@@ -1,0 +1,50 @@
+flowchart LR
+    subgraph Input["Investigation Data"]
+        F["Findings"]
+        C["Connections"]
+        E["Entities"]
+        G["Graph Metrics"]
+        T["Timeline Events"]
+    end
+
+    subgraph Engine["Understanding Engine"]
+        direction TB
+        subgraph Modalities["5 Output Modalities"]
+            M1["Wiki Dossiers<br/><i>Always-current reference</i>"]
+            M2["Mechanism Explainers<br/><i>How structures work</i>"]
+            M3["Analytical Articles<br/><i>Deep contextual analysis</i>"]
+            M4["Visual Outputs<br/><i>Graphs, timelines, flows</i>"]
+            M5["Cross-Thread Synthesis<br/><i>Connecting the threads</i>"]
+        end
+        ED["Editor Gate<br/><i>Modality-aware review</i>"]
+    end
+
+    subgraph Output["Web Application"]
+        O1["/entities/{slug}"]
+        O2["/explainers/{slug}"]
+        O3["/analysis/{slug}"]
+        O4["/graph  /timeline  /finances"]
+        O5["/threads/{id}"]
+    end
+
+    F --> M1
+    F --> M3
+    C --> M1
+    C --> M4
+    E --> M1
+    E --> M2
+    G --> M4
+    G --> M5
+    T --> M4
+    T --> M3
+
+    M1 --> ED
+    M2 --> ED
+    M3 --> ED
+    M4 --> O4
+    M5 --> ED
+
+    ED --> O1
+    ED --> O2
+    ED --> O3
+    ED --> O5

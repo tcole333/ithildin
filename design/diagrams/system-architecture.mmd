@@ -1,0 +1,92 @@
+flowchart TB
+    subgraph External["External Interfaces"]
+        CLI["Human CLI"]
+        WebHook["Web Hooks"]
+        Scheduler["Scheduler"]
+        Ingest["Data Ingest"]
+        Halt["/halt Command"]
+    end
+
+    subgraph Queue["Job Queue Layer (PostgreSQL)"]
+        direction TB
+        Q1["Discovery Queue"]
+        Q2["Investigation Queue"]
+        Q3["Analysis Queue"]
+        Q4["Understanding Queue"]
+        Q5["Infrastructure Queue"]
+    end
+
+    subgraph Agents["Agent Worker Pool (12 Personas)"]
+        direction TB
+        subgraph Discovery["Discovery Agents"]
+            A1["Surveyor"]
+            A2["Pattern Spotter"]
+            A3["Lead Triage"]
+        end
+
+        subgraph Investigation["Investigation Agents"]
+            A5["Entity Tracer"]
+            A6["Deep Investigator"]
+            A7["Document Miner"]
+        end
+
+        subgraph Analysis["Analysis Agents"]
+            A9["Network Analyst"]
+            A10["Timeline Analyst"]
+            A11["Systemic Analyst"]
+            A12["Synthesist"]
+        end
+
+        subgraph Understanding["Understanding Agents"]
+            A13["Dossier Writer"]
+            A14["Explainer Writer"]
+            A15["Contextual Analyst"]
+            A16["Editor"]
+        end
+
+        subgraph Infrastructure["Infrastructure Agents"]
+            A17["Tool Builder"]
+            A18["Source Integrator"]
+            A19["Registry Adder"]
+        end
+    end
+
+    subgraph Data["Data Layer"]
+        DB1["investigation.db<br/>(PostgreSQL)"]
+        DB2["Source DBs<br/>(SQLite/Neo4j)"]
+        Graph["Graph Store<br/>(Neo4j)"]
+        ContentStore["Content Store<br/>(Markdown + JSON)"]
+    end
+
+    subgraph WebApp["Web Application"]
+        WA1["Dossier Pages"]
+        WA2["Explainers & Articles"]
+        WA3["Network Graph"]
+        WA4["Timeline & Flows"]
+        WA5["Search"]
+    end
+
+    CLI --> Queue
+    WebHook --> Queue
+    Scheduler --> Queue
+    Ingest --> Queue
+    Halt -.->|"Pause All"| Queue
+
+    Q1 --> Discovery
+    Q2 --> Investigation
+    Q3 --> Analysis
+    Q4 --> Understanding
+    Q5 --> Infrastructure
+
+    A1 --> DB1
+    A6 --> DB1
+    A9 --> Graph
+    A13 --> ContentStore
+    A17 --> DB1
+
+    Discovery -.->|Spawn Jobs| Queue
+    Investigation -.->|Spawn Jobs| Queue
+    Analysis -.->|Spawn Jobs| Queue
+    Understanding -.->|Spawn Jobs| Queue
+
+    ContentStore --> WebApp

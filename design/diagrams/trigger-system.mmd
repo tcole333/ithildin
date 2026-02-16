@@ -1,0 +1,36 @@
+flowchart TB
+    subgraph Triggers["Trigger Sources"]
+        T1["Scheduled<br/>(Cron)"]
+        T2["Threshold<br/>(Accumulation)"]
+        T3["Event-Driven<br/>(Real-time)"]
+        T4["Pattern<br/>(Intelligent)"]
+    end
+    
+    subgraph Engine["Trigger Engine"]
+        E["Evaluate Conditions"]
+        E1["Spawn Jobs"]
+    end
+    
+    subgraph Queue["Job Queue"]
+        Q["Priority Queue"]
+    end
+    
+    subgraph Examples["Example Triggers"]
+        X1["Every 6h:<br/>Source Scan"]
+        X2["10+ Findings:<br/>Synthesis"]
+        X3["New Entity:<br/>Trace Job"]
+        X4["Burst Detected:<br/>Analysis"]
+    end
+    
+    T1 --> E
+    T2 --> E
+    T3 --> E
+    T4 --> E
+    
+    E -->|Condition Met| E1
+    E1 --> Q
+    
+    X1 -.-> T1
+    X2 -.-> T2
+    X3 -.-> T3
+    X4 -.-> T4

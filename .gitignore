@@ -1,0 +1,33 @@
+# System and editor
+.DS_Store
+.env
+.envrc
+.cache/
+.playwright-mcp/
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Data and databases
+datasets/
+backups/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+investigation*.db*
+registry.db
+
+# Build artifacts
+site/web/node_modules/
+site/web/dist/
+site/web/.astro/
+site/web/.cache/
+
+# Logs
+*.log

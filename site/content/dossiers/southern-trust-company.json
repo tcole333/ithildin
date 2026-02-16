@@ -1,0 +1,799 @@
+{
+  "name": "Southern Trust Company",
+  "slug": "southern-trust-company",
+  "stats": {
+    "total_findings": 16,
+    "total_connections": 17,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 16
+    },
+    "connection_types": {
+      "corporate": 4,
+      "financial": 12,
+      "advisory": 1
+    }
+  },
+  "findings": [
+    {
+      "id": 233,
+      "finding_type": "financial",
+      "summary": "Southern Trust Company MMDA balance was $109,981,919.36 as of Dec 2015 (EFTA02347813). This was Epstein's single largest cash holding. STC had Deutsche Bank account (44129244) receiving Leon Black payments. Also invested in Carvana stock (75,000 shares at $65.19 avg, Sep 2018) through Morgan Stanley/Schermerhorn. STC registered as VIEDC beneficiary. Tax/accounting by Seckendorf Hasson & Reilly (Lake Success NY) covering all JE Entities. Used for visa applications (Karyna Shuliak Japan visa). Address used as meeting location (Albert Bryan visited 1:30pm, 3rd floor American Yacht Harbour).",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:57:42",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02347813",
+          "source_quote": "SOUTHERN TRUST COMPANY, INC. - MMDA Available 109,981,919.36",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 631,
+      "finding_type": "financial",
+      "summary": "On August 21, 2015, Epstein sent a self-memo (to-do list) revealing: (1) He was 'sitting on over 130 million in CASH', (2) His family office had too many employees ('brad hiring another bookkeeper?'), (3) He instructed 'brad' (Karp) to wire $5M charitable contribution to Gratitude America before Sept 1, (4) Referenced 'difficult few months.' The prior day (Aug 20), Epstein emailed Melanie Spinella with a stream-of-consciousness list: 'boat, plane, tax returns, art space, phaidon, IT, TRA jpm db gs' and instructed wiring to Southern Trust 'to cover work done until today.' This reveals Epstein's direct operational control over Southern Trust/Financial, his awareness of the $130M+ cash position across accounts, and Karp's role directing fund flows.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 01:42:23",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02489710",
+          "source_quote": " you are still sitting on over 130 million in CASH...Please instruct brad to wire 5m charitable contribution to gratittude America...difficult few months / EFTA02370309: boat, plane, tax returns, art space, phaidon, IT, TRA jpm db gs...please wire an amount to Southern Trust to cover work done until today",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 636,
+      "finding_type": "financial",
+      "summary": "Southern Trust Company Inc held $56,542,688.38 in a Deutsche Bank Elite Money Market Deposit account as of June 2016 (statement period June 1-30, 2016). Address: 6100 Red Hook Quarter B3, St Thomas 00802 USVI. Relationship manager: Paul Morris. This is the parent entity of Southern Financial LLC. The DB daily deposit report (EFTA01383662, Apr 2018) lists Southern Financial LLC alongside other Epstein entities: JEGE LLC, Darren K Indyke PLLC, HBRK Associates, NES LLC, LSJE LLC, Gratitude America Ltd, Neptune LLC, Plan D LLC, Zorro Management LLC - confirming Southern Financial as part of the core Epstein entity constellation at Deutsche Bank.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 01:43:19",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01286240",
+          "source_quote": " Deutsche Bank Trust Co Americas / SOUTHERN TRUST COMPANY INC / 6100 RED HOOK QUARTER B3 ST THOMAS / Elite Money Market Deposit Balance $56,542,688.38 / EFTA01383662: SOUTHERN FINANCIAL LLC alongside JEGE LLC, DARREN K INDYKE PLLC, HBRK ASSOCIATES, NES LLC, LSJE LLC, GRATITUDE AMERICA LTD",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1272,
+      "finding_type": "financial",
+      "summary": "Southern Trust Company M Dec 23, 2019 payment TRACED: Wire was from STC at Citibank (FirstBank USVI) to Interactive Brokers LLC, One Pickwick Plaza, Greenwich CT 06830, into a STC brokerage account. Wire instructions explicitly state 'PUT FUNDS IN INTEREST BEARING MONEY MARKET ACCOUNT.' This was an estate asset repositioning \u2014 moving cash from banking to brokerage \u2014 not a distribution to an external party. Transaction number 201912230001627, charge . This occurred 5 months after Epstein's death (Aug 10, 2019) during the estate administration period when Indyke/Kahn were consolidating assets.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:30:53",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01273178",
+          "source_quote": "FEDWIRE PAYMENT DEBIT ADVICE Date 23-Dec-2019 Originator SOUTHERN TRUST COMPANY INC RED HOOK QUARTER ST THOMAS VI 00802 Beneficiary INTERACTIVE BROKERS LLC ONE PICKWICK PLAZA GREENWICH CONNECTICUT 06830 Instructed Amount 13,000,000.00 USD Originator to Beneficiary FOR TRANSFER TO SOUTHERN TRUST COMPANY INC PUT FUNDS IN INTEREST BEARING MONEY MARKET ACCOUNT",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1276,
+      "finding_type": "financial",
+      "summary": "Estate consolidation wave Dec 12, 2019: Seven HBRK Associates wires totaling $9,238,007.10 liquidated subsidiary entity accounts into STC at FirstBank. Each wire identified the originating entity: LSJE ($2,707,464.11), ZORRO ($1,451,474.78), NES ($1,345,169.03), NEPTUNE ($1,013,546.36), PLAN D ($971,262.20), JEGE ($922,789.01), HYPERION ($826,301.61). Additionally: Richard Kahn wired $98,795.45 from Butterfly Trust (via Kellerhals as trustee, National Financial Services/Fidelity), Darren Indyke PLLC IOLA Trust account wired $5,566,408.92 from TD Bank (Nov 20), and $4,657,830.34 from unknown source. Three Fortress Value Recovery Fund distributions ($79,206.92, $92,594.02, $15.00). Total consolidation inflow: ~$20M+. All directed to STC at FirstBank, then the $13M transferred to Interactive Brokers Dec 23.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:31:07",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01273155",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1279,
+      "finding_type": "financial",
+      "summary": "Oct 2013 $6M incoming TRACED: Deutsche Bank statement for STC (EFTA01284214) shows three deposits in October 2013 to the Elite Money Market Deposit account (Amanda Kirby, relationship manager): Oct 7 = $12,755,048.50 (ORG-003040315872 SOUTHERN TRUST COMPANY INC \u2014 internal transfer from another STC DB account), Oct 15 = $8,500,000 (ORG-394001320945 LEON D BLACK DEBRA R BLACK 760 PARK AVE NEW YORK NY 10 \u2014 Leon Black payment), Oct 17 = $6,000,000 (ORG-3040545872 SOUTHERN TRUST COMPANY INC \u2014 internal transfer). Total deposits: $27,258,838.74. The $6M was NOT from an external source \u2014 it was an internal STC-to-STC account transfer at Deutsche Bank. The originator code 3040545872 matches the Southern Trust entity. The $8.5M Leon Black deposit is notable as an early payment (Oct 2013) predating the later $16.5M (May 2013, separately documented) and $15M (Feb 2013) Black payments.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:31:21",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01284214",
+          "source_quote": "10-17 # Incoming Money Tmsf 6.000.000.00 27.255.048.50 ORG-3040545872 SOUTHERN TRUST COMPANY. LNC 6100 RED HOOK QTRS STE B3 S",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1282,
+      "finding_type": "financial",
+      "summary": "Leon Black total payments to STC Deutsche Bank account documented: Feb 2013 = $15,000,000 (ORG-394001320945 LEON D RACK/BLACK, Chips Credit), May 2013 = $16,500,000 (ORG-394001320945 LEON D BLACK, Chips Credit), Oct 2013 = $8,500,000 (ORG-394001320945 LEON D BLACK DEBRA R BLACK). Three payments in 8 months totaling $40,000,000. All went directly to STC Elite Money Market Deposit at Deutsche Bank. The Feb-May $31.5M alone would account for the STC balance rising from near-zero to $27.3M end-Oct 2013 (with interim transfers out). Originator consistently LEON D BLACK via ORG-394001320945 (a Fedwire participant code). The Oct payment included Debra R Black (wife) as co-originator.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:31:32",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02708280",
+          "source_quote": "Chips Credit Via: Bank...B/O: Leon D Black New York NY 10021-4152 Ref: Nbnf=Southern Trust Company, Inc St Thomas VI 00802-1348 Obl=Leon Black Ssn: 0357056 16,500,000.00; EFTA02708281:Chips Credit Via: Bank of A B/O: Leon D Rack New York NY 10021-4152 Ref: Nbnf Southern Trust Company, Inc 15,000,000.00",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1287,
+      "finding_type": "financial",
+      "summary": "STC peak balance $109,981,919.36 (MMDA account, Dec 30, 2015) confirmed via Deutsche Bank online banking screenshot forwarded by Kahn. On that date, a single $10,000,000 incoming wire posted at 1:57PM ET. Separately, Oct 2014 statement shows balance reached $88,224,973.81 after $20M in same-day incoming wires ($13M + $7M on Oct 16 2014). Nov 2015 Kahn email to Epstein lists three accounts over $20M: Southern Trust $82.5M, Haze Trust $47.375M, Southern Financial LLC $29.25M \u2014 combined $159.125M in liquid balances. Darren Indyke instructed $20M transfer to 'erika escrow account' (Kellerhals) routing through JEE personal. Complete STC balance trajectory: Near-zero (early 2013) -> $27.3M (Oct 2013) -> $88.2M (Oct 2014) -> $110M (Dec 2015) -> $56.5M (June 2016) -> $18M (May 2017) -> near-zero (Oct 2017-2018) -> $91K (May 2019) -> consolidated to IB (Dec 2019).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:31:46",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02347813",
+          "source_quote": "Savings SOUTHERN TRUST COMPANY, INC. - MMDA Available 109,981,919.36 12/30/2015 INCOMING MONEY TRANSFER 10,000,000.00; EFTA02671293:southern trust 82,500,000 haze trust 47,375,000 southern financial llc 29,250,000",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1293,
+      "finding_type": "financial",
+      "summary": "JPMorgan account snapshot (Paul Barrett, Managing Director, Global Investment Opportunities Group, JP Morgan Private Bank) lists combined Southern Financial/Trust balances: Southern Financial LLC = $23,380,735.58 (WOD $9,056,419.71 + WOA $14,050,627.87 + DDA $273,688), Southern Trust Company Inc = $26,779,306.11 (W8964002 $2,234,360.80 + DDA $149,999.75 + Savings $24,394,495.56). Total combined: $50,160,041.69. These were JPMorgan accounts managed before the Feb 2014 migration to Deutsche Bank, when Harry Beller confirmed 'All positions at JPM were finally closed. JPM will wire today the remaining cash balances to Deutsche Bank: (1) Southern Financial $10,397,100, (2) Southern Trust (Laurie Cameron) $911,808 remaining balance (JPM wired yesterday $4,003,093).' Laurie Cameron was STC's FX/currency portfolio manager, not an EdR person.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:32:01",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02571157",
+          "source_quote": "SOUTHERN FINANCIAL LLC WOD W91850003 9,056,419.71 WOA W92099006 14,050,627.87 DDA 273,688.00 23,380,735.58 SOUTHERN TRUST COMPANY, INC W8964002 2,234,360.80 DDA 149,999.75 SAVINGS 24,394,495.56 26,779,306.11; EFTA02518675:JPM will wire today remaining cash balances to Deutche Bank: 1) Southern Financial 10,397,100 2) Southern Trust (Laurie Cameron) 911,808 remaining balance (JPM wired yesterday 4,003,093)",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1296,
+      "finding_type": "financial",
+      "summary": "Operational security failure May 24, 2019 (6 weeks pre-arrest): Journalist 'Nova' (surname only, no first name given) called STC's USVI office. When receptionist Una answered as 'Southern Trust Company,' Nova pivoted from his original inquiry about 'Financial Trust' to Southern Trust, noting he could find nothing about STC on Google. Nova told Una 'he would then have no choice but to leave what we did up to his own interpretation.' Cecile de Jongh (former USVI First Lady, STC office manager) reported to Indyke, asking: 'Should we start answering the phone with 2525?' (the address number). Richard Kahn identified Nova as 'a journalist. hes called a number of people.' This reveals: (1) STC had no public internet presence by design, (2) journalists were actively investigating pre-arrest, (3) the entity naming confused even staff (Groff writing checks to wrong entity), (4) the office operated under deliberate opacity.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:32:14",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02288520",
+          "source_quote": "because Una answered the phone with Southern Trust Company Mr. Nova switched his inquiry from Financial Trust to Southern Trust and told Una that he Googled Southern Trust and could not find anything. Should we start answering the phone with 2525?",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1297,
+      "finding_type": "financial",
+      "summary": "USMS personal effects at arrest confirm Southern Trust Company as Epstein's employer of record as of July 2019. UnitedHealthcare Choice Plus card shows Group Number 272605 under employer name 'Southern Trust Company'. The USM-312 form lists employer phone as 340-775-2525 (USVI area code). This confirms Southern Trust maintained active employee benefits through at least the arrest date. The health plan number 911-87726-04 and payer ID 87726 could be used to trace the corporate benefits arrangement. Also: USMS prisoner records list occupations as 1-BANKER, 2-SOUTHERN TRUST COMPANY, 3-SELF EMPLOYED (in that order), suggesting BANKER was primary identity and STC secondary.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:32:24",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "MUCKROCK:78799/Docs.redacted.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1302,
+      "finding_type": "financial",
+      "summary": "Complete Southern Trust corporate family structure with account details: (1) SOUTHERN TRUST COMPANY INC \u2014 parent entity, USVI domestic profit corp (581871), formed 11/18/2011, registered 9053 Estate Thomas Ste 101, agent Business Basics VI LLC (Kellerhals). Deutsche Bank accounts: 42952763 (money market), 77000965, 77000957, 44129241, 44129244 (wires to Valar/Seaford). FirstBank PR platinum banking. Citibank. Charles Schwab (opened Apr 2019). Interactive Brokers (Dec 2019). JPMorgan (pre-Feb 2014). (2) SOUTHERN FINANCIAL LLC \u2014 wholly owned subsidiary per NYDFS. Deutsche Bank: W91850003, W92099006 + DDA. ISDA derivatives master with DB London. Investment vehicle for equities/derivatives/hedge funds. Held Bear Stearns, Tudor Futures, Renault, Ariad, Carvana positions. Portfolio value peak $16.7M (Dec 2018). (3) SOUTHERN COUNTRY INTERNATIONAL LTD \u2014 offshore entity, Ltd designation. Schwab accounts (Apr 2019). Tax code 525990. (4) FINANCIAL STRATEGY GROUP INC (FL P93000087814, 1993-2000) \u2014 predecessor entity, renamed to Southern Country International.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:32:41",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02633183",
+          "source_quote": "FirstBank entity list includes SOUTHERN COUNTRY INTERNATIONAL LTD and SOUTHERN TRUST COMPANY INC; EFTA02700407:RE Southern Financial Relationship authorization to Deutsche Bank; EFTA02571157:JPM accounts SOUTHERN FINANCIAL LLC and SOUTHERN TRUST COMPANY INC",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1303,
+      "finding_type": "financial",
+      "summary": "FirstBank USVI rejected STC request to open 6 new deposit accounts on Feb 28, 2019 (4.5 months pre-arrest). VP Dina Perry-Malone wrote: 'After careful review and consideration of your request to open six additional deposit accounts, we cannot proceed with aforementioned at this time.' FirstBank simultaneously requested beneficial ownership certifications for 18 existing entity accounts: Cypress Inc, F T Real Estate Inc, Freedom Air Petroleum LLC, FSF LLC, Gratitude America Ltd, Great St Jim LLC, IGO Company LLC, J Epstein Virgin Islands Foundation Inc, Jeepers Inc, Laurel Inc, Little St James LLC, LSJE LLC, Maple Inc, and others. Michelle Smith-Roberts (Waterfront Branch and Platinum Banking Manager) had requested information about wire beneficiaries including American Yacht ($37K, $38K), Citizens for Better Government ($50K), Democratic Cong ($10K), and monthly payments to unnamed individuals ($8,333 each). This shows banks tightening oversight months before arrest.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:32:55",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02633183",
+          "source_quote": "After careful review and consideration of your request to open six (6) additional accounts, we cannot proceed with aforementioned at this time. Kindly provide me with a forwarding address to return the checks received for the initial deposits",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1336,
+      "finding_type": "financial",
+      "summary": "Complete DS10 STC transaction map: 16 transactions totaling $19.6M outgoing + $8.6M incoming (net $11M outgoing). OUTGOING: $3.05M to Citibank/Morgan Stanley (Jun 5, 2015), $1M to Citibank/Morgan Stanley (Aug 23, 2015), $175K to FirstBank Puerto Rico (Jun 11, 2015), $2M internal transfer (Oct 17, 2017), $4.4K to JPMorgan Chase (Oct 20, 2017), $13M to Interactive Brokers (Dec 23, 2019). Six internal STC-to-STC transfers totaling $15.7M. INCOMING: $6M internal Oct 2013, $373K internal Oct 2013, periodic $200-400K transfers (Feb 2016 through Oct 2018), $349K final Jan 2020. STC held 20 balance observations with peak $26.7M (Nov 2013) in DS10, but this dramatically understates the true peak of $110M (Dec 2015 per EFTA02347813) \u2014 DS10 captures only partial account data. Southern Financial LLC had separate 6 transactions ($602K out, $59K in) and portfolio peak $16.7M (Dec 2018). The $500K SFL to JPMorgan Chase (May 5, 2017) was the largest SFL wire in DS10.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:35:13",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01284214",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1507,
+      "finding_type": "financial",
+      "summary": "SOUTHERN TRUST COMPANY BROKER-DEALER ACTIVITY -- ACTIVE SECURITIES TRADING: DOJ corpus reveals Southern Trust Company (the renamed FTC entity) was actively trading securities through Morgan Stanley, not merely holding the Apollo IPO shares passively. Evidence: (1) EFTA02454166 (Aug 16, 2016): Andrew Atlas (Morgan Stanley Financial Advisor, Midtown Manhattan Complex) notified Richard Kahn that 'Southern Trust Company was allocated 500m bonds' in an EsTrade Preferred offering at 5.875%. The $500M bond allocation indicates Southern Trust maintained institutional-scale brokerage relationships. (2) EFTA02360125: 'Southern Trust Co. WING allocated 200 shares; priced 19. Opened at 30.50.' Andrew Atlas asked if Kahn wanted to 'hold or sell.' (3) EFTA02714849: 'Southern Trust Company was allocated $1,000,000.00 worth of the SCHW 6% $25 Pfd.' (4) EFTA02505378: 'Southern Financial LLC' received a $1M capital call from Neoteny 3 LP (Apr 2015). (5) EFTA02624629 (Sep 2018): 'CVNA - Carvana - for Southern Trust Company' -- purchased 75,000 shares at $65.19 average ($4.9M position). This demonstrates that the Epstein entity holding Apollo IPO shares (transferred from FTC to Southern Financial LLC) was simultaneously conducting active securities trading through Morgan Stanley, with institutional-level bond allocations and IPO participation in multiple companies.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:39:39",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02454166, EFTA02360125, EFTA02714849, EFTA02624629",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1536,
+      "finding_type": "financial",
+      "summary": "Three core Epstein USVI entities have LEI registrations: STC (549300AZFOXEILVV4R81), FTC (CKK88E24733DTGIKLS94), and Southern Financial LLC (549300KB8YL2XC7B4K14). All three share the same registered address: 6100 Red Hook Quarter B3, St. Thomas, USVI 00802. All LEIs were initially registered in 2012-2013 and are now LAPSED, with last updates on 2023-08-04. Entity status remains ACTIVE. No parent-subsidiary relationships reported in GLEIF \u2014 these entities operated as independent nodes despite sharing address and clearly being controlled by the same principals.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:48:28",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF:549300AZFOXEILVV4R81,GLEIF:CKK88E24733DTGIKLS94,GLEIF:549300KB8YL2XC7B4K14",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 52,
+      "person_a": "Enhanced Education",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "corporate",
+      "description": "Southern Trust Company Inc was used as intermediary for Enhanced Education disbursements. USVI STEM Fair funding came through Southern Trust, not directly from Enhanced Education. Southern Trust was an Epstein-controlled entity at the same 6100 Red Hook address.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:43",
+      "other_person": "Enhanced Education",
+      "other_person_slug": "enhanced-education",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02370820 EFTA02709872",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 264,
+      "person_a": "Financial Trust Company",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "corporate",
+      "description": "Southern Trust Company Inc is USVI EDC-registered entity linked to FTC. Kahn traded Carvana stock through Southern Trust. Groff loans from Southern Financial LLC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:49:58",
+      "other_person": "Financial Trust Company",
+      "other_person_slug": "financial-trust-company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02624629",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 272,
+      "person_a": "J. Epstein Virgin Islands Foundation",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "corporate",
+      "description": "Southern Trust Company Inc operates under the corporate umbrella of the Jeffrey Epstein VI Foundation. Southern Trust sponsored the STEM Fair.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:14",
+      "other_person": "J. Epstein Virgin Islands Foundation",
+      "other_person_slug": "j-epstein-virgin-islands-foundation",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02709872",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 289,
+      "person_a": "Southern Trust Company",
+      "person_b": "VIEDC",
+      "relationship_type": "corporate",
+      "description": "Southern Trust Company Inc registered with USVI Economic Development Commission. Registration forms submitted by Cecile de Jongh Aug 2017.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:53:45",
+      "other_person": "VIEDC",
+      "other_person_slug": "viedc",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02221770",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 830,
+      "person_a": "Honeycomb Partners",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": "STC wired 20M to Honeycomb Partners on 05/31/2016. Honeycomb Ventures I LP wire instructions reference Southern Trust Company. Return distributions from Honeycomb flowed back to STC (1.75M in May 2018). Northern Trust held Honeycomb Partners LP account C15185220010 showing 5M outgoing June 2018.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:10:25",
+      "other_person": "Honeycomb Partners",
+      "other_person_slug": "honeycomb-partners",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287619",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287701",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01376049",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02366568",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 840,
+      "person_a": "Honeycomb Asset Management",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": "STC wired 20M to Honeycomb Partners LP on May 31 2016 from MMDA account 9244. Additional Honeycomb transactions in Deutsche Bank statements June 2018. Wire reference line was Southern Trust Company. Honeycomb was the single largest fund allocation in the Dechert Exhibit B ledger at ~34M across 5 transactions.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:12:38",
+      "other_person": "Honeycomb Asset Management",
+      "other_person_slug": "honeycomb-asset-management",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00027019",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287619",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287701",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01376049",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 850,
+      "person_a": "Honeycomb Asset Management",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": "STC MMDA account 9244 wired 20M to Honeycomb Partners LP on 05/31/2016. Wire reference marked Southern Trust Company. STC had 80.875M balance at time of wire. Additional flows via Deutsche Bank accounts totaling at least 60M across Honeycomb Partners and Ventures I-IV.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:15:43",
+      "other_person": "Honeycomb Asset Management",
+      "other_person_slug": "honeycomb-asset-management",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287619",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287701",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01376049",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 851,
+      "person_a": "Honeycomb Asset Management LP",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": "STC (Epstein's trust entity) wired 20M to Honeycomb Partners LP on 05/31/2016 from MMDA account 9244 (balance 80.9M). Wire reference: Southern Trust Company Inc. STC was the primary funding vehicle for Epstein's Honeycomb investment.",
+      "strength": "strong",
+      "date_range": "2016-05 to 2018-06",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:15:46",
+      "other_person": "Honeycomb Asset Management LP",
+      "other_person_slug": "honeycomb-asset-management-lp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01376049",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02366568",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 902,
+      "person_a": "Southern Trust Company",
+      "person_b": "The 2017 Caterpillar Trust",
+      "relationship_type": "financial",
+      "description": "Caterpillar Trust was opened under the Southern Financial/STC relationship at Deutsche Bank. AML review identifies it as 'a new account for the Southern Financial relationship'.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:44:24",
+      "other_person": "The 2017 Caterpillar Trust",
+      "other_person_slug": "the-2017-caterpillar-trust",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01299264",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01364114",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 910,
+      "person_a": "Southern Trust Company",
+      "person_b": "The 2017 Caterpillar Trust",
+      "relationship_type": "financial",
+      "description": "Caterpillar Trust was part of the Southern Financial/Southern Trust Company relationship at Deutsche Bank Private Bank (client since 2013). AML compliance explicitly identified it as a new account under this relationship. Deutsche Bank Account 42969987.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:45:18",
+      "other_person": "The 2017 Caterpillar Trust",
+      "other_person_slug": "the-2017-caterpillar-trust",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01299262",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01364114",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 913,
+      "person_a": "Southern Trust Company",
+      "person_b": "The 2017 Caterpillar Trust",
+      "relationship_type": "financial",
+      "description": "Caterpillar Trust was part of Southern Financial relationship at Deutsche Bank. Received M from STC/Southern Financial LLC per Dechert Exhibit B. Both under DB RM code 81851.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:49:22",
+      "other_person": "The 2017 Caterpillar Trust",
+      "other_person_slug": "the-2017-caterpillar-trust",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01299264",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01458780",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 637,
+      "person_a": "Interactive Brokers LLC",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:33:27",
+      "other_person": "Interactive Brokers LLC",
+      "other_person_slug": "interactive-brokers-llc",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01273178:M Fedwire Dec 23 2019 STC to IB for money market account",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 638,
+      "person_a": "Laurie Cameron",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:33:30",
+      "other_person": "Laurie Cameron",
+      "other_person_slug": "laurie-cameron",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02518675:JPM cash transfer Southern Trust (Laurie Cameron) ,808; EFTA02671795:Dec 13 2013 FX position report",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 639,
+      "person_a": "Leon Black",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:33:32",
+      "other_person": "Leon Black",
+      "other_person_slug": "leon-black",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02708280:.5M Chips Credit Leon D Black to STC May 2013; EFTA02708281:M Feb 2013; EFTA01284214:.5M Oct 2013",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 640,
+      "person_a": "Alan Dlugash",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "advisory",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:33:40",
+      "other_person": "Alan Dlugash",
+      "other_person_slug": "alan-dlugash",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02488862:Dlugash advised on SCI tax codes Sep 2015",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 641,
+      "person_a": "FirstBank Puerto Rico",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:33:41",
+      "other_person": "FirstBank Puerto Rico",
+      "other_person_slug": "firstbank-puerto-rico",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01273155:Platinum Banking relationship",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 643,
+      "person_a": "Dina Perry-Malone",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 01:33:42",
+      "other_person": "Dina Perry-Malone",
+      "other_person_slug": "dina-perry-malone",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02633183:VP USVI Market Manager FirstBank, refused 6 new accounts Feb 2019",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2016-05 to 2018-06",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "STC (Epstein's trust entity) wired 20M to Honeycomb Partners LP on 05/31/2016 from MMDA account 9244 (balance 80.9M). Wire reference: Southern Trust Company Inc. STC was the primary funding vehicle for Epstein's Honeycomb investment.",
+      "other_person": "Honeycomb Asset Management LP",
+      "id": 851
+    }
+  ]
+}

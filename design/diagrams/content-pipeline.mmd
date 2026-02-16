@@ -1,0 +1,73 @@
+flowchart TB
+    subgraph Triggers["Triggers"]
+        T1["New Finding"]
+        T2["Pattern Detected"]
+        T3["Thread Milestone"]
+        T4["Graph Change"]
+    end
+
+    subgraph Routing["Modality Router"]
+        R["Route by trigger type"]
+    end
+
+    T1 --> R
+    T2 --> R
+    T3 --> R
+    T4 --> R
+
+    subgraph Dossier["Wiki Dossier"]
+        D1["Dossier Writer"]
+        D2["Fact Check"]
+        D3["Interlink"]
+    end
+
+    subgraph Explainer["Mechanism Explainer"]
+        E1["Explainer Writer"]
+        E2["Clarity Review"]
+    end
+
+    subgraph Article["Analytical Article"]
+        AR1["Contextual Analyst"]
+        AR2["Source Review"]
+    end
+
+    subgraph Visual["Visual Export"]
+        V1["Graph Export"]
+        V2["Timeline Export"]
+        V3["Financial Flow"]
+    end
+
+    R -->|"entity/finding"| D1
+    R -->|"pattern"| E1
+    R -->|"milestone"| AR1
+    R -->|"data change"| V1
+
+    D1 --> D2
+    D2 --> D3
+    E1 --> E2
+    AR1 --> AR2
+
+    subgraph Editor["Editor Gate"]
+        ED["Modality-Aware Review"]
+    end
+
+    D3 --> ED
+    E2 --> ED
+    AR2 --> ED
+
+    subgraph Publish["Web App"]
+        P1["content/ directory"]
+        P2["Search Index"]
+        P3["Build & Deploy"]
+    end
+
+    ED -->|Approve| P1
+    ED -->|Revise| D1
+    ED -->|Revise| E1
+    ED -->|Revise| AR1
+    V1 --> P1
+    V2 --> P1
+    V3 --> P1
+    P1 --> P2
+    P2 --> P3
+    P3 --> W[(Web Application)]

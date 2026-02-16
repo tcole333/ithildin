@@ -1,0 +1,327 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FindingCard from '../../components/FindingCard.astro';
+import { readFileSync, existsSync, readdirSync } from 'fs';
+import { resolve, basename } from 'path';
+
+export function getStaticPaths() {
+  const contentDir = resolve(process.cwd(), '..', 'content', 'dossiers');
+  if (!existsSync(contentDir)) return [];
+
+  const paths: { params: { slug: string } }[] = [];
+
+  // Real dossier pages
+  const files = readdirSync(contentDir).filter(f => f.endsWith('.json') && !f.startsWith('_'));
+  for (const f of files) {
+    paths.push({ params: { slug: basename(f, '.json') } });
+  }
+
+  // Redirect pages for old alias slugs
+  const redirectsPath = resolve(contentDir, '_redirects.json');
+  if (existsSync(redirectsPath)) {
+    const redirects = JSON.parse(readFileSync(redirectsPath, 'utf-8'));
+    for (const oldSlug of Object.keys(redirects)) {
+      // Only add if not already a real dossier
+      if (!paths.some(p => p.params.slug === oldSlug)) {
+        paths.push({ params: { slug: oldSlug } });
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { slug } = Astro.params;
+const contentDir = resolve(process.cwd(), '..', 'content', 'dossiers');
+
+// Check for redirect first
+const redirectsPath = resolve(contentDir, '_redirects.json');
+let redirectTarget: string | null = null;
+if (existsSync(redirectsPath)) {
+  const redirects = JSON.parse(readFileSync(redirectsPath, 'utf-8'));
+  if (redirects[slug!]) {
+    redirectTarget = redirects[slug!];
+  }
+}
+
+if (redirectTarget) {
+  return Astro.redirect(`/dossiers/${redirectTarget}`, 301);
+}
+
+const dossierPath = resolve(contentDir, `${slug}.json`);
+
+let dossier: any = null;
+if (existsSync(dossierPath)) {
+  dossier = JSON.parse(readFileSync(dossierPath, 'utf-8'));
+}
+
+if (!dossier) {
+  return Astro.redirect('/dossiers');
+}
+
+// Load backlinks
+const backlinksPath = resolve(process.cwd(), '..', 'content', 'backlinks.json');
+let relatedDossiers: any[] = [];
+let relatedArticles: any[] = [];
+if (existsSync(backlinksPath)) {
+  const backlinks = JSON.parse(readFileSync(backlinksPath, 'utf-8'));
+  relatedDossiers = backlinks.dossier_to_dossier?.[slug] || [];
+  relatedArticles = backlinks.dossier_to_article?.[slug] || [];
+}
+
+// Group findings by type
+const findingsByType: Record<string, any[]> = {};
+for (const f of dossier.findings) {
+  const type = f.finding_type || 'unknown';
+  if (!findingsByType[type]) findingsByType[type] = [];
+  findingsByType[type].push(f);
+}
+
+const typeOrder = ['financial', 'corporate', 'communication', 'relationship', 'legal', 'intelligence', 'identity', 'location', 'document'];
+const sortedTypes = Object.keys(findingsByType).sort((a, b) => {
+  const ai = typeOrder.indexOf(a);
+  const bi = typeOrder.indexOf(b);
+  return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+});
+
+const strengthOrder = ['strong', 'medium', 'weak', 'circumstantial'];
+---
+<BaseLayout title={dossier.name}>
+  <div class="space-y-8">
+    <!-- Header -->
+    <div class="flex items-start justify-between">
+      <div>
+        <div class="text-sm text-gray-500 mb-1">
+          <a href="/dossiers" class="hover:text-gray-400">Dossiers</a> / {dossier.name}
+        </div>
+        <h1 class="text-3xl font-bold tracking-tight">{dossier.name}</h1>
+      </div>
+      <div class="flex gap-3 text-sm text-gray-400">
+        <span>{dossier.stats.total_findings} findings</span>
+        <span>{dossier.stats.total_connections} connections</span>
+        <span>{dossier.stats.total_entities} entities</span>
+      </div>
+    </div>
+
+    <!-- Tab-like sections -->
+    <div class="space-y-10">
+      <!-- Findings by Type -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Findings</h2>
+        {sortedTypes.map(type => (
+          <div class="mb-6">
+            <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">
+              {type} ({findingsByType[type].length})
+            </h3>
+            <div class="space-y-3">
+              {findingsByType[type].slice(0, 20).map((f: any) => (
+                <FindingCard finding={f} />
+              ))}
+              {findingsByType[type].length > 20 && (
+                <details>
+                  <summary class="text-sm text-gray-500 hover:text-gray-300 cursor-pointer py-2">
+                    Show {findingsByType[type].length - 20} more {type} findings
+                  </summary>
+                  <div class="space-y-3 mt-3">
+                    {findingsByType[type].slice(20).map((f: any) => (
+                      <FindingCard finding={f} />
+                    ))}
+                  </div>
+                </details>
+              )}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <!-- Connections -->
+      {dossier.connections.length > 0 && (
+        <section>
+          <h2 class="text-xl font-semibold mb-4">Connections ({dossier.connections.length})</h2>
+          <div class="space-y-2">
+            {dossier.connections.slice(0, 20).map((c: any) => (
+              <div class="flex items-start justify-between bg-gray-900 border border-gray-800 rounded-lg px-4 py-3">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2">
+                    <a href={`/dossiers/${c.other_person_slug}`} class="text-sm text-blue-400 hover:text-blue-300">
+                      {c.other_person}
+                    </a>
+                    <span class="text-xs text-gray-600">|</span>
+                    <span class="text-xs text-gray-500">{c.relationship_type}</span>
+                    <span class={`text-xs ${
+                      c.strength === 'strong' ? 'text-green-500' :
+                      c.strength === 'medium' ? 'text-yellow-500' :
+                      c.strength === 'weak' ? 'text-orange-500' :
+                      'text-gray-600'
+                    }`}>
+                      {c.strength}
+                    </span>
+                  </div>
+                  <p class="text-xs text-gray-400 mt-1">{c.description}</p>
+                </div>
+                {c.date_range && (
+                  <span class="text-xs text-gray-500 shrink-0 ml-4">{c.date_range}</span>
+                )}
+              </div>
+            ))}
+            {dossier.connections.length > 20 && (
+              <details>
+                <summary class="text-sm text-gray-500 hover:text-gray-300 cursor-pointer py-2">
+                  Show {dossier.connections.length - 20} more connections
+                </summary>
+                <div class="space-y-2 mt-2">
+                  {dossier.connections.slice(20).map((c: any) => (
+                    <div class="flex items-start justify-between bg-gray-900 border border-gray-800 rounded-lg px-4 py-3">
+                      <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                          <a href={`/dossiers/${c.other_person_slug}`} class="text-sm text-blue-400 hover:text-blue-300">
+                            {c.other_person}
+                          </a>
+                          <span class="text-xs text-gray-600">|</span>
+                          <span class="text-xs text-gray-500">{c.relationship_type}</span>
+                          <span class={`text-xs ${
+                            c.strength === 'strong' ? 'text-green-500' :
+                            c.strength === 'medium' ? 'text-yellow-500' :
+                            c.strength === 'weak' ? 'text-orange-500' :
+                            'text-gray-600'
+                          }`}>
+                            {c.strength}
+                          </span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">{c.description}</p>
+                      </div>
+                      {c.date_range && (
+                        <span class="text-xs text-gray-500 shrink-0 ml-4">{c.date_range}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </details>
+            )}
+          </div>
+        </section>
+      )}
+
+      <!-- Entity Roles -->
+      {dossier.entities.length > 0 && (
+        <section>
+          <h2 class="text-xl font-semibold mb-4">Corporate Entities ({dossier.entities.length})</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left text-xs text-gray-500 uppercase tracking-wider border-b border-gray-800">
+                  <th class="pb-2 pr-4">Entity</th>
+                  <th class="pb-2 pr-4">Type</th>
+                  <th class="pb-2 pr-4">Role</th>
+                  <th class="pb-2 pr-4">Jurisdiction</th>
+                  <th class="pb-2 pr-4">Status</th>
+                  <th class="pb-2">Period</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-800/50">
+                {dossier.entities.map((e: any) => (
+                  <tr class="text-gray-300">
+                    <td class="py-2.5 pr-4 font-medium">{e.entity_name}</td>
+                    <td class="py-2.5 pr-4 text-gray-500">{e.entity_type}</td>
+                    <td class="py-2.5 pr-4">{e.role}</td>
+                    <td class="py-2.5 pr-4 text-gray-500">{e.jurisdiction}</td>
+                    <td class="py-2.5 pr-4">
+                      <span class={e.entity_status === 'active' ? 'text-green-500' : 'text-gray-600'}>
+                        {e.entity_status}
+                      </span>
+                    </td>
+                    <td class="py-2.5 text-gray-500 text-xs">
+                      {e.date_start || '?'} – {e.date_end || 'present'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <!-- Timeline -->
+      {dossier.timeline.length > 0 && (
+        <section>
+          <h2 class="text-xl font-semibold mb-4">Timeline ({dossier.timeline.length} dated events)</h2>
+          <div class="relative border-l border-gray-800 ml-4 space-y-4">
+            {dossier.timeline.slice(0, 20).map((event: any) => (
+              <div class="relative pl-6">
+                <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-gray-800 bg-gray-950"></div>
+                <div class="text-xs text-gray-500 mb-0.5">{event.date}</div>
+                {event.type === 'finding' ? (
+                  <p class="text-sm text-gray-300">{event.summary}</p>
+                ) : (
+                  <p class="text-sm text-gray-300">
+                    <span class="text-gray-500">[{event.relationship_type}]</span>{' '}
+                    <a href={`/dossiers/${event.other_person?.toLowerCase().replace(/\s+/g, '-').replace(/[.']/g, '')}`} class="text-blue-400 hover:text-blue-300">
+                      {event.other_person}
+                    </a>: {event.description}
+                  </p>
+                )}
+              </div>
+            ))}
+            {dossier.timeline.length > 20 && (
+              <details>
+                <summary class="text-sm text-gray-500 hover:text-gray-300 cursor-pointer py-2 pl-6">
+                  Show {dossier.timeline.length - 20} more events
+                </summary>
+                <div class="space-y-4 mt-2">
+                  {dossier.timeline.slice(20).map((event: any) => (
+                    <div class="relative pl-6">
+                      <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-gray-800 bg-gray-950"></div>
+                      <div class="text-xs text-gray-500 mb-0.5">{event.date}</div>
+                      {event.type === 'finding' ? (
+                        <p class="text-sm text-gray-300">{event.summary}</p>
+                      ) : (
+                        <p class="text-sm text-gray-300">
+                          <span class="text-gray-500">[{event.relationship_type}]</span>{' '}
+                          <a href={`/dossiers/${event.other_person?.toLowerCase().replace(/\s+/g, '-').replace(/[.']/g, '')}`} class="text-blue-400 hover:text-blue-300">
+                            {event.other_person}
+                          </a>: {event.description}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </details>
+            )}
+          </div>
+        </section>
+      )}
+      <!-- Related Articles -->
+      {relatedArticles.length > 0 && (
+        <section>
+          <h2 class="text-xl font-semibold mb-4">Related Articles ({relatedArticles.length})</h2>
+          <div class="space-y-2">
+            {relatedArticles.map((a: any) => (
+              <a href={`/articles/${a.slug}`}
+                 class="block bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 hover:border-gray-700 transition-colors">
+                <span class="text-blue-400">{a.title}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Connected Dossiers -->
+      {relatedDossiers.length > 0 && (
+        <section>
+          <h2 class="text-xl font-semibold mb-4">Connected Dossiers ({relatedDossiers.length})</h2>
+          <div class="flex flex-wrap gap-2">
+            {relatedDossiers.map((d: any) => (
+              <a href={`/dossiers/${d.slug}`}
+                 class="inline-flex items-center gap-1.5 bg-gray-900 border border-gray-800 rounded-full px-3 py-1.5 text-sm hover:border-gray-700 transition-colors">
+                <span class="text-gray-300">{d.name}</span>
+                <span class="text-xs text-gray-600">
+                  {d.via === 'connection' ? d.relationship_type : `via ${d.entity}`}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </div>
+</BaseLayout>

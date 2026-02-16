@@ -1,0 +1,507 @@
+#!/usr/bin/env python3
+"""
+Post-wave auto-lead generator.
+
+Scans entity tables for new entries not yet cross-referenced and
+generates investigation leads automatically.
+
+Run after each investigation wave:
+    python tools/auto_leads.py
+    python tools/auto_leads.py --dry-run    # Preview without creating leads
+    python tools/auto_leads.py --stats      # Show what's been processed
+
+Triggers:
+    - New entity address → search registries for other entities at that address
+    - New entity role (person→entity) → search for person as officer elsewhere
+    - New entity → search corporate registries + ACRIS + Aleph
+    - New connection with < 5 findings → search DOJ/DugganUSA for person
+"""
+
+import argparse
+import sqlite3
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).parent.parent
+DB_PATH = PROJECT_ROOT / "investigation.db"
+
+# High-value addresses that warrant high-priority cross-ref
+KNOWN_ADDRESSES = {
+    "457 madison": "Indyke/Epstein corporate office cluster",
+    "9 e 71": "Epstein NYC mansion",
+    "9 east 71": "Epstein NYC mansion",
+    "301 e 66": "Epstein-linked property",
+    "358 el brillo": "Epstein Palm Beach mansion",
+    "575 lexington": "Epstein Foundation office",
+    "6100 red hook": "Little St. James / USVI",
+    "49 zorro ranch": "Epstein NM ranch",
+    "133 east 64": "Galbraith apartment (blocks from mansion)",
+}
+
+# Known top correspondents / key persons — officer matches get high priority
+KEY_PERSONS = {
+    "darren indyke", "richard kahn", "erika kellerhals", "lesley groff",
+    "christina galbraith", "karyna shuliak", "ghislaine maxwell",
+    "leon black", "les wexner", "eva dubin", "glenn dubin",
+    "terje rod-larsen", "mona juul", "lawrence summers",
+    "kathy ruemmler", "kathryn ruemmler",
+    "michael wolff", "reid weingarten", "steve bannon",
+    "boris nikolic", "jide zeitlin", "ken starr", "kenneth starr",
+    "alan dershowitz", "david boies", "brad edwards",
+    "mark epstein", "sarah kellen", "nadia marcinkova",
+}
+
+
+def get_db():
+    db = sqlite3.connect(str(DB_PATH))
+    db.row_factory = sqlite3.Row
+    return db
+
+
+def is_processed(db, table_name, record_id, crossref_type):
+    row = db.execute(
+        "SELECT id FROM auto_crossref_log WHERE table_name=? AND record_id=? AND crossref_type=?",
+        (table_name, record_id, crossref_type)
+    ).fetchone()
+    return row is not None
+
+
+def log_processed(db, table_name, record_id, crossref_type, lead_id=None):
+    db.execute(
+        "INSERT OR IGNORE INTO auto_crossref_log (table_name, record_id, crossref_type, lead_id) VALUES (?,?,?,?)",
+        (table_name, record_id, crossref_type, lead_id)
+    )
+
+
+def lead_exists(db, title_fragment):
+    """Check if a similar lead already exists."""
+    row = db.execute(
+        "SELECT id FROM leads WHERE title LIKE ?", (f"%{title_fragment}%",)
+    ).fetchone()
+    return row["id"] if row else None
+
+
+def create_lead(db, title, category, priority, source, target=None, notes=None):
+    """Create a lead and return its ID. Auto-leads go to pending_triage."""
+    db.execute(
+        """INSERT INTO leads (title, category, priority, status, source, target_name, created_at)
+           VALUES (?, ?, ?, 'pending_triage', ?, ?, datetime('now'))""",
+        (title, category, priority, source, target)
+    )
+    lead_id = db.execute("SELECT last_insert_rowid()").fetchone()[0]
+    if notes:
+        db.execute(
+            "INSERT INTO lead_notes (lead_id, note, created_at) VALUES (?, ?, datetime('now'))",
+            (lead_id, notes)
+        )
+    return lead_id
+
+
+def address_priority(address):
+    """Determine priority based on known addresses."""
+    addr_lower = address.lower()
+    for pattern, desc in KNOWN_ADDRESSES.items():
+        if pattern in addr_lower:
+            return "high", desc
+    return "medium", None
+
+
+def person_priority(person_name):
+    """Determine priority based on known key persons."""
+    name_lower = person_name.lower().strip()
+    if name_lower in KEY_PERSONS:
+        return "high"
+    # Check partial matches (last name)
+    for kp in KEY_PERSONS:
+        parts = kp.split()
+        if len(parts) >= 2 and parts[-1] == name_lower.split()[-1] if name_lower.split() else "":
+            return "high"
+    return "medium"
+
+
+def normalize_address(addr):
+    """Normalize address for dedup — extract street number + name."""
+    import re
+    addr = addr.strip().lower()
+    # Remove suite/apt/fl info
+    addr = re.sub(r'\b(suite|ste|apt|fl|floor|unit|#)\b.*', '', addr, flags=re.IGNORECASE)
+    # Remove common suffixes
+    addr = re.sub(r'\b(llc|inc|corp)\b', '', addr)
+    # Extract just the street part (first line before comma)
+    addr = addr.split(",")[0].strip()
+    # Collapse whitespace
+    addr = re.sub(r'\s+', ' ', addr).strip()
+    return addr[:50]
+
+
+def process_new_addresses(db, dry_run=False):
+    """Generate leads for new entity addresses."""
+    rows = db.execute("""
+        SELECT ea.id, ea.entity_id, ea.address, ea.address_type, e.name as entity_name
+        FROM entity_addresses ea
+        JOIN entities e ON ea.entity_id = e.id
+        WHERE ea.id NOT IN (
+            SELECT record_id FROM auto_crossref_log WHERE table_name='entity_addresses'
+        )
+    """).fetchall()
+
+    created = 0
+    seen_addresses = {}  # normalized → lead_id
+
+    for row in rows:
+        addr = row["address"]
+        if not addr or len(addr.strip()) < 10:
+            log_processed(db, "entity_addresses", row["id"], "address_search")
+            continue
+
+        norm = normalize_address(addr)
+        if len(norm) < 8:
+            log_processed(db, "entity_addresses", row["id"], "address_search")
+            continue
+
+        # Skip vague addresses (just city/state, c/o addresses, PO boxes)
+        skip_patterns = ["c/o ", "p.o. box", "po box", "unknown", "n/a"]
+        if any(p in addr.lower() for p in skip_patterns):
+            log_processed(db, "entity_addresses", row["id"], "address_search")
+            continue
+        # Skip addresses that are just a city/state (no street number)
+        import re
+        if not re.search(r'\d', norm):
+            log_processed(db, "entity_addresses", row["id"], "address_search")
+            continue
+
+        # Dedup within this batch
+        if norm in seen_addresses:
+            log_processed(db, "entity_addresses", row["id"], "address_search", seen_addresses[norm])
+            continue
+
+        # Check existing leads
+        existing = lead_exists(db, norm[:30])
+        if existing:
+            seen_addresses[norm] = existing
+            log_processed(db, "entity_addresses", row["id"], "address_search", existing)
+            continue
+
+        priority, known_desc = address_priority(addr)
+        addr_display = addr.split(",")[0].strip()[:40]
+        title = f"Cross-ref address: {addr_display} — find other entities"
+        notes = f"Entity '{row['entity_name']}' registered at {addr}."
+        if known_desc:
+            notes += f" Known Epstein location: {known_desc}."
+        notes += " Search: query_registry.py address, query_acris.py, ingest_newyork.py search-address"
+
+        if dry_run:
+            print(f"  [DRY] Address lead ({priority}): {title}")
+            seen_addresses[norm] = -1
+        else:
+            lead_id = create_lead(db, title, "entity", priority, "agent:auto_leads", target=addr_display, notes=notes)
+            seen_addresses[norm] = lead_id
+            log_processed(db, "entity_addresses", row["id"], "address_search", lead_id)
+            created += 1
+
+    return created, len(rows)
+
+
+def process_new_roles(db, dry_run=False):
+    """Generate leads for new person-entity roles (search for person as officer elsewhere)."""
+    rows = db.execute("""
+        SELECT er.id, er.entity_id, er.person_name, er.role, e.name as entity_name
+        FROM entity_roles er
+        JOIN entities e ON er.entity_id = e.id
+        WHERE er.id NOT IN (
+            SELECT record_id FROM auto_crossref_log WHERE table_name='entity_roles'
+        )
+    """).fetchall()
+
+    # Group by person to avoid creating duplicate leads for same person at multiple entities
+    persons_seen = {}
+    created = 0
+    for row in rows:
+        person = row["person_name"]
+        if not person or len(person.strip()) < 3:
+            log_processed(db, "entity_roles", row["id"], "officer_search")
+            continue
+
+        person_normalized = person.strip().lower()
+        if person_normalized in persons_seen:
+            log_processed(db, "entity_roles", row["id"], "officer_search", persons_seen[person_normalized])
+            continue
+
+        # Skip Epstein himself — we know his entities
+        if "epstein" in person_normalized and "mark" not in person_normalized:
+            persons_seen[person_normalized] = None
+            log_processed(db, "entity_roles", row["id"], "officer_search")
+            continue
+
+        # Check if lead already exists
+        existing = lead_exists(db, f"officer: {person.strip()[:30]}")
+        if existing:
+            persons_seen[person_normalized] = existing
+            log_processed(db, "entity_roles", row["id"], "officer_search", existing)
+            continue
+
+        # Check if person already has 5+ findings (well-investigated)
+        finding_count = db.execute(
+            "SELECT COUNT(*) FROM findings WHERE target_name LIKE ?",
+            (f"%{person.strip()}%",)
+        ).fetchone()[0]
+        if finding_count >= 5:
+            persons_seen[person_normalized] = None
+            log_processed(db, "entity_roles", row["id"], "officer_search")
+            continue
+
+        priority = person_priority(person)
+        title = f"Cross-ref officer: {person.strip()} — find other entity roles"
+        notes = f"Found as {row['role']} at {row['entity_name']}."
+        notes += f" {finding_count} existing findings."
+        notes += " Search: query_registry.py officers, ingest_newyork.py search-officers, query_aleph.py"
+
+        if dry_run:
+            print(f"  [DRY] Officer lead ({priority}): {title}")
+            persons_seen[person_normalized] = -1
+        else:
+            lead_id = create_lead(db, title, "person", priority, "agent:auto_leads", target=person.strip(), notes=notes)
+            persons_seen[person_normalized] = lead_id
+            log_processed(db, "entity_roles", row["id"], "officer_search", lead_id)
+            created += 1
+
+    return created, len(rows)
+
+
+def process_new_entities(db, dry_run=False):
+    """Generate leads for new entities (search registries)."""
+    rows = db.execute("""
+        SELECT e.id, e.name, e.entity_type, e.jurisdiction
+        FROM entities e
+        WHERE e.id NOT IN (
+            SELECT record_id FROM auto_crossref_log WHERE table_name='entities'
+        )
+    """).fetchall()
+
+    created = 0
+    for row in rows:
+        name = row["name"]
+        if not name or len(name.strip()) < 3:
+            log_processed(db, "entities", row["id"], "entity_search")
+            continue
+
+        # Skip entities that are just generic descriptions or well-known public entities
+        skip_names = {"unknown", "n/a", "none", "self", "personal"}
+        if name.strip().lower() in skip_names:
+            log_processed(db, "entities", row["id"], "entity_search")
+            continue
+
+        # Skip well-known public institutions (not useful to registry-search)
+        public_entities = {
+            "goldman sachs", "jpmorgan", "jp morgan", "deutsche bank", "apollo global",
+            "paul weiss", "kirkland & ellis", "kirkland and ellis",
+            "harvard", "mit", "yale", "columbia", "nyu",
+            "fbi", "doj", "cia", "nsa", "state department",
+            "united nations", "world economic forum", "council of europe",
+        }
+        name_lower = name.strip().lower()
+        if any(pe in name_lower for pe in public_entities):
+            log_processed(db, "entities", row["id"], "entity_search")
+            continue
+
+        # Only create leads for entity types likely to have registry records
+        searchable_types = {"llc", "inc", "ltd", "trust", "foundation", "nonprofit", "partnership", "fund"}
+        if row["entity_type"] not in searchable_types:
+            log_processed(db, "entities", row["id"], "entity_search")
+            continue
+
+        # Check if lead already exists
+        name_short = name.strip()[:40]
+        existing = lead_exists(db, f"registry: {name_short}")
+        if existing:
+            log_processed(db, "entities", row["id"], "entity_search", existing)
+            continue
+
+        # Determine priority — entities with known Epstein connection types get higher
+        priority = "low"
+        epstein_types = {"trust", "foundation", "nonprofit", "fund", "llc"}
+        if row["entity_type"] in epstein_types:
+            priority = "medium"
+
+        # Check if entity has roles (more connected = higher priority)
+        role_count = db.execute(
+            "SELECT COUNT(*) FROM entity_roles WHERE entity_id=?", (row["id"],)
+        ).fetchone()[0]
+        if role_count >= 2:
+            priority = "medium"
+        if role_count >= 4:
+            priority = "high"
+
+        title = f"Cross-ref registry: {name_short} — search corporate registries"
+        jur = row["jurisdiction"] or "unknown"
+        notes = f"Type: {row['entity_type']}, Jurisdiction: {jur}, {role_count} known roles."
+        notes += " Search: query_registry.py search, query_aleph.py search --schema Company, ingest_newyork.py search"
+
+        if dry_run:
+            print(f"  [DRY] Entity lead ({priority}): {title}")
+        else:
+            lead_id = create_lead(db, title, "entity", priority, "agent:auto_leads", target=name.strip(), notes=notes)
+            log_processed(db, "entities", row["id"], "entity_search", lead_id)
+            created += 1
+
+    return created, len(rows)
+
+
+def process_new_connections(db, dry_run=False):
+    """Generate leads for new connections where person has < 5 findings."""
+    rows = db.execute("""
+        SELECT c.id, c.person_a, c.person_b, c.relationship_type
+        FROM connections c
+        WHERE c.id NOT IN (
+            SELECT record_id FROM auto_crossref_log WHERE table_name='connections'
+        )
+    """).fetchall()
+
+    # Only generate leads for persons with HIGH priority (key persons)
+    # or persons with 0 findings AND a strong connection type
+    STRONG_TYPES = {"financial", "legal", "intelligence", "employment", "corporate"}
+
+    persons_checked = set()
+    created = 0
+    for row in rows:
+        for person in [row["person_b"], row["person_a"]]:
+            if not person or person.strip().lower() in persons_checked:
+                continue
+            persons_checked.add(person.strip().lower())
+
+            # Skip Epstein himself
+            if "epstein" in person.lower() and "mark" not in person.lower():
+                continue
+
+            # Skip very short or generic names
+            if len(person.strip()) < 5:
+                continue
+
+            # Skip public figures who aren't direct network members
+            skip_persons = {"mike pence", "stefan halper", "donald trump", "hillary clinton",
+                           "barack obama", "vladimir putin", "mbs", "joe biden"}
+            if person.strip().lower() in skip_persons:
+                continue
+
+            finding_count = db.execute(
+                "SELECT COUNT(*) FROM findings WHERE target_name LIKE ?",
+                (f"%{person.strip()}%",)
+            ).fetchone()[0]
+            if finding_count >= 3:
+                continue
+
+            existing = lead_exists(db, f"Deep-search: {person.strip()[:30]}")
+            if existing:
+                continue
+
+            # Only create if: key person OR strong connection with 0 findings
+            priority = person_priority(person)
+            is_strong = row["relationship_type"] in STRONG_TYPES
+            if priority != "high" and not (finding_count == 0 and is_strong):
+                continue
+
+            title = f"Deep-search: {person.strip()} — {finding_count} findings, expand coverage"
+            notes = f"Connected via {row['relationship_type']} relationship."
+            notes += f" Only {finding_count} findings. Search DOJ Vol 11, DugganUSA, LMSBAND."
+
+            if dry_run:
+                print(f"  [DRY] Connection lead ({priority}): {title}")
+            else:
+                lead_id = create_lead(db, title, "person", priority, "agent:auto_leads", target=person.strip(), notes=notes)
+                created += 1
+
+        log_processed(db, "connections", row["id"], "connection_search")
+
+    return created, len(rows)
+
+
+def cmd_run(args):
+    db = get_db()
+
+    print("=" * 60)
+    print("AUTO-LEAD GENERATOR — Post-Wave Cross-Reference")
+    print("=" * 60)
+    if args.dry_run:
+        print("[DRY RUN — no leads will be created]\n")
+
+    # Process each category
+    results = {}
+
+    print("\n--- New Addresses ---")
+    c, t = process_new_addresses(db, args.dry_run)
+    results["addresses"] = (c, t)
+    print(f"  {t} new addresses scanned, {c} leads created")
+
+    print("\n--- New Officer Roles ---")
+    c, t = process_new_roles(db, args.dry_run)
+    results["roles"] = (c, t)
+    print(f"  {t} new roles scanned, {c} leads created")
+
+    print("\n--- New Entities ---")
+    c, t = process_new_entities(db, args.dry_run)
+    results["entities"] = (c, t)
+    print(f"  {t} new entities scanned, {c} leads created")
+
+    print("\n--- New Connections ---")
+    c, t = process_new_connections(db, args.dry_run)
+    results["connections"] = (c, t)
+    print(f"  {t} new connections scanned, {c} leads created")
+
+    if not args.dry_run:
+        db.commit()
+
+    total_created = sum(v[0] for v in results.values())
+    total_scanned = sum(v[1] for v in results.values())
+
+    print(f"\n{'=' * 60}")
+    print(f"Total: {total_scanned} items scanned, {total_created} leads created")
+    if args.dry_run:
+        print("(Dry run — nothing was saved)")
+    print(f"{'=' * 60}")
+
+
+def cmd_stats(args):
+    db = get_db()
+    print("Auto Cross-Reference Stats")
+    print("-" * 40)
+    for table in ["entities", "entity_addresses", "entity_roles", "connections"]:
+        total = db.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
+        processed = db.execute(
+            "SELECT COUNT(DISTINCT record_id) FROM auto_crossref_log WHERE table_name=?",
+            (table,)
+        ).fetchone()[0]
+        leads = db.execute(
+            "SELECT COUNT(*) FROM auto_crossref_log WHERE table_name=? AND lead_id IS NOT NULL",
+            (table,)
+        ).fetchone()[0]
+        print(f"  {table}: {processed}/{total} processed, {leads} leads created")
+
+    print()
+    total_leads = db.execute(
+        "SELECT COUNT(*) FROM leads WHERE source='agent:auto_leads'"
+    ).fetchone()[0]
+    print(f"Total auto-generated leads: {total_leads}")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Post-wave auto-lead generator")
+    sub = parser.add_subparsers(dest="command")
+
+    p = sub.add_parser("run", help="Generate leads from new entity data")
+    p.add_argument("--dry-run", action="store_true", help="Preview without creating")
+
+    sub.add_parser("stats", help="Show processing stats")
+
+    args = parser.parse_args()
+    if not args.command:
+        args.command = "run"
+        args.dry_run = False
+
+    if args.command == "run":
+        cmd_run(args)
+    elif args.command == "stats":
+        cmd_stats(args)
+
+
+if __name__ == "__main__":
+    main()

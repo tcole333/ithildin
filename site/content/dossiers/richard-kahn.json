@@ -1,0 +1,1334 @@
+{
+  "name": "Richard Kahn",
+  "slug": "richard-kahn",
+  "aliases": [],
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 33,
+    "total_entities": 13,
+    "finding_types": {
+      "financial": 7,
+      "relationship": 1,
+      "identity": 1,
+      "communication": 1
+    },
+    "connection_types": {
+      "advisory": 1,
+      "corporate": 6,
+      "employment": 1,
+      "financial": 20,
+      "legal": 2,
+      "political": 1,
+      "intelligence": 1,
+      "social": 1
+    }
+  },
+  "findings": [
+    {
+      "id": 318,
+      "finding_type": "financial",
+      "summary": "HBRK Associates Inc (Kahn's entity) was incorporated in NY on Aug 29, 2008. Registered at 1365 York Avenue, Apt. 28, NY 10021 (personal residence), operated from 575 Lexington Ave 4th Floor, NY 10022. HBRK served as the entity through which Kahn managed Epstein financial operations. JPMorgan account 799789169 shows regular check activity. Kahn requested 250K funding approval from Epstein for HBRK in July 2009.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:51:50",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01513772",
+          "source_quote": "HBRK ASSOCIATES INC Primary Account 000000799789169",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02440151",
+          "source_quote": "HBRK needs to be funded for the next 3 months. Do I have your approval to fund with 250,000?",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 321,
+      "finding_type": "financial",
+      "summary": "HBRK Associates compensation history reveals Kahn was hired Oct 17, 2005. Entity transitioned from NYSG (2004-2008) to HBRK (2009-2013). Salary data shows progression through Epstein employment. Kahn previously served as CEO of RDK Asset Management Inc (2000-2008). Kahn managed wire transfers: Feb 2014 wire of 100,067.96 from Hyperion Air Inc initiated through DB.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:51:59",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01344209",
+          "source_quote": "Rich Following is what we initiated on 2/25/14 Debit A/M Hyperion Amount 100,067.96 Air, Inc. Wire",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02679045",
+          "source_quote": "HBRK ASSOCIATES COMPENSATION AND BENEFITS Richard Kahn Hire date 10/17/2005",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 326,
+      "finding_type": "relationship",
+      "summary": "Kahn network per LMSBAND co-occurrence: 1818 files with Stewart Oldfield (DB banker - most frequent), 830 with Indyke, 677 with Bella Klein, 471 with Epstein, 348 Amanda Kirby (DB), 329 Cynthia Rodriguez (DB), 299 Paul Morris, 208 Daniel Sabba (DB), 195 Rothschild, 184 Tazia Smith. LittleSis shows: treasurer at COUQ Foundation, treasurer at Poplar Inc, position at HBRK, executor of Epstein estate, donations to Bill Richardson, Stacey Plaskett (5400), and Hillary Clinton (500). Professional relationship with Ben Goertzel and transaction with Humanity+ Inc.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:10",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LMSBAND:cooccurrence",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 327,
+      "finding_type": "financial",
+      "summary": "Coatue Enterprises LLC (NY reg 4748511, incorporated April 27, 2015) used HBRK Associates 575 Lexington Ave 4th Floor as its registered address, confirming Kahn-managed entity. Kahn also managed DB relationship for large cash withdrawals - Jan 12, 2018 correspondence with Cynthia Rodriguez at DB confirming branch awareness of withdrawal with indemnity, Indyke picking up with photo ID. Kahn supervised Euro ordering via AFEX for Indyke pickup.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:22",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345951",
+          "source_quote": "Please let me know if you can order 50,000 Euros for Darren to pickup tomorrow at AFEX. Please order only large bills",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01346084",
+          "source_quote": "Please make sure Dairen has his photo ID upon pick up and we should be all set",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 329,
+      "finding_type": "financial",
+      "summary": "Kahn managed Epstein personal spending: arranged Peggy Siegal wire for Elton John dinner (June 2017), oversaw Apple Watch Series 4 gifts to staff (Nov 2018, Hermes bands), handled Nick Ribis consultations, coordinated with David Mitchell on Southampton property, managed 9 East 71st Street with Merwin Dela Cruz. Kahn also handled Sold for 500K pounds report to Epstein (March 2018), Caterpillar Trust administration (2017), and FlightAware tracking of N120JE.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:34",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02216198",
+          "source_quote": "Peggy Siegal. She is the one attending. I will let Rebecca know you are wiring the funds",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02264399",
+          "source_quote": "He does want a Hermes band but the aluminum space gray case. Its a gift",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02513207",
+          "source_quote": "Sold for 500k pounds",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 347,
+      "finding_type": "financial",
+      "summary": "Kahn managed Gratitude America as its President, handling all disbursements. Key operations: coordinated with Deutsche Bank on SFL/Gratitude America accounts (March 2016, classified Strictly Confidential). Set up AG account with higher interest (Aug 2018). Directed Gratitude America donations including to James Fitzpatrick (April 2018 - check sent via regular mail). Managed Gratitude America stationery for recommendation letters. Coordinated LNKD stock sales (sold 800 at 192.22) and WDC bond purchases (2MM at 104.30) through Epstein accounts.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:55:35",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01388214",
+          "source_quote": "can we set up an AG account with higher interest",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01477556",
+          "source_quote": "RE SFL and Gratitude America Ltd classified Strictly Confidential",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02242137",
+          "source_quote": "gratitude america is foundation that will be sending, will be sent today via regular mail",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02460277",
+          "source_quote": "sold 800 LNKD at 192.2176 FYI WDC bonds we purchased 2mm at 104.30",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 452,
+      "finding_type": "financial",
+      "summary": "Richard Kahn (Epstein's financial manager, RDK Properties LLC) made confirmed FEC donations from NYC 10021: ,300 to Richardson for President (2007-11-13, employer RDK PROPERTIES LLC) and  to Hillary Clinton for President (2007-06-06, employer RDK PROPERTIES LLC). Both Kahn and Indyke donated to Richardson for President in 2007, suggesting coordinated giving. Kahn's donation to Clinton (same committee as Maxwell, Dershowitz, and Barrett) further confirms the bundling pattern. NOTE: 3,259 total FEC results for 'Richard Kahn' but most are different people -- only the RDK Properties/NYC 10021 entries are confirmed as the Epstein associate.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:48:41",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FEC:C00431577/schedule_a,FEC:C00431569/schedule_a",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1577,
+      "finding_type": "financial",
+      "summary": "On May 22, 2017, Epstein directed Kahn to get quotes on selling AND buying 100K Rothschild & Co (EPA:ROTH) shares. Kahn contacted Tazia Smith at Deutsche Bank, who noted the stock closed at 27.585 euros on ~1.6K shares that day and warned 'b/a is going to be wide' for 100K shares given low liquidity. This was the same period when Epstein was advising Ariane de Rothschild on EdR bank strategy (5M share buyback permissions at 35 EUR, sale restrictions, Jardine discussions). Epstein was simultaneously: (1) acting as advisor to EdR with inside knowledge of corporate actions, (2) directing his accountant to trade EdR shares through Deutsche Bank, and (3) discussing share structure changes with Ariane de Rothschild directly. The dual position of advisor and trader raises serious insider trading concerns.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:11:47",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02648963",
+          "source_quote": "get a quote on selling 100k rothschild and co shares. same for buying the same amount. thx",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1580,
+      "finding_type": "identity",
+      "summary": "HBRK Associates Inc was successor entity to NYSG, with the transition occurring between 2008 and 2009. NYSG operated 2004-2008, HBRK from 2009-2019+. Richard Kahn hire date: 10/17/2005. HBRK served as: (1) Epstein's financial management office (575 Lexington Ave 4th Floor, NY 10022, later PO Box 400 NY 10150), (2) Tristar car service account name (still used NYSG name through at least Dec 2018), (3) conduit for all family office operations. HBRK required quarterly funding of 250K from Epstein. DS10 records show 9.24M incoming to HBRK on 12/12/2019 (post-death estate transfers across 7 transactions). Kahn also managed Apple purchases (HBRK Europe account) and Florida property maintenance. Harry Beller was an HBRK employee.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:12:07",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02440151",
+          "source_quote": "HBRK needs to be funded for the next 3 months. Do I have your approval to fund with 250,000? Rich Kahn HBRK Associates Inc. PO Box 400 New York NY 10150",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2741,
+      "finding_type": "communication",
+      "summary": "Richard Kahn systematically monitored Peter Thiel in media and forwarded articles to Epstein. At least 8 separate forwards documented: Thiel-Trump hedging bet (BuzzFeed Aug 2017), Trump Germany ambassador tap (CNBC Jan 2017), Thiel-Trump tech pal (NYT Jan 2017), NZ citizenship backup country (NYT Jan 2017), RNC embrace squirming (NYT Jul 2016), Thiel defends Trump support (NYT Oct 2016). All marked Importance High.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-16 01:52:13",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02344639",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02354528",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02365477",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02383501",
+          "source_quote": "Peter Thiel Has Been Hedging His Bet On Donald Trump",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02447431",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3,
+      "person_a": "Leon Black",
+      "person_b": "Richard Kahn",
+      "relationship_type": "advisory",
+      "description": "Kahn managed Gratitude America (EIN 66-0789697) which received $10M from Black in 2015. Kahn also worked on Black family financial matters as referenced in Origins Project unused funds email.",
+      "strength": "strong",
+      "date_range": "2014-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:07:26",
+      "other_person": "Leon Black",
+      "other_person_slug": "leon-black",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02628470",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Richard Kahn",
+      "relationship_type": "corporate",
+      "description": "Kahn served as President of GA from 2012-2019. Address: 575 Lexington Ave 4th Floor (HBRK Associates) then 9053 Estate Thomas. Managed all banking, donations, and correspondence for the foundation. Zero compensation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:11:15",
+      "other_person": "Gratitude America Ltd",
+      "other_person_slug": "gratitude-america-ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2015",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "person_a": "Enhanced Education",
+      "person_b": "Richard Kahn",
+      "relationship_type": "corporate",
+      "description": "Richard Kahn (HBRK Associates Inc., 575 Lexington Ave, 4th Floor, NYC) was the primary financial manager directing Enhanced Education transactions. He instructed stock sales, wire transfers, directed payments, and handled Leon Black donation structuring. Named as 'c/o' contact on ASU pledge.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:21",
+      "other_person": "Enhanced Education",
+      "other_person_slug": "enhanced-education",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02339486 EFTA01374773 EFTA02541869",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 202,
+      "person_a": "Christina Galbraith",
+      "person_b": "Richard Kahn",
+      "relationship_type": "corporate",
+      "description": "Kahn CC'd on strategy emails. Handled Shears invoices.",
+      "strength": "strong",
+      "date_range": "2014",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:14:59",
+      "other_person": "Christina Galbraith",
+      "other_person_slug": "christina-galbraith",
+      "evidence": []
+    },
+    {
+      "id": 267,
+      "person_a": "Darren Indyke",
+      "person_b": "Richard Kahn",
+      "relationship_type": "corporate",
+      "description": "Co-beneficiaries of Butterfly Trust. Co-trustees of 1953 Trust. Co-executors of estate. Both at 575 Lexington Ave 4th Floor. Co-occur in 830 LMSBAND files.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:51:34",
+      "other_person": "Darren Indyke",
+      "other_person_slug": "darren-indyke",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01266204",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01296151",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 281,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Richard Kahn",
+      "relationship_type": "employment",
+      "description": "Financial officer/accountant. Hired Oct 2005. President of Gratitude America. Administrator of Southern Trust Company and Butterfly Trust. Co-executor of estate. Co-trustee of 1953 Trust.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:41",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01266204",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02679045",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 282,
+      "person_a": "Richard Kahn",
+      "person_b": "Stewart Oldfield",
+      "relationship_type": "financial",
+      "description": "Primary Deutsche Bank relationship manager for Epstein accounts. 1818 LMSBAND co-occurrences - the single highest co-occurrence for Kahn.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:43",
+      "other_person": "Stewart Oldfield",
+      "other_person_slug": "stewart-oldfield",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01344939",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 319,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Richard Kahn",
+      "relationship_type": "corporate",
+      "description": "Kahn managed all four tree-named property holding entities (Nautilus/Laurel/Maple/Cypress) through HBRK Associates at 301 E 66th St 10F and 575 Lexington Ave. Coordinated JPMorgan Chase accounts.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:05:49",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01268446",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02697605",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 829,
+      "person_a": "David Fiszel",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Kahn (HBRK Associates, 575 Lexington Ave 4th Floor) intermediated all Honeycomb AM communications with Epstein. Forwarded performance reports, deal memos, and wire instructions. Referred to Epstein as 'boss' in messages to Fiszel. Kahn received investor reports at richardkahn12@gmail.com from Morgan Stanley Fund Services.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:10:18",
+      "other_person": "David Fiszel",
+      "other_person_slug": "david-fiszel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02347334",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02605703",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02651157",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 839,
+      "person_a": "Honeycomb Asset Management",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Richard Kahn (HBRK Associates Inc, 575 Lexington Ave 4th Floor NY) served as intermediary between Epstein and Honeycomb. Kahn forwarded performance reports, wire instructions, and investment opportunities. Kahn facilitated Honeycomb Ventures I and IV subscriptions.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:12:30",
+      "other_person": "Honeycomb Asset Management LP",
+      "other_person_slug": "honeycomb-asset-management-lp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02347334",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02366568",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02482577",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02519406",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02520425",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 845,
+      "person_a": "David Fiszel",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Richard Kahn (HBRK Associates) was the primary intermediary between Fiszel and Epstein. Kahn forwarded performance reports, deal opportunities, wire instructions, and pushed Fiszel for introductions to Epstein network. Kahn described Epstein as boss to Fiszel.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:14:39",
+      "other_person": "David Fiszel",
+      "other_person_slug": "david-fiszel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02347334",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02461321",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02482577",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02551407",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 849,
+      "person_a": "David Fiszel",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Kahn (HBRK Associates, 575 Lexington Ave) served as Epstein's investment intermediary for all Honeycomb transactions. Kahn forwarded Fiszel fund docs, performance reports, and co-invest opportunities to Epstein. Kahn also served as social intermediary requesting introductions from Epstein for Fiszel.",
+      "strength": "strong",
+      "date_range": "2016-05 to 2019-04",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:15:40",
+      "other_person": "David Fiszel",
+      "other_person_slug": "david-fiszel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02347334",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02366568",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02551407",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02605703",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 880,
+      "person_a": "Darren Indyke",
+      "person_b": "Richard Kahn",
+      "relationship_type": "legal",
+      "description": "Co-executors of Epstein estate and co-defendants in 30+ federal lawsuits. Co-signatories on Epstein entities. Both directed by Epstein on entity formation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:41:56",
+      "other_person": "Darren Indyke",
+      "other_person_slug": "darren-indyke",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/docket/16079176/doe-v-darren-k-indyke-and-richard-d-kahn/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 890,
+      "person_a": "Richard Kahn",
+      "person_b": "The 2017 Caterpillar Trust",
+      "relationship_type": "financial",
+      "description": "Kahn managed Caterpillar Trust administration via HBRK Associates Inc, coordinated account closures, transfers to Butterfly Trust, and demanded secrecy about Epstein's identity",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:42:26",
+      "other_person": "The 2017 Caterpillar Trust",
+      "other_person_slug": "the-2017-caterpillar-trust",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02636559",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02637022",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 901,
+      "person_a": "Richard Kahn",
+      "person_b": "The 2017 Caterpillar Trust",
+      "relationship_type": "financial",
+      "description": "Richard Kahn (HBRK Associates) managed Caterpillar Trust administration and executed the $2.16M transfer from DB Caterpillar to MS Butterfly Trust on March 18, 2019. Coordinated with DB staff and Morgan Stanley's Andrew Atlas.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:44:22",
+      "other_person": "The 2017 Caterpillar Trust",
+      "other_person_slug": "the-2017-caterpillar-trust",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02636488",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02636559",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 908,
+      "person_a": "Richard Kahn",
+      "person_b": "The 2017 Caterpillar Trust",
+      "relationship_type": "financial",
+      "description": "Richard Kahn (HBRK Associates Inc) managed Caterpillar Trust finances, directed 2.16M transfer to Butterfly Trust at Morgan Stanley, coordinated with Andrew Atlas at Morgan Stanley for new account setup. Same 575 Lexington Ave address as Indyke PLLC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:45:07",
+      "other_person": "The 2017 Caterpillar Trust",
+      "other_person_slug": "the-2017-caterpillar-trust",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01364044",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02636559",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 917,
+      "person_a": "Andrew Atlas",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Kahn coordinated opening Butterfly Trust account at Morgan Stanley with Atlas (SVP, Equity Sales/Middle Markets, 1290 Ave of Americas). Atlas provided Citibank wire instructions for funding from Caterpillar Trust.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:49:50",
+      "other_person": "Andrew Atlas",
+      "other_person_slug": "andrew-atlas",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02636559",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1048,
+      "person_a": "Nicholas Ribis",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Kahn managed Ribis loan account for Epstein: demanded $200K repayment, threatened to deposit bouncing checks, tracked hotel deal closing. Forwarded Ribis correspondence to Epstein. Ribis sent checks to Kahn/HBRK Associates.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 19:22:11",
+      "other_person": "Nicholas Ribis",
+      "other_person_slug": "nicholas-ribis",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02396297",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02457469",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02529762",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02640360",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1119,
+      "person_a": "Darren Indyke",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Post-death DB account liquidation: Indyke PLLC received 5.57M (Nov 20, 2019) and HBRK Associates (Kahn entity) received 9.24M (Dec 12, 2019). Combined 14.9M+ in estate DB account closures. Kahn originated the Harlequin Dane loan request to Epstein (EFTA02460458). Both served as estate co-executors.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 21:48:31",
+      "other_person": "Darren Indyke",
+      "other_person_slug": "darren-indyke",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02460458",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1302,
+      "person_a": "Richard Kahn",
+      "person_b": "Robert Lawrence Kuhn",
+      "relationship_type": "financial",
+      "description": "Richard Kahn (HBRK Associates, 575 Lexington Ave) processed the Gratitude America wire transfers to Kuhn Foundation: $150K on 8/1/2017 and $500K on 6/15/2018. Kahn handled the wire mechanics at Epstein's direction.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 20:10:45",
+      "other_person": "Robert Lawrence Kuhn",
+      "other_person_slug": "robert-lawrence-kuhn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02580751",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02581065",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 162,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:58:14",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": []
+    },
+    {
+      "id": 283,
+      "person_a": "Richard Kahn",
+      "person_b": "Stacey Plaskett",
+      "relationship_type": "political",
+      "description": "Kahn donated 5400 to USVI Delegate Stacey Plaskett in Aug 2016. Plaskett later served on judiciary committees overseeing Epstein-related matters.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:45",
+      "other_person": "Stacey Plaskett",
+      "other_person_slug": "stacey-plaskett",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:rel1565617",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 285,
+      "person_a": "Erika Kellerhals",
+      "person_b": "Richard Kahn",
+      "relationship_type": "corporate",
+      "description": "Both officers on Gratitude America Ltd and JEVIF. Kellerhals copied Kahn on tax conference report analysis (Dec 2017). 10 LMSBAND co-occurrences.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:53:35",
+      "other_person": "Erika Kellerhals",
+      "other_person_slug": "erika-kellerhals",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02547535",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 344,
+      "person_a": "Darren Indyke",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Both donated max ,300 to Richardson for President within 7 days (Kahn 2007-11-13, Indyke 2007-11-20), confirming coordinated political bundling for NM governor where Zorro Ranch is located",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:50:45",
+      "other_person": "Darren Indyke",
+      "other_person_slug": "darren-indyke",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FEC:C00431577/schedule_a",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 346,
+      "person_a": "Ghislaine Maxwell",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Both donated to Hillary Clinton for President (C00431569): Maxwell ,300 (2007-03-30), Kahn  (2007-06-06). Part of broader 4-person Epstein network bundling for Clinton 2008",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:50:55",
+      "other_person": "Ghislaine Maxwell",
+      "other_person_slug": "ghislaine-maxwell",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FEC:C00431569/schedule_a",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 349,
+      "person_a": "Kenneth Starr",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Both donated max contribution to Richardson for President: Starr ,300 (2008-12-09), Kahn ,300 (2007-11-13). Three-way Richardson bundling with Indyke",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:51:08",
+      "other_person": "Ken Starr",
+      "other_person_slug": "ken-starr",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FEC:C00431577/schedule_a",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 496,
+      "person_a": "Harvey Weinstein",
+      "person_b": "Richard Kahn",
+      "relationship_type": "intelligence",
+      "description": "Kahn obsessively tracked Weinstein criminal case, forwarded articles to Epstein",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 04:20:53",
+      "other_person": "Harvey Weinstein",
+      "other_person_slug": "harvey-weinstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02358046",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 514,
+      "person_a": "Maria Prusakova",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": "Epstein forwarded Prusakova's Berkeley proof-of-funding documents to Kahn at HBRK Associates for payment (Apr 2016). Kahn also handled wire for Davos-Apartments contract (Dec 2018). Kahn was the financial mechanism through which Epstein funded Prusakova.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 20:52:25",
+      "other_person": "Maria Prusakova",
+      "other_person_slug": "maria-prusakova",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02270604",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02466540",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 792,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:13:25",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": []
+    },
+    {
+      "id": 793,
+      "person_a": "Ariane de Rothschild",
+      "person_b": "Richard Kahn",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:13:29",
+      "other_person": "Ariane de Rothschild",
+      "other_person_slug": "ariane-de-rothschild",
+      "evidence": []
+    },
+    {
+      "id": 1238,
+      "person_a": "OBM",
+      "person_b": "Richard Kahn",
+      "relationship_type": "legal",
+      "description": "GRM filing index shows OBM Limited Rich Kahn emails and invoices in OBM vs LSJ litigation file. Kahn directly managed the construction dispute between OBM and LSJ (Little St. James).",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:36:00",
+      "other_person": "OBM",
+      "other_person_slug": "obm",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1286,
+      "person_a": "Richard Kahn",
+      "person_b": "Robert Lawrence Kuhn",
+      "relationship_type": "financial",
+      "description": "Kahn processed Epstein's funding instructions to Kuhn Foundation. On June 14, 2018, Epstein told Kahn to send $600K; Kahn confirmed prior $150K and offered to send immediately.",
+      "strength": "medium",
+      "date_range": "2017-08 to 2018-06",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 20:07:19",
+      "other_person": "Robert Lawrence Kuhn",
+      "other_person_slug": "robert-lawrence-kuhn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02580751",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02581174",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 534,
+      "person_a": "Paul Tudor Jones",
+      "person_b": "Richard Kahn",
+      "relationship_type": "social",
+      "description": "Kahn forwarded Bloomberg article about PTJ being victimized in Hamilton Ponzi scheme to Epstein (Feb 2017). Kahn also managed Robin Hood table purchases for Epstein via HBRK Associates.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 21:33:48",
+      "other_person": "Paul Tudor Jones",
+      "other_person_slug": "paul-tudor-jones",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02351614",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02703849",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "ceo",
+      "date_start": "2000-01-01",
+      "date_end": "2008-04-03",
+      "source": "LittleSis",
+      "entity_id": 226,
+      "entity_name": "RDK Asset Management Inc",
+      "entity_type": "inc",
+      "jurisdiction": "NY",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "president",
+      "date_start": "2012",
+      "date_end": "2019",
+      "source": "Finding #29",
+      "entity_id": 1,
+      "entity_name": "Gratitude America Ltd",
+      "entity_type": "nonprofit",
+      "jurisdiction": "USVI",
+      "entity_status": "dormant"
+    },
+    {
+      "role": "trustee",
+      "date_start": "2019",
+      "date_end": null,
+      "source": "Finding #11",
+      "entity_id": 111,
+      "entity_name": "Epstein 2019 Trust",
+      "entity_type": "trust",
+      "jurisdiction": "USVI",
+      "entity_status": "active"
+    },
+    {
+      "role": "principal",
+      "date_start": null,
+      "date_end": null,
+      "source": "Finding #29",
+      "entity_id": 116,
+      "entity_name": "HBRK Associates Inc",
+      "entity_type": "inc",
+      "jurisdiction": "NY",
+      "entity_status": "active"
+    },
+    {
+      "role": "financial_manager",
+      "date_start": null,
+      "date_end": null,
+      "source": "Finding #48 context",
+      "entity_id": 19,
+      "entity_name": "Enhanced Education",
+      "entity_type": "unknown",
+      "jurisdiction": null,
+      "entity_status": "active"
+    },
+    {
+      "role": "officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "Finding #67",
+      "entity_id": 3,
+      "entity_name": "J. Epstein Virgin Islands Foundation",
+      "entity_type": "foundation",
+      "jurisdiction": "USVI",
+      "entity_status": "active"
+    },
+    {
+      "role": "administrator",
+      "date_start": null,
+      "date_end": null,
+      "source": "EFTA02339486",
+      "entity_id": 133,
+      "entity_name": "Southern Trust Company, Inc.",
+      "entity_type": "inc",
+      "jurisdiction": "USVI",
+      "entity_status": "active"
+    },
+    {
+      "role": "administrator",
+      "date_start": null,
+      "date_end": null,
+      "source": "EFTA02477445",
+      "entity_id": 135,
+      "entity_name": "Butterfly Trust",
+      "entity_type": "trust",
+      "jurisdiction": "unknown",
+      "entity_status": "active"
+    },
+    {
+      "role": "officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "master_narrative",
+      "entity_id": 166,
+      "entity_name": "Coatue Enterprises LLC",
+      "entity_type": "llc",
+      "jurisdiction": "unknown",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "DOJ EFTA02635112",
+      "entity_id": 225,
+      "entity_name": "Truth Robot, LLC",
+      "entity_type": "llc",
+      "jurisdiction": null,
+      "entity_status": "unknown"
+    },
+    {
+      "role": "treasurer",
+      "date_start": null,
+      "date_end": null,
+      "source": "LittleSis",
+      "entity_id": 227,
+      "entity_name": "Poplar Inc.",
+      "entity_type": "inc",
+      "jurisdiction": "USVI",
+      "entity_status": "dissolved"
+    },
+    {
+      "role": "treasurer",
+      "date_start": null,
+      "date_end": null,
+      "source": "LittleSis",
+      "entity_id": 228,
+      "entity_name": "The C.O.U.Q. Foundation, Inc.",
+      "entity_type": "foundation",
+      "jurisdiction": "unknown",
+      "entity_status": "unknown"
+    },
+    {
+      "role": "process server/officer",
+      "date_start": null,
+      "date_end": null,
+      "source": "NY SoS",
+      "entity_id": 116,
+      "entity_name": "HBRK Associates Inc",
+      "entity_type": "inc",
+      "jurisdiction": "NY",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2014",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Kahn CC'd on strategy emails. Handled Shears invoices.",
+      "other_person": "Christina Galbraith",
+      "id": 202
+    },
+    {
+      "date": "2014-2019",
+      "type": "connection",
+      "relationship_type": "advisory",
+      "description": "Kahn managed Gratitude America (EIN 66-0789697) which received $10M from Black in 2015. Kahn also worked on Black family financial matters as referenced in Origins Project unused funds email.",
+      "other_person": "Leon Black",
+      "id": 3
+    },
+    {
+      "date": "2016-05 to 2019-04",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Kahn (HBRK Associates, 575 Lexington Ave) served as Epstein's investment intermediary for all Honeycomb transactions. Kahn forwarded Fiszel fund docs, performance reports, and co-invest opportunities to Epstein. Kahn also served as social intermediary requesting introductions from Epstein for Fiszel.",
+      "other_person": "David Fiszel",
+      "id": 849
+    },
+    {
+      "date": "2017-08 to 2018-06",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Kahn processed Epstein's funding instructions to Kuhn Foundation. On June 14, 2018, Epstein told Kahn to send $600K; Kahn confirmed prior $150K and offered to send immediately.",
+      "other_person": "Robert Lawrence Kuhn",
+      "id": 1286
+    }
+  ]
+}

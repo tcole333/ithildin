@@ -1,0 +1,187 @@
+{
+  "name": "HDI",
+  "slug": "hdi",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "legal": 2,
+      "financial": 2,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "intelligence": 1,
+      "financial": 1
+    }
+  },
+  "findings": [
+    {
+      "id": 388,
+      "finding_type": "legal",
+      "summary": "Humpty Dumpty Institute has no FARA registration despite documented CCP/Taihe Institute ties with 12+ PLA members, 33+ Congress members on advisory board, and CODEL pipeline where Epstein could fill congressional delegation slots. Taihe Institute also absent from FARA. China has 276 FARA-registered foreign principals but neither HDI nor Taihe appears. This is a potential FARA violation given documented foreign government connections.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:41:43",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:negative_search_HDI",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 426,
+      "finding_type": "financial",
+      "summary": "HDI (EIN 13-4028567) 990 filings show severe financial contraction. Peak revenue was .82M in 2011, declining to .47M in 2015, K in 2016, K in 2017, K in 2018, then a brief spike to K in 2019, K in 2020, K in 2021, K in 2022, and K in 2023. Assets peaked at K (2011) and have remained minimal (K in 2023). Care-of is Ralph Cwerman. The organization went from a .8M/yr operation to under K/yr, representing over 80% revenue decline - far more severe than typical nonprofit fluctuations.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:45:05",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:134028567/2011-2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 460,
+      "finding_type": "financial",
+      "summary": "HDI cumulative 990 analysis: Revenue declined 73.6% from peak of .82M (2011) to K (2023). The organization consistently spent more than it earned, but survived by operating on thin margins with minimal assets (K-287K range). Revenue collapse began immediately: .82M (2011), .64M (2012), .70M (2013), then accelerating decline to K by 2018. Partial recovery in 2022-2023 (K, K) may reflect new funding sources unrelated to Epstein. HDI operated with much smaller scale than IPI but showed similar pattern of contraction.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:49:42",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:134028567/2011-2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1150,
+      "finding_type": "legal",
+      "summary": "HDI FARA LEGAL ANALYSIS: Humpty Dumpty Institute has zero FARA registrations despite documented CCP/Taihe Institute partnership (since 2017) and extensive Congressional engagement. HDI's activities that potentially trigger FARA: (1) Partnership with Taihe Institute, which employs 12+ current/former CCP and PLA members as senior fellows; (2) 52+ Congressional Delegations to 30+ countries including Azerbaijan, Bahrain, Turkey/Cyprus, and UN; (3) 33+ current/former Congress members on advisory board including Maxine Waters, Jim Clyburn, Debbie Wasserman Schultz, Gregory Meeks; (4) 550+ members of Congress and staffers hosted for summits; (5) Mark Epstein (Jeffrey's brother) on board, participated in Bahrain and Azerbaijan CODELs; (6) Taihe co-authored report calling US 'failed country' and claiming COVID leaked from Maryland military base. HDI CLAIMS: States it 'never accepted any funds from the Taihe Institute or any Chinese Government organ or entity.' FARA COMPARABLE: China-United States Exchange Foundation registered under FARA with 4 separate registrants (Capitol Counsel #6328, Wilson Global #6584, BLJ Worldwide #5875, BGR Government Affairs #5430) for similar China-US influence activities. HDI's partnership with Taihe performing similar functions without FARA registration is anomalous. COUNTER: HDI's 990s show revenue declined from $1.47M (2015) to $202K (2020), suggesting limited operational capacity. HDI claims no Chinese government funding. KEY QUESTION: Even if no direct Chinese funding, does the Taihe partnership constitute acting as agent of a foreign principal under 22 USC 611(c)?",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 22:55:55",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02598877",
+          "source_quote": "We (Humpty Dumpty Institute) led a congressional delegation to Bahrain to meet with ministers and the president",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02725237",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1187,
+      "finding_type": "intelligence",
+      "summary": "HDI CODEL pipeline mechanics reconstructed. Mark Epstein (Jeffrey's brother, HDI board member) personally participated in CODELs to Bahrain (2013) and Azerbaijan (2014). EFTA02598877 shows Mark emailed Jeffrey Dec 22, 2014: 'We (Humpty Dumpty Institute) led a congressional delegation to Bahrain to meet with ministers and the president (king/head poobah), opposition leaders, senate, head of the US Navy 5th fleet (headquartered in Bahrain) etc. I did not know you were doing this kind of stuff. I was also on one to Azerbaijan, and might go on one to Turkey/Cypress in March.' EFTA02725237 shows full Azerbaijan agenda (May 30-Jun 4, 2014): meetings with President Ilham Aliyev, US Ambassador Morningstar, Foreign Affairs Minister Mammadyarov. When members dropped out, Merante sought replacements from 'media, finance, banking, education' -- Mark forwarded directly to Jeffrey (May 22, 2014), giving Jeffrey access to fill Congressional delegation slots. HDI has organized 52+ CODELs total with 550+ Congress members/staff. These are all-expenses-paid first-class trips. The combination of CCP/Taihe partnership + CODEL access + Epstein family involvement + zero FARA/LDA registration constitutes a significant regulatory blind spot.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 22:57:59",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02598877",
+          "source_quote": "We (Humpty Dumpty Institute) led a congressional delegation to Bahrain to meet with ministers and the president",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02725237",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 557,
+      "person_a": "HDI",
+      "person_b": "Taihe Institute",
+      "relationship_type": "intelligence",
+      "description": "Partnership since 2017. Taihe employs 12+ CCP/PLA members. HDI participated in Taihe forums in Beijing. Neither registered under FARA.",
+      "strength": "strong",
+      "date_range": "2017-present",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 22:58:23",
+      "other_person": "Taihe Institute",
+      "other_person_slug": "taihe-institute",
+      "evidence": []
+    },
+    {
+      "id": 337,
+      "person_a": "HDI",
+      "person_b": "Ralph Cwerman",
+      "relationship_type": "financial",
+      "description": "Cwerman is the care-of contact for Humpty Dumpty Institute on IRS records (EIN 13-4028567). He is the organizational point person for the entity whose revenue collapsed 80% from .8M to under K.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:46:31",
+      "other_person": "Ralph Cwerman",
+      "other_person_slug": "ralph-cwerman",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS990:134028567",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2017-present",
+      "type": "connection",
+      "relationship_type": "intelligence",
+      "description": "Partnership since 2017. Taihe employs 12+ CCP/PLA members. HDI participated in Taihe forums in Beijing. Neither registered under FARA.",
+      "other_person": "Taihe Institute",
+      "id": 557
+    }
+  ]
+}

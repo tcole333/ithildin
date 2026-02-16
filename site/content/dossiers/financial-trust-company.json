@@ -1,0 +1,733 @@
+{
+  "name": "Financial Trust Company",
+  "slug": "financial-trust-company",
+  "aliases": [
+    "Financial Trust Company Inc"
+  ],
+  "stats": {
+    "total_findings": 19,
+    "total_connections": 12,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 18,
+      "document": 1
+    },
+    "connection_types": {
+      "corporate": 3,
+      "financial": 9
+    }
+  },
+  "findings": [
+    {
+      "id": 235,
+      "finding_type": "financial",
+      "summary": "Financial Trust Company Inc. maintained Swiss banking through Valartis Bank AG Zurich (SWIFT: VLRTCHZZ) with correspondents: JP Morgan Chase (USD), Swiss Euro Clearing Bank Frankfurt (EUR), Royal Bank of Canada Toronto (CAD). Also maintained separate assets safekeeping account at Valartis. Used 'Financial Trust Ltd' variant as investment vehicle offering $25M equity for Carnegie Deli acquisition (May 2012). Draft described entity as 'private investment company operating as independent private investment arm of JP Morgan' with JP Morgan taking 'all reputational and balance sheet risks.' David Stern headed European investments. Entity also proposed Lux-based vehicle to finance Sal Oppenheim (Europe's leading private bank). Same address as STC: 6100 Red Hook Quarter B3, St Thomas USVI.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:57:55",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02413560",
+          "source_quote": "BENEFICIARY Financial Trust Company Inc. BENEFICIARYS BANK Valartis Bank AG Zurich SWIFT-BIC VLRTCHZZ CORRESPONDENT BANK FOR USD JP Morgan Chase Bank New York",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 308,
+      "finding_type": "financial",
+      "summary": "Financial Trust Company Inc (aka J. Epstein & Co., founded 1982) is Epstein's core financial management firm. Registered at 6100 Red Hook Quarter, St Thomas USVI. FTC maintained accounts at Valartis Bank AG Zurich (Bernard Andersen, Managing Director, 2-4 Place du Molard, Geneva) with IBAN in USD/EUR/CAD. JPMorgan correspondent bank for USD. FTC is linked to Southern Trust Company Inc (registered with USVI EDC) and Southern Financial LLC (used for employee loans). Lesley Groff had loans from Southern Financial LLC. FTC owned 'Big N' barge in USVI. Tax returns for FTC and Jeepers prepared together. FTC had employment records showing lawyer employed at 6100 Red Hook Quarter. DB Zwirn & Co. LP sued Financial Trust Company Inc and Jeepers Inc (disposed 07/23/2010). Marvin Gerber also sued Financial Trust Company. Carvana stock (CVNA) purchased through Southern Trust Company in Sept 2018 by Richard Kahn (75,000 shares at $65.19 avg).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:49:33",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02413560",
+          "source_quote": "Financial Trust Company, Inc. IBAN USD, IBAN EUR, IBAN CAD. BENEFICIARY'S BANK: Valartis Bank AG Zurich. SWIFT-BIC: VLRTCHZZ. CORRESPONDENT BANK FOR USD: JP Morgan Chase Bank, New York CHASUS33",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 520,
+      "finding_type": "financial",
+      "summary": "FTC 2009 K-1 Schedule reveals 9 investment partners: Prentice Partners (-$1,618,713), AP Technology ($18,938), Tudor Funding (-$355,079), Liquid Funding ($969), Highbridge/Zwirn (-$13,302,334), ML Hertz ($88), CitiGroup HedgeForum (-$15,163), BS Asset Backed Sec. LP (-$31,558 + $2,106 adj), AP SHL (-$200). Total net K-1 losses approximately $15.3M, dominated by Highbridge/Zwirn write-down. The 1120S filing (EFTA00725865) shows FTC functioned as Epstein's primary investment holding vehicle channeling capital into hedge funds, private equity co-investments, and structured products across Apollo, Bear Stearns, Merrill Lynch, and Citigroup platforms.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 01:17:38",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00725865",
+          "source_quote": "FTC 2009 1120S tax return K-1 schedule listing 9 partnership investments",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 545,
+      "finding_type": "financial",
+      "summary": "FTC INVESTMENT PORTFOLIO STRUCTURE SYNTHESIS: The 2009 K-1 schedule combined with entity charts (EFTA02678708, EFTA02702404, EFTA02726069) reveals FTC's multi-layered investment architecture spanning 5 major financial institutions: (1) APOLLO via AP SHL Investors LLC ($526K net), AP Technology Partners LLC ($1.2M net), AP Alternative Assets, AP Investment Europe Ltd, Apollo RE Investment Fund, Environmental Solutions, SOMA Coinvest, AREIF III Transfer Members LLC, Buckingham RAF Partners; (2) JPMORGAN via Highbridge Capital Corp managed accounts ($58.3M as of 2014), Caliber One LP; (3) BEAR STEARNS via BS Asset Backed Securities LP, Highview Global Macro ($12.5M), Highbridge Long/Short Equity ($12.5M), Bear Stearns High-Grade Structured ($15M), and direct accounts ($667K Epstein, $4.5M Enhanced Education); (4) MERRILL LYNCH via ML Hertz Co-Investor LP; (5) CITIGROUP via CitiGroup HedgeForum. Additional investments: Prentice Capital Partners, Tudor Funding, Liquid Funding, Lone Cascade, BlueStar I LLC, Franklin Bank Family Interests. Total portfolio value conservatively $200M+ across these vehicles. The entity charts show interconnected holdings through FTC, Southern Financial LLC, Haze Trust, Jeepers Inc, and property entities.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 01:19:59",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02678708",
+          "source_quote": "Entity chart showing AP Technology Partners 0.6M AP SHL Investors LLC AP Alternative Assets Marketable Securities 14mil Note due from 1997 Trust 27mil BlueStar I LLC 0.133mil AP Investment Europe",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 614,
+      "finding_type": "financial",
+      "summary": "Financial Trust Company Inc was the renamed successor to J. Epstein and Co. Inc (renamed 1996, relocated to USVI St Thomas for tax advantages) per Deutsche Bank KYC documentation. Based at 6100 Red Hook Quarters Suite B3, St Thomas USVI 00802. 1000+ DugganUSA references. The KYC profile listed Epstein net worth at 500M+, estimated annual income 10M, and 50-100M in assets planned for Deutsche Bank Private Wealth Management. Southern Trust Company Inc was described as a separate private consulting company that invests client assets and generates revenue from investment returns and management fees.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 01:39:36",
+      "target_name": "Financial Trust Company Inc",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01284127",
+          "source_quote": "In 1996, Epstein changed the name of his firm to the Financial Trust Company and, for tax advantages, based it on the island of St. Thomas in the U.S. Virgin Islands",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1014,
+      "finding_type": "financial",
+      "summary": "FTC K-1 schedule (2009 Form 1120S) reveals FTC's investment portfolio spanned 5 major Wall Street platforms: (1) APOLLO: AP SHL Investors ($910K invested) and AP Technology Partners ($1.3M invested) - side vehicles formed by Apollo executives, NOT formal Apollo funds. (2) TUDOR: Tudor Futures Fund managed by Paul Tudor Jones - $16.3M position growing to eventual $13.5M redemption in Aug 2014. (3) MERRILL LYNCH: ML Hertz Co-Investor LP - PE co-investment in 2005 Hertz LBO, $3.9M position. (4) BEAR STEARNS: BS Asset Backed Securities LP - $332K residual from pre-2008 MBS position, winding down. (5) CITIGROUP: HedgeForum platform - minor $15K allocation. Plus: Prentice Capital Partners (Michael Zimmerman/ex-SAC hedge fund, -$1.6M loss), Liquid Funding Holding (Marc Rowan connection, dormant), and Highbridge/Zwirn ($58.4M combined exposure via FTC+Haze, -$13.3M K-1 loss from Zwirn fraud). Total FTC portfolio as of 4/30/12: $292.9M. By 8/31/14: $403.8M total assets across all entities. FTC described itself as 'the independent, private investment arm of JP Morgan' (EFTA02436569, per David Stern draft).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 20:47:23",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00725865",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02436569",
+          "source_quote": "Financial Trust is a private investment company based in xxx, USA. It operates as the independent, private investment arm of JP Morgan",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02674602",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02698368",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02711200",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1015,
+      "finding_type": "financial",
+      "summary": "David Stern (FTC European investments head) drafted a description of FTC for a Sal Oppenheim bank deal: 'Financial Trust is a private investment company based in xxx, USA. It operates as the independent, private investment arm of JP Morgan. JP Morgan takes on all reputational and - where necessary - balance sheet risks. David Stern heads the European investments and reports directly to the Chairman.' This draft was sent from Asia Gateway Ltd (Michelin House, 81 Fulham Road, London SW3 6RD) to Epstein's jeevacation@gmail.com. The characterization of FTC as 'the independent, private investment arm of JP Morgan' is extraordinary -- it suggests FTC was presenting itself to European counterparties as a JPM affiliate, with JPM taking 'reputational and balance sheet risks.' This aligns with the FTC\u2192JPM banking relationship (Valartis Bank AG Zurich as custodian, JPM Chase as USD correspondent bank) and the $75M JPM trading account.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 20:47:35",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02413560",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02436569",
+          "source_quote": "Financial Trust is a private investment company based in xxx, USA. It operates as the independent, private investment arm of JP Morgan. JP Morgan takes on all reputational and - where necessary - balance sheet risks. David Stern heads the European investments and reports directly to the Chairman.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1019,
+      "finding_type": "financial",
+      "summary": "FTC portfolio (4/30/12) also held positions NOT on the 2009 K-1 schedule, revealing additional investment relationships: Renaissance Institutional Equity Fund (Jim Simons, $1.27M), DB Zwirn Special Opportunities Fund ($76M settlement receivable, partially recovered $16.4M by 4/30/13), King Street Capital ($21.9M via Haze Trust), Bruce Galloway Fund ($3.9M, added by 2014), Boothbay Multi-Strategy Fund ($10M, added by 2014), Environmental Solutions Worldwide (13.35M shares held in safe + JPM, separate from AP Technology), and Island Yacht Harbor investment ($1M). The full portfolio was managed through JPM trading accounts ($75M for FTC, $20.8M for Haze) plus Deutsche Bank, UBS, BNP Paribas, and Wells Fargo accounts. Monthly spending of $1.2-1.3M drawn from portfolio.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 20:49:29",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02674602",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02698368",
+          "source_quote": "RENAISSANCE INST EQUITY FUND 1,272,150...CdZ ZWIRN SPECIAL OPPURTUNITIES FUND 76,000,000",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02711200",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02713432",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1021,
+      "finding_type": "financial",
+      "summary": "FTC operational security failures revealed in May 2019: A journalist named 'Nova' called FTC's USVI office seeking to know what Financial Trust did. When receptionist Una answered with 'Southern Trust Company' (the renamed successor entity), Nova pivoted to investigating Southern Trust and noted he could find nothing on Google. Cecile de Jongh (former USVI First Lady) reported to Indyke, asking if they should 'start answering the phone with 2525' (just the address number). Additionally, FTC/Financial Trust Ltd was used for a Carnegie Deli acquisition bid in May 2012 (EFTA02725956), with the letter stating 'Financial Trust Ltd. is a private investment company' with 'up to $25 Million of disposable equity available.' This shows FTC was actively used as a deal vehicle, not just a holding company.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 20:49:41",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02288520",
+          "source_quote": "because Una answered the phone with Southern Trust Company Mr. Nova switched his inquiry from Financial Trust to Southern Trust and told Una that he Googled Southern Trust and could not find anything. Should we start answering the phone with 2525?",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02725956",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1462,
+      "finding_type": "financial",
+      "summary": "FTC APOLLO IPO DIRECTED SHARE OFFERING -- AUTHORIZATION CHAIN: Dechert confirms FTC purchased 263,257 Apollo shares during March 2011 IPO via a 'directed share offering program managed by the lead broker-dealer.' Directed share programs (DSPs) in IPOs are allocation programs where the issuer designates specific purchasers who receive shares at the IPO price before public trading. For an allocation of 263,257 shares (~$5M at ~$19/share), the issuer's management or underwriting syndicate lead must approve the allocation. This means someone at Apollo or the lead underwriter (Goldman Sachs/JPMorgan were Apollo's IPO leads) authorized FTC's participation. Black told Dechert he 'did not recall that transaction almost a decade later.' The shares were transferred to Southern Financial LLC in 2013 and held through at least September 2019. Dechert acknowledged this contradicts Apollo's public statement that it 'never did any business with' Epstein, noting the phrases are 'quite broad in scope' and 'perhaps more nuanced than might appear at first glance.' The FTC IPO purchase is significant because (1) it confirms a direct financial relationship between an Epstein entity and Apollo corporate structure, (2) someone at Apollo authorized the allocation, and (3) Southern Financial LLC held the shares through Epstein's arrest.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:34:34",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K 000119312521016405 EX-99.1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1506,
+      "finding_type": "financial",
+      "summary": "ESWW CO-INVESTMENT -- FTC AND BLACK FAMILY JOINT INVESTMENT: Dechert confirmed that 'in 2011, Epstein, through Financial Trust Company, appears to have invested in Environmental Solutions World Wide alongside Black and certain Black family members.' DOJ corpus elaborates: (1) EFTA02724061 (Jul 29, 2012): Harry Beller confirmed to Epstein 'FTC has a partnership interest investment in AP Technology and in APSHL and the stock shares of Environmental Solutions.' This distinguishes ESWW from the Apollo vehicles -- it was a direct stock investment, not a partnership interest. (2) EFTA02680530 (Sep 12, 2012): Beller provided Epstein an 'Environmental Solutions breakdown.' (3) HOUSE_OVERSIGHT_023355: Lists 'environmental solutions 12 million in stock' among Black/FTC holdings. (4) EFTA02403217: ESWW stock certificates required replacement after 2013 reverse stock split. JPMorgan notified the certificates submitted were invalid, and the Family Office reached out to Darren Indyke to locate new certificates. The ESWW co-investment is significant because it demonstrates FTC and Black invested side-by-side in the same company -- contradicting the narrative that Epstein's financial relationship was limited to advisory services. FTC held 13.35M ESWW shares, stored partly in a physical safe and partly at JPMorgan.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:39:22",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K EX-99.1, EFTA02724061, EFTA02403217",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1566,
+      "finding_type": "financial",
+      "summary": "Sal Oppenheim deal (Aug 2009) reveals JPM-FTC operational architecture. Epstein directly told David Stern: 'j.p. morgan will be the joint venture partner. financial trust is joint venture, all the guarantees and reputational risk will only be j p. morgan.. they will deal the head of the private bank, jes staley, with 1.5 trillion dollars under management. and the chairman jamie dimon.' This is Epstein characterizing the relationship in real-time, not Stern's draft marketing language. Staley was directly engaged: Epstein gave Stern Staley's personal cell (917-912-7145), Stern proposed 'Option 2: I pass on Staley cell number - von krockow calls Staley - Staley dials you in - the three of you discuss.' Staley replied 'Monday around ten can work.' Von Krockow (Sal Oppenheim chairman) was presented bullet points on JEE, Financial Trust Co, DS role. The proposed structure: a Luxembourg entity financing Sal Oppenheim 'ensuring Sal Oppenheim's continuous independence as Europe's leading private bank.' DB had 'exclusivity' and shareholders were nervous, but von Krockow was open to 'credible alternatives if the partner is right.' Stern pushed through September 2009 but the deal collapsed -- Sal Oppenheim was acquired by Deutsche Bank in 2010. The Sal Oppenheim episode proves three things: (1) Epstein believed and stated FTC was a JPM joint venture, (2) Jes Staley personally engaged in FTC's European deal-making, and (3) FTC presented itself to European banking counterparties as having JPM's reputational and balance sheet backing.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:09:25",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02441049",
+          "source_quote": "j.p. morgan will be the joint venture partner. financial trust is joint venture, all the guaantees and reputational risk will only be j p. morgan.. It is a mistake, to take deutch bank if they need govit intervention.. they will deal the head of the private bank, jes staley, with 1.5. trillion dollars under maganement. and the chariman jamie dimon",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2461,
+      "finding_type": "financial",
+      "summary": "GRM Filing Index (EFTA00300480 pp.49-50) reveals FTC maintained accounts at 9+ major financial institutions: JP Morgan (account + POA sent 6/26/08 + ISDA + Credit Support Annex + Chase account), Goldman Sachs (account + Master Repurchase Agreement 1/20/00 + brokerage 2002 + 2007 + currency business FTC/LHS/JEE + prime brokerage), Bear Stearns (futures + options trading + master repurchase 10/11/00 + FTC/Morgan SWAP 10/18/01 + emerging markets macro fund), Merrill Lynch (ISDA agreement + capital services ISDA), Morgan Stanley Dean Witter, Credit Suisse, First Union, Hambrecht & Quist. Also held Google SWAP transaction through FTC/JP Morgan Chase, and FTC/AIG CBO IRS Form 5471. Financial Report 2003 and Federal Tax Return 2007 on file.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:32:49",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2466,
+      "finding_type": "financial",
+      "summary": "GRM Filing Index (EFTA00300480 p50) reveals FTC Transaction Files II documenting investment fund subscriptions: AP Technology Partners LLC, Tudor Futures Fund 2/1/01, SAB Capital Partners subscription 1/30/01, SAB Capital Partners LP subscription 4/24/02, Global Opportunities, Viking Global Consumer Fund subscription documents, Viking Global Equities LP subscription/confidential memorandum. Also: Estee Lauder purchase on 11/01/01 and transfer of TOO Inc from LHW to FTC on June 25, 2001.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:33:00",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2469,
+      "finding_type": "financial",
+      "summary": "GRM Filing Index (EFTA00300480 p50) reveals FTC VI section documenting: JCK Partners Opportunity Fund, Highbridge Managed Account, FTC Consulting Agreement with Highbridge Management (appears twice), FTC/Wexner Children's Trust/MBZ - Purchase of Boston Properties from Prudential, AP SHL Investors LLC, Second City Capital, Bear Stearns Emerging Markets Macro Fund, and Purchase of Island Global/AYH Ownership. The FTC-Wexner Children's Trust-MBZ-Boston Properties-Prudential entry confirms FTC served as investment conduit for Wexner family trust real estate acquisitions.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:33:10",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2477,
+      "finding_type": "financial",
+      "summary": "GRM Boxes #004740710-004740713 contain extensive FTC documentation spanning admin, IDC/tax, transactions, and litigation. Key items: (1) FTC Admin File - IRS Summons for Liston J. Thomas, engagement letter with Hodge & Francois, Leon Casey employment/POA, FTC ML Hertz Co-Investor LP, EDC economic development benefits applications (Nov 2009-Feb 2010), FTC/EDC Residency Opinion; (2) IDC/Tax file - EDC audits 4/99-12/05 and 2008, Erika Kellerhals wrote FTC Response to EDC determination letter (June 29 2009), Delson Residency Opinion, FTC EDGAR Codes; (3) Transaction Files IV-VII - Highbridge Corp (Files I & II dated 9/19/00), FINRA Rule 5131, Pinehurst Partners Plus/LP, Howcast, Highbridge Capital Corp Private Placement, Highbridge Long/Short Equity Fund LP, Deerfield Triarc Capital Corp Subscription, Prentice Capital Partners, DCM Partners LLC, Highview Global Macro LP",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:33:35",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": "p5-7 FTC Administrative File; IRS Summons/Liston J. Thomas; FTC ML Hertz Co-Investor LP; EDC Signed Acceptance (Feb 14 2010); FTC Response to Determination Letter from EDC written by Erika Kellerhals June 29 2009; Highbridge Corporation File I (9/19/00); Deerfield Triarc Capital Corp Subscription; Highview Global Macro LP",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2496,
+      "finding_type": "document",
+      "summary": "GRM Box #004626325 (EFTA00300480 p49) contains FTC organizational file with: Tax Recovery Brochure, Tax Issue 2004, Corporate Franchise Tax, Registration Requirements for Securities Transactions in USVI 2005, Financial Report 2003, Federal Tax Return 2007. The USVI securities registration document from 2005 is significant as it predates FTC's known USVI relocation and may document the regulatory framework Epstein used for USVI-based financial operations.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:34:33",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2509,
+      "finding_type": "financial",
+      "summary": "GRM Box #004740715 documents FTC $50,000,000 Line of Credit with JP Morgan including correspondence, attorney notes, drafts, grid notes, collateral agreement, line letter, Form U-1, auto debit letter, secretary certificate, board resolutions, and corporate certificate. This is the credit facility that enabled FTC to operate as Epstein's USVI-based financial vehicle. Same box contains M. Jeffrey E. Epstein Investments file with The Core Club 55th Street LLC and DCM Partners.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:35:06",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": "p13-14 FTC $50,000,000 Line of Credit with JP Morgan: Correspondence; Collateral Agreement; Line Letter; Form U-1; Board Resolutions; M. Jeffrey E. Epstein Investments: The Core Club 55th Street LLC; DCM Partners",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2522,
+      "finding_type": "financial",
+      "summary": "GRM Filing Index (EFTA00300480 p49-50) reveals FTC's Goldman Sachs relationship spanned at least 7 years with multiple product lines: Goldman Sachs Account and Master Repurchase Agreement (1/20/00), Goldman Sachs Brokerage Account (2002), Goldman Sachs Account (2007), Goldman Sach Currency Business FTC/LHS/JEE (cross-entity currency trading involving FTC, LHS, and JEE), FTC Prime Brokerage Account Goldman Sachs. The 'LHS' in the currency business is likely Leslie H. Wexner's initials, suggesting joint FTC/Wexner currency operations through Goldman Sachs.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:35:49",
+      "target_name": "Financial Trust Company",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 263,
+      "person_a": "Financial Trust Company",
+      "person_b": "Jeepers Inc",
+      "relationship_type": "corporate",
+      "description": "FTC is parent entity of Jeepers Inc. Tax returns prepared together. Both at 6100 Red Hook Quarter B3, St Thomas USVI.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:49:56",
+      "other_person": "Jeepers Inc",
+      "other_person_slug": "jeepers-inc",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02710352",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 264,
+      "person_a": "Financial Trust Company",
+      "person_b": "Southern Trust Company",
+      "relationship_type": "corporate",
+      "description": "Southern Trust Company Inc is USVI EDC-registered entity linked to FTC. Kahn traded Carvana stock through Southern Trust. Groff loans from Southern Financial LLC.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:49:58",
+      "other_person": "Southern Trust Company Inc",
+      "other_person_slug": "southern-trust-company-inc",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02624629",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 265,
+      "person_a": "Financial Trust Company",
+      "person_b": "Valartis Bank AG",
+      "relationship_type": "financial",
+      "description": "FTC maintained accounts at Valartis Bank AG Zurich with IBAN in USD/EUR/CAD. Bernard Andersen managed the relationship.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:49:59",
+      "other_person": "Valartis Bank AG",
+      "other_person_slug": "valartis-bank-ag",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02413560",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1244,
+      "person_a": "Financial Trust Company",
+      "person_b": "JP Morgan",
+      "relationship_type": "financial",
+      "description": "FTC $50,000,000 Line of Credit with JP Morgan documented in GRM Box #004740715. Includes collateral agreement, line letter, Form U-1, board resolutions, and corporate certificate.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:36:17",
+      "other_person": "JP Morgan",
+      "other_person_slug": "jp-morgan",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1246,
+      "person_a": "Financial Trust Company",
+      "person_b": "Highbridge Capital",
+      "relationship_type": "financial",
+      "description": "Multiple FTC transaction files document Highbridge Capital investments: Highbridge Corporation Files I & II (from 9/19/00), Highbridge Capital Corp Private Placement, Highbridge Long/Short Equity Fund LP, Highbridge Capital 2010 Annual Review, FTC Consulting Agreement with Highbridge Management, HB Multi Strategy. GRM Boxes #004740711-004740714.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:36:17",
+      "other_person": "Highbridge Capital",
+      "other_person_slug": "highbridge-capital",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1249,
+      "person_a": "Financial Trust Company",
+      "person_b": "Highbridge Capital Corp",
+      "relationship_type": "financial",
+      "description": "Two FTC Consulting Agreements with Highbridge Management documented in GRM Box #004626325 (EFTA00300480 p50). FTC also held Highbridge Managed Account. Confirms active consulting/advisory relationship beyond passive investment.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:36:20",
+      "other_person": "Highbridge Capital Corp",
+      "other_person_slug": "highbridge-capital-corp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1251,
+      "person_a": "Financial Trust Company",
+      "person_b": "Leslie Wexner",
+      "relationship_type": "financial",
+      "description": "GRM Box #004626325 (EFTA00300480 p50) documents FTC/Wexner Children's Trust/MBZ - Purchase of Boston Properties from Prudential, confirming FTC served as investment vehicle for Wexner family trust real estate acquisitions. Also YLK Charitable Fund and Buckeye LLC statutory representation invoiced through Wexner Miscellaneous section of trust agreements (p47).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:36:30",
+      "other_person": "Les Wexner",
+      "other_person_slug": "les-wexner",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1253,
+      "person_a": "Financial Trust Company",
+      "person_b": "Jeepers Inc",
+      "relationship_type": "financial",
+      "description": "FTC assigned DB Zwirn Special Opportunities Fund I and II positions to Jeepers Inc per GRM filing index EFTA00300480 p521",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:37:10",
+      "other_person": "Jeepers Inc",
+      "other_person_slug": "jeepers-inc",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00300480",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 724,
+      "person_a": "Apollo Global Management",
+      "person_b": "Financial Trust Company",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:37:39",
+      "other_person": "Apollo Global Management",
+      "other_person_slug": "apollo-global-management",
+      "evidence": []
+    },
+    {
+      "id": 732,
+      "person_a": "Financial Trust Company",
+      "person_b": "Southern Financial LLC",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:37:47",
+      "other_person": "Southern Financial LLC",
+      "other_person_slug": "southern-financial-llc",
+      "evidence": []
+    },
+    {
+      "id": 753,
+      "person_a": "Financial Trust Company",
+      "person_b": "Leslie Wexner",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:44:18",
+      "other_person": "Les Wexner",
+      "other_person_slug": "les-wexner",
+      "evidence": []
+    },
+    {
+      "id": 754,
+      "person_a": "Financial Trust Company",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:44:18",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

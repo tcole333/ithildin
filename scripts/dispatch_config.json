@@ -1,0 +1,20 @@
+{
+    "poll_interval_seconds": 300,
+    "max_concurrent": 3,
+    "max_research_agents": 2,
+    "max_analysis_agents": 1,
+    "triggers": {
+        "triage": { "min_pending": 1 },
+        "build_infra": { "min_open": 1 },
+        "pursue_lead": { "min_high_critical": 1 },
+        "auto_leads": { "completions_since_last": 10 },
+        "analyze_network": { "new_findings_since_last": 50, "cooldown_hours": 48 },
+        "generate_hunches": { "new_findings_since_last": 50, "cooldown_hours": 72 },
+        "timeline_analysis": { "new_findings_since_last": 30, "cooldown_hours": 72 },
+        "systemic_analysis": { "new_findings_since_last": 50, "cooldown_hours": 168 }
+    },
+    "allowed_tools": "Bash,Read,Write,Edit,Glob,Grep,Task,WebFetch,WebSearch",
+    "cooldown_seconds": 60,
+    "timeout_seconds": 1800,
+    "model": "sonnet"
+}

@@ -1,0 +1,387 @@
+{
+  "name": "IPI",
+  "slug": "ipi",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 11,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 6,
+      "legal": 2
+    },
+    "connection_types": {
+      "financial": 10,
+      "advisory": 1
+    }
+  },
+  "findings": [
+    {
+      "id": 290,
+      "finding_type": "financial",
+      "summary": "IPI submitted a 20M grant proposal to Gates Foundation on September 4, 2013 for Polio Eradication and Peace and Health (EFTA02678411). The proposal was for 60 months (2014-2018) covering Pakistan, Nigeria, Somalia. The Foundation approved only 2.5M (grant OPP1096058), signed March 2, 2014. Payment: 1.25M upon signing, 1.25M in March 2015 contingent on progress report. Grant end date December 31, 2015.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:36:30",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02678411",
+          "source_quote": "Amount Requested from Foundation 20,000,000",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02709169",
+          "source_quote": "Total Grant Amount 2,500,000.00",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 387,
+      "finding_type": "legal",
+      "summary": "IPI has no FARA registration despite receiving Norwegian government funding and hosting US Congressional members on advisory boards. Norway has 50 FARA-registered foreign principals, but IPI -- which received $650K in Epstein-conduit funds and lobbied Congress on foreign policy -- appears nowhere in the FARA database. This is a potential FARA violation.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:41:41",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:negative_search_IPI",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 421,
+      "finding_type": "financial",
+      "summary": "IPI (EIN 03-0213226) 990 filings show dramatic financial decline correlating with Epstein exposure. Peak assets were .6M in 2010, declining steadily to .4M in 2014, .7M in 2015, .7M in 2016, .7M in 2017, .5M in 2018, .4M in 2019, then collapsing to .9M in 2020 (COVID+Epstein), recovering briefly to .3M in 2021, but continuing decline to .4M in 2022 and .9M in 2023. Revenue dropped from .9M (2014) to .9M (2020) - a 67% collapse. The 2020 year shows revenue of only .9M against .6M in expenses, indicating severe financial distress.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:48",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:030213226/2010-2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 423,
+      "finding_type": "financial",
+      "summary": "IPI expenses have consistently exceeded revenue since 2015, indicating the organization has been drawing down reserves. Revenue vs expenses gap: 2015 (.3M vs .2M), 2016 (.5M vs .5M), 2017 (.7M vs .6M), 2018 (.4M vs .6M), 2019 (.3M vs .1M), 2020 (.9M vs .6M), 2023 (.0M vs .6M). The persistent deficit since 2015 suggests IPI lost a major funding source and has been spending down endowment. This aligns with the KPMG-confirmed K Epstein conduit and subsequent donor flight.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:56",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:030213226/2015-2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 458,
+      "finding_type": "financial",
+      "summary": "IPI cumulative financial analysis from 990 filings: Over 2010-2023, IPI ran a cumulative deficit of .5M. Assets declined from .6M (2010) to .9M (2023), a 73% decline. Only TWO years showed surpluses: 2010 (+.4M) and 2021 (+.9M). Five years showed deficits exceeding M: 2011 (-.1M, worst single year), 2016 (-.0M), 2018 (-.3M), 2020 (-.7M, COVID+Epstein), 2023 (-.6M). The 2011 deficit of .1M on .6M revenue suggests a major one-time write-down or accounting adjustment. At current burn rate (.6M/yr deficit), IPI has approximately 2.5 years of reserves remaining.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:49:34",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:030213226/2010-2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 468,
+      "finding_type": "financial",
+      "summary": "IPI 2011 anomaly: Revenue was only .64M against .71M in expenses, creating an .07M deficit in a single year. This was by far the worst year. The prior year (2010) showed .63M in revenue and .6M in assets. The 2011 collapse took assets from .6M to .5M. This could represent: (1) a major investment loss, (2) a one-time accounting adjustment, (3) loss of a very large donor. The 2010 revenue of .6M vs 2011 revenue of .6M represents an 81% year-over-year decline that preceded the Epstein plea deal. This warrants examination of the actual 2011 990 PDF to understand the revenue collapse.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:50:57",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:030213226/2010,IRS990:030213226/2011",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1147,
+      "finding_type": "legal",
+      "summary": "IPI FARA LEGAL ANALYSIS: IPI has zero FARA registrations despite receiving funding from Norwegian government (confirmed as 'donor country' in EFTA02675352: 'which we usually forward to donor countries like Sweden or Norway'). IPI's activities that potentially trigger FARA: (1) Received $650K KPMG-confirmed Epstein conduit funds while Norwegian national Rod-Larsen was president; (2) Hosted Ministerial Working Dinners at 777 UN Plaza with UAE, Luxembourg, and other foreign government officials; (3) Operated Mongolia Advisory Board paying $100K each to former heads of state (Rod-Larsen, Summers, Barak, Bondevik, Rudd); (4) Rod-Larsen forwarded IPI program activities 'which we usually forward to donor countries' directly to Epstein; (5) IPI bank instructions sent to Epstein for $5M Gates Foundation wire (EFTA02707935). FARA EXEMPTIONS IPI MIGHT CLAIM: (a) 22 USC 611(d) academic/scientific exemption -- IPI registered as 501(c)(3) think tank; (b) UN affiliate exemption -- IPI's charter connects to Trygve Lie Center; (c) No direct foreign government instruction. COUNTER-ARGUMENTS: (a) IPI's Congressional engagement (hosting 33+ members) goes beyond academic research; (b) Norwegian government was a confirmed donor country; (c) Rod-Larsen directed IPI activities through Epstein, a non-diplomatic channel; (d) $5.86M total Epstein-directed funding makes IPI financially dependent on non-transparent sources. COMPARABLE: Norwegian Agency for Development Cooperation registered 6 FARA entries (via Waxman Consulting #6710, Center for International Policy #6896), showing Norway DOES register its grantees. IPI's absence is anomalous.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 22:55:39",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02675352",
+          "source_quote": "IPI program activities which we usually forward to donor countries like Sweden or Norway",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02707935",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1182,
+      "finding_type": "financial",
+      "summary": "IPI Norwegian government funding pipeline confirmed via DOJ documents. EFTA02675352: IPI staff emailed Epstein saying 'I understood from terje that you needed some material on IPI activities. Terje has forwarded you the annual report 2012 and 2011 and I add as an attachment IPI program activities (which we usually forward to donor countries like Sweden or Norway).' This confirms: (1) Norway and Sweden are designated 'donor countries' to IPI; (2) Rod-Larsen directed IPI staff to provide Epstein the same program activity reports given to sovereign donors; (3) Epstein was receiving donor-level reporting from IPI. IPI's 990 filings show 2014 revenue of $11.87M. Norway's Ministry of Foreign Affairs and Norwegian Agency for Development Cooperation (NORAD) are known IPI funders. 990s show government grants as a revenue category but exact Norwegian government amounts require Schedule B review (not publicly available). IPI also received funding from Switzerland (Vienna office), Finland, Denmark, and multiple Middle Eastern governments (co-hosted events). The pattern of sovereign donor countries funding IPI while IPI had zero FARA/LDA registration is the core regulatory gap.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 22:57:44",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02675352",
+          "source_quote": "which we usually forward to donor countries like Sweden or Norway",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02678411",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 44,
+      "person_a": "Enhanced Education",
+      "person_b": "IPI",
+      "relationship_type": "financial",
+      "description": "Enhanced Education donated $125,000 to IPI in Oct 2011 (WK Rick Hooper fellowship) and reimbursed IPI $14,158.88 for Lawrence Summers first-class flight in Mar 2014. Total: $139,158.88.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:13:52",
+      "other_person": "Enhanced Education",
+      "other_person_slug": "enhanced-education",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "KPMG-IPI-Report-p9 KPMG-IPI-Report-p10 EFTA02713369",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 556,
+      "person_a": "IPI",
+      "person_b": "Norwegian Government",
+      "relationship_type": "financial",
+      "description": "IPI received Norwegian govt funding as confirmed donor country. NORAD registered 6 FARA entries but IPI never registered.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 22:58:22",
+      "other_person": "Norwegian Government",
+      "other_person_slug": "norwegian-government",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02675352",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "person_a": "IPI",
+      "person_b": "Rod-Larsen",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:39",
+      "other_person": "Rod-Larsen",
+      "other_person_slug": "rod-larsen",
+      "evidence": []
+    },
+    {
+      "id": 56,
+      "person_a": "IPI",
+      "person_b": "Kevin Rudd",
+      "relationship_type": "advisory",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:49",
+      "other_person": "Kevin Rudd",
+      "other_person_slug": "kevin-rudd",
+      "evidence": []
+    },
+    {
+      "id": 57,
+      "person_a": "IPI",
+      "person_b": "Leon Black",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:49",
+      "other_person": "Leon Black",
+      "other_person_slug": "leon-black",
+      "evidence": []
+    },
+    {
+      "id": 58,
+      "person_a": "Enhanced Education",
+      "person_b": "IPI",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:49",
+      "other_person": "Enhanced Education",
+      "other_person_slug": "enhanced-education",
+      "evidence": []
+    },
+    {
+      "id": 59,
+      "person_a": "Gratitude America",
+      "person_b": "IPI",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:49",
+      "other_person": "Gratitude America",
+      "other_person_slug": "gratitude-america",
+      "evidence": []
+    },
+    {
+      "id": 60,
+      "person_a": "IPI",
+      "person_b": "JPMorgan Chase",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:50",
+      "other_person": "JPMorgan Chase",
+      "other_person_slug": "jpmorgan-chase",
+      "evidence": []
+    },
+    {
+      "id": 61,
+      "person_a": "Boris Nikolic",
+      "person_b": "IPI",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:50",
+      "other_person": "Boris Nikolic",
+      "other_person_slug": "boris-nikolic",
+      "evidence": []
+    },
+    {
+      "id": 62,
+      "person_a": "Gates Foundation",
+      "person_b": "IPI",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:50",
+      "other_person": "Gates Foundation",
+      "other_person_slug": "gates-foundation",
+      "evidence": []
+    },
+    {
+      "id": 340,
+      "person_a": "IPI",
+      "person_b": "Leon Black",
+      "relationship_type": "financial",
+      "description": "Black Family Foundation (EIN 13-3947890) K to IPI (Dec 2014 per KPMG). IPI 990 shows .87M revenue in 2014, its peak year. Black was a key donor to the Rod-Larsen-led entity.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:50:03",
+      "other_person": "Leon Black",
+      "other_person_slug": "leon-black",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:133947890/2014,IRS990:030213226/2014",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

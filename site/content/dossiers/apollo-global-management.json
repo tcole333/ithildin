@@ -1,0 +1,413 @@
+{
+  "name": "Apollo Global Management",
+  "slug": "apollo-global-management",
+  "aliases": [],
+  "stats": {
+    "total_findings": 10,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "legal": 1,
+      "financial": 8,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "legal": 3,
+      "financial": 4,
+      "corporate": 1
+    }
+  },
+  "findings": [
+    {
+      "id": 2052,
+      "finding_type": "legal",
+      "summary": "Case 15-01145 complaint (212pp, EFTA01091533-01091744) details Apollo's role as architect of 8.1-12.6B asset-stripping scheme at Caesars/CEOC. Apollo and TPG acquired CEC in 30.7B LBO (Jan 2008), then systematically transferred CEOC's most valuable assets to new entities beyond creditor reach while CEOC was insolvent. Oct 2012 Apollo presentation: 'Have our cake and eat it too.' Examiner found 3.6-5.1B in strong claims. Apollo lost ~2B on LBO + surrendered ~950M equity in settlement.",
+      "detail": "17 fraudulent transfers alleged 2009-2014: online gaming/WSOP IP, Total Rewards (valued ~2B), Las Vegas properties (Ling, Octavius, PH, Bally's, Cromwell, Quad, Harrah's NO), 31 acres undeveloped LV land (transferred for zero), 14.75B in bond guarantees released for nothing. Paul Weiss named as co-defendant. Epstein received complaint motion May 20, 2016 (EFTA02463454) and actively tracked case through Ribis/Spinella/Karp channels. CEOC emerged Oct 2017. Case closed Aug 2025.",
+      "source_datasets": [
+        "doj_vol11",
+        "duggan",
+        "EFTA01091533"
+      ],
+      "confidence": "high",
+      "date_of_event": "2016-05-13",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 19:12:51",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01091533",
+          "source_quote": "Have our cake and eat it too - strengthen our hand in a potential restructuring with as little capital outlay as possible",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02338300",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02452879",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02463454",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 406,
+      "finding_type": "financial",
+      "summary": "Apollo Global Management maintained continuous lobbying presence 2014-2025 via Brownstein Hyatt Farber Schreck. 84 total filings. Spending escalated dramatically around Epstein arrest: Q1-Q4 2018 was steady at 80K/quarter (320K/year), then jumped to 120K in Q1 2019, 210K in Q2-Q3 2019, and 670K in Q4 2019 (1.21M total for 2019 - a 278% increase). Q1 2020 continued at 520K. All filings focused on Financial Institutions/Investments/Securities and portfolio management. Added Media/broadcast issues and Foreign Relations lobbying topics in 2017-2019. Key lobbyists include Marc Lampkin, Nadeam Elshami (former Pelosi CoS), Norman Brownstein (firm founder).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:43:39",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:068dbf6e-5727-4513-84d4-497a317110e4",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 408,
+      "finding_type": "financial",
+      "summary": "Apollo Global Management lobbying spending increased 278% from 2018 to 2019 (320K to 1.21M), coinciding with renewed Epstein scrutiny and Leon Black relationship revelations. Q4 2019 alone was 670K - more than double the entire 2018 annual spend. New issue areas added: Media/broadcast transaction issues and Foreign Relations. This suggests Apollo was managing political risk related to the Epstein scandal and Black's position.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:43:44",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:50a5295b-7a33-43ef-bb3c-6695ca3efe73",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1386,
+      "finding_type": "financial",
+      "summary": "EFTA02651844 reveals that Apollo corporate was directly involved in the BRH K-1 tax issue that Epstein was coordinating. An unidentified tax professional wrote: 'I agree with Brad that it would be good to have Apollo acknowledge that the 884,006 corresponds to their new understanding of the implicitly revised BRH K-1. To do that, I have to tell them this number. Is that ok?' This confirms: (1) Apollo corporate (not just Black personally) was a participant in the IRS tax compliance matter. (2) BRH Holdings LP (the partnership through which all three Apollo founders hold their ownership interests) was at the center of the dispute. (3) The amount 884,006 required Apollo institutional acknowledgment. (4) The BRH K-1 was 'implicitly revised' -- meaning the original K-1 reporting was incorrect and needed correction, a potentially significant IRS compliance issue. Combined with EFTA02670537 ('is PW writing for all three guys?'), this proves the 8865/BRH tax matter was an institutional Apollo issue affecting all three founders, coordinated through Epstein.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:03:50",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02651844",
+          "source_quote": "I agree with Brad that it would be good to have Apollo acknowledge that the 884,006 corresponds to their new understanding of the implicitly revised BRH K-1",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1466,
+      "finding_type": "financial",
+      "summary": "BRH K-1 IRS AUDIT -- AP PROFESSIONAL HOLDINGS DOUBLE-REPORTING: EFTA02722063 (Mar 28, 2014) reveals a specific IRS compliance failure at the heart of the BRH/Apollo architecture: Goldman Sachs 1099s issued under 'LEON BLACK IMY-AP PROFESSIONAL HOLDINGS LP' were reported TWICE in 2012 -- once on Leon Black's personal 1040 and once on BFP LP's K-1, overstating taxable income by approximately $250K. The email confirms 'The AP Professional LP income was picked up by BRH Holdings. I confirmed with Apollo.' This double-reporting was being coordinated between Epstein, Joslin, Wechsler, and Apollo's own tax function. The BRH Holdings K-1 was subsequently subject to IRS audit, with the 'delta' being Leon's (BFP's) allocable share of the adjustment of BRH Holdings LP ordinary income (EFTA02651276/EFTA02651304). Suzanne Wong at Apollo or Deloitte was identified as the person who could provide the IRS audit report. Brad Wechsler emailed Leon Black, Jeffrey Epstein, and Barry Cohen directly about 'BRH adjustments' and sent payment forms to Tom Turrin (EFTA02650654, May 2, 2017).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:35:04",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02722063",
+          "source_quote": "GSCO 1099s issued under LEON BLACK IMY-AP PROFESSIONAL HOLDINGS LP were reported twice in 2012 -- once on LDB 1040 and once on K-1 for BFP LP. Taxable income overstated by $250K. The AP Professional LP income was picked up by BRH Holdings. I confirmed with Apollo.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1475,
+      "finding_type": "financial",
+      "summary": "APOLLO GLEIF CORPORATE HIERARCHY -- LIMITED SUBSIDIARY VISIBILITY: GLEIF LEI database shows Apollo Asset Management Inc (LEI 54930054P2G7ZJB0KM79, Delaware, ACTIVE) with only 3 registered direct subsidiaries: (1) AGM India Advisors Private Limited (India, ACTIVE). (2) Apollo Investment Management Europe LLP (UK, ACTIVE). (3) Apollo Management International LLP (UK, ACTIVE). This is striking because Apollo operates through hundreds of affiliated entities (fund vehicles, holding companies, SPVs). The 3-subsidiary GLEIF registration captures only the top-level management entities -- the vast majority of Apollo's corporate structure (BRH Holdings GP Ltd/Cayman, AP Professional Holdings LP/Cayman, the fund entities, Athene entities) are not captured in the LEI hierarchy. Apollo's Athene Holding Ltd (CIK 0001527469, Bermuda-incorporated, subsequently merged into Apollo) had its own separate SEC filing history. The GLEIF data confirms Apollo's reported structure is minimal compared to its actual corporate complexity.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:35:47",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF LEI 54930054P2G7ZJB0KM79",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1494,
+      "finding_type": "financial",
+      "summary": "FTC FIVE-LAYER APOLLO INVESTMENT ARCHITECTURE: Synthesizing Dechert report, DOJ corpus, and SEC filings reveals FTC maintained at least 5 distinct financial relationships with Apollo-related entities: (1) APOLLO IPO SHARES: FTC purchased 263,257 shares March 2011 via directed share program (~$5M). Transferred to Southern Financial LLC 2013, held through Sept 2019. (2) AP SHL INVESTORS LLC: FTC invested $910,562 (Jan 2002), received $384,125 distributions. Net $526K. 'Formed by certain Apollo executives' per Dechert. K-1 issued in FTC name annually. (3) AP TECHNOLOGY PARTNERS LLC: FTC invested $1,311,522 (FY2000, multiple tranches). Net investment $1,228,776. Still valued $250K-$111K through 2015. 'Formed by certain Apollo executives.' (4) ENVIRONMENTAL SOLUTIONS WORLD WIDE (ESWW): FTC held 13.35M shares (stock certificates stored in safe + JPM), $12M position. FTC invested alongside Black and Black family members in 2011 per Dechert. ESWW had reverse stock split 2013, certificates needed replacement. (5) LIQUID FUNDING: FTC K-1 showed $969 income (2009). 'Liquid Funding Holding' on 2004 investment summary. Marc Rowan referenced 'Liquid Funding' history in Aug 2016 Shwachman introduction. Combined, these five channels represent a financial relationship dating from 2000-2019 -- nearly two decades of continuous Epstein-Apollo financial entanglement that Dechert characterized as not constituting 'business.'",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:37:06",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K EX-99.1, EFTA00725865, EFTA02724061",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1499,
+      "finding_type": "financial",
+      "summary": "APOLLO DEF 14A PROXY STATEMENTS -- EPSTEIN NON-DISCLOSURE PATTERN: Apollo filed only 2 DEF 14A proxy statements under CIK 1411494: Aug 20, 2020 (pre-Dechert report) and Aug 16, 2021 (post-Dechert, post-Black CEO resignation). The 2020 proxy listed 7 directors: Leon Black, Joshua Harris, Marc Rowan, Michael Ducey, Robert Kraft, A.B. Krongard, and Pauline Richards. No mention of Epstein or related-party transactions with Epstein entities in the standard proxy format. The 2021 proxy (post-Black resignation) listed 12 directors including new additions Walter (Jay) Clayton, Kerry Murphy Healey, Pamela Joyner, Richard Emerson, David Simon, and James Zelter -- reflecting the governance overhaul promised in the Jan 2021 letter. The 2021 proxy disclosed: 'On March 8, 2021, the Company and Athene Holding Ltd. agreed to effect an all-stock merger transaction to combine their respective businesses.' The Epstein disclosure was handled through the 8-K process (Jan 2021 Dechert report filing) rather than in proxy statements, ensuring it was publicly available but outside the standard annual disclosure cycle.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:37:35",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC DEF 14A 000119312520225055 and 000119312521247884",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1500,
+      "finding_type": "financial",
+      "summary": "APOLLO-EPSTEIN FINANCIAL ARCHITECTURE SYNTHESIS: The complete financial architecture reveals Epstein's entanglement with Apollo was far deeper than the Dechert report's framing suggests. MONEY FLOWS TO EPSTEIN: $158M advisory fees (2013-2017) from Black via Southern Trust Company Inc + $30.5M loans via BV70 LLC/Plan D LLC = $188.5M gross flows. Only $10M loan repaid. Net: $178.5M from Black to Epstein. MONEY FLOWS FROM EPSTEIN TO APOLLO: FTC purchased 263,257 Apollo IPO shares (~$5M, Mar 2011). FTC invested $910K in AP SHL (2002) + $1.31M in AP Technology (2000) + $12M ESWW alongside Black (2011) + $969 Liquid Funding. Total: ~$19.2M invested in Apollo-adjacent vehicles. STRUCTURAL ENTANGLEMENT: (1) Epstein reviewed BRH Holdings LP agreement -- the vehicle through which all three founders held 52.4% of Apollo (202M shares). (2) Epstein modeled BRH 'death' scenarios -- corporate succession planning at the founder level. (3) Epstein coordinated IRS Form 8865 filings for 'all three guys' via Paul Weiss. (4) Epstein proposed the corporate inversion and Athene restructuring. (5) Epstein received confidential TRA calculations from Rowan via Apollo CFO Chris Weidler. (6) Epstein had direct coordination with 'Apollo in house' tax function. (7) Epstein held Apollo analyst meeting notes in his files. The relationship was not simply 'personal advisory services to Leon Black' -- it was institutional access to Apollo's most sensitive corporate, tax, and succession architecture, affecting all three founders equally through BRH.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:38:18",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K EX-99.1, EFTA02670537, EFTA02451672, EFTA02576529, HOUSE_OVERSIGHT_023222",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1505,
+      "finding_type": "intelligence",
+      "summary": "APOLLO LITTLESIS NETWORK -- POLITICAL AND CORPORATE CONNECTIONS: LittleSis (entity 50090) reveals Apollo's institutional connections beyond the founder triad: POLITICAL DIRECTORS: Pat Toomey (former US Senator, R-PA) and Evan Bayh (former US Senator, D-IN) both hold positions at Apollo -- establishing bipartisan political access. BUSINESS: Apollo did business with Dechert LLP (the firm that investigated the Epstein relationship, rel 2018121), McGraw Hill Education ($2.4B acquisition 2013), Kushner Companies ($184M, Nov 2017 -- during Jared Kushner's time as White House senior adviser), New Fortress Energy ($800M, Jan 2020), and Sylvan Learning (2003). The Kushner Companies transaction is investigatively significant: an $184M deal with Apollo occurred while Jared Kushner was a senior White House adviser and his family needed financing for 666 Fifth Avenue. All three Apollo co-founders -- Black (8302), Harris (6143), Rowan (66624) -- plus co-founders Antony Ressler (66637) and John J. Hannan (38666) are documented in LittleSis as having positions at Apollo.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:39:05",
+      "target_name": "Apollo Global Management",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 50090",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 1041,
+      "person_a": "Apollo Global Management",
+      "person_b": "Brad Karp",
+      "relationship_type": "legal",
+      "description": "Karp asked Epstein about Caesars while PW was defendant in Case 15-01145",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 19:13:48",
+      "other_person": "Brad Karp",
+      "other_person_slug": "brad-karp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02452879",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1042,
+      "person_a": "Apollo Global Management",
+      "person_b": "Marc Rowan",
+      "relationship_type": "legal",
+      "description": "Rowan named defendant in Caesars Case 15-01145 while Epstein tracked his liability",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 19:13:48",
+      "other_person": "Marc Rowan",
+      "other_person_slug": "marc-rowan",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02473688",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 328,
+      "person_a": "Apollo Global Management",
+      "person_b": "Brownstein Hyatt Farber Schreck",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:45:51",
+      "other_person": "Brownstein Hyatt Farber Schreck",
+      "other_person_slug": "brownstein-hyatt-farber-schreck",
+      "evidence": []
+    },
+    {
+      "id": 724,
+      "person_a": "Apollo Global Management",
+      "person_b": "Financial Trust Company",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:37:39",
+      "other_person": "Financial Trust Company",
+      "other_person_slug": "financial-trust-company",
+      "evidence": []
+    },
+    {
+      "id": 725,
+      "person_a": "Apollo Global Management",
+      "person_b": "BRH Holdings LP",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:37:40",
+      "other_person": "BRH Holdings LP",
+      "other_person_slug": "brh-holdings-lp",
+      "evidence": []
+    },
+    {
+      "id": 731,
+      "person_a": "Apollo Global Management",
+      "person_b": "Dechert LLP",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:37:46",
+      "other_person": "Dechert LLP",
+      "other_person_slug": "dechert-llp",
+      "evidence": []
+    },
+    {
+      "id": 734,
+      "person_a": "Apollo Global Management",
+      "person_b": "Elysium Management LLC",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:37:49",
+      "other_person": "Elysium Management LLC",
+      "other_person_slug": "elysium-management-llc",
+      "evidence": []
+    },
+    {
+      "id": 1234,
+      "person_a": "Apollo Global Management",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": "FTC invested in two Apollo funds: AP SHL Investors LLC ($910K, Jan 2002) and AP Technology Partners LLC ($1.3M, FY2000). Total Apollo fund investments: $2.2M+. Position sold between 2012-2013. This is a DIRECT financial relationship \u2014 Epstein was an LP in Apollo funds \u2014 separate from and in addition to the Black\u2192STC advisory payments.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 06:00:07",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02522085",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2016-05-13",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Case 15-01145 complaint (212pp, EFTA01091533-01091744) details Apollo's role as architect of 8.1-12.6B asset-stripping scheme at Caesars/CEOC. Apollo and TPG acquired CEC in 30.7B LBO (Jan 2008), then systematically transferred CEOC's most valuable assets to new entities beyond creditor reach while CEOC was insolvent. Oct 2012 Apollo presentation: 'Have our cake and eat it too.' Examiner found 3.6-5.1B in strong claims. Apollo lost ~2B on LBO + surrendered ~950M equity in settlement.",
+      "confidence": "high",
+      "id": 2052
+    }
+  ]
+}

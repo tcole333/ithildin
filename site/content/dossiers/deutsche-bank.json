@@ -1,0 +1,392 @@
+{
+  "name": "Deutsche Bank",
+  "slug": "deutsche-bank",
+  "aliases": [
+    "DB TRUST",
+    "DEUTSCHE BANK",
+    "Deutsche Bank Trust"
+  ],
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 9,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 5,
+      "legal": 1,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "financial": 6,
+      "employment": 2,
+      "legal": 1
+    }
+  },
+  "findings": [
+    {
+      "id": 322,
+      "finding_type": "financial",
+      "summary": "NYDFS Consent Order (2020) confirms Deutsche Bank maintained 40+ accounts for Epstein entities from Aug 2013 to Dec 2018. DB classified relationship as 'high-risk' but failed to properly monitor. Butterfly Trust included co-conspirators as beneficiaries. Over 120 wires totaling $2.65M sent to beneficiaries including women with Eastern European surnames. Payments to 'a Russian model and Russian publicity agent' deemed 'normal for this client.' ARRC conditions never communicated to relationship team. $150M penalty.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:00",
+      "target_name": "Deutsche Bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYDFS-ConsentOrder-2020",
+          "source_quote": "Since this type of activity is normal for this client it is not deemed suspicious",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 395,
+      "finding_type": "legal",
+      "summary": "Deutsche Bank had 4 FARA-registered foreign principal entries through 3 different registrants: Sullivan & Worcester (#2843, 1977-1985), TransAtlantic Futures Inc (#4353, 1990-1992), and Van Scoyoc Associates (#5401, 2003). The Van Scoyoc registration for Deutsche Bank AG New York Branch (2003) overlaps with the period Deutsche Bank maintained 40+ accounts for Epstein and facilitated $2.65M via Butterfly Trust. Deutsche Bank's FARA registrations confirm it was actively lobbying US government while simultaneously serving as Epstein's primary banking relationship.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:42:27",
+      "target_name": "Deutsche Bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:2843",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:4353",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:5401",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 415,
+      "finding_type": "financial",
+      "summary": "Deutsche Bank maintained extensive lobbying apparatus: 142 total filings spanning 2002-present. In 2007 (Epstein NPA year), DB lobbied on Anti-Money Laundering and Hedge Fund Regulation (200K H1, 450K H2 = 650K total). In 2019 (Epstein arrest year), DB lobbied via Tiber Creek Group at 150-210K/quarter (660K total) on Dodd-Frank reform, financial services regulation, trade, and cybersecurity. Key lobbyists: Jeffrey Peck, Drew Cantor. Notable: DB was simultaneously lobbying on AML/banking regulation while maintaining 40+ Epstein accounts and processing 2.65M via Butterfly Trust to co-conspirators. 29 LD-203 contribution reports filed, including contributions to Schumer, Shelby, Barney Frank, Gillibrand, and Harry Reid.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:22",
+      "target_name": "Deutsche Bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:a4af493d-717a-42e4-b59a-e4049bd3a8b5",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 416,
+      "finding_type": "intelligence",
+      "summary": "Deutsche Bank lobbied specifically on Anti-Money Laundering issues in H1 2007 while simultaneously maintaining 40+ Epstein accounts that would later result in 150M NYDFS penalty. DB spent 200K on AML/hedge fund/securities regulation lobbying in H1 2007 and 450K on mortgage/hedge fund/securities in H2 2007. This lobbying occurred during the exact period (2006-2008) when Epstein's NPA was being negotiated and when DB was processing suspicious transactions for Epstein entities. The juxtaposition of lobbying to influence AML regulation while facilitating suspicious transactions for a known sex offender is investigatively significant.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:27",
+      "target_name": "Deutsche Bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:a4af493d-717a-42e4-b59a-e4049bd3a8b5",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 434,
+      "finding_type": "financial",
+      "summary": "Deutsche Bank Securities Inc filed 29 LD-203 contribution reports. Notable political contributions from DB registered lobbyists include: Schumer (2.5K, 2010), Gillibrand (multiple 2.4-2.5K, 2009-2010), Harry Reid (1.5K, 2010), Barney Frank (5K, 2010), Shelby (5K, 2010), Kanjorski (5K, 2008; 2.7K, 2010), Jim Himes (2.5K, 2010), Kelly Ayotte (2.5K, 2010), Stabenow (5K, 2010), and DCCC (5K, 2008). These contributions went to members of the Senate Banking Committee and House Financial Services Committee who oversaw banking regulation, including AML/BSA enforcement that would later result in Deutsche Bank's 150M NYDFS penalty for Epstein-related AML failures.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:45:39",
+      "target_name": "Deutsche Bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:324ee8eb-12a2-42b9-8676-fba8683878e7",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 923,
+      "finding_type": "financial",
+      "summary": "LMSBAND dataset contains a Deutsche Bank 1MDB article (EFTA01384845) documenting DB's investigation for possible foreign corruption or anti-money-laundering violations in its work for 1MDB. Headlines captured: 'Deutsche Bank Caught Up in Scandal Over Malaysian 1MDB Fund' (NYT), 'Deutsche Bank latest headache: Its role in Malaysia 1MDB scandal' (CNN), 'US Investigating Deutsche Bank Dealings With Malaysian Fund 1MDB' (WSJ). This is significant because Deutsche Bank maintained 40+ Epstein accounts simultaneously. The DOJ Vol 11 article (EFTA02466190) specifically notes: 'Deutsche Bank, as 1MDB banker, was involved in sending 1 billion of the funds money out of the country in 2009' and 'the US Department of Justice has asked banks including Deutsche Bank AG and J.P. Morgan Chase for documents related to their interactions with 1MDB.' Both DB and JPM -- Epstein's two primary banks -- were implicated in the 1MDB probe.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 04:16:26",
+      "target_name": "Deutsche Bank",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01384845",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02466190",
+          "source_quote": "Deutsche Bank as 1MDB banker was involved in sending 1 billion of the funds money out of the country in 2009; the US Department of Justice has asked banks including Deutsche Bank AG and J.P. Morgan Chase for documents related to their interactions with 1MDB",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 960,
+      "finding_type": "financial",
+      "summary": "Deutsche Bank had dual exposure to both 1MDB and Epstein networks simultaneously. DB was investigated by DOJ for possible FCPA/AML violations related to 1MDB fund work (EFTA01384845: 'Deutsche Bank faces US investigation over work for Malaysia 1MDB fund'). DB also maintained 40+ Epstein accounts with $2.65M flowing via Butterfly Trust to co-conspirators. DB lobbied on 'Anti-Money Laundering' issues in H1 2007 while maintaining Epstein accounts. The Wildman v. Deutsche Bank case (EDNY 2021, 2nd Cir 2023) is a 1MDB-related shareholder suit. Doe 1 v. Deutsche Bank (SDNY 2022) is the Epstein victim case. Both involved the same bank's compliance failures.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 04:18:54",
+      "target_name": "Deutsche Bank",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01384845",
+          "source_quote": "Deutsche Bank faces US investigation over work for Malaysia 1MDB fund \u2014 The Guardian",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 39,
+      "person_a": "Deutsche Bank",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "financial",
+      "description": "Deutsche Bank Trust Company Americas was primary banking relationship for GA. Account managed by Stewart Oldfield. KYC case #01353080. Part of the SOUTHERN FINANCIAL RELATIONSHIP umbrella with Mort Inc. GA account changed to Inactive Prospect after all accounts closed.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:12:32",
+      "other_person": "Gratitude America Ltd",
+      "other_person_slug": "gratitude-america-ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01284072",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345320",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01376946",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "person_a": "Deutsche Bank",
+      "person_b": "Enhanced Education",
+      "relationship_type": "financial",
+      "description": "Deutsche Bank held Enhanced Education brokerage account managed by Ted Serure. Account underwent KYC/AML review 2018-2019. DB compliance flagged the Enhanced Education trade name for due diligence. Account closed Feb 2019.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:36",
+      "other_person": "Enhanced Education",
+      "other_person_slug": "enhanced-education",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01374774 EFTA01378650 EFTA01357627",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1209,
+      "person_a": "Deutsche Bank",
+      "person_b": "The Limited Inc",
+      "relationship_type": "financial",
+      "description": "Deutsche Bank AG (NY/Cayman) served as Managing Agent on The Limited's ~$715M 1995 credit facility with $82M commitment \u2014 same bank that later maintained Epstein's accounts (RM 82289)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:11:49",
+      "other_person": "The Limited Inc",
+      "other_person_slug": "the-limited-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:10-K:0000950132-96-000246",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1268,
+      "person_a": "Deutsche Bank",
+      "person_b": "The Limited Inc",
+      "relationship_type": "financial",
+      "description": "Deutsche Bank AG New York Branch was Managing Agent on The Limited Dec 15, 1995 B revolving credit facility",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 08:04:36",
+      "other_person": "The Limited Inc",
+      "other_person_slug": "the-limited-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "0000950132-96-000246:EX-4.8",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1329,
+      "person_a": "Deutsche Bank",
+      "person_b": "Robert Rankin",
+      "relationship_type": "employment",
+      "description": "Rankin was head of Deutsche Bank Asia-Pacific, later Crown Resorts executive chairman",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 22:22:13",
+      "other_person": "Robert Rankin",
+      "other_person_slug": "robert-rankin",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:440095",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1341,
+      "person_a": "Deutsche Bank",
+      "person_b": "Robert Rankin",
+      "relationship_type": "employment",
+      "description": "Rankin was CEO Deutsche Bank Asia-Pacific excluding Japan Oct 2009 to Jun 2012 then Co-Head Corporate Banking and Securities from Jun 2012. Deutsche Bank was Epsteins primary bank with 67M plus 32M Wanek accounts.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 23:00:52",
+      "other_person": "Robert Rankin",
+      "other_person_slug": "robert-rankin",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:db.com/newsroom_news/archive",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 279,
+      "person_a": "Deutsche Bank",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": "40+ accounts at DB from Aug 2013-Dec 2018. $2.65M in wires through Butterfly Trust. NYDFS $150M penalty. Relationship managed via wealth management division.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:20",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": []
+    },
+    {
+      "id": 327,
+      "person_a": "Deutsche Bank",
+      "person_b": "Epstein",
+      "relationship_type": "legal",
+      "description": "Deutsche Bank had 4 FARA registrations as foreign principal while simultaneously maintaining 40+ accounts for Epstein. FARA lobbying and Epstein banking were concurrent activities.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:13",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA:5401",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 329,
+      "person_a": "Deutsche Bank",
+      "person_b": "Tiber Creek Group",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:45:53",
+      "other_person": "Tiber Creek Group",
+      "other_person_slug": "tiber-creek-group",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

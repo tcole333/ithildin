@@ -1,0 +1,56 @@
+flowchart TB
+    subgraph Orchestrator["Deep Investigator"]
+        O["Receive Job"]
+        O1["Spawn Child Jobs"]
+        O2["Wait for Completion"]
+        O3["Synthesize Results"]
+    end
+    
+    subgraph Parallel["Parallel Investigation"]
+        direction TB
+        A["Agent A:<br/>Document Corpus"]
+        B["Agent B:<br/>Corporate/Financial"]
+        C["Agent C:<br/>Legal/Court"]
+        D["Agent D:<br/>OSINT/Network"]
+    end
+    
+    subgraph Workdirs["Work Directories"]
+        WA[/jobs/job-a/\nreport.md\nfindings.json/]
+        WB[/jobs/job-b/\nreport.md\nfindings.json/]
+        WC[/jobs/job-c/\nreport.md\nfindings.json/]
+        WD[/jobs/job-d/\nreport.md\nfindings.json/]
+    end
+    
+    subgraph Synthesis["Synthesis Agent"]
+        S["Read Reports"]
+        S1["Find Corroboration"]
+        S2["Identify Gaps"]
+        S3["Generate Insights"]
+    end
+    
+    subgraph Output["Output"]
+        F["Final Report"]
+        DB[(Findings DB)]
+    end
+    
+    O --> O1
+    O1 --> A
+    O1 --> B
+    O1 --> C
+    O1 --> D
+    
+    A --> WA
+    B --> WB
+    C --> WC
+    D --> WD
+    
+    WA --> S
+    WB --> S
+    WC --> S
+    WD --> S
+    
+    S --> S1 --> S2 --> S3
+    S3 --> F
+    S3 --> DB
+    
+    O2 -.->|Dependencies| S

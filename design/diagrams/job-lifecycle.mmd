@@ -1,0 +1,26 @@
+stateDiagram-v2
+    [*] --> PENDING: Create Job
+    
+    PENDING --> CLAIMED: Agent Claims
+    PENDING --> BLOCKED: Has Dependencies
+    
+    CLAIMED --> IN_PROGRESS: Start Execution
+    CLAIMED --> PENDING: Timeout/Heartbeat Lost
+    
+    IN_PROGRESS --> COMPLETED: Success
+    IN_PROGRESS --> FAILED: Error
+    IN_PROGRESS --> AWAITING_REVIEW: Human Review
+    IN_PROGRESS --> PENDING: Timeout
+    
+    BLOCKED --> PENDING: Dependencies Met
+    
+    FAILED --> PENDING: Retry
+    FAILED --> STALE: Max Retries
+    
+    AWAITING_REVIEW --> COMPLETED: Approved
+    AWAITING_REVIEW --> PENDING: Revision Requested
+    AWAITING_REVIEW --> REJECTED: Rejected
+    
+    COMPLETED --> [*]
+    REJECTED --> [*]
+    STALE --> [*]

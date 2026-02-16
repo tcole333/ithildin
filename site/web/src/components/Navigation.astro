@@ -1,0 +1,35 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Overview' },
+  { href: '/articles', label: 'Articles' },
+  { href: '/dossiers', label: 'Dossiers' },
+  { href: '/network', label: 'Network' },
+  { href: '/financials', label: 'Financial Flows' },
+];
+---
+<nav class="border-b border-gray-800 bg-gray-950/80 backdrop-blur-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-14">
+      <a href="/" class="text-lg font-semibold text-gray-100 tracking-tight">
+        Epstein Investigation
+      </a>
+      <div class="flex items-center gap-1">
+        {links.map(link => (
+          <a
+            href={link.href}
+            class:list={[
+              'px-3 py-1.5 rounded text-sm transition-colors',
+              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                ? 'bg-gray-800 text-white'
+                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>

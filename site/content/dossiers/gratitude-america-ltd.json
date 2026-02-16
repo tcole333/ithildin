@@ -1,0 +1,2366 @@
+{
+  "name": "Gratitude America Ltd",
+  "slug": "gratitude-america-ltd",
+  "aliases": [
+    "Gratitude America"
+  ],
+  "stats": {
+    "total_findings": 42,
+    "total_connections": 52,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 37,
+      "legal": 2,
+      "identity": 2,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "financial": 43,
+      "corporate": 9
+    }
+  },
+  "findings": [
+    {
+      "id": 2441,
+      "finding_type": "financial",
+      "summary": "DS10 database contains parser error showing 1,854,228 USD wire to SEB Bank on Apr 3 2018. Actual transaction was EUR 15,000 (18,542.78 USD) to NPO Baleto teatras in Vilnius, Lithuania via SEB Bank. Beginning balance 341,387.42 USD, ending balance 323,031.10 USD. The 1.85M figure does not exist - it was a misread of formatted amount display in bank statement.",
+      "detail": null,
+      "source_datasets": [
+        "doj_vol11",
+        "lmsband",
+        "duggan"
+      ],
+      "confidence": "high",
+      "date_of_event": "2018-04-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:34:27",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "dataset10-EFTA01287550",
+          "source_quote": "Transaction Detail shows '04-03 it Outgoing Fx Transfer TO SEB BANK NPO BALETO TE EUR 15000 RATE 1.23618562' with debit amount (18,542.78) and remaining balance 322,844.64. Summary section confirms Other Debits (18,542.78) and Ending Balance 323,031.10",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "finding_type": "legal",
+      "summary": "Gratitude America Ltd (EIN 66-0789697) incorporated in USVI on April 25, 2012 as a 501(c)(3) private foundation. Registered address: 9053 Estate Thomas Suite 101, St Thomas VI 00802 (Royal Palms Professional Building). Also used address 6100 Red Hook Quarter B3, St Thomas USVI 00802. IRS ruling date September 2012. NTEE code T20 (Private Grantmaking Foundations). Books kept by Erika Kellerhals at USVI address.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:05:40",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01295154",
+          "source_quote": "ARTICLES OF INCORPORATION OF GRATITUDE AMERICA, LTD. We, the undersigned, do hereby incorporate ourselves under Chapter 3, Tide 13, of the Virgin Islands Code",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "finding_type": "identity",
+      "summary": "Officers of Gratitude America (2012-2019): Richard Kahn - President (2012-2019), Darren K Indyke - Treasurer (2012-2015) then Vice President (2017-2019), Erika A Kellerhals - Secretary (2012-2019) and also Treasurer (2017-2019). Jeffrey E. Epstein listed as Director (deceased) on 2019 filing. All officers at 575 Lexington Ave 4th Floor NYC 10022 (HBRK Associates) or 9053 Estate Thomas Suite 101 St Thomas VI. Zero compensation paid to any officer across all filing years.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:05:57",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2015",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "finding_type": "financial",
+      "summary": "Leon Black (via BV70 LLC) donated $10,003,000 to Gratitude America in October 2015. This was the sole contribution received across the foundation's lifetime. The Dechert investigation also found a letter from Gratitude America to Black on Aug 21, 2015 thanking him for a $5M donation, confirmed by email from Epstein, but no bank record or Family Office document confirming this second donation was found. The $10M is confirmed on the 2015 990-PF (line 1: contributions $10,003,000).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:06:14",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02730996",
+          "source_quote": "Black also made a $10 million donation to Gratitude America in October 2015, which was a charitable organization affiliated with Epstein",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2015",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "finding_type": "financial",
+      "summary": "Gratitude America held accounts at Deutsche Bank Trust Company Americas (primary banking relationship, managed by Stewart Oldfield) and Morgan Stanley (brokerage opened for investments). Richard Kahn emailed about opening the Morgan Stanley account: 'gratitude brokerage has been opened at morgan stanley currently we have 9,650,000 at DB in checking account please advise amount i should send to open account.' Account was closed by Darren Indyke on Jan 10, 2019 (EFTA01387256). Deutsche Bank KYC identified Jeffrey Epstein as President of Gratitude America who was 'a current client of the bank.'",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:06:34",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01284072",
+          "source_quote": "Jeffrey Epstein (President of Gratitude America) is a current client of the bank",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01387256",
+          "source_quote": "Please close the above account. Sincerely, Darren Indyke",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02703896",
+          "source_quote": "gratitude brokerage has been opened at morgan stanley currently we have 9,650,000 at DB in checking account",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "finding_type": "financial",
+      "summary": "Complete grant disbursements by year: 2015: $0. 2016: $580,000 total (Melanoma Research Alliance $225K, Verse Video Education $110K, Bruce Marsha Moskowitz Foundation $100K, Hasty Pudding $50K, NY Concert Artists $50K, Hewitt School $15K, Crohns Colitis $10K, Women Global Cancer $10K, Icahn Mt Sinai $10K). 2017: $1,260,000 total (IPI $375K, MIT $150K, Kuhn Foundation $150K, Verse Video/Lisa New $110K [coded as separate], Cancer Research Wellness $75K, Association Mind Education Rome $60K, Moskowitz $50K, Chopra Foundation $50K, Met Orchestra $50K, UJA Federation $50K, Univ Arizona $50K, IPFCA $50K, O'Gorman Garden $30K, Nautilus Think $25K, Film Society Lincoln Ctr $25K, JTCC $25K, Crohns $10K, Hasty Pudding not listed, Friends Elton John $15K, IFP Gotham Awards $10K, Leukemia $5K, Walk MS $5K). 2018: $891,440 (Kuhn Foundation $500K, Humanity Plus $100K, Hasty Pudding $50K, Cancer Research Wellness $25K, Association Mind Education $25K, Crohns $10K, plus consulting expenses $235K). 2019: $110,000 net (IPI $150K, Hasty Pudding $50K, Nat'l MS Society $10K, minus $100K prior year refund). Grand total disbursed 2015-2019: approximately $2.84M.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:06:58",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2016",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "finding_type": "financial",
+      "summary": "IPI (International Peace Institute) received $525,000 total from Gratitude America: $375,000 in 2017 and $150,000 in 2019. This is the single largest recipient of grants from Gratitude America. Combined with the KPMG-confirmed $650K from Enhanced Education, IPI received at least $1.175M from Epstein-controlled foundations. The 2019 payment of $150K to IPI is notable as it was made in the same year Epstein was arrested (July 2019) and died (August 2019).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:07:14",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "finding_type": "financial",
+      "summary": "Kuhn Foundation (357 Waverly Dr, Pasadena CA 91105) received $650,000 total from Gratitude America: $150,000 in 2017 and $500,000 in 2018 (the single largest individual grant). The Kuhn Foundation is the second-largest cumulative recipient after IPI. Requires investigation to determine the relationship between Epstein and the Kuhn Foundation.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:07:28",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "finding_type": "financial",
+      "summary": "Landon Thomas Jr (NYT financial reporter) received $30,000 from Gratitude America in August 2017. Email chain shows Epstein directed the payment: Thomas asked 'What was the name again of the name it will come under?' and was told '30k from gratitude america.' Thomas responded with effusive thanks: 'Needless to say, this is enormous for us and I am tremendously grateful for your efforts.' This payment to an active NYT reporter covering finance represents a serious journalistic ethics violation.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:07:44",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02353300",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02366490",
+          "source_quote": "the check came today in the amount of $30,000. Needless to say, this is enormous for us and I am tremendously grateful for your efforts",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02640495",
+          "source_quote": "30k from gratitude america",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "finding_type": "financial",
+      "summary": "Epstein described Gratitude America as 'my private foundation. based on the philosophy that too many people complain about the country rather than expressing the thanks it deserves.' This framing was used when directing Lisa New charitable payments. In contrast, Richard Kahn noted that Gratitude America was 'subject to public' disclosure (unlike Enhanced Education), meaning its 990-PF filings are publicly available. The existence of Enhanced Education as a parallel vehicle specifically to AVOID public disclosure of disbursements is the critical distinction.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:07:59",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02469790",
+          "source_quote": "the supporter is me .so no name necessary, the check will come from Gratitude America, my private foundation. based on the philosophy that too many people complain about the country rather than expressing the thanks it deserves.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "finding_type": "financial",
+      "summary": "Gratitude America financial lifecycle: Incorporated April 2012, received $10M from Leon Black in Oct 2015. Assets peaked at $10,006,564 (2015). Invested in stocks via Morgan Stanley: corporate stock portfolio at $4.8M-$5.5M (2016-2018), with active trading generating $899K gains in 2017, $69K losses in 2018, $155K gains in 2019. By 2019 all stocks liquidated (portfolio sold off), $8.18M remaining in cash. Assets frozen at $8,175,884 from 2020-2022 with $0 revenue and $0 expenses after Epstein's death. The foundation appears dormant but not dissolved as of 2022.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:08:15",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2015",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "finding_type": "financial",
+      "summary": "Epstein used Gratitude America to channel funds to Leon Black's preferred charities as reciprocal donations. In 2016, Gratitude America paid $225,000 to Melanoma Research Alliance (charity established by Black and his wife Debra). Separately, Gratitude America paid $100,000 to Bruce Marsha Moskowitz Foundation in both 2016 and 2017 ($150K total) \u2014 a Palm Beach FL entity. This suggests Epstein was servicing Black's charitable interests through Gratitude America funds that originated from Black's own $10M donation \u2014 a circular arrangement.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:08:31",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02730996",
+          "source_quote": "Epstein made significant donations to the Melanoma Research Alliance, a charitable foundation established by Black and his wife, at Black's request",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2016",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "finding_type": "financial",
+      "summary": "Gratitude America paid $235,000 in 'consulting expense' in 2017 (Statement 3: CONSULTING EXPENSE $235,000). This is the largest single non-grant expense in any year. No contractor paid over $50,000 is listed on the return. The identity of the consultant(s) receiving $235,000 is not disclosed on the 990-PF. In 2016, 'other expenses' of $290,805 were recorded with $290,030 coded to charitable purposes \u2014 similar pattern. These consulting payments warrant investigation as potential self-dealing or payments to Epstein associates.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:08:48",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2016",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "finding_type": "financial",
+      "summary": "Humanity Plus (5042 Wilshire Blvd Ste 14334, Los Angeles CA 90036) received $100,000 from Gratitude America in 2018. This is linked to Joscha Bach, who emailed about visa complications: 'not all money was relayed via Humanity Plus (some came directly from Gratitude America), which probably creates problems with the O visa (I can only receive grants via the organization sponsoring the visa), which means that we may have to figure out a solution before the year is over.' This suggests Epstein was using Gratitude America to fund individual researchers/associates through fiscal sponsors, and that direct payments created immigration/visa complications.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:09:04",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02614563",
+          "source_quote": "not all money was relayed via Humanity Plus (some came directly from Gratitude America), which probably creates problems with the O visa",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "finding_type": "financial",
+      "summary": "Epstein directed a $20,000 payment from Gratitude America for 'administering the chomsky challenge in linguistics.' Richard Kahn emailed: 'jeffrey wanted me to reach out regarding a payment from his foundation gratitude america in the amount of 20,000 for administering the chomsky challenge in linguistics. please advise if you would like a check or wire.' This links Gratitude America to Noam Chomsky's linguistics work, consistent with the known Epstein-Chomsky relationship (38 emails in HF corpus).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:09:18",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02376664",
+          "source_quote": "jeffrey wanted me to reach out regarding a payment from his foundation gratitude america in the amount of 20,000 for administering the chomsky challenge in linguistics",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02658315",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "finding_type": "financial",
+      "summary": "Epstein used Gratitude America stationery for personal purposes. On June 21, 2018, Lesley Groff asked Richard Kahn for 'Gratitude America stationary' because 'Jeffrey is asking me to write a recommendation for [redacted] on Gratitude America stationary.' Kahn replied 'no logo, i would use 6100 red hook address and phone.' Groff confirmed she would 'print it up myself.' Epstein then clarified 'its a school recommendation do it from gratitude america.' Using a private foundation's letterhead for personal school recommendations blurs the foundation's institutional identity with Epstein's personal interests.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:09:34",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02248109",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02249412",
+          "source_quote": "no logo i would use 6100 red hook address and phone",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02249865",
+          "source_quote": "its a school recommendation do it from gratitude america",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "finding_type": "financial",
+      "summary": "In an email to Melanie Spinella (his accountant/assistant), Epstein detailed the Leon Black payment structure: '10m paid today to gratitude america, a 501 c 3, willl make last year complete. 20 million paid today ftc. 10 million july 15 5 million sept 30. , 5 million jan 1 for all of 16. tax savings paid at 37 percent. of net. savings. 50 million credit. net. so 150 million free.' This reveals: (1) the $10M to Gratitude America was part of a larger $35M payment from Black, (2) $20M went to Financial Trust Company (FTC) the same day, (3) Epstein calculated 37% tax savings yielding $50M credit on $150M, and (4) Epstein instructed 'Talk to me before signing anything today important' and 'did the paul weiss bill get paid???'",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:09:52",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02476050",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02477798",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02504960",
+          "source_quote": "10m paid today to gratitude america, a 501 c 3, willl make last year complete. 20 million paid today ftc. 10 million july 15 5 million sept 30. , 5 million jan 1 for all of 16. tax savings paid at 37 percent",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02639558",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "finding_type": "financial",
+      "summary": "Gratitude America is listed as one of Epstein's USVI entities in DOJ documents alongside: Great St Jim LLC, IGO Company LLC, J Epstein Virgin Islands Foundation Inc, Jeepers Inc, Laurel Inc, Little St James LLC, LSJE LLC, Maple Inc, Michelle's Transportation Co LLC, Nautilus Inc, Southern Country International Ltd, Southern Trust Company Inc, Thomas World Air. This confirms Gratitude America was part of the broader Epstein USVI corporate structure managed by the same officers (Indyke, Kellerhals, Kahn).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:10:09",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02633183",
+          "source_quote": "GRATITUDE AMERICA, LTD e. GREAT ST JIM, LLC f. IGO COMPANY LLC g. J EPSTEIN VIRGIN ISLANDS FOUNDATION INC h. JEEPERS INC i. LAUREL INC j. LITTLE ST JAMES LLC k. LSJE LLC",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 317,
+      "finding_type": "financial",
+      "summary": "Gratitude America Ltd (EIN 66-0789697), USVI 501(c)(3) incorporated April 25, 2012 at 9100 Havensight Port of Sale Ste 15-16, St Thomas USVI. Address changed to 6100 Red Hook Quarter B3 and 9053 Estate Thomas Ste 101. Richard Kahn is President. Erika Kellerhals (attorney) employed. Received $10,007,332 in 2015 from BV70 LLC (Leon Black entity). Assets: $10,006,564 (2015), $8,184,284 (2019), $8,175,884 (2020-2022 static). Revenue dropped to $1/yr from 2020. Kahn noted it was 'subject to public' unlike Enhanced Education. Brokerage moved from Deutsche Bank ($9.65M) to Morgan Stanley. Darren Indyke signed account closure letter Jan 10, 2019 at Deutsche Bank. Disbursements per LittleSis: $225K Melanoma Research Alliance, $150K Moskowitz Foundation, $150K MIT, $150K Kuhn Foundation, $100K CRWI, $50K Police & Fire Chaplains, $30K Landon Thomas Jr (per DOJ). Apollo Global 8-K (Jan 2021) references Gratitude America in Leon Black-Epstein context.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:51:42",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02703896",
+          "source_quote": "gratitude brokerage has been opened at morgan stanley currently we have 9,650,000 at DB in checking account please advise amount i should send to open account",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 411,
+      "finding_type": "legal",
+      "summary": "Gratitude America Ltd has ZERO lobbying filings in Senate LDA records. While Gratitude America was structured as a 501c3 nonprofit (EIN 66-0789697) and primarily functioned as a financial vehicle rather than an advocacy organization, its zero-filing status confirms it was not used for registered lobbying. Gratitude America received 10M from Leon Black and served as a conduit for Epstein-directed payments including 30K to Landon Thomas Jr.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:01",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:negative_search_gratitude_america",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 414,
+      "finding_type": "financial",
+      "summary": "Gratitude America Ltd (EIN 66-0789697) is registered in St Thomas USVI at 9053 Estate Thomas Suite 101, care-of Erika Kellerhals (Swiss operative). IRS 990-PF shows entity was dormant 2012-2014 (assets  each year), then received ,003,000 in contributions in 2015 tax year, creating overnight M in assets. Entity has been effectively frozen since 2019 arrest with .175M in assets and zero revenue/expenses from 2020-2022.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:20",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:660789697/2015,IRS990:660789697/2012-2014,IRS990:660789697/2020-2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 417,
+      "finding_type": "financial",
+      "summary": "Gratitude America 2019 was the only year with meaningful activity after the 2015 donation: ,470 in net investment income, ,000 in grants paid, ,433 total expenses. This was the year of Epstein's arrest (July 6, 2019). From 2020-2022, entity reported  in revenue, /bin/zsh in expenses, ,175,884 in assets - completely frozen. No grants made, no officer compensation paid. The .175M represents approximately .8M decline from the original M, likely from expenses and the 2019 grants.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:29",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:660789697/2019,IRS990:660789697/2020,IRS990:660789697/2021,IRS990:660789697/2022",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 419,
+      "finding_type": "identity",
+      "summary": "Gratitude America Ltd care-of name on IRS records is Erika Kellerhals, confirming her role as the Swiss operative managing this USVI-based entity. Zero officer compensation reported across all filing years (2012-2022), suggesting officers serve without pay or compensation is routed through other entities.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:38",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS990:660789697",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 470,
+      "finding_type": "financial",
+      "summary": "Gratitude America 990-PF filing gap: ProPublica shows filings with data for 2012-2015, 2019-2022. Additional filings (PDF only, no extracted data) exist for 2016, 2017, 2018. The 2016-2018 filings need examination as they cover the period when Epstein was most active with the network. The 2016 filing likely shows the first full year post-M deposit. Examining what happened with M in assets during these three years would reveal whether funds were invested, distributed as grants, or held static.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:51:35",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:660789697/2016,IRS990:660789697/2017,IRS990:660789697/2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1463,
+      "finding_type": "financial",
+      "summary": "DS10 reveals Gratitude America was a NET RECIPIENT entity \u2014 receiving $8.08M while disbursing only $1.85M. INCOMING: $7,112,269 (Jul 24, 2019 \u2014 2 weeks after arrest, likely automated investment liquidation), $816,766 (Jul 25, 2019 \u2014 next-day continuation), $150,000 (Dec 11, 2017). The Jul 2019 incoming $7.93M represents the Morgan Stanley brokerage account liquidation triggered by the arrest. OUTGOING: $1,854,228 to SEB Bank (Apr 3, 2018, EFTA01287550). SEB Bank is Skandinaviska Enskilda Banken, a Swedish bank \u2014 but the specific IBAN (LT34 7044 0600...) identifies the SEB LITHUANIA branch. This $1.85M payment from a US nonprofit to a Lithuanian bank account warrants investigation. The Swedish-American Life Science Summit (Barbro Ehnbom, Chairman) also used SEB Stockholm for wire receipts from Epstein entities. The timing: Gratitude America received $10M from BV70/Black in Oct 2015, held $9.65M at DB checking, then Darren Indyke closed the DB account on Jan 10, 2019 (finding #41), moving to Morgan Stanley. The $8.08M recovered post-arrest represents most of the original $10M Black donation \u2014 meaning Gratitude America's stated charitable disbursements over 4 years totaled only about $2M (consistent with the known grants to IPI, MIT, Melanoma Research, etc.).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:34:45",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287550,EFTA00,EFTA0013",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1502,
+      "finding_type": "financial",
+      "summary": "Gratitude America complete financial lifecycle from 990-PF filings (ProPublica, EIN 66-0789697): DORMANT PHASE (2012-2014): $1 revenue, $0 expenses, $1 assets each year. ACTIVATION (2015): $10,007,332 revenue (single $10,003,000 contribution from BV70 LLC/Leon Black), $768 expenses, $10,006,564 assets. OPERATING (2016-2018): Active grant-making period -- $225K Melanoma Research Alliance, $150K MIT, $150K Moskowitz Foundation, $150K Kuhn Foundation, $525K IPI (3 checks drawn on Deutsche Bank Trust Co Americas), $100K Humanity Plus, $100K CRWI, $50K Police/Fire Chaplains, $30K Landon Thomas Jr, $20K Chomsky linguistics challenge, $235K consulting expense (2017), $290K other expenses (2016). Stock portfolio peaked at $5.5M via Morgan Stanley with active trading ($899K gains 2017, $69K losses 2018). ARREST YEAR (2019): $242,470 revenue, $110,433 expenses, $8,184,284 assets. All stocks liquidated. Deutsche Bank account closed by Indyke Jan 10, 2019. FROZEN (2020-2022): $1 revenue, $0 expenses, $8,175,884 assets -- completely static. Foundation dormant but NOT dissolved. Total grants disbursed: estimated $1.8M+ from the $10M endowment. Care-of: Erika Kellerhals. USVI status: Dissolved/Withdrawn (entity 582530).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:38:44",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica:660789697",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1512,
+      "finding_type": "financial",
+      "summary": "Gratitude America 2017 990-PF reveals $1,260,000 in grants to 20 recipients. Largest: International Peace Institute $375,000, Kuhn Foundation $150,000, MIT $150,000. Also: Cancer Research Wellness Institute $75,000, Association Mind Education (Rome Italy) $60,000, Bruce & Marsha Moskowitz Foundation (Palm Beach) $50,000, Chopra Foundation $50,000, Met Orchestra Musician $50,000, Inter Police & Fire Chaplains $50,000, U of Arizona Foundation $50,000, UJA Federation $50,000, O'Gorman Garden $30,000, Nautilus Think $25,000, Film Society of Lincoln Center $25,000, JTCC $25,000, Friends of Elton John $15,000, Crohn's Colitis Foundation $10,000, Independent Feature Project $10,000, Leukemia & Lymphoma Society $5,000, Walk MS $5,000. Officers: Richard Kahn (President), Darren K Indyke (VP), Erika A Kellerhals (Secretary+Treasurer). Consulting expense $235,000. Revenue $1,143,976 (interest $144,578, dividends $89,161, capital gains $899,417). Assets declined from $9.26M to $8.86M.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:40:26",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2017",
+          "source_quote": "Statement 5 Part XV Line 3A Recipients - International Peace Institute 375000, Kuhn Foundation 150000, MIT 150000, Cancer Research Wellness Institute 75000, Association Mind Education Rome Italy 60000",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1515,
+      "finding_type": "financial",
+      "summary": "Gratitude America 2018 990-PF reveals $891,440 in grants to 9 recipients. Largest: Kuhn Foundation $500,000 (PF status), Humanity Plus $100,000, Hasty Pudding Institute $50,000, Edge Foundation Inc $35,000. Also: Cancer Research Wellness Institute $25,000, Association Mind Education (Rome Italy) $25,000, Shakespeare Theatre of NJ $25,000, Crohn's Colitis Foundation $10,000, Junior Tennis Champions Center $10,000. Revenue only $95,237 (interest $94,963, dividends $61,031, capital losses -$69,379). Assets declined from $8.91M to $7.44M. Massive net capital loss of -$69,379 from selling $31.4M in securities. Signed 2019-11-15 (4 months after Epstein arrest).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:40:40",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2018",
+          "source_quote": "Part XV Line 3 Recipients - Kuhn Foundation 500000 PF, Humanity Plus 100000, Hasty Pudding Institute 50000, Edge Foundation Inc 35000, Cancer Research Wellness Institute 25000, Association Mind Education Rome 25000",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1516,
+      "finding_type": "financial",
+      "summary": "Gratitude America 2016 990-PF: Revenue $134,178 (interest $54,367, dividends $21,576, capital gains $58,235 from selling 800 shares LinkedIn-A purchased 2016-03-02 for $95,414). Grants paid $580,000 (recipients in Additional Data Table). Other expenses $290,805. Total expenses $875,935. Assets declined from $10.0M to $9.39M. Officers: Richard Kahn (President, 575 Lexington Ave 4th Fl NYC), Darren K Indyke (Treasurer, same address), Erika A Kellerhals (Secretary, 9053 Estate Thomas Suite 101 St Thomas VI). Note Indyke promoted from Treasurer in 2016 to Vice President by 2017. Books in care of Erika Kellerhals at USVI address.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:40:56",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2016",
+          "source_quote": "Part IV Capital Gains - 800 LINKEDIN CORP A, P(purchased), acquired 2016-03-02, sold 2016-06-14, gross 153649, basis 95414, gain 58235",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1527,
+      "finding_type": "financial",
+      "summary": "Complete Gratitude America money flow reconstruction from 990-PF filings and Dechert report: Leon Black donated $10M in Oct 2015 (confirmed) plus possible $5M earlier (unverified). Foundation received $10.007M in 2015, then distributed: 2016: $580,000 in grants; 2017: $1,260,000 in grants to 20 recipients including IPI ($375K), Kuhn Foundation ($150K), MIT ($150K); 2018: $891,440 in grants to 9 recipients including Kuhn Foundation ($500K), Humanity Plus ($100K), Edge Foundation ($35K). Total confirmed grants 2016-2018: $2,731,440. Also $235K consulting fees in 2017 and $290K other expenses in 2016. Assets peaked at $10M (2015), declined to $7.4M (2018), then froze at $8.175M (2020-2022). Foundation effectively became dormant after Epstein arrest (July 2019), reporting $1 revenue and $0 expenses from 2020 onward.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:43:05",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2015",
+          "source_quote": "Revenue 10007332. SEC-8K:Black donated 10M to Gratitude America Oct 2015 affiliated with Epstein. 990-PF-2017:Grants paid 1260000. 990-PF-2018:Grants paid 891440",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2016",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2017",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-8K-0001193125-21-016405",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1533,
+      "finding_type": "financial",
+      "summary": "Gratitude America grant network maps as a three-tier distribution system: (1) BLACK->GRATITUDE: Leon Black $10M (Oct 2015, Dechert-confirmed) + possible $5M (Aug 2015, unverified). (2) GRATITUDE->EPSTEIN NETWORK: IPI $375K (2017), Kuhn Foundation $650K total (2017-2018), MIT $150K (2017), O'Gorman Garden $30K (2017), Edge Foundation $35K (2018), Humanity Plus $100K (2018). (3) GRATITUDE->UNKNOWN NEXUS: Association Mind Education Rome $85K (2017-2018 - foreign entity, not in US 990 system), Cancer Research Wellness Inst Carmel CA $100K (2017-2018), Bruce & Marsha Moskowitz Foundation Palm Beach $50K (2017), Chopra Foundation $50K (2017). The $235K 'consulting expense' in 2017 is also noteworthy -- paid to unnamed consultant(s). Key pattern: Black's money flows through Gratitude America to both known Epstein-affiliated entities (IPI, Edge, MIT, O'Gorman) and obscure recipients requiring further investigation.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:44:17",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2017",
+          "source_quote": "Statement 5 total 1260000; 990-PF-2018:total 891440; SEC-8K:Black donated 10M to Gratitude America affiliated with Epstein",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC-8K-0001193125-21-016405",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1590,
+      "finding_type": "financial",
+      "summary": "Dechert Exhibit E confirms Gratitude America's MMDA at Deutsche Bank was primarily capitalized by a single 10M deposit from BV70 LLC (Leon Black's entity) on 10/14/2015. Bloomberg confirmed Black controls BV70 LLC. From this 10M, Gratitude America dispersed funds to: Bruce & Marsha Moskowitz Foundation (multiple payments), Melanoma Research Alliance Foundation, Cancer Research Wellness Institute, Gratitude America Ltd (Morgan Stanley/Citibank and First Bank of Puerto Rico accounts), NPO Baleto Teatras, and VSJ Baleto Teatras (Lithuanian ballet). Total documented disbursements approximately 12M (including transfers between Gratitude accounts). This establishes the BV70-to-Gratitude pipeline as a Leon Black funding mechanism routed through Epstein's Deutsche Bank infrastructure.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:13:00",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00027019",
+          "source_quote": "Exhibit E: The Gratitude America MMDA was primarily capitalized via a 10 million deposit from BV70 LLC. Bloomberg has reported that Leon Black controls BV70 LLC",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1595,
+      "finding_type": "financial",
+      "summary": "Gratitude America Ltd (EIN 66-0789697) maintained consulting expense line items from 2016-2018: $290,000 (2016), $235,000 (2017), $20,000 (2018). Recipients identified through DOJ email corpus include: (1) Leon Botstein (President, Bard College) - received 1099 for 2016 consulting agreement, sent to Bard College address in Annandale-on-Hudson; (2) Jeremy Rubin (MIT/Bitcoin researcher) - received $25,000 check sent to Cambridge address with consulting agreement in Jan/Feb 2016; (3) Noam Chomsky - $30,000 consulting from Gratitude confirmed, with Darren Indyke to draft agreement (Feb 2017); (4) Landon Thomas Jr. (NYT journalist) - $30,000 from Gratitude America directed Aug 2017 as 'consulting' with O'Gorman connection. Despite individual amounts, no contractor paid over $50,000 was disclosed on any 990-PF (all reported 'NONE'), suggesting payments were structured below disclosure threshold.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:16:21",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345265",
+          "source_quote": "CONSULTING FEES 290,000; EFTA02350806:preparing 1099s for Gratitude America in regards to your consulting agreement for 2016; EFTA02363644:sending today via Fed Ex to your Cambridge address a check in the amount of 25,000 along with 2 copies of consulting agreement; EFTA02658448:please confirm 30k to Noam Chomsky is consulting from Gratitude and the expertise for consulting agreement darren will draft; EFTA02353300:30k from gratitude america...consulting? if so shall darren draft agreement",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02350806",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02353300",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02363644",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02658448",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02661839",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1596,
+      "finding_type": "financial",
+      "summary": "Gratitude America wired EUR 15,000 ($18,542.78) to SEB Bank Vilnius on April 3, 2018 for NPO Baleto teatras (Lithuanian National Opera and Ballet Theatre). The 2018 990-PF confirms a $28,543 grant to 'VSL Baleto Teatras' (company code 302629386, M. Dauksos St 3-4, Vilnius). The wire was initiated through Deutsche Bank account. A separate $75,000 wire from J Epstein Virgin Islands Foundation to UAB Fors Projektai (Teatro st.9B-19, Vilnius; VAT LT100006777816; forsevent.com) via BNY Mellon on 01/20/2017. Both entities connected to 'balerina Simona' (email: balerinasimona@hotmail.com, Lithuanian phone +37068256466), identified as Simona, a Lithuanian woman with personal relationship to Epstein who stayed at 9 E 71st St and traveled to Paris. Her husband involved in Fors Projektai (event company). General manager of Baleto teatras is Valdas Petreikis.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:16:39",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287550",
+          "source_quote": "April 3 wire to SEB BANK for NPO BALETO TE EUR 15,000 = $18,542.78; EFTA02365092:please advise on amount to send and entity to pay...UAB Fors projektai VAT LT100006777816; EFTA02252638:balerina Simona My self phone is +37068256466; EFTA01299660:BNY Mellon wire $75,000 to UAB Fors Projektai 01/20/2017",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01299660",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02237761",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02252638",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02343901",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02365092",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02373434",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1597,
+      "finding_type": "financial",
+      "summary": "Gratitude America assets frozen at exactly $8,175,884 from 2020-2022 (confirmed across three consecutive 990-PF filings). Assets held entirely as 'savings and temporary cash investments' with zero stock holdings (all equities liquidated by end of 2019). Revenue reported as $1/year, expenses $0-$8,400/year. No grants paid after 2019. Officers remain Richard Kahn (Pres/Dir), Darren Indyke (VP/Dir), Erika Kellerhals (Secr/Tres/Dir) at 9053 Estate Thomas Suite 101, St Thomas VI 00802. Foundation included as one of ten Epstein-created entities in USVI AG v. Estate of Jeffrey Epstein $105M settlement (Nov 2022). 2022 filing signed 11/15/2023 by David M. Hasson (Seckendorf Hasson Reilly and Kobay CPAs, Lake Success NY). Excess distributions carryover from 2017 ($255,623) and 2018 ($540,238) still on books.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:17:03",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345265",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1599,
+      "finding_type": "financial",
+      "summary": "Gratitude America 990-PF analysis (TY2016-2022) reveals complete asset trajectory and grant patterns. Assets: $10M (2015) -> $9.4M (2016) -> $8.9M (2017) -> $7.4M (2018) -> $8.2M (2019) -> $8.175M frozen (2020-2022). Asset decline 2016-2018 driven by grants exceeding investment income: 2016 grants $580K, 2017 grants $1,260,000, 2018 grants $891,440. Active stock trading: 50+ positions traded in 2017 (capital gains $899,417), continued through 2019 (42 positions). Officers consistently: Richard Kahn (Pres), Darren Indyke (VP/Treas then VP/Dir), Erika Kellerhals (Secy then Secr/Tres/Dir). All compensation reported as $0. Books kept by Kellerhals at 9053 Estate Thomas Suite 101, St Thomas VI. CPA: David M. Hasson, Seckendorf Hasson Reilly CPAs, Lake Success NY. Foreign financial account reported Yes in 2016-2017, changed to No in 2018, then Yes again in 2019. Jeffrey E. Epstein listed as DECEASED Director on 2019 filing. Deutsche Bank account closed by Indyke 01/10/2019 (6 months pre-arrest). Signature cards show Epstein AND Indyke as signatories.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:17:39",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345265",
+          "source_quote": "TY 2016 Gratitude America CONSULTING FEES 290,000; EFTA01387256:account closure letter 01/10/2019 from Darren Indyke to Brad at Deutsche Bank; EFTA01345320:Deutsche Bank signature cards for Gratitude America showing Jeffrey Epstein and Darren Indyke as signatories; 990-PF TY2016-2022: total assets declining from 10M to frozen at 8.175M",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345298",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345320",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01387256",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1600,
+      "finding_type": "financial",
+      "summary": "Complete grant recipients mapped from 990-PF filings 2016-2019. Top: IPI 375K, Kuhn 650K, MIT 150K, Melanoma 225K, Humanity Plus 100K, Moskowitz 150K, Hasty Pudding 100K, Mind Education 85K Rome, Baleto Teatras 28K Vilnius, Paris cultural assoc 58K, Edge 35K Brockman, OGorman Garden 30K Thomas conduit. Mix of legitimate charities with personal network entities and non-US recipients.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:18:22",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345265",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345298",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1601,
+      "finding_type": "financial",
+      "summary": "Consulting arrangement secrecy pattern documented: Richard Kahn email to unnamed recipient shows Lesley Groff was NOT aware of their consulting arrangement with Gratitude, requiring check to be re-routed. Quote: unfortunately lesley is not aware of your consulting arrangement with gratitude. This shows Epstein compartmentalized even inner circle knowledge of consulting payments. Same pattern: Kahn asked Epstein for approval before each consulting payment, forwarding all requests to jeevacation at gmail for direction. Epstein personally directed amount, recipient, and entity for each payment.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:18:35",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02371052",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02374402",
+          "source_quote": "unfortunately lesley is not aware of your consulting arrangement with gratitude shall i void check and issue new or will your mail be forwarded",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02453298",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1603,
+      "finding_type": "financial",
+      "summary": "DS10 Deutsche Bank records show 1,854,228 outgoing wire from Gratitude America to SEB Bank on Apr 3 2018 (EFTA01287550). This is far larger than the EUR 15K (18,542.78 USD) Baleto teatras wire shown on the same-date statement with starting balance of 341K. The 1.85M likely represents a larger wire from a different Gratitude America account (possibly Morgan Stanley brokerage or main DB account) to SEB Bank Vilnius. DS10 also shows Jul 24-25 2019 incoming 7.93M (post-arrest Morgan Stanley liquidation), and Dec 2017 incoming 150K. Total DS10 Gratitude flows: outgoing 1.85M, incoming 8.08M. The 1.85M SEB Bank wire requires further investigation -- if confirmed it represents 18.5 pct of the entire Black 10M donation sent to a single Lithuanian bank.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:21:07",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287550",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2568,
+      "finding_type": "financial",
+      "summary": "Gratitude America gave $35K to Edge Foundation Inc (Brockman) in 2018 per IRS 990-PF Schedule I. Direct Epstein-controlled entity funding another Epstein-adjacent organization.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 09:07:58",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS990:660789697:201812",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2569,
+      "finding_type": "financial",
+      "summary": "Gratitude America gave $500K to Kuhn Foundation in 2018 \u2014 its largest single grant. Purpose listed as 'general charitable purposes.' Kuhn Foundation identity and connection to Epstein network requires investigation.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 09:07:58",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS990:660789697:201812",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2571,
+      "finding_type": "intelligence",
+      "summary": "Co-granting pattern: Both Gratitude America ($225K in 2016) and Leon Black Family Foundation ($1.225M in 2016-2017) gave to Melanoma Research Alliance. Overlap in charitable giving between Epstein entity and Black entity suggests coordinated philanthropy.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 09:08:13",
+      "target_name": "Gratitude America",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS990:660789697:201612",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 737,
+      "person_a": "Gratitude America",
+      "person_b": "SEB Bank Lithuania",
+      "relationship_type": "financial",
+      "description": "DS10: 1.85M wire Apr 3 2018 to SEB Lithuania",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:38:04",
+      "other_person": "SEB Bank Lithuania",
+      "other_person_slug": "seb-bank-lithuania",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01287550",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 741,
+      "person_a": "Gratitude America",
+      "person_b": "International Peace Institute",
+      "relationship_type": "financial",
+      "description": "Gratitude America granted $375,000 to IPI in 2017 per 990-PF Statement 5",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:41:06",
+      "other_person": "International Peace Institute",
+      "other_person_slug": "international-peace-institute",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2017",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 742,
+      "person_a": "Gratitude America",
+      "person_b": "Kuhn Foundation",
+      "relationship_type": "financial",
+      "description": "Gratitude America granted $150,000 to Kuhn Foundation in 2017 and $500,000 in 2018 (total $650,000) per 990-PF filings",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:41:07",
+      "other_person": "Kuhn Foundation",
+      "other_person_slug": "kuhn-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2017",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2018",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 743,
+      "person_a": "Gratitude America",
+      "person_b": "Humanity Plus",
+      "relationship_type": "financial",
+      "description": "Gratitude America granted $100,000 to Humanity Plus (transhumanist organization) in 2018 per 990-PF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:41:09",
+      "other_person": "Humanity Plus",
+      "other_person_slug": "humanity-plus",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2018",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 744,
+      "person_a": "Edge Foundation",
+      "person_b": "Gratitude America",
+      "relationship_type": "financial",
+      "description": "Gratitude America granted $35,000 to Edge Foundation Inc (Brockman) in 2018 per 990-PF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:41:10",
+      "other_person": "Edge Foundation",
+      "other_person_slug": "edge-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2018",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 745,
+      "person_a": "Gratitude America",
+      "person_b": "O'Gorman Garden",
+      "relationship_type": "financial",
+      "description": "Gratitude America granted $30,000 to The O'Gorman Garden (Landon Thomas conduit) in 2017 per 990-PF",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:41:12",
+      "other_person": "O'Gorman Garden",
+      "other_person_slug": "ogorman-garden",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2017",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 746,
+      "person_a": "Gratitude America",
+      "person_b": "MIT",
+      "relationship_type": "financial",
+      "description": "Gratitude America granted $150,000 to MIT in 2017 per 990-PF (MIT Media Lab linked to Epstein through Joi Ito)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 02:41:14",
+      "other_person": "MIT",
+      "other_person_slug": "mit",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-EIN-66-0789697-2017",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1283,
+      "person_a": "Gratitude America",
+      "person_b": "Kuhn Foundation",
+      "relationship_type": "financial",
+      "description": "Gratitude America $500K grant to Kuhn Foundation (2018)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 09:08:31",
+      "other_person": "Kuhn Foundation",
+      "other_person_slug": "kuhn-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS990:660789697:201812",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1282,
+      "person_a": "Edge Foundation",
+      "person_b": "Gratitude America",
+      "relationship_type": "financial",
+      "description": "Gratitude America $35K grant to Edge Foundation (2018)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 09:08:31",
+      "other_person": "Edge Foundation",
+      "other_person_slug": "edge-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS990:660789697:201812",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1290,
+      "person_a": "Gratitude America",
+      "person_b": "Robert Lawrence Kuhn",
+      "relationship_type": "financial",
+      "description": "Gratitude America Ltd (USVI) was the vehicle for transferring $650K ($150K 2017, $500K 2018) to The Kuhn Foundation. Kuhn Foundation was second-largest cumulative recipient of Gratitude America grants after IPI.",
+      "strength": "strong",
+      "date_range": "2017-2018",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 20:07:37",
+      "other_person": "Robert Lawrence Kuhn",
+      "other_person_slug": "robert-lawrence-kuhn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02376647",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/330783933",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "person_a": "Gratitude America",
+      "person_b": "IPI",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:49",
+      "other_person": "International Peace Institute",
+      "other_person_slug": "international-peace-institute",
+      "evidence": []
+    },
+    {
+      "id": 335,
+      "person_a": "Gratitude America",
+      "person_b": "Leon Black",
+      "relationship_type": "financial",
+      "description": "Black Family Foundation (EIN 13-3947890) paid .76M in grants in 2014 tax year. Gratitude America (EIN 66-0789697) received .003M in contributions in 2015 tax year. Timing alignment and amount correspondence strongly suggests Black Foundation was the source of Gratitude America's sole major contribution.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:46:21",
+      "other_person": "Leon Black",
+      "other_person_slug": "leon-black",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "IRS990:133947890/2014,IRS990:660789697/2015",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 336,
+      "person_a": "Erika Kellerhals",
+      "person_b": "Gratitude America",
+      "relationship_type": "financial",
+      "description": "Kellerhals is the care-of contact for Gratitude America Ltd on IRS records. She manages the USVI-registered entity holding .175M in frozen assets post-Epstein arrest.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:46:26",
+      "other_person": "Erika Kellerhals",
+      "other_person_slug": "erika-kellerhals",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS990:660789697",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 797,
+      "person_a": "Gratitude America",
+      "person_b": "Leon Botstein",
+      "relationship_type": "financial",
+      "description": "Botstein received consulting agreement from Gratitude America for 2016. 1099 form prepared by Richard Kahn Jan 2017. Sent to Bard College address.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:18:42",
+      "other_person": "Leon Botstein",
+      "other_person_slug": "leon-botstein",
+      "evidence": []
+    },
+    {
+      "id": 798,
+      "person_a": "Gratitude America",
+      "person_b": "Jeremy Rubin",
+      "relationship_type": "financial",
+      "description": "Rubin received 25K consulting check from Gratitude America sent to Cambridge address with consulting agreement Jan-Feb 2016. Unidentified woman was thrilled with idea of gratitude consulting at 25K for 1 year.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:18:44",
+      "other_person": "Jeremy Rubin",
+      "other_person_slug": "jeremy-rubin",
+      "evidence": []
+    },
+    {
+      "id": 799,
+      "person_a": "Gratitude America",
+      "person_b": "Noam Chomsky",
+      "relationship_type": "financial",
+      "description": "30K consulting from Gratitude to Chomsky confirmed Feb 2017. Darren Indyke to draft consulting agreement. Epstein also directed 20K from foundation for administering the Chomsky challenge in linguistics.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:18:47",
+      "other_person": "Noam Chomsky",
+      "other_person_slug": "noam-chomsky",
+      "evidence": []
+    },
+    {
+      "id": 800,
+      "person_a": "Gratitude America",
+      "person_b": "Landon Thomas",
+      "relationship_type": "financial",
+      "description": "30K from Gratitude America directed by Epstein Aug 2017 as consulting with OGorman Garden connection. Kahn asked if consulting and if Darren should draft agreement.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:18:49",
+      "other_person": "Landon Thomas",
+      "other_person_slug": "landon-thomas",
+      "evidence": []
+    },
+    {
+      "id": 801,
+      "person_a": "Giuseppe Bersani",
+      "person_b": "Gratitude America",
+      "relationship_type": "financial",
+      "description": "Bersani received 60K (2017) and 25K (2018) from Gratitude America through Association Mind Education Rome. Organized Neupsyco congresses in Havana Cuba.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:18:51",
+      "other_person": "Giuseppe Bersani",
+      "other_person_slug": "giuseppe-bersani",
+      "evidence": []
+    },
+    {
+      "id": 802,
+      "person_a": "Gratitude America",
+      "person_b": "NPO Baleto teatras",
+      "relationship_type": "financial",
+      "description": "Gratitude America wired EUR 15K to SEB Bank Vilnius for NPO Baleto teatras April 2018. 2018 990-PF confirms 28,543 grant to VSL Baleto Teatras (CC 302629386 Vilnius). Connected through balerina Simona.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 03:18:54",
+      "other_person": "NPO Baleto teatras",
+      "other_person_slug": "npo-baleto-teatras",
+      "evidence": []
+    },
+    {
+      "id": 31,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Leon Black",
+      "relationship_type": "financial",
+      "description": "Black donated $10,003,000 to GA in Oct 2015 via BV70 LLC. Possible additional $5M. Part of larger $35M payment day. GA then donated $225K back to Black's Melanoma Research Alliance charity.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:10:48",
+      "other_person": "Leon Black",
+      "other_person_slug": "leon-black",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02504960",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02730996",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2015",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "International Peace Institute",
+      "relationship_type": "financial",
+      "description": "IPI received $525,000 total from GA: $375K in 2017 and $150K in 2019. Largest cumulative recipient. Combined with $650K from Enhanced Education, IPI received $1.175M+ from Epstein foundations.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:11:00",
+      "other_person": "International Peace Institute",
+      "other_person_slug": "international-peace-institute",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Richard Kahn",
+      "relationship_type": "corporate",
+      "description": "Kahn served as President of GA from 2012-2019. Address: 575 Lexington Ave 4th Floor (HBRK Associates) then 9053 Estate Thomas. Managed all banking, donations, and correspondence for the foundation. Zero compensation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:11:15",
+      "other_person": "Richard Kahn",
+      "other_person_slug": "richard-kahn",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2015",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "person_a": "Darren Indyke",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "corporate",
+      "description": "Indyke served as Treasurer (2012-2015) then Vice President/Director (2017-2019). Signed account closure letter Jan 10, 2019. Address: 575 Lexington Ave 4th Floor NYC then 9053 Estate Thomas USVI. Zero compensation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:11:28",
+      "other_person": "Darren Indyke",
+      "other_person_slug": "darren-indyke",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01387256",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2015",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "person_a": "Erika Kellerhals",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "corporate",
+      "description": "Kellerhals served as Secretary (2012-2019) and also Treasurer (2017-2019). Attorney at Kellerhals Ferguson LLP in USVI. Handled articles of incorporation, director appointments, and book-keeping. Repeatedly requested director names for the foundation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:11:42",
+      "other_person": "Erika Kellerhals",
+      "other_person_slug": "erika-kellerhals",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02550717",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02697431",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2015",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "corporate",
+      "description": "Epstein listed as Director (deceased) on 2019 990-PF. Deutsche Bank KYC identified him as President of GA. Epstein called it 'my private foundation' and directed all grant decisions personally. Part of his USVI entity network.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:11:54",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01284072",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02469790",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2019",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Landon Thomas Jr",
+      "relationship_type": "financial",
+      "description": "Thomas received $30,000 from GA in Aug 2017 while active NYT financial reporter. Directed by Epstein. Thomas asked what name the check would come under.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:12:06",
+      "other_person": "Landon Thomas Jr.",
+      "other_person_slug": "landon-thomas-jr",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02353300",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02366490",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02640495",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Kuhn Foundation",
+      "relationship_type": "financial",
+      "description": "Kuhn Foundation (Pasadena CA) received $650,000 from GA: $150K in 2017 and $500K in 2018. Second largest cumulative recipient. Relationship between Epstein and Kuhn Foundation needs investigation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:12:19",
+      "other_person": "Kuhn Foundation",
+      "other_person_slug": "kuhn-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2018",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "person_a": "Deutsche Bank",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "financial",
+      "description": "Deutsche Bank Trust Company Americas was primary banking relationship for GA. Account managed by Stewart Oldfield. KYC case #01353080. Part of the SOUTHERN FINANCIAL RELATIONSHIP umbrella with Mort Inc. GA account changed to Inactive Prospect after all accounts closed.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:12:32",
+      "other_person": "Deutsche Bank",
+      "other_person_slug": "deutsche-bank",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01284072",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01345320",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01376946",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Joscha Bach",
+      "relationship_type": "financial",
+      "description": "GA funded Bach via Humanity Plus ($100K in 2018) and also made direct payments to him. Bach complained direct GA payments created O-visa complications since he could only receive grants through his visa sponsor.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:12:45",
+      "other_person": "Joscha Bach",
+      "other_person_slug": "joscha-bach",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02614563",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2018",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "MIT",
+      "relationship_type": "financial",
+      "description": "MIT (600 Memorial Dr W98-308, Cambridge MA 02139) received $150,000 from GA in 2017. Part of Epstein's broader academic funding network.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:12:57",
+      "other_person": "MIT",
+      "other_person_slug": "mit",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990PF-2017",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 70,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Noam Chomsky",
+      "relationship_type": "financial",
+      "description": "Epstein directed K from GA for 'administering the chomsky challenge in linguistics.' Kahn emailed: 'jeffrey wanted me to reach out regarding a payment from his foundation gratitude america in the amount of 20,000 for administering the chomsky challenge in linguistics.'",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:07",
+      "other_person": "Noam Chomsky",
+      "other_person_slug": "noam-chomsky",
+      "evidence": []
+    },
+    {
+      "id": 72,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Morgan Stanley",
+      "relationship_type": "financial",
+      "description": "GA held brokerage account at Morgan Stanley for stock trading. Kahn emailed: 'gratitude brokerage has been opened at morgan stanley.' Portfolio held .8M-.5M in corporate stocks (2016-2018), generating K gains in 2017. Account closed Jan 10, 2019 by Indyke.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:16",
+      "other_person": "Morgan Stanley",
+      "other_person_slug": "morgan-stanley",
+      "evidence": []
+    },
+    {
+      "id": 73,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Lesley Groff",
+      "relationship_type": "corporate",
+      "description": "Groff (Epstein executive assistant) used GA stationery for school recommendation letter at Epstein's direction. Kahn instructed: 'no logo, use 6100 red hook address.' Groff also served as wire instruction contact for payments.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:18",
+      "other_person": "Lesley Groff",
+      "other_person_slug": "lesley-groff",
+      "evidence": []
+    },
+    {
+      "id": 77,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Leon Black",
+      "relationship_type": "financial",
+      "description": "Black (via BV70 LLC) donated ,003,000 to GA in Oct 2015 -- the sole contribution ever received. GA subsequently made K in donations to Black's own Melanoma Research Alliance (circular flow). Black payment was part of larger M same-day transfer (M to Financial Trust Company). Possible additional M donation (letter found, no bank record).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:27",
+      "other_person": "Leon Black",
+      "other_person_slug": "leon-black",
+      "evidence": []
+    },
+    {
+      "id": 81,
+      "person_a": "Enhanced Education",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "corporate",
+      "description": "Sister entity: both Epstein-controlled USVI 501(c)(3) foundations managed by same officers (Indyke, Kellerhals, Kahn). Key distinction: GA is 'subject to public' (990-PF filings accessible), Enhanced Education has no publicly available filings. Same grant recipients (IPI received from both). GA used for transparent disbursements, Enhanced Education for opaque ones.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:42",
+      "other_person": "Enhanced Education",
+      "other_person_slug": "enhanced-education",
+      "evidence": []
+    },
+    {
+      "id": 273,
+      "person_a": "BV70 LLC",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "financial",
+      "description": "BV70 LLC (Leon Black entity) donated $10M to Gratitude America in 2015. This is the single largest known Gratitude America donation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 21:52:16",
+      "other_person": "BV70 LLC",
+      "other_person_slug": "bv70-llc",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02703896",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1285,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "The Kuhn Foundation",
+      "relationship_type": "financial",
+      "description": "Gratitude America (Epstein-controlled, funded by Leon Black $10M) sent $650K to The Kuhn Foundation: $150K on 8/1/2017 and $500K in June 2018 for 'Closer To Truth' PBS series.",
+      "strength": "strong",
+      "date_range": "2017-08 to 2018-06",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 20:07:14",
+      "other_person": "The Kuhn Foundation",
+      "other_person_slug": "the-kuhn-foundation",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02580751",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02581174",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1298,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Robert Lawrence Kuhn",
+      "relationship_type": "financial",
+      "description": "Gratitude America wired $150K (Aug 1, 2017) and $500K (Jun 15, 2018) to Kuhn Foundation sub-account 'CTT JE - Radical Breakthroughs'. Total $650K. Second-largest cumulative Gratitude America recipient after IPI.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 20:10:19",
+      "other_person": "Robert Lawrence Kuhn",
+      "other_person_slug": "robert-lawrence-kuhn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02580751",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02581065",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1305,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Kuhn Foundation",
+      "relationship_type": "financial",
+      "description": "Gratitude America Ltd (EIN 66-0789697, USVI) wired $150K on 8/1/2017 and $500K+ on 6/15/2018 to The Kuhn Foundation (EIN 33-0783933) for Closer To Truth Radical Breakthroughs series. Second-largest Gratitude America grant recipient after IPI. Funds deposited to dedicated sub-account 'Kuhn Foundation CTT JE - Radical Breakthroughs.'",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 20:11:17",
+      "other_person": "Kuhn Foundation",
+      "other_person_slug": "kuhn-foundation",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990-PF-2018-EIN-330783933",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02580751",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IRS-990-XML-Gratitude-America-660789697",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Melanoma Research Alliance",
+      "relationship_type": "financial",
+      "description": "GA paid K to Melanoma Research Alliance in 2016. MRA was founded by Debra and Leon Black, making this a circular flow: Black donates M to GA, GA then donates K to Black's own charity.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:14:57",
+      "other_person": "Melanoma Research Alliance",
+      "other_person_slug": "melanoma-research-alliance",
+      "evidence": []
+    },
+    {
+      "id": 67,
+      "person_a": "Bruce Marsha Moskowitz Foundation",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "financial",
+      "description": "GA paid K total to Moskowitz Foundation (Palm Beach FL): K in 2016, K in 2017. Palm Beach connection suggests possible Epstein social circle.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:00",
+      "other_person": "Bruce Marsha Moskowitz Foundation",
+      "other_person_slug": "bruce-marsha-moskowitz-foundation",
+      "evidence": []
+    },
+    {
+      "id": 68,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Hasty Pudding Institute of 1770",
+      "relationship_type": "financial",
+      "description": "GA paid K total to Hasty Pudding: K in 2016, K in 2018, K in 2019. Harvard social club. Consistent multi-year funding.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:01",
+      "other_person": "Hasty Pudding Institute of 1770",
+      "other_person_slug": "hasty-pudding-institute-of-1770",
+      "evidence": []
+    },
+    {
+      "id": 69,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Verse Video Education",
+      "relationship_type": "financial",
+      "description": "GA paid K+ to Verse Video Education in 2016 and additional amounts in 2017. Lisa New (72 emails in HF corpus, top correspondent) connected to this entity.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:05",
+      "other_person": "Verse Video Education",
+      "other_person_slug": "verse-video-education",
+      "evidence": []
+    },
+    {
+      "id": 71,
+      "person_a": "Association Mind Education",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "financial",
+      "description": "GA paid K total to Association Mind Education (Rome, Italy): K in 2017, K in 2018. Italian nonprofit receiving Epstein foundation funds warrants investigation.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:09",
+      "other_person": "Association Mind Education",
+      "other_person_slug": "association-mind-education",
+      "evidence": []
+    },
+    {
+      "id": 74,
+      "person_a": "Cancer Research Wellness Institute",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "financial",
+      "description": "GA paid K total to Cancer Research Wellness Institute (Carmel CA): K in 2017, K in 2018. Requires investigation to determine relationship.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:20",
+      "other_person": "Cancer Research Wellness Institute",
+      "other_person_slug": "cancer-research-wellness-institute",
+      "evidence": []
+    },
+    {
+      "id": 76,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "University of Arizona",
+      "relationship_type": "financial",
+      "description": "GA paid K to University of Arizona in 2017. Requires investigation to determine which department/program and relationship to Epstein.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:23",
+      "other_person": "University of Arizona",
+      "other_person_slug": "university-of-arizona",
+      "evidence": []
+    },
+    {
+      "id": 78,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Melanie Spinella",
+      "relationship_type": "corporate",
+      "description": "Spinella (Epstein accountant/assistant) received email from Epstein detailing the M GA + M FTC payment structure on same day as Black transfer. Handled financial administration for Epstein entities.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:30",
+      "other_person": "Melanie Spinella",
+      "other_person_slug": "melanie-spinella",
+      "evidence": []
+    },
+    {
+      "id": 79,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Seckendorf Hasson and Reilly",
+      "relationship_type": "corporate",
+      "description": "SHR CPA's LLC prepared GA's 990-PF tax filings. David M. Hasson CPA was the preparer. Located at 305 W Old Country Rd Suite 300, Hicksville NY 11801.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:36",
+      "other_person": "Seckendorf Hasson and Reilly",
+      "other_person_slug": "seckendorf-hasson-and-reilly",
+      "evidence": []
+    },
+    {
+      "id": 80,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "Stewart Oldfield",
+      "relationship_type": "financial",
+      "description": "Oldfield at Deutsche Bank managed GA's bank account. Emails about account activity went through Oldfield. Part of Deutsche Bank private banking relationship with Epstein entities.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:38",
+      "other_person": "Stewart Oldfield",
+      "other_person_slug": "stewart-oldfield",
+      "evidence": []
+    },
+    {
+      "id": 82,
+      "person_a": "Bella Klein",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "corporate",
+      "description": "Klein (Epstein accounting staff) facilitated the final K GA donation to IPI in April 2019. Klein requested IPI bank instructions and sent overnight check.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:44",
+      "other_person": "Bella Klein",
+      "other_person_slug": "bella-klein",
+      "evidence": []
+    },
+    {
+      "id": 75,
+      "person_a": "Chopra Foundation",
+      "person_b": "Gratitude America Ltd",
+      "relationship_type": "financial",
+      "description": "GA paid K to Chopra Foundation in 2017. Deepak Chopra connection to Epstein social circle.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:21",
+      "other_person": "Chopra Foundation",
+      "other_person_slug": "chopra-foundation",
+      "evidence": []
+    },
+    {
+      "id": 83,
+      "person_a": "Gratitude America Ltd",
+      "person_b": "IPFCA",
+      "relationship_type": "financial",
+      "description": "GA paid K to IPFCA in 2017. Identity and purpose of this organization requires investigation.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:15:45",
+      "other_person": "IPFCA",
+      "other_person_slug": "ipfca",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2017-08 to 2018-06",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Gratitude America (Epstein-controlled, funded by Leon Black $10M) sent $650K to The Kuhn Foundation: $150K on 8/1/2017 and $500K in June 2018 for 'Closer To Truth' PBS series.",
+      "other_person": "The Kuhn Foundation",
+      "id": 1285
+    },
+    {
+      "date": "2017-2018",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Gratitude America Ltd (USVI) was the vehicle for transferring $650K ($150K 2017, $500K 2018) to The Kuhn Foundation. Kuhn Foundation was second-largest cumulative recipient of Gratitude America grants after IPI.",
+      "other_person": "Robert Lawrence Kuhn",
+      "id": 1290
+    },
+    {
+      "date": "2018-04-03",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "DS10 database contains parser error showing 1,854,228 USD wire to SEB Bank on Apr 3 2018. Actual transaction was EUR 15,000 (18,542.78 USD) to NPO Baleto teatras in Vilnius, Lithuania via SEB Bank. Beginning balance 341,387.42 USD, ending balance 323,031.10 USD. The 1.85M figure does not exist - it was a misread of formatted amount display in bank statement.",
+      "confidence": "high",
+      "id": 2441
+    }
+  ]
+}

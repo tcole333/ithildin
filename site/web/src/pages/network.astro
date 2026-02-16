@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NetworkGraph from '../components/NetworkGraph';
+import { readFileSync, existsSync } from 'fs';
+import { resolve } from 'path';
+
+const contentDir = resolve(process.cwd(), '..', 'content');
+const networkPath = resolve(contentDir, 'network.json');
+
+let networkData = { nodes: [], edges: [], stats: { total_nodes: 0, person_nodes: 0, entity_nodes: 0, total_edges: 0 } };
+if (existsSync(networkPath)) {
+  networkData = JSON.parse(readFileSync(networkPath, 'utf-8'));
+}
+---
+<BaseLayout title="Network Graph">
+  <div class="space-y-4">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight">Network Graph</h1>
+      <p class="text-gray-400 mt-1">
+        {networkData.stats.person_nodes} people and {networkData.stats.entity_nodes} entities
+        connected by {networkData.stats.total_edges.toLocaleString()} relationships.
+      </p>
+    </div>
+    <div class="h-[calc(100vh-12rem)] border border-gray-800 rounded-lg overflow-hidden">
+      <NetworkGraph data={networkData} client:only="react" />
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, existsSync, readdirSync } from 'fs';
+import { resolve, basename } from 'path';
+import { marked } from 'marked';
+
+export function getStaticPaths() {
+  const articlesDir = resolve(process.cwd(), '..', 'content', 'articles');
+  if (!existsSync(articlesDir)) return [];
+
+  const files = readdirSync(articlesDir).filter(f => f.endsWith('.mdx'));
+  return files.map(f => ({
+    params: { slug: basename(f, '.mdx') },
+  }));
+}
+
+const { slug } = Astro.params;
+const articlesDir = resolve(process.cwd(), '..', 'content', 'articles');
+const articlePath = resolve(articlesDir, `${slug}.mdx`);
+
+if (!existsSync(articlePath)) {
+  return Astro.redirect('/articles');
+}
+
+const raw = readFileSync(articlePath, 'utf-8');
+
+// Load backlinks
+const backlinksPath = resolve(process.cwd(), '..', 'content', 'backlinks.json');
+let linkedDossiers: any[] = [];
+let relatedArticles: any[] = [];
+if (existsSync(backlinksPath)) {
+  const backlinks = JSON.parse(readFileSync(backlinksPath, 'utf-8'));
+  linkedDossiers = backlinks.article_to_dossier?.[slug] || [];
+  relatedArticles = backlinks.article_to_article?.[slug] || [];
+}
+
+// Parse frontmatter
+const frontmatterMatch = raw.match(/^---\n([\s\S]*?)\n---/);
+const meta: Record<string, string> = {};
+if (frontmatterMatch) {
+  for (const line of frontmatterMatch[1].split('\n')) {
+    const [key, ...valueParts] = line.split(':');
+    if (key && valueParts.length > 0) {
+      meta[key.trim()] = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
+    }
+  }
+}
+
+// Get content after frontmatter and render markdown
+const rawContent = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
+const wordCount = rawContent.split(/\s+/).length;
+const content = await marked.parse(rawContent);
+---
+<BaseLayout title={meta.title || slug}>
+  <article class="max-w-3xl mx-auto">
+    <header class="mb-10">
+      <div class="text-sm text-gray-500 mb-2">
+        <a href="/articles" class="hover:text-gray-400">Articles</a> / {meta.cluster || slug}
+      </div>
+      <h1 class="text-4xl font-bold tracking-tight leading-tight">{meta.title || slug}</h1>
+      {meta.subtitle && <p class="text-xl text-gray-400 mt-3">{meta.subtitle}</p>}
+      <div class="flex items-center gap-4 mt-4 text-sm text-gray-500">
+        <span>{Math.round(wordCount / 1000)}K words</span>
+        <span>{Math.ceil(wordCount / 250)} min read</span>
+        {meta.targets && <span>Targets: {meta.targets}</span>}
+      </div>
+    </header>
+
+    <div class="prose prose-invert prose-gray max-w-none
+                prose-headings:text-gray-100 prose-headings:font-semibold
+                prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+                prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-gray-300 prose-p:leading-relaxed
+                prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-gray-200
+                prose-blockquote:border-gray-700 prose-blockquote:text-gray-400
+                prose-code:text-emerald-400 prose-code:bg-gray-900 prose-code:px-1 prose-code:rounded
+                prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800"
+         set:html={content} />
+
+    <!-- Backlinks sidebar -->
+    {(linkedDossiers.length > 0 || relatedArticles.length > 0) && (
+      <footer class="mt-12 pt-8 border-t border-gray-800">
+        {linkedDossiers.length > 0 && (
+          <div class="mb-6">
+            <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">Referenced Dossiers</h3>
+            <div class="flex flex-wrap gap-2">
+              {linkedDossiers.map((d: any) => (
+                <a href={`/dossiers/${d.slug}`}
+                   class="inline-block bg-gray-900 border border-gray-800 rounded-full px-3 py-1 text-sm text-gray-300 hover:border-gray-700 transition-colors">
+                  {d.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+        {relatedArticles.length > 0 && (
+          <div>
+            <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">Related Articles</h3>
+            <div class="space-y-2">
+              {relatedArticles.map((a: any) => (
+                <a href={`/articles/${a.slug}`}
+                   class="block text-blue-400 hover:text-blue-300 text-sm">
+                  {a.title}
+                  {a.shared_targets?.length > 0 && (
+                    <span class="text-gray-600 ml-2">
+                      (via {a.shared_targets.slice(0, 3).join(', ')})
+                    </span>
+                  )}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </footer>
+    )}
+  </article>
+</BaseLayout>
