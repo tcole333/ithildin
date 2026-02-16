@@ -112,6 +112,15 @@ def ensure_dispatch_table(db):
 
 # ── Queue depth queries ──────────────────────────────────────────────
 
+def is_system_paused(db):
+    """Check system_state for pause flag (safe if table missing)."""
+    try:
+        row = db.execute("SELECT value FROM system_state WHERE key='paused'").fetchone()
+        return row and row["value"] == "true"
+    except sqlite3.OperationalError:
+        return False
+
+
 def get_queue_depths(db):
     """Get current queue depths from investigation.db."""
     depths = {}
@@ -424,6 +433,12 @@ def dispatch_cycle(config, dry_run=False):
     # Reap completed processes
     reap_completed(db, config)
 
+    # Respect global pause
+    if is_system_paused(db):
+        print("  [paused] system_state.paused=true — no launches")
+        db.close()
+        return
+
     # Get queue depths
     queues = get_queue_depths(db)
     running = get_running_instances(db)
@@ -548,6 +563,7 @@ def cmd_daemon(args):
 def cmd_status(args):
     db = get_db()
     ensure_dispatch_table(db)
+    paused = is_system_paused(db)
 
     # Running
     running = get_running_instances(db)
@@ -555,6 +571,7 @@ def cmd_status(args):
     max_c = config.get("max_concurrent", 3)
 
     print(f"Dispatcher Status ({utcnow().strftime('%Y-%m-%d %H:%M UTC')})")
+    print(f"Paused: {'yes' if paused else 'no'}")
     print("=" * 55)
 
     if running:
