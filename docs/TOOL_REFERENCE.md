@@ -625,7 +625,26 @@ SELECT * FROM human_actions WHERE status='pending' ORDER BY priority;
 
 ---
 
-## Automated Dispatcher
+## Queue Dispatcher (Ithildin queue system)
+
+Launches queue agent workers based on pending job types. Config: `scripts/queue_dispatch_config.json`.
+
+```bash
+# One-shot: check queue, spawn needed agents
+uv run python scripts/queue_dispatcher.py run
+
+# Dry run: show what would spawn without launching
+uv run python scripts/queue_dispatcher.py run --dry-run
+
+# Show pending vs active by persona
+uv run python scripts/queue_dispatcher.py status
+
+# Daemon mode: poll every N seconds
+uv run python scripts/queue_dispatcher.py daemon
+uv run python scripts/queue_dispatcher.py daemon --poll-interval 60
+```
+
+## Legacy Dispatcher (manual pipeline)
 
 Launches headless Claude Code instances to process queues. Config: `scripts/dispatch_config.json`.
 

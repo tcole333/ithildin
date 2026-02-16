@@ -135,6 +135,48 @@ class QueueSystemTests(unittest.TestCase):
         self.assertIn("pending_count", metrics)
         self.assertIn("active_agents", metrics)
 
+    def test_recursion_limits(self):
+        old_depth = os.environ.get("ITHILDIN_MAX_DEPTH")
+        old_children = os.environ.get("ITHILDIN_MAX_CHILDREN")
+        os.environ["ITHILDIN_MAX_DEPTH"] = "1"
+        os.environ["ITHILDIN_MAX_CHILDREN"] = "1"
+        try:
+            parent_id = self.queue.create_job(job_type="echo", domain="system")
+            child_id = self.queue.create_job(
+                job_type="echo",
+                domain="system",
+                parent_job_id=parent_id,
+            )
+            child = self.queue.get_job(child_id)
+            self.assertEqual(child["status"], "pending")
+
+            sibling_id = self.queue.create_job(
+                job_type="echo",
+                domain="system",
+                parent_job_id=parent_id,
+            )
+            sibling = self.queue.get_job(sibling_id)
+            self.assertEqual(sibling["status"], "cancelled")
+            self.assertTrue((sibling.get("error_message") or "").startswith("max_children_exceeded"))
+
+            grandchild_id = self.queue.create_job(
+                job_type="echo",
+                domain="system",
+                parent_job_id=child_id,
+            )
+            grandchild = self.queue.get_job(grandchild_id)
+            self.assertEqual(grandchild["status"], "cancelled")
+            self.assertTrue((grandchild.get("error_message") or "").startswith("max_depth_exceeded"))
+        finally:
+            if old_depth is None:
+                os.environ.pop("ITHILDIN_MAX_DEPTH", None)
+            else:
+                os.environ["ITHILDIN_MAX_DEPTH"] = old_depth
+            if old_children is None:
+                os.environ.pop("ITHILDIN_MAX_CHILDREN", None)
+            else:
+                os.environ["ITHILDIN_MAX_CHILDREN"] = old_children
+
     def test_agent_registration(self):
         self.queue.register_agent("agent-5", "echo", ["echo"])
         job_id = self.queue.create_job(job_type="echo", domain="system")

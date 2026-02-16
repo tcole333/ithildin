@@ -59,10 +59,16 @@ class AgentWorker:
             job_id = job["id"]
             self.queue.update_agent_job(self.agent_id, job_id)
             self.queue.start_job(job_id, self.agent_id)
+            base = Path(os.environ.get("OSINT_WORKDIR_BASE", "/tmp/osint-jobs"))
+            self.queue.set_workdir(job_id, str(base / job_id))
 
             try:
                 output = self.execute(job)
-                self.queue.complete_job(job_id, output)
+                if output and isinstance(output, dict):
+                    status = output.pop("job_status", "completed")
+                else:
+                    status = "completed"
+                self.queue.complete_job(job_id, output, status=status)
                 self.queue.update_agent_stats(self.agent_id, completed=True)
             except Exception as exc:
                 self.queue.fail_job(job_id, str(exc), traceback.format_exc())
@@ -1110,6 +1116,7 @@ class ExplainerWriterWorker(AgentWorker):
                     payload={
                         "content_path": str(content_path),
                         "modality": "mechanism_explainer",
+                        "source_job_id": job["id"],
                     },
                     priority=payload.get("review_priority", 5),
                     created_by=f"agent:{self.persona}",
@@ -1124,6 +1131,7 @@ class ExplainerWriterWorker(AgentWorker):
             "content_path": str(content_path) if not dry_run else None,
             "report_path": str(report_path),
             "review_job_id": review_job_id,
+            "job_status": "awaiting_review" if review_job_id else "completed",
         }
 
 
@@ -1197,6 +1205,7 @@ class ContextualAnalystWorker(AgentWorker):
                     payload={
                         "content_path": str(content_path),
                         "modality": "analytical_article",
+                        "source_job_id": job["id"],
                     },
                     priority=payload.get("review_priority", 5),
                     created_by=f"agent:{self.persona}",
@@ -1211,6 +1220,7 @@ class ContextualAnalystWorker(AgentWorker):
             "content_path": str(content_path) if not dry_run else None,
             "report_path": str(report_path),
             "review_job_id": review_job_id,
+            "job_status": "awaiting_review" if review_job_id else "completed",
         }
 
 
@@ -1273,6 +1283,15 @@ class EditorReviewWorker(AgentWorker):
         workdir = _ensure_workdir(job["id"])
         report_path = workdir / "report.json"
         report_path.write_text(json.dumps(report, indent=2))
+
+        source_job_id = payload.get("source_job_id")
+        if source_job_id:
+            if decision == "approve":
+                self.queue.set_status(source_job_id, "completed")
+            elif decision == "reject":
+                self.queue.set_status(source_job_id, "failed", error_message="editor_reject")
+            else:
+                self.queue.set_status(source_job_id, "awaiting_review")
 
         return {
             "report_path": str(report_path),
@@ -1664,6 +1683,7 @@ class DossierWriterWorker(AgentWorker):
         target = payload.get("target_name")
         min_findings = int(payload.get("min_findings", 5))
         update_backlinks = bool(payload.get("update_backlinks", False))
+        spawn_review = bool(payload.get("spawn_review", False))
         dry_run = bool(payload.get("dry_run", False))
 
         workdir = _ensure_workdir(job["id"])
@@ -1671,6 +1691,7 @@ class DossierWriterWorker(AgentWorker):
         tool_results: Dict[str, Any] = {}
 
         pipeline_root = Path(__file__).resolve().parent.parent / "site" / "pipeline"
+        review_job_id = None
         if not dry_run:
             args = []
             if target:
@@ -1686,6 +1707,20 @@ class DossierWriterWorker(AgentWorker):
                 tool_results["compute_backlinks"] = _run_script(
                     pipeline_root / "compute_backlinks.py",
                     [],
+                )
+
+            if spawn_review:
+                review_job_id = self.queue.create_job(
+                    job_type="editor_review",
+                    domain="curation",
+                    payload={
+                        "content_path": None,
+                        "modality": "wiki_dossier_update",
+                        "source_job_id": job["id"],
+                    },
+                    priority=payload.get("review_priority", 4),
+                    created_by=f"agent:{self.persona}",
+                    source_trigger="wiki_dossier_update",
                 )
 
         report_lines = [
@@ -1709,6 +1744,8 @@ class DossierWriterWorker(AgentWorker):
             "target": target,
             "report_path": str(report_path),
             "pipeline": tool_results,
+            "review_job_id": review_job_id,
+            "job_status": "awaiting_review" if review_job_id else "completed",
         }
 
 

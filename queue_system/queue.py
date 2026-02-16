@@ -6,6 +6,7 @@ SQLite-backed job queue for the Ithildin platform.
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 import time
 from pathlib import Path
@@ -269,6 +270,8 @@ class JobQueue:
         max_attempts: Optional[int] = None,
         retry_delay_seconds: Optional[int] = None,
         timeout_seconds: Optional[int] = None,
+        max_depth: Optional[int] = None,
+        max_children: Optional[int] = None,
     ) -> str:
         job_id = str(uuid4())
         payload_json = json.dumps(payload or {})
@@ -290,6 +293,30 @@ class JobQueue:
             db = self._connect()
             try:
                 status_to_use = status
+                error_message = None
+
+                depth_limit = max_depth
+                if depth_limit is None:
+                    env_val = os.environ.get("ITHILDIN_MAX_DEPTH")
+                    depth_limit = int(env_val) if env_val else None
+
+                child_limit = max_children
+                if child_limit is None:
+                    env_val = os.environ.get("ITHILDIN_MAX_CHILDREN")
+                    child_limit = int(env_val) if env_val else None
+
+                if parent_job_id:
+                    if depth_limit is not None:
+                        depth = self._job_depth(db, parent_job_id)
+                        if depth + 1 > depth_limit:
+                            status_to_use = "cancelled"
+                            error_message = f"max_depth_exceeded:{depth_limit}"
+                    if child_limit is not None and status_to_use != "cancelled":
+                        child_count = self._child_count(db, parent_job_id)
+                        if child_count >= child_limit:
+                            status_to_use = "cancelled"
+                            error_message = f"max_children_exceeded:{child_limit}"
+
                 if dependencies and status == "pending":
                     if not self._dependencies_complete(db, dependencies):
                         status_to_use = "blocked"
@@ -300,9 +327,10 @@ class JobQueue:
                         id, job_type, domain, priority, status, payload, created_by,
                         tags, scheduled_for, parent_job_id, thread_id,
                         max_attempts, retry_delay_seconds, timeout_seconds,
-                        source_trigger, source_finding_id, source_lead_id
+                        source_trigger, source_finding_id, source_lead_id,
+                        error_message
                     )
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         job_id,
@@ -322,6 +350,7 @@ class JobQueue:
                         source_trigger,
                         source_finding_id,
                         source_lead_id,
+                        error_message,
                     ),
                 )
                 db.execute(
@@ -331,6 +360,14 @@ class JobQueue:
                     """,
                     (str(uuid4()), job_id, payload_json, created_by),
                 )
+                if status_to_use == "cancelled":
+                    db.execute(
+                        """
+                        INSERT INTO job_events (id, job_id, event_type, payload)
+                        VALUES (?, ?, 'cancelled', ?)
+                        """,
+                        (str(uuid4()), job_id, error_message or "cancelled"),
+                    )
                 for dep_id in dependencies:
                     db.execute(
                         """
@@ -535,32 +572,95 @@ class JobQueue:
 
         self._with_retry(_start)
 
-    def complete_job(self, job_id: str, output: Optional[Dict[str, Any]] = None) -> None:
+    def complete_job(
+        self,
+        job_id: str,
+        output: Optional[Dict[str, Any]] = None,
+        status: str = "completed",
+    ) -> None:
         output_json = json.dumps(output or {})
 
         def _complete():
             db = self._connect()
             try:
                 db.execute("BEGIN IMMEDIATE")
-                db.execute(
-                    """
-                    UPDATE job_queue
-                    SET status='completed', completed_at=CURRENT_TIMESTAMP, output=?
-                    WHERE id=?
-                    """,
-                    (output_json, job_id),
-                )
-                db.execute(
-                    "INSERT INTO job_events (id, job_id, event_type, payload) "
-                    "VALUES (?, ?, 'completed', ?)",
-                    (str(uuid4()), job_id, output_json),
-                )
-                self._unblock_dependents(db, job_id)
+                if status == "completed":
+                    db.execute(
+                        """
+                        UPDATE job_queue
+                        SET status='completed', completed_at=CURRENT_TIMESTAMP, output=?
+                        WHERE id=?
+                        """,
+                        (output_json, job_id),
+                    )
+                    db.execute(
+                        "INSERT INTO job_events (id, job_id, event_type, payload) "
+                        "VALUES (?, ?, 'completed', ?)",
+                        (str(uuid4()), job_id, output_json),
+                    )
+                    self._unblock_dependents(db, job_id)
+                else:
+                    db.execute(
+                        """
+                        UPDATE job_queue
+                        SET status=?, output=?
+                        WHERE id=?
+                        """,
+                        (status, output_json, job_id),
+                    )
+                    db.execute(
+                        "INSERT INTO job_events (id, job_id, event_type, payload) "
+                        "VALUES (?, ?, 'progress', ?)",
+                        (str(uuid4()), job_id, json.dumps({"status": status, "output": output})),
+                    )
                 db.commit()
             finally:
                 db.close()
 
         self._with_retry(_complete)
+
+    def set_status(
+        self,
+        job_id: str,
+        status: str,
+        error_message: Optional[str] = None,
+    ) -> None:
+        def _set():
+            db = self._connect()
+            try:
+                completed_at = None
+                if status in {"completed", "failed", "cancelled", "stale"}:
+                    completed_at = "CURRENT_TIMESTAMP"
+                if completed_at:
+                    db.execute(
+                        f"""
+                        UPDATE job_queue
+                        SET status=?, completed_at={completed_at}, error_message=?
+                        WHERE id=?
+                        """,
+                        (status, error_message, job_id),
+                    )
+                else:
+                    db.execute(
+                        """
+                        UPDATE job_queue
+                        SET status=?, error_message=?
+                        WHERE id=?
+                        """,
+                        (status, error_message, job_id),
+                    )
+
+                event_type = status if status in {"failed", "blocked", "cancelled", "stale"} else "progress"
+                db.execute(
+                    "INSERT INTO job_events (id, job_id, event_type, payload) "
+                    "VALUES (?, ?, ?, ?)",
+                    (str(uuid4()), job_id, event_type, error_message or ""),
+                )
+                db.commit()
+            finally:
+                db.close()
+
+        self._with_retry(_set)
 
     def fail_job(
         self,
@@ -678,6 +778,25 @@ class JobQueue:
                 db.close()
 
         self._with_retry(_update)
+
+    def set_workdir(self, job_id: str, workdir_path: str) -> None:
+        def _set():
+            db = self._connect()
+            try:
+                db.execute(
+                    "UPDATE job_queue SET workdir_path=? WHERE id=?",
+                    (workdir_path, job_id),
+                )
+                db.execute(
+                    "INSERT INTO job_events (id, job_id, event_type, payload) "
+                    "VALUES (?, ?, 'progress', ?)",
+                    (str(uuid4()), job_id, json.dumps({"workdir_path": workdir_path})),
+                )
+                db.commit()
+            finally:
+                db.close()
+
+        self._with_retry(_set)
 
     def heartbeat_agent(self, agent_id: str) -> None:
         def _heartbeat():
@@ -956,6 +1075,30 @@ class JobQueue:
             deps,
         ).fetchone()
         return row["n"] == len(deps)
+
+    def _job_depth(self, db: sqlite3.Connection, job_id: str) -> int:
+        depth = 0
+        current_id = job_id
+        while current_id:
+            row = db.execute(
+                "SELECT parent_job_id FROM job_queue WHERE id=?",
+                (current_id,),
+            ).fetchone()
+            if not row:
+                break
+            parent_id = row["parent_job_id"]
+            if not parent_id:
+                break
+            depth += 1
+            current_id = parent_id
+        return depth
+
+    def _child_count(self, db: sqlite3.Connection, parent_job_id: str) -> int:
+        row = db.execute(
+            "SELECT COUNT(*) as n FROM job_queue WHERE parent_job_id=?",
+            (parent_job_id,),
+        ).fetchone()
+        return row["n"]
 
     def _dependencies_remaining(self, db: sqlite3.Connection, job_id: str) -> int:
         row = db.execute(

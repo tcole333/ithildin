@@ -1,6 +1,6 @@
-# Epstein Network OSINT Investigation Platform
+# Ithildin OSINT Investigation Platform
 
-Agent-scale network investigation rooted in the Epstein case but following evidence across connected structures — Mega Group, Deutsche Bank pipeline, Gulf state operations, Israeli intelligence nexus, Apollo/Black financial flows, and parallel networks. Multiple Claude Code sessions pursue leads in parallel, track findings, and build on each other's work.
+Ithildin is an agent-scale network investigation rooted in the Epstein case but following evidence across connected structures — Mega Group, Deutsche Bank pipeline, Gulf state operations, Israeli intelligence nexus, Apollo/Black financial flows, and parallel networks. Multiple Claude Code sessions pursue leads in parallel, track findings, and build on each other's work.
 
 **Design doc**: `PRD.md`
 **Master narrative**: `research/master.md`
@@ -28,7 +28,7 @@ Agent-scale network investigation rooted in the Epstein case but following evide
 /ingest-source <source>     # Add new data source
 /add-registry               # Add corporate registry
 
-# Automated dispatcher (headless Claude Code)
+# Legacy dispatcher (pre-queue, headless Claude Code)
 uv run python scripts/dispatcher.py run       # One-shot: launch needed agents
 uv run python scripts/dispatcher.py status    # Show running/recent agents
 uv run python scripts/dispatcher.py daemon    # Poll loop (Ctrl-C to stop)
@@ -69,6 +69,10 @@ uv run python scripts/agent_worker.py --persona tool_build
 uv run python scripts/agent_worker.py --persona bug_fix
 uv run python scripts/agent_worker.py --persona source_ingest
 uv run python scripts/agent_worker.py --persona registry_add
+uv run python scripts/queue_dispatcher.py status
+uv run python scripts/queue_dispatcher.py run
+uv run python scripts/queue_dispatcher.py run --dry-run
+uv run python scripts/queue_dispatcher.py daemon --poll-interval 60
 uv run python scripts/trigger_engine.py run --dry-run
 uv run python scripts/trigger_engine.py status
 

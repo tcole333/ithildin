@@ -1,0 +1,165 @@
+{
+  "agents": [
+    {
+      "persona": "lead_triage",
+      "job_types": ["lead_triage"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "surveyor",
+      "job_types": ["source_scan"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "document_miner",
+      "job_types": ["document_mine"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "entity_tracer",
+      "job_types": ["trace_entity"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "pattern_spotter",
+      "job_types": ["pattern_trigger"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "synthesist",
+      "job_types": ["synthesis"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "investigation_orchestrator",
+      "job_types": ["deep_investigate"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "dossier_writer",
+      "job_types": ["wiki_dossier_update"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "visual_exporter",
+      "job_types": ["visual_export"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "content_pipeline",
+      "job_types": ["content_build"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "network_analyst",
+      "job_types": ["network_analysis"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "timeline_analyst",
+      "job_types": ["timeline_correlation"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "systemic_analyst",
+      "job_types": ["systemic_analysis"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "explainer_writer",
+      "job_types": ["mechanism_explainer"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "contextual_analyst",
+      "job_types": ["analytical_article"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "editor",
+      "job_types": ["editor_review", "fact_check"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "dedupe_review",
+      "job_types": ["dedupe_review"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "verify_finding",
+      "job_types": ["verify_finding"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "tool_build",
+      "job_types": ["tool_build", "bug_fix"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "source_ingest",
+      "job_types": ["source_ingest"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "registry_add",
+      "job_types": ["registry_add"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "deep_person",
+      "job_types": ["deep_person"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": true
+    },
+    {
+      "persona": "echo",
+      "job_types": ["echo"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": false
+    }
+  ]
+}
