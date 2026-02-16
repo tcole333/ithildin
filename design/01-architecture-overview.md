@@ -1,4 +1,4 @@
-# OSINT Research Platform: Architecture Overview
+# Ithildin: Architecture Overview
 ## Design Document v1.1
 
 ### 1. Vision

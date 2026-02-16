@@ -1,4 +1,4 @@
-# PRD: Epstein OSINT Agent-Scale Investigation Platform
+# PRD: Ithildin Agent-Scale Investigation Platform
 
 ## Problem
 
@@ -14,7 +14,7 @@ The public data ecosystem is similarly fragmented. Nobody has published a clean,
 
 ## Solution
 
-Transform the investigation into an agent-scalable platform where multiple Claude Code sessions can pursue leads in parallel, track findings systematically, and build on each other's work — operating at a scale impossible for a human researcher. The investigation follows evidence wherever it leads, not just Epstein-centric threads: connected networks (Mega Group, Deutsche Bank pipeline, Gulf state operations, Israeli intelligence nexus) are investigated on their own terms through dedicated investigation threads.
+Transform the investigation into Ithildin, an agent-scalable platform where multiple Claude Code sessions can pursue leads in parallel, track findings systematically, and build on each other's work — operating at a scale impossible for a human researcher. The investigation follows evidence wherever it leads, not just Epstein-centric threads: connected networks (Mega Group, Deutsche Bank pipeline, Gulf state operations, Israeli intelligence nexus) are investigated on their own terms through dedicated investigation threads.
 
 ### Core Architecture
 

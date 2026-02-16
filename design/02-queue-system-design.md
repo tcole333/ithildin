@@ -3,7 +3,7 @@
 
 ### 1. Overview
 
-The queue system is the central nervous system of the autonomous research platform. All work is represented as jobs that flow through queues, are claimed by agents, executed, and completed. Jobs can spawn child jobs and depend on other jobs.
+The queue system is the central nervous system of Ithildin. All work is represented as jobs that flow through queues, are claimed by agents, executed, and completed. Jobs can spawn child jobs and depend on other jobs.
 
 **Technology Choice**: PostgreSQL with advisory locks for job claiming. This provides:
 - ACID guarantees for job state transitions

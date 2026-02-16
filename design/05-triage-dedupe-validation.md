@@ -8,7 +8,7 @@ Data quality is the foundation of credible research. This document specifies the
 - **Deduplication**: Redundant findings are merged, distinct findings preserved
 - **Validation**: Citations are verified, claims are accurate, confidence is calibrated
 
-These systems operate as queue jobs and gates throughout the platform.
+These systems operate as queue jobs and gates throughout Ithildin.
 
 ### 2. Lead Triage System
 

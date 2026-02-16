@@ -1,0 +1,81 @@
+{
+  "scheduled": [
+    {
+      "name": "lead_triage_interval",
+      "enabled": false,
+      "interval_minutes": 30,
+      "job_type": "lead_triage",
+      "domain": "discovery",
+      "payload": {
+        "batch_size": 20,
+        "dry_run": false,
+        "triaged_by": "agent:lead_triage"
+      },
+      "priority": 6,
+      "cooldown_minutes": 15,
+      "max_per_hour": 2
+    }
+  ],
+  "thresholds": [
+    {
+      "name": "lead_triage_pending",
+      "enabled": false,
+      "metric": "pending_triage",
+      "threshold": 20,
+      "job_type": "lead_triage",
+      "domain": "discovery",
+      "payload": {
+        "batch_size": 20,
+        "dry_run": false,
+        "triaged_by": "agent:lead_triage"
+      },
+      "priority": 6,
+      "cooldown_minutes": 30,
+      "max_per_hour": 2
+    },
+    {
+      "name": "queue_pending_watch",
+      "enabled": false,
+      "metric": "queue_pending",
+      "threshold": 50,
+      "job_type": "echo",
+      "domain": "system",
+      "payload": {
+        "message": "Queue pending threshold reached"
+      },
+      "priority": 2,
+      "cooldown_minutes": 60,
+      "max_per_hour": 1
+    },
+    {
+      "name": "finding_burst_synthesis",
+      "enabled": false,
+      "metric": "findings_delta",
+      "threshold": 25,
+      "job_type": "synthesis",
+      "domain": "analysis",
+      "payload": {
+        "query": "recent findings burst",
+        "dry_run": true
+      },
+      "priority": 5,
+      "cooldown_minutes": 120,
+      "max_per_hour": 1
+    },
+    {
+      "name": "weekly_dedupe_review",
+      "enabled": false,
+      "metric": "findings_total",
+      "threshold": 1,
+      "job_type": "dedupe_review",
+      "domain": "curation",
+      "payload": {
+        "action": "scan",
+        "dry_run": true
+      },
+      "priority": 4,
+      "cooldown_minutes": 10080,
+      "max_per_hour": 1
+    }
+  ]
+}

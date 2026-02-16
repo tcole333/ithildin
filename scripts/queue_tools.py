@@ -159,6 +159,28 @@ def cmd_show(args):
         return
     print(json.dumps(job, indent=2, default=str))
 
+def cmd_agents(args):
+    queue = JobQueue()
+    agents = queue.list_agents(status=args.status, limit=args.limit)
+    for agent in agents:
+        current = agent.get("current_job_id") or "-"
+        print(
+            f"{agent['id']}  {agent['persona']:<14} {agent['status']:<8} "
+            f"{current:<36} {agent.get('last_heartbeat')}"
+        )
+
+
+def cmd_metrics(args):
+    queue = JobQueue()
+    metrics = queue.sample_metrics()
+    print(json.dumps(metrics, indent=2, default=str))
+
+
+def cmd_mark_stale(args):
+    queue = JobQueue()
+    marked = queue.mark_stale_jobs(grace_seconds=args.grace_seconds)
+    print(f"Marked stale jobs: {marked}")
+
 
 def cmd_pause(args, paused: bool):
     queue = JobQueue()
@@ -210,6 +232,18 @@ def main():
     p_show = sub.add_parser("show", help="Show job details")
     p_show.add_argument("job_id", help="Job ID")
     p_show.set_defaults(func=cmd_show)
+
+    p_agents = sub.add_parser("agents", help="List agent instances")
+    p_agents.add_argument("--status", help="Filter by status")
+    p_agents.add_argument("--limit", type=int, default=50, help="Max results")
+    p_agents.set_defaults(func=cmd_agents)
+
+    p_metrics = sub.add_parser("metrics", help="Sample queue metrics")
+    p_metrics.set_defaults(func=cmd_metrics)
+
+    p_stale = sub.add_parser("mark-stale", help="Mark stale in-progress jobs")
+    p_stale.add_argument("--grace-seconds", type=int, default=0)
+    p_stale.set_defaults(func=cmd_mark_stale)
 
     p_pause = sub.add_parser("pause", help="Pause queue claiming")
     p_pause.add_argument("--by", help="Updated by")

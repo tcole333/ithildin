@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SQLite-backed job queue for the autonomous research platform.
+SQLite-backed job queue for the Ithildin platform.
 """
 
 from __future__ import annotations
@@ -17,6 +17,10 @@ DEFAULT_DB_PATH = Path(__file__).resolve().parent.parent / "investigation.db"
 DEFAULT_BUSY_TIMEOUT_MS = 5000
 DEFAULT_RETRY_ATTEMPTS = 3
 DEFAULT_RETRY_BACKOFF = 0.1
+DEFAULT_JOB_MAX_ATTEMPTS = 3
+DEFAULT_JOB_RETRY_DELAY_SECONDS = 300
+DEFAULT_JOB_TIMEOUT_SECONDS = 1800
+DEFAULT_RETRY_DELAY_MULTIPLIER = 5
 
 
 class JobQueue:
@@ -26,11 +30,13 @@ class JobQueue:
         busy_timeout_ms: int = DEFAULT_BUSY_TIMEOUT_MS,
         retry_attempts: int = DEFAULT_RETRY_ATTEMPTS,
         retry_backoff: float = DEFAULT_RETRY_BACKOFF,
+        retry_delay_multiplier: int = DEFAULT_RETRY_DELAY_MULTIPLIER,
     ) -> None:
         self.db_path = db_path or DEFAULT_DB_PATH
         self.busy_timeout_ms = busy_timeout_ms
         self.retry_attempts = retry_attempts
         self.retry_backoff = retry_backoff
+        self.retry_delay_multiplier = retry_delay_multiplier
         self._ensure_schema()
 
     def _connect(self) -> sqlite3.Connection:
@@ -212,7 +218,7 @@ class JobQueue:
 
     def _row_to_dict(self, row: sqlite3.Row) -> Dict[str, Any]:
         data = dict(row)
-        for key in ("payload", "output", "tags", "search_queries"):
+        for key in ("payload", "output", "tags", "search_queries", "capabilities"):
             data[key] = self._parse_json(data.get(key))
         return data
 
@@ -259,35 +265,60 @@ class JobQueue:
         source_trigger: Optional[str] = None,
         source_finding_id: Optional[int] = None,
         source_lead_id: Optional[int] = None,
+        depends_on: Optional[Iterable[str]] = None,
+        max_attempts: Optional[int] = None,
+        retry_delay_seconds: Optional[int] = None,
+        timeout_seconds: Optional[int] = None,
     ) -> str:
         job_id = str(uuid4())
         payload_json = json.dumps(payload or {})
         tags_json = json.dumps(tags or [])
+        dependencies = list(dict.fromkeys(depends_on or []))
+        max_attempts = max_attempts if max_attempts is not None else DEFAULT_JOB_MAX_ATTEMPTS
+        retry_delay_seconds = (
+            retry_delay_seconds
+            if retry_delay_seconds is not None
+            else DEFAULT_JOB_RETRY_DELAY_SECONDS
+        )
+        timeout_seconds = (
+            timeout_seconds
+            if timeout_seconds is not None
+            else DEFAULT_JOB_TIMEOUT_SECONDS
+        )
 
         def _insert():
             db = self._connect()
             try:
+                status_to_use = status
+                if dependencies and status == "pending":
+                    if not self._dependencies_complete(db, dependencies):
+                        status_to_use = "blocked"
+
                 db.execute(
                     """
                     INSERT INTO job_queue (
                         id, job_type, domain, priority, status, payload, created_by,
                         tags, scheduled_for, parent_job_id, thread_id,
+                        max_attempts, retry_delay_seconds, timeout_seconds,
                         source_trigger, source_finding_id, source_lead_id
                     )
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         job_id,
                         job_type,
                         domain,
                         priority,
-                        status,
+                        status_to_use,
                         payload_json,
                         created_by,
                         tags_json,
                         scheduled_for,
                         parent_job_id,
                         thread_id,
+                        max_attempts,
+                        retry_delay_seconds,
+                        timeout_seconds,
                         source_trigger,
                         source_finding_id,
                         source_lead_id,
@@ -300,12 +331,71 @@ class JobQueue:
                     """,
                     (str(uuid4()), job_id, payload_json, created_by),
                 )
+                for dep_id in dependencies:
+                    db.execute(
+                        """
+                        INSERT OR IGNORE INTO job_dependencies (job_id, depends_on_job_id)
+                        VALUES (?, ?)
+                        """,
+                        (job_id, dep_id),
+                    )
+                    db.execute(
+                        """
+                        INSERT INTO job_events (id, job_id, event_type, payload)
+                        VALUES (?, ?, 'dependency_added', ?)
+                        """,
+                        (
+                            str(uuid4()),
+                            job_id,
+                            json.dumps({"depends_on": dep_id}),
+                        ),
+                    )
                 db.commit()
             finally:
                 db.close()
 
         self._with_retry(_insert)
         return job_id
+
+    def add_dependencies(self, job_id: str, depends_on: Iterable[str]) -> None:
+        dependencies = list(dict.fromkeys(depends_on))
+        if not dependencies:
+            return
+
+        def _add():
+            db = self._connect()
+            try:
+                for dep_id in dependencies:
+                    db.execute(
+                        """
+                        INSERT OR IGNORE INTO job_dependencies (job_id, depends_on_job_id)
+                        VALUES (?, ?)
+                        """,
+                        (job_id, dep_id),
+                    )
+                    db.execute(
+                        """
+                        INSERT INTO job_events (id, job_id, event_type, payload)
+                        VALUES (?, ?, 'dependency_added', ?)
+                        """,
+                        (
+                            str(uuid4()),
+                            job_id,
+                            json.dumps({"depends_on": dep_id}),
+                        ),
+                    )
+
+                remaining = self._dependencies_remaining(db, job_id)
+                if remaining > 0:
+                    db.execute(
+                        "UPDATE job_queue SET status='blocked' WHERE id=? AND status='pending'",
+                        (job_id,),
+                    )
+                db.commit()
+            finally:
+                db.close()
+
+        self._with_retry(_add)
 
     def get_job(self, job_id: str) -> Optional[Dict[str, Any]]:
         def _fetch():
@@ -361,6 +451,14 @@ class JobQueue:
         clauses = [
             "status = 'pending'",
             "(scheduled_for IS NULL OR scheduled_for <= CURRENT_TIMESTAMP)",
+            """
+            NOT EXISTS (
+                SELECT 1 FROM job_dependencies jd
+                LEFT JOIN job_queue jq ON jd.depends_on_job_id = jq.id
+                WHERE jd.job_id = job_queue.id
+                  AND (jq.id IS NULL OR jq.status != 'completed')
+            )
+            """,
         ]
         params: List[Any] = []
         caps = list(capabilities) if capabilities else []
@@ -419,7 +517,9 @@ class JobQueue:
                 db.execute(
                     """
                     UPDATE job_queue
-                    SET status='in_progress', started_at=CURRENT_TIMESTAMP
+                    SET status='in_progress',
+                        started_at=CURRENT_TIMESTAMP,
+                        stale_after=datetime('now', '+' || timeout_seconds || ' seconds')
                     WHERE id=?
                     """,
                     (job_id,),
@@ -441,6 +541,7 @@ class JobQueue:
         def _complete():
             db = self._connect()
             try:
+                db.execute("BEGIN IMMEDIATE")
                 db.execute(
                     """
                     UPDATE job_queue
@@ -454,6 +555,7 @@ class JobQueue:
                     "VALUES (?, ?, 'completed', ?)",
                     (str(uuid4()), job_id, output_json),
                 )
+                self._unblock_dependents(db, job_id)
                 db.commit()
             finally:
                 db.close()
@@ -469,20 +571,66 @@ class JobQueue:
         def _fail():
             db = self._connect()
             try:
-                db.execute(
+                row = db.execute(
                     """
-                    UPDATE job_queue
-                    SET status='failed', completed_at=CURRENT_TIMESTAMP,
-                        error_message=?, error_traceback=?
-                    WHERE id=?
+                    SELECT attempts, max_attempts, retry_delay_seconds
+                    FROM job_queue WHERE id=?
                     """,
-                    (error_message, error_traceback, job_id),
-                )
-                db.execute(
-                    "INSERT INTO job_events (id, job_id, event_type, payload) "
-                    "VALUES (?, ?, 'failed', ?)",
-                    (str(uuid4()), job_id, error_message),
-                )
+                    (job_id,),
+                ).fetchone()
+                if not row:
+                    return
+
+                attempts = row["attempts"] or 0
+                max_attempts = row["max_attempts"] or DEFAULT_JOB_MAX_ATTEMPTS
+                retry_delay_seconds = row["retry_delay_seconds"] or DEFAULT_JOB_RETRY_DELAY_SECONDS
+
+                if attempts < max_attempts:
+                    attempt_index = max(attempts - 1, 0)
+                    delay = retry_delay_seconds * (self.retry_delay_multiplier ** attempt_index)
+                    db.execute(
+                        """
+                        UPDATE job_queue
+                        SET status='pending',
+                            scheduled_for=datetime('now', ?),
+                            error_message=?,
+                            error_traceback=?,
+                            claimed_by=NULL,
+                            claimed_at=NULL,
+                            started_at=NULL
+                        WHERE id=?
+                        """,
+                        (f"+{delay} seconds", error_message, error_traceback, job_id),
+                    )
+                    db.execute(
+                        "INSERT INTO job_events (id, job_id, event_type, payload) "
+                        "VALUES (?, ?, 'retry_scheduled', ?)",
+                        (
+                            str(uuid4()),
+                            job_id,
+                            json.dumps(
+                                {
+                                    "attempt": attempts,
+                                    "delay_seconds": delay,
+                                }
+                            ),
+                        ),
+                    )
+                else:
+                    db.execute(
+                        """
+                        UPDATE job_queue
+                        SET status='failed', completed_at=CURRENT_TIMESTAMP,
+                            error_message=?, error_traceback=?
+                        WHERE id=?
+                        """,
+                        (error_message, error_traceback, job_id),
+                    )
+                    db.execute(
+                        "INSERT INTO job_events (id, job_id, event_type, payload) "
+                        "VALUES (?, ?, 'failed', ?)",
+                        (str(uuid4()), job_id, error_message),
+                    )
                 db.commit()
             finally:
                 db.close()
@@ -531,6 +679,20 @@ class JobQueue:
 
         self._with_retry(_update)
 
+    def heartbeat_agent(self, agent_id: str) -> None:
+        def _heartbeat():
+            db = self._connect()
+            try:
+                db.execute(
+                    "UPDATE agent_instances SET last_heartbeat=CURRENT_TIMESTAMP WHERE id=?",
+                    (agent_id,),
+                )
+                db.commit()
+            finally:
+                db.close()
+
+        self._with_retry(_heartbeat)
+
     def update_agent_stats(self, agent_id: str, completed: bool) -> None:
         field = "jobs_completed" if completed else "jobs_failed"
 
@@ -576,3 +738,257 @@ class JobQueue:
                 db.close()
 
         return self._with_retry(_counts)
+
+    def list_agents(self, status: Optional[str] = None, limit: int = 50) -> List[Dict[str, Any]]:
+        def _fetch():
+            db = self._connect()
+            try:
+                clauses = []
+                params: List[Any] = []
+                if status:
+                    clauses.append("status = ?")
+                    params.append(status)
+                where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+                query = (
+                    "SELECT * FROM agent_instances "
+                    f"{where} "
+                    "ORDER BY last_heartbeat DESC "
+                    "LIMIT ?"
+                )
+                params.append(limit)
+                rows = db.execute(query, params).fetchall()
+                return [self._row_to_dict(r) for r in rows]
+            finally:
+                db.close()
+
+        return self._with_retry(_fetch)
+
+    def mark_stale_jobs(self, grace_seconds: int = 0) -> int:
+        def _mark():
+            db = self._connect()
+            try:
+                modifier = f"-{grace_seconds} seconds" if grace_seconds else "0 seconds"
+                rows = db.execute(
+                    """
+                    SELECT id FROM job_queue
+                    WHERE status='in_progress' AND (
+                        (stale_after IS NOT NULL AND stale_after <= datetime('now', ?))
+                        OR (
+                            stale_after IS NULL
+                            AND started_at IS NOT NULL
+                            AND timeout_seconds IS NOT NULL
+                            AND (strftime('%s','now') - strftime('%s', started_at))
+                                >= (timeout_seconds + ?)
+                        )
+                    )
+                    """,
+                    (modifier, grace_seconds),
+                ).fetchall()
+                job_ids = [row["id"] for row in rows]
+                for job_id in job_ids:
+                    db.execute(
+                        """
+                        UPDATE job_queue
+                        SET status='stale',
+                            completed_at=CURRENT_TIMESTAMP,
+                            error_message='stale job timeout'
+                        WHERE id=?
+                        """,
+                        (job_id,),
+                    )
+                    db.execute(
+                        "INSERT INTO job_events (id, job_id, event_type, payload) "
+                        "VALUES (?, ?, 'stale', ?)",
+                        (str(uuid4()), job_id, "stale job timeout"),
+                    )
+                db.commit()
+                return len(job_ids)
+            finally:
+                db.close()
+
+        return self._with_retry(_mark)
+
+    def sample_metrics(self, critical_threshold: int = 50) -> Dict[str, Any]:
+        def _sample():
+            db = self._connect()
+            try:
+                status_rows = db.execute(
+                    "SELECT status, COUNT(*) as n FROM job_queue GROUP BY status"
+                ).fetchall()
+                statuses = {row["status"]: row["n"] for row in status_rows}
+
+                domain_rows = db.execute(
+                    "SELECT domain, COUNT(*) as n FROM job_queue WHERE status='pending' GROUP BY domain"
+                ).fetchall()
+                domains = {row["domain"]: row["n"] for row in domain_rows}
+
+                completed_1h = db.execute(
+                    """
+                    SELECT COUNT(*) as n FROM job_queue
+                    WHERE status='completed'
+                      AND completed_at >= datetime('now', '-1 hour')
+                    """
+                ).fetchone()["n"]
+                failed_1h = db.execute(
+                    """
+                    SELECT COUNT(*) as n FROM job_queue
+                    WHERE status='failed'
+                      AND completed_at >= datetime('now', '-1 hour')
+                    """
+                ).fetchone()["n"]
+                avg_processing = db.execute(
+                    """
+                    SELECT AVG(strftime('%s', completed_at) - strftime('%s', started_at)) as avg
+                    FROM job_queue
+                    WHERE status='completed'
+                      AND completed_at >= datetime('now', '-1 hour')
+                      AND started_at IS NOT NULL
+                    """
+                ).fetchone()["avg"]
+                avg_processing = avg_processing if avg_processing is not None else 0
+
+                active_agents = db.execute(
+                    "SELECT COUNT(*) as n FROM agent_instances WHERE status='active'"
+                ).fetchone()["n"]
+                idle_agents = db.execute(
+                    """
+                    SELECT COUNT(*) as n FROM agent_instances
+                    WHERE status='active' AND current_job_id IS NULL
+                    """
+                ).fetchone()["n"]
+
+                stuck_count = db.execute(
+                    """
+                    SELECT COUNT(*) as n FROM job_queue
+                    WHERE status='in_progress'
+                      AND stale_after IS NOT NULL
+                      AND stale_after <= CURRENT_TIMESTAMP
+                    """
+                ).fetchone()["n"]
+
+                pending_count = statuses.get("pending", 0)
+
+                metrics = {
+                    "pending_count": pending_count,
+                    "claimed_count": statuses.get("claimed", 0),
+                    "in_progress_count": statuses.get("in_progress", 0),
+                    "awaiting_review_count": statuses.get("awaiting_review", 0),
+                    "failed_count": statuses.get("failed", 0),
+                    "discovery_pending": domains.get("discovery", 0),
+                    "investigation_pending": domains.get("investigation", 0),
+                    "analysis_pending": domains.get("analysis", 0),
+                    "understanding_pending": domains.get("understanding", 0),
+                    "infrastructure_pending": domains.get("infrastructure", 0),
+                    "jobs_completed_1h": completed_1h,
+                    "jobs_failed_1h": failed_1h,
+                    "avg_processing_time_seconds": avg_processing,
+                    "active_agents": active_agents,
+                    "idle_agents": idle_agents,
+                    "has_stuck_jobs": 1 if stuck_count > 0 else 0,
+                    "has_failed_jobs": 1 if statuses.get("failed", 0) > 0 else 0,
+                    "queue_depth_critical": 1 if pending_count >= critical_threshold else 0,
+                }
+
+                db.execute(
+                    """
+                    INSERT INTO queue_metrics (
+                        id,
+                        pending_count,
+                        claimed_count,
+                        in_progress_count,
+                        awaiting_review_count,
+                        failed_count,
+                        discovery_pending,
+                        investigation_pending,
+                        analysis_pending,
+                        understanding_pending,
+                        infrastructure_pending,
+                        jobs_completed_1h,
+                        jobs_failed_1h,
+                        avg_processing_time_seconds,
+                        active_agents,
+                        idle_agents,
+                        has_stuck_jobs,
+                        has_failed_jobs,
+                        queue_depth_critical
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        str(uuid4()),
+                        metrics["pending_count"],
+                        metrics["claimed_count"],
+                        metrics["in_progress_count"],
+                        metrics["awaiting_review_count"],
+                        metrics["failed_count"],
+                        metrics["discovery_pending"],
+                        metrics["investigation_pending"],
+                        metrics["analysis_pending"],
+                        metrics["understanding_pending"],
+                        metrics["infrastructure_pending"],
+                        metrics["jobs_completed_1h"],
+                        metrics["jobs_failed_1h"],
+                        metrics["avg_processing_time_seconds"],
+                        metrics["active_agents"],
+                        metrics["idle_agents"],
+                        metrics["has_stuck_jobs"],
+                        metrics["has_failed_jobs"],
+                        metrics["queue_depth_critical"],
+                    ),
+                )
+                db.commit()
+                return metrics
+            finally:
+                db.close()
+
+        return self._with_retry(_sample)
+
+    def _dependencies_complete(self, db: sqlite3.Connection, dependencies: Iterable[str]) -> bool:
+        deps = list(dependencies)
+        if not deps:
+            return True
+        placeholders = ",".join("?" for _ in deps)
+        row = db.execute(
+            f"""
+            SELECT COUNT(*) as n FROM job_queue
+            WHERE id IN ({placeholders}) AND status='completed'
+            """,
+            deps,
+        ).fetchone()
+        return row["n"] == len(deps)
+
+    def _dependencies_remaining(self, db: sqlite3.Connection, job_id: str) -> int:
+        row = db.execute(
+            """
+            SELECT COUNT(*) as n
+            FROM job_dependencies jd
+            LEFT JOIN job_queue jq ON jd.depends_on_job_id = jq.id
+            WHERE jd.job_id=?
+              AND (jq.id IS NULL OR jq.status != 'completed')
+            """,
+            (job_id,),
+        ).fetchone()
+        return row["n"]
+
+    def _unblock_dependents(self, db: sqlite3.Connection, completed_job_id: str) -> None:
+        rows = db.execute(
+            "SELECT job_id FROM job_dependencies WHERE depends_on_job_id=?",
+            (completed_job_id,),
+        ).fetchall()
+        for row in rows:
+            job_id = row["job_id"]
+            if self._dependencies_remaining(db, job_id) == 0:
+                updated = db.execute(
+                    """
+                    UPDATE job_queue
+                    SET status='pending'
+                    WHERE id=? AND status='blocked'
+                    """,
+                    (job_id,),
+                )
+                if updated.rowcount:
+                    db.execute(
+                        "INSERT INTO job_events (id, job_id, event_type, payload) "
+                        "VALUES (?, ?, 'unblocked', ?)",
+                        (str(uuid4()), job_id, json.dumps({"by": completed_job_id})),
+                    )

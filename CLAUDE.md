@@ -44,7 +44,36 @@ uv run python scripts/queue_tools.py resume --by "human"
 uv run python scripts/queue_tools.py submit --type echo --domain system --payload '{"message":"hello"}'
 uv run python scripts/queue_tools.py enqueue-triage --batch-size 20
 uv run python scripts/queue_tools.py enqueue-lead 42 --sources findings --created-by "human"
+uv run python scripts/queue_tools.py agents
+uv run python scripts/queue_tools.py metrics
+uv run python scripts/queue_tools.py mark-stale --grace-seconds 60
 uv run python scripts/agent_worker.py --persona echo
+uv run python scripts/agent_worker.py --persona surveyor
+uv run python scripts/agent_worker.py --persona document_miner
+uv run python scripts/agent_worker.py --persona entity_tracer
+uv run python scripts/agent_worker.py --persona pattern_spotter
+uv run python scripts/agent_worker.py --persona synthesist
+uv run python scripts/agent_worker.py --persona investigation_orchestrator
+uv run python scripts/agent_worker.py --persona dossier_writer
+uv run python scripts/agent_worker.py --persona visual_exporter
+uv run python scripts/agent_worker.py --persona content_pipeline
+uv run python scripts/agent_worker.py --persona network_analyst
+uv run python scripts/agent_worker.py --persona timeline_analyst
+uv run python scripts/agent_worker.py --persona systemic_analyst
+uv run python scripts/agent_worker.py --persona explainer_writer
+uv run python scripts/agent_worker.py --persona contextual_analyst
+uv run python scripts/agent_worker.py --persona editor
+uv run python scripts/agent_worker.py --persona dedupe_review
+uv run python scripts/agent_worker.py --persona verify_finding
+uv run python scripts/agent_worker.py --persona tool_build
+uv run python scripts/agent_worker.py --persona bug_fix
+uv run python scripts/agent_worker.py --persona source_ingest
+uv run python scripts/agent_worker.py --persona registry_add
+uv run python scripts/trigger_engine.py run --dry-run
+uv run python scripts/trigger_engine.py status
+
+# Content output location override
+ITHILDIN_CONTENT_ROOT=site/content uv run python scripts/agent_worker.py --persona explainer_writer
 ```
 
 ## Investigative Approach

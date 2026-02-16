@@ -30,12 +30,13 @@ def main():
         print(f"Unknown persona '{persona}'. Available: {', '.join(WORKER_REGISTRY)}")
         sys.exit(1)
 
+    capabilities = worker_cls.JOB_TYPES or [persona]
     queue = JobQueue()
     worker = worker_cls(
         queue=queue,
         agent_id=agent_id,
         persona=persona,
-        capabilities=[persona],
+        capabilities=capabilities,
         poll_interval=args.poll_interval,
     )
     worker.run_forever()

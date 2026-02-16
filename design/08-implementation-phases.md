@@ -3,7 +3,7 @@
 
 ### 1. Overview
 
-This document outlines the phased implementation of the autonomous research platform. Each phase builds on the previous, with working functionality at every step.
+This document outlines the phased implementation of the Ithildin platform. Each phase builds on the previous, with working functionality at every step.
 
 **Principles**:
 - Always have a working system
@@ -515,7 +515,7 @@ print("Phase 7 complete - Platform production ready")
 **Tasks**:
 ```
 □ Provision PostgreSQL
-  □ Create database 'osint_platform'
+  □ Create database 'ithildin_platform'
   □ Apply queue schema + supporting tables
 
 □ Migrate data from SQLite

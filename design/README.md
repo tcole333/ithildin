@@ -1,6 +1,6 @@
-# Autonomous Research Platform - Design Documentation
+# Ithildin Platform - Design Documentation
 
-This directory contains comprehensive design documentation for transforming the Epstein OSINT investigation into a **multi-modal understanding engine** that produces interlinked wiki dossiers, mechanism explainers, analytical articles, and interactive visualizations — delivered through a browsable web application.
+This directory contains comprehensive design documentation for Ithildin, transforming the Epstein OSINT investigation into a **multi-modal understanding engine** that produces interlinked wiki dossiers, mechanism explainers, analytical articles, and interactive visualizations — delivered through a browsable web application.
 
 ## Documents
 
