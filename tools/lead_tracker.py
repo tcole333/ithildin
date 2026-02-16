@@ -774,6 +774,57 @@ def _ensure_schema(db):
         except sqlite3.OperationalError:
             pass
 
+    # ── Fix lead_* foreign keys pointing to leads_old_backup ──
+    def _fk_points_to_backup(table):
+        try:
+            rows = db.execute(f"PRAGMA foreign_key_list({table})").fetchall()
+        except sqlite3.OperationalError:
+            return False
+        return any(r[2] == "leads_old_backup" for r in rows)
+
+    if _fk_points_to_backup("lead_notes"):
+        db.executescript("""
+            CREATE TABLE lead_notes_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                lead_id INTEGER NOT NULL REFERENCES leads(id),
+                note TEXT NOT NULL,
+                session_id INTEGER REFERENCES sessions(id),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            INSERT INTO lead_notes_new (id, lead_id, note, session_id, created_at)
+                SELECT id, lead_id, note, session_id, created_at FROM lead_notes;
+            DROP TABLE lead_notes;
+            ALTER TABLE lead_notes_new RENAME TO lead_notes;
+        """)
+
+    if _fk_points_to_backup("lead_evidence"):
+        db.executescript("""
+            CREATE TABLE lead_evidence_new (
+                lead_id INTEGER NOT NULL REFERENCES leads(id),
+                evidence_type TEXT NOT NULL,
+                evidence_ref TEXT NOT NULL,
+                PRIMARY KEY (lead_id, evidence_ref)
+            );
+            INSERT INTO lead_evidence_new (lead_id, evidence_type, evidence_ref)
+                SELECT lead_id, evidence_type, evidence_ref FROM lead_evidence;
+            DROP TABLE lead_evidence;
+            ALTER TABLE lead_evidence_new RENAME TO lead_evidence;
+        """)
+
+    if _fk_points_to_backup("lead_relations"):
+        db.executescript("""
+            CREATE TABLE lead_relations_new (
+                lead_id INTEGER NOT NULL REFERENCES leads(id),
+                related_lead_id INTEGER NOT NULL REFERENCES leads(id),
+                relation_type TEXT DEFAULT 'related',
+                PRIMARY KEY (lead_id, related_lead_id)
+            );
+            INSERT INTO lead_relations_new (lead_id, related_lead_id, relation_type)
+                SELECT lead_id, related_lead_id, relation_type FROM lead_relations;
+            DROP TABLE lead_relations;
+            ALTER TABLE lead_relations_new RENAME TO lead_relations;
+        """)
+
     db.commit()
 
 

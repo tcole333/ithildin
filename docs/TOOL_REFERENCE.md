@@ -12,6 +12,8 @@ uv run python scripts/queue_tools.py status
 uv run python scripts/queue_tools.py pause --by "human"
 uv run python scripts/queue_tools.py resume --by "human"
 uv run python scripts/queue_tools.py submit --type echo --domain system --payload '{"message":"hello"}'
+uv run python scripts/queue_tools.py enqueue-triage --batch-size 20
+uv run python scripts/queue_tools.py enqueue-lead 42 --sources findings --created-by "human"
 uv run python scripts/agent_worker.py --persona echo
 ```
 

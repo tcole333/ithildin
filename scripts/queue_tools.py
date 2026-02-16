@@ -47,6 +47,79 @@ def cmd_submit(args):
     print(f"Job submitted: {job_id}")
 
 
+def _priority_to_int(priority: str) -> int:
+    mapping = {
+        "critical": 10,
+        "high": 7,
+        "medium": 5,
+        "low": 3,
+    }
+    return mapping.get(priority, 5)
+
+
+def cmd_enqueue_triage(args):
+    from tools import lead_tracker
+
+    db = lead_tracker.get_db()
+    total = db.execute(
+        "SELECT COUNT(*) as n FROM leads WHERE status='pending_triage'"
+    ).fetchone()["n"]
+    db.close()
+
+    if total == 0 and not args.force:
+        print("No pending_triage leads found. Use --force to enqueue anyway.")
+        return
+
+    payload = {
+        "batch_size": args.batch_size,
+        "dry_run": args.dry_run,
+        "triaged_by": args.triaged_by,
+    }
+    queue = JobQueue()
+    job_id = queue.create_job(
+        job_type="lead_triage",
+        domain="discovery",
+        payload=payload,
+        priority=6,
+        created_by=args.created_by,
+    )
+    print(f"Job submitted: {job_id}")
+
+
+def cmd_enqueue_lead(args):
+    from tools import lead_tracker
+
+    db = lead_tracker.get_db()
+    lead = db.execute("SELECT * FROM leads WHERE id = ?", (args.lead_id,)).fetchone()
+    db.close()
+
+    if not lead:
+        print("Lead not found.")
+        return
+
+    target = lead["target_name"] or lead["title"]
+    sources = [s.strip() for s in args.sources.split(",") if s.strip()] if args.sources else None
+
+    payload = {
+        "target_name": target,
+        "lead_id": lead["id"],
+        "limit": args.limit,
+    }
+    if sources is not None:
+        payload["sources"] = sources
+
+    queue = JobQueue()
+    job_id = queue.create_job(
+        job_type=args.job_type,
+        domain=args.domain,
+        payload=payload,
+        priority=_priority_to_int(lead["priority"]),
+        created_by=args.created_by,
+        source_lead_id=lead["id"],
+    )
+    print(f"Job submitted: {job_id}")
+
+
 def cmd_status(args):
     queue = JobQueue()
     paused = queue.is_paused()
@@ -106,6 +179,23 @@ def main():
     p_submit.add_argument("--created-by", help="Creator identifier")
     p_submit.add_argument("--scheduled-for", help="Schedule timestamp (YYYY-MM-DD HH:MM:SS)")
     p_submit.set_defaults(func=cmd_submit)
+
+    p_triage = sub.add_parser("enqueue-triage", help="Create a lead_triage job")
+    p_triage.add_argument("--batch-size", type=int, default=20)
+    p_triage.add_argument("--dry-run", action="store_true")
+    p_triage.add_argument("--triaged-by", default="agent:lead_triage")
+    p_triage.add_argument("--created-by", help="Creator identifier")
+    p_triage.add_argument("--force", action="store_true", help="Enqueue even if no pending leads")
+    p_triage.set_defaults(func=cmd_enqueue_triage)
+
+    p_lead = sub.add_parser("enqueue-lead", help="Create a job from a lead")
+    p_lead.add_argument("lead_id", type=int)
+    p_lead.add_argument("--job-type", default="deep_person")
+    p_lead.add_argument("--domain", default="investigation")
+    p_lead.add_argument("--limit", type=int, default=20)
+    p_lead.add_argument("--sources", help="Comma-separated source list")
+    p_lead.add_argument("--created-by", help="Creator identifier")
+    p_lead.set_defaults(func=cmd_enqueue_lead)
 
     p_status = sub.add_parser("status", help="Show queue status")
     p_status.set_defaults(func=cmd_status)
