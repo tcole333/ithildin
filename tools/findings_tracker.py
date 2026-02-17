@@ -19,7 +19,7 @@ import argparse
 import json
 import sqlite3
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 try:
     from tools.output_util import add_output_args, write_output
@@ -88,13 +88,14 @@ VALID_CORRECTION_TYPES = [
 def add_finding(target_name, summary, finding_type=None, detail=None,
                 evidence_ids=None, source_datasets=None, confidence="medium",
                 date_of_event=None, lead_id=None, claim_type="inference",
-                source_quotes=None, thread_id=None):
+                source_quotes=None, thread_id=None, email_sender=None):
     """Add a new finding with evidence references and provenance.
 
     Args:
         source_quotes: dict mapping evidence_ref -> {quote, page, assessment}
                        e.g. {"EFTA02336502": {"quote": "craft purchase 18M", "page": "p3"}}
         thread_id: Investigation thread ID to assign this finding to.
+        email_sender: Email sender name to store on EFTA evidence rows.
     Returns: finding ID.
     """
     # Resolve aliases to prevent future duplicates
@@ -122,10 +123,12 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
             sq = source_quotes.get(ev, {}) if source_quotes else {}
             db.execute("""
                 INSERT OR IGNORE INTO finding_evidence
-                    (finding_id, evidence_type, evidence_ref, source_quote, source_page, assessment)
-                VALUES (?, ?, ?, ?, ?, ?)
+                    (finding_id, evidence_type, evidence_ref, source_quote,
+                     source_page, assessment, email_sender)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
             """, (finding_id, ev_type, ev,
-                  sq.get("quote"), sq.get("page"), sq.get("assessment")))
+                  sq.get("quote"), sq.get("page"), sq.get("assessment"),
+                  email_sender if ev_type == "efta" else None))
 
     db.commit()
     db.close()
@@ -209,7 +212,7 @@ def update_finding(finding_id, field, new_value, reason, correction_type="refine
 def verify_finding(finding_id, verified_by="human"):
     """Mark a finding as verified by a human or agent."""
     db = _get_db_standalone()
-    now = datetime.now(datetime.timezone.utc).isoformat()
+    now = datetime.now(timezone.utc).isoformat()
     db.execute("""
         UPDATE findings SET verification_status = 'verified', verified_by = ?, verified_at = ?
         WHERE id = ?
@@ -221,7 +224,7 @@ def verify_finding(finding_id, verified_by="human"):
 def dispute_finding(finding_id, reason, corrected_by=None):
     """Mark a finding as disputed with reason recorded in corrections."""
     db = _get_db_standalone()
-    now = datetime.now(datetime.timezone.utc).isoformat()
+    now = datetime.now(timezone.utc).isoformat()
 
     # Get current status for audit trail
     finding = db.execute("SELECT verification_status FROM findings WHERE id = ?", (finding_id,)).fetchone()
@@ -244,7 +247,7 @@ def dispute_finding(finding_id, reason, corrected_by=None):
 def retract_finding(finding_id, reason, corrected_by=None):
     """Retract a finding entirely. Flags downstream leads for review."""
     db = _get_db_standalone()
-    now = datetime.now(datetime.timezone.utc).isoformat()
+    now = datetime.now(timezone.utc).isoformat()
 
     finding = db.execute("SELECT * FROM findings WHERE id = ?", (finding_id,)).fetchone()
     if not finding:
@@ -607,6 +610,7 @@ def main():
     add_p.add_argument("--source-quote", nargs="+",
                        help="ref:quote pairs, e.g. 'EFTA02336502:craft purchase 18M'")
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
+    add_p.add_argument("--email-sender", help="Email sender for EFTA evidence (e.g. 'Jeffrey Epstein')")
 
     # list
     list_p = subparsers.add_parser("list", help="List findings")
@@ -725,6 +729,7 @@ def main():
             claim_type=getattr(args, "claim_type", "inference"),
             source_quotes=source_quotes,
             thread_id=getattr(args, "thread_id", None),
+            email_sender=getattr(args, "email_sender", None),
         )
         print(f"Created finding #{fid}: {args.target} - {args.summary}")
 
@@ -852,6 +857,13 @@ def main():
                     print(f"  [{ev['evidence_type']}] {ev['evidence_ref']}")
                     if ev.get("source_quote"):
                         print(f"    Quote: \"{ev['source_quote']}\"")
+                    if ev.get("email_sender"):
+                        sender = ev["email_sender"]
+                        recip = ""
+                        date_str = f" ({ev['email_date']})" if ev.get("email_date") else ""
+                        pos = ev.get("chain_position")
+                        pos_str = f", chain position {pos}" if pos is not None else ""
+                        print(f"    Email sender: {sender}{date_str}{pos_str}")
                     if ev.get("source_page"):
                         print(f"    Page/Loc: {ev['source_page']}")
                     if ev.get("assessment"):
