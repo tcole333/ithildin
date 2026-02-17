@@ -21,7 +21,7 @@ import argparse
 import json
 import sqlite3
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 try:
     from tools.output_util import add_output_args, write_output
@@ -33,6 +33,10 @@ DB_PATH = Path(__file__).parent.parent / "investigation.db"
 VALID_CATEGORIES = ["person", "entity", "financial", "document", "digital", "connection", "legal", "intelligence"]
 VALID_PRIORITIES = ["critical", "high", "medium", "low"]
 VALID_STATUSES = ["open", "pending_triage", "in_progress", "completed", "blocked", "dead_end"]
+
+
+def _utcnow() -> datetime:
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 def get_db():
@@ -536,6 +540,10 @@ def _ensure_schema(db):
         # Investigation thread assignment
         ("leads", "thread_id INTEGER REFERENCES investigation_threads(id)"),
         ("findings", "thread_id INTEGER REFERENCES investigation_threads(id)"),
+        # Email attribution on finding_evidence (from parse_email_chain.py)
+        ("finding_evidence", "email_sender TEXT"),
+        ("finding_evidence", "email_date TEXT"),
+        ("finding_evidence", "chain_position INTEGER"),
     ]
     for table, column_def in _migrations:
         try:
@@ -939,7 +947,7 @@ def get_lead(lead_id):
 def claim_lead(lead_id, session_id=None):
     """Mark a lead as in_progress."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     db.execute(
         "UPDATE leads SET status = 'in_progress', updated_at = ? WHERE id = ? AND status = 'open'",
         (now, lead_id)
@@ -958,7 +966,7 @@ def claim_lead(lead_id, session_id=None):
 def add_note(lead_id, note, session_id=None):
     """Add a note to a lead."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     db.execute(
         "INSERT INTO lead_notes (lead_id, note, session_id) VALUES (?, ?, ?)",
         (lead_id, note, session_id)
@@ -984,7 +992,7 @@ def add_evidence_to_lead(lead_id, evidence_ref, evidence_type=None):
 def complete_lead(lead_id, findings_text):
     """Mark a lead as completed with findings."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     db.execute("""
         UPDATE leads SET status = 'completed', findings = ?, updated_at = ?, completed_at = ?
         WHERE id = ?
@@ -996,7 +1004,7 @@ def complete_lead(lead_id, findings_text):
 def block_lead(lead_id, reason):
     """Mark a lead as blocked."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     db.execute("UPDATE leads SET status = 'blocked', updated_at = ? WHERE id = ?", (now, lead_id))
     db.execute("INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)", (lead_id, f"BLOCKED: {reason}"))
     db.commit()
@@ -1006,7 +1014,7 @@ def block_lead(lead_id, reason):
 def dead_end_lead(lead_id, reason):
     """Mark a lead as a dead end."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     db.execute(
         "UPDATE leads SET status = 'dead_end', findings = ?, updated_at = ?, completed_at = ? WHERE id = ?",
         (reason, now, now, lead_id)
@@ -1018,7 +1026,7 @@ def dead_end_lead(lead_id, reason):
 def reopen_lead(lead_id):
     """Reopen a closed lead."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     db.execute(
         "UPDATE leads SET status = 'open', updated_at = ?, completed_at = NULL WHERE id = ?",
         (now, lead_id)
