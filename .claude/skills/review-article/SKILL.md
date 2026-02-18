@@ -223,6 +223,47 @@ For each flag:
 [LINE Z] "According to the New York Times" — VERIFY: do we have the primary source?
 ```
 
+### 5a. Contextual Claims Verification (CRITICAL — high hallucination risk for added context)
+
+Articles contain two types of claims: **corpus claims** (from EFTA documents, cited inline) and **contextual claims** (added by the writer from general knowledge). Contextual claims are the highest-risk category because they bypass the EFTA verification pipeline.
+
+**Identify every contextual claim in the article** — any factual assertion NOT attributed to an EFTA document or finding. Common categories:
+
+1. **Dollar amounts not from primary sources**: sovereign wealth fund AUM, corporate revenue, deal sizes, penalty amounts
+2. **Biographical claims about public figures**: job titles, career timelines, when someone was hired/fired
+3. **Superlatives and status claims**: "largest," "most influential," "first," "youngest"
+4. **Temporal status claims**: "at the time the most..." — verify the claim holds for the specific date
+5. **Regulatory/legal framework descriptions**: how FARA works, SAR thresholds, corporate law requirements
+6. **Institutional descriptions**: what an organization does, how large it is, who it reports to
+
+**For each contextual claim, the reviewer must choose one of three outcomes:**
+- **CITE**: verify via web search and add a source (even parenthetically). Use authoritative sources: government sites (.gov), regulatory bodies, court filings, SEC filings.
+- **SOFTEN**: downgrade the precision to match what can be verified. "$800 billion" → "hundreds of billions"; "the most influential" → "among the most influential"; "the largest" → "one of the largest"
+- **DELETE**: if the claim adds color but not substance and can't be verified, remove it.
+
+```
+[LINE X] "$800 billion AUM" — SOFTEN: use "hundreds of billions" (exact figure varies by year and source)
+[LINE Y] "most influential strategist outside government" — DELETE: unverifiable superlative
+[LINE Z] "$150 million NYDFS penalty" — CITE: verified via NYDFS consent order July 2020
+[LINE W] "FARA was enacted in 1938" — CITE: verified via DOJ FARA FAQ page
+```
+
+### 5aa. Claims Skeleton (Pre-Review Verification)
+
+Before evaluating prose quality, generate a **claims skeleton** — a stripped-down list of every factual claim in the article with its evidence. This separates the argument from the writing, making logical gaps and unsupported claims visible.
+
+Format:
+```
+CLAIM: [factual assertion as stated in article]
+SOURCE: [EFTA ID / web source / "contextual - unverified"]
+TYPE: [corpus / contextual / inference]
+STATUS: [verified / needs-softening / needs-source / unsupported]
+```
+
+If the claims skeleton doesn't hold up — if the argument has logical gaps, unsupported leaps, or claims that only work because the prose is compelling — the pretty version needs revision regardless of how well it reads.
+
+The skeleton also serves as a **diff-aware provenance check**: after any editing pass, generate a new skeleton from the edited text and compare it to the pre-edit version. Any new claims that appeared during editing (not present in the original EFTA-sourced draft) must pass the cite/soften/delete test before publication.
+
 ### 5b. Model Cross-Reference Check
 
 Verify that articles reference applicable analytical models where evidence warrants:
@@ -275,6 +316,39 @@ Beyond mechanical fact-checking, evaluate whether the article actually WORKS as 
 - [ ] Is the "why it works this way" explained, not just the "how"?
 - [ ] Are stakes established BEFORE the mechanism is explained?
 
+### 5d. Skeptic Pass (Adversarial Review)
+
+Review the article specifically for claims that look factual but are actually interpretive. The goal is to catch "interpretations dressed as facts" — the category most likely to survive normal fact-checking because they feel true.
+
+Check for:
+- **Interpretations presented as facts**: absence of hedging language + presence of causal verbs ("caused," "proves," "reveals," "demonstrates"). These verbs should be reserved for claims directly supported by documents.
+- **Scope creep**: extending claims beyond the temporal or geographic boundaries of evidence. If the emails cover 2016-2019, don't generalize about "a decades-long pattern."
+- **Implied intent**: ascribing motive without documentary evidence. "Epstein positioned himself as..." implies strategic intent. "The correspondence shows Epstein feeding intelligence to..." describes observable behavior.
+- **Dramatic escalation**: claims that build to a climax not supported by the evidence gradient. If the evidence shows routine correspondence, don't narrate it as an escalating intelligence operation.
+- **Status inflation**: describing someone's role or influence in terms that serve the narrative rather than accuracy. Check every description of a person's status against the specific date in the article.
+
+For each finding:
+```
+[LINE X] "positioned himself as an intelligence asset" — SKEPTIC: implies strategic intent; change to "the correspondence shows him feeding intelligence to"
+[LINE Y] "the most influential strategist" — SKEPTIC: status inflation; verify for specific date or downgrade
+[LINE Z] "the kind of intelligence that hedge funds pay millions for" — SKEPTIC: inflates value of a public press release
+```
+
+### 5e. Epistemic Consistency Check
+
+Verify the article uses consistent epistemic signposting:
+- **Observation language** ("In the email chain…", "The CC line shows…") for direct document evidence
+- **Inference language** ("The correspondence suggests…", "The simplest explanation is…") for conclusions drawn from evidence
+- **Speculation language** ("One possible explanation is…", "We cannot determine from this corpus…") for hypotheses
+
+Flag any paragraph that:
+- Uses observation language for an inference (inflating confidence)
+- Uses speculation language for something directly documented (deflating confidence)
+- Contains an interpretive claim with no epistemic signpost at all
+- Uses "reveals" or "demonstrates" for an inference rather than a documented fact
+
+Also verify the article includes a **confidence framing paragraph** before the first major evidentiary section.
+
 ### 6. Style Review
 
 Check the article against the patio11 style guide:
@@ -291,6 +365,15 @@ Check the article against the patio11 style guide:
 - [ ] No exhibit-list evidence dumps — everything narrated into the story
 - [ ] Calibrated precision (exact figures when known, honest ranges when uncertain)
 - [ ] Infrastructure revealed, not just described (the waterfall, the cascade, the gap)
+
+#### AI Tell Detection
+- [ ] No colon crutch: `[Statement]: [Explanation]` pattern used sparingly, not as default exposition structure
+- [ ] No "This is..." / "This reveals..." / "What X reveals is..." transitions — integrate conclusions into descriptions
+- [ ] No stacked declaratives: three or more consecutive short S-V-O sentences
+- [ ] No repetitive subject starts: same subject beginning three consecutive sentences
+- [ ] No hand-holding: don't explain why evidence matters after presenting it — let the reader do the math
+- [ ] Syntactic variance: subordinating conjunctions, participial phrases, and varied sentence lengths present throughout
+- [ ] Confidence framing paragraph present before first major evidentiary section
 
 ### 7. Apply Fixes
 

@@ -105,6 +105,51 @@ Every paragraph must either advance the reader's understanding or provide eviden
 
 Distinguish clearly between documented fact, reasonable inference, and open question. Treat gaps as interesting rather than embarrassing. "We do not know the balances in the Valartis accounts" is more honest and more interesting than omitting the accounts entirely. The "What We Don't Know" should be one of the most compelling sections.
 
+### Epistemic Signposting
+
+Use quiet language cues to keep the reader oriented about evidentiary status — not inline tags or metadata, but natural prose signals that distinguish evidence tiers without slowing the writing.
+
+**Observation language** (for claims directly visible in documents): "In the email chain…", "The CC line shows…", "The contact list groups…", "The wire transfer records confirm…"
+
+**Inference language** (for conclusions drawn from evidence): "The simplest explanation is…", "The correspondence suggests…", "A plausible read is…", "The timing is consistent with…", "The pattern indicates…"
+
+**Speculation language** (for hypotheses beyond the evidence): "If that pattern holds, it would imply…", "One possible explanation is…", "We cannot determine from this corpus whether…", "The evidence is insufficient to establish…"
+
+One signpost per paragraph is usually enough to keep the reader oriented. The key is consistency: once you establish that "the email shows" means direct evidence and "this suggests" means inference, readers learn to calibrate. Don't mix registers — if you use observation language for an inference, you're inflating confidence.
+
+Additionally, articles should include a brief **confidence framing** paragraph early in the piece (before the first major evidentiary section) that tells the reader: what primary sources underpin the article, how claims are cited, and that inferences are explicitly marked. This is a one-time orientation, not a recurring disclaimer.
+
+### Contextual Claims
+
+Articles contain two types of factual claims:
+1. **Corpus claims** — drawn from EFTA documents, court filings, financial records. Always cited inline.
+2. **Contextual claims** — drawn from general knowledge, public sources, regulatory frameworks. Examples: sovereign wealth fund asset figures, biographical details about public figures, descriptions of how FARA works, corporate revenue figures.
+
+**Contextual claims are high-risk for error** because the writer adds them without the same verification discipline applied to EFTA-sourced facts. Every contextual claim must pass one of three tests:
+- **Cite it**: provide a verifiable source (even parenthetically: "per NYDFS consent order")
+- **Soften it**: use hedging that reflects the precision available ("assets in the trillions" vs "$1.3 trillion")
+- **Delete it**: if the claim adds color but not substance and can't be verified, remove it
+
+Specific high-risk categories:
+- Dollar amounts not from primary sources (AUM figures, revenue, deal sizes) → soften or cite
+- Superlatives ("largest," "most influential," "first") → always verify or downgrade to "among the largest"
+- Temporal claims about people's status ("at the time the most...") → verify against the specific date
+- Regulatory descriptions → verify exact thresholds, dates, mechanisms via authoritative sources
+
+### Avoiding AI Writing Tells
+
+LLM-generated prose has recognizable patterns that erode reader trust. Actively vary sentence structure and avoid these specific habits:
+
+**The colon crutch**: Resist the formula `[Statement of fact]: [Explanation of fact]`. Don't write "The pitch: Carbyne wanted to..." — integrate the explanation into the sentence: "He pitched Carbyne, his public safety company, for..."
+
+**The "This is..." transition**: Don't summarize a paragraph's significance with "This is..." or "This reveals..." or "What X reveals is..." If the evidence is strong, integrate the conclusion into the description itself. Instead of "What the list reveals is organizational," write "Rather than organizing contacts alphabetically, Epstein grouped them by function."
+
+**Stacked declaratives**: Avoid sequences of short Subject-Verb-Object sentences: "The relationship was X. It was also Y. He did Z. She responded with W." Use subordinating conjunctions (although, while, because, despite), participial phrases, and varied sentence lengths. Three similar-length declarative sentences in a row is a tell.
+
+**Repetitive subject starts**: If "Epstein" begins three consecutive sentences, restructure so the subject varies. Use passive voice occasionally, start with prepositional phrases, or use the object of the previous sentence as the subject of the next.
+
+**Hand-holding**: Don't tell the reader why something matters after showing it. If you've spent 400 words explaining what a normal compliance review looks like and then quote the committee saying they were "comfortable with things continuing," you don't need to add "This is extraordinary because..." The reader already did the math.
+
 ## Process
 
 ### 1. Load Cluster Data
@@ -398,12 +443,16 @@ For the full set of writing, explanation, and narrative principles, see `researc
 ## Quality Bar
 
 An article is ready for `/review-article` when:
-1. Every factual claim has an evidence citation
-2. No `[NEEDS SOURCE]` flags remain
-3. The mechanism is explained (a reader with no prior knowledge could follow the money)
-4. Tone is dry and understated (no "shocking" or "explosive")
-5. The "What We Don't Know" section is honest about gaps
-6. Word count is 3,000-8,000
-7. The structure was driven by the evidence, not imposed before research completed
-8. Applicable analytical models are referenced via callout blocks where evidence warrants
-9. No Evidence Index or Editor's Note in the article (citations auto-generate Sources; structural reasoning goes in the user report)
+1. Every corpus claim has an evidence citation
+2. Every contextual claim is either cited, softened, or explicitly flagged for review
+3. No `[NEEDS SOURCE]` flags remain
+4. The mechanism is explained (a reader with no prior knowledge could follow the money)
+5. Tone is dry and understated (no "shocking" or "explosive")
+6. Epistemic signposting distinguishes observation from inference from speculation throughout (not just in "What We Don't Know")
+7. A confidence framing paragraph appears before the first major evidentiary section
+8. The "What We Don't Know" section is honest about gaps
+9. Word count is 3,000-8,000
+10. The structure was driven by the evidence, not imposed before research completed
+11. Applicable analytical models are referenced via callout blocks where evidence warrants
+12. No Evidence Index or Editor's Note in the article (citations auto-generate Sources; structural reasoning goes in the user report)
+13. No colon crutch, "This is..." transitions, or stacked declaratives — syntactic variance is present throughout
