@@ -29,8 +29,8 @@ const totalConnections = networkStats.total_edges;
           <div class="section-label">Overview</div>
           <h1 class="text-4xl md:text-5xl font-display text-moon">Ithildin</h1>
           <p class="font-body text-lg md:text-xl text-mithril leading-relaxed max-w-xl">
-            A forensic archive of public records and primary sources, organized into dossiers,
-            timelines, and network maps.
+            The structures beneath the surface. Built from court filings, 
+            leaked documents, and public records.
           </p>
         </div>
         <div class="space-y-4">
@@ -39,7 +39,7 @@ const totalConnections = networkStats.total_edges;
           </div>
           <div class="rune-divider"></div>
           <p class="text-sm text-mithril font-body">
-            A quiet index to the archive.
+            Autonomous investigation. Primary sources only. All citations verified.
           </p>
         </div>
       </div>
@@ -49,22 +49,22 @@ const totalConnections = networkStats.total_edges;
       <div class="surface p-5 reveal" style="--delay: 0.1s;">
         <div class="section-label">Findings</div>
         <div class="text-3xl font-mono text-moon mt-3">{totalFindings.toLocaleString()}</div>
-        <div class="text-xs text-mithril mt-2">Cited findings</div>
+        <div class="text-xs text-mithril mt-2">From primary sources</div>
       </div>
       <div class="surface p-5 reveal" style="--delay: 0.15s;">
         <div class="section-label">Dossiers</div>
         <div class="text-3xl font-mono text-moon mt-3">{dossierIndex.length}</div>
-        <div class="text-xs text-mithril mt-2">In the archive</div>
+        <div class="text-xs text-mithril mt-2">Entity profiles</div>
       </div>
       <div class="surface p-5 reveal" style="--delay: 0.2s;">
         <div class="section-label">Entities</div>
         <div class="text-3xl font-mono text-moon mt-3">{networkStats.entity_nodes}</div>
-        <div class="text-xs text-mithril mt-2">Entities mapped</div>
+        <div class="text-xs text-mithril mt-2">Persons & organizations</div>
       </div>
       <div class="surface p-5 reveal" style="--delay: 0.25s;">
         <div class="section-label">Connections</div>
         <div class="text-3xl font-mono text-moon mt-3">{totalConnections.toLocaleString()}</div>
-        <div class="text-xs text-mithril mt-2">Relationships traced</div>
+        <div class="text-xs text-mithril mt-2">Documented links</div>
       </div>
     </section>
 
