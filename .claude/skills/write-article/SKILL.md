@@ -295,17 +295,11 @@ word_count: ~5000
 [Honest about gaps — what questions remain unanswered]
 [Include missing documents: what records should exist but don't?]
 
----
-
-### Evidence Index
-[List of all EFTA IDs and source references cited in the article]
-
-### Editor's Note: Why This Structure
-[2-3 paragraphs explaining: What finding drove the lead? What is the core thesis and why?
-What structural choices did you make and what alternatives did you consider? What would
-make this article stronger — what evidence would you want that you don't have?
-This section is for editorial review and should be removed before publication.]
 ```
+
+**DO NOT include an Evidence Index section.** The `citations.ts` system auto-generates a "Sources" section with numbered footnotes and jmail.world links from the inline `[EFTA...]` citations. A manual evidence index would duplicate this.
+
+**DO NOT include an Editor's Note in the article file.** Instead, after saving the article, output your structural reasoning directly to the user in the report (step 8). This includes: what finding drove the lead, the core thesis, structural choices, and what evidence would make the article stronger. This reasoning is for the user's review, not for publication.
 
 ### 5. Evidence Audit
 
@@ -409,7 +403,7 @@ An article is ready for `/review-article` when:
 3. The mechanism is explained (a reader with no prior knowledge could follow the money)
 4. Tone is dry and understated (no "shocking" or "explosive")
 5. The "What We Don't Know" section is honest about gaps
-6. The "Editor's Note: Why This Structure" section explains the structural logic
-7. Word count is 3,000-8,000
-8. The structure was driven by the evidence, not imposed before research completed
-9. Applicable analytical models are referenced via callout blocks where evidence warrants
+6. Word count is 3,000-8,000
+7. The structure was driven by the evidence, not imposed before research completed
+8. Applicable analytical models are referenced via callout blocks where evidence warrants
+9. No Evidence Index or Editor's Note in the article (citations auto-generate Sources; structural reasoning goes in the user report)
