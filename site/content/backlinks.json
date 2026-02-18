@@ -6379,7 +6379,6 @@
     ]
   },
   "model_to_dossier": {
-    "parallel-financial-system": [],
     "narrative-shield": [
       {
         "slug": "landon-thomas-jr",
@@ -6388,24 +6387,10 @@
       }
     ],
     "private-order": [],
-    "manufactured-dependency": [
-      {
-        "slug": "leon-black",
-        "name": "Leon Black",
-        "via": "canonical_instance"
-      }
-    ],
     "jurisdictional-arbitrage": [
       {
         "slug": "deutsche-bank",
         "name": "Deutsche Bank",
-        "via": "canonical_instance"
-      }
-    ],
-    "bridge-tax": [
-      {
-        "slug": "kirkland-ellis",
-        "name": "Kirkland & Ellis",
         "via": "canonical_instance"
       }
     ],
@@ -6416,19 +6401,28 @@
         "via": "canonical_instance"
       }
     ],
-    "complexity-as-credential": []
+    "manufactured-dependency": [
+      {
+        "slug": "leon-black",
+        "name": "Leon Black",
+        "via": "canonical_instance"
+      }
+    ],
+    "complexity-as-credential": [],
+    "bridge-tax": [
+      {
+        "slug": "kirkland-ellis",
+        "name": "Kirkland & Ellis",
+        "via": "canonical_instance"
+      }
+    ],
+    "parallel-financial-system": []
   },
   "dossier_to_model": {
     "landon-thomas-jr": [
       {
         "id": "narrative-shield",
         "title": "The Narrative Shield"
-      }
-    ],
-    "leon-black": [
-      {
-        "id": "manufactured-dependency",
-        "title": "Manufactured Dependency"
       }
     ],
     "deutsche-bank": [
@@ -6439,6 +6433,12 @@
       {
         "id": "enabler-gradient",
         "title": "The Enabler Gradient"
+      }
+    ],
+    "leon-black": [
+      {
+        "id": "manufactured-dependency",
+        "title": "Manufactured Dependency"
       }
     ],
     "kirkland-ellis": [
