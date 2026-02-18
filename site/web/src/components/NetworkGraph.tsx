@@ -1,10 +1,10 @@
-import { useEffect, useRef, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
 interface NetworkNode {
   id: string;
   name: string;
-  slug: string;
+  slug?: string;
   type: 'person' | 'entity';
   connections: number;
   finding_count?: number;
@@ -18,6 +18,7 @@ interface NetworkNode {
   color?: string;
   baseColor?: string;
   val?: number;
+  distance?: number | null;
 }
 
 interface NetworkEdge {
@@ -27,6 +28,8 @@ interface NetworkEdge {
   description: string;
   strength: string;
   verified: boolean;
+  strengthWeight?: number;
+  strengthOpacity?: number;
 }
 
 interface NetworkData {
@@ -42,192 +45,357 @@ interface NetworkData {
 
 interface Props {
   data: NetworkData;
+  dossierSlugs?: string[];
 }
+
+const COLORS = {
+  person: '#c7d0d9',
+  entity: '#7ea7c1',
+  highlight: '#8fd3e8',
+  edge: '#2a313b',
+  text: '#c7d0d9',
+  muted: '#8c97a3',
+  panelBg: '#12151b',
+  panelBorder: '#2a313b',
+};
+
+const STRENGTH_WIDTH: Record<string, number> = {
+  strong: 2.6,
+  medium: 1.8,
+  weak: 1.2,
+  circumstantial: 1,
+};
+
+const STRENGTH_OPACITY: Record<string, number> = {
+  strong: 0.6,
+  medium: 0.45,
+  weak: 0.35,
+  circumstantial: 0.3,
+};
 
 const EPSTEIN_ID = 'Jeffrey Epstein';
 
-export default function NetworkGraph({ data }: Props) {
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/[\s-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function formatRelationship(value?: string): string {
+  if (!value) return 'Unknown';
+  return value.replace(/_/g, ' ');
+}
+
+function formatStrength(value?: string): string {
+  if (!value) return 'unknown';
+  return value.replace(/_/g, ' ');
+}
+
+function formatEntityType(value?: string): string {
+  if (!value) return 'unknown';
+  return value.replace(/_/g, ' ');
+}
+
+export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<d3.Selection<HTMLDivElement, unknown, HTMLElement, any> | null>(null);
-  const [selectedNode, setSelectedNode] = useState<string | null>(null);
-  const [densityFilter, setDensityFilter] = useState(30);
-  const [debouncedDensity, setDebouncedDensity] = useState(30);
-  const [showEntities, setShowEntities] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  // Debounce density filter — visual state updates immediately, computation uses debounced value
+  const nodeById = useMemo(() => {
+    const map = new Map<string, NetworkNode>();
+    data.nodes.forEach(node => map.set(node.id, node));
+    return map;
+  }, [data]);
+
+  const dossierSlugSet = useMemo(() => new Set(dossierSlugs), [dossierSlugs]);
+
+  const entityTypeStats = useMemo(() => {
+    const counts = new Map<string, number>();
+    data.nodes.forEach(node => {
+      if (node.type !== 'entity') return;
+      const type = node.entity_type || 'unknown';
+      counts.set(type, (counts.get(type) || 0) + 1);
+    });
+    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+  }, [data]);
+
+  const relationshipStats = useMemo(() => {
+    const counts = new Map<string, number>();
+    data.edges.forEach(edge => {
+      const type = edge.relationship_type || 'unknown';
+      counts.set(type, (counts.get(type) || 0) + 1);
+    });
+    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+  }, [data]);
+
+  const strengthStats = useMemo(() => {
+    const counts = new Map<string, number>();
+    data.edges.forEach(edge => {
+      const strength = edge.strength || 'unknown';
+      counts.set(strength, (counts.get(strength) || 0) + 1);
+    });
+    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+  }, [data]);
+
+  const [query, setQuery] = useState('');
+  const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
+  const [focusMode, setFocusMode] = useState(false);
+  const [depth, setDepth] = useState(2);
+  const [includePersons, setIncludePersons] = useState(true);
+  const [excludeEpstein, setExcludeEpstein] = useState(false);
+  const [selectedEntityTypes, setSelectedEntityTypes] = useState(() => entityTypeStats.map(([type]) => type));
+  const [selectedRelTypes, setSelectedRelTypes] = useState(() => relationshipStats.map(([type]) => type));
+  const [selectedStrengths, setSelectedStrengths] = useState(() => strengthStats.map(([type]) => type));
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [showEdgeLabels, setShowEdgeLabels] = useState(false);
+
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedDensity(densityFilter), 300);
-    return () => clearTimeout(timer);
-  }, [densityFilter]);
+    const container = containerRef.current;
+    if (!container) return;
 
-  const graphData = useMemo(() => {
-    // Filter nodes
-    let filteredNodes = data.nodes.filter(n => {
-      if (!showEntities && n.type === 'entity') return false;
+    const update = () => {
+      const rect = container.getBoundingClientRect();
+      const width = Math.floor(rect.width);
+      const height = Math.floor(rect.height);
+      if (width && height) {
+        setDimensions({ width, height });
+      }
+    };
+
+    update();
+
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', update);
+      return () => window.removeEventListener('resize', update);
+    }
+
+    const observer = new ResizeObserver(update);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  const searchResults = useMemo(() => {
+    const term = query.trim().toLowerCase();
+    if (!term) return [];
+    return data.nodes
+      .filter(node => !(excludeEpstein && node.id === EPSTEIN_ID))
+      .filter(node => (node.name || node.id).toLowerCase().includes(term))
+      .sort((a, b) => (b.connections || 0) - (a.connections || 0))
+      .slice(0, 8);
+  }, [data, query, excludeEpstein]);
+
+  const graphState = useMemo(() => {
+    const selectedSet = new Set(selectedNodes);
+    const allowedEntityTypes = new Set(selectedEntityTypes);
+    const allowedRelTypes = new Set(selectedRelTypes);
+    const allowedStrengths = new Set(selectedStrengths);
+
+    const filteredNodes = data.nodes.filter(node => {
+      if (excludeEpstein && node.id === EPSTEIN_ID) return false;
+      if (selectedSet.has(node.id)) return true;
+      if (node.type === 'person') return includePersons;
+      return allowedEntityTypes.has(node.entity_type || 'unknown');
+    });
+
+    const nodeIds = new Set(filteredNodes.map(node => node.id));
+
+    const filteredEdges = data.edges.filter(edge => {
+      const sid = typeof edge.source === 'string' ? edge.source : edge.source.id;
+      const tid = typeof edge.target === 'string' ? edge.target : edge.target.id;
+      if (!nodeIds.has(sid) || !nodeIds.has(tid)) return false;
+      if (!allowedRelTypes.has(edge.relationship_type || 'unknown')) return false;
+      if (!allowedStrengths.has(edge.strength || 'unknown')) return false;
+      if (verifiedOnly && !edge.verified) return false;
       return true;
     });
 
-    // Build adjacency and BFS from Epstein — hoist Set above filter
     const adjacency = new Map<string, Set<string>>();
-    const filteredNodeIds = new Set(filteredNodes.map(n => n.id));
-    const edgesForFiltered = data.edges.filter(e => {
-      const sid = typeof e.source === 'string' ? e.source : e.source.id;
-      const tid = typeof e.target === 'string' ? e.target : e.target.id;
-      return filteredNodeIds.has(sid) && filteredNodeIds.has(tid);
-    });
-
-    edgesForFiltered.forEach(e => {
-      const sid = typeof e.source === 'string' ? e.source : e.source.id;
-      const tid = typeof e.target === 'string' ? e.target : e.target.id;
+    filteredEdges.forEach(edge => {
+      const sid = typeof edge.source === 'string' ? edge.source : edge.source.id;
+      const tid = typeof edge.target === 'string' ? edge.target : edge.target.id;
       if (!adjacency.has(sid)) adjacency.set(sid, new Set());
       if (!adjacency.has(tid)) adjacency.set(tid, new Set());
       adjacency.get(sid)!.add(tid);
       adjacency.get(tid)!.add(sid);
     });
 
-    // BFS distances
-    const distances = new Map<string, number>();
-    const queue: string[] = [];
-    if (filteredNodes.some(n => n.id === EPSTEIN_ID)) {
-      distances.set(EPSTEIN_ID, 0);
-      queue.push(EPSTEIN_ID);
-    }
-    while (queue.length > 0) {
-      const current = queue.shift()!;
-      const dist = distances.get(current)!;
-      for (const neighbor of adjacency.get(current) || []) {
-        if (!distances.has(neighbor)) {
-          distances.set(neighbor, dist + 1);
-          queue.push(neighbor);
-        }
-      }
-    }
-
-    // Density filtering: keep nodes with connections above threshold for their hop distance
-    const connectionsByHop = new Map<number, number[]>();
-    for (const node of filteredNodes) {
-      const hop = distances.get(node.id) ?? Infinity;
-      if (hop !== Infinity) {
-        if (!connectionsByHop.has(hop)) connectionsByHop.set(hop, []);
-        connectionsByHop.get(hop)!.push(node.connections);
-      }
-    }
-
-    const avgByHop = new Map<number, number>();
-    for (const [hop, conns] of connectionsByHop) {
-      avgByHop.set(hop, conns.reduce((a, b) => a + b, 0) / conns.length);
-    }
-
-    const threshold = debouncedDensity / 100;
-    const keepIds = new Set<string>();
-    keepIds.add(EPSTEIN_ID);
-
-    for (const node of filteredNodes) {
-      const hop = distances.get(node.id) ?? Infinity;
-      const avg = avgByHop.get(hop);
-      if (avg !== undefined && node.connections >= avg * threshold) {
-        keepIds.add(node.id);
-      }
-    }
-
-    // Color nodes
-    const directToEpstein = new Map<string, number>();
-    edgesForFiltered.forEach(e => {
-      const sid = typeof e.source === 'string' ? e.source : e.source.id;
-      const tid = typeof e.target === 'string' ? e.target : e.target.id;
-      if (sid === EPSTEIN_ID) directToEpstein.set(tid, (directToEpstein.get(tid) || 0) + 1);
-      if (tid === EPSTEIN_ID) directToEpstein.set(sid, (directToEpstein.get(sid) || 0) + 1);
-    });
-    const maxDirect = Math.max(...Array.from(directToEpstein.values()), 1);
-
-    const nodes = filteredNodes
-      .filter(n => keepIds.has(n.id))
-      .map(n => {
-        const dist = distances.get(n.id) ?? Infinity;
-        const direct = directToEpstein.get(n.id) || 0;
-        let color: string;
-
-        if (n.id === EPSTEIN_ID) {
-          color = '#dc2626';
-        } else if (n.type === 'entity') {
-          color = '#8b5cf6'; // purple for entities
-        } else if (direct > 0) {
-          const ratio = direct / maxDirect;
-          const hue = 45 - ratio * 30;
-          color = `hsl(${hue}, 80%, 60%)`;
-        } else if (dist <= 3) {
-          color = 'hsl(270, 70%, 65%)';
-        } else {
-          color = 'hsl(120, 50%, 50%)';
-        }
-
-        return { ...n, val: n.connections, color, baseColor: color };
+    const distances: Record<string, number> = {};
+    if (selectedSet.size > 0) {
+      const queue: string[] = [];
+      selectedSet.forEach(id => {
+        distances[id] = 0;
+        queue.push(id);
       });
 
-    const nodeIds = new Set(nodes.map(n => n.id));
-    const edges = edgesForFiltered.filter(e => {
-      const sid = typeof e.source === 'string' ? e.source : e.source.id;
-      const tid = typeof e.target === 'string' ? e.target : e.target.id;
-      return nodeIds.has(sid) && nodeIds.has(tid);
+      while (queue.length > 0) {
+        const current = queue.shift()!;
+        const dist = distances[current];
+        const neighbors = adjacency.get(current);
+        if (!neighbors) continue;
+        for (const neighbor of neighbors) {
+          if (distances[neighbor] === undefined) {
+            distances[neighbor] = dist + 1;
+            queue.push(neighbor);
+          }
+        }
+      }
+    }
+
+    if (focusMode && selectedSet.size === 0) {
+      return {
+        nodes: [],
+        edges: [],
+        distances,
+        hasSelection: false,
+        message: 'Select one or more entities to focus the network.',
+      };
+    }
+
+    let focusedNodes = filteredNodes;
+    let focusedEdges = filteredEdges;
+
+    if (focusMode && selectedSet.size > 0) {
+      const keepIds = new Set<string>();
+      Object.entries(distances).forEach(([id, dist]) => {
+        if (dist <= depth) keepIds.add(id);
+      });
+
+      focusedNodes = filteredNodes.filter(node => keepIds.has(node.id));
+      const focusedNodeIds = new Set(focusedNodes.map(node => node.id));
+      focusedEdges = filteredEdges.filter(edge => {
+        const sid = typeof edge.source === 'string' ? edge.source : edge.source.id;
+        const tid = typeof edge.target === 'string' ? edge.target : edge.target.id;
+        return focusedNodeIds.has(sid) && focusedNodeIds.has(tid);
+      });
+    }
+
+    const nodes = focusedNodes.map(node => {
+      const baseColor = node.type === 'person' ? COLORS.person : COLORS.entity;
+      return {
+        ...node,
+        val: Math.max(1, node.connections || 1),
+        baseColor,
+        color: baseColor,
+        distance: distances[node.id] ?? null,
+      };
     });
 
-    return { nodes, edges };
-  }, [data, debouncedDensity, showEntities]);
+    const edges = focusedEdges.map(edge => {
+      const strengthKey = (edge.strength || 'medium').toLowerCase();
+      return {
+        ...edge,
+        strengthWeight: STRENGTH_WIDTH[strengthKey] || 1.6,
+        strengthOpacity: STRENGTH_OPACITY[strengthKey] || 0.4,
+      };
+    });
+
+    return {
+      nodes,
+      edges,
+      distances,
+      hasSelection: selectedSet.size > 0,
+      message: '',
+    };
+  }, [
+    data,
+    selectedNodes,
+    includePersons,
+    selectedEntityTypes,
+    selectedRelTypes,
+    selectedStrengths,
+    verifiedOnly,
+    focusMode,
+    depth,
+    excludeEpstein,
+  ]);
+
+  const labelIds = useMemo(() => {
+    const ids = new Set<string>();
+    const sorted = [...graphState.nodes].sort((a, b) => (b.connections || 0) - (a.connections || 0));
+    const limit = graphState.nodes.length > 240 ? 40 : graphState.nodes.length > 140 ? 60 : 120;
+    sorted.slice(0, limit).forEach(node => ids.add(node.id));
+    selectedNodes.forEach(id => ids.add(id));
+    return ids;
+  }, [graphState.nodes, selectedNodes]);
 
   useEffect(() => {
-    if (!svgRef.current || graphData.nodes.length === 0) return;
+    if (!svgRef.current) return;
+    if (graphState.nodes.length === 0) {
+      d3.select(svgRef.current).selectAll('*').remove();
+      return;
+    }
 
-    const width = svgRef.current.clientWidth;
-    const height = svgRef.current.clientHeight;
+    const width = dimensions.width;
+    const height = dimensions.height;
+    if (!width || !height) return;
 
     d3.select(svgRef.current).selectAll('*').remove();
-    const svg = d3.select(svgRef.current);
+    const svg = d3.select(svgRef.current)
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', `0 0 ${width} ${height}`);
 
     const zoom = d3.zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.01, 10])
+      .scaleExtent([0.2, 6])
       .on('zoom', (event) => g.attr('transform', event.transform));
 
     const g = svg.append('g');
 
-    const initialScale = 0.2;
-    const initialTransform = d3.zoomIdentity
-      .translate(width / 2, height / 2)
-      .scale(initialScale)
-      .translate(-width / 2, -height / 2);
+    svg.call(zoom as any);
 
-    svg.call(zoom).call(zoom.transform as any, initialTransform);
-
-    const maxConn = Math.max(...graphData.nodes.map(n => n.val || 1));
-    const radiusScale = d3.scalePow()
-      .exponent(0.5)
+    const maxConn = Math.max(...graphState.nodes.map(n => n.val || 1));
+    const radiusScale = d3.scaleSqrt()
       .domain([1, maxConn])
-      .range([5, 80])
+      .range([4, 36])
       .clamp(true);
 
-    const simulation = d3.forceSimulation(graphData.nodes as any)
+    const nodes = graphState.nodes.map(node => ({ ...node }));
+    const edges = graphState.edges.map(edge => ({ ...edge }));
+
+    const simulation = d3.forceSimulation(nodes as any)
       .alphaDecay(0.05)
-      .alphaMin(0.01)
-      .force('link', d3.forceLink(graphData.edges as any).id((d: any) => d.id).distance(50))
-      .force('charge', d3.forceManyBody().strength(-200))
+      .alphaMin(0.02)
+      .force('link', d3.forceLink(edges as any).id((d: any) => d.id).distance(60))
+      .force('charge', d3.forceManyBody().strength(-220))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius((d: any) => radiusScale(d.val || 1) + 5))
+      .force('collision', d3.forceCollide().radius((d: any) => radiusScale(d.val || 1) + 6))
       .force('radial', d3.forceRadial(
-        (d: any) => (50 - Math.min(d.val || 1, 50)) * 33 + 200,
+        (d: any) => (50 - Math.min(d.val || 1, 50)) * 24 + 200,
         width / 2,
         height / 2,
-      ).strength(0.2));
+      ).strength(0.1));
 
     const link = g.append('g')
       .selectAll('line')
-      .data(graphData.edges)
+      .data(edges)
       .join('line')
-      .attr('stroke', '#4b5563')
-      .attr('stroke-width', 1.5)
-      .attr('stroke-opacity', 0.5);
+      .attr('stroke', COLORS.edge)
+      .attr('stroke-width', (d: any) => d.strengthWeight || 1.6)
+      .attr('stroke-opacity', (d: any) => d.strengthOpacity || 0.4)
+      .attr('stroke-dasharray', (d: any) => d.verified ? '0' : '4 4');
+
+    const labelEdges = showEdgeLabels && edges.length <= 120;
+    const edgeLabels = labelEdges
+      ? g.append('g')
+        .selectAll('text')
+        .data(edges)
+        .join('text')
+        .attr('fill', COLORS.text)
+        .attr('font-size', '9px')
+        .style('paint-order', 'stroke')
+        .style('stroke', '#0b0d10')
+        .style('stroke-width', '3px')
+        .style('stroke-linejoin', 'round')
+        .style('pointer-events', 'none')
+        .text((d: any) => formatRelationship(d.relationship_type))
+      : null;
 
     const node = g.append('g')
       .selectAll('g')
-      .data(graphData.nodes)
+      .data(nodes)
       .join('g')
       .call(d3.drag<any, any>()
         .on('start', (event, d) => { d.fx = d.x; d.fy = d.y; })
@@ -243,30 +411,50 @@ export default function NetworkGraph({ data }: Props) {
     node.append('circle')
       .attr('r', (d: any) => radiusScale(d.val || 1))
       .attr('fill', (d: any) => d.color)
-      .attr('stroke', '#fff')
+      .attr('stroke', COLORS.text)
       .attr('stroke-width', 0.5)
       .style('cursor', 'pointer')
-      .on('click', (_event: any, d: any) => {
-        setSelectedNode(prev => prev === d.id ? null : d.id);
+      .on('click', (event: any, d: any) => {
+        const multi = event.metaKey || event.ctrlKey || event.shiftKey;
+        setSelectedNodes(prev => {
+          const next = new Set(prev);
+          if (multi) {
+            if (next.has(d.id)) {
+              next.delete(d.id);
+            } else {
+              next.add(d.id);
+            }
+            return Array.from(next);
+          }
+          if (prev.length === 1 && prev[0] === d.id) return [];
+          return [d.id];
+        });
       });
 
-    node.append('text')
+    const labelNodes = nodes.filter(nodeItem => labelIds.has(nodeItem.id));
+
+    const nodeLabels = g.append('g')
+      .selectAll('text')
+      .data(labelNodes)
+      .join('text')
       .text((d: any) => d.name)
-      .attr('x', 0)
-      .attr('y', (d: any) => radiusScale(d.val || 1) * 1.4)
       .attr('text-anchor', 'middle')
-      .attr('fill', '#d1d5db')
-      .attr('font-size', '4px')
+      .attr('fill', COLORS.text)
+      .attr('font-size', '10px')
+      .style('paint-order', 'stroke')
+      .style('stroke', '#0b0d10')
+      .style('stroke-width', '3px')
+      .style('stroke-linejoin', 'round')
       .style('pointer-events', 'none');
 
-    // Tooltip — reuse across renders via ref
     if (!tooltipRef.current) {
       tooltipRef.current = d3.select('body')
         .append('div')
         .style('position', 'absolute')
         .style('visibility', 'hidden')
-        .style('background', 'rgba(0,0,0,0.9)')
-        .style('color', 'white')
+        .style('background', COLORS.panelBg)
+        .style('color', COLORS.text)
+        .style('border', `1px solid ${COLORS.panelBorder}`)
         .style('padding', '8px 12px')
         .style('border-radius', '6px')
         .style('font-size', '12px')
@@ -278,12 +466,25 @@ export default function NetworkGraph({ data }: Props) {
 
     node.on('mouseover', (_event: any, d: any) => {
       tooltip.style('visibility', 'visible')
-        .html(`<strong>${d.name}</strong><br/>${d.connections} connections${d.finding_count ? `<br/>${d.finding_count} findings` : ''}${d.type === 'entity' ? `<br/>${d.entity_type || ''} (${d.jurisdiction || '?'})` : ''}`);
+        .html(`<strong>${d.name}</strong><br/>${d.connections} connections${d.finding_count ? `<br/>${d.finding_count} findings` : ''}${d.type === 'entity' ? `<br/>${formatEntityType(d.entity_type)} (${d.jurisdiction || '?'})` : ''}`);
     })
-    .on('mousemove', (event: any) => {
-      tooltip.style('top', (event.pageY - 10) + 'px').style('left', (event.pageX + 10) + 'px');
+      .on('mousemove', (event: any) => {
+        tooltip.style('top', (event.pageY - 10) + 'px').style('left', (event.pageX + 10) + 'px');
+      })
+      .on('mouseout', () => tooltip.style('visibility', 'hidden'));
+
+    link.on('mouseover', function (_event: any, d: any) {
+      d3.select(this).attr('stroke-opacity', 0.8);
+      tooltip.style('visibility', 'visible')
+        .html(`<strong>${formatRelationship(d.relationship_type)}</strong><br/>Strength: ${formatStrength(d.strength)}${d.verified ? '' : '<br/>Unverified'}${d.description ? `<br/>${d.description}` : ''}`);
     })
-    .on('mouseout', () => tooltip.style('visibility', 'hidden'));
+      .on('mousemove', (event: any) => {
+        tooltip.style('top', (event.pageY - 10) + 'px').style('left', (event.pageX + 10) + 'px');
+      })
+      .on('mouseout', function () {
+        d3.select(this).attr('stroke-opacity', (d: any) => d.strengthOpacity || 0.4);
+        tooltip.style('visibility', 'hidden');
+      });
 
     simulation.on('tick', () => {
       link
@@ -291,85 +492,315 @@ export default function NetworkGraph({ data }: Props) {
         .attr('y1', (d: any) => d.source.y)
         .attr('x2', (d: any) => d.target.x)
         .attr('y2', (d: any) => d.target.y);
+
+      if (edgeLabels) {
+        edgeLabels
+          .attr('x', (d: any) => (d.source.x + d.target.x) / 2)
+          .attr('y', (d: any) => (d.source.y + d.target.y) / 2);
+      }
+
       node.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+      nodeLabels
+        .attr('x', (d: any) => d.x)
+        .attr('y', (d: any) => d.y + radiusScale(d.val || 1) + 8);
     });
 
     return () => {
       simulation.stop();
-      // Tooltip lives in ref — hide but don't remove (reused across renders)
       tooltip.style('visibility', 'hidden');
     };
-  }, [graphData]);
+  }, [graphState, dimensions, labelIds, showEdgeLabels]);
 
-  // Update colors when selection changes
   useEffect(() => {
+    if (!svgRef.current) return;
+
+    const selectedSet = new Set(selectedNodes);
+    const distances = graphState.distances;
     const svg = d3.select(svgRef.current);
+
     svg.selectAll<SVGCircleElement, any>('circle')
-      .attr('fill', (d: any) => selectedNode && d.id === selectedNode ? '#06b6d4' : d.baseColor);
+      .attr('fill', (d: any) => selectedSet.has(d.id) ? COLORS.highlight : d.baseColor)
+      .attr('fill-opacity', (d: any) => {
+        if (selectedSet.size === 0) return 0.9;
+        if (selectedSet.has(d.id)) return 1;
+        const dist = distances[d.id];
+        if (dist === 1) return 0.85;
+        if (dist === 2) return 0.65;
+        return 0.35;
+      });
+
     svg.selectAll<SVGLineElement, any>('line')
       .attr('stroke', (d: any) => {
-        if (!selectedNode) return '#4b5563';
         const sid = typeof d.source === 'string' ? d.source : d.source.id;
         const tid = typeof d.target === 'string' ? d.target : d.target.id;
-        return sid === selectedNode || tid === selectedNode ? '#06b6d4' : '#4b5563';
+        return selectedSet.size > 0 && (selectedSet.has(sid) || selectedSet.has(tid))
+          ? COLORS.highlight
+          : COLORS.edge;
       })
       .attr('stroke-opacity', (d: any) => {
-        if (!selectedNode) return 0.5;
+        if (selectedSet.size === 0) return d.strengthOpacity || 0.4;
         const sid = typeof d.source === 'string' ? d.source : d.source.id;
         const tid = typeof d.target === 'string' ? d.target : d.target.id;
-        return sid === selectedNode || tid === selectedNode ? 1 : 0.2;
+        return selectedSet.has(sid) || selectedSet.has(tid) ? 0.85 : 0.2;
       });
-  }, [selectedNode]);
+  }, [selectedNodes, graphState.distances]);
+
+  useEffect(() => {
+    if (!excludeEpstein) return;
+    setSelectedNodes(prev => prev.filter(id => id !== EPSTEIN_ID));
+  }, [excludeEpstein]);
+
+  const selectedDetails = selectedNodes
+    .map(id => nodeById.get(id))
+    .filter(Boolean) as NetworkNode[];
+
+  const resetFilters = () => {
+    setIncludePersons(true);
+    setExcludeEpstein(false);
+    setSelectedEntityTypes(entityTypeStats.map(([type]) => type));
+    setSelectedRelTypes(relationshipStats.map(([type]) => type));
+    setSelectedStrengths(strengthStats.map(([type]) => type));
+    setVerifiedOnly(false);
+  };
+
+  const toggleSelection = (id: string) => {
+    setSelectedNodes(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return Array.from(next);
+    });
+  };
 
   return (
-    <div className="relative w-full h-full">
-      {/* Controls */}
-      <div className="absolute top-4 left-4 z-10 bg-gray-900/90 backdrop-blur-sm rounded-lg p-3 space-y-3 text-sm">
-        <div>
-          <label className="text-gray-400 text-xs block mb-1">Density Filter: {densityFilter}%</label>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            value={densityFilter}
-            onChange={e => setDensityFilter(Number(e.target.value))}
-            className="w-40"
-          />
-        </div>
-        <label className="flex items-center gap-2 text-gray-400 text-xs cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showEntities}
-            onChange={e => setShowEntities(e.target.checked)}
-            className="rounded"
-          />
-          Show entities ({data.stats.entity_nodes})
-        </label>
-        <div className="text-xs text-gray-500">
-          {graphData.nodes.length} nodes / {graphData.edges.length} edges
+    <div ref={containerRef} className="relative w-full h-full">
+      <div className="absolute top-4 left-4 z-10 w-80 max-h-[70vh] overflow-y-auto">
+        <div className="surface p-4 space-y-4">
+          <div>
+            <div className="section-label">Search</div>
+            <input
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              placeholder="Search entities"
+              className="mt-2 w-full rounded border border-[color:var(--color-ash)] bg-[rgba(11,13,16,0.6)] px-3 py-2 text-sm text-moon placeholder:text-[color:var(--color-mithril)]"
+            />
+            {searchResults.length > 0 && (
+              <div className="mt-2 space-y-1">
+                {searchResults.map(node => (
+                  <button
+                    key={node.id}
+                    onClick={() => toggleSelection(node.id)}
+                    className={`w-full text-left rounded border border-[color:var(--color-ash)] px-3 py-2 text-xs transition ${selectedNodes.includes(node.id) ? 'bg-[rgba(18,21,27,0.85)]' : 'bg-[rgba(18,21,27,0.55)]'}`}
+                  >
+                    <div className="text-sm text-moon">{node.name}</div>
+                    <div className="text-xs text-mithril">
+                      {node.type}{node.type === 'entity' && node.entity_type ? ` / ${formatEntityType(node.entity_type)}` : ''} / {node.connections} links
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between">
+              <div className="section-label">Selection</div>
+              {selectedNodes.length > 0 && (
+                <button onClick={() => setSelectedNodes([])} className="text-xs text-mithril hover:text-moon">Clear</button>
+              )}
+            </div>
+            {selectedDetails.length === 0 ? (
+              <p className="text-xs text-mithril mt-2">No entities selected.</p>
+            ) : (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {selectedDetails.map(node => (
+                  <span key={node.id} className="chip" style={{ letterSpacing: '0.12em' }}>
+                    {node.name}
+                    <button onClick={() => toggleSelection(node.id)} className="text-[10px]">x</button>
+                  </span>
+                ))}
+              </div>
+            )}
+            {selectedDetails.length === 1 && (
+              <div className="mt-3 text-xs text-mithril">
+                <div className="text-moon">{selectedDetails[0].connections} connections</div>
+                {selectedDetails[0].finding_count ? (
+                  <div>{selectedDetails[0].finding_count} findings</div>
+                ) : null}
+                {selectedDetails[0].type === 'entity' && (
+                  <div>{formatEntityType(selectedDetails[0].entity_type)} / {selectedDetails[0].jurisdiction || 'Unknown jurisdiction'}</div>
+                )}
+                {(() => {
+                  const slug = selectedDetails[0].slug || slugify(selectedDetails[0].name || selectedDetails[0].id);
+                  if (!dossierSlugSet.has(slug)) return <div className="mt-2">No dossier yet.</div>;
+                  return (
+                    <a
+                      href={`/dossiers/${slug}`}
+                      className="mt-2 inline-flex text-icy hover:text-ember"
+                    >
+                      View dossier &rarr;
+                    </a>
+                  );
+                })()}
+              </div>
+            )}
+          </div>
+
+          <div className="surface-muted p-3 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="section-label">Focus</div>
+              <label className="text-xs text-mithril flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={focusMode}
+                  onChange={e => setFocusMode(e.target.checked)}
+                />
+                Focus selection
+              </label>
+            </div>
+            <div>
+              <div className="text-xs text-mithril">Depth: {depth}</div>
+              <input
+                type="range"
+                min={1}
+                max={4}
+                value={depth}
+                onChange={e => setDepth(Number(e.target.value))}
+                className="w-full"
+                disabled={!focusMode}
+              />
+            </div>
+            {graphState.message && (
+              <div className="text-xs text-ember">{graphState.message}</div>
+            )}
+          </div>
+
+          <details className="surface-muted p-3">
+            <summary className="text-xs text-mithril uppercase tracking-wider">Filters</summary>
+            <div className="mt-3 space-y-4">
+              <div>
+                <div className="section-label">Entities</div>
+                <label className="mt-2 flex items-center gap-2 text-xs text-mithril">
+                  <input
+                    type="checkbox"
+                    checked={includePersons}
+                    onChange={e => setIncludePersons(e.target.checked)}
+                  />
+                  People ({data.stats.person_nodes})
+                </label>
+                <label className="mt-2 flex items-center gap-2 text-xs text-mithril">
+                  <input
+                    type="checkbox"
+                    checked={excludeEpstein}
+                    onChange={e => setExcludeEpstein(e.target.checked)}
+                  />
+                  Exclude Jeffrey Epstein
+                </label>
+                <div className="mt-2 grid grid-cols-2 gap-2">
+                  {entityTypeStats.map(([type, count]) => (
+                    <label key={type} className="flex items-center gap-2 text-xs text-mithril">
+                      <input
+                        type="checkbox"
+                        checked={selectedEntityTypes.includes(type)}
+                        onChange={e => {
+                          setSelectedEntityTypes(prev =>
+                            e.target.checked
+                              ? [...prev, type]
+                              : prev.filter(value => value !== type)
+                          );
+                        }}
+                      />
+                      {formatEntityType(type)} ({count})
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="section-label">Relationships</div>
+                <div className="mt-2 grid grid-cols-2 gap-2">
+                  {relationshipStats.map(([type, count]) => (
+                    <label key={type} className="flex items-center gap-2 text-xs text-mithril">
+                      <input
+                        type="checkbox"
+                        checked={selectedRelTypes.includes(type)}
+                        onChange={e => {
+                          setSelectedRelTypes(prev =>
+                            e.target.checked
+                              ? [...prev, type]
+                              : prev.filter(value => value !== type)
+                          );
+                        }}
+                      />
+                      {formatRelationship(type)} ({count})
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="section-label">Strength</div>
+                <div className="mt-2 grid grid-cols-2 gap-2">
+                  {strengthStats.map(([type, count]) => (
+                    <label key={type} className="flex items-center gap-2 text-xs text-mithril">
+                      <input
+                        type="checkbox"
+                        checked={selectedStrengths.includes(type)}
+                        onChange={e => {
+                          setSelectedStrengths(prev =>
+                            e.target.checked
+                              ? [...prev, type]
+                              : prev.filter(value => value !== type)
+                          );
+                        }}
+                      />
+                      {formatStrength(type)} ({count})
+                    </label>
+                  ))}
+                </div>
+                <label className="mt-2 flex items-center gap-2 text-xs text-mithril">
+                  <input
+                    type="checkbox"
+                    checked={verifiedOnly}
+                    onChange={e => setVerifiedOnly(e.target.checked)}
+                  />
+                  Verified only
+                </label>
+                <label className="mt-2 flex items-center gap-2 text-xs text-mithril">
+                  <input
+                    type="checkbox"
+                    checked={showEdgeLabels}
+                    onChange={e => setShowEdgeLabels(e.target.checked)}
+                  />
+                  Edge labels
+                </label>
+              </div>
+
+              <button
+                onClick={resetFilters}
+                className="text-xs text-mithril hover:text-moon"
+              >
+                Reset filters
+              </button>
+            </div>
+          </details>
+
+          <div className="text-xs text-mithril">
+            {graphState.nodes.length} nodes / {graphState.edges.length} edges shown
+          </div>
+          <div className="text-[11px] text-mithril">
+            Edge width = strength - dashed = unverified
+          </div>
         </div>
       </div>
 
-      {/* Selected node info */}
-      {selectedNode && (
-        <div className="absolute top-4 right-4 z-10 bg-gray-900/90 backdrop-blur-sm rounded-lg p-4 max-w-xs">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="font-semibold text-white text-sm">{selectedNode}</h3>
-            <button onClick={() => setSelectedNode(null)} className="text-gray-500 hover:text-gray-300 text-xs">close</button>
-          </div>
-          <a
-            href={`/dossiers/${selectedNode.toLowerCase().replace(/\s+/g, '-').replace(/[.']/g, '')}`}
-            className="text-xs text-blue-400 hover:text-blue-300"
-          >
-            View dossier →
-          </a>
-        </div>
-      )}
+      <svg ref={svgRef} className="w-full h-full graph-canvas" />
 
-      <svg ref={svgRef} className="w-full h-full bg-gray-950" />
-
-      <div className="absolute bottom-0 left-0 right-0 bg-gray-900/50 backdrop-blur-sm px-4 py-2 text-xs text-gray-400 text-center">
-        Click nodes to select · Scroll to zoom · Drag to pan
+      <div className="absolute bottom-0 left-0 right-0 bg-[rgba(18,21,27,0.75)] backdrop-blur-sm px-4 py-2 text-xs text-mithril text-center">
+        Drag to pan - Scroll to zoom - Click to select (shift/cmd for multi-select)
       </div>
     </div>
   );

@@ -24,10 +24,14 @@ def run(cmd: list[str], label: str) -> bool:
 def main():
     steps = [
         (["uv", "run", "python", str(PIPELINE_DIR / "export_dossiers.py")], "Export dossiers"),
+        (["uv", "run", "python", str(PIPELINE_DIR / "curate_dossier.py"), "--all"], "Curate dossiers"),
         (["uv", "run", "python", str(PIPELINE_DIR / "export_network.py")], "Export network graph"),
         (["uv", "run", "python", str(PIPELINE_DIR / "export_financials.py")], "Export financial flows"),
         (["uv", "run", "python", str(PIPELINE_DIR / "story_clustering.py")], "Export story clusters"),
+        (["uv", "run", "python", str(PIPELINE_DIR / "export_structures.py")], "Export corporate structures"),
+        (["uv", "run", "python", str(PIPELINE_DIR / "export_models.py")], "Validate & index models"),
         (["uv", "run", "python", str(PIPELINE_DIR / "compute_backlinks.py")], "Compute backlinks"),
+        (["uv", "run", "python", str(PIPELINE_DIR / "export_agent_context.py"), "--all"], "Export agent context"),
     ]
 
     failed = []

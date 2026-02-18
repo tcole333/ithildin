@@ -18,37 +18,41 @@ const ds10Data = loadJson('ds10-flows.json');
 ---
 <BaseLayout title="Financial Flows">
   <div class="space-y-10">
-    <div>
-      <h1 class="text-3xl font-bold tracking-tight">Financial Flows</h1>
-      <p class="text-gray-400 mt-1">
-        Money trails through trust companies, shell corporations, and offshore entities.
-        Data sourced from Deutsche Bank DS10 records, court filings, and financial findings.
-      </p>
-    </div>
+    <section class="surface beam p-8 reveal" style="--delay: 0s;">
+      <div class="space-y-3">
+        <div class="section-label">Flows</div>
+        <h1 class="text-3xl md:text-4xl font-display text-moon">Financial Paths</h1>
+        <p class="text-mithril font-body">
+          Money trails through trusts, shell corporations, and offshore entities. These diagrams
+          map the channels that keep capital in motion.
+        </p>
+      </div>
+    </section>
 
     {apolloData && (
-      <SankeyDiagram data={apolloData} height={400} client:visible />
+      <SankeyDiagram data={apolloData} height={420} client:visible />
     )}
 
     {wexnerData && (
-      <SankeyDiagram data={wexnerData} height={400} client:visible />
+      <SankeyDiagram data={wexnerData} height={420} client:visible />
     )}
 
     {ds10Data && ds10Data.nodes.length > 0 && (
-      <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-white mb-2">Deutsche Bank DS10 Summary</h3>
-        <p class="text-sm text-gray-400 mb-4">
-          579 transactions totaling $304M through Deutsche Bank. {ds10Data.stats.total_nodes} entities,
-          {ds10Data.stats.total_links} flows above $50K threshold.
+      <div class="surface p-6">
+        <div class="section-label">Deutsche Bank DS10</div>
+        <h3 class="text-lg font-semibold text-moon mt-2">$304M in traced flows</h3>
+        <p class="text-sm text-mithril font-body mt-2">
+          579 transactions through Deutsche Bank. {ds10Data.stats.total_nodes} entities and
+          {` ${ds10Data.stats.total_links} `}flows above the $50K threshold.
         </p>
 
         {ds10Data.top_transactions && ds10Data.top_transactions.length > 0 && (
-          <div>
-            <h4 class="text-sm font-medium text-gray-300 mb-3">Largest Transactions</h4>
-            <div class="overflow-x-auto">
+          <div class="mt-6">
+            <h4 class="text-sm text-mithril uppercase tracking-[0.3em]">Largest Transactions</h4>
+            <div class="overflow-x-auto mt-3">
               <table class="w-full text-sm">
                 <thead>
-                  <tr class="text-left text-xs text-gray-500 uppercase tracking-wider border-b border-gray-800">
+                  <tr class="text-left text-xs text-mithril uppercase tracking-wider border-b border-[color:var(--color-ash)]">
                     <th class="pb-2 pr-4">Date</th>
                     <th class="pb-2 pr-4">Amount</th>
                     <th class="pb-2 pr-4">From</th>
@@ -56,14 +60,14 @@ const ds10Data = loadJson('ds10-flows.json');
                     <th class="pb-2">Reference</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-800/50">
+                <tbody class="divide-y divide-[color:var(--color-ash)]">
                   {ds10Data.top_transactions.slice(0, 20).map((tx: any) => (
-                    <tr class="text-gray-300">
-                      <td class="py-2 pr-4 text-gray-500 text-xs">{tx.tx_date}</td>
-                      <td class="py-2 pr-4 font-mono text-emerald-400">${tx.amount?.toLocaleString()}</td>
+                    <tr class="text-moon">
+                      <td class="py-2 pr-4 text-mithril text-xs font-mono">{tx.tx_date}</td>
+                      <td class="py-2 pr-4 font-mono text-ember">${tx.amount?.toLocaleString()}</td>
                       <td class="py-2 pr-4">{tx.sender}</td>
                       <td class="py-2 pr-4">{tx.receiver}</td>
-                      <td class="py-2 text-gray-500 text-xs truncate max-w-48">{tx.reference}</td>
+                      <td class="py-2 text-mithril text-xs truncate max-w-48">{tx.reference}</td>
                     </tr>
                   ))}
                 </tbody>

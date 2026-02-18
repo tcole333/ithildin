@@ -4,26 +4,31 @@ const currentPath = Astro.url.pathname;
 const links = [
   { href: '/', label: 'Overview' },
   { href: '/articles', label: 'Articles' },
+  { href: '/models', label: 'Models' },
   { href: '/dossiers', label: 'Dossiers' },
   { href: '/network', label: 'Network' },
   { href: '/financials', label: 'Financial Flows' },
 ];
 ---
-<nav class="border-b border-gray-800 bg-gray-950/80 backdrop-blur-sm sticky top-0 z-50">
+<nav class="sticky top-0 z-50 border-b border-[color:var(--color-ash)] bg-[rgba(11,13,16,0.82)] backdrop-blur">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-14">
-      <a href="/" class="text-lg font-semibold text-gray-100 tracking-tight">
-        Epstein Investigation
+    <div class="flex flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/ithildin-logo.png" alt="Ithildin mark" class="h-10 w-10 rounded-sm opacity-90" />
+        <div>
+          <div class="font-display text-sm text-moon">Ithildin</div>
+          <div class="text-xs text-mithril tracking-[0.4em] uppercase">Research Atlas</div>
+        </div>
       </a>
-      <div class="flex items-center gap-1">
+      <div class="flex flex-wrap items-center gap-2">
         {links.map(link => (
           <a
             href={link.href}
             class:list={[
-              'px-3 py-1.5 rounded text-sm transition-colors',
+              'nav-link',
               currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? 'bg-gray-800 text-white'
-                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'
+                ? 'active'
+                : ''
             ]}
           >
             {link.label}

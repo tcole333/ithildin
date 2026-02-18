@@ -11,6 +11,7 @@ import os
 import sqlite3
 import sys
 from pathlib import Path
+from datetime import datetime, timezone
 
 DB_PATH = Path(__file__).parent.parent.parent / "investigation.db"
 OUTPUT_DIR = Path(__file__).parent.parent / "content" / "dossiers"
@@ -22,6 +23,30 @@ def slugify(name: str) -> str:
     slug = re.sub(r'[^a-z0-9\s-]', '', slug)  # Remove everything except alphanumeric, spaces, hyphens
     slug = re.sub(r'[\s-]+', '-', slug)  # Collapse whitespace and hyphens
     return slug.strip('-')
+
+
+def _utcnow() -> datetime:
+    return datetime.now(timezone.utc).replace(tzinfo=None)
+
+
+def _parse_datetime(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        try:
+            return datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            return None
+
+
+def _max_datetime(left: datetime | None, right: datetime | None) -> datetime | None:
+    if left is None:
+        return right
+    if right is None:
+        return left
+    return left if left >= right else right
 
 
 def get_connection(db_path: str | Path = DB_PATH) -> sqlite3.Connection:
@@ -67,6 +92,7 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
 
     # Findings with evidence (across all name variants)
     findings = []
+    last_updated = None
     rows = conn.execute(
         f"""
         SELECT f.id, f.finding_type, f.summary, f.detail, f.source_datasets,
@@ -86,6 +112,8 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
                 finding["source_datasets"] = json.loads(finding["source_datasets"])
             except (json.JSONDecodeError, TypeError):
                 pass
+
+        last_updated = _max_datetime(last_updated, _parse_datetime(row["created_at"]))
 
         evidence = conn.execute(
             """
@@ -141,6 +169,7 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
             ).fetchall()
             connection["evidence"] = [dict(e) for e in evidence]
             connections.append(connection)
+            last_updated = _max_datetime(last_updated, _parse_datetime(row["created_at"]))
 
     # Entity roles (across all name variants)
     entity_roles = []
@@ -194,16 +223,22 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
         ct = c["relationship_type"] or "unknown"
         connection_types[ct] = connection_types.get(ct, 0) + 1
 
+    last_updated_str = last_updated.isoformat() if last_updated else None
+    generated_at = _utcnow().isoformat()
+
     return {
         "name": canonical_name,
         "slug": slugify(canonical_name),
         "aliases": [n for n in all_names if n != canonical_name],
+        "generated_at": generated_at,
+        "last_updated": last_updated_str,
         "stats": {
             "total_findings": len(findings),
             "total_connections": len(connections),
             "total_entities": len(entity_roles),
             "finding_types": finding_types,
             "connection_types": connection_types,
+            "last_updated": last_updated_str,
         },
         "findings": findings,
         "connections": connections,
@@ -263,6 +298,8 @@ def main():
     parser.add_argument("--min-findings", type=int, default=5, help="Minimum findings to export (default: 5)")
     parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
     parser.add_argument("--list", action="store_true", help="List targets that would be exported")
+    parser.add_argument("--incremental", action="store_true", help="Skip dossiers with no new updates")
+    parser.add_argument("--curate", action="store_true", help="Run curation pipeline after export")
     args = parser.parse_args()
 
     conn = get_connection()
@@ -304,23 +341,43 @@ def main():
     for canonical, all_names in targets:
         dossier = export_target(conn, canonical, all_names)
         out_path = args.output_dir / f"{dossier['slug']}.json"
-        with open(out_path, "w") as f:
-            json.dump(dossier, f, indent=2, default=str)
+
+        dossier_for_index = dossier
+        skipped = False
+        if args.incremental and out_path.exists():
+            try:
+                existing = json.loads(out_path.read_text())
+            except json.JSONDecodeError:
+                existing = None
+            if existing:
+                existing_last = _parse_datetime(
+                    existing.get("last_updated") or existing.get("generated_at")
+                )
+                new_last = _parse_datetime(dossier.get("last_updated"))
+                if existing_last and new_last and existing_last >= new_last:
+                    dossier_for_index = existing
+                    skipped = True
+
+        if not skipped:
+            with open(out_path, "w") as f:
+                json.dump(dossier, f, indent=2, default=str)
 
         index.append({
-            "name": dossier["name"],
-            "slug": dossier["slug"],
-            "stats": dossier["stats"],
+            "name": dossier_for_index["name"],
+            "slug": dossier_for_index["slug"],
+            "stats": dossier_for_index["stats"],
+            "last_updated": dossier_for_index.get("last_updated"),
         })
 
         # Generate redirects for alias slugs
-        for alias in dossier.get("aliases", []):
+        for alias in dossier_for_index.get("aliases", []):
             alias_slug = slugify(alias)
-            if alias_slug != dossier["slug"]:
-                redirects[alias_slug] = dossier["slug"]
+            if alias_slug != dossier_for_index["slug"]:
+                redirects[alias_slug] = dossier_for_index["slug"]
 
-        alias_info = f" (+{len(dossier['aliases'])} aliases)" if dossier.get("aliases") else ""
-        print(f"  Exported {canonical} ({dossier['stats']['total_findings']} findings, {dossier['stats']['total_connections']} connections){alias_info}")
+        alias_info = f" (+{len(dossier_for_index['aliases'])} aliases)" if dossier_for_index.get("aliases") else ""
+        action = "Skipped" if skipped else "Exported"
+        print(f"  {action} {canonical} ({dossier_for_index['stats']['total_findings']} findings, {dossier_for_index['stats']['total_connections']} connections){alias_info}")
 
     # Write index
     index_path = args.output_dir / "_index.json"
@@ -336,6 +393,22 @@ def main():
 
     print(f"\nExported {len(targets)} dossiers to {args.output_dir}")
     conn.close()
+
+    if args.curate:
+        import subprocess
+
+        curate_script = Path(__file__).parent / "curate_dossier.py"
+        curate_args = ["uv", "run", "python", str(curate_script)]
+        if args.target:
+            curate_args.extend(["--target", args.target])
+        else:
+            curate_args.append("--all")
+        curate_args.extend(["--dossier-dir", str(args.output_dir)])
+
+        print("\nRunning curation pipeline...")
+        result = subprocess.run(curate_args)
+        if result.returncode != 0:
+            print("  Curation pipeline failed", file=sys.stderr)
 
 
 if __name__ == "__main__":

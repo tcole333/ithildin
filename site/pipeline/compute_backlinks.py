@@ -272,6 +272,112 @@ def compute_cluster_dossier_links(clusters: list[dict], dossier_index: dict[str,
     return links
 
 
+MODELS_DIR = CONTENT_DIR / "models"
+
+
+def load_model_index() -> list[dict]:
+    """Load model index for cross-referencing."""
+    index_path = MODELS_DIR / "_index.json"
+    if not index_path.exists():
+        return []
+    return json.loads(index_path.read_text())
+
+
+def compute_model_backlinks(
+    dossier_index: dict[str, dict],
+    model_index: list[dict],
+) -> tuple[dict[str, list[dict]], dict[str, list[dict]]]:
+    """Compute model↔dossier backlinks.
+
+    Sources:
+    1. Tags table: findings tagged with tag_type='model' and value=model-slug
+       → map finding's target_name to dossier slug
+    2. Canonical instances: model JSON references specific targets
+       → match target labels to dossier slugs
+
+    Returns (model_to_dossier, dossier_to_model).
+    """
+    model_ids = {m["id"] for m in model_index}
+    model_map = {m["id"]: m for m in model_index}
+
+    m2d: dict[str, list[dict]] = {mid: [] for mid in model_ids}
+    d2m: dict[str, list[dict]] = {}
+
+    name_to_slug: dict[str, str] = {}
+    for slug, info in dossier_index.items():
+        name_to_slug[info["name"].lower()] = slug
+
+    # Source 1: Tags with type='model'
+    try:
+        conn = sqlite3.connect(str(DB_PATH))
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute("""
+            SELECT t.tag_value, f.target_name
+            FROM tags t
+            JOIN findings f ON t.record_id = f.id AND t.table_name = 'findings'
+            WHERE t.tag_type = 'model'
+        """).fetchall()
+        conn.close()
+
+        for row in rows:
+            model_slug = row["tag_value"]
+            target_name = row["target_name"]
+            if model_slug not in model_ids:
+                continue
+
+            dossier_slug = name_to_slug.get(target_name.lower()) if target_name else None
+            if not dossier_slug or dossier_slug not in dossier_index:
+                dossier_slug = slugify(target_name) if target_name else None
+            if not dossier_slug or dossier_slug not in dossier_index:
+                continue
+
+            # Add to m2d if not already present
+            existing_slugs = {d["slug"] for d in m2d[model_slug]}
+            if dossier_slug not in existing_slugs:
+                m2d[model_slug].append({
+                    "slug": dossier_slug,
+                    "name": dossier_index[dossier_slug]["name"],
+                    "via": "tag",
+                })
+    except (sqlite3.OperationalError, FileNotFoundError):
+        pass
+
+    # Source 2: Canonical instances from model JSONs
+    for model_info in model_index:
+        model_path = MODELS_DIR / f"{model_info['id']}.json"
+        if not model_path.exists():
+            continue
+        model_data = json.loads(model_path.read_text())
+        for inst in model_data.get("canonical_instances", []):
+            label = inst.get("label", "").lower()
+            # Try to match label to a dossier
+            for name, slug in name_to_slug.items():
+                if name in label or label in name:
+                    existing_slugs = {d["slug"] for d in m2d[model_info["id"]]}
+                    if slug not in existing_slugs:
+                        m2d[model_info["id"]].append({
+                            "slug": slug,
+                            "name": dossier_index[slug]["name"],
+                            "via": "canonical_instance",
+                        })
+                    break
+
+    # Build reverse: dossier_to_model
+    for model_slug, dossier_links in m2d.items():
+        for dl in dossier_links:
+            dossier_slug = dl["slug"]
+            if dossier_slug not in d2m:
+                d2m[dossier_slug] = []
+            existing_model_ids = {m["id"] for m in d2m[dossier_slug]}
+            if model_slug not in existing_model_ids:
+                d2m[dossier_slug].append({
+                    "id": model_slug,
+                    "title": model_map[model_slug]["title"],
+                })
+
+    return m2d, d2m
+
+
 def main():
     print("Computing backlinks...")
 
@@ -305,12 +411,23 @@ def main():
     c2d_count = sum(len(v) for v in c2d.values())
     print(f"  Cluster→Dossier: {c2d_count} links")
 
+    model_index = load_model_index()
+    print(f"  Loaded {len(model_index)} models")
+
+    m2d, d2m = compute_model_backlinks(dossier_index, model_index)
+    m2d_count = sum(len(v) for v in m2d.values())
+    d2m_count = sum(len(v) for v in d2m.values())
+    print(f"  Model→Dossier: {m2d_count} links")
+    print(f"  Dossier→Model: {d2m_count} links")
+
     backlinks = {
         "dossier_to_dossier": d2d,
         "article_to_dossier": a2d,
         "dossier_to_article": d2a,
         "article_to_article": a2a,
         "cluster_to_dossier": c2d,
+        "model_to_dossier": m2d,
+        "dossier_to_model": d2m,
     }
 
     out_path = CONTENT_DIR / "backlinks.json"

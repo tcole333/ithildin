@@ -16,7 +16,6 @@ interface ArticleMeta {
 
 let articles: ArticleMeta[] = [];
 
-// Read article frontmatter from MDX files
 if (existsSync(articlesDir)) {
   const files = readdirSync(articlesDir).filter(f => f.endsWith('.mdx'));
   for (const file of files) {
@@ -38,7 +37,6 @@ if (existsSync(articlesDir)) {
   }
 }
 
-// Planned articles (story clusters)
 const planned = [
   { title: "The Apollo Money Pipeline", subtitle: "How $158M+ flowed from 3 billionaires to a convicted sex offender", cluster: "apollo-money-pipeline" },
   { title: "Wexner Trust Architecture", subtitle: "A masterclass in using trusts to obscure beneficial ownership", cluster: "wexner-trust-architecture" },
@@ -57,7 +55,6 @@ const planned = [
 const publishedSlugs = new Set(articles.map(a => a.slug));
 const unwritten = planned.filter(p => !publishedSlugs.has(p.cluster));
 
-// Load cluster→dossier backlinks for planned articles
 const backlinksPath = resolve(process.cwd(), '..', 'content', 'backlinks.json');
 let clusterDossiers: Record<string, any[]> = {};
 if (existsSync(backlinksPath)) {
@@ -66,48 +63,67 @@ if (existsSync(backlinksPath)) {
 }
 ---
 <BaseLayout title="Articles">
-  <div class="space-y-8">
-    <div>
-      <h1 class="text-3xl font-bold tracking-tight">Investigative Articles</h1>
-      <p class="text-gray-400 mt-2 max-w-2xl">
-        Deep-dive analyses into mechanisms, money flows, and systemic patterns.
-        Written in a style that explains the plumbing — how money actually moves,
-        what compliance checks should have caught it, and what makes these structures possible.
-      </p>
-    </div>
+  <div class="space-y-10">
+    <section class="surface beam p-8 reveal" style="--delay: 0s;">
+      <div class="space-y-4">
+        <div class="section-label">Longform</div>
+        <h1 class="text-3xl md:text-4xl font-display text-moon">Investigative Articles</h1>
+        <p class="text-mithril font-body max-w-2xl">
+          Deep-dive analyses into mechanisms, money flows, and systemic patterns. Each piece is
+          a narrative map of how systems operate beneath the surface.
+        </p>
+      </div>
+    </section>
 
     {articles.length > 0 && (
-      <div class="space-y-4">
-        <h2 class="text-xl font-semibold">Published</h2>
-        {articles.map(article => (
-          <a href={`/articles/${article.slug}`} class="block bg-gray-900 border border-gray-800 rounded-lg p-5 hover:border-gray-700 transition-colors group">
-            <h3 class="text-lg font-semibold text-gray-200 group-hover:text-white">{article.title}</h3>
-            {article.subtitle && <p class="text-sm text-gray-400 mt-1">{article.subtitle}</p>}
-            {article.wordCount && <span class="text-xs text-gray-600 mt-2 inline-block">{Math.round(article.wordCount / 1000)}K words</span>}
-          </a>
-        ))}
-      </div>
+      <section class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-semibold text-moon">Published</h2>
+          <div class="rune-divider flex-1 ml-6"></div>
+        </div>
+        <div class="grid gap-4">
+          {articles.map((article, idx) => (
+            <a
+              href={`/articles/${article.slug}`}
+              class="surface p-6 transition reveal"
+              style={`--delay: ${Math.min(idx * 0.05, 0.4)}s;`}
+            >
+              <div class="section-label">Article</div>
+              <h3 class="text-xl text-moon mt-3">{article.title}</h3>
+              {article.subtitle && <p class="text-sm text-mithril mt-2 font-body">{article.subtitle}</p>}
+              {article.wordCount && (
+                <div class="text-xs text-mithril mt-4 font-mono">
+                  {Math.round(article.wordCount / 1000)}K words / {Math.ceil(article.wordCount / 250)} min read
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+      </section>
     )}
 
-    <div class="space-y-4">
-      <h2 class="text-xl font-semibold text-gray-400">{articles.length > 0 ? 'Planned' : 'Planned Articles'}</h2>
-      <div class="grid md:grid-cols-2 gap-3">
-        {unwritten.map(article => {
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold text-moon">Planned</h2>
+        <div class="rune-divider flex-1 ml-6"></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        {unwritten.map((article, idx) => {
           const dossiers = clusterDossiers[article.cluster] || [];
           return (
-            <div class="bg-gray-900/50 border border-gray-800/50 rounded-lg p-4">
-              <h3 class="text-sm font-semibold text-gray-400">{article.title}</h3>
-              <p class="text-xs text-gray-500 mt-1">{article.subtitle}</p>
+            <div class="surface-muted p-5 reveal" style={`--delay: ${Math.min(idx * 0.04, 0.4)}s;`}>
+              <div class="section-label">Planned</div>
+              <h3 class="text-lg text-moon mt-3">{article.title}</h3>
+              <p class="text-xs text-mithril mt-2 font-body">{article.subtitle}</p>
               {dossiers.length > 0 && (
-                <div class="flex flex-wrap gap-1 mt-2">
+                <div class="flex flex-wrap gap-2 mt-4">
                   {dossiers.slice(0, 6).map((d: any) => (
-                    <a href={`/dossiers/${d.slug}`}
-                       class="text-xs text-blue-400/70 hover:text-blue-400 bg-gray-800/50 rounded px-1.5 py-0.5">
+                    <a href={`/dossiers/${d.slug}`} class="chip" style="letter-spacing: 0.14em;">
                       {d.name}
                     </a>
                   ))}
                   {dossiers.length > 6 && (
-                    <span class="text-xs text-gray-600">+{dossiers.length - 6} more</span>
+                    <span class="text-xs text-mithril">+{dossiers.length - 6} more</span>
                   )}
                 </div>
               )}
@@ -115,6 +131,6 @@ if (existsSync(backlinksPath)) {
           );
         })}
       </div>
-    </div>
+    </section>
   </div>
 </BaseLayout>
