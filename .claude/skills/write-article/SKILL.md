@@ -460,6 +460,60 @@ For the full set of writing, explanation, and narrative principles, see `researc
 - **Narrative Structure** (Eight-Beat Envelope, Dual-Spine, Character-Web, Evidence Budget, Progressive Revelation)
 - **Anti-Patterns** (language, structural, precision, and analytical failure modes to avoid)
 
+## Visualizations
+
+Articles should use interactive visualizations from the component library where they genuinely help readers track complex information — timelines with many actors and dates, financial flows, corporate structures, relationship networks. The goal is comprehension, not decoration.
+
+**Available components** (embed via `data-viz` markers in MDX):
+
+| Component | Best For | Example |
+|-----------|----------|---------|
+| `TimelineChart` | Dense chronologies with 10+ events across multiple actors | Gulf correspondence timeline grouped by entity |
+| `TransactionTable` | Financial flows with amounts, dates, parties | Apollo money pipeline transactions |
+| `EgoNetwork` | Showing one person's connections with strength/type | Epstein's Gulf contact tiers |
+| `SankeyDiagram` | Money flows between entities | Fund → entity → destination chains |
+| `CorporateStructure` | Hierarchical entity ownership/control | Trust structures, shell company chains |
+
+**Embedding syntax:**
+```html
+<div data-viz="TimelineChart" data-src="/content/timelines/cluster-name.json" data-height="420" data-group-by="entity"></div>
+```
+
+**When to use visualizations:**
+- The article introduces 5+ named actors whose relationships the reader must track
+- There's a dense chronology where the sequence of events matters and text alone forces the reader to hold too much state
+- Financial flows involve multiple parties and amounts that benefit from visual structure
+- Corporate structures have ownership/control chains that are hard to follow in prose
+- The article discusses network patterns (who connects to whom) that are fundamentally visual
+
+**When NOT to use them:**
+- As decoration or to break up long text sections
+- When the prose already makes the point clearly
+- For simple two-party relationships or linear timelines
+- When the data would need to be fabricated or padded to fill a visualization
+
+**Data files:** Create JSON in `site/content/{timelines,financials,ego,structures}/` matching the component's expected format. Copy to `site/web/public/content/` for runtime fetch. See `site/web/src/components/*.tsx` for prop interfaces.
+
+**The writer is responsible for creating visualization data files during writing.** When you encounter a section where a visualization would genuinely help, create the JSON data file from the evidence you've already assembled. Don't defer this to the review step — the article structure should account for where visualizations sit.
+
+## Temporal Accuracy
+
+Relationships, roles, and institutional affiliations change over time. The article must accurately frame when things were true.
+
+**Time-bound all relationship claims:**
+- "Ruemmler, then White House Counsel" not "Ruemmler, White House Counsel" (she left that role in 2014)
+- "Barrack, who at the time chaired Colony Capital" not just "Barrack, chairman of Colony Capital"
+- "Deutsche Bank, which served as Epstein's bank from 2013 to 2019" not "Epstein's bank Deutsche Bank"
+
+**Common temporal errors to avoid:**
+- Treating a past banking relationship as current
+- Describing someone's role at an institution when they'd already left
+- Conflating different time periods of a relationship (early social → later operational)
+- Using present tense for dissolved entities or expired corporate registrations
+- Applying post-2019 knowledge to pre-arrest narratives (the article shouldn't read like a retrospective indictment)
+
+**When a relationship spans multiple phases, note the evolution.** Don't flatten a 15-year relationship into a single characterization. "The correspondence from 2009 shows a social acquaintance; by 2016, the exchanges had shifted to operational intelligence sharing" is more accurate than describing the entire span as intelligence work.
+
 ## Quality Bar
 
 An article is ready for `/review-article` when:
@@ -476,3 +530,5 @@ An article is ready for `/review-article` when:
 11. Applicable analytical models are referenced via callout blocks where evidence warrants
 12. No Evidence Index or Editor's Note in the article (citations auto-generate Sources; structural reasoning goes in the user report)
 13. No colon crutch, "This is..." transitions, or stacked declaratives — syntactic variance is present throughout
+14. Visualizations included where they genuinely help readers track complex information (timelines, flows, structures)
+15. All relationship and role claims are temporally accurate — time-bounded to when they were true

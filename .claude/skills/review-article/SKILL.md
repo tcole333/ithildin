@@ -349,6 +349,63 @@ Flag any paragraph that:
 
 Also verify the article includes a **confidence framing paragraph** before the first major evidentiary section.
 
+### 5f. Temporal Accuracy Check
+
+Verify that all relationship claims, role descriptions, and institutional affiliations are accurately time-bounded. This is a high-risk category — articles covering decade-spanning networks can easily treat past relationships as current or flatten relationship evolution.
+
+**For each named person, check:**
+- [ ] Is their described role accurate for the date in the article? (e.g., "White House Counsel" only during their actual tenure)
+- [ ] If multiple roles are mentioned, are the time boundaries clear? ("then-White House Counsel, now general counsel of Goldman Sachs")
+- [ ] Are status descriptors date-appropriate? (Don't call someone "chairman" after they've stepped down)
+
+**For each institution/entity, check:**
+- [ ] Is the entity described as it existed at the time? (Not retroactively applying later developments)
+- [ ] Are dissolved entities flagged as dissolved? (Corporate registrations expire; trusts terminate)
+- [ ] Are banking/professional relationships bounded? ("served as Epstein's bank from 2013 to 2019" not "Epstein's bank")
+
+**For relationship arcs, check:**
+- [ ] Does the article distinguish phases? (Early social contact vs. later operational use)
+- [ ] Is post-arrest knowledge separated from pre-arrest narrative? (The article shouldn't read as if everyone knew in 2016 what became public in 2019)
+- [ ] Are "at the time" qualifiers present where needed?
+
+**For legal outcomes, check:**
+- [ ] Indictments, guilty pleas, acquittals, and pardons all have correct dates
+- [ ] Pending vs. resolved matters are accurately distinguished
+- [ ] "Convicted" is not used for someone who was acquitted or whose case is pending
+
+Flag temporal errors as:
+```
+[LINE X] "Ruemmler, White House Counsel" — TEMPORAL: she left that role in 2014; this event is 2018. Use "former White House Counsel"
+[LINE Y] "Barrack, chairman of Colony Capital" — TEMPORAL: verify he still held this title in 2021 when indicted
+[LINE Z] "Deutsche Bank, Epstein's bank" — TEMPORAL: relationship ended Dec 2018; frame as past tense after that date
+```
+
+### 5g. Visualization Assessment
+
+Evaluate whether the article would benefit from interactive visualizations, and check any existing ones.
+
+**Check existing visualizations:**
+- [ ] Does each `data-viz` marker have a valid `data-src` pointing to an existing JSON file?
+- [ ] Does the data match the article's claims? (Dates, names, amounts should be consistent)
+- [ ] Is the visualization placed at a natural point in the article where the reader needs orientation?
+- [ ] Does surrounding prose provide enough context that the article works without JS?
+
+**Identify visualization opportunities:**
+- [ ] Does the article have 10+ dated events across 3+ actors? → Suggest TimelineChart
+- [ ] Does it describe financial flows with specific amounts between parties? → Suggest TransactionTable or SankeyDiagram
+- [ ] Does it introduce a complex network of relationships? → Suggest EgoNetwork
+- [ ] Does it describe corporate structures or ownership chains? → Suggest CorporateStructure
+
+**Flag opportunities:**
+```
+[SECTION "The Three Tiers"] — VIZ: TimelineChart would help readers track 30+ events across 7 actors
+[SECTION "The Mechanism"] — VIZ: SankeyDiagram for money flows; data available in DS10 records
+[NO VIZ NEEDED] — Article has simple linear structure; prose handles it well
+```
+
+Available components: TimelineChart, TransactionTable, EgoNetwork, SankeyDiagram, CorporateStructure.
+Data format specs in `site/web/src/components/*.tsx`.
+
 ### 6. Style Review
 
 Check the article against the patio11 style guide:
@@ -365,6 +422,8 @@ Check the article against the patio11 style guide:
 - [ ] No exhibit-list evidence dumps — everything narrated into the story
 - [ ] Calibrated precision (exact figures when known, honest ranges when uncertain)
 - [ ] Infrastructure revealed, not just described (the waterfall, the cascade, the gap)
+- [ ] Relationship and role claims are temporally accurate (time-bounded to when they were true)
+- [ ] Visualizations present where they help and absent where they'd be decorative
 
 #### AI Tell Detection
 - [ ] No colon crutch: `[Statement]: [Explanation]` pattern used sparingly, not as default exposition structure
