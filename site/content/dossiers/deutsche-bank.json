@@ -6,11 +6,11 @@
     "DEUTSCHE BANK",
     "Deutsche Bank Trust"
   ],
-  "generated_at": "2026-02-17T18:12:03.432569",
-  "last_updated": "2026-02-17T15:30:43",
+  "generated_at": "2026-02-18T02:59:57.294211",
+  "last_updated": "2026-02-17T19:56:25",
   "stats": {
     "total_findings": 24,
-    "total_connections": 18,
+    "total_connections": 19,
     "total_entities": 0,
     "finding_types": {
       "legal": 10,
@@ -19,13 +19,13 @@
       "identity": 1
     },
     "connection_types": {
-      "financial": 10,
+      "financial": 11,
       "employment": 2,
       "legal": 3,
       "corporate": 2,
       "political": 1
     },
-    "last_updated": "2026-02-17T15:30:43"
+    "last_updated": "2026-02-17T19:56:25"
   },
   "findings": [
     {
@@ -938,6 +938,27 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 2010,
+      "person_a": "Deutsche Bank",
+      "person_b": "Republic National Bank of New York",
+      "relationship_type": "financial",
+      "description": "RNB and Deutsche Bank operated in parallel on correspondent banking: both blocked South Pacific island nation wire transfers in late 1999 (alongside Bank of New York) due to money laundering concerns with Nauru-licensed banks",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:56:25",
+      "other_person": "Republic National Bank of New York",
+      "other_person_slug": "republic-national-bank-of-new-york",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Levin PSI Correspondent Banking report pp.236, 249",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -1241,7 +1262,7 @@
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
       }
     ],
-    "curated_at": "2026-02-17T18:12:03.721746"
+    "curated_at": "2026-02-18T02:59:57.516256"
   },
   "viz_data": {
     "ego_network": {
@@ -1372,6 +1393,13 @@
           "strength": 0.7,
           "evidence_ref": "Finding:2954",
           "description": "Epstein iMessage (May 27, 2019): 'Navigate Biden Horowitz Barr. DB NYS /' \u2014 DB likely refers to Deutsche Bank, Epstein's primary banker. Barr as AG oversaw DOJ during period when Deutsche Bank was under investigation for Epstein accounts, money laundering, and sanctions violations. SDNY investigated DB's Epstein relationship. Barr attempted to replace SDNY USA Berman with Jay Clayton, who had represented Deutsche Bank at Sullivan & Cromwell."
+        },
+        {
+          "target": "Republic National Bank of New York",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "Levin PSI Correspondent Banking report pp.236, 249",
+          "description": "RNB and Deutsche Bank operated in parallel on correspondent banking: both blocked South Pacific island nation wire transfers in late 1999 (alongside Bank of New York) due to money laundering concerns with Nauru-licensed banks"
         }
       ],
       "secondHop": {

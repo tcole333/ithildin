@@ -7,11 +7,11 @@
     "JEFFREY EPSTEIN",
     "Jeffrey E Epstein"
   ],
-  "generated_at": "2026-02-17T18:12:03.258695",
-  "last_updated": "2026-02-17T18:04:54",
+  "generated_at": "2026-02-18T02:59:57.185590",
+  "last_updated": "2026-02-17T22:21:51",
   "stats": {
-    "total_findings": 200,
-    "total_connections": 507,
+    "total_findings": 201,
+    "total_connections": 520,
     "total_entities": 111,
     "finding_types": {
       "identity": 17,
@@ -22,20 +22,20 @@
       "unknown": 2,
       "document": 11,
       "communication": 7,
-      "relationship": 8
+      "relationship": 9
     },
     "connection_types": {
-      "financial": 157,
+      "financial": 158,
       "legal": 84,
-      "social": 107,
+      "social": 114,
       "corporate": 43,
-      "intelligence": 68,
-      "advisory": 21,
+      "intelligence": 72,
+      "advisory": 22,
       "political": 5,
       "employment": 20,
       "familial": 2
     },
-    "last_updated": "2026-02-17T18:04:54"
+    "last_updated": "2026-02-17T22:21:51"
   },
   "findings": [
     {
@@ -5534,6 +5534,28 @@
           "evidence_type": "ref",
           "evidence_ref": "OffshoreAlert:Katlyn-Doe-v-Epstein",
           "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3337,
+      "finding_type": "relationship",
+      "summary": "Brockman emailed Epstein (Sept 14, 2015): 'Safra in town - got me into Cornell Weill. Being met at ER by top cardiologist.' Indicates Jacqui Safra had medical connections that benefited Brockman, and this favor was reported directly to Epstein, showing Safra as a shared resource in the Brockman-Epstein relationship.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:52:11",
+      "target_name": "Epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02357201",
+          "source_quote": " Safra in town - got me into Cornell Weill. Being met at ER by top cardiologist. All set. JB",
           "source_page": null,
           "assessment": null
         }
@@ -12844,6 +12866,168 @@
       ]
     },
     {
+      "id": 1987,
+      "person_a": "Jacqui Safra",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Repeated attendance at Edge Foundation dinners together (2012-2014), Jerusalem real estate negotiations, financial discussions via John Brockman intermediary. At least 15 DOJ documents reference both.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:53:04",
+      "other_person": "Jacqui Safra",
+      "other_person_slug": "jacqui-safra",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02365899",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1993,
+      "person_a": "Jacqui Safra",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Safra in Epstein social circle via Brockman Edge Foundation. Brockman brokered potential financial deals between them.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:53:12",
+      "other_person": "Jacqui Safra",
+      "other_person_slug": "jacqui-safra",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02413047",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02581892",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02707165",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1995,
+      "person_a": "J.E. Safra",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "J.E. Safra (Jacob E. Safra) on Brockman tech-billionaire email distribution alongside Epstein",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:53:16",
+      "other_person": "J.E. Safra",
+      "other_person_slug": "je-safra",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02694698",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02694835",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2055,
+      "person_a": "Adnan Khashoggi",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "financial",
+      "description": "Khashoggi was Epstein's financial client; Epstein described as financial fixer",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 20:19:42",
+      "other_person": "Adnan Khashoggi",
+      "other_person_slug": "adnan-khashoggi",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis relationships 2037411 and 2016804",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2071,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Joe Lockhart",
+      "relationship_type": "advisory",
+      "description": "Epstein sought Lockhart for PR crisis management Jan 2015. Lockhart's Petraeus crisis work was key credential. Summers introduced them, Epstein forwarded chain to Ruemmler.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:15:45",
+      "other_person": "Joe Lockhart",
+      "other_person_slug": "joe-lockhart",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02347846",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02512194",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02514269",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2085,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Michael Wolff",
+      "relationship_type": "intelligence",
+      "description": "Epstein used Wolff as a White House intelligence source in March 2017, asking him to identify upcoming ambassadorial appointments. Wolff confirmed he was 'at WH all week' and offered to 'fish' for names. Epstein specifically asked about Petraeus for a Trump administration role.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:21:51",
+      "other_person": "Michael Wolff",
+      "other_person_slug": "michael-wolff",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02656903",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #3464",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 46,
       "person_a": "International Peace Institute",
       "person_b": "Jeffrey Epstein",
@@ -16371,6 +16555,147 @@
       ]
     },
     {
+      "id": 1996,
+      "person_a": "Andrew Safra",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Andrew Safra organized NYC premiere of Young Victoria; Epstein emailed about it Dec 2009",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:53:18",
+      "other_person": "Andrew Safra",
+      "other_person_slug": "andrew-safra",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02433816",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1999,
+      "person_a": "Andrew Safra",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Epstein was aware of and commented on Andrew Safra's NYC social events. Epstein called him 'Andrew asshole Safra' (Dec 2009). Siegal organized competing Duchess of York event with Epstein's financial backing, listing Ghislaine Maxwell as potential host.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:53:29",
+      "other_person": "Andrew Safra",
+      "other_person_slug": "andrew-safra",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02432629",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2013,
+      "person_a": "Jacqui Safra",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "John Brockman (mutual acquaintance) emailed Epstein about Jacqui Safra as potential co-investor in EDGE platform. Brockman also flagged Safra's banking difficulties as potential business opportunity for Epstein.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:59:00",
+      "other_person": "Jacqui Safra",
+      "other_person_slug": "jacqui-safra",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02413047",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2063,
+      "person_a": "David Petraeus",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "intelligence",
+      "description": "Indirect but significant: Pritzker reported all Petraeus interactions to Epstein. Ed Epstein (journalist) sent Jeffrey Epstein intelligence analysis of Petraeus scandal framing it as possible penetration operation. Larry Summers suggested Epstein hire Joe Lockhart (who helped Clinton and General Petraeus) for PR crisis management. Davidson claimed during FBI sting that Petraeus tape existed involving the Clems.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:06:59",
+      "other_person": "David Petraeus",
+      "other_person_slug": "david-petraeus",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02384585",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02397051",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02562913",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2079,
+      "person_a": "David Petraeus",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "intelligence",
+      "description": "Indirect connection through multiple channels: (1) Tom Pritzker reported all Petraeus interactions to Epstein; (2) Ed Epstein sent Petraeus penetration analysis TO Jeff Epstein; (3) Epstein invoked Petraeus scandal when advising Leon Black; (4) Lockhart's Petraeus credential was selling point for Epstein PR hire; (5) Ariane de Rothschild forwarded Wilson Center invite (Petraeus co-chaired) to Epstein; (6) Pritzker listed Petraeus as Aspen Strategy Group member to Epstein; (7) Ambani asked Epstein about Petraeus as India ambassador. No evidence of DIRECT contact between Petraeus and Jeff Epstein.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:21:16",
+      "other_person": "David Petraeus",
+      "other_person_slug": "david-petraeus",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02372647",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02377394",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02397051",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02454350",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02562913",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 377,
       "person_a": "Jeffrey Epstein",
       "person_b": "Nelson Peltz",
@@ -16552,6 +16877,66 @@
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA02624014",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2006,
+      "person_a": "Andrew Safra",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "social",
+      "description": "Epstein discussed Andrew Safra organizing NY premiere for Young Victoria (Dec 2009); part of broader Safra family social overlap with Epstein",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:54:58",
+      "other_person": "Andrew Safra",
+      "other_person_slug": "andrew-safra",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02433816",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2069,
+      "person_a": "David Petraeus",
+      "person_b": "Jeffrey Epstein",
+      "relationship_type": "intelligence",
+      "description": "No direct Epstein-Petraeus communication found. Connection mediated through: Pritzker reporting interactions, Ed Epstein sending intelligence analysis, Rothschild forwarding Wilson Center events, Epstein using Petraeus as cautionary example for Black. Absence of direct contact is investigatively significant.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:15:41",
+      "other_person": "David Petraeus",
+      "other_person_slug": "david-petraeus",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02372647",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02377394",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02397051",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02562913",
           "source_quote": null,
           "source_page": null
         }
@@ -20606,7 +20991,7 @@
         "guidance": "Narrative about documented communications \u2014 emails, calls, messages. Focus on what they reveal about the relationship or operation."
       }
     ],
-    "curated_at": "2026-02-17T18:12:03.940451"
+    "curated_at": "2026-02-18T02:59:57.647528"
   },
   "viz_data": {
     "ego_network": {
@@ -22755,6 +23140,48 @@
           "description": "Co-defendants in US v. Epstein 96 Civ 8307 (SDNY). Epstein leased 34 E 69th St from OFM, sublet to Fisher, who sublet to Soffer. Government sued all for ejectment. Judge Chin ejected all defendants Apr 1, 1998. Soffer was last holdout subtenant."
         },
         {
+          "target": "Jacqui Safra",
+          "type": "social",
+          "strength": 1.0,
+          "evidence_ref": "EFTA02365899",
+          "description": "Repeated attendance at Edge Foundation dinners together (2012-2014), Jerusalem real estate negotiations, financial discussions via John Brockman intermediary. At least 15 DOJ documents reference both."
+        },
+        {
+          "target": "Jacqui Safra",
+          "type": "social",
+          "strength": 1.0,
+          "evidence_ref": "EFTA02413047",
+          "description": "Safra in Epstein social circle via Brockman Edge Foundation. Brockman brokered potential financial deals between them."
+        },
+        {
+          "target": "J.E. Safra",
+          "type": "social",
+          "strength": 1.0,
+          "evidence_ref": "EFTA02694698",
+          "description": "J.E. Safra (Jacob E. Safra) on Brockman tech-billionaire email distribution alongside Epstein"
+        },
+        {
+          "target": "Adnan Khashoggi",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "LittleSis relationships 2037411 and 2016804",
+          "description": "Khashoggi was Epstein's financial client; Epstein described as financial fixer"
+        },
+        {
+          "target": "Joe Lockhart",
+          "type": "advisory",
+          "strength": 1.0,
+          "evidence_ref": "EFTA02347846",
+          "description": "Epstein sought Lockhart for PR crisis management Jan 2015. Lockhart's Petraeus crisis work was key credential. Summers introduced them, Epstein forwarded chain to Ruemmler."
+        },
+        {
+          "target": "Michael Wolff",
+          "type": "intelligence",
+          "strength": 1.0,
+          "evidence_ref": "EFTA02656903",
+          "description": "Epstein used Wolff as a White House intelligence source in March 2017, asking him to identify upcoming ambassadorial appointments. Wolff confirmed he was 'at WH all week' and offered to 'fish' for names. Epstein specifically asked about Petraeus for a Trump administration role."
+        },
+        {
           "target": "International Peace Institute",
           "type": "financial",
           "strength": 0.7,
@@ -24022,6 +24449,41 @@
           "description": "Epstein hosted private party with Woody Allen at which trafficking victim was forced to serve"
         },
         {
+          "target": "Andrew Safra",
+          "type": "social",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02433816",
+          "description": "Andrew Safra organized NYC premiere of Young Victoria; Epstein emailed about it Dec 2009"
+        },
+        {
+          "target": "Andrew Safra",
+          "type": "social",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02432629",
+          "description": "Epstein was aware of and commented on Andrew Safra's NYC social events. Epstein called him 'Andrew asshole Safra' (Dec 2009). Siegal organized competing Duchess of York event with Epstein's financial backing, listing Ghislaine Maxwell as potential host."
+        },
+        {
+          "target": "Jacqui Safra",
+          "type": "social",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02413047",
+          "description": "John Brockman (mutual acquaintance) emailed Epstein about Jacqui Safra as potential co-investor in EDGE platform. Brockman also flagged Safra's banking difficulties as potential business opportunity for Epstein."
+        },
+        {
+          "target": "David Petraeus",
+          "type": "intelligence",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02384585",
+          "description": "Indirect but significant: Pritzker reported all Petraeus interactions to Epstein. Ed Epstein (journalist) sent Jeffrey Epstein intelligence analysis of Petraeus scandal framing it as possible penetration operation. Larry Summers suggested Epstein hire Joe Lockhart (who helped Clinton and General Petraeus) for PR crisis management. Davidson claimed during FBI sting that Petraeus tape existed involving the Clems."
+        },
+        {
+          "target": "David Petraeus",
+          "type": "intelligence",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02372647",
+          "description": "Indirect connection through multiple channels: (1) Tom Pritzker reported all Petraeus interactions to Epstein; (2) Ed Epstein sent Petraeus penetration analysis TO Jeff Epstein; (3) Epstein invoked Petraeus scandal when advising Leon Black; (4) Lockhart's Petraeus credential was selling point for Epstein PR hire; (5) Ariane de Rothschild forwarded Wilson Center invite (Petraeus co-chaired) to Epstein; (6) Pritzker listed Petraeus as Aspen Strategy Group member to Epstein; (7) Ambani asked Epstein about Petraeus as India ambassador. No evidence of DIRECT contact between Petraeus and Jeff Epstein."
+        },
+        {
           "target": "Nelson Peltz",
           "type": "financial",
           "strength": 0.4,
@@ -24083,6 +24545,20 @@
           "strength": 0.4,
           "evidence_ref": "EFTA02571471",
           "description": "No direct emails between Lowell and Epstein found. Connection is via Kathy Ruemmler who mentioned Lowell to Epstein twice: dinner Sep 2018, Kushner defense call Nov 2017. Lowell was in Epstein social/professional orbit through DC defense bar."
+        },
+        {
+          "target": "Andrew Safra",
+          "type": "social",
+          "strength": 0.4,
+          "evidence_ref": "EFTA02433816",
+          "description": "Epstein discussed Andrew Safra organizing NY premiere for Young Victoria (Dec 2009); part of broader Safra family social overlap with Epstein"
+        },
+        {
+          "target": "David Petraeus",
+          "type": "intelligence",
+          "strength": 0.4,
+          "evidence_ref": "EFTA02372647",
+          "description": "No direct Epstein-Petraeus communication found. Connection mediated through: Pritzker reporting interactions, Ed Epstein sending intelligence analysis, Rothschild forwarding Wilson Center events, Epstein using Petraeus as cautionary example for Black. Absence of direct contact is investigatively significant."
         },
         {
           "target": "Nigel Oakes",

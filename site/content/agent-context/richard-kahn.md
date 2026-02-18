@@ -1,5 +1,5 @@
 # Richard Kahn
-**Stats**: 10 findings, 38 connections, 13 entities
+**Stats**: 11 findings, 39 connections, 13 entities
 **Dossier**: /dossiers/richard-kahn
 
 ## Key Findings
@@ -13,6 +13,7 @@
 - **[financial/high]** Kahn managed Epstein personal spending: arranged Peggy Siegal wire for Elton John dinner (June 2017), oversaw Apple Watch Series 4 gifts to staff (Nov 2018, Hermes bands), handled Nick Ribis consultations, coordinated with David Mitchell on Southampton property, managed 9 East 71st Street with Merwin Dela Cruz. Kahn also handled Sold for 500K pounds report to Epstein (March 2018), Caterpillar Trust administration (2017), and FlightAware tracking of N120JE. (2017-06) (Finding #329)
 - **[communication/high]** Richard Kahn systematically monitored Peter Thiel in media and forwarded articles to Epstein. At least 8 separate forwards documented: Thiel-Trump hedging bet (BuzzFeed Aug 2017), Trump Germany ambassador tap (CNBC Jan 2017), Thiel-Trump tech pal (NYT Jan 2017), NZ citizenship backup country (NYT Jan 2017), RNC embrace squirming (NYT Jul 2016), Thiel defends Trump support (NYT Oct 2016). All marked Importance High. (2017-08) (Finding #2741)
 - **[relationship/medium]** Kahn network per LMSBAND co-occurrence: 1818 files with Stewart Oldfield (DB banker - most frequent), 830 with Indyke, 677 with Bella Klein, 471 with Epstein, 348 Amanda Kirby (DB), 329 Cynthia Rodriguez (DB), 299 Paul Morris, 208 Daniel Sabba (DB), 195 Rothschild, 184 Tazia Smith. LittleSis shows: treasurer at COUQ Foundation, treasurer at Poplar Inc, position at HBRK, executor of Epstein estate, donations to Bill Richardson, Stacey Plaskett (5400), and Hillary Clinton (500). Professional relationship with Ben Goertzel and transaction with Humanity+ Inc. (Finding #326)
+- **[financial/high]** Richard Kahn (Epstein's accountant at HBRK Associates) discussed obtaining a 'Safra (150-200) member list' to market a real estate project by David Mitchell (Mitchell Holdings LLC, 801 Madison Ave). Plan was to donate $100,000 per purchase to 'Safra' from broker commissions. This likely refers to the Edmond J. Safra Synagogue (Manhattan Sephardic community). Email also discusses DB (Deutsche Bank) loan extension and $1.5M funding request. (Finding #3336)
 
 ## Top Connections
 - **Leon Black** [advisory/strong]: Kahn managed Gratitude America (EIN 66-0789697) which received $10M from Black in 2015. Kahn also worked on Black family financial matters as referenced in Origins Project unused funds email.
@@ -27,7 +28,7 @@
 - **Honeycomb Asset Management LP** [financial/strong]: Richard Kahn (HBRK Associates Inc, 575 Lexington Ave 4th Floor NY) served as intermediary between Epstein and Honeycomb. Kahn forwarded performance reports, wire instructions, and investment opportunities. Kahn facilitated Honeycomb Ventures I and IV subscriptions.
 - **David Fiszel** [financial/strong]: Richard Kahn (HBRK Associates) was the primary intermediary between Fiszel and Epstein. Kahn forwarded performance reports, deal opportunities, wire instructions, and pushed Fiszel for introductions to Epstein network. Kahn described Epstein as boss to Fiszel.
 - **David Fiszel** [financial/strong]: Kahn (HBRK Associates, 575 Lexington Ave) served as Epstein's investment intermediary for all Honeycomb transactions. Kahn forwarded Fiszel fund docs, performance reports, and co-invest opportunities to Epstein. Kahn also served as social intermediary requesting introductions from Epstein for Fiszel.
-- ... and 26 more
+- ... and 27 more
 
 ## Entity Roles
 - ceo at RDK Asset Management Inc (NY)

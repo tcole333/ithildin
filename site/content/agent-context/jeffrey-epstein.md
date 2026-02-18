@@ -1,6 +1,6 @@
 # Jeffrey Epstein
 **Aliases**: Epstein, J EPSTEIN, JEFFREY EPSTEIN, Jeffrey E Epstein
-**Stats**: 200 findings, 507 connections, 111 entities
+**Stats**: 201 findings, 520 connections, 111 entities
 **Dossier**: /dossiers/jeffrey-epstein
 
 ## Key Findings
@@ -30,7 +30,7 @@
 - **Celina Dubin** [social/medium]: None
 - **Leon Black** [financial/strong]: $158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019.
 - **Kathryn Ruemmler** [legal/strong]: Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will.
-- ... and 495 more
+- ... and 508 more
 
 ## Entity Roles
 - officer at Nine East 71st Street Corporation (NY)

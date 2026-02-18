@@ -4,16 +4,16 @@
   "aliases": [
     "Aron DSouza"
   ],
-  "generated_at": "2026-02-17T18:12:03.389464",
-  "last_updated": "2026-02-15T22:26:24",
+  "generated_at": "2026-02-18T02:59:57.256065",
+  "last_updated": "2026-02-17T19:32:02",
   "stats": {
-    "total_findings": 32,
+    "total_findings": 33,
     "total_connections": 18,
     "total_entities": 0,
     "finding_types": {
       "identity": 1,
       "unknown": 21,
-      "relationship": 5,
+      "relationship": 6,
       "intelligence": 2,
       "financial": 3
     },
@@ -25,7 +25,7 @@
       "social": 2,
       "financial": 1
     },
-    "last_updated": "2026-02-15T22:26:24"
+    "last_updated": "2026-02-17T19:32:02"
   },
   "findings": [
     {
@@ -836,6 +836,35 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 3318,
+      "finding_type": "relationship",
+      "summary": "DSouza met Thiel at Oxford 2009 via unnamed mutual friend. 24yo undergrad asked Thiel his biggest problem and proposed proxy war litigation strategy against Gawker.",
+      "detail": "Origin story per BuzzFeed Ryan Mac Feb 2018 and Ryan Holiday Conspiracy: In 2009 a mutual friend connected 24-year-old Melbourne-born law undergraduate Aron DSouza to Peter Thiel during his visit to Oxford. On a walk DSouza asked What is the biggest problem you face and how can I help solve it. Thiel told him about Gawker outing. DSouza proposed: Why dont you find someone else who wants to sue them and have a proxy war? Let me write you a memo. In spring 2011 DSouza dined with Thiel at Restaurant Tim Raue in Berlin presenting full plan. DSouza described as of Chinese heritage with few public connections to Thiel. He later found Charles Harder at Wolf Rifkin Shapiro Schulman and Rabkin. The mutual friend who introduced them at Oxford is unnamed and unidentified.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:32:02",
+      "target_name": "Aron D'Souza",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OSINT:BuzzFeed_Ryan_Mac_Mr_A_Feb2018",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OSINT:Ryan_Holiday_Conspiracy_book",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -1489,7 +1518,8 @@
           2650,
           2645,
           2648,
-          2652
+          2652,
+          3318
         ],
         "connection_ids": [
           1313,
@@ -1537,7 +1567,7 @@
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
       }
     ],
-    "curated_at": "2026-02-17T18:12:03.641754"
+    "curated_at": "2026-02-18T02:59:57.450027"
   },
   "viz_data": {
     "ego_network": {
@@ -1671,6 +1701,32 @@
         }
       ],
       "secondHop": {
+        "Charles Harder": [
+          {
+            "target": "Harvey Weinstein",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Harder represented Weinstein, sent threatening letter to NYT before their sexual assault investigation was published. Resigned after story broke."
+          },
+          {
+            "target": "Donald Trump",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Harder represents Trump on Stormy Daniels lawsuit, Jared Kushner, Melania Trump defamation suit, Trump campaign, and Omarosa claims"
+          },
+          {
+            "target": "Keith Davidson",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Connected through both Hogan and Daniels matters: Davidson brokered Hogan tape extortion, Harder won Hogan case against Gawker. Davidson brokered Stormy Daniels payment, Harder represents Trump in Daniels lawsuit. Opposite sides of same transactions."
+          },
+          {
+            "target": "Terry Bollea",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Harder represented Bollea in both Bollea v Gawker state court and Gawker v FBI FOIA case. Filed intervention motion June 30 2015."
+          }
+        ],
         "Christian Angermayer": [
           {
             "target": "Peter Thiel",

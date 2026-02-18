@@ -2,17 +2,17 @@
   "name": "Ron Soffer",
   "slug": "ron-soffer",
   "aliases": [],
-  "generated_at": "2026-02-17T18:12:03.336805",
-  "last_updated": "2026-02-17T18:11:59",
+  "generated_at": "2026-02-18T02:59:57.228832",
+  "last_updated": "2026-02-17T18:23:37",
   "stats": {
-    "total_findings": 55,
-    "total_connections": 29,
+    "total_findings": 58,
+    "total_connections": 30,
     "total_entities": 0,
     "finding_types": {
-      "identity": 11,
+      "identity": 12,
       "financial": 2,
-      "legal": 17,
-      "intelligence": 16,
+      "legal": 18,
+      "intelligence": 17,
       "communication": 5,
       "relationship": 2,
       "document": 2
@@ -20,11 +20,12 @@
     "connection_types": {
       "legal": 20,
       "employment": 1,
+      "familial": 1,
       "intelligence": 4,
       "social": 3,
       "political": 1
     },
-    "last_updated": "2026-02-17T18:11:59"
+    "last_updated": "2026-02-17T18:23:37"
   },
   "findings": [
     {
@@ -1810,6 +1811,72 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 3310,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Ron Soffer is a 5-thread convergence node with only 4-document corpus presence across 331K pages, yet connects Epstein to: (1) Republic National Bank/Edmond Safra banking world (1988-91), (2) Iranian consular property scheme via Fisher & Soffer partnership (1996-98), (3) Bouvier-Rybolovlev billion-dollar art fraud dispute involving Xitrans/Panama Papers entities, (4) claimed Council of Europe/Jagland connection (likely conflation with ophthalmologist Dr. Soffer who actually treated Jagland), (5) SoftBank/Misra honey trap legal work consideration (Jan 2019). Zero regulatory footprint across 25+ US databases despite tri-jurisdictional bar membership. Ivan Fisher partnership at Epstein-controlled former Iranian diplomatic building combines organized crime defense lawyer (Pizza Connection Trial) with IDF JAG-trained Israeli/French lawyer. Epstein's 'go slow' response to Weingarten about Soffer suggests either genuine unfamiliarity or deliberate caution about a sensitive asset.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 18:15:08",
+      "target_name": "Ron Soffer",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01324981,EFTA01325003,EFTA01325008,HOUSE_OVERSIGHT_028576,EFTA01888282",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3311,
+      "finding_type": "identity",
+      "summary": "French government SIRENE registry confirms: Full name RON SHAUL SOFFER, SIREN 380866657, born November 1960, French nationality. Registered as entrepreneur individuel (sole practitioner), activity code 69.10Z (legal services). Created 1990-12-03. CLOSED 2024-06-30 (status: C). Headquarters: 4 Rue Quentin-Bauchart, 75008 Paris (2015-2024), previously 8 Rue Magellan, 75008 Paris (1995-2015). 4 total establishments, 0 currently open. 1-2 employees at peak.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 18:23:28",
+      "target_name": "Ron Soffer",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SIRENE:380866657",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3312,
+      "finding_type": "legal",
+      "summary": "HUDOC confirms Ron Soffer appeared as counsel in 4 ECHR cases: (1) Broadhurst Investments Ltd (Cyprus) v Romania (App 34868/03, admissibility 15/06/2010) - Cypriot commercial company; (2) App 10787/08 et al v Romania (admissibility 10/04/2012); (3) App 50425/06 et al v France (partly admissible 31/08/2010); (4) App 50425/06 et al v France (judgment 06/10/2011, non-violation Art 7). Cases span 2010-2012. Soffer described as 'Me Ron Soffer, avocat a Paris' in ECHR documents.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 18:23:37",
+      "target_name": "Ron Soffer",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HUDOC:001-99808,HUDOC:001-110778,HUDOC:001-100467,HUDOC:001-106659",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -2099,6 +2166,27 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.ronsoffer.com/membres_eng",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 1980,
+      "person_a": "Agnes Peresztegi",
+      "person_b": "Ron Soffer",
+      "relationship_type": "familial",
+      "description": "Agnes Peresztegi is Of Counsel at Ron Soffer's firm Soffer Avocats and reportedly his wife. She specializes in WWII looted art restitution and is associated with the Commission for Art Recovery of the World Jewish Congress.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 18:12:05",
+      "other_person": "Agnes Peresztegi",
+      "other_person_slug": "agnes-peresztegi",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.sofferavocats.com/en/staff/agnes-peresztegi-of-counsel/",
           "source_quote": null,
           "source_page": null
         }
@@ -2945,8 +3033,8 @@
           1977,
           1978,
           1979,
-          407,
-          408
+          1980,
+          407
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
@@ -3022,7 +3110,7 @@
         "guidance": "Narrative about documented communications \u2014 emails, calls, messages. Focus on what they reveal about the relationship or operation."
       }
     ],
-    "curated_at": "2026-02-17T18:12:04.126433"
+    "curated_at": "2026-02-18T02:59:57.797266"
   },
   "viz_data": {
     "ego_network": {
@@ -3118,6 +3206,13 @@
           "strength": 1.0,
           "evidence_ref": "https://www.ronsoffer.com/membres_eng",
           "description": "Ron Soffer worked in banking law at Edmond Safra's Republic National Bank of New York (1988-1991). Republic was Safra's flagship US banking institution. Soffer was an employee/in-house counsel, not a principal."
+        },
+        {
+          "target": "Agnes Peresztegi",
+          "type": "familial",
+          "strength": 1.0,
+          "evidence_ref": "https://www.sofferavocats.com/en/staff/agnes-peresztegi-of-counsel/",
+          "description": "Agnes Peresztegi is Of Counsel at Ron Soffer's firm Soffer Avocats and reportedly his wife. She specializes in WWII looted art restitution and is associated with the Commission for Art Recovery of the World Jewish Congress."
         },
         {
           "target": "Jeffrey Epstein",
@@ -3233,6 +3328,38 @@
         }
       ],
       "secondHop": {
+        "Edmond Safra": [
+          {
+            "target": "Jacqui Safra",
+            "type": "familial",
+            "strength": 1.0,
+            "description": "Jacqui Safra is Edmond Safra's nephew (Safra banking dynasty). Edmond founded Republic National Bank of NY. Both appear on Peggy Siegal master contact lists associated with Epstein social network."
+          },
+          {
+            "target": "Peter A. Cohen",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Cohen worked for Safra at Republic NY/Trade Development Bank 1978-1979, later returned as Vice Chairman of Republic NY and Chairman of Republic NY Securities Corp"
+          },
+          {
+            "target": "Republic National Bank of New York",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Safra founded RNB in 1966; also founded Trade Development Bank Geneva (sold to AmEx 1983)"
+          },
+          {
+            "target": "Bill Browder",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Co-founded Hermitage Capital Management 1996 with RNB providing $25M seed capital for Russian investments"
+          },
+          {
+            "target": "American Express",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "AmEx conducted unauthorized smear campaign against Safra 1986-1989, falsely linking him to money laundering and Iran-Contra; settled for $8M and public apology"
+          }
+        ],
         "Ivan Fisher": [
           {
             "target": "Jeffrey Epstein",

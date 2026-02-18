@@ -1,6 +1,6 @@
 # Aron D'Souza
 **Aliases**: Aron DSouza
-**Stats**: 32 findings, 18 connections, 0 entities
+**Stats**: 33 findings, 18 connections, 0 entities
 **Dossier**: /dossiers/aron-dsouza
 
 ## Key Findings

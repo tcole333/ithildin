@@ -1,6 +1,6 @@
 # Deutsche Bank
 **Aliases**: DB TRUST, DEUTSCHE BANK, Deutsche Bank Trust
-**Stats**: 24 findings, 18 connections, 0 entities
+**Stats**: 24 findings, 19 connections, 0 entities
 **Dossier**: /dossiers/deutsche-bank
 
 ## Key Findings
@@ -30,4 +30,4 @@
 - **Kirkland & Ellis** [corporate/strong]: K&E represented DB in CFTC precious metals spoofing settlement (M), shareholder litigation after forex investigation, and MidOcean Partners .6B spin-off.
 - **International Peace Institute** [financial/strong]: Finding #90: LMSBAND contains images of actual check copies from Gratitude America to IPI, all drawn on Deutsche Bank Trust Company Americas (New York NY 10154). C
 - **Lawrence Summers** [financial/strong]: Finding #140: Deutsche Bank account statement (Nov 2014) shows two wire transfers from Epstein's account (account ending 44129244) to LH Summers Economic Consulting
-- ... and 6 more
+- ... and 7 more

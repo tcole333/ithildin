@@ -1,6 +1,6 @@
 # Leon Black
 **Aliases**: LEON BLACK, Leon D Black
-**Stats**: 57 findings, 46 connections, 12 entities
+**Stats**: 57 findings, 47 connections, 12 entities
 **Dossier**: /dossiers/leon-black
 
 ## Key Findings
@@ -30,7 +30,7 @@
 - **BV70 LLC** [corporate/strong]: BV70 LLC is controlled by Leon Black. Also: BJAV Marine Ltd, JMWT LLC, Narrows Holdings LLC, Narrows Holdings II LLC, Pent Holdings Inc.
 - **Marc Rowan** [corporate/strong]: Apollo Global co-founders [public knowledge]
 - **Joshua Harris** [corporate/strong]: Apollo Global co-founders [public knowledge]
-- ... and 34 more
+- ... and 35 more
 
 ## Entity Roles
 - co-founder at Apollo Global Management (DE)

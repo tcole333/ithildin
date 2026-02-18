@@ -4,11 +4,11 @@
   "aliases": [
     "ARIANE DE ROTHSCHILD"
   ],
-  "generated_at": "2026-02-17T18:12:03.429151",
-  "last_updated": "2026-02-17T04:24:25",
+  "generated_at": "2026-02-18T02:59:57.290692",
+  "last_updated": "2026-02-17T22:15:46",
   "stats": {
     "total_findings": 25,
-    "total_connections": 13,
+    "total_connections": 14,
     "total_entities": 0,
     "finding_types": {
       "relationship": 6,
@@ -22,9 +22,10 @@
       "familial": 1,
       "intelligence": 1,
       "corporate": 1,
-      "advisory": 1
+      "advisory": 1,
+      "political": 1
     },
-    "last_updated": "2026-02-17T04:24:25"
+    "last_updated": "2026-02-17T22:15:46"
   },
   "findings": [
     {
@@ -1028,6 +1029,27 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 2072,
+      "person_a": "Ariane de Rothschild",
+      "person_b": "David Petraeus",
+      "relationship_type": "political",
+      "description": "Rothschild forwarded Wilson Center Global Advisory Council invitation featuring Petraeus as co-chair to Epstein with 'What do u think?' Event Oct 2015 included Carter, Kerry, McConnell, Gingrich.",
+      "strength": "weak",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:15:46",
+      "other_person": "David Petraeus",
+      "other_person_slug": "david-petraeus",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02377394",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -1323,7 +1345,7 @@
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
       }
     ],
-    "curated_at": "2026-02-17T18:12:03.638331"
+    "curated_at": "2026-02-18T02:59:57.446314"
   },
   "viz_data": {
     "ego_network": {
@@ -1419,9 +1441,48 @@
           "strength": 0.7,
           "evidence_ref": "EFTA02465423",
           "description": null
+        },
+        {
+          "target": "David Petraeus",
+          "type": "political",
+          "strength": 0.4,
+          "evidence_ref": "EFTA02377394",
+          "description": "Rothschild forwarded Wilson Center Global Advisory Council invitation featuring Petraeus as co-chair to Epstein with 'What do u think?' Event Oct 2015 included Carter, Kerry, McConnell, Gingrich."
         }
       ],
       "secondHop": {
+        "David Petraeus": [
+          {
+            "target": "Tom Pritzker",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Close personal relationship: Pritzker visited Petraeus in Afghanistan (June 2011, Petraeus loaned personal helicopter), in Iraq (July 2008, 2-hour private meeting), and hosted Petraeus for lunch (Sept 2012). All interactions reported directly to Jeffrey Epstein."
+          },
+          {
+            "target": "KKR",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Petraeus is Partner at KKR and Chairman of KKR Global Institute since 2013. SEC filings confirm board roles in KKR portfolio companies OneStream Inc, Corporate Capital Trust, FS KKR Capital Corp"
+          },
+          {
+            "target": "Devon Energy",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Petraeus served on Devon Energy board of directors, appears in DEF 14A proxy statements 2019-2025"
+          },
+          {
+            "target": "Paula Broadwell",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Extramarital affair caused Petraeus resignation as CIA Director Nov 2012. Broadwell was his biographer. Post-scandal both rebuilt careers separately."
+          },
+          {
+            "target": "Wilson Center",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Petraeus Co-chair of Wilson Center Global Advisory Council. Oct 2015 agenda shows him chairing Tour d Horizon session. Tom Nides was board chairman. Ariane de Rothschild forwarded invite to Epstein."
+          }
+        ],
         "Edmond de Rothschild Bank": [
           {
             "target": "Jeffrey Epstein",

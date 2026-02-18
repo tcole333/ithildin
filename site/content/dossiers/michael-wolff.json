@@ -2,11 +2,11 @@
   "name": "Michael Wolff",
   "slug": "michael-wolff",
   "aliases": [],
-  "generated_at": "2026-02-17T18:12:03.490945",
-  "last_updated": "2026-02-17T04:24:25",
+  "generated_at": "2026-02-18T02:59:57.333281",
+  "last_updated": "2026-02-17T22:21:51",
   "stats": {
     "total_findings": 13,
-    "total_connections": 23,
+    "total_connections": 24,
     "total_entities": 1,
     "finding_types": {
       "communication": 7,
@@ -15,13 +15,13 @@
       "location": 1
     },
     "connection_types": {
-      "intelligence": 5,
+      "intelligence": 6,
       "social": 4,
       "advisory": 5,
       "corporate": 8,
       "financial": 1
     },
-    "last_updated": "2026-02-17T04:24:25"
+    "last_updated": "2026-02-17T22:21:51"
   },
   "findings": [
     {
@@ -699,6 +699,33 @@
       "evidence": []
     },
     {
+      "id": 2085,
+      "person_a": "Jeffrey Epstein",
+      "person_b": "Michael Wolff",
+      "relationship_type": "intelligence",
+      "description": "Epstein used Wolff as a White House intelligence source in March 2017, asking him to identify upcoming ambassadorial appointments. Wolff confirmed he was 'at WH all week' and offered to 'fish' for names. Epstein specifically asked about Petraeus for a Trump administration role.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:21:51",
+      "other_person": "Jeffrey Epstein",
+      "other_person_slug": "jeffrey-epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02656903",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #3464",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 28,
       "person_a": "Michael Wolff",
       "person_b": "Reid Weingarten",
@@ -1090,7 +1117,7 @@
           1794,
           1795,
           1839,
-          28
+          2085
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
@@ -1105,6 +1132,7 @@
         "connection_ids": [
           97,
           605,
+          2085,
           260,
           1394,
           1422
@@ -1128,7 +1156,7 @@
         "guidance": "Narrative about documented communications \u2014 emails, calls, messages. Focus on what they reveal about the relationship or operation."
       }
     ],
-    "curated_at": "2026-02-17T18:12:04.051602"
+    "curated_at": "2026-02-18T02:59:57.735985"
   },
   "viz_data": {
     "ego_network": {
@@ -1231,6 +1259,13 @@
           "strength": 1.0,
           "evidence_ref": null,
           "description": "Finding #372: Michael Wolff (Epstein's PR strategist, 303 emails) drafted narrative for publication: 'It is Bill Gates who at the end of the summer began prodding E"
+        },
+        {
+          "target": "Jeffrey Epstein",
+          "type": "intelligence",
+          "strength": 1.0,
+          "evidence_ref": "EFTA02656903",
+          "description": "Epstein used Wolff as a White House intelligence source in March 2017, asking him to identify upcoming ambassadorial appointments. Wolff confirmed he was 'at WH all week' and offered to 'fish' for names. Epstein specifically asked about Petraeus for a Trump administration role."
         },
         {
           "target": "Reid Weingarten",
@@ -1443,18 +1478,6 @@
             "type": "familial",
             "strength": 1.0,
             "description": "Finding #263: Epstein sent people to Sulayem in Dubai with the response: 'thank you, they are a treasure, no girl in dubai is safe tonite.' Context unclear but high"
-          },
-          {
-            "target": "Thorbjorn Jagland",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Finding #273: Jagland was visiting Moscow regularly and debriefing Epstein on Russian diplomatic positions. Oct 2017: 'I have to be in the tent. Tomorrow the Presid"
-          },
-          {
-            "target": "Melanie Walker",
-            "type": "social",
-            "strength": 1.0,
-            "description": "Finding #357: Walker told Epstein she was instructed by 'the inner circle' not to communicate with him (post-2008 conviction), and would be 'in deep trouble' if she"
           }
         ]
       },

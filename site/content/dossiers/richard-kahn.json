@@ -2,14 +2,14 @@
   "name": "Richard Kahn",
   "slug": "richard-kahn",
   "aliases": [],
-  "generated_at": "2026-02-17T18:12:03.509698",
-  "last_updated": "2026-02-17T04:24:25",
+  "generated_at": "2026-02-18T02:59:57.343708",
+  "last_updated": "2026-02-17T19:53:11",
   "stats": {
-    "total_findings": 10,
-    "total_connections": 38,
+    "total_findings": 11,
+    "total_connections": 39,
     "total_entities": 13,
     "finding_types": {
-      "financial": 7,
+      "financial": 8,
       "identity": 1,
       "communication": 1,
       "relationship": 1
@@ -18,13 +18,13 @@
       "advisory": 1,
       "corporate": 8,
       "employment": 1,
-      "financial": 22,
+      "financial": 23,
       "legal": 3,
       "political": 1,
       "intelligence": 1,
       "social": 1
     },
-    "last_updated": "2026-02-17T04:24:25"
+    "last_updated": "2026-02-17T19:53:11"
   },
   "findings": [
     {
@@ -333,6 +333,28 @@
           "evidence_type": "ref",
           "evidence_ref": "LMSBAND:cooccurrence",
           "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3336,
+      "finding_type": "financial",
+      "summary": "Richard Kahn (Epstein's accountant at HBRK Associates) discussed obtaining a 'Safra (150-200) member list' to market a real estate project by David Mitchell (Mitchell Holdings LLC, 801 Madison Ave). Plan was to donate $100,000 per purchase to 'Safra' from broker commissions. This likely refers to the Edmond J. Safra Synagogue (Manhattan Sephardic community). Email also discusses DB (Deutsche Bank) loan extension and $1.5M funding request.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:52:07",
+      "target_name": "Richard Kahn",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02662561",
+          "source_quote": " david also spoke about obtaining safra (150-200) member list and will market directly to them. david said they will market together and he will donate 100,000 for each purchase from that list to Safra he said a portion of that money would come from commission paid to broker (his wife)",
           "source_page": null,
           "assessment": null
         }
@@ -1218,6 +1240,27 @@
       ]
     },
     {
+      "id": 1992,
+      "person_a": "Richard Kahn",
+      "person_b": "Safra Synagogue",
+      "relationship_type": "financial",
+      "description": "Kahn discussed obtaining Safra (150-200) member list to market David Mitchell real estate project. Planned to donate 100K per purchase from commissions to Safra.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 19:53:11",
+      "other_person": "Safra Synagogue",
+      "other_person_slug": "safra-synagogue",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02662561",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 534,
       "person_a": "Paul Tudor Jones",
       "person_b": "Richard Kahn",
@@ -1507,6 +1550,7 @@
       326,
       318,
       327,
+      3336,
       452
     ],
     "key_identifiers": {
@@ -1720,7 +1764,8 @@
           327,
           347,
           1577,
-          329
+          329,
+          3336
         ],
         "connection_ids": [
           282,
@@ -1750,7 +1795,7 @@
         "guidance": "Narrative about corporate entities, roles, jurisdictions. Explain the structure and its purpose, not just list entities."
       }
     ],
-    "curated_at": "2026-02-17T18:12:04.100449"
+    "curated_at": "2026-02-18T02:59:57.780972"
   },
   "viz_data": {
     "ego_network": {
@@ -2014,6 +2059,13 @@
           "strength": 0.7,
           "evidence_ref": "EFTA02580751",
           "description": "Kahn processed Epstein's funding instructions to Kuhn Foundation. On June 14, 2018, Epstein told Kahn to send $600K; Kahn confirmed prior $150K and offered to send immediately."
+        },
+        {
+          "target": "Safra Synagogue",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02662561",
+          "description": "Kahn discussed obtaining Safra (150-200) member list to market David Mitchell real estate project. Planned to donate 100K per purchase from commissions to Safra."
         },
         {
           "target": "Paul Tudor Jones",

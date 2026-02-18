@@ -1,0 +1,16 @@
+# Republic National Bank
+**Stats**: 5 findings, 4 connections, 0 entities
+**Dossier**: /dossiers/republic-national-bank
+
+## Key Findings
+- **[intelligence/high]** NEGATIVE RESULT: Exhaustive search across all local document databases (DOJ Vol 11, Duggan, LMSBAND, Unified, Epstein 20K) found ZERO direct mentions of Republic National Bank of New York or Republic New York Corporation in Epstein's banking records, wire transfers, or correspondence. All 'Republic National Bank' phrase matches were false positives. No evidence of Epstein banking relationship with RNB. However, Jacqui Safra (Safra banking family) was a direct Epstein social associate. (Finding #3341)
+- **[intelligence/medium]** SYNTHESIS: Republic National Bank / Safra investigation reveals a banking institution operating at the intersection of intelligence operations, organized crime exposure, and the Epstein network. Key convergences: (1) IRAN-CONTRA: Both RNB (NY) and Trade Development Bank (Geneva) served as conduits for Enterprise funds — RNB officer Nan Morabia delivered $150K cash to Adnan Khashoggi, TDB held Enterprise funds in 'Codelis' account (Walsh Report). (2) RUSSIAN ORGANIZED CRIME: RNB exposed $10B Bank of NY/Mogilevich money laundering (Aug 1998), Safra co-founded Hermitage Capital with Bill Browder (1996, $25M RNB seed). (3) SUSPICIOUS DEATH TIMELINE: Safra died in arson fire Dec 3, 1999 — between RNB's Mogilevich exposure and HSBC acquisition closing Dec 31, 1999. Nurse Ted Maher (Green Beret background) convicted. (4) EPSTEIN CONNECTION via nephew Jacqui Safra — Edge Foundation dinners with Epstein/Bezos/Gates (2012-14), Jerusalem property offered to Lauder (Mega Group) then Epstein, bank loan difficulties offered as financial opportunity. (5) MADOFF: Safra banks served as both conduit and victim. (6) 70 Safra entities in ICIJ offshore leaks, entire offshore infrastructure absorbed by HSBC 1999. (7) Ron Soffer worked at RNB 1988-91, bridging Safra world to Epstein legal network. Peter A. Cohen identified as bridge between Safra empire and Wall Street. Zero RNB documents in Epstein's 331K-page DOJ corpus — connection runs through family social network, not institutional banking. (Finding #3370)
+- **[financial/medium]** RNB handled many Enterprise wire transfers per Walsh Report AND later adopted exemplary KYC policies per 2001 Levin PSI report (before HSBC acquisition) (Finding #3390)
+- **[financial/high]** RNB handled Enterprise wire transfers AND had an officer coordinating off-book cash deliveries (Finding #3414)
+- **[financial/medium]** RNB was America's largest gold bullion dealer -- critical context for Iran-Contra cash operations (Finding #3421)
+
+## Top Connections
+- **Willard Zucker** [financial/strong]: Enterprise wire transfers routed through RNB; Zucker managed Swiss side via CSF Geneva
+- **Nan Morabia** [employment/strong]: Officer at Republic National Bank of New York; conducted cash drops outside bank channels
+- **Trade Development Bank** [corporate/strong]: Both banks controlled by Edmond Safra; RNB (NY) handled Enterprise wire transfers, TDB (Geneva) held Codelis account
+- **Nan Morabia** [employment/strong]: Nan Morabia was an officer at Republic National Bank of New York (Edmond Safra's bank, 452 Fifth Ave); she delivered $7,000 to Robert Owen at RNB in Aug 1985

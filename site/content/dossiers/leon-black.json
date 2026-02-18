@@ -5,11 +5,11 @@
     "LEON BLACK",
     "Leon D Black"
   ],
-  "generated_at": "2026-02-17T18:12:03.330300",
-  "last_updated": "2026-02-16T05:26:43",
+  "generated_at": "2026-02-18T02:59:57.232132",
+  "last_updated": "2026-02-17T22:21:52",
   "stats": {
     "total_findings": 57,
-    "total_connections": 46,
+    "total_connections": 47,
     "total_entities": 12,
     "finding_types": {
       "financial": 41,
@@ -22,11 +22,11 @@
       "advisory": 3,
       "corporate": 10,
       "legal": 3,
-      "intelligence": 3,
+      "intelligence": 4,
       "political": 3,
       "social": 1
     },
-    "last_updated": "2026-02-16T05:26:43"
+    "last_updated": "2026-02-17T22:21:52"
   },
   "findings": [
     {
@@ -2499,6 +2499,27 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 2086,
+      "person_a": "David Petraeus",
+      "person_b": "Leon Black",
+      "relationship_type": "intelligence",
+      "description": "Epstein explicitly invoked the Petraeus scandal as a cautionary analogy when advising Leon Black through Brad Karp: comparing Black's use of an Apollo employee as intermediary to how Petraeus/Broadwell dynamic destroyed careers. Both are examples of Epstein analyzing kompromat risk for powerful clients.",
+      "strength": "circumstantial",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 22:21:52",
+      "other_person": "David Petraeus",
+      "other_person_slug": "david-petraeus",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02372647",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [
@@ -3367,12 +3388,13 @@
         "connection_ids": [
           1050,
           19,
-          1497
+          1497,
+          2086
         ],
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
       }
     ],
-    "curated_at": "2026-02-17T18:12:04.020657"
+    "curated_at": "2026-02-18T02:59:57.707899"
   },
   "viz_data": {
     "ego_network": {
@@ -3699,6 +3721,13 @@
           "strength": 0.7,
           "evidence_ref": "LittleSis:50090",
           "description": "Krongard (former CIA ExDir 2001-2004) serves as Independent Director at Apollo Global Management \u2014 intelligence community connection to Apollo board"
+        },
+        {
+          "target": "David Petraeus",
+          "type": "intelligence",
+          "strength": 0.2,
+          "evidence_ref": "EFTA02372647",
+          "description": "Epstein explicitly invoked the Petraeus scandal as a cautionary analogy when advising Leon Black through Brad Karp: comparing Black's use of an Apollo employee as intermediary to how Petraeus/Broadwell dynamic destroyed careers. Both are examples of Epstein analyzing kompromat risk for powerful clients."
         }
       ],
       "secondHop": {

@@ -1,5 +1,5 @@
 # Ron Soffer
-**Stats**: 55 findings, 29 connections, 0 entities
+**Stats**: 58 findings, 30 connections, 0 entities
 **Dossier**: /dossiers/ron-soffer
 
 ## Key Findings
@@ -29,4 +29,4 @@
 - **Jeffrey Epstein** [legal/strong]: Co-defendants in US v. Epstein 96 Civ 8307 (SDNY). Epstein leased 34 E 69th St from OFM, sublet to Fisher, who sublet to Soffer. Government sued all for ejectment. Judge Chin ejected all defendants Apr 1, 1998. Soffer was last holdout subtenant.
 - **Ivan Fisher** [legal/strong]: Partners in Fisher & Soffer a/k/a Fisher & Sophir, a general partnership at 34 E 69th St, NYC. Named as co-defendants in US v. Epstein 96 Civ 8307. Soffer was Fisher's subtenant and law partner.
 - **Yves Bouvier** [legal/strong]: Soffer Avocats served as lead counsel for Yves Bouvier in the Bouvier Affair litigation (Accent Delight/Xitrans v. Sotheby's 1:18-cv-09011, In Re: Accent Delight Section 1782 cases, Monaco, Geneva, Singapore). The attorney-client relationship spanned from at least 2015 through settlement in Dec 2023.
-- ... and 17 more
+- ... and 18 more

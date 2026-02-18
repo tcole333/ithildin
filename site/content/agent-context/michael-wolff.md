@@ -1,5 +1,5 @@
 # Michael Wolff
-**Stats**: 13 findings, 23 connections, 1 entities
+**Stats**: 13 findings, 24 connections, 1 entities
 **Dossier**: /dossiers/michael-wolff
 
 ## Key Findings
@@ -29,7 +29,7 @@
 - **Mark Epstein** [corporate/strong]: Finding #182: Wolff pitched a book project about Epstein on July 31, 2011 titled 'Book project'. Email states: 'The book I have in mind will focus on, although not 
 - **Anas Alrasheed** [corporate/strong]: Finding #211: Wolff proposed including Epstein in his next book after Fire and Fury, asking Nov 5, 2018: opening with Epstein and Bannon talking about Trump. Would 
 - **Brad Karp** [corporate/strong]: Finding #211: Wolff proposed including Epstein in his next book after Fire and Fury, asking Nov 5, 2018: opening with Epstein and Bannon talking about Trump. Would 
-- ... and 11 more
+- ... and 12 more
 
 ## Entity Roles
 - associated at Black Bag Media (VA)
