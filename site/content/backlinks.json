@@ -6379,32 +6379,10 @@
     ]
   },
   "model_to_dossier": {
-    "narrative-shield": [
-      {
-        "slug": "landon-thomas-jr",
-        "name": "Landon Thomas Jr.",
-        "via": "canonical_instance"
-      }
-    ],
-    "private-order": [],
     "jurisdictional-arbitrage": [
       {
         "slug": "deutsche-bank",
         "name": "Deutsche Bank",
-        "via": "canonical_instance"
-      }
-    ],
-    "enabler-gradient": [
-      {
-        "slug": "deutsche-bank",
-        "name": "Deutsche Bank",
-        "via": "canonical_instance"
-      }
-    ],
-    "manufactured-dependency": [
-      {
-        "slug": "leon-black",
-        "name": "Leon Black",
         "via": "canonical_instance"
       }
     ],
@@ -6416,15 +6394,31 @@
         "via": "canonical_instance"
       }
     ],
+    "manufactured-dependency": [
+      {
+        "slug": "leon-black",
+        "name": "Leon Black",
+        "via": "canonical_instance"
+      }
+    ],
+    "private-order": [],
+    "enabler-gradient": [
+      {
+        "slug": "deutsche-bank",
+        "name": "Deutsche Bank",
+        "via": "canonical_instance"
+      }
+    ],
+    "narrative-shield": [
+      {
+        "slug": "landon-thomas-jr",
+        "name": "Landon Thomas Jr.",
+        "via": "canonical_instance"
+      }
+    ],
     "parallel-financial-system": []
   },
   "dossier_to_model": {
-    "landon-thomas-jr": [
-      {
-        "id": "narrative-shield",
-        "title": "The Narrative Shield"
-      }
-    ],
     "deutsche-bank": [
       {
         "id": "jurisdictional-arbitrage",
@@ -6435,16 +6429,22 @@
         "title": "The Enabler Gradient"
       }
     ],
+    "kirkland-ellis": [
+      {
+        "id": "bridge-tax",
+        "title": "The Bridge Tax"
+      }
+    ],
     "leon-black": [
       {
         "id": "manufactured-dependency",
         "title": "Manufactured Dependency"
       }
     ],
-    "kirkland-ellis": [
+    "landon-thomas-jr": [
       {
-        "id": "bridge-tax",
-        "title": "The Bridge Tax"
+        "id": "narrative-shield",
+        "title": "The Narrative Shield"
       }
     ]
   }
