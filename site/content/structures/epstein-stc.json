@@ -1,0 +1,514 @@
+{
+  "id": "epstein-stc",
+  "title": "Epstein / Southern Trust Company",
+  "subtitle": "Corporate ownership hierarchy centered on STC (USVI)",
+  "nodes": [
+    {
+      "id": "person:jeffrey_epstein",
+      "name": "Jeffrey Epstein",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:cecile_de_jongh",
+      "name": "Cecile de Jongh",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:tyler_shears",
+      "name": "Tyler Shears",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:peter_fenwick",
+      "name": "Peter Fenwick",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:ehud_barak",
+      "name": "Ehud Barak",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:terje_rod-larsen",
+      "name": "Terje Rod-Larsen",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:kevin_rudd",
+      "name": "Kevin Rudd",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:marc_leon",
+      "name": "Marc Leon",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:darren_indyke",
+      "name": "Darren Indyke",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:erika_kellerhals",
+      "name": "Erika Kellerhals",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:gretchen_buhlig",
+      "name": "Gretchen Buhlig",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:peter_thiel",
+      "name": "Peter Thiel",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "entity:4",
+      "name": "Southern Trust Company, Inc",
+      "nodeType": "entity",
+      "entityType": "inc",
+      "jurisdiction": "USVI",
+      "status": "active",
+      "parentIds": [
+        "person:jeffrey_epstein"
+      ]
+    },
+    {
+      "id": "entity:133",
+      "name": "Southern Trust Company, Inc.",
+      "nodeType": "entity",
+      "entityType": "inc",
+      "jurisdiction": "USVI",
+      "status": "active",
+      "parentIds": [
+        "person:jeffrey_epstein",
+        "person:cecile_de_jongh"
+      ]
+    },
+    {
+      "id": "entity:196",
+      "name": "Black Bag Media",
+      "nodeType": "entity",
+      "entityType": "unknown",
+      "jurisdiction": "VA",
+      "status": "unknown",
+      "parentIds": [
+        "entity:19"
+      ]
+    },
+    {
+      "id": "entity:135",
+      "name": "Butterfly Trust",
+      "nodeType": "entity",
+      "entityType": "trust",
+      "jurisdiction": "unknown",
+      "status": "active",
+      "parentIds": [
+        "entity:133",
+        "person:jeffrey_epstein"
+      ]
+    },
+    {
+      "id": "entity:72",
+      "name": "Shears Consulting Group LLC",
+      "nodeType": "entity",
+      "entityType": "llc",
+      "jurisdiction": "FL",
+      "status": "active",
+      "parentIds": [
+        "entity:19",
+        "person:tyler_shears"
+      ]
+    },
+    {
+      "id": "entity:137",
+      "name": "Mort Inc.",
+      "nodeType": "entity",
+      "entityType": "inc",
+      "jurisdiction": "unknown",
+      "status": "active",
+      "parentIds": [
+        "entity:133",
+        "person:jeffrey_epstein"
+      ]
+    },
+    {
+      "id": "entity:138",
+      "name": "Southern Financial LLC",
+      "nodeType": "entity",
+      "entityType": "llc",
+      "jurisdiction": "unknown",
+      "status": "active",
+      "parentIds": [
+        "entity:133",
+        "person:jeffrey_epstein"
+      ]
+    },
+    {
+      "id": "entity:8",
+      "name": "C O U Q Foundation Inc",
+      "nodeType": "entity",
+      "entityType": "foundation",
+      "jurisdiction": "unknown",
+      "status": "active",
+      "parentIds": [
+        "entity:19",
+        "person:jeffrey_epstein"
+      ]
+    },
+    {
+      "id": "entity:139",
+      "name": "Enhanced Education Trust",
+      "nodeType": "entity",
+      "entityType": "trust",
+      "jurisdiction": "UK",
+      "status": "unknown",
+      "parentIds": [
+        "entity:19",
+        "person:peter_fenwick"
+      ]
+    },
+    {
+      "id": "entity:167",
+      "name": "Achrayut Leumit Ltd.",
+      "nodeType": "entity",
+      "entityType": "ltd",
+      "jurisdiction": "Israel",
+      "status": "unknown",
+      "parentIds": [
+        "entity:19",
+        "person:ehud_barak"
+      ]
+    },
+    {
+      "id": "entity:78",
+      "name": "International Peace Institute",
+      "nodeType": "entity",
+      "entityType": "nonprofit",
+      "jurisdiction": "NY",
+      "status": "active",
+      "parentIds": [
+        "entity:19",
+        "person:terje_rod-larsen",
+        "person:kevin_rudd"
+      ]
+    },
+    {
+      "id": "entity:206",
+      "name": "Kensington Morocco",
+      "nodeType": "entity",
+      "entityType": "unknown",
+      "jurisdiction": "unknown",
+      "status": "unknown",
+      "parentIds": [
+        "entity:19",
+        "person:marc_leon"
+      ]
+    },
+    {
+      "id": "entity:19",
+      "name": "Enhanced Education",
+      "nodeType": "entity",
+      "entityType": "unknown",
+      "jurisdiction": "unknown",
+      "status": "active",
+      "parentIds": [
+        "entity:133",
+        "person:jeffrey_epstein",
+        "person:darren_indyke",
+        "person:erika_kellerhals"
+      ]
+    },
+    {
+      "id": "entity:84",
+      "name": "ASU Foundation",
+      "nodeType": "entity",
+      "entityType": "foundation",
+      "jurisdiction": "AZ",
+      "status": "active",
+      "parentIds": [
+        "entity:19",
+        "person:gretchen_buhlig"
+      ]
+    },
+    {
+      "id": "entity:54",
+      "name": "Haze Trust",
+      "nodeType": "entity",
+      "entityType": "trust",
+      "jurisdiction": "USVI",
+      "status": "active",
+      "parentIds": [
+        "entity:133",
+        "person:jeffrey_epstein",
+        "person:darren_indyke"
+      ]
+    },
+    {
+      "id": "entity:124",
+      "name": "Tribeca Film Institute",
+      "nodeType": "entity",
+      "entityType": "nonprofit",
+      "jurisdiction": "NY",
+      "status": "active",
+      "parentIds": [
+        "entity:19"
+      ]
+    },
+    {
+      "id": "entity:190",
+      "name": "Valar Global Fund III LP",
+      "nodeType": "entity",
+      "entityType": "partnership",
+      "jurisdiction": "unknown",
+      "status": "active",
+      "parentIds": [
+        "entity:19",
+        "person:peter_thiel"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:138",
+      "relationType": "owner",
+      "description": "Jeffrey Epstein \u2014 owner"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:133",
+      "relationType": "owner",
+      "description": "Jeffrey Epstein \u2014 owner"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:54",
+      "relationType": "beneficiary",
+      "description": "Jeffrey Epstein \u2014 beneficiary"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:8",
+      "relationType": "founder",
+      "description": "Jeffrey Epstein \u2014 founder"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:19",
+      "relationType": "founder",
+      "description": "Jeffrey Epstein \u2014 founder"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:54",
+      "relationType": "trustee",
+      "description": "Jeffrey Epstein \u2014 trustee"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:137",
+      "relationType": "beneficial_owner",
+      "description": "Jeffrey Epstein \u2014 beneficial_owner"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:137",
+      "relationType": "grantor",
+      "description": "Jeffrey Epstein \u2014 grantor"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:54",
+      "relationType": "grantor",
+      "description": "Jeffrey Epstein \u2014 grantor"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:4",
+      "relationType": "founder",
+      "description": "Jeffrey Epstein \u2014 founder"
+    },
+    {
+      "source": "person:jeffrey_epstein",
+      "target": "entity:135",
+      "relationType": "grantor",
+      "description": "Jeffrey Epstein \u2014 grantor"
+    },
+    {
+      "source": "person:cecile_de_jongh",
+      "target": "entity:133",
+      "relationType": "officer",
+      "description": "Cecile de Jongh \u2014 officer"
+    },
+    {
+      "source": "person:tyler_shears",
+      "target": "entity:72",
+      "relationType": "president",
+      "description": "Tyler Shears \u2014 president"
+    },
+    {
+      "source": "person:peter_fenwick",
+      "target": "entity:139",
+      "relationType": "trustee",
+      "description": "Peter Fenwick \u2014 trustee"
+    },
+    {
+      "source": "person:ehud_barak",
+      "target": "entity:167",
+      "relationType": "principal",
+      "description": "Ehud Barak \u2014 principal"
+    },
+    {
+      "source": "person:terje_rod-larsen",
+      "target": "entity:78",
+      "relationType": "president",
+      "description": "Terje Rod-Larsen \u2014 president"
+    },
+    {
+      "source": "person:kevin_rudd",
+      "target": "entity:78",
+      "relationType": "chairman",
+      "description": "Kevin Rudd \u2014 chairman"
+    },
+    {
+      "source": "person:marc_leon",
+      "target": "entity:206",
+      "relationType": "principal",
+      "description": "Marc Leon \u2014 principal"
+    },
+    {
+      "source": "person:darren_indyke",
+      "target": "entity:19",
+      "relationType": "officer",
+      "description": "Darren Indyke \u2014 officer"
+    },
+    {
+      "source": "person:darren_indyke",
+      "target": "entity:54",
+      "relationType": "trustee",
+      "description": "Darren Indyke \u2014 trustee"
+    },
+    {
+      "source": "person:erika_kellerhals",
+      "target": "entity:19",
+      "relationType": "officer",
+      "description": "Erika Kellerhals \u2014 officer"
+    },
+    {
+      "source": "person:gretchen_buhlig",
+      "target": "entity:84",
+      "relationType": "ceo",
+      "description": "Gretchen Buhlig \u2014 ceo"
+    },
+    {
+      "source": "person:peter_thiel",
+      "target": "entity:190",
+      "relationType": "principal",
+      "description": "Peter Thiel \u2014 principal"
+    },
+    {
+      "source": "entity:133",
+      "target": "entity:19",
+      "relationType": "controls",
+      "description": "Southern Trust Company administers Enhanced Education / J Epstein VI Foundation accounts. EFTA02575631 shows Butterfly Trust, J. Epstein VI Foundation (Enhanced Education) as accounts under same umbrella. EFTA02370820 shows DOE received funds from Southern Trust Company not directly from Enhanced Education."
+    },
+    {
+      "source": "entity:133",
+      "target": "entity:135",
+      "relationType": "controls",
+      "description": "Butterfly Trust managed by Richard Kahn via Southern Trust Company infrastructure. EFTA02636559 shows Butterfly Trust brokerage account funded from DB Caterpillar Trust."
+    },
+    {
+      "source": "entity:133",
+      "target": "entity:54",
+      "relationType": "controls",
+      "description": "Haze Trust managed alongside other JE entities by Southern Trust Company. Tax work by same CPAs."
+    },
+    {
+      "source": "entity:133",
+      "target": "entity:137",
+      "relationType": "funds",
+      "description": "Southern Trust Company transferred $1.25M loan to Mort Inc. EFTA02715980: transfer from STC to Mort as loan on Mort books."
+    },
+    {
+      "source": "entity:133",
+      "target": "entity:138",
+      "relationType": "controls",
+      "description": "Southern Financial LLC managed as part of JE Entities under Southern Trust Company umbrella. $48.77M cash as of Aug 2014."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:78",
+      "relationType": "funds",
+      "description": "$125K donation Oct 2011 + $14K flight reimbursement Mar 2014 = $139K total"
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:84",
+      "relationType": "funds",
+      "description": "$100K+ pledge for Origins Project. EE authorization needed for fund transfers."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:72",
+      "relationType": "funds",
+      "description": "$3,400/month for SEO/reputation management. Suppress negative search results."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:8",
+      "relationType": "funds",
+      "description": "$50K from Enhanced Education."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:124",
+      "relationType": "funds",
+      "description": "$25K Mar 2011 via Bella Klein."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:139",
+      "relationType": "funds",
+      "description": "Enhanced Education (USVI) funds Enhanced Education Trust (UK) for neuroscience research in Cyprus. EFTA02654710: money to Network -> Enhanced Education Trust -> Andy Ioannides in Cyprus."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:167",
+      "relationType": "funds",
+      "description": "Enhanced Education/Epstein entities made payments to Achrayut Leumit (Ehud Barak NGO)."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:196",
+      "relationType": "funds",
+      "description": "$100K wire transfer from Epstein entities to Black Bag Media."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:206",
+      "relationType": "funds",
+      "description": "$12M wire to Marc Leon / Kensington Morocco, April 2019. Richard Kahn tried to revert."
+    },
+    {
+      "source": "entity:19",
+      "target": "entity:190",
+      "relationType": "invested_in",
+      "description": "Epstein entities invested $30M+ in Valar Global Fund III LP (Peter Thiel-associated)."
+    }
+  ]
+}

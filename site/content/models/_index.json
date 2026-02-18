@@ -1,0 +1,124 @@
+[
+  {
+    "id": "bridge-tax",
+    "title": "The Bridge Tax",
+    "subtitle": "Power from occupying structural holes",
+    "archetype": "Success to the Successful",
+    "definition": "Power derived from occupying structural holes in a network \u2014 bridging otherwise disconnected groups and capturing the information asymmetry between them. The \"tax\" is what the broker extracts for providing the bridge: fees, information, obligation, or leverage.",
+    "instance_count": 3,
+    "mechanism_count": 4,
+    "related_models": [
+      "private-order",
+      "manufactured-dependency"
+    ],
+    "visualization_type": "ego-network",
+    "last_updated": "2026-02-16"
+  },
+  {
+    "id": "complexity-as-credential",
+    "title": "Complexity as Credential",
+    "subtitle": "The con and the infrastructure are the same thing",
+    "archetype": "Growth and Underinvestment",
+    "definition": "The deliberate use of complex financial structures to simultaneously (a) obscure activity from oversight, (b) signal sophistication and wealth to marks, and (c) generate the conditions for manufactured dependency. The complexity serves the con and IS the con.",
+    "instance_count": 3,
+    "mechanism_count": 4,
+    "related_models": [
+      "manufactured-dependency",
+      "narrative-shield",
+      "jurisdictional-arbitrage"
+    ],
+    "visualization_type": "juxtaposition",
+    "last_updated": "2026-02-16"
+  },
+  {
+    "id": "enabler-gradient",
+    "title": "The Enabler Gradient",
+    "subtitle": "From architects to unwitting participants",
+    "archetype": "Drifting Goals / Tragedy of the Commons",
+    "definition": "Within any complex financial crime network, participants operate at different levels of awareness and complicity \u2014 from fully complicit architects to unwitting service providers \u2014 and the system requires participants at every level.",
+    "instance_count": 3,
+    "mechanism_count": 5,
+    "related_models": [
+      "manufactured-dependency",
+      "private-order"
+    ],
+    "visualization_type": "gradient-spectrum",
+    "last_updated": "2026-02-16"
+  },
+  {
+    "id": "jurisdictional-arbitrage",
+    "title": "Jurisdictional Arbitrage",
+    "subtitle": "Exploiting gaps between legal regimes",
+    "archetype": "Escalation",
+    "definition": "The exploitation of differences between legal, regulatory, and enforcement regimes across jurisdictions \u2014 extracting value where oversight is weak and storing/protecting it where institutions are strong.",
+    "instance_count": 3,
+    "mechanism_count": 4,
+    "related_models": [
+      "private-order",
+      "parallel-financial-system"
+    ],
+    "visualization_type": "multi-jurisdiction-flow",
+    "last_updated": "2026-02-16"
+  },
+  {
+    "id": "manufactured-dependency",
+    "title": "Manufactured Dependency",
+    "subtitle": "Creating problems to sell solutions",
+    "archetype": "Fixes That Fail",
+    "definition": "A pattern where an operator creates the conditions for problems to arise, then positions themselves as the solution \u2014 generating leverage without explicit coercion.",
+    "instance_count": 3,
+    "mechanism_count": 5,
+    "related_models": [
+      "bridge-tax",
+      "enabler-gradient",
+      "complexity-as-credential"
+    ],
+    "visualization_type": "process-flow-feedback",
+    "last_updated": "2026-02-16"
+  },
+  {
+    "id": "narrative-shield",
+    "title": "The Narrative Shield",
+    "subtitle": "Controlling the information environment",
+    "archetype": "Shifting the Burden",
+    "definition": "Power maintained through controlling the information environment \u2014 shaping what is reported, what questions are asked, and what narratives dominate \u2014 not through direct coercion but through cultivated media relationships, strategic information placement, and reputation infrastructure.",
+    "instance_count": 4,
+    "mechanism_count": 5,
+    "related_models": [
+      "manufactured-dependency",
+      "complexity-as-credential"
+    ],
+    "visualization_type": "information-flow",
+    "last_updated": "2026-02-16"
+  },
+  {
+    "id": "parallel-financial-system",
+    "title": "The Parallel Financial System",
+    "subtitle": "Where intelligence finance meets private crime",
+    "archetype": "Shifting the Burden",
+    "definition": "Off-the-books financial infrastructure \u2014 maintained by or for intelligence services \u2014 that intersects with and enables private financial crime, because the same mechanisms (shell companies, compliant banks, deniable intermediaries) serve both purposes.",
+    "instance_count": 3,
+    "mechanism_count": 4,
+    "related_models": [
+      "jurisdictional-arbitrage",
+      "bridge-tax"
+    ],
+    "visualization_type": "structural-comparison",
+    "last_updated": "2026-02-16"
+  },
+  {
+    "id": "private-order",
+    "title": "The Private Order",
+    "subtitle": "Access-controlled networks within open societies",
+    "archetype": "Success to the Successful",
+    "definition": "A parallel access-controlled network operating within an ostensibly open-access democratic society, where membership is maintained through reciprocal obligation and access to the network IS the rent.",
+    "instance_count": 3,
+    "mechanism_count": 5,
+    "related_models": [
+      "bridge-tax",
+      "enabler-gradient"
+    ],
+    "visualization_type": "bipartite-graph",
+    "last_updated": "2026-02-16"
+  }
+]

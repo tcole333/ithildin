@@ -4,42 +4,67 @@
   "aliases": [
     "Gold & Wachtel"
   ],
+  "generated_at": "2026-02-17T18:12:03.458500",
+  "last_updated": "2026-02-14T21:48:45",
   "stats": {
-    "total_findings": 21,
+    "total_findings": 20,
     "total_connections": 10,
     "total_entities": 0,
     "finding_types": {
-      "legal": 14,
-      "location": 2,
+      "legal": 13,
       "identity": 2,
+      "location": 2,
       "relationship": 1,
-      "communication": 1,
-      "intelligence": 1
+      "intelligence": 1,
+      "communication": 1
     },
     "connection_types": {
       "legal": 4,
       "employment": 5,
       "corporate": 1
-    }
+    },
+    "last_updated": "2026-02-14T21:48:45"
   },
   "findings": [
     {
-      "id": 2067,
+      "id": 2141,
       "finding_type": "legal",
-      "summary": "Gold & Wachtel served as registered process agent for J. EPSTEIN & COMPANY, INC. (formerly JEFFREY E. EPSTEIN, INC.) at 10 East 53rd Street, New York, NY 10022. NY Corp ID #1307306. Filed circa 1988, name change 10/03/1997, final dissolution 04/04/2001.",
+      "summary": "Wachtel and Masyr LLP represented Jeffrey E. Epstein in United States v. Epstein (96 CIV 8307 SDNY 1998) - eviction case from former Iranian consulate building. Attorney Steven J. Cohen of Wachtel and Masyr appeared for Epstein. Gold and Wachtel (a related/predecessor firm led by William Wachtel) also represented Jackie Fine Arts Inc and hired Darren Indyke in 1986 as a favor to Bernard Indyke. This establishes the Wachtel firm-Epstein relationship back to at least 1996.",
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "1986",
       "claim_type": "direct_quote",
       "verification_status": "unverified",
-      "created_at": "2026-02-14 20:06:41",
-      "target_name": "Gold and Wachtel",
+      "created_at": "2026-02-14 20:52:49",
+      "target_name": "Gold & Wachtel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01325008",
+          "source_quote": "Wachtel and Masyr LLP By Steven J. Cohen Esq New York for Jeffrey E. Epstein No. 96 CIV 8307(DC) United States District Court S.D. New York",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2079,
+      "finding_type": "identity",
+      "summary": "FEC records identify 4 Gold & Wachtel employees/partners making political donations (1987-1998): William B. Wachtel (NYC 10024, K to Bradley 1987, K to Bradley 1989), Jesse Masyr (Somers NY 10589, K to D'Amato 1996), Deborah S. Clark (NYC 10024, K to Schumer 1997, K to Schumer 1998), William Dowling (Brooklyn 11217, + to Abrams 1992). Clark's filings show both 'GOLD & WACHTEL LLP' and 'GOLD & WACHTELL LLP' spellings. Masyr's 141 hits in Epstein document corpus warrants separate investigation.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "1987",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:10:38",
+      "target_name": "Gold & Wachtel",
       "evidence": [
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA01332942",
-          "source_quote": "Company Name: J. EPSTEIN S COMPANY, INC. Process Name: GOLD 6, WACHTEL, ESQS Process Address: 10 EAST 53RD STREET NEW YORK, NY 10022",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -52,11 +77,11 @@
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "1988",
       "claim_type": "direct_quote",
       "verification_status": "unverified",
       "created_at": "2026-02-14 20:06:46",
-      "target_name": "Gold and Wachtel",
+      "target_name": "Gold & Wachtel",
       "evidence": [
         {
           "evidence_type": "efta",
@@ -75,66 +100,110 @@
       ]
     },
     {
-      "id": 2069,
+      "id": 2095,
       "finding_type": "legal",
-      "summary": "Successor firm Wachtel & Masyr LLP represented Jeffrey Epstein in United States v. Epstein (SDNY 96 CIV. 8307, 1998). Attorney Steven J. Cohen of Wachtel & Masyr appeared as Epstein's counsel. Case involved US government evicting Epstein from former Iranian Deputy Consul General residence at 34 East 69th Street. Jeffrey Schantz identified as Epstein's 'transaction counsel' in same case.",
+      "summary": "Gold and Wachtel founded 1984 by Harry Wachtel and Robert Gold. Represented Epstein from 1988.",
       "detail": null,
       "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
+      "confidence": "medium",
+      "date_of_event": "1988",
+      "claim_type": "synthesis",
       "verification_status": "unverified",
-      "created_at": "2026-02-14 20:06:53",
-      "target_name": "Gold and Wachtel",
+      "created_at": "2026-02-14 20:15:32",
+      "target_name": "Gold & Wachtel",
       "evidence": [
         {
           "evidence_type": "efta",
-          "evidence_ref": "EFTA01325008",
-          "source_quote": "Wachtel & Masyr, LLP, By Steven J. Cohen, Esq., New York, for Jeffrey E. Epstein.",
+          "evidence_ref": "EFTA01332942",
+          "source_quote": "GOLD WACHTEL ESQS 10 EAST 53RD ST",
           "source_page": null,
           "assessment": null
         }
       ]
     },
     {
-      "id": 2070,
+      "id": 2074,
       "finding_type": "legal",
-      "summary": "The 1998 SDNY case reveals Epstein leased the former Iranian Deputy Consul General residence at 34 East 69th Street from the Office of Foreign Missions in 1992 at 15K/month. Epstein occupied it until Jan 1996, then illegally sublet to Ivan Fisher at 20K/month without written OFM consent. Jeffrey Schantz conducted negotiations with OFM on April 19, 1996 about the sublet. OFM terminated Epstein's lease Aug 23, 1996. This is the earliest documented legal representation by the Gold & Wachtel successor firm.",
+      "summary": "Gold & Wachtel was a boutique NYC law firm at 10 East 53rd Street, NY 10022, co-managed by Robert Gold and William B. Wachtel. Served as process agent for J. Epstein & Company Inc. (NY DOS #1307306) from 11/16/1988. Firm became Wachtel Missry LLP on 12/13/1994 (NY DOS #1875279). Successor firm at 885 Second Ave, 47th Floor, NY 10017.",
+      "detail": "\n\n[Merged from finding #2082]: Gold & Wachtel was a boutique NYC law firm at 10 East 53rd Street, New York, NY 10022. Co-founded by Robert Gold and William B. Wachtel. Represented Jeffrey Epstein from at least November 1988, serving as process agent for J. Epstein & Company Inc (NY DOS ID 1307306). Both Jeffrey A. Schantz (from 1995) and Darren K. Indyke originated from this firm.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "1988-11-16",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:09:40",
+      "target_name": "Gold & Wachtel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01332942",
+          "source_quote": "Process Name: GOLD & WACHTEL, ESQS / Process Address: 10 EAST 53RD STREET / NEW YORK, NY 10022 / Identification Number: 1307306 / Filing Date: 11/16/1988",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2133,
+      "finding_type": "legal",
+      "summary": "Gold and Wachtel represented Herman Finesod on appeal in Jackie Fine Arts RICO fraud case. William B. Wachtel was on brief as defense counsel for Finesod in Faircloth v Finesod 4th Cir 1991. This means Wachtel was personally defending the man who ran the 409M fraud that Bernard Indyke managed, while simultaneously employing Bernards son Darren.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "1992",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:51:43",
+      "target_name": "Gold & Wachtel",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Faircloth v Finesod 938 F.2d 513 4th Cir 1991",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2091,
+      "finding_type": "legal",
+      "summary": "CourtListener reveals multiple lawsuits involving Gold & Wachtel: (1) Zhadanov v. Gold & Wachtel (SDNY 99-cv-05900, 1999, contract dispute), (2) Urse v. Gold & Wachtel (OHSD 94-cv-00604, 1994, civil rights employment), (3) Del Raso v. Gold & Wachtel (Bankr FLSB 94-00548, 1994), (4) Tri-State Sol-Aire Corp v. Gold & Wachtel (NY App Div 1997, malpractice suit), (5) Gold & Wachtel LLP v. Mark-Holli Realty (SDNY 97-cv-00308, 1997, contract - firm suing a client for fees). Cases span 1994-2000 indicating firm was active through late 1990s.",
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "1994",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-02-14 20:07:01",
-      "target_name": "Gold and Wachtel",
+      "created_at": "2026-02-14 20:13:52",
+      "target_name": "Gold & Wachtel",
       "evidence": [
         {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01325008",
-          "source_quote": "In 1992, OFM entered into a two-year lease with Epstein...Jeffrey Schantz, Epstein's transaction counsel, on April 19, 1996, OFM orally consented to Epstein's request to sublet the Premises to Fisher",
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/docket/4522246/zhadanov-v-gold-wachtel/",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
       ]
     },
     {
-      "id": 2071,
-      "finding_type": "identity",
-      "summary": "Steven J. Cohen identified as attorney at Wachtel & Masyr LLP who represented Epstein in 1998 SDNY case. This is a different attorney from the known Epstein operatives (Schantz and Indyke), indicating additional firm personnel handled Epstein matters. Cohen appeared on behalf of the firm in federal court filings.",
+      "id": 2086,
+      "finding_type": "legal",
+      "summary": "Gold & Wachtel underwent succession: (1) Gold & Wachtel (active by 1987, dissolved by late 1994), (2) Wachtel & Masyr LLP (active by 1998, at 110 E 59th St), (3) Wachtel Missry LLP (formed Dec 13 1994 per NY SoS, at 885 Second Ave 47th Floor). Steven J. Cohen represented Epstein under Wachtel & Masyr in US v. Epstein (96 CIV 8307, SDNY 1998) and is currently partner at Wachtel Missry, establishing continuity.",
       "detail": null,
       "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
+      "confidence": "medium",
+      "date_of_event": "1994-12-13",
+      "claim_type": "inference",
       "verification_status": "unverified",
-      "created_at": "2026-02-14 20:07:07",
-      "target_name": "Gold and Wachtel",
+      "created_at": "2026-02-14 20:13:12",
+      "target_name": "Gold & Wachtel",
       "evidence": [
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA01325008",
-          "source_quote": "Wachtel & Masyr, LLP, By Steven J. Cohen, Esq., New York, for Jeffrey E. Epstein.",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -147,11 +216,11 @@
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
-      "date_of_event": null,
+      "date_of_event": "1995",
       "claim_type": "synthesis",
       "verification_status": "unverified",
       "created_at": "2026-02-14 20:07:15",
-      "target_name": "Gold and Wachtel",
+      "target_name": "Gold & Wachtel",
       "evidence": [
         {
           "evidence_type": "efta",
@@ -177,57 +246,13 @@
       ]
     },
     {
-      "id": 2073,
-      "finding_type": "communication",
-      "summary": "Email from Jeffrey Epstein to 'Gold, Steven' on April 22, 2013 about rescheduling an inspection: 'Steve can we move the inspection to tues next week, I am not returning until then.' CC'd to Richard Bamen. This may be Steven Gold, a possible named partner of Gold & Wachtel, still in contact with Epstein 25+ years after the firm's founding.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:07:22",
-      "target_name": "Gold and Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01893262",
-          "source_quote": "To: Gold, Steven From: Jeffrey Epstei Sent: Mon 4/22/2013 9:17:31 PM Richard Bamen Steve can we move the inspection to tues next week, I am not returning until then",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2074,
-      "finding_type": "legal",
-      "summary": "Gold & Wachtel was a boutique NYC law firm at 10 East 53rd Street, NY 10022, co-managed by Robert Gold and William B. Wachtel. Served as process agent for J. Epstein & Company Inc. (NY DOS #1307306) from 11/16/1988. Firm became Wachtel Missry LLP on 12/13/1994 (NY DOS #1875279). Successor firm at 885 Second Ave, 47th Floor, NY 10017.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:09:40",
-      "target_name": "Gold & Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01332942",
-          "source_quote": "Process Name: GOLD & WACHTEL, ESQS / Process Address: 10 EAST 53RD STREET / NEW YORK, NY 10022 / Identification Number: 1307306 / Filing Date: 11/16/1988",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 2078,
       "finding_type": "legal",
       "summary": "Gold & Wachtel personnel pipeline to Epstein: Jeffrey A. Schantz (JD Fordham 1983) served as Epstein primary operative 1995-2003, was original co-Trustee of 2001 Trust ONE with M bequest. Darren K. Indyke (JD Cornell Law 1991) replaced Schantz as primary operative 2003-2019, designated successor Trustee in Trust. Indyke confirmed as G&W attorney via LittleSis (entity 349261). Robert Gold co-managed the firm. Both Schantz and Indyke transitioned from G&W attorneys to Epstein inner circle operatives.",
       "detail": null,
       "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
+      "confidence": "medium",
+      "date_of_event": "1995",
       "claim_type": "synthesis",
       "verification_status": "unverified",
       "created_at": "2026-02-14 20:10:26",
@@ -250,66 +275,181 @@
       ]
     },
     {
-      "id": 2079,
-      "finding_type": "identity",
-      "summary": "FEC records identify 4 Gold & Wachtel employees/partners making political donations (1987-1998): William B. Wachtel (NYC 10024, K to Bradley 1987, K to Bradley 1989), Jesse Masyr (Somers NY 10589, K to D'Amato 1996), Deborah S. Clark (NYC 10024, K to Schumer 1997, K to Schumer 1998), William Dowling (Brooklyn 11217, + to Abrams 1992). Clark's filings show both 'GOLD & WACHTEL LLP' and 'GOLD & WACHTELL LLP' spellings. Masyr's 141 hits in Epstein document corpus warrants separate investigation.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:10:38",
-      "target_name": "Gold & Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01332942",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2082,
-      "finding_type": "legal",
-      "summary": "Gold & Wachtel was a boutique NYC law firm at 10 East 53rd Street, New York, NY 10022. Co-founded by Robert Gold and William B. Wachtel. Represented Jeffrey Epstein from at least November 1988, serving as process agent for J. Epstein & Company Inc (NY DOS ID 1307306). Both Jeffrey A. Schantz (from 1995) and Darren K. Indyke originated from this firm.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:12:34",
-      "target_name": "Gold & Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01332942",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2086,
-      "finding_type": "legal",
-      "summary": "Gold & Wachtel underwent succession: (1) Gold & Wachtel (active by 1987, dissolved by late 1994), (2) Wachtel & Masyr LLP (active by 1998, at 110 E 59th St), (3) Wachtel Missry LLP (formed Dec 13 1994 per NY SoS, at 885 Second Ave 47th Floor). Steven J. Cohen represented Epstein under Wachtel & Masyr in US v. Epstein (96 CIV 8307, SDNY 1998) and is currently partner at Wachtel Missry, establishing continuity.",
+      "id": 2102,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Gold and Wachtel was founded 1984 at 10 E 53rd St NYC by Harry H. Wachtel (1917-1997, MLK advisor, VP of Rapid American Corp/Riklis) and Robert Gold (b.1945, AUSA SDNY 1973-77 in Official Corruption and Securities Fraud units). The firm was the institutional origin of Epstein's entire legal/operational infrastructure. KEY FINDINGS: (1) PIPELINE: Darren Indyke started as pre-law assistant in 1986 through father Bernard's connection \u2014 Bernard was manager/board member of Jackie Fine Arts (G&W client, $500M+ tax shelter fraud, Herman Finesod convicted). William Wachtel lied to Daily Beast calling Bernard 'a mailroom employee.' Indyke first encountered Epstein at G&W in 1986, returned after Cornell Law 1991. Schantz (Fordham 1983) went in-house with Epstein May 1995. Both successive #1 operatives came from this firm. (2) ROBERT GOLD SHIELDED EPSTEIN FROM TOWERS FINANCIAL PROSECUTION: Hoffenberg says 'Ask Robert Gold' \u2014 Gold 'kept the US attorney away from Epstein until there were only a few weeks left before the statute of limitations ran out.' Gold's AUSA SDNY background (corruption+securities fraud) gave him the connections. (3) Gold named in 2001 Trust One as 'his friend, ROBERT GOLD' for debt forgiveness. 13 documents show warm personal relationship post-conviction 2011-2014. (4) Gold's later career: Ranieri & Co crisis management (1998-2000) \u2014 same Ranieri firm Schantz sent FedEx packages to from NYSG Dec 2003. Then DLA Piper, Wilson Sonsini, Mishcon de Reya (2014). Jun 2014 email from Mishcon: 'spent the day in Paris working with Alan.' (5) SAKER AVIATION: William B. Wachtel (Harry's son) chairs Saker Aviation Services (SKAS) with former G&W attorney Jesse Masyr in 25 SEC filings \u2014 FBO/charter company run by Epstein's former law firm partners. (6) Steven J. Cohen represented Epstein in 1998 from successor firm, now partner at Wachtel Missry LLP. (7) Firm became Wachtel Missry LLP after Harry's death Feb 1997. Gold departed late 1990s. Firm succession: Gold and Wachtel \u2192 Wachtel and Masyr \u2192 Wachtel Missry.",
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "inference",
+      "date_of_event": "1995-05",
+      "claim_type": "synthesis",
       "verification_status": "unverified",
-      "created_at": "2026-02-14 20:13:12",
+      "created_at": "2026-02-14 20:21:46",
+      "target_name": "Gold & Wachtel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01266298",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01325008",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01332942",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01888016",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01920882",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02522672",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02548651",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "HOUSE_OVERSIGHT_022081",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2070,
+      "finding_type": "legal",
+      "summary": "The 1998 SDNY case reveals Epstein leased the former Iranian Deputy Consul General residence at 34 East 69th Street from the Office of Foreign Missions in 1992 at 15K/month. Epstein occupied it until Jan 1996, then illegally sublet to Ivan Fisher at 20K/month without written OFM consent. Jeffrey Schantz conducted negotiations with OFM on April 19, 1996 about the sublet. OFM terminated Epstein's lease Aug 23, 1996. This is the earliest documented legal representation by the Gold & Wachtel successor firm.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "1996-04-19",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:07:01",
       "target_name": "Gold & Wachtel",
       "evidence": [
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA01325008",
-          "source_quote": null,
+          "source_quote": "In 1992, OFM entered into a two-year lease with Epstein...Jeffrey Schantz, Epstein's transaction counsel, on April 19, 1996, OFM orally consented to Epstein's request to sublet the Premises to Fisher",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2067,
+      "finding_type": "legal",
+      "summary": "Gold & Wachtel served as registered process agent for J. EPSTEIN & COMPANY, INC. (formerly JEFFREY E. EPSTEIN, INC.) at 10 East 53rd Street, New York, NY 10022. NY Corp ID #1307306. Filed circa 1988, name change 10/03/1997, final dissolution 04/04/2001.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "1997-10-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:06:41",
+      "target_name": "Gold & Wachtel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01332942",
+          "source_quote": "Company Name: J. EPSTEIN S COMPANY, INC. Process Name: GOLD 6, WACHTEL, ESQS Process Address: 10 EAST 53RD STREET NEW YORK, NY 10022",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2069,
+      "finding_type": "legal",
+      "summary": "Successor firm Wachtel & Masyr LLP represented Jeffrey Epstein in United States v. Epstein (SDNY 96 CIV. 8307, 1998). Attorney Steven J. Cohen of Wachtel & Masyr appeared as Epstein's counsel. Case involved US government evicting Epstein from former Iranian Deputy Consul General residence at 34 East 69th Street. Jeffrey Schantz identified as Epstein's 'transaction counsel' in same case.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "1998",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:06:53",
+      "target_name": "Gold & Wachtel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01325008",
+          "source_quote": "Wachtel & Masyr, LLP, By Steven J. Cohen, Esq., New York, for Jeffrey E. Epstein.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2071,
+      "finding_type": "identity",
+      "summary": "Steven J. Cohen identified as attorney at Wachtel & Masyr LLP who represented Epstein in 1998 SDNY case. This is a different attorney from the known Epstein operatives (Schantz and Indyke), indicating additional firm personnel handled Epstein matters. Cohen appeared on behalf of the firm in federal court filings.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "1998",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:07:07",
+      "target_name": "Gold & Wachtel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01325008",
+          "source_quote": "Wachtel & Masyr, LLP, By Steven J. Cohen, Esq., New York, for Jeffrey E. Epstein.",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2073,
+      "finding_type": "communication",
+      "summary": "Email from Jeffrey Epstein to 'Gold, Steven' on April 22, 2013 about rescheduling an inspection: 'Steve can we move the inspection to tues next week, I am not returning until then.' CC'd to Richard Bamen. This may be Steven Gold, a possible named partner of Gold & Wachtel, still in contact with Epstein 25+ years after the firm's founding.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2013-04-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:07:22",
+      "target_name": "Gold & Wachtel",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01893262",
+          "source_quote": "To: Gold, Steven From: Jeffrey Epstei Sent: Mon 4/22/2013 9:17:31 PM Richard Bamen Steve can we move the inspection to tues next week, I am not returning until then",
           "source_page": null,
           "assessment": null
         }
@@ -332,116 +472,6 @@
           "evidence_type": "efta",
           "evidence_ref": "EFTA01332942",
           "source_quote": "Process Address: 10 EAST 53RD STREET NEW YORK NY 10022",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2091,
-      "finding_type": "legal",
-      "summary": "CourtListener reveals multiple lawsuits involving Gold & Wachtel: (1) Zhadanov v. Gold & Wachtel (SDNY 99-cv-05900, 1999, contract dispute), (2) Urse v. Gold & Wachtel (OHSD 94-cv-00604, 1994, civil rights employment), (3) Del Raso v. Gold & Wachtel (Bankr FLSB 94-00548, 1994), (4) Tri-State Sol-Aire Corp v. Gold & Wachtel (NY App Div 1997, malpractice suit), (5) Gold & Wachtel LLP v. Mark-Holli Realty (SDNY 97-cv-00308, 1997, contract - firm suing a client for fees). Cases span 1994-2000 indicating firm was active through late 1990s.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:13:52",
-      "target_name": "Gold & Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.courtlistener.com/docket/4522246/zhadanov-v-gold-wachtel/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2095,
-      "finding_type": "legal",
-      "summary": "Gold and Wachtel founded 1984 by Harry Wachtel and Robert Gold. Represented Epstein from 1988.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:15:32",
-      "target_name": "Gold and Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01332942",
-          "source_quote": "GOLD WACHTEL ESQS 10 EAST 53RD ST",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2102,
-      "finding_type": "intelligence",
-      "summary": "SYNTHESIS: Gold and Wachtel was founded 1984 at 10 E 53rd St NYC by Harry H. Wachtel (1917-1997, MLK advisor, VP of Rapid American Corp/Riklis) and Robert Gold (b.1945, AUSA SDNY 1973-77 in Official Corruption and Securities Fraud units). The firm was the institutional origin of Epstein's entire legal/operational infrastructure. KEY FINDINGS: (1) PIPELINE: Darren Indyke started as pre-law assistant in 1986 through father Bernard's connection \u2014 Bernard was manager/board member of Jackie Fine Arts (G&W client, $500M+ tax shelter fraud, Herman Finesod convicted). William Wachtel lied to Daily Beast calling Bernard 'a mailroom employee.' Indyke first encountered Epstein at G&W in 1986, returned after Cornell Law 1991. Schantz (Fordham 1983) went in-house with Epstein May 1995. Both successive #1 operatives came from this firm. (2) ROBERT GOLD SHIELDED EPSTEIN FROM TOWERS FINANCIAL PROSECUTION: Hoffenberg says 'Ask Robert Gold' \u2014 Gold 'kept the US attorney away from Epstein until there were only a few weeks left before the statute of limitations ran out.' Gold's AUSA SDNY background (corruption+securities fraud) gave him the connections. (3) Gold named in 2001 Trust One as 'his friend, ROBERT GOLD' for debt forgiveness. 13 documents show warm personal relationship post-conviction 2011-2014. (4) Gold's later career: Ranieri & Co crisis management (1998-2000) \u2014 same Ranieri firm Schantz sent FedEx packages to from NYSG Dec 2003. Then DLA Piper, Wilson Sonsini, Mishcon de Reya (2014). Jun 2014 email from Mishcon: 'spent the day in Paris working with Alan.' (5) SAKER AVIATION: William B. Wachtel (Harry's son) chairs Saker Aviation Services (SKAS) with former G&W attorney Jesse Masyr in 25 SEC filings \u2014 FBO/charter company run by Epstein's former law firm partners. (6) Steven J. Cohen represented Epstein in 1998 from successor firm, now partner at Wachtel Missry LLP. (7) Firm became Wachtel Missry LLP after Harry's death Feb 1997. Gold departed late 1990s. Firm succession: Gold and Wachtel \u2192 Wachtel and Masyr \u2192 Wachtel Missry.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:21:46",
-      "target_name": "Gold and Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01332942,EFTA01325008,EFTA01266298,EFTA02522672,EFTA02548651,EFTA01888016,EFTA01920882,HOUSE_OVERSIGHT_022081",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2133,
-      "finding_type": "legal",
-      "summary": "Gold and Wachtel represented Herman Finesod on appeal in Jackie Fine Arts RICO fraud case. William B. Wachtel was on brief as defense counsel for Finesod in Faircloth v Finesod 4th Cir 1991. This means Wachtel was personally defending the man who ran the 409M fraud that Bernard Indyke managed, while simultaneously employing Bernards son Darren.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:51:43",
-      "target_name": "Gold and Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Faircloth v Finesod 938 F.2d 513 4th Cir 1991",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2141,
-      "finding_type": "legal",
-      "summary": "Wachtel and Masyr LLP represented Jeffrey E. Epstein in United States v. Epstein (96 CIV 8307 SDNY 1998) - eviction case from former Iranian consulate building. Attorney Steven J. Cohen of Wachtel and Masyr appeared for Epstein. Gold and Wachtel (a related/predecessor firm led by William Wachtel) also represented Jackie Fine Arts Inc and hired Darren Indyke in 1986 as a favor to Bernard Indyke. This establishes the Wachtel firm-Epstein relationship back to at least 1996.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:52:49",
-      "target_name": "Gold & Wachtel",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01325008",
-          "source_quote": "Wachtel and Masyr LLP By Steven J. Cohen Esq New York for Jeffrey E. Epstein No. 96 CIV 8307(DC) United States District Court S.D. New York",
           "source_page": null,
           "assessment": null
         }
@@ -484,7 +514,21 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "NY SoS DOS 1384964, NY SoS DOS 1898217, NY SoS DOS 1898213",
+          "evidence_ref": "NY SoS DOS 1384964",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY SoS DOS 1898213",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY SoS DOS 1898217",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -675,8 +719,8 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-02-14 20:07:38",
-      "other_person": "Jeffrey Schantz",
-      "other_person_slug": "jeffrey-schantz",
+      "other_person": "Jeffrey A. Schantz",
+      "other_person_slug": "jeffrey-a-schantz",
       "evidence": [
         {
           "evidence_type": "efta",
@@ -751,5 +795,481 @@
     }
   ],
   "entities": [],
-  "timeline": []
+  "timeline": [
+    {
+      "date": "1986",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Wachtel and Masyr LLP represented Jeffrey E. Epstein in United States v. Epstein (96 CIV 8307 SDNY 1998) - eviction case from former Iranian consulate building. Attorney Steven J. Cohen of Wachtel and Masyr appeared for Epstein. Gold and Wachtel (a related/predecessor firm led by William Wachtel) also represented Jackie Fine Arts Inc and hired Darren Indyke in 1986 as a favor to Bernard Indyke. This establishes the Wachtel firm-Epstein relationship back to at least 1996.",
+      "confidence": "high",
+      "id": 2141
+    },
+    {
+      "date": "1987",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "FEC records identify 4 Gold & Wachtel employees/partners making political donations (1987-1998): William B. Wachtel (NYC 10024, K to Bradley 1987, K to Bradley 1989), Jesse Masyr (Somers NY 10589, K to D'Amato 1996), Deborah S. Clark (NYC 10024, K to Schumer 1997, K to Schumer 1998), William Dowling (Brooklyn 11217, + to Abrams 1992). Clark's filings show both 'GOLD & WACHTEL LLP' and 'GOLD & WACHTELL LLP' spellings. Masyr's 141 hits in Epstein document corpus warrants separate investigation.",
+      "confidence": "confirmed",
+      "id": 2079
+    },
+    {
+      "date": "1988",
+      "type": "finding",
+      "finding_type": "location",
+      "summary": "Gold & Wachtel firm address confirmed as 10 East 53rd Street, New York, NY 10022 from NY State corporate filing for J. Epstein & Company Inc. The successor firm Wachtel & Masyr LLP relocated to 110 East 59th Street, New York, NY 10022.",
+      "confidence": "high",
+      "id": 2068
+    },
+    {
+      "date": "1988",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Gold and Wachtel founded 1984 by Harry Wachtel and Robert Gold. Represented Epstein from 1988.",
+      "confidence": "medium",
+      "id": 2095
+    },
+    {
+      "date": "1988-11-16",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Gold & Wachtel was a boutique NYC law firm at 10 East 53rd Street, NY 10022, co-managed by Robert Gold and William B. Wachtel. Served as process agent for J. Epstein & Company Inc. (NY DOS #1307306) from 11/16/1988. Firm became Wachtel Missry LLP on 12/13/1994 (NY DOS #1875279). Successor firm at 885 Second Ave, 47th Floor, NY 10017.",
+      "confidence": "medium",
+      "id": 2074
+    },
+    {
+      "date": "1992",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Gold and Wachtel represented Herman Finesod on appeal in Jackie Fine Arts RICO fraud case. William B. Wachtel was on brief as defense counsel for Finesod in Faircloth v Finesod 4th Cir 1991. This means Wachtel was personally defending the man who ran the 409M fraud that Bernard Indyke managed, while simultaneously employing Bernards son Darren.",
+      "confidence": "confirmed",
+      "id": 2133
+    },
+    {
+      "date": "1994",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "CourtListener reveals multiple lawsuits involving Gold & Wachtel: (1) Zhadanov v. Gold & Wachtel (SDNY 99-cv-05900, 1999, contract dispute), (2) Urse v. Gold & Wachtel (OHSD 94-cv-00604, 1994, civil rights employment), (3) Del Raso v. Gold & Wachtel (Bankr FLSB 94-00548, 1994), (4) Tri-State Sol-Aire Corp v. Gold & Wachtel (NY App Div 1997, malpractice suit), (5) Gold & Wachtel LLP v. Mark-Holli Realty (SDNY 97-cv-00308, 1997, contract - firm suing a client for fees). Cases span 1994-2000 indicating firm was active through late 1990s.",
+      "confidence": "high",
+      "id": 2091
+    },
+    {
+      "date": "1994-12-13",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Gold & Wachtel underwent succession: (1) Gold & Wachtel (active by 1987, dissolved by late 1994), (2) Wachtel & Masyr LLP (active by 1998, at 110 E 59th St), (3) Wachtel Missry LLP (formed Dec 13 1994 per NY SoS, at 885 Second Ave 47th Floor). Steven J. Cohen represented Epstein under Wachtel & Masyr in US v. Epstein (96 CIV 8307, SDNY 1998) and is currently partner at Wachtel Missry, establishing continuity.",
+      "confidence": "medium",
+      "id": 2086
+    },
+    {
+      "date": "1995",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Firm evolution: Gold & Wachtel (at 10 E 53rd St) was Epstein's original law firm from ~1988, serving as process agent for Jeffrey E. Epstein, Inc./J. Epstein & Company Inc. The firm became Wachtel & Masyr LLP (at 110 E 59th St) by at least 1996. 'Gold' departed (name dropped from firm), while 'Wachtel' remained as named partner with new partner 'Masyr'. Both Schantz (active 1995-2003) and Indyke (Cornell Law 1991, active from early 1990s) came from this firm.",
+      "confidence": "medium",
+      "id": 2072
+    },
+    {
+      "date": "1995",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Gold & Wachtel personnel pipeline to Epstein: Jeffrey A. Schantz (JD Fordham 1983) served as Epstein primary operative 1995-2003, was original co-Trustee of 2001 Trust ONE with M bequest. Darren K. Indyke (JD Cornell Law 1991) replaced Schantz as primary operative 2003-2019, designated successor Trustee in Trust. Indyke confirmed as G&W attorney via LittleSis (entity 349261). Robert Gold co-managed the firm. Both Schantz and Indyke transitioned from G&W attorneys to Epstein inner circle operatives.",
+      "confidence": "medium",
+      "id": 2078
+    },
+    {
+      "date": "1995-05",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Gold and Wachtel was founded 1984 at 10 E 53rd St NYC by Harry H. Wachtel (1917-1997, MLK advisor, VP of Rapid American Corp/Riklis) and Robert Gold (b.1945, AUSA SDNY 1973-77 in Official Corruption and Securities Fraud units). The firm was the institutional origin of Epstein's entire legal/operational infrastructure. KEY FINDINGS: (1) PIPELINE: Darren Indyke started as pre-law assistant in 1986 through father Bernard's connection \u2014 Bernard was manager/board member of Jackie Fine Arts (G&W client, $500M+ tax shelter fraud, Herman Finesod convicted). William Wachtel lied to Daily Beast calling Bernard 'a mailroom employee.' Indyke first encountered Epstein at G&W in 1986, returned after Cornell Law 1991. Schantz (Fordham 1983) went in-house with Epstein May 1995. Both successive #1 operatives came from this firm. (2) ROBERT GOLD SHIELDED EPSTEIN FROM TOWERS FINANCIAL PROSECUTION: Hoffenberg says 'Ask Robert Gold' \u2014 Gold 'kept the US attorney away from Epstein until there were only a few weeks left before the statute of limitations ran out.' Gold's AUSA SDNY background (corruption+securities fraud) gave him the connections. (3) Gold named in 2001 Trust One as 'his friend, ROBERT GOLD' for debt forgiveness. 13 documents show warm personal relationship post-conviction 2011-2014. (4) Gold's later career: Ranieri & Co crisis management (1998-2000) \u2014 same Ranieri firm Schantz sent FedEx packages to from NYSG Dec 2003. Then DLA Piper, Wilson Sonsini, Mishcon de Reya (2014). Jun 2014 email from Mishcon: 'spent the day in Paris working with Alan.' (5) SAKER AVIATION: William B. Wachtel (Harry's son) chairs Saker Aviation Services (SKAS) with former G&W attorney Jesse Masyr in 25 SEC filings \u2014 FBO/charter company run by Epstein's former law firm partners. (6) Steven J. Cohen represented Epstein in 1998 from successor firm, now partner at Wachtel Missry LLP. (7) Firm became Wachtel Missry LLP after Harry's death Feb 1997. Gold departed late 1990s. Firm succession: Gold and Wachtel \u2192 Wachtel and Masyr \u2192 Wachtel Missry.",
+      "confidence": "medium",
+      "id": 2102
+    },
+    {
+      "date": "1996-04-19",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "The 1998 SDNY case reveals Epstein leased the former Iranian Deputy Consul General residence at 34 East 69th Street from the Office of Foreign Missions in 1992 at 15K/month. Epstein occupied it until Jan 1996, then illegally sublet to Ivan Fisher at 20K/month without written OFM consent. Jeffrey Schantz conducted negotiations with OFM on April 19, 1996 about the sublet. OFM terminated Epstein's lease Aug 23, 1996. This is the earliest documented legal representation by the Gold & Wachtel successor firm.",
+      "confidence": "high",
+      "id": 2070
+    },
+    {
+      "date": "1997-10-03",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Gold & Wachtel served as registered process agent for J. EPSTEIN & COMPANY, INC. (formerly JEFFREY E. EPSTEIN, INC.) at 10 East 53rd Street, New York, NY 10022. NY Corp ID #1307306. Filed circa 1988, name change 10/03/1997, final dissolution 04/04/2001.",
+      "confidence": "high",
+      "id": 2067
+    },
+    {
+      "date": "1998",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Successor firm Wachtel & Masyr LLP represented Jeffrey Epstein in United States v. Epstein (SDNY 96 CIV. 8307, 1998). Attorney Steven J. Cohen of Wachtel & Masyr appeared as Epstein's counsel. Case involved US government evicting Epstein from former Iranian Deputy Consul General residence at 34 East 69th Street. Jeffrey Schantz identified as Epstein's 'transaction counsel' in same case.",
+      "confidence": "confirmed",
+      "id": 2069
+    },
+    {
+      "date": "1998",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Steven J. Cohen identified as attorney at Wachtel & Masyr LLP who represented Epstein in 1998 SDNY case. This is a different attorney from the known Epstein operatives (Schantz and Indyke), indicating additional firm personnel handled Epstein matters. Cohen appeared on behalf of the firm in federal court filings.",
+      "confidence": "confirmed",
+      "id": 2071
+    },
+    {
+      "date": "2013-04-22",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Email from Jeffrey Epstein to 'Gold, Steven' on April 22, 2013 about rescheduling an inspection: 'Steve can we move the inspection to tues next week, I am not returning until then.' CC'd to Richard Bamen. This may be Steven Gold, a possible named partner of Gold & Wachtel, still in contact with Epstein 25+ years after the firm's founding.",
+      "confidence": "medium",
+      "id": 2073
+    }
+  ],
+  "curation": {
+    "key_finding_ids": [
+      2102,
+      2069,
+      2079,
+      2071,
+      2068,
+      2141,
+      2070,
+      2067,
+      2072,
+      2073,
+      2088,
+      2078
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          2072
+        ],
+        "connection_ids": [
+          1057,
+          1062,
+          1063,
+          1064,
+          1060,
+          1053,
+          1054,
+          1055,
+          1087,
+          1056
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          2141,
+          2095,
+          2074,
+          2133,
+          2091,
+          2086,
+          2078,
+          2070
+        ],
+        "connection_ids": [
+          1057,
+          1062,
+          1053,
+          1087
+        ],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      }
+    ],
+    "curated_at": "2026-02-17T18:12:03.819713"
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Gold and Wachtel",
+      "connections": [
+        {
+          "target": "Jeffrey Epstein",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "EFTA01266298",
+          "description": "Gold & Wachtel served as Epstein's law firm and process agent for J. Epstein & Company Inc. from 1988. Both Schantz and Indyke recruited from the firm. Co-managing partner Robert Gold maintained personal relationship with Epstein through 2014."
+        },
+        {
+          "target": "Jeffrey Epstein",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "EFTA01325008",
+          "description": "Law firm representing Epstein from 1988. Process agent for J. Epstein & Company Inc. Both Schantz and Indyke originated from this firm."
+        },
+        {
+          "target": "Robert Gold",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "https://www.lawfuel.com/new-york-july-11-2006-lawfuel-press-release-service-dla-p/",
+          "description": "Co-managing partner and name partner. Former AUSA SDNY criminal division 1973-1977. Formed firm with William Wachtel."
+        },
+        {
+          "target": "William B. Wachtel",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "https://littlesis.org/org/388883-Gold_&_Wachtel",
+          "description": "Founding partner (Principal) per LittleSis. Founded successor firm Wachtel Missry LLP in Dec 1994."
+        },
+        {
+          "target": "Saker Aviation Services",
+          "type": "corporate",
+          "strength": 0.7,
+          "evidence_ref": "EFTA01332942",
+          "description": "G&W founding partner William Wachtel chairs Saker Aviation (FBO/charter). Former G&W attorney Jesse Masyr in 25 Saker SEC filings. Aviation company operated by Epstein former law firm principals."
+        },
+        {
+          "target": "Jeffrey Epstein",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "EFTA01325008",
+          "description": "Gold & Wachtel served as process agent for Jeffrey E. Epstein Inc./J. Epstein & Company Inc. from ~1988. Successor firm Wachtel & Masyr LLP continued representing Epstein through at least 1998 in federal court (SDNY 96 CIV 8307)."
+        },
+        {
+          "target": "Jeffrey A. Schantz",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "EFTA01325008",
+          "description": "Schantz served as Epstein's transaction counsel from at least 1996 while at Wachtel & Masyr LLP (successor to Gold & Wachtel). Conducted OFM negotiations for 34 E 69th St sublease April 1996."
+        },
+        {
+          "target": "Darren Indyke",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "EFTA01295770",
+          "description": "Indyke was an attorney at Gold & Wachtel. Father Bernard Indyke managed Jackie Fine Arts, a Gold & Wachtel client, suggesting a family recruitment pipeline into Epstein service."
+        },
+        {
+          "target": "Jeffrey Epstein",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "https://wikispooks.com/wiki/Darren_Indyke",
+          "description": "Gold and Wachtel represented Epstein in real estate deals at least as far back as 1988. Darren Indyke worked at the firm and transitioned to become Epsteins exclusive counsel."
+        },
+        {
+          "target": "Steven J. Cohen",
+          "type": "employment",
+          "strength": 0.7,
+          "evidence_ref": "EFTA01325008",
+          "description": "Cohen appeared as counsel for Epstein at Wachtel & Masyr LLP in SDNY 96 CIV 8307 (1998). Third known attorney from the firm involved in Epstein matters."
+        }
+      ],
+      "secondHop": {
+        "Darren Indyke": [
+          {
+            "target": "Leon Black",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Indyke handled legal matters for both Epstein and Black. Conference call details (EFTA02340224) show joint calls between Epstein, Black-related parties, Brad Karp, Brad Wechsler, and Patrick Fenn."
+          },
+          {
+            "target": "Gratitude America Ltd",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Indyke served as Treasurer (2012-2015) then Vice President/Director (2017-2019). Signed account closure letter Jan 10, 2019. Address: 575 Lexington Ave 4th Floor NYC then 9053 Estate Thomas USVI. Zero compensation."
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "In-house attorney at Southern Financial LLC for 15+ years. Secretary at STC, Authorized Signatory at SFL. Co-executor of estate. Beneficiary of Butterfly Trust. Trustee of 1953 Trust and Epstein 2019 Trust."
+          },
+          {
+            "target": "Richard Kahn",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-beneficiaries of Butterfly Trust. Co-trustees of 1953 Trust. Co-executors of estate. Both at 575 Lexington Ave 4th Floor. Co-occur in 830 LMSBAND files."
+          },
+          {
+            "target": "Stewart Oldfield",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Indyke corresponded extensively with Oldfield at Deutsche Bank on Prytanee LLC, CDD forms, account management. 381 LMSBAND co-occurrences."
+          }
+        ],
+        "Jeffrey A. Schantz": [
+          {
+            "target": "Jeffrey E. Epstein",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Co-Trustee of Trust One Two and Hart Trust and co-Executor of 2001 Will"
+          },
+          {
+            "target": "Paul Hoffman",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-officers in USVI entities including J Epstein VI Foundation"
+          }
+        ],
+        "Jeffrey Epstein": [
+          {
+            "target": "Leon Black",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "$158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019."
+          },
+          {
+            "target": "Kathy Ruemmler",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will."
+          },
+          {
+            "target": "Reid Weingarten",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Defense counsel 19 Cr. 490 (SDNY 2019). Personal advisor 2011-2019, 245+ emails. ~450K paid in Steptoe fees, 300K owed. Paris travel Sept 2011. Regular breakfast meetings at 71st St."
+          },
+          {
+            "target": "Landon Thomas Jr",
+            "type": "intelligence",
+            "strength": 1.0,
+            "description": "185-email correspondence 2007-2019. Thomas served as Epstein media asset: advance warning of investigations, brokered intros to Masa Son and Tom Barrack, received 40K+ payments to charity, wrote defining 2002 profile and 2008 NYT piece. Classified as compromised source."
+          },
+          {
+            "target": "Landon Thomas Jr",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Epstein directed 40K+ to Thomas charity (Ricardo O Gorman Garden): 10K from foundation in Mar 2015 plus 30K from Gratitude America in Aug 2017. Thomas provided wire instructions for TD Bank account."
+          }
+        ],
+        "Robert Gold": [
+          {
+            "target": "Steven Hoffenberg",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Gold used former AUSA connections to shield Epstein from Towers Financial prosecution, running out statute of limitations. Hoffenberg served 19 years; Epstein was never charged."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": [
+      {
+        "date": "1986",
+        "label": "Wachtel and Masyr LLP represented Jeffrey E. Epstein in United States v. Epstein (96 CIV 8307 SDNY 1998) - eviction case from former Iranian consulate building. Attorney Steven J. Cohen of Wachtel and Masyr appeared for Epstein. Gold and Wachtel (a related/predecessor firm led by William Wachtel) also represented Jackie Fine Arts Inc and hired Darren Indyke in 1986 as a favor to Bernard Indyke. This establishes the Wachtel firm-Epstein relationship back to at least 1996.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2141
+      },
+      {
+        "date": "1987",
+        "label": "FEC records identify 4 Gold & Wachtel employees/partners making political donations (1987-1998): William B. Wachtel (NYC 10024, K to Bradley 1987, K to Bradley 1989), Jesse Masyr (Somers NY 10589, K to D'Amato 1996), Deborah S. Clark (NYC 10024, K to Schumer 1997, K to Schumer 1998), William Dowling (Brooklyn 11217, + to Abrams 1992). Clark's filings show both 'GOLD & WACHTEL LLP' and 'GOLD & WACHTELL LLP' spellings. Masyr's 141 hits in Epstein document corpus warrants separate investigation.",
+        "type": "identity",
+        "evidence_ref": null,
+        "id": 2079
+      },
+      {
+        "date": "1988",
+        "label": "Gold & Wachtel firm address confirmed as 10 East 53rd Street, New York, NY 10022 from NY State corporate filing for J. Epstein & Company Inc. The successor firm Wachtel & Masyr LLP relocated to 110 East 59th Street, New York, NY 10022.",
+        "type": "location",
+        "evidence_ref": null,
+        "id": 2068
+      },
+      {
+        "date": "1988",
+        "label": "Gold and Wachtel founded 1984 by Harry Wachtel and Robert Gold. Represented Epstein from 1988.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2095
+      },
+      {
+        "date": "1988-11-16",
+        "label": "Gold & Wachtel was a boutique NYC law firm at 10 East 53rd Street, NY 10022, co-managed by Robert Gold and William B. Wachtel. Served as process agent for J. Epstein & Company Inc. (NY DOS #1307306) from 11/16/1988. Firm became Wachtel Missry LLP on 12/13/1994 (NY DOS #1875279). Successor firm at 885 Second Ave, 47th Floor, NY 10017.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2074
+      },
+      {
+        "date": "1992",
+        "label": "Gold and Wachtel represented Herman Finesod on appeal in Jackie Fine Arts RICO fraud case. William B. Wachtel was on brief as defense counsel for Finesod in Faircloth v Finesod 4th Cir 1991. This means Wachtel was personally defending the man who ran the 409M fraud that Bernard Indyke managed, while simultaneously employing Bernards son Darren.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2133
+      },
+      {
+        "date": "1994",
+        "label": "CourtListener reveals multiple lawsuits involving Gold & Wachtel: (1) Zhadanov v. Gold & Wachtel (SDNY 99-cv-05900, 1999, contract dispute), (2) Urse v. Gold & Wachtel (OHSD 94-cv-00604, 1994, civil rights employment), (3) Del Raso v. Gold & Wachtel (Bankr FLSB 94-00548, 1994), (4) Tri-State Sol-Aire Corp v. Gold & Wachtel (NY App Div 1997, malpractice suit), (5) Gold & Wachtel LLP v. Mark-Holli Realty (SDNY 97-cv-00308, 1997, contract - firm suing a client for fees). Cases span 1994-2000 indicating firm was active through late 1990s.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2091
+      },
+      {
+        "date": "1994-12-13",
+        "label": "Gold & Wachtel underwent succession: (1) Gold & Wachtel (active by 1987, dissolved by late 1994), (2) Wachtel & Masyr LLP (active by 1998, at 110 E 59th St), (3) Wachtel Missry LLP (formed Dec 13 1994 per NY SoS, at 885 Second Ave 47th Floor). Steven J. Cohen represented Epstein under Wachtel & Masyr in US v. Epstein (96 CIV 8307, SDNY 1998) and is currently partner at Wachtel Missry, establishing continuity.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2086
+      },
+      {
+        "date": "1995",
+        "label": "Firm evolution: Gold & Wachtel (at 10 E 53rd St) was Epstein's original law firm from ~1988, serving as process agent for Jeffrey E. Epstein, Inc./J. Epstein & Company Inc. The firm became Wachtel & Masyr LLP (at 110 E 59th St) by at least 1996. 'Gold' departed (name dropped from firm), while 'Wachtel' remained as named partner with new partner 'Masyr'. Both Schantz (active 1995-2003) and Indyke (Cornell Law 1991, active from early 1990s) came from this firm.",
+        "type": "relationship",
+        "evidence_ref": null,
+        "id": 2072
+      },
+      {
+        "date": "1995",
+        "label": "Gold & Wachtel personnel pipeline to Epstein: Jeffrey A. Schantz (JD Fordham 1983) served as Epstein primary operative 1995-2003, was original co-Trustee of 2001 Trust ONE with M bequest. Darren K. Indyke (JD Cornell Law 1991) replaced Schantz as primary operative 2003-2019, designated successor Trustee in Trust. Indyke confirmed as G&W attorney via LittleSis (entity 349261). Robert Gold co-managed the firm. Both Schantz and Indyke transitioned from G&W attorneys to Epstein inner circle operatives.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2078
+      },
+      {
+        "date": "1995-05",
+        "label": "SYNTHESIS: Gold and Wachtel was founded 1984 at 10 E 53rd St NYC by Harry H. Wachtel (1917-1997, MLK advisor, VP of Rapid American Corp/Riklis) and Robert Gold (b.1945, AUSA SDNY 1973-77 in Official Corruption and Securities Fraud units). The firm was the institutional origin of Epstein's entire legal/operational infrastructure. KEY FINDINGS: (1) PIPELINE: Darren Indyke started as pre-law assistant in 1986 through father Bernard's connection \u2014 Bernard was manager/board member of Jackie Fine Arts (G&W client, $500M+ tax shelter fraud, Herman Finesod convicted). William Wachtel lied to Daily Beast calling Bernard 'a mailroom employee.' Indyke first encountered Epstein at G&W in 1986, returned after Cornell Law 1991. Schantz (Fordham 1983) went in-house with Epstein May 1995. Both successive #1 operatives came from this firm. (2) ROBERT GOLD SHIELDED EPSTEIN FROM TOWERS FINANCIAL PROSECUTION: Hoffenberg says 'Ask Robert Gold' \u2014 Gold 'kept the US attorney away from Epstein until there were only a few weeks left before the statute of limitations ran out.' Gold's AUSA SDNY background (corruption+securities fraud) gave him the connections. (3) Gold named in 2001 Trust One as 'his friend, ROBERT GOLD' for debt forgiveness. 13 documents show warm personal relationship post-conviction 2011-2014. (4) Gold's later career: Ranieri & Co crisis management (1998-2000) \u2014 same Ranieri firm Schantz sent FedEx packages to from NYSG Dec 2003. Then DLA Piper, Wilson Sonsini, Mishcon de Reya (2014). Jun 2014 email from Mishcon: 'spent the day in Paris working with Alan.' (5) SAKER AVIATION: William B. Wachtel (Harry's son) chairs Saker Aviation Services (SKAS) with former G&W attorney Jesse Masyr in 25 SEC filings \u2014 FBO/charter company run by Epstein's former law firm partners. (6) Steven J. Cohen represented Epstein in 1998 from successor firm, now partner at Wachtel Missry LLP. (7) Firm became Wachtel Missry LLP after Harry's death Feb 1997. Gold departed late 1990s. Firm succession: Gold and Wachtel \u2192 Wachtel and Masyr \u2192 Wachtel Missry.",
+        "type": "intelligence",
+        "evidence_ref": null,
+        "id": 2102
+      },
+      {
+        "date": "1996-04-19",
+        "label": "The 1998 SDNY case reveals Epstein leased the former Iranian Deputy Consul General residence at 34 East 69th Street from the Office of Foreign Missions in 1992 at 15K/month. Epstein occupied it until Jan 1996, then illegally sublet to Ivan Fisher at 20K/month without written OFM consent. Jeffrey Schantz conducted negotiations with OFM on April 19, 1996 about the sublet. OFM terminated Epstein's lease Aug 23, 1996. This is the earliest documented legal representation by the Gold & Wachtel successor firm.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2070
+      },
+      {
+        "date": "1997-10-03",
+        "label": "Gold & Wachtel served as registered process agent for J. EPSTEIN & COMPANY, INC. (formerly JEFFREY E. EPSTEIN, INC.) at 10 East 53rd Street, New York, NY 10022. NY Corp ID #1307306. Filed circa 1988, name change 10/03/1997, final dissolution 04/04/2001.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2067
+      },
+      {
+        "date": "1998",
+        "label": "Successor firm Wachtel & Masyr LLP represented Jeffrey Epstein in United States v. Epstein (SDNY 96 CIV. 8307, 1998). Attorney Steven J. Cohen of Wachtel & Masyr appeared as Epstein's counsel. Case involved US government evicting Epstein from former Iranian Deputy Consul General residence at 34 East 69th Street. Jeffrey Schantz identified as Epstein's 'transaction counsel' in same case.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 2069
+      },
+      {
+        "date": "1998",
+        "label": "Steven J. Cohen identified as attorney at Wachtel & Masyr LLP who represented Epstein in 1998 SDNY case. This is a different attorney from the known Epstein operatives (Schantz and Indyke), indicating additional firm personnel handled Epstein matters. Cohen appeared on behalf of the firm in federal court filings.",
+        "type": "identity",
+        "evidence_ref": null,
+        "id": 2071
+      },
+      {
+        "date": "2013-04-22",
+        "label": "Email from Jeffrey Epstein to 'Gold, Steven' on April 22, 2013 about rescheduling an inspection: 'Steve can we move the inspection to tues next week, I am not returning until then.' CC'd to Richard Bamen. This may be Steven Gold, a possible named partner of Gold & Wachtel, still in contact with Epstein 25+ years after the firm's founding.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 2073
+      }
+    ]
+  }
 }

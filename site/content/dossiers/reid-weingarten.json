@@ -4,24 +4,78 @@
   "aliases": [
     "Weingarten"
   ],
+  "generated_at": "2026-02-17T18:12:03.438092",
+  "last_updated": "2026-02-16T16:14:55",
   "stats": {
     "total_findings": 24,
-    "total_connections": 19,
+    "total_connections": 20,
     "total_entities": 1,
     "finding_types": {
+      "financial": 3,
+      "communication": 10,
       "intelligence": 2,
       "legal": 7,
-      "communication": 10,
-      "financial": 3,
       "relationship": 2
     },
     "connection_types": {
-      "legal": 13,
+      "legal": 14,
       "social": 5,
       "advisory": 1
-    }
+    },
+    "last_updated": "2026-02-16T16:14:55"
   },
   "findings": [
+    {
+      "id": 475,
+      "finding_type": "financial",
+      "summary": "Reid Weingarten (Epstein defense attorney, Steptoe and Johnson) made only 3 personal political donations totaling 3000 dollars: 1000 to Strickland for Colorado (2002), 1000 to Alex Sanders for Senate (2002), 1000 to Friends of Mark Warner (1996). All from Washington DC. Minimal political donor despite being a high-profile white-collar defense attorney. No coordination with other Epstein network donors detected.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2002",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:52:35",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FEC:C00368175/schedule_a",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "finding_type": "communication",
+      "summary": "Weingarten told a third party 'don't mention my role with brad till we both think it useful' -- referring to Brad Karp (Paul Weiss chairman). This suggests Weingarten had a confidential advisory role related to Karp and Epstein that was strategically concealed. Weingarten also told Epstein: 'Still have to figure out what my role is in all this shit.' In Sept 2011, Epstein told Matthew Menchel (Kobre & Kim LLP attorney): 'your name just came up, when you sent an email to weingarten, he is with me in paris love to see you' -- confirming Weingarten traveled with Epstein internationally.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2011-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:07:28",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02360944",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_notesbymuneeb:Weingarten-role-brad",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 816,
       "finding_type": "intelligence",
@@ -45,21 +99,136 @@
       ]
     },
     {
-      "id": 12,
-      "finding_type": "legal",
-      "summary": "Weingarten was a finalist for Trump's outside counsel position in May 2017. WaPo reporter Ashley Parker emailed Weingarten on 5/22/2017 stating 'we understand you're one of the finalists for the role, and have already spoken with senior White House' officials. Weingarten forwarded this to Epstein asking 'Do I have the choice? And if so, your view?' and Epstein replied 'do you want it? or jared?' then 'we should talk.' Epstein also forwarded the WaPo article to Leon Black and to Darren Indyke ('whoops').",
+      "id": 56,
+      "finding_type": "communication",
+      "summary": "Epstein managed Weingarten's media exposure through Michael Wolff. In EFTA02512781 (2/1/2015), Epstein wrote to Wolff: 'weingarten quotes out. governone has note been sentenced.' This shows Epstein directing Wolff's PR strategy on behalf of Weingarten's clients, removing quotes before sentencing. Additionally, Epstein offered Weingarten and Ruemmler as guests to an unnamed person in March 2018: 'did you enjoy last night. leon doesnt listen as much as he should. but he is a good guy. Im in palm beach for the weekend. next week if you like Kathy ruemmler. or reid weingarten and or miro lacjak.' This demonstrates Epstein curating social/professional access to his legal advisors.",
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "2015-02-01",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-02-12 20:05:01",
+      "created_at": "2026-02-12 20:07:39",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02512781",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180316072400",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "finding_type": "communication",
+      "summary": "Epstein used Weingarten in legal strategy discussions about his own vulnerability as early as July 2015. In EFTA02341191, Epstein wrote to Brad Karp (Paul Weiss partner): 'add Levander or Weingarten? relationship to law enf paramount. difficult to settle as there are others that would i think might be encouraged to emerge. most other similar cases are usually a one off. perfect storm. cosby, wey. money, wall street etc.. terrible.. if she falls into the hands of the bottom fishers. very bad. very. they will want the pr.' This shows Epstein considering Weingarten for his defense team 4 years before arrest, discussing strategy around potential accusers and law enforcement relationships.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2015-07",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:07:18",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02341191",
+          "source_quote": "add Levander or Weingarten? relationship to law enf paramount. difficult to settle as there are others that would i think might be encouraged to emerge",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "finding_type": "communication",
+      "summary": "Weingarten appears in Epstein's personal to-do/contact lists alongside his most important associates. In a Sept 2015 email to himself, Epstein listed: 'weingarten, ruemmler. zuckerman, holterbosch. kamen kerry jaret. GLENN CALL. AIRCELL coverage? scarola, sanctions. paul mccartney - leon. grubman motola peggy.' In a separate list labeled 'list for bannon steve,' Epstein included Weingarten alongside: 'chomsky, barrack barak, zagat, nathan, brian greene, yau, eo wilson, prince andrews, jagland, clinton pastrana, richardson, leahy, jarecki, schumer, ranieri, waheed, mongolia, ruemmler, weingarten, amabani, rochsild, dersh, ken starrk.' This places Weingarten in Epstein's inner circle of legal/political advisors.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2015-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:06:43",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02344749",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02712645",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_notesbymuneeb:list-for-bannon-steve",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "finding_type": "communication",
+      "summary": "Epstein sent Weingarten a Pizzagate article about the Clintons on 12/20/2016, and Weingarten replied 'Clinton' in an Oct 2012 email. Epstein also shared Trump tax story coverage with Weingarten (10/3/2018), to which Epstein responded defending Trump: 'how unfair yes, it was written by financial illiterates. . referencing todays dollars? with no back up. IRS looked at all. .they ignored taxes paid along the way.' Weingarten's reaction to reading the NYT Trump tax story: 'Reading the nytimes trump tax story...so wish I was with you right now.' Weingarten also told Epstein 'Of course I trust you...what is going on?' (2/21/2019) after Epstein said 'Trust me' -- suggesting a deep personal bond.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2016-12-20",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:07:06",
       "target_name": "Reid Weingarten",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "hf_to-be:20170522172800,hf_to-be:20170522164300,hf_to-be:20170522215223",
+          "evidence_ref": "hf_to-be:20121016010027",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20161220120500",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20181003112906",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20190221085200",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20190221085400",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -73,7 +242,7 @@
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "2017-02-16",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
       "created_at": "2026-02-12 20:05:09",
@@ -81,7 +250,50 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "hf_to-be:20170216201701,hf_to-be:20170216151400",
+          "evidence_ref": "hf_to-be:20170216151400",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20170216201701",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "finding_type": "legal",
+      "summary": "Weingarten was a finalist for Trump's outside counsel position in May 2017. WaPo reporter Ashley Parker emailed Weingarten on 5/22/2017 stating 'we understand you're one of the finalists for the role, and have already spoken with senior White House' officials. Weingarten forwarded this to Epstein asking 'Do I have the choice? And if so, your view?' and Epstein replied 'do you want it? or jared?' then 'we should talk.' Epstein also forwarded the WaPo article to Leon Black and to Darren Indyke ('whoops').",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2017-05-22",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:05:01",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20170522164300",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20170522172800",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20170522215223",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -95,7 +307,7 @@
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "2017-07-25",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
       "created_at": "2026-02-12 20:05:21",
@@ -103,7 +315,35 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "hf_to-be:20170725215100,hf_to-be:20171102173625,hf_to-be:20171102112100,hf_to-be:20171201174237,hf_to-be:20180103181102",
+          "evidence_ref": "hf_to-be:20170725215100",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20171102112100",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20171102173625",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20171201174237",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180103181102",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -111,21 +351,56 @@
       ]
     },
     {
-      "id": 21,
-      "finding_type": "legal",
-      "summary": "Weingarten served as co-lead defense counsel for Epstein in US v. Epstein, 19 Cr. 490 (SDNY 2019). Defense team included Martin Weinberg (Boston), Marc Fernich, Michael Scavelli (Steptoe), and Jason Meade (Steptoe). Key dates: 7/7/2019 Weingarten email 'Thanks see you in the morning' re case; 7/11/2019 appearance notice filed; 7/14-15/2019 bail memo discussions; 7/25/2019 bail hearing; 8/1/2019 preservation requests; 8/10/2019 Epstein death and pathologist request; 8/20/2019 2nd Circuit appeal (Dkt 19-2221); 11/19/2019 call with SDNY re indictment even post-mortem.",
+      "id": 39,
+      "finding_type": "communication",
+      "summary": "Epstein used Weingarten's knowledge for political intelligence and strategy. Key intelligence exchanges: (1) 1/15/2018 Weingarten: 'Trump stopped them? He cannot stand mcgahn' -- insider knowledge about White House counsel dynamics; (2) Epstein to Weingarten 1/15/2018: 'mcgann feels if he stays he risks indicment'; (3) 1/12/2018 Epstein: 'Senate subpoena?'; (4) 5/20/2018 Epstein sent Weingarten detailed intel about a 'us citizen working for mi5' calling 'trump campaign insiders'; (5) 10/2/2018 Weingarten: 'Turns out you were right about sdny but they are going to wait their turn' -- confirming Epstein had advance knowledge of SDNY investigations; (6) 11/15/2018 Weingarten: 'So fucking much going on'; (7) Weingarten declined to discuss Russia/Trump/Comey with Bloomberg: 'ain't saying sh to anyone on or off the record'.",
       "detail": null,
       "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
+      "confidence": "high",
+      "date_of_event": "2018-01-15",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-02-12 20:05:34",
+      "created_at": "2026-02-12 20:06:30",
       "target_name": "Reid Weingarten",
       "evidence": [
         {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA00030168,EFTA00028985,EFTA00014330,EFTA00021400,EFTA00020937,EFTA00019661,EFTA00032802",
+          "evidence_type": "ref",
+          "evidence_ref": "hf_notesbymuneeb:Weingarten-sdny",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20170623112826",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180112092300",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180115100500",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180115130800",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180520200259",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -139,7 +414,7 @@
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
-      "date_of_event": null,
+      "date_of_event": "2018-03-24",
       "claim_type": "paraphrase",
       "verification_status": "unverified",
       "created_at": "2026-02-12 20:05:44",
@@ -147,7 +422,289 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "hf_to-be:20180324172400,hf_to-be:20180324080600,hf_to-be:20180324081500,hf_to-be:20180324213001,hf_to-be:20190706082800",
+          "evidence_ref": "hf_to-be:20180324080600",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180324081500",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180324172400",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180324213001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20190706082800",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "finding_type": "legal",
+      "summary": "Weingarten represented Steve Wynn in DOJ investigation related to Elliott Broidy. WaPo article (8/17/2018) forwarded by Steptoe colleague Brian Heberlig to Weingarten stated: 'An attorney for Wynn, Reid Weingarten, declined to comment, saying only that Wynn is cooperating with the Justice Department.' Epstein shared this article with Steve Bannon. Separately, on 7/6/2019, Weingarten told Epstein: 'Have a hysterical wynn-trump issue that will make you laugh.' Weingarten also represented Fethullah Gulen in the Turkey extradition matter (confirmed in multiple 2016 media reports).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2018-08-17",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:06:06",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20180817184700",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20190706125057",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "finding_type": "communication",
+      "summary": "Weingarten asked Epstein whether he should take the Huawei CFO case (Meng Wanzhou, arrested 12/1/2018). In an undated email, Weingarten wrote to Epstein: 'Kent, connecticut....and you? Hear about Bannon in italy? should I take the huawei cfo?' This shows Weingarten consistently consulted Epstein about major case decisions. Weingarten's firm Steptoe was indeed later involved in the Huawei case (US v. Huawei Technologies, EDNY, filed 8/22/2018). Bloomberg reporter Greg Farrell also confirmed Jared Kushner wanted Weingarten as his attorney (6/23/2017): 'I am told on good authority that Jared wants you as his atty.'",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2018-12-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:06:16",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_notesbymuneeb:Weingarten-Huawei",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hf_to-be:20170623113200",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 759,
+      "finding_type": "legal",
+      "summary": "Weingarten confirmed Epstein's intelligence about SDNY investigation on Jan 22, 2019 at 2:59 PM, writing 'Turns out you were right about sdny but they are going to wait their turn'. When Epstein asked 'Civil or crime', Weingarten replied simply 'Crim'. This shows Weingarten had independent access to information about the SDNY criminal investigation and was sharing it with Epstein, and that Epstein's original tip about the RICO claim was accurate.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2019-01-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 02:50:26",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_028601",
+          "source_quote": "Turns out you were right about sdny but they are 'going to wait their turn'...",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 762,
+      "finding_type": "financial",
+      "summary": "Weingarten discussed Steptoe & Johnson billing dispute on Jan 22, 2019. He reported that 'the Steptoe numbercrunchers advise me Jeffrey has paid about 450 and owes about 300 and seems disinclined to make Steptoe whole'. He referenced the 'unspeakably awful evan barr debacle' and questioned whether Miller had made an error. Weingarten called himself 'the 800 pound gorilla' at Steptoe and said the firm would not chase Epstein for the money. Separately, Epstein stated 'im not sheyl, frankly i havent been involved in this at all except for the ridiculousness' and suggested resolving it by end of month. Total Steptoe billing: approximately K (K paid, K outstanding).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2019-01-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 02:50:49",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_028601",
+          "source_quote": "the Steptoe numbercrunchers advise me Jeffrey has paid about 450 and owes about 300 and seems disinclined to make Steptoe whole",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 763,
+      "finding_type": "relationship",
+      "summary": "On Jan 22, 2019 at 9:09 PM, Weingarten wrote 'Still have to figure out what my role is in all this shit...' revealing uncertainty about his own position in Epstein's operations at this late stage (6 months before arrest). This is significant because Weingarten was Epstein's #1 correspondent (245 HF Parquet emails) yet still lacked a defined role, suggesting the informal/ad-hoc nature of Epstein's operational structure. Combined with the SDNY RICO intelligence-sharing, the SoftBank briefing, and the Steptoe billing relationship, Weingarten occupied a hybrid lawyer-advisor-fixer role that defied conventional categorization.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2019-01-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 02:50:54",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_028601",
+          "source_quote": "Still have to figure out what my role is in all this shit...",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 764,
+      "finding_type": "legal",
+      "summary": "On Jan 22, 2019, Epstein assessed an unnamed lawyer ('new guy') that Weingarten had discussed, asking 'you seemed to imply that your new guy could only shoot blanks? if thats so. its an easy decision. , if not. oy'. Weingarten clarified 'Not my new guy...not repping him'. Epstein then pressed 'do you think he has the goods?' This exchange shows Epstein vetting lawyers through Weingarten, evaluating their capabilities for undisclosed purposes, while Weingarten maintained distance from the individual. The identity of the 'new guy' is unresolved.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2019-01-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 02:50:59",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_028601",
+          "source_quote": "you seemed to imply that your new guy could only shoot blanks? if thats so. its an easy decision. , if not. oy",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 1163,
+      "finding_type": "intelligence",
+      "summary": "Weingarten at Steptoe & Johnson was Epstein's criminal defense pipeline. On Jan 22, 2019, Weingarten confirmed the SDNY intelligence: 'Turns out you were right about sdny but they are going to wait their turn.' He also revealed he was navigating role conflict: 'Still have to figure out what my role is in all this shit.' Separately, Weingarten raised Steptoe billing: Epstein had paid ~450K but owed ~300K ('How the fuck are we back here after the unspeakably awful evan barr debacle'). Evan Barr was a prior Steptoe attorney on Epstein matters, now replaced by Michael Miller. Weingarten had independent SDNY contacts who confirmed Epstein's tip.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2019-01-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-13 22:56:51",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_028601",
+          "source_quote": "Turns out you were right about sdny but they are going to wait their turn",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "finding_type": "legal",
+      "summary": "Weingarten served as co-lead defense counsel for Epstein in US v. Epstein, 19 Cr. 490 (SDNY 2019). Defense team included Martin Weinberg (Boston), Marc Fernich, Michael Scavelli (Steptoe), and Jason Meade (Steptoe). Key dates: 7/7/2019 Weingarten email 'Thanks see you in the morning' re case; 7/11/2019 appearance notice filed; 7/14-15/2019 bail memo discussions; 7/25/2019 bail hearing; 8/1/2019 preservation requests; 8/10/2019 Epstein death and pathologist request; 8/20/2019 2nd Circuit appeal (Dkt 19-2221); 11/19/2019 call with SDNY re indictment even post-mortem.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2019-07-07",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 20:05:34",
+      "target_name": "Reid Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00014330",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00019661",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00020937",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00021400",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00028985",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00030168",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00032802",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 429,
+      "finding_type": "relationship",
+      "summary": "Lobbyist name search for 'Weingarten' returned only Amanda Weingarten at Paul Weiss Rifkind Wharton and Garrison LLP, who lobbied for Carlos Ghosn Bichara in Q3/Q4 2019 and Q1 2020 on civil rights and criminal justice in Japan. Reid Weingarten (Epstein's defense attorney, 245 emails) does NOT appear as a registered lobbyist. Amanda Weingarten appeared alongside Brad Karp (Paul Weiss chair) in the Ghosn filings. Paul Weiss is a major white-shoe law firm representing high-profile criminal defendants. The Ghosn-Weingarten-Karp connection at Paul Weiss warrants further investigation for any Epstein overlaps.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2019-10",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:45:20",
+      "target_name": "Weingarten",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:b089f771-5278-4859-828d-5073f8149f9d",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -177,94 +734,6 @@
       ]
     },
     {
-      "id": 32,
-      "finding_type": "legal",
-      "summary": "Weingarten represented Steve Wynn in DOJ investigation related to Elliott Broidy. WaPo article (8/17/2018) forwarded by Steptoe colleague Brian Heberlig to Weingarten stated: 'An attorney for Wynn, Reid Weingarten, declined to comment, saying only that Wynn is cooperating with the Justice Department.' Epstein shared this article with Steve Bannon. Separately, on 7/6/2019, Weingarten told Epstein: 'Have a hysterical wynn-trump issue that will make you laugh.' Weingarten also represented Fethullah Gulen in the Turkey extradition matter (confirmed in multiple 2016 media reports).",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 20:06:06",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "hf_to-be:20180817184700,hf_to-be:20190706125057",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 36,
-      "finding_type": "communication",
-      "summary": "Weingarten asked Epstein whether he should take the Huawei CFO case (Meng Wanzhou, arrested 12/1/2018). In an undated email, Weingarten wrote to Epstein: 'Kent, connecticut....and you? Hear about Bannon in italy? should I take the huawei cfo?' This shows Weingarten consistently consulted Epstein about major case decisions. Weingarten's firm Steptoe was indeed later involved in the Huawei case (US v. Huawei Technologies, EDNY, filed 8/22/2018). Bloomberg reporter Greg Farrell also confirmed Jared Kushner wanted Weingarten as his attorney (6/23/2017): 'I am told on good authority that Jared wants you as his atty.'",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 20:06:16",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "hf_notesbymuneeb:Weingarten-Huawei,hf_to-be:20170623113200",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 39,
-      "finding_type": "communication",
-      "summary": "Epstein used Weingarten's knowledge for political intelligence and strategy. Key intelligence exchanges: (1) 1/15/2018 Weingarten: 'Trump stopped them? He cannot stand mcgahn' -- insider knowledge about White House counsel dynamics; (2) Epstein to Weingarten 1/15/2018: 'mcgann feels if he stays he risks indicment'; (3) 1/12/2018 Epstein: 'Senate subpoena?'; (4) 5/20/2018 Epstein sent Weingarten detailed intel about a 'us citizen working for mi5' calling 'trump campaign insiders'; (5) 10/2/2018 Weingarten: 'Turns out you were right about sdny but they are going to wait their turn' -- confirming Epstein had advance knowledge of SDNY investigations; (6) 11/15/2018 Weingarten: 'So fucking much going on'; (7) Weingarten declined to discuss Russia/Trump/Comey with Bloomberg: 'ain't saying sh to anyone on or off the record'.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 20:06:30",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "hf_to-be:20180115100500,hf_to-be:20180115130800,hf_to-be:20180112092300,hf_to-be:20180520200259,hf_notesbymuneeb:Weingarten-sdny,hf_to-be:20170623112826",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 44,
-      "finding_type": "communication",
-      "summary": "Weingarten appears in Epstein's personal to-do/contact lists alongside his most important associates. In a Sept 2015 email to himself, Epstein listed: 'weingarten, ruemmler. zuckerman, holterbosch. kamen kerry jaret. GLENN CALL. AIRCELL coverage? scarola, sanctions. paul mccartney - leon. grubman motola peggy.' In a separate list labeled 'list for bannon steve,' Epstein included Weingarten alongside: 'chomsky, barrack barak, zagat, nathan, brian greene, yau, eo wilson, prince andrews, jagland, clinton pastrana, richardson, leahy, jarecki, schumer, ranieri, waheed, mongolia, ruemmler, weingarten, amabani, rochsild, dersh, ken starrk.' This places Weingarten in Epstein's inner circle of legal/political advisors.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 20:06:43",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02712645,EFTA02344749,hf_notesbymuneeb:list-for-bannon-steve",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 47,
       "finding_type": "communication",
       "summary": "NY Magazine (Alex Yablon) sent fact-checking questions to Epstein that confirm Weingarten regularly breakfasted at Epstein's Manhattan residence. The email asks: 'The morning after the Qataris came over, did you have a 9 AM breakfast with the attorney Reid Weingarten? Did you discuss his defense of CT governor John Rowland, the Qatari visit, and who controls ISIS? Did Weingarten believe Turkey was using ISIS as a proxy?' This confirms Weingarten discussed geopolitics and his active cases with Epstein over breakfast, and that the relationship was openly described to journalists.",
@@ -280,94 +749,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "hf_notesbymuneeb:Yablon-factcheck",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 51,
-      "finding_type": "communication",
-      "summary": "Epstein sent Weingarten a Pizzagate article about the Clintons on 12/20/2016, and Weingarten replied 'Clinton' in an Oct 2012 email. Epstein also shared Trump tax story coverage with Weingarten (10/3/2018), to which Epstein responded defending Trump: 'how unfair yes, it was written by financial illiterates. . referencing todays dollars? with no back up. IRS looked at all. .they ignored taxes paid along the way.' Weingarten's reaction to reading the NYT Trump tax story: 'Reading the nytimes trump tax story...so wish I was with you right now.' Weingarten also told Epstein 'Of course I trust you...what is going on?' (2/21/2019) after Epstein said 'Trust me' -- suggesting a deep personal bond.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 20:07:06",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "hf_to-be:20161220120500,hf_to-be:20121016010027,hf_to-be:20181003112906,hf_to-be:20190221085400,hf_to-be:20190221085200",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 53,
-      "finding_type": "communication",
-      "summary": "Epstein used Weingarten in legal strategy discussions about his own vulnerability as early as July 2015. In EFTA02341191, Epstein wrote to Brad Karp (Paul Weiss partner): 'add Levander or Weingarten? relationship to law enf paramount. difficult to settle as there are others that would i think might be encouraged to emerge. most other similar cases are usually a one off. perfect storm. cosby, wey. money, wall street etc.. terrible.. if she falls into the hands of the bottom fishers. very bad. very. they will want the pr.' This shows Epstein considering Weingarten for his defense team 4 years before arrest, discussing strategy around potential accusers and law enforcement relationships.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 20:07:18",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02341191",
-          "source_quote": "add Levander or Weingarten? relationship to law enf paramount. difficult to settle as there are others that would i think might be encouraged to emerge",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 54,
-      "finding_type": "communication",
-      "summary": "Weingarten told a third party 'don't mention my role with brad till we both think it useful' -- referring to Brad Karp (Paul Weiss chairman). This suggests Weingarten had a confidential advisory role related to Karp and Epstein that was strategically concealed. Weingarten also told Epstein: 'Still have to figure out what my role is in all this shit.' In Sept 2011, Epstein told Matthew Menchel (Kobre & Kim LLP attorney): 'your name just came up, when you sent an email to weingarten, he is with me in paris love to see you' -- confirming Weingarten traveled with Epstein internationally.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 20:07:28",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "hf_notesbymuneeb:Weingarten-role-brad,EFTA02360944",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 56,
-      "finding_type": "communication",
-      "summary": "Epstein managed Weingarten's media exposure through Michael Wolff. In EFTA02512781 (2/1/2015), Epstein wrote to Wolff: 'weingarten quotes out. governone has note been sentenced.' This shows Epstein directing Wolff's PR strategy on behalf of Weingarten's clients, removing quotes before sentencing. Additionally, Epstein offered Weingarten and Ruemmler as guests to an unnamed person in March 2018: 'did you enjoy last night. leon doesnt listen as much as he should. but he is a good guy. Im in palm beach for the weekend. next week if you like Kathy ruemmler. or reid weingarten and or miro lacjak.' This demonstrates Epstein curating social/professional access to his legal advisors.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 20:07:39",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA02512781,hf_to-be:20180316072400",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -391,160 +772,6 @@
           "evidence_type": "ref",
           "evidence_ref": "FARA:negative_search_Weingarten",
           "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 429,
-      "finding_type": "relationship",
-      "summary": "Lobbyist name search for 'Weingarten' returned only Amanda Weingarten at Paul Weiss Rifkind Wharton and Garrison LLP, who lobbied for Carlos Ghosn Bichara in Q3/Q4 2019 and Q1 2020 on civil rights and criminal justice in Japan. Reid Weingarten (Epstein's defense attorney, 245 emails) does NOT appear as a registered lobbyist. Amanda Weingarten appeared alongside Brad Karp (Paul Weiss chair) in the Ghosn filings. Paul Weiss is a major white-shoe law firm representing high-profile criminal defendants. The Ghosn-Weingarten-Karp connection at Paul Weiss warrants further investigation for any Epstein overlaps.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 22:45:20",
-      "target_name": "Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA:b089f771-5278-4859-828d-5073f8149f9d",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 475,
-      "finding_type": "financial",
-      "summary": "Reid Weingarten (Epstein defense attorney, Steptoe and Johnson) made only 3 personal political donations totaling 3000 dollars: 1000 to Strickland for Colorado (2002), 1000 to Alex Sanders for Senate (2002), 1000 to Friends of Mark Warner (1996). All from Washington DC. Minimal political donor despite being a high-profile white-collar defense attorney. No coordination with other Epstein network donors detected.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": null,
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-12 22:52:35",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "FEC:C00368175/schedule_a",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 759,
-      "finding_type": "legal",
-      "summary": "Weingarten confirmed Epstein's intelligence about SDNY investigation on Jan 22, 2019 at 2:59 PM, writing 'Turns out you were right about sdny but they are going to wait their turn'. When Epstein asked 'Civil or crime', Weingarten replied simply 'Crim'. This shows Weingarten had independent access to information about the SDNY criminal investigation and was sharing it with Epstein, and that Epstein's original tip about the RICO claim was accurate.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-13 02:50:26",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "HOUSE_OVERSIGHT_028601",
-          "source_quote": "Turns out you were right about sdny but they are 'going to wait their turn'...",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 762,
-      "finding_type": "financial",
-      "summary": "Weingarten discussed Steptoe & Johnson billing dispute on Jan 22, 2019. He reported that 'the Steptoe numbercrunchers advise me Jeffrey has paid about 450 and owes about 300 and seems disinclined to make Steptoe whole'. He referenced the 'unspeakably awful evan barr debacle' and questioned whether Miller had made an error. Weingarten called himself 'the 800 pound gorilla' at Steptoe and said the firm would not chase Epstein for the money. Separately, Epstein stated 'im not sheyl, frankly i havent been involved in this at all except for the ridiculousness' and suggested resolving it by end of month. Total Steptoe billing: approximately K (K paid, K outstanding).",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-13 02:50:49",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "HOUSE_OVERSIGHT_028601",
-          "source_quote": "the Steptoe numbercrunchers advise me Jeffrey has paid about 450 and owes about 300 and seems disinclined to make Steptoe whole",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 763,
-      "finding_type": "relationship",
-      "summary": "On Jan 22, 2019 at 9:09 PM, Weingarten wrote 'Still have to figure out what my role is in all this shit...' revealing uncertainty about his own position in Epstein's operations at this late stage (6 months before arrest). This is significant because Weingarten was Epstein's #1 correspondent (245 HF Parquet emails) yet still lacked a defined role, suggesting the informal/ad-hoc nature of Epstein's operational structure. Combined with the SDNY RICO intelligence-sharing, the SoftBank briefing, and the Steptoe billing relationship, Weingarten occupied a hybrid lawyer-advisor-fixer role that defied conventional categorization.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-13 02:50:54",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "HOUSE_OVERSIGHT_028601",
-          "source_quote": "Still have to figure out what my role is in all this shit...",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 764,
-      "finding_type": "legal",
-      "summary": "On Jan 22, 2019, Epstein assessed an unnamed lawyer ('new guy') that Weingarten had discussed, asking 'you seemed to imply that your new guy could only shoot blanks? if thats so. its an easy decision. , if not. oy'. Weingarten clarified 'Not my new guy...not repping him'. Epstein then pressed 'do you think he has the goods?' This exchange shows Epstein vetting lawyers through Weingarten, evaluating their capabilities for undisclosed purposes, while Weingarten maintained distance from the individual. The identity of the 'new guy' is unresolved.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-13 02:50:59",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "HOUSE_OVERSIGHT_028601",
-          "source_quote": "you seemed to imply that your new guy could only shoot blanks? if thats so. its an easy decision. , if not. oy",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 1163,
-      "finding_type": "intelligence",
-      "summary": "Weingarten at Steptoe & Johnson was Epstein's criminal defense pipeline. On Jan 22, 2019, Weingarten confirmed the SDNY intelligence: 'Turns out you were right about sdny but they are going to wait their turn.' He also revealed he was navigating role conflict: 'Still have to figure out what my role is in all this shit.' Separately, Weingarten raised Steptoe billing: Epstein had paid ~450K but owed ~300K ('How the fuck are we back here after the unspeakably awful evan barr debacle'). Evan Barr was a prior Steptoe attorney on Epstein matters, now replaced by Michael Miller. Weingarten had independent SDNY contacts who confirmed Epstein's tip.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": null,
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-13 22:56:51",
-      "target_name": "Reid Weingarten",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "HOUSE_OVERSIGHT_028601",
-          "source_quote": "Turns out you were right about sdny but they are going to wait their turn",
           "source_page": null,
           "assessment": null
         }
@@ -984,6 +1211,33 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 1521,
+      "person_a": "Reid Weingarten",
+      "person_b": "William Barr",
+      "relationship_type": "legal",
+      "description": "Weingarten was Epstein's primary criminal defense attorney at Steptoe & Johnson. Weingarten discussed Barr in context of Epstein strategy. Farkas told Epstein (Apr 2019): 'Told you Barr would protect Trump known him for 50 years.' Weingarten confirmed SDNY investigation intelligence (Jan 2019) while Barr was being confirmed as AG. Weingarten's role as defense counsel meant direct institutional interaction with Barr's DOJ.",
+      "strength": "medium",
+      "date_range": "2019-2019",
+      "verification_status": "unverified",
+      "created_at": "2026-02-16 16:14:55",
+      "other_person": "William Barr",
+      "other_person_slug": "william-barr",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding:1163",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding:2963",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [
@@ -1007,6 +1261,22 @@
       "description": "Long-term professional friendship from DOJ Public Integrity Section. Epstein forwarded WaPo article to Leon Black noting Holder and Weingarten met during their early years at the Justice Department.",
       "other_person": "Eric Holder",
       "id": 30
+    },
+    {
+      "date": "2002",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Reid Weingarten (Epstein defense attorney, Steptoe and Johnson) made only 3 personal political donations totaling 3000 dollars: 1000 to Strickland for Colorado (2002), 1000 to Alex Sanders for Senate (2002), 1000 to Friends of Mark Warner (1996). All from Washington DC. Minimal political donor despite being a high-profile white-collar defense attorney. No coordination with other Epstein network donors detected.",
+      "confidence": "medium",
+      "id": 475
+    },
+    {
+      "date": "2011-09",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Weingarten told a third party 'don't mention my role with brad till we both think it useful' -- referring to Brad Karp (Paul Weiss chairman). This suggests Weingarten had a confidential advisory role related to Karp and Epstein that was strategically concealed. Weingarten also told Epstein: 'Still have to figure out what my role is in all this shit.' In Sept 2011, Epstein told Matthew Menchel (Kobre & Kim LLP attorney): 'your name just came up, when you sent an email to weingarten, he is with me in paris love to see you' -- confirming Weingarten traveled with Epstein internationally.",
+      "confidence": "high",
+      "id": 54
     },
     {
       "date": "2011-12-09",
@@ -1041,12 +1311,44 @@
       "id": 28
     },
     {
+      "date": "2015-02-01",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Epstein managed Weingarten's media exposure through Michael Wolff. In EFTA02512781 (2/1/2015), Epstein wrote to Wolff: 'weingarten quotes out. governone has note been sentenced.' This shows Epstein directing Wolff's PR strategy on behalf of Weingarten's clients, removing quotes before sentencing. Additionally, Epstein offered Weingarten and Ruemmler as guests to an unnamed person in March 2018: 'did you enjoy last night. leon doesnt listen as much as he should. but he is a good guy. Im in palm beach for the weekend. next week if you like Kathy ruemmler. or reid weingarten and or miro lacjak.' This demonstrates Epstein curating social/professional access to his legal advisors.",
+      "confidence": "high",
+      "id": 56
+    },
+    {
+      "date": "2015-07",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Epstein used Weingarten in legal strategy discussions about his own vulnerability as early as July 2015. In EFTA02341191, Epstein wrote to Brad Karp (Paul Weiss partner): 'add Levander or Weingarten? relationship to law enf paramount. difficult to settle as there are others that would i think might be encouraged to emerge. most other similar cases are usually a one off. perfect storm. cosby, wey. money, wall street etc.. terrible.. if she falls into the hands of the bottom fishers. very bad. very. they will want the pr.' This shows Epstein considering Weingarten for his defense team 4 years before arrest, discussing strategy around potential accusers and law enforcement relationships.",
+      "confidence": "confirmed",
+      "id": 53
+    },
+    {
+      "date": "2015-09",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Weingarten appears in Epstein's personal to-do/contact lists alongside his most important associates. In a Sept 2015 email to himself, Epstein listed: 'weingarten, ruemmler. zuckerman, holterbosch. kamen kerry jaret. GLENN CALL. AIRCELL coverage? scarola, sanctions. paul mccartney - leon. grubman motola peggy.' In a separate list labeled 'list for bannon steve,' Epstein included Weingarten alongside: 'chomsky, barrack barak, zagat, nathan, brian greene, yau, eo wilson, prince andrews, jagland, clinton pastrana, richardson, leahy, jarecki, schumer, ranieri, waheed, mongolia, ruemmler, weingarten, amabani, rochsild, dersh, ken starrk.' This places Weingarten in Epstein's inner circle of legal/political advisors.",
+      "confidence": "high",
+      "id": 44
+    },
+    {
       "date": "2015-2018",
       "type": "connection",
       "relationship_type": "social",
       "description": "Both on Epstein contact lists alongside each other. Both offered as social introductions by Epstein. Both senior attorneys.",
       "other_person": "Kathryn Ruemmler",
       "id": 26
+    },
+    {
+      "date": "2016-12-20",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Epstein sent Weingarten a Pizzagate article about the Clintons on 12/20/2016, and Weingarten replied 'Clinton' in an Oct 2012 email. Epstein also shared Trump tax story coverage with Weingarten (10/3/2018), to which Epstein responded defending Trump: 'how unfair yes, it was written by financial illiterates. . referencing todays dollars? with no back up. IRS looked at all. .they ignored taxes paid along the way.' Weingarten's reaction to reading the NYT Trump tax story: 'Reading the nytimes trump tax story...so wish I was with you right now.' Weingarten also told Epstein 'Of course I trust you...what is going on?' (2/21/2019) after Epstein said 'Trust me' -- suggesting a deep personal bond.",
+      "confidence": "high",
+      "id": 51
     },
     {
       "date": "2016-2019",
@@ -1057,12 +1359,68 @@
       "id": 25
     },
     {
+      "date": "2017-02-16",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "On 2/16/2017, Weingarten told Epstein 'I know...I just saw that and almost threw up....also have to decide today whether or not to take flynn.' This confirms Weingarten was offered the chance to represent Michael Flynn and was consulting Epstein about the decision in real-time. The same day, Epstein sent Weingarten a Politico article about Alexander Acosta (Trump's DOL nominee) and the Epstein plea deal.",
+      "confidence": "high",
+      "id": 15
+    },
+    {
+      "date": "2017-05-22",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Weingarten was a finalist for Trump's outside counsel position in May 2017. WaPo reporter Ashley Parker emailed Weingarten on 5/22/2017 stating 'we understand you're one of the finalists for the role, and have already spoken with senior White House' officials. Weingarten forwarded this to Epstein asking 'Do I have the choice? And if so, your view?' and Epstein replied 'do you want it? or jared?' then 'we should talk.' Epstein also forwarded the WaPo article to Leon Black and to Darren Indyke ('whoops').",
+      "confidence": "high",
+      "id": 12
+    },
+    {
+      "date": "2017-07-25",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Weingarten and Epstein had extensive real-time discussions about Mueller investigation strategy from 2017-2018. Key exchanges: (1) 7/25/2017 Weingarten: 'If trump fires mueller and gets away with it it is 1933 berlin'; (2) 11/2/2017 Weingarten: 'Trump is going to fire mueller and republicans on hill won't do a thing'; same day Epstein: 'shouldnt mueller just file sealed indictments against jared ivanka and junior? they would stay even if he were fired'; (3) 12/1/2017 Weingarten: 'Beginning of the end...will say trump told him to go the russkies'; (4) 1/3/2018 Weingarten: 'Internet is crashing right now about this....trump apparently off his rocker'.",
+      "confidence": "high",
+      "id": 18
+    },
+    {
       "date": "2018",
       "type": "connection",
       "relationship_type": "legal",
       "description": "Weingarten asked Epstein re Barrack/Chagoury connection.",
       "other_person": "Tom Barrack",
       "id": 208
+    },
+    {
+      "date": "2018-01-15",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Epstein used Weingarten's knowledge for political intelligence and strategy. Key intelligence exchanges: (1) 1/15/2018 Weingarten: 'Trump stopped them? He cannot stand mcgahn' -- insider knowledge about White House counsel dynamics; (2) Epstein to Weingarten 1/15/2018: 'mcgann feels if he stays he risks indicment'; (3) 1/12/2018 Epstein: 'Senate subpoena?'; (4) 5/20/2018 Epstein sent Weingarten detailed intel about a 'us citizen working for mi5' calling 'trump campaign insiders'; (5) 10/2/2018 Weingarten: 'Turns out you were right about sdny but they are going to wait their turn' -- confirming Epstein had advance knowledge of SDNY investigations; (6) 11/15/2018 Weingarten: 'So fucking much going on'; (7) Weingarten declined to discuss Russia/Trump/Comey with Bloomberg: 'ain't saying sh to anyone on or off the record'.",
+      "confidence": "high",
+      "id": 39
+    },
+    {
+      "date": "2018-03-24",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Epstein introduced Steve Bannon to Weingarten for breakfast on 3/24/2018. Epstein to Weingarten: 'yes 730?' then 'Tonight or tomnight' then 'Steve is coming to meet you breakfast'. Weingarten: 'I am there'. This was before Bannon's legal troubles but shows Epstein brokering high-level political introductions to his defense attorney. Separately, on 7/6/2019, Epstein told Weingarten 'bannon for breakfast tomor' -- one day before Epstein's arrest on 7/6/2019.",
+      "confidence": "high",
+      "id": 25
+    },
+    {
+      "date": "2018-08-17",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Weingarten represented Steve Wynn in DOJ investigation related to Elliott Broidy. WaPo article (8/17/2018) forwarded by Steptoe colleague Brian Heberlig to Weingarten stated: 'An attorney for Wynn, Reid Weingarten, declined to comment, saying only that Wynn is cooperating with the Justice Department.' Epstein shared this article with Steve Bannon. Separately, on 7/6/2019, Weingarten told Epstein: 'Have a hysterical wynn-trump issue that will make you laugh.' Weingarten also represented Fethullah Gulen in the Turkey extradition matter (confirmed in multiple 2016 media reports).",
+      "confidence": "high",
+      "id": 32
+    },
+    {
+      "date": "2018-12-01",
+      "type": "finding",
+      "finding_type": "communication",
+      "summary": "Weingarten asked Epstein whether he should take the Huawei CFO case (Meng Wanzhou, arrested 12/1/2018). In an undated email, Weingarten wrote to Epstein: 'Kent, connecticut....and you? Hear about Bannon in italy? should I take the huawei cfo?' This shows Weingarten consistently consulted Epstein about major case decisions. Weingarten's firm Steptoe was indeed later involved in the Huawei case (US v. Huawei Technologies, EDNY, filed 8/22/2018). Bloomberg reporter Greg Farrell also confirmed Jared Kushner wanted Weingarten as his attorney (6/23/2017): 'I am told on good authority that Jared wants you as his atty.'",
+      "confidence": "high",
+      "id": 36
     },
     {
       "date": "2018-2019",
@@ -1105,12 +1463,760 @@
       "id": 388
     },
     {
+      "date": "2019-01-22",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Weingarten confirmed Epstein's intelligence about SDNY investigation on Jan 22, 2019 at 2:59 PM, writing 'Turns out you were right about sdny but they are going to wait their turn'. When Epstein asked 'Civil or crime', Weingarten replied simply 'Crim'. This shows Weingarten had independent access to information about the SDNY criminal investigation and was sharing it with Epstein, and that Epstein's original tip about the RICO claim was accurate.",
+      "confidence": "confirmed",
+      "id": 759
+    },
+    {
+      "date": "2019-01-22",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Weingarten discussed Steptoe & Johnson billing dispute on Jan 22, 2019. He reported that 'the Steptoe numbercrunchers advise me Jeffrey has paid about 450 and owes about 300 and seems disinclined to make Steptoe whole'. He referenced the 'unspeakably awful evan barr debacle' and questioned whether Miller had made an error. Weingarten called himself 'the 800 pound gorilla' at Steptoe and said the firm would not chase Epstein for the money. Separately, Epstein stated 'im not sheyl, frankly i havent been involved in this at all except for the ridiculousness' and suggested resolving it by end of month. Total Steptoe billing: approximately K (K paid, K outstanding).",
+      "confidence": "confirmed",
+      "id": 762
+    },
+    {
+      "date": "2019-01-22",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "On Jan 22, 2019 at 9:09 PM, Weingarten wrote 'Still have to figure out what my role is in all this shit...' revealing uncertainty about his own position in Epstein's operations at this late stage (6 months before arrest). This is significant because Weingarten was Epstein's #1 correspondent (245 HF Parquet emails) yet still lacked a defined role, suggesting the informal/ad-hoc nature of Epstein's operational structure. Combined with the SDNY RICO intelligence-sharing, the SoftBank briefing, and the Steptoe billing relationship, Weingarten occupied a hybrid lawyer-advisor-fixer role that defied conventional categorization.",
+      "confidence": "confirmed",
+      "id": 763
+    },
+    {
+      "date": "2019-01-22",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "On Jan 22, 2019, Epstein assessed an unnamed lawyer ('new guy') that Weingarten had discussed, asking 'you seemed to imply that your new guy could only shoot blanks? if thats so. its an easy decision. , if not. oy'. Weingarten clarified 'Not my new guy...not repping him'. Epstein then pressed 'do you think he has the goods?' This exchange shows Epstein vetting lawyers through Weingarten, evaluating their capabilities for undisclosed purposes, while Weingarten maintained distance from the individual. The identity of the 'new guy' is unresolved.",
+      "confidence": "confirmed",
+      "id": 764
+    },
+    {
+      "date": "2019-01-22",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Weingarten at Steptoe & Johnson was Epstein's criminal defense pipeline. On Jan 22, 2019, Weingarten confirmed the SDNY intelligence: 'Turns out you were right about sdny but they are going to wait their turn.' He also revealed he was navigating role conflict: 'Still have to figure out what my role is in all this shit.' Separately, Weingarten raised Steptoe billing: Epstein had paid ~450K but owed ~300K ('How the fuck are we back here after the unspeakably awful evan barr debacle'). Evan Barr was a prior Steptoe attorney on Epstein matters, now replaced by Michael Miller. Weingarten had independent SDNY contacts who confirmed Epstein's tip.",
+      "confidence": "confirmed",
+      "id": 1163
+    },
+    {
       "date": "2019-01-25",
       "type": "connection",
       "relationship_type": "legal",
       "description": "Weingarten evaluating potential legal representation of Rajeev Misra SoftBank Vision Fund as of Jan 25, 2019. Sought Epstein intelligence and endorsement before accepting engagement.",
       "other_person": "Rajeev Misra",
       "id": 391
+    },
+    {
+      "date": "2019-07-07",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Weingarten served as co-lead defense counsel for Epstein in US v. Epstein, 19 Cr. 490 (SDNY 2019). Defense team included Martin Weinberg (Boston), Marc Fernich, Michael Scavelli (Steptoe), and Jason Meade (Steptoe). Key dates: 7/7/2019 Weingarten email 'Thanks see you in the morning' re case; 7/11/2019 appearance notice filed; 7/14-15/2019 bail memo discussions; 7/25/2019 bail hearing; 8/1/2019 preservation requests; 8/10/2019 Epstein death and pathologist request; 8/20/2019 2nd Circuit appeal (Dkt 19-2221); 11/19/2019 call with SDNY re indictment even post-mortem.",
+      "confidence": "high",
+      "id": 21
+    },
+    {
+      "date": "2019-10",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Lobbyist name search for 'Weingarten' returned only Amanda Weingarten at Paul Weiss Rifkind Wharton and Garrison LLP, who lobbied for Carlos Ghosn Bichara in Q3/Q4 2019 and Q1 2020 on civil rights and criminal justice in Japan. Reid Weingarten (Epstein's defense attorney, 245 emails) does NOT appear as a registered lobbyist. Amanda Weingarten appeared alongside Brad Karp (Paul Weiss chair) in the Ghosn filings. Paul Weiss is a major white-shoe law firm representing high-profile criminal defendants. The Ghosn-Weingarten-Karp connection at Paul Weiss warrants further investigation for any Epstein overlaps.",
+      "confidence": "medium",
+      "id": 429
+    },
+    {
+      "date": "2019-2019",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "Weingarten was Epstein's primary criminal defense attorney at Steptoe & Johnson. Weingarten discussed Barr in context of Epstein strategy. Farkas told Epstein (Apr 2019): 'Told you Barr would protect Trump known him for 50 years.' Weingarten confirmed SDNY investigation intelligence (Jan 2019) while Barr was being confirmed as AG. Weingarten's role as defense counsel meant direct institutional interaction with Barr's DOJ.",
+      "other_person": "William Barr",
+      "id": 1521
     }
-  ]
+  ],
+  "curation": {
+    "key_finding_ids": [
+      21,
+      44,
+      816,
+      53,
+      54,
+      56,
+      762,
+      12,
+      759,
+      764,
+      1163,
+      763
+    ],
+    "key_identifiers": {
+      "jurisdictions": [
+        "DC"
+      ],
+      "officers": [
+        {
+          "role": "senior_counsel",
+          "entity": "Steptoe & Johnson LLP",
+          "start": null,
+          "end": null
+        }
+      ],
+      "entities": [
+        {
+          "id": 57,
+          "name": "Steptoe & Johnson LLP",
+          "type": "partnership",
+          "jurisdiction": "DC",
+          "role": "senior_counsel"
+        }
+      ]
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          763,
+          429
+        ],
+        "connection_ids": [
+          18,
+          22,
+          25,
+          29,
+          30,
+          209,
+          388,
+          391,
+          406,
+          417,
+          21,
+          26,
+          27,
+          28,
+          208
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          475,
+          762,
+          28
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          15,
+          12,
+          32,
+          759,
+          764,
+          21,
+          404
+        ],
+        "connection_ids": [
+          18,
+          22,
+          25,
+          29,
+          388,
+          391
+        ],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          816,
+          1163
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      },
+      {
+        "id": "communications",
+        "title": "Communications",
+        "viz": null,
+        "finding_ids": [
+          54,
+          56,
+          53,
+          44,
+          51,
+          18,
+          39,
+          25
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about documented communications \u2014 emails, calls, messages. Focus on what they reveal about the relationship or operation."
+      }
+    ],
+    "curated_at": "2026-02-17T18:12:04.093886"
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Reid Weingarten",
+      "connections": [
+        {
+          "target": "Jeffrey Epstein",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "EFTA00028985",
+          "description": "Defense counsel 19 Cr. 490 (SDNY 2019). Personal advisor 2011-2019, 245+ emails. ~450K paid in Steptoe fees, 300K owed. Paris travel Sept 2011. Regular breakfast meetings at 71st St."
+        },
+        {
+          "target": "Steve Wynn",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "hf_to-be:20180817184700",
+          "description": "Weingarten represented Wynn in DOJ investigation related to Elliott Broidy. Discussed Wynn-Trump issues with Epstein."
+        },
+        {
+          "target": "Fethullah Gulen",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "hf_notesbymuneeb:Gulen-audio-recording",
+          "description": "Weingarten represented Gulen in Turkey extradition matter post-2016 coup. Team included Steptoe colleagues."
+        },
+        {
+          "target": "Martin Weinberg",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "EFTA00020766",
+          "description": "Co-defense counsel for Epstein in US v. Epstein 19 Cr. 490 SDNY. Weinberg based in Boston. Coordinated on bail, discovery, preservation, and 2nd Circuit appeal."
+        },
+        {
+          "target": "Eric Holder",
+          "type": "social",
+          "strength": 1.0,
+          "evidence_ref": "hf_to-be:20170523184627",
+          "description": "Long-term professional friendship from DOJ Public Integrity Section. Epstein forwarded WaPo article to Leon Black noting Holder and Weingarten met during their early years at the Justice Department."
+        },
+        {
+          "target": "Mike Pence",
+          "type": "social",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Weingarten: 'agreed to meet pence one-on-one Thursday in dc.'"
+        },
+        {
+          "target": "Jeffrey Epstein",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "HOUSE_OVERSIGHT_028601",
+          "description": "SDNY RICO intelligence sharing Jan 21-22, 2019. Epstein tipped Weingarten about SDNY RICO investigation against the org. Weingarten independently confirmed and shared case status: going to wait their turn, Crim. Bilateral intelligence flow about federal criminal investigation."
+        },
+        {
+          "target": "Rajeev Misra",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "HOUSE_OVERSIGHT_028601",
+          "description": "Weingarten evaluating potential legal representation of Rajeev Misra SoftBank Vision Fund as of Jan 25, 2019. Sought Epstein intelligence and endorsement before accepting engagement."
+        },
+        {
+          "target": "Ron Soffer",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "HOUSE_OVERSIGHT_028576",
+          "description": "Weingarten (Steptoe) considered hiring Soffer for the SoftBank caper in Jan 2019. Soffer had approached Weingarten seeking work. Weingarten asked Epstein to vet him."
+        },
+        {
+          "target": "Ron Soffer",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "HOUSE_OVERSIGHT_028576",
+          "description": "Weingarten considered hiring Soffer for 'the SoftBank caper' (Jan 26, 2019). Soffer is a French/Israeli lawyer with Paris main office. Weingarten described him as 'a yid who also works out of nyc.' Weingarten asked Epstein to 'get the book on him' \u2014 seeking intelligence/vetting."
+        },
+        {
+          "target": "Steve Bannon",
+          "type": "social",
+          "strength": 0.7,
+          "evidence_ref": "hf_to-be:20180324172400",
+          "description": "Epstein introduced Bannon to Weingarten for breakfast 3/24/2018. Additional breakfast planned 7/7/2019. Weingarten on Epstein list for Bannon."
+        },
+        {
+          "target": "Kathryn Ruemmler",
+          "type": "social",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02712645",
+          "description": "Both on Epstein contact lists alongside each other. Both offered as social introductions by Epstein. Both senior attorneys."
+        },
+        {
+          "target": "Brad Karp",
+          "type": "legal",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02341191",
+          "description": "Weingarten had concealed advisory role with Karp re Epstein legal matters. Weingarten told Epstein: do not mention my role with brad. Karp is chairman of Paul Weiss."
+        },
+        {
+          "target": "Michael Wolff",
+          "type": "advisory",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02512781",
+          "description": "Epstein directed Wolff PR strategy on Weingarten quotes. Epstein to Wolff: weingarten quotes out. governone has not been sentenced."
+        },
+        {
+          "target": "Tom Barrack",
+          "type": "legal",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Weingarten asked Epstein re Barrack/Chagoury connection."
+        },
+        {
+          "target": "Ron Soffer",
+          "type": "legal",
+          "strength": 0.7,
+          "evidence_ref": "HOUSE_OVERSIGHT_028576",
+          "description": "Weingarten knew of Soffer and considered hiring him for the SoftBank caper (Rajeev Misra/Benedetti matter) in Jan 2019. Asked Epstein about him Jan 26, 2019."
+        },
+        {
+          "target": "Ron Soffer",
+          "type": "legal",
+          "strength": 0.7,
+          "evidence_ref": "HOUSE_OVERSIGHT_028576",
+          "description": "Weingarten asked Epstein about Soffer Jan 26 2019, described as French/Israeli lawyer in Paris, was considering hiring him for SoftBank caper. Weingarten said get the book on him"
+        },
+        {
+          "target": "Alessandro Benedetti",
+          "type": "social",
+          "strength": 0.7,
+          "evidence_ref": "EFTA00925685",
+          "description": "Weingarten knew of Benedetti through Epstein by Dec 2011, later considered deploying someone on SoftBank caper Benedetti orchestrated"
+        },
+        {
+          "target": "Ron Soffer",
+          "type": "legal",
+          "strength": 0.7,
+          "evidence_ref": "HOUSE_OVERSIGHT_028576",
+          "description": "Soffer sought to be hired by Weingarten for SoftBank matter Jan 2019. Epstein vetted him through Council of Europe connections."
+        },
+        {
+          "target": "William Barr",
+          "type": "legal",
+          "strength": 0.7,
+          "evidence_ref": "Finding:1163",
+          "description": "Weingarten was Epstein's primary criminal defense attorney at Steptoe & Johnson. Weingarten discussed Barr in context of Epstein strategy. Farkas told Epstein (Apr 2019): 'Told you Barr would protect Trump known him for 50 years.' Weingarten confirmed SDNY investigation intelligence (Jan 2019) while Barr was being confirmed as AG. Weingarten's role as defense counsel meant direct institutional interaction with Barr's DOJ."
+        }
+      ],
+      "secondHop": {
+        "Alessandro Benedetti": [
+          {
+            "target": "Rajeev Misra",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Misra paid Benedetti 500K via Barkmere Group BVI Apr 2015 for smear campaign. Benedetti expected exec position plus profit share. Falling out led to WSJ leak Feb 2020"
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Neighbors on Avenue Foch, Paris. Weingarten described Benedetti as Epstein's Italian jewish neighbor on ave foch in Dec 2011"
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Paris neighbor (Avenue Foch Dec 2011). On Paris contact list Sept 2013. Epstein queried Teodorani about Benedetti Jan 28 2019. Multi-year relationship 2011-2019."
+          },
+          {
+            "target": "Rajeev Misra",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Misra paid Benedetti 500K via Standard Chartered to Barkmere Group BVI Apr 2015 for SoftBank sabotage operation."
+          },
+          {
+            "target": "Nicolas Giannakopoulos",
+            "type": "intelligence",
+            "strength": 1.0,
+            "description": "Giannakopoulos was Benedetti's subcontractor in the SoftBank sabotage operation (2015-2016). Benedetti recruited Giannakopoulos to distribute leaked banking records and act as nominal shareholder."
+          }
+        ],
+        "Brad Karp": [
+          {
+            "target": "Guzel Ganieva",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Karp coordinated Nardello surveillance (Leon Black dispute) 2015."
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Paul Weiss chairman, personal friend, regular visits to 71st St 2016-2019, Leon Black escrow, Misra representation, Ghosn crisis"
+          },
+          {
+            "target": "Rajeev Misra",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Paul Weiss represented Misra in SoftBank matters; Karp confirmed to Epstein Jan 26 2019"
+          },
+          {
+            "target": "Rajeev Misra",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Karp (Chairman Paul Weiss) confirmed to Epstein he sort of represented Misra and spoke to him the previous day, Jan 26 2019."
+          },
+          {
+            "target": "Carlos Ghosn",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Karp was dealing with Ghosn crisis from Nov 20 2018, personally traveled to Tokyo, confirmed Epstein source intelligence accurate, Paul Weiss later lobbied for Ghosn in Japan Q3-Q4 2019 and Q1 2020"
+          }
+        ],
+        "Jeffrey Epstein": [
+          {
+            "target": "Leon Black",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "$158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019."
+          },
+          {
+            "target": "Kathy Ruemmler",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will."
+          },
+          {
+            "target": "Landon Thomas Jr",
+            "type": "intelligence",
+            "strength": 1.0,
+            "description": "185-email correspondence 2007-2019. Thomas served as Epstein media asset: advance warning of investigations, brokered intros to Masa Son and Tom Barrack, received 40K+ payments to charity, wrote defining 2002 profile and 2008 NYT piece. Classified as compromised source."
+          },
+          {
+            "target": "Landon Thomas Jr",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Epstein directed 40K+ to Thomas charity (Ricardo O Gorman Garden): 10K from foundation in Mar 2015 plus 30K from Gratitude America in Aug 2017. Thomas provided wire instructions for TD Bank account."
+          },
+          {
+            "target": "Steve Bannon",
+            "type": "intelligence",
+            "strength": 1.0,
+            "description": "160+ emails, 526 jmail. Daily contact Jan 2018-Jul 2019. Bitcoin advisory, film collaboration, political intelligence exchange, USVI island, 100k payment."
+          }
+        ],
+        "Kathryn Ruemmler": [
+          {
+            "target": "Lesley Groff",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #50: Epstein provided Ruemmler with substantial gifts and personal services. Nov 2015 \u2014 Epstein bought Ruemmler an iMac for NY ('He is so over the top\\!\\!\\"
+          },
+          {
+            "target": "Mark Epstein",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #50: Epstein provided Ruemmler with substantial gifts and personal services. Nov 2015 \u2014 Epstein bought Ruemmler an iMac for NY ('He is so over the top\\!\\!\\"
+          },
+          {
+            "target": "Michael Wolff",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #211: Wolff proposed including Epstein in his next book after Fire and Fury, asking Nov 5, 2018: opening with Epstein and Bannon talking about Trump. Would "
+          }
+        ],
+        "Michael Wolff": [
+          {
+            "target": "Steve Bannon",
+            "type": "intelligence",
+            "strength": 1.0,
+            "description": "Wolff served as intermediary. Forwarded WH intel Bannon->Wolff->Epstein. Proposed media project. Assessed leak risks."
+          },
+          {
+            "target": "Steve Bannon",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Wolff intermediary between Bannon and Epstein, forwarded communications and arranged meetings"
+          },
+          {
+            "target": "Woody Allen",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Wolff managed Woody Allen PR through Epstein, co-managed crisis strategy on MeToo allegations"
+          },
+          {
+            "target": "Dmitry Rybolovlev",
+            "type": "intelligence",
+            "strength": 1.0,
+            "description": "Manuscript with Epstein edits re: Rybolovlev/Trump [Wave 3]"
+          },
+          {
+            "target": "Tree of Life Limited",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #182: Wolff pitched a book project about Epstein on July 31, 2011 titled 'Book project'. Email states: 'The book I have in mind will focus on, although not "
+          }
+        ],
+        "Ron Soffer": [
+          {
+            "target": "Yves Bouvier",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Soffer Avocats served as lead counsel for Bouvier in the billion-dollar Bouvier Affair against Rybolovlev. SDNY cases: Accent Delight/Xitrans (1:16-mc-00125) and Accent Delight v. Sothebys (1:18-cv-09011)."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": [
+      {
+        "date": "1980s-present",
+        "label": "social with Eric Holder",
+        "type": "social",
+        "entity": "Eric Holder",
+        "id": 30
+      },
+      {
+        "date": "2002",
+        "label": "Reid Weingarten (Epstein defense attorney, Steptoe and Johnson) made only 3 personal political donations totaling 3000 dollars: 1000 to Strickland for Colorado (2002), 1000 to Alex Sanders for Senate (2002), 1000 to Friends of Mark Warner (1996). All from Washington DC. Minimal political donor despite being a high-profile white-collar defense attorney. No coordination with other Epstein network donors detected.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 475
+      },
+      {
+        "date": "2011-09",
+        "label": "Weingarten told a third party 'don't mention my role with brad till we both think it useful' -- referring to Brad Karp (Paul Weiss chairman). This suggests Weingarten had a confidential advisory role related to Karp and Epstein that was strategically concealed. Weingarten also told Epstein: 'Still have to figure out what my role is in all this shit.' In Sept 2011, Epstein told Matthew Menchel (Kobre & Kim LLP attorney): 'your name just came up, when you sent an email to weingarten, he is with me in paris love to see you' -- confirming Weingarten traveled with Epstein internationally.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 54
+      },
+      {
+        "date": "2011-12-09",
+        "label": "EFTA00925685 (Dec 9, 2011): Weingarten to Epstein: 'Got back last nite...kiev is pretty wild...need to be in dc monday morn first thing.' Weingarten had just returned from Kiev, Ukraine in Dec 2011 \u2014 during a period of significant US legal interest in Ukraine (Tymoshenko trial Oct 2011, Manafort active, Pinchuk dealings). This is 8 years before Weingarten's SoftBank involvement and connects to the broader Ukraine thread (Schoen FARA #6071 for Pinchuk, Waldman dual Deripaska/Lavrov registration). Weingarten also referenced 'interesting jeffrey-reid projects' \u2014 confirming joint ventures beyond attorney-client.",
+        "type": "intelligence",
+        "evidence_ref": null,
+        "id": 816
+      },
+      {
+        "date": "2011-2019",
+        "label": "legal with Jeffrey Epstein",
+        "type": "legal",
+        "entity": "Jeffrey Epstein",
+        "id": 18
+      },
+      {
+        "date": "2015",
+        "label": "legal with Brad Karp",
+        "type": "legal",
+        "entity": "Brad Karp",
+        "id": 27
+      },
+      {
+        "date": "2015",
+        "label": "advisory with Michael Wolff",
+        "type": "advisory",
+        "entity": "Michael Wolff",
+        "id": 28
+      },
+      {
+        "date": "2015-02-01",
+        "label": "Epstein managed Weingarten's media exposure through Michael Wolff. In EFTA02512781 (2/1/2015), Epstein wrote to Wolff: 'weingarten quotes out. governone has note been sentenced.' This shows Epstein directing Wolff's PR strategy on behalf of Weingarten's clients, removing quotes before sentencing. Additionally, Epstein offered Weingarten and Ruemmler as guests to an unnamed person in March 2018: 'did you enjoy last night. leon doesnt listen as much as he should. but he is a good guy. Im in palm beach for the weekend. next week if you like Kathy ruemmler. or reid weingarten and or miro lacjak.' This demonstrates Epstein curating social/professional access to his legal advisors.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 56
+      },
+      {
+        "date": "2015-07",
+        "label": "Epstein used Weingarten in legal strategy discussions about his own vulnerability as early as July 2015. In EFTA02341191, Epstein wrote to Brad Karp (Paul Weiss partner): 'add Levander or Weingarten? relationship to law enf paramount. difficult to settle as there are others that would i think might be encouraged to emerge. most other similar cases are usually a one off. perfect storm. cosby, wey. money, wall street etc.. terrible.. if she falls into the hands of the bottom fishers. very bad. very. they will want the pr.' This shows Epstein considering Weingarten for his defense team 4 years before arrest, discussing strategy around potential accusers and law enforcement relationships.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 53
+      },
+      {
+        "date": "2015-09",
+        "label": "Weingarten appears in Epstein's personal to-do/contact lists alongside his most important associates. In a Sept 2015 email to himself, Epstein listed: 'weingarten, ruemmler. zuckerman, holterbosch. kamen kerry jaret. GLENN CALL. AIRCELL coverage? scarola, sanctions. paul mccartney - leon. grubman motola peggy.' In a separate list labeled 'list for bannon steve,' Epstein included Weingarten alongside: 'chomsky, barrack barak, zagat, nathan, brian greene, yau, eo wilson, prince andrews, jagland, clinton pastrana, richardson, leahy, jarecki, schumer, ranieri, waheed, mongolia, ruemmler, weingarten, amabani, rochsild, dersh, ken starrk.' This places Weingarten in Epstein's inner circle of legal/political advisors.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 44
+      },
+      {
+        "date": "2015-2018",
+        "label": "social with Kathryn Ruemmler",
+        "type": "social",
+        "entity": "Kathryn Ruemmler",
+        "id": 26
+      },
+      {
+        "date": "2016-12-20",
+        "label": "Epstein sent Weingarten a Pizzagate article about the Clintons on 12/20/2016, and Weingarten replied 'Clinton' in an Oct 2012 email. Epstein also shared Trump tax story coverage with Weingarten (10/3/2018), to which Epstein responded defending Trump: 'how unfair yes, it was written by financial illiterates. . referencing todays dollars? with no back up. IRS looked at all. .they ignored taxes paid along the way.' Weingarten's reaction to reading the NYT Trump tax story: 'Reading the nytimes trump tax story...so wish I was with you right now.' Weingarten also told Epstein 'Of course I trust you...what is going on?' (2/21/2019) after Epstein said 'Trust me' -- suggesting a deep personal bond.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 51
+      },
+      {
+        "date": "2016-2019",
+        "label": "legal with Fethullah Gulen",
+        "type": "legal",
+        "entity": "Fethullah Gulen",
+        "id": 25
+      },
+      {
+        "date": "2017-02-16",
+        "label": "On 2/16/2017, Weingarten told Epstein 'I know...I just saw that and almost threw up....also have to decide today whether or not to take flynn.' This confirms Weingarten was offered the chance to represent Michael Flynn and was consulting Epstein about the decision in real-time. The same day, Epstein sent Weingarten a Politico article about Alexander Acosta (Trump's DOL nominee) and the Epstein plea deal.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 15
+      },
+      {
+        "date": "2017-05-22",
+        "label": "Weingarten was a finalist for Trump's outside counsel position in May 2017. WaPo reporter Ashley Parker emailed Weingarten on 5/22/2017 stating 'we understand you're one of the finalists for the role, and have already spoken with senior White House' officials. Weingarten forwarded this to Epstein asking 'Do I have the choice? And if so, your view?' and Epstein replied 'do you want it? or jared?' then 'we should talk.' Epstein also forwarded the WaPo article to Leon Black and to Darren Indyke ('whoops').",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 12
+      },
+      {
+        "date": "2017-07-25",
+        "label": "Weingarten and Epstein had extensive real-time discussions about Mueller investigation strategy from 2017-2018. Key exchanges: (1) 7/25/2017 Weingarten: 'If trump fires mueller and gets away with it it is 1933 berlin'; (2) 11/2/2017 Weingarten: 'Trump is going to fire mueller and republicans on hill won't do a thing'; same day Epstein: 'shouldnt mueller just file sealed indictments against jared ivanka and junior? they would stay even if he were fired'; (3) 12/1/2017 Weingarten: 'Beginning of the end...will say trump told him to go the russkies'; (4) 1/3/2018 Weingarten: 'Internet is crashing right now about this....trump apparently off his rocker'.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 18
+      },
+      {
+        "date": "2018",
+        "label": "legal with Tom Barrack",
+        "type": "legal",
+        "entity": "Tom Barrack",
+        "id": 208
+      },
+      {
+        "date": "2018-01-15",
+        "label": "Epstein used Weingarten's knowledge for political intelligence and strategy. Key intelligence exchanges: (1) 1/15/2018 Weingarten: 'Trump stopped them? He cannot stand mcgahn' -- insider knowledge about White House counsel dynamics; (2) Epstein to Weingarten 1/15/2018: 'mcgann feels if he stays he risks indicment'; (3) 1/12/2018 Epstein: 'Senate subpoena?'; (4) 5/20/2018 Epstein sent Weingarten detailed intel about a 'us citizen working for mi5' calling 'trump campaign insiders'; (5) 10/2/2018 Weingarten: 'Turns out you were right about sdny but they are going to wait their turn' -- confirming Epstein had advance knowledge of SDNY investigations; (6) 11/15/2018 Weingarten: 'So fucking much going on'; (7) Weingarten declined to discuss Russia/Trump/Comey with Bloomberg: 'ain't saying sh to anyone on or off the record'.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 39
+      },
+      {
+        "date": "2018-03-24",
+        "label": "Epstein introduced Steve Bannon to Weingarten for breakfast on 3/24/2018. Epstein to Weingarten: 'yes 730?' then 'Tonight or tomnight' then 'Steve is coming to meet you breakfast'. Weingarten: 'I am there'. This was before Bannon's legal troubles but shows Epstein brokering high-level political introductions to his defense attorney. Separately, on 7/6/2019, Epstein told Weingarten 'bannon for breakfast tomor' -- one day before Epstein's arrest on 7/6/2019.",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 25
+      },
+      {
+        "date": "2018-08-17",
+        "label": "Weingarten represented Steve Wynn in DOJ investigation related to Elliott Broidy. WaPo article (8/17/2018) forwarded by Steptoe colleague Brian Heberlig to Weingarten stated: 'An attorney for Wynn, Reid Weingarten, declined to comment, saying only that Wynn is cooperating with the Justice Department.' Epstein shared this article with Steve Bannon. Separately, on 7/6/2019, Weingarten told Epstein: 'Have a hysterical wynn-trump issue that will make you laugh.' Weingarten also represented Fethullah Gulen in the Turkey extradition matter (confirmed in multiple 2016 media reports).",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 32
+      },
+      {
+        "date": "2018-12-01",
+        "label": "Weingarten asked Epstein whether he should take the Huawei CFO case (Meng Wanzhou, arrested 12/1/2018). In an undated email, Weingarten wrote to Epstein: 'Kent, connecticut....and you? Hear about Bannon in italy? should I take the huawei cfo?' This shows Weingarten consistently consulted Epstein about major case decisions. Weingarten's firm Steptoe was indeed later involved in the Huawei case (US v. Huawei Technologies, EDNY, filed 8/22/2018). Bloomberg reporter Greg Farrell also confirmed Jared Kushner wanted Weingarten as his attorney (6/23/2017): 'I am told on good authority that Jared wants you as his atty.'",
+        "type": "communication",
+        "evidence_ref": null,
+        "id": 36
+      },
+      {
+        "date": "2018-2019",
+        "label": "legal with Steve Wynn",
+        "type": "legal",
+        "entity": "Steve Wynn",
+        "id": 22
+      },
+      {
+        "date": "2018-2019",
+        "label": "social with Steve Bannon",
+        "type": "social",
+        "entity": "Steve Bannon",
+        "id": 21
+      },
+      {
+        "date": "2019",
+        "label": "legal with Martin Weinberg",
+        "type": "legal",
+        "entity": "Martin Weinberg",
+        "id": 29
+      },
+      {
+        "date": "2019",
+        "label": "legal with Ron Soffer",
+        "type": "legal",
+        "entity": "Ron Soffer",
+        "id": 421
+      },
+      {
+        "date": "2019-01-21 to 2019-01-22",
+        "label": "legal with Jeffrey Epstein",
+        "type": "legal",
+        "entity": "Jeffrey Epstein",
+        "id": 388
+      },
+      {
+        "date": "2019-01-22",
+        "label": "Weingarten confirmed Epstein's intelligence about SDNY investigation on Jan 22, 2019 at 2:59 PM, writing 'Turns out you were right about sdny but they are going to wait their turn'. When Epstein asked 'Civil or crime', Weingarten replied simply 'Crim'. This shows Weingarten had independent access to information about the SDNY criminal investigation and was sharing it with Epstein, and that Epstein's original tip about the RICO claim was accurate.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 759
+      },
+      {
+        "date": "2019-01-22",
+        "label": "Weingarten discussed Steptoe & Johnson billing dispute on Jan 22, 2019. He reported that 'the Steptoe numbercrunchers advise me Jeffrey has paid about 450 and owes about 300 and seems disinclined to make Steptoe whole'. He referenced the 'unspeakably awful evan barr debacle' and questioned whether Miller had made an error. Weingarten called himself 'the 800 pound gorilla' at Steptoe and said the firm would not chase Epstein for the money. Separately, Epstein stated 'im not sheyl, frankly i havent been involved in this at all except for the ridiculousness' and suggested resolving it by end of month. Total Steptoe billing: approximately K (K paid, K outstanding).",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 762
+      },
+      {
+        "date": "2019-01-22",
+        "label": "On Jan 22, 2019 at 9:09 PM, Weingarten wrote 'Still have to figure out what my role is in all this shit...' revealing uncertainty about his own position in Epstein's operations at this late stage (6 months before arrest). This is significant because Weingarten was Epstein's #1 correspondent (245 HF Parquet emails) yet still lacked a defined role, suggesting the informal/ad-hoc nature of Epstein's operational structure. Combined with the SDNY RICO intelligence-sharing, the SoftBank briefing, and the Steptoe billing relationship, Weingarten occupied a hybrid lawyer-advisor-fixer role that defied conventional categorization.",
+        "type": "relationship",
+        "evidence_ref": null,
+        "id": 763
+      },
+      {
+        "date": "2019-01-22",
+        "label": "On Jan 22, 2019, Epstein assessed an unnamed lawyer ('new guy') that Weingarten had discussed, asking 'you seemed to imply that your new guy could only shoot blanks? if thats so. its an easy decision. , if not. oy'. Weingarten clarified 'Not my new guy...not repping him'. Epstein then pressed 'do you think he has the goods?' This exchange shows Epstein vetting lawyers through Weingarten, evaluating their capabilities for undisclosed purposes, while Weingarten maintained distance from the individual. The identity of the 'new guy' is unresolved.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 764
+      },
+      {
+        "date": "2019-01-22",
+        "label": "Weingarten at Steptoe & Johnson was Epstein's criminal defense pipeline. On Jan 22, 2019, Weingarten confirmed the SDNY intelligence: 'Turns out you were right about sdny but they are going to wait their turn.' He also revealed he was navigating role conflict: 'Still have to figure out what my role is in all this shit.' Separately, Weingarten raised Steptoe billing: Epstein had paid ~450K but owed ~300K ('How the fuck are we back here after the unspeakably awful evan barr debacle'). Evan Barr was a prior Steptoe attorney on Epstein matters, now replaced by Michael Miller. Weingarten had independent SDNY contacts who confirmed Epstein's tip.",
+        "type": "intelligence",
+        "evidence_ref": null,
+        "id": 1163
+      },
+      {
+        "date": "2019-01-25",
+        "label": "legal with Rajeev Misra",
+        "type": "legal",
+        "entity": "Rajeev Misra",
+        "id": 391
+      },
+      {
+        "date": "2019-07-07",
+        "label": "Weingarten served as co-lead defense counsel for Epstein in US v. Epstein, 19 Cr. 490 (SDNY 2019). Defense team included Martin Weinberg (Boston), Marc Fernich, Michael Scavelli (Steptoe), and Jason Meade (Steptoe). Key dates: 7/7/2019 Weingarten email 'Thanks see you in the morning' re case; 7/11/2019 appearance notice filed; 7/14-15/2019 bail memo discussions; 7/25/2019 bail hearing; 8/1/2019 preservation requests; 8/10/2019 Epstein death and pathologist request; 8/20/2019 2nd Circuit appeal (Dkt 19-2221); 11/19/2019 call with SDNY re indictment even post-mortem.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 21
+      },
+      {
+        "date": "2019-10",
+        "label": "Lobbyist name search for 'Weingarten' returned only Amanda Weingarten at Paul Weiss Rifkind Wharton and Garrison LLP, who lobbied for Carlos Ghosn Bichara in Q3/Q4 2019 and Q1 2020 on civil rights and criminal justice in Japan. Reid Weingarten (Epstein's defense attorney, 245 emails) does NOT appear as a registered lobbyist. Amanda Weingarten appeared alongside Brad Karp (Paul Weiss chair) in the Ghosn filings. Paul Weiss is a major white-shoe law firm representing high-profile criminal defendants. The Ghosn-Weingarten-Karp connection at Paul Weiss warrants further investigation for any Epstein overlaps.",
+        "type": "relationship",
+        "evidence_ref": null,
+        "id": 429
+      },
+      {
+        "date": "2019-2019",
+        "label": "legal with William Barr",
+        "type": "legal",
+        "entity": "William Barr",
+        "id": 1521
+      }
+    ]
+  }
 }
