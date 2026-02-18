@@ -131,10 +131,30 @@ Articles contain two types of factual claims:
 - **Delete it**: if the claim adds color but not substance and can't be verified, remove it
 
 Specific high-risk categories:
-- Dollar amounts not from primary sources (AUM figures, revenue, deal sizes) → soften or cite
+- Dollar amounts not from primary sources (AUM figures, revenue, deal sizes) → verify and cite
 - Superlatives ("largest," "most influential," "first") → always verify or downgrade to "among the largest"
 - Temporal claims about people's status ("at the time the most...") → verify against the specific date
 - Regulatory descriptions → verify exact thresholds, dates, mechanisms via authoritative sources
+- Biographical claims (job titles, career history, legal outcomes) → verify and cite
+- Geopolitical claims (diplomatic relations, blockades, treaties) → verify and cite
+
+**How to cite contextual claims:** Use inline markdown hyperlinks to authoritative sources. The article already uses `[EFTA...]` for corpus citations; contextual claims use standard markdown links.
+
+Examples from a published article:
+- `the [Gulf blockade began](https://en.wikipedia.org/wiki/Qatar_diplomatic_crisis)` — geopolitical event
+- `[estimated by the Sovereign Wealth Fund Institute](https://www.swfinstitute.org/...) at roughly $700 billion` — financial figure
+- `[fired fifteen months earlier](https://www.npr.org/2017/08/18/...)` — biographical timeline
+- `[plead guilty to conspiring to act as an unregistered foreign agent](https://www.washingtonpost.com/...)` — legal outcome
+- `[elevated to crown prince until June 21, 2017](https://www.aljazeera.com/...)` — political event
+
+**Source hierarchy for contextual claims:**
+1. Government sources (.gov, court filings, regulatory orders) — strongest
+2. Wire services and major newspapers of record (AP, Reuters, WSJ, WaPo) — strong
+3. Specialist publications (SWFI for sovereign wealth, Lloyd's List for shipping) — strong for domain
+4. Wikipedia — acceptable for widely known facts (dates, diplomatic relations, career timelines) where the underlying sources are clear
+5. Never cite social media, blog posts, or opinion pieces as factual sources
+
+**The writer is responsible for verifying contextual claims at writing time**, not deferring to the reviewer. Use WebSearch during the writing process to verify and source every contextual claim as you write it. Do not write "$800 billion" and plan to verify later — verify now, cite now.
 
 ### Avoiding AI Writing Tells
 
