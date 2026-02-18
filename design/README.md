@@ -20,6 +20,7 @@ This directory contains comprehensive design documentation for Ithildin, transfo
 - **[07-infra-integration.md](07-infra-integration.md)** - Integration with existing infrastructure
 - **[08-implementation-phases.md](08-implementation-phases.md)** - Phased rollout plan (8 phases, 4-6 weeks)
 - **[09-web-application.md](09-web-application.md)** - Web application design: routes, search, graphs, deployment
+- **[10-ui-inspiration.md](10-ui-inspiration.md)** - Ithildin UI inspiration and style guide
 
 ## Diagrams
 
