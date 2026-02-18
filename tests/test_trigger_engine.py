@@ -52,6 +52,7 @@ class TriggerEngineTests(unittest.TestCase):
     def test_threshold_trigger_queue_pending(self):
         self.queue.create_job(job_type="echo", domain="system")
         config = {
+            "budget_per_hour": 10,
             "scheduled": [],
             "thresholds": [
                 {
@@ -75,6 +76,40 @@ class TriggerEngineTests(unittest.TestCase):
         self.assertEqual(len(results), 1)
         jobs = self.queue.list_jobs(limit=10)
         self.assertEqual(len(jobs), 2)
+
+    def test_budget_per_hour_limits_scheduled(self):
+        config = {
+            "budget_per_hour": 1,
+            "scheduled": [
+                {
+                    "name": "scheduled_echo_a",
+                    "enabled": True,
+                    "interval_minutes": 60,
+                    "job_type": "echo",
+                    "domain": "system",
+                    "payload": {"message": "hello"},
+                },
+                {
+                    "name": "scheduled_echo_b",
+                    "enabled": True,
+                    "interval_minutes": 60,
+                    "job_type": "echo",
+                    "domain": "system",
+                    "payload": {"message": "hello"},
+                },
+            ],
+            "thresholds": [],
+        }
+        self._write_config(config)
+        engine = TriggerEngine(
+            self.queue,
+            db_path=self.db_path,
+            config_path=self.config_path,
+        )
+        results = engine.run_scheduled()
+        self.assertEqual(len(results), 1)
+        jobs = self.queue.list_jobs(limit=10)
+        self.assertEqual(len(jobs), 1)
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ import argparse
 import json
 import sqlite3
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 try:
@@ -42,6 +42,10 @@ VALID_PRIORITIES = ["critical", "high", "medium", "low"]
 VALID_STATUSES = ["open", "evaluating", "in_progress", "completed", "blocked", "rejected"]
 VALID_ACCESS_METHODS = ["rest_api", "graphql", "bulk_download", "sftp", "web_scrape", "soda_api", "manual", "sdk", "other"]
 VALID_AUTH = ["none", "api_key_free", "api_key_paid", "login_required", "paid_subscription", "other"]
+
+
+def _utcnow() -> datetime:
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 # ── CRUD ────────────────────────────────────────────────────
@@ -137,7 +141,7 @@ def get_request(req_id):
 def claim_request(req_id):
     """Set status to evaluating. Only works if currently open."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     cursor = db.execute(
         "UPDATE infra_requests SET status = 'evaluating', claimed_at = ? WHERE id = ? AND status = 'open'",
         (now, req_id)
@@ -196,7 +200,7 @@ def add_note(req_id, text):
 def complete_request(req_id, tool_file, files_modified, summary):
     """Mark request as completed."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     files_json = json.dumps(files_modified) if files_modified else None
     db.execute("""
         UPDATE infra_requests
@@ -315,7 +319,7 @@ def get_stats():
 def block_lead_on_infra(lead_id, infra_id, reason=None):
     """Block a lead because it depends on an infra request."""
     db = get_db()
-    now = datetime.utcnow().isoformat()
+    now = _utcnow().isoformat()
     db.execute(
         "UPDATE leads SET status = 'blocked', blocked_by_infra_id = ?, updated_at = ? WHERE id = ?",
         (infra_id, now, lead_id)

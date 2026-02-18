@@ -8,11 +8,12 @@ from __future__ import annotations
 import json
 import os
 import re
+import sqlite3
 import subprocess
 import sys
 import time
 import traceback
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -95,11 +96,60 @@ def _ensure_workdir(job_id: str) -> Path:
     return workdir
 
 
+def _utcnow() -> datetime:
+    return datetime.now(timezone.utc).replace(tzinfo=None)
+
+
+def _parse_datetime(value: Optional[str]) -> Optional[datetime]:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        try:
+            return datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            return None
+
+
+def _max_datetime(left: Optional[datetime], right: Optional[datetime]) -> Optional[datetime]:
+    if left is None:
+        return right
+    if right is None:
+        return left
+    return left if left >= right else right
+
+
+def _load_alias_groups(db: sqlite3.Connection) -> tuple[Dict[str, str], Dict[str, set]]:
+    raw_to_canonical: Dict[str, str] = {}
+    canonical_to_aliases: Dict[str, set] = {}
+    try:
+        rows = db.execute("SELECT canonical_name, alias FROM name_aliases").fetchall()
+    except sqlite3.OperationalError:
+        return raw_to_canonical, canonical_to_aliases
+
+    for row in rows:
+        canonical = row["canonical_name"]
+        alias = row["alias"]
+        raw_to_canonical[alias.lower()] = canonical
+        canonical_to_aliases.setdefault(canonical, set()).add(alias)
+
+    return raw_to_canonical, canonical_to_aliases
+
+
 def _content_root() -> Path:
     root = os.environ.get("ITHILDIN_CONTENT_ROOT")
     if root:
         return Path(root)
     return Path(__file__).resolve().parent.parent / "site" / "content"
+
+
+def _load_model_index() -> list[dict]:
+    """Load analytical model index for agent context."""
+    index_path = _content_root() / "models" / "_index.json"
+    if not index_path.exists():
+        return []
+    return json.loads(index_path.read_text())
 
 
 def _slugify(value: str) -> str:
@@ -266,7 +316,7 @@ class LeadTriageWorker(AgentWorker):
             "dry_run": dry_run,
         }
 
-        now = datetime.utcnow().isoformat()
+        now = _utcnow().isoformat()
         for lead in leads:
             lead_id = lead["id"]
             target_name = lead.get("target_name") or ""
@@ -458,7 +508,7 @@ class DeepPersonWorker(AgentWorker):
             f"# Investigation Report: {target}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -521,7 +571,7 @@ class SurveyorWorker(AgentWorker):
             f"# Source Scan Report: {query}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -579,7 +629,7 @@ class DocumentMineWorker(AgentWorker):
             f"# Document Mine Report: {query}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -658,7 +708,7 @@ class EntityTracerWorker(AgentWorker):
             f"# Entity Trace Report: {entity_name}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -739,7 +789,7 @@ class PatternSpotterWorker(AgentWorker):
             "# Pattern Spotter Report",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -798,7 +848,7 @@ class SynthesistWorker(AgentWorker):
             f"# Synthesis Report: {query or 'selected findings'}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -879,7 +929,7 @@ class NetworkAnalystWorker(AgentWorker):
             "# Network Analysis Report",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -964,7 +1014,7 @@ class TimelineAnalystWorker(AgentWorker):
             "# Timeline Analysis Report",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -1025,7 +1075,7 @@ class SystemicAnalystWorker(AgentWorker):
             "# Systemic Analysis Report",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -1053,7 +1103,7 @@ class ExplainerWriterWorker(AgentWorker):
         title = payload.get("title") or (f"Mechanism: {mechanism}" if mechanism else None)
         subtitle = payload.get("subtitle")
         targets = payload.get("targets") or []
-        date_str = payload.get("date") or datetime.utcnow().date().isoformat()
+        date_str = payload.get("date") or _utcnow().date().isoformat()
         status = payload.get("status", "draft")
         dry_run = bool(payload.get("dry_run", False))
 
@@ -1080,19 +1130,64 @@ class ExplainerWriterWorker(AgentWorker):
         ]
         frontmatter = [line for line in frontmatter if line is not None]
 
+        # Include applicable analytical models
+        model_index = _load_model_index()
+        model_refs = [m for m in model_index if m["id"] in (payload.get("models") or [])]
+
         body = [
-            "## Overview",
-            "Draft explainer for the mechanism.",
+            "## Hook",
             "",
-            "## Evidence",
-            "- [ ] Add primary source citations",
+            "[What is the most counterintuitive finding about this mechanism? Open with a structural",
+            "truth that contradicts naive assumptions. The reader should think 'wait, that can't be right'",
+            "and then spend the rest of the article discovering that it is.]",
             "",
-            "## Open Questions",
-            "- [ ] Add open questions",
-            "",
-            "## Sources",
-            "- [ ] Add source references",
         ]
+        if model_refs:
+            body.append("## Applicable Models")
+            for m in model_refs:
+                body.append(f"- **[{m['title']}](/models/{m['id']})** — {m['subtitle']}")
+            body.append("")
+        body.extend([
+            "## The Mechanism",
+            "",
+            "[Use Three-Part Architecture for each section:",
+            "(1) Conceptual frame — what is this thing and what role does it play?",
+            "(2) Specific evidence — exact dates, amounts, parties, EFTA references",
+            "(3) Analysis connecting them — why does this instance illuminate the mechanism?]",
+            "",
+            "## What Should Have Happened",
+            "",
+            "[Explain the regulatory/compliance framework. Use Perspective Internalization:",
+            "put the reader inside the compliance desk, the registrar's office, the bank's KYC team.",
+            "Show the gap between design and reality at each step.]",
+            "",
+            "[NOTE: Ideally the counterfactual is woven throughout the Mechanism section,",
+            "not isolated here. This section is a fallback.]",
+            "",
+            "## Why It Works This Way",
+            "",
+            "[Evolutionary Explanation: (1) How it works today, (2) Why that seems weird,",
+            "(3) Historical/structural reason it evolved this way, (4) What would happen",
+            "if you tried to change it, (5) Now you understand why it persists.]",
+            "",
+            "## What We Don't Know",
+            "",
+            "[Honest about gaps. Include missing documents: what records should exist but don't?",
+            "Calibrated imprecision increases credibility.]",
+            "",
+            "## Evidence Index",
+            "",
+            "- [ ] Add EFTA references and source citations",
+            "",
+            "## Craft Notes",
+            "",
+            "Key principles for this explainer (from research/craft-principles.md):",
+            "- Three-Part Structure: frame + evidence + analysis for every mechanism section",
+            "- Infrastructure Reveal: peel back layers, show the invisible cascades",
+            "- Stakes Before Mechanism: establish consequences before explaining how it works",
+            "- Calibrated Precision: exact figures when available, honest ranges when uncertain",
+            "- No 'shocking' language — let the facts do the work",
+        ])
         content_text = "\n".join(frontmatter + body)
 
         workdir = _ensure_workdir(job["id"])
@@ -1101,7 +1196,7 @@ class ExplainerWriterWorker(AgentWorker):
             f"# Mechanism Explainer Draft: {title}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             f"## Content Path: {content_path}",
         ]
@@ -1144,7 +1239,7 @@ class ContextualAnalystWorker(AgentWorker):
         lens = payload.get("lens", "general")
         subtitle = payload.get("subtitle")
         targets = payload.get("targets") or []
-        date_str = payload.get("date") or datetime.utcnow().date().isoformat()
+        date_str = payload.get("date") or _utcnow().date().isoformat()
         status = payload.get("status", "draft")
         dry_run = bool(payload.get("dry_run", False))
 
@@ -1169,19 +1264,58 @@ class ContextualAnalystWorker(AgentWorker):
         ]
         frontmatter = [line for line in frontmatter if line is not None]
 
+        # Detect applicable analytical models from title/targets
+        model_index = _load_model_index()
+        detect_text = f"{title} {' '.join(targets) if isinstance(targets, list) else targets}"
+        try:
+            from tools.model_detector import detect_models
+            detected = detect_models(detect_text)
+        except Exception:
+            detected = []
+        applicable_models = [d for d in detected if d.get("confidence") in ("high", "medium")]
+
         body = [
-            "## Summary",
-            "Draft analytical article.",
+            "## Opening",
             "",
-            "## Findings",
-            "- [ ] Summarize key findings with citations",
+            "[Counterintuitive hook — what structural truth contradicts naive assumptions?",
+            "Not 'Epstein was connected to powerful people' but something about HOW the system",
+            "worked that would surprise an intelligent person in finance/law/compliance.]",
             "",
+        ]
+        if applicable_models:
+            body.append("## Analytical Framework")
+            body.append("")
+            body.append("[Use these detected models as narrative scaffolding — not just a list,")
+            body.append("but recurring characters that appear throughout the analysis:]")
+            body.append("")
+            for m in applicable_models:
+                body.append(f"- **[{m['title']}](/models/{m['model_id']})** ({m['confidence']}) — {', '.join(m.get('reasons', [])[:2])}")
+            body.append("")
+        body.extend([
             "## Analysis",
-            "- [ ] Provide lens-based analysis",
+            "",
+            "[Perspective: write from INSIDE the system, not about it. Explain WHY it evolved",
+            "this way using Evolutionary Explanation: (1) how it works, (2) why that seems weird,",
+            "(3) historical reason, (4) what happens if you try to change it.]",
+            "",
+            "[Use the Dual-Spine technique: one holding spine (timeline, person, transaction chain)",
+            "provides forward momentum; one depth spine (system explanation, regulatory framework)",
+            "provides meaning. Weave them together.]",
+            "",
+            "## Evidence",
+            "",
+            "[Apply the evidence budget: select the findings that reveal mechanisms, connect threads,",
+            "or contradict the public narrative. Use documents as plot points — paraphrase context,",
+            "then quote the devastating line.]",
+            "",
+            "## What We Don't Know",
+            "",
+            "[Honest about gaps. Missing documents are evidence. Calibrated imprecision",
+            "increases credibility.]",
             "",
             "## Sources",
-            "- [ ] Add source references",
-        ]
+            "- [ ] Add EFTA references and source citations",
+        ])
         content_text = "\n".join(frontmatter + body)
 
         workdir = _ensure_workdir(job["id"])
@@ -1190,7 +1324,7 @@ class ContextualAnalystWorker(AgentWorker):
             f"# Analytical Article Draft: {title}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             f"## Content Path: {content_path}",
         ]
@@ -1232,10 +1366,14 @@ class EditorReviewWorker(AgentWorker):
         content_path = payload.get("content_path")
         slug = payload.get("slug")
         min_words = int(payload.get("min_words", 300))
+        modality = payload.get("modality")
         required_fields = payload.get("required_fields") or ["title", "date", "status"]
 
         if not content_path and slug:
-            content_path = str(_content_root() / "articles" / f"{slug}.mdx")
+            if modality == "wiki_dossier_update":
+                content_path = str(_content_root() / "dossiers" / f"{slug}.json")
+            else:
+                content_path = str(_content_root() / "articles" / f"{slug}.mdx")
         if not content_path:
             raise ValueError("payload.content_path or payload.slug is required")
 
@@ -1243,42 +1381,129 @@ class EditorReviewWorker(AgentWorker):
         if not content_file.exists():
             raise FileNotFoundError(f"Content not found: {content_path}")
 
-        raw = content_file.read_text()
-        frontmatter: Dict[str, str] = {}
-        body = raw
-        if raw.startswith("---"):
-            parts = raw.split("---", 2)
-            if len(parts) >= 3:
-                fm_text = parts[1]
-                body = parts[2].lstrip("\n")
-                for line in fm_text.splitlines():
-                    if ":" not in line:
-                        continue
-                    key, value = line.split(":", 1)
-                    frontmatter[key.strip()] = value.strip().strip("\"")
+        if content_file.suffix == ".json" or modality == "wiki_dossier_update":
+            dossier = json.loads(content_file.read_text())
+            required_fields = payload.get("required_fields") or [
+                "name",
+                "slug",
+                "findings",
+                "connections",
+                "stats",
+            ]
+            missing = [field for field in required_fields if field not in dossier]
+            stats = dossier.get("stats") or {}
+            total_findings = stats.get("total_findings", len(dossier.get("findings", [])))
+            min_findings = int(payload.get("min_findings", 5))
+            evidence_count = sum(1 for f in dossier.get("findings", []) if f.get("evidence"))
 
-        missing = [field for field in required_fields if not frontmatter.get(field)]
-        word_count = len(re.findall(r"\\b\\w+\\b", body))
-        citations = sorted(set(re.findall(r"\[[^\]]+\]", body)))
+            issues = []
+            if missing:
+                issues.append(f"Missing dossier fields: {', '.join(missing)}")
+            if total_findings < min_findings:
+                issues.append(f"Findings below minimum ({total_findings} < {min_findings})")
+            if evidence_count == 0:
+                issues.append("No evidence attached to findings")
 
-        issues = []
-        if missing:
-            issues.append(f"Missing frontmatter fields: {', '.join(missing)}")
-        if word_count < min_words:
-            issues.append(f"Word count below minimum ({word_count} < {min_words})")
-        if not citations:
-            issues.append("No citations detected")
+            decision = "approve" if not issues else "revise"
+            report = {
+                "content_path": content_path,
+                "review_type": "dossier",
+                "decision": decision,
+                "issues": issues,
+                "missing_fields": missing,
+                "total_findings": total_findings,
+                "evidence_count": evidence_count,
+            }
+        else:
+            raw = content_file.read_text()
+            frontmatter: Dict[str, str] = {}
+            body = raw
+            if raw.startswith("---"):
+                parts = raw.split("---", 2)
+                if len(parts) >= 3:
+                    fm_text = parts[1]
+                    body = parts[2].lstrip("\n")
+                    for line in fm_text.splitlines():
+                        if ":" not in line:
+                            continue
+                        key, value = line.split(":", 1)
+                        frontmatter[key.strip()] = value.strip().strip("\"")
 
-        decision = "approve" if not issues else "revise"
-        report = {
-            "content_path": content_path,
-            "decision": decision,
-            "issues": issues,
-            "missing_fields": missing,
-            "word_count": word_count,
-            "citation_count": len(citations),
-            "citations": citations,
-        }
+            missing = [field for field in required_fields if not frontmatter.get(field)]
+            word_count = len(re.findall(r"\b\w+\b", body))
+            citations = sorted(set(re.findall(r"\[[^\]]+\]", body)))
+
+            # Check for model references in article content
+            model_index = _load_model_index()
+            model_slugs = {m["id"] for m in model_index}
+            referenced_models = [mid for mid in model_slugs if f"/models/{mid}" in body]
+
+            # Detect if models *should* be referenced but aren't
+            suggested_models = []
+            try:
+                from tools.model_detector import detect_models
+                detected = detect_models(body[:2000])
+                suggested_models = [
+                    d["model_id"] for d in detected
+                    if d.get("confidence") in ("high", "medium") and d["model_id"] not in referenced_models
+                ]
+            except Exception:
+                pass
+
+            issues = []
+            if missing:
+                issues.append(f"Missing frontmatter fields: {', '.join(missing)}")
+            if word_count < min_words:
+                issues.append(f"Word count below minimum ({word_count} < {min_words})")
+            if not citations:
+                issues.append("No citations detected")
+            if suggested_models:
+                issues.append(f"Consider referencing models: {', '.join(suggested_models)}")
+
+            # Narrative quality checks (from craft-principles.md)
+            body_lower = body.lower()
+
+            # Check for mechanism explanation (not just events)
+            mechanism_indicators = ["how", "works", "mechanism", "process", "system", "because", "evolved"]
+            has_mechanism = sum(1 for w in mechanism_indicators if w in body_lower) >= 3
+            if not has_mechanism:
+                issues.append("narrative: No mechanism explanation detected — article may describe events without explaining HOW the system works")
+
+            # Check for perspective internalization (inside-out language)
+            perspective_indicators = ["you're", "your", "imagine", "from the", "at the desk", "in the office"]
+            has_perspective = any(p in body_lower for p in perspective_indicators)
+            if not has_perspective and word_count > 1000:
+                issues.append("narrative: No perspective internalization — consider putting the reader inside the system")
+
+            # Check for exhibit-list style (multiple documents listed without narrative)
+            exhibit_pattern = re.findall(r"(?:document|exhibit|attachment|filing)\s+\d+", body_lower)
+            if len(exhibit_pattern) > 5:
+                issues.append("narrative: Possible exhibit-list evidence style — documents should be narrated as plot points, not listed")
+
+            # Check for chronology-only structure
+            chrono_markers = re.findall(r"(?:in \d{4}|on \w+ \d{1,2},? \d{4}|the following year|later that)", body_lower)
+            if len(chrono_markers) > 8 and "mechanism" not in body_lower and "how" not in body_lower[:500]:
+                issues.append("narrative: Appears to be pure chronology — consider thematic structure or dual-spine technique")
+
+            # Check for sensationalist language
+            sensational = [w for w in ["shocking", "explosive", "bombshell", "stunning", "horrifying"]
+                          if w in body_lower]
+            if sensational:
+                issues.append(f"narrative: Sensationalist language detected: {', '.join(sensational)} — let the facts do the work")
+
+            decision = "approve" if not issues else "revise"
+            report = {
+                "content_path": content_path,
+                "review_type": "article",
+                "decision": decision,
+                "issues": issues,
+                "missing_fields": missing,
+                "referenced_models": referenced_models,
+                "suggested_models": suggested_models,
+                "word_count": word_count,
+                "citation_count": len(citations),
+                "citations": citations,
+            }
 
         workdir = _ensure_workdir(job["id"])
         report_path = workdir / "report.json"
@@ -1335,7 +1560,7 @@ class DedupeReviewWorker(AgentWorker):
             f"# Dedupe Review: {action}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
         ]
         if dry_run:
             report_lines.append("## Dry Run: no dedupe actions executed")
@@ -1390,7 +1615,7 @@ class FindingVerificationWorker(AgentWorker):
             f"# Finding Verification: {finding_id}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Tool Results",
         ]
@@ -1441,7 +1666,7 @@ class ToolBuilderWorker(AgentWorker):
             f"# Tool Build: {infra_id or 'no infra id'}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
         ]
         if dry_run:
             report_lines.append("## Dry Run: no infra actions executed")
@@ -1490,7 +1715,7 @@ class SourceIntegratorWorker(AgentWorker):
             f"# Source Ingest: {infra_id or script}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
         ]
         if dry_run:
             report_lines.append("## Dry Run: no ingest actions executed")
@@ -1539,7 +1764,7 @@ class RegistryAdderWorker(AgentWorker):
             f"# Registry Add: {infra_id or script}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
         ]
         if dry_run:
             report_lines.append("## Dry Run: no registry actions executed")
@@ -1644,7 +1869,7 @@ class DeepInvestigationWorker(AgentWorker):
             f"# Deep Investigation Orchestration: {target}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Child Jobs",
         ]
@@ -1684,6 +1909,7 @@ class DossierWriterWorker(AgentWorker):
         min_findings = int(payload.get("min_findings", 5))
         update_backlinks = bool(payload.get("update_backlinks", False))
         spawn_review = bool(payload.get("spawn_review", False))
+        curate = bool(payload.get("curate", False))
         dry_run = bool(payload.get("dry_run", False))
 
         workdir = _ensure_workdir(job["id"])
@@ -1698,10 +1924,24 @@ class DossierWriterWorker(AgentWorker):
                 args.extend(["--target", target])
             if min_findings:
                 args.extend(["--min-findings", str(min_findings)])
+            if payload.get("incremental"):
+                args.append("--incremental")
             tool_results["export_dossiers"] = _run_script(
                 pipeline_root / "export_dossiers.py",
                 args,
             )
+
+            # Automated curation (key findings, viz data, identifiers)
+            if curate or payload.get("curate"):
+                curate_args = []
+                if target:
+                    curate_args.extend(["--target", target])
+                else:
+                    curate_args.append("--all")
+                tool_results["curate_dossier"] = _run_script(
+                    pipeline_root / "curate_dossier.py",
+                    curate_args,
+                )
 
             if update_backlinks:
                 tool_results["compute_backlinks"] = _run_script(
@@ -1709,25 +1949,37 @@ class DossierWriterWorker(AgentWorker):
                     [],
                 )
 
-            if spawn_review:
+            if spawn_review and target:
+                content_path = _content_root() / "dossiers" / f"{_slugify(target)}.json"
                 review_job_id = self.queue.create_job(
                     job_type="editor_review",
                     domain="curation",
                     payload={
-                        "content_path": None,
+                        "content_path": str(content_path),
                         "modality": "wiki_dossier_update",
                         "source_job_id": job["id"],
+                        "min_findings": min_findings,
                     },
                     priority=payload.get("review_priority", 4),
                     created_by=f"agent:{self.persona}",
                     source_trigger="wiki_dossier_update",
                 )
 
+        # Detect applicable analytical models for this target
+        applicable_models = []
+        if target and not dry_run:
+            try:
+                from tools.model_detector import detect_models
+                detected = detect_models(target)
+                applicable_models = [d["model_id"] for d in detected if d.get("confidence") in ("high", "medium")]
+            except Exception:
+                pass
+
         report_lines = [
             f"# Dossier Update: {target or 'all targets'}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Pipeline Results",
         ]
@@ -1738,14 +1990,228 @@ class DossierWriterWorker(AgentWorker):
             report_lines.append(f"- {name}: {status}")
             if result.get("stderr"):
                 report_lines.append(f"  - stderr: {result['stderr'][:200]}")
+        if applicable_models:
+            report_lines.append("")
+            report_lines.append("## Applicable Models")
+            for mid in applicable_models:
+                report_lines.append(f"- {mid}")
+
+        # Curation status
+        if target:
+            report_lines.append("")
+            report_lines.append("## Curation")
+            content_path = _content_root() / "dossiers" / f"{_slugify(target)}.json"
+            if content_path.exists():
+                try:
+                    dossier_data = json.loads(content_path.read_text())
+                    curation_data = dossier_data.get("curation") or {}
+                    has_narrative = bool(curation_data.get("overview"))
+                    key_count = len(curation_data.get("key_finding_ids", []))
+                    has_viz = bool(dossier_data.get("viz_data", {}).get("ego_network"))
+                    report_lines.append(f"- Key findings selected: {key_count}")
+                    report_lines.append(f"- Viz data: {'yes' if has_viz else 'no'}")
+                    report_lines.append(f"- Narrative overview: {'yes' if has_narrative else 'needs /curate-dossier'}")
+                except (json.JSONDecodeError, KeyError):
+                    report_lines.append("- Curation status: error reading dossier")
+            else:
+                report_lines.append("- Dossier file not found")
+
         report_path.write_text("\n".join(report_lines))
 
         return {
             "target": target,
             "report_path": str(report_path),
             "pipeline": tool_results,
+            "applicable_models": applicable_models,
             "review_job_id": review_job_id,
             "job_status": "awaiting_review" if review_job_id else "completed",
+        }
+
+
+class DossierFreshnessWorker(AgentWorker):
+    JOB_TYPES = ["dossier_freshness_audit"]
+
+    def _has_pending_update(self, canonical_name: str) -> bool:
+        pattern = f"%\"target_name\": \"{canonical_name}\"%"
+        db = self.queue._connect()
+        try:
+            row = db.execute(
+                """
+                SELECT COUNT(*) as n
+                FROM job_queue
+                WHERE job_type='wiki_dossier_update'
+                  AND status IN ('pending', 'claimed', 'in_progress', 'blocked')
+                  AND payload LIKE ?
+                """,
+                (pattern,),
+            ).fetchone()
+            return row["n"] > 0
+        finally:
+            db.close()
+
+    def execute(self, job: Dict[str, Any]) -> Dict[str, Any]:
+        payload = job.get("payload", {})
+        min_findings = int(payload.get("min_findings", 5))
+        max_updates = int(payload.get("max_updates", 25))
+        dry_run = bool(payload.get("dry_run", False))
+        update_backlinks = bool(payload.get("update_backlinks", False))
+        spawn_review = bool(payload.get("spawn_review", False))
+        review_priority = int(payload.get("review_priority", 4))
+
+        workdir = _ensure_workdir(job["id"])
+        report_path = workdir / "report.json"
+
+        content_root = _content_root()
+        dossiers_dir = content_root / "dossiers"
+        existing: Dict[str, Dict[str, Any]] = {}
+        if dossiers_dir.exists():
+            for path in dossiers_dir.glob("*.json"):
+                if path.name.startswith("_"):
+                    continue
+                try:
+                    dossier = json.loads(path.read_text())
+                except json.JSONDecodeError:
+                    continue
+                name = dossier.get("name")
+                if not name:
+                    continue
+                existing[name.lower()] = {
+                    "name": name,
+                    "slug": dossier.get("slug") or path.stem,
+                    "last_updated": _parse_datetime(
+                        dossier.get("last_updated") or dossier.get("generated_at")
+                    ),
+                    "aliases": dossier.get("aliases") or [],
+                    "has_curation": bool(
+                        dossier.get("curation", {}).get("key_finding_ids")
+                    ),
+                }
+
+        db_path = Path(self.queue.db_path)
+        db = sqlite3.connect(str(db_path))
+        db.row_factory = sqlite3.Row
+        canonical_data: Dict[str, Dict[str, Any]] = {}
+        try:
+            raw_to_canonical, canonical_to_aliases = _load_alias_groups(db)
+            rows = db.execute(
+                """
+                SELECT target_name, COUNT(*) as cnt, MAX(created_at) as max_created
+                FROM findings
+                WHERE verification_status != 'retracted'
+                GROUP BY target_name
+                """
+            ).fetchall()
+            for row in rows:
+                raw_name = row["target_name"]
+                canonical = raw_to_canonical.get(raw_name.lower(), raw_name)
+                entry = canonical_data.setdefault(
+                    canonical,
+                    {"count": 0, "names": set(), "last_updated": None},
+                )
+                entry["count"] += row["cnt"]
+                entry["names"].add(raw_name)
+                entry["names"].add(canonical)
+                if canonical in canonical_to_aliases:
+                    entry["names"].update(canonical_to_aliases[canonical])
+                entry["last_updated"] = _max_datetime(
+                    entry["last_updated"],
+                    _parse_datetime(row["max_created"]),
+                )
+
+            conn_rows = db.execute(
+                """
+                SELECT person_a as name, MAX(created_at) as max_created
+                FROM connections
+                WHERE verification_status != 'retracted'
+                GROUP BY person_a
+                UNION ALL
+                SELECT person_b as name, MAX(created_at) as max_created
+                FROM connections
+                WHERE verification_status != 'retracted'
+                GROUP BY person_b
+                """
+            ).fetchall()
+            for row in conn_rows:
+                raw_name = row["name"]
+                if not raw_name:
+                    continue
+                canonical = raw_to_canonical.get(raw_name.lower(), raw_name)
+                if canonical not in canonical_data:
+                    continue
+                entry = canonical_data[canonical]
+                entry["last_updated"] = _max_datetime(
+                    entry["last_updated"],
+                    _parse_datetime(row["max_created"]),
+                )
+        finally:
+            db.close()
+
+        updates_needed: List[str] = []
+        needs_curation: List[str] = []
+        new_targets: List[str] = []
+        for canonical, entry in sorted(
+            canonical_data.items(),
+            key=lambda item: -item[1]["count"],
+        ):
+            if entry["count"] < min_findings:
+                continue
+            existing_info = existing.get(canonical.lower())
+            if not existing_info:
+                new_targets.append(canonical)
+                updates_needed.append(canonical)
+                continue
+            last_updated = existing_info.get("last_updated")
+            if not last_updated or (
+                entry["last_updated"] and entry["last_updated"] > last_updated
+            ):
+                updates_needed.append(canonical)
+            # Check for missing curation
+            elif not existing_info.get("has_curation"):
+                needs_curation.append(canonical)
+                updates_needed.append(canonical)
+
+        curate_dossiers = bool(payload.get("curate", True))
+        jobs_created: List[str] = []
+        if not dry_run:
+            for canonical in updates_needed:
+                if len(jobs_created) >= max_updates:
+                    break
+                if self._has_pending_update(canonical):
+                    continue
+                job_id = self.queue.create_job(
+                    job_type="wiki_dossier_update",
+                    domain="curation",
+                    payload={
+                        "target_name": canonical,
+                        "min_findings": min_findings,
+                        "update_backlinks": update_backlinks,
+                        "spawn_review": spawn_review,
+                        "review_priority": review_priority,
+                        "curate": curate_dossiers,
+                    },
+                    priority=payload.get("priority", 4),
+                    created_by=f"agent:{self.persona}",
+                    source_trigger="dossier_freshness_audit",
+                )
+                jobs_created.append(job_id)
+
+        report = {
+            "targets_checked": len(canonical_data),
+            "targets_existing": len(existing),
+            "new_targets": new_targets,
+            "updates_needed": updates_needed,
+            "needs_curation": needs_curation,
+            "jobs_created": jobs_created,
+            "dry_run": dry_run,
+            "min_findings": min_findings,
+        }
+        report_path.write_text(json.dumps(report, indent=2))
+
+        return {
+            "report_path": str(report_path),
+            "jobs_created": jobs_created,
+            "updates_needed": updates_needed,
+            "new_targets": new_targets,
         }
 
 
@@ -1782,7 +2248,7 @@ class VisualExportWorker(AgentWorker):
             f"# Visual Export: {export_type}",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Pipeline Results",
         ]
@@ -1824,7 +2290,7 @@ class ContentBuildWorker(AgentWorker):
             "# Content Build",
             f"## Job ID: {job['id']}",
             f"## Agent: {self.persona}",
-            f"## Executed: {datetime.utcnow().isoformat()}",
+            f"## Executed: {_utcnow().isoformat()}",
             "",
             "## Pipeline Results",
         ]
@@ -1880,6 +2346,7 @@ WORKER_REGISTRY = {
     "investigation_orchestrator": DeepInvestigationWorker,
     "wiki_dossier_update": DossierWriterWorker,
     "dossier_writer": DossierWriterWorker,
+    "dossier_freshness_audit": DossierFreshnessWorker,
     "visual_export": VisualExportWorker,
     "visual_exporter": VisualExportWorker,
     "content_build": ContentBuildWorker,

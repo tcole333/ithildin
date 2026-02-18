@@ -141,6 +141,21 @@ class TriggerEngine:
         ).fetchone()
         return row["n"] >= max_per_hour
 
+    def _budget_available(
+        self,
+        db: sqlite3.Connection,
+        budget_per_hour: Optional[int],
+    ) -> bool:
+        if not budget_per_hour:
+            return True
+        row = db.execute(
+            """
+            SELECT COUNT(*) as n FROM trigger_runs
+            WHERE completed_at >= datetime('now', '-1 hour')
+            """
+        ).fetchone()
+        return row["n"] < budget_per_hour
+
     def _get_metric_value(
         self,
         db: sqlite3.Connection,
@@ -196,6 +211,7 @@ class TriggerEngine:
     def run_scheduled(self, dry_run: bool = False) -> List[Dict[str, Any]]:
         config = self._load_config()
         triggers = config.get("scheduled", [])
+        budget_per_hour = config.get("budget_per_hour")
         results: List[Dict[str, Any]] = []
         db = self._connect()
         try:
@@ -209,6 +225,10 @@ class TriggerEngine:
                 if self._cooldown_active(db, name, trigger.get("cooldown_minutes")):
                     continue
                 if self._max_per_hour_reached(db, name, trigger.get("max_per_hour")):
+                    continue
+                if not self._budget_available(db, budget_per_hour):
+                    if dry_run:
+                        results.append({"name": name, "status": "budget_exceeded"})
                     continue
 
                 row = db.execute(
@@ -249,6 +269,7 @@ class TriggerEngine:
     def run_thresholds(self, dry_run: bool = False) -> List[Dict[str, Any]]:
         config = self._load_config()
         triggers = config.get("thresholds", [])
+        budget_per_hour = config.get("budget_per_hour")
         results: List[Dict[str, Any]] = []
         db = self._connect()
         try:
@@ -263,6 +284,10 @@ class TriggerEngine:
                 if self._cooldown_active(db, name, trigger.get("cooldown_minutes")):
                     continue
                 if self._max_per_hour_reached(db, name, trigger.get("max_per_hour")):
+                    continue
+                if not self._budget_available(db, budget_per_hour):
+                    if dry_run:
+                        results.append({"name": name, "status": "budget_exceeded"})
                     continue
 
                 value, meta = self._get_metric_value(db, name, metric)

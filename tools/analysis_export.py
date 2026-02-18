@@ -410,6 +410,52 @@ def export_thread_summary(thread_id=None):
     return {"threads": threads}
 
 
+def export_pillar_dump():
+    """Export institutional pillars, career arcs, persons, events, and scores."""
+    db = get_analysis_db()
+
+    try:
+        pillars = [dict(r) for r in db.execute(
+            "SELECT * FROM institutional_pillars ORDER BY pillar_type, name"
+        ).fetchall()]
+        persons = [dict(r) for r in db.execute(
+            "SELECT * FROM persons ORDER BY canonical_name"
+        ).fetchall()]
+        arcs = [dict(r) for r in db.execute("""
+            SELECT ca.*, ip.name as pillar_name, ip.pillar_type
+            FROM career_arcs ca
+            JOIN institutional_pillars ip ON ca.pillar_id = ip.id
+            ORDER BY ca.person_name, COALESCE(ca.date_start, '0000')
+        """).fetchall()]
+        events = [dict(r) for r in db.execute("""
+            SELECT pe.*, ip.name as pillar_name
+            FROM pillar_events pe
+            JOIN institutional_pillars ip ON pe.pillar_id = ip.id
+            ORDER BY pe.event_date
+        """).fetchall()]
+        scores = [dict(r) for r in db.execute(
+            "SELECT * FROM pillar_scores ORDER BY score_value DESC"
+        ).fetchall()]
+    except sqlite3.OperationalError:
+        return {"error": "Pillar tables not found. Run pillar_tracker.py seed first.",
+                "pillar_count": 0, "person_count": 0, "arc_count": 0,
+                "event_count": 0, "score_count": 0}
+
+    db.close()
+    return {
+        "pillars": pillars,
+        "persons": persons,
+        "career_arcs": arcs,
+        "pillar_events": events,
+        "pillar_scores": scores,
+        "pillar_count": len(pillars),
+        "person_count": len(persons),
+        "arc_count": len(arcs),
+        "event_count": len(events),
+        "score_count": len(scores),
+    }
+
+
 def export_analysis_state():
     """Export current analysis run history and change detection state."""
     db = get_analysis_db()
@@ -507,6 +553,10 @@ def main():
     p_as = sub.add_parser("analysis-state", help="Export analysis run history")
     add_output_args(p_as)
 
+    # pillar-dump
+    p_pd = sub.add_parser("pillar-dump", help="Export institutional pillars, career arcs, and scores")
+    add_output_args(p_pd)
+
     args = parser.parse_args()
 
     if args.command == "connections-graph":
@@ -588,6 +638,17 @@ def main():
             last = changes["last_run"] or "never"
             print(f"  {skill:<25} last={last}  "
                   f"+{changes['new_findings']} findings, +{changes['new_connections']} connections")
+
+    elif args.command == "pillar-dump":
+        result = export_pillar_dump()
+        if write_output(result, args, summary="pillar dump"):
+            return
+        print(f"Pillar Dump:")
+        print(f"  {result['pillar_count']} institutions")
+        print(f"  {result['person_count']} persons")
+        print(f"  {result['arc_count']} career arcs")
+        print(f"  {result['event_count']} pillar events")
+        print(f"  {result['score_count']} scores")
 
     else:
         parser.print_help()

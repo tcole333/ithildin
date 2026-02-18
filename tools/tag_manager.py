@@ -36,7 +36,7 @@ except ImportError:
     from lead_tracker import get_db
 
 VALID_TABLES = ["findings", "connections", "entities", "leads", "hypotheses"]
-VALID_TAG_TYPES = ["theme", "pattern", "cluster", "method", "geographic", "temporal", "operational", "systemic"]
+VALID_TAG_TYPES = ["theme", "pattern", "cluster", "method", "geographic", "temporal", "operational", "systemic", "model"]
 
 
 # ── Schema ────────────────────────────────────────────────────

@@ -1,4 +1,5 @@
 {
+  "budget_per_hour": 10,
   "scheduled": [
     {
       "name": "lead_triage_interval",
@@ -14,6 +15,23 @@
       "priority": 6,
       "cooldown_minutes": 15,
       "max_per_hour": 2
+    },
+    {
+      "name": "dossier_freshness_audit",
+      "enabled": false,
+      "interval_minutes": 1440,
+      "job_type": "dossier_freshness_audit",
+      "domain": "curation",
+      "payload": {
+        "min_findings": 5,
+        "max_updates": 25,
+        "update_backlinks": true,
+        "spawn_review": false,
+        "dry_run": true
+      },
+      "priority": 4,
+      "cooldown_minutes": 720,
+      "max_per_hour": 1
     }
   ],
   "thresholds": [

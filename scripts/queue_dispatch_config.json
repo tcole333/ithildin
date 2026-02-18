@@ -57,6 +57,13 @@
       "enabled": true
     },
     {
+      "persona": "dossier_freshness_audit",
+      "job_types": ["dossier_freshness_audit"],
+      "min_workers": 0,
+      "max_workers": 1,
+      "enabled": false
+    },
+    {
       "persona": "visual_exporter",
       "job_types": ["visual_export"],
       "min_workers": 0,

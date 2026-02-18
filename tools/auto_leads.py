@@ -415,6 +415,108 @@ def process_new_connections(db, dry_run=False):
     return created, len(rows)
 
 
+def process_alumni_clustering(db, dry_run=False):
+    """Generate leads when 3+ alumni of a dissolved institution cluster at the same destination."""
+    try:
+        # Get all dissolved/acquired institutions
+        dissolved = db.execute("""
+            SELECT id, name FROM institutional_pillars
+            WHERE status IN ('dissolved', 'acquired')
+        """).fetchall()
+    except sqlite3.OperationalError:
+        return 0, 0  # pillar tables don't exist yet
+
+    created = 0
+    total = 0
+    for inst in dissolved:
+        # Find destination clustering
+        destinations = db.execute("""
+            SELECT ip_dest.name as dest_name, COUNT(DISTINCT ca_orig.person_id) as alumni_count,
+                   GROUP_CONCAT(DISTINCT ca_orig.person_name) as alumni_names
+            FROM career_arcs ca_orig
+            JOIN career_arcs ca_dest ON ca_dest.person_id = ca_orig.person_id
+                AND ca_dest.pillar_id != ca_orig.pillar_id
+            JOIN institutional_pillars ip_dest ON ca_dest.pillar_id = ip_dest.id
+            WHERE ca_orig.pillar_id = ?
+            GROUP BY ip_dest.id
+            HAVING COUNT(DISTINCT ca_orig.person_id) >= 3
+        """, (inst["id"],)).fetchall()
+
+        for dest in destinations:
+            total += 1
+            dedup_key = f"alumni_cluster:{inst['name']}:{dest['dest_name']}"
+            if is_processed(db, "institutional_pillars", inst["id"], dedup_key):
+                continue
+
+            priority = "high" if dest["alumni_count"] >= 5 else "medium"
+            title = f"Alumni clustering: {dest['alumni_count']} former {inst['name']} personnel now at {dest['dest_name']}"
+            notes = f"Alumni: {dest['alumni_names']}. Investigate coordinated movement and shared playbook."
+
+            if dry_run:
+                print(f"  [DRY] Alumni clustering ({priority}): {title}")
+            else:
+                existing = lead_exists(db, f"Alumni clustering:.*{inst['name']}.*{dest['dest_name']}")
+                if existing:
+                    log_processed(db, "institutional_pillars", inst["id"], dedup_key, existing)
+                    continue
+                lead_id = create_lead(db, title, "connection", priority, "agent:auto_leads:alumni_cluster", notes=notes)
+                log_processed(db, "institutional_pillars", inst["id"], dedup_key, lead_id)
+                created += 1
+
+    return created, total
+
+
+def process_pillar_gaps(db, dry_run=False):
+    """Generate leads for persons at 3+ institutions missing common pillar types."""
+    try:
+        # Persons with 3+ career arcs
+        multi_arc = db.execute("""
+            SELECT p.id, p.canonical_name, COUNT(DISTINCT ca.pillar_id) as inst_count,
+                   GROUP_CONCAT(DISTINCT ip.pillar_type) as types_present
+            FROM persons p
+            JOIN career_arcs ca ON ca.person_id = p.id
+            JOIN institutional_pillars ip ON ca.pillar_id = ip.id
+            GROUP BY p.id
+            HAVING COUNT(DISTINCT ca.pillar_id) >= 3
+        """).fetchall()
+    except sqlite3.OperationalError:
+        return 0, 0  # pillar tables don't exist yet
+
+    core_types = {"banking", "legal", "government"}
+    created = 0
+    total = 0
+
+    for person in multi_arc:
+        present = set(person["types_present"].split(","))
+        missing = core_types - present
+        if not missing:
+            continue
+
+        total += 1
+        dedup_key = f"pillar_gap:{person['canonical_name']}"
+        if is_processed(db, "persons", person["id"], dedup_key):
+            continue
+
+        for gap in missing:
+            title = f"Pillar gap: {person['canonical_name']} has no {gap} connections"
+            notes = (f"Has arcs at {person['inst_count']} institutions ({person['types_present']}) "
+                     f"but no {gap} connections. Investigate hidden {gap} ties.")
+
+            if dry_run:
+                print(f"  [DRY] Pillar gap (medium): {title}")
+            else:
+                existing = lead_exists(db, f"Pillar gap: {person['canonical_name']}.*{gap}")
+                if existing:
+                    continue
+                lead_id = create_lead(db, title, "connection", "medium", "agent:auto_leads:pillar_gap",
+                                      target=person["canonical_name"], notes=notes)
+                created += 1
+
+        log_processed(db, "persons", person["id"], dedup_key)
+
+    return created, total
+
+
 def cmd_run(args):
     db = get_db()
 
@@ -446,6 +548,16 @@ def cmd_run(args):
     c, t = process_new_connections(db, args.dry_run)
     results["connections"] = (c, t)
     print(f"  {t} new connections scanned, {c} leads created")
+
+    print("\n--- Alumni Clustering ---")
+    c, t = process_alumni_clustering(db, args.dry_run)
+    results["alumni_clustering"] = (c, t)
+    print(f"  {t} institution pairs checked, {c} leads created")
+
+    print("\n--- Pillar Gap Analysis ---")
+    c, t = process_pillar_gaps(db, args.dry_run)
+    results["pillar_gaps"] = (c, t)
+    print(f"  {t} multi-institution persons checked, {c} leads created")
 
     if not args.dry_run:
         db.commit()

@@ -25,6 +25,7 @@ uv run python scripts/agent_worker.py --persona pattern_spotter
 uv run python scripts/agent_worker.py --persona synthesist
 uv run python scripts/agent_worker.py --persona investigation_orchestrator
 uv run python scripts/agent_worker.py --persona dossier_writer
+uv run python scripts/agent_worker.py --persona dossier_freshness_audit
 uv run python scripts/agent_worker.py --persona visual_exporter
 uv run python scripts/agent_worker.py --persona content_pipeline
 uv run python scripts/agent_worker.py --persona network_analyst
@@ -305,6 +306,23 @@ python tools/query_israel.py search "Ehud Barak" --limit 50
 python tools/query_israel.py company 515106409  # By registration number
 python tools/query_israel.py stats
 
+# French Company Registry / SIRENE (all French companies, no auth)
+python tools/query_france.py search "Soffer Avocats" --output /tmp/france-soffer.json
+python tools/query_france.py search "Ron Soffer" --limit 10
+python tools/query_france.py company 380866657  # By SIREN number
+python tools/query_france.py search "Epstein" --naf 69.10Z  # Filter by activity code (69.10Z = legal)
+python tools/query_france.py address "4 Rue Quentin-Bauchart" --postal 75008
+python tools/query_france.py naf 64.20Z --postal 75008  # Activities of holding companies in 75008
+
+# HUDOC — European Court of Human Rights (20K+ judgments, no auth)
+python tools/query_hudoc.py search "Soffer, avocat" --output /tmp/hudoc-soffer.json
+python tools/query_hudoc.py search "Epstein" --limit 20
+python tools/query_hudoc.py case 001-99808  # Broadhurst Investments v Romania
+python tools/query_hudoc.py appno "34868/03"  # By application number
+python tools/query_hudoc.py text 001-99808  # Full text of judgment/decision
+python tools/query_hudoc.py text 001-99808 --output /tmp/broadhurst-text.json  # Save full text
+python tools/query_hudoc.py respondent ISR --limit 50  # All cases against Israel
+
 # Delaware (via OpenCorporates API — requires OPENCORPORATES_API_KEY)
 # Free research key: https://opencorporates.com/api_accounts/new
 # Paid plans: £2,250/year minimum
@@ -449,6 +467,17 @@ python tools/query_fec.py batch-persons
 ```
 CRITICAL: Multiple Jeffrey Epsteins — always check employer/address.
 
+### FINRA BrokerCheck (broker registrations, no auth)
+```bash
+python tools/query_finra.py search "Leon Black" --limit 10
+python tools/query_finra.py search "Bear Stearns" --type firm --limit 5
+python tools/query_finra.py detail 1047702                     # Full individual record by CRD
+python tools/query_finra.py detail 20376 --type firm           # Full firm record
+python tools/query_finra.py employment 1047702                 # Employment history only
+python tools/query_finra.py disclosures 1047702                # Disciplinary/regulatory events
+```
+Returns: CRD numbers, employment history with dates, firm affiliations, disclosures (allegations, sanctions), registered states/SROs. Search returns summary; detail/employment/disclosures return full records.
+
 ### Federal Lobbying (Senate LDA, no auth)
 ```bash
 python tools/query_lobbying.py client "Apollo Global"
@@ -522,6 +551,24 @@ python tools/query_muckrock.py download 78799 --dir datasets/muckrock
 python tools/query_documentcloud.py search "Ghislaine Maxwell"
 python tools/query_documentcloud.py document 24402693 --full
 python tools/query_documentcloud.py text 24402693 --page 5
+```
+
+### OffshoreAlert (29K+ offshore court cases, 4,500+ articles, MLATs, regulatory actions)
+```bash
+# Search (HTML scraping — rich results with scores, excerpts, tags)
+uv run python tools/offshorealert_search.py search "deutsche bank" -v
+uv run python tools/offshorealert_search.py search "leon black" --output /tmp/oa-results.json
+uv run python tools/offshorealert_search.py search "liquid funding bermuda" -a  # all pages
+
+# Extract tagged entities from search results (names, companies, jurisdictions)
+uv run python tools/offshorealert_search.py entities "jeffrey epstein" -n 200
+uv run python tools/offshorealert_search.py entities "apollo" --output /tmp/oa-entities.json
+
+# API search (lightweight, no login needed, fewer results)
+uv run python tools/offshorealert_search.py api-search "epstein"
+
+# NOTE: Individual article pages and PDF downloads are behind reCAPTCHA.
+# Use Playwright browser session for full article content.
 ```
 
 ## Specialized
@@ -679,3 +726,143 @@ SELECT * FROM dispatch_runs WHERE status='running';
 SELECT run_type, COUNT(*), ROUND(SUM(cost_usd),2) FROM dispatch_runs GROUP BY run_type;
 SELECT * FROM dispatch_runs ORDER BY started_at DESC LIMIT 10;
 ```
+
+---
+
+## pillar_tracker.py — Institutional Pillars & Alumni Dynamics
+
+Models institutions as enabling infrastructure. Tracks career arcs, alumni dispersal,
+cohort overlaps, and cross-pillar orchestrator scores.
+
+### Schema Tables
+- `persons` — canonical person registry (FK anchor for career_arcs/pillar_scores)
+- `institutional_pillars` — institutions categorized by type (banking, legal, government, etc.)
+- `career_arcs` — person-to-institution tenure records with dates and roles
+- `pillar_events` — institutional-level timeline events (collapses, investigations, etc.)
+- `pillar_scores` — computed orchestrator/analysis scores per person
+
+### Institution Management
+
+```bash
+# Seed ~37 initial institutions
+uv run python tools/pillar_tracker.py seed
+
+# Register a new institution
+uv run python tools/pillar_tracker.py register \
+    --name "Drexel Burnham Lambert" --type banking --sub-type investment_bank \
+    --status dissolved --dissolved 1990 --significance "Junk bond epicenter"
+
+# List institutions (filterable)
+uv run python tools/pillar_tracker.py list
+uv run python tools/pillar_tracker.py list --type banking
+uv run python tools/pillar_tracker.py list --status dissolved
+
+# Show institution details
+uv run python tools/pillar_tracker.py show 1
+```
+
+### Career Arcs
+
+```bash
+# Add a career arc
+uv run python tools/pillar_tracker.py arc \
+    --person "Leon Black" --pillar "Drexel Burnham Lambert" \
+    --role "Managing Director" --seniority senior \
+    --start 1977 --end 1990 --exit-type collapse \
+    --source "Apollo prospectus"
+
+# View career timeline
+uv run python tools/pillar_tracker.py career "Leon Black"
+
+# Bootstrap from existing data (employment connections + entity_roles)
+uv run python tools/pillar_tracker.py bootstrap --dry-run
+uv run python tools/pillar_tracker.py bootstrap
+
+# Re-bootstrap with alias-aware dedup
+uv run python tools/pillar_tracker.py rebootstrap
+```
+
+### Institutional Events
+
+```bash
+# Add event
+uv run python tools/pillar_tracker.py event \
+    --pillar "Drexel Burnham Lambert" --date 1990-02-13 \
+    --type collapse --description "Filed for bankruptcy"
+
+# View events for institution
+uv run python tools/pillar_tracker.py events "Drexel Burnham Lambert"
+```
+
+### Alumni & Temporal Analysis
+
+```bash
+# All alumni of an institution
+uv run python tools/pillar_tracker.py alumni "Kirkland & Ellis"
+uv run python tools/pillar_tracker.py alumni "Drexel Burnham Lambert" --active-during 1985-1990
+
+# Cohort overlap (people who were there simultaneously)
+uv run python tools/pillar_tracker.py cohort "Drexel Burnham Lambert" --start 1985 --end 1990
+
+# Where alumni went after leaving
+uv run python tools/pillar_tracker.py dispersal "Drexel Burnham Lambert"
+
+# Shared institutional tenures between two people
+uv run python tools/pillar_tracker.py overlap --person-a "Leon Black" --person-b "Joshua Harris"
+
+# Person timeline (career arcs + pillar events + external events interleaved)
+uv run python tools/pillar_tracker.py timeline "Leon Black"
+```
+
+### Orchestrator Identification
+
+```bash
+# Compute orchestrator scores
+uv run python tools/pillar_tracker.py score --top 30
+uv run python tools/pillar_tracker.py score --person "Leon Black"
+uv run python tools/pillar_tracker.py score --top 10 --cache  # saves to pillar_scores
+
+# Find pillar type gaps in person's career
+uv run python tools/pillar_tracker.py gaps --person "Leon Black"
+
+# People spanning 3+ pillar types
+uv run python tools/pillar_tracker.py cross-pillar --min-pillars 3
+```
+
+Score algorithm: `breadth * 3 + revolving_door * 4 + dispersal * 2 + sqrt(cohort) + log(years + 1)`
+
+### Network Views
+
+```bash
+# All people at institutions of a given type
+uv run python tools/pillar_tracker.py pillar-network --type legal
+
+# Summary stats
+uv run python tools/pillar_tracker.py stats
+```
+
+### graph_tools.py Extensions
+
+```bash
+# Subgraph filtered to people at pillar type institutions
+uv run python tools/graph_tools.py pillar-subgraph --pillar-type legal --metric degree --top 20
+
+# Institution-to-institution graph (edges = shared alumni)
+uv run python tools/graph_tools.py institutional-graph --min-shared 2
+```
+
+### analysis_export.py Extension
+
+```bash
+# Export pillar system data
+uv run python tools/analysis_export.py pillar-dump --output $WORKDIR/pillar-data.json
+```
+
+### Pillar Types
+`banking`, `legal`, `accounting`, `government`, `media`, `operations`, `intelligence`, `philanthropy`, `consulting`, `academia`
+
+### Seniority Levels
+`junior`, `mid`, `senior`, `leadership`, `founder`
+
+### Exit Types
+`voluntary`, `fired`, `collapse`, `retirement`, `government_appointment`, `indictment`, `unknown`

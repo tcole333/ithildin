@@ -534,6 +534,21 @@ def main():
     p_cliq.add_argument("--min-size", type=int, default=4)
     add_output_args(p_cliq)
 
+    # pillar-subgraph
+    p_psub = sub.add_parser("pillar-subgraph", help="Subgraph filtered to people with arcs at pillar type")
+    p_psub.add_argument("--pillar-type", required=True,
+                        choices=["banking", "legal", "accounting", "government",
+                                 "media", "operations", "intelligence", "philanthropy",
+                                 "consulting", "academia"])
+    p_psub.add_argument("--metric", choices=VALID_METRICS, default="degree")
+    p_psub.add_argument("--top", type=int, default=30)
+    add_output_args(p_psub)
+
+    # institutional-graph
+    p_igraph = sub.add_parser("institutional-graph", help="Institution-to-institution graph weighted by shared alumni")
+    p_igraph.add_argument("--min-shared", type=int, default=1)
+    add_output_args(p_igraph)
+
     # stats
     sub.add_parser("stats", help="Graph summary statistics")
 
@@ -658,6 +673,105 @@ def main():
         print(f"\nDense Subgraphs (min size {args.min_size}): {len(cliques)} found")
         for c in cliques[:20]:
             print(f"  Size {c['size']}: {', '.join(c['members'])}")
+
+    elif args.command == "pillar-subgraph":
+        # Build subgraph from people who have career arcs at institutions of given type
+        db = get_graph_db()
+        try:
+            arc_people = db.execute("""
+                SELECT DISTINCT ca.person_name
+                FROM career_arcs ca
+                JOIN institutional_pillars ip ON ca.pillar_id = ip.id
+                WHERE ip.pillar_type = ?
+            """, (args.pillar_type,)).fetchall()
+            pillar_people = {r["person_name"].lower() for r in arc_people}
+        except sqlite3.OperationalError:
+            print("ERROR: pillar tables not found. Run 'pillar_tracker.py seed' first.")
+            sys.exit(1)
+        db.close()
+
+        if not pillar_people:
+            print(f"No people with career arcs at {args.pillar_type} institutions")
+            sys.exit(0)
+
+        adj, nodes = build_graph()
+        # Filter to only nodes that are in pillar_people
+        sub_nodes = {n for n in nodes if n.lower() in pillar_people}
+        sub_adj = {}
+        for n in sub_nodes:
+            if n in adj:
+                sub_adj[n] = {nb: edges for nb, edges in adj[n].items() if nb in sub_nodes}
+
+        if args.metric == "degree":
+            metrics = degree_centrality(sub_adj, sub_nodes)
+        elif args.metric == "betweenness":
+            metrics = betweenness_centrality(sub_adj, sub_nodes, sample_size=100)
+        elif args.metric == "closeness":
+            metrics = closeness_centrality(sub_adj, sub_nodes, sample_size=50)
+
+        ranked = sorted(metrics.items(), key=lambda x: x[1], reverse=True)[:args.top]
+        results = [{"rank": i + 1, "node": n, args.metric: round(v, 4)} for i, (n, v) in enumerate(ranked)]
+
+        if write_output(results, args, summary=f"pillar-subgraph {args.pillar_type} {args.metric}"):
+            return
+        print(f"\nPillar Subgraph: {args.pillar_type} — {args.metric} centrality ({len(sub_nodes)} nodes)")
+        print(f"{'Rank':>4}  {'Node':<40} {args.metric.title():>12}")
+        print("-" * 60)
+        for r in results:
+            print(f"{r['rank']:>4}  {r['node']:<40} {r[args.metric]:>12.4f}")
+
+    elif args.command == "institutional-graph":
+        # Nodes = institutions, edges = shared alumni (weighted by count)
+        db = get_graph_db()
+        try:
+            arcs = db.execute("""
+                SELECT ca.person_id, ip.name as pillar_name
+                FROM career_arcs ca
+                JOIN institutional_pillars ip ON ca.pillar_id = ip.id
+            """).fetchall()
+        except sqlite3.OperationalError:
+            print("ERROR: pillar tables not found. Run 'pillar_tracker.py seed' first.")
+            sys.exit(1)
+        db.close()
+
+        # Group people by institution
+        person_institutions = defaultdict(set)
+        for a in arcs:
+            person_institutions[a["person_id"]].add(a["pillar_name"])
+
+        # Count shared alumni between institution pairs
+        from collections import Counter as _Counter
+        pair_counts = _Counter()
+        for pid, insts in person_institutions.items():
+            insts_list = sorted(insts)
+            for i, a in enumerate(insts_list):
+                for b in insts_list[i + 1:]:
+                    pair_counts[(a, b)] += 1
+
+        # Filter by min-shared
+        edges = []
+        for (a, b), count in pair_counts.most_common():
+            if count >= args.min_shared:
+                edges.append({"source": a, "target": b, "shared_alumni": count})
+
+        inst_nodes = set()
+        for e in edges:
+            inst_nodes.add(e["source"])
+            inst_nodes.add(e["target"])
+
+        results = {
+            "nodes": sorted(inst_nodes),
+            "edges": edges,
+            "node_count": len(inst_nodes),
+            "edge_count": len(edges),
+        }
+
+        if write_output(results, args, summary=f"institutional graph ({len(edges)} edges)"):
+            return
+        print(f"\nInstitutional Graph ({len(inst_nodes)} institutions, {len(edges)} edges, min shared={args.min_shared})")
+        print(f"{'─' * 70}")
+        for e in edges:
+            print(f"  {e['source']:<35} ↔ {e['target']:<35} ({e['shared_alumni']} shared)")
 
     elif args.command == "stats":
         adj, nodes = build_graph()

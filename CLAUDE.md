@@ -1,13 +1,9 @@
 # Ithildin OSINT Investigation Platform
 
-Ithildin is an agent-scale network investigation rooted in the Epstein case but following evidence across connected structures — Mega Group, Deutsche Bank pipeline, Gulf state operations, Israeli intelligence nexus, Apollo/Black financial flows, and parallel networks. Multiple Claude Code sessions pursue leads in parallel, track findings, and build on each other's work.
+Agent-scale network investigation rooted in the Epstein case, following evidence across connected structures — Mega Group, Deutsche Bank, Gulf states, Israeli intelligence, Apollo/Black financial flows, and parallel networks. Multiple Claude Code sessions pursue leads in parallel.
 
-**Design doc**: `PRD.md`
-**Master narrative**: `research/master.md`
-**Investigative methodology**: `research/INVESTIGATIVE_METHODOLOGY.md` — **read this before investigating**
-**Tool reference**: `docs/TOOL_REFERENCE.md` — complete CLI examples for all 35+ tools
-**Related investigations**: `research/RELATED_INVESTIGATIONS.md`
-**OSINT resources**: `research/OSINT_RESOURCES.md`
+**Design doc**: `PRD.md` | **Narrative**: `research/master.md` | **Methodology**: `research/INVESTIGATIVE_METHODOLOGY.md`
+**Tool reference**: `docs/TOOL_REFERENCE.md` (complete CLI for all 37+ tools) | **OSINT resources**: `research/OSINT_RESOURCES.md`
 
 ## Quick Start
 
@@ -18,8 +14,8 @@ Ithildin is an agent-scale network investigation rooted in the Epstein case but 
 /triage-leads               # Process pending_triage leads (batch of 20)
 /build-infra                # Build next infra request (or scan for gaps)
 /search-all-sources <term>  # Fan-out search
-/analyze-network            # Graph structure analysis — centrality, bridges, gaps
-/generate-hunches           # Emerging theme recognition across findings
+/analyze-network            # Graph structure analysis
+/generate-hunches           # Emerging theme recognition
 /timeline-analysis          # Temporal correlation with external events
 /systemic-analysis          # Deep entity patterns beyond Epstein
 /investigate-person <name>  # Single-agent deep-dive
@@ -27,90 +23,36 @@ Ithildin is an agent-scale network investigation rooted in the Epstein case but 
 /status-report              # Investigation status
 /ingest-source <source>     # Add new data source
 /add-registry               # Add corporate registry
-
-# Legacy dispatcher (pre-queue, headless Claude Code)
-uv run python scripts/dispatcher.py run       # One-shot: launch needed agents
-uv run python scripts/dispatcher.py status    # Show running/recent agents
-uv run python scripts/dispatcher.py daemon    # Poll loop (Ctrl-C to stop)
-uv run python scripts/dispatcher.py stop      # Kill running agents
 ```
 
-## Queue System (SQLite-first)
-
-```bash
-uv run python scripts/queue_tools.py status
-uv run python scripts/queue_tools.py pause --by "human"
-uv run python scripts/queue_tools.py resume --by "human"
-uv run python scripts/queue_tools.py submit --type echo --domain system --payload '{"message":"hello"}'
-uv run python scripts/queue_tools.py enqueue-triage --batch-size 20
-uv run python scripts/queue_tools.py enqueue-lead 42 --sources findings --created-by "human"
-uv run python scripts/queue_tools.py agents
-uv run python scripts/queue_tools.py metrics
-uv run python scripts/queue_tools.py mark-stale --grace-seconds 60
-uv run python scripts/agent_worker.py --persona echo
-uv run python scripts/agent_worker.py --persona surveyor
-uv run python scripts/agent_worker.py --persona document_miner
-uv run python scripts/agent_worker.py --persona entity_tracer
-uv run python scripts/agent_worker.py --persona pattern_spotter
-uv run python scripts/agent_worker.py --persona synthesist
-uv run python scripts/agent_worker.py --persona investigation_orchestrator
-uv run python scripts/agent_worker.py --persona dossier_writer
-uv run python scripts/agent_worker.py --persona visual_exporter
-uv run python scripts/agent_worker.py --persona content_pipeline
-uv run python scripts/agent_worker.py --persona network_analyst
-uv run python scripts/agent_worker.py --persona timeline_analyst
-uv run python scripts/agent_worker.py --persona systemic_analyst
-uv run python scripts/agent_worker.py --persona explainer_writer
-uv run python scripts/agent_worker.py --persona contextual_analyst
-uv run python scripts/agent_worker.py --persona editor
-uv run python scripts/agent_worker.py --persona dedupe_review
-uv run python scripts/agent_worker.py --persona verify_finding
-uv run python scripts/agent_worker.py --persona tool_build
-uv run python scripts/agent_worker.py --persona bug_fix
-uv run python scripts/agent_worker.py --persona source_ingest
-uv run python scripts/agent_worker.py --persona registry_add
-uv run python scripts/queue_dispatcher.py status
-uv run python scripts/queue_dispatcher.py run
-uv run python scripts/queue_dispatcher.py run --dry-run
-uv run python scripts/queue_dispatcher.py daemon --poll-interval 60
-uv run python scripts/trigger_engine.py run --dry-run
-uv run python scripts/trigger_engine.py status
-
-# Content output location override
-ITHILDIN_CONTENT_ROOT=site/content uv run python scripts/agent_worker.py --persona explainer_writer
-```
+Queue system: `scripts/queue_tools.py {status,pause,resume,submit,enqueue-triage,enqueue-lead,agents,metrics}`. Workers: `scripts/agent_worker.py --persona <name>`. See `docs/TOOL_REFERENCE.md` for full persona list and dispatcher commands.
 
 ## Investigative Approach
 
 **You are not a search engine.** Use your knowledge of geopolitics, finance, intelligence tradecraft, and human behavior.
 
 1. **Hypothesize first, then search.** What would confirm or refute it?
-2. **Simulate the person.** What role does this person play in the network? What are their incentives?
+2. **Simulate the person.** What role do they play? What are their incentives?
 3. **Follow the money.** Financial flows reveal truth that words obscure.
 4. **Check the timeline.** What else was happening on that date?
 5. **Note what's missing.** Communication gaps and absent records are often more significant.
 6. **Use multilingual knowledge.** Hebrew, Russian, Arabic, Norwegian sources.
 7. **Distinguish fact from inference.** Label them differently.
-8. **Follow the network, not the biography.** A lead is worth pursuing if it reveals how these systems work, even if Epstein isn't directly involved.
+8. **Follow the network, not the biography.** Worth pursuing if it reveals how systems work.
 
-### API & Data Source Verification Rule
-**Never ship a tool targeting an unverified endpoint.** Probe first, code second. If discovery fails, create a `human_action` item.
+**Never ship a tool targeting an unverified endpoint.** Probe first, code second.
 
 ## Investigation Database
 
-All state lives in **`investigation.db`** (SQLite, WAL mode). Schema: `leads`, `findings`, `connections`, `entities` + junction tables (`lead_notes`, `lead_evidence`, `finding_evidence`, `connection_evidence`, `entity_roles`, `entity_addresses`, `entity_relations`). Also: `infra_requests`, `infra_notes`, `human_actions`, `source_reliability`, `corrections`, `search_log`, `name_aliases`.
+All state in **`investigation.db`** (SQLite, WAL mode). Schema: `leads`, `findings`, `connections`, `entities` + junction tables. Also: `infra_requests`, `human_actions`, `source_reliability`, `corrections`, `search_log`, `name_aliases`.
 
-Lead lifecycle: `open → in_progress → completed | blocked | dead_end`
-Auto-leads: `pending_triage → open` (via `/triage-leads`) or `→ dead_end` (duplicate)
+Lead lifecycle: `open -> in_progress -> completed | blocked | dead_end`
+Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 
-### Python Convention
-Always use `uv run` to invoke tools:
-```bash
-uv run python tools/query_doj.py search "bannon" -n 50 --output /tmp/doj-bannon.json
-```
-
-### Output Flag Convention
-Always use `--output FILE` to keep context lean. **Session isolation**: every skill invocation creates a unique working directory via `WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)` and uses `$WORKDIR/` for all `--output` paths. This prevents parallel agents from overwriting each other's temp files.
+### Conventions
+- Always use `uv run python` to invoke tools (not bare `python`)
+- Always use `--output FILE` for search results. **Session isolation**: `WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)`, all temp files in `$WORKDIR/`
+- Check search_log before querying: `from tools.lead_tracker import check_searched`
 
 ### Core CLI (full examples in docs/TOOL_REFERENCE.md)
 
@@ -119,31 +61,15 @@ Always use `--output FILE` to keep context lean. **Session isolation**: every sk
 | **Leads** | `lead_tracker.py {add,list,claim,complete,search,evidence,next,stats}` |
 | **Findings** | `findings_tracker.py {add,connect,connections,search,timeline}` |
 | **Audit** | `findings_tracker.py {unverified,provenance,verify,dispute,retract,correct,audit}` |
-| **Infra** | `infra_tracker.py {add,list,show,claim,evaluate,complete,reject,search,next,stats,block-lead}` |
-| **Source report** | `source_report.py` — live status of all data sources |
-| **Auto-leads** | `auto_leads.py run` — creates `pending_triage` leads for `/triage-leads` |
-| **Entity dedup** | `entity_dedup.py {add-alias,list-aliases,remove-alias,scan,apply,seed,merge,stats}` — name alias management |
-| **Hypotheses** | `hypothesis_tracker.py {add,list,show,investigate,confirm,refute,supersede,evidence,search,stats}` |
-| **Tags** | `tag_manager.py {tag,bulk-tag,find,list-values,record,remove,stats}` |
-| **Event timeline** | `event_timeline.py {seed,add,window,near,list,stats}` |
-| **Graph tools** | `graph_tools.py {centrality,components,bridges,paths,neighbors,holes,cliques,stats}` |
-| **Analysis export** | `analysis_export.py {connections-graph,findings-dump,timeline-export,entity-network,coverage-matrix,thread-summary,analysis-state}` |
+| **Infra** | `infra_tracker.py {add,list,show,claim,evaluate,complete,reject,search,next,stats}` |
+| **Analysis** | `hypothesis_tracker.py`, `tag_manager.py`, `event_timeline.py`, `graph_tools.py`, `analysis_export.py` |
+| **Pillars** | `pillar_tracker.py {register,list,show,seed,arc,career,event,events,bootstrap,alumni,cohort,dispersal,overlap,timeline,score,gaps,cross-pillar,pillar-network,stats}` |
 
-### Data Sources (37+ tools)
+**39+ data source tools** covering document corpora, corporate registries (15 jurisdictions), public records, financial data, and external APIs. Run `uv run python tools/source_report.py` for live status.
 
-**Document corpus:** DugganUSA (204K), DOJ Vol 11 (331K), LMSBAND (60K/851K entities), Unified DB (70K), Epstein 20K (25.8K), Investigations DB (PDFs)
-
-**Registries:** Corporate registry (CO/CY/DC/DE/FL/HK/MD/NY/NM/PA/VI/UK/CA/IL/CH), UCC filings (FL/NM), ICIJ (800K offshore), GLEIF LEI, UK Companies House, Israeli Corporations Authority (720K), Swiss Zefix (30K+ via SPARQL)
-
-**Public records:** SEC EDGAR, CourtListener, ProPublica 990, IRS 990 XML (Schedule I/R grants+related), IRS 990 Bulk (all US nonprofit grants 2009-2024, ~6.9M filings), NYC ACRIS, FEC, Federal Lobbying (LDA), FARA, LittleSis, OCCRP Aleph
-
-**External APIs:** GDELT (news), OpenSanctions (4.13M), EpsteinExposed (1.3K persons), MuckRock FOIA, DocumentCloud
-
-**Financial:** DS10 (Deutsche Bank, 579 tx/$304M), FAA Registry (aircraft), FinCEN Files (4.5K tx/5.5K connections, 2000-2017 SARs), SWIFT BIC Directory (32K+ banks, BIC→LEI mappings)
-
-**Raw data:** DDoSecrets EML (13K), Barak emails (1.4K), HF Parquet (4.3K emails), FBI Files Parquet (8.2K)
-
-Run `uv run python tools/source_report.py` for live status. See `docs/TOOL_REFERENCE.md` for all CLI examples.
+**New international tools:**
+- `query_france.py`: French company registry (SIRENE) — `search`, `company <SIREN>`, `naf <CODE>`, `address` — free, no auth
+- `query_hudoc.py`: ECHR case database (HUDOC) — `search`, `case <ID>`, `appno <NUM>`, `text <ID>`, `respondent <STATE>` — free, no auth
 
 ## Evidence Standards
 
@@ -166,63 +92,35 @@ Run `uv run python tools/source_report.py` for live status. See `docs/TOOL_REFER
 Every finding MUST provide: `--evidence`, `--claim-type`, `--source-quote`
 
 **Claim types and max confidence:**
-- `direct_quote` → can be `confirmed` (if primary source)
-- `paraphrase` → max `high`
-- `inference` → max `medium`
-- `synthesis` → max `medium`
-- `user_provided` → as specified
+- `direct_quote` -> can be `confirmed` (if primary source)
+- `paraphrase` -> max `high`
+- `inference` / `synthesis` -> max `medium`
+- `user_provided` -> as specified
 
 **Agents MUST NOT set confidence to `confirmed` for inferences or syntheses.**
 
-Verification: findings start `unverified` → human reviews → `verify`, `dispute`, or `retract` (cascades to connections). All corrections tracked immutably in `corrections` table.
+## Multi-Instance Workflow
 
-### Before Querying
-Check search_log: `from tools.lead_tracker import check_searched`
-
-## Multi-Instance Workflow (Waves)
-
-Run **separate CC instances** for parallel wave execution instead of one orchestrator spawning all agents:
+Run **separate CC instances** — NOT one orchestrator spawning all agents:
 
 ```
-Terminal 1: claude → /pursue-lead    # Claims next high-priority lead
-Terminal 2: claude → /pursue-lead    # Claims a different lead (DB prevents double-claim)
-Terminal 3: claude → /deep-investigate "Target Name"
+Terminal 1: claude -> /pursue-lead    # Claims next high-priority lead
+Terminal 2: claude -> /pursue-lead    # Claims different lead (DB prevents double-claim)
+Terminal 3: claude -> /deep-investigate "Target Name"
 ```
 
-Why: A single session hitting 200MB+ crashes from agent transcript bloat. Separate instances each stay at 5-20MB.
-
-Rules:
-- All instances write to shared `investigation.db` (WAL mode handles concurrent writes)
-- Each instance has its own context window — no compounding
-- Post-wave: run `uv run python tools/auto_leads.py run` from any instance
-- Each skill creates a unique `WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)` — all temp files go there, preventing cross-instance overwrites
-- Sub-agents within a session write reports to `$WORKDIR/report-*.md` — parent reads files, NOT TaskOutput
-- Use `--output $WORKDIR/...` on ALL search commands in every context
+- All instances share `investigation.db` (WAL mode handles concurrent writes)
+- Each skill creates unique `WORKDIR` — prevents cross-instance overwrites
+- Sub-agents write `$WORKDIR/report-*.md` — parent reads files, NOT TaskOutput
+- Post-wave: run `uv run python tools/auto_leads.py run`
 
 ## Environment
 
-- **Always use `uv run python` to invoke tools** (not bare `python` or `.venv/bin/python3`)
+- **Always use `uv run python`** to invoke tools
 - DOJ Vol 11 DB: `/Users/travcole/projects/epstein-docs/output/documents.db`
 - Dehashed API: credits limited (468)
 - Obsidian vault: `~/Documents/Mines of Moria/epstein research/`
-
-## Key Identifiers
-
-### Epstein Emails
-jeevacation@gmail.com (primary inbox), jeeproject@yahoo.com (primary outgoing), jeffreyepsteinorg@gmail.com, jeffrey.epstein@centurytel.net, lsje_llc@outlook.com, zorroranch@aol.com, epstein@wanadoo.fr + 12 others
-
-### Inner Circle
-- Darren Indyke: dkiesq@aol.com, (212) 971-1314
-- Richard Kahn: richardkahn12@gmail.com
-- Lesley Groff: lesley.jee@gmail.com, lgroff@dkipllc.com
-- Christina Galbraith: galbraith_christina@yahoo.com
-- Karyna Shuliak: kari.shulia@gmail.com
-
-### Key Addresses
-9 E 71st St NYC, 358 El Brillo Way Palm Beach, 49 Zorro Ranch Rd Stanley NM, 6100 Red Hook Rd St Thomas USVI
-
-### Top Correspondents
-Wolff 303, Weingarten 245, Ruemmler 201, Summers 200, Thomas Jr 185, Bannon 160/526, Alrasheed 70, Lisa New 72, Chomsky 38, Schoen 34, Barak 28/444, Karp 17
+- Key identifiers (emails, addresses, contacts): see `memory/key-identifiers.md`
 
 ## Priority Sources (Not Yet Integrated)
 
@@ -230,9 +128,7 @@ Wolff 303, Weingarten 245, Ruemmler 201, Summers 200, Thomas Jr 185, Bannon 160/
 |--------|-------|
 | Giuffre v. Maxwell docket (SDNY 15-cv-7433) | Civil depositions |
 | USVI v. JPMorgan exhibits (SDNY 1:22-cv-10904) | Financial evidence |
-| DE corporate registry | Next state to add via `/add-registry` (CA now integrated) |
-| CBP/FBI Vault PDFs | Download + ingest |
-| FinCEN Files | 200K+ transactions, Deutsche Bank SARs |
+| DE corporate registry | Next state for `/add-registry` |
 
 ## Ethical Guidelines
 
