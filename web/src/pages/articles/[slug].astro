@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, existsSync, readdirSync } from 'fs';
+import { resolve, basename } from 'path';
+import { marked } from 'marked';
+import { applyCitations, renderFootnotes } from '../../lib/citations';
+import { loadFindingEvidenceMap } from '../../lib/findingEvidence';
+
+export function getStaticPaths() {
+  const articlesDir = resolve(process.cwd(), '..', 'content', 'articles');
+  if (!existsSync(articlesDir)) return [];
+
+  const files = readdirSync(articlesDir).filter(f => f.endsWith('.mdx'));
+  return files.map(f => ({
+    params: { slug: basename(f, '.mdx') },
+  }));
+}
+
+const { slug } = Astro.params;
+const articlesDir = resolve(process.cwd(), '..', 'content', 'articles');
+const articlePath = resolve(articlesDir, `${slug}.mdx`);
+
+if (!existsSync(articlePath)) {
+  return Astro.redirect('/articles');
+}
+
+const raw = readFileSync(articlePath, 'utf-8');
+
+const backlinksPath = resolve(process.cwd(), '..', 'content', 'backlinks.json');
+let linkedDossiers: any[] = [];
+let relatedArticles: any[] = [];
+if (existsSync(backlinksPath)) {
+  const backlinks = JSON.parse(readFileSync(backlinksPath, 'utf-8'));
+  linkedDossiers = backlinks.article_to_dossier?.[slug] || [];
+  relatedArticles = backlinks.article_to_article?.[slug] || [];
+}
+
+const frontmatterMatch = raw.match(/^---\n([\s\S]*?)\n---/);
+const meta: Record<string, string> = {};
+if (frontmatterMatch) {
+  for (const line of frontmatterMatch[1].split('\n')) {
+    const [key, ...valueParts] = line.split(':');
+    if (key && valueParts.length > 0) {
+      meta[key.trim()] = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
+    }
+  }
+}
+
+const rawContent = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
+const wordCount = rawContent.split(/\s+/).length;
+const findingEvidenceMap = loadFindingEvidenceMap();
+const { markdown: contentWithCitations, entries } = applyCitations(rawContent, { findingEvidenceMap });
+const contentHtml = await marked.parse(contentWithCitations);
+const footnotesHtml = renderFootnotes(entries);
+const content = contentHtml + footnotesHtml;
+---
+<BaseLayout title={meta.title || slug}>
+  <div class="space-y-10">
+    <section class="surface beam p-8 reveal" style="--delay: 0s;">
+      <div class="space-y-4">
+        <div class="section-label">Article</div>
+        <h1 class="text-3xl md:text-4xl font-display text-moon">{meta.title || slug}</h1>
+        {meta.subtitle && <p class="text-lg text-mithril font-body">{meta.subtitle}</p>}
+        <div class="flex flex-wrap gap-4 text-xs text-mithril font-mono">
+          <span>{Math.round(wordCount / 1000)}K words</span>
+          <span>{Math.ceil(wordCount / 250)} min read</span>
+          {meta.targets && <span>Targets: {meta.targets}</span>}
+        </div>
+      </div>
+    </section>
+
+    <article class="surface-muted p-8 md:p-10">
+      <div
+        class="prose prose-invert max-w-none prose-ithildin"
+        set:html={content}
+      />
+    </article>
+
+    {(linkedDossiers.length > 0 || relatedArticles.length > 0) && (
+      <section class="surface p-6">
+        <div class="section-label">Backlinks</div>
+        <div class="mt-4 grid gap-6 md:grid-cols-2">
+          {linkedDossiers.length > 0 && (
+            <div>
+              <h3 class="text-sm text-mithril uppercase tracking-[0.3em]">Referenced Dossiers</h3>
+              <div class="flex flex-wrap gap-2 mt-3">
+                {linkedDossiers.map((d: any) => (
+                  <a href={`/dossiers/${d.slug}`} class="chip" style="letter-spacing: 0.14em;">
+                    {d.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+          {relatedArticles.length > 0 && (
+            <div>
+              <h3 class="text-sm text-mithril uppercase tracking-[0.3em]">Related Articles</h3>
+              <div class="space-y-2 mt-3">
+                {relatedArticles.map((a: any) => (
+                  <a href={`/articles/${a.slug}`} class="block text-sm text-moon">
+                    {a.title}
+                    {a.shared_targets?.length > 0 && (
+                      <span class="text-xs text-mithril ml-2">
+                        via {a.shared_targets.slice(0, 3).join(', ')}
+                      </span>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+  </div>
+  <script>
+    import { hydrateArticleViz } from '../../lib/vizHydrator';
+    hydrateArticleViz();
+  </script>
+</BaseLayout>

@@ -1,0 +1,104 @@
+{
+  "id": "offshore-chains",
+  "title": "Offshore Entity Chains",
+  "subtitle": "ILEX, Khan Stiftung, Virgo Trust and connected offshore structures",
+  "nodes": [
+    {
+      "id": "person:marcel_kellerhals",
+      "name": "Marcel Kellerhals",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "person:dmitry_rybolovlev",
+      "name": "Dmitry Rybolovlev",
+      "nodeType": "person",
+      "parentIds": []
+    },
+    {
+      "id": "entity:289",
+      "name": "ILEX FIDUTRUST SA",
+      "nodeType": "entity",
+      "entityType": "ltd",
+      "jurisdiction": "Switzerland",
+      "status": "Active",
+      "parentIds": []
+    },
+    {
+      "id": "entity:235",
+      "name": "Khan Stiftung",
+      "nodeType": "entity",
+      "entityType": "foundation",
+      "jurisdiction": "LI",
+      "status": "unknown",
+      "parentIds": [
+        "person:marcel_kellerhals"
+      ]
+    },
+    {
+      "id": "entity:236",
+      "name": "Pamur Anstalt",
+      "nodeType": "entity",
+      "entityType": "unknown",
+      "jurisdiction": "LI",
+      "status": "unknown",
+      "parentIds": [
+        "entity:235"
+      ]
+    },
+    {
+      "id": "entity:210",
+      "name": "Xitrans Finance Ltd",
+      "nodeType": "entity",
+      "entityType": "ltd",
+      "jurisdiction": "VG",
+      "status": "active",
+      "parentIds": [
+        "entity:287",
+        "entity:289",
+        "person:dmitry_rybolovlev"
+      ]
+    },
+    {
+      "id": "entity:287",
+      "name": "The Virgo Trust",
+      "nodeType": "entity",
+      "entityType": "trust",
+      "jurisdiction": "Cyprus",
+      "status": "Active",
+      "parentIds": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "person:marcel_kellerhals",
+      "target": "entity:235",
+      "relationType": "principal",
+      "description": "Marcel Kellerhals \u2014 principal"
+    },
+    {
+      "source": "person:dmitry_rybolovlev",
+      "target": "entity:210",
+      "relationType": "beneficial_owner",
+      "description": "Dmitry Rybolovlev \u2014 beneficial_owner"
+    },
+    {
+      "source": "entity:289",
+      "target": "entity:210",
+      "relationType": "controls",
+      "description": "ILEX FIDUTRUST SA (Geneva) manages Xitrans Finance Ltd as intermediary through Mossack Fonseca"
+    },
+    {
+      "source": "entity:235",
+      "target": "entity:236",
+      "relationType": "controls",
+      "description": "Khan Stiftung controls Pamur Anstalt which owns Bin Ennakhil palace"
+    },
+    {
+      "source": "entity:287",
+      "target": "entity:210",
+      "relationType": "owns",
+      "description": "The Virgo Trust owns Xitrans Finance Ltd as shareholder from 13-JUN-2005 per ICIJ Panama Papers"
+    }
+  ]
+}
