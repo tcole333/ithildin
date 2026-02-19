@@ -27,6 +27,7 @@ Usage:
 """
 
 import argparse
+import hashlib
 import os
 import re
 import sqlite3
@@ -35,6 +36,7 @@ from datetime import datetime
 
 
 DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'datasets', 'lmsband_epstein_files.db')
+PARSER_VERSION = "ds10_parser_v2"
 
 
 def get_db():
@@ -63,6 +65,15 @@ def create_tables(db):
             reference TEXT,
             raw_extract TEXT,
             confidence REAL,
+            statement_id TEXT,
+            statement_seq INTEGER,
+            running_balance REAL,
+            running_balance_raw TEXT,
+            parsed_from_statement INTEGER DEFAULT 0,
+            qa_status TEXT DEFAULT 'pending',
+            qa_flags_json TEXT,
+            extract_run_id TEXT,
+            parser_version TEXT,
             UNIQUE(file_id, tx_date, amount, sender, receiver)
         );
 
@@ -93,11 +104,37 @@ def create_tables(db):
             UNIQUE(file_id, entity, investment, position_date)
         );
 
+        CREATE TABLE IF NOT EXISTS ds10_statement_recon (
+            id INTEGER PRIMARY KEY,
+            statement_id TEXT UNIQUE,
+            file_id INTEGER,
+            efta_id TEXT,
+            account_holder TEXT,
+            account_number TEXT,
+            statement_start_date TEXT,
+            statement_end_date TEXT,
+            beginning_balance REAL,
+            ending_balance REAL,
+            parsed_inflow_total REAL,
+            parsed_outflow_total REAL,
+            recomputed_ending_balance REAL,
+            recon_delta REAL,
+            recon_eligible INTEGER DEFAULT 0,
+            eligibility_reason TEXT,
+            recon_status TEXT DEFAULT 'pending',
+            run_id TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
         CREATE INDEX IF NOT EXISTS idx_tx_sender ON ds10_transactions(sender);
         CREATE INDEX IF NOT EXISTS idx_tx_receiver ON ds10_transactions(receiver);
         CREATE INDEX IF NOT EXISTS idx_tx_date ON ds10_transactions(tx_date);
         CREATE INDEX IF NOT EXISTS idx_tx_amount ON ds10_transactions(amount);
         CREATE INDEX IF NOT EXISTS idx_tx_efta ON ds10_transactions(efta_id);
+        CREATE INDEX IF NOT EXISTS idx_tx_statement_id ON ds10_transactions(statement_id);
+        CREATE INDEX IF NOT EXISTS idx_tx_statement_seq ON ds10_transactions(statement_id, statement_seq);
+        CREATE INDEX IF NOT EXISTS idx_tx_qa_status ON ds10_transactions(qa_status);
+        CREATE INDEX IF NOT EXISTS idx_tx_extract_run_id ON ds10_transactions(extract_run_id);
         CREATE INDEX IF NOT EXISTS idx_bal_holder ON ds10_balances(account_holder);
         CREATE INDEX IF NOT EXISTS idx_bal_date ON ds10_balances(balance_date);
         CREATE INDEX IF NOT EXISTS idx_bal_efta ON ds10_balances(efta_id);
@@ -105,7 +142,29 @@ def create_tables(db):
         CREATE INDEX IF NOT EXISTS idx_pos_investment ON ds10_positions(investment);
         CREATE INDEX IF NOT EXISTS idx_pos_date ON ds10_positions(position_date);
         CREATE INDEX IF NOT EXISTS idx_pos_efta ON ds10_positions(efta_id);
+        CREATE INDEX IF NOT EXISTS idx_recon_statement_id ON ds10_statement_recon(statement_id);
+        CREATE INDEX IF NOT EXISTS idx_recon_status ON ds10_statement_recon(recon_status);
+        CREATE INDEX IF NOT EXISTS idx_recon_run_id ON ds10_statement_recon(run_id);
     """)
+
+    # Column migrations for existing tables.
+    tx_columns = [
+        ("statement_id", "TEXT"),
+        ("statement_seq", "INTEGER"),
+        ("running_balance", "REAL"),
+        ("running_balance_raw", "TEXT"),
+        ("parsed_from_statement", "INTEGER DEFAULT 0"),
+        ("qa_status", "TEXT DEFAULT 'pending'"),
+        ("qa_flags_json", "TEXT"),
+        ("extract_run_id", "TEXT"),
+        ("parser_version", "TEXT"),
+    ]
+    for col, col_def in tx_columns:
+        try:
+            db.execute(f"ALTER TABLE ds10_transactions ADD COLUMN {col} {col_def}")
+        except sqlite3.OperationalError:
+            pass
+
     db.commit()
     print("Tables created successfully.")
 
@@ -118,6 +177,38 @@ def extract_efta_id(filename):
     """Extract EFTA ID from filename like EFTA01344228.pdf."""
     m = re.search(r'(EFTA\d+)', filename)
     return m.group(1) if m else None
+
+
+def _default_extract_run_id():
+    env_id = os.getenv("DS10_EXTRACT_RUN_ID")
+    if env_id:
+        return env_id
+    return datetime.utcnow().strftime("run_%Y%m%dT%H%M%SZ")
+
+
+def _compact_name_component(name):
+    if not name:
+        return "unknown"
+    cleaned = re.sub(r"[^A-Za-z0-9]+", "_", name.strip().lower()).strip("_")
+    if not cleaned:
+        return "unknown"
+    return cleaned[:40]
+
+
+def build_statement_id(file_id, efta_id, account_number, holder, start_date, end_date):
+    """Build a deterministic statement key for reconciliation and row ordering."""
+    key_parts = [
+        str(file_id or ""),
+        str(efta_id or ""),
+        str(account_number or ""),
+        str(start_date or ""),
+        str(end_date or ""),
+        str(holder or ""),
+    ]
+    digest = hashlib.sha1("|".join(key_parts).encode("utf-8")).hexdigest()[:10]
+    base = f"{efta_id or 'NOEFTA'}_{account_number or _compact_name_component(holder)}_{start_date or 'nostart'}_{end_date or 'noend'}"
+    base = re.sub(r"[^A-Za-z0-9_-]+", "_", base)
+    return f"{base}_{digest}"
 
 
 def parse_amount(raw):
@@ -511,7 +602,7 @@ def parse_db_statement(file_id, filename, text):
             holder = 'JEFFREY EPSTEIN'
 
     # Get date range
-    _, end_date, year = extract_statement_date_range(text)
+    start_date, end_date, year = extract_statement_date_range(text)
 
     # Extract account type and number
     # Pattern: "Business Checking XXXXXXX" or "Elite Checking With Interest XXXXXXX"
@@ -611,10 +702,12 @@ def parse_db_statement(file_id, filename, text):
                 if end_bal is not None:
                     break
 
+    statement_id = build_statement_id(file_id, efta_id, acct_number, holder, start_date, end_date)
+    statement_seq = 0
+
     # Record balances
     if holder and end_date:
         if beg_bal is not None:
-            start_date, _, _ = extract_statement_date_range(text)
             if start_date:
                 balances.append({
                     'file_id': file_id,
@@ -709,6 +802,8 @@ def parse_db_statement(file_id, filename, text):
             if m_in:
                 date_str = normalize_date(m_in.group(1), year)
                 amount, conf = parse_dollar_amount(m_in.group(2))
+                running_balance_raw = m_in.group(3).strip()
+                running_balance, _ = parse_dollar_amount(running_balance_raw)
                 if amount and date_str:
                     # Try to get sender from the next lines (ORG= pattern)
                     sender = None
@@ -740,6 +835,7 @@ def parse_db_statement(file_id, filename, text):
                         if name_match:
                             sender = name_match.group(1).strip()
 
+                    statement_seq += 1
                     transactions.append({
                         'file_id': file_id,
                         'efta_id': efta_id,
@@ -755,6 +851,11 @@ def parse_db_statement(file_id, filename, text):
                         'reference': None,
                         'raw_extract': raw_context[:500],
                         'confidence': conf,
+                        'statement_id': statement_id,
+                        'statement_seq': statement_seq,
+                        'running_balance': running_balance,
+                        'running_balance_raw': running_balance_raw,
+                        'parsed_from_statement': 1,
                     })
                 i += 1
                 continue
@@ -768,6 +869,8 @@ def parse_db_statement(file_id, filename, text):
             if m_out:
                 date_str = normalize_date(m_out.group(1), year)
                 amount, conf = parse_dollar_amount(m_out.group(2))
+                running_balance_raw = m_out.group(3).strip()
+                running_balance, _ = parse_dollar_amount(running_balance_raw)
                 if amount and date_str:
                     # Try to get receiver from "TO BANK A/C ENTITY" pattern
                     receiver = None
@@ -844,6 +947,7 @@ def parse_db_statement(file_id, filename, text):
                                     receiver_account = ac_m.group(2).strip()
                                 break
 
+                    statement_seq += 1
                     transactions.append({
                         'file_id': file_id,
                         'efta_id': efta_id,
@@ -859,6 +963,11 @@ def parse_db_statement(file_id, filename, text):
                         'reference': fx_reference,
                         'raw_extract': raw_context[:500],
                         'confidence': conf,
+                        'statement_id': statement_id,
+                        'statement_seq': statement_seq,
+                        'running_balance': running_balance,
+                        'running_balance_raw': running_balance_raw,
+                        'parsed_from_statement': 1,
                     })
                 i += 1
                 continue
@@ -868,11 +977,14 @@ def parse_db_statement(file_id, filename, text):
             if m_xfer:
                 date_str = normalize_date(m_xfer.group(1), year)
                 amount, conf = parse_dollar_amount(m_xfer.group(2))
+                running_balance_raw = m_xfer.group(3).strip()
+                running_balance, _ = parse_dollar_amount(running_balance_raw)
                 if amount and date_str:
                     raw_context = line.strip()
                     for j in range(1, min(3, len(lines) - i)):
                         raw_context += '\n' + lines[i + j].strip()
 
+                    statement_seq += 1
                     transactions.append({
                         'file_id': file_id,
                         'efta_id': efta_id,
@@ -888,6 +1000,11 @@ def parse_db_statement(file_id, filename, text):
                         'reference': 'Transfer Of Funds',
                         'raw_extract': raw_context[:500],
                         'confidence': conf * 0.9,
+                        'statement_id': statement_id,
+                        'statement_seq': statement_seq,
+                        'running_balance': running_balance,
+                        'running_balance_raw': running_balance_raw,
+                        'parsed_from_statement': 1,
                     })
                 i += 1
                 continue
@@ -897,6 +1014,8 @@ def parse_db_statement(file_id, filename, text):
             if m_cmd:
                 date_str = normalize_date(m_cmd.group(1), year)
                 amount, conf = parse_dollar_amount(m_cmd.group(2))
+                running_balance_raw = m_cmd.group(3).strip()
+                running_balance, _ = parse_dollar_amount(running_balance_raw)
                 if amount and date_str and amount >= 10000:  # Only record significant transfers
                     raw_context = line.strip()
                     for j in range(1, min(3, len(lines) - i)):
@@ -906,6 +1025,7 @@ def parse_db_statement(file_id, filename, text):
                     dep_match = re.search(r'DEP\s+(\d+)', raw_context)
                     dest_account = dep_match.group(1) if dep_match else None
 
+                    statement_seq += 1
                     transactions.append({
                         'file_id': file_id,
                         'efta_id': efta_id,
@@ -921,6 +1041,11 @@ def parse_db_statement(file_id, filename, text):
                         'reference': 'Cash Mgmt Transfer Debit',
                         'raw_extract': raw_context[:500],
                         'confidence': conf * 0.85,
+                        'statement_id': statement_id,
+                        'statement_seq': statement_seq,
+                        'running_balance': running_balance,
+                        'running_balance_raw': running_balance_raw,
+                        'parsed_from_statement': 1,
                     })
                 i += 1
                 continue
@@ -930,6 +1055,8 @@ def parse_db_statement(file_id, filename, text):
             if m_cmc:
                 date_str = normalize_date(m_cmc.group(1), year)
                 amount, conf = parse_dollar_amount(m_cmc.group(2))
+                running_balance_raw = m_cmc.group(3).strip()
+                running_balance, _ = parse_dollar_amount(running_balance_raw)
                 if amount and date_str and amount >= 10000:
                     raw_context = line.strip()
                     for j in range(1, min(3, len(lines) - i)):
@@ -938,6 +1065,7 @@ def parse_db_statement(file_id, filename, text):
                     dep_match = re.search(r'DEP\s+(\d+)', raw_context)
                     src_account = dep_match.group(1) if dep_match else None
 
+                    statement_seq += 1
                     transactions.append({
                         'file_id': file_id,
                         'efta_id': efta_id,
@@ -953,6 +1081,11 @@ def parse_db_statement(file_id, filename, text):
                         'reference': 'Cash Mgmt Transfer Credit',
                         'raw_extract': raw_context[:500],
                         'confidence': conf * 0.85,
+                        'statement_id': statement_id,
+                        'statement_seq': statement_seq,
+                        'running_balance': running_balance,
+                        'running_balance_raw': running_balance_raw,
+                        'parsed_from_statement': 1,
                     })
                 i += 1
                 continue
@@ -1486,12 +1619,13 @@ def fetch_ds10_docs(db, keyword_filter=None, limit=None):
 def insert_transactions(db, transactions):
     """Insert transactions with INSERT OR IGNORE."""
     inserted = 0
+    default_run_id = _default_extract_run_id()
     for tx in transactions:
         # Sanity check: skip absurd amounts (> $10B is almost certainly a parsing error)
-        if tx['amount'] and tx['amount'] > 10_000_000_000:
+        if tx.get('amount') and tx['amount'] > 10_000_000_000:
             continue
         # Date validation: must be between 2000 and 2025
-        if tx['tx_date']:
+        if tx.get('tx_date'):
             try:
                 yr = int(tx['tx_date'][:4])
                 if yr < 2000 or yr > 2025:
@@ -1503,13 +1637,34 @@ def insert_transactions(db, transactions):
                 INSERT OR IGNORE INTO ds10_transactions
                 (file_id, efta_id, tx_date, amount, currency, direction,
                  sender, sender_account, receiver, receiver_account,
-                 bank, reference, raw_extract, confidence)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 bank, reference, raw_extract, confidence,
+                 statement_id, statement_seq, running_balance, running_balance_raw,
+                 parsed_from_statement, qa_status, qa_flags_json, extract_run_id, parser_version)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
-                tx['file_id'], tx['efta_id'], tx['tx_date'], tx['amount'],
-                tx['currency'], tx['direction'], tx['sender'], tx['sender_account'],
-                tx['receiver'], tx['receiver_account'], tx['bank'], tx['reference'],
-                tx['raw_extract'], tx['confidence'],
+                tx.get('file_id'),
+                tx.get('efta_id'),
+                tx.get('tx_date'),
+                tx.get('amount'),
+                tx.get('currency', 'USD'),
+                tx.get('direction'),
+                tx.get('sender'),
+                tx.get('sender_account'),
+                tx.get('receiver'),
+                tx.get('receiver_account'),
+                tx.get('bank'),
+                tx.get('reference'),
+                tx.get('raw_extract'),
+                tx.get('confidence'),
+                tx.get('statement_id'),
+                tx.get('statement_seq'),
+                tx.get('running_balance'),
+                tx.get('running_balance_raw'),
+                tx.get('parsed_from_statement', 0),
+                tx.get('qa_status', 'pending'),
+                tx.get('qa_flags_json'),
+                tx.get('extract_run_id', default_run_id),
+                tx.get('parser_version', PARSER_VERSION),
             ))
             if db.execute("SELECT changes()").fetchone()[0] > 0:
                 inserted += 1

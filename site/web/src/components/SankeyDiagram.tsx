@@ -25,6 +25,7 @@ interface FlowData {
 interface Props {
   data: FlowData;
   height?: number;
+  valueScale?: 'linear' | 'sqrt' | 'log';
 }
 
 const categoryColors: Record<string, string> = {
@@ -44,7 +45,14 @@ function formatAmount(value: number): string {
   return `$${value.toLocaleString()}`;
 }
 
-export default function SankeyDiagram({ data, height = 500 }: Props) {
+function toLayoutValue(value: number, mode: Props['valueScale']): number {
+  const safe = Math.max(value, 1);
+  if (mode === 'sqrt') return Math.sqrt(safe);
+  if (mode === 'log') return Math.log10(safe + 1) * 100;
+  return safe;
+}
+
+export default function SankeyDiagram({ data, height = 500, valueScale = 'linear' }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
@@ -107,7 +115,8 @@ export default function SankeyDiagram({ data, height = 500 }: Props) {
       links: validLinks.map(d => ({
         source: d.source,
         target: d.target,
-        value: Math.max(d.value, 1),
+        value: toLayoutValue(Math.max(d.value, 1), valueScale),
+        originalValue: d.value,
         label: d.label,
       })),
     } as any);
@@ -127,9 +136,10 @@ export default function SankeyDiagram({ data, height = 500 }: Props) {
       .attr('stroke-width', (d: any) => Math.max(2, d.width))
       .attr('stroke-linecap', 'round')
       .on('mouseover', function (event: any, d: any) {
+        const originalValue = typeof d.originalValue === 'number' ? d.originalValue : d.value;
         d3.select(this).attr('stroke-opacity', 0.55);
         tooltip.style('visibility', 'visible')
-          .html(`<strong>${d.source.name} &rarr; ${d.target.name}</strong>${d.label ? `<br/>${d.label}` : ''}${d.value > 1 ? `<br/>${formatAmount(d.value)}` : ''}`);
+          .html(`<strong>${d.source.name} &rarr; ${d.target.name}</strong>${d.label ? `<br/>${d.label}` : ''}${originalValue > 1 ? `<br/>${formatAmount(originalValue)}` : ''}`);
       })
       .on('mousemove', (event: any) => {
         tooltip.style('top', (event.pageY - 10) + 'px').style('left', (event.pageX + 10) + 'px');
@@ -142,7 +152,10 @@ export default function SankeyDiagram({ data, height = 500 }: Props) {
     // Link labels
     const linkLabelData = isCompact
       ? []
-      : sankeyData.links.filter((d: any) => d.value > 1 && d.label && d.width > 8);
+      : sankeyData.links.filter((d: any) => {
+        const originalValue = typeof d.originalValue === 'number' ? d.originalValue : d.value;
+        return originalValue > 1 && d.label && d.width > 8;
+      });
 
     linkGroup.selectAll('text')
       .data(linkLabelData)
@@ -158,7 +171,10 @@ export default function SankeyDiagram({ data, height = 500 }: Props) {
       .style('stroke-width', '3px')
       .style('stroke-linejoin', 'round')
       .style('pointer-events', 'none')
-      .text((d: any) => d.label || formatAmount(d.value));
+      .text((d: any) => {
+        const originalValue = typeof d.originalValue === 'number' ? d.originalValue : d.value;
+        return d.label || formatAmount(originalValue);
+      });
 
     // Nodes
     const nodeGroup = svg.append('g');
@@ -214,7 +230,7 @@ export default function SankeyDiagram({ data, height = 500 }: Props) {
     return () => {
       tooltip.remove();
     };
-  }, [data, height, width]);
+  }, [data, height, width, valueScale]);
 
   return (
     <div ref={containerRef} className="surface p-4">

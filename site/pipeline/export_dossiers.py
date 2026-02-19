@@ -13,6 +13,12 @@ import sys
 from pathlib import Path
 from datetime import datetime, timezone
 
+try:
+    from evidence_refs import canonicalize_evidence_rows
+except ImportError:
+    # Allows importing when executed as a package module.
+    from .evidence_refs import canonicalize_evidence_rows
+
 DB_PATH = Path(__file__).parent.parent.parent / "investigation.db"
 OUTPUT_DIR = Path(__file__).parent.parent / "content" / "dossiers"
 
@@ -123,7 +129,7 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
             """,
             (row["id"],),
         ).fetchall()
-        finding["evidence"] = [dict(e) for e in evidence]
+        finding["evidence"] = canonicalize_evidence_rows([dict(e) for e in evidence])
         findings.append(finding)
 
     # Connections (across all name variants)
@@ -167,7 +173,7 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
                 """,
                 (row["id"],),
             ).fetchall()
-            connection["evidence"] = [dict(e) for e in evidence]
+            connection["evidence"] = canonicalize_evidence_rows([dict(e) for e in evidence])
             connections.append(connection)
             last_updated = _max_datetime(last_updated, _parse_datetime(row["created_at"]))
 

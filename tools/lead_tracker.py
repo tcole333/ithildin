@@ -502,6 +502,62 @@ def _ensure_schema(db):
         CREATE INDEX IF NOT EXISTS idx_dispatch_status ON dispatch_runs(status);
         CREATE INDEX IF NOT EXISTS idx_dispatch_type ON dispatch_runs(run_type);
         CREATE INDEX IF NOT EXISTS idx_dispatch_started ON dispatch_runs(started_at);
+
+        -- ══════════════════════════════════════════════════════════
+        -- QUALITY RUNS / ISSUES / REVIEWS: Data quality gating
+        -- ══════════════════════════════════════════════════════════
+        CREATE TABLE IF NOT EXISTS quality_runs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            dataset TEXT NOT NULL,
+            run_type TEXT NOT NULL,
+            run_id TEXT,
+            started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            completed_at TIMESTAMP,
+            status TEXT DEFAULT 'running' CHECK(status IN ('running','passed','failed')),
+            tool_version TEXT,
+            metrics_json TEXT
+        );
+
+        CREATE TABLE IF NOT EXISTS quality_issues (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            dataset TEXT NOT NULL,
+            record_ref TEXT NOT NULL,
+            issue_code TEXT NOT NULL,
+            severity TEXT NOT NULL CHECK(severity IN ('info','warning','critical')),
+            status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open','resolved','waived')),
+            details_json TEXT,
+            detected_in_run_id INTEGER REFERENCES quality_runs(id),
+            resolved_by TEXT,
+            resolved_at TIMESTAMP,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS review_tasks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            dataset TEXT NOT NULL,
+            record_ref TEXT NOT NULL,
+            tier TEXT NOT NULL CHECK(tier IN ('tier1','tier2')),
+            status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open','in_review','approved','rejected')),
+            required_approvals INTEGER NOT NULL DEFAULT 1,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            closed_at TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS review_decisions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            task_id INTEGER NOT NULL REFERENCES review_tasks(id),
+            reviewer TEXT NOT NULL,
+            decision TEXT NOT NULL CHECK(decision IN ('approve','reject','needs_fix')),
+            notes TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(task_id, reviewer)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_quality_runs_dataset ON quality_runs(dataset, run_type);
+        CREATE INDEX IF NOT EXISTS idx_quality_issues_open ON quality_issues(dataset, severity, status);
+        CREATE INDEX IF NOT EXISTS idx_quality_issues_record ON quality_issues(record_ref, issue_code, status);
+        CREATE INDEX IF NOT EXISTS idx_review_tasks_record ON review_tasks(dataset, record_ref, status);
+        CREATE INDEX IF NOT EXISTS idx_review_decisions_task ON review_decisions(task_id);
     """)
 
     # Investigation threads — group related leads/findings by theme
@@ -521,6 +577,8 @@ def _ensure_schema(db):
         ("findings", "verification_status TEXT DEFAULT 'unverified'"),  # unverified, verified, disputed, retracted
         ("findings", "verified_by TEXT"),
         ("findings", "verified_at TIMESTAMP"),
+        ("findings", "quality_state TEXT DEFAULT 'unchecked'"),
+        ("findings", "confidence_requested TEXT"),
         # Provenance fields on finding_evidence
         ("finding_evidence", "source_quote TEXT"),               # exact text from source supporting claim
         ("finding_evidence", "source_page TEXT"),                # page/line/section within source

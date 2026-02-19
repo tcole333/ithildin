@@ -111,10 +111,11 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
     cursor = db.execute("""
         INSERT INTO findings (target_name, finding_type, summary, detail,
                              source_datasets, confidence, date_of_event, lead_id,
-                             claim_type, verification_status, thread_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?)
+                             claim_type, verification_status, thread_id,
+                             quality_state, confidence_requested)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?)
     """, (target_name, finding_type, summary, detail,
-          sources_json, confidence, date_of_event, lead_id, claim_type, thread_id))
+          sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence))
     finding_id = cursor.lastrowid
 
     if evidence_ids:

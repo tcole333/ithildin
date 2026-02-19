@@ -156,9 +156,15 @@ Wikipedia-style lead section:
 - **Standalone** — a reader who only reads the lead understands the subject
 - **Encyclopedic tone** — neutral, authoritative, information-dense
 - **Specific** — names, amounts, dates, jurisdictions
-- **Every claim references evidence** — inline Finding references
+- **Every claim references evidence** — inline citation tokens only
 - Structure: (1) Who/what and why it matters, (2) Most significant facts, (3) Current status/unresolved questions
 - Adapt structure to whether this is a person, entity, or event
+
+Citation syntax is REQUIRED:
+- Good: `[Finding #2108][EFTA01296686]`
+- Good: `[SEC:0000909518-01-000297]` / `[EDGAR:0000909518-01-000297]`
+- Bad: `(Finding #2108, EFTA01296686)` (parenthetical citations do not reliably render)
+- Bad: plain `Finding #2108` without brackets
 
 ### 2. `system_role` (plain text, 1-2 sentences)
 What this entity reveals about how the network operates.
@@ -186,13 +192,14 @@ Which analytical models apply, from: {models_text}
 After composing the content, write it to the dossier using this exact command:
 
 ```bash
-uv run python -c "
+uv run python - <<'PY'
 import json
 from pathlib import Path
 
 path = Path('site/content/dossiers/{slug}.json')
 dossier = json.loads(path.read_text())
 
+dossier.setdefault('curation', {{}})
 dossier['curation']['lead'] = YOUR_LEAD_HTML
 dossier['curation']['system_role'] = YOUR_SYSTEM_ROLE
 dossier['curation']['sections'] = YOUR_SECTIONS_LIST
@@ -205,10 +212,11 @@ for old_field in ['overview', 'financial_summary']:
 
 path.write_text(json.dumps(dossier, indent=2, default=str))
 print('Written successfully')
-"
+PY
 ```
 
 IMPORTANT: Use triple-quoted strings for the HTML content. Escape any quotes properly for JSON.
+IMPORTANT: Do NOT use `python -c "..."` to write narrative HTML containing dollar amounts (`$250,000` etc). Shell expansion will corrupt numbers.
 IMPORTANT: The content is HTML rendered via set:html — use <p>, <a>, <strong>, <em> tags.
 IMPORTANT: Keep sections substantive (2-4 paragraphs each) but focused. Quality over quantity.
 IMPORTANT: Do NOT read the full dossier JSON yourself — all the data you need is provided above.

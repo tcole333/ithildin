@@ -7,11 +7,64 @@ that a writing agent will use to generate articles.
 
 import argparse
 import json
+import re
 import sqlite3
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent.parent.parent / "investigation.db"
 OUTPUT_DIR = Path(__file__).parent.parent / "content"
+
+# Evidence reference classification patterns — order matters (first match wins)
+SOURCE_TYPE_PATTERNS = [
+    ("efta", re.compile(r"^EFTA\d", re.IGNORECASE)),
+    ("house_oversight", re.compile(r"^HOUSE_OVERSIGHT", re.IGNORECASE)),
+    ("acris", re.compile(r"^ACRIS", re.IGNORECASE)),
+    ("fec", re.compile(r"^FEC", re.IGNORECASE)),
+    ("littlesis", re.compile(r"^LittleSis", re.IGNORECASE)),
+    ("usvi_registry", re.compile(r"^USVI", re.IGNORECASE)),
+    ("courtlistener", re.compile(r"^(?:CourtListener|CL:)", re.IGNORECASE)),
+    ("fara", re.compile(r"^FARA", re.IGNORECASE)),
+    ("lda", re.compile(r"^LDA", re.IGNORECASE)),
+    ("sec_edgar", re.compile(r"^(?:SEC|EDGAR)", re.IGNORECASE)),
+    ("irs_990", re.compile(r"^(?:990|IRS.?990|ProPublica|PP990|PROPUBLICA)", re.IGNORECASE)),
+    ("ds10", re.compile(r"^DS10", re.IGNORECASE)),
+    ("lmsband", re.compile(r"^LMSBAND", re.IGNORECASE)),
+    ("doj_vol11", re.compile(r"^DOJ.?(?:Vol|11)", re.IGNORECASE)),
+    ("duggan", re.compile(r"^DugganUSA", re.IGNORECASE)),
+    ("unified", re.compile(r"^Unified", re.IGNORECASE)),
+    ("gleif", re.compile(r"^GLEIF", re.IGNORECASE)),
+    ("opensanctions", re.compile(r"^OpenSanctions", re.IGNORECASE)),
+    ("icij", re.compile(r"^ICIJ", re.IGNORECASE)),
+    ("occrp", re.compile(r"^OCCRP", re.IGNORECASE)),
+    ("gdelt", re.compile(r"^GDELT", re.IGNORECASE)),
+    ("faa", re.compile(r"^FAA", re.IGNORECASE)),
+    ("ucc", re.compile(r"^UCC", re.IGNORECASE)),
+    ("state_registry", re.compile(r"^(?:FL_SUNBIZ|FL.SunBiz|FL:|NY_DOS|NY.SoS|NY.DOS|NM.SoS|DC_|OC:|UK.Companies)", re.IGNORECASE)),
+    ("muckrock", re.compile(r"^MUCKROCK", re.IGNORECASE)),
+    ("documentcloud", re.compile(r"^DOCUMENTCLOUD", re.IGNORECASE)),
+    ("offshorealert", re.compile(r"^OffshoreAlert", re.IGNORECASE)),
+    ("url", re.compile(r"^https?://", re.IGNORECASE)),
+]
+
+# All searchable tool names in search_log
+ALL_SEARCH_TOOLS = {
+    "query_doj", "duggan_search", "query_lmsband", "query_unified",
+    "query_epstein20k", "query_edgar", "query_990", "query_acris",
+    "parse_ds10_financials", "query_fec", "query_fara", "query_lobbying",
+    "query_courtlistener", "query_littlesis", "query_aleph",
+    "query_icij", "query_opensanctions", "query_gdelt",
+    "query_registry", "query_gleif", "query_faa",
+}
+
+
+def classify_evidence_ref(ref: str) -> str:
+    """Classify an evidence_ref string into a source type."""
+    if not ref:
+        return "unknown"
+    for source_type, pattern in SOURCE_TYPE_PATTERNS:
+        if pattern.search(ref):
+            return source_type
+    return "other"
 
 # Seed clusters identified from 11 waves of findings
 CLUSTERS = [
@@ -183,11 +236,44 @@ def gather_cluster_data(conn: sqlite3.Connection, cluster: dict) -> dict:
             ).fetchall()
             connections.extend(conns)
 
+    # Compute source diversity from evidence refs
+    source_counts: dict[str, int] = {}
+    for fid, ev_list in evidence.items():
+        for ev in ev_list:
+            ref = ev.get("evidence_ref", "")
+            stype = classify_evidence_ref(ref)
+            source_counts[stype] = source_counts.get(stype, 0) + 1
+
+    total_refs = sum(source_counts.values())
+    dominant_pct = 0.0
+    if total_refs > 0:
+        dominant_pct = round(max(source_counts.values()) / total_refs * 100, 1)
+
+    # Check which search tools have NOT been searched for this cluster's targets
+    searched_tools = set()
+    for target in targets:
+        rows = conn.execute(
+            "SELECT DISTINCT source FROM search_log WHERE query_text LIKE ?",
+            (f"%{target}%",),
+        ).fetchall()
+        for r in rows:
+            searched_tools.add(r["source"])
+    unsearched = sorted(ALL_SEARCH_TOOLS - searched_tools)
+
+    source_diversity = {
+        **{k: v for k, v in sorted(source_counts.items(), key=lambda x: -x[1])},
+        "total": total_refs,
+        "dominant_source_pct": dominant_pct,
+        "source_types_used": len(source_counts),
+        "unsearched_sources": unsearched,
+    }
+
     return {
         **cluster,
         "findings": [dict(f) for f in findings],
         "evidence": {str(k): v for k, v in evidence.items()},
         "connections": [dict(c) for c in connections],
+        "source_diversity": source_diversity,
         "stats": {
             "total_findings": len(findings),
             "total_connections": len(connections),
@@ -222,9 +308,11 @@ def main():
     for cluster in clusters_to_export:
         data = gather_cluster_data(conn, cluster)
         results.append(data)
+        sd = data["source_diversity"]
         print(f"  {cluster['id']}: {data['stats']['total_findings']} findings, "
               f"{data['stats']['total_connections']} connections, "
-              f"{data['stats']['unique_targets']} targets")
+              f"{data['stats']['unique_targets']} targets, "
+              f"{sd['source_types_used']} source types ({sd['dominant_source_pct']}% dominant)")
 
     out_path = args.output_dir / "clusters.json"
     with open(out_path, "w") as f:

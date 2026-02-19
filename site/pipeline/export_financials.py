@@ -23,6 +23,58 @@ def normalize_entity(name: str) -> str:
     return resolve_canonical(name.strip())
 
 
+def _table_exists(conn: sqlite3.Connection, name: str) -> bool:
+    row = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+        (name,),
+    ).fetchone()
+    return bool(row)
+
+
+def _column_exists(conn: sqlite3.Connection, table: str, column: str) -> bool:
+    rows = conn.execute(f"PRAGMA table_info({table})").fetchall()
+    return any(r[1] == column for r in rows)
+
+
+def _fetch_quality_metadata() -> dict:
+    if not INVESTIGATION_DB.exists():
+        return {"quality_run_id": None, "math_checks_passed": False}
+
+    conn = sqlite3.connect(str(INVESTIGATION_DB))
+    conn.row_factory = sqlite3.Row
+    quality_run_id = None
+    math_checks_passed = False
+    try:
+        if _table_exists(conn, "quality_runs"):
+            row = conn.execute(
+                """
+                SELECT run_id
+                FROM quality_runs
+                WHERE dataset = 'ds10'
+                ORDER BY COALESCE(completed_at, started_at) DESC
+                LIMIT 1
+                """
+            ).fetchone()
+            if row:
+                quality_run_id = row["run_id"]
+        if _table_exists(conn, "quality_issues"):
+            crit = conn.execute(
+                """
+                SELECT COUNT(*)
+                FROM quality_issues
+                WHERE dataset='ds10'
+                  AND status='open'
+                  AND severity='critical'
+                  AND issue_code LIKE 'MATH%'
+                """
+            ).fetchone()[0]
+            math_checks_passed = int(crit) == 0
+    finally:
+        conn.close()
+
+    return {"quality_run_id": quality_run_id, "math_checks_passed": math_checks_passed}
+
+
 def export_ds10_flows(min_amount: float = 50000) -> dict:
     """Export DS10 transaction flows as Sankey-compatible data."""
     if not LMSBAND_DB.exists():
@@ -32,14 +84,19 @@ def export_ds10_flows(min_amount: float = 50000) -> dict:
     conn = sqlite3.connect(str(LMSBAND_DB))
     conn.row_factory = sqlite3.Row
 
+    qa_filter = ""
+    if _column_exists(conn, "ds10_transactions", "qa_status"):
+        qa_filter = "AND qa_status = 'promoted'"
+
     # Get aggregated flows between entities
     rows = conn.execute(
-        """
+        f"""
         SELECT sender, receiver, SUM(amount) as total_amount, COUNT(*) as tx_count,
                MIN(tx_date) as first_date, MAX(tx_date) as last_date
         FROM ds10_transactions
         WHERE amount >= ? AND sender IS NOT NULL AND receiver IS NOT NULL
               AND sender != '' AND receiver != ''
+              {qa_filter}
         GROUP BY sender, receiver
         HAVING total_amount >= ?
         ORDER BY total_amount DESC
@@ -93,22 +150,26 @@ def export_ds10_flows(min_amount: float = 50000) -> dict:
 
     # Top transactions for detail
     top_tx = conn.execute(
-        """
+        f"""
         SELECT tx_date, amount, sender, receiver, reference, efta_id
         FROM ds10_transactions
         WHERE amount >= 1000000
+          {qa_filter}
         ORDER BY amount DESC
         LIMIT 50
         """,
     ).fetchall()
 
     conn.close()
+    quality = _fetch_quality_metadata()
 
     return {
         "nodes": nodes,
         "links": links,
         "balances": balances,
         "top_transactions": [dict(r) for r in top_tx],
+        "quality_run_id": quality["quality_run_id"],
+        "math_checks_passed": quality["math_checks_passed"],
         "stats": {
             "total_nodes": len(nodes),
             "total_links": len(links),

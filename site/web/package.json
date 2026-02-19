@@ -5,10 +5,19 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "test:e2e": "playwright test",
+    "test:citations": "node scripts/test-citations.mjs",
+    "test:citations:snapshots": "node scripts/test-citation-snapshots.mjs",
+    "test:support-spans": "node scripts/test-support-spans.mjs",
+    "lint:citations": "node scripts/lint-citations.mjs",
+    "lint:citations:changed": "node scripts/lint-citations.mjs --changed-files --strict-changed-files",
+    "lint:citations:update-baseline": "node scripts/lint-citations.mjs --update-baseline",
+    "report:support-coverage": "node scripts/report-support-coverage.mjs",
+    "report:support-coverage:changed": "node scripts/report-support-coverage.mjs --changed-files",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npx wrangler pages deploy dist/ --project-name=ithildin --branch=main --commit-dirty=true",
-    "deploy:preview": "npx wrangler pages deploy dist/ --project-name=ithildin --branch=preview --commit-dirty=true"
+    "deploy": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=main --commit-dirty=true",
+    "deploy:preview": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=preview --commit-dirty=true"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -26,5 +35,8 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
   }
 }
