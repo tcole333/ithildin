@@ -16,7 +16,7 @@ from pathlib import Path
 CONTENT_DIR = Path(__file__).parent.parent / "content"
 DOSSIERS_DIR = CONTENT_DIR / "dossiers"
 ARTICLES_DIR = CONTENT_DIR / "articles"
-DB_PATH = Path(__file__).parent.parent.parent / "investigation.db"
+DB_PATH = Path(__file__).parent.parent / "investigation.db"
 
 
 def load_dossier_index() -> dict[str, dict]:

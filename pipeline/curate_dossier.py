@@ -20,7 +20,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent.parent / "investigation.db"
+DB_PATH = Path(__file__).parent.parent / "investigation.db"
 DOSSIER_DIR = Path(__file__).parent.parent / "content" / "dossiers"
 
 STRENGTH_MAP = {"strong": 1.0, "medium": 0.7, "weak": 0.4, "circumstantial": 0.2}

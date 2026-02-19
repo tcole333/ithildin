@@ -88,32 +88,36 @@ const structureData = {
   nodes: [
     { id: 'person:epstein', name: 'Jeffrey Epstein', nodeType: 'person', parentIds: [] },
     { id: 'person:black', name: 'Leon Black', nodeType: 'person', parentIds: [] },
-    { id: 'entity:stc', name: 'Southern Trust Company', nodeType: 'entity', entityType: 'inc', jurisdiction: 'USVI', status: 'active', parentIds: ['person:epstein'] },
-    { id: 'entity:ga', name: 'Gratitude America', nodeType: 'entity', entityType: 'nonprofit', jurisdiction: 'USVI', status: 'active', parentIds: ['person:epstein'] },
-    { id: 'entity:nes', name: 'NES LLC', nodeType: 'entity', entityType: 'llc', jurisdiction: 'NM', status: 'active', parentIds: ['person:epstein'] },
-    { id: 'entity:jege', name: 'JEGE Inc', nodeType: 'entity', entityType: 'inc', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
-    { id: 'entity:pland', name: 'Plan D LLC', nodeType: 'entity', entityType: 'llc', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
-    { id: 'entity:we', name: 'WE LLC', nodeType: 'entity', entityType: 'llc', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
-    { id: 'entity:igo', name: 'IGO Company LLC', nodeType: 'entity', entityType: 'llc', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
-    { id: 'entity:bfp', name: 'Black Family Partners', nodeType: 'entity', entityType: 'partnership', jurisdiction: 'NY', status: 'active', parentIds: ['person:black'] },
-    { id: 'entity:edr', name: 'Edmond de Rothschild Trust', nodeType: 'entity', entityType: 'trust', jurisdiction: 'UK', status: 'active', parentIds: ['entity:bfp'] },
-    { id: 'entity:phaidon', name: 'Phaidon Global LLC', nodeType: 'entity', entityType: 'llc', jurisdiction: 'NY', status: 'active', parentIds: ['entity:bfp'] },
-    { id: 'entity:cat', name: '2017 Caterpillar Trust', nodeType: 'entity', entityType: 'trust', jurisdiction: 'NY', status: 'active', parentIds: ['entity:bfp'] },
+    { id: 'entity:stc', name: 'Southern Trust Company', nodeType: 'entity', entityType: 'inc', role: 'Trust company', jurisdiction: 'USVI', status: 'active', emphasis: 'primary', parentIds: ['person:epstein'] },
+    { id: 'entity:ga', name: 'Gratitude America', nodeType: 'entity', entityType: 'nonprofit', role: 'Foundation', jurisdiction: 'USVI', status: 'active', parentIds: ['person:epstein'] },
+    { id: 'entity:nes', name: 'NES LLC', nodeType: 'entity', entityType: 'llc', role: 'Finance LLC', jurisdiction: 'NM', status: 'active', parentIds: ['person:epstein'] },
+    { id: 'entity:jege', name: 'JEGE Inc', nodeType: 'entity', entityType: 'inc', role: 'Shell', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
+    { id: 'entity:pland', name: 'Plan D LLC', nodeType: 'entity', entityType: 'llc', role: 'Asset SPV', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
+    { id: 'entity:we', name: 'WE LLC', nodeType: 'entity', entityType: 'llc', role: 'Investment SPV', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
+    { id: 'entity:igo', name: 'IGO Company LLC', nodeType: 'entity', entityType: 'llc', role: 'Offshore bank', jurisdiction: 'USVI', status: 'active', parentIds: ['entity:stc'] },
+    { id: 'entity:bfp', name: 'Black Family Partners', nodeType: 'entity', entityType: 'partnership', role: 'Investment vehicle', jurisdiction: 'NY', status: 'active', parentIds: ['person:black'] },
+    { id: 'entity:edr', name: 'Edmond de Rothschild Trust', nodeType: 'entity', entityType: 'trust', role: 'Trust', jurisdiction: 'UK', status: 'active', parentIds: ['entity:bfp'] },
+    { id: 'entity:phaidon', name: 'Phaidon Global LLC', nodeType: 'entity', entityType: 'llc', role: 'Holding LLC', jurisdiction: 'NY', status: 'active', parentIds: ['entity:bfp'] },
+    { id: 'entity:cat', name: '2017 Caterpillar Trust', nodeType: 'entity', entityType: 'trust', role: 'Trust', jurisdiction: 'NY', status: 'active', parentIds: ['entity:bfp'] },
   ],
   edges: [
-    { source: 'person:epstein', target: 'entity:stc', relationType: 'owns', description: 'Founder, beneficial owner, president' },
-    { source: 'person:epstein', target: 'entity:ga', relationType: 'founder', description: '501(c)(3) foundation' },
-    { source: 'person:epstein', target: 'entity:nes', relationType: 'owns', description: 'New Mexico entity' },
-    { source: 'entity:stc', target: 'entity:jege', relationType: 'subsidiary', description: 'STC subsidiary' },
-    { source: 'entity:stc', target: 'entity:pland', relationType: 'subsidiary', description: 'STC subsidiary' },
-    { source: 'entity:stc', target: 'entity:we', relationType: 'subsidiary', description: 'STC subsidiary' },
-    { source: 'entity:stc', target: 'entity:igo', relationType: 'subsidiary', description: 'STC subsidiary' },
-    { source: 'person:black', target: 'entity:bfp', relationType: 'controls', description: 'Family investment vehicle' },
-    { source: 'entity:bfp', target: 'entity:stc', relationType: 'funds', description: '$158M+ total payments' },
-    { source: 'entity:bfp', target: 'entity:edr', relationType: 'funds', description: '$25M transfer' },
-    { source: 'entity:bfp', target: 'entity:phaidon', relationType: 'controls', description: '$10M+ line of credit' },
-    { source: 'entity:bfp', target: 'entity:cat', relationType: 'controls', description: 'Trust contributions' },
-    { source: 'entity:edr', target: 'entity:stc', relationType: 'funds', description: '$25M transfer to STC' },
+    { source: 'person:epstein', target: 'entity:stc', relationType: 'owns', description: 'Founder, beneficial owner, president', category: 'ownership', strength: 0.9 },
+    { source: 'person:epstein', target: 'entity:ga', relationType: 'founder', description: '501(c)(3) foundation', category: 'governance', strength: 0.6 },
+    { source: 'person:epstein', target: 'entity:nes', relationType: 'owns', description: 'New Mexico entity', category: 'ownership', strength: 0.7 },
+    { source: 'entity:stc', target: 'entity:jege', relationType: 'subsidiary', description: 'STC subsidiary', category: 'ownership', strength: 0.5 },
+    { source: 'entity:stc', target: 'entity:pland', relationType: 'subsidiary', description: 'STC subsidiary', category: 'ownership', strength: 0.5 },
+    { source: 'entity:stc', target: 'entity:we', relationType: 'subsidiary', description: 'STC subsidiary', category: 'ownership', strength: 0.5 },
+    { source: 'entity:stc', target: 'entity:igo', relationType: 'subsidiary', description: 'STC subsidiary', category: 'ownership', strength: 0.5 },
+    { source: 'person:black', target: 'entity:bfp', relationType: 'controls', description: 'Family investment vehicle', category: 'ownership', strength: 0.7 },
+    { source: 'entity:bfp', target: 'entity:stc', relationType: 'funds', description: '$158M+ total payments', label: 'Management fees', category: 'financial', strength: 0.9, showLabel: true },
+    { source: 'entity:bfp', target: 'entity:edr', relationType: 'funds', description: '$25M transfer', label: 'Transfer', category: 'financial', strength: 0.6 },
+    { source: 'entity:bfp', target: 'entity:phaidon', relationType: 'controls', description: '$10M+ line of credit', category: 'ownership', strength: 0.6 },
+    { source: 'entity:bfp', target: 'entity:cat', relationType: 'controls', description: 'Trust contributions', category: 'ownership', strength: 0.5 },
+    { source: 'entity:edr', target: 'entity:stc', relationType: 'funds', description: '$25M transfer to STC', label: 'Transfer', category: 'financial', strength: 0.6 },
+  ],
+  annotations: [
+    { id: 'ann-1', targetId: 'entity:stc', text: 'Trust company anchors the structure and routes payments into the shell cluster.' },
+    { id: 'ann-2', targetId: 'entity:bfp', text: 'Funds from Black Family Partners enter as management fees.' },
   ],
 };
 ---
@@ -193,8 +197,9 @@ const structureData = {
       </div>
       <p class="text-sm text-mithril">
         Top-down ownership diagram using Sugiyama DAG layout. Entity types encoded as shapes,
-        jurisdictions as colors, relationship types as edge styles. Click nodes to highlight
-        ancestor/descendant chains. Click +/- to collapse subtrees.
+        jurisdictions as stroke colors, relationship types as edge colors, evidence quality as
+        dashes. Click nodes to highlight ancestor/descendant chains. Click +/- to collapse
+        subtrees.
       </p>
       <CorporateStructure
         data={structureData}

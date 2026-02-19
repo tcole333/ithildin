@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export compact markdown context files for research agents.
 
-Generates one markdown file per dossier in site/content/agent-context/{slug}.md.
+Generates one markdown file per dossier in content/agent-context/{slug}.md.
 Agents load a single file read instead of querying investigation.db.
 """
 

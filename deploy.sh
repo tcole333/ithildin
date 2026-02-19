@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SITE_DIR="$(cd "$(dirname "$0")" && pwd)"
-ROOT="$(cd "$SITE_DIR/.." && pwd)"
+ROOT="$(cd "$(dirname "$0")" && pwd)"
 
 echo "==> Running data pipeline..."
 cd "$ROOT"
-uv run python site/pipeline/build_all.py
+uv run python pipeline/build_all.py
 
 echo "==> Building Astro site..."
-cd "$SITE_DIR/web"
+cd "$ROOT/web"
 npm run build
 
 echo "==> Deploying to Cloudflare Pages..."

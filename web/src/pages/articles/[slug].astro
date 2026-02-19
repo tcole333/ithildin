@@ -2,9 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, basename } from 'path';
-import { marked } from 'marked';
-import { applyCitations, renderFootnotes } from '../../lib/citations';
 import { loadFindingEvidenceMap } from '../../lib/findingEvidence';
+import { processArticleEvidenceContent, safeJsonForScript } from '../../lib/contentEvidencePipeline';
 
 export function getStaticPaths() {
   const articlesDir = resolve(process.cwd(), '..', 'content', 'articles');
@@ -49,10 +48,16 @@ if (frontmatterMatch) {
 const rawContent = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
 const wordCount = rawContent.split(/\s+/).length;
 const findingEvidenceMap = loadFindingEvidenceMap();
-const { markdown: contentWithCitations, entries } = applyCitations(rawContent, { findingEvidenceMap });
-const contentHtml = await marked.parse(contentWithCitations);
-const footnotesHtml = renderFootnotes(entries);
-const content = contentHtml + footnotesHtml;
+const evidenceModeEnabled = import.meta.env.PUBLIC_ENABLE_EVIDENCE_MODE === 'true';
+const {
+  pageHtml: content,
+  supportMap,
+  supportMetrics,
+} = await processArticleEvidenceContent(rawContent, findingEvidenceMap, { enableSupportSpans: evidenceModeEnabled });
+const supportMapJson = safeJsonForScript(supportMap);
+const supportSummary = supportMetrics.total_sentences > 0
+  ? `${supportMetrics.supported_sentence_pct}% supported (${supportMetrics.supported_sentences}/${supportMetrics.total_sentences} sentences)`
+  : 'No sentence-level support spans detected.';
 ---
 <BaseLayout title={meta.title || slug}>
   <div class="space-y-10">
@@ -69,12 +74,30 @@ const content = contentHtml + footnotesHtml;
       </div>
     </section>
 
-    <article class="surface-muted p-8 md:p-10">
+    <article class="surface-muted p-8 md:p-10" data-evidence-page={evidenceModeEnabled ? 'true' : undefined} data-support-map-id={evidenceModeEnabled ? 'support-map-data' : undefined}>
+      {evidenceModeEnabled && (
+        <div class="evidence-mode">
+          <label class="evidence-mode__toggle">
+            <input type="checkbox" data-evidence-mode-toggle />
+            <span>Evidence Mode</span>
+          </label>
+          <div class="evidence-mode__summary" data-evidence-mode-summary>
+            <span>{supportSummary}</span>
+            {supportMetrics.orphan_citations_count > 0 && (
+              <span>{supportMetrics.orphan_citations_count} orphan citation{supportMetrics.orphan_citations_count === 1 ? '' : 's'}</span>
+            )}
+          </div>
+        </div>
+      )}
       <div
         class="prose prose-invert max-w-none prose-ithildin"
+        data-support-content
         set:html={content}
       />
     </article>
+    {evidenceModeEnabled && (
+      <script type="application/json" id="support-map-data" set:html={supportMapJson}></script>
+    )}
 
     {(linkedDossiers.length > 0 || relatedArticles.length > 0) && (
       <section class="surface p-6">
@@ -117,4 +140,10 @@ const content = contentHtml + footnotesHtml;
     import { hydrateArticleViz } from '../../lib/vizHydrator';
     hydrateArticleViz();
   </script>
+  {evidenceModeEnabled && (
+    <script>
+      import { initSupportMode } from '../../lib/supportMode';
+      initSupportMode();
+    </script>
+  )}
 </BaseLayout>

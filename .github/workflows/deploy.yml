@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -19,7 +21,34 @@ jobs:
       - run: npm ci
         working-directory: web
 
-      - run: npm run build
+      - run: python3 scripts/financial_quality.py gate --scope publish --strict --with-math --json > financial-quality-gate.json
+        continue-on-error: true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: financial-quality-gate
+          path: financial-quality-gate.json
+
+      - run: npm run lint:citations
+        working-directory: web
+
+      - run: npm run lint:citations:changed -- --base-ref "${{ github.event.before }}" --head-ref "${{ github.sha }}"
+        working-directory: web
+
+      - run: npm run test:citations
+        working-directory: web
+
+      - run: npm run test:citations:snapshots
+        working-directory: web
+
+      - run: npm run report:support-coverage
+        working-directory: web
+
+      - run: npm run report:support-coverage:changed -- --base-ref "${{ github.event.before }}" --head-ref "${{ github.sha }}"
+        working-directory: web
+
+      - run: PUBLIC_ENABLE_EVIDENCE_MODE=false npm run build
         working-directory: web
 
       - uses: cloudflare/wrangler-action@v3

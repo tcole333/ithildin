@@ -13,11 +13,11 @@ import sqlite3
 import sys
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent.parent / "investigation.db"
+DB_PATH = Path(__file__).parent.parent / "investigation.db"
 OUTPUT_PATH = Path(__file__).parent.parent / "content" / "network.json"
 
 # Add tools to path for name_resolver
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 
 def slugify(name: str) -> str:

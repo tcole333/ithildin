@@ -2,7 +2,7 @@
 """Export corporate ownership structures as DAG JSON for CorporateStructure.tsx.
 
 BFS traversal from configured root entities through entity_relations + entity_roles.
-Outputs site/content/structures/*.json.
+Outputs content/structures/*.json.
 """
 
 import argparse
@@ -12,11 +12,11 @@ import sys
 from collections import deque
 from pathlib import Path
 
-INVESTIGATION_DB = Path(__file__).parent.parent.parent / "investigation.db"
+INVESTIGATION_DB = Path(__file__).parent.parent / "investigation.db"
 OUTPUT_DIR = Path(__file__).parent.parent / "content" / "structures"
 
 # Add tools to path for name_resolver
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from tools.name_resolver import resolve_canonical
 
