@@ -136,26 +136,25 @@ const ds10HasData = Boolean(ds10Data && Array.isArray(ds10Data.links) && ds10Dat
   <div class="space-y-8">
     <section class="surface beam p-8 reveal" style="--delay: 0s;">
       <div class="space-y-3">
-        <div class="section-label">Financial Intelligence</div>
+        <div class="section-label">Financial Data</div>
         <h1 class="text-3xl md:text-4xl font-display text-moon">Financial Flows</h1>
         <p class="text-mithril font-body">
-          The goal is not to simplify complexity away, but to scaffold it. Start with the dominant
-          corridors, focus on one entity at a time, then verify the claim against transaction-level evidence.
+          Review key entities, flow links, and transactions in one place.
         </p>
       </div>
 
       <div class="mt-5 grid gap-2 md:grid-cols-3">
         <div class="surface-muted p-3">
-          <div class="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Orient</div>
-          <p class="text-xs text-moon mt-1">See where value concentrates before diving into individual records.</p>
+          <div class="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Overview</div>
+          <p class="text-xs text-moon mt-1">Start with the highest-value links.</p>
         </div>
         <div class="surface-muted p-3">
-          <div class="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Focus</div>
-          <p class="text-xs text-moon mt-1">Pivot to one entity to inspect inbound and outbound relationships.</p>
+          <div class="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Entity</div>
+          <p class="text-xs text-moon mt-1">Select one entity to inspect inbound and outbound activity.</p>
         </div>
         <div class="surface-muted p-3">
-          <div class="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Verify</div>
-          <p class="text-xs text-moon mt-1">Move from summarized corridors to dated transactions and EFTA traces.</p>
+          <div class="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Transactions</div>
+          <p class="text-xs text-moon mt-1">Use dated transactions and EFTA records to verify details.</p>
         </div>
       </div>
     </section>
@@ -164,7 +163,7 @@ const ds10HasData = Boolean(ds10Data && Array.isArray(ds10Data.links) && ds10Dat
       <FinancialWorkbench data={ds10Data} dossierSlugByEntityKey={dossierSlugByEntityKey} client:load />
     ) : (
       <section class="surface p-6">
-        <div class="section-label">DS10 Workbench</div>
+        <div class="section-label">DS10 Data</div>
         <p class="text-sm text-mithril mt-2">
           DS10 flow data is not available in this build. Run `uv run python site/pipeline/export_financials.py`
           to regenerate `/site/content/financials/ds10-flows.json`.
@@ -225,7 +224,7 @@ const ds10HasData = Boolean(ds10Data && Array.isArray(ds10Data.links) && ds10Dat
       <div class="text-xs text-mithril mt-2">
         {ds10Data?.stats ? (
           <>
-            DS10 currently includes {ds10Data.stats.total_nodes || 0} entities, {ds10Data.stats.total_links || 0} traced corridors, and{' '}
+            DS10 currently includes {ds10Data.stats.total_nodes || 0} entities, {ds10Data.stats.total_links || 0} traced links, and{' '}
             {formatMoney(ds10Data.stats.total_value || 0)} in aggregated value above threshold.
           </>
         ) : (

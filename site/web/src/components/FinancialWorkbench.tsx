@@ -511,11 +511,10 @@ export default function FinancialWorkbench({ data, dossierSlugByEntityKey }: Pro
       data-hydrated={isHydrated ? 'true' : 'false'}
     >
       <div className="space-y-2 mb-4">
-        <div className="section-label">DS10 Workbench</div>
-        <h2 className="text-xl font-semibold text-moon">Deutsche Bank Flow Investigation</h2>
+        <div className="section-label">DS10 Data</div>
+        <h2 className="text-xl font-semibold text-moon">Deutsche Bank Flows</h2>
         <p className="text-sm text-mithril">
-          Orient first, then focus, then verify. This view compresses noisy labels into canonical entities,
-          surfaces dominant corridors, and keeps document-level transaction evidence in reach.
+          Use filters to review entities, links, and source transactions.
         </p>
       </div>
 
@@ -525,7 +524,7 @@ export default function FinancialWorkbench({ data, dossierSlugByEntityKey }: Pro
           <div className="text-sm text-ember font-mono mt-1">{formatMoney(processed.totalValue)}</div>
         </div>
         <div className="surface-muted p-2.5">
-          <div className="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Corridors</div>
+          <div className="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Links</div>
           <div className="text-sm text-moon font-mono mt-1">{processed.aggregatedLinks.length}</div>
         </div>
         <div className="surface-muted p-2.5">
@@ -545,14 +544,14 @@ export default function FinancialWorkbench({ data, dossierSlugByEntityKey }: Pro
       </div>
 
       <div className="surface-muted p-3 mb-4">
-        <div className="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Investigative Signals</div>
+        <div className="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Key Signals</div>
         <div className="grid gap-2 lg:grid-cols-3 mt-2">
           <div className="rounded border border-[color:var(--color-ash)] bg-[rgba(11,13,16,0.45)] p-2">
-            <div className="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Largest corridor</div>
+            <div className="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">Largest link</div>
             <div className="text-xs text-moon mt-1">
               {processed.topCorridor
                 ? `${processed.topCorridor.sourceLabel} -> ${processed.topCorridor.targetLabel}`
-                : 'No corridor data'}
+                : 'No link data'}
             </div>
             <div className="text-[11px] text-ember font-mono mt-1">
               {processed.topCorridor ? formatMoney(processed.topCorridor.value) : '-'}
@@ -583,7 +582,7 @@ export default function FinancialWorkbench({ data, dossierSlugByEntityKey }: Pro
         </div>
 
         <div className="text-[11px] text-mithril font-mono mt-2">
-          Top-5 corridors account for {topFiveConcentration}% of traced value. Normalization merged {processed.aliasMerges} noisy labels.
+          Top 5 links account for {topFiveConcentration}% of traced value. Normalization merged {processed.aliasMerges} noisy labels.
         </div>
       </div>
 
@@ -604,7 +603,7 @@ export default function FinancialWorkbench({ data, dossierSlugByEntityKey }: Pro
           ))}
         </select>
 
-        <span className="text-xs text-mithril font-mono ml-2">Min corridor</span>
+        <span className="text-xs text-mithril font-mono ml-2">Min flow</span>
         <div className="flex flex-wrap gap-1">
           {MIN_AMOUNT_OPTIONS.map(option => {
             const active = option === minAmount;
@@ -628,11 +627,11 @@ export default function FinancialWorkbench({ data, dossierSlugByEntityKey }: Pro
       <div className="grid gap-3 xl:grid-cols-[minmax(0,1fr)_330px] mb-4">
         <div className="surface-muted p-3">
           <div className="text-[10px] text-mithril font-mono uppercase tracking-[0.2em] mb-2" data-testid="primary-corridors-count">
-            Primary Corridors ({filteredLinks.length})
+            Primary Links ({filteredLinks.length})
           </div>
 
           {filteredLinks.length === 0 ? (
-            <div className="text-xs text-mithril">No corridors match this threshold and focus combination.</div>
+            <div className="text-xs text-mithril">No links match this threshold and focus combination.</div>
           ) : (
             <div className="space-y-2">
               {filteredLinks.slice(0, 16).map(link => {
