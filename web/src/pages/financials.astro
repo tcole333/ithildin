@@ -116,6 +116,7 @@ function formatMoney(value: number): string {
 
 const apolloData = loadJson<ApolloData>('apollo-pipeline.json');
 const wexnerData = loadJson<GenericSankeyData>('wexner-architecture.json');
+const gratitudeData = loadJson<GenericSankeyData>('gratitude-pipeline.json');
 const ds10Data = loadJson<DS10Data>('ds10-flows.json');
 const dossierIndexPath = resolve(process.cwd(), '..', 'content', 'dossiers', '_index.json');
 const dossierIndex = existsSync(dossierIndexPath)
@@ -185,6 +186,9 @@ const ds10HasData = Boolean(ds10Data && Array.isArray(ds10Data.links) && ds10Dat
         )}
         {wexnerData && (
           <SankeyDiagram data={wexnerData} height={340} valueScale="sqrt" client:visible />
+        )}
+        {gratitudeData && (
+          <SankeyDiagram data={gratitudeData} height={340} valueScale="sqrt" client:visible />
         )}
       </div>
     </section>
