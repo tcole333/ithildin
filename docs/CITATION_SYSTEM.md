@@ -28,6 +28,11 @@ Writers include citations as inline tokens in content:
 | `[FARA:num]` | `[FARA:6071]` | FARA registration |
 | `[REG:XX:id]` | `[REG:FL:P950000272]` | State corporate registry |
 | `[DS10]` | `[DS10]` | DS10 financial dataset page |
+| `[DOCUMENTCLOUD:id]` | `[DOCUMENTCLOUD:24402693]` | DocumentCloud document |
+| `[OffshoreAlert:slug]` | `[OffshoreAlert:DB-Consent-Order-NYDFS]` | OffshoreAlert article |
+| `[MUCKROCK:id]` | `[MUCKROCK:78799/Docs.redacted.pdf]` | MuckRock FOIA request |
+| `[LittleSis:id]` | `[LittleSis:101661]` | LittleSis entity profile |
+| `[ICIJ:id]` | `[ICIJ:82004676]` | ICIJ Offshore Leaks node |
 
 ### 2. Processing Pipeline
 
@@ -196,7 +201,7 @@ Dossier content uses the same citation system as articles. Use these inline toke
 
 ### Architecture: Declarative Citation Registry
 
-All 19 citation types are defined in a single `CITATION_REGISTRY` array in `web/src/lib/citations.ts`. Each entry is a `CitationTypeDef` that co-locates everything about a type:
+All 24 citation types are defined in a single `CITATION_REGISTRY` array in `web/src/lib/citations.ts`. Each entry is a `CitationTypeDef` that co-locates everything about a type:
 
 ```typescript
 type CitationTypeDef = {
@@ -242,6 +247,18 @@ To add a new citation type (e.g., `[HUDOC:001-234567]`), add **one object** to `
 ```
 
 That's it. No other files need to change for the citation engine to recognize the new type.
+
+### Generic URL Override (`source-urls.json`)
+
+For one-off citation keys that don't fit a structured pattern (e.g., a specific report URL, a news article), add a key → URL mapping to `web/src/data/source-urls.json`:
+
+```json
+{
+  "KPMG:IPI_Forensic_Review_p12": "https://example.com/kpmg-ipi-report.pdf"
+}
+```
+
+The override is consulted as the **last resort** in both `resolveCitationToken()` and `extractEvidenceLinks()` — after all registry patterns have been tried. This means structured patterns always take priority.
 
 **Checklist after adding a type:**
 1. Add a unit test in `web/scripts/test-citations.mjs` (both `applyCitations` and `extractEvidenceLinks`)

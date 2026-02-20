@@ -4,7 +4,7 @@ Static site built with Astro, deployed to Cloudflare Pages. Articles (MDX) and d
 
 ## Citation System
 
-**Registry**: `src/lib/citations.ts` defines all 19 citation types in a single `CITATION_REGISTRY` array.
+**Registry**: `src/lib/citations.ts` defines all 24 citation types in a single `CITATION_REGISTRY` array.
 
 **Adding a new citation type** = adding one object to the registry with `id`, `tokenPattern`, `healthTier`, `resolve()`, and `extract()`. No other files need to change for the engine to recognize it. See `docs/CITATION_SYSTEM.md` for the full guide and example.
 
