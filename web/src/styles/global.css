@@ -322,6 +322,15 @@ a:hover {
   color: var(--color-icy);
 }
 
+.citation-entry [data-citation-key^="finding:"] {
+  color: var(--color-icy);
+  cursor: pointer;
+}
+
+.citation-entry [data-citation-key^="finding:"]:hover {
+  color: #cfeaf1;
+}
+
 .citation-sources {
   margin-top: 0.25rem;
   font-size: 0.75rem;
