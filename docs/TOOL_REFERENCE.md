@@ -154,6 +154,8 @@ python tools/graph_tools.py paths "Leon Black" "Ehud Barak" [--max-hops 6]
 python tools/graph_tools.py neighbors "Leon Black" [--depth 2]
 python tools/graph_tools.py holes [--min-degree 5]                      # structural holes / brokerage
 python tools/graph_tools.py cliques [--min-size 4]                      # dense subgraphs
+python tools/graph_tools.py triangles [--top 50] [--min-strength medium] [--rel-type financial]  # open triads / closure gaps
+python tools/graph_tools.py clustering [--min-degree 2] [--top 50]      # local clustering coefficients
 python tools/graph_tools.py stats
 ```
 
@@ -896,3 +898,52 @@ uv run python tools/analysis_export.py pillar-dump --output $WORKDIR/pillar-data
 
 ### Exit Types
 `voluntary`, `fired`, `collapse`, `retirement`, `government_appointment`, `indictment`, `unknown`
+
+---
+
+## Methodology Tracker
+
+Tracks operational learnings from investigation agents. Part of investigation.db.
+
+### methodology_tracker.py
+
+```bash
+# Record an observation
+uv run python tools/methodology_tracker.py add --category friction --description "query_doj.py FTS5 times out for common words" --skill pursue-lead --lead-id 42
+
+# List observations
+uv run python tools/methodology_tracker.py list [--category friction] [--status open] [--limit 50]
+
+# Show detail
+uv run python tools/methodology_tracker.py show <ID>
+
+# Update status
+uv run python tools/methodology_tracker.py acknowledge <ID>
+uv run python tools/methodology_tracker.py address <ID> --resolution "Added FTS5 phrase quoting"
+uv run python tools/methodology_tracker.py dismiss <ID> --reason "Duplicate of #3"
+
+# Detect recurring patterns across observations
+uv run python tools/methodology_tracker.py patterns [--min-count 3]
+
+# Bulk ingest learnings from a structured handoff report
+uv run python tools/methodology_tracker.py ingest-report $WORKDIR/report-agent-a.md [--skill deep-investigate] [--lead-id N]
+
+# Statistics
+uv run python tools/methodology_tracker.py stats
+```
+
+### Observation Categories
+`friction`, `surprise`, `methodology`, `process_gap`, `source_quality`
+
+### Observation Statuses
+`open`, `acknowledged`, `addressed`, `dismissed`, `duplicate`
+
+### validate_report.py
+
+Validates structured handoff reports (YAML frontmatter + required sections + categorized learnings).
+
+```bash
+uv run python tools/validate_report.py <file-or-dir>
+uv run python tools/validate_report.py $WORKDIR/report-agent-a.md    # single file
+uv run python tools/validate_report.py $WORKDIR/                     # all report-*.md in dir
+```

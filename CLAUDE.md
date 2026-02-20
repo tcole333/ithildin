@@ -21,6 +21,7 @@ Agent-scale network investigation rooted in the Epstein case, following evidence
 /investigate-person <name>  # Single-agent deep-dive
 /trace-entity <entity>      # Corporate entity trace
 /status-report              # Investigation status
+/review-methodology         # Operational learning review
 /ingest-source <source>     # Add new data source
 /add-registry               # Add corporate registry
 ```
@@ -62,7 +63,7 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 | **Findings** | `findings_tracker.py {add,connect,connections,search,timeline}` |
 | **Audit** | `findings_tracker.py {unverified,provenance,verify,dispute,retract,correct,audit}` |
 | **Infra** | `infra_tracker.py {add,list,show,claim,evaluate,complete,reject,search,next,stats}` |
-| **Analysis** | `hypothesis_tracker.py`, `tag_manager.py`, `event_timeline.py`, `graph_tools.py`, `analysis_export.py` |
+| **Analysis** | `hypothesis_tracker.py`, `tag_manager.py`, `event_timeline.py`, `graph_tools.py`, `analysis_export.py`, `methodology_tracker.py` |
 | **Pillars** | `pillar_tracker.py {register,list,show,seed,arc,career,event,events,bootstrap,alumni,cohort,dispersal,overlap,timeline,score,gaps,cross-pillar,pillar-network,stats}` |
 
 **39+ data source tools** covering document corpora, corporate registries (15 jurisdictions), public records, financial data, and external APIs. Run `uv run python tools/source_report.py` for live status.
