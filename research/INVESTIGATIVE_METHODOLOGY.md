@@ -364,6 +364,28 @@ When an agent claims a threaded lead, it should:
 3. Create cross-thread leads when discoveries span thread boundaries
 4. Not close a lead just because it moved away from the thread's "expected" territory — follow the evidence
 
+## Analytical Framework Awareness
+
+This investigation uses 8 core analytical models (Bridge Tax, Manufactured Dependency, Private Order, Narrative Shield, Jurisdictional Arbitrage, Parallel Financial System, Enabler Gradient, Complexity as Credential) plus a growing set of domain lenses. See `research/craft-research/analytical-models.md` for the core models and `research/craft-research/frameworks/` for domain lenses.
+
+**During investigation, if you encounter a recurring pattern that none of the 8 core analytical models explain well, record it as a framework candidate:**
+
+```bash
+uv run python tools/hypothesis_tracker.py add \
+    --title "PATTERN NAME" \
+    --pattern-type framework_candidate \
+    --description "Pattern observed: [WHAT]. Domain: [financial-crime/org-theory/intelligence/behavioral/legal-regulatory/economic]. Why existing models miss it: [WHY]. Findings: [IDS]." \
+    --originated-from "agent:AGENT_NAME"
+```
+
+The `/discover-frameworks` skill harvests these suggestions as bottom-up signal for framework discovery. You do not need to fully research or formalize the framework — just flag the pattern and move on with your investigation.
+
+**Use `model_detector.py` to check which models apply to a finding:**
+```bash
+uv run python tools/model_detector.py detect --finding-id FINDING_ID
+uv run python tools/model_detector.py gaps --finding-id FINDING_ID  # reports when nothing matches
+```
+
 ## Red Lines
 
 - Don't fabricate evidence or connections that aren't in the data

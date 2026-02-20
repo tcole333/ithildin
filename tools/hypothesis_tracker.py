@@ -34,7 +34,7 @@ except ImportError:
     from lead_tracker import get_db
 
 VALID_STATUSES = ["proposed", "investigating", "confirmed", "refuted", "superseded", "stale"]
-VALID_PATTERN_TYPES = ["emerging_theme", "structural", "temporal", "financial", "operational"]
+VALID_PATTERN_TYPES = ["emerging_theme", "structural", "temporal", "financial", "operational", "framework_candidate"]
 
 
 # ── Schema ────────────────────────────────────────────────────
