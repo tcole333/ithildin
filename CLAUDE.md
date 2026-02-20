@@ -67,6 +67,8 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 
 **39+ data source tools** covering document corpora, corporate registries (15 jurisdictions), public records, financial data, and external APIs. Run `uv run python tools/source_report.py` for live status.
 
+**Citation types** for new data sources: add one entry to `CITATION_REGISTRY` in `web/src/lib/citations.ts`. See `docs/CITATION_SYSTEM.md` for the registry pattern and example.
+
 **New international tools:**
 - `query_france.py`: French company registry (SIRENE) — `search`, `company <SIREN>`, `naf <CODE>`, `address` — free, no auth
 - `query_hudoc.py`: ECHR case database (HUDOC) — `search`, `case <ID>`, `appno <NUM>`, `text <ID>`, `respondent <STATE>` — free, no auth

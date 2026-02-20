@@ -194,17 +194,78 @@ Dossier content uses the same citation system as articles. Use these inline toke
 
 ## Technical Implementation
 
-### citations.ts
+### Architecture: Declarative Citation Registry
+
+All 19 citation types are defined in a single `CITATION_REGISTRY` array in `web/src/lib/citations.ts`. Each entry is a `CitationTypeDef` that co-locates everything about a type:
 
 ```typescript
-// Main functions
-export function applyCitations(markdown: string, options?: CitationOptions): {
-  markdown: string;  // HTML with citation links
+type CitationTypeDef = {
+  id: string;              // Unique type identifier ("efta", "sec", "fec", etc.)
+  tokenPattern: string;    // Regex pattern string for bracket token detection
+  healthTier: HealthTier;  // tier1-4 or "label-only" for check-citation-health.mjs
+  resolve(token: string, options: CitationOptions): Omit<CitationEntry, "number"> | null;
+  extract(raw: string): CitationLink[];
+  stripPattern?: RegExp | false;  // false = don't strip from remainder text
+};
+```
+
+The public API functions (`applyCitations`, `extractEvidenceLinks`, `resolveCitationToken`) loop the registry instead of maintaining separate if/else chains. `CITE_TOKEN_PATTERNS` is derived from the registry automatically.
+
+### Adding a New Citation Type
+
+To add a new citation type (e.g., `[HUDOC:001-234567]`), add **one object** to `CITATION_REGISTRY` in `web/src/lib/citations.ts`:
+
+```typescript
+// In CITATION_REGISTRY array:
+{
+  id: "hudoc",
+  tokenPattern: "HUDOC:\\d{3}-\\d{6}",
+  healthTier: "tier1",
+  resolve(token) {
+    const match = token.match(/HUDOC:(\d{3}-\d{6})/i);
+    if (!match) return null;
+    const caseId = match[1];
+    return {
+      key: `hudoc:${caseId}`,
+      label: `HUDOC ${caseId}`,
+      url: `https://hudoc.echr.coe.int/eng?i=${caseId}`,
+    };
+  },
+  extract(raw) {
+    return (raw.match(/HUDOC:\d{3}-\d{6}/gi) || []).map(ref => {
+      const caseId = ref.replace(/HUDOC:/i, "");
+      const url = `https://hudoc.echr.coe.int/eng?i=${caseId}`;
+      return { key: url, label: `HUDOC:${caseId}`, url };
+    });
+  },
+},
+```
+
+That's it. No other files need to change for the citation engine to recognize the new type.
+
+**Checklist after adding a type:**
+1. Add a unit test in `web/scripts/test-citations.mjs` (both `applyCitations` and `extractEvidenceLinks`)
+2. Run `npm run test:citations && npm run test:citations:snapshots`
+3. Update the token pattern table in this document (below) and in relevant skills
+4. If the URL builder is complex, extract it as a standalone function above the registry
+
+### extract() key convention
+
+The `extract` method returns `CitationLink[]` where `key` is `url || label` (matching the deduplication behavior of `extractEvidenceLinks`). For types with URLs, `key` is the URL. For label-only types (KPMG), `key` is the label string.
+
+### Public API
+
+```typescript
+export function applyCitations(markdown: string, options?: CitationOptions, state?: CitationState): {
+  markdown: string;
   entries: CitationEntry[];
 }
 
 export function renderFootnotes(entries: CitationEntry[]): string;
 export function extractEvidenceLinks(raw: string): CitationLink[];
+export function splitCitationGroup(group: string): string[];
+export function createCitationState(): CitationState;
+export function getCitationHealthTier(citationKey: string): HealthTier | "skip";
 ```
 
 ### CitationEntry Type
@@ -219,6 +280,20 @@ type CitationEntry = {
 };
 ```
 
+### File Locations
+
+| Component | Path |
+|-----------|------|
+| Core library + registry | `web/src/lib/citations.ts` |
+| Unit tests (48) | `web/scripts/test-citations.mjs` |
+| Snapshot regression | `web/scripts/test-citation-snapshots.mjs` |
+| Link health checker | `web/scripts/check-citation-health.mjs` |
+| Lint | `web/scripts/lint-citations.mjs` |
+| Support span engine | `web/src/lib/supportSpans.ts` |
+| Shared content pipeline | `web/src/lib/contentEvidencePipeline.ts` |
+| Evidence mode UI logic | `web/src/lib/supportMode.ts` |
+| Coverage report CLI | `web/scripts/report-support-coverage.mjs` |
+
 ### Dossier Page Implementation
 
 ```astro
@@ -229,7 +304,7 @@ import { applyCitations, renderFootnotes } from '../../lib/citations';
 const findingEvidenceMap = buildDossierFindingEvidenceMap(dossier);
 
 // Process lead
-const { html: leadHtml, entries: leadCitations } = 
+const { html: leadHtml, entries: leadCitations } =
   applyCitations(curation.lead, { findingEvidenceMap });
 
 // Process sections with shared numbering
@@ -247,15 +322,7 @@ const footnotesHtml = renderFootnotes(allCitations);
 
 ### Existing Dossiers
 
-Existing dossiers with parenthetical citations `(EFTAxxxxx)` are automatically normalized:
-
-```typescript
-// In citations.ts
-function normalizeCitationPatterns(text: string): string {
-  // Converts (EFTAxxxxxx) -> [EFTAxxxxxx]
-  return text.replace(/(?<!\[)\((EFTA\d{6,})\)/g, '[$1]');
-}
-```
+Existing dossiers with parenthetical citations `(EFTAxxxxx)` are automatically normalized to bracket format by `normalizeCitationPatterns()`.
 
 ### Future Dossier Updates
 
