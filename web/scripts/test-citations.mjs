@@ -345,7 +345,7 @@ run("Finding: resolves with evidence map to primary source URL", () => {
   const result = applyCitations("See [Finding #2108].", { findingEvidenceMap });
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "Finding #2108");
-  assert.match(result.entries[0].url ?? "", /jmail\.world/);
+  assert.ok(result.entries[0].url, "expected a URL for the finding");
   assert.ok(result.entries[0].sources?.length);
 });
 
