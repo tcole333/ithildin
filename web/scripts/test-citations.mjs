@@ -9,6 +9,7 @@ const {
   createCitationState,
   extractEvidenceLinks,
   splitCitationGroup,
+  getCitationHealthTier,
 } = jiti(citationsPath);
 
 let passed = 0;
@@ -428,6 +429,123 @@ run("splitCitationGroup: splits comma-separated tokens", () => {
 run("multiple types in one group: each gets a citation entry", () => {
   const result = applyCitations("See [EFTA02504960, 990:660789697].");
   assert.equal(result.entries.length, 2);
+});
+
+// ---------------------------------------------------------------------------
+// getCitationHealthTier
+// ---------------------------------------------------------------------------
+
+run("getCitationHealthTier: returns correct tier for known prefixes", () => {
+  assert.equal(getCitationHealthTier("efta:EFTA02504960"), "tier4");
+  assert.equal(getCitationHealthTier("sec:0001193125-21-123456"), "tier1");
+  assert.equal(getCitationHealthTier("fec:C00352732"), "tier1");
+  assert.equal(getCitationHealthTier("fara:6458"), "tier3");
+  assert.equal(getCitationHealthTier("lda:Broidy Capital"), "tier2");
+  assert.equal(getCitationHealthTier("kpmg:IPI"), "label-only");
+  assert.equal(getCitationHealthTier("finding:2108"), "label-only");
+});
+
+run("getCitationHealthTier: returns skip for unknown prefixes", () => {
+  assert.equal(getCitationHealthTier("unknown:something"), "skip");
+  assert.equal(getCitationHealthTier(""), "skip");
+  assert.equal(getCitationHealthTier("https://example.com"), "skip");
+});
+
+// ---------------------------------------------------------------------------
+// Registry: all 19 types resolve through applyCitations
+// ---------------------------------------------------------------------------
+
+run("Registry: all 19 types produce citation entries", () => {
+  const tokens = [
+    "Finding #1",
+    "EFTA02504960",
+    "HOUSE_OVERSIGHT_12345",
+    "SEC:0001193125-21-123456",
+    "EDGAR:0001193125-21-123456",
+    "990:660789697",
+    "ACRIS:2017021700466001",
+    "CL:69737684",
+    "FEC:C00352732",
+    "FARA:6458",
+    "USVI:582530",
+    "FL-SunBiz:F08000003048",
+    "NM-SoS:1615137",
+    "NY-SoS:2773652",
+    "REG:FL:F08000003048",
+    "DS10",
+    "KPMG:IPI",
+    "LDA:Broidy Capital",
+    "OpenSanctions:Q125731",
+  ];
+
+  for (const token of tokens) {
+    const result = applyCitations(`See [${token}].`);
+    assert.ok(
+      result.entries.length >= 1,
+      `Token "${token}" should produce at least one citation entry, got ${result.entries.length}`,
+    );
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Registry: all 19 types extract from raw evidence text
+// ---------------------------------------------------------------------------
+
+run("Registry: all extractable types produce evidence links", () => {
+  // Finding has no extract (only resolves in bracket context) — excluded
+  const rawRefs = [
+    { input: "EFTA02504960", expectMin: 1 },
+    { input: "HOUSE_OVERSIGHT_12345", expectMin: 1 },
+    { input: "SEC:0001193125-21-123456", expectMin: 1 },
+    { input: "EDGAR:0001193125-21-123456", expectMin: 1 },
+    { input: "990:660789697", expectMin: 1 },
+    { input: "ACRIS:2017021700466001", expectMin: 1 },
+    { input: "CL:69737684", expectMin: 1 },
+    { input: "FEC:C00352732", expectMin: 1 },
+    { input: "FARA:6458", expectMin: 1 },
+    { input: "USVI:582530", expectMin: 1 },
+    { input: "FL-SunBiz:F08000003048", expectMin: 1 },
+    { input: "NM-SoS:1615137", expectMin: 1 },
+    { input: "NY-SoS:2773652", expectMin: 1 },
+    { input: "REG:FL:F08000003048", expectMin: 1 },
+    { input: "DS10:GRATITUDE", expectMin: 1 },
+    { input: "KPMG:IPI", expectMin: 1 },
+    { input: "LDA:Broidy Capital", expectMin: 1 },
+    { input: "OpenSanctions:Q125731", expectMin: 1 },
+  ];
+
+  for (const { input, expectMin } of rawRefs) {
+    const links = extractEvidenceLinks(input);
+    assert.ok(
+      links.length >= expectMin,
+      `extractEvidenceLinks("${input}") should produce >= ${expectMin} links, got ${links.length}`,
+    );
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Registry: unknown tokens fall through gracefully
+// ---------------------------------------------------------------------------
+
+run("Registry: unrecognized bracket content passes through unchanged", () => {
+  const result = applyCitations("See [some random text].");
+  assert.equal(result.entries.length, 0);
+  assert.ok(result.markdown.includes("[some random text]"));
+});
+
+run("Registry: empty evidence string returns empty links", () => {
+  const links = extractEvidenceLinks("");
+  assert.equal(links.length, 0);
+});
+
+// ---------------------------------------------------------------------------
+// Registry: token pattern derivation works
+// ---------------------------------------------------------------------------
+
+run("Registry: splitCitationGroup recognizes all token types", () => {
+  const combined = "EFTA02504960, SEC:0001193125-21-123456, FEC:C00352732, DS10, KPMG:IPI";
+  const tokens = splitCitationGroup(combined);
+  assert.equal(tokens.length, 5, `Expected 5 tokens from group, got ${tokens.length}: ${JSON.stringify(tokens)}`);
 });
 
 // ---------------------------------------------------------------------------
