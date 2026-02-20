@@ -181,7 +181,12 @@ function showPopover(entry: PreviewEntry, href: string, anchor: HTMLElement): vo
   }
 }
 
+const DETAIL_PAGE_RE = /^\/(dossiers|articles)\/[a-z0-9-]+\/?$/;
+
 export function initBacklinkPopover(): void {
+  // Only activate on detail pages, not index/landing pages
+  if (!DETAIL_PAGE_RE.test(window.location.pathname)) return;
+
   document.addEventListener("click", async (event) => {
     const target = event.target as HTMLElement | null;
     if (!target) return;
