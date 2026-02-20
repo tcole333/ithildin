@@ -36,11 +36,11 @@ def _column_exists(conn: sqlite3.Connection, table: str, column: str) -> bool:
     return any(r[1] == column for r in rows)
 
 
-def _fetch_quality_metadata() -> dict:
-    if not INVESTIGATION_DB.exists():
+def _fetch_quality_metadata(inv_db_path: Path = INVESTIGATION_DB) -> dict:
+    if not inv_db_path.exists():
         return {"quality_run_id": None, "math_checks_passed": False}
 
-    conn = sqlite3.connect(str(INVESTIGATION_DB))
+    conn = sqlite3.connect(str(inv_db_path))
     conn.row_factory = sqlite3.Row
     quality_run_id = None
     math_checks_passed = False
@@ -75,13 +75,17 @@ def _fetch_quality_metadata() -> dict:
     return {"quality_run_id": quality_run_id, "math_checks_passed": math_checks_passed}
 
 
-def export_ds10_flows(min_amount: float = 50000) -> dict:
+def export_ds10_flows(
+    min_amount: float = 50000,
+    ds10_db_path: Path = LMSBAND_DB,
+    inv_db_path: Path = INVESTIGATION_DB,
+) -> dict:
     """Export DS10 transaction flows as Sankey-compatible data."""
-    if not LMSBAND_DB.exists():
-        print(f"  Warning: {LMSBAND_DB} not found, skipping DS10 flows")
+    if not ds10_db_path.exists():
+        print(f"  Warning: {ds10_db_path} not found, skipping DS10 flows")
         return {"nodes": [], "links": [], "stats": {}}
 
-    conn = sqlite3.connect(str(LMSBAND_DB))
+    conn = sqlite3.connect(str(ds10_db_path))
     conn.row_factory = sqlite3.Row
 
     qa_filter = ""
@@ -161,7 +165,7 @@ def export_ds10_flows(min_amount: float = 50000) -> dict:
     ).fetchall()
 
     conn.close()
-    quality = _fetch_quality_metadata()
+    quality = _fetch_quality_metadata(inv_db_path)
 
     return {
         "nodes": nodes,
@@ -178,9 +182,9 @@ def export_ds10_flows(min_amount: float = 50000) -> dict:
     }
 
 
-def export_apollo_pipeline() -> dict:
+def export_apollo_pipeline(inv_db_path: Path = INVESTIGATION_DB) -> dict:
     """Export Apollo → Epstein money flows from findings."""
-    conn = sqlite3.connect(str(INVESTIGATION_DB))
+    conn = sqlite3.connect(str(inv_db_path))
     conn.row_factory = sqlite3.Row
 
     # Get financial findings related to Apollo/Black/Rowan/Harris
@@ -269,6 +273,8 @@ def export_wexner_architecture() -> dict:
 def main():
     parser = argparse.ArgumentParser(description="Export financial flow data")
     parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
+    parser.add_argument("--ds10-db", type=Path, default=LMSBAND_DB, help="Path to DS10 SQLite database")
+    parser.add_argument("--inv-db", type=Path, default=INVESTIGATION_DB, help="Path to investigation SQLite DB")
     parser.add_argument("--diagram", choices=["ds10", "apollo", "wexner", "all"], default="all")
     parser.add_argument("--min-amount", type=float, default=50000, help="Min amount for DS10 flows")
     args = parser.parse_args()
@@ -276,8 +282,8 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
     diagrams = {
-        "ds10": ("ds10-flows.json", lambda: export_ds10_flows(args.min_amount)),
-        "apollo": ("apollo-pipeline.json", export_apollo_pipeline),
+        "ds10": ("ds10-flows.json", lambda: export_ds10_flows(args.min_amount, args.ds10_db, args.inv_db)),
+        "apollo": ("apollo-pipeline.json", lambda: export_apollo_pipeline(args.inv_db)),
         "wexner": ("wexner-architecture.json", export_wexner_architecture),
     }
 
