@@ -199,6 +199,12 @@ def main() -> int:
     conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
     try:
+        # Check that required tables exist (investigation.db may be absent in CI)
+        tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()}
+        if "finding_evidence" not in tables:
+            print("Skipping dossier evidence sync: finding_evidence table not found (CI mode).")
+            conn.close()
+            return 0
         dossier_paths = iter_dossier_paths(dossier_dir, args.dossier)
         finding_map = load_finding_evidence_map(conn)
         connection_map = load_connection_evidence_map(conn)
