@@ -38,18 +38,16 @@ if (existsSync(articlesDir)) {
 }
 
 const planned = [
+  { title: "The Parallel Diplomatic Corps", subtitle: "How IPI, HDI, and Gratitude America functioned as influence infrastructure outside FARA", cluster: "parallel-diplomatic-corps" },
   { title: "The Apollo Money Pipeline", subtitle: "How $158M+ flowed from 3 billionaires to a convicted sex offender", cluster: "apollo-money-pipeline" },
   { title: "Wexner Trust Architecture", subtitle: "A masterclass in using trusts to obscure beneficial ownership", cluster: "wexner-trust-architecture" },
   { title: "Deutsche Bank Plumbing", subtitle: "What 579 transactions and $304M tell us about compliance theater", cluster: "deutsche-bank-plumbing" },
   { title: "The Gulf Intelligence Web", subtitle: "The geopolitics of a financier's Rolodex", cluster: "gulf-intelligence-web" },
-  { title: "Shadow Lobbying Empire", subtitle: "How to lobby Congress without technically lobbying Congress", cluster: "shadow-lobbying-empire" },
   { title: "The Corporate Shell Network", subtitle: "The corporate structure diagram that takes a full wall", cluster: "corporate-shell-network" },
   { title: "The Legal Shield", subtitle: "When your lawyers are also your intelligence service", cluster: "legal-shield" },
   { title: "Science & Tech Interface", subtitle: "Philanthropy as a social technology", cluster: "science-tech-interface" },
-  { title: "The Norwegian Connection", subtitle: "An ex-diplomat, a defense minister, and a registered sex offender", cluster: "norwegian-connection" },
   { title: "Inner Circle Operations", subtitle: "The org chart of a criminal enterprise that filed its taxes", cluster: "inner-circle-operations" },
   { title: "USVI Operations", subtitle: "Why the US Virgin Islands is the Delaware of the Caribbean", cluster: "usvi-operations" },
-  { title: "The Political Influence Machine", subtitle: "Campaign finance as relationship management", cluster: "political-influence-machine" },
 ];
 
 const publishedSlugs = new Set(articles.map(a => a.slug));
