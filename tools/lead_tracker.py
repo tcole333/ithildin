@@ -419,6 +419,32 @@ def _ensure_schema(db):
         CREATE INDEX IF NOT EXISTS idx_infra_notes_infra ON infra_notes(infra_id);
 
         -- ══════════════════════════════════════════════════════════
+        -- METHODOLOGY OBSERVATIONS: Operational learning loop
+        -- ══════════════════════════════════════════════════════════
+        CREATE TABLE IF NOT EXISTS methodology_observations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            category TEXT NOT NULL CHECK(category IN (
+                'friction', 'surprise', 'methodology', 'process_gap', 'source_quality'
+            )),
+            description TEXT NOT NULL,
+            source_skill TEXT,
+            source_lead_id INTEGER REFERENCES leads(id),
+            source_agent TEXT,
+            target_name TEXT,
+            status TEXT DEFAULT 'open' CHECK(status IN (
+                'open', 'acknowledged', 'addressed', 'dismissed', 'duplicate'
+            )),
+            resolution TEXT,
+            related_infra_id INTEGER REFERENCES infra_requests(id),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_methobs_category ON methodology_observations(category);
+        CREATE INDEX IF NOT EXISTS idx_methobs_status ON methodology_observations(status);
+        CREATE INDEX IF NOT EXISTS idx_methobs_skill ON methodology_observations(source_skill);
+        CREATE INDEX IF NOT EXISTS idx_methobs_lead ON methodology_observations(source_lead_id);
+
+        -- ══════════════════════════════════════════════════════════
         -- IRS 990 XML: Parsed e-file data (Schedule I/R)
         -- ══════════════════════════════════════════════════════════
         CREATE TABLE IF NOT EXISTS irs990_filings (
