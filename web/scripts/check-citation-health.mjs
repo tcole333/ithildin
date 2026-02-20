@@ -44,6 +44,12 @@ const jiti = createJiti(import.meta.url);
 const { applyCitations, createCitationState } = jiti(
   resolve(cwd, "src", "lib", "citations.ts"),
 );
+const { loadFindingEvidenceMap } = jiti(
+  resolve(cwd, "src", "lib", "findingEvidence.ts"),
+);
+const { buildDossierFindingEvidenceMap } = jiti(
+  resolve(cwd, "src", "lib", "contentEvidencePipeline.ts"),
+);
 
 // ---------------------------------------------------------------------------
 // URL tier classification
@@ -109,6 +115,9 @@ function extractAllCitationUrls() {
     }
   }
 
+  // Load the global finding → evidence map once (articles use DB-backed map)
+  const findingEvidenceMap = loadFindingEvidenceMap();
+
   // Process articles
   if (existsSync(articlesDir)) {
     const files = readdirSync(articlesDir).filter((f) => f.endsWith(".mdx"));
@@ -117,9 +126,15 @@ function extractAllCitationUrls() {
       const raw = readFileSync(abs, "utf-8");
       const body = raw.replace(/^---\n[\s\S]*?\n---\n*/, "");
       const state = createCitationState();
-      applyCitations(body, {}, state);
+      applyCitations(body, { findingEvidenceMap }, state);
       for (const entry of state.entries) {
         addUrl(entry.url, entry.key, entry.label, `article:${fileName}`);
+        // Also collect URLs from finding sub-sources
+        if (entry.sources) {
+          for (const src of entry.sources) {
+            addUrl(src.url, src.key, src.label, `article:${fileName}`);
+          }
+        }
       }
     }
   }
@@ -132,11 +147,12 @@ function extractAllCitationUrls() {
     for (const fileName of files) {
       const abs = resolve(dossiersDir, fileName);
       const dossier = JSON.parse(readFileSync(abs, "utf-8"));
+      const dossierFindingMap = buildDossierFindingEvidenceMap(dossier);
       const state = createCitationState();
 
       const lead = dossier.curation?.lead;
       if (typeof lead === "string" && lead.trim()) {
-        applyCitations(lead, {}, state);
+        applyCitations(lead, { findingEvidenceMap: dossierFindingMap }, state);
       }
 
       const sections = Array.isArray(dossier.curation?.sections)
@@ -146,12 +162,17 @@ function extractAllCitationUrls() {
         const content =
           typeof section?.content === "string" ? section.content : "";
         if (content.trim()) {
-          applyCitations(content, {}, state);
+          applyCitations(content, { findingEvidenceMap: dossierFindingMap }, state);
         }
       }
 
       for (const entry of state.entries) {
         addUrl(entry.url, entry.key, entry.label, `dossier:${fileName}`);
+        if (entry.sources) {
+          for (const src of entry.sources) {
+            addUrl(src.url, src.key, src.label, `dossier:${fileName}`);
+          }
+        }
       }
     }
   }
@@ -196,6 +217,20 @@ async function checkUrl(url, timeout) {
         ok: false,
         redirect: location,
       };
+    }
+
+    // Some servers block non-browser UAs with 403 — retry with browser UA
+    if (response.status === 403) {
+      const retryResponse = await fetch(url, {
+        method: "GET",
+        signal: AbortSignal.timeout(timeout),
+        redirect: "follow",
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        },
+      });
+      return { status: retryResponse.status, ok: retryResponse.ok };
     }
 
     // Some servers don't support HEAD — try GET
@@ -492,8 +527,46 @@ async function main() {
       "utf-8",
     );
     process.stdout.write(
-      `\n--fix: wrote ${Object.keys(overrides).length} overrides to ${overridesPath}\n`,
+      `\n--fix: wrote ${Object.keys(overrides).length} jmail overrides to ${overridesPath}\n`,
     );
+
+    // Generate CourtListener overrides (slug lookup via API)
+    const brokenCl = [...results.broken, ...results.unreachable].filter(
+      (r) => r.url && r.url.includes("courtlistener.com/docket/"),
+    );
+    if (brokenCl.length > 0) {
+      const clToken = process.env.COURTLISTENER_TOKEN;
+      const clOverrides = {};
+      for (const entry of brokenCl) {
+        const match = entry.url.match(/\/docket\/(\d+)/);
+        if (!match) continue;
+        const docketId = match[1];
+        if (clOverrides[docketId]) continue;
+        try {
+          const headers = {};
+          if (clToken) headers["Authorization"] = `Token ${clToken}`;
+          const resp = await fetch(
+            `https://www.courtlistener.com/api/rest/v4/dockets/${docketId}/`,
+            { headers, signal: AbortSignal.timeout(10000) },
+          );
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data.absolute_url) {
+              clOverrides[docketId] = `https://www.courtlistener.com${data.absolute_url}`;
+            }
+          }
+        } catch {
+          // skip unreachable CL API
+        }
+      }
+      if (Object.keys(clOverrides).length > 0) {
+        const clPath = resolve(cwd, "src", "data", "cl-overrides.json");
+        writeFileSync(clPath, JSON.stringify(clOverrides, null, 2) + "\n", "utf-8");
+        process.stdout.write(
+          `--fix: wrote ${Object.keys(clOverrides).length} CL overrides to ${clPath}\n`,
+        );
+      }
+    }
   }
 
   // Console summary
