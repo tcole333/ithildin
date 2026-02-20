@@ -5,7 +5,7 @@
   "subtitle": "Power from occupying structural holes",
   "archetype": "Success to the Successful",
   "definition": "Power derived from occupying structural holes in a network — bridging otherwise disconnected groups and capturing the information asymmetry between them. The \"tax\" is what the broker extracts for providing the bridge: fees, information, obligation, or leverage.",
-  "case_intro": "In 2015, Epstein's network graph shows something striking: he is the *only* node connecting Wall Street (Black, Harris, Rowan) to Israeli intelligence (Barak, Carbyne), Gulf royals (Al Thani, Alsabbagh) to DC lawyers (Ruemmler), and academic science (Harvard, MIT) to political power (Summers, Clinton associates). Remove Epstein and these clusters have almost no connection to each other. His betweenness centrality — 278 direct connections — is the highest in the graph by a factor of six. He doesn't need to be the smartest person in any room. He needs to be the person who's been in *all the rooms*. And every time someone crosses his bridge, he collects a tax: information, obligation, money, or leverage. The bridge itself is the business.",
+  "case_intro": "In 2015, Epstein's network graph shows something striking: he is the *only* node connecting Wall Street (Black, Harris, Rowan) to Israeli intelligence (Barak, Carbyne), Gulf royals (Al Thani, Alsabbagh) to DC lawyers (Ruemmler), and academic science (Harvard, MIT) to political power (Summers, Clinton associates). Remove Epstein and these clusters have almost no connection to each other. His degree centrality — 317 direct connections — is the highest in the graph by nearly five times the next node. His betweenness centrality (0.82 normalized) confirms he is the primary bridge in the network, occupying the shortest paths between otherwise disconnected clusters. He doesn't need to be the smartest person in any room. He needs to be the person who's been in *all the rooms*. And every time someone crosses his bridge, he collects a tax: information, obligation, money, or leverage. The bridge itself is the business.",
   "theoretical_basis": "Ronald Burt, *Structural Holes: The Social Structure of Competition* (1992). The person who bridges a structural hole controls information flow between groups and can extract rents from that position.",
   "mechanism": ["Bridge position", "Information asymmetry", "Access control", "Rent extraction"],
   "mechanism_details": {
@@ -23,18 +23,18 @@
   "canonical_instances": [
     {
       "label": "Epstein's network position",
-      "summary": "Degree centrality 278 (highest in graph), connecting Wall Street (Black, Harris, Rowan) to Government (Summers, Clinton associates) to Israeli intelligence (Barak, Carbyne) to American tech (Gates via Nikolic) to Gulf royals (Al Thani, Alsabbagh) to Science/academia (Harvard, MIT, Santa Fe Institute). No other single node connects all these clusters.",
-      "evidence": ["graph_tools.py analysis"]
+      "summary": "Degree centrality 317 (highest in graph, ~5x the next node at 66). Betweenness centrality 0.82 (highest, confirming bridge position). Connects Wall Street (Black, Harris, Rowan) to Government (Summers, Clinton associates) to Israeli intelligence (Barak, Carbyne) to American tech (Gates via Nikolic) to Gulf royals (Al Thani, Alsabbagh) to Science/academia (Harvard, MIT, Santa Fe Institute). No other single node connects all these clusters.",
+      "evidence": ["finding:2859", "finding:757", "finding:3466", "EFTA02575400", "EFTA02627134"]
     },
     {
       "label": "Kirkland & Ellis",
-      "summary": "Brokerage score 0.967, #3 degree centrality (47). K&E bridges corporate defense, DOJ prosecution, political fundraising, and regulatory drafting. Same structural hole position, but institutional rather than personal. Filip wrote DPA rules as Deputy AG, then used them defending corporate clients at K&E.",
-      "evidence": ["Thread 7 findings"]
+      "summary": "Brokerage score 0.967, degree centrality 47 (highest-brokerage node with degree > 20). K&E bridges corporate defense, DOJ prosecution, political fundraising, and regulatory drafting. Same structural hole position, but institutional rather than personal. Filip wrote DPA rules as Deputy AG, then used them defending corporate clients at K&E.",
+      "evidence": ["finding:3179", "finding:3180", "finding:3083", "finding:3114", "EFTA02612560", "EFTA00013801"]
     },
     {
       "label": "Ruemmler connecting both sides",
-      "summary": "Kathryn Ruemmler maintained relationships with both the anti-Qatar operation (Broidy/Nader) and Qatar-adjacent interests. Bridge position between opposing factions.",
-      "evidence": ["Thread 6 findings"]
+      "summary": "Kathryn Ruemmler maintained relationships with both the anti-Qatar operation (Broidy/Nader) and Qatar-adjacent interests. Bridge position between opposing factions. The only person in the network spanning both banking and legal pillar types.",
+      "evidence": ["finding:174", "finding:887", "finding:1385", "finding:1431", "finding:3473", "EFTA02479180", "EFTA02502020", "EFTA02358899"]
     }
   ],
   "detection_markers": [
@@ -55,5 +55,5 @@
     "description": "Network graph with structural holes visible, clusters color-coded, and the bridge node highlighted. Static ego network with labeled clusters.",
     "static_fallback": "Static labeled cluster diagram"
   },
-  "last_updated": "2026-02-16"
+  "last_updated": "2026-02-20"
 }

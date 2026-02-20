@@ -5,7 +5,7 @@
   "subtitle": "Where intelligence finance meets private crime",
   "archetype": "Shifting the Burden",
   "definition": "Off-the-books financial infrastructure — maintained by or for intelligence services — that intersects with and enables private financial crime, because the same mechanisms (shell companies, compliant banks, deniable intermediaries) serve both purposes.",
-  "case_intro": "In 1972, Agha Hasan Abedi founded the Bank of Credit and Commerce International with a specific design principle: serve clients that other banks wouldn't touch. By the late 1980s, BCCI held $20B+ in assets and counted among its clients the CIA, Pakistan's ISI, multiple drug cartels, arms dealers, and at least three other intelligence services. The bank wasn't captured by intelligence operations — it was *designed* as shared infrastructure. The same features that let the CIA move money without congressional oversight also let drug cartels launder proceeds and arms dealers finance shipments. When BCCI collapsed in 1991, the investigation revealed something structural: the overlap between intelligence finance and criminal finance wasn't incidental. The two systems share plumbing because they face the same problem — moving money without institutional oversight. Now look at the documented infrastructure around Epstein: Deutsche Bank (188 FinCEN filings, $6.1B in suspicious transactions), USVI trust companies, layered offshore entities, and a network that spans Wall Street, intelligence-connected figures (Barak, Maxwell family), and Gulf state intermediaries. The question isn't whether the systems are identical. The question is whether they share plumbing — and if so, which pipes.",
+  "case_intro": "In 1972, Agha Hasan Abedi founded the Bank of Credit and Commerce International with a specific design principle: serve clients that other banks wouldn't touch. By the late 1980s, BCCI held $20B+ in assets and counted among its clients the CIA, Pakistan's ISI, multiple drug cartels, arms dealers, and at least three other intelligence services. The bank wasn't captured by intelligence operations — it was *designed* as shared infrastructure. The same features that let the CIA move money without congressional oversight also let drug cartels launder proceeds and arms dealers finance shipments. When BCCI collapsed in 1991, the investigation revealed something structural: the overlap between intelligence finance and criminal finance wasn't incidental. The two systems share plumbing because they face the same problem — moving money without institutional oversight. Now look at the documented infrastructure around Epstein: Deutsche Bank ($304M across 579 documented transactions, with actual flows far larger per the NYDFS consent order), USVI trust companies, layered offshore entities, and a network that spans Wall Street, intelligence-connected figures (Barak, Maxwell family), and Gulf state intermediaries. The question isn't whether the systems are identical. The question is whether they share plumbing — and if so, which pipes.",
   "theoretical_basis": "Documented historical operations (not theory): Air America, Iran-Contra, BCCI, Nugan Hand Bank. The incentive structure is straightforward: any entity that needs to move money without congressional/parliamentary oversight will build or co-opt the same infrastructure that financial criminals use.",
   "mechanism": ["Revenue sources outside appropriations", "Non-reporting banking infrastructure", "Logistics with civilian cover", "Deniable intermediaries"],
   "mechanism_details": {
@@ -25,7 +25,7 @@
     "Which Epstein-adjacent figures had BCCI relationships? (Systematic trace needed)",
     "Southern Air Transport's presence in Columbus, Ohio overlaps with Wexner's base. SAT board members, bankers, logistics partners — do any names appear in our network?",
     "Robert Maxwell's intelligence connections are documented. Ghislaine inherited networks. The framework suggests broader intelligence service connections beyond Thread 4.",
-    "Deutsche Bank appears in both FinCEN Files (188 filings, $6.1B) and Epstein's banking. Shared infrastructure, not necessarily shared operations — but worth investigating."
+    "Deutsche Bank's NYDFS consent order documents systemic compliance failures. The FBME correspondent banking relationship ($618B in dollar-denominated transactions) and Epstein account management share the same institutional infrastructure. Shared plumbing, not necessarily shared operations — but worth investigating."
   ],
   "canonical_instances": [
     {
@@ -35,13 +35,13 @@
     },
     {
       "label": "The financial infrastructure overlap",
-      "summary": "Deutsche Bank appears in both FinCEN Files (188 filings, $6.1B in suspicious transactions) and Epstein's banking ($304M across 579 transactions). The same bank that processed intelligence-adjacent transactions also processed Epstein's money.",
-      "evidence": ["Thread 3", "FinCEN Files"]
+      "summary": "Deutsche Bank processed $304M across 579 documented Epstein-related transactions (DS10 dataset — partial capture). The NYDFS consent order documents systemic compliance failures. DB also processed 478,379 dollar-denominated transactions totaling over $618B for FBME, a bank with documented intelligence connections. The same infrastructure served both purposes.",
+      "evidence": ["finding:322", "finding:1453", "finding:2820", "finding:3222", "finding:3181", "NYDFS-ConsentOrder-2020", "OffshoreAlert:DB-Consent-Order-NYDFS", "OffshoreAlert:Ali-Karimi-v-DB"]
     },
     {
       "label": "Maxwell family connections",
       "summary": "Robert Maxwell's intelligence connections are documented. Ghislaine inherited networks. Thread 4 covers Israeli connections but the framework suggests broader intelligence service connections.",
-      "evidence": ["Thread 4 findings"]
+      "evidence": ["finding:451", "finding:496", "finding:515", "finding:531", "finding:547", "finding:964", "finding:1319", "finding:1346", "EFTA02434764", "EFTA02571796", "EFTA02652177", "DOCUMENTCLOUD:24402693"]
     }
   ],
   "detection_markers": [
@@ -64,5 +64,5 @@
     "description": "Side-by-side: a documented historical intelligence-finance operation (BCCI, Iran-Contra) and the documented Epstein infrastructure. Map structural parallels without asserting operational identity.",
     "static_fallback": "Side-by-side feature table"
   },
-  "last_updated": "2026-02-16"
+  "last_updated": "2026-02-20"
 }

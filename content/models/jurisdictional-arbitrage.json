@@ -23,17 +23,17 @@
     {
       "label": "The USVI trust architecture",
       "summary": "Southern Trust Company incorporated in USVI (tax advantages, privacy), banking through Deutsche Bank (willing to onboard clients others rejected), beneficial ownership obscured through layered structures.",
-      "evidence": ["DS10 financial records", "Thread 3"]
+      "evidence": ["finding:233", "finding:1279", "finding:1302", "finding:1504", "EFTA02347813", "EFTA01284214", "EFTA02633183", "USVI:582110"]
     },
     {
       "label": "The five-tier corporate architecture",
       "summary": "USVI trusts → holding companies → operating entities → bank accounts → real property. Each tier adds a layer of opacity and a different jurisdiction's protections.",
-      "evidence": ["Wave 11 findings"]
+      "evidence": ["finding:1545", "finding:484", "finding:590", "finding:534", "ACRIS:FT_1690000317169", "FL-SunBiz:P95000027272", "GLEIF:549300AZFOXEILVV4R81", "NM-SoS:1615137", "NY-SoS:3355889"]
     },
     {
       "label": "Deutsche Bank as enabler",
-      "summary": "$304M across 579 transactions. DB's willingness to process these transactions without meaningful compliance review IS the bridge infrastructure. The bank profits from providing the bridge.",
-      "evidence": ["Thread 3", "DS10"]
+      "summary": "$304M across 579 transactions (DS10 dataset — partial capture; actual flows far larger per NYDFS consent order). DB's willingness to process these transactions without meaningful compliance review IS the bridge infrastructure. The bank profits from providing the bridge.",
+      "evidence": ["finding:322", "finding:1453", "finding:1825", "finding:2820", "finding:3251", "NYDFS-ConsentOrder-2020", "OffshoreAlert:DB-Consent-Order-NYDFS"]
     }
   ],
   "detection_markers": [
@@ -53,5 +53,5 @@
     "description": "Flow diagram showing money and ownership flowing across jurisdictional boundaries — USVI trust at top, Delaware holding companies in the middle, New York/Florida/New Mexico operating entities and properties at the bottom. Color-coded by jurisdiction.",
     "static_fallback": "Entity-jurisdiction table"
   },
-  "last_updated": "2026-02-16"
+  "last_updated": "2026-02-20"
 }

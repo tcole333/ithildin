@@ -5,7 +5,7 @@
   "subtitle": "From architects to unwitting participants",
   "archetype": "Drifting Goals / Tragedy of the Commons",
   "definition": "Within any complex financial crime network, participants operate at different levels of awareness and complicity — from fully complicit architects to unwitting service providers — and the system requires participants at every level.",
-  "case_intro": "In 2013, a Deutsche Bank relationship manager — designated RM 82289 — opens accounts for Jeffrey Epstein. This is five years after Epstein's Florida conviction. JPMorgan has already exited the relationship. The RM processes $67M through a primary account and $32M through a connected Wanek account. Internal compliance flags are raised — and overridden. The RM is not an architect of the scheme; they are a professional doing a job in an institutional environment where the compliance function has been subordinated to the revenue function. Elsewhere in the network, Brad Karp — chairman of Paul Weiss — actively leaks privileged DOJ intelligence about the Ghosn case to Epstein across seven documents in November-January 2019. Karp isn't willfully blind; he is a knowing participant making deliberate choices. Meanwhile, a registered agent in the USVI files annual reports for hundreds of entities, three of which happen to be Epstein shells. This agent is almost certainly unwitting. The system needs all three.",
+  "case_intro": "In 2013, a Deutsche Bank relationship manager — designated RM 82289 — opens accounts for Jeffrey Epstein. This is five years after Epstein's Florida conviction. JPMorgan has already exited the relationship. The RM co-manages Epstein and Wanek family accounts under a single portfolio, with 60+ accounts including The Haze Trust at $40.58M. Internal compliance flags are raised — and overridden. The RM is not an architect of the scheme; they are a professional doing a job in an institutional environment where the compliance function has been subordinated to the revenue function. Elsewhere in the network, Brad Karp — chairman of Paul Weiss — actively leaks privileged DOJ intelligence about the Ghosn case to Epstein across multiple exchanges from November 2018 through January 2019. Karp isn't willfully blind; he is a knowing participant making deliberate choices. Meanwhile, a registered agent in the USVI files annual reports for hundreds of entities, three of which happen to be Epstein shells. This agent is almost certainly unwitting. The system needs all three.",
   "mechanism": ["Architects", "Knowing participants", "Willfully blind", "Captured", "Unwitting participants"],
   "mechanism_details": {
     "Architects": "Fully complicit — design the structures, understand their purpose, profit from the scheme. Example: Epstein himself, possibly Indyke/Kahn as inner circle.",
@@ -19,17 +19,17 @@
     {
       "label": "Deutsche Bank RM network",
       "summary": "Some RMs appear to have been knowing participants (flagged internally, ignored compliance). Others may have been willfully blind (didn't ask questions about a client who checked every compliance red flag). The institution's compliance failures created the environment for both.",
-      "evidence": ["Thread 3 findings", "DS10"]
+      "evidence": ["finding:2228", "finding:2258", "finding:1790", "finding:1798", "finding:960", "finding:3187", "EFTA01384845", "EFTA01386072", "EFTA01383203", "OffshoreAlert:DB-Consent-Order-NYDFS"]
     },
     {
       "label": "Legal enablers",
       "summary": "Brad Karp actively leaked privileged DOJ/Ghosn intelligence to Epstein (knowing participant at minimum). A registered agent filing paperwork for 500 entities including three Epstein shells is almost certainly unwitting. Reid Weingarten defending Epstein as legal counsel occupies a more complex position.",
-      "evidence": ["Email corpus evidence"]
+      "evidence": ["finding:517", "finding:526", "finding:879", "finding:980", "finding:1339", "finding:21", "finding:25", "EFTA02627034", "EFTA02627134", "EFTA02616157", "EFTA00014330"]
     },
     {
       "label": "The philanthropy layer",
       "summary": "Scientists and academics who accepted Epstein funding — most likely unwitting about the source, but the gifts served Epstein's reputation laundering. Their participation was essential to the managed perception model, but they may have had no idea.",
-      "evidence": []
+      "evidence": ["finding:149", "finding:689", "finding:694", "finding:370", "finding:1400", "EFTA01920171", "EFTA02653740", "EFTA01898505", "EFTA02693048", "IRS990:133528667"]
     }
   ],
   "detection_markers": [
@@ -49,5 +49,5 @@
     "description": "A horizontal spectrum from \"Architect\" (fully complicit) on the left to \"Unwitting\" (no knowledge) on the right, with documented actors placed along it based on evidence. Color-coded dark red → amber → gray.",
     "static_fallback": "Horizontal spectrum with actors"
   },
-  "last_updated": "2026-02-16"
+  "last_updated": "2026-02-20"
 }
