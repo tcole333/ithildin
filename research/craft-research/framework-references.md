@@ -78,3 +78,11 @@ Curated academic and practitioner frameworks relevant to this investigation. Age
 | Enron (2001) | Mark-to-market reality distortion, special purpose entities | Complex structures concealing actual financial position |
 | Panama Papers (2016) | Offshore architecture at scale, Mossack Fonseca as enabler | Shell company formation patterns, jurisdictional layering |
 | 1MDB (2015) | Sovereign wealth fund looting, Goldman Sachs facilitation | Elite financial crime with institutional enablers |
+
+## Investigative Methods
+
+| Framework | Source | Relevance |
+|-----------|--------|-----------|
+| Forensic absence analysis | Implicit in forensic accounting; related to Peripheral Collapse lens | The deliberate removal or prevention of records as a stronger signal than their content. Due diligence ordered then withdrawn (DB/Gratitude America 2016), meetings with no documented substance (EXECUTIVE-1/Epstein Jan 2015), FARA registrations that appear and disappear (RNB 1975-76), communication gaps in otherwise dense correspondence. Where Peripheral Collapse detects hollow entities, forensic absence detects hollow *moments* in real entities — the surgical removal of documentation at specific decision points. Grounding: findings 3217, 3259, 3361 |
+| Affinity network exploitation | Madoff case studies; Perri, "Fraud Auditing" (2011) | Trust networks where shared identity (ethnicity, religion, profession, social class) suppresses due diligence. The Mega Group's shared identity as major Jewish-American philanthropists created implicit trust that Epstein exploited. Professional affinity (K&E/DOJ shared identity as "elite lawyers") similarly suppresses scrutiny. Distinct from Bridge Tax (which is about structural position) — affinity exploitation is about leveraging *shared identity* within a single cluster |
+| Cultural capture | Kwak, "Cultural Capture and the Financial Regulators" (2014) | Refinement of Stigler's regulatory capture: regulators internalize the worldview of the regulated industry not through bribery or revolving doors but through social proximity, shared educational backgrounds, and status competition. Explains why DB compliance officers interpreted ambiguity in favor of the client — not corruption but cognitive alignment with the client-facing perspective |
