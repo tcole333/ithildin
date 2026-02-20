@@ -85,11 +85,13 @@ def _duckdb():
 
 
 def _registry():
-    """Return registry.db connection."""
+    """Return registry.db connection with WAL mode and busy timeout."""
     if not REGISTRY_DB.exists():
         print(f"Warning: {REGISTRY_DB} not found", file=sys.stderr)
         return None
-    db = sqlite3.connect(str(REGISTRY_DB))
+    db = sqlite3.connect(str(REGISTRY_DB), timeout=30)
+    db.execute("PRAGMA journal_mode=WAL")
+    db.execute("PRAGMA busy_timeout=30000")
     db.row_factory = sqlite3.Row
     return db
 
@@ -171,19 +173,32 @@ def search_registry(db, org_name, state=None):
 
     matches = []
 
-    # Try FTS5 first
-    try:
+    # Fast path: jurisdiction-scoped LIKE search when we know the state
+    # Uses source_jurisdiction index — instant for small jurisdictions
+    rows = []
+    if state:
+        juris = state.lower()
         rows = db.execute("""
-            SELECT re.* FROM registry_entities_fts fts
-            JOIN registry_entities re ON fts.rowid = re.id
-            WHERE registry_entities_fts MATCH ?
-            ORDER BY rank LIMIT 20
-        """, [f'"{name}"']).fetchall()
-    except sqlite3.OperationalError:
-        rows = []
+            SELECT * FROM registry_entities
+            WHERE source_jurisdiction = ?
+            AND entity_name LIKE ?
+            LIMIT 20
+        """, [juris, f"%{name}%"]).fetchall()
 
-    # Fall back to LIKE if FTS empty
+    # Fall back to FTS for cross-jurisdiction or if scoped search empty
     if not rows:
+        try:
+            rows = db.execute("""
+                SELECT re.* FROM registry_entities_fts fts
+                JOIN registry_entities re ON fts.rowid = re.id
+                WHERE registry_entities_fts MATCH ?
+                ORDER BY rank LIMIT 20
+            """, [f'"{name}"']).fetchall()
+        except sqlite3.OperationalError:
+            rows = []
+
+    # Final fallback: unscoped LIKE (only when no state filter — avoids 6M row scan)
+    if not rows and not state:
         rows = db.execute("""
             SELECT * FROM registry_entities
             WHERE entity_name LIKE ? LIMIT 20
@@ -222,15 +237,18 @@ def search_registry_by_address(db, address, city=None, state=None):
         return []
 
     addr_norm = address.strip().upper()
-    query = "SELECT * FROM registry_entities WHERE UPPER(principal_address) LIKE ? "
-    params = [f"%{addr_norm}%"]
+
+    # Scope to jurisdiction for performance when state is known
+    if state:
+        query = "SELECT * FROM registry_entities WHERE source_jurisdiction = ? AND UPPER(principal_address) LIKE ? "
+        params = [state.lower(), f"%{addr_norm}%"]
+    else:
+        query = "SELECT * FROM registry_entities WHERE UPPER(principal_address) LIKE ? "
+        params = [f"%{addr_norm}%"]
 
     if city:
         query += "AND UPPER(principal_city) LIKE ? "
         params.append(f"%{city.upper()}%")
-    if state:
-        query += "AND UPPER(principal_state) = ? "
-        params.append(state.upper())
 
     query += "LIMIT 50"
     return [dict(r) for r in db.execute(query, params).fetchall()]
@@ -288,31 +306,60 @@ def search_nydos_live(db, org_name):
 
     if ingested:
         db.commit()
-        # Rebuild FTS index so new entities are searchable
-        try:
-            db.execute("INSERT INTO registry_entities_fts(registry_entities_fts) VALUES('rebuild')")
-            db.execute("INSERT INTO registry_officers_fts(registry_officers_fts) VALUES('rebuild')")
-            db.commit()
-        except sqlite3.OperationalError:
-            pass
+        # Incrementally add new entities to FTS (much faster than full rebuild)
+        for eid in ingested:
+            try:
+                db.execute("""
+                    INSERT INTO registry_entities_fts(rowid, entity_name, principal_address, purpose)
+                    SELECT id, entity_name, principal_address, purpose
+                    FROM registry_entities WHERE id = ?
+                """, [eid])
+            except sqlite3.OperationalError:
+                pass
+            try:
+                # Also index any new officers
+                db.execute("""
+                    INSERT INTO registry_officers_fts(rowid, officer_name, address)
+                    SELECT id, officer_name, address
+                    FROM registry_officers WHERE entity_id = ?
+                """, [eid])
+            except sqlite3.OperationalError:
+                pass
+        db.commit()
 
     return ingested
 
 
-def find_officer_across_entities(db, officer_name):
-    """Find all entities where a person is listed as an officer."""
+def find_officer_across_entities(db, officer_name, jurisdiction=None):
+    """Find all entities where a person is listed as an officer.
+
+    When jurisdiction is provided, only searches within that jurisdiction
+    to avoid expensive full-table scans on large registries (6M+ FL entities).
+    """
     if not db:
         return []
 
     name_norm = officer_name.strip().upper()
-    rows = db.execute("""
-        SELECT ro.*, re.entity_name, re.source_jurisdiction, re.source_id,
-               re.status, re.formation_date, re.entity_type
-        FROM registry_officers ro
-        JOIN registry_entities re ON ro.entity_id = re.id
-        WHERE UPPER(ro.officer_name) LIKE ?
-        ORDER BY re.formation_date
-    """, [f"%{name_norm}%"]).fetchall()
+
+    if jurisdiction:
+        rows = db.execute("""
+            SELECT ro.*, re.entity_name, re.source_jurisdiction, re.source_id,
+                   re.status, re.formation_date, re.entity_type
+            FROM registry_officers ro
+            JOIN registry_entities re ON ro.entity_id = re.id
+            WHERE re.source_jurisdiction = ?
+            AND UPPER(ro.officer_name) LIKE ?
+            ORDER BY re.formation_date
+        """, [jurisdiction.lower(), f"%{name_norm}%"]).fetchall()
+    else:
+        rows = db.execute("""
+            SELECT ro.*, re.entity_name, re.source_jurisdiction, re.source_id,
+                   re.status, re.formation_date, re.entity_type
+            FROM registry_officers ro
+            JOIN registry_entities re ON ro.entity_id = re.id
+            WHERE UPPER(ro.officer_name) LIKE ?
+            ORDER BY re.formation_date
+        """, [f"%{name_norm}%"]).fetchall()
     return [dict(r) for r in rows]
 
 
@@ -418,10 +465,14 @@ def trace_npi(npi, con, db, leie=None):
             result["unique_agents"] = list(all_agents.keys())
 
             # Step 5: Cross-reference officers to find other entities they control
+            # Scope to same jurisdiction for performance (avoids 6M row FL scan)
+            jurisdictions = list({m.get("source_jurisdiction") for m in registry_matches if m.get("source_jurisdiction")})
             officer_network = {}
             matched_ids = {m["id"] for m in registry_matches}
             for oname in all_officers:
-                other_entities = find_officer_across_entities(db, oname)
+                other_entities = []
+                for j in jurisdictions:
+                    other_entities.extend(find_officer_across_entities(db, oname, jurisdiction=j))
                 other_only = [e for e in other_entities if e.get("entity_id") not in matched_ids]
                 if other_only:
                     officer_network[oname] = other_only
@@ -509,7 +560,11 @@ def cmd_batch(args):
     results = []
     for i, npi in enumerate(npis, 1):
         print(f"  [{i}/{len(npis)}] Tracing {npi}...", end="", flush=True)
-        result = trace_npi(npi, con, db, leie)
+        try:
+            result = trace_npi(npi, con, db, leie)
+        except Exception as e:
+            print(f" ERROR: {e}")
+            result = {"npi": str(npi), "steps": [f"error: {e}"], "error": str(e)}
         results.append(result)
         name = result.get("org_name") or "?"
         rmatch = len(result.get("registry_matches", []))
