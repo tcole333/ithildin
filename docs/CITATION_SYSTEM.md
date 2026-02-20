@@ -45,14 +45,14 @@ Content with tokens → applyCitations() → HTML with citation links
 
 | Component | Path |
 |-----------|------|
-| Core library | `site/web/src/lib/citations.ts` |
-| Support span engine | `site/web/src/lib/supportSpans.ts` |
-| Shared content pipeline | `site/web/src/lib/contentEvidencePipeline.ts` |
-| Evidence mode UI logic | `site/web/src/lib/supportMode.ts` |
-| Article page | `site/web/src/pages/articles/[slug].astro` |
-| Dossier page | `site/web/src/pages/dossiers/[slug].astro` |
-| Finding evidence | `site/web/src/lib/findingEvidence.ts` |
-| Coverage report CLI | `site/web/scripts/report-support-coverage.mjs` |
+| Core library | `web/src/lib/citations.ts` |
+| Support span engine | `web/src/lib/supportSpans.ts` |
+| Shared content pipeline | `web/src/lib/contentEvidencePipeline.ts` |
+| Evidence mode UI logic | `web/src/lib/supportMode.ts` |
+| Article page | `web/src/pages/articles/[slug].astro` |
+| Dossier page | `web/src/pages/dossiers/[slug].astro` |
+| Finding evidence | `web/src/lib/findingEvidence.ts` |
+| Coverage report CLI | `web/scripts/report-support-coverage.mjs` |
 
 ## Article Pipeline Integration
 
@@ -143,7 +143,7 @@ Citations now emit stable attributes used by support mode and tests:
 Run:
 
 ```bash
-cd site/web
+cd web
 npm run report:support-coverage
 # or
 npm run report:support-coverage:changed -- --base-ref <BASE> --head-ref <HEAD>

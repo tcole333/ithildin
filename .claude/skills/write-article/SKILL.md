@@ -35,7 +35,7 @@ Phase 0 `research dossier` -> Phase 1 `structure` -> Phase 2 `draft` -> Phase 3 
 ```
 Phase 0: RESEARCH DOSSIER -> $WORKDIR/research-dossier.md
 Phase 1: STRUCTURE        -> $WORKDIR/article-structure.md
-Phase 2: DRAFT            -> site/content/articles/<cluster-id>.mdx
+Phase 2: DRAFT            -> content/articles/<cluster-id>.mdx
 Phase 3: VERIFY           -> $WORKDIR/verification-report.md
 Phase 4: REVISE           -> updated article + revision summary
 ```
@@ -51,16 +51,16 @@ Search across corpus + structured + legal/network sources. Do not limit research
 No args:
 
 ```bash
-uv run python site/pipeline/story_clustering.py --list
+uv run python pipeline/story_clustering.py --list
 ```
 
 With a cluster:
 
 ```bash
-uv run python site/pipeline/story_clustering.py --cluster <CLUSTER_ID>
+uv run python pipeline/story_clustering.py --cluster <CLUSTER_ID>
 ```
 
-Read `site/content/clusters.json`, locate the selected cluster, and capture:
+Read `content/clusters.json`, locate the selected cluster, and capture:
 - title
 - targets
 - `source_diversity`
@@ -73,9 +73,14 @@ uv run python scripts/evidence_audit.py report
 ```
 
 Block writing if any are true:
-- >10% of cluster findings have missing `source_quote`
+- >10% of **document-sourced** evidence rows have missing `source_quote`
 - Any `direct_quote`/`confirmed` finding has a cross-check mismatch
 - >5 unresolved duplicate clusters within the article's scope
+
+Evidence category rules:
+- **Document** (EFTA, DOJ, court filings, etc.): `source_quote` required — quote proves claim is in actual document
+- **Structured** (FEC, IRS 990, ACRIS, FARA, LDA, SEC, etc.): `source_quote` optional — the evidence_ref itself is the verification. Quote can hold extracted values (e.g., `"amount: $650,000; recipient: IPI"`)
+- **Web/Media** (URLs, GDELT, etc.): `source_quote` recommended but not blocking — URLs go dead, quote preserves context
 
 ### 0.3 Source Diversity Assessment
 
@@ -253,7 +258,7 @@ Evidence-support mapping now runs at sentence granularity in the web UI:
 
 ### Article format
 
-Write `site/content/articles/<cluster-id>.mdx` with YAML frontmatter:
+Write `content/articles/<cluster-id>.mdx` with YAML frontmatter:
 
 ```mdx
 ---
@@ -276,8 +281,8 @@ Do not include:
 ### Create visualization data files
 
 When you encounter a section where a visualization genuinely helps, create the JSON data file during writing:
-- `site/content/{timelines,financials,ego,structures}/` for source data
-- Copy to `site/web/public/content/` for runtime fetch
+- `content/{timelines,financials,ego,structures}/` for source data
+- Copy to `web/public/content/` for runtime fetch
 - Embed: `<div data-viz="TimelineChart" data-src="/content/timelines/cluster-name.json" data-height="420" data-group-by="entity"></div>`
 
 ### Analytical model callouts
@@ -293,9 +298,9 @@ Available models: manufactured-dependency, bridge-tax, private-order, narrative-
 
 ### Save and build
 
-Save to `site/content/articles/<cluster-id>.mdx`, then:
+Save to `content/articles/<cluster-id>.mdx`, then:
 ```bash
-cd /Users/travcole/projects/osint-research/site/web && npx astro build 2>&1 | tail -5
+cd /Users/travcole/projects/osint-research/web && npx astro build 2>&1 | tail -5
 ```
 
 ---
@@ -315,7 +320,7 @@ The reviewer does NOT edit the article directly — it reports problems for Phas
 Then run support-coverage metrics for the draft:
 
 ```bash
-cd /Users/travcole/projects/osint-research/site/web
+cd /Users/travcole/projects/osint-research/web
 npm run report:support-coverage:changed -- --base-ref HEAD~1 --head-ref HEAD
 ```
 
@@ -355,7 +360,7 @@ Read the verification report and apply fixes.
 ### 4.6. Final build and report
 
 ```bash
-cd /Users/travcole/projects/osint-research/site/web && npx astro build 2>&1 | tail -5
+cd /Users/travcole/projects/osint-research/web && npx astro build 2>&1 | tail -5
 ```
 
 Output to the user:
@@ -369,7 +374,7 @@ Output to the user:
 - **Research agents**: 3 (corpus, financial, legal)
 - **Verification**: [X blocking / Y should-fix / Z suggestions]
 - **Status**: reviewed
-- **Path**: site/content/articles/<cluster-id>.mdx
+- **Path**: content/articles/<cluster-id>.mdx
 
 ### Structural Notes
 - [What finding drove the lead]
@@ -400,6 +405,7 @@ Output to the user:
 | inner-circle-operations | Inner Circle Operations | The org chart of a criminal enterprise that filed its taxes |
 | usvi-operations | USVI Operations | Why the US Virgin Islands is the Delaware of the Caribbean |
 | political-influence-machine | The Political Influence Machine | Campaign finance as relationship management |
+| parallel-diplomatic-corps | The Parallel Diplomatic Corps | Epstein built institutions that brokered between governments |
 
 ## Readiness Criteria
 

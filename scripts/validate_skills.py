@@ -67,7 +67,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--require-uv",
         action="store_true",
-        help="Warn when a command starts with bare python for project tools/scripts/site paths",
+        help="Warn when a command starts with bare python for project tools/scripts paths",
     )
     parser.add_argument(
         "--strict",
@@ -296,7 +296,7 @@ def lint_markdown_file(
 
                 # Optional style check for bare python.
                 if require_uv and len(tokens) >= 2 and tokens[0] == "python":
-                    if tokens[1].startswith(("tools/", "scripts/", "site/")):
+                    if tokens[1].startswith(("tools/", "scripts/")):
                         issues.append(
                             Issue(
                                 "WARN",

@@ -5,8 +5,8 @@ Parses citation tokens, classifies by source type, computes diversity metrics,
 and cross-references investigation.db for available but uncited evidence.
 
 Usage:
-    uv run python scripts/source_diversity.py site/content/articles/gulf-intelligence-web.mdx
-    uv run python scripts/source_diversity.py site/content/articles/gulf-intelligence-web.mdx --json
+    uv run python scripts/source_diversity.py content/articles/gulf-intelligence-web.mdx
+    uv run python scripts/source_diversity.py content/articles/gulf-intelligence-web.mdx --json
 """
 
 import argparse
@@ -18,7 +18,7 @@ from collections import Counter
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
-CLUSTERS_PATH = Path(__file__).parent.parent / "site" / "content" / "clusters.json"
+CLUSTERS_PATH = Path(__file__).parent.parent / "content" / "clusters.json"
 
 # Citation token patterns matching citations.ts
 CITATION_PATTERNS = [

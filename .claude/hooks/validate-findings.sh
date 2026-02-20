@@ -20,9 +20,24 @@ if ! echo "$COMMAND" | grep -q -- "--evidence"; then
   exit 2
 fi
 
-# 2. Require --source-quote
-if ! echo "$COMMAND" | grep -q -- "--source-quote"; then
-  echo "BLOCKED: findings_tracker add requires --source-quote flag. Provide the exact text from the source that supports this claim. Format: --source-quote 'EFTAXXXX:exact quote text here'" >&2
+# 2. Require --source-quote for document-type evidence refs
+# Structured data (FEC, 990, ACRIS, FARA, LDA, SEC, FAA, UCC, GLEIF, etc.) doesn't need quotes —
+# the evidence_ref itself IS the verification.
+EVIDENCE_VAL=$(echo "$COMMAND" | sed -n "s/.*--evidence[= ]*'\([^']*\)'.*/\1/p")
+if [ -z "$EVIDENCE_VAL" ]; then
+  EVIDENCE_VAL=$(echo "$COMMAND" | sed -n 's/.*--evidence[= ]*"\([^"]*\)".*/\1/p')
+fi
+if [ -z "$EVIDENCE_VAL" ]; then
+  EVIDENCE_VAL=$(echo "$COMMAND" | awk '{for(i=1;i<=NF;i++) if($i=="--evidence") print $(i+1)}')
+fi
+# Check if evidence is a structured data type (source_quote optional)
+IS_STRUCTURED=false
+if echo "$EVIDENCE_VAL" | grep -qiE "^(FEC|IRS.?990|990:|ProPublica|PP990|PROPUBLICA|ACRIS|FARA|LDA|SEC|EDGAR|FAA|UCC|GLEIF|OpenSanctions|ICIJ|OCCRP|FL_SUNBIZ|FL.SunBiz|FL:|NY_DOS|NY.SoS|NY.DOS|NM.SoS|DC_|OC:|UK.Companies|USVI)"; then
+  IS_STRUCTURED=true
+fi
+
+if [ "$IS_STRUCTURED" = "false" ] && ! echo "$COMMAND" | grep -q -- "--source-quote"; then
+  echo "BLOCKED: findings_tracker add requires --source-quote flag for document-type evidence. Provide the exact text from the source that supports this claim. Format: --source-quote 'EFTAXXXX:exact quote text here'. (Structured data like FEC/990/ACRIS/FARA refs are exempt.)" >&2
   exit 2
 fi
 

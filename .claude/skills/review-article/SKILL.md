@@ -10,7 +10,7 @@ Adversarial verification agent that finds problems in articles and dossiers. Pro
 
 ## Arguments
 
-- Required: path or cluster ID (e.g., `/review-article apollo-money-pipeline` or `/review-article site/content/articles/apollo-money-pipeline.mdx`)
+- Required: path or cluster ID (e.g., `/review-article apollo-money-pipeline` or `/review-article content/articles/apollo-money-pipeline.mdx`)
 - Optional `--dossier <slug>`: review a dossier instead of an article
 - Optional `--backlinks-only`: just surface backlink candidates without full review
 - Optional `--workdir <path>`: write verification report to this directory (for `/write-article` integration)
@@ -37,12 +37,12 @@ The reviewer produces `$WORKDIR/verification-report.md` (or outputs directly if 
 
 For articles:
 ```
-Read: site/content/articles/<cluster-id>.mdx
+Read: content/articles/<cluster-id>.mdx
 ```
 
 For dossiers:
 ```
-Read: site/content/dossiers/<slug>.json
+Read: content/dossiers/<slug>.json
 ```
 
 ### 2. Evidence Integrity Check
@@ -99,7 +99,7 @@ uv run python tools/query_doj.py efta EFTA02576529 --text --output $WORKDIR/veri
 Run support coverage metrics and include key outputs in the review:
 
 ```bash
-cd /Users/travcole/projects/osint-research/site/web
+cd /Users/travcole/projects/osint-research/web
 npm run report:support-coverage:changed -- --base-ref HEAD~1 --head-ref HEAD
 ```
 
@@ -167,7 +167,7 @@ For each, choose: **CITE** (verify + add source), **SOFTEN** (downgrade precisio
 **NEW** — Analyze what types of evidence the article actually cites vs. what's available.
 
 ```bash
-uv run python scripts/source_diversity.py site/content/articles/<cluster-id>.mdx
+uv run python scripts/source_diversity.py content/articles/<cluster-id>.mdx
 ```
 
 Report should include:
@@ -297,7 +297,7 @@ Check if applicable analytical models are referenced. Missing model references �
 
 #### Person/Entity → Dossier Links
 ```bash
-ls site/content/dossiers/ | grep -i "<name>"
+ls content/dossiers/ | grep -i "<name>"
 ```
 Every person with a dossier should be linked: `[Leon Black](/dossiers/leon-black)`
 
@@ -311,7 +311,7 @@ uv run python tools/query_registry.py search "<ENTITY>" --output $WORKDIR/verify
 
 #### Dossier → Article Links (when reviewing dossiers)
 ```bash
-Grep: pattern="<TARGET_NAME>" path="site/content/articles/"
+Grep: pattern="<TARGET_NAME>" path="content/articles/"
 ```
 
 ### 14. Compile Verification Report

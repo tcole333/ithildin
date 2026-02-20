@@ -44,7 +44,7 @@ uv run python scripts/trigger_engine.py run --dry-run
 uv run python scripts/trigger_engine.py status
 
 # Override content output directory for writer personas
-ITHILDIN_CONTENT_ROOT=site/content uv run python scripts/agent_worker.py --persona contextual_analyst
+ITHILDIN_CONTENT_ROOT=content uv run python scripts/agent_worker.py --persona contextual_analyst
 ```
 
 ### Leads

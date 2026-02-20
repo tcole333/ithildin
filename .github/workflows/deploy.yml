@@ -18,6 +18,8 @@ jobs:
           cache: npm
           cache-dependency-path: web/package-lock.json
 
+      - run: node scripts/check-path-contract.mjs
+
       - run: npm ci
         working-directory: web
 
