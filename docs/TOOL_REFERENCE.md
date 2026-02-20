@@ -310,6 +310,22 @@ python tools/query_michigan.py entity 85956 802112570 --output /tmp/mi-entity.js
 python tools/query_michigan.py ingest 85956 802112570                     # Single entity → registry.db
 python tools/query_michigan.py ingest-search "Epstein" --limit 20         # Batch (slow — 1 browser session per entity)
 
+# New Jersey Division of Revenue (HTML scraping — no detail pages)
+python tools/query_newjersey.py search "EPSTEIN" --output /tmp/nj-epstein.json
+python tools/query_newjersey.py search "APOLLO" --limit 50 --output /tmp/nj-apollo.json
+python tools/query_newjersey.py entity 0600092144 --output /tmp/nj-entity.json   # By 10-digit entity ID
+python tools/query_newjersey.py keywords "HOME CARE" --output /tmp/nj-homecare.json  # Keyword search
+python tools/query_newjersey.py ingest 0600092144                          # Single entity → registry.db
+python tools/query_newjersey.py ingest-search "Epstein" --limit 20         # Batch ingest
+
+# Massachusetts Corporations Division (Incapsula WAF — needs Playwright browser helper)
+# First run may require manual Incapsula challenge solve in browser window
+python tools/query_massachusetts.py search "EPSTEIN" --output /tmp/ma-epstein.json
+python tools/query_massachusetts.py search "APOLLO" --type F --output /tmp/ma-apollo.json  # Full text search
+python tools/query_massachusetts.py entity 000487270 --output /tmp/ma-entity.json   # By MA ID number
+python tools/query_massachusetts.py ingest 000487270                       # Single entity → registry.db
+python tools/query_massachusetts.py ingest-search "Epstein" --limit 20     # Batch (slow — 1 browser session per entity)
+
 # Colorado (SODA API — 1.3M+ entities, no auth)
 python tools/ingest_colorado.py search "Epstein" --limit 100
 python tools/ingest_colorado.py search "Zorro Ranch"

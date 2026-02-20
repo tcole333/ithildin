@@ -138,6 +138,12 @@ python tools/query_texas.py search "<QUERY>" --output $WORKDIR/search-tx.json
 # Michigan LARA (business registry — Playwright browser helper, Cloudflare WAF)
 python tools/query_michigan.py search "<QUERY>" --contains --output $WORKDIR/search-mi.json
 
+# New Jersey Division of Revenue (business entity name search — no detail pages)
+python tools/query_newjersey.py search "<QUERY>" --output $WORKDIR/search-nj.json
+
+# Massachusetts Corporations Division (Playwright browser helper, Incapsula WAF)
+python tools/query_massachusetts.py search "<QUERY>" --output $WORKDIR/search-ma.json
+
 # Epstein Files 20K (House Oversight docs — HOUSE_OVERSIGHT IDs, not EFTA)
 python tools/ingest_epstein_20k.py search "<QUERY>" --limit 10
 

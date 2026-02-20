@@ -95,6 +95,16 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 - `ingest <INTERNAL_ID> <FILING_NUMBER>` | `ingest-search "query"` — ingests to registry.db
 - Free, no auth. Requires `_mi_browser_helper.js` (Playwright + Chrome). First run may need manual Cloudflare solve.
 
+**NJ Division of Revenue** (`query_newjersey.py`): NJ business entity name search via njportal.com. Returns entity name, ID, city, type, formation date. No detail pages (officers/agents require paid Business Records Service).
+- `search "EPSTEIN"` | `entity <ENTITY_ID>` | `keywords "HOME CARE"`
+- `ingest <ENTITY_ID>` | `ingest-search "query"` — ingests to registry.db
+- Free, no auth. Limited data (name, type, city, formation date only).
+
+**MA Corporations Division** (`query_massachusetts.py`): MA Secretary of the Commonwealth corporate registry via Playwright browser helper (Incapsula WAF). Rich data: entity name/type/status, officers, registered agent, name changes, fiscal date.
+- `search "EPSTEIN" --type B` | `entity <ID_NUMBER>` (B=begins, M=exact, F=full text, S=soundex)
+- `ingest <ID_NUMBER>` | `ingest-search "query"` — ingests to registry.db
+- Free, no auth. Requires `_ma_browser_helper.js` (Playwright + Chrome). First run may need manual Incapsula solve.
+
 **Medicaid Provider Analysis** (T-MSIS 2018-2024, 227M rows, $1.09T):
 - `query_medicaid.py`: DuckDB-backed spending analysis — `stats`, `top-billers`, `top-codes`, `provider <NPI>`, `code <HCPCS>`, `network <NPI>`, `anomalies`, `sql`
 - `trace_provider.py`: Corporate trace pipeline — NPI → NPPES → state registry → officer network
