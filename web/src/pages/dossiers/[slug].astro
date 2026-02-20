@@ -10,6 +10,7 @@ import {
   processDossierCurationEvidence,
   safeJsonForScript,
 } from '../../lib/contentEvidencePipeline';
+import { extractCitedFindingIds, buildDossierFindingDetailMap } from '../../lib/findingDetail';
 
 export function getStaticPaths() {
   const contentDir = resolve(process.cwd(), '..', 'content', 'dossiers');
@@ -131,6 +132,11 @@ const {
   enableSupportSpans: evidenceModeEnabled,
 });
 const supportMapJson = safeJsonForScript(supportMap);
+
+const citedFindingIds = extractCitedFindingIds(pageCitations);
+const findingDetailMap = buildDossierFindingDetailMap(dossier, citedFindingIds);
+const findingDetailJson = safeJsonForScript(findingDetailMap);
+
 const supportSummary = supportMetrics.total_sentences > 0
   ? `${supportMetrics.supported_sentence_pct}% supported (${supportMetrics.supported_sentences}/${supportMetrics.total_sentences} sentences)`
   : 'No sentence-level support spans detected.';
@@ -473,10 +479,19 @@ const supportSummary = supportMetrics.total_sentences > 0
   {evidenceModeEnabled && (
     <script type="application/json" id="support-map-data" set:html={supportMapJson}></script>
   )}
+  {citedFindingIds.length > 0 && (
+    <script type="application/json" id="finding-detail-data" set:html={findingDetailJson}></script>
+  )}
   {evidenceModeEnabled && (
     <script>
       import { initSupportMode } from '../../lib/supportMode';
       initSupportMode();
+    </script>
+  )}
+  {citedFindingIds.length > 0 && (
+    <script>
+      import { initFindingPopover } from '../../lib/findingPopover';
+      initFindingPopover();
     </script>
   )}
 </BaseLayout>

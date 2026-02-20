@@ -4,6 +4,7 @@ import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, basename } from 'path';
 import { loadFindingEvidenceMap } from '../../lib/findingEvidence';
 import { processArticleEvidenceContent, safeJsonForScript } from '../../lib/contentEvidencePipeline';
+import { extractCitedFindingIds, loadFindingDetails } from '../../lib/findingDetail';
 
 export function getStaticPaths() {
   const articlesDir = resolve(process.cwd(), '..', 'content', 'articles');
@@ -51,10 +52,15 @@ const findingEvidenceMap = loadFindingEvidenceMap();
 const evidenceModeEnabled = import.meta.env.PUBLIC_ENABLE_EVIDENCE_MODE === 'true';
 const {
   pageHtml: content,
+  citationEntries,
   supportMap,
   supportMetrics,
 } = await processArticleEvidenceContent(rawContent, findingEvidenceMap, { enableSupportSpans: evidenceModeEnabled });
 const supportMapJson = safeJsonForScript(supportMap);
+
+const citedFindingIds = extractCitedFindingIds(citationEntries);
+const findingDetailMap = loadFindingDetails(citedFindingIds);
+const findingDetailJson = safeJsonForScript(findingDetailMap);
 const supportSummary = supportMetrics.total_sentences > 0
   ? `${supportMetrics.supported_sentence_pct}% supported (${supportMetrics.supported_sentences}/${supportMetrics.total_sentences} sentences)`
   : 'No sentence-level support spans detected.';
@@ -97,6 +103,9 @@ const supportSummary = supportMetrics.total_sentences > 0
     </article>
     {evidenceModeEnabled && (
       <script type="application/json" id="support-map-data" set:html={supportMapJson}></script>
+    )}
+    {citedFindingIds.length > 0 && (
+      <script type="application/json" id="finding-detail-data" set:html={findingDetailJson}></script>
     )}
 
     {(linkedDossiers.length > 0 || relatedArticles.length > 0) && (
@@ -144,6 +153,12 @@ const supportSummary = supportMetrics.total_sentences > 0
     <script>
       import { initSupportMode } from '../../lib/supportMode';
       initSupportMode();
+    </script>
+  )}
+  {citedFindingIds.length > 0 && (
+    <script>
+      import { initFindingPopover } from '../../lib/findingPopover';
+      initFindingPopover();
     </script>
   )}
 </BaseLayout>
