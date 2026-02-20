@@ -24,20 +24,25 @@ def _print_results(results):
     print(json.dumps(results, indent=2, default=str))
 
 
+def _engine(args) -> TriggerEngine:
+    queue = JobQueue(db_path=Path(args.db_path))
+    return TriggerEngine(queue, config_path=args.config)
+
+
 def cmd_run_scheduled(args):
-    engine = TriggerEngine(JobQueue(), config_path=args.config)
+    engine = _engine(args)
     results = engine.run_scheduled(dry_run=args.dry_run)
     _print_results(results)
 
 
 def cmd_run_thresholds(args):
-    engine = TriggerEngine(JobQueue(), config_path=args.config)
+    engine = _engine(args)
     results = engine.run_thresholds(dry_run=args.dry_run)
     _print_results(results)
 
 
 def cmd_run(args):
-    engine = TriggerEngine(JobQueue(), config_path=args.config)
+    engine = _engine(args)
     results = []
     results.extend(engine.run_scheduled(dry_run=args.dry_run))
     results.extend(engine.run_thresholds(dry_run=args.dry_run))
@@ -45,7 +50,7 @@ def cmd_run(args):
 
 
 def cmd_daemon(args):
-    engine = TriggerEngine(JobQueue(), config_path=args.config)
+    engine = _engine(args)
     while True:
         results = []
         results.extend(engine.run_scheduled(dry_run=args.dry_run))
@@ -56,7 +61,7 @@ def cmd_daemon(args):
 
 
 def cmd_status(args):
-    engine = TriggerEngine(JobQueue(), config_path=args.config)
+    engine = _engine(args)
     runs = engine.list_runs(limit=args.limit, trigger_name=args.name)
     print(json.dumps(runs, indent=2, default=str))
 
@@ -68,6 +73,7 @@ def main():
         default=str(DEFAULT_CONFIG_PATH),
         help="Path to trigger config JSON",
     )
+    parser.add_argument("--db-path", default=str(PROJECT_ROOT / "investigation.db"))
     parser.add_argument("--dry-run", action="store_true")
     sub = parser.add_subparsers(dest="command")
 
