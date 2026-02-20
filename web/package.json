@@ -15,6 +15,7 @@
     "lint:citations:update-baseline": "node scripts/lint-citations.mjs --update-baseline",
     "report:support-coverage": "node scripts/report-support-coverage.mjs",
     "report:support-coverage:changed": "node scripts/report-support-coverage.mjs --changed-files",
+    "check:citation-health": "node scripts/check-citation-health.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=main --commit-dirty=true",
