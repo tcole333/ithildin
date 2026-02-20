@@ -140,6 +140,10 @@ const supportSummary = supportMetrics.total_sentences > 0
     import { hydrateArticleViz } from '../../lib/vizHydrator';
     hydrateArticleViz();
   </script>
+  <script>
+    import { initCitationFallback } from '../../lib/citationFallback';
+    initCitationFallback();
+  </script>
   {evidenceModeEnabled && (
     <script>
       import { initSupportMode } from '../../lib/supportMode';

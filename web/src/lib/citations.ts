@@ -955,8 +955,9 @@ export function renderFootnotes(entries: CitationEntry[]): string {
     const number = entry.number;
     const external = isExternalUrl(entry.url);
     const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
+    const eftaFallback = entry.key.startsWith("efta:") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
     const link = entry.url
-      ? `<a href="${escapeHtml(entry.url)}"${attrs} data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</a>`
+      ? `<a href="${escapeHtml(entry.url)}"${attrs}${eftaFallback} data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</a>`
       : `<span data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</span>`;
 
     let sources = "";

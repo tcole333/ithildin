@@ -328,6 +328,56 @@ a:hover {
   color: var(--color-mithril);
 }
 
+.citation-fallback-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(1rem);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: rgba(18, 21, 27, 0.95);
+  border: 1px solid rgba(42, 49, 59, 0.9);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--color-moonlight);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.citation-fallback-toast--visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.citation-fallback-toast a {
+  color: var(--color-icy);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.citation-fallback-toast a:hover {
+  text-decoration: underline;
+}
+
+.citation-fallback-toast button {
+  background: none;
+  border: none;
+  color: var(--color-mithril);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 0.15rem;
+  line-height: 1;
+}
+
+.citation-fallback-toast button:hover {
+  color: var(--color-moonlight);
+}
+
 .evidence-mode {
   display: flex;
   flex-wrap: wrap;
