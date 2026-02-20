@@ -2,6 +2,9 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkStringify from "remark-stringify";
+import { readFileSync, existsSync } from "fs";
+import { resolve, dirname } from "path";
+import { fileURLToPath } from "url";
 
 export type CitationLink = {
   key: string;
@@ -120,7 +123,28 @@ function cleanUrl(value: string): string {
   return value.replace(/[),.;]+$/, "");
 }
 
+let _jmailOverrides: Record<string, string> | null = null;
+function loadJmailOverrides(): Record<string, string> {
+  if (_jmailOverrides) return _jmailOverrides;
+  try {
+    const dir = typeof import.meta.dirname === "string"
+      ? import.meta.dirname
+      : dirname(fileURLToPath(import.meta.url));
+    const overridePath = resolve(dir, "..", "data", "jmail-overrides.json");
+    if (existsSync(overridePath)) {
+      _jmailOverrides = JSON.parse(readFileSync(overridePath, "utf-8"));
+    } else {
+      _jmailOverrides = {};
+    }
+  } catch {
+    _jmailOverrides = {};
+  }
+  return _jmailOverrides!;
+}
+
 function buildJmailUrl(id: string): string {
+  const overrides = loadJmailOverrides();
+  if (overrides[id]) return overrides[id];
   return `${JMAIL_BASE}/${id}?view=inbox`;
 }
 
@@ -865,8 +889,7 @@ function renderCitationSuperscripts(inner: string, options: CitationOptions, cit
     const href = resolved.url || `#fn-${number}`;
     const external = isExternalUrl(resolved.url);
     const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    const jmailFallback = resolved.url?.includes("jmail.world") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
-    return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs}${jmailFallback} data-citation-number="${number}" data-citation-key="${escapeHtml(resolved.key)}" aria-label="Source ${number}: ${escapeHtml(resolved.label)}">${number}</a></sup>`;
+    return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs} data-citation-number="${number}" data-citation-key="${escapeHtml(resolved.key)}" aria-label="Source ${number}: ${escapeHtml(resolved.label)}">${number}</a></sup>`;
   });
 
   return rendered.join("");
@@ -955,9 +978,8 @@ export function renderFootnotes(entries: CitationEntry[]): string {
     const number = entry.number;
     const external = isExternalUrl(entry.url);
     const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    const jmailFallback = entry.url?.includes("jmail.world") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
     const link = entry.url
-      ? `<a href="${escapeHtml(entry.url)}"${attrs}${jmailFallback} data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</a>`
+      ? `<a href="${escapeHtml(entry.url)}"${attrs} data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</a>`
       : `<span data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</span>`;
 
     let sources = "";
@@ -967,8 +989,7 @@ export function renderFootnotes(entries: CitationEntry[]): string {
           const sourceLabel = escapeHtml(source.label);
           if (source.url) {
             const sourceAttrs = isExternalUrl(source.url) ? ' target="_blank" rel="noopener noreferrer"' : "";
-            const sourceFallback = source.url.includes("jmail.world") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
-            return `<a href="${escapeHtml(source.url)}"${sourceAttrs}${sourceFallback} data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(entry.key)}">${sourceLabel}</a>`;
+            return `<a href="${escapeHtml(source.url)}"${sourceAttrs} data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(entry.key)}">${sourceLabel}</a>`;
           }
           return `<span data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(entry.key)}">${sourceLabel}</span>`;
         })

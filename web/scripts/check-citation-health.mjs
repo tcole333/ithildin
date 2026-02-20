@@ -18,6 +18,7 @@
 
 import { readFileSync, readdirSync, existsSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { execFileSync } from "node:child_process";
 import { createJiti } from "jiti";
 
 const cwd = process.cwd();
@@ -226,6 +227,96 @@ async function checkUrl(url, timeout) {
 }
 
 // ---------------------------------------------------------------------------
+// jmail.world body check (returns 200 but renders "Thread Not Found")
+// ---------------------------------------------------------------------------
+
+/**
+ * @param {string} url
+ * @param {number} timeout
+ * @returns {Promise<{status: number|null, ok: boolean, broken: boolean, error?: string}>}
+ */
+async function checkJmailUrl(url, timeout) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        "User-Agent":
+          "Ithildin-Citation-Health-Checker/1.0 (+https://github.com/ithildin)",
+      },
+    });
+    clearTimeout(timer);
+    const body = await response.text();
+    const broken = body.includes("Thread Not Found");
+    return { status: response.status, ok: !broken, broken };
+  } catch (err) {
+    clearTimeout(timer);
+    return {
+      status: null,
+      ok: false,
+      broken: true,
+      error: err.message || "Unknown error",
+    };
+  }
+}
+
+// ---------------------------------------------------------------------------
+// EFTA dataset lookup (for --fix mode DOJ URL construction)
+// ---------------------------------------------------------------------------
+
+/**
+ * Look up which DOJ DataSet an EFTA ID belongs to by querying documents.db.
+ * Falls back to DataSet 11 (the most common unindexed volume).
+ * @param {string} eftaId
+ * @returns {number}
+ */
+function lookupEftaDataset(eftaId) {
+  const docsDb =
+    process.env.EPSTEIN_DOCS_DB ||
+    resolve(
+      process.env.HOME,
+      "projects",
+      "epstein-docs",
+      "output",
+      "documents.db",
+    );
+  if (existsSync(docsDb)) {
+    try {
+      const row = execFileSync(
+        "sqlite3",
+        [docsDb, `SELECT pdf_path FROM documents WHERE bates_id='${eftaId}' LIMIT 1`],
+        { encoding: "utf-8" },
+      ).trim();
+      const volMatch = row.match(/VOL(\d+)/);
+      if (volMatch) return parseInt(volMatch[1], 10);
+    } catch {
+      // Fall through to default
+    }
+  }
+  return 11;
+}
+
+/**
+ * @param {string} eftaId
+ * @param {number} datasetNum
+ * @returns {string}
+ */
+function buildDojUrl(eftaId, datasetNum) {
+  return `https://www.justice.gov/epstein/files/DataSet%20${datasetNum}/${eftaId}.pdf`;
+}
+
+/**
+ * Extract an EFTA ID from a jmail.world URL.
+ * @param {string} url
+ * @returns {string|null}
+ */
+function extractEftaIdFromUrl(url) {
+  const match = url.match(/jmail\.world\/thread\/(EFTA\d+|HOUSE_OVERSIGHT_\d+)/i);
+  return match ? match[1].toUpperCase() : null;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
@@ -259,16 +350,26 @@ async function main() {
   }
 
   // Tier 3: Skip
-  // Tier 4: Sample
+  // Tier 4: Sample (or all in --fix mode)
   const tier4 = byTier.tier4 || [];
   if (tier4.length > 0) {
-    const shuffled = [...tier4].sort(() => Math.random() - 0.5);
-    const sample = shuffled.slice(0, sampleSize);
-    process.stdout.write(
-      `  Sampling ${sample.length} of ${tier4.length} tier4 (jmail.world) URLs...\n`,
-    );
-    for (const entry of sample) {
-      toCheck.push(entry);
+    if (fixMode) {
+      // In --fix mode, check ALL jmail URLs to find every broken one
+      process.stdout.write(
+        `  --fix mode: checking all ${tier4.length} tier4 (jmail.world) URLs...\n`,
+      );
+      for (const entry of tier4) {
+        toCheck.push(entry);
+      }
+    } else {
+      const shuffled = [...tier4].sort(() => Math.random() - 0.5);
+      const sample = shuffled.slice(0, sampleSize);
+      process.stdout.write(
+        `  Sampling ${sample.length} of ${tier4.length} tier4 (jmail.world) URLs...\n`,
+      );
+      for (const entry of sample) {
+        toCheck.push(entry);
+      }
     }
   }
 
@@ -289,7 +390,11 @@ async function main() {
   for (let i = 0; i < toCheck.length; i += batchSize) {
     const batch = toCheck.slice(i, i + batchSize);
     const checks = batch.map(async (entry) => {
-      const result = await checkUrl(entry.url, timeoutMs);
+      // Use body-check for jmail URLs (they return 200 even for missing threads)
+      const isJmail = entry.url.includes("jmail.world");
+      const result = isJmail
+        ? await checkJmailUrl(entry.url, timeoutMs)
+        : await checkUrl(entry.url, timeoutMs);
       return { ...entry, ...result };
     });
 
@@ -365,6 +470,31 @@ async function main() {
   };
 
   writeFileSync(resultsPath, JSON.stringify(report, null, 2) + "\n", "utf-8");
+
+  // --fix mode: generate jmail override mapping
+  if (fixMode) {
+    const overrides = {};
+    const brokenJmail = [...results.broken, ...results.unreachable].filter(
+      (r) => r.url && r.url.includes("jmail.world"),
+    );
+
+    for (const entry of brokenJmail) {
+      const eftaId = extractEftaIdFromUrl(entry.url);
+      if (!eftaId) continue;
+      const datasetNum = lookupEftaDataset(eftaId);
+      overrides[eftaId] = buildDojUrl(eftaId, datasetNum);
+    }
+
+    const overridesPath = resolve(cwd, "src", "data", "jmail-overrides.json");
+    writeFileSync(
+      overridesPath,
+      JSON.stringify(overrides, null, 2) + "\n",
+      "utf-8",
+    );
+    process.stdout.write(
+      `\n--fix: wrote ${Object.keys(overrides).length} overrides to ${overridesPath}\n`,
+    );
+  }
 
   // Console summary
   process.stdout.write("\n--- Citation Health Report ---\n");
