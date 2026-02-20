@@ -238,7 +238,7 @@ Based on results, suggest:
 
 ## Tool Bug Reporting
 If you encounter bugs in CLI tools (crashes, incorrect output, missing features), submit them to the infra queue:
-`uv run uv run python tools/infra_tracker.py add --title "Bug: <description>" --type tool_improvement --priority high --description "<details including the error traceback>"`
+`uv run python tools/infra_tracker.py add --title "Bug: <description>" --type tool_improvement --priority high --description "<details including the error traceback>"`
 
 ## Context Management
 

@@ -29,7 +29,7 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths throughout this sess
 ### 1. Check Queue Depth
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 total = db.execute(\"SELECT COUNT(*) FROM leads WHERE status='pending_triage'\").fetchone()[0]
@@ -44,7 +44,7 @@ If zero leads pending, report that and exit.
 ### 2. Claim Batch
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3, json
 db = sqlite3.connect('investigation.db')
 rows = db.execute('''
@@ -72,12 +72,12 @@ Process each lead through these checks in order:
 Search for leads with similar titles or the same target:
 
 ```bash
-uv run uv run python tools/lead_tracker.py search "<LEAD_TITLE_KEYWORDS>" --output $WORKDIR/triage-dupes.json
+uv run python tools/lead_tracker.py search "<LEAD_TITLE_KEYWORDS>" --output $WORKDIR/triage-dupes.json
 ```
 
 Also check by target_name:
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3, json
 db = sqlite3.connect('investigation.db')
 db.row_factory = sqlite3.Row
@@ -101,7 +101,7 @@ print(f'{len(rows)} existing leads for this target')
 How well-investigated is this target already?
 
 ```bash
-uv run uv run python tools/findings_tracker.py search "<TARGET>" --output $WORKDIR/triage-findings.json
+uv run python tools/findings_tracker.py search "<TARGET>" --output $WORKDIR/triage-findings.json
 ```
 
 - **5+ findings**: Target is well-covered. Lower priority unless the lead opens a genuinely new angle.
@@ -155,7 +155,7 @@ If target_name is obvious from the title but missing, fill it in.
 Find leads sharing the same target or closely related targets:
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 # Find leads with same target
@@ -177,7 +177,7 @@ INSERT OR IGNORE INTO lead_relations (lead_id, related_lead_id, relation_type) V
 For leads that pass triage (not deduped):
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 from datetime import datetime
 db = sqlite3.connect('investigation.db')
@@ -192,7 +192,7 @@ db.commit()
 
 If priority was adjusted:
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 from datetime import datetime
 db = sqlite3.connect('investigation.db')

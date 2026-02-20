@@ -177,7 +177,7 @@ uv run python tools/findings_tracker.py connect \
 
 ```bash
 # Check if entity exists
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 rows = db.execute('SELECT id, name, entity_type FROM entities WHERE name LIKE ?', ('%ENTITY_NAME%',)).fetchall()
@@ -185,7 +185,7 @@ for r in rows: print(r)
 "
 
 # Register new entity
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entities (name, entity_type, jurisdiction, ein, status, source, notes) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -197,7 +197,7 @@ print('Entity ID:', db.execute('SELECT last_insert_rowid()').fetchone()[0])
 # jurisdiction: ny, fl, nm, usvi, bvi, de, uk, cayman, bermuda, panama, etc.
 
 # Register officers/directors
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_roles (entity_id, person_name, role, date_start, date_end, source) VALUES (?, ?, ?, ?, ?, ?)',
@@ -206,7 +206,7 @@ db.commit()
 "
 
 # Register addresses
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_addresses (entity_id, address, address_type, date_observed, source) VALUES (?, ?, ?, ?, ?)',
@@ -215,7 +215,7 @@ db.commit()
 "
 
 # Register entity-to-entity relationships (ownership chains, funding flows)
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_relations (entity_a_id, entity_b_id, relation_type, description, source) VALUES (?, ?, ?, ?, ?)',

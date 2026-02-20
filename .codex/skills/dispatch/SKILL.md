@@ -14,7 +14,7 @@ Read-only queue depth reporter. Shows what needs attention and suggests which sk
 Run these queries against investigation.db:
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 from datetime import datetime
 db = sqlite3.connect('investigation.db')
@@ -72,7 +72,7 @@ print(f'total_leads={total_leads}')
 Then query analysis state:
 
 ```bash
-uv run uv run python tools/analysis_export.py analysis-state
+uv run python tools/analysis_export.py analysis-state
 ```
 
 ### 2. Format Report
@@ -135,8 +135,8 @@ Based on queue depths, suggest which skills to run:
 If there are open high/critical leads, list the top 5:
 
 ```bash
-uv run uv run python tools/lead_tracker.py list --status open --priority critical --limit 5
-uv run uv run python tools/lead_tracker.py list --status open --priority high --limit 5
+uv run python tools/lead_tracker.py list --status open --priority critical --limit 5
+uv run python tools/lead_tracker.py list --status open --priority high --limit 5
 ```
 
 ### 5. Optional: Show Infra Queue
@@ -144,7 +144,7 @@ uv run uv run python tools/lead_tracker.py list --status open --priority high --
 If there are open infra requests, list them:
 
 ```bash
-uv run uv run python tools/infra_tracker.py list --status open --limit 5
+uv run python tools/infra_tracker.py list --status open --limit 5
 ```
 
 ### 6. Optional: Show Hypothesis Queue
@@ -152,14 +152,14 @@ uv run uv run python tools/infra_tracker.py list --status open --limit 5
 If there are proposed hypotheses:
 
 ```bash
-uv run uv run python tools/hypothesis_tracker.py list --status proposed --limit 5
+uv run python tools/hypothesis_tracker.py list --status proposed --limit 5
 ```
 
 ## Notes
 
 - This skill is **read-only** — it does not modify any data
 - It's designed to be run at the start of a session to decide what to work on
-- Automated dispatch: `uv run uv run python scripts/dispatcher.py status` for running agents
+- Automated dispatch: `uv run python scripts/dispatcher.py status` for running agents
 - Analysis skills have cooldown periods (48-168h) to prevent running too frequently
 - Priority: data gathering > triage > analysis > post-processing
 - Multiple CC instances can each run `/dispatch` to see the same queue state

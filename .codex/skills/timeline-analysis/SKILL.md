@@ -25,7 +25,7 @@ echo "Session workdir: $WORKDIR"
 ### 1. Register Analysis Run
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 from tools.analysis_export import start_analysis_run
 run_id = start_analysis_run('timeline-analysis')
 print(f'Analysis run #{run_id}')
@@ -35,9 +35,9 @@ print(f'Analysis run #{run_id}')
 ### 2. Export Timeline Data
 
 ```bash
-uv run uv run python tools/analysis_export.py timeline-export --output $WORKDIR/timeline.json
-uv run uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.json
-uv run uv run python tools/event_timeline.py list --limit 200 -v --output $WORKDIR/events.json
+uv run python tools/analysis_export.py timeline-export --output $WORKDIR/timeline.json
+uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.json
+uv run python tools/event_timeline.py list --limit 200 -v --output $WORKDIR/events.json
 ```
 
 ### 3. Date Extraction
@@ -50,7 +50,7 @@ Many findings have NULL `date_of_event` but mention dates in their summary/detai
 For each finding with an extractable date, note it for analysis. Optionally backfill `date_of_event`:
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('UPDATE findings SET date_of_event = ? WHERE id = ?', ('YYYY-MM-DD', FINDING_ID))
@@ -70,7 +70,7 @@ Find clusters where 3+ findings occur within a 14-day window:
 **b) Cross-reference with events**
 For each activity cluster, check the event timeline:
 ```bash
-uv run uv run python tools/event_timeline.py window --start YYYY-MM-DD --end YYYY-MM-DD
+uv run python tools/event_timeline.py window --start YYYY-MM-DD --end YYYY-MM-DD
 ```
 What external events coincide? Arrests, filings, media reports, elections?
 
@@ -114,7 +114,7 @@ These periods are investigatively significant — check for patterns in each:
 For temporal patterns discovered:
 
 ```bash
-uv run uv run python tools/findings_tracker.py add \
+uv run python tools/findings_tracker.py add \
     --target "TARGET_NAME" \
     --type financial \
     --summary "TEMPORAL PATTERN" \
@@ -128,7 +128,7 @@ uv run uv run python tools/findings_tracker.py add \
 ### 7. Tag Temporal Patterns
 
 ```bash
-uv run uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2 \
+uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2 \
     --type temporal --value "PATTERN_NAME" --created-by "agent:timeline-analysis"
 ```
 
@@ -137,7 +137,7 @@ uv run uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID
 For unexplained timing correlations:
 
 ```bash
-uv run uv run python tools/hypothesis_tracker.py add \
+uv run python tools/hypothesis_tracker.py add \
     --title "TEMPORAL HYPOTHESIS" \
     --pattern-type temporal \
     --description "PATTERN observed in WINDOW. Involves: TARGETS. Correlation with: EVENT." \
@@ -151,7 +151,7 @@ uv run uv run python tools/hypothesis_tracker.py add \
 If analysis reveals important external events not in the timeline, add them:
 
 ```bash
-uv run uv run python tools/event_timeline.py add \
+uv run python tools/event_timeline.py add \
     --date YYYY-MM-DD \
     --name "EVENT_NAME" \
     --category legal \
@@ -191,7 +191,7 @@ Write to `$WORKDIR/report-timeline-analysis.md`:
 ### 11. Complete Analysis Run
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 from tools.analysis_export import complete_analysis_run
 complete_analysis_run(RUN_ID, findings_created=N, hypotheses_created=M,
                       leads_created=L, tags_created=T,

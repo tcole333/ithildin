@@ -42,13 +42,13 @@ Before launching agents, gather what's already known:
 
 ```bash
 # Existing findings
-uv run uv run python tools/findings_tracker.py search "<TARGET>"
+uv run python tools/findings_tracker.py search "<TARGET>"
 
 # Existing leads
-uv run uv run python tools/lead_tracker.py search "<TARGET>"
+uv run python tools/lead_tracker.py search "<TARGET>"
 
 # Existing entity records
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 for r in db.execute('SELECT id, name FROM entities WHERE name LIKE ?', ('%TARGET%',)).fetchall():
@@ -92,31 +92,31 @@ YOUR MANDATE: Search ALL local document databases exhaustively for any mention o
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
 REQUIRED SEARCHES:
-1. uv run uv run python tools/query_doj.py search "[TARGET]" --limit 30 --output [WORKDIR]/a-doj.json
-2. uv run uv run python tools/query_doj.py search "[VARIANT]" --limit 20 --output [WORKDIR]/a-doj-var.json
-3. uv run uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/a-duggan.json
-4. uv run uv run python tools/query_lmsband.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-lmsband.json
-5. uv run uv run python tools/query_lmsband.py entities "[TARGET]" --output [WORKDIR]/a-lmsband-ent.json
-6. uv run uv run python tools/query_lmsband.py cooccurrence "[TARGET]" --top 20 --output [WORKDIR]/a-lmsband-cooc.json
-7. uv run uv run python tools/query_unified.py emails "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-email.json
-8. uv run uv run python tools/query_unified.py docs "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-docs.json
-9. uv run uv run python tools/query_unified.py entities "[TARGET]" --output [WORKDIR]/a-unified-ent.json
-10. uv run uv run python tools/query_unified.py triples --actor "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-trip-act.json
-11. uv run uv run python tools/query_unified.py triples --target "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-trip-tgt.json
-12. uv run uv run python tools/ingest_epstein_20k.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-20k.json
+1. uv run python tools/query_doj.py search "[TARGET]" --limit 30 --output [WORKDIR]/a-doj.json
+2. uv run python tools/query_doj.py search "[VARIANT]" --limit 20 --output [WORKDIR]/a-doj-var.json
+3. uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/a-duggan.json
+4. uv run python tools/query_lmsband.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-lmsband.json
+5. uv run python tools/query_lmsband.py entities "[TARGET]" --output [WORKDIR]/a-lmsband-ent.json
+6. uv run python tools/query_lmsband.py cooccurrence "[TARGET]" --top 20 --output [WORKDIR]/a-lmsband-cooc.json
+7. uv run python tools/query_unified.py emails "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-email.json
+8. uv run python tools/query_unified.py docs "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-docs.json
+9. uv run python tools/query_unified.py entities "[TARGET]" --output [WORKDIR]/a-unified-ent.json
+10. uv run python tools/query_unified.py triples --actor "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-trip-act.json
+11. uv run python tools/query_unified.py triples --target "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-trip-tgt.json
+12. uv run python tools/ingest_epstein_20k.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-20k.json
 
 For EVERY document found, read the full text:
-uv run uv run python tools/query_doj.py efta EFTA_ID --text
+uv run python tools/query_doj.py efta EFTA_ID --text
 
 Extract: dates, names, financial amounts, relationships, exact quotes.
 
 RECORD findings using:
-uv run uv run python tools/findings_tracker.py add --target "[TARGET]" --type TYPE \
+uv run python tools/findings_tracker.py add --target "[TARGET]" --type TYPE \
   --summary "..." --evidence EFTA_ID --claim-type direct_quote \
   --source-quote "EFTA_ID:exact quote" --confidence LEVEL
 
 Record connections using:
-uv run uv run python tools/findings_tracker.py connect --person-a "..." --person-b "..." \
+uv run python tools/findings_tracker.py connect --person-a "..." --person-b "..." \
   --type TYPE --detail "..." --evidence EFTA_ID --confidence LEVEL
 
 If zero results: record a finding noting the search scope and negative result — absence of evidence IS evidence when the corpus has 331K pages.
@@ -127,7 +127,7 @@ As you search, be curious. If documents reference data sources we don't have too
 - An email references a foreign corporate registry entry → note the registry and entity
 - A record mentions a dataset or database we haven't ingested → note what it is and where to get it
 At the end of your investigation, list any SOURCE GAPS you identified and create infrastructure requests for valuable ones:
-uv run uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
+uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
 FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-a.md using this format:
 # Agent A Report: [TARGET]
@@ -165,66 +165,66 @@ YOUR MANDATE: Search ALL corporate, financial, property, and regulatory database
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. uv run uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/b-doj.json
-2. uv run uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/b-duggan.json
-3. uv run uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/b-lmsband.json
-4. uv run uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/b-unified.json
-For EVERY document found, read the full text with: uv run uv run python tools/query_doj.py efta EFTA_ID --text
+1. uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/b-doj.json
+2. uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/b-duggan.json
+3. uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/b-lmsband.json
+4. uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/b-unified.json
+For EVERY document found, read the full text with: uv run python tools/query_doj.py efta EFTA_ID --text
 Extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (do ALL of these — use --output on every search):
 
 CORPORATE REGISTRIES:
-1. uv run uv run python tools/query_registry.py search "[TARGET]" --output [WORKDIR]/b-registry.json
-2. uv run uv run python tools/query_registry.py officers "[TARGET]" --output [WORKDIR]/b-officers.json
-3. uv run uv run python tools/query_registry.py address "[KNOWN_ADDRESS]" --output [WORKDIR]/b-addr.json  (if applicable)
+1. uv run python tools/query_registry.py search "[TARGET]" --output [WORKDIR]/b-registry.json
+2. uv run python tools/query_registry.py officers "[TARGET]" --output [WORKDIR]/b-officers.json
+3. uv run python tools/query_registry.py address "[KNOWN_ADDRESS]" --output [WORKDIR]/b-addr.json  (if applicable)
 
 SEC EDGAR:
-4. uv run uv run python tools/query_edgar.py search "[TARGET]" --size 20 --facets --output [WORKDIR]/b-edgar.json
-5. uv run uv run python tools/query_edgar.py lookup "[TARGET]"
-6. uv run uv run python tools/query_edgar.py search "[TARGET]" "[ASSOCIATED_ENTITY]" --size 10 --output [WORKDIR]/b-edgar2.json  (if applicable)
+4. uv run python tools/query_edgar.py search "[TARGET]" --size 20 --facets --output [WORKDIR]/b-edgar.json
+5. uv run python tools/query_edgar.py lookup "[TARGET]"
+6. uv run python tools/query_edgar.py search "[TARGET]" "[ASSOCIATED_ENTITY]" --size 10 --output [WORKDIR]/b-edgar2.json  (if applicable)
 
 PROPERTY (NYC):
-7. uv run uv run python tools/query_acris.py party "[TARGET]" --output [WORKDIR]/b-acris.json
+7. uv run python tools/query_acris.py party "[TARGET]" --output [WORKDIR]/b-acris.json
 
 CAMPAIGN FINANCE:
-8. uv run uv run python tools/query_fec.py donor "[TARGET]" --limit 20 --output [WORKDIR]/b-fec.json
-9. uv run uv run python tools/query_fec.py employer "[TARGET]" --output [WORKDIR]/b-fec-emp.json  (if entity)
+8. uv run python tools/query_fec.py donor "[TARGET]" --limit 20 --output [WORKDIR]/b-fec.json
+9. uv run python tools/query_fec.py employer "[TARGET]" --output [WORKDIR]/b-fec-emp.json  (if entity)
 
 NONPROFITS:
-10. uv run uv run python tools/query_990.py search "[TARGET]" --output [WORKDIR]/b-990.json
+10. uv run python tools/query_990.py search "[TARGET]" --output [WORKDIR]/b-990.json
 
 LOBBYING:
-11. uv run uv run python tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/b-lda-client.json
-12. uv run uv run python tools/query_lobbying.py registrant "[TARGET]" --output [WORKDIR]/b-lda-reg.json
-13. uv run uv run python tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/b-lda-lob.json
+11. uv run python tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/b-lda-client.json
+12. uv run python tools/query_lobbying.py registrant "[TARGET]" --output [WORKDIR]/b-lda-reg.json
+13. uv run python tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/b-lda-lob.json
 
 FOREIGN AGENTS:
-14. uv run uv run python tools/query_fara.py search "[TARGET]" --output [WORKDIR]/b-fara.json
+14. uv run python tools/query_fara.py search "[TARGET]" --output [WORKDIR]/b-fara.json
 
 UCC FILINGS:
-15. uv run uv run python tools/query_registry.py ucc-search "[TARGET]" --output [WORKDIR]/b-ucc.json
+15. uv run python tools/query_registry.py ucc-search "[TARGET]" --output [WORKDIR]/b-ucc.json
 
 FAA AIRCRAFT:
-16. uv run uv run python tools/ingest_faa.py search "[TARGET]"
+16. uv run python tools/ingest_faa.py search "[TARGET]"
 
 GLEIF (corporate hierarchy — financial entities):
-17. uv run uv run python tools/query_gleif.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-gleif.json
-18. If LEI found: uv run uv run python tools/query_gleif.py hierarchy <LEI> --output [WORKDIR]/b-gleif-hier.json
+17. uv run python tools/query_gleif.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-gleif.json
+18. If LEI found: uv run python tools/query_gleif.py hierarchy <LEI> --output [WORKDIR]/b-gleif-hier.json
 
 UK COMPANIES HOUSE (if API key configured):
-19. uv run uv run python tools/ingest_uk_companies_house.py search "[TARGET]" --limit 10
-20. If found: uv run uv run python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER>
-21. If found: uv run uv run python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER>
+19. uv run python tools/ingest_uk_companies_house.py search "[TARGET]" --limit 10
+20. If found: uv run python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER>
+21. If found: uv run python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER>
 
 OPENSANCTIONS (PEP/sanctions check — if ingested):
-22. uv run uv run python tools/query_opensanctions.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-sanctions.json
+22. uv run python tools/query_opensanctions.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-sanctions.json
 
 USVI CORPORATE REGISTRY:
-23. uv run uv run python tools/ingest_usvi.py search "[TARGET]"
+23. uv run python tools/ingest_usvi.py search "[TARGET]"
 
 DS10 DEUTSCHE BANK FINANCIAL RECORDS:
-24. uv run uv run python tools/parse_ds10_financials.py query --entity "[TARGET]"
+24. uv run python tools/parse_ds10_financials.py query --entity "[TARGET]"
 
 For each hit, investigate further (e.g., read SEC filings, pull 990 details, check filing histories).
 
@@ -239,7 +239,7 @@ As you search, be curious about data sources we're missing. If you discover:
 - A nonprofit, foundation, or entity registered somewhere we can't currently search → note the gap
 - An SEC filing type or EDGAR feature we're not using → note the enhancement
 At the end of your investigation, list SOURCE GAPS and create infrastructure requests:
-uv run uv run python tools/infra_tracker.py add --title "Add [JURISDICTION] registry" --type new_registry --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[REGISTRY]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
+uv run python tools/infra_tracker.py add --title "Add [JURISDICTION] registry" --type new_registry --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[REGISTRY]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
 If you find a data source that would immediately help AND it has a free, accessible API — you may build the tool yourself. Probe the endpoint first, confirm it works, then write the integration. Update CLAUDE.md and /search-all-sources after.
 
@@ -281,21 +281,21 @@ YOUR MANDATE: Search ALL legal and court databases for this target. You are look
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. uv run uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/c-doj.json
-2. uv run uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/c-duggan.json
-3. uv run uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/c-lmsband.json
-4. uv run uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/c-unified.json
-For EVERY document found, read the full text with: uv run uv run python tools/query_doj.py efta EFTA_ID --text
+1. uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/c-doj.json
+2. uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/c-duggan.json
+3. uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/c-lmsband.json
+4. uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/c-unified.json
+For EVERY document found, read the full text with: uv run python tools/query_doj.py efta EFTA_ID --text
 Extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (use --output on all):
 
 COURTLISTENER (federal courts):
-1. uv run uv run python tools/query_courtlistener.py search "[TARGET]" --output [WORKDIR]/c-cl-search.json
-2. uv run uv run python tools/query_courtlistener.py party "[TARGET]"
-3. uv run uv run python tools/query_courtlistener.py cases "[TARGET]"
-4. uv run uv run python tools/query_courtlistener.py opinions "[TARGET]" --limit 10
-5. If any dockets found: uv run uv run python tools/query_courtlistener.py docket <DOCKET_ID> --output [WORKDIR]/c-cl-docket.json
+1. uv run python tools/query_courtlistener.py search "[TARGET]" --output [WORKDIR]/c-cl-search.json
+2. uv run python tools/query_courtlistener.py party "[TARGET]"
+3. uv run python tools/query_courtlistener.py cases "[TARGET]"
+4. uv run python tools/query_courtlistener.py opinions "[TARGET]" --limit 10
+5. If any dockets found: uv run python tools/query_courtlistener.py docket <DOCKET_ID> --output [WORKDIR]/c-cl-docket.json
 
 For each case found:
 - What is the nature of the case?
@@ -305,16 +305,16 @@ For each case found:
 - What do the opinions/rulings reveal?
 
 FARA (deep check):
-6. uv run uv run python tools/query_fara.py search "[TARGET]" --output [WORKDIR]/c-fara.json
-7. If found: uv run uv run python tools/query_fara.py detail <REG_NUM> --output [WORKDIR]/c-fara-detail.json
+6. uv run python tools/query_fara.py search "[TARGET]" --output [WORKDIR]/c-fara.json
+7. If found: uv run python tools/query_fara.py detail <REG_NUM> --output [WORKDIR]/c-fara-detail.json
 
 LOBBYING (deep check):
-8. uv run uv run python tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/c-lda-lob.json
-9. uv run uv run python tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/c-lda-client.json
-10. If filings found: uv run uv run python tools/query_lobbying.py filings --client "[TARGET]" --output [WORKDIR]/c-lda-filings.json
+8. uv run python tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/c-lda-lob.json
+9. uv run python tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/c-lda-client.json
+10. If filings found: uv run python tools/query_lobbying.py filings --client "[TARGET]" --output [WORKDIR]/c-lda-filings.json
 
 INVESTIGATION REPORTS (ingested PDFs):
-11. uv run uv run python tools/query_investigations.py search "[TARGET]" --limit 10 --output [WORKDIR]/c-inv.json
+11. uv run python tools/query_investigations.py search "[TARGET]" --limit 10 --output [WORKDIR]/c-inv.json
 
 RECORD all findings using the findings_tracker.py CLI. Record connections between the target and any Epstein-network persons discovered in litigation.
 
@@ -327,7 +327,7 @@ As you search court records, look for:
 - Legal databases that would help (state bar records, judicial disclosure databases, arbitration records)
 - Government investigation reports or hearing transcripts not yet in our investigations.db
 If you find a new court system or legal database with a public API, create an infrastructure request. If it's simple enough, build the tool:
-uv run uv run python tools/infra_tracker.py add --title "Integrate [COURT/DATABASE]" --type new_source --description "Discovered during [TARGET] investigation. [Details, URL, access method]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
+uv run python tools/infra_tracker.py add --title "Integrate [COURT/DATABASE]" --type new_source --description "Discovered during [TARGET] investigation. [Details, URL, access method]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
 FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-c.md using this format:
 # Agent C Report: [TARGET]
@@ -365,27 +365,27 @@ YOUR MANDATE: Search ALL network mapping, offshore leak, and open web sources fo
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. uv run uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/d-doj.json
-2. uv run uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/d-duggan.json
-3. uv run uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/d-lmsband.json
-4. uv run uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/d-unified.json
-For EVERY document found, read the full text with: uv run uv run python tools/query_doj.py efta EFTA_ID --text
+1. uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/d-doj.json
+2. uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/d-duggan.json
+3. uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/d-lmsband.json
+4. uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/d-unified.json
+For EVERY document found, read the full text with: uv run python tools/query_doj.py efta EFTA_ID --text
 Extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (use --output on all):
 
 LITTLESIS (relationship mapping):
-1. uv run uv run python tools/query_littlesis.py search "[TARGET]" --output [WORKDIR]/d-ls-search.json
-2. If found: uv run uv run python tools/query_littlesis.py entity <ID> --output [WORKDIR]/d-ls-entity.json
-3. If found: uv run uv run python tools/query_littlesis.py relationships <ID> --limit 50 --output [WORKDIR]/d-ls-rels.json
+1. uv run python tools/query_littlesis.py search "[TARGET]" --output [WORKDIR]/d-ls-search.json
+2. If found: uv run python tools/query_littlesis.py entity <ID> --output [WORKDIR]/d-ls-entity.json
+3. If found: uv run python tools/query_littlesis.py relationships <ID> --limit 50 --output [WORKDIR]/d-ls-rels.json
 
 OCCRP ALEPH (corporate registries, leaks, sanctions):
-4. uv run uv run python tools/query_aleph.py search "[TARGET]" --schema Person --output [WORKDIR]/d-aleph-person.json
-5. uv run uv run python tools/query_aleph.py search "[TARGET]" --schema Company --output [WORKDIR]/d-aleph-company.json
-6. If found: uv run uv run python tools/query_aleph.py expand <ENTITY_ID> --output [WORKDIR]/d-aleph-expand.json
+4. uv run python tools/query_aleph.py search "[TARGET]" --schema Person --output [WORKDIR]/d-aleph-person.json
+5. uv run python tools/query_aleph.py search "[TARGET]" --schema Company --output [WORKDIR]/d-aleph-company.json
+6. If found: uv run python tools/query_aleph.py expand <ENTITY_ID> --output [WORKDIR]/d-aleph-expand.json
 
 ICIJ OFFSHORE LEAKS (if Neo4j running):
-7. uv run uv run python tools/query_icij.py search "[TARGET]" --output [WORKDIR]/d-icij.json
+7. uv run python tools/query_icij.py search "[TARGET]" --output [WORKDIR]/d-icij.json
 
 WEB SEARCH (use WebSearch tool directly — NOT bash):
 8. "[TARGET]" — basic biography
@@ -400,11 +400,11 @@ WEB FETCH (use WebFetch tool for key pages):
 - If relevant news articles found, fetch and extract key facts
 
 EPSTEINEXPOSED (pre-mapped persons, documents, flights):
-13. uv run uv run python tools/ingest_epstein_exposed.py search "[TARGET]" --output [WORKDIR]/d-exposed.json
+13. uv run python tools/ingest_epstein_exposed.py search "[TARGET]" --output [WORKDIR]/d-exposed.json
 
 GDELT (global news):
-14. uv run uv run python tools/query_gdelt.py articles "[TARGET]" --limit 30 --output [WORKDIR]/d-gdelt-art.json
-15. uv run uv run python tools/query_gdelt.py context "[TARGET]" --limit 20 --output [WORKDIR]/d-gdelt-ctx.json
+14. uv run python tools/query_gdelt.py articles "[TARGET]" --limit 30 --output [WORKDIR]/d-gdelt-art.json
+15. uv run python tools/query_gdelt.py context "[TARGET]" --limit 20 --output [WORKDIR]/d-gdelt-ctx.json
 
 RECORD all findings using the findings_tracker.py CLI. Web sources should use claim-type "paraphrase" with the URL as evidence. Record connections to network-connected persons (not just Epstein — any relevant network actor).
 
@@ -423,7 +423,7 @@ For each new source discovered:
 2. Create an infrastructure lead if it has broad investigative value
 3. If it's a free API with clear documentation, you may build the integration tool yourself — probe first, confirm it works, then write `tools/query_[source].py` or `tools/ingest_[source].py`
 
-uv run uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] web research. URL: [URL]. Data: [WHAT]. Access: [HOW]. Value: [WHY]." --source-name "[SOURCE]" --source-url "[URL]" --priority [high/medium] --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
+uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] web research. URL: [URL]. Data: [WHAT]. Access: [HOW]. Value: [WHY]." --source-name "[SOURCE]" --source-url "[URL]" --priority [high/medium] --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
 FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-d.md using this format:
 # Agent D Report: [TARGET]
@@ -487,7 +487,7 @@ After reading all 4 report files:
 If the sub-agents' individual findings combine to tell a larger story, record a synthesis finding:
 
 ```bash
-uv run uv run python tools/findings_tracker.py add --target "[TARGET]" --type intelligence \
+uv run python tools/findings_tracker.py add --target "[TARGET]" --type intelligence \
   --summary "SYNTHESIS: [what the combined evidence shows]" \
   --evidence [ALL_EVIDENCE_REFS] --claim-type synthesis \
   --source-quote "[REF]:key supporting fact" --confidence medium
@@ -553,7 +553,7 @@ Format:
 
 ## Tool Bug Reporting
 If you encounter bugs in CLI tools (crashes, incorrect output, missing features), submit them to the infra queue:
-`uv run uv run python tools/infra_tracker.py add --title "Bug: <description>" --type tool_improvement --priority high --description "<details including the error traceback>"`
+`uv run python tools/infra_tracker.py add --title "Bug: <description>" --type tool_improvement --priority high --description "<details including the error traceback>"`
 
 ## Notes
 

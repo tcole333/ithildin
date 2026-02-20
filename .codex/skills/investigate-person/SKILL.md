@@ -188,7 +188,7 @@ uv run python tools/findings_tracker.py connect \
 
 ```bash
 # Check if entity exists
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 rows = db.execute('SELECT id, name, entity_type FROM entities WHERE name LIKE ?', ('%ENTITY_NAME%',)).fetchall()
@@ -196,7 +196,7 @@ for r in rows: print(r)
 "
 
 # Register new entity (if not found)
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entities (name, entity_type, jurisdiction, status, source, notes) VALUES (?, ?, ?, ?, ?, ?)',
@@ -208,7 +208,7 @@ print('Entity ID:', db.execute('SELECT last_insert_rowid()').fetchone()[0])
 # jurisdiction: ny, fl, nm, usvi, bvi, de, uk, etc.
 
 # Register person's role at entity
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_roles (entity_id, person_name, role, date_start, date_end, source) VALUES (?, ?, ?, ?, ?, ?)',
@@ -218,7 +218,7 @@ db.commit()
 # role: officer, director, trustee, secretary, vp, president, registered_agent, partner, counsel, beneficiary, signatory
 
 # Register entity address
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_addresses (entity_id, address, address_type, date_observed, source) VALUES (?, ?, ?, ?, ?)',
@@ -227,7 +227,7 @@ db.commit()
 "
 
 # Register entity-to-entity relationship
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_relations (entity_a_id, entity_b_id, relation_type, description, source) VALUES (?, ?, ?, ?, ?)',
@@ -250,7 +250,7 @@ When you discover employment history (past or present positions at institutions)
 
 ```bash
 # Record each institutional affiliation discovered
-uv run uv run python tools/pillar_tracker.py arc \
+uv run python tools/pillar_tracker.py arc \
     --person "<NAME>" --pillar "<INSTITUTION>" \
     --role "<ROLE>" --seniority <junior|mid|senior|leadership|founder> \
     --start "<YEAR>" --end "<YEAR>" \
@@ -258,7 +258,7 @@ uv run uv run python tools/pillar_tracker.py arc \
     --source "<EVIDENCE_REF>"
 ```
 
-Record arcs at: law firms, banks, government agencies, accounting firms, intelligence agencies, academic institutions, media organizations. The pillar must already be registered — check with `uv run uv run python tools/pillar_tracker.py list`.
+Record arcs at: law firms, banks, government agencies, accounting firms, intelligence agencies, academic institutions, media organizations. The pillar must already be registered — check with `uv run python tools/pillar_tracker.py list`.
 
 ### 7. Create/Update Person Research File
 If the person warrants a dedicated file (10+ findings, active investigation):

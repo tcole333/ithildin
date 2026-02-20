@@ -73,13 +73,13 @@ For person/entity leads, supplement dataset searches with web research:
 Additional API tools (use `--output` to keep context lean):
 ```bash
 # LittleSis (relationship/board mapping)
-uv run uv run python tools/query_littlesis.py search "<TARGET>" --output $WORKDIR/lead-littlesis.json
+uv run python tools/query_littlesis.py search "<TARGET>" --output $WORKDIR/lead-littlesis.json
 
 # SEC EDGAR (mentions in public filings)
-uv run uv run python tools/query_edgar.py search "<TARGET>" --size 10 --output $WORKDIR/lead-edgar.json
+uv run python tools/query_edgar.py search "<TARGET>" --size 10 --output $WORKDIR/lead-edgar.json
 
 # Investigation reports (if populated)
-uv run uv run python tools/query_investigations.py search "<TARGET>" --limit 10 --output $WORKDIR/lead-investigations.json
+uv run python tools/query_investigations.py search "<TARGET>" --limit 10 --output $WORKDIR/lead-investigations.json
 ```
 
 This is especially important when:
@@ -132,7 +132,7 @@ uv run python tools/findings_tracker.py connect \
 
 ```bash
 # 1. Check if entity already exists
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 rows = db.execute('SELECT id, name, entity_type FROM entities WHERE name LIKE ?', ('%ENTITY_NAME%',)).fetchall()
@@ -140,7 +140,7 @@ for r in rows: print(r)
 "
 
 # 2. If not found, register it
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entities (name, entity_type, jurisdiction, status, source, notes) VALUES (?, ?, ?, ?, ?, ?)',
@@ -152,7 +152,7 @@ print('Entity ID:', db.execute('SELECT last_insert_rowid()').fetchone()[0])
 # jurisdiction: ny, fl, nm, usvi, bvi, de, uk, etc.
 
 # 3. Register person roles at entity
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_roles (entity_id, person_name, role, date_start, date_end, source) VALUES (?, ?, ?, ?, ?, ?)',
@@ -162,7 +162,7 @@ db.commit()
 # role: officer, director, trustee, secretary, vp, president, registered_agent, partner, counsel, beneficiary, signatory
 
 # 4. Register entity addresses
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_addresses (entity_id, address, address_type, date_observed, source) VALUES (?, ?, ?, ?, ?)',
@@ -171,7 +171,7 @@ db.commit()
 "
 
 # 5. Register entity-to-entity relationships
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_relations (entity_a_id, entity_b_id, relation_type, description, source) VALUES (?, ?, ?, ?, ?)',
@@ -193,14 +193,14 @@ db.commit()
 When employment history is discovered during investigation, record career arcs:
 
 ```bash
-uv run uv run python tools/pillar_tracker.py arc \
+uv run python tools/pillar_tracker.py arc \
     --person "<NAME>" --pillar "<INSTITUTION>" \
     --role "<ROLE>" --seniority <junior|mid|senior|leadership|founder> \
     --start "<YEAR>" --end "<YEAR>" \
     --source "<EVIDENCE_REF>"
 ```
 
-Check registered pillars: `uv run uv run python tools/pillar_tracker.py list --type banking` (or legal, government, etc.)
+Check registered pillars: `uv run python tools/pillar_tracker.py list --type banking` (or legal, government, etc.)
 
 ### 6. Spawn Follow-Up Leads
 When investigation reveals new threads worth pursuing:
@@ -273,7 +273,7 @@ uv run python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cro
 - **Prefer EFTA IDs** as canonical evidence references when available
 - **Create follow-ups generously**: If something looks interesting, create a lead for it
 - **Document dead ends**: A dead end is still valuable — it prevents re-investigation
-- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, create an infrastructure request via `uv run uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. If the source has a free API and you can build the tool quickly, do it — probe the endpoint first, confirm it works, then write the tool and update CLAUDE.md.
+- **Be curious and proactive about infrastructure**: As you investigate, look for data sources we don't have tools for. If you find a government database, corporate registry, or public dataset that would help the investigation, create an infrastructure request via `uv run python tools/infra_tracker.py add --title "..." --type new_source --description "..." --source-name "..." --priority medium --discovered-by "agent:pursue-lead"`. If the source has a free API and you can build the tool quickly, do it — probe the endpoint first, confirm it works, then write the tool and update CLAUDE.md.
 - **Extend existing tools when gaps appear**: If a query tool doesn't cover a jurisdiction you need, or a search tool misses a variant you tried manually, create an infra request with `--type tool_improvement`. Small enhancements compound across all future investigations.
 
 ## Context Management
@@ -295,7 +295,7 @@ All instances write to shared `investigation.db` (WAL mode handles concurrent wr
 
 ### Tool Bug Reporting
 If you encounter bugs in CLI tools (crashes, incorrect output, missing features), submit them to the infra queue:
-`uv run uv run python tools/infra_tracker.py add --title "Bug: <description>" --type tool_improvement --priority high --description "<details including the error traceback>"`
+`uv run python tools/infra_tracker.py add --title "Bug: <description>" --type tool_improvement --priority high --description "<details including the error traceback>"`
 
 ### Report File (when running as sub-agent)
 If spawned by another skill (e.g., wave orchestrator), write a report at completion:

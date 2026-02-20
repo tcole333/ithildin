@@ -27,7 +27,7 @@ echo "Session workdir: $WORKDIR"
 ### 1. Register Analysis Run
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 from tools.analysis_export import start_analysis_run
 run_id = start_analysis_run('systemic-analysis')
 print(f'Analysis run #{run_id}')
@@ -40,19 +40,19 @@ Depending on the argument:
 
 **For `--thread N`:**
 ```bash
-uv run uv run python tools/analysis_export.py findings-dump --thread-id N --output $WORKDIR/thread-findings.json
+uv run python tools/analysis_export.py findings-dump --thread-id N --output $WORKDIR/thread-findings.json
 ```
 Select the top 10-15 actors by finding count in the thread.
 
 **For `--person "Name"`:**
 ```bash
-uv run uv run python tools/graph_tools.py neighbors "Name" --depth 2 --output $WORKDIR/ego.json
+uv run python tools/graph_tools.py neighbors "Name" --depth 2 --output $WORKDIR/ego.json
 ```
 Select the person plus their top 10-15 connections by degree.
 
 **For `--cluster "label"`:**
 ```bash
-uv run uv run python tools/tag_manager.py find --type cluster --value "label" --output $WORKDIR/cluster.json
+uv run python tools/tag_manager.py find --type cluster --value "label" --output $WORKDIR/cluster.json
 ```
 Extract the distinct target_names from the tagged findings.
 
@@ -62,30 +62,30 @@ For each member of the target group, search external sources. Use `--output $WOR
 
 **a) LittleSis — Relationship mapping**
 ```bash
-uv run uv run python tools/query_littlesis.py search "MEMBER_NAME" --output $WORKDIR/littlesis-MEMBER.json
+uv run python tools/query_littlesis.py search "MEMBER_NAME" --output $WORKDIR/littlesis-MEMBER.json
 # If found, get full relationships:
-uv run uv run python tools/query_littlesis.py relationships ENTITY_ID --output $WORKDIR/littlesis-rels-MEMBER.json
+uv run python tools/query_littlesis.py relationships ENTITY_ID --output $WORKDIR/littlesis-rels-MEMBER.json
 ```
 
 **b) SEC EDGAR — Board and financial connections**
 ```bash
-uv run uv run python tools/query_edgar.py search "MEMBER_NAME" --output $WORKDIR/edgar-MEMBER.json
-uv run uv run python tools/query_edgar.py company CIK_NUMBER --output $WORKDIR/edgar-co-MEMBER.json
+uv run python tools/query_edgar.py search "MEMBER_NAME" --output $WORKDIR/edgar-MEMBER.json
+uv run python tools/query_edgar.py company CIK_NUMBER --output $WORKDIR/edgar-co-MEMBER.json
 ```
 
 **c) ProPublica 990 — Nonprofit board overlap**
 ```bash
-uv run uv run python tools/query_990.py search "MEMBER_NAME" --output $WORKDIR/990-MEMBER.json
+uv run python tools/query_990.py search "MEMBER_NAME" --output $WORKDIR/990-MEMBER.json
 ```
 
 **d) FEC — Political donation patterns**
 ```bash
-uv run uv run python tools/query_fec.py donor "MEMBER_NAME" --output $WORKDIR/fec-MEMBER.json
+uv run python tools/query_fec.py donor "MEMBER_NAME" --output $WORKDIR/fec-MEMBER.json
 ```
 
 **e) OpenSanctions — Sanctions/PEP status**
 ```bash
-uv run uv run python tools/query_opensanctions.py search "MEMBER_NAME" --output $WORKDIR/sanctions-MEMBER.json
+uv run python tools/query_opensanctions.py search "MEMBER_NAME" --output $WORKDIR/sanctions-MEMBER.json
 ```
 
 ### 4. Build Comparison Matrix
@@ -118,7 +118,7 @@ This reveals the SYSTEM — the pre-existing or parallel structure that Epstein 
 For each systemic pattern:
 
 ```bash
-uv run uv run python tools/findings_tracker.py add \
+uv run python tools/findings_tracker.py add \
     --target "SYSTEM_NAME (e.g., 'Mega Group philanthropy network')" \
     --type relationship \
     --summary "SYSTEMIC PATTERN: N members share X" \
@@ -132,7 +132,7 @@ uv run uv run python tools/findings_tracker.py add \
 ### 7. Tag with Systemic Labels
 
 ```bash
-uv run uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
+uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
     --type systemic --value "GROUP_NAME" --created-by "agent:systemic-analysis"
 ```
 
@@ -141,7 +141,7 @@ uv run uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID
 For system-level coordination patterns:
 
 ```bash
-uv run uv run python tools/hypothesis_tracker.py add \
+uv run python tools/hypothesis_tracker.py add \
     --title "SYSTEMIC HYPOTHESIS" \
     --pattern-type operational \
     --description "SYSTEM PATTERN: N actors share X, suggesting Y" \
@@ -155,7 +155,7 @@ uv run uv run python tools/hypothesis_tracker.py add \
 For unexplored system nodes (e.g., the shared attorney, the common board, the co-investment vehicle):
 
 ```bash
-uv run uv run python tools/lead_tracker.py add \
+uv run python tools/lead_tracker.py add \
     --target "SYSTEM_NODE_NAME" \
     --category connection \
     --priority medium \
@@ -169,7 +169,7 @@ uv run uv run python tools/lead_tracker.py add \
 Create connections between system members that aren't already recorded:
 
 ```bash
-uv run uv run python tools/findings_tracker.py connect \
+uv run python tools/findings_tracker.py connect \
     --person-a "MEMBER_A" \
     --person-b "MEMBER_B" \
     --type board_membership \
@@ -217,7 +217,7 @@ Write to `$WORKDIR/report-systemic-analysis.md`:
 ### 12. Complete Analysis Run
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 from tools.analysis_export import complete_analysis_run
 complete_analysis_run(RUN_ID, findings_created=N, hypotheses_created=M,
                       leads_created=L, tags_created=T,

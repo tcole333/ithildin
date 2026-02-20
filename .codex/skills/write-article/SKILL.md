@@ -271,8 +271,8 @@ Do not include:
 ### Create visualization data files
 
 When you encounter a section where a visualization genuinely helps, create the JSON data file during writing:
-- `site/content/{timelines,financials,ego,structures}/` for source data
-- Copy to `site/web/public/content/` for runtime fetch
+- `content/{timelines,financials,ego,structures}/` for source data
+- Copy to `web/public/content/` for runtime fetch
 - Embed: `<div data-viz="TimelineChart" data-src="/content/timelines/cluster-name.json" data-height="420" data-group-by="entity"></div>`
 
 ### Analytical model callouts
@@ -290,7 +290,7 @@ Available models: manufactured-dependency, bridge-tax, private-order, narrative-
 
 Save to `content/articles/<cluster-id>.mdx`, then:
 ```bash
-cd /Users/travcole/projects/osint-research/site/web && npx astro build 2>&1 | tail -5
+cd /Users/travcole/projects/osint-research/web && npx astro build 2>&1 | tail -5
 ```
 
 ---
@@ -337,7 +337,7 @@ Read the verification report and apply fixes.
 ### 4.6. Final build and report
 
 ```bash
-cd /Users/travcole/projects/osint-research/site/web && npx astro build 2>&1 | tail -5
+cd /Users/travcole/projects/osint-research/web && npx astro build 2>&1 | tail -5
 ```
 
 Output to the user:

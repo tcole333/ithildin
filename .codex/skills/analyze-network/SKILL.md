@@ -24,7 +24,7 @@ echo "Session workdir: $WORKDIR"
 ### 1. Register Analysis Run
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 from tools.analysis_export import start_analysis_run
 run_id = start_analysis_run('analyze-network')
 print(f'Analysis run #{run_id}')
@@ -36,9 +36,9 @@ Save the `run_id` for later.
 ### 2. Export Data
 
 ```bash
-uv run uv run python tools/analysis_export.py connections-graph --output $WORKDIR/graph.json
-uv run uv run python tools/analysis_export.py coverage-matrix --top 100 --output $WORKDIR/coverage.json
-uv run uv run python tools/analysis_export.py thread-summary --output $WORKDIR/threads.json
+uv run python tools/analysis_export.py connections-graph --output $WORKDIR/graph.json
+uv run python tools/analysis_export.py coverage-matrix --top 100 --output $WORKDIR/coverage.json
+uv run python tools/analysis_export.py thread-summary --output $WORKDIR/threads.json
 ```
 
 ### 3. Graph Metrics
@@ -46,25 +46,25 @@ uv run uv run python tools/analysis_export.py thread-summary --output $WORKDIR/t
 Run these analyses and save results:
 
 ```bash
-uv run uv run python tools/graph_tools.py centrality --metric degree --top 50 --cache --output $WORKDIR/degree.json
-uv run uv run python tools/graph_tools.py centrality --metric betweenness --top 50 --cache --output $WORKDIR/betweenness.json
-uv run uv run python tools/graph_tools.py bridges --output $WORKDIR/bridges.json
-uv run uv run python tools/graph_tools.py holes --min-degree 3 --output $WORKDIR/holes.json
-uv run uv run python tools/graph_tools.py cliques --min-size 3 --output $WORKDIR/cliques.json
-uv run uv run python tools/graph_tools.py components --min-size 3 --output $WORKDIR/components.json
-uv run uv run python tools/graph_tools.py stats
+uv run python tools/graph_tools.py centrality --metric degree --top 50 --cache --output $WORKDIR/degree.json
+uv run python tools/graph_tools.py centrality --metric betweenness --top 50 --cache --output $WORKDIR/betweenness.json
+uv run python tools/graph_tools.py bridges --output $WORKDIR/bridges.json
+uv run python tools/graph_tools.py holes --min-degree 3 --output $WORKDIR/holes.json
+uv run python tools/graph_tools.py cliques --min-size 3 --output $WORKDIR/cliques.json
+uv run python tools/graph_tools.py components --min-size 3 --output $WORKDIR/components.json
+uv run python tools/graph_tools.py stats
 ```
 
 ### 3b. Institutional Analysis
 
 ```bash
-uv run uv run python tools/pillar_tracker.py score --top 30 --cache --output $WORKDIR/orchestrator-scores.json
-uv run uv run python tools/pillar_tracker.py cross-pillar --min-pillars 2 --output $WORKDIR/cross-pillar.json
-uv run uv run python tools/graph_tools.py institutional-graph --min-shared 1 --output $WORKDIR/inst-graph.json
-uv run uv run python tools/graph_tools.py pillar-subgraph --pillar-type legal --metric degree --top 20 --output $WORKDIR/legal-subgraph.json
-uv run uv run python tools/graph_tools.py pillar-subgraph --pillar-type banking --metric degree --top 20 --output $WORKDIR/banking-subgraph.json
-uv run uv run python tools/graph_tools.py pillar-subgraph --pillar-type government --metric degree --top 20 --output $WORKDIR/gov-subgraph.json
-uv run uv run python tools/analysis_export.py pillar-dump --output $WORKDIR/pillar-dump.json
+uv run python tools/pillar_tracker.py score --top 30 --cache --output $WORKDIR/orchestrator-scores.json
+uv run python tools/pillar_tracker.py cross-pillar --min-pillars 2 --output $WORKDIR/cross-pillar.json
+uv run python tools/graph_tools.py institutional-graph --min-shared 1 --output $WORKDIR/inst-graph.json
+uv run python tools/graph_tools.py pillar-subgraph --pillar-type legal --metric degree --top 20 --output $WORKDIR/legal-subgraph.json
+uv run python tools/graph_tools.py pillar-subgraph --pillar-type banking --metric degree --top 20 --output $WORKDIR/banking-subgraph.json
+uv run python tools/graph_tools.py pillar-subgraph --pillar-type government --metric degree --top 20 --output $WORKDIR/gov-subgraph.json
+uv run python tools/analysis_export.py pillar-dump --output $WORKDIR/pillar-dump.json
 ```
 
 ### 4. Analyze Results
@@ -86,7 +86,7 @@ Groups where everyone knows everyone. These may represent: boards, partnerships,
 **e) Cross-thread actors**
 Using findings-dump, find persons who appear in 2+ threads:
 ```bash
-uv run uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.json
+uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.json
 ```
 Then identify target_names appearing across different thread_ids. These cross-thread actors may be system-level connectors, not just Epstein associates.
 
@@ -101,7 +101,7 @@ From orchestrator scores: who spans the most pillar types? Who has government↔
 For each structural insight discovered:
 
 ```bash
-uv run uv run python tools/findings_tracker.py add \
+uv run python tools/findings_tracker.py add \
     --target "NETWORK_TARGET" \
     --type relationship \
     --summary "INSIGHT" \
@@ -117,7 +117,7 @@ uv run uv run python tools/findings_tracker.py add \
 For each cluster or pattern identified:
 
 ```bash
-uv run uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
+uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
     --type cluster --value "CLUSTER_NAME" --created-by "agent:analyze-network"
 ```
 
@@ -126,7 +126,7 @@ uv run uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID
 For structural observations that suggest deeper investigation:
 
 ```bash
-uv run uv run python tools/hypothesis_tracker.py add \
+uv run python tools/hypothesis_tracker.py add \
     --title "HYPOTHESIS" \
     --pattern-type structural \
     --description "EVIDENCE AND REASONING" \
@@ -140,7 +140,7 @@ uv run uv run python tools/hypothesis_tracker.py add \
 For high-connectivity under-investigated nodes:
 
 ```bash
-uv run uv run python tools/lead_tracker.py add \
+uv run python tools/lead_tracker.py add \
     --target "NAME" \
     --category person \
     --priority high \
@@ -164,7 +164,7 @@ Write analysis report to `$WORKDIR/report-analyze-network.md` with:
 ### 10. Complete Analysis Run
 
 ```bash
-uv run uv run python -c "
+uv run python -c "
 from tools.analysis_export import complete_analysis_run
 complete_analysis_run(RUN_ID, findings_created=N, hypotheses_created=M,
                       leads_created=L, tags_created=T,

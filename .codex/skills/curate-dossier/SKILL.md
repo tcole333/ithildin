@@ -26,7 +26,7 @@ WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
 ### 1. Run Automated Pipeline
 
 ```bash
-uv run uv run python site/pipeline/curate_dossier.py --target "TARGET_NAME"
+uv run python pipeline/curate_dossier.py --target "TARGET_NAME"
 ```
 
 This populates `key_finding_ids`, `key_identifiers`, `section_suggestions`, and `viz_data`.
@@ -35,7 +35,7 @@ This populates `key_finding_ids`, `key_identifiers`, `section_suggestions`, and 
 
 Read the dossier JSON:
 ```bash
-Read: site/content/dossiers/<slug>.json
+Read: content/dossiers/<slug>.json
 ```
 
 Key fields to use:
@@ -48,8 +48,8 @@ Key fields to use:
 ### 3. Research Context
 
 ```bash
-uv run uv run python tools/findings_tracker.py search --target "TARGET_NAME" --output $WORKDIR/findings.json
-uv run uv run python tools/lead_tracker.py search --query "TARGET_NAME" --output $WORKDIR/leads.json
+uv run python tools/findings_tracker.py search --target "TARGET_NAME" --output $WORKDIR/findings.json
+uv run python tools/lead_tracker.py search --query "TARGET_NAME" --output $WORKDIR/leads.json
 ```
 
 ### 4. Generate Narrative
@@ -116,7 +116,7 @@ Each section has:
 
 #### `applicable_models` (array of strings)
 
-Check `site/content/models/` for which analytical models apply. Use model IDs.
+Check `content/models/` for which analytical models apply. Use model IDs.
 
 ### 5. Citation Format
 
@@ -150,7 +150,7 @@ Read current dossier, merge narrative fields into `curation`, write back:
 import json
 from pathlib import Path
 
-path = Path(f"site/content/dossiers/{slug}.json")
+path = Path(f"content/dossiers/{slug}.json")
 dossier = json.loads(path.read_text())
 
 dossier["curation"]["lead"] = lead_html
@@ -179,7 +179,7 @@ Before writing:
 ## Batch Mode
 
 When `--batch N`:
-1. Read `site/content/dossiers/_index.json`
+1. Read `content/dossiers/_index.json`
 2. Sort by total_findings descending
 3. Filter to those without `curation.lead`
 4. Process top N

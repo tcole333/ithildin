@@ -29,16 +29,16 @@ Audit the investigation platform for gaps and create infra requests.
 
 ```bash
 # No args — get next by priority
-uv run uv run python tools/infra_tracker.py next
+uv run python tools/infra_tracker.py next
 
 # Specific ID
-uv run uv run python tools/infra_tracker.py show <ID>
+uv run python tools/infra_tracker.py show <ID>
 ```
 
 ### 2. Claim and Evaluate
 
 ```bash
-uv run uv run python tools/infra_tracker.py claim <ID>
+uv run python tools/infra_tracker.py claim <ID>
 ```
 
 **Probe the endpoint before writing code.** This is the critical step.
@@ -61,14 +61,14 @@ For web scrape targets:
 
 Record probe results:
 ```bash
-uv run uv run python tools/infra_tracker.py evaluate <ID> \
+uv run python tools/infra_tracker.py evaluate <ID> \
   --probe-results "API confirmed at https://... Returns JSON. No auth. Rate limit 10/sec." \
   --proceed
 ```
 
 If the endpoint doesn't work or requires paid access:
 ```bash
-uv run uv run python tools/infra_tracker.py evaluate <ID> \
+uv run python tools/infra_tracker.py evaluate <ID> \
   --notes "API requires paid subscription ($500/year). Documented at URL." \
   --reject
 ```
@@ -128,13 +128,13 @@ if __name__ == "__main__":
 Run the tool against known targets to verify:
 ```bash
 # Test basic search
-uv run uv run python tools/query_<source>.py search "Epstein" --output /tmp/test-search.json
+uv run python tools/query_<source>.py search "Epstein" --output /tmp/test-search.json
 
 # Test with known entities
-uv run uv run python tools/query_<source>.py search "Leon Black" --output /tmp/test-black.json
+uv run python tools/query_<source>.py search "Leon Black" --output /tmp/test-black.json
 
 # Verify output format
-uv run uv run python -c "import json; d=json.load(open('/tmp/test-search.json')); print(len(d), type(d))"
+uv run python -c "import json; d=json.load(open('/tmp/test-search.json')); print(len(d), type(d))"
 ```
 
 ### 5. Document and Complete
@@ -146,7 +146,7 @@ Update documentation:
 
 Complete the request:
 ```bash
-uv run uv run python tools/infra_tracker.py complete <ID> \
+uv run python tools/infra_tracker.py complete <ID> \
   --tool-file "tools/query_<source>.py" \
   --files-modified tools/query_<source>.py CLAUDE.md docs/TOOL_REFERENCE.md \
   --summary "Built <source> integration. Covers X records. No auth required."
@@ -159,7 +159,7 @@ This auto-unblocks any leads that were waiting on this infrastructure.
 ### 1. Audit Source Health
 
 ```bash
-uv run uv run python tools/source_report.py
+uv run python tools/source_report.py
 ```
 
 Check for:
@@ -176,7 +176,7 @@ Check `memory/MEMORY.md` for the "Priority Sources to Add" section.
 
 Find tools that consistently return zero results:
 ```bash
-uv run uv run python -c "
+uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 rows = db.execute('''
@@ -191,15 +191,15 @@ for r in rows: print(f'{r[0]}: {r[1]} searches, {r[2]} zeros ({r[2]*100//r[1]}%)
 
 Don't duplicate:
 ```bash
-uv run uv run python tools/infra_tracker.py list --status open
-uv run uv run python tools/infra_tracker.py list --status evaluating
+uv run python tools/infra_tracker.py list --status open
+uv run python tools/infra_tracker.py list --status evaluating
 ```
 
 ### 5. Create Requests
 
 For each gap found:
 ```bash
-uv run uv run python tools/infra_tracker.py add \
+uv run python tools/infra_tracker.py add \
   --title "Integrate <source name>" \
   --type new_source \
   --description "Description of source, what data it contains, why it matters for the investigation. At least 20 characters." \
