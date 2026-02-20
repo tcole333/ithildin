@@ -236,10 +236,20 @@ python tools/query_registry.py stats
 # Florida SunBiz (SFTP bulk)
 python tools/ingest_florida.py download && python tools/ingest_florida.py ingest
 
-# New York (SODA API)
+# New York (SODA API — bulk data)
 python tools/ingest_newyork.py search "Epstein"
 python tools/ingest_newyork.py search-officers "Indyke"
 python tools/ingest_newyork.py ingest-batch "Epstein" --with-filings
+
+# New York DOS Public Inquiry (REST API — entity detail, filings, names)
+python tools/query_nydos.py search "HOME CARE" --status Active --output /tmp/ny-homecare.json
+python tools/query_nydos.py search "EPSTEIN" --match Contains --output /tmp/ny-epstein.json
+python tools/query_nydos.py search "873065" --by-id --output /tmp/ny-dosid.json
+python tools/query_nydos.py entity 873065 --filings --names --output /tmp/ny-entity.json
+python tools/query_nydos.py filings 873065 --output /tmp/ny-filings.json
+python tools/query_nydos.py names 873065 --output /tmp/ny-names.json
+python tools/query_nydos.py ingest 873065                          # Single entity → registry.db
+python tools/query_nydos.py ingest-search "HOME CARE" --status Active --limit 50  # Batch ingest
 
 # New Mexico (REST API, 4s rate limit)
 python tools/ingest_newmexico.py search "Zorro Ranch"

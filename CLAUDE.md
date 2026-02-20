@@ -73,6 +73,11 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 - `query_france.py`: French company registry (SIRENE) — `search`, `company <SIREN>`, `naf <CODE>`, `address` — free, no auth
 - `query_hudoc.py`: ECHR case database (HUDOC) — `search`, `case <ID>`, `appno <NUM>`, `text <ID>`, `respondent <STATE>` — free, no auth
 
+**NY DOS Public Inquiry** (`query_nydos.py`): Direct REST API to NY Division of Corporations (4.1M+ entities). Complements SODA-based `ingest_newyork.py` with entity detail pages, filing/name history, CEO/agent info. Key for Medicaid provider corporate structure analysis.
+- `search "HOME CARE" --status Active` | `entity <DOS_ID> --filings --names` | `filings <DOS_ID>` | `names <DOS_ID>`
+- `ingest <DOS_ID>` | `ingest-search "query" --status Active --limit 50` — ingests to registry.db
+- Free, no auth, rate-limited to 1 req/sec
+
 ## Evidence Standards
 
 ### Canonical References
