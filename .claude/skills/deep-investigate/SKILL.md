@@ -543,6 +543,18 @@ After reading all 4 report files:
 9. **Note the Narrative Potential**: What's the most counterintuitive finding? What single fact would most surprise an intelligent person in finance/law/compliance? This is the seed for a future article hook. Record it in the synthesis finding.
 10. **Flag Missing Documents**: What records should exist but don't? Missing SARs, absent emails in a timeline, corporate filings that should be present but aren't. Absence of expected records is itself evidence — record it as a finding.
 
+### 4b. Ingest Agent Learnings
+
+After reading all reports, ingest their Learnings sections into the methodology observation system:
+
+```bash
+for report in $WORKDIR/report-agent-*.md; do
+    uv run python tools/methodology_tracker.py ingest-report "$report" --skill deep-investigate
+done
+```
+
+This captures tool friction, surprise findings, and process insights for later `/review-methodology` analysis.
+
 ### 5. Record Synthesis Findings
 
 If the sub-agents' individual findings combine to tell a larger story, record a synthesis finding:

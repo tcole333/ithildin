@@ -301,3 +301,15 @@ lead_id: <ID>
 - [Process gap] missing infrastructure
 - [Source quality] data source reliability notes
 ```
+
+After writing the report, ingest learnings into the methodology tracker:
+```bash
+uv run python tools/methodology_tracker.py ingest-report "$WORKDIR/report-lead-<LEAD_ID>.md" --skill pursue-lead --lead-id <LEAD_ID>
+```
+
+During investigation, record tool friction or process issues inline as they occur:
+```bash
+uv run python tools/methodology_tracker.py add --category friction \
+    --description "query_doj.py FTS5 times out for common words" \
+    --skill pursue-lead --lead-id <LEAD_ID>
+```

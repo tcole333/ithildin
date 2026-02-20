@@ -364,3 +364,15 @@ leads_spawned: [count]
 ```
 
 Write to `$WORKDIR/report-investigate-<name-slug>.md`.
+
+After writing the report, ingest learnings into the methodology tracker:
+```bash
+uv run python tools/methodology_tracker.py ingest-report "$WORKDIR/report-investigate-<name-slug>.md" --skill investigate-person
+```
+
+During investigation, record tool friction or process issues inline as they occur:
+```bash
+uv run python tools/methodology_tracker.py add --category friction \
+    --description "query_doj.py FTS5 times out for common words" \
+    --skill investigate-person --target "<NAME>"
+```
