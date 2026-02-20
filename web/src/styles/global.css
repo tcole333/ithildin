@@ -453,3 +453,176 @@ a:hover {
     letter-spacing: 0.12em;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Finding Provenance Popover
+   --------------------------------------------------------------------------- */
+
+.finding-popover {
+  position: absolute;
+  z-index: 1000;
+  width: 420px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--color-stone);
+  border: 1px solid var(--color-ash);
+  border-radius: 4px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(42, 49, 59, 0.5);
+  font-family: var(--font-ui);
+  color: var(--color-moonlight);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.finding-popover--mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: auto;
+  width: 100%;
+  max-height: 70vh;
+  border-radius: 12px 12px 0 0;
+  border-bottom: none;
+}
+
+.finding-popover__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--color-ash);
+}
+
+.finding-popover__title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-icy);
+  letter-spacing: 0.04em;
+}
+
+.finding-popover__close {
+  background: none;
+  border: none;
+  color: var(--color-mithril);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  line-height: 1;
+}
+
+.finding-popover__close:hover {
+  color: var(--color-moonlight);
+}
+
+.finding-popover__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.5rem 0.85rem;
+}
+
+.finding-popover__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 3px;
+  border: 1px solid;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.finding-popover__summary {
+  padding: 0 0.85rem 0.65rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-moonlight);
+  line-height: 1.55;
+}
+
+.finding-popover__evidence {
+  padding: 0 0.85rem 0.75rem;
+  border-top: 1px solid rgba(42, 49, 59, 0.6);
+}
+
+.finding-popover__evidence-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-mithril);
+  padding: 0.5rem 0 0.35rem;
+}
+
+.finding-popover__evidence-item {
+  padding: 0.35rem 0;
+  font-size: 0.78rem;
+}
+
+.finding-popover__evidence-item + .finding-popover__evidence-item {
+  border-top: 1px solid rgba(42, 49, 59, 0.4);
+}
+
+.finding-popover__evidence-type {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-mithril);
+}
+
+.finding-popover__evidence-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-icy);
+}
+
+.finding-popover__evidence-link:hover {
+  color: #cfeaf1;
+}
+
+.finding-popover__evidence-ref {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-mithril);
+}
+
+.finding-popover__quote {
+  margin: 0.3rem 0 0.2rem;
+  padding: 0.35rem 0.6rem;
+  border-left: 2px solid var(--color-ash);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--color-mithril);
+  line-height: 1.45;
+}
+
+.finding-popover__assessment {
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  color: var(--color-mithril);
+  padding-left: 0.6rem;
+}
+
+.finding-popover__assessment::before {
+  content: "\2192 ";
+  color: var(--color-ash);
+}
+
+.finding-popover__evidence-expand {
+  display: inline-block;
+  background: none;
+  border: 1px solid var(--color-ash);
+  border-radius: 3px;
+  color: var(--color-mithril);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  margin-top: 0.35rem;
+  cursor: pointer;
+}
+
+.finding-popover__evidence-expand:hover {
+  border-color: var(--color-icy);
+  color: var(--color-icy);
+}
