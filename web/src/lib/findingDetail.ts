@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, statSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { extractEvidenceLinks, type CitationEntry, type CitationLink } from "./citations";
@@ -150,9 +150,10 @@ function groupRowsIntoDetails(rows: DbRow[]): FindingDetailMap {
   return map;
 }
 
-export function loadFindingDetails(findingIds: string[]): FindingDetailMap {
+export function loadFindingDetails(findingIds: string[], slug?: string): FindingDetailMap {
   if (findingIds.length === 0) return {};
 
+  // Try DB first (local dev / local build)
   for (const dbPath of candidateDbPaths()) {
     if (!isUsableDb(dbPath)) continue;
     const rows = queryFindingDetails(dbPath, findingIds);
@@ -161,7 +162,53 @@ export function loadFindingDetails(findingIds: string[]): FindingDetailMap {
     }
   }
 
+  // Fallback: pre-baked JSON file (CI builds without investigation.db)
+  if (slug) {
+    const map = loadFindingDetailsFromFile(slug, findingIds);
+    if (Object.keys(map).length > 0) return map;
+  }
+
   return {};
+}
+
+// ---------------------------------------------------------------------------
+// loadFindingDetailsFromFile — JSON file fallback (for CI builds)
+// ---------------------------------------------------------------------------
+
+function findArticleFindingsFile(slug: string): string | null {
+  const candidates = [
+    resolve(process.cwd(), "..", "content", "articles", `${slug}-findings.json`),
+    resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "content", "articles", `${slug}-findings.json`),
+  ];
+  for (const p of candidates) {
+    if (existsSync(p)) return p;
+  }
+  return null;
+}
+
+function loadFindingDetailsFromFile(slug: string, findingIds: string[]): FindingDetailMap {
+  const filePath = findArticleFindingsFile(slug);
+  if (!filePath) return {};
+
+  try {
+    const raw = JSON.parse(readFileSync(filePath, "utf-8")) as FindingDetailMap;
+    // Re-resolve citation links (they may have changed since file was generated)
+    const idSet = new Set(findingIds);
+    const result: FindingDetailMap = {};
+    for (const [id, detail] of Object.entries(raw)) {
+      if (!idSet.has(id)) continue;
+      result[id] = {
+        ...detail,
+        evidence: (detail.evidence || []).map((ev) => ({
+          ...ev,
+          resolved_links: extractEvidenceLinks(ev.evidence_ref),
+        })),
+      };
+    }
+    return result;
+  } catch {
+    return {};
+  }
 }
 
 // ---------------------------------------------------------------------------

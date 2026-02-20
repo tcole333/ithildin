@@ -59,7 +59,7 @@ const {
 const supportMapJson = safeJsonForScript(supportMap);
 
 const citedFindingIds = extractCitedFindingIds(citationEntries);
-const findingDetailMap = loadFindingDetails(citedFindingIds);
+const findingDetailMap = loadFindingDetails(citedFindingIds, slug);
 const findingDetailJson = safeJsonForScript(findingDetailMap);
 const supportSummary = supportMetrics.total_sentences > 0
   ? `${supportMetrics.supported_sentence_pct}% supported (${supportMetrics.supported_sentences}/${supportMetrics.total_sentences} sentences)`
