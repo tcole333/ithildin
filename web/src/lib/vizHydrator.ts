@@ -31,6 +31,9 @@ const COMPONENTS: Record<string, React.ComponentType<any>> = {
   CorporateStructure,
 };
 
+/** Components that expect the JSON payload nested under a `data` prop. */
+const NESTED_DATA_COMPONENTS = new Set(['SankeyDiagram', 'CorporateStructure']);
+
 export async function hydrateArticleViz() {
   const markers = document.querySelectorAll<HTMLElement>('[data-viz]');
   if (markers.length === 0) return;
@@ -63,7 +66,9 @@ export async function hydrateArticleViz() {
       if (el.dataset.groupBy) overrides.groupBy = el.dataset.groupBy;
       if (el.dataset.title) overrides.title = el.dataset.title;
 
-      const props = { ...data, ...overrides };
+      const props = NESTED_DATA_COMPONENTS.has(name!)
+        ? { data, ...overrides }
+        : { ...data, ...overrides };
       const Component = COMPONENTS[name];
       const root = createRoot(el);
       root.render(createElement(Component, props));
