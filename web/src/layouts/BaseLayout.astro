@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
+import SearchModal from '../components/SearchModal.tsx';
 
 interface Props {
   title: string;
@@ -20,6 +21,7 @@ const { title, description = "Ithildin is a forensic OSINT platform mapping hidd
   </head>
   <body class="min-h-screen antialiased">
     <Navigation />
+    <SearchModal client:load />
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <slot />
     </main>

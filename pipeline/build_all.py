@@ -32,6 +32,7 @@ def main():
         (["uv", "run", "python", str(PIPELINE_DIR / "export_models.py")], "Validate & index models"),
         (["uv", "run", "python", str(PIPELINE_DIR / "compute_backlinks.py")], "Compute backlinks"),
         (["uv", "run", "python", str(PIPELINE_DIR / "export_agent_context.py"), "--all"], "Export agent context"),
+        (["uv", "run", "python", str(PIPELINE_DIR / "export_search_index.py")], "Export search index"),
     ]
 
     failed = []

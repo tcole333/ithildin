@@ -34,7 +34,20 @@ const links = [
             {link.label}
           </a>
         ))}
+        <button id="search-trigger" class="nav-link" aria-label="Search" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <kbd class="search-shortcut">&#8984;K</kbd>
+        </button>
       </div>
     </div>
   </div>
 </nav>
+
+<script>
+  document.getElementById('search-trigger')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('open-search'));
+  });
+</script>
