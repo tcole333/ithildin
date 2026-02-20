@@ -23,56 +23,20 @@ export type CitationState = {
   index: Map<string, number>;
 };
 
-const FINDING_RE = /Finding\s*#\s*(\d+)/i;
+export type HealthTier = "tier1" | "tier2" | "tier3" | "tier4" | "label-only";
+
+type CitationTypeDef = {
+  id: string;
+  tokenPattern: string;
+  healthTier: HealthTier;
+  resolve(token: string, options: CitationOptions): Omit<CitationEntry, "number"> | null;
+  extract(raw: string): CitationLink[];
+  stripPattern?: RegExp | false;
+};
+
 const URL_RE = /https?:\/\/[^\s\]]+/gi;
 
-// Non-EFTA source patterns
-const SEC_RE = /SEC:(\d{10}-\d{2}-\d{6})/i;
-const IRS990_RE = /990:(\d{9})/i;
-const ACRIS_RE = /ACRIS:(\d{13,16})/i;
-const CL_RE = /CL:(\d+)/i;
-const FEC_RE = /FEC:([A-Za-z0-9_/-]+)/i;
-const FARA_RE = /FARA:(\d+)/i;
-const USVI_RE = /USVI:([A-Za-z0-9]+)/i;
-const REG_RE = /REG:([A-Z]{2}):([A-Za-z0-9]+)/i;
-const EDGAR_RE = /EDGAR:(\d{10}-\d{2}-\d{6})/i;
-const FL_SUNBIZ_RE = /FL[-_]?SunBiz[:\s]+([A-Za-z0-9]+)/i;
-const NM_SOS_RE = /NM[-_]?SoS[:\s]+([A-Za-z0-9]+)/i;
-const NY_SOS_RE = /NY[-_]?SoS[:\s]+([A-Za-z0-9]+)/i;
-const KPMG_RE = /KPMG:([A-Za-z0-9_-]+)/i;
-const LDA_RE = /LDA:([A-Za-z0-9_ -]+)/i;
-const OPENSANCTIONS_RE = /OpenSanctions:([A-Za-z0-9]+)/i;
-
-const CITE_TOKEN_PATTERNS = [
-  "EFTA\\d{6,}",
-  "HOUSE_OVERSIGHT_\\d+",
-  "Finding\\s*#\\s*\\d+",
-  "DS10(?::[A-Za-z0-9_-]+)?",
-  "SEC:\\d{10}-\\d{2}-\\d{6}",
-  "EDGAR:\\d{10}-\\d{2}-\\d{6}",
-  "990:\\d{9}",
-  "ACRIS:\\d{13,16}",
-  "CL:\\d+",
-  "FEC:[A-Za-z0-9_/-]+",
-  "FARA:\\d+",
-  "USVI:[A-Za-z0-9]+",
-  "REG:[A-Z]{2}:[A-Za-z0-9]+",
-  "FL[-_]?SunBiz[:\\s]+[A-Za-z0-9]+",
-  "NM[-_]?SoS[:\\s]+[A-Za-z0-9]+",
-  "NY[-_]?SoS[:\\s]+[A-Za-z0-9]+",
-  "KPMG:[A-Za-z0-9_-]+",
-  "LDA:[A-Za-z0-9_ -]+",
-  "OpenSanctions:[A-Za-z0-9]+",
-  "https?:\\/\\/[^\\s,;)]+",
-];
-const CITE_TOKEN_PATTERN = CITE_TOKEN_PATTERNS.join("|");
-const CITE_TOKEN_RE = new RegExp(`(?:${CITE_TOKEN_PATTERN})`, "i");
-
 const JMAIL_BASE = "https://jmail.world/thread";
-
-function getCiteTokenGlobalRe(): RegExp {
-  return new RegExp(CITE_TOKEN_PATTERN, "gi");
-}
 
 function buildSecEdgarUrl(accession: string): string {
   const dashless = accession.replace(/-/g, "");
@@ -193,7 +157,7 @@ function sourceFingerprint(value?: string): string {
 }
 
 function resolveFecToken(token: string): Omit<CitationEntry, "number"> | null {
-  const match = cleanToken(token).match(FEC_RE);
+  const match = cleanToken(token).match(/FEC:([A-Za-z0-9_/-]+)/i);
   if (!match) return null;
 
   const rawBody = match[1];
@@ -237,7 +201,7 @@ function resolveFecToken(token: string): Omit<CitationEntry, "number"> | null {
 }
 
 function resolveFlSunBizToken(token: string): Omit<CitationEntry, "number"> | null {
-  const match = cleanToken(token).match(FL_SUNBIZ_RE);
+  const match = cleanToken(token).match(/FL[-_]?SunBiz[:\s]+([A-Za-z0-9]+)/i);
   if (!match) return null;
 
   const entityId = match[1].toUpperCase();
@@ -249,7 +213,7 @@ function resolveFlSunBizToken(token: string): Omit<CitationEntry, "number"> | nu
 }
 
 function resolveNmSosToken(token: string): Omit<CitationEntry, "number"> | null {
-  const match = cleanToken(token).match(NM_SOS_RE);
+  const match = cleanToken(token).match(/NM[-_]?SoS[:\s]+([A-Za-z0-9]+)/i);
   if (!match) return null;
 
   const entityId = match[1];
@@ -261,7 +225,7 @@ function resolveNmSosToken(token: string): Omit<CitationEntry, "number"> | null 
 }
 
 function resolveNySosToken(token: string): Omit<CitationEntry, "number"> | null {
-  const match = cleanToken(token).match(NY_SOS_RE);
+  const match = cleanToken(token).match(/NY[-_]?SoS[:\s]+([A-Za-z0-9]+)/i);
   if (!match) return null;
 
   const entityId = match[1];
@@ -270,6 +234,403 @@ function resolveNySosToken(token: string): Omit<CitationEntry, "number"> | null 
     label: `NY-SoS:${entityId}`,
     url: buildRegistryUrl("NY", entityId),
   };
+}
+
+// ---------------------------------------------------------------------------
+// Citation Type Registry
+// ---------------------------------------------------------------------------
+
+const CITATION_REGISTRY: CitationTypeDef[] = [
+  {
+    id: "finding",
+    tokenPattern: "Finding\\s*#\\s*\\d+",
+    healthTier: "label-only",
+    resolve(token, options) {
+      const findingMatch = token.match(/Finding\s*#\s*(\d+)/i);
+      if (!findingMatch) return null;
+
+      const findingId = findingMatch[1];
+      const rawRefs = options.findingEvidenceMap?.[findingId] || [];
+      const sources: CitationLink[] = [];
+      const seen = new Set<string>();
+
+      for (const ref of rawRefs) {
+        for (const link of extractEvidenceLinks(ref)) {
+          if (seen.has(link.key)) continue;
+          seen.add(link.key);
+          sources.push(link);
+        }
+      }
+
+      const url = sources.find(s => s.url)?.url;
+      return {
+        key: `finding:${findingId}`,
+        label: `Finding #${findingId}`,
+        url,
+        sources: sources.length ? sources : undefined,
+      };
+    },
+    extract() { return []; },
+    stripPattern: false,
+  },
+  {
+    id: "efta",
+    tokenPattern: "EFTA\\d{6,}",
+    healthTier: "tier4",
+    resolve(token) {
+      const eftaMatches = token.match(/EFTA\d{6,}/gi);
+      if (!eftaMatches || eftaMatches.length === 0) return null;
+      const first = eftaMatches[0].toUpperCase();
+      let label = first;
+      if (eftaMatches.length > 1 && token.includes("-")) {
+        label = `${first}-${eftaMatches[1].toUpperCase()}`;
+      }
+      return { key: `efta:${label}`, label, url: buildJmailUrl(first) };
+    },
+    extract(raw) {
+      return (raw.match(/EFTA\d{6,}/gi) || []).map(id => {
+        const normalized = id.toUpperCase();
+        const url = buildJmailUrl(normalized);
+        return { key: url, label: normalized, url };
+      });
+    },
+  },
+  {
+    id: "house_oversight",
+    tokenPattern: "HOUSE_OVERSIGHT_\\d+",
+    healthTier: "tier4",
+    resolve(token) {
+      const houseMatches = token.match(/HOUSE_OVERSIGHT_\d+/gi);
+      if (!houseMatches || houseMatches.length === 0) return null;
+      const id = houseMatches[0].toUpperCase();
+      return { key: `house:${id}`, label: id, url: buildJmailUrl(id) };
+    },
+    extract(raw) {
+      return (raw.match(/HOUSE_OVERSIGHT_\d+/gi) || []).map(id => {
+        const normalized = id.toUpperCase();
+        const url = buildJmailUrl(normalized);
+        return { key: url, label: normalized, url };
+      });
+    },
+  },
+  {
+    id: "sec",
+    tokenPattern: "SEC:\\d{10}-\\d{2}-\\d{6}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/SEC:(\d{10}-\d{2}-\d{6})/i);
+      if (!match) return null;
+      const accession = match[1];
+      return { key: `sec:${accession}`, label: `SEC ${accession}`, url: buildSecEdgarUrl(accession) };
+    },
+    extract(raw) {
+      return (raw.match(/SEC:\d{10}-\d{2}-\d{6}/gi) || []).map(ref => {
+        const acc = ref.replace(/SEC:/i, "");
+        const url = buildSecEdgarUrl(acc);
+        return { key: url, label: `SEC:${acc}`, url };
+      });
+    },
+  },
+  {
+    id: "edgar",
+    tokenPattern: "EDGAR:\\d{10}-\\d{2}-\\d{6}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/EDGAR:(\d{10}-\d{2}-\d{6})/i);
+      if (!match) return null;
+      const accession = match[1];
+      return { key: `sec:${accession}`, label: `EDGAR ${accession}`, url: buildSecEdgarUrl(accession) };
+    },
+    extract(raw) {
+      return (raw.match(/EDGAR:\d{10}-\d{2}-\d{6}/gi) || []).map(ref => {
+        const acc = ref.replace(/EDGAR:/i, "");
+        const url = buildSecEdgarUrl(acc);
+        return { key: url, label: `EDGAR:${acc}`, url };
+      });
+    },
+  },
+  {
+    id: "irs990",
+    tokenPattern: "990:\\d{9}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/990:(\d{9})/i);
+      if (!match) return null;
+      const ein = match[1];
+      return { key: `990:${ein}`, label: `990 EIN ${ein}`, url: build990Url(ein) };
+    },
+    extract(raw) {
+      return (raw.match(/990:\d{9}/gi) || []).map(ref => {
+        const ein = ref.replace(/990:/i, "");
+        const url = build990Url(ein);
+        return { key: url, label: `990:${ein}`, url };
+      });
+    },
+  },
+  {
+    id: "acris",
+    tokenPattern: "ACRIS:\\d{13,16}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/ACRIS:(\d{13,16})/i);
+      if (!match) return null;
+      const docId = match[1];
+      return { key: `acris:${docId}`, label: `ACRIS ${docId}`, url: buildAcrisUrl(docId) };
+    },
+    extract(raw) {
+      return (raw.match(/ACRIS:\d{13,16}/gi) || []).map(ref => {
+        const docId = ref.replace(/ACRIS:/i, "");
+        const url = buildAcrisUrl(docId);
+        return { key: url, label: `ACRIS:${docId}`, url };
+      });
+    },
+  },
+  {
+    id: "cl",
+    tokenPattern: "CL:\\d+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/CL:(\d+)/i);
+      if (!match) return null;
+      const docketId = match[1];
+      return { key: `cl:${docketId}`, label: `CourtListener ${docketId}`, url: buildCourtListenerUrl(docketId) };
+    },
+    extract(raw) {
+      return (raw.match(/CL:\d+/gi) || []).map(ref => {
+        const docketId = ref.replace(/CL:/i, "");
+        const url = buildCourtListenerUrl(docketId);
+        return { key: url, label: `CL:${docketId}`, url };
+      });
+    },
+  },
+  {
+    id: "fec",
+    tokenPattern: "FEC:[A-Za-z0-9_/-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      return resolveFecToken(token);
+    },
+    extract(raw) {
+      return (raw.match(/FEC:[A-Za-z0-9_/-]+/gi) || []).flatMap(ref => {
+        const resolved = resolveFecToken(ref);
+        if (!resolved) return [];
+        return [{ key: resolved.url || resolved.label, label: resolved.label, url: resolved.url }];
+      });
+    },
+  },
+  {
+    id: "fara",
+    tokenPattern: "FARA:\\d+",
+    healthTier: "tier3",
+    resolve(token) {
+      const match = token.match(/FARA:(\d+)/i);
+      if (!match) return null;
+      const regNum = match[1];
+      return { key: `fara:${regNum}`, label: `FARA #${regNum}`, url: buildFaraUrl(regNum) };
+    },
+    extract(raw) {
+      return (raw.match(/FARA:\d+/gi) || []).map(ref => {
+        const regNum = ref.replace(/FARA:/i, "");
+        const url = buildFaraUrl(regNum);
+        return { key: url, label: `FARA:${regNum}`, url };
+      });
+    },
+  },
+  {
+    id: "usvi",
+    tokenPattern: "USVI:[A-Za-z0-9]+",
+    healthTier: "tier3",
+    resolve(token) {
+      const match = token.match(/USVI:([A-Za-z0-9]+)/i);
+      if (!match) return null;
+      const entityId = match[1];
+      return { key: `usvi:${entityId}`, label: `USVI ${entityId}`, url: buildRegistryUrl("USVI", entityId) };
+    },
+    extract(raw) {
+      return (raw.match(/USVI:[A-Za-z0-9]+/gi) || []).map(ref => {
+        const entityId = ref.replace(/USVI:/i, "");
+        const url = buildRegistryUrl("USVI", entityId);
+        return { key: url, label: `USVI:${entityId}`, url };
+      });
+    },
+  },
+  {
+    id: "fl_sunbiz",
+    tokenPattern: "FL[-_]?SunBiz[:\\s]+[A-Za-z0-9]+",
+    healthTier: "tier1",
+    resolve(token) {
+      return resolveFlSunBizToken(token);
+    },
+    extract(raw) {
+      return (raw.match(/FL[-_]?SunBiz[:\s]+[A-Za-z0-9]+/gi) || []).flatMap(ref => {
+        const resolved = resolveFlSunBizToken(ref);
+        if (!resolved) return [];
+        return [{ key: resolved.url || resolved.label, label: resolved.label, url: resolved.url }];
+      });
+    },
+  },
+  {
+    id: "nm_sos",
+    tokenPattern: "NM[-_]?SoS[:\\s]+[A-Za-z0-9]+",
+    healthTier: "tier3",
+    resolve(token) {
+      return resolveNmSosToken(token);
+    },
+    extract(raw) {
+      return (raw.match(/NM[-_]?SoS[:\s]+[A-Za-z0-9]+/gi) || []).flatMap(ref => {
+        const resolved = resolveNmSosToken(ref);
+        if (!resolved) return [];
+        return [{ key: resolved.url || resolved.label, label: resolved.label, url: resolved.url }];
+      });
+    },
+  },
+  {
+    id: "ny_sos",
+    tokenPattern: "NY[-_]?SoS[:\\s]+[A-Za-z0-9]+",
+    healthTier: "tier3",
+    resolve(token) {
+      return resolveNySosToken(token);
+    },
+    extract(raw) {
+      return (raw.match(/NY[-_]?SoS[:\s]+[A-Za-z0-9]+/gi) || []).flatMap(ref => {
+        const resolved = resolveNySosToken(ref);
+        if (!resolved) return [];
+        return [{ key: resolved.url || resolved.label, label: resolved.label, url: resolved.url }];
+      });
+    },
+  },
+  {
+    id: "reg",
+    tokenPattern: "REG:[A-Z]{2}:[A-Za-z0-9]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/REG:([A-Z]{2}):([A-Za-z0-9]+)/i);
+      if (!match) return null;
+      const jurisdiction = match[1].toUpperCase();
+      const entityId = match[2];
+      return {
+        key: `reg:${jurisdiction}:${entityId}`,
+        label: `${jurisdiction} ${entityId}`,
+        url: buildRegistryUrl(jurisdiction, entityId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/REG:[A-Z]{2}:[A-Za-z0-9]+/gi) || []).flatMap(ref => {
+        const regMatch = ref.match(/REG:([A-Z]{2}):([A-Za-z0-9]+)/i);
+        if (!regMatch) return [];
+        const jurisdiction = regMatch[1].toUpperCase();
+        const entityId = regMatch[2];
+        const url = buildRegistryUrl(jurisdiction, entityId);
+        return [{ key: url, label: `REG:${jurisdiction}:${entityId}`, url }];
+      });
+    },
+  },
+  {
+    id: "ds10",
+    tokenPattern: "DS10(?::[A-Za-z0-9_-]+)?",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = token.match(/^DS10(?::[A-Za-z0-9_-]+)?$/i);
+      if (!match) return null;
+      const normalized = token.replace(/^ds10/i, "DS10");
+      return {
+        key: `dataset:${normalized.toLowerCase()}`,
+        label: normalized,
+        url: buildDs10Url(),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/\bDS10(?::[A-Za-z0-9_-]+)?\b/gi) || []).map(ref => {
+        const label = ref.replace(/^ds10/i, "DS10");
+        const url = buildDs10Url();
+        return { key: url, label, url };
+      });
+    },
+    stripPattern: /\bDS10(?::[A-Za-z0-9_-]+)?\b/gi,
+  },
+  {
+    id: "kpmg",
+    tokenPattern: "KPMG:[A-Za-z0-9_-]+",
+    healthTier: "label-only",
+    resolve(token) {
+      const match = token.match(/KPMG:([A-Za-z0-9_-]+)/i);
+      if (!match) return null;
+      const subject = match[1];
+      return {
+        key: `kpmg:${subject.toLowerCase()}`,
+        label: `KPMG: ${subject}`,
+      };
+    },
+    extract(raw) {
+      return (raw.match(/KPMG:[A-Za-z0-9_-]+/gi) || []).flatMap(ref => {
+        const m = ref.match(/KPMG:([A-Za-z0-9_-]+)/i);
+        if (!m) return [];
+        return [{ key: `KPMG:${m[1]}`, label: `KPMG:${m[1]}` }];
+      });
+    },
+  },
+  {
+    id: "lda",
+    tokenPattern: "LDA:[A-Za-z0-9_ -]+",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/LDA:([A-Za-z0-9_ -]+)/i);
+      if (!match) return null;
+      const registrant = match[1].trim();
+      return {
+        key: `lda:${registrant.toLowerCase()}`,
+        label: `LDA: ${registrant}`,
+        url: buildLdaUrl(registrant),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/LDA:[A-Za-z0-9_ -]+/gi) || []).flatMap(ref => {
+        const m = ref.match(/LDA:([A-Za-z0-9_ -]+)/i);
+        if (!m) return [];
+        const registrant = m[1].trim();
+        const url = buildLdaUrl(registrant);
+        return [{ key: url, label: `LDA:${registrant}`, url }];
+      });
+    },
+  },
+  {
+    id: "opensanctions",
+    tokenPattern: "OpenSanctions:[A-Za-z0-9]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/OpenSanctions:([A-Za-z0-9]+)/i);
+      if (!match) return null;
+      const entityId = match[1];
+      return {
+        key: `opensanctions:${entityId}`,
+        label: `OpenSanctions ${entityId}`,
+        url: buildOpenSanctionsUrl(entityId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/OpenSanctions:[A-Za-z0-9]+/gi) || []).flatMap(ref => {
+        const m = ref.match(/OpenSanctions:([A-Za-z0-9]+)/i);
+        if (!m) return [];
+        const url = buildOpenSanctionsUrl(m[1]);
+        return [{ key: url, label: `OpenSanctions:${m[1]}`, url }];
+      });
+    },
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Derived patterns from registry
+// ---------------------------------------------------------------------------
+
+const CITE_TOKEN_PATTERNS = [
+  ...CITATION_REGISTRY.map(t => t.tokenPattern),
+  "https?:\\/\\/[^\\s,;)]+",
+];
+const CITE_TOKEN_PATTERN = CITE_TOKEN_PATTERNS.join("|");
+const CITE_TOKEN_RE = new RegExp(`(?:${CITE_TOKEN_PATTERN})`, "i");
+
+function getCiteTokenGlobalRe(): RegExp {
+  return new RegExp(CITE_TOKEN_PATTERN, "gi");
 }
 
 function isLikelyMarkdownLinkTarget(text: string, openParenIndex: number): boolean {
@@ -315,174 +676,57 @@ export function splitCitationGroup(group: string): string[] {
   );
 }
 
+// ---------------------------------------------------------------------------
+// extractEvidenceLinks — registry-driven
+// ---------------------------------------------------------------------------
+
 export function extractEvidenceLinks(raw: string): CitationLink[] {
   const links: CitationLink[] = [];
   const seen = new Set<string>();
-  const add = (label: string, url?: string) => {
-    const key = url || label;
-    if (!key || seen.has(key)) return;
-    seen.add(key);
-    links.push({ key, label, url });
+  const add = (link: CitationLink) => {
+    if (!link.key || seen.has(link.key)) return;
+    seen.add(link.key);
+    links.push(link);
   };
 
   if (!raw) return links;
 
+  // URLs first (not in registry)
   const urls = raw.match(URL_RE) || [];
   for (const url of urls) {
     const cleaned = cleanUrl(url);
-    add(cleaned, cleaned);
+    add({ key: cleaned, label: cleaned, url: cleaned });
   }
 
-  const eftaMatches = raw.match(/EFTA\d{6,}/gi) || [];
-  for (const id of eftaMatches) {
-    const normalized = id.toUpperCase();
-    add(normalized, buildJmailUrl(normalized));
+  // Each registered type
+  for (const type of CITATION_REGISTRY) {
+    for (const link of type.extract(raw)) add(link);
   }
 
-  const houseMatches = raw.match(/HOUSE_OVERSIGHT_\d+/gi) || [];
-  for (const id of houseMatches) {
-    const normalized = id.toUpperCase();
-    add(normalized, buildJmailUrl(normalized));
+  // Remainder: strip all known patterns, add leftover as label
+  let remainder = raw.replace(URL_RE, "");
+  for (const type of CITATION_REGISTRY) {
+    if (type.stripPattern === false) continue;
+    const strip = type.stripPattern ?? new RegExp(type.tokenPattern, "gi");
+    remainder = remainder.replace(strip, "");
   }
-
-  const secRefMatches = raw.match(/SEC:\d{10}-\d{2}-\d{6}/gi) || [];
-  for (const ref of secRefMatches) {
-    const acc = ref.replace(/SEC:/i, "");
-    add(`SEC:${acc}`, buildSecEdgarUrl(acc));
-  }
-
-  const edgarRefMatches = raw.match(/EDGAR:\d{10}-\d{2}-\d{6}/gi) || [];
-  for (const ref of edgarRefMatches) {
-    const acc = ref.replace(/EDGAR:/i, "");
-    add(`EDGAR:${acc}`, buildSecEdgarUrl(acc));
-  }
-
-  const irs990RefMatches = raw.match(/990:\d{9}/gi) || [];
-  for (const ref of irs990RefMatches) {
-    const ein = ref.replace(/990:/i, "");
-    add(`990:${ein}`, build990Url(ein));
-  }
-
-  const acrisRefMatches = raw.match(/ACRIS:\d{13,16}/gi) || [];
-  for (const ref of acrisRefMatches) {
-    const docId = ref.replace(/ACRIS:/i, "");
-    add(`ACRIS:${docId}`, buildAcrisUrl(docId));
-  }
-
-  const clRefMatches = raw.match(/CL:\d+/gi) || [];
-  for (const ref of clRefMatches) {
-    const docketId = ref.replace(/CL:/i, "");
-    add(`CL:${docketId}`, buildCourtListenerUrl(docketId));
-  }
-
-  const ds10RefMatches = raw.match(/\bDS10(?::[A-Za-z0-9_-]+)?\b/gi) || [];
-  for (const ref of ds10RefMatches) {
-    add(ref.replace(/^ds10/i, "DS10"), buildDs10Url());
-  }
-
-  const fecRefMatches = raw.match(/FEC:[A-Za-z0-9_/-]+/gi) || [];
-  for (const ref of fecRefMatches) {
-    const resolved = resolveFecToken(ref);
-    if (resolved) {
-      add(resolved.label, resolved.url);
-    }
-  }
-
-  const faraRefMatches = raw.match(/FARA:\d+/gi) || [];
-  for (const ref of faraRefMatches) {
-    const regNum = ref.replace(/FARA:/i, "");
-    add(`FARA:${regNum}`, buildFaraUrl(regNum));
-  }
-
-  const usviRefMatches = raw.match(/USVI:[A-Za-z0-9]+/gi) || [];
-  for (const ref of usviRefMatches) {
-    const entityId = ref.replace(/USVI:/i, "");
-    add(`USVI:${entityId}`, buildRegistryUrl("USVI", entityId));
-  }
-
-  const flSunBizMatches = raw.match(/FL[-_]?SunBiz[:\s]+[A-Za-z0-9]+/gi) || [];
-  for (const ref of flSunBizMatches) {
-    const resolved = resolveFlSunBizToken(ref);
-    if (resolved) add(resolved.label, resolved.url);
-  }
-
-  const nmSosMatches = raw.match(/NM[-_]?SoS[:\s]+[A-Za-z0-9]+/gi) || [];
-  for (const ref of nmSosMatches) {
-    const resolved = resolveNmSosToken(ref);
-    if (resolved) add(resolved.label, resolved.url);
-  }
-
-  const nySosMatches = raw.match(/NY[-_]?SoS[:\s]+[A-Za-z0-9]+/gi) || [];
-  for (const ref of nySosMatches) {
-    const resolved = resolveNySosToken(ref);
-    if (resolved) add(resolved.label, resolved.url);
-  }
-
-  const regRefMatches = raw.match(/REG:[A-Z]{2}:[A-Za-z0-9]+/gi) || [];
-  for (const ref of regRefMatches) {
-    const regMatch = ref.match(REG_RE);
-    if (!regMatch) continue;
-    const jurisdiction = regMatch[1].toUpperCase();
-    const entityId = regMatch[2];
-    add(`REG:${jurisdiction}:${entityId}`, buildRegistryUrl(jurisdiction, entityId));
-  }
-
-  const kpmgRefMatches = raw.match(/KPMG:[A-Za-z0-9_-]+/gi) || [];
-  for (const ref of kpmgRefMatches) {
-    const kpmgMatch = ref.match(KPMG_RE);
-    if (kpmgMatch) add(`KPMG:${kpmgMatch[1]}`);
-  }
-
-  const ldaRefMatches = raw.match(/LDA:[A-Za-z0-9_ -]+/gi) || [];
-  for (const ref of ldaRefMatches) {
-    const ldaMatch = ref.match(LDA_RE);
-    if (ldaMatch) {
-      const registrant = ldaMatch[1].trim();
-      add(`LDA:${registrant}`, buildLdaUrl(registrant));
-    }
-  }
-
-  const openSanctionsRefMatches = raw.match(/OpenSanctions:[A-Za-z0-9]+/gi) || [];
-  for (const ref of openSanctionsRefMatches) {
-    const osMatch = ref.match(OPENSANCTIONS_RE);
-    if (osMatch) add(`OpenSanctions:${osMatch[1]}`, buildOpenSanctionsUrl(osMatch[1]));
-  }
-
-  const remainder = raw
-    .replace(URL_RE, "")
-    .replace(/EFTA\d{6,}/gi, "")
-    .replace(/HOUSE_OVERSIGHT_\d+/gi, "")
-    .replace(/SEC:\d{10}-\d{2}-\d{6}/gi, "")
-    .replace(/EDGAR:\d{10}-\d{2}-\d{6}/gi, "")
-    .replace(/990:\d{9}/gi, "")
-    .replace(/ACRIS:\d{13,16}/gi, "")
-    .replace(/CL:\d+/gi, "")
-    .replace(/\bDS10(?::[A-Za-z0-9_-]+)?\b/gi, "")
-    .replace(/FEC:[A-Za-z0-9_/-]+/gi, "")
-    .replace(/FARA:\d+/gi, "")
-    .replace(/USVI:[A-Za-z0-9]+/gi, "")
-    .replace(/FL[-_]?SunBiz[:\s]+[A-Za-z0-9]+/gi, "")
-    .replace(/NM[-_]?SoS[:\s]+[A-Za-z0-9]+/gi, "")
-    .replace(/NY[-_]?SoS[:\s]+[A-Za-z0-9]+/gi, "")
-    .replace(/REG:[A-Z]{2}:[A-Za-z0-9]+/gi, "")
-    .replace(/KPMG:[A-Za-z0-9_-]+/gi, "")
-    .replace(/LDA:[A-Za-z0-9_ -]+/gi, "")
-    .replace(/OpenSanctions:[A-Za-z0-9]+/gi, "")
-    .replace(/[;:,]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  remainder = remainder.replace(/[;:,]+/g, " ").replace(/\s+/g, " ").trim();
 
   if (remainder) {
-    add(cleanToken(remainder));
+    add({ key: cleanToken(remainder), label: cleanToken(remainder) });
   }
 
   if (links.length === 0) {
     const fallback = cleanToken(raw);
-    if (fallback) add(fallback);
+    if (fallback) add({ key: fallback, label: fallback });
   }
 
   return links;
 }
+
+// ---------------------------------------------------------------------------
+// resolveCitationToken — registry-driven
+// ---------------------------------------------------------------------------
 
 function resolveCitationToken(token: string, options: CitationOptions): Omit<CitationEntry, "number"> {
   const trimmed = cleanToken(token);
@@ -490,165 +734,30 @@ function resolveCitationToken(token: string, options: CitationOptions): Omit<Cit
     return { key: "unknown", label: "Unknown" };
   }
 
+  // URL citations (not in registry)
   const urlMatch = trimmed.match(/https?:\/\/[^\s\]]+/i);
   if (urlMatch && urlMatch[0]) {
     const url = cleanUrl(urlMatch[0]);
     return { key: url, label: url, url };
   }
 
-  const findingMatch = trimmed.match(FINDING_RE);
-  if (findingMatch) {
-    const findingId = findingMatch[1];
-    const rawRefs = options.findingEvidenceMap?.[findingId] || [];
-    const sources: CitationLink[] = [];
-    const seen = new Set<string>();
-
-    for (const ref of rawRefs) {
-      for (const link of extractEvidenceLinks(ref)) {
-        if (seen.has(link.key)) continue;
-        seen.add(link.key);
-        sources.push(link);
-      }
-    }
-
-    const url = sources.find(s => s.url)?.url;
-    return {
-      key: `finding:${findingId}`,
-      label: `Finding #${findingId}`,
-      url,
-      sources: sources.length ? sources : undefined,
-    };
-  }
-
-  const eftaMatches = trimmed.match(/EFTA\d{6,}/gi);
-  if (eftaMatches && eftaMatches.length > 0) {
-    const first = eftaMatches[0].toUpperCase();
-    let label = first;
-    if (eftaMatches.length > 1 && trimmed.includes("-")) {
-      label = `${first}-${eftaMatches[1].toUpperCase()}`;
-    }
-    return { key: `efta:${label}`, label, url: buildJmailUrl(first) };
-  }
-
-  const houseMatches = trimmed.match(/HOUSE_OVERSIGHT_\d+/gi);
-  if (houseMatches && houseMatches.length > 0) {
-    const id = houseMatches[0].toUpperCase();
-    return { key: `house:${id}`, label: id, url: buildJmailUrl(id) };
-  }
-
-  const secMatch = trimmed.match(SEC_RE);
-  if (secMatch) {
-    const accession = secMatch[1];
-    return { key: `sec:${accession}`, label: `SEC ${accession}`, url: buildSecEdgarUrl(accession) };
-  }
-
-  const edgarMatch = trimmed.match(EDGAR_RE);
-  if (edgarMatch) {
-    const accession = edgarMatch[1];
-    return { key: `sec:${accession}`, label: `EDGAR ${accession}`, url: buildSecEdgarUrl(accession) };
-  }
-
-  const irs990Match = trimmed.match(IRS990_RE);
-  if (irs990Match) {
-    const ein = irs990Match[1];
-    return { key: `990:${ein}`, label: `990 EIN ${ein}`, url: build990Url(ein) };
-  }
-
-  const acrisMatch = trimmed.match(ACRIS_RE);
-  if (acrisMatch) {
-    const docId = acrisMatch[1];
-    return { key: `acris:${docId}`, label: `ACRIS ${docId}`, url: buildAcrisUrl(docId) };
-  }
-
-  const clMatch = trimmed.match(CL_RE);
-  if (clMatch) {
-    const docketId = clMatch[1];
-    return { key: `cl:${docketId}`, label: `CourtListener ${docketId}`, url: buildCourtListenerUrl(docketId) };
-  }
-
-  const fecResolved = resolveFecToken(trimmed);
-  if (fecResolved) {
-    return fecResolved;
-  }
-
-  const faraMatch = trimmed.match(FARA_RE);
-  if (faraMatch) {
-    const regNum = faraMatch[1];
-    return { key: `fara:${regNum}`, label: `FARA #${regNum}`, url: buildFaraUrl(regNum) };
-  }
-
-  const usviMatch = trimmed.match(USVI_RE);
-  if (usviMatch) {
-    const entityId = usviMatch[1];
-    return { key: `usvi:${entityId}`, label: `USVI ${entityId}`, url: buildRegistryUrl("USVI", entityId) };
-  }
-
-  const flSunBizResolved = resolveFlSunBizToken(trimmed);
-  if (flSunBizResolved) {
-    return flSunBizResolved;
-  }
-
-  const nmSosResolved = resolveNmSosToken(trimmed);
-  if (nmSosResolved) {
-    return nmSosResolved;
-  }
-
-  const nySosResolved = resolveNySosToken(trimmed);
-  if (nySosResolved) {
-    return nySosResolved;
-  }
-
-  const regMatch = trimmed.match(REG_RE);
-  if (regMatch) {
-    const jurisdiction = regMatch[1].toUpperCase();
-    const entityId = regMatch[2];
-    return {
-      key: `reg:${jurisdiction}:${entityId}`,
-      label: `${jurisdiction} ${entityId}`,
-      url: buildRegistryUrl(jurisdiction, entityId),
-    };
-  }
-
-  const ds10Match = trimmed.match(/^DS10(?::[A-Za-z0-9_-]+)?$/i);
-  if (ds10Match) {
-    const normalized = trimmed.replace(/^ds10/i, "DS10");
-    return {
-      key: `dataset:${normalized.toLowerCase()}`,
-      label: normalized,
-      url: buildDs10Url(),
-    };
-  }
-
-  const kpmgMatch = trimmed.match(KPMG_RE);
-  if (kpmgMatch) {
-    const subject = kpmgMatch[1];
-    return {
-      key: `kpmg:${subject.toLowerCase()}`,
-      label: `KPMG: ${subject}`,
-    };
-  }
-
-  const ldaMatch = trimmed.match(LDA_RE);
-  if (ldaMatch) {
-    const registrant = ldaMatch[1].trim();
-    return {
-      key: `lda:${registrant.toLowerCase()}`,
-      label: `LDA: ${registrant}`,
-      url: buildLdaUrl(registrant),
-    };
-  }
-
-  const openSanctionsMatch = trimmed.match(OPENSANCTIONS_RE);
-  if (openSanctionsMatch) {
-    const entityId = openSanctionsMatch[1];
-    return {
-      key: `opensanctions:${entityId}`,
-      label: `OpenSanctions ${entityId}`,
-      url: buildOpenSanctionsUrl(entityId),
-    };
+  // Walk the registry
+  for (const type of CITATION_REGISTRY) {
+    const result = type.resolve(trimmed, options);
+    if (result) return result;
   }
 
   return { key: trimmed, label: trimmed };
+}
+
+// ---------------------------------------------------------------------------
+// Health tier lookup (for optional use by check-citation-health.mjs)
+// ---------------------------------------------------------------------------
+
+export function getCitationHealthTier(citationKey: string): HealthTier | "skip" {
+  const prefix = citationKey.split(":")[0];
+  const type = CITATION_REGISTRY.find(t => t.id === prefix);
+  return type?.healthTier ?? "skip";
 }
 
 /**
