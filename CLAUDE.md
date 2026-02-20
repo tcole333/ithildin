@@ -21,6 +21,7 @@ Agent-scale network investigation rooted in the Epstein case, following evidence
 /investigate-person <name>  # Single-agent deep-dive
 /trace-entity <entity>      # Corporate entity trace
 /status-report              # Investigation status
+/discover-frameworks         # Evolve analytical framework inventory
 /review-methodology         # Operational learning review
 /ingest-source <source>     # Add new data source
 /add-registry               # Add corporate registry
@@ -74,10 +75,25 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 - `query_france.py`: French company registry (SIRENE) — `search`, `company <SIREN>`, `naf <CODE>`, `address` — free, no auth
 - `query_hudoc.py`: ECHR case database (HUDOC) — `search`, `case <ID>`, `appno <NUM>`, `text <ID>`, `respondent <STATE>` — free, no auth
 
+**CA SoS bizfileonline** (`query_california.py`): Drives bizfileonline.sos.ca.gov Angular UI via CDP to bypass Imperva WAF. Up to 500 results, filing history, PDF links. Requires MCP Playwright Chrome running.
+- `search "PARAFI CAPITAL" --status active` | `entity 726332 --history` | `history 726332`
+- `ingest 726332` | `ingest-search "Epstein" --limit 50` — ingests to registry.db with filing history
+- No auth needed, entity numbers: strip "C" prefix (search tips say "remove C from number")
+
 **NY DOS Public Inquiry** (`query_nydos.py`): Direct REST API to NY Division of Corporations (4.1M+ entities). Complements SODA-based `ingest_newyork.py` with entity detail pages, filing/name history, CEO/agent info. Key for Medicaid provider corporate structure analysis.
 - `search "HOME CARE" --status Active` | `entity <DOS_ID> --filings --names` | `filings <DOS_ID>` | `names <DOS_ID>`
 - `ingest <DOS_ID>` | `ingest-search "query" --status Active --limit 50` — ingests to registry.db
 - Free, no auth, rate-limited to 1 req/sec
+
+**TX Comptroller** (`query_texas.py`): Franchise tax entity search via comptroller.texas.gov data-search proxy. Returns entity name, DBA, EIN, mailing address, officers with addresses, registered agent, SoS file number.
+- `search "EPSTEIN"` | `search --taxpayer-id 32044352170` | `search --file-number 0801432227`
+- `entity <TAXPAYER_ID>` | `ingest <TAXPAYER_ID>` | `ingest-search "query"` — ingests to registry.db
+- Free, no auth, rate-limited to 1 req/sec
+
+**MI LARA Business Registry** (`query_michigan.py`): MI Division of Corporations portal API via Playwright browser helper (Cloudflare WAF). Covers domestic/foreign corps, LLCs, LPs, LLPs, nonprofits.
+- `search "EPSTEIN" --contains` | `entity <INTERNAL_ID> <FILING_NUMBER>`
+- `ingest <INTERNAL_ID> <FILING_NUMBER>` | `ingest-search "query"` — ingests to registry.db
+- Free, no auth. Requires `_mi_browser_helper.js` (Playwright + Chrome). First run may need manual Cloudflare solve.
 
 **Medicaid Provider Analysis** (T-MSIS 2018-2024, 227M rows, $1.09T):
 - `query_medicaid.py`: DuckDB-backed spending analysis — `stats`, `top-billers`, `top-codes`, `provider <NPI>`, `code <HCPCS>`, `network <NPI>`, `anomalies`, `sql`

@@ -278,15 +278,37 @@ python tools/ingest_newmexico.py search "Zorro Ranch"
 python tools/ingest_newmexico.py detail <internal_id>
 python tools/ingest_newmexico.py ingest-batch "Zorro"
 
-# California (BE Public Search API — needs API key: CA_SOS_API_KEY)
-python tools/ingest_california.py search "PARAFI CAPITAL"
-python tools/ingest_california.py search "Epstein" --begins-with
-python tools/ingest_california.py search "Apollo" --date-start 1990-01-01 --date-end 2020-12-31
-python tools/ingest_california.py search-number 202150010654
-python tools/ingest_california.py detail 202150010654
-python tools/ingest_california.py ingest-entity 202150010654
-python tools/ingest_california.py ingest-batch "Epstein"
-python tools/ingest_california.py server-status
+# California — bizfileonline web API (no auth, up to 500 results)
+# Requires MCP Playwright Chrome running (trigger with any browser_navigate call)
+python tools/query_california.py search "PARAFI CAPITAL"
+python tools/query_california.py search "Epstein" --status active --type corp
+python tools/query_california.py search "Apollo" --officer-last "BLACK"
+python tools/query_california.py search "726332" --by-number
+python tools/query_california.py entity 726332 --history --output /tmp/entity.json
+python tools/query_california.py entity C0726332 --output /tmp/entity.json
+python tools/query_california.py history 726332 --output /tmp/history.json
+python tools/query_california.py ingest 726332
+python tools/query_california.py ingest-search "Epstein" --limit 50
+# Official API (needs CA_SOS_API_KEY — pending approval)
+# python tools/ingest_california.py search "PARAFI CAPITAL"
+
+# Texas Comptroller — franchise tax entity search (no auth)
+python tools/query_texas.py search "EPSTEIN" --output /tmp/tx-epstein.json
+python tools/query_texas.py search "APOLLO" --limit 50 --output /tmp/tx-apollo.json
+python tools/query_texas.py search --taxpayer-id 32044352170 --output /tmp/tx-tid.json
+python tools/query_texas.py search --file-number 0801432227 --output /tmp/tx-fileno.json
+python tools/query_texas.py entity 32044352170 --output /tmp/tx-entity.json
+python tools/query_texas.py entity 32044352170 --json                     # Raw JSON to stdout
+python tools/query_texas.py ingest 32044352170                            # Single entity → registry.db
+python tools/query_texas.py ingest-search "Epstein" --limit 50            # Batch ingest
+
+# Michigan LARA Business Registry (Cloudflare WAF — needs Playwright browser helper)
+# First run may require manual Cloudflare challenge solve in browser window
+python tools/query_michigan.py search "EPSTEIN" --contains --output /tmp/mi-epstein.json
+python tools/query_michigan.py search "APOLLO" --output /tmp/mi-apollo.json    # StartsWith by default
+python tools/query_michigan.py entity 85956 802112570 --output /tmp/mi-entity.json  # internal_id filing_number
+python tools/query_michigan.py ingest 85956 802112570                     # Single entity → registry.db
+python tools/query_michigan.py ingest-search "Epstein" --limit 20         # Batch (slow — 1 browser session per entity)
 
 # Colorado (SODA API — 1.3M+ entities, no auth)
 python tools/ingest_colorado.py search "Epstein" --limit 100
