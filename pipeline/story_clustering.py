@@ -168,6 +168,25 @@ CLUSTERS = [
         "keywords": ["FEC", "bundling", "plaskett", "richardson", "clinton", "campaign",
                      "political", "donation"],
     },
+    {
+        "id": "parallel-diplomatic-corps",
+        "title": "The Parallel Diplomatic Corps",
+        "subtitle": "How IPI, HDI, and Gratitude America functioned as influence infrastructure outside FARA",
+        "style_angle": "Epstein built institutions that brokered between governments — then those institutions needed him",
+        "targets": [
+            "International Peace Institute", "IPI",
+            "Humpty Dumpty Institute", "HDI",
+            "Terje Rod-Larsen", "Ehud Barak", "Thorbjorn Jagland",
+            "Gratitude America", "Gratitude America Ltd",
+            "Erika Kellerhals", "Richard Kahn", "Elliott Broidy",
+        ],
+        "keywords": [
+            "IPI", "HDI", "lobbying", "FARA", "congress", "shadow",
+            "norway", "norwegian", "rod-larsen", "barak", "jagland", "telenor",
+            "FEC", "bundling", "plaskett", "richardson", "clinton", "campaign",
+            "political", "donation", "gratitude", "kellerhals", "diplomatic",
+        ],
+    },
 ]
 
 
@@ -282,16 +301,51 @@ def gather_cluster_data(conn: sqlite3.Connection, cluster: dict) -> dict:
     }
 
 
+def _resolve_output_path(args: argparse.Namespace) -> Path:
+    if args.output_file:
+        out_path = args.output_file
+    elif args.cluster:
+        # Safe default for single-cluster runs: avoid clobbering content/clusters.json.
+        out_path = args.output_dir / f"cluster-{args.cluster}.json"
+    else:
+        out_path = args.output_dir / "clusters.json"
+
+    if args.cluster and out_path.name == "clusters.json" and not args.allow_overwrite_main:
+        raise ValueError(
+            "Refusing to overwrite clusters.json for single-cluster export. "
+            "Use --output-file <path> or pass --allow-overwrite-main."
+        )
+
+    return out_path
+
+
 def main():
     parser = argparse.ArgumentParser(description="Prepare article cluster data")
     parser.add_argument("--cluster", help="Single cluster ID to export")
     parser.add_argument("--list", action="store_true", help="List available clusters")
     parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
+    parser.add_argument(
+        "--output-file",
+        type=Path,
+        help="Explicit output file path. Defaults to content/clusters.json for full export, "
+             "or content/cluster-<id>.json for --cluster.",
+    )
+    parser.add_argument(
+        "--allow-overwrite-main",
+        action="store_true",
+        help="Allow --cluster exports to overwrite clusters.json (unsafe default disabled).",
+    )
     args = parser.parse_args()
 
     if args.list:
         for c in CLUSTERS:
             print(f"  {c['id']}: {c['title']}")
+        return
+
+    try:
+        out_path = _resolve_output_path(args)
+    except ValueError as err:
+        print(err)
         return
 
     conn = sqlite3.connect(str(DB_PATH))
@@ -314,7 +368,7 @@ def main():
               f"{data['stats']['unique_targets']} targets, "
               f"{sd['source_types_used']} source types ({sd['dominant_source_pct']}% dominant)")
 
-    out_path = args.output_dir / "clusters.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2, default=str)
 
