@@ -865,8 +865,8 @@ function renderCitationSuperscripts(inner: string, options: CitationOptions, cit
     const href = resolved.url || `#fn-${number}`;
     const external = isExternalUrl(resolved.url);
     const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    const eftaFallback = resolved.key.startsWith("efta:") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
-    return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs}${eftaFallback} data-citation-number="${number}" data-citation-key="${escapeHtml(resolved.key)}" aria-label="Source ${number}: ${escapeHtml(resolved.label)}">${number}</a></sup>`;
+    const jmailFallback = resolved.url?.includes("jmail.world") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
+    return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs}${jmailFallback} data-citation-number="${number}" data-citation-key="${escapeHtml(resolved.key)}" aria-label="Source ${number}: ${escapeHtml(resolved.label)}">${number}</a></sup>`;
   });
 
   return rendered.join("");
@@ -955,9 +955,9 @@ export function renderFootnotes(entries: CitationEntry[]): string {
     const number = entry.number;
     const external = isExternalUrl(entry.url);
     const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    const eftaFallback = entry.key.startsWith("efta:") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
+    const jmailFallback = entry.url?.includes("jmail.world") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
     const link = entry.url
-      ? `<a href="${escapeHtml(entry.url)}"${attrs}${eftaFallback} data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</a>`
+      ? `<a href="${escapeHtml(entry.url)}"${attrs}${jmailFallback} data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</a>`
       : `<span data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</span>`;
 
     let sources = "";
@@ -967,7 +967,8 @@ export function renderFootnotes(entries: CitationEntry[]): string {
           const sourceLabel = escapeHtml(source.label);
           if (source.url) {
             const sourceAttrs = isExternalUrl(source.url) ? ' target="_blank" rel="noopener noreferrer"' : "";
-            return `<a href="${escapeHtml(source.url)}"${sourceAttrs} data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(entry.key)}">${sourceLabel}</a>`;
+            const sourceFallback = source.url.includes("jmail.world") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
+            return `<a href="${escapeHtml(source.url)}"${sourceAttrs}${sourceFallback} data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(entry.key)}">${sourceLabel}</a>`;
           }
           return `<span data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(entry.key)}">${sourceLabel}</span>`;
         })
