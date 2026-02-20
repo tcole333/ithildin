@@ -39,6 +39,9 @@ const EDGAR_RE = /EDGAR:(\d{10}-\d{2}-\d{6})/i;
 const FL_SUNBIZ_RE = /FL[-_]?SunBiz[:\s]+([A-Za-z0-9]+)/i;
 const NM_SOS_RE = /NM[-_]?SoS[:\s]+([A-Za-z0-9]+)/i;
 const NY_SOS_RE = /NY[-_]?SoS[:\s]+([A-Za-z0-9]+)/i;
+const KPMG_RE = /KPMG:([A-Za-z0-9_-]+)/i;
+const LDA_RE = /LDA:([A-Za-z0-9_ -]+)/i;
+const OPENSANCTIONS_RE = /OpenSanctions:([A-Za-z0-9]+)/i;
 
 const CITE_TOKEN_PATTERNS = [
   "EFTA\\d{6,}",
@@ -57,6 +60,9 @@ const CITE_TOKEN_PATTERNS = [
   "FL[-_]?SunBiz[:\\s]+[A-Za-z0-9]+",
   "NM[-_]?SoS[:\\s]+[A-Za-z0-9]+",
   "NY[-_]?SoS[:\\s]+[A-Za-z0-9]+",
+  "KPMG:[A-Za-z0-9_-]+",
+  "LDA:[A-Za-z0-9_ -]+",
+  "OpenSanctions:[A-Za-z0-9]+",
   "https?:\\/\\/[^\\s,;)]+",
 ];
 const CITE_TOKEN_PATTERN = CITE_TOKEN_PATTERNS.join("|");
@@ -87,6 +93,14 @@ function buildCourtListenerUrl(docketId: string): string {
 
 function buildDs10Url(): string {
   return "/financials";
+}
+
+function buildLdaUrl(registrant: string): string {
+  return `https://lda.senate.gov/filings/public/filing/search/?registrant=${encodeURIComponent(registrant)}&filing_type=`;
+}
+
+function buildOpenSanctionsUrl(entityId: string): string {
+  return `https://www.opensanctions.org/entities/${entityId}/`;
 }
 
 function buildFecCommitteeUrl(committeeId: string): string {
@@ -413,6 +427,27 @@ export function extractEvidenceLinks(raw: string): CitationLink[] {
     add(`REG:${jurisdiction}:${entityId}`, buildRegistryUrl(jurisdiction, entityId));
   }
 
+  const kpmgRefMatches = raw.match(/KPMG:[A-Za-z0-9_-]+/gi) || [];
+  for (const ref of kpmgRefMatches) {
+    const kpmgMatch = ref.match(KPMG_RE);
+    if (kpmgMatch) add(`KPMG:${kpmgMatch[1]}`);
+  }
+
+  const ldaRefMatches = raw.match(/LDA:[A-Za-z0-9_ -]+/gi) || [];
+  for (const ref of ldaRefMatches) {
+    const ldaMatch = ref.match(LDA_RE);
+    if (ldaMatch) {
+      const registrant = ldaMatch[1].trim();
+      add(`LDA:${registrant}`, buildLdaUrl(registrant));
+    }
+  }
+
+  const openSanctionsRefMatches = raw.match(/OpenSanctions:[A-Za-z0-9]+/gi) || [];
+  for (const ref of openSanctionsRefMatches) {
+    const osMatch = ref.match(OPENSANCTIONS_RE);
+    if (osMatch) add(`OpenSanctions:${osMatch[1]}`, buildOpenSanctionsUrl(osMatch[1]));
+  }
+
   const remainder = raw
     .replace(URL_RE, "")
     .replace(/EFTA\d{6,}/gi, "")
@@ -430,6 +465,9 @@ export function extractEvidenceLinks(raw: string): CitationLink[] {
     .replace(/NM[-_]?SoS[:\s]+[A-Za-z0-9]+/gi, "")
     .replace(/NY[-_]?SoS[:\s]+[A-Za-z0-9]+/gi, "")
     .replace(/REG:[A-Z]{2}:[A-Za-z0-9]+/gi, "")
+    .replace(/KPMG:[A-Za-z0-9_-]+/gi, "")
+    .replace(/LDA:[A-Za-z0-9_ -]+/gi, "")
+    .replace(/OpenSanctions:[A-Za-z0-9]+/gi, "")
     .replace(/[;:,]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -581,6 +619,35 @@ function resolveCitationToken(token: string, options: CitationOptions): Omit<Cit
     };
   }
 
+  const kpmgMatch = trimmed.match(KPMG_RE);
+  if (kpmgMatch) {
+    const subject = kpmgMatch[1];
+    return {
+      key: `kpmg:${subject.toLowerCase()}`,
+      label: `KPMG: ${subject}`,
+    };
+  }
+
+  const ldaMatch = trimmed.match(LDA_RE);
+  if (ldaMatch) {
+    const registrant = ldaMatch[1].trim();
+    return {
+      key: `lda:${registrant.toLowerCase()}`,
+      label: `LDA: ${registrant}`,
+      url: buildLdaUrl(registrant),
+    };
+  }
+
+  const openSanctionsMatch = trimmed.match(OPENSANCTIONS_RE);
+  if (openSanctionsMatch) {
+    const entityId = openSanctionsMatch[1];
+    return {
+      key: `opensanctions:${entityId}`,
+      label: `OpenSanctions ${entityId}`,
+      url: buildOpenSanctionsUrl(entityId),
+    };
+  }
+
   return { key: trimmed, label: trimmed };
 }
 
@@ -689,7 +756,8 @@ function renderCitationSuperscripts(inner: string, options: CitationOptions, cit
     const href = resolved.url || `#fn-${number}`;
     const external = isExternalUrl(resolved.url);
     const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs} data-citation-number="${number}" data-citation-key="${escapeHtml(resolved.key)}" aria-label="Source ${number}: ${escapeHtml(resolved.label)}">${number}</a></sup>`;
+    const eftaFallback = resolved.key.startsWith("efta:") ? ` data-fallback-url="https://oversight.house.gov/release/epstein-documents/"` : "";
+    return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs}${eftaFallback} data-citation-number="${number}" data-citation-key="${escapeHtml(resolved.key)}" aria-label="Source ${number}: ${escapeHtml(resolved.label)}">${number}</a></sup>`;
   });
 
   return rendered.join("");
