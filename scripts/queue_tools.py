@@ -21,7 +21,14 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from queue_system.queue import JobQueue
+from queue_system.queue import DEFAULT_DB_PATH, JobQueue
+
+
+def _queue(args) -> JobQueue:
+    db_path = getattr(args, "db_path", None)
+    if db_path:
+        return JobQueue(db_path=Path(db_path))
+    return JobQueue()
 
 
 def _load_payload(payload_str: Optional[str], payload_file: Optional[str]) -> dict:
@@ -34,7 +41,7 @@ def _load_payload(payload_str: Optional[str], payload_file: Optional[str]) -> di
 
 
 def cmd_submit(args):
-    queue = JobQueue()
+    queue = _queue(args)
     payload = _load_payload(args.payload, args.payload_file)
     job_id = queue.create_job(
         job_type=args.type,
@@ -75,7 +82,7 @@ def cmd_enqueue_triage(args):
         "dry_run": args.dry_run,
         "triaged_by": args.triaged_by,
     }
-    queue = JobQueue()
+    queue = _queue(args)
     job_id = queue.create_job(
         job_type="lead_triage",
         domain="discovery",
@@ -108,7 +115,7 @@ def cmd_enqueue_lead(args):
     if sources is not None:
         payload["sources"] = sources
 
-    queue = JobQueue()
+    queue = _queue(args)
     job_id = queue.create_job(
         job_type=args.job_type,
         domain=args.domain,
@@ -121,7 +128,7 @@ def cmd_enqueue_lead(args):
 
 
 def cmd_status(args):
-    queue = JobQueue()
+    queue = _queue(args)
     paused = queue.is_paused()
     status_counts = queue.status_counts()
     domain_counts = queue.domain_counts()
@@ -140,7 +147,7 @@ def cmd_status(args):
 
 
 def cmd_list(args):
-    queue = JobQueue()
+    queue = _queue(args)
     jobs = queue.list_jobs(
         status=args.status,
         domain=args.domain,
@@ -152,7 +159,7 @@ def cmd_list(args):
 
 
 def cmd_show(args):
-    queue = JobQueue()
+    queue = _queue(args)
     job = queue.get_job(args.job_id)
     if not job:
         print("Job not found.")
@@ -160,7 +167,7 @@ def cmd_show(args):
     print(json.dumps(job, indent=2, default=str))
 
 def cmd_agents(args):
-    queue = JobQueue()
+    queue = _queue(args)
     agents = queue.list_agents(status=args.status, limit=args.limit)
     for agent in agents:
         current = agent.get("current_job_id") or "-"
@@ -171,25 +178,30 @@ def cmd_agents(args):
 
 
 def cmd_metrics(args):
-    queue = JobQueue()
+    queue = _queue(args)
     metrics = queue.sample_metrics()
     print(json.dumps(metrics, indent=2, default=str))
 
 
 def cmd_mark_stale(args):
-    queue = JobQueue()
+    queue = _queue(args)
     marked = queue.mark_stale_jobs(grace_seconds=args.grace_seconds)
     print(f"Marked stale jobs: {marked}")
 
 
 def cmd_pause(args, paused: bool):
-    queue = JobQueue()
+    queue = _queue(args)
     queue.set_paused(paused, updated_by=args.by)
     print(f"Paused set to {'true' if paused else 'false'}")
 
 
 def main():
     parser = argparse.ArgumentParser(description="Queue management CLI")
+    parser.add_argument(
+        "--db-path",
+        default=str(DEFAULT_DB_PATH),
+        help=f"Path to queue DB (default: {DEFAULT_DB_PATH})",
+    )
     sub = parser.add_subparsers(dest="command")
 
     p_submit = sub.add_parser("submit", help="Submit a job")

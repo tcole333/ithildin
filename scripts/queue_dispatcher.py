@@ -20,8 +20,9 @@ DB_PATH = PROJECT_ROOT / "investigation.db"
 CONFIG_PATH = Path(__file__).resolve().parent / "queue_dispatch_config.json"
 
 
-def _connect():
-    db = sqlite3.connect(str(DB_PATH))
+def _connect(db_path: Path | None = None):
+    target = db_path or DB_PATH
+    db = sqlite3.connect(str(target))
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -103,7 +104,7 @@ def spawn_workers(actions: List[dict], config: dict, dry_run: bool) -> List[dict
 
 
 def cmd_run(args):
-    db = _connect()
+    db = _connect(Path(args.db_path))
     try:
         if is_paused(db):
             print("System paused; no dispatch actions.")
@@ -126,7 +127,7 @@ def cmd_daemon(args):
 
 
 def cmd_status(args):
-    db = _connect()
+    db = _connect(Path(args.db_path))
     try:
         pending = get_pending_by_type(db)
         active = get_active_agents(db, args.heartbeat_seconds)
@@ -154,6 +155,7 @@ def cmd_status(args):
 def main():
     parser = argparse.ArgumentParser(description="Queue dispatcher for Ithildin")
     parser.add_argument("--config", default=str(CONFIG_PATH))
+    parser.add_argument("--db-path", default=str(DB_PATH))
     parser.add_argument("--heartbeat-seconds", type=int, default=90)
     parser.add_argument("--dry-run", action="store_true")
     sub = parser.add_subparsers(dest="command")
