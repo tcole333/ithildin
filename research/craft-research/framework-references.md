@@ -29,6 +29,11 @@ Curated academic and practitioner frameworks relevant to this investigation. Age
 | Moral hazard | Arrow (1963); applied to bailout dynamics | Protection from consequences enabling escalation of risk-taking |
 | Information asymmetry / adverse selection | Akerlof, "The Market for Lemons" (1970) | Due diligence failures when one party controls information |
 | Organizational deviance | Ermann & Lundman, "Corporate and Governmental Deviance" (1978) | Deviance as organizational product, not individual pathology |
+| Exit, Voice, and Loyalty | Hirschman, "Exit, Voice, and Loyalty" (1970) | Why insiders stay silent: the cost of exit increases with each accommodation, and loyalty suppresses voice. Theoretical foundation for Exit Cost Escalation lens. Promoted to Tier 2 as "Exit Cost Escalation" (applied to professional service providers) |
+| Gatekeeping failure | Coffee, "Gatekeepers: The Professions and Corporate Governance" (2006) | How lawyers, accountants, and auditors fail as gatekeepers when their economic incentives align with the entities they oversee rather than the investors/public they formally serve. Foundation for Fiduciary Inversion lens |
+| Moral Mazes | Jackall, "Moral Mazes: The World of Corporate Managers" (1988) | How corporate bureaucracy corrupts individual moral reasoning through career incentives, blame avoidance, and loyalty to superiors rather than to organizational mission or external obligations. Explains the professional rationalization patterns visible in DB compliance and K&E revolving door |
+| Cooptation theory | Selznick, "TVA and the Grass Roots" (1949) | How organizations absorb external elements into their decision-making to neutralize threats. The reverse pattern is also operative: external actors (Epstein) absorb organizational fiduciaries (trustees, committee members) into their own orbit |
+| Sunk cost escalation | Staw, "Knee-Deep in the Big Muddy" (1976); Brockner, "The Escalation of Commitment" (1992) | The tendency to continue an endeavor once an investment has been made, even when continued investment is irrational. Behavioral foundation for Exit Cost Escalation: each accommodation is an investment that makes withdrawal more psychologically costly |
 
 ## Intelligence Studies
 
