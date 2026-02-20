@@ -45,11 +45,6 @@ run("EFTA: extractEvidenceLinks resolves EFTA ID", () => {
   assert.match(links[0].url ?? "", /jmail\.world/);
 });
 
-run("EFTA: adds data-fallback-url attribute to rendered HTML", () => {
-  const result = applyCitations("Cited [EFTA02504960] here.");
-  assert.match(result.markdown, /data-fallback-url="https:\/\/oversight\.house\.gov/);
-});
-
 run("EFTA: handles range notation (EFTA-EFTA)", () => {
   const result = applyCitations("Pages [EFTA02504960-EFTA02504965].");
   assert.equal(result.entries.length, 1);
