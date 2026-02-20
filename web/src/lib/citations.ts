@@ -2,9 +2,7 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkStringify from "remark-stringify";
-import { readFileSync, existsSync } from "fs";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
+import jmailOverridesData from "../data/jmail-overrides.json";
 
 export type CitationLink = {
   key: string;
@@ -123,28 +121,10 @@ function cleanUrl(value: string): string {
   return value.replace(/[),.;]+$/, "");
 }
 
-let _jmailOverrides: Record<string, string> | null = null;
-function loadJmailOverrides(): Record<string, string> {
-  if (_jmailOverrides) return _jmailOverrides;
-  try {
-    const dir = typeof import.meta.dirname === "string"
-      ? import.meta.dirname
-      : dirname(fileURLToPath(import.meta.url));
-    const overridePath = resolve(dir, "..", "data", "jmail-overrides.json");
-    if (existsSync(overridePath)) {
-      _jmailOverrides = JSON.parse(readFileSync(overridePath, "utf-8"));
-    } else {
-      _jmailOverrides = {};
-    }
-  } catch {
-    _jmailOverrides = {};
-  }
-  return _jmailOverrides!;
-}
+const jmailOverrides: Record<string, string> = jmailOverridesData;
 
 function buildJmailUrl(id: string): string {
-  const overrides = loadJmailOverrides();
-  if (overrides[id]) return overrides[id];
+  if (jmailOverrides[id]) return jmailOverrides[id];
   return `${JMAIL_BASE}/${id}?view=inbox`;
 }
 
