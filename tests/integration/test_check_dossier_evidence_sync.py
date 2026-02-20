@@ -73,3 +73,20 @@ def test_check_sync_missing_paths_returns_2(run_python_script, tmp_path: Path) -
     )
     assert result.returncode == 2
     assert "Database not found" in result.stderr
+
+
+@pytest.mark.integration
+@pytest.mark.real_fixture
+def test_check_sync_missing_dossier_dir_returns_2(copy_fixture_db, run_python_script, tmp_path: Path) -> None:
+    db_path = copy_fixture_db("check_sync_investigation.db")
+    missing_dossier_dir = tmp_path / "missing-dossiers"
+
+    result = run_python_script(
+        "scripts/check_dossier_evidence_sync.py",
+        "--db-path",
+        str(db_path),
+        "--dossier-dir",
+        str(missing_dossier_dir),
+    )
+    assert result.returncode == 2
+    assert "Dossier directory not found" in result.stderr
