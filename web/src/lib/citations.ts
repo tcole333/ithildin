@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import remarkStringify from "remark-stringify";
 import jmailOverridesData from "../data/jmail-overrides.json";
 import clOverridesData from "../data/cl-overrides.json";
+import sourceUrlOverridesData from "../data/source-urls.json";
 
 export type CitationLink = {
   key: string;
@@ -54,6 +55,7 @@ function buildAcrisUrl(docId: string): string {
 }
 
 const clOverrides: Record<string, string> = clOverridesData;
+const sourceUrlOverrides: Record<string, string> = sourceUrlOverridesData;
 
 function buildCourtListenerUrl(docketId: string): string {
   if (clOverrides[docketId]) return clOverrides[docketId];
@@ -70,6 +72,26 @@ function buildLdaUrl(registrant: string): string {
 
 function buildOpenSanctionsUrl(entityId: string): string {
   return `https://www.opensanctions.org/entities/${entityId}/`;
+}
+
+function buildDocumentCloudUrl(docId: string): string {
+  return `https://www.documentcloud.org/documents/${docId}`;
+}
+
+function buildOffshoreAlertUrl(slug: string): string {
+  return `https://www.offshorealert.com/${slug}/`;
+}
+
+function buildMuckRockUrl(requestId: string): string {
+  return `https://www.muckrock.com/foi/${requestId}/`;
+}
+
+function buildLittleSisUrl(entityId: string): string {
+  return `https://littlesis.org/entities/${entityId}`;
+}
+
+function buildIcijUrl(nodeId: string): string {
+  return `https://offshoreleaks.icij.org/nodes/${nodeId}`;
 }
 
 function buildFecCommitteeUrl(committeeId: string): string {
@@ -624,6 +646,123 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       });
     },
   },
+  {
+    id: "documentcloud",
+    tokenPattern: "DOCUMENTCLOUD:\\d+",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/DOCUMENTCLOUD:(\d+)/i);
+      if (!match) return null;
+      const docId = match[1];
+      return {
+        key: `documentcloud:${docId}`,
+        label: `DocumentCloud ${docId}`,
+        url: buildDocumentCloudUrl(docId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/DOCUMENTCLOUD:\d+/gi) || []).map(ref => {
+        const docId = ref.replace(/DOCUMENTCLOUD:/i, "");
+        const url = buildDocumentCloudUrl(docId);
+        return { key: url, label: `DOCUMENTCLOUD:${docId}`, url };
+      });
+    },
+  },
+  {
+    id: "offshorealert",
+    tokenPattern: "OffshoreAlert:[A-Za-z0-9_-]+",
+    healthTier: "tier3",
+    resolve(token) {
+      const match = token.match(/OffshoreAlert:([A-Za-z0-9_-]+)/i);
+      if (!match) return null;
+      const slug = match[1];
+      return {
+        key: `offshorealert:${slug.toLowerCase()}`,
+        label: `OffshoreAlert:${slug}`,
+        url: buildOffshoreAlertUrl(slug),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/OffshoreAlert:[A-Za-z0-9_-]+/gi) || []).flatMap(ref => {
+        const m = ref.match(/OffshoreAlert:([A-Za-z0-9_-]+)/i);
+        if (!m) return [];
+        const url = buildOffshoreAlertUrl(m[1]);
+        return [{ key: url, label: `OffshoreAlert:${m[1]}`, url }];
+      });
+    },
+  },
+  {
+    id: "muckrock",
+    tokenPattern: "MUCKROCK:\\d+(?:\\/[A-Za-z0-9_.-]+)?",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/MUCKROCK:(\d+)(?:\/([A-Za-z0-9_.-]+))?/i);
+      if (!match) return null;
+      const requestId = match[1];
+      const fileName = match[2];
+      const label = fileName ? `MuckRock ${requestId}/${fileName}` : `MuckRock ${requestId}`;
+      return {
+        key: `muckrock:${requestId}`,
+        label,
+        url: buildMuckRockUrl(requestId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/MUCKROCK:\d+(?:\/[A-Za-z0-9_.-]+)?/gi) || []).flatMap(ref => {
+        const m = ref.match(/MUCKROCK:(\d+)(?:\/([A-Za-z0-9_.-]+))?/i);
+        if (!m) return [];
+        const url = buildMuckRockUrl(m[1]);
+        const label = m[2] ? `MUCKROCK:${m[1]}/${m[2]}` : `MUCKROCK:${m[1]}`;
+        return [{ key: url, label, url }];
+      });
+    },
+  },
+  {
+    id: "littlesis",
+    tokenPattern: "LittleSis[_:]?\\d+",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/LittleSis[_:]?(\d+)/i);
+      if (!match) return null;
+      const entityId = match[1];
+      return {
+        key: `littlesis:${entityId}`,
+        label: `LittleSis ${entityId}`,
+        url: buildLittleSisUrl(entityId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/LittleSis[_:]\d+/gi) || []).flatMap(ref => {
+        const m = ref.match(/LittleSis[_:](\d+)/i);
+        if (!m) return [];
+        const url = buildLittleSisUrl(m[1]);
+        return [{ key: url, label: `LittleSis:${m[1]}`, url }];
+      });
+    },
+  },
+  {
+    id: "icij",
+    tokenPattern: "ICIJ(?:-PP|-node)?[:\\s]\\d+",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/ICIJ(?:-PP|-node)?[:\s](\d+)/i);
+      if (!match) return null;
+      const nodeId = match[1];
+      return {
+        key: `icij:${nodeId}`,
+        label: `ICIJ ${nodeId}`,
+        url: buildIcijUrl(nodeId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/ICIJ(?:-PP|-node)?[:\s]\d+/gi) || []).flatMap(ref => {
+        const m = ref.match(/ICIJ(?:-PP|-node)?[:\s](\d+)/i);
+        if (!m) return [];
+        const url = buildIcijUrl(m[1]);
+        return [{ key: url, label: ref.trim(), url }];
+      });
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -721,12 +860,25 @@ export function extractEvidenceLinks(raw: string): CitationLink[] {
   remainder = remainder.replace(/[;:,]+/g, " ").replace(/\s+/g, " ").trim();
 
   if (remainder) {
-    add({ key: cleanToken(remainder), label: cleanToken(remainder) });
+    const cleanedRemainder = cleanToken(remainder);
+    const remainderOverride = sourceUrlOverrides[cleanedRemainder];
+    if (remainderOverride) {
+      add({ key: cleanedRemainder, label: cleanedRemainder, url: remainderOverride });
+    } else {
+      add({ key: cleanedRemainder, label: cleanedRemainder });
+    }
   }
 
   if (links.length === 0) {
     const fallback = cleanToken(raw);
-    if (fallback) add({ key: fallback, label: fallback });
+    if (fallback) {
+      const fallbackOverride = sourceUrlOverrides[fallback];
+      if (fallbackOverride) {
+        add({ key: fallback, label: fallback, url: fallbackOverride });
+      } else {
+        add({ key: fallback, label: fallback });
+      }
+    }
   }
 
   return links;
@@ -753,6 +905,12 @@ function resolveCitationToken(token: string, options: CitationOptions): Omit<Cit
   for (const type of CITATION_REGISTRY) {
     const result = type.resolve(trimmed, options);
     if (result) return result;
+  }
+
+  // Check source-urls.json override as last resort
+  const overrideUrl = sourceUrlOverrides[trimmed];
+  if (overrideUrl) {
+    return { key: trimmed, label: trimmed, url: overrideUrl };
   }
 
   return { key: trimmed, label: trimmed };

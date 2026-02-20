@@ -337,6 +337,117 @@ run("OpenSanctions: extractEvidenceLinks resolves entity", () => {
 });
 
 // ---------------------------------------------------------------------------
+// DocumentCloud
+// ---------------------------------------------------------------------------
+
+run("DocumentCloud: resolves document ID to DocumentCloud URL", () => {
+  const result = applyCitations("See [DOCUMENTCLOUD:24402693].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "DocumentCloud 24402693");
+  assert.equal(result.entries[0].url, "https://www.documentcloud.org/documents/24402693");
+});
+
+run("DocumentCloud: extractEvidenceLinks resolves doc ID", () => {
+  const links = extractEvidenceLinks("DOCUMENTCLOUD:24402693");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /documentcloud\.org\/documents\/24402693/);
+});
+
+// ---------------------------------------------------------------------------
+// OffshoreAlert
+// ---------------------------------------------------------------------------
+
+run("OffshoreAlert: resolves slug to OffshoreAlert URL", () => {
+  const result = applyCitations("See [OffshoreAlert:DB-Consent-Order-NYDFS].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "OffshoreAlert:DB-Consent-Order-NYDFS");
+  assert.match(result.entries[0].url ?? "", /offshorealert\.com\/DB-Consent-Order-NYDFS/);
+});
+
+run("OffshoreAlert: extractEvidenceLinks resolves slug", () => {
+  const links = extractEvidenceLinks("OffshoreAlert:Katlyn-Doe-v-Epstein");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /offshorealert\.com\/Katlyn-Doe-v-Epstein/);
+});
+
+// ---------------------------------------------------------------------------
+// MuckRock
+// ---------------------------------------------------------------------------
+
+run("MuckRock: resolves request ID to MuckRock URL", () => {
+  const result = applyCitations("See [MUCKROCK:78799].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "MuckRock 78799");
+  assert.equal(result.entries[0].url, "https://www.muckrock.com/foi/78799/");
+});
+
+run("MuckRock: resolves request ID with filename", () => {
+  const result = applyCitations("See [MUCKROCK:78799/Docs.redacted.pdf].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "MuckRock 78799/Docs.redacted.pdf");
+  assert.equal(result.entries[0].url, "https://www.muckrock.com/foi/78799/");
+});
+
+run("MuckRock: extractEvidenceLinks resolves request", () => {
+  const links = extractEvidenceLinks("MUCKROCK:80009/2019-083151_RC.pdf");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /muckrock\.com\/foi\/80009/);
+});
+
+// ---------------------------------------------------------------------------
+// LittleSis
+// ---------------------------------------------------------------------------
+
+run("LittleSis: resolves colon-separated ID to LittleSis URL", () => {
+  const result = applyCitations("See [LittleSis:101661].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "LittleSis 101661");
+  assert.equal(result.entries[0].url, "https://littlesis.org/entities/101661");
+});
+
+run("LittleSis: resolves underscore variant", () => {
+  const result = applyCitations("See [LITTLESIS_429018].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "LittleSis 429018");
+  assert.match(result.entries[0].url ?? "", /littlesis\.org\/entities\/429018/);
+});
+
+run("LittleSis: extractEvidenceLinks resolves entity ID", () => {
+  const links = extractEvidenceLinks("LittleSis:101661");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /littlesis\.org\/entities\/101661/);
+});
+
+// ---------------------------------------------------------------------------
+// ICIJ
+// ---------------------------------------------------------------------------
+
+run("ICIJ: resolves plain format to offshore leaks URL", () => {
+  const result = applyCitations("See [ICIJ:82004676].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "ICIJ 82004676");
+  assert.equal(result.entries[0].url, "https://offshoreleaks.icij.org/nodes/82004676");
+});
+
+run("ICIJ: resolves PP variant", () => {
+  const result = applyCitations("See [ICIJ-PP:55063719].");
+  assert.equal(result.entries.length, 1);
+  assert.match(result.entries[0].url ?? "", /offshoreleaks\.icij\.org\/nodes\/55063719/);
+});
+
+run("ICIJ: resolves node variant", () => {
+  const result = applyCitations("See [ICIJ-node:56105421].");
+  assert.equal(result.entries.length, 1);
+  assert.match(result.entries[0].url ?? "", /offshoreleaks\.icij\.org\/nodes\/56105421/);
+});
+
+run("ICIJ: extractEvidenceLinks resolves ICIJ ref", () => {
+  const links = extractEvidenceLinks("ICIJ:82004676");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /offshoreleaks\.icij\.org\/nodes\/82004676/);
+});
+
+// ---------------------------------------------------------------------------
 // Finding references
 // ---------------------------------------------------------------------------
 
@@ -450,7 +561,7 @@ run("getCitationHealthTier: returns skip for unknown prefixes", () => {
 // Registry: all 19 types resolve through applyCitations
 // ---------------------------------------------------------------------------
 
-run("Registry: all 19 types produce citation entries", () => {
+run("Registry: all 24 types produce citation entries", () => {
   const tokens = [
     "Finding #1",
     "EFTA02504960",
@@ -471,6 +582,11 @@ run("Registry: all 19 types produce citation entries", () => {
     "KPMG:IPI",
     "LDA:Broidy Capital",
     "OpenSanctions:Q125731",
+    "DOCUMENTCLOUD:24402693",
+    "OffshoreAlert:DB-Consent-Order",
+    "MUCKROCK:78799",
+    "LittleSis:101661",
+    "ICIJ:82004676",
   ];
 
   for (const token of tokens) {
@@ -507,6 +623,11 @@ run("Registry: all extractable types produce evidence links", () => {
     { input: "KPMG:IPI", expectMin: 1 },
     { input: "LDA:Broidy Capital", expectMin: 1 },
     { input: "OpenSanctions:Q125731", expectMin: 1 },
+    { input: "DOCUMENTCLOUD:24402693", expectMin: 1 },
+    { input: "OffshoreAlert:DB-Consent-Order", expectMin: 1 },
+    { input: "MUCKROCK:78799", expectMin: 1 },
+    { input: "LittleSis:101661", expectMin: 1 },
+    { input: "ICIJ:82004676", expectMin: 1 },
   ];
 
   for (const { input, expectMin } of rawRefs) {
@@ -541,6 +662,26 @@ run("Registry: splitCitationGroup recognizes all token types", () => {
   const combined = "EFTA02504960, SEC:0001193125-21-123456, FEC:C00352732, DS10, KPMG:IPI";
   const tokens = splitCitationGroup(combined);
   assert.equal(tokens.length, 5, `Expected 5 tokens from group, got ${tokens.length}: ${JSON.stringify(tokens)}`);
+});
+
+run("Registry: splitCitationGroup recognizes new types", () => {
+  const combined = "DOCUMENTCLOUD:24402693, ICIJ:82004676, LittleSis:101661";
+  const tokens = splitCitationGroup(combined);
+  assert.equal(tokens.length, 3, `Expected 3 tokens, got ${tokens.length}: ${JSON.stringify(tokens)}`);
+});
+
+// ---------------------------------------------------------------------------
+// source-urls.json override (structural test — file exists and is loaded)
+// ---------------------------------------------------------------------------
+
+run("source-urls.json: override file is loaded without error", () => {
+  // If the JSON file didn't parse or import correctly, the module would
+  // have thrown at import time. This test confirms the file exists and
+  // is valid JSON. Actual override behavior is tested by adding a key
+  // to source-urls.json and verifying it resolves.
+  // For now, just verify extractEvidenceLinks still works (module loaded).
+  const links = extractEvidenceLinks("some-unknown-ref");
+  assert.ok(Array.isArray(links));
 });
 
 // ---------------------------------------------------------------------------
