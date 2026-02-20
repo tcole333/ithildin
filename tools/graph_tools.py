@@ -16,6 +16,8 @@ Usage:
     python tools/graph_tools.py neighbors "Leon Black" [--depth 2] [--output FILE]
     python tools/graph_tools.py holes [--min-degree 5] [--output FILE]
     python tools/graph_tools.py cliques [--min-size 4] [--output FILE]
+    python tools/graph_tools.py triangles [--top 50] [--min-strength medium] [--rel-type financial] [--output FILE]
+    python tools/graph_tools.py clustering [--min-degree 2] [--top 50] [--output FILE]
     python tools/graph_tools.py stats
 """
 
@@ -362,6 +364,151 @@ def find_structural_holes(adj, nodes, min_degree=5):
     return holes
 
 
+STRENGTH_WEIGHTS = {"strong": 4, "medium": 3, "weak": 2, "circumstantial": 1}
+
+
+def find_open_triads(adj, nodes, db=None, top=50, min_strength=None, rel_type=None):
+    """Find open triads — pairs (B, C) that share a mutual connection A but have no direct edge.
+
+    Scores each gap by:
+    - Strength factor (0.4): strong A-B + strong A-C = highly surprising gap
+    - Type diversity factor (0.3): shared relationship types across A-B and A-C
+    - Institutional overlap factor (0.3): B and C share career_arcs institutions or entity_roles
+
+    Returns list of open triads sorted by closure score descending.
+    """
+    close_db = False
+    if db is None:
+        db = get_graph_db()
+        close_db = True
+
+    # Pre-load institutional data for overlap scoring
+    person_institutions = defaultdict(set)
+    try:
+        for r in db.execute("SELECT person_name, pillar_id FROM career_arcs").fetchall():
+            person_institutions[r["person_name"].lower()].add(("pillar", r["pillar_id"]))
+    except sqlite3.OperationalError:
+        pass  # pillar tables may not exist
+    try:
+        for r in db.execute("SELECT person_name, entity_id FROM entity_roles").fetchall():
+            person_institutions[r["person_name"].lower()].add(("entity", r["entity_id"]))
+    except sqlite3.OperationalError:
+        pass
+
+    if close_db:
+        db.close()
+
+    # Strength filter threshold
+    strength_threshold = STRENGTH_WEIGHTS.get(min_strength, 0) if min_strength else 0
+
+    # Track best gap per (B, C) pair
+    best_gaps = {}  # tuple(sorted([b, c])) -> gap_dict
+    pivot_counts = defaultdict(int)  # same key -> count of pivots
+
+    for a in nodes:
+        neighbors = adj.get(a, {})
+        if len(neighbors) < 2:
+            continue
+
+        neighbor_list = list(neighbors.keys())
+        for i, b in enumerate(neighbor_list):
+            for c in neighbor_list[i + 1:]:
+                # Check if B-C edge exists — if so, triad is closed
+                if c in adj.get(b, {}):
+                    continue
+
+                ab_edges = neighbors[b]
+                ac_edges = neighbors[c]
+
+                # Apply rel_type filter
+                if rel_type:
+                    ab_edges = [e for e in ab_edges if e.get("type") == rel_type]
+                    ac_edges = [e for e in ac_edges if e.get("type") == rel_type]
+                    if not ab_edges or not ac_edges:
+                        continue
+
+                # Strength factor (0.4 weight)
+                ab_max = max(STRENGTH_WEIGHTS.get(e.get("strength", "circumstantial"), 1) for e in ab_edges)
+                ac_max = max(STRENGTH_WEIGHTS.get(e.get("strength", "circumstantial"), 1) for e in ac_edges)
+                if ab_max < strength_threshold or ac_max < strength_threshold:
+                    continue
+                strength_score = (ab_max + ac_max) / 8.0  # normalize to 0-1
+
+                # Type diversity factor (0.3 weight)
+                ab_types = {e.get("type") for e in ab_edges if e.get("type")}
+                ac_types = {e.get("type") for e in ac_edges if e.get("type")}
+                shared_types = ab_types & ac_types
+                all_types = ab_types | ac_types
+                type_score = len(shared_types) / max(len(all_types), 1)
+
+                # Institutional overlap factor (0.3 weight)
+                b_insts = person_institutions.get(b.lower(), set())
+                c_insts = person_institutions.get(c.lower(), set())
+                if b_insts and c_insts:
+                    overlap = len(b_insts & c_insts)
+                    union = len(b_insts | c_insts)
+                    inst_score = overlap / union
+                else:
+                    inst_score = 0.0
+
+                closure_score = round(
+                    0.4 * strength_score + 0.3 * type_score + 0.3 * inst_score, 4
+                )
+
+                key = tuple(sorted([b, c]))
+                pivot_counts[key] += 1
+
+                if key not in best_gaps or closure_score > best_gaps[key]["closure_score"]:
+                    best_gaps[key] = {
+                        "node_b": key[0],
+                        "node_c": key[1],
+                        "pivot": a,
+                        "closure_score": closure_score,
+                        "strength_score": round(strength_score, 4),
+                        "type_score": round(type_score, 4),
+                        "institutional_overlap": round(inst_score, 4),
+                        "ab_types": sorted(ab_types),
+                        "ac_types": sorted(ac_types),
+                        "shared_institutions": len(b_insts & c_insts) if b_insts and c_insts else 0,
+                    }
+
+    # Attach pivot counts and sort
+    results = []
+    for key, gap in best_gaps.items():
+        gap["pivot_count"] = pivot_counts[key]
+        results.append(gap)
+
+    results.sort(key=lambda x: x["closure_score"], reverse=True)
+    return results[:top]
+
+
+def clustering_coefficient(adj, nodes, min_degree=2):
+    """Compute local clustering coefficient for each node.
+
+    C(v) = 2 * |edges among neighbors| / (degree * (degree - 1))
+    Returns dict of node -> coefficient, filtered by min_degree.
+    """
+    results = {}
+    for node in nodes:
+        neighbors = list(adj.get(node, {}).keys())
+        degree = len(neighbors)
+        if degree < min_degree:
+            continue
+
+        # Count edges among neighbors
+        actual_edges = 0
+        for i, n1 in enumerate(neighbors):
+            for n2 in neighbors[i + 1:]:
+                if n2 in adj.get(n1, {}):
+                    actual_edges += 1
+
+        possible = degree * (degree - 1) / 2
+        coeff = (actual_edges / possible) if possible > 0 else 0.0
+        results[node] = round(coeff, 4)
+
+    return results
+
+
 def find_cliques(adj, nodes, min_size=4):
     """Find dense subgraphs (approximate cliques) via greedy expansion.
 
@@ -548,6 +695,19 @@ def main():
     p_igraph = sub.add_parser("institutional-graph", help="Institution-to-institution graph weighted by shared alumni")
     p_igraph.add_argument("--min-shared", type=int, default=1)
     add_output_args(p_igraph)
+
+    # triangles (open triads)
+    p_tri = sub.add_parser("triangles", help="Find open triads (missing edges between mutual connections)")
+    p_tri.add_argument("--top", type=int, default=50)
+    p_tri.add_argument("--min-strength", choices=["strong", "medium", "weak", "circumstantial"])
+    p_tri.add_argument("--rel-type", help="Filter by relationship type (e.g., financial)")
+    add_output_args(p_tri)
+
+    # clustering coefficient
+    p_clust = sub.add_parser("clustering", help="Compute local clustering coefficients")
+    p_clust.add_argument("--min-degree", type=int, default=2)
+    p_clust.add_argument("--top", type=int, default=50)
+    add_output_args(p_clust)
 
     # stats
     sub.add_parser("stats", help="Graph summary statistics")
@@ -772,6 +932,37 @@ def main():
         print(f"{'─' * 70}")
         for e in edges:
             print(f"  {e['source']:<35} ↔ {e['target']:<35} ({e['shared_alumni']} shared)")
+
+    elif args.command == "triangles":
+        db = get_graph_db()
+        adj, nodes = build_graph(db)
+        triads = find_open_triads(
+            adj, nodes, db=db, top=args.top,
+            min_strength=args.min_strength, rel_type=args.rel_type,
+        )
+        if write_output(triads, args, summary=f"open triads (top {args.top})"):
+            return
+        print(f"\nOpen Triads ({len(triads)} found):")
+        print(f"{'B':<25} {'C':<25} {'Pivot':<25} {'Score':>6} {'Pivots':>6}")
+        print("-" * 95)
+        for t in triads:
+            print(f"{t['node_b']:<25} {t['node_c']:<25} {t['pivot']:<25} "
+                  f"{t['closure_score']:>6.3f} {t['pivot_count']:>6}")
+
+    elif args.command == "clustering":
+        adj, nodes = build_graph()
+        coefficients = clustering_coefficient(adj, nodes, min_degree=args.min_degree)
+        ranked = sorted(coefficients.items(), key=lambda x: x[1], reverse=True)[:args.top]
+        results = [{"rank": i + 1, "node": n, "clustering_coefficient": v, "degree": len(adj.get(n, {}))}
+                   for i, (n, v) in enumerate(ranked)]
+
+        if write_output(results, args, summary=f"clustering coefficients (min degree {args.min_degree})"):
+            return
+        print(f"\nClustering Coefficients (min degree {args.min_degree}, top {args.top}):")
+        print(f"{'Rank':>4}  {'Node':<40} {'Coefficient':>11} {'Degree':>6}")
+        print("-" * 65)
+        for r in results:
+            print(f"{r['rank']:>4}  {r['node']:<40} {r['clustering_coefficient']:>11.4f} {r['degree']:>6}")
 
     elif args.command == "stats":
         adj, nodes = build_graph()
