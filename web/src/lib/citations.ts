@@ -3,6 +3,7 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkStringify from "remark-stringify";
 import jmailOverridesData from "../data/jmail-overrides.json";
+import clOverridesData from "../data/cl-overrides.json";
 
 export type CitationLink = {
   key: string;
@@ -52,7 +53,10 @@ function buildAcrisUrl(docId: string): string {
   return `https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=${docId}`;
 }
 
+const clOverrides: Record<string, string> = clOverridesData;
+
 function buildCourtListenerUrl(docketId: string): string {
+  if (clOverrides[docketId]) return clOverrides[docketId];
   return `https://www.courtlistener.com/docket/${docketId}/`;
 }
 

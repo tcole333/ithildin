@@ -126,7 +126,7 @@ run("CL: resolves docket ID to CourtListener URL", () => {
   const result = applyCitations("Docket [CL:69737684].");
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "CourtListener 69737684");
-  assert.equal(result.entries[0].url, "https://www.courtlistener.com/docket/69737684/");
+  assert.equal(result.entries[0].url, "https://www.courtlistener.com/docket/69737684/united-states-of-america-ex-rel-v-international-peace-institute-inc/");
 });
 
 run("CL: extractEvidenceLinks resolves docket", () => {
