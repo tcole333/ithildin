@@ -1,0 +1,19 @@
+[project]
+name = "osint-research"
+version = "0.0.0"
+description = "Local test/runtime configuration for Ithildin OSINT research workspace."
+requires-python = ">=3.11"
+dependencies = [
+  "pytest>=8.3.5",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"
+markers = [
+  "integration: integration tests against script/CLI boundaries",
+  "real_fixture: tests backed by fixtures derived from real project data",
+  "live_data: tests that require live/local large data stores",
+  "slow: slower-running tests",
+]

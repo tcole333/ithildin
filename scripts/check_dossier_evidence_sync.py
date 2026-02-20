@@ -131,7 +131,7 @@ def check_sync(dossier_paths: list[Path], finding_map: dict[int, list[dict]], co
             if fid is None:
                 continue
             fid = int(fid)
-            dossier_rows = list(finding.get("evidence") or [])
+            dossier_rows = canonicalize_evidence_rows(list(finding.get("evidence") or []))
             db_rows = finding_map.get(fid, [])
             if sorted_tuples(dossier_rows, "finding") != sorted_tuples(db_rows, "finding"):
                 mismatches.append(
@@ -149,7 +149,7 @@ def check_sync(dossier_paths: list[Path], finding_map: dict[int, list[dict]], co
             if cid is None:
                 continue
             cid = int(cid)
-            dossier_rows = list(connection.get("evidence") or [])
+            dossier_rows = canonicalize_evidence_rows(list(connection.get("evidence") or []))
             db_rows = connection_map.get(cid, [])
             if sorted_tuples(dossier_rows, "connection") != sorted_tuples(db_rows, "connection"):
                 mismatches.append(
@@ -174,19 +174,32 @@ def main() -> int:
         help="Optional dossier slug or filename. Repeat to check multiple.",
     )
     parser.add_argument("--limit", type=int, default=50, help="Max mismatch lines to print (default: 50)")
+    parser.add_argument(
+        "--db-path",
+        default=str(DB_PATH),
+        help=f"Path to investigation database (default: {DB_PATH})",
+    )
+    parser.add_argument(
+        "--dossier-dir",
+        default=str(DOSSIER_DIR),
+        help=f"Path to dossier directory (default: {DOSSIER_DIR})",
+    )
     args = parser.parse_args()
 
-    if not DB_PATH.exists():
-        print(f"Database not found: {DB_PATH}", file=sys.stderr)
+    db_path = Path(args.db_path)
+    dossier_dir = Path(args.dossier_dir)
+
+    if not db_path.exists():
+        print(f"Database not found: {db_path}", file=sys.stderr)
         return 2
-    if not DOSSIER_DIR.exists():
-        print(f"Dossier directory not found: {DOSSIER_DIR}", file=sys.stderr)
+    if not dossier_dir.exists():
+        print(f"Dossier directory not found: {dossier_dir}", file=sys.stderr)
         return 2
 
-    conn = sqlite3.connect(str(DB_PATH))
+    conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
     try:
-        dossier_paths = iter_dossier_paths(DOSSIER_DIR, args.dossier)
+        dossier_paths = iter_dossier_paths(dossier_dir, args.dossier)
         finding_map = load_finding_evidence_map(conn)
         connection_map = load_connection_evidence_map(conn)
         mismatches = check_sync(dossier_paths, finding_map, connection_map)

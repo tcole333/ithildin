@@ -42,6 +42,13 @@ def connect_db(path: Path) -> sqlite3.Connection:
     return db
 
 
+def _path_from_args(args, attr: str, default: Path) -> Path:
+    raw = getattr(args, attr, None)
+    if raw in (None, ""):
+        return default
+    return Path(raw)
+
+
 def table_exists(db: sqlite3.Connection, name: str) -> bool:
     row = db.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name = ?",
@@ -771,10 +778,11 @@ def promote_ds10(ds10_db: sqlite3.Connection, inv_db: sqlite3.Connection, run_id
     return {"promoted": promoted, "demoted": demoted}
 
 
-def _load_docs_ocr() -> sqlite3.Connection | None:
-    if not DOCS_DB_PATH.exists():
+def _load_docs_ocr(docs_db_path: Path | None = None) -> sqlite3.Connection | None:
+    target = docs_db_path or DOCS_DB_PATH
+    if not target.exists():
         return None
-    db = sqlite3.connect(str(DOCS_DB_PATH))
+    db = sqlite3.connect(str(target))
     db.row_factory = sqlite3.Row
     return db
 
@@ -817,10 +825,11 @@ def evaluate_financial_findings(
     run_db_id: int,
     auto_cap: bool,
     apply_changes: bool,
+    docs_db_path: Path | None = None,
 ) -> dict:
     active_keys: set[IssueKey] = set()
     issue_codes = {"FQ001_SOURCE_QUOTE_REQUIRED", "FQ002_SOURCE_PAGE_REQUIRED", "FQ003_QUOTE_CROSSCHECK_REQUIRED"}
-    docs_db = _load_docs_ocr()
+    docs_db = _load_docs_ocr(docs_db_path)
 
     findings = inv_db.execute(
         """
@@ -1108,8 +1117,8 @@ def _critical_publish_issues(inv_db: sqlite3.Connection, ds10_db: sqlite3.Connec
 
 
 def cmd_qa_ds10(args) -> int:
-    inv_db = connect_db(INV_DB_PATH)
-    ds10_db = connect_db(DS10_DB_PATH)
+    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
 
@@ -1134,7 +1143,7 @@ def cmd_qa_ds10(args) -> int:
 
 
 def cmd_recon_report(args) -> int:
-    ds10_db = connect_db(DS10_DB_PATH)
+    ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     _ensure_ds10_quality_schema(ds10_db)
     run_id = args.run_id
     if not run_id:
@@ -1174,8 +1183,8 @@ def cmd_recon_report(args) -> int:
 
 
 def cmd_gate(args) -> int:
-    inv_db = connect_db(INV_DB_PATH)
-    ds10_db = connect_db(DS10_DB_PATH)
+    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
     run_id = args.run_id or _utcnow().replace(":", "").replace("-", "")
@@ -1217,8 +1226,8 @@ def cmd_gate(args) -> int:
 
 
 def cmd_create_review_tasks(args) -> int:
-    inv_db = connect_db(INV_DB_PATH)
-    ds10_db = connect_db(DS10_DB_PATH)
+    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
     result = create_review_tasks(inv_db, ds10_db, args.dataset)
@@ -1229,8 +1238,8 @@ def cmd_create_review_tasks(args) -> int:
 
 
 def cmd_review(args) -> int:
-    inv_db = connect_db(INV_DB_PATH)
-    ds10_db = connect_db(DS10_DB_PATH)
+    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
     result = apply_review_decision(
@@ -1248,8 +1257,8 @@ def cmd_review(args) -> int:
 
 
 def cmd_promote_ds10(args) -> int:
-    inv_db = connect_db(INV_DB_PATH)
-    ds10_db = connect_db(DS10_DB_PATH)
+    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
     result = promote_ds10(ds10_db, inv_db, args.run_id)
@@ -1260,7 +1269,7 @@ def cmd_promote_ds10(args) -> int:
 
 
 def cmd_evaluate_findings(args) -> int:
-    inv_db = connect_db(INV_DB_PATH)
+    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
     ensure_quality_schema(inv_db)
     run_id = args.run_id or _utcnow().replace(":", "").replace("-", "")
     run_db_id = start_quality_run(inv_db, dataset="findings", run_type="gate", run_id=run_id)
@@ -1270,6 +1279,7 @@ def cmd_evaluate_findings(args) -> int:
             run_db_id=run_db_id,
             auto_cap=args.auto_cap,
             apply_changes=True,
+            docs_db_path=_path_from_args(args, "docs_db", DOCS_DB_PATH),
         )
         finish_quality_run(inv_db, run_db_id=run_db_id, status="passed", metrics=metrics)
         print(json.dumps(metrics, indent=2))
@@ -1301,8 +1311,8 @@ def _ensure_review_task(inv_db: sqlite3.Connection, dataset: str, record_ref: st
 
 def cmd_backfill_financial(args) -> int:
     apply_changes = bool(args.apply)
-    inv_db = connect_db(INV_DB_PATH)
-    ds10_db = connect_db(DS10_DB_PATH)
+    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
     run_id = args.run_id or _utcnow().replace(":", "").replace("-", "")
@@ -1313,6 +1323,7 @@ def cmd_backfill_financial(args) -> int:
             run_db_id=run_db_id,
             auto_cap=args.auto_cap,
             apply_changes=apply_changes,
+            docs_db_path=_path_from_args(args, "docs_db", DOCS_DB_PATH),
         )
 
         # Demote promoted DS10 rows with open critical math issues.
@@ -1355,17 +1366,46 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Financial quality controls and hard-gates")
     sub = parser.add_subparsers(dest="command", required=True)
 
+    def add_db_path_args(
+        cmd: argparse.ArgumentParser,
+        *,
+        include_inv: bool = True,
+        include_ds10: bool = True,
+        include_docs: bool = False,
+    ) -> None:
+        if include_inv:
+            cmd.add_argument(
+                "--inv-db",
+                default=str(INV_DB_PATH),
+                help=f"Path to investigation DB (default: {INV_DB_PATH})",
+            )
+        if include_ds10:
+            cmd.add_argument(
+                "--ds10-db",
+                default=str(DS10_DB_PATH),
+                help=f"Path to DS10 DB (default: {DS10_DB_PATH})",
+            )
+        if include_docs:
+            cmd.add_argument(
+                "--docs-db",
+                default=str(DOCS_DB_PATH),
+                help=f"Path to docs OCR DB (default: {DOCS_DB_PATH})",
+            )
+
     qa = sub.add_parser("qa-ds10", help="Run DS10 quality checks")
+    add_db_path_args(qa, include_inv=True, include_ds10=True)
     qa.add_argument("--run-id", required=True)
     qa.add_argument("--with-math", action="store_true")
     qa.set_defaults(func=cmd_qa_ds10)
 
     recon = sub.add_parser("recon-report", help="Report statement reconciliation results")
+    add_db_path_args(recon, include_inv=False, include_ds10=True)
     recon.add_argument("--run-id")
     recon.add_argument("--json", action="store_true")
     recon.set_defaults(func=cmd_recon_report)
 
     gate = sub.add_parser("gate", help="Run publish/deploy gate")
+    add_db_path_args(gate, include_inv=True, include_ds10=True)
     gate.add_argument("--scope", default="publish")
     gate.add_argument("--strict", action="store_true")
     gate.add_argument("--with-math", action="store_true")
@@ -1374,10 +1414,12 @@ def build_parser() -> argparse.ArgumentParser:
     gate.set_defaults(func=cmd_gate)
 
     crt = sub.add_parser("create-review-tasks", help="Create review tasks for DS10 rows")
+    add_db_path_args(crt, include_inv=True, include_ds10=True)
     crt.add_argument("--dataset", default="ds10")
     crt.set_defaults(func=cmd_create_review_tasks)
 
     review = sub.add_parser("review", help="Submit a review decision")
+    add_db_path_args(review, include_inv=True, include_ds10=True)
     review.add_argument("--task-id", type=int, required=True)
     review.add_argument("--decision", choices=["approve", "reject", "needs_fix"], required=True)
     review.add_argument("--by", required=True)
@@ -1385,16 +1427,19 @@ def build_parser() -> argparse.ArgumentParser:
     review.set_defaults(func=cmd_review)
 
     promote = sub.add_parser("promote-ds10", help="Promote approved DS10 rows")
+    add_db_path_args(promote, include_inv=True, include_ds10=True)
     promote.add_argument("--run-id", required=True)
     promote.set_defaults(func=cmd_promote_ds10)
 
     evalf = sub.add_parser("evaluate-findings", help="Evaluate financial finding hard-gates")
+    add_db_path_args(evalf, include_inv=True, include_ds10=False, include_docs=True)
     evalf.add_argument("--type", default="financial")
     evalf.add_argument("--auto-cap", action="store_true")
     evalf.add_argument("--run-id")
     evalf.set_defaults(func=cmd_evaluate_findings)
 
     backfill = sub.add_parser("backfill-financial", help="Backfill hard-gate decisions on existing financial data")
+    add_db_path_args(backfill, include_inv=True, include_ds10=True, include_docs=True)
     backfill.add_argument("--auto-cap", action="store_true")
     backfill.add_argument("--queue", action="store_true")
     backfill.add_argument("--dry-run", action="store_true")

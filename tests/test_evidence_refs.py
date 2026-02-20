@@ -3,7 +3,8 @@ from pathlib import Path
 import unittest
 
 
-MODULE_PATH = Path(__file__).resolve().parents[1] / "site" / "pipeline" / "evidence_refs.py"
+MODULE_PATH = Path(__file__).resolve().parents[1] / "pipeline" / "evidence_refs.py"
+assert MODULE_PATH.exists(), f"Expected evidence refs module at {MODULE_PATH}"
 SPEC = importlib.util.spec_from_file_location("evidence_refs", MODULE_PATH)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader

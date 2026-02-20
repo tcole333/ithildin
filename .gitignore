@@ -22,6 +22,9 @@ backups/
 *.sqlite3
 investigation*.db*
 registry.db
+!tests/fixtures/**/*.db
+!tests/fixtures/**/*.sqlite
+!tests/fixtures/**/*.sqlite3
 
 # Build artifacts
 site/web/node_modules/
