@@ -78,6 +78,13 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 - `ingest <DOS_ID>` | `ingest-search "query" --status Active --limit 50` — ingests to registry.db
 - Free, no auth, rate-limited to 1 req/sec
 
+**Medicaid Provider Analysis** (T-MSIS 2018-2024, 227M rows, $1.09T):
+- `query_medicaid.py`: DuckDB-backed spending analysis — `stats`, `top-billers`, `top-codes`, `provider <NPI>`, `code <HCPCS>`, `network <NPI>`, `anomalies`, `sql`
+- `trace_provider.py`: Corporate trace pipeline — NPI → NPPES → state registry → officer network
+  - `trace <NPI>` | `batch --top-anomalies N` | `excluded` | `officer-network` | `agent-network` | `pipeline --top-anomalies N`
+  - Live NY DOS lookup: auto-ingests entities to registry.db when tracing NY providers
+- Data in `data/`: medicaid_spending.parquet (2.9GB), billing/servicing_providers.parquet (NPPES), leie_exclusions.csv (OIG)
+
 ## Evidence Standards
 
 ### Canonical References

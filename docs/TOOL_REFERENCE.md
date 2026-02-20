@@ -251,6 +251,26 @@ python tools/query_nydos.py names 873065 --output /tmp/ny-names.json
 python tools/query_nydos.py ingest 873065                          # Single entity → registry.db
 python tools/query_nydos.py ingest-search "HOME CARE" --status Active --limit 50  # Batch ingest
 
+# Medicaid Provider Spending (T-MSIS 2018-2024, 227M rows)
+python tools/query_medicaid.py stats                                             # Dataset overview
+python tools/query_medicaid.py top-billers --limit 20 --output /tmp/top.json
+python tools/query_medicaid.py top-codes --limit 20 --output /tmp/codes.json
+python tools/query_medicaid.py provider 1962650622 --output /tmp/provider.json   # Provider detail
+python tools/query_medicaid.py provider 1962650622 --timeline                    # Monthly timeline
+python tools/query_medicaid.py code T1019 --limit 20 --output /tmp/t1019.json   # HCPCS code analysis
+python tools/query_medicaid.py network 1376097303 --output /tmp/net.json         # Billing network
+python tools/query_medicaid.py anomalies --output /tmp/anomalies.json            # Composite anomaly scoring
+python tools/query_medicaid.py sql "SELECT billing_npi, sum(paid) FROM m GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
+
+# Medicaid Provider Trace Pipeline (NPI → NPPES → Registry → Officers)
+python tools/trace_provider.py trace 1962650622 --output /tmp/trace.json         # Single NPI trace
+python tools/trace_provider.py batch --top-anomalies 20 --output /tmp/batch.json # Top anomalous billers
+python tools/trace_provider.py batch --file /tmp/npis.txt --output /tmp/batch.json
+python tools/trace_provider.py excluded --output /tmp/excluded.json              # OIG exclusion cross-ref
+python tools/trace_provider.py officer-network --min-entities 2 --output /tmp/officers.json
+python tools/trace_provider.py agent-network --min-entities 3 --output /tmp/agents.json
+python tools/trace_provider.py pipeline --top-anomalies 50 --output /tmp/pipeline.json
+
 # New Mexico (REST API, 4s rate limit)
 python tools/ingest_newmexico.py search "Zorro Ranch"
 python tools/ingest_newmexico.py detail <internal_id>
