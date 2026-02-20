@@ -4,6 +4,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from subprocess import CalledProcessError
 from urllib.request import urlopen
 
 DEFAULT_ITEMS_FILE = Path(__file__).with_name("ds09_warc_items.txt")
@@ -46,10 +47,15 @@ def build_download_url(identifier: str, name: str) -> str:
     return f"https://archive.org/download/{identifier}/{name}"
 
 
-def download_with_curl(url: str, dest: Path) -> None:
+def download_with_curl(url: str, dest: Path) -> bool:
     dest.parent.mkdir(parents=True, exist_ok=True)
     cmd = ["curl", "-L", "-C", "-", "--output", str(dest), url]
-    subprocess.run(cmd, check=True)
+    try:
+        subprocess.run(cmd, check=True)
+        return True
+    except CalledProcessError as exc:
+        print(f"curl failed ({exc.returncode}): {url}")
+        return False
 
 
 def main() -> int:
@@ -154,7 +160,10 @@ def main() -> int:
                 continue
 
         print(f"Downloading: {entry['url']}")
-        download_with_curl(entry["url"], dest)
+        success = download_with_curl(entry["url"], dest)
+        if not success:
+            print(f"Skipped (download error): {entry['url']}")
+            continue
         downloaded += 1
         if args.max_files and downloaded >= args.max_files:
             break

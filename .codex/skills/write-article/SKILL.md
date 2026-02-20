@@ -34,7 +34,7 @@ Phase 0 `research dossier` -> Phase 1 `structure` -> Phase 2 `draft` -> Phase 3 
 ```
 Phase 0: RESEARCH DOSSIER -> $WORKDIR/research-dossier.md
 Phase 1: STRUCTURE        -> $WORKDIR/article-structure.md
-Phase 2: DRAFT            -> site/content/articles/<cluster-id>.mdx
+Phase 2: DRAFT            -> content/articles/<cluster-id>.mdx
 Phase 3: VERIFY           -> $WORKDIR/verification-report.md
 Phase 4: REVISE           -> updated article + revision summary
 ```
@@ -50,16 +50,16 @@ Search across corpus + structured + legal/network sources. Do not limit research
 No args:
 
 ```bash
-uv run uv run python site/pipeline/story_clustering.py --list
+uv run python pipeline/story_clustering.py --list
 ```
 
 With a cluster:
 
 ```bash
-uv run uv run python site/pipeline/story_clustering.py --cluster <CLUSTER_ID>
+uv run python pipeline/story_clustering.py --cluster <CLUSTER_ID> --output-dir "$WORKDIR"
 ```
 
-Read `site/content/clusters.json`, locate the selected cluster, and capture:
+Read `$WORKDIR/cluster-<CLUSTER_ID>.json` (single-cluster export) and capture:
 - title
 - targets
 - `source_diversity`
@@ -68,7 +68,7 @@ Read `site/content/clusters.json`, locate the selected cluster, and capture:
 ### 0.2 Evidence Integrity Gate
 
 ```bash
-uv run uv run python scripts/evidence_audit.py report
+uv run python scripts/evidence_audit.py report
 ```
 
 Block writing if any are true:
@@ -248,7 +248,7 @@ Use the structured citation tokens that render as linked footnotes:
 
 ### Article format
 
-Write `site/content/articles/<cluster-id>.mdx` with YAML frontmatter:
+Write `content/articles/<cluster-id>.mdx` with YAML frontmatter:
 
 ```mdx
 ---
@@ -288,7 +288,7 @@ Available models: manufactured-dependency, bridge-tax, private-order, narrative-
 
 ### Save and build
 
-Save to `site/content/articles/<cluster-id>.mdx`, then:
+Save to `content/articles/<cluster-id>.mdx`, then:
 ```bash
 cd /Users/travcole/projects/osint-research/site/web && npx astro build 2>&1 | tail -5
 ```
@@ -351,7 +351,7 @@ Output to the user:
 - **Research agents**: 3 (corpus, financial, legal)
 - **Verification**: [X blocking / Y should-fix / Z suggestions]
 - **Status**: reviewed
-- **Path**: site/content/articles/<cluster-id>.mdx
+- **Path**: content/articles/<cluster-id>.mdx
 
 ### Structural Notes
 - [What finding drove the lead]

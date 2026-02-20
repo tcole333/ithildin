@@ -47,7 +47,7 @@ Read: site/content/dossiers/<slug>.json
 ### 2. Evidence Integrity Check
 
 ```bash
-uv run uv run python scripts/evidence_audit.py report
+uv run python scripts/evidence_audit.py report
 ```
 
 Flag in the verification report if:
@@ -75,8 +75,8 @@ The skeleton separates the argument from the writing. If the skeleton has logica
 #### 4a. Dollar Amounts
 Every financial figure must trace to a source:
 ```bash
-uv run uv run python tools/findings_tracker.py search "$40M" --output $WORKDIR/verify-amounts.json
-uv run uv run python tools/parse_ds10_financials.py query --entity "Southern Trust" --output $WORKDIR/verify-ds10.json
+uv run python tools/findings_tracker.py search "$40M" --output $WORKDIR/verify-amounts.json
+uv run python tools/parse_ds10_financials.py query --entity "Southern Trust" --output $WORKDIR/verify-ds10.json
 ```
 - Does the amount match the source exactly?
 - Is the date correct?
@@ -85,7 +85,7 @@ uv run uv run python tools/parse_ds10_financials.py query --entity "Southern Tru
 #### 4b. Citation References
 Every inline citation must exist and support the claim:
 ```bash
-uv run uv run python tools/query_doj.py efta EFTA02576529 --text --output $WORKDIR/verify-efta.json
+uv run python tools/query_doj.py efta EFTA02576529 --text --output $WORKDIR/verify-efta.json
 ```
 - Does the document actually say what the article claims?
 - Is the quote accurate (for direct_quote claims)?
@@ -93,7 +93,7 @@ uv run uv run python tools/query_doj.py efta EFTA02576529 --text --output $WORKD
 
 #### 4c. Named Persons and Entities
 ```bash
-uv run uv run python tools/findings_tracker.py search "<PERSON>" --output $WORKDIR/verify-person.json
+uv run python tools/findings_tracker.py search "<PERSON>" --output $WORKDIR/verify-person.json
 ```
 - Do we have findings for this person?
 - Is their described role accurate?
@@ -149,7 +149,7 @@ For each, choose: **CITE** (verify + add source), **SOFTEN** (downgrade precisio
 **NEW** — Analyze what types of evidence the article actually cites vs. what's available.
 
 ```bash
-uv run uv run python scripts/source_diversity.py site/content/articles/<cluster-id>.mdx
+uv run python scripts/source_diversity.py site/content/articles/<cluster-id>.mdx
 ```
 
 Report should include:
@@ -270,7 +270,7 @@ Visualization issues → **SUGGESTIONS**.
 ### 12. Model Cross-Reference
 
 ```bash
-uv run uv run python tools/model_detector.py detect --text "<article excerpt>"
+uv run python tools/model_detector.py detect --text "<article excerpt>"
 ```
 
 Check if applicable analytical models are referenced. Missing model references → **SUGGESTIONS**.
@@ -288,7 +288,7 @@ Check if the article references topics covered by other articles.
 
 #### Entity → External Registry Links
 ```bash
-uv run uv run python tools/query_registry.py search "<ENTITY>" --output $WORKDIR/verify-registry.json
+uv run python tools/query_registry.py search "<ENTITY>" --output $WORKDIR/verify-registry.json
 ```
 
 #### Dossier → Article Links (when reviewing dossiers)
@@ -361,7 +361,7 @@ When reviewing a dossier (`--dossier` flag):
 
 1. **Completeness**: Compare finding count against dossier JSON
 ```bash
-uv run uv run python tools/findings_tracker.py search "<TARGET>" --output $WORKDIR/verify-dossier.json
+uv run python tools/findings_tracker.py search "<TARGET>" --output $WORKDIR/verify-dossier.json
 ```
 2. **Connection accuracy**: Are all connections properly attributed?
 3. **Timeline integrity**: Events in chronological order?

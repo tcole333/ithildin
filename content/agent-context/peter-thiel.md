@@ -1,5 +1,5 @@
 # Peter Thiel
-**Stats**: 85 findings, 65 connections, 1 entities
+**Stats**: 86 findings, 67 connections, 1 entities
 **Dossier**: /dossiers/peter-thiel
 
 ## Key Findings
@@ -29,7 +29,7 @@
 - **JD Vance** [advisory/strong]: Mentor-protege since 2011. Thiel hired Vance at Mithril Capital, backed Narya Capital, donated 15M to Senate campaign, engineered VP selection
 - **David Sacks** [corporate/strong]: Stanford Review colleagues, co-authored Diversity Myth 1998, PayPal COO. Sacks now Trump AI/Crypto czar. Cross-invested (Craft in Palantir, FF in Yammer)
 - **Elon Musk** [corporate/strong]: PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both.
-- ... and 53 more
+- ... and 55 more
 
 ## Entity Roles
 - principal at Valar Global Fund III LP (unknown)

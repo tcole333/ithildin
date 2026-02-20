@@ -1,6 +1,6 @@
 # Kathryn Ruemmler
 **Aliases**: Kathy Ruemmler
-**Stats**: 29 findings, 32 connections, 4 entities
+**Stats**: 31 findings, 33 connections, 4 entities
 **Dossier**: /dossiers/kathryn-ruemmler
 
 ## Key Findings
@@ -30,7 +30,7 @@
 - **John Waldron** [corporate/strong]: Waldron (Goldman President/COO) recruited Ruemmler in Apr 2019, forwarded email to Epstein. Leadership group wanted to make something work in short order.
 - **George Nader** [legal/strong]: None
 - **Ken Starr** [legal/strong]: None
-- ... and 20 more
+- ... and 21 more
 
 ## Entity Roles
 - partner at Latham & Watkins LLP (NY)

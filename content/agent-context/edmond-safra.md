@@ -1,5 +1,5 @@
 # Edmond Safra
-**Stats**: 9 findings, 7 connections, 0 entities
+**Stats**: 9 findings, 8 connections, 0 entities
 **Dossier**: /dossiers/edmond-safra
 
 ## Key Findings
@@ -21,3 +21,4 @@
 - **American Express** [legal/strong]: AmEx conducted unauthorized smear campaign against Safra 1986-1989, falsely linking him to money laundering and Iran-Contra; settled for $8M and public apology
 - **Republic National Bank of New York** [corporate/strong]: Safra founded RNB in 1966; also founded Trade Development Bank Geneva (sold to AmEx 1983)
 - **Semion Mogilevich** [intelligence/medium]: Safra's RNB exposed Mogilevich-linked Benex money laundering through Bank of New York (1998-1999); Safra died in arson 3 months later
+- **Ariane de Rothschild** [financial/medium]: Safra banking network (RNB, Republic New York Corp) partially absorbed into Edmond de Rothschild banking system after Safra death 1999. Both represent Sephardic private banking dynasties.

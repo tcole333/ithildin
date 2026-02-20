@@ -1,5 +1,5 @@
 # Adnan Khashoggi
-**Stats**: 5 findings, 13 connections, 0 entities
+**Stats**: 6 findings, 13 connections, 0 entities
 **Dossier**: /dossiers/adnan-khashoggi
 
 ## Key Findings
@@ -8,6 +8,7 @@
 - **[relationship/confirmed]** Khashoggi family corporate footprint: Essam at EarthShell/E. Khashoggi Industries (SEC CIK 1107077/1308722), Nabila in FL film companies, Husni at Trump Tower address (Finding #3397)
 - **[financial/confirmed]** Khashoggi's Iran-Contra bridge financing: deposited M into Enterprise's Lake Resources account Feb 7-18, 1986 (four payments: .5M Feb 7, .5M Feb 10, two M Feb 18 - all via BCCI). Deposited M for HAWK spare parts May 14-16, 1986 (raised from Tiny Rowlands [declined], Oussama Lababidi via 'Kremdale Corp' [M], and Vertex International/Cayman Islands backed by Ernie Walter Miller and Donald Fraser of Canada [M via 'Trivert International']). Ghorbanifar only repaid Khashoggi .1M of M owed (including 20% commission), leaving Khashoggi deeply exposed. (Finding #3398)
 - **[financial/high]** BCCI Monte Carlo processed Khashoggi's Iran arms bridge financing via 'float' mechanism - officer Manir Karim received $100,000 bribe; BCCI London approved the transactions (Finding #3409)
+- **[relationship/medium]** Adnan Khashoggi has the 11th highest betweenness centrality (0.039) despite only 8 connections, indicating he is a critical historical bridge between arms dealing/intelligence networks and the Epstein-adjacent banking infrastructure (Finding #3469)
 
 ## Top Connections
 - **Republic National Bank of New York** [financial/strong]: RNB officer Nan Morabia delivered $150,000 in cash to Khashoggi (Iran arms sales financier) in New York on Nov 26, 1986. Morabia also handled Enterprise wire transfers through RNB.

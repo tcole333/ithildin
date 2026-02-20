@@ -1,5 +1,5 @@
 # Steve Bannon
-**Stats**: 23 findings, 29 connections, 0 entities
+**Stats**: 23 findings, 32 connections, 0 entities
 **Dossier**: /dossiers/steve-bannon
 
 ## Key Findings
@@ -27,6 +27,6 @@
 - **Cambridge Analytica** [employment/strong]: VP of Cambridge Analytica 2014
 - **Cambridge Analytica** [corporate/strong]: VP Jun 2014-Aug 2016. CA parent SCL Group conducted military psyops and election influence.
 - **Nicholas Ribis** [intelligence/strong]: Epstein positioned Ribis to Bannon as Trump loyalist (Feb 2018: 'Nick was the person that negotiated Donald out of bankruptcy. Knows Donald 25 years.'). Both served as parallel Trump-orbit intelligence channels to Epstein — Ribis provided White House personnel movements while Bannon provided political strategy intel.
-- **Kathryn Ruemmler** [social/medium]: Met jointly at Epstein mansion multiple times including Mar 2018 (with Lajcak), Apr 2019 (with Scaramucci).
-- **Reid Weingarten** [social/medium]: Epstein introduced Bannon to Weingarten for breakfast 3/24/2018. Additional breakfast planned 7/7/2019. Weingarten on Epstein list for Bannon.
-- ... and 17 more
+- **Jeffrey Epstein** [social/strong]: Bannon and Epstein exchanged messages about Robert Kraft's legal defense on March 10, 2019. Bannon forwarded Kraft 'legal dream team' article; Epstein replied '90 percent inaccurate wow. hes ok.' Active communication March 2019.
+- **Jeffrey Epstein** [social/strong]: Bannon forwarded Kraft legal dream team article to Epstein Mar 10 2019. Epstein responded with insider knowledge.
+- ... and 20 more

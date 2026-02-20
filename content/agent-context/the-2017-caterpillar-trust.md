@@ -1,5 +1,5 @@
 # The 2017 Caterpillar Trust
-**Stats**: 32 findings, 40 connections, 0 entities
+**Stats**: 33 findings, 40 connections, 0 entities
 **Dossier**: /dossiers/the-2017-caterpillar-trust
 
 ## Key Findings

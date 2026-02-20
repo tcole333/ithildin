@@ -1,5 +1,5 @@
 # William Barr
-**Stats**: 86 findings, 89 connections, 0 entities
+**Stats**: 87 findings, 89 connections, 0 entities
 **Dossier**: /dossiers/william-barr
 
 ## Key Findings

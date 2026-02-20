@@ -1,5 +1,5 @@
 # Howard Lutnick
-**Stats**: 16 findings, 9 connections, 0 entities
+**Stats**: 16 findings, 11 connections, 0 entities
 **Dossier**: /dossiers/howard-lutnick
 
 ## Key Findings
@@ -25,4 +25,6 @@
 - **David Mitchell** [financial/medium]: None
 - **Darren Indyke** [legal/medium]: None
 - **Paul Tudor Jones** [social/medium]: Both benefit co-chairs at Dubin Breast Center second annual benefit alongside Steven Cohen, David Shaw, Kenneth Tropin.
+- **Peter Thiel** [political/medium]: Both donated to Congressional Leadership Fund (FEC). Both connected to Trump political orbit. Thiel on Bilderberg Steering, Lutnick co-chaired Trump 2025 transition.
+- **Tom Barrack** [political/medium]: Both donated to Republican state committees and Trump-aligned PACs (FEC). Both LittleSis FEC records show Republican political orbit. Lutnick co-chaired Trump transition. Barrack chaired 58th Inaugural Committee. Both PEP status.
 - **Paul Tudor Jones** [social/weak]: Co-chaired Dubin Breast Center 2012 benefit together per EFTA02702727. Lutnick later purchased 11 E 71st from Epstein estate via Comet Trust.

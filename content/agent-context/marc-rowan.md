@@ -1,5 +1,5 @@
 # Marc Rowan
-**Stats**: 23 findings, 14 connections, 0 entities
+**Stats**: 23 findings, 16 connections, 0 entities
 **Dossier**: /dossiers/marc-rowan
 
 ## Key Findings
@@ -28,5 +28,5 @@
 - **Jeffrey Epstein** [intelligence/strong]: Epstein brokered Ribis-Rowan connection on Caesars. Forwarded Ribis's cell to Rowan, who called. Then Epstein forwarded entire chain to Black's office. Epstein functioned as intelligence broker between Apollo co-founders on Caesars litigation strategy.
 - **Leon Black** [political/strong]: Coordinated political donations: identical amounts to 15+ shared recipients on same dates
 - **Joshua Harris** [political/strong]: Coordinated political donations plus shared Wharton advisory board positions
-- **Brad Karp** [legal/medium]: Karp (Paul Weiss chairman) engaged by Epstein to work on Apollo/Athene restructuring. Epstein mentioned Kathy Ruemmler recommending a hire at Paul Weiss. Karp responded enthusiastically to the engagement.
-- ... and 2 more
+- **Robert Kraft** [corporate/strong]: Co-directors on Apollo Global Management board. Rowan as Managing Partner/co-founder, Kraft as independent director 2014-2021. Rowan became CEO after Black's departure.
+- ... and 4 more

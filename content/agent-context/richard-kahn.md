@@ -1,5 +1,5 @@
 # Richard Kahn
-**Stats**: 11 findings, 39 connections, 13 entities
+**Stats**: 11 findings, 46 connections, 13 entities
 **Dossier**: /dossiers/richard-kahn
 
 ## Key Findings
@@ -28,7 +28,7 @@
 - **Honeycomb Asset Management LP** [financial/strong]: Richard Kahn (HBRK Associates Inc, 575 Lexington Ave 4th Floor NY) served as intermediary between Epstein and Honeycomb. Kahn forwarded performance reports, wire instructions, and investment opportunities. Kahn facilitated Honeycomb Ventures I and IV subscriptions.
 - **David Fiszel** [financial/strong]: Richard Kahn (HBRK Associates) was the primary intermediary between Fiszel and Epstein. Kahn forwarded performance reports, deal opportunities, wire instructions, and pushed Fiszel for introductions to Epstein network. Kahn described Epstein as boss to Fiszel.
 - **David Fiszel** [financial/strong]: Kahn (HBRK Associates, 575 Lexington Ave) served as Epstein's investment intermediary for all Honeycomb transactions. Kahn forwarded Fiszel fund docs, performance reports, and co-invest opportunities to Epstein. Kahn also served as social intermediary requesting introductions from Epstein for Fiszel.
-- ... and 27 more
+- ... and 34 more
 
 ## Entity Roles
 - ceo at RDK Asset Management Inc (NY)

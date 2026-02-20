@@ -1,6 +1,6 @@
 # Ehud Barak
 **Aliases**: Barak
-**Stats**: 9 findings, 23 connections, 5 entities
+**Stats**: 9 findings, 25 connections, 5 entities
 **Dossier**: /dossiers/ehud-barak
 
 ## Key Findings
@@ -27,7 +27,7 @@
 - **Dov Lautman** [political/strong]: Lautman was a 'close associate' of Barak. Donated indirectly to Barak's 1999 campaign via Generation of Peace org (part of Barak Affair scandal, M+ fine). Both connected through Labor Party and Israeli peace/business establishment.
 - **Wexner Foundation** [financial/strong]: Wexner Foundation paid Barak .3M (2004-2006) for two research papers (one incomplete). Epstein was de facto CFO of Wexner family office approving grants during this exact period. Creates direct financial flow: Wexner -> Foundation -> Barak, with Epstein as gatekeeper.
 - **Carbyne/Reporty** [financial/strong]: Finding #331: Indyke resisted revealing Epstein as controlling person of STC to Israeli lawyers handling Carbyne anti-money-laundering compliance. Wrote: 'I thought
-- ... and 11 more
+- ... and 13 more
 
 ## Entity Roles
 - principal at Hyperion EB (Israel)

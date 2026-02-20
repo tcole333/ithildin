@@ -1,6 +1,6 @@
 # Deutsche Bank
 **Aliases**: DB TRUST, DEUTSCHE BANK, Deutsche Bank Trust
-**Stats**: 24 findings, 19 connections, 0 entities
+**Stats**: 25 findings, 19 connections, 0 entities
 **Dossier**: /dossiers/deutsche-bank
 
 ## Key Findings

@@ -2,11 +2,11 @@
   "name": "Edmond Safra",
   "slug": "edmond-safra",
   "aliases": [],
-  "generated_at": "2026-02-18T16:11:16.279916",
-  "last_updated": "2026-02-17T20:18:45",
+  "generated_at": "2026-02-20T01:17:47.310690",
+  "last_updated": "2026-02-18T16:44:56",
   "stats": {
     "total_findings": 9,
-    "total_connections": 7,
+    "total_connections": 8,
     "total_entities": 0,
     "finding_types": {
       "relationship": 3,
@@ -18,12 +18,12 @@
     "connection_types": {
       "employment": 2,
       "familial": 1,
-      "financial": 1,
+      "financial": 2,
       "legal": 1,
       "corporate": 1,
       "intelligence": 1
     },
-    "last_updated": "2026-02-17T20:18:45"
+    "last_updated": "2026-02-18T16:44:56"
   },
   "findings": [
     {
@@ -166,7 +166,7 @@
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA02433816",
-          "source_quote": null,
+          "source_quote": "Nothing to do with me.. But you have a point, let me find out. \n \nOriginal Message \nFrom: Jeffrey Epstein \nTo: \nSub.. \nSent: Dec 7, 2009 7:56 PM \nandrew safra , is doing your new york prmeir for young victoria\u201e why not peggy \nsiegal that loves you? \n***** ******* \n************************ \n*******...",
           "source_page": null,
           "assessment": null
         }
@@ -195,21 +195,21 @@
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA02392189",
-          "source_quote": null,
+          "source_quote": "Lesley Groff \nSubject: \ntoday \nWestin \nJE, \nYOUR HOUSE IN JERUSALEM \nJacque Safra is here with me. Wants to sell you his Jerusalem house in =albieh neighborhood known as \"The Sherover \nHouse\" across st from =erusalem Theatre (that the Sherovers built and donated to city), and a =ew doors down from...",
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA02413047",
-          "source_quote": null,
+          "source_quote": "JE, \nHad dinner with Jacqui last night, whose is in town scrambling because his loan \nat one of the big banks is not getting renewed. Something for you?? \nHe took us out to celebrate Max's 30th birthday (today!!). \nSaw Ronna Tanenbaum in SF last week. (Remember her?) She's going to put together \na...",
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "efta",
           "evidence_ref": "EFTA02440202",
-          "source_quote": null,
+          "source_quote": "Title: London \nJaqui Safra, Jean Doumanian and I left Portofino this morning- drove to Genoa and flew into Famborough....now driving \nto London. \nJean's play \"The Mountain Top\" is opening tonight and we are all going. It's about Martin Luther King and his last night \nalive in that Memphis Motel....",
           "source_page": null,
           "assessment": null
         }
@@ -426,6 +426,20 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 2090,
+      "person_a": "Ariane de Rothschild",
+      "person_b": "Edmond Safra",
+      "relationship_type": "financial",
+      "description": "Safra banking network (RNB, Republic New York Corp) partially absorbed into Edmond de Rothschild banking system after Safra death 1999. Both represent Sephardic private banking dynasties.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-18 16:44:56",
+      "other_person": "Ariane de Rothschild",
+      "other_person_slug": "ariane-de-rothschild",
+      "evidence": []
     }
   ],
   "entities": [],
@@ -481,7 +495,8 @@
           2001,
           2005,
           2051,
-          2002
+          2002,
+          2090
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
@@ -495,12 +510,13 @@
           3348
         ],
         "connection_ids": [
-          2000
+          2000,
+          2090
         ],
         "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
       }
     ],
-    "curated_at": "2026-02-18T16:11:16.505608"
+    "curated_at": "2026-02-20T01:17:47.422855"
   },
   "viz_data": {
     "ego_network": {
@@ -554,6 +570,13 @@
           "strength": 0.7,
           "evidence_ref": "https://commdocs.house.gov/committees/bank/hba59889.000/hba59889_0.HTM",
           "description": "Safra's RNB exposed Mogilevich-linked Benex money laundering through Bank of New York (1998-1999); Safra died in arson 3 months later"
+        },
+        {
+          "target": "Ariane de Rothschild",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Safra banking network (RNB, Republic New York Corp) partially absorbed into Edmond de Rothschild banking system after Safra death 1999. Both represent Sephardic private banking dynasties."
         }
       ],
       "secondHop": {
@@ -563,6 +586,38 @@
             "type": "employment",
             "strength": 1.0,
             "description": "Cohen was CEO of Shearson Lehman/American Express 1983-1990, youngest head of major Wall Street firm at age 36; key figure in AmEx-Safra competitive tension"
+          }
+        ],
+        "Ariane de Rothschild": [
+          {
+            "target": "Kathy Ruemmler",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Close personal friends. Traveled together Paris Jul 2015. Epstein proposed Ruemmler do succession planning for Ariane."
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "CEO of EdR Group. 25M consulting agreement (Oct 2015). Regular meetings 2013-2019 at 9 E 71st. Shared 1MDB intelligence in real-time. Deployed Ruemmler as EdR legal advisor."
+          },
+          {
+            "target": "Kathy Ruemmler",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Ruemmler provided legal counsel to EdR during 1MDB crisis. Dinner with Ariane (Mar 2017). Joint meetings at 9 E 71st. Ariane confirmed Kathy on all angles of Lux remediation."
+          },
+          {
+            "target": "Sultan Bin Sulayem",
+            "type": "familial",
+            "strength": 1.0,
+            "description": "Finding #353: Sulayem-Barak Israel back-channel confirmed. July 2018: Sulayem thanked Barak for visa help, staying at 1 Rothschild Blvd Tel Aviv penthouse for 3 mon"
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "financial",
+            "strength": 0.7,
+            "description": ""
           }
         ],
         "Jacqui Safra": [

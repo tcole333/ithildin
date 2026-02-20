@@ -2,11 +2,11 @@
   "name": "Howard Lutnick",
   "slug": "howard-lutnick",
   "aliases": [],
-  "generated_at": "2026-02-18T16:11:16.246845",
-  "last_updated": "2026-02-13T21:35:24",
+  "generated_at": "2026-02-20T01:17:47.283843",
+  "last_updated": "2026-02-18T16:45:08",
   "stats": {
     "total_findings": 16,
-    "total_connections": 9,
+    "total_connections": 11,
     "total_entities": 0,
     "finding_types": {
       "location": 3,
@@ -20,9 +20,10 @@
     "connection_types": {
       "financial": 4,
       "social": 4,
-      "legal": 1
+      "legal": 1,
+      "political": 2
     },
-    "last_updated": "2026-02-13T21:35:24"
+    "last_updated": "2026-02-18T16:45:08"
   },
   "findings": [
     {
@@ -876,6 +877,34 @@
       ]
     },
     {
+      "id": 2089,
+      "person_a": "Howard Lutnick",
+      "person_b": "Peter Thiel",
+      "relationship_type": "political",
+      "description": "Both donated to Congressional Leadership Fund (FEC). Both connected to Trump political orbit. Thiel on Bilderberg Steering, Lutnick co-chaired Trump 2025 transition.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-18 16:44:55",
+      "other_person": "Peter Thiel",
+      "other_person_slug": "peter-thiel",
+      "evidence": []
+    },
+    {
+      "id": 2093,
+      "person_a": "Howard Lutnick",
+      "person_b": "Tom Barrack",
+      "relationship_type": "political",
+      "description": "Both donated to Republican state committees and Trump-aligned PACs (FEC). Both LittleSis FEC records show Republican political orbit. Lutnick co-chaired Trump transition. Barrack chaired 58th Inaugural Committee. Both PEP status.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-18 16:45:08",
+      "other_person": "Tom Barrack",
+      "other_person_slug": "tom-barrack",
+      "evidence": []
+    },
+    {
       "id": 544,
       "person_a": "Howard Lutnick",
       "person_b": "Paul Tudor Jones",
@@ -1049,7 +1078,9 @@
           517,
           518,
           520,
-          532
+          532,
+          2089,
+          2093
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
@@ -1084,54 +1115,7 @@
         "guidance": "Narrative about documented communications \u2014 emails, calls, messages. Focus on what they reveal about the relationship or operation."
       }
     ],
-    "curated_at": "2026-02-19T01:02:11.523424",
-    "lead": "<p>Howard W. Lutnick (born July 14, 1961) is the chairman and CEO of Cantor Fitzgerald and, as of 2025, the U.S. Secretary of Commerce. His connection to <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> is rooted in a single address: 11 East 71st Street, the townhouse immediately adjacent to Epstein's mansion at 9 East 71st. NYC ACRIS records trace the property through a chain beginning with Xandra Corp NV (a <a href=\"/dossiers/les-wexner\">Les Wexner</a> entity), passing through SAM Conversion Corp at Wexner's L Brands headquarters, into Epstein's hands as trustee of the 11 East 71st St Trust in December 1992, then to the Comet Trust via Epstein's attorneys Gold and Wachtel LLP in April 1996, and finally to Lutnick in January 1998 for an estimated $7.6 million. Lutnick has lived next door to Epstein's townhouse continuously from 1998 through the present, transferring the property to the HWL Personal Asset Trust in 2010. DOJ Volume 11 contains 30 documents referencing Lutnick, establishing a relationship that spanned at least 2009 through 2019 and encompassed social, financial, and business dimensions.</p>\n\n<p>The documentary record directly contradicts Lutnick's repeated public claim that he severed contact with Epstein in 2005. In October 2009, Lutnick sought Epstein's phone number through an intermediary. In April 2011, Epstein's assistant Lesley Groff reminded Epstein to call Lutnick. An undated schedule places Lutnick at 5:00 PM drinks alongside <a href=\"/dossiers/leon-black\">Leon Black</a> and Woody Allen. In November 2015, Lutnick personally invited Epstein to a Hillary Clinton fundraiser at Cantor Fitzgerald's offices. In December 2012, Lutnick, his wife Allison, their four children, and the family of Cantor Fitzgerald executive Michael Lehrman visited Epstein at Little St. James island aboard the yacht Excellence -- a visit Lutnick finally confirmed under oath at his February 2026 Senate confirmation hearing. Four days after that island visit, on December 28, 2012, the Adfin Solutions co-investment agreement was signed, binding Epstein's Southern Trust Company and Cantor Fitzgerald's CVAFH I LLC as co-investors in the same ad-tech company.</p>\n\n<p>The financial relationship extended beyond Adfin. In November 2013, a draft asset management agreement between Cantor Fitzgerald and an Epstein entity was circulated through David Stern to Epstein. In November 2017, Epstein donated $50,000 to the UJA-Federation Wall Street Dinner honoring Lutnick, directing his assistant to \"pass along to Lutnick he can fill\" the table of ten. In May 2018, Lutnick and Epstein coordinated a joint legal campaign against the Frick Collection's construction plans, with Lutnick emailing Epstein directly from his Cantor Fitzgerald address and Epstein directing his attorney Darren Indyke to cooperate with Lutnick's lawyer. The final documented contact is a May 13, 2019 iMessage -- eight weeks before Epstein's arrest -- in which Epstein learned that \"Trump is coming to Lutnick's house Thursday\" and replied, \"i won't be home otherwise i could have come out an waved.\" An exhaustive search across all available data sources reveals no evidence connecting Lutnick to Epstein's criminal conduct. No victim has named Lutnick, and his name does not appear in flight logs, massage scheduling, or coercion documents. The investigatively significant issue is the documented decade-plus pattern of contact that Lutnick publicly denied.</p>",
-    "system_role": "Lutnick represents the case of a Wall Street CEO whose extensive post-conviction social, financial, and business relationship with Epstein -- documented across 30 DOJ files spanning 2009 to 2019 -- was publicly denied until primary source documents made the denials untenable, illustrating how proximity (literal next-door neighbor) creates both deep access and acute reputational risk that incentivizes false public narratives.",
-    "sections": [
-      {
-        "id": "the-71st-street-property-chain",
-        "title": "The 71st Street Property Chain",
-        "content": "<p>The physical foundation of the Epstein-Lutnick relationship is a single property at 11 East 71st Street, and the chain of title that brought it to Lutnick reads as a condensed history of Epstein's real estate operations. ACRIS records document the complete sequence: Xandra Corp NV, a <a href=\"/dossiers/les-wexner\">Les Wexner</a> entity, originally held the property. In 1990, SAM Conversion Corp -- registered at 41 South High Street, Columbus, Ohio, the address of Wexner's L Brands headquarters -- received the deed. In December 1992, SAM Conversion transferred the property to 'Epstein, Jeffrey E. Trustee, 11 East 71st St Trust,' with the same Columbus address. In April 1996, Epstein as trustee conveyed it to the Comet Trust through Gold and Wachtel LLP, his attorneys. In January 1998, the Comet Trust, with Guido Goldman as trustee, sold it to Howard W. Lutnick, then residing at 200 East 69th Street, for an estimated \\.6 million.</p>\n\n<p>The Comet Trust intermediary raises its own questions. Guido Goldman, the trustee who facilitated the transfer, was the founder of the German Marshall Fund and Harvard's Center for European Studies. SEC filings indicate the Comet Trust held a portion of the de Gunzburg/Bronfman family fortune derived from Seagram distillery. Goldman operated First Spring Corp, a small investment management company, from 157 Church Street, New Haven, Connecticut -- the address of the law firm Bergman Horowitz and Reynolds PC. An ACRIS agreement (FT_1170005201917) from the 11 East 71st Street Trust to the Comet Trust was executed on the same day as the deed, through Gold and Wachtel LLP. Goldman died in November 2020. No documents in DOJ Volume 11 mention Goldman by name in connection with Epstein, making the Comet Trust's role in this property chain -- receiving the townhouse from Epstein's trust and passing it to Lutnick within twenty-two months -- an opaque but documented transaction.</p>\n\n<p>Lutnick's subsequent property actions are well documented. In September 2010, he deeded the property to the HWL Personal Asset Trust (dated May 28, 2009). A 2005 deed of easement to the National Architectural Trust and a 2006 NYC Department of Transportation agreement are on file. A \\ million Chase Manhattan mortgage was satisfied and replaced by a \\ million Wells Fargo mortgage in November 2018, itself satisfied in June 2021. The estate of Gary F. Lutnick, Howard's brother who died on September 11, 2001, also appears in the 11 East 71st Street records. SDNY investigation background checks prepared for the <a href=\"/dossiers/ghislaine-maxwell\">Ghislaine Maxwell</a> prosecution (EFTA01296720 and related files) list the entire Lutnick family -- Allison L., Brandon G., Howard William, and Kyle S. -- as neighbors at 11 East 71st Street, confirming that federal investigators were aware of the adjacency.</p>",
-        "viz": null
-      },
-      {
-        "id": "the-social-record-2009-2019",
-        "title": "The Social Record: 2009-2019",
-        "content": "<p>The documented social relationship between Lutnick and <a href=\"/dossiers/jeffrey-epstein\">Epstein</a> spans at least a decade and is anchored in primary source emails from DOJ Volume 11. In October 2009, a Rich Barnett email to Epstein's jeevacation@gmail.com states: 'Howard Lutnick would like to speak to you... one of his employees asked me if Howard could have your' phone number (EFTA02438886). In April 2011, Lesley Groff, Epstein's longtime assistant, sent a reminder: 'Reminder you want to speak to Howard Lutnick today 212 829 4926' (EFTA02360594). An undated Epstein schedule lists '5pm Drinks with Lutnick' on the same page as appointments with <a href=\"/dossiers/leon-black\">Leon Black</a>, Michael Wolff, Olga, and Terje Roed-Larsen (EFTA02379401). In January 2016, Richard Kahn referred to Lutnick as 'your neighbor' in correspondence with Epstein (EFTA02474570).</p>\n\n<p>The most significant social evidence is the December 2012 visit to Little St. James island. Lutnick emailed Groff from his Cantor Fitzgerald address on December 19, 2012: 'Hi Jeff, We are landing in St. Thomas early Saturday afternoon... Does Sunday evening for dinner sound good? I have another couple (Michael and Marcy Lehrman) with me on my boat.' Allison Lutnick followed up on December 21, describing the group as '2 families each with 4 kids ranging in age from 7-16' on the yacht Excellence. Epstein invited them for lunch at 'little st james on the map, behind christmans cove' (EFTA02521271). Lutnick confirmed this visit at his February 2026 Senate confirmation hearing. The visit directly contradicts his prior public claim that he cut ties with Epstein in 2005.</p>\n\n<p>The social connections extended through overlapping circles. Lutnick and his wife Allison co-chaired the Dubin Breast Center benefit at Mount Sinai alongside Glenn and Eva Dubin in both 2012 and 2013 (EFTA02702727, EFTA02672763). Glenn Dubin is a well-documented Epstein associate whose relationship included a \\.375 million assignment of Fortress fund interest to Epstein-controlled Jeepers Inc. Michael Lehrman, who accompanied Lutnick to Little St. James, ran Cantor Fitzgerald's debt fund and was separately a prospect to buy Epstein's house. In July 2013, an unidentified correspondent asked Epstein: 'What is your view on Howard Lutnick? Just met him with PA' (EFTA02678875) -- indicating Epstein was regarded as a knowledgeable reference on Lutnick within their shared network. In November 2015, Lutnick personally invited Epstein to a Hillary Clinton fundraiser at Cantor Fitzgerald's offices (EFTA02671545). In January 2017, Lutnick invited Epstein to a Cantor Relief Fund event.</p>",
-        "viz": "timeline"
-      },
-      {
-        "id": "financial-entanglements",
-        "title": "Financial Entanglements: Adfin, Cantor, and the UJA",
-        "content": "<p>The financial dimension of the Lutnick-Epstein relationship centers on three documented channels: the Adfin Solutions co-investment, a draft Cantor Fitzgerald asset management agreement, and a \\,000 charitable donation. The Adfin deal is the most substantive. On December 28, 2012 -- four days after Lutnick's visit to Little St. James -- an investment agreement was signed binding Epstein's Southern Trust Company (which wired \\,000 via Deutsche Bank, per EFTA02575973) and Cantor Fitzgerald affiliate CVAFH I LLC as co-investors in Adfin Solutions, an ad-tech company. David Mitchell of Mitchell Holdings LLC served as the intermediary who brokered the deal and subsequently managed the relationship between Epstein and Cantor.</p>\n\n<p>Mitchell's January 2014 update to Epstein (EFTA02404269) reported that Cantor Ventures had completed a \\ million convertible placement in Adfin, followed by a commitment of \\ million more at a \\-18 million valuation. The investment terms included a board seat, 8% coupon, and a voting agreement between 'JEE/JL/DJM' -- Jeffrey E. Epstein, Jonathan Ledecky (Adfin founder), and David J. Mitchell. <a href=\"/dossiers/darren-indyke\">Darren Indyke</a>, Epstein's in-house attorney, was directly involved in the transaction details. By April 2018, Adfin's value had declined and company management offered only a \\,000 buyout. Mitchell wrote to Epstein: 'I feel very badly this happened as I introduced you to this investment' (EFTA02466064). Business correspondence between Epstein and Cantor/Mitchell regarding Adfin continued through at least 2018.</p>\n\n<p>The broader Cantor Fitzgerald business relationship is evidenced by a November 2013 draft asset management agreement. David Stern forwarded to Epstein a 'Draft Cantor agreement' from John J. Jones, Cantor Fitzgerald's Deputy General Counsel, with the attachment titled 'UML_Cantor_agreement_re_asset_management.docx' (EFTA02678017). Stern separately asked Epstein: 'Have you seen Cantor Fitzgerald proposal?' (EFTA02672302). Whether this agreement was executed remains unknown. In March 2019, Mitchell forwarded to Epstein an article about a Silverstein/Cantor Fitzgerald Opportunity Zone fund (EFTA02630570), suggesting ongoing awareness of Cantor's deal flow within Epstein's circle. The charitable channel operated through the UJA-Federation: in November 2017, Epstein donated \\,000 to the Wall Street Dinner honoring Lutnick, writing to John Paulson: '50k from me, hope pr is ok' (EFTA02568209). Epstein's assistant informed Lutnick's staff that 'Jeffrey says he will not use the table himself and to pass along to Lutnick he can fill them' (EFTA02228507). This was a post-conviction financial gesture directly benefiting Lutnick's public reputation.</p>",
-        "viz": null
-      },
-      {
-        "id": "the-frick-coordination-and-final-contacts",
-        "title": "The Frick Coordination and Final Contacts",
-        "content": "<p>The most vivid evidence of active neighborly coordination comes from May 2018, when Lutnick and <a href=\"/dossiers/jeffrey-epstein\">Epstein</a> mounted a joint legal campaign against the Frick Collection's planned construction adjacent to their properties. Lutnick emailed Epstein directly from his Cantor Fitzgerald address (hlutnick@cantor.com), writing: 'You should put in a letter. I am sending a lawyer. Don't ignore this. They will build exactly across from you 1. A bus and group entrance, 2 a loading dock for party rentals, 3 a massive building to block your sunlight and views' (EFTA02246563). Lutnick's real estate lawyer Babak Yaghmaie noted he 'has not been able to reach Epstein, Miller or the neighbor on the east side.' Epstein responded: 'tell your lawyer that darren my lawyer will contact him' -- referring to <a href=\"/dossiers/darren-indyke\">Darren Indyke</a>. Lutnick replied: 'Meeting is tomorrow morning' (EFTA02654255). This exchange, just fourteen months before Epstein's arrest, shows both men coordinating through their personal attorneys on shared property interests with evident familiarity.</p>\n\n<p>The final documented contact is an iMessage from May 13, 2019, approximately eight weeks before Epstein's July 6 arrest. Someone messaged Epstein: 'Trump is coming to Lutnick's house Thursday.' Epstein replied: 'i won't be home otherwise i could have come out an waved.' The other party responded: 'Ha! I love it' (EFTA02445658). The exchange, recovered from Epstein's device, demonstrates that Epstein was aware of and monitoring high-profile visitors to his neighbor's house, and that his proximity to the sitting President's social visits to Lutnick was a matter of casual amusement rather than alarm. In August 2017, when David Mitchell forwarded a Page Six article about Lutnick purchasing a separate triplex at an \\ million discount, Epstein replied: 'you can tell him i would like to buy his house' (EFTA02640863) -- suggesting Epstein entertained the idea of consolidating the Wexner-Epstein-Lutnick property block on 71st Street. <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> separately forwarded the same article to Epstein, as well as a Daily Mail article about a lawsuit involving Lutnick and a January 2019 article about Lutnick and the TV show Billions -- indicating that Epstein's inner circle routinely tracked and shared Lutnick-related news.</p>",
-        "viz": null
-      },
-      {
-        "id": "fbi-case-file-and-public-record",
-        "title": "FBI Case File Entry and the Public Record",
-        "content": "<p>The FBI evidence index for the Epstein case (50D-NY-3027571) contains an entry titled 'NTOC2020 288hmb01 Alleged Money Laundering by Howard Lutnick via BGC Financial and Cantor Fitzgerald,' dated to the early 2021 timeframe (EFTA02730741, spanning pages EFTA02730856-857). This was a tip submitted to the FBI's National Threat Operations Center. According to web reporting, a caller alleged Lutnick engaged in money laundering and Ponzi schemes through BGC Financial and Cantor Fitzgerald, with purported links to JP Morgan, Russian hedge funds, and offshore shell companies. The caller claimed to possess supporting documents linking Lutnick to Epstein and <a href=\"/dossiers/ghislaine-maxwell\">Maxwell</a>. The FBI conducted a follow-up interview on February 16, 2021. Lutnick was never charged. The investigative significance is not the unproven allegation itself, but that it was deemed relevant enough to be indexed within the FBI's Epstein case evidence report alongside other NTOC tips about victims and associates.</p>\n\n<p>An exhaustive search across all available data sources -- DOJ Volume 11, LMSBAND, the unified document database, DugganUSA, CourtListener, ICIJ, and Aleph -- reveals zero evidence that Lutnick was involved in Epstein's criminal conduct. No victim has named Lutnick. His name does not appear in flight logs, massage scheduling records, or coercion documents. The 30 DOJ documents referencing Lutnick are uniformly business, social, or property-related. The 8 LMSBAND hits consist of 5 neighbor background checks, 1 FBI evidence index entry, 1 schedule, and 1 iMessage. The relationship, as documented, was primarily neighborly, social, and business -- but it was extensive, continuous, and post-conviction, spanning from at least October 2009 through May 2019.</p>\n\n<p>The core investigative issue is the gap between the documented record and Lutnick's public statements. Lutnick repeatedly claimed he severed ties with Epstein in 2005 after learning of the Florida investigation. The documentary evidence shows him requesting Epstein's phone number in 2009, visiting Little St. James in 2012, co-investing through Cantor entities in 2012-2013, inviting Epstein to political fundraisers in 2015 and charitable events in 2017, coordinating legal strategy in 2018, and being the subject of Epstein's casual surveillance as recently as May 2019. Lutnick ultimately confirmed the island visit under oath at his Senate confirmation hearing in February 2026, but only after the DOJ document release made denial impossible. This pattern -- maintaining a relationship while publicly denying it, then conceding only what can be proven -- is the defining feature of the Lutnick dossier.</p>",
-        "viz": null
-      }
-    ],
-    "open_questions": [
-      "Was the January 1998 sale of 11 East 71st Street from the Comet Trust to Lutnick an arm's-length transaction, and what role -- if any -- did Epstein play in facilitating Lutnick's acquisition of the property that had passed through his own trust only twenty-two months earlier?",
-      "What was the substance of the November 2013 'UML_Cantor_agreement_re_asset_management.docx' -- a draft asset management agreement between Cantor Fitzgerald and an Epstein entity -- and was it ever executed?",
-      "What is the full scope of the voting agreement between 'JEE/JL/DJM' (Epstein, Ledecky, Mitchell) in the Adfin Solutions investment, and did Lutnick have any personal involvement beyond the CVAFH I LLC/Cantor Ventures channel?",
-      "Who was the source of the May 2019 iMessage informing Epstein that 'Trump is coming to Lutnick's house Thursday,' and does this indicate ongoing intelligence sharing about Lutnick within Epstein's network?",
-      "Did the FBI's follow-up interview on the NTOC tip about alleged money laundering by Lutnick via BGC Financial and Cantor Fitzgerald produce any substantive findings, and what documents -- if any -- did the caller provide?"
-    ],
-    "applicable_models": [
-      "narrative-shield",
-      "enabler-gradient",
-      "bridge-tax",
-      "complexity-as-credential"
-    ]
+    "curated_at": "2026-02-20T01:17:47.472739"
   },
   "viz_data": {
     "ego_network": {
@@ -1148,7 +1132,7 @@
           "target": "Guido Goldman",
           "type": "financial",
           "strength": 0.7,
-          "evidence_ref": "ACRIS:FT_1350006236535",
+          "evidence_ref": "ACRIS:1350006236535",
           "description": "Goldman as Comet Trust trustee transferred 11 E 71st St to Lutnick Jan 1998 for zero recorded consideration. Property had come from Epstein/Wexner chain."
         },
         {
@@ -1192,6 +1176,20 @@
           "strength": 0.7,
           "evidence_ref": "EFTA02702727",
           "description": "Both benefit co-chairs at Dubin Breast Center second annual benefit alongside Steven Cohen, David Shaw, Kenneth Tropin."
+        },
+        {
+          "target": "Peter Thiel",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Both donated to Congressional Leadership Fund (FEC). Both connected to Trump political orbit. Thiel on Bilderberg Steering, Lutnick co-chaired Trump 2025 transition."
+        },
+        {
+          "target": "Tom Barrack",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Both donated to Republican state committees and Trump-aligned PACs (FEC). Both LittleSis FEC records show Republican political orbit. Lutnick co-chaired Trump transition. Barrack chaired 58th Inaugural Committee. Both PEP status."
         },
         {
           "target": "Paul Tudor Jones",

@@ -1,5 +1,5 @@
 # Alessandro Benedetti
-**Stats**: 28 findings, 20 connections, 11 entities
+**Stats**: 29 findings, 20 connections, 11 entities
 **Dossier**: /dossiers/alessandro-benedetti
 
 ## Key Findings

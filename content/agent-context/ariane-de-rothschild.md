@@ -1,6 +1,6 @@
 # Ariane de Rothschild
 **Aliases**: ARIANE DE ROTHSCHILD
-**Stats**: 25 findings, 14 connections, 0 entities
+**Stats**: 25 findings, 15 connections, 0 entities
 **Dossier**: /dossiers/ariane-de-rothschild
 
 ## Key Findings
@@ -30,4 +30,4 @@
 - **Jabor Al Thani** [social/medium]: None
 - **Richard Kahn** [financial/medium]: None
 - **Jeffrey Epstein** [financial/medium]: None
-- ... and 2 more
+- ... and 3 more

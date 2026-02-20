@@ -1,6 +1,6 @@
 # Darren Indyke
 **Aliases**: Darren K. Indyke
-**Stats**: 93 findings, 85 connections, 24 entities
+**Stats**: 93 findings, 88 connections, 24 entities
 **Dossier**: /dossiers/darren-indyke
 
 ## Key Findings
@@ -30,7 +30,7 @@
 - **Abigail Wexner** [legal/strong]: Abigail Wexner granted power of attorney to Indyke for NYC real property matters Jan 2008
 - **Andy Faulkner** [financial/strong]: Faulkner at United Community Bank wired 250K to Indyke/Kahn on April 5 2019. Split into 240K online plus 10K in-branch due to bank limit.
 - **Joseph Dwyer** [legal/strong]: Dwyer of JPD Consultants delivered Report to Counsel to Indyke on April 5 2019. Indyke arranged conference call with Epstein for April 7. PI firm at 315 Madison Ave Third Floor.
-- ... and 73 more
+- ... and 76 more
 
 ## Entity Roles
 - officer at Nine East 71st Street Corporation (NY)

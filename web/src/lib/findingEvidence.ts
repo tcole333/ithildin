@@ -1,28 +1,41 @@
 import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { existsSync, statSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 let cached: Record<string, string[]> | null = null;
 
-export function loadFindingEvidenceMap(): Record<string, string[]> {
-  if (cached) return cached;
+function candidateDbPaths(): string[] {
+  const envPath = String(process.env.INVESTIGATION_DB_PATH || "").trim();
+  const moduleDir = dirname(fileURLToPath(import.meta.url));
+  const candidates = [
+    envPath,
+    resolve(process.cwd(), "investigation.db"),
+    resolve(process.cwd(), "..", "investigation.db"),
+    resolve(moduleDir, "..", "..", "..", "investigation.db"),
+  ].filter((value): value is string => Boolean(value));
+  return Array.from(new Set(candidates));
+}
 
-  const dbPath = resolve(process.cwd(), "..", "..", "investigation.db");
-  if (!existsSync(dbPath)) {
-    cached = {};
-    return cached;
+function isUsableDb(path: string): boolean {
+  if (!existsSync(path)) return false;
+  try {
+    return statSync(path).size > 0;
+  } catch {
+    return false;
   }
+}
 
+function loadFromDb(path: string): Record<string, string[]> | null {
   try {
     const output = execFileSync("sqlite3", [
-      dbPath,
+      path,
       ".mode json",
       "SELECT finding_id, evidence_ref FROM finding_evidence;",
     ], { encoding: "utf-8" }).trim();
 
     if (!output) {
-      cached = {};
-      return cached;
+      return {};
     }
 
     const rows: Array<{ finding_id: number; evidence_ref: string | null }> = JSON.parse(output);
@@ -34,10 +47,24 @@ export function loadFindingEvidenceMap(): Record<string, string[]> {
         map[key].push(row.evidence_ref);
       }
     }
-    cached = map;
-    return cached;
-  } catch (_err) {
-    cached = {};
-    return cached;
+    return map;
+  } catch {
+    return null;
   }
+}
+
+export function loadFindingEvidenceMap(): Record<string, string[]> {
+  if (cached) return cached;
+
+  for (const dbPath of candidateDbPaths()) {
+    if (!isUsableDb(dbPath)) continue;
+    const map = loadFromDb(dbPath);
+    if (map) {
+      cached = map;
+      return cached;
+    }
+  }
+
+  cached = {};
+  return cached;
 }

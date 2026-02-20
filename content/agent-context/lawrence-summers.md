@@ -1,6 +1,6 @@
 # Lawrence Summers
 **Aliases**: Larry Summers
-**Stats**: 24 findings, 32 connections, 3 entities
+**Stats**: 24 findings, 35 connections, 3 entities
 **Dossier**: /dossiers/lawrence-summers
 
 ## Key Findings
@@ -30,7 +30,7 @@
 - **Lesley Groff** [corporate/strong]: Finding #154: Summers wrote a recommendation letter for Nicole Junkermann at Epstein's request (Jul 2014). Epstein forwarded to Lesley Groff: 'Larry Summers Recomme
 - **Norwegian Network** [corporate/strong]: Finding #154: Summers wrote a recommendation letter for Nicole Junkermann at Epstein's request (Jul 2014). Epstein forwarded to Lesley Groff: 'Larry Summers Recomme
 - **Onassis Foundation** [financial/strong]: Finding #157: Summers asked Epstein for financial advice on cryptocurrency tax avoidance (Jan 8, 2018). Summers wrote: 'This is for me in a minor way and for a pal 
-- ... and 20 more
+- ... and 23 more
 
 ## Entity Roles
 - principal at LHSummers Economic Consulting LLC (MA)

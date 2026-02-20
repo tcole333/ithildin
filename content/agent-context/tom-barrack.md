@@ -1,5 +1,5 @@
 # Tom Barrack
-**Stats**: 46 findings, 40 connections, 0 entities
+**Stats**: 46 findings, 42 connections, 0 entities
 **Dossier**: /dossiers/tom-barrack
 
 ## Key Findings
@@ -29,4 +29,4 @@
 - **Donald Trump** [political/strong]: Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor.
 - **Rashid Al Malik** [intelligence/strong]: Business partner per LittleSis. Dubai-based Emirati businessman. Co-defendant in FARA case. Barrack allegedly coordinated UAE policy advocacy through Al Malik without FARA registration.
 - **Donald Trump** [political/strong]: Close friends since 1985. Barrack brokered Trump Plaza Hotel 1988. Chaired 58th Inaugural Committee 107M. Senior adviser 2016 campaign. Ambassador Turkey 2025.
-- ... and 28 more
+- ... and 30 more

@@ -4,23 +4,24 @@
   "aliases": [
     "Gratitude America"
   ],
-  "generated_at": "2026-02-18T16:11:16.185845",
-  "last_updated": "2026-02-17T04:24:24",
+  "generated_at": "2026-02-20T01:17:47.217464",
+  "last_updated": "2026-02-18T17:24:51",
   "stats": {
-    "total_findings": 42,
-    "total_connections": 79,
+    "total_findings": 43,
+    "total_connections": 80,
     "total_entities": 0,
     "finding_types": {
       "identity": 2,
       "financial": 37,
       "legal": 2,
-      "intelligence": 1
+      "intelligence": 1,
+      "relationship": 1
     },
     "connection_types": {
-      "financial": 43,
+      "financial": 44,
       "corporate": 36
     },
-    "last_updated": "2026-02-17T04:24:24"
+    "last_updated": "2026-02-18T17:24:51"
   },
   "findings": [
     {
@@ -1300,6 +1301,28 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 3466,
+      "finding_type": "relationship",
+      "summary": "Gratitude America Ltd is the 2nd highest betweenness centrality node (0.138) and 3rd highest degree (54) in the investigation graph, serving as the primary entity bridging the Epstein financial apparatus to institutional recipients and associates",
+      "detail": "Network analysis shows Gratitude America Ltd connects 54 entities including Leon Black, IPI, Deutsche Bank, Darren Indyke, R. Kahn, Erika Kellerhals, and grant recipients. Its brokerage score of 0.955 (neighbor density 0.045) indicates it controls information flow between otherwise disconnected parts of the network. It bridges Thread 1 (Core Network), Thread 3 (Deutsche Bank), and Thread 5 (Apollo/Black). The entity node 'Gratitude America' (no Ltd) has 17 additional connections with 0 findings, representing a data quality gap.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-18 16:22:36",
+      "target_name": "Gratitude America Ltd",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-6",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -1520,6 +1543,33 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://projects.propublica.org/nonprofits/organizations/330783933",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2145,
+      "person_a": "Gratitude America",
+      "person_b": "Noam Chomsky",
+      "relationship_type": "financial",
+      "description": "Gratitude America Ltd (Epstein's USVI nonprofit, funded through Deutsche Bank Trust) issued ,000 check to Noam Chomsky on March 2, 2017. Valeria stated this was payment for a linguistics challenge/prize initiative Epstein wanted to establish.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-18 17:24:51",
+      "other_person": "Noam Chomsky",
+      "other_person_slug": "noam-chomsky",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01348702",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01358498",
           "source_quote": null,
           "source_page": null
         }
@@ -3079,9 +3129,9 @@
       411,
       2571,
       419,
+      3466,
       1595,
-      1596,
-      1601
+      1596
     ],
     "key_identifiers": {
       "jurisdictions": [],
@@ -3093,7 +3143,9 @@
         "id": "key-relationships",
         "title": "Key Relationships",
         "viz": "ego_network",
-        "finding_ids": [],
+        "finding_ids": [
+          3466
+        ],
         "connection_ids": [
           737,
           741,
@@ -3105,11 +3157,11 @@
           1283,
           1282,
           1290,
+          2145,
           59,
           335,
           336,
-          797,
-          798
+          797
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
@@ -3153,61 +3205,7 @@
         "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
       }
     ],
-    "curated_at": "2026-02-19T00:36:47.173322",
-    "lead": "<p>Gratitude America Ltd (EIN 66-0789697) was a U.S. Virgin Islands 501(c)(3) private foundation incorporated on April 25, 2012 and controlled by <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a>. Dormant for its first three years with just $1 in assets, the foundation was activated in October 2015 when it received a single $10,003,000 donation from BV70 LLC, an entity controlled by <a href=\"/dossiers/leon-black\">Leon Black</a>, co-founder of <a href=\"/dossiers/apollo-global-management\">Apollo Global Management</a>. This payment, confirmed by the Dechert LLP investigation and IRS 990-PF filings, was part of a larger $35 million same-day transfer from Black to Epstein-controlled entities &mdash; $10 million to Gratitude America and $20 million to <a href=\"/dossiers/financial-trust-company\">Financial Trust Company</a>. Epstein described it to his accountant as yielding \"tax savings paid at 37 percent\" on a \"$50 million credit\" against \"$150 million free\" (EFTA02504960).</p>\n\n<p>Between 2016 and 2019, Gratitude America disbursed approximately $2.84 million in grants to over 20 recipients and $545,000 in consulting fees. The largest grant recipients were the <a href=\"/dossiers/international-peace-institute\">International Peace Institute</a> ($525,000), the <a href=\"/dossiers/kuhn-foundation\">Kuhn Foundation</a> ($650,000), MIT ($150,000), and Melanoma Research Alliance ($225,000) &mdash; the last of which was a charity founded by Black and his wife Debra, creating a circular flow from Black's donation back to Black's own charitable interests. Consulting payments went to academics including Noam Chomsky ($30,000), Leon Botstein ($25,000), and MIT researcher Jeremy Rubin ($25,000), as well as $30,000 to <a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a>, an active New York Times financial reporter. All payments were personally directed by Epstein through his accountant <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, with consulting arrangements drafted by attorney <a href=\"/dossiers/darren-indyke\">Darren Indyke</a>.</p>\n\n<p>The foundation was managed by the same three officers who ran most of Epstein's USVI entities: Kahn as President, Indyke as Treasurer then Vice President, and <a href=\"/dossiers/erika-kellerhals\">Erika Kellerhals</a> as Secretary and bookkeeper &mdash; none receiving reported compensation. Its banking moved from <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> Trust Company Americas (where it held $9.65 million in checking) to Morgan Stanley for brokerage activities. Indyke closed the Deutsche Bank account on January 10, 2019, six months before Epstein's arrest. Following the arrest on July 6, 2019, Morgan Stanley liquidated the stock portfolio, returning $7.93 million to the Deutsche Bank account. From 2020 through at least 2022, the foundation sat frozen at $8,175,884 in assets with $1 in annual revenue and $0 in expenses &mdash; dormant but not dissolved. It was included among ten Epstein-created entities in the USVI Attorney General's $105 million settlement in November 2022.</p>",
-    "system_role": "Gratitude America reveals how a nominally public-facing 501(c)(3) private foundation can function as a controlled disbursement channel for a single wealthy donor's tax-advantaged payments, while simultaneously providing a vehicle for undisclosed consulting payments to academics, journalists, and researchers whose independence the payments compromised.",
-    "sections": [
-      {
-        "id": "formation-and-structure",
-        "title": "Formation and Corporate Structure",
-        "content": "<p>Gratitude America Ltd was incorporated in the U.S. Virgin Islands on April 25, 2012 under Chapter 3, Title 13 of the Virgin Islands Code (EFTA01295154). Its registered address was 9053 Estate Thomas Suite 101, St. Thomas, VI 00802 &mdash; the Royal Palms Professional Building, which also served as the address for <a href=\"/dossiers/erika-kellerhals\">Erika Kellerhals</a>'s law firm, Kellerhals Ferguson LLP. The foundation also used 6100 Red Hook Quarter B3 and 9100 Havensight Port of Sale Suite 15-16 in St. Thomas at various times. Its IRS ruling date was September 2012, and it was classified under NTEE code T20 (Private Grantmaking Foundations).</p>\n\n<p>The foundation's officer structure mirrored the standard Epstein USVI entity template. <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> of HBRK Associates (575 Lexington Avenue, 4th Floor, New York) served as President from 2012 through 2019. <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> served as Treasurer from 2012 to 2015, then was listed as Vice President from 2017 onward. Kellerhals served as Secretary throughout and also assumed the Treasurer role by 2017. <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> was listed as Director (deceased) on the 2019 filing, and Deutsche Bank's KYC file identified him as \"President of Gratitude America\" who was \"a current client of the bank\" (EFTA01284072). All officers reported zero compensation across every filing year, a pattern consistent with Epstein's other foundations. Books were kept by Kellerhals at the USVI address, and the CPA was David M. Hasson of Seckendorf Hasson Reilly, Lake Success, New York.</p>\n\n<p>Epstein himself described Gratitude America as \"my private foundation, based on the philosophy that too many people complain about the country rather than expressing the thanks it deserves\" (EFTA02469790). This framing served as a cover story for external inquiries. Internally, Kahn noted that Gratitude America was \"subject to public\" disclosure unlike <a href=\"/dossiers/enhanced-education\">Enhanced Education</a>, its sister entity &mdash; meaning its 990-PF filings were publicly available. The existence of Enhanced Education as a parallel vehicle specifically to avoid public disclosure of disbursements is the critical structural distinction between the two foundations. DOJ documents list Gratitude America alongside more than a dozen other Epstein USVI entities including <a href=\"/dossiers/igo-company-llc\">IGO Company LLC</a>, <a href=\"/dossiers/jeepers-inc\">Jeepers Inc</a>, <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company Inc</a>, and <a href=\"/dossiers/southern-country-international-ltd\">Southern Country International Ltd</a> (EFTA02633183).</p>",
-        "viz": null
-      },
-      {
-        "id": "leon-black-capitalization",
-        "title": "The Leon Black Capitalization",
-        "content": "<p>Gratitude America sat entirely dormant from its 2012 incorporation through 2014, reporting $1 in revenue, $0 in expenses, and $1 in assets each year. This changed abruptly in October 2015 when BV70 LLC, an entity Bloomberg confirmed is controlled by <a href=\"/dossiers/leon-black\">Leon Black</a>, deposited $10,003,000 into Gratitude America's Money Market Deposit Account at <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> Trust Company Americas (EFTA00027019). This was the sole substantive contribution the foundation ever received.</p>\n\n<p>The Dechert LLP investigation, commissioned by Apollo Global Management's board, confirmed the $10 million October 2015 donation and also identified a letter from Gratitude America to Black dated August 21, 2015 thanking him for a $5 million donation. However, no bank record or Black Family Office document confirming this second donation was found. Epstein's own email to his accountant Melanie Spinella placed the Gratitude America payment in the context of a much larger financial arrangement: \"10m paid today to gratitude america, a 501 c 3, willl make last year complete. 20 million paid today ftc. 10 million july 15 5 million sept 30., 5 million jan 1 for all of 16. tax savings paid at 37 percent. of net. savings. 50 million credit. net. so 150 million free\" (EFTA02504960). This reveals the $10 million to Gratitude America was part of a $35 million same-day payment structure flowing to multiple Epstein entities, with Epstein calculating substantial tax benefits from the arrangement.</p>\n\n<p>Apollo Global Management's January 2021 8-K filing referenced Gratitude America in its disclosure of the Black-Epstein financial relationship, confirming the donation's significance to <a href=\"/dossiers/apollo-global-management\">Apollo</a>'s governance crisis. Black ultimately stepped down as Apollo CEO in March 2021, citing the Dechert findings that he had paid Epstein approximately $158 million over five years for tax and estate planning services &mdash; of which the Gratitude America donation was one component.</p>",
-        "viz": "timeline"
-      },
-      {
-        "id": "grant-disbursements",
-        "title": "Grant Disbursements and Recipient Network",
-        "content": "<p>Between 2016 and 2019, Gratitude America disbursed approximately $2.84 million in grants to more than 20 organizations. The grants mapped a three-tier distribution pattern: known Epstein-affiliated entities, Black-connected charities, and obscure recipients whose relationships to the network require further investigation.</p>\n\n<p>The <a href=\"/dossiers/international-peace-institute\">International Peace Institute</a> was the single largest cumulative recipient, receiving $375,000 in 2017 and $150,000 in 2019 &mdash; $525,000 total. The 2019 payment is notable because it was made the same year Epstein was arrested. Combined with the KPMG-confirmed $650,000 from Enhanced Education, IPI received at least $1.175 million from Epstein-controlled foundations. The <a href=\"/dossiers/kuhn-foundation\">Kuhn Foundation</a> in Pasadena, California was the second-largest cumulative recipient at $650,000: $150,000 in August 2017 and $500,000 in June 2018, the latter being the single largest individual grant Gratitude America ever made. The funds were directed to a dedicated sub-account labeled \"CTT JE &mdash; Radical Breakthroughs\" for the PBS series <em>Closer to Truth</em>, produced by <a href=\"/dossiers/robert-lawrence-kuhn\">Robert Lawrence Kuhn</a>.</p>\n\n<p>The circular flow back to Leon Black's charitable interests is among the most revealing disbursement patterns. In 2016, Gratitude America paid $225,000 to Melanoma Research Alliance, a charity founded by Black and his wife Debra. Epstein \"made significant donations to the Melanoma Research Alliance... at Black's request\" (EFTA02730996). Both Gratitude America ($225,000 in 2016) and the Leon Black Family Foundation ($1.225 million in 2016-2017) gave to the same charity, suggesting coordinated philanthropy between an Epstein entity and Black's own foundation. The Bruce and Marsha Moskowitz Foundation in Palm Beach received $150,000 across 2016-2017.</p>\n\n<p>Academic and scientific recipients included MIT ($150,000 in 2017, linked to the Epstein-Joi Ito relationship at the Media Lab), the University of Arizona Foundation ($50,000 in 2017), Edge Foundation ($35,000 in 2018, run by John Brockman), and Humanity Plus ($100,000 in 2018), through which Epstein funded AI researcher Joscha Bach. Bach complained in an email that \"not all money was relayed via Humanity Plus (some came directly from Gratitude America), which probably creates problems with the O visa\" (EFTA02614563) &mdash; revealing how direct payments from the foundation created immigration complications for foreign researchers dependent on Epstein's funding.</p>\n\n<p>Cultural and international recipients included the Hasty Pudding Institute of 1770 ($100,000 across 2016-2019), the Association Mind Education in Rome ($85,000 across 2017-2018, organized by Giuseppe Bersani for neuropsychology congresses in Havana), NPO Baleto Teatras in Vilnius, Lithuania ($28,543 in 2018, connected through a Lithuanian woman identified as \"balerina Simona\" who stayed at Epstein's 9 East 71st Street residence), and a Paris cultural association ($58,000). The Chopra Foundation received $50,000 in 2017, the Metropolitan Orchestra Musicians received $50,000 in 2017, and UJA Federation received $50,000 in 2017. The breadth of recipients &mdash; spanning Lithuanian ballet, Cuban neuroscience conferences, Harvard social clubs, and cancer research &mdash; reflects Epstein's desire to project intellectual and cultural patronage through a tax-advantaged vehicle funded entirely by someone else's money.</p>",
-        "viz": "ego_network"
-      },
-      {
-        "id": "consulting-payments",
-        "title": "Consulting Payments and Journalist Capture",
-        "content": "<p>Beyond grants, Gratitude America maintained a substantial consulting expense line: $290,000 in 2016, $235,000 in 2017, and $20,000 in 2018. Despite these amounts, no contractor paid over $50,000 was disclosed on any 990-PF filing &mdash; all returns reported \"NONE\" in the contractor disclosure section &mdash; suggesting payments were structured below the disclosure threshold. DOJ email records identify several recipients.</p>\n\n<p>Leon Botstein, President of Bard College, received a consulting agreement from Gratitude America for 2016, with a 1099 form prepared by <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> and sent to Bard College in Annandale-on-Hudson. Jeremy Rubin, an MIT/Bitcoin researcher, received a $25,000 check sent to his Cambridge address with a consulting agreement in early 2016. Noam Chomsky received $30,000 in consulting from Gratitude America in February 2017, with <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> tasked to draft the agreement. Epstein also directed a separate $20,000 payment from the foundation \"for administering the chomsky challenge in linguistics\" (EFTA02376664).</p>\n\n<p>The most significant consulting payment went to <a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a>, an active New York Times financial reporter, who received $30,000 from Gratitude America in August 2017. The email chain documents the arrangement with striking transparency: Thomas asked Epstein \"What was the name again of the name it will come under?\" and was told \"30k from gratitude america\" (EFTA02640495). When the check arrived, Thomas responded with effusive thanks: \"Needless to say, this is enormous for us and I am tremendously grateful for your efforts\" (EFTA02366490). Kahn, uncertain of the payment category, asked Epstein: \"consulting? if so shall darren draft agreement\" (EFTA02353300). This payment to an active journalist covering finance at the newspaper of record represents a serious journalistic ethics violation and potential media capture.</p>\n\n<p>The compartmentalization of these consulting arrangements is documented in the email record. In one exchange, Kahn noted that <a href=\"/dossiers/lesley-groff\">Lesley Groff</a>, Epstein's executive assistant, \"is not aware of your consulting arrangement with gratitude\" and asked how to reroute a check that had been mistakenly sent to her attention (EFTA02374402). Epstein personally directed the amount, recipient, and paying entity for each consulting payment, with Kahn forwarding all requests to Epstein's personal Gmail for approval before execution.</p>",
-        "viz": null
-      },
-      {
-        "id": "banking-and-investments",
-        "title": "Banking Relationships and Investment Activity",
-        "content": "<p>Gratitude America's primary banking relationship was with <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> Trust Company Americas, where it held a Money Market Deposit Account managed by relationship manager Stewart Oldfield under KYC case #01353080. The account fell under the \"Southern Financial Relationship\" umbrella alongside other Epstein entities. Deutsche Bank signature cards showed both Epstein and <a href=\"/dossiers/darren-indyke\">Indyke</a> as authorized signatories (EFTA01345320).</p>\n\n<p>In addition to the Deutsche Bank checking account, <a href=\"/dossiers/richard-kahn\">Kahn</a> opened a brokerage account at Morgan Stanley for investment purposes. His email reported: \"gratitude brokerage has been opened at morgan stanley currently we have 9,650,000 at DB in checking account please advise amount i should send to open account\" (EFTA02703896). The Morgan Stanley portfolio held $4.8 to $5.5 million in corporate stocks between 2016 and 2018. In 2016, the foundation traded 800 shares of LinkedIn-A, purchased in March and sold in June for a $58,235 gain. Active trading expanded in 2017, with over 50 positions generating $899,417 in capital gains. The 2018 portfolio produced a net capital loss of $69,379 from selling $31.4 million in securities. By 2019, all stocks had been liquidated.</p>\n\n<p>The foundation also reported foreign financial accounts in 2016-2017, switched to \"No\" in 2018, then back to \"Yes\" in 2019 &mdash; a fluctuation that may reflect the Baleto Teatras wire to SEB Bank Lithuania or other international activity. A confirmed wire of EUR 15,000 ($18,542.78) to SEB Bank Vilnius on April 3, 2018 for NPO Baleto Teatras is documented in Deutsche Bank records (EFTA01287550).</p>\n\n<p>Indyke closed the Deutsche Bank account on January 10, 2019 &mdash; six months before Epstein's July arrest. The account closure letter, addressed to \"Brad\" at Deutsche Bank, was signed by Indyke in his capacity as Vice President (EFTA01387256). Following Epstein's arrest, Morgan Stanley automatically liquidated the brokerage portfolio, sending $7,112,269 on July 24 and $816,766 on July 25, 2019 back to the Deutsche Bank account. These automated liquidation transfers occurred just two weeks after the arrest, representing the recovery of most of the original $10 million endowment. From 2020 onward, all assets were held as \"savings and temporary cash investments\" with zero stock holdings, frozen at exactly $8,175,884 across three consecutive annual filings.</p>",
-        "viz": null
-      },
-      {
-        "id": "post-arrest-freeze",
-        "title": "Post-Arrest Freeze and Settlement",
-        "content": "<p>Epstein's arrest on July 6, 2019 and death on August 10, 2019 effectively ended Gratitude America's operations. The 2019 990-PF, signed on November 15, 2019, listed Jeffrey E. Epstein as \"DECEASED Director\" and reported $242,470 in net investment income, $110,000 in grants (the final IPI payment of $150,000 minus a $100,000 prior-year refund, plus $50,000 to Hasty Pudding and $10,000 to National MS Society), and $110,433 in total expenses. Assets stood at $8,184,284.</p>\n\n<p>From 2020 through at least 2022, the foundation entered complete stasis. Each annual filing reported $1 in revenue (the minimum for a non-zero return), $0 in expenses, and $8,175,884 in assets &mdash; the same figure to the dollar across three consecutive years. No grants were paid. No officer compensation was reported. Officers remained <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> (President/Director), <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> (Vice President/Director), and <a href=\"/dossiers/erika-kellerhals\">Erika Kellerhals</a> (Secretary/Treasurer/Director) at 9053 Estate Thomas Suite 101. The 2022 filing was signed by CPA David M. Hasson on November 15, 2023. Excess distribution carryovers from 2017 ($255,623) and 2018 ($540,238) remained on the books.</p>\n\n<p>Gratitude America was included as one of ten Epstein-created entities in the USVI Attorney General's action against the Estate of Jeffrey Epstein, which settled for $105 million-plus in November 2022. The USVI corporate registry lists the entity (number 582530) as Dissolved/Withdrawn. However, IRS filings continued to be submitted through at least tax year 2022, indicating the foundation had not been formally wound down for federal tax purposes as of that date. The $8.175 million in frozen assets &mdash; representing approximately 82% of the original Leon Black donation after seven years of grant-making, consulting payments, and investment activity &mdash; remains one of the larger identifiable pools of Epstein-related funds subject to estate proceedings and potential claimant recovery.</p>",
-        "viz": "timeline"
-      }
-    ],
-    "open_questions": [
-      "What was the purpose and recipient of the $290,000 in 'other expenses' reported in 2016 and $235,000 in consulting expenses in 2017, and were payments deliberately structured below the $50,000 disclosure threshold to avoid 990-PF contractor reporting?",
-      "What happened to the $8.175 million in frozen Gratitude America assets following the USVI AG settlement and estate proceedings -- were these funds distributed to the Epstein Victims Compensation Program or claimed by other parties?",
-      "What is the full identity of the 'Association Mind Education' in Rome that received $85,000 and organized neuropsychology congresses in Havana, Cuba -- does Giuseppe Bersani have other Epstein network connections?",
-      "Did Leon Black receive any direct or indirect tax benefit from the $225,000 Gratitude America grant to his own Melanoma Research Alliance, and did the Dechert investigation examine this circular flow as potential self-dealing?",
-      "What was the scope of Gratitude America's relationship with 'balerina Simona' in Lithuania beyond the documented $28,543 Baleto Teatras grant, given that the related UAB Fors Projektai received a separate $75,000 from J. Epstein Virgin Islands Foundation?"
-    ],
-    "applicable_models": [
-      "bridge-tax",
-      "narrative-shield",
-      "parallel-financial-system",
-      "enabler-gradient",
-      "complexity-as-credential"
-    ]
+    "curated_at": "2026-02-20T01:17:47.459697"
   },
   "viz_data": {
     "ego_network": {
@@ -3266,14 +3264,14 @@
           "target": "Kuhn Foundation",
           "type": "financial",
           "strength": 1.0,
-          "evidence_ref": "IRS990:660789697:201812",
+          "evidence_ref": "990:660789697",
           "description": "Gratitude America $500K grant to Kuhn Foundation (2018)"
         },
         {
           "target": "Edge Foundation",
           "type": "financial",
           "strength": 1.0,
-          "evidence_ref": "IRS990:660789697:201812",
+          "evidence_ref": "990:660789697",
           "description": "Gratitude America $35K grant to Edge Foundation (2018)"
         },
         {
@@ -3282,6 +3280,13 @@
           "strength": 1.0,
           "evidence_ref": "EFTA02376647",
           "description": "Gratitude America Ltd (USVI) was the vehicle for transferring $650K ($150K 2017, $500K 2018) to The Kuhn Foundation. Kuhn Foundation was second-largest cumulative recipient of Gratitude America grants after IPI."
+        },
+        {
+          "target": "Noam Chomsky",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "EFTA01348702",
+          "description": "Gratitude America Ltd (Epstein's USVI nonprofit, funded through Deutsche Bank Trust) issued ,000 check to Noam Chomsky on March 2, 2017. Valeria stated this was payment for a linguistics challenge/prize initiative Epstein wanted to establish."
         },
         {
           "target": "International Peace Institute",
@@ -3294,14 +3299,14 @@
           "target": "Leon Black",
           "type": "financial",
           "strength": 0.7,
-          "evidence_ref": "IRS990:133947890/2014,IRS990:660789697/2015",
+          "evidence_ref": "990:133947890",
           "description": "Black Family Foundation (EIN 13-3947890) paid .76M in grants in 2014 tax year. Gratitude America (EIN 66-0789697) received .003M in contributions in 2015 tax year. Timing alignment and amount correspondence strongly suggests Black Foundation was the source of Gratitude America's sole major contribution."
         },
         {
           "target": "Erika Kellerhals",
           "type": "financial",
           "strength": 0.7,
-          "evidence_ref": "IRS990:660789697",
+          "evidence_ref": "990:660789697",
           "description": "Kellerhals is the care-of contact for Gratitude America Ltd on IRS records. She manages the USVI-registered entity holding .175M in frozen assets post-Epstein arrest."
         },
         {

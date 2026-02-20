@@ -4,11 +4,11 @@
   "aliases": [
     "Darren K. Indyke"
   ],
-  "generated_at": "2026-02-18T16:11:16.134206",
-  "last_updated": "2026-02-17T15:31:19",
+  "generated_at": "2026-02-20T01:17:47.168034",
+  "last_updated": "2026-02-18T17:24:22",
   "stats": {
     "total_findings": 93,
-    "total_connections": 85,
+    "total_connections": 88,
     "total_entities": 24,
     "finding_types": {
       "relationship": 8,
@@ -24,14 +24,14 @@
       "advisory": 1,
       "corporate": 11,
       "employment": 16,
-      "financial": 19,
+      "financial": 21,
       "intelligence": 1,
-      "legal": 28,
+      "legal": 29,
       "familial": 7,
       "political": 1,
       "social": 1
     },
-    "last_updated": "2026-02-17T15:31:19"
+    "last_updated": "2026-02-18T17:24:22"
   },
   "findings": [
     {
@@ -154,7 +154,7 @@
     {
       "id": 448,
       "finding_type": "financial",
-      "summary": "Indyke made 11 FEC-recorded political donations totaling approx $22,000 from 2000-2018. His 2000 donation lists employer as 'J EPSTEIN AND CO INC' (NYC 10002). By 2003, he listed 'NEW YORK STRATEGY GROUP LLC' (NYSG) as employer. Donated to: Plaskett/USVI 3x ($10.7K total, 2014-2018), Richardson for President ($2,300, 2007), King for Congress/NM ($4K, 2004), Gephardt for President ($2K, 2003), Kerry Committee ($2K, 2002), Kelly for Congress ($1K, 2000). Pattern: heavy USVI focus via Plaskett, NM connection via King (Zorro Ranch state), plus major Democratic presidential candidates.",
+      "summary": "Indyke made 11 FEC-recorded political donations totaling approx ,000 from 2000-2018. His 2000 donation lists employer as 'J EPSTEIN AND CO INC' (NYC 10002). By 2003, he listed 'NEW YORK STRATEGY GROUP LLC' (NYSG) as employer. Donated to: Plaskett/USVI 3x (K total, 2014-2018), Richardson for President (,300, 2007), King for Congress/NM (K, 2004), Gephardt for President (K, 2003), Kerry Committee (K, 2002), Kelly for Congress (K, 2000). Pattern: heavy USVI focus via Plaskett, NM connection via King (Zorro Ranch state), plus major Democratic presidential candidates.",
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
@@ -1012,7 +1012,7 @@
     {
       "id": 309,
       "finding_type": "financial",
-      "summary": "Indyke's DKIP PLLC account at Deutsche Bank (acct 42953707) was flagged by DB AML for cash structuring. Three instances since July 2016 where client cashed checks just below 10K reporting threshold. DB internal meetings held July 24-25, 2017 to discuss. Indyke also cashed $9,500 check for Jeffrey Epstein and asked about CTR requirements, and separately picked up $40,000 cash plus Euros from JE personal accounts.",
+      "summary": "Indyke's DKIP PLLC account at Deutsche Bank (acct 42953707) was flagged by DB AML for cash structuring. Three instances since July 2016 where client cashed checks just below K reporting threshold. DB internal meetings held July 24-25, 2017 to discuss. Indyke also cashed ,500 check for Jeffrey Epstein and asked about CTR requirements, and separately picked up ,000 cash plus Euros from JE personal accounts.",
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
@@ -3796,6 +3796,60 @@
       "evidence": []
     },
     {
+      "id": 2131,
+      "person_a": "Darren Indyke",
+      "person_b": "Noam Chomsky",
+      "relationship_type": "financial",
+      "description": "Indyke drafted the consulting agreement for the $30K Gratitude America payment to Chomsky (Feb 2017). Indyke's office (575 Lexington Ave, 4th Floor) was the same address as HBRK Associates (Kahn). Indyke's legal assistant Bebe Avdiu coordinated Chomsky dinner meetings with Epstein at Harvard.",
+      "strength": "strong",
+      "date_range": "2017-02 to 2017-06",
+      "verification_status": "unverified",
+      "created_at": "2026-02-18 17:20:50",
+      "other_person": "Noam Chomsky",
+      "other_person_slug": "noam-chomsky",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02215602",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02380242",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02462366",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2141,
+      "person_a": "Darren Indyke",
+      "person_b": "Noam Chomsky",
+      "relationship_type": "financial",
+      "description": "Epstein's personal attorney Darren Indyke's firm wired ,159 to Chomsky in December 2018. Chomsky claimed these were his own funds being reorganized through Epstein's office.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-18 17:24:22",
+      "other_person": "Noam Chomsky",
+      "other_person_slug": "noam-chomsky",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02352463",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 343,
       "person_a": "Darren Indyke",
       "person_b": "Lesley Groff",
@@ -3821,7 +3875,7 @@
       "person_a": "Darren Indyke",
       "person_b": "Richard Kahn",
       "relationship_type": "financial",
-      "description": "Both donated max $2,300 to Richardson for President within 7 days (Kahn 2007-11-13, Indyke 2007-11-20), confirming coordinated political bundling for NM governor where Zorro Ranch is located",
+      "description": "Both donated max ,300 to Richardson for President within 7 days (Kahn 2007-11-13, Indyke 2007-11-20), confirming coordinated political bundling for NM governor where Zorro Ranch is located",
       "strength": "medium",
       "date_range": null,
       "verification_status": "unverified",
@@ -3842,7 +3896,7 @@
       "person_a": "Darren Indyke",
       "person_b": "Ghislaine Maxwell",
       "relationship_type": "financial",
-      "description": "Both donated to King for Congress (Gary King, NM) in 2004: Indyke $4K, Maxwell $4K from St. Thomas VI. NM political influence during Zorro Ranch era",
+      "description": "Both donated to King for Congress (Gary King, NM) in 2004: Indyke K, Maxwell K from St. Thomas VI. NM political influence during Zorro Ranch era",
       "strength": "medium",
       "date_range": null,
       "verification_status": "unverified",
@@ -3863,7 +3917,7 @@
       "person_a": "Darren Indyke",
       "person_b": "Kenneth Starr",
       "relationship_type": "financial",
-      "description": "Both donated max contribution to Richardson for President: Starr $2,300 (2008-12-09), Indyke $2,300 (2007-11-20). Note: This is Kenneth Starr the insurance exec (Starr & Company), NOT the independent counsel",
+      "description": "Both donated max contribution to Richardson for President: Starr ,300 (2008-12-09), Indyke ,300 (2007-11-20). Note: This is Kenneth Starr the insurance exec (Starr & Company), NOT the independent counsel",
       "strength": "medium",
       "date_range": null,
       "verification_status": "unverified",
@@ -4219,6 +4273,39 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "SEC EDGAR 0001144204-08-025959",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2117,
+      "person_a": "Darren Indyke",
+      "person_b": "Noam Chomsky",
+      "relationship_type": "legal",
+      "description": "Indyke's legal assistant Bebe Avdiu at DARREN K. INDYKE, PLLC (575 Lexington Avenue, 4th Floor, NY 10022) coordinated Chomsky-Epstein meetings including Harvard lunch June 2017",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-18 17:18:13",
+      "other_person": "Noam Chomsky",
+      "other_person_slug": "noam-chomsky",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02215565",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02215602",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02217395",
           "source_quote": null,
           "source_page": null
         }
@@ -4743,7 +4830,7 @@
       "date": "2000",
       "type": "finding",
       "finding_type": "financial",
-      "summary": "Indyke made 11 FEC-recorded political donations totaling approx $22,000 from 2000-2018. His 2000 donation lists employer as 'J EPSTEIN AND CO INC' (NYC 10002). By 2003, he listed 'NEW YORK STRATEGY GROUP LLC' (NYSG) as employer. Donated to: Plaskett/USVI 3x ($10.7K total, 2014-2018), Richardson for President ($2,300, 2007), King for Congress/NM ($4K, 2004), Gephardt for President ($2K, 2003), Kerry Committee ($2K, 2002), Kelly for Congress ($1K, 2000). Pattern: heavy USVI focus via Plaskett, NM connection via King (Zorro Ranch state), plus major Democratic presidential candidates.",
+      "summary": "Indyke made 11 FEC-recorded political donations totaling approx ,000 from 2000-2018. His 2000 donation lists employer as 'J EPSTEIN AND CO INC' (NYC 10002). By 2003, he listed 'NEW YORK STRATEGY GROUP LLC' (NYSG) as employer. Donated to: Plaskett/USVI 3x (K total, 2014-2018), Richardson for President (,300, 2007), King for Congress/NM (K, 2004), Gephardt for President (K, 2003), Kerry Committee (K, 2002), Kelly for Congress (K, 2000). Pattern: heavy USVI focus via Plaskett, NM connection via King (Zorro Ranch state), plus major Democratic presidential candidates.",
       "confidence": "medium",
       "id": 448
     },
@@ -5015,7 +5102,7 @@
       "date": "2016-07",
       "type": "finding",
       "finding_type": "financial",
-      "summary": "Indyke's DKIP PLLC account at Deutsche Bank (acct 42953707) was flagged by DB AML for cash structuring. Three instances since July 2016 where client cashed checks just below 10K reporting threshold. DB internal meetings held July 24-25, 2017 to discuss. Indyke also cashed $9,500 check for Jeffrey Epstein and asked about CTR requirements, and separately picked up $40,000 cash plus Euros from JE personal accounts.",
+      "summary": "Indyke's DKIP PLLC account at Deutsche Bank (acct 42953707) was flagged by DB AML for cash structuring. Three instances since July 2016 where client cashed checks just below K reporting threshold. DB internal meetings held July 24-25, 2017 to discuss. Indyke also cashed ,500 check for Jeffrey Epstein and asked about CTR requirements, and separately picked up ,000 cash plus Euros from JE personal accounts.",
       "confidence": "high",
       "id": 309
     },
@@ -5034,6 +5121,14 @@
       "summary": "Indyke coordinated legal response to James Patterson book about Epstein in August 2016. Drafted letter to Eric Rayman (publisher counsel) with exhibits: (A) Hoffenberg email claiming to be on book writing team, (B) 1997 sentencing opinion (Hoffenberg's conviction), (C) 2014 NY Post consent decree, (D) 2016 order dismissing case. Worked with attorney Charles Michael. Multiple emails marked High Importance over Aug 17-18, 2016 show Indyke's active role managing Epstein's media/legal threats including monitoring Google Alerts for 'Jeffrey Epstein' from 2014-2016 and forwarding them to Epstein.",
       "confidence": "high",
       "id": 1742
+    },
+    {
+      "date": "2017-02 to 2017-06",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Indyke drafted the consulting agreement for the $30K Gratitude America payment to Chomsky (Feb 2017). Indyke's office (575 Lexington Ave, 4th Floor) was the same address as HBRK Associates (Kahn). Indyke's legal assistant Bebe Avdiu coordinated Chomsky dinner meetings with Epstein at Harvard.",
+      "other_person": "Noam Chomsky",
+      "id": 2131
     },
     {
       "date": "2017-04-26",
@@ -5773,79 +5868,7 @@
         "guidance": "Narrative about documented communications \u2014 emails, calls, messages. Focus on what they reveal about the relationship or operation."
       }
     ],
-    "curated_at": "2026-02-19T00:30:56.554348",
-    "lead": "<p>Darren Keith Indyke (born 1965, Glen Cove, Long Island) served as Jeffrey Epstein's exclusive personal attorney for over two decades, functioning not merely as legal counsel but as the central operational manager of Epstein's corporate, financial, and logistical infrastructure. A graduate of Colgate University (1986) and Cornell Law School (1991, NY Bar #2491850), Indyke entered Epstein's orbit through <a href=\"/dossiers/gold-and-wachtel\">Gold and Wachtel</a>, a firm that represented Epstein from at least 1988. Indyke's father <a href=\"/dossiers/bernard-indyke\">Bernard Indyke</a> was a manager at Jackie Fine Arts, a Gold and Wachtel client operated by <a href=\"/dossiers/herman-finesod\">Herman Finesod</a> that ran art reproduction tax shelters &mdash; a connection that brought the younger Indyke into the firm as a favor to his father (Finding #2100). By the mid-1990s, Indyke left conventional practice to work exclusively for Epstein, initially through J. Epstein &amp; Co. and later through New York Strategy Group LLC and his own DKIP PLLC.</p>\n\n<p>Through his law firm DKIP PLLC, Indyke managed at least 23 business entities across New York, Florida, the U.S. Virgin Islands, New Mexico, and France, including <a href=\"/dossiers/nine-east-71st-street-corporation\">Nine East 71st Street Corporation</a>, <a href=\"/dossiers/southern-financial-llc\">Southern Financial LLC</a>, <a href=\"/dossiers/gratitude-america-ltd\">Gratitude America Ltd</a>, and <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company</a> (Finding #2108, EFTA01296686). Deutsche Bank records show his law firm received regular $250,000 monthly deposits from Epstein's JPMorgan account to cover payroll and operations (Finding #2191, EFTA01503821). His Deutsche Bank account was flagged for cash structuring &mdash; three instances since July 2016 of cashing checks just below the $10,000 Currency Transaction Report threshold &mdash; triggering a Suspicious Activity Report and internal compliance meetings in July 2017 (Finding #1731, EFTA01346023). DKIP PLLC also served as a conduit for Epstein real estate transactions, including a $350,000 wire to FirstBank Puerto Rico for FT Real Estate Inc. in November 2014 (EFTA01285197) and a $1 million below-market loan from <a href=\"/dossiers/southern-financial-llc\">Southern Financial LLC</a> to Indyke's personal entity Harlequin Dane LLC at just 1.41% AFR (Finding #2195, EFTA02460458).</p>\n\n<p>Following Epstein's death in August 2019, Indyke and co-executor <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> received over $14.9 million in combined post-death Deutsche Bank transfers during account liquidation (Finding #2197). The USVI Attorney General's 2021 amended complaint alleged the pair managed at least 140 bank accounts, made over $2.5 million in payments to women with Eastern European surnames, and withdrew cash in amounts avoiding federal reporting thresholds (Finding #1708). Indyke was named a $50 million beneficiary in Epstein's will. The USVI matter settled for $105 million-plus in 2022 with no criminal conviction and no admission of liability. As of February 2026, Indyke has been subpoenaed by the House Oversight Committee with testimony scheduled for March 5, 2026 (Finding #1703), and faces ongoing civil lawsuits from at least 30 Epstein victims. He currently operates as a licensed Florida real estate agent and runs The Indyke Law Firm PLLC from Delray Beach, Florida (Finding #1706).</p>",
-    "system_role": "Indyke reveals the role of the captive in-house attorney as the indispensable enabler of a financial secrecy network: a single individual who simultaneously served as corporate officer, trust administrator, communications hub, counter-surveillance point, cash handler, entity formation agent, and defense coordinator &mdash; making Epstein's multi-jurisdictional structure operable while maintaining the appearance of arms-length legal representation.",
-    "sections": [
-      {
-        "id": "origins-and-career-path",
-        "title": "Origins and Path to Epstein",
-        "content": "<p>Darren Indyke grew up middle-class in Glen Cove, Long Island, graduating from Glen Cove High School in 1982. His entry into the Epstein network was not through elite circles but through family patronage: his father <a href=\"/dossiers/bernard-indyke\">Bernard Indyke</a> served as manager and board member of Jackie Fine Arts, a <a href=\"/dossiers/gold-and-wachtel\">Gold and Wachtel</a> client that operated art reproduction tax shelters under <a href=\"/dossiers/herman-finesod\">Herman Finesod</a>, later convicted as the \"King of Tax Shelters\" (Finding #1700). William Wachtel hired Darren as a favor to Bernard, misrepresenting Bernard's role as that of a mailroom employee rather than a tax shelter manager (Finding #2100). Indyke worked at Gold and Wachtel from 1986 to 1988 as a pre-law clerk, where he first encountered Epstein as a firm client, then attended Cornell Law School, graduating in 1991.</p>\n\n<p>Indyke returned to Gold and Wachtel as a corporate and intellectual property associate from 1991 to 1995, briefly moved to Greenberg Traurig in 1995-1996, then left conventional legal practice entirely to work exclusively for <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> circa 1996. His earliest FEC filing (2000) lists his employer as \"J Epstein and Co Inc\" at a New York City 10002 address; by 2003, this had shifted to \"New York Strategy Group LLC\" at 301 East 66th Street &mdash; a building associated with Epstein entity 301 East 66th Street Associates LP, where Indyke himself resided in Apartment 8D (Finding #1725). The progression from a law firm where Epstein was merely one of many clients to a fully captive role as Epstein's sole attorney marks a career trajectory without obvious parallel in legitimate legal practice. His own business entity, DKI Graphics Inc (NY Corp #1695791, filed January 1993), went inactive, replaced entirely by his Epstein-centric practice (Finding #2142, EFTA01296686).</p>",
-        "viz": null
-      },
-      {
-        "id": "corporate-architecture",
-        "title": "Corporate Architecture",
-        "content": "<p>Indyke's Deutsche Bank KYC file lists 50 employment records and 23 business associations, making him the most prolific entity administrator in the Epstein network (Finding #1761, EFTA01295770). His role spanned officer positions at <a href=\"/dossiers/nine-east-71st-street-corporation\">Nine East 71st Street Corporation</a> (from 1989), <a href=\"/dossiers/igo-company-llc\">116 East 65th Street LLC</a> (from 2000), 6975 Morse Road LLC (from 2001), Max Hotel Services Corp (CEO), E Management New York LLC (agent and process server), Zorro Development Corp (Secretary, in New Mexico), and numerous others. He served as Secretary at <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company</a> and Authorized Signatory at <a href=\"/dossiers/southern-financial-llc\">Southern Financial LLC</a> &mdash; the two core Epstein corporate vehicles that controlled the wider entity web (Finding #311).</p>\n\n<p>The architecture extended across at least five jurisdictions. In the USVI, Indyke was VP and Secretary of Poplar Inc., Trustee of the Haze Trust (from 1999), and Treasurer then Vice President of <a href=\"/dossiers/gratitude-america-ltd\">Gratitude America Ltd</a> (2012-2019). In Florida, he managed 124 Parc Monceau LLC (a Paris-property entity formed in 2013, dissolved 2017) and Harlequin Dane LLC (his personal entity from 2015). In New Mexico, he was Secretary of Zorro Development Corp. He also held a co-ownership interest in Paris-SCIJEP, an LLC in France (Finding #1541). The entity Florida Science Foundation (FL SunBiz N07000010684), where Indyke served as Assistant Director at 457 Madison Avenue, operated from 2007 to 2009 &mdash; notably spanning the period of Epstein's Florida plea deal, during which it may have facilitated the work-release program that allowed Epstein 16-hour daily departures from jail (Finding #510).</p>\n\n<p>A revealing exchange from March 2019 documents how Indyke managed ownership concealment at Epstein's direction. When forming Truth Robot LLC, Indyke asked Epstein whether to name SF LLC or STC as the manager. Epstein responded: \"Cant have my name.\" Indyke replied: \"Will delete and have Rich sign as Treasurer of Southern Financial LLC\" (Finding #1738, EFTA02637769). This exchange captures the deliberate layering of entities to obscure Epstein's beneficial ownership, with Indyke as the architect executing the concealment.</p>",
-        "viz": null
-      },
-      {
-        "id": "financial-flows",
-        "title": "Financial Flows and Cash Structuring",
-        "content": "<p>Deutsche Bank records reveal that DKIP PLLC (account #42953707) functioned as a three-purpose financial vehicle: law firm payroll, conduit for Epstein entity transactions, and destination for post-death estate liquidation (Finding #2208). Epstein directly funded the firm's operations through regular $250,000 monthly transfers from his JPMorgan DDA account (#739110438), which covered ADP payroll disbursements of $45,000 to $50,000 per month (Finding #2191, EFTA01503821). The Deutsche Bank account balance peaked at $600,000 in November 2014, and over the tracked period processed $5.95 million outgoing and $5.57 million incoming &mdash; $11.5 million in gross flows (Finding #2208).</p>\n\n<p>The most significant documented transaction was a $350,000 wire from DKIP PLLC to <a href=\"/dossiers/financial-trust-company\">FirstBank Puerto Rico</a> for the account of FT Real Estate Inc., an Epstein USVI C-corporation, on November 6, 2014 (EFTA01285197). The same day, Indyke's account received a $600,000 deposit from Epstein &mdash; demonstrating how the law firm served as a pass-through for real estate transactions in the Caribbean (Finding #2193). A separate wire of $25,000 to an unknown recipient on September 12, 2014, was the earliest DS10 wire from the account, funded by a fresh deposit into what had been a $0 balance (Finding #2203).</p>\n\n<p>In June 2016, a single day's wire report shows $1.27 million in Indyke-connected disbursements from Epstein's Deutsche Bank account: $1 million and $50,000 to Harlequin Dane LLC (Indyke's personal entity) and $220,000 to Endicott Opportunity Partners IV LP at an address adjacent to Indyke's office. The $1 million payment to Harlequin Dane was structured as a 9-year loan from <a href=\"/dossiers/southern-financial-llc\">Southern Financial LLC</a> at the IRS minimum Applicable Federal Rate of 1.41%, as confirmed by <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>'s email requesting approval: \"please confirm ok to transfer 1,000,000 to Harlequin Dane LLC (darren entity) for 9 year loan from SFL LLC\" (Finding #2195, EFTA02460458). This below-market loan from an Epstein entity to Indyke's personal entity represents a compensation structure that avoids the tax and disclosure implications of direct salary payments.</p>\n\n<p><a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> AML flagged both the DKIP PLLC account and Epstein's personal account (#35269691) for cash structuring in July 2017. Three instances since July 2016 involved cashing checks just below the $10,000 Currency Transaction Report threshold. On April 26, 2017, Indyke walked into Deutsche Bank's 345 Park Avenue branch with two checks totaling $19,500 &mdash; one for $9,500 from Epstein's account (using power of attorney) and one for $10,000 from his own DKIP account. When cashing a $9,500 check for Epstein on a prior occasion, Indyke had explicitly \"inquired on if a CTR will have to be done\" (Finding #1731, EFTA01345992). The pattern of monthly $9,500 check cashing was flagged as structuring, triggering a SAR filing and an internal compliance meeting with <a href=\"/dossiers/stewart-oldfield\">Stewart Oldfield</a> and other Deutsche Bank personnel on July 25, 2017 (EFTA01346029). Separately, Indyke also picked up $40,000 in cash plus Euros from Epstein's personal accounts (EFTA01345568).</p>",
-        "viz": null
-      },
-      {
-        "id": "operational-control-center",
-        "title": "DKIP as Operational Control Center",
-        "content": "<p>DKIP PLLC functioned far beyond the scope of a conventional law firm. Internal emails reveal the office operated as Epstein's primary communications hub, with staff making calls on his behalf to figures including <a href=\"/dossiers/leon-black\">Leon Black</a>, Christina Devernois, Bill Scherer, and others. A December 17, 2010 email from the office details the day's call sheet: \"Peggy is only one we did not call. I have called Leon Black, Christina Devernois (he has called you back), Bill Scherer, Michelle, Kevin Law...\" Epstein's reply from his iPhone &mdash; \"Did we finish calls?\" &mdash; illustrates the call-center dynamic (Finding #1704, EFTA02355134). Legal assistant Bebe Avdiu (bebe.dkipllc@gmail.com) managed scheduling, medical appointments, travel arrangements for young women, and even congressional outreach, contacting \"Commissioner Henry's office\" in February 2018 (Finding #348, EFTA02238828).</p>\n\n<p>Indyke was embedded in Epstein's counter-surveillance operations. When a British journalist anchored a rental boat near Little St. James Island in March 2011, USVI staff reported the incident to both Epstein and Indyke (CC: DKIPKLC), noting the reporter \"was there for about 3 hours\" and \"probably left because it is raining heavily\" (Finding #1728, EFTA01837558). In May 2019, when a caller named \"Nova\" phoned <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company</a> asking what <a href=\"/dossiers/financial-trust-company\">Financial Trust</a> did, <a href=\"/dossiers/richard-kahn\">Kahn</a> identified him as a journalist and staff discussed whether to change the phone greeting from \"Southern Trust\" to simply \"2525\" &mdash; the street address &mdash; to further obscure the entity's nature (Finding #1744, EFTA02288520). Indyke was CC'd on these communications, demonstrating his integration into the network's information-control apparatus.</p>\n\n<p>Indyke also served as Epstein's media intelligence feed, forwarding Google Alerts for \"Jeffrey Epstein\" and political news articles from 2014 through 2019. These included a 2016 email about the James Patterson book alleging a federal cover-up of Epstein's crimes, which prompted Indyke to coordinate a legal response with attorney Charles Michael, drafting a letter to the publisher's counsel (Finding #1742, HOUSE_OVERSIGHT_031307). He forwarded a Gloria Allred interview about Trump misconduct allegations and a \"Rigging the Election\" DNC video to Epstein in October-November 2016 (Finding #1753). The breadth of these forwards &mdash; spanning legal threats, political intelligence, and reputation monitoring &mdash; confirms the office functioned as Epstein's situational awareness center.</p>",
-        "viz": null
-      },
-      {
-        "id": "wexner-nexus",
-        "title": "Wexner Connection",
-        "content": "<p>Indyke maintained a documented professional relationship with the <a href=\"/dossiers/les-wexner\">Wexner</a> family that extended beyond his Epstein work. He served as Secretary of The Wexner Foundation (a Foreign Not-For-Profit Corp registered in New York, DOS #2405489) and appeared in <a href=\"/dossiers/les-wexner\">Leslie Wexner</a>'s SC 13D/A SEC filing for TOO Inc. (later Bath &amp; Body Works) in March 2001 &mdash; the only EDGAR filing mentioning Indyke by name (Finding #1718, EDGAR:0000909518-01-000297). This filing confirms Indyke's role in Wexner SEC compliance as early as 2001, a period when the Epstein-Wexner relationship was still intact.</p>\n\n<p>A January 2008 ACRIS record reveals that Abigail S. Wexner transferred a property interest at 15 Central Park West, Unit 10B &mdash; one of Manhattan's most exclusive addresses &mdash; to Darren K. Indyke (Finding #2105, ACRIS:2008012900966001). The document type is listed as PAT (deed/patent). While this may have been executed in Indyke's capacity as a fiduciary or attorney-in-fact, the transfer of a high-value Manhattan property to Epstein's personal lawyer by Wexner's wife represents a tangible financial link between the two families that warrants further investigation. <a href=\"/dossiers/the-limited-inc\">The Limited Inc.</a> and the broader Wexner corporate ecosystem constituted a significant portion of Indyke's non-Epstein professional portfolio during the 1998-2001 period.</p>",
-        "viz": "ego_network"
-      },
-      {
-        "id": "pre-arrest-activity",
-        "title": "Pre-Arrest Activity (2019)",
-        "content": "<p>The months before Epstein's July 6, 2019 arrest reveal Indyke operating at peak intensity across legal, logistical, and operational functions. In March 2019, he arranged Epstein's passport renewal through G3 Visas and Passports at the Miami Passport Agency, with the passport issued March 8 &mdash; the same day Epstein emailed about a Russian visa transfer (Finding #1448, EFTA02278714). He handled <a href=\"/dossiers/karyna-shuliak\">Karyna Shuliak</a>'s divorce affidavit, managed DPNR permit violation investigations at the USVI property (with local attorney Chris Kroblin of <a href=\"/dossiers/erika-kellerhals\">Kellerhals</a> Ferguson Kroblin reporting to him), and tracked Epstein's day-counts across jurisdictions to establish USVI tax residency: \"The idea is that I am trying to establish that he travels frequently out of the USVI. I know he does, but maybe we might want to quantify\" (Finding #1733, EFTA02283344).</p>\n\n<p>In early April 2019, Indyke curated victim evidence excerpts for Epstein's defense, compiling police report pages and deposition transcripts. He specifically flagged a page referencing Epstein \"masturbating\" and recommended to Epstein: \"I am thinking that we keep it out,\" before Epstein approved sending the full package to \"Jack\" (Finding #1695, EFTA02634581). On April 3, he produced a \"First Draft of Talking Points\" asserting that \"Mr. Epstein has diligently and fully complied with all applicable registration obligations under federal and local law\" (Finding #1699, EFTA02632963). Days later, on April 8, he personally contacted Angel Watch, the SMART Office (three calls), and ICE's Child Exploitation Cybercrimes division to navigate sex offender registration requirements, finding that Angel Watch had \"no warm bodies\" to speak with and was directed to an email inbox at dhsintermeganslaw@ice.dhs.gov (Finding #1691, EFTA02633922).</p>\n\n<p>Simultaneously, Indyke was negotiating the purchase of a Sikorsky S-76 helicopter, drafting the Asset Purchase Agreement and coordinating pre-purchase inspections with pilot Larry Visoski &mdash; notably, Indyke himself was scheduled for S-76 recurrent pilot training at FlightSafety Palm Beach in May 2019, confirming he held a helicopter pilot rating (Finding #1701, EFTA02636796). On February 13, he alerted Epstein's inner circle &mdash; including <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, Bella Klein, Jeanne Brennan, and <a href=\"/dossiers/nan-morabia\">Cecile de Jongh</a> &mdash; that his dkiesq@aol.com email had suffered \"unauthorized uses,\" shifting communications to dki.birchtreebr@gmail.com (Finding #1705, EFTA02275663).</p>",
-        "viz": "timeline"
-      },
-      {
-        "id": "maxwell-property-link",
-        "title": "Maxwell Property Arrangement",
-        "content": "<p>Deutsche Bank due diligence records reveal that Indyke and <a href=\"/dossiers/ghislaine-maxwell\">Ghislaine Maxwell</a> were listed as \"Other Associates\" at the same physical address for seven years, from November 2008 to September 2015 (Finding #1762, EFTA01295770). The address was 116 East 65th Street, a property purchased by Indyke that was \"promptly split into apartments, one of which is now Ms Maxwell's residence,\" according to a Daily Mail report cited in the same Deutsche Bank file. This arrangement gave Maxwell a residence purchased and managed by Epstein's attorney, providing a layer of separation between Maxwell and Epstein in property records while maintaining practical proximity.</p>\n\n<p>Beyond real estate, Indyke's connections to Maxwell extended through the corporate structure. Both donated to Gary King for Congress (New Mexico) in 2004 &mdash; Indyke $4,000, Maxwell $4,000 from St. Thomas, V.I. &mdash; confirming coordinated political giving in the state where Epstein's Zorro Ranch was located. Indyke also signed corporation paperwork for Sarah Kellen's design business in 2012, connecting him to another member of the inner circle (Finding #1710). The Common Interest Agreement privilege logs from Epstein's legal defense show Indyke coordinating legal strategy with Maxwell's attorneys, confirming an intertwined legal posture between the two (Finding #1321).</p>",
-        "viz": null
-      },
-      {
-        "id": "post-death-estate",
-        "title": "Post-Death and Estate Administration",
-        "content": "<p>Indyke and <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> were named co-executors of the Estate of Jeffrey E. Epstein, co-trustees of the 1953 Trust (created August 8, 2019 &mdash; just two days before Epstein's death), co-trustees of the Epstein 2019 Trust, and co-beneficiaries of the Butterfly Trust alongside <a href=\"/dossiers/karyna-shuliak\">Karyna Shuliak</a> (Finding #312, EFTA01266204). Indyke was designated a $50 million beneficiary in Epstein's will. The 1953 Trust's creation date &mdash; August 8, 2019, 48 hours before Epstein's death in MCC custody &mdash; raises significant questions about whether the trust was created in anticipation of death, suicide, or simply as part of ongoing estate planning.</p>\n\n<p>Deutsche Bank account liquidation records from November 2019 show DKIP PLLC receiving $5,566,408.92 on November 20, with $4.66 million moving to an unknown recipient the same day. Two weeks later, <a href=\"/dossiers/richard-kahn\">Kahn</a>'s HBRK Associates received $9.24 million across seven transfers, and Kahn personally received $98,800 &mdash; a combined $14.9 million in post-death transfers to the co-executors (Finding #2197). Indyke oversaw the Epstein Victims Compensation Program, which ultimately paid over $120 million to more than 130 survivors. He also managed the disposition of Epstein's major properties: the Manhattan townhouse at <a href=\"/dossiers/34-east-69th-street\">9 East 71st Street</a>, the Palm Beach estate, the New Mexico ranch, and the USVI islands.</p>\n\n<p>As co-executor, Indyke was named defendant in more than 30 federal lawsuits across SDNY, SDFL, and NDGA, with plaintiffs including Annie Farmer, multiple Doe plaintiffs, and others (Finding #1723). He was represented in these proceedings by Troutman Pepper Hamilton Sanders LLP (attorney Bennet J. Moskowitz). In a separate action, JEGE LLC &mdash; an Epstein aviation entity &mdash; and Thomas Huff filed a fraud lawsuit against Indyke and Kahn in N.D. Georgia in 2021, representing the unusual circumstance of an Epstein insider entity suing the estate executors (Finding #1726). The USVI AG's 2021 amended complaint contained the most detailed allegations against Indyke personally, including management of 140+ bank accounts and facilitation of payments to women with Eastern European surnames (Finding #1708). The $105 million-plus settlement in 2022 resolved the USVI claims without admission of liability.</p>",
-        "viz": "timeline"
-      },
-      {
-        "id": "congressional-and-current",
-        "title": "Congressional Scrutiny and Current Status",
-        "content": "<p>On August 25, 2025, the House Oversight Committee subpoenaed Indyke alongside <a href=\"/dossiers/les-wexner\">Les Wexner</a> and <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, with testimony scheduled for March 5, 2026. Survivors told the Committee that Indyke and Kahn \"knew about Epstein's abuse and helped facilitate his crimes through management of legal and financial affairs\" (Finding #1703). Indyke's defense attorney Daniel Weiner has represented him in both the USVI civil litigation and the congressional proceedings. Criminal defense attorney Marc Agnifilo &mdash; who also represented NXIVM leader Keith Raniere &mdash; has separately served as Indyke's attorney.</p>\n\n<p>Indyke joined Parlatore Law Group LLP as Of Counsel in October 2022, a firm founded by Timothy Parlatore, who represented Donald Trump in the classified documents investigation and currently represents Secretary of Defense Pete Hegseth. Indyke departed in January 2026, coinciding with the DOJ's release of 3.5 million Epstein files (Finding #1715). His NY bar status as of February 2026 shows registration due within 30 days. He currently operates as a licensed Florida real estate agent with Luxury Partners Realty in Delray Beach and runs The Indyke Law Firm PLLC (FL entity L22000043914, formed 2022) from 16065 Bristol Isle Way, Delray Beach. His Le Lac Road property in Boca Raton, purchased in 2015 for $3.1 million without a mortgage, sold in May 2023 for $5.5 million (Finding #1706).</p>\n\n<p>Indyke appeared in 130+ documents in the November 2024 DOJ email release and is referenced in 96 documents on EpsteinExposed.com. GDELT analysis shows 30 recent articles mentioning Indyke in the context of DOJ file releases, House Oversight subpoenas, and the Parlatore connection. The Cornell Daily Sun covered both Indyke (JD '91) and <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a> ('71) as Cornell Law alumni implicated in the Epstein files (Finding #1714).</p>",
-        "viz": null
-      }
-    ],
-    "open_questions": [
-      "What was the full scope of the $1 million below-market loan from Southern Financial LLC to Harlequin Dane LLC, and were there additional below-market loans or compensation structures that circumvented standard income reporting?",
-      "Why does Indyke not appear in the USVI corporate registry despite serving as authorized signatory for USVI entities including Laurel Inc and Cypress Inc &mdash; was this deliberate structuring to avoid jurisdictional disclosure?",
-      "What was the purpose of the Florida Science Foundation (2007-2009) and did it play a role in facilitating Epstein's work-release arrangements during the Florida plea deal?",
-      "What is the significance of the Abigail Wexner property transfer at 15 Central Park West Unit 10B to Indyke in January 2008 &mdash; was this in a fiduciary capacity, or did it represent direct personal benefit from the Wexner family?",
-      "What records from the 11 boxes stored under DKIP account #4361 have been preserved, and were they produced in response to the House Oversight subpoena?"
-    ],
-    "applicable_models": [
-      "enabler-gradient",
-      "complexity-as-credential",
-      "jurisdictional-arbitrage",
-      "parallel-financial-system",
-      "manufactured-dependency"
-    ]
+    "curated_at": "2026-02-20T01:17:47.399479"
   },
   "viz_data": {
     "ego_network": {
@@ -6244,6 +6267,20 @@
           "description": "Finding #555: CDE Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein (JEE Owner). Listed in Richard Kahn Open Items memo (March 2012) as one of 8 potenti"
         },
         {
+          "target": "Noam Chomsky",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "EFTA02215602",
+          "description": "Indyke drafted the consulting agreement for the $30K Gratitude America payment to Chomsky (Feb 2017). Indyke's office (575 Lexington Ave, 4th Floor) was the same address as HBRK Associates (Kahn). Indyke's legal assistant Bebe Avdiu coordinated Chomsky dinner meetings with Epstein at Harvard."
+        },
+        {
+          "target": "Noam Chomsky",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "EFTA02352463",
+          "description": "Epstein's personal attorney Darren Indyke's firm wired ,159 to Chomsky in December 2018. Chomsky claimed these were his own funds being reorganized through Epstein's office."
+        },
+        {
           "target": "Lesley Groff",
           "type": "financial",
           "strength": 0.7,
@@ -6255,7 +6292,7 @@
           "type": "financial",
           "strength": 0.7,
           "evidence_ref": "FEC:C00431577/schedule_a",
-          "description": "Both donated max $2,300 to Richardson for President within 7 days (Kahn 2007-11-13, Indyke 2007-11-20), confirming coordinated political bundling for NM governor where Zorro Ranch is located"
+          "description": "Both donated max ,300 to Richardson for President within 7 days (Kahn 2007-11-13, Indyke 2007-11-20), confirming coordinated political bundling for NM governor where Zorro Ranch is located"
         },
         {
           "target": "Ghislaine Maxwell",
@@ -6269,7 +6306,7 @@
           "type": "financial",
           "strength": 0.7,
           "evidence_ref": "FEC:C00431577/schedule_a",
-          "description": "Both donated max contribution to Richardson for President: Starr $2,300 (2008-12-09), Indyke $2,300 (2007-11-20). Note: This is Kenneth Starr the insurance exec (Starr & Company), NOT the independent counsel"
+          "description": "Both donated max contribution to Richardson for President: Starr ,300 (2008-12-09), Indyke ,300 (2007-11-20). Note: This is Kenneth Starr the insurance exec (Starr & Company), NOT the independent counsel"
         },
         {
           "target": "Howard Lutnick",
@@ -6382,6 +6419,13 @@
           "strength": 0.7,
           "evidence_ref": "EFTA01332942",
           "description": "Both connected through Gold & Wachtel / Wachtel & Masyr law firm ecosystem. Gold & Wachtel LLP was founded 1984 and served as Epstein's registered agent. The firm produced Darren Indyke who became Epstein's primary attorney and estate executor. Masyr was a named partner and management committee member at the firm."
+        },
+        {
+          "target": "Noam Chomsky",
+          "type": "legal",
+          "strength": 0.7,
+          "evidence_ref": "EFTA02215565",
+          "description": "Indyke's legal assistant Bebe Avdiu at DARREN K. INDYKE, PLLC (575 Lexington Avenue, 4th Floor, NY 10022) coordinated Chomsky-Epstein meetings including Harvard lunch June 2017"
         },
         {
           "target": "Daniel Weiner",
@@ -6625,7 +6669,7 @@
       },
       {
         "date": "2000",
-        "label": "Indyke made 11 FEC-recorded political donations totaling approx $22,000 from 2000-2018. His 2000 donation lists employer as 'J EPSTEIN AND CO INC' (NYC 10002). By 2003, he listed 'NEW YORK STRATEGY GROUP LLC' (NYSG) as employer. Donated to: Plaskett/USVI 3x ($10.7K total, 2014-2018), Richardson for President ($2,300, 2007), King for Congress/NM ($4K, 2004), Gephardt for President ($2K, 2003), Kerry Committee ($2K, 2002), Kelly for Congress ($1K, 2000). Pattern: heavy USVI focus via Plaskett, NM connection via King (Zorro Ranch state), plus major Democratic presidential candidates.",
+        "label": "Indyke made 11 FEC-recorded political donations totaling approx ,000 from 2000-2018. His 2000 donation lists employer as 'J EPSTEIN AND CO INC' (NYC 10002). By 2003, he listed 'NEW YORK STRATEGY GROUP LLC' (NYSG) as employer. Donated to: Plaskett/USVI 3x (K total, 2014-2018), Richardson for President (,300, 2007), King for Congress/NM (K, 2004), Gephardt for President (K, 2003), Kerry Committee (K, 2002), Kelly for Congress (K, 2000). Pattern: heavy USVI focus via Plaskett, NM connection via King (Zorro Ranch state), plus major Democratic presidential candidates.",
         "type": "financial",
         "evidence_ref": null,
         "id": 448
@@ -6863,7 +6907,7 @@
       },
       {
         "date": "2016-07",
-        "label": "Indyke's DKIP PLLC account at Deutsche Bank (acct 42953707) was flagged by DB AML for cash structuring. Three instances since July 2016 where client cashed checks just below 10K reporting threshold. DB internal meetings held July 24-25, 2017 to discuss. Indyke also cashed $9,500 check for Jeffrey Epstein and asked about CTR requirements, and separately picked up $40,000 cash plus Euros from JE personal accounts.",
+        "label": "Indyke's DKIP PLLC account at Deutsche Bank (acct 42953707) was flagged by DB AML for cash structuring. Three instances since July 2016 where client cashed checks just below K reporting threshold. DB internal meetings held July 24-25, 2017 to discuss. Indyke also cashed ,500 check for Jeffrey Epstein and asked about CTR requirements, and separately picked up ,000 cash plus Euros from JE personal accounts.",
         "type": "financial",
         "evidence_ref": null,
         "id": 309
@@ -6881,6 +6925,13 @@
         "type": "legal",
         "evidence_ref": null,
         "id": 1742
+      },
+      {
+        "date": "2017-02 to 2017-06",
+        "label": "financial with Noam Chomsky",
+        "type": "financial",
+        "entity": "Noam Chomsky",
+        "id": 2131
       },
       {
         "date": "2017-04-26",

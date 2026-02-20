@@ -1,5 +1,5 @@
 # Robert Lawrence Kuhn
-**Stats**: 31 findings, 22 connections, 0 entities
+**Stats**: 31 findings, 23 connections, 0 entities
 **Dossier**: /dossiers/robert-lawrence-kuhn
 
 ## Key Findings
@@ -29,4 +29,4 @@
 - **Jeffrey Epstein** [financial/strong]: Epstein funded Kuhn's Closer To Truth TV series via Gratitude America Ltd: $150K (8/1/2017) + $600K directed (6/15/2018). Funds routed to dedicated sub-account 'Kuhn Foundation CTT JE - Radical Breakthroughs.' Epstein directed episode content. 20+ emails, 9+ in-person meetings at 9 E 71st St (6/2017-6/2019). Last meeting 6/13/2019, 23 days pre-arrest.
 - **Kuhn Foundation** [corporate/strong]: Robert Lawrence Kuhn is President of The Kuhn Foundation (EIN 33-0783933), devoting 25 hours/week. Foundation run as family enterprise: Dora Kuhn (VP), Aaron Kuhn (VP, NYC), Adam Kuhn (CFO), Daniella Kuhn (Secretary). All at $0 compensation. Foundation's sole program is Closer To Truth (CTT), created and hosted by Kuhn.
 - **Richard Kahn** [financial/medium]: Kahn processed Epstein's funding instructions to Kuhn Foundation. On June 14, 2018, Epstein told Kahn to send $600K; Kahn confirmed prior $150K and offered to send immediately.
-- ... and 10 more
+- ... and 11 more

@@ -1,6 +1,6 @@
 # Erika Kellerhals
 **Aliases**: Kellerhals
-**Stats**: 34 findings, 25 connections, 6 entities
+**Stats**: 35 findings, 25 connections, 6 entities
 **Dossier**: /dossiers/erika-kellerhals
 
 ## Key Findings

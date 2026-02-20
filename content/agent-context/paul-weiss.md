@@ -1,5 +1,5 @@
 # Paul Weiss
-**Stats**: 63 findings, 28 connections, 0 entities
+**Stats**: 64 findings, 28 connections, 0 entities
 **Dossier**: /dossiers/paul-weiss
 
 ## Key Findings

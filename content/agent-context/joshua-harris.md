@@ -1,5 +1,5 @@
 # Joshua Harris
-**Stats**: 13 findings, 13 connections, 0 entities
+**Stats**: 13 findings, 14 connections, 0 entities
 **Dossier**: /dossiers/joshua-harris
 
 ## Key Findings
@@ -21,6 +21,7 @@
 - **Leon Black** [corporate/strong]: Apollo Global co-founders [public knowledge]
 - **Leon Black** [political/strong]: Coordinated political donations: 15+ shared recipients including McConnell, Cotton, Graham
 - **Marc Rowan** [political/strong]: Coordinated political donations plus shared Wharton advisory board positions
+- **Robert Kraft** [corporate/strong]: Co-directors on Apollo Global Management board. Harris as Managing Partner/co-founder, Kraft as independent director 2014-2021.
 - **Jeffrey Epstein** [financial/medium]: None
 - **Jeffrey Epstein** [social/medium]: None
 - **Bill Gates** [social/medium]: None
@@ -28,5 +29,4 @@
 - **Leon Black** [corporate/medium]: None
 - **Bob Bodian** [legal/medium]: None
 - **Marc Rowan** [corporate/medium]: None
-- **Boris Nikolic** [social/medium]: None
-- ... and 1 more
+- ... and 2 more

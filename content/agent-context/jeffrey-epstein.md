@@ -1,6 +1,6 @@
 # Jeffrey Epstein
 **Aliases**: Epstein, J EPSTEIN, JEFFREY EPSTEIN, Jeffrey E Epstein
-**Stats**: 201 findings, 520 connections, 111 entities
+**Stats**: 210 findings, 537 connections, 111 entities
 **Dossier**: /dossiers/jeffrey-epstein
 
 ## Key Findings
@@ -14,8 +14,8 @@
 - **[intelligence/high]** Epstein was in Riyadh, Saudi Arabia during US election week Nov 2016 (Nov 6-10). Flight planning emails confirm: Nov 6 departure from Paris to Riyadh (EFTA02670977), Nov 7 Groff reminder of Nov 10 departure from Riyadh (EFTA02670242). Karyna Shuliak accompanied him, requiring visa processing and hijab arrangements (EFTA02325695, EFTA02445731). Aziza Alahmadi was the Saudi host arranging logistics. (2016-11) (Finding #1151)
 - **[financial/medium]** FBI CHS reported to FBI on 11/27/2017 that 'Epstein was President Vladimir Putin's wealth manager and provided the same service for Zimbabwean President Robert Mugabe.' CHS also stated 'Epstein made his money from charging his clients fees to hide their money offshore.' The Putin claim is partially corroborated by email corpus showing Epstein discussing potential Putin meetings (EFTA00917842, EFTA00694933) and having 'one of putins people' at his property (EFTA01300291). The Mugabe claim is corroborated by Joi Ito email asking 'You mean Mugabe? Are you buddies?' after Epstein proposed 'approaching him and providing a new currency/economy' (EFTA02360037, June 2015). (2017-11-27) (Finding #1605)
 - **[location/confirmed]** Hanscom Field trips were exclusively Harvard/MIT academic circuit visits. Documented itineraries show consistent meeting pattern: Martin Nowak (Harvard math/evolution), Joi Ito (MIT Media Lab), Joscha Bach (AI researcher), Seth Lloyd (MIT quantum computing), Danny Hillis (computer scientist), Noam Chomsky, Larry Summers (at his home), and Mike Hopkins. EFTA02240481 (3/25/2018): full schedule showing Nowak->Joi->Madars->Joscha->Summers. EFTA02349926 (3/26/2017): Nowak->Joi(private)->Joi People->Bach->Lloyd->Hillis->Summers. EFTA02214958 (6/30/2017): Lunch with Valeria/Noam at Harvard, meeting Joi Ito, Boris Nikolic. EFTA02300238 (11/28/2014): Reid Hoffman and Joi Ito flew with Epstein from island to Bedford on N908JE. Pattern: Teterboro->Hanscom via private jet, sedan service by Tristar Worldwide to/from Rectrix Aviation. (2018-03-25) (Finding #1400)
-- **[identity/high]** New passport 566672615 issued 3/8/2019 was arranged by Darren Indyke through G3 passport expediting service at Miami Passport Agency. EFTA02278714 (3/5/2019): staff spoke to Danny at G3 Miami, located across from Miami Regional Passport Agency. EFTA02278777 (3/6/2019): Indyke sent website for passport renewal at Miami agency. EFTA02280357 (3/8/2019, same day as issuance): Epstein emailed from jeevacation@gmail.com asking to transfer Russian visa from old to new passport. EFTA02282612 (4/4/2019): references passport expiry March 7, 2029 confirming 10-year issuance. FBI opened case SOD-NY-3027571 on 12/8/2018 -- passport obtained 3 months into active investigation. (2019-03-08) (Finding #1396)
 - **[intelligence/confirmed]** FBI placed TECS travel hit on Epstein generating automatic SILENT HIT alerts for every border crossing. EFTA00040581 (4/26/2019): FBI VCAC/Human Trafficking agent emailed confirming Epstein had 3 active US passports (469911707, 547017616, 566672615) and that travel hit was in place. SILENT HIT record P3N06596100A01 generated alerts forwarded to FBI NY agents on: 4/27/2019 (Teterboro), 4/28/2019 (Teterboro), 5/5/2019 (Teterboro), 5/18/2019 (Palm Beach), 6/3/2019, 6/10/2019, 6/11/2019, 6/14/2019, and 7/6/2019 (arrest day, QUERY MANIFEST 07:30). Alerts went to FBI NY VCAC/Human Trafficking squad and OGA (Other Government Agency) recipients. (2019-04-26) (Finding #1398)
+- **[communication/confirmed]** Between Feb 22 and Mar 14 2019, Epstein coordinated Kraft/Havens defense while simultaneously forwarding Kraft articles to Ehud Barak and Michael Wolff (Feb 25), discussing with Bannon (Mar 10, 'hes ok'), and being told by Larry Summers 'Why doesn't kraft use a higher class service' (Mar 14). Epstein told Karp 'if you want kraft news call me all good but only me and you' (Mar 7). Epstein warned Goldberger about 'a past issue with Kraft that may come to light.' (Finding #3634)
 
 ## Top Connections
 - **Harry Coutts Chairman** [financial/strong]: David Stern introduced. Harry = Chairman Managing Partners Coutts UK, banker of Prince Andrew. Discussed JV venture.
@@ -30,7 +30,7 @@
 - **Celina Dubin** [social/medium]: None
 - **Leon Black** [financial/strong]: $158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019.
 - **Kathryn Ruemmler** [legal/strong]: Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will.
-- ... and 508 more
+- ... and 525 more
 
 ## Entity Roles
 - officer at Nine East 71st Street Corporation (NY)
