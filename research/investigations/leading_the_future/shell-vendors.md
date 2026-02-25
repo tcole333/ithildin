@@ -25,14 +25,14 @@
 
 | Jurisdiction | Result |
 |-------------|--------|
-| **Nevada SOS** | Search failed (Incapsula browser session conflict) |
+| **Nevada SOS** | **0 results** (confirmed — NOT a NV entity despite Reno NV mailing address) |
 | **NY DOS** | 0 results |
 | **Texas Comptroller** | 0 results |
 | **NJ Division of Revenue** | 0 results |
 | **registry.db (FL/NY/NM/PA)** | 0 exact matches |
 | **OCCRP Aleph** | 0 results |
 
-**Summit Ridge Media Group LLC does not appear in any state corporate registry searched.** If it is a Nevada LLC (given the Reno address), it would only appear in the NV SOS database, which was inaccessible due to browser session issues. This is the critical missing search.
+**Summit Ridge Media Group LLC is NOT registered in Nevada** despite using a Reno NV mailing address on FEC filings. Given that its paired vendor (Lantern Production Consultants LLC) is a Delaware LLC with CT Corporation as agent, Summit Ridge Media Group LLC is very likely also a Delaware LLC. Pending: Delaware ICIS confirmation.
 
 ### Domain Investigation: summitridgemedia.com
 
@@ -90,7 +90,8 @@ Evidence:
 5. ✅ No web presence under exact FEC name ("Summit Ridge Media Group")
 6. ✅ Domain summitridgemediagroup.com does not exist
 7. ✅ The similar domain summitridgemedia.com belongs to a different person/business (Christo Zeelie)
-8. ⚠️ NV SOS search incomplete (browser session conflict)
+8. ✅ **Not registered in Nevada** despite Reno NV mailing address
+9. ⚠️ Pending: Delaware ICIS search (likely DE LLC like Lantern)
 
 ---
 
@@ -109,11 +110,30 @@ Evidence:
 
 **1344 Disc Drive** = **PostalAnnex+** (Store #307), Spanish Springs Shopping Center, Sparks NV. "#3038" is a mailbox number. This is a commercial mailbox/virtual office service.
 
+### Delaware Incorporation (CONFIRMED)
+
+| Field | Value |
+|-------|-------|
+| **Company Number** | 10385842 |
+| **Incorporation Date** | **October 30, 2025** |
+| **Company Type** | Domestic Limited Liability Company |
+| **Jurisdiction** | Delaware |
+| **Registered Agent** | The Corporation Trust Company |
+| **Agent Address** | Corporation Trust Center, 1209 Orange St, Wilmington DE 19801 |
+| **Officers/Directors** | None listed (DE LLCs do not require public disclosure) |
+
+**Key observations**:
+1. **Formation timing**: Incorporated Oct 30, 2025 — just **41 days** before Think Big's first IE payment ($118,350 on Dec 10, 2025). Entity was created specifically for this operation.
+2. **Delaware for privacy**: DE LLCs do not publicly disclose members or managers. The principals behind this entity are invisible in state records.
+3. **CT Corporation as agent**: Premium registered agent service ($300+/year), indicating professional legal counsel set up this entity — not a DIY formation.
+4. **Jurisdictional split**: Delaware incorporation + Nevada mailing address on FEC filings = deliberate separation between formation jurisdiction (privacy) and operational address (NV mailbox).
+
 ### Corporate Registry Search
 
 | Jurisdiction | Result |
 |-------------|--------|
-| **Nevada SOS** | Search failed (Incapsula browser session conflict) |
+| **Nevada SOS** | **0 results** (confirmed — NOT a NV entity despite NV mailing address) |
+| **Delaware** | **FOUND** — Company #10385842, formed Oct 30, 2025, CT Corp agent |
 | **NY DOS** | 7 results, **none matching** (Black Lantern Productions, Lantern Man Productions, etc.) |
 | **Texas Comptroller** | 0 results |
 | **NJ Division of Revenue** | Not searched (no "Lantern Production" variant) |
@@ -141,17 +161,19 @@ The anti-Bores spending ($1.6M+) is the network's largest single-target expendit
 
 ### Shell Assessment: Lantern Production Consultants LLC
 
-**Confidence: VERY HIGH (shell entity)**
+**Confidence: VERY HIGH (purpose-built firewall entity)**
 
 Evidence:
 1. ✅ Exclusively used by one PAC (Think Big only)
 2. ✅ No other FEC clients
-3. ✅ Not found in any state corporate registry searched
-4. ✅ Registered address is a Sparks NV commercial mailbox (PostalAnnex+)
-5. ✅ **Zero web presence** — no domain, no social media, no business listings
-6. ✅ No news coverage of this entity
-7. ✅ $3.87M routed through an entity with no visible infrastructure
-8. ⚠️ NV SOS search incomplete (browser session conflict)
+3. ✅ **Delaware LLC formed Oct 30, 2025** — 41 days before first payment. Created for this operation.
+4. ✅ **Not registered in Nevada** despite Sparks NV mailing address on FEC filings
+5. ✅ Registered address is a Sparks NV commercial mailbox (PostalAnnex+)
+6. ✅ **Zero web presence** — no domain, no social media, no business listings
+7. ✅ No news coverage of this entity
+8. ✅ $3.87M routed through an entity with no visible infrastructure
+9. ✅ CT Corporation registered agent — professional legal setup, no public officer disclosure
+10. ✅ Delaware chosen specifically for member privacy (no public disclosure requirement)
 
 ---
 
@@ -190,9 +212,9 @@ This suggests a standardized approach to creating vendor entities for these oper
 
 ## 4. Open Questions
 
-1. **NV SOS registration**: Are these LLCs actually registered in Nevada? The NV SOS search failed due to browser session conflicts. This is the single most important missing data point — NV SOS records would reveal officers, registered agents, formation dates, and status.
+1. **~~NV SOS registration~~**: ~~Are these LLCs actually registered in Nevada?~~ **RESOLVED**: Neither entity is registered in Nevada. Lantern is a Delaware LLC (Company #10385842, formed Oct 30, 2025, CT Corp agent). Summit Ridge is likely also Delaware — pending ICIS confirmation.
 
-2. **Who controls these entities?** The officers/members of these LLCs would reveal whether they are connected to Targeted Victory, Bamberger & Vlasto, or another firm. NV SOS records are the key.
+2. **Who controls these entities?** Delaware LLC members/managers are NOT publicly disclosed. The principals are invisible through state records. Alternative approaches: (a) FOIA the FEC for vendor registration documents, (b) check if any FEC Form 3X/3L attachments name the vendor principals, (c) trace payments downstream from these LLCs to actual media vendors.
 
 3. **Where does the money actually go?** Summit Ridge and Lantern receive millions via FEC filings, but they are intermediaries. The actual media placements (TV buys, digital ads, direct mail) are executed by production companies, ad platforms, and print houses that may not appear in FEC records.
 
@@ -204,12 +226,8 @@ This suggests a standardized approach to creating vendor entities for these oper
 
 ## 5. Recommended Follow-Up
 
-### Critical (NV SOS — requires manual browser warmup)
-```bash
-uv run python tools/query_nevada.py warmup    # Solve Incapsula challenge
-uv run python tools/query_nevada.py search "SUMMIT RIDGE MEDIA" --mode contains
-uv run python tools/query_nevada.py search "LANTERN PRODUCTION" --mode contains
-```
+### Critical — Delaware ICIS
+Search Delaware Division of Corporations (icis.corp.delaware.gov) for "Summit Ridge Media Group" to confirm Delaware incorporation (expected, given Lantern's pattern).
 
 ### Additional State Searches
 ```bash

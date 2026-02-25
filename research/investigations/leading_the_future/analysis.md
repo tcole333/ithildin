@@ -91,17 +91,23 @@ DARK MONEY ARM:
 
 ## 2. Shell Vendor Assessment
 
-**Both Summit Ridge Media Group LLC and Lantern Production Consultants LLC are purpose-built firewall entities** created specifically for this PAC network's media operations. Neither has:
+**Both Summit Ridge Media Group LLC and Lantern Production Consultants LLC are purpose-built firewall entities** created specifically for this PAC network's media operations.
+
+**Lantern Production Consultants LLC** — confirmed as a **Delaware LLC** (Company #10385842), incorporated **October 30, 2025** — just 41 days before its first FEC payment. CT Corporation as registered agent. Delaware chosen specifically because it does not require public disclosure of LLC members/managers. Uses a Sparks NV PostalAnnex+ mailbox on FEC filings despite having zero Nevada presence.
+
+**Summit Ridge Media Group LLC** — **not registered in Nevada** despite using a Reno NV mailbox address. Not found in any of 7 jurisdictions searched. Likely also a Delaware LLC (pending ICIS confirmation).
+
+Neither entity has:
 - Any other FEC clients
-- Any state corporate registry presence (across 6+ jurisdictions searched)
 - Any web presence under their exact names
 - Any physical office (both use Nevada commercial mailbox services)
+- Any publicly identifiable principals (DE LLCs shield member/manager identity)
 
 The vendor pair creates a **compartmentalization firewall**: the actual media buying operation (likely executed by Targeted Victory or its subcontractors) is insulated from FEC disclosure behind these intermediaries. Each partisan arm uses a different vendor, preventing cross-referencing.
 
 This is the same pattern used by Fairshake, which used "Main Street Media Group" — another purpose-named LLC. The naming convention ("geographic feature + Media + Group") appears standardized.
 
-**Critical missing data**: NV SOS records (blocked by Incapsula during this session). These would reveal officers, registered agents, and formation dates — potentially linking the shells directly to Targeted Victory or Bamberger & Vlasto.
+**NV SOS confirmed both are NOT Nevada entities** despite Nevada mailing addresses. Lantern is a Delaware LLC formed Oct 30, 2025 with CT Corporation as agent — Delaware's privacy protections ensure the principals remain invisible in state records. The only paths to identifying who controls these entities: (a) FOIA the FEC for vendor registration documents, (b) trace payments downstream to actual media vendors, (c) check FEC Form 3X/3L attachments.
 
 ---
 
@@ -173,7 +179,7 @@ The 501(c)(4) dark money arms (Cedar Innovation Foundation and Build American AI
 
 ### Highest Priority
 
-1. **NV SOS records for both shell vendors** — Officers, registered agents, formation dates. Would definitively link shells to the operation's principals.
+1. **~~NV SOS records~~** — RESOLVED. Neither entity is registered in Nevada. Lantern is a Delaware LLC (Oct 30, 2025, CT Corp). Summit Ridge likely also Delaware. DE LLCs do not disclose members/managers — principals are invisible through state records.
 
 2. **Where is the $39.3M war chest going?** — LTF has only deployed $10M to affiliates with $39.3M in reserve. The 2026 midterm cycle is just beginning. At Fairshake's 2024 spending rate ($40M+), this is a massive weapon.
 
