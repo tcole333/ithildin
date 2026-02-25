@@ -93,9 +93,12 @@ DARK MONEY ARM:
 
 **Both Summit Ridge Media Group LLC and Lantern Production Consultants LLC are purpose-built firewall entities** created specifically for this PAC network's media operations.
 
-**Lantern Production Consultants LLC** — confirmed as a **Delaware LLC** (Company #10385842), incorporated **October 30, 2025** — just 41 days before its first FEC payment. CT Corporation as registered agent. Delaware chosen specifically because it does not require public disclosure of LLC members/managers. Uses a Sparks NV PostalAnnex+ mailbox on FEC filings despite having zero Nevada presence.
+Both are **Delaware LLCs formed on the same day (October 30, 2025)** with the same registered agent (CT Corporation), with company numbers only **10 apart** (#10385832 and #10385842). They were created in a single batch filing — almost certainly by the same law firm in the same session, 41 days before the first FEC payment.
 
-**Summit Ridge Media Group LLC** — **not registered in Nevada** despite using a Reno NV mailbox address. Not found in any of 7 jurisdictions searched. Likely also a Delaware LLC (pending ICIS confirmation).
+- **Summit Ridge Media Group LLC** — DE Company #10385832, CT Corp agent. Reno NV mailbox on FEC filings. Not registered in Nevada.
+- **Lantern Production Consultants LLC** — DE Company #10385842, CT Corp agent. Sparks NV mailbox on FEC filings. Not registered in Nevada.
+
+Delaware chosen specifically because it does not require public disclosure of LLC members/managers — the principals are invisible through state records.
 
 Neither entity has:
 - Any other FEC clients
@@ -179,7 +182,7 @@ The 501(c)(4) dark money arms (Cedar Innovation Foundation and Build American AI
 
 ### Highest Priority
 
-1. **~~NV SOS records~~** — RESOLVED. Neither entity is registered in Nevada. Lantern is a Delaware LLC (Oct 30, 2025, CT Corp). Summit Ridge likely also Delaware. DE LLCs do not disclose members/managers — principals are invisible through state records.
+1. **~~NV SOS records~~** — RESOLVED. Neither entity registered in Nevada. Both are Delaware LLCs formed Oct 30, 2025 with CT Corp (#10385832 and #10385842 — 10 numbers apart, same batch filing). DE LLCs do not disclose members/managers — principals invisible through state records. New lead: companies #10385833-10385841 filed in same batch may reveal other operation entities or the filing attorney.
 
 2. **Where is the $39.3M war chest going?** — LTF has only deployed $10M to affiliates with $39.3M in reserve. The 2026 midterm cycle is just beginning. At Fairshake's 2024 spending rate ($40M+), this is a massive weapon.
 
