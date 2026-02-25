@@ -2,8 +2,8 @@
 """
 FEC (Federal Election Commission) campaign finance API wrapper.
 
-Searches individual contributions (Schedule A) to identify political donations
-by investigation subjects. Cross-references donor names, employers, and addresses.
+Covers Schedule A (receipts/contributions), Schedule B (disbursements/spending),
+Schedule E (independent expenditures), committee totals, and candidate/committee lookups.
 
 API: https://api.open.fec.gov/v1/
 Auth: Free API key from api.data.gov (required). Set FEC_API_KEY in .env.
@@ -13,13 +13,31 @@ IMPORTANT: Multiple people named "Jeffrey Epstein" exist in FEC records.
 Always cross-reference employer, address, and occupation to disambiguate.
 
 Usage:
+    # Schedule A — contributions/receipts
     python tools/query_fec.py donor "Jeffrey Epstein" --limit 50
     python tools/query_fec.py donor "Leon Black" --min-amount 1000
     python tools/query_fec.py donor "Black" --employer "Apollo" --limit 10
     python tools/query_fec.py employer "Gratitude America"
-    python tools/query_fec.py employer "International Peace Institute"
     python tools/query_fec.py address "10021" --name "Epstein"
     python tools/query_fec.py recipient C00580100 --cycle 2018
+
+    # Schedule B — disbursements (where did the money go?)
+    python tools/query_fec.py disbursements C00916114 --limit 200
+    python tools/query_fec.py disbursements C00916114 --recipient "Summit Ridge"
+    python tools/query_fec.py disbursements C00916114 --min-amount 50000
+
+    # Schedule E — independent expenditures (support/oppose ads)
+    python tools/query_fec.py ie C00916114 --limit 200
+    python tools/query_fec.py ie C00916114 --support-oppose S
+    python tools/query_fec.py ie C00916114 --candidate P80001571
+
+    # Committee financial summary
+    python tools/query_fec.py totals C00916114
+    python tools/query_fec.py totals C00916114 --cycle 2024
+
+    # Lookups
+    python tools/query_fec.py committee C00916114
+    python tools/query_fec.py candidate "Gonzalez"
     python tools/query_fec.py batch-persons
 """
 
@@ -67,6 +85,7 @@ def _fetch(endpoint, params, max_pages=1):
     params["per_page"] = params.get("per_page", 100)
 
     all_results = []
+    data = {}
     page = 0
 
     while page < max_pages:
@@ -264,6 +283,194 @@ def cmd_recipient(args):
         _print_contribution(r)
 
 
+def _print_disbursement(d):
+    """Print a single disbursement record."""
+    recipient = d.get("recipient_name", "?")
+    amount = _format_amount(d.get("disbursement_amount"))
+    date = d.get("disbursement_date", "?")
+    desc = d.get("disbursement_description", "")
+    memo = d.get("memo_text", "")
+    city = d.get("recipient_city", "")
+    state = d.get("recipient_state", "")
+
+    print(f"  {recipient} — {amount} on {date}")
+    if desc:
+        print(f"    Description: {desc}")
+    if memo:
+        print(f"    Memo: {memo}")
+    if city or state:
+        print(f"    Location: {city}, {state}")
+    print()
+
+
+def _print_ie(ie):
+    """Print a single independent expenditure record."""
+    candidate = ie.get("candidate_name", "?")
+    so = ie.get("support_oppose_indicator", "?")
+    so_label = "SUPPORT" if so == "S" else "OPPOSE" if so == "O" else so
+    payee = ie.get("payee_name", "?")
+    amount = _format_amount(ie.get("expenditure_amount"))
+    date = ie.get("expenditure_date", "?")
+    desc = ie.get("expenditure_description", "")
+    office = ie.get("office_full", "")
+    state = ie.get("state", "")
+    district = ie.get("district", "")
+
+    print(f"  [{so_label}] {candidate} — {amount} on {date}")
+    print(f"    Payee: {payee}")
+    if desc:
+        print(f"    Description: {desc}")
+    if office:
+        office_str = office
+        if state:
+            office_str += f" — {state}"
+        if district:
+            office_str += f" District {district}"
+        print(f"    Office: {office_str}")
+    print()
+
+
+def cmd_disbursements(args):
+    """Search committee disbursements (Schedule B — where the money went)."""
+    params = {"committee_id": args.committee_id, "sort": "-disbursement_date"}
+    if args.recipient:
+        params["recipient_name"] = args.recipient
+    if args.description:
+        params["disbursement_description"] = args.description
+    if args.min_date:
+        params["min_date"] = args.min_date
+    if args.max_date:
+        params["max_date"] = args.max_date
+    if args.min_amount:
+        params["min_amount"] = args.min_amount
+    if args.cycle:
+        params["two_year_transaction_period"] = args.cycle
+
+    max_pages = max(1, args.limit // 100 + 1)
+    results, pagination = _fetch("/schedules/schedule_b/", params, max_pages=max_pages)
+
+    if write_output(results[:args.limit], args, summary=f"FEC disbursements {args.committee_id}"):
+        return
+    if args.json_out:
+        print(json.dumps(results[:args.limit], indent=2, default=str))
+        return
+
+    total = pagination.get("count", len(results))
+    print(f"Found {total} disbursements from {args.committee_id} (showing {min(len(results), args.limit)})")
+    print()
+
+    # Aggregate by recipient
+    recipient_totals = {}
+    for r in results[:args.limit]:
+        name = r.get("recipient_name", "UNKNOWN")
+        amt = float(r.get("disbursement_amount", 0) or 0)
+        recipient_totals[name] = recipient_totals.get(name, 0) + amt
+
+    if recipient_totals:
+        print("  === TOP RECIPIENTS ===")
+        for name, total_amt in sorted(recipient_totals.items(), key=lambda x: -x[1])[:15]:
+            print(f"    {name}: {_format_amount(total_amt)}")
+        print()
+
+    for r in results[:args.limit]:
+        _print_disbursement(r)
+
+
+def cmd_ie(args):
+    """Search independent expenditures (Schedule E — support/oppose ads)."""
+    params = {"committee_id": args.committee_id, "sort": "-expenditure_date"}
+    if args.candidate:
+        params["candidate_id"] = args.candidate
+    if args.support_oppose:
+        params["support_oppose_indicator"] = args.support_oppose
+    if args.min_date:
+        params["min_date"] = args.min_date
+    if args.max_date:
+        params["max_date"] = args.max_date
+    if args.min_amount:
+        params["min_amount"] = args.min_amount
+    if args.cycle:
+        params["two_year_transaction_period"] = args.cycle
+
+    max_pages = max(1, args.limit // 100 + 1)
+    results, pagination = _fetch("/schedules/schedule_e/", params, max_pages=max_pages)
+
+    if write_output(results[:args.limit], args, summary=f"FEC IEs {args.committee_id}"):
+        return
+    if args.json_out:
+        print(json.dumps(results[:args.limit], indent=2, default=str))
+        return
+
+    total = pagination.get("count", len(results))
+    print(f"Found {total} independent expenditures from {args.committee_id} (showing {min(len(results), args.limit)})")
+    print()
+
+    # Aggregate by candidate + support/oppose
+    candidate_totals = {}
+    for r in results[:args.limit]:
+        cand = r.get("candidate_name", "UNKNOWN")
+        so = r.get("support_oppose_indicator", "?")
+        key = f"{'SUPPORT' if so == 'S' else 'OPPOSE'} {cand}"
+        amt = float(r.get("expenditure_amount", 0) or 0)
+        candidate_totals[key] = candidate_totals.get(key, 0) + amt
+
+    if candidate_totals:
+        print("  === IE SUMMARY ===")
+        for key, total_amt in sorted(candidate_totals.items(), key=lambda x: -x[1]):
+            print(f"    {key}: {_format_amount(total_amt)}")
+        print()
+
+    for r in results[:args.limit]:
+        _print_ie(r)
+
+
+def cmd_totals(args):
+    """Get committee financial summary (total receipts, disbursements, cash on hand)."""
+    params = {}
+    if args.cycle:
+        params["cycle"] = args.cycle
+
+    url = f"{BASE_URL}/committee/{args.committee_id}/totals/?{urlencode(params)}&api_key={_get_api_key()}"
+    req = Request(url, headers={"Accept": "application/json", "User-Agent": "OSINT-Research/1.0"})
+    try:
+        with urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read().decode())
+    except HTTPError as e:
+        body = e.read().decode()[:500]
+        print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
+        return
+    except URLError as e:
+        print(f"ERROR: {e.reason}", file=sys.stderr)
+        return
+
+    results = data.get("results", [])
+
+    if write_output(results, args, summary=f"FEC totals {args.committee_id}"):
+        return
+    if args.json_out:
+        print(json.dumps(results, indent=2, default=str))
+        return
+
+    if not results:
+        print(f"No financial totals found for {args.committee_id}")
+        return
+
+    for t in results:
+        cycle = t.get("cycle", "?")
+        print(f"Committee {args.committee_id} — Cycle {cycle}")
+        print(f"  Receipts:              {_format_amount(t.get('receipts'))}")
+        print(f"  Disbursements:         {_format_amount(t.get('disbursements'))}")
+        print(f"  Cash on Hand:          {_format_amount(t.get('last_cash_on_hand_end_period'))}")
+        print(f"  Debts Owed:            {_format_amount(t.get('last_debts_owed_to_committee'))}")
+        print(f"  Individual Contrib:    {_format_amount(t.get('individual_contributions'))}")
+        print(f"  PAC Contributions:     {_format_amount(t.get('other_political_committee_contributions'))}")
+        print(f"  Independent Expend:    {_format_amount(t.get('independent_expenditures'))}")
+        cov_start = t.get("coverage_start_date", "?")
+        cov_end = t.get("coverage_end_date", "?")
+        print(f"  Coverage: {cov_start} to {cov_end}")
+        print()
+
+
 def cmd_committee(args):
     """Look up committee details."""
     results, _ = _fetch(f"/committees/{args.committee_id}/", {})
@@ -441,6 +648,36 @@ def main():
     p.add_argument("--min-amount", type=float, help="Minimum amount")
     add_output_args(p)
 
+    # disbursements (Schedule B)
+    p = sub.add_parser("disbursements", help="Committee disbursements (Schedule B)")
+    p.add_argument("committee_id", help="FEC committee ID (e.g., C00916114)")
+    p.add_argument("--recipient", help="Filter by recipient name")
+    p.add_argument("--description", help="Filter by disbursement description")
+    p.add_argument("--min-date", help="Earliest date (YYYY-MM-DD)")
+    p.add_argument("--max-date", help="Latest date (YYYY-MM-DD)")
+    p.add_argument("--min-amount", type=float, help="Minimum amount")
+    p.add_argument("--limit", type=int, default=20, help="Max results")
+    p.add_argument("--cycle", type=int, help="Election cycle year")
+    add_output_args(p)
+
+    # ie (Schedule E — independent expenditures)
+    p = sub.add_parser("ie", help="Independent expenditures (Schedule E)")
+    p.add_argument("committee_id", help="FEC committee ID (e.g., C00916114)")
+    p.add_argument("--candidate", help="Filter by candidate ID (e.g., P80001571)")
+    p.add_argument("--support-oppose", choices=["S", "O"], help="S=support, O=oppose")
+    p.add_argument("--min-date", help="Earliest date (YYYY-MM-DD)")
+    p.add_argument("--max-date", help="Latest date (YYYY-MM-DD)")
+    p.add_argument("--min-amount", type=float, help="Minimum amount")
+    p.add_argument("--limit", type=int, default=20, help="Max results")
+    p.add_argument("--cycle", type=int, help="Election cycle year")
+    add_output_args(p)
+
+    # totals (committee financial summary)
+    p = sub.add_parser("totals", help="Committee financial summary")
+    p.add_argument("committee_id", help="FEC committee ID (e.g., C00916114)")
+    p.add_argument("--cycle", type=int, help="Election cycle year")
+    add_output_args(p)
+
     # committee
     p = sub.add_parser("committee", help="Look up committee details")
     p.add_argument("committee_id", help="FEC committee ID")
@@ -464,6 +701,9 @@ def main():
         "employer": cmd_employer,
         "address": cmd_address,
         "recipient": cmd_recipient,
+        "disbursements": cmd_disbursements,
+        "ie": cmd_ie,
+        "totals": cmd_totals,
         "committee": cmd_committee,
         "candidate": cmd_candidate,
         "batch-persons": cmd_batch_persons,
