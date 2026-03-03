@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Lead tracking for the Epstein OSINT investigation.
+Lead tracking for OSINT investigations.
 
 Part of investigation.db (shared with findings_tracker.py).
 
@@ -263,13 +263,13 @@ def _ensure_schema(db):
                 'primary_corporate',        -- SEC filings, corporate registries, 990s
                 'primary_correspondence',   -- Actual emails, letters from corpus
                 'secondary_quality',        -- Reputable investigative journalism (with caveats)
-                'secondary_compromised',    -- Media with known Epstein connections (NYT/Thomas, Wolff)
+                'secondary_compromised',    -- Media with known subject connections
                 'secondary_blog',           -- Independent researchers, blogs (verify everything)
                 'tertiary_wiki',            -- Wikipedia, social media (use only as starting point)
                 'unknown'
             )),
             reliability_notes TEXT,         -- Known biases, conflicts, limitations
-            epstein_connection TEXT,        -- If this source had a known relationship with Epstein
+            epstein_connection TEXT,        -- DEPRECATED: use subject_connection instead
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
 
@@ -595,6 +595,13 @@ def _ensure_schema(db):
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )""")
 
+    # Investigation config — key/value store for profile settings
+    db.execute("""CREATE TABLE IF NOT EXISTS investigation_config (
+        key TEXT PRIMARY KEY,
+        value TEXT NOT NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )""")
+
     # ── Schema migrations: add columns to existing tables ──
     # SQLite ALTER TABLE ADD COLUMN is safe — errors if column exists, which we catch.
     _migrations = [
@@ -628,6 +635,13 @@ def _ensure_schema(db):
         ("finding_evidence", "email_sender TEXT"),
         ("finding_evidence", "email_date TEXT"),
         ("finding_evidence", "chain_position INTEGER"),
+        # Investigation profile scoping
+        ("leads", "profile_id TEXT DEFAULT 'epstein'"),
+        ("findings", "profile_id TEXT DEFAULT 'epstein'"),
+        ("connections", "profile_id TEXT DEFAULT 'epstein'"),
+        ("investigation_threads", "profile_id TEXT DEFAULT 'epstein'"),
+        # Source reliability: rename epstein_connection -> subject_connection
+        ("source_reliability", "subject_connection TEXT"),
     ]
     for table, column_def in _migrations:
         try:
@@ -635,10 +649,23 @@ def _ensure_schema(db):
         except sqlite3.OperationalError:
             pass  # column already exists
 
-    # Thread indexes
+    # Migrate epstein_connection data to subject_connection (one-time)
+    try:
+        db.execute("""
+            UPDATE source_reliability SET subject_connection = epstein_connection
+            WHERE subject_connection IS NULL AND epstein_connection IS NOT NULL
+        """)
+    except sqlite3.OperationalError:
+        pass  # epstein_connection column doesn't exist (fresh DB)
+
+    # Thread and profile indexes
     for idx_sql in [
         "CREATE INDEX IF NOT EXISTS idx_leads_thread ON leads(thread_id)",
         "CREATE INDEX IF NOT EXISTS idx_findings_thread ON findings(thread_id)",
+        "CREATE INDEX IF NOT EXISTS idx_leads_profile ON leads(profile_id)",
+        "CREATE INDEX IF NOT EXISTS idx_findings_profile ON findings(profile_id)",
+        "CREATE INDEX IF NOT EXISTS idx_connections_profile ON connections(profile_id)",
+        "CREATE INDEX IF NOT EXISTS idx_threads_profile ON investigation_threads(profile_id)",
     ]:
         try:
             db.execute(idx_sql)
