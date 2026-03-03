@@ -81,7 +81,7 @@ Also evaluate sentence-level explicit support:
 Every financial figure must trace to a source:
 ```bash
 uv run python tools/findings_tracker.py search "$40M" --output $WORKDIR/verify-amounts.json
-uv run python tools/parse_ds10_financials.py query --entity "Southern Trust" > $WORKDIR/verify-ds10.txt
+uv run python tools/parse_ds10_financials.py query --entity "ENTITY_NAME" > $WORKDIR/verify-ds10.txt
 ```
 - Does the amount match the source exactly?
 - Is the date correct?
@@ -299,7 +299,7 @@ Check if applicable analytical models are referenced. Missing model references �
 ```bash
 ls content/dossiers/ | grep -i "<name>"
 ```
-Every person with a dossier should be linked: `[Leon Black](/dossiers/leon-black)`
+Every person with a dossier should be linked: `[Person Name](/dossiers/person-slug)`
 
 #### Article → Article Cross-References
 Check if the article references topics covered by other articles.
@@ -322,7 +322,7 @@ Write `$WORKDIR/verification-report.md`:
 # Verification Report: [TITLE]
 
 ## BLOCKING (must fix before publication)
-- [LINE X] "Black paid Epstein $40M" — NEEDS: EFTA reference for specific amount
+- [LINE X] "Person A paid Person B $40M" — NEEDS: primary source reference for specific amount
 - [LINE Y] "31 CFR 1020.230" — WRONG CITE: correct is 31 CFR 1010.230
 - [LINE Z] "positioned himself as an intelligence asset" — inference presented as fact
 
@@ -356,7 +356,7 @@ Available but uncited: 8 IRS 990 findings, 15 ACRIS records, 6 CourtListener doc
 ### Dossier Links
 | Text | Target | Confidence |
 |------|--------|------------|
-| "Leon Black" | /dossiers/leon-black | high |
+| "Person Name" | /dossiers/person-slug | high |
 
 ### Cross-Article Links
 | Reference | Target Article | Anchor Text |

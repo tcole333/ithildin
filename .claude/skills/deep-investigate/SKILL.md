@@ -13,6 +13,24 @@ Launch an orchestrated investigation of a person, entity, or topic using paralle
 - Required: target name or topic (e.g., `/deep-investigate Ron Soffer`, `/deep-investigate Barkmere Group Ltd`)
 - Optional context after the name: `/deep-investigate Ron Soffer — French/Israeli lawyer referenced in SoftBank caper, Weingarten considering deploying him Jan 2019`
 
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
+
+### Ambient Documentation
+**Document everything, not just what's relevant to your current hypothesis.**
+When you encounter information during investigation — officer names, addresses,
+corporate relationships, financial figures, dates, professional affiliations —
+record it even if it doesn't obviously connect to the current lead. Use
+`entity_tracker.py` to register entities, roles, and addresses. Use
+`findings_tracker.py` with `--type background` for contextual facts that don't
+directly answer the current question but are worth preserving. These ambient
+findings compound across investigations and surface connections later.
+
 ## Architecture
 
 You are the **orchestrator**. You do NOT search sources yourself. Instead you:
@@ -78,11 +96,11 @@ Use the Task tool to launch ALL FOUR agents simultaneously in a single message. 
 
 #### Agent A: Document Corpus
 
-**Sources**: DOJ Vol 11, DugganUSA, LMSBAND, Unified DB, Epstein Files 20K, HF Parquet, Barak emails
+**Sources**: All corpus tools listed in the active investigation profile (loaded via `investigation_context.py`).
 
 **Prompt template**:
 ```
-You are investigating [TARGET]. [THREAD CONTEXT — e.g. "This is part of the Mega Group investigation thread." or "This is part of the Epstein Core Network thread." if applicable]
+You are investigating [TARGET]. [THREAD CONTEXT — use the thread name from the investigation profile if applicable, e.g. "This is part of the [THREAD_NAME] investigation thread."]
 
 TARGET BRIEFING: [2-3 sentences of context]
 
@@ -93,18 +111,10 @@ YOUR MANDATE: Search ALL local document databases exhaustively for any mention o
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
 REQUIRED SEARCHES:
-1. .venv/bin/python3 tools/query_doj.py search "[TARGET]" --limit 30 --output [WORKDIR]/a-doj.json
-2. .venv/bin/python3 tools/query_doj.py search "[VARIANT]" --limit 20 --output [WORKDIR]/a-doj-var.json
-3. .venv/bin/python3 tools/duggan_search.py "[TARGET]" --output [WORKDIR]/a-duggan.json
-4. .venv/bin/python3 tools/query_lmsband.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-lmsband.json
-5. .venv/bin/python3 tools/query_lmsband.py entities "[TARGET]" --output [WORKDIR]/a-lmsband-ent.json
-6. .venv/bin/python3 tools/query_lmsband.py cooccurrence "[TARGET]" --top 20 --output [WORKDIR]/a-lmsband-cooc.json
-7. .venv/bin/python3 tools/query_unified.py emails "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-email.json
-8. .venv/bin/python3 tools/query_unified.py docs "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-docs.json
-9. .venv/bin/python3 tools/query_unified.py entities "[TARGET]" --output [WORKDIR]/a-unified-ent.json
-10. .venv/bin/python3 tools/query_unified.py triples --actor "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-trip-act.json
-11. .venv/bin/python3 tools/query_unified.py triples --target "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-trip-tgt.json
-12. .venv/bin/python3 tools/ingest_epstein_20k.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-20k.json
+For each tool listed in the investigation profile's corpus_tools, run a search against "[TARGET]" and any name variants. Use --output [WORKDIR]/a-<tool-name>.json for each. Example pattern:
+  .venv/bin/python3 tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-<tool-name>.json
+
+For tools that support sub-commands (entities, cooccurrence, emails, docs, triples), run those additional queries as well.
 
 For EVERY document found, read the full text:
 .venv/bin/python3 tools/query_doj.py efta EFTA_ID --text
@@ -181,12 +191,9 @@ YOUR MANDATE: Search ALL corporate, financial, property, and regulatory database
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. .venv/bin/python3 tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/b-doj.json
-2. .venv/bin/python3 tools/duggan_search.py "[TARGET]" --output [WORKDIR]/b-duggan.json
-3. .venv/bin/python3 tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/b-lmsband.json
-4. .venv/bin/python3 tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/b-unified.json
-For EVERY document found, read the full text with: .venv/bin/python3 tools/query_doj.py efta EFTA_ID --text
-Extract: dates, names, financial amounts, relationships, exact quotes.
+Search corpus tools listed in the investigation profile. For each corpus tool, run:
+  .venv/bin/python3 tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/b-<tool-name>.json
+For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (do ALL of these — use --output on every search):
 
@@ -312,12 +319,9 @@ YOUR MANDATE: Search ALL legal and court databases for this target. You are look
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. .venv/bin/python3 tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/c-doj.json
-2. .venv/bin/python3 tools/duggan_search.py "[TARGET]" --output [WORKDIR]/c-duggan.json
-3. .venv/bin/python3 tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/c-lmsband.json
-4. .venv/bin/python3 tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/c-unified.json
-For EVERY document found, read the full text with: .venv/bin/python3 tools/query_doj.py efta EFTA_ID --text
-Extract: dates, names, financial amounts, relationships, exact quotes.
+Search corpus tools listed in the investigation profile. For each corpus tool, run:
+  .venv/bin/python3 tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/c-<tool-name>.json
+For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (use --output on all):
 
@@ -332,7 +336,7 @@ For each case found:
 - What is the nature of the case?
 - Who are the other parties?
 - What is the timeline?
-- Are any Epstein-associated persons or entities involved?
+- Are any investigation-associated persons or entities involved?
 - What do the opinions/rulings reveal?
 
 FARA (deep check):
@@ -347,7 +351,7 @@ LOBBYING (deep check):
 INVESTIGATION REPORTS (ingested PDFs):
 11. .venv/bin/python3 tools/query_investigations.py search "[TARGET]" --limit 10 --output [WORKDIR]/c-inv.json
 
-RECORD all findings using the findings_tracker.py CLI. Record connections between the target and any Epstein-network persons discovered in litigation.
+RECORD all findings using the findings_tracker.py CLI. Record connections between the target and any investigation-network persons discovered in litigation.
 
 Zero court results for a person who should have them (e.g., a practicing attorney) is notable — record it.
 
@@ -396,7 +400,7 @@ Use .venv/bin/python3 for all commands.
 
 #### Agent D: Network, OSINT & Open Web
 
-**Sources**: LittleSis, ICIJ/Aleph, EpsteinExposed, WebSearch, WebFetch, GDELT
+**Sources**: LittleSis, ICIJ/Aleph, Shodan, crt.sh, Wayback Machine, URLScan.io, WebSearch, WebFetch, GDELT, plus any investigation-specific OSINT tools from the profile
 
 **Prompt template**:
 ```
@@ -411,12 +415,9 @@ YOUR MANDATE: Search ALL network mapping, offshore leak, and open web sources fo
 IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
 
 CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. .venv/bin/python3 tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/d-doj.json
-2. .venv/bin/python3 tools/duggan_search.py "[TARGET]" --output [WORKDIR]/d-duggan.json
-3. .venv/bin/python3 tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/d-lmsband.json
-4. .venv/bin/python3 tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/d-unified.json
-For EVERY document found, read the full text with: .venv/bin/python3 tools/query_doj.py efta EFTA_ID --text
-Extract: dates, names, financial amounts, relationships, exact quotes.
+Search corpus tools listed in the investigation profile. For each corpus tool, run:
+  .venv/bin/python3 tools/<corpus_tool>.py search "[TARGET]" --limit 20 --output [WORKDIR]/d-<tool-name>.json
+For EVERY document found, read the full text to extract: dates, names, financial amounts, relationships, exact quotes.
 
 REQUIRED SEARCHES (use --output on all):
 
@@ -435,7 +436,7 @@ ICIJ OFFSHORE LEAKS (if Neo4j running):
 
 WEB SEARCH (use WebSearch tool directly — NOT bash):
 8. "[TARGET]" — basic biography
-9. "[TARGET]" Jeffrey Epstein — known connections
+9. "[TARGET]" {primary_subject} — known connections (use primary_subject from investigation profile)
 10. "[TARGET]" lawsuit OR investigation OR scandal
 11. "[TARGET]" [ASSOCIATED_CONTEXT] — e.g., "Ron Soffer lawyer Paris SoftBank"
 12. "[TARGET]" site:opencorporates.com OR site:linkedin.com
@@ -445,14 +446,24 @@ WEB FETCH (use WebFetch tool for key pages):
 - If company/firm website found, fetch the about/team page
 - If relevant news articles found, fetch and extract key facts
 
-EPSTEINEXPOSED (pre-mapped persons, documents, flights):
-13. .venv/bin/python3 tools/ingest_epstein_exposed.py search "[TARGET]" --output [WORKDIR]/d-exposed.json
+INVESTIGATION-SPECIFIC OSINT (search any investigation-specific tools from the profile):
+13. Run any investigation-specific OSINT tools listed in the profile's corpus_tools that Agent A didn't cover.
+
+INFRASTRUCTURE RECON (DNS, SSL certs, hosting, historical web):
+14. .venv/bin/python3 tools/query_shodan.py domain "[TARGET_DOMAIN]" --output [WORKDIR]/d-shodan-domain.json  (if domain known)
+15. .venv/bin/python3 tools/query_shodan.py search "ssl:[TARGET_DOMAIN]" --output [WORKDIR]/d-shodan-ssl.json  (if domain known)
+16. .venv/bin/python3 tools/query_shodan.py host [TARGET_IP] --output [WORKDIR]/d-shodan-host.json  (if IP known)
+17. .venv/bin/python3 tools/query_crtsh.py search "[TARGET_DOMAIN]" --output [WORKDIR]/d-crtsh.json  (cert transparency — subdomain enum)
+18. .venv/bin/python3 tools/query_crtsh.py timeline "[TARGET_DOMAIN]" --output [WORKDIR]/d-crtsh-timeline.json
+19. .venv/bin/python3 tools/query_wayback.py timeline "[TARGET_DOMAIN]" --output [WORKDIR]/d-wayback.json  (historical snapshots)
+20. .venv/bin/python3 tools/query_wayback.py first "[TARGET_DOMAIN]" --output [WORKDIR]/d-wayback-first.json
+21. .venv/bin/python3 tools/query_urlscan.py search "domain:[TARGET_DOMAIN]" --output [WORKDIR]/d-urlscan.json  (tech stack, linked domains)
 
 GDELT (global news):
-14. .venv/bin/python3 tools/query_gdelt.py articles "[TARGET]" --limit 30 --output [WORKDIR]/d-gdelt-art.json
-15. .venv/bin/python3 tools/query_gdelt.py context "[TARGET]" --limit 20 --output [WORKDIR]/d-gdelt-ctx.json
+22. .venv/bin/python3 tools/query_gdelt.py articles "[TARGET]" --limit 30 --output [WORKDIR]/d-gdelt-art.json
+23. .venv/bin/python3 tools/query_gdelt.py context "[TARGET]" --limit 20 --output [WORKDIR]/d-gdelt-ctx.json
 
-RECORD all findings using the findings_tracker.py CLI. Web sources should use claim-type "paraphrase" with the URL as evidence. Record connections to network-connected persons (not just Epstein — any relevant network actor).
+RECORD all findings using the findings_tracker.py CLI. Web sources should use claim-type "paraphrase" with the URL as evidence. Record connections to any network-connected persons identified in the investigation profile or discovered during research.
 
 For web research: prioritize PRIMARY sources (court filings, government records, corporate registries) over secondary (news articles, Wikipedia). Note source reliability.
 

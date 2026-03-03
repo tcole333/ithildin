@@ -14,6 +14,14 @@ Deep-dive investigation of a named individual across all available data sources.
 
 **Read `research/INVESTIGATIVE_METHODOLOGY.md` before your first investigation.** This skill encodes that methodology.
 
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
+
 ## Process
 
 ### Session Setup — Prevent File Collisions
@@ -32,10 +40,10 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files thr
 **This is the most important step.** Before querying any database, use your training data:
 
 - **Who is this person in the world?** Public biography, position, known affiliations. A Goldman Sachs General Counsel is different from an obscure PR consultant. The investigation approach changes based on the person's power, visibility, and incentive structure.
-- **What's their known role in the network?** This may be a direct Epstein relationship, or a connection through Mega Group, Deutsche Bank, Gulf operations, Israeli intelligence, or another thread. Published reporting, court filings, media coverage — what's the public narrative? Your job is to test whether the documentary evidence supports, contradicts, or complicates that narrative.
+- **What's their known role in the network?** This may be a direct relationship to the primary_subject, or a connection through threads defined in the investigation profile. Published reporting, court filings, media coverage — what's the public narrative? Your job is to test whether the documentary evidence supports, contradicts, or complicates that narrative.
 - **Form explicit hypotheses.** Write them down as a lead note:
-  - "Hypothesis: Ruemmler's relationship was transactional — Epstein wanted Goldman access, Ruemmler wanted social/political connections through Epstein's network"
-  - "If correct, I'd expect to see: emails about introductions to non-Goldman people, invitations to social events, and potentially financial favors"
+  - "Hypothesis: the relationship was transactional — Subject A wanted institutional access, Subject B wanted social/political connections through the network"
+  - "If correct, I'd expect to see: emails about introductions, invitations to social events, and potentially financial favors"
   - "If wrong, I'd expect to see: purely social/casual correspondence with no ask patterns"
 
 **Simulate the person:**
@@ -49,10 +57,10 @@ Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files thr
 
 ### 0b. Web Background Research
 
-Before diving into Epstein-specific databases, research the subject's public profile:
+Before diving into investigation-specific databases, research the subject's public profile:
 
 - WebSearch: `"<NAME>"` — basic biography, current position
-- WebSearch: `"<NAME>" Jeffrey Epstein` — known public reporting on connection
+- WebSearch: `"<NAME>" {primary_subject}` — known public reporting on connection (use primary_subject from the investigation profile)
 - WebSearch: `"<NAME>" investigation lawsuit scandal` — legal/reputational issues
 - WebSearch: `"<NAME>" site:littlesis.org` — pre-mapped relationships
 
@@ -111,7 +119,7 @@ python tools/query_edgar.py lookup "<NAME>" --output $WORKDIR/inv-edgar-lookup.j
 
 # Mentions in SEC filings (proxy statements, 10-K, enforcement)
 python tools/query_edgar.py search "<NAME>" --size 20 --facets --output $WORKDIR/inv-edgar-search.json
-python tools/query_edgar.py search "<NAME>" "epstein" --size 10 --output $WORKDIR/inv-edgar-epstein.json
+python tools/query_edgar.py search "<NAME>" "{primary_subject}" --size 10 --output $WORKDIR/inv-edgar-subject.json
 
 # If CIK found — insider transactions reveal ownership positions
 python tools/query_edgar.py insider <CIK> --detail --limit 10 --output $WORKDIR/inv-edgar-insider.json
@@ -148,7 +156,7 @@ python tools/query_icij.py search "<KNOWN_ENTITY>"  # If associated companies kn
 # Check HF parquet for email correspondence
 python -c "
 import pandas as pd
-df = pd.read_parquet('datasets/epstein-emails-hf/emails.parquet')
+df = pd.read_parquet('datasets/emails.parquet')  # Use investigation-specific email corpus if available
 mask = df.apply(lambda r: '<NAME>'.lower() in str(r).lower(), axis=1)
 hits = df[mask]
 print(f'Found {len(hits)} emails')
@@ -223,7 +231,7 @@ uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_addresses (entity_id, address, address_type, date_observed, source) VALUES (?, ?, ?, ?, ?)',
-    (ENTITY_ID, '457 Madison Ave, New York, NY 10022', 'registered', '2019', 'ny_sos'))
+    (ENTITY_ID, '123 Main St, City, ST 00000', 'registered', '2019', 'state_sos'))
 db.commit()
 "
 
@@ -232,7 +240,7 @@ uv run python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 db.execute('INSERT INTO entity_relations (entity_a_id, entity_b_id, relation_type, description, source) VALUES (?, ?, ?, ?, ?)',
-    (ENTITY_A_ID, ENTITY_B_ID, 'funds', 'Black donated $10M to Gratitude America via BV70 LLC', 'EFTA02XXXXXX'))
+    (ENTITY_A_ID, ENTITY_B_ID, 'funds', 'Entity A donated $10M to Entity B via shell LLC', 'SOURCE_REF'))
 db.commit()
 "
 # relation_type: owns, controls, funds, shares_officer, subsidiary, successor, shares_address, client_of, banks_with
@@ -303,10 +311,10 @@ Create `research/persons/<name-slug>.md` with:
 Before spawning follow-ups, explicitly consider:
 
 - **Communication gaps**: If emails span 2016-2017 but nothing in 2018-2019, why? ProtonMail migration? Relationship ended? Intermediaries?
-- **The "both sides" pattern**: Who else was Epstein communicating with who has an adversarial relationship to this person? Map the contradictions.
+- **The "both sides" pattern**: Who else was the primary subject communicating with who has an adversarial relationship to this person? Map the contradictions.
 - **Coded language**: Flag any euphemisms or unusual phrasing for deeper analysis. "Craft purchase," "cognitive intervention," "training program" — always question jargon that doesn't fit the context.
-- **Intermediary patterns**: If communications go through Groff, Galbraith, or Indyke instead of directly, ask why this relationship needed a cutout.
-- **Timeline context**: Map key events in this person's life against their Epstein communication pattern. Promotions, legal troubles, elections, divorces — correlate external events with contact frequency/tone changes.
+- **Intermediary patterns**: If communications go through known gatekeepers or intermediaries (assistants, lawyers, fixers listed in key_persons) instead of directly, ask why this relationship needed a cutout.
+- **Timeline context**: Map key events in this person's life against their communication pattern with the primary subject. Promotions, legal troubles, elections, divorces — correlate external events with contact frequency/tone changes.
 
 ### 9. Spawn Follow-Up Leads
 Create leads for:

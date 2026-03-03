@@ -12,6 +12,14 @@ Search a term across every available data source in parallel. Deduplicates by EF
 
 - Required: search term (e.g., `/search-all-sources churkin ambassador`)
 
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill. The `corpus_tools` field lists investigation-specific data sources to search in addition to the generic sources below.
+
 ## Process
 
 ### 0. Session Setup — Prevent File Collisions
@@ -144,21 +152,33 @@ python tools/query_newjersey.py search "<QUERY>" --output $WORKDIR/search-nj.jso
 # Massachusetts Corporations Division (Playwright browser helper, Incapsula WAF)
 python tools/query_massachusetts.py search "<QUERY>" --output $WORKDIR/search-ma.json
 
-# Epstein Files 20K (House Oversight docs — HOUSE_OVERSIGHT IDs, not EFTA)
-python tools/ingest_epstein_20k.py search "<QUERY>" --limit 10
+# Shodan (infrastructure recon — DNS, SSL certs, hosting, org footprint — paid plan)
+python tools/query_shodan.py search "ssl:<QUERY>" --output $WORKDIR/search-shodan-ssl.json
+python tools/query_shodan.py domain "<QUERY>" --output $WORKDIR/search-shodan-domain.json
 
-# EpsteinExposed.com (persons, documents, flights)
-python tools/ingest_epstein_exposed.py search "<QUERY>"
+# crt.sh Certificate Transparency (subdomain enum, cert timeline — free, no auth)
+python tools/query_crtsh.py search "<QUERY>" --output $WORKDIR/search-crtsh.json
 
-# MuckRock FOIA (21 Epstein FOIA requests — FBI, CBP, USMS, DOJ, BOP, SDNY, SDFL)
-python tools/query_muckrock.py search "<QUERY>"
+# Wayback Machine (historical web snapshots — free, no auth)
+python tools/query_wayback.py timeline "<QUERY>" --output $WORKDIR/search-wayback.json
 
-# DocumentCloud (6,613+ pages — Giuffre v. Maxwell, MCC records)
-python tools/query_documentcloud.py search "<QUERY>" --limit 10
+# URLScan.io (passive web scans — tech stacks, linked domains — free)
+python tools/query_urlscan.py search "domain:<QUERY>" --output $WORKDIR/search-urlscan.json
 
 # OffshoreAlert (29K+ offshore court cases, articles, MLATs, regulatory actions)
 python tools/offshorealert_search.py search "<QUERY>" -v --output $WORKDIR/search-offshorealert.json
 ```
+
+### 1c. Investigation Corpus Tools (from profile)
+
+Search any investigation-specific corpus tools listed in `corpus_tools` from the investigation profile. These are data sources tied to the active investigation (e.g., specialized document corpora, FOIA collections, case-specific databases). Run each tool listed in the profile that hasn't already been searched:
+
+```bash
+# Example — the actual tools depend on the investigation profile's corpus_tools list:
+# python tools/<corpus_tool>.py search "<QUERY>" --limit 10 --output $WORKDIR/search-<source>.json
+```
+
+Log each corpus tool search the same way as generic sources.
 
 ### 2. Log Each Search
 After each query, log it to prevent redundant future searches:
@@ -172,15 +192,16 @@ log_search("<QUERY>", "uk_companies_house", result_count)
 log_search("<QUERY>", "opensanctions", result_count)
 log_search("<QUERY>", "ds10_financial", result_count)
 log_search("<QUERY>", "usvi", result_count)
-log_search("<QUERY>", "epstein_20k", result_count)
-log_search("<QUERY>", "epstein_exposed", result_count)
-log_search("<QUERY>", "muckrock", result_count)
-log_search("<QUERY>", "documentcloud", result_count)
 log_search("<QUERY>", "dc_corp_registry", result_count)
+# Also log any corpus_tools searches from the investigation profile:
 log_search("<QUERY>", "ca_bizfile", result_count)
 log_search("<QUERY>", "tx_comptroller", result_count)
 log_search("<QUERY>", "mi_lara", result_count)
 log_search("<QUERY>", "offshorealert", result_count)
+log_search("<QUERY>", "shodan", result_count)
+log_search("<QUERY>", "crtsh", result_count)
+log_search("<QUERY>", "wayback", result_count)
+log_search("<QUERY>", "urlscan", result_count)
 # etc.
 ```
 
@@ -197,16 +218,16 @@ Format:
 SEARCH: "<QUERY>" across 7 sources
 
 === CORROBORATED (3+ sources) ===
-EFTA02394403 — [DugganUSA, DOJ Vol 11, LMSBAND]
-  Ambassador Churkin email to Epstein, May 2016
+<DOC_ID_1> — [Source A, Source B, Source C]
+  Description of corroborated finding
 
 === MULTI-SOURCE (2 sources) ===
-EFTA02219298 — [DOJ Vol 11, Unified DB]
-  Maxim Churkin appointment scheduling, Aug 2017
+<DOC_ID_2> — [Source A, Source D]
+  Description of multi-source finding
 
 === SINGLE-SOURCE ===
-[LMSBAND file #12345] — Churkin mentioned in travel document
-[Unified triple] — Epstein -> arranged meeting -> Churkin @ NYC, 2016-12
+[Source file #12345] — <QUERY> mentioned in document
+[Unified triple] — Subject -> arranged meeting -> Target @ Location, date
 
 === SOURCE COVERAGE ===
 DugganUSA:    15 hits
@@ -225,20 +246,21 @@ UK CH:        0 hits (not searched — no API key)
 OpenSanctions: 1 hit (PEP match)
 DS10:         0 hits (no matching transactions)
 USVI:         0 hits
-Epstein 20K:  3 hits (House Oversight docs)
-EpsteinExposed: 1 hit (person match)
-MuckRock:     0 hits (FOIA tags search)
-DocumentCloud: 3 hits (full-text search)
 DC DLCP:      0 hits (ArcGIS, 492K entities)
+[Corpus tools from investigation profile — list each with hit count]
 CA SoS:       0 hits (keyword search, top 150)
 OffshoreAlert: 5 hits (offshore court cases, articles)
+Shodan:       3 hits (SSL certs, DNS records)
+crt.sh:       5 hits (certificate transparency)
+Wayback:      12 hits (historical snapshots)
+URLScan:      2 hits (passive web scans)
 ```
 
 ### 5. Analytical Assessment
 
 Don't just present results — analyze them. Apply the investigative methodology from `research/INVESTIGATIVE_METHODOLOGY.md`:
 
-- **What did you expect to find vs. what you found?** Surprises are intelligence. If you searched for a known Epstein associate and found zero DOJ documents, that absence is significant — it may mean concealment, document destruction, or that the relationship operated through channels the DOJ didn't capture.
+- **What did you expect to find vs. what you found?** Surprises are intelligence. If you searched for a known associate and found zero results in the investigation corpus, that absence is significant — it may mean concealment, document destruction, or that the relationship operated through channels the corpus didn't capture.
 - **Cross-bureaucratic correlation**: Results from independent sources (e.g., an EFTA email + an LMSBAND financial record + an ICIJ offshore entity) that converge on the same event or relationship are far more valuable than the same document appearing in 3 derivative databases.
 - **New names and entities**: Flag any previously unknown persons, email addresses, phone numbers, or corporate entities that appear in results. Each is a potential new investigation thread.
 - **Timeline patterns**: If results cluster around specific dates, note what was happening in the world then. A cluster of emails in May 2017 relates to Mueller's appointment. A cluster in June 2019 relates to the weeks before arrest.

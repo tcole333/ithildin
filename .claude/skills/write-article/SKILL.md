@@ -12,9 +12,17 @@ Phase 0 `research dossier` -> Phase 1 `structure` -> Phase 2 `draft` -> Phase 3 
 
 ## Arguments
 
-- Required: cluster ID (example: `/write-article apollo-money-pipeline`)
+- Required: cluster ID (example: `/write-article <cluster-id>` — run `uv run python pipeline/story_clustering.py --list` for available clusters)
 - Optional `--dry-run`: run only Phase 0 and stop after the dossier
 - No arguments: list available clusters
+
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
 
 ## Non-Negotiable Defaults
 
@@ -44,7 +52,7 @@ Phase 4: REVISE           -> updated article + revision summary
 
 ## Phase 0: Research Dossier
 
-Search across corpus + structured + legal/network sources. Do not limit research to EFTA/DOJ.
+Search across corpus + structured + legal/network sources. Use corpus tools from the investigation profile rather than assuming specific corpus databases.
 
 ### 0.1 Discover Cluster Context
 
@@ -98,15 +106,12 @@ Run three tracks in parallel and write markdown reports:
 
 Track A: Corpus deep-dive
 ```
-uv run python tools/query_doj.py search "<QUERY>" --limit 20 --output "$WORKDIR/corpus-doj.json"
-uv run python tools/duggan_search.py "<QUERY>" --output "$WORKDIR/corpus-duggan.json"
-uv run python tools/query_lmsband.py search "<QUERY>" --limit 15 --output "$WORKDIR/corpus-lmsband.json"
-uv run python tools/query_unified.py docs "<QUERY>" --limit 15 --output "$WORKDIR/corpus-unified-docs.json"
-uv run python tools/query_unified.py emails "<QUERY>" --limit 15 --output "$WORKDIR/corpus-unified-emails.json"
-uv run python tools/ingest_epstein_20k.py search "<QUERY>" --limit 15 --json > "$WORKDIR/corpus-20k.json"
+# Search all corpus tools from the investigation profile.
+# For each corpus_tool in the profile, run:
+uv run python tools/<corpus_tool>.py search "<QUERY>" --limit 20 --output "$WORKDIR/corpus-<tool-name>.json"
 
-# Pull full text for key references
-uv run python tools/query_doj.py efta EFTA_ID --text --output "$WORKDIR/efta-EFTA_ID.json"
+# For tools supporting sub-commands (emails, docs, entities, triples), run those too.
+# Pull full text for key references found in search results.
 ```
 
 Track B: Financial/corporate/property
@@ -154,7 +159,7 @@ Wait for all track reports, then write `$WORKDIR/research-dossier.md`:
 ## Evidence Inventory
 | Source Type | Count | Key Items |
 |-------------|-------|-----------|
-| EFTA corpus | 280   | EFTA02576529 (ARRC minutes), ... |
+| DOJ corpus  | 280   | [key document IDs and descriptions] |
 | SEC EDGAR   | 12    | 10-K disclosures, Form D filings |
 | IRS 990     | 8     | Gratitude America grants |
 | ACRIS       | 15    | Property transfers |
@@ -291,7 +296,7 @@ When evidence exemplifies an analytical model, insert a callout block:
 ```mdx
 > **Manufactured Dependency** — Creating conditions for problems, then selling the solution. [Full analysis →](/models/manufactured-dependency)
 >
-> Evidence: [EFTA02576529] — Epstein introduced Black to the extortionist years before the "rescue."
+> Evidence: [CITATION_ID] — [Specific evidence from corpus supporting this model application]
 ```
 
 Available models: manufactured-dependency, bridge-tax, private-order, narrative-shield, jurisdictional-arbitrage, parallel-financial-system, enabler-gradient, complexity-as-credential.
@@ -349,7 +354,7 @@ Read the verification report and apply fixes.
 - Apply if they improve the article without disrupting its architecture
 
 ### 4.4. Backlinks pass
-- Link named persons/entities to their dossier pages: `[Leon Black](/dossiers/leon-black)`
+- Link named persons/entities to their dossier pages: `[Person Name](/dossiers/person-slug)`
 - Cross-reference other articles where relevant
 - Link external registry entries
 
@@ -391,21 +396,13 @@ Output to the user:
 
 ## Cluster Reference
 
-| ID | Title | Key Angle |
-|----|-------|-----------|
-| apollo-money-pipeline | The Apollo Money Pipeline | How do you move $40M to a felon through legitimate banking? |
-| wexner-trust-architecture | Wexner Trust Architecture | A masterclass in using trusts to obscure beneficial ownership |
-| deutsche-bank-plumbing | Deutsche Bank Plumbing | What 579 transactions and $304M tell us about compliance theater |
-| gulf-intelligence-web | The Gulf Intelligence Web | The geopolitics of a financier's Rolodex |
-| shadow-lobbying-empire | Shadow Lobbying Empire | How to lobby Congress without technically lobbying Congress |
-| corporate-shell-network | The Corporate Shell Network | The corporate structure diagram that takes a full wall |
-| legal-shield | The Legal Shield | When your lawyers are also your intelligence service |
-| science-tech-interface | Science & Tech Interface | Philanthropy as a social technology |
-| norwegian-connection | The Norwegian Connection | An ex-diplomat, a defense minister, and a registered sex offender |
-| inner-circle-operations | Inner Circle Operations | The org chart of a criminal enterprise that filed its taxes |
-| usvi-operations | USVI Operations | Why the US Virgin Islands is the Delaware of the Caribbean |
-| political-influence-machine | The Political Influence Machine | Campaign finance as relationship management |
-| parallel-diplomatic-corps | The Parallel Diplomatic Corps | Epstein built institutions that brokered between governments |
+Load available clusters dynamically:
+
+```bash
+uv run python pipeline/story_clustering.py --list
+```
+
+This returns all active story clusters with their IDs, titles, key angles, and readiness metrics. Use the output rather than a hardcoded table, as clusters evolve with the investigation.
 
 ## Readiness Criteria
 

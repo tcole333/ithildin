@@ -13,6 +13,24 @@ Claim and investigate the next highest-priority open lead. Operates fully autono
 - Optional lead ID: `/pursue-lead 42` to pursue a specific lead
 - No arguments: automatically picks the highest-priority open lead
 
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
+
+### Ambient Documentation
+**Document everything, not just what's relevant to your current hypothesis.**
+When you encounter information during investigation — officer names, addresses,
+corporate relationships, financial figures, dates, professional affiliations —
+record it even if it doesn't obviously connect to the current lead. Use
+`entity_tracker.py` to register entities, roles, and addresses. Use
+`findings_tracker.py` with `--type background` for contextual facts that don't
+directly answer the current question but are worth preserving. These ambient
+findings compound across investigations and surface connections later.
+
 ## Process
 
 ### 0. Session Setup — Prevent File Collisions
@@ -41,7 +59,7 @@ Read the lead's description and category to determine the right approach:
 
 - **person** → Run `/investigate-person` workflow
 - **entity** → Run `/trace-entity` workflow
-- **financial** → Focus on DOJ Vol 11, LMSBAND financial records, ICIJ offshore data
+- **financial** → Focus on investigation corpus financial records, ICIJ offshore data
 - **document** → Focus on locating and analyzing specific documents
 - **digital** → Focus on email accounts, usernames, digital footprint
 - **connection** → Focus on tracing relationship between two known entities
@@ -84,7 +102,7 @@ uv run python tools/query_investigations.py search "<TARGET>" --limit 10 --outpu
 ```
 
 This is especially important when:
-- A lead involves a person not well-covered in Epstein datasets
+- A lead involves a person not well-covered in the investigation corpus
 - A lead involves an international entity or jurisdiction
 - A lead connects to broader patterns (banking fraud, intelligence ops, etc.)
 
@@ -95,10 +113,10 @@ python tools/findings_tracker.py add \
     --target "<TARGET_NAME>" \
     --summary "One-line summary of what the evidence shows" \
     --type communication \
-    --evidence EFTA02XXXXXX \
+    --evidence <EVIDENCE_REF> \
     --claim-type paraphrase \
-    --source-quote "EFTA02XXXXXX:exact text from source supporting this claim" \
-    --sources doj_vol11 lmsband \
+    --source-quote "<EVIDENCE_REF>:exact text from source supporting this claim" \
+    --sources <SOURCE_NAMES> \
     --confidence high \
     --date "2017-03-15" \
     --lead-id <LEAD_ID>
@@ -123,7 +141,7 @@ If the finding reveals a relationship:
 python tools/findings_tracker.py connect \
     --person-a "<PERSON_A>" --person-b "<PERSON_B>" \
     --type financial --strength strong \
-    --evidence EFTA02XXXXXX \
+    --evidence <EVIDENCE_REF> \
     --finding-id <FINDING_ID>
 ```
 
@@ -142,7 +160,7 @@ uv run python tools/entity_tracker.py add-entity   --name "Entity Name"   --enti
 uv run python tools/entity_tracker.py add-role   --entity-id <ENTITY_ID>   --person-name "Person Name"   --role "director"   --date-start "2010-01"   --date-end "2019-07"   --source "EFTA02XXXXXX"
 
 # 4) Record address
-uv run python tools/entity_tracker.py add-address   --entity-id <ENTITY_ID>   --address "457 Madison Ave, New York, NY 10022"   --address-type registered   --date-observed "2019"   --source "ny_sos"
+uv run python tools/entity_tracker.py add-address   --entity-id <ENTITY_ID>   --address "123 Main St, City, ST 00000"   --address-type registered   --date-observed "2019"   --source "ny_sos"
 
 # 5) Record entity relation
 uv run python tools/entity_tracker.py add-relation   --entity-a-id <ENTITY_A_ID>   --entity-b-id <ENTITY_B_ID>   --relation-type funds   --description "Enhanced Education donated $150K to IPI"   --source "EFTA02XXXXXX"
@@ -211,19 +229,19 @@ python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-refe
 ### During Investigation
 
 - **Follow the incentive structure.** Money flows reveal truth that words obscure. When you find a financial transaction, ask: what service could possibly justify this amount?
-- **Look for the "both sides" pattern.** Epstein maintained relationships with opposing parties simultaneously. Map contradictions — they reveal his actual strategy.
+- **Look for the "both sides" pattern.** Investigation subjects often maintain relationships with opposing parties simultaneously. Map contradictions — they reveal the subject's actual strategy.
 - **Try alternate search terms.** Transliterations, maiden names, entity abbreviations, coded language. A search for "craft purchase" finds what "boat" or "yacht" misses.
 - **Analyze tone and context**, not just frequency. 10 formal emails may reveal less than 3 intimate ones with financial requests.
 
 ### When Recording Findings
 
 - **Distinguish fact from inference.** "Email shows wire transfer of $18M" is a fact. "This was payment for diplomatic access" is an inference. Label them differently.
-- **Note what you didn't find.** "Searched 5 sources for Churkin-Epstein financial links, found none" is itself a finding.
+- **Note what you didn't find.** "Searched 5 sources for Target-Subject financial links, found none" is itself a finding.
 - **End with new hypotheses.** Every completed lead should spawn questions, not just answers.
 
 ### Thread Awareness
 
-- **Do NOT close a lead because you didn't find direct Epstein connections.** Follow the thread — if the target connects to other interesting actors or reveals network infrastructure, that's valuable. A Mega Group lead is about the Mega Group, not about Epstein.
+- **Do NOT close a lead because you didn't find direct {primary_subject} connections.** Follow the thread — if the target connects to other interesting actors or reveals network infrastructure, that's valuable. A thread-specific lead is about that thread's subject, not solely about the primary subject.
 - If the lead has a `thread_id`, assign new findings to the same thread with `--thread-id N`.
 - If you discover something relevant to a different thread, create a new lead in that thread.
 
