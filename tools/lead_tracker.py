@@ -1587,23 +1587,29 @@ def main():
             print(f"Created thread #{cursor.lastrowid}: {args.title}")
 
         elif args.thread_command == "seed":
-            SEED_THREADS = [
-                ("Epstein Core Network", "Primary investigation thread — Epstein's direct relationships, operations, and infrastructure"),
-                ("Mega Group", "Wexner-Lauder-Steinhardt-Bronfman philanthropic/intelligence network and parallel structures"),
-                ("Deutsche Bank Pipeline", "DB accounts, SARs, relationship manager network, compliance failures, and connected financial flows"),
-                ("Israeli Intelligence Nexus", "Barak, Carbyne, Maxwell family, Mossad connections, and Israeli state actor operations"),
-                ("Apollo / Leon Black Financial", "Black-STC flows, all 3 Apollo founders, Dechert report, and related fund movements"),
-                ("Gulf State Operations", "Qatar/Saudi/UAE three-tier structure, Broidy/Nader, Ruemmler, and Middle East operations"),
-            ]
+            from tools.investigation_context import get_active_profile
+            profile = get_active_profile()
+            if not profile.threads:
+                print("No threads defined in active investigation profile.")
+                db.close()
+                return
             created = 0
-            for title, desc in SEED_THREADS:
+            for thread_def in profile.threads:
+                title = thread_def.get("name", "")
+                desc = thread_def.get("description", "")
+                if not title:
+                    continue
                 existing = db.execute("SELECT id FROM investigation_threads WHERE title = ?", (title,)).fetchone()
                 if not existing:
-                    db.execute("INSERT INTO investigation_threads (title, description) VALUES (?, ?)", (title, desc))
+                    profile_id = profile.name
+                    db.execute(
+                        "INSERT INTO investigation_threads (title, description, profile_id) VALUES (?, ?, ?)",
+                        (title, desc, profile_id)
+                    )
                     created += 1
             db.commit()
             db.close()
-            print(f"Seeded {created} threads ({len(SEED_THREADS) - created} already existed)")
+            print(f"Seeded {created} threads ({len(profile.threads) - created} already existed)")
 
         else:
             thread_p.print_help()

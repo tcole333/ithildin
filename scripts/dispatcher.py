@@ -68,7 +68,7 @@ PROMPTS = {
         "Cross-reference with event timeline.",
     "systemic_analysis": "Run the /systemic-analysis skill. Analyze the largest investigation thread's actors "
         "as a system — shared boards, co-investments, common counsel, jurisdiction clustering. "
-        "Focus on non-Epstein connections between actors.",
+        "Focus on non-subject connections between actors.",
 }
 
 
