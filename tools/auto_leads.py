@@ -14,7 +14,7 @@ Triggers:
     - New entity address → search registries for other entities at that address
     - New entity role (person→entity) → search for person as officer elsewhere
     - New entity → search corporate registries + ACRIS + Aleph
-    - New connection with < 5 findings → search DOJ/DugganUSA for person
+    - New connection with < 5 findings → search corpus for person
 """
 
 import argparse
@@ -25,31 +25,30 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_PATH = PROJECT_ROOT / "investigation.db"
 
-# High-value addresses that warrant high-priority cross-ref
-KNOWN_ADDRESSES = {
-    "457 madison": "Indyke/Epstein corporate office cluster",
-    "9 e 71": "Epstein NYC mansion",
-    "9 east 71": "Epstein NYC mansion",
-    "301 e 66": "Epstein-linked property",
-    "358 el brillo": "Epstein Palm Beach mansion",
-    "575 lexington": "Epstein Foundation office",
-    "6100 red hook": "Little St. James / USVI",
-    "49 zorro ranch": "Epstein NM ranch",
-    "133 east 64": "Galbraith apartment (blocks from mansion)",
-}
 
-# Known top correspondents / key persons — officer matches get high priority
-KEY_PERSONS = {
-    "darren indyke", "richard kahn", "erika kellerhals", "lesley groff",
-    "christina galbraith", "karyna shuliak", "ghislaine maxwell",
-    "leon black", "les wexner", "eva dubin", "glenn dubin",
-    "terje rod-larsen", "mona juul", "lawrence summers",
-    "kathy ruemmler", "kathryn ruemmler",
-    "michael wolff", "reid weingarten", "steve bannon",
-    "boris nikolic", "jide zeitlin", "ken starr", "kenneth starr",
-    "alan dershowitz", "david boies", "brad edwards",
-    "mark epstein", "sarah kellen", "nadia marcinkova",
-}
+def _load_profile_data():
+    """Load key persons and known addresses from active investigation profile."""
+    try:
+        from tools.investigation_context import get_active_profile
+        profile = get_active_profile()
+        known_addresses = profile.known_addresses or {}
+        key_persons = set(profile.key_persons or [])
+        primary_subject = profile.primary_subject.lower() if profile.primary_subject else ""
+        return known_addresses, key_persons, primary_subject
+    except Exception:
+        # Fallback: return empty sets if profile system not available
+        return {}, set(), ""
+
+
+# Loaded lazily on first use
+_profile_cache = None
+
+
+def _get_profile():
+    global _profile_cache
+    if _profile_cache is None:
+        _profile_cache = _load_profile_data()
+    return _profile_cache
 
 
 def get_db():
@@ -98,21 +97,23 @@ def create_lead(db, title, category, priority, source, target=None, notes=None):
 
 
 def address_priority(address):
-    """Determine priority based on known addresses."""
+    """Determine priority based on known addresses from active profile."""
+    known_addresses, _, _ = _get_profile()
     addr_lower = address.lower()
-    for pattern, desc in KNOWN_ADDRESSES.items():
+    for pattern, desc in known_addresses.items():
         if pattern in addr_lower:
             return "high", desc
     return "medium", None
 
 
 def person_priority(person_name):
-    """Determine priority based on known key persons."""
+    """Determine priority based on key persons from active profile."""
+    _, key_persons, _ = _get_profile()
     name_lower = person_name.lower().strip()
-    if name_lower in KEY_PERSONS:
+    if name_lower in key_persons:
         return "high"
     # Check partial matches (last name)
-    for kp in KEY_PERSONS:
+    for kp in key_persons:
         parts = kp.split()
         if len(parts) >= 2 and parts[-1] == name_lower.split()[-1] if name_lower.split() else "":
             return "high"
@@ -187,7 +188,7 @@ def process_new_addresses(db, dry_run=False):
         title = f"Cross-ref address: {addr_display} — find other entities"
         notes = f"Entity '{row['entity_name']}' registered at {addr}."
         if known_desc:
-            notes += f" Known Epstein location: {known_desc}."
+            notes += f" Known investigation location: {known_desc}."
         notes += " Search: query_registry.py address, query_acris.py, ingest_newyork.py search-address"
 
         if dry_run:
@@ -227,8 +228,9 @@ def process_new_roles(db, dry_run=False):
             log_processed(db, "entity_roles", row["id"], "officer_search", persons_seen[person_normalized])
             continue
 
-        # Skip Epstein himself — we know his entities
-        if "epstein" in person_normalized and "mark" not in person_normalized:
+        # Skip the primary investigation subject — we know their entities
+        _, _, primary_subject = _get_profile()
+        if primary_subject and primary_subject in person_normalized:
             persons_seen[person_normalized] = None
             log_processed(db, "entity_roles", row["id"], "officer_search")
             continue
@@ -317,10 +319,10 @@ def process_new_entities(db, dry_run=False):
             log_processed(db, "entities", row["id"], "entity_search", existing)
             continue
 
-        # Determine priority — entities with known Epstein connection types get higher
+        # Determine priority — entity types commonly used for opacity get higher priority
         priority = "low"
-        epstein_types = {"trust", "foundation", "nonprofit", "fund", "llc"}
-        if row["entity_type"] in epstein_types:
+        opacity_types = {"trust", "foundation", "nonprofit", "fund", "llc"}
+        if row["entity_type"] in opacity_types:
             priority = "medium"
 
         # Check if entity has roles (more connected = higher priority)
@@ -369,8 +371,9 @@ def process_new_connections(db, dry_run=False):
                 continue
             persons_checked.add(person.strip().lower())
 
-            # Skip Epstein himself
-            if "epstein" in person.lower() and "mark" not in person.lower():
+            # Skip the primary investigation subject
+            _, _, primary_subject = _get_profile()
+            if primary_subject and primary_subject in person.lower():
                 continue
 
             # Skip very short or generic names
@@ -402,7 +405,7 @@ def process_new_connections(db, dry_run=False):
 
             title = f"Deep-search: {person.strip()} — {finding_count} findings, expand coverage"
             notes = f"Connected via {row['relationship_type']} relationship."
-            notes += f" Only {finding_count} findings. Search DOJ Vol 11, DugganUSA, LMSBAND."
+            notes += f" Only {finding_count} findings. Search investigation corpus."
 
             if dry_run:
                 print(f"  [DRY] Connection lead ({priority}): {title}")
