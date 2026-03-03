@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Institutional pillars and alumni dynamics tracker for the Epstein OSINT investigation.
+Institutional pillars and alumni dynamics tracker.
 
-Models institutions as enabling infrastructure — Drexel, K&E, Bear Stearns, Arthur Andersen —
-tracking career arcs, alumni dispersal, cohort overlaps, and cross-pillar orchestrator scores.
+Models institutions as enabling infrastructure, tracking career arcs,
+alumni dispersal, cohort overlaps, and cross-pillar orchestrator scores.
 
 Part of investigation.db.
 
@@ -958,64 +958,41 @@ def rebootstrap():
 
 # ── Seed Data ────────────────────────────────────────────────
 
-SEED_PILLARS = [
-    # Banking
-    ("Drexel Burnham Lambert", "banking", "investment_bank", "dissolved", "1935", "1990", None, "Junk bond epicenter. Milken, Black, Harris, Rowan all passed through."),
-    ("Bear Stearns", "banking", "investment_bank", "dissolved", "1923", "2008", None, "Epstein's early career. Cayne, Greenberg network. Collapsed in 2008 crisis."),
-    ("Goldman Sachs", "banking", "investment_bank", "active", "1869", None, None, "Revolving door to Treasury/Fed. Ruemmler (post-WH Counsel). Daffey connections."),
-    ("Deutsche Bank", "banking", "commercial_bank", "active", "1870", None, None, "Primary Epstein banking relationship post-JPMorgan. SARs, RM network."),
-    ("JPMorgan Chase", "banking", "commercial_bank", "active", "2000", None, None, "Long Epstein relationship. USVI lawsuit. Jes Staley."),
-    ("Citigroup", "banking", "commercial_bank", "active", "1998", None, None, "Robert Rubin post-Treasury. Connected to multiple network nodes."),
-    ("Apollo Global Management", "banking", "private_equity", "active", "1990", None, None, "Founded by Black, Harris, Rowan — all ex-Drexel. $158M Black→Epstein."),
-    # Legal
-    ("Kirkland & Ellis", "legal", "law_firm", "active", "1908", None, None, "DOJ revolving door. Barr, Acosta, Starr. Defended Epstein and Trump."),
-    ("Paul Weiss", "legal", "law_firm", "active", "1875", None, None, "Major corporate firm. Connected to multiple investigation threads."),
-    ("Sullivan & Cromwell", "legal", "law_firm", "active", "1879", None, None, "Deep establishment ties. Historical intelligence connections."),
-    ("Dechert LLP", "legal", "law_firm", "active", "1875", None, None, "Leon Black's personal counsel. Handled Black-Epstein relationship management."),
-    ("Latham & Watkins", "legal", "law_firm", "active", "1934", None, None, "Major corporate firm. DOJ revolving door presence."),
-    ("Steptoe & Johnson", "legal", "law_firm", "active", "1913", None, None, "Rod-Larsen representation. IPI legal matters."),
-    ("Gold & Wachtel", "legal", "law_firm", "active", None, None, None, "Epstein inner circle legal. Darren Indyke partner."),
-    ("Boies Schiller Flexner", "legal", "law_firm", "active", "1997", None, None, "David Boies. Harvey Weinstein connection. Dual representation issues."),
-    # Accounting
-    ("Arthur Andersen", "accounting", "big_five", "dissolved", "1913", "2002", None, "Enron auditor. Collapse dispersed talent to remaining Big Four."),
-    ("KPMG", "accounting", "big_four", "active", "1987", None, None, "Epstein forensic review. Appendix A entity mapping."),
-    ("Ernst & Young", "accounting", "big_four", "active", "1989", None, None, "Major auditor in network-adjacent companies."),
-    ("PricewaterhouseCoopers", "accounting", "big_four", "active", "1998", None, None, "Global auditing presence. Offshore entity audits."),
-    ("Deloitte", "accounting", "big_four", "active", "1845", None, None, "Consulting and audit. Government contract presence."),
-    # Government
-    ("DOJ (Criminal Division)", "government", "federal_agency", "active", None, None, None, "NPA decision point. Acosta, Villafana. K&E revolving door."),
-    ("SEC", "government", "regulator", "active", "1934", None, None, "Financial regulation. Revolving door with law firms and banks."),
-    ("SDNY (US Attorney)", "government", "federal_prosecutor", "active", None, None, None, "2019 indictment. Giuffre v. Maxwell. Key prosecution venue."),
-    ("USAO-SDFL", "government", "federal_prosecutor", "active", None, None, None, "Original NPA. Acosta's office. Villafana as lead prosecutor."),
-    ("FBI", "government", "federal_agency", "active", "1908", None, None, "Investigation leads. Intelligence nexus."),
-    ("CIA", "government", "intelligence_agency", "active", "1947", None, None, "Intelligence connections. Operational overlap potential."),
-    ("White House Counsel", "government", "executive_office", "active", None, None, None, "Ruemmler (Obama). Revolving door to Goldman, K&E."),
-    # Intelligence
-    ("Mossad", "intelligence", "foreign_intelligence", "active", "1949", None, "Israel", "Maxwell family connections. Barak nexus."),
-    ("Unit 8200", "intelligence", "signals_intelligence", "active", "1952", None, "Israel", "Tech sector pipeline. Carbyne founders."),
-    # Media
-    ("New York Times", "media", "newspaper", "active", "1851", None, None, "Landon Thomas Jr. coverage. Potential narrative management."),
-    ("New York Post", "media", "newspaper", "active", "1801", None, None, "Tabloid coverage vector. Murdoch orbit."),
-    # Philanthropy
-    ("Clinton Foundation", "philanthropy", "foundation", "active", "1997", None, None, "Epstein donor. Flight logs. Political access."),
-    ("Edge Foundation", "philanthropy", "foundation", "active", "1996", None, None, "Brockman. Science/tech elite network. Epstein dinners."),
-    # Academia
-    ("Harvard", "academia", "university", "active", "1636", None, "Massachusetts", "Summers, Dershowitz, donations. Program on Evolutionary Dynamics."),
-    ("MIT", "academia", "university", "active", "1861", None, "Massachusetts", "Media Lab. Ito. $800K+ donations post-conviction."),
-    ("Santa Fe Institute", "academia", "research_institute", "active", "1984", None, "New Mexico", "Complexity science. Epstein board involvement."),
-    # Operations
-    ("Southern Trust Company", "operations", "trust_company", "active", None, None, "USVI", "Epstein entity. KPMG review subject. Financial Trust Company sibling."),
-]
+def _load_seed_pillars():
+    """Load seed pillars from the active investigation profile."""
+    try:
+        from tools.investigation_context import get_active_profile
+        profile = get_active_profile()
+        return profile.seed_pillars or []
+    except Exception:
+        return []
 
 
 def seed():
-    """Populate initial ~35 institutional pillars."""
+    """Populate institutional pillars from the active investigation profile."""
+    pillars = _load_seed_pillars()
+    if not pillars:
+        print("No seed pillars defined in active investigation profile.")
+        return 0
+
     db = get_pillar_db()
     created = 0
     skipped = 0
 
-    for entry in SEED_PILLARS:
-        name, ptype, sub_type, status, founded, dissolved, jurisdiction, significance = entry
+    for entry in pillars:
+        if isinstance(entry, dict):
+            name = entry.get("name", "")
+            ptype = entry.get("pillar_type", "")
+            sub_type = entry.get("sub_type", "")
+            status = entry.get("status", "active")
+            founded = entry.get("founded")
+            dissolved = entry.get("dissolved")
+            jurisdiction = entry.get("jurisdiction")
+            significance = entry.get("significance", "")
+        else:
+            # Legacy tuple format
+            name, ptype, sub_type, status, founded, dissolved, jurisdiction, significance = entry
+
         try:
             db.execute("""
                 INSERT INTO institutional_pillars
