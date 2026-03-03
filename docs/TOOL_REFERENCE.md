@@ -468,15 +468,38 @@ python tools/query_edgar.py read "https://..." --lines 200
 ```
 Look up relevant CIKs for current investigation targets via `query_edgar.py lookup "entity name"`
 
-### USAspending (government contracts, no auth)
+### USAspending (federal spending — contracts, grants, loans — no auth)
 ```bash
-# Set PYTHONHTTPSVERIFY=0 if environment has SSL cert issues
-uv run python tools/query_usaspending.py search "Palantir"
-uv run python tools/query_usaspending.py recipient "Palantir Technologies"
-uv run python tools/query_usaspending.py awards "PALANTIR TECHNOLOGIES INC." --limit 10
-uv run python tools/query_usaspending.py covid "Palantir"
-uv run python tools/query_usaspending.py loans "Citadel"
-uv run python tools/query_usaspending.py uei "RN99S3S7N977"
+# Set OSINT_INSECURE_SSL=true if environment has SSL cert issues
+uv run python tools/query_usaspending.py search "QUERY"                      # Recipient autocomplete
+uv run python tools/query_usaspending.py awards "RECIPIENT" --limit 20       # Contract awards
+uv run python tools/query_usaspending.py awards "RECIPIENT" --grants         # Grant awards
+uv run python tools/query_usaspending.py award CONT_AWD_123_456             # Full award detail by ID
+uv run python tools/query_usaspending.py recipient "QUERY"                   # Recipient profile + agency breakdown
+uv run python tools/query_usaspending.py subawards "RECIPIENT"               # Subcontractor/subgrantee data
+uv run python tools/query_usaspending.py transactions "RECIPIENT" --date-range 2020-01-01,2024-12-31
+uv run python tools/query_usaspending.py timeline "RECIPIENT" --group fiscal_year  # Spending trend
+uv run python tools/query_usaspending.py geography "RECIPIENT" --geo-layer state   # Geographic distribution
+uv run python tools/query_usaspending.py top-recipients --agency "Department of Defense" --limit 10
+uv run python tools/query_usaspending.py agencies --limit 10                 # List top-tier federal agencies
+uv run python tools/query_usaspending.py covid "QUERY"                       # COVID-19 relief awards
+uv run python tools/query_usaspending.py loans "QUERY"                       # Loan awards (PPP, EIDL, etc.)
+```
+
+### SAM.gov (entity registrations, exclusions, contracts, opportunities — requires SAM_API_KEY)
+```bash
+# Free API key: sam.gov → Account Details → API Key. Basic tier: 10 req/day.
+uv run python tools/query_sam.py entity "QUERY"                              # Entity registration search
+uv run python tools/query_sam.py entity "QUERY" --status A --sections all    # Active entities with full detail
+uv run python tools/query_sam.py entity --uei RN99S3S7N977                   # Search by UEI
+uv run python tools/query_sam.py entity --cage 1ABC2                         # Search by CAGE code
+uv run python tools/query_sam.py exclusions "QUERY"                          # Debarments/suspensions search
+uv run python tools/query_sam.py exclusions "QUERY" --classification Firm    # Firm exclusions only
+uv run python tools/query_sam.py exclusions --npi 1234567890                 # Exclusions by NPI
+uv run python tools/query_sam.py contracts "RECIPIENT"                       # Federal contract awards (replaces FPDS)
+uv run python tools/query_sam.py contracts "RECIPIENT" --naics 541511 --min-amount 1000000
+uv run python tools/query_sam.py contracts --piid GS-35F-0119T              # Search by procurement ID
+uv run python tools/query_sam.py opportunities "surveillance" --posted-from 01/01/2025  # Solicitations
 ```
 
 ### Medicare (CMS spending, no auth)

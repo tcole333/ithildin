@@ -89,9 +89,12 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 
 **Citation types** for new data sources: add one entry to `CITATION_REGISTRY` in `web/src/lib/citations.ts`. See `docs/CITATION_SYSTEM.md` for the registry pattern and example. For one-off URLs without a structured pattern, add the citation key → URL mapping to `web/src/data/source-urls.json`.
 
-**International tools:**
-- `query_usaspending.py`: US Federal spending/contracts — `search`, `awards`, `recipient` — free, no auth
+**Government spending & contracts:**
+- `query_usaspending.py`: Federal spending — `search`, `awards`, `award`, `recipient`, `subawards`, `transactions`, `geography`, `timeline`, `top-recipients`, `agencies` — free, no auth
+- `query_sam.py`: SAM.gov — `entity`, `exclusions`, `contracts`, `opportunities` — free API key (SAM_API_KEY)
 - `query_medicare.py`: Medicare provider spending — `search`, `provider` — free, no auth
+
+**International tools:**
 - `query_france.py`: French company registry (SIRENE) — `search`, `company <SIREN>`, `naf <CODE>`, `address` — free, no auth
 - `query_hudoc.py`: ECHR case database (HUDOC) — `search`, `case <ID>`, `appno <NUM>`, `text <ID>`, `respondent <STATE>` — free, no auth
 
