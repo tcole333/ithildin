@@ -149,6 +149,9 @@ python tools/query_usaspending.py awards "<KNOWN_COMPANY>" --grants --output $WO
 
 # SAM.gov exclusions (debarment/suspension check)
 python tools/query_sam.py exclusions "<NAME>" --output $WORKDIR/inv-sam-exclusions.json
+
+# SAM.gov Bulk (local SQLite — 874K entities, 167K exclusions, no API limit)
+python tools/ingest_sam.py search "<NAME>" --output $WORKDIR/inv-sam-bulk.json
 ```
 
 ### 4. ICIJ Offshore Cross-Reference

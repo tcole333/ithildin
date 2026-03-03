@@ -158,9 +158,13 @@ python tools/query_usaspending.py awards "<ENTITY>" --grants --output $WORKDIR/t
 python tools/query_usaspending.py subawards "<ENTITY>" --output $WORKDIR/trace-usaspending-subs.json
 python tools/query_usaspending.py timeline "<ENTITY>" --group fiscal_year --output $WORKDIR/trace-usaspending-timeline.json
 
-# SAM.gov (entity registration, exclusions — requires SAM_API_KEY)
+# SAM.gov API (entity registration, exclusions — requires SAM_API_KEY)
 python tools/query_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-entity.json
 python tools/query_sam.py exclusions "<ENTITY>" --output $WORKDIR/trace-sam-exclusions.json
+
+# SAM.gov Bulk (874K entities, 167K exclusions — local SQLite, no API limit)
+python tools/ingest_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-bulk-entity.json
+python tools/ingest_sam.py exclusion "<ENTITY>" --output $WORKDIR/trace-sam-bulk-excl.json
 ```
 
 Web research:

@@ -235,6 +235,16 @@ def generate_report():
         sources["SAM.gov"]["status"] = "no_api_key"
         sources["SAM.gov"]["start_cmd"] = "export SAM_API_KEY=<key> (free at sam.gov → Account Details → API Key)"
 
+    # SAM.gov Bulk Data (local SQLite)
+    sources["SAM.gov Bulk"] = {
+        "description": "874K entities, 167K exclusions (monthly extract, local SQLite)",
+        "query_tool": "tools/ingest_sam.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "sam.db",
+            "SELECT COUNT(*) FROM sam_entities"
+        ),
+    }
+
     # APIs
     sources["DugganUSA API"] = {
         "description": "329K+ docs across all 12 DOJ datasets",

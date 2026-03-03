@@ -91,7 +91,8 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 
 **Government spending & contracts:**
 - `query_usaspending.py`: Federal spending — `search`, `awards`, `award`, `recipient`, `subawards`, `transactions`, `geography`, `timeline`, `top-recipients`, `agencies` — free, no auth
-- `query_sam.py`: SAM.gov — `entity`, `exclusions`, `contracts`, `opportunities` — free API key (SAM_API_KEY)
+- `query_sam.py`: SAM.gov API — `entity`, `exclusions`, `contracts`, `opportunities` — free API key (SAM_API_KEY)
+- `ingest_sam.py`: SAM.gov Bulk (874K entities, 167K exclusions) — `search`, `entity`, `exclusion`, `entity-by-uei`, `entity-by-cage`, `naics`, `address`, `stats` — local SQLite, no auth
 - `query_medicare.py`: Medicare provider spending — `search`, `provider` — free, no auth
 
 **International tools:**
