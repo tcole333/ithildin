@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Data source coverage report for the Epstein OSINT investigation.
+Data source coverage report for the OSINT investigation platform.
 
 Lists all available data sources, record counts, and status.
 
@@ -218,6 +218,23 @@ def generate_report():
         ),
     }
 
+    # Government spending
+    sources["USAspending"] = {
+        "description": "All federal spending — contracts, grants, loans, subawards (no auth)",
+        "query_tool": "tools/query_usaspending.py",
+        **check_api("USAspending", "https://api.usaspending.gov/api/v2/references/toptier_agencies/"),
+    }
+
+    sam_key = os.environ.get("SAM_API_KEY")
+    sources["SAM.gov"] = {
+        "description": "Entity registrations, exclusions/debarments, contract awards, opportunities",
+        "query_tool": "tools/query_sam.py",
+        **check_api("SAM.gov", f"https://api.sam.gov/entity-information/v4/exclusions?api_key={sam_key}&q=test" if sam_key else None),
+    }
+    if not sam_key:
+        sources["SAM.gov"]["status"] = "no_api_key"
+        sources["SAM.gov"]["start_cmd"] = "export SAM_API_KEY=<key> (free at sam.gov → Account Details → API Key)"
+
     # APIs
     sources["DugganUSA API"] = {
         "description": "329K+ docs across all 12 DOJ datasets",
@@ -272,11 +289,40 @@ def generate_report():
         **fara_info,
     }
 
+    # Shodan (infrastructure recon)
+    shodan_key = os.environ.get("SHODAN_API_KEY")
+    sources["Shodan"] = {
+        "description": "Internet-connected devices, DNS, SSL certs (infrastructure recon)",
+        "query_tool": "tools/query_shodan.py",
+        **check_api("Shodan", f"https://api.shodan.io/api-info?key={shodan_key}" if shodan_key else None),
+    }
+
+    # crt.sh Certificate Transparency
+    sources["crt.sh CT Logs"] = {
+        "description": "Certificate Transparency logs — subdomain enum, cert timeline, issuer tracking",
+        "query_tool": "tools/query_crtsh.py",
+        **check_api("crt.sh", "https://crt.sh/?q=example.com&output=json"),
+    }
+
+    # Wayback Machine CDX
+    sources["Wayback Machine"] = {
+        "description": "Historical web snapshots — timeline reconstruction, removed content detection",
+        "query_tool": "tools/query_wayback.py",
+        **check_api("Wayback", "https://web.archive.org/cdx/search/cdx?url=example.com&output=json&limit=1"),
+    }
+
+    # URLScan.io
+    sources["URLScan.io"] = {
+        "description": "Passive web scans — tech stacks, linked domains, hosting, HTTP transactions",
+        "query_tool": "tools/query_urlscan.py",
+        **check_api("URLScan", "https://urlscan.io/api/v1/search/?q=domain:example.com&size=1"),
+    }
+
     return sources
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Epstein OSINT data source report")
+    parser = argparse.ArgumentParser(description="OSINT data source coverage report")
     parser.add_argument("-j", "--json", action="store_true")
     args = parser.parse_args()
 
@@ -287,7 +333,7 @@ def main():
         return
 
     print("\n" + "=" * 80)
-    print("EPSTEIN OSINT DATA SOURCE REPORT")
+    print("OSINT DATA SOURCE REPORT")
     print("=" * 80)
 
     available = 0

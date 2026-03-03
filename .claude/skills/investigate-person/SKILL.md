@@ -142,6 +142,13 @@ python tools/query_lobbying.py lobbyist "<NAME>" --output $WORKDIR/inv-lobbying.
 
 # FARA foreign agent registrations (if foreign connections)
 python tools/query_fara.py search "<NAME>" --output $WORKDIR/inv-fara.json
+
+# Federal contracts & grants (companies they lead or are associated with)
+python tools/query_usaspending.py awards "<KNOWN_COMPANY>" --output $WORKDIR/inv-usaspending.json
+python tools/query_usaspending.py awards "<KNOWN_COMPANY>" --grants --output $WORKDIR/inv-usaspending-grants.json
+
+# SAM.gov exclusions (debarment/suspension check)
+python tools/query_sam.py exclusions "<NAME>" --output $WORKDIR/inv-sam-exclusions.json
 ```
 
 ### 4. ICIJ Offshore Cross-Reference

@@ -151,6 +151,16 @@ python tools/query_lobbying.py registrant "<ENTITY>" --output $WORKDIR/trace-lob
 
 # FARA (foreign agent registration)
 python tools/query_fara.py search "<ENTITY>" --output $WORKDIR/trace-fara.json
+
+# Federal contracts & grants (USAspending — no auth)
+python tools/query_usaspending.py awards "<ENTITY>" --output $WORKDIR/trace-usaspending-contracts.json
+python tools/query_usaspending.py awards "<ENTITY>" --grants --output $WORKDIR/trace-usaspending-grants.json
+python tools/query_usaspending.py subawards "<ENTITY>" --output $WORKDIR/trace-usaspending-subs.json
+python tools/query_usaspending.py timeline "<ENTITY>" --group fiscal_year --output $WORKDIR/trace-usaspending-timeline.json
+
+# SAM.gov (entity registration, exclusions — requires SAM_API_KEY)
+python tools/query_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-entity.json
+python tools/query_sam.py exclusions "<ENTITY>" --output $WORKDIR/trace-sam-exclusions.json
 ```
 
 Web research:

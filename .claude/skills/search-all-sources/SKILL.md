@@ -167,6 +167,16 @@ python tools/query_urlscan.py search "domain:<QUERY>" --output $WORKDIR/search-u
 
 # OffshoreAlert (29K+ offshore court cases, articles, MLATs, regulatory actions)
 python tools/offshorealert_search.py search "<QUERY>" -v --output $WORKDIR/search-offshorealert.json
+
+# USAspending (federal contracts, grants, loans — no auth)
+python tools/query_usaspending.py awards "<QUERY>" --output $WORKDIR/search-usaspending-contracts.json
+python tools/query_usaspending.py awards "<QUERY>" --grants --output $WORKDIR/search-usaspending-grants.json
+python tools/query_usaspending.py subawards "<QUERY>" --output $WORKDIR/search-usaspending-subs.json
+
+# SAM.gov (entity registrations, exclusions/debarments — requires SAM_API_KEY)
+python tools/query_sam.py entity "<QUERY>" --output $WORKDIR/search-sam-entity.json
+python tools/query_sam.py exclusions "<QUERY>" --output $WORKDIR/search-sam-exclusions.json
+python tools/query_sam.py contracts "<QUERY>" --output $WORKDIR/search-sam-contracts.json
 ```
 
 ### 1c. Investigation Corpus Tools (from profile)
@@ -202,6 +212,11 @@ log_search("<QUERY>", "shodan", result_count)
 log_search("<QUERY>", "crtsh", result_count)
 log_search("<QUERY>", "wayback", result_count)
 log_search("<QUERY>", "urlscan", result_count)
+log_search("<QUERY>", "usaspending_contracts", result_count)
+log_search("<QUERY>", "usaspending_grants", result_count)
+log_search("<QUERY>", "sam_entity", result_count)
+log_search("<QUERY>", "sam_exclusions", result_count)
+log_search("<QUERY>", "sam_contracts", result_count)
 # etc.
 ```
 
@@ -250,6 +265,8 @@ DC DLCP:      0 hits (ArcGIS, 492K entities)
 [Corpus tools from investigation profile — list each with hit count]
 CA SoS:       0 hits (keyword search, top 150)
 OffshoreAlert: 5 hits (offshore court cases, articles)
+USAspending:  8 hits (contracts), 2 hits (grants), 1 hit (subawards)
+SAM.gov:      3 hits (entities), 0 hits (exclusions), 5 hits (contracts)
 Shodan:       3 hits (SSL certs, DNS records)
 crt.sh:       5 hits (certificate transparency)
 Wayback:      12 hits (historical snapshots)
