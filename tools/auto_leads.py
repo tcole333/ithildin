@@ -520,6 +520,226 @@ def process_pillar_gaps(db, dry_run=False):
     return created, total
 
 
+# Known mass-market registered agent companies — these serve thousands of entities
+# and should not trigger co-agent leads
+MASS_MARKET_AGENTS = {
+    "ct corporation", "c t corporation", "ct corp",
+    "csc", "corporation service company",
+    "national registered agents", "nrai",
+    "registered agents inc", "rai",
+    "legalzoom", "legal zoom",
+    "the corporation trust", "corporation trust company",
+    "united states corporation agents",
+    "northwest registered agent",
+    "incorp services", "incorp",
+    "cogency global",
+    "paracorp",
+    "vcorp services",
+    "wolters kluwer",
+    "capitol services",
+    "the company corporation",
+    "incorporating services",
+    "harvard business services",
+    "agents and corporations",
+    "spiegel & utrera",
+    "blumberg excelsior",
+}
+
+
+def _is_mass_market_agent(agent_name, db=None):
+    """Check if an agent is a mass-market registered agent company."""
+    if not agent_name:
+        return True
+    name_lower = agent_name.strip().lower()
+    # Static list check
+    for mm in MASS_MARKET_AGENTS:
+        if mm in name_lower:
+            return True
+    # Dynamic threshold: if this agent serves 50+ entities in registry.db, flag it
+    if db:
+        try:
+            registry_db = sqlite3.connect(str(PROJECT_ROOT / "registry.db"))
+            count = registry_db.execute(
+                "SELECT COUNT(*) FROM entities WHERE registered_agent LIKE ?",
+                (f"%{agent_name.strip()[:30]}%",)
+            ).fetchone()[0]
+            registry_db.close()
+            if count >= 50:
+                return True
+        except (sqlite3.OperationalError, FileNotFoundError):
+            pass
+    return False
+
+
+def process_officer_escalation(db, dry_run=False):
+    """Escalate priority for officers found at 3+ entities (serial director pattern)."""
+    rows = db.execute("""
+        SELECT person_name, COUNT(DISTINCT entity_id) as entity_count
+        FROM entity_roles
+        GROUP BY LOWER(TRIM(person_name))
+        HAVING COUNT(DISTINCT entity_id) >= 3
+    """).fetchall()
+
+    escalated = 0
+    total = len(rows)
+    for row in rows:
+        person = row["person_name"]
+        entity_count = row["entity_count"]
+
+        dedup_key = f"officer_escalation:{person.strip().lower()}"
+        if is_processed(db, "entity_roles", 0, dedup_key):
+            continue
+
+        # Check if there's an existing lead for this person
+        existing = lead_exists(db, f"officer: {person.strip()[:30]}")
+        if existing:
+            # Escalate priority if it's currently medium/low
+            if not dry_run:
+                db.execute(
+                    "UPDATE leads SET priority = 'high' WHERE id = ? AND priority IN ('medium', 'low')",
+                    (existing,)
+                )
+                db.execute(
+                    "INSERT INTO lead_notes (lead_id, note, created_at) VALUES (?, ?, datetime('now'))",
+                    (existing, f"Auto-escalated: officer at {entity_count} entities (serial director pattern)")
+                )
+            escalated += 1
+        else:
+            # Create a new high-priority lead
+            title = f"Serial director: {person.strip()} — officer at {entity_count} entities"
+            notes = f"Found as officer at {entity_count} different entities. Pattern suggests nominee director or key network operative."
+            if not dry_run:
+                create_lead(db, title, "person", "high", "agent:auto_leads:officer_escalation", target=person.strip(), notes=notes)
+            else:
+                print(f"  [DRY] Serial director (high): {title}")
+            escalated += 1
+
+        log_processed(db, "entity_roles", 0, dedup_key)
+
+    return escalated, total
+
+
+def process_filing_clusters(db, dry_run=False):
+    """Find entities filed within 7 days of each other by the same officer/agent."""
+    try:
+        # Get entities with known formation dates and officers
+        entities = db.execute("""
+            SELECT e.id, e.name, e.jurisdiction,
+                   MIN(er.person_name) as first_officer,
+                   e.created_at as formation_date
+            FROM entities e
+            JOIN entity_roles er ON er.entity_id = e.id
+            WHERE e.created_at IS NOT NULL
+            GROUP BY e.id
+        """).fetchall()
+    except sqlite3.OperationalError:
+        return 0, 0
+
+    if len(entities) < 2:
+        return 0, 0
+
+    # Group by officer and find clusters within 7-day windows
+    from collections import defaultdict
+    import datetime
+
+    officer_entities = defaultdict(list)
+    for e in entities:
+        officer = e["first_officer"].strip().lower() if e["first_officer"] else None
+        if not officer:
+            continue
+        try:
+            date = datetime.datetime.strptime(e["formation_date"][:10], "%Y-%m-%d")
+            officer_entities[officer].append((date, e["name"], e["id"], e["jurisdiction"]))
+        except (ValueError, TypeError):
+            continue
+
+    created = 0
+    total = 0
+    for officer, ents in officer_entities.items():
+        if len(ents) < 2:
+            continue
+        ents.sort(key=lambda x: x[0])
+
+        # Sliding window: find groups within 7 days
+        i = 0
+        while i < len(ents):
+            cluster = [ents[i]]
+            j = i + 1
+            while j < len(ents) and (ents[j][0] - ents[i][0]).days <= 7:
+                cluster.append(ents[j])
+                j += 1
+            if len(cluster) >= 2:
+                total += 1
+                names = ", ".join(c[1] for c in cluster[:5])
+                dedup_key = f"filing_cluster:{officer}:{cluster[0][0].strftime('%Y-%m')}"
+                if not is_processed(db, "entities", 0, dedup_key):
+                    title = f"Filing cluster: {len(cluster)} entities by {officer.title()} within 7 days"
+                    notes = (f"Entities: {names}. Filed within {(cluster[-1][0] - cluster[0][0]).days} days "
+                             f"starting {cluster[0][0].strftime('%Y-%m-%d')}. Investigate coordinated formation.")
+                    if dry_run:
+                        print(f"  [DRY] Filing cluster (high): {title}")
+                    else:
+                        create_lead(db, title, "entity", "high", "agent:auto_leads:filing_cluster",
+                                    target=officer.title(), notes=notes)
+                    created += 1
+                    log_processed(db, "entities", 0, dedup_key)
+            i = j if j > i + 1 else i + 1
+
+    return created, total
+
+
+def process_jurisdiction_clusters(db, dry_run=False):
+    """Find persons with 3+ entities in unusual jurisdictions."""
+    # Jurisdictions that are commonly used for opacity
+    UNUSUAL_JURISDICTIONS = {
+        "wyoming", "wy", "nevada", "nv", "delaware", "de",
+        "usvi", "us virgin islands", "bvi", "british virgin islands",
+        "cayman", "cayman islands", "panama", "bermuda", "jersey",
+        "guernsey", "isle of man", "bahamas", "seychelles",
+        "marshall islands", "nevis", "st. kitts",
+    }
+
+    try:
+        rows = db.execute("""
+            SELECT er.person_name, e.jurisdiction, COUNT(DISTINCT e.id) as entity_count,
+                   GROUP_CONCAT(DISTINCT e.name) as entity_names
+            FROM entity_roles er
+            JOIN entities e ON er.entity_id = e.id
+            WHERE e.jurisdiction IS NOT NULL
+            GROUP BY LOWER(TRIM(er.person_name)), LOWER(TRIM(e.jurisdiction))
+            HAVING COUNT(DISTINCT e.id) >= 3
+        """).fetchall()
+    except sqlite3.OperationalError:
+        return 0, 0
+
+    created = 0
+    total = len(rows)
+    for row in rows:
+        jur = (row["jurisdiction"] or "").strip().lower()
+        if jur not in UNUSUAL_JURISDICTIONS:
+            continue
+
+        person = row["person_name"]
+        dedup_key = f"jurisdiction_cluster:{person.strip().lower()}:{jur}"
+        if is_processed(db, "entity_roles", 0, dedup_key):
+            continue
+
+        entity_names = row["entity_names"][:200] if row["entity_names"] else "unknown"
+        title = f"Jurisdiction cluster: {person.strip()} has {row['entity_count']} entities in {row['jurisdiction']}"
+        notes = (f"Entities: {entity_names}. Concentration in {row['jurisdiction']} "
+                 f"may indicate opacity-seeking behavior.")
+
+        if dry_run:
+            print(f"  [DRY] Jurisdiction cluster (medium): {title}")
+        else:
+            create_lead(db, title, "entity", "medium", "agent:auto_leads:jurisdiction_cluster",
+                        target=person.strip(), notes=notes)
+        created += 1
+        log_processed(db, "entity_roles", 0, dedup_key)
+
+    return created, total
+
+
 def cmd_run(args):
     db = get_db()
 
@@ -561,6 +781,21 @@ def cmd_run(args):
     c, t = process_pillar_gaps(db, args.dry_run)
     results["pillar_gaps"] = (c, t)
     print(f"  {t} multi-institution persons checked, {c} leads created")
+
+    print("\n--- Serial Director Detection ---")
+    c, t = process_officer_escalation(db, args.dry_run)
+    results["officer_escalation"] = (c, t)
+    print(f"  {t} multi-entity officers checked, {c} escalated/created")
+
+    print("\n--- Filing Date Clusters ---")
+    c, t = process_filing_clusters(db, args.dry_run)
+    results["filing_clusters"] = (c, t)
+    print(f"  {t} officer filing groups checked, {c} leads created")
+
+    print("\n--- Jurisdiction Clusters ---")
+    c, t = process_jurisdiction_clusters(db, args.dry_run)
+    results["jurisdiction_clusters"] = (c, t)
+    print(f"  {t} person-jurisdiction pairs checked, {c} leads created")
 
     if not args.dry_run:
         db.commit()
