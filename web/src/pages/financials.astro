@@ -7,7 +7,7 @@ import { resolve } from 'path';
 
 const contentDir = resolve(process.cwd(), '..', 'content', 'financials');
 
-type ApolloFinding = {
+type ModelFinding = {
   id: number;
   target_name?: string;
   summary: string;
@@ -28,19 +28,12 @@ type SankeyLink = {
   label?: string;
 };
 
-type ApolloData = {
+type ModelData = {
   title: string;
   subtitle?: string;
   nodes: SankeyNode[];
   links: SankeyLink[];
-  findings?: ApolloFinding[];
-};
-
-type GenericSankeyData = {
-  title: string;
-  subtitle?: string;
-  nodes: SankeyNode[];
-  links: SankeyLink[];
+  findings?: ModelFinding[];
 };
 
 type DS10Link = {
@@ -114,9 +107,19 @@ function formatMoney(value: number): string {
   return `$${value.toLocaleString()}`;
 }
 
-const apolloData = loadJson<ApolloData>('apollo-pipeline.json');
-const wexnerData = loadJson<GenericSankeyData>('wexner-architecture.json');
-const gratitudeData = loadJson<GenericSankeyData>('gratitude-pipeline.json');
+// Dynamically discover all Sankey model files (exclude ds10-flows which uses FinancialWorkbench)
+import { readdirSync } from 'fs';
+const modelFiles = existsSync(contentDir)
+  ? readdirSync(contentDir).filter(f => f.endsWith('.json') && f !== 'ds10-flows.json').sort()
+  : [];
+const sankeyModels = modelFiles
+  .map(f => loadJson<ModelData>(f))
+  .filter((d): d is ModelData => d !== null && Array.isArray(d.nodes) && Array.isArray(d.links));
+
+// First model with findings gets the evidence anchors section
+const modelWithFindings = sankeyModels.find(m => m.findings && m.findings.length > 0);
+const findingCards = (modelWithFindings?.findings || []).slice(0, 6);
+
 const ds10Data = loadJson<DS10Data>('ds10-flows.json');
 const dossierIndexPath = resolve(process.cwd(), '..', 'content', 'dossiers', '_index.json');
 const dossierIndex = existsSync(dossierIndexPath)
@@ -130,7 +133,6 @@ const dossierSlugByEntityKey = dossierIndex.reduce<Record<string, string>>((acc,
   return acc;
 }, {});
 
-const apolloFindingCards = (apolloData?.findings || []).slice(0, 6);
 const ds10HasData = Boolean(ds10Data && Array.isArray(ds10Data.links) && ds10Data.links.length > 0);
 ---
 <BaseLayout title="Financial Flows">
@@ -181,29 +183,23 @@ const ds10HasData = Boolean(ds10Data && Array.isArray(ds10Data.links) && ds10Dat
       </p>
 
       <div class="mt-4 grid gap-4 xl:grid-cols-2">
-        {apolloData && (
-          <SankeyDiagram data={apolloData} height={340} valueScale="sqrt" client:visible />
-        )}
-        {wexnerData && (
-          <SankeyDiagram data={wexnerData} height={340} valueScale="sqrt" client:visible />
-        )}
-        {gratitudeData && (
-          <SankeyDiagram data={gratitudeData} height={340} valueScale="sqrt" client:visible />
-        )}
+        {sankeyModels.map(model => (
+          <SankeyDiagram data={model} height={340} valueScale="sqrt" client:visible />
+        ))}
       </div>
     </section>
 
-    {apolloFindingCards.length > 0 && (
+    {findingCards.length > 0 && modelWithFindings && (
       <section class="surface p-6">
         <div class="section-label">Evidence Anchors</div>
-        <h2 class="text-xl text-moon font-semibold mt-2">High-signal findings behind the Apollo model</h2>
+        <h2 class="text-xl text-moon font-semibold mt-2">High-signal findings behind {modelWithFindings.title || 'the model'}</h2>
         <p class="text-sm text-mithril mt-2">
           Model diagrams are only useful when they stay attached to specific records and dates.
           These anchors keep the abstraction accountable.
         </p>
 
         <div class="mt-4 grid gap-2 md:grid-cols-2 xl:grid-cols-3">
-          {apolloFindingCards.map(finding => (
+          {findingCards.map(finding => (
             <article class="surface-muted p-3">
               <div class="text-[10px] text-mithril font-mono uppercase tracking-[0.2em]">
                 Finding #{finding.id}{finding.confidence ? ` | ${finding.confidence}` : ''}
