@@ -903,14 +903,17 @@ def bootstrap(dry_run=False):
         except sqlite3.IntegrityError:
             stats["arcs_skipped"] += 1
 
-    # Step 2: Entity roles → career arcs (non-Epstein roles at matched institutions)
+    # Step 2: Entity roles → career arcs (exclude primary subject from bootstrap)
+    from tools.investigation_context import get_active_profile
+    _profile = get_active_profile()
+    _exclude_name = _profile.primary_subject.lower() if _profile.primary_subject else ""
     entity_roles = db.execute("""
         SELECT er.id, er.entity_id, er.person_name, er.role, er.date_start, er.date_end, er.source,
                e.name as entity_name
         FROM entity_roles er
         JOIN entities e ON er.entity_id = e.id
-        WHERE LOWER(er.person_name) != 'jeffrey epstein'
-    """).fetchall()
+        WHERE LOWER(er.person_name) != ?
+    """, (_exclude_name,)).fetchall()
 
     for er in entity_roles:
         pillar_id, pillar_name = _match_institution(er["entity_name"], db)

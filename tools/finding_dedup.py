@@ -18,12 +18,25 @@ from pathlib import Path
 
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
 
-STOP_WORDS = {"the", "a", "an", "and", "or", "but", "in", "on", "at", "to",
+_GENERIC_STOP_WORDS = {"the", "a", "an", "and", "or", "but", "in", "on", "at", "to",
               "for", "of", "with", "by", "from", "is", "was", "were", "are",
               "be", "been", "being", "have", "has", "had", "do", "does", "did",
               "will", "would", "could", "should", "may", "might", "shall",
-              "this", "that", "these", "those", "it", "its", "as", "not", "no",
-              "epstein", "jeffrey"}  # epstein/jeffrey too common to be distinctive
+              "this", "that", "these", "those", "it", "its", "as", "not", "no"}
+
+def _build_stop_words():
+    """Build stop words including primary subject name tokens (too common to be distinctive)."""
+    words = set(_GENERIC_STOP_WORDS)
+    try:
+        from tools.investigation_context import get_active_profile
+        profile = get_active_profile()
+        if profile.primary_subject:
+            words |= set(profile.primary_subject.lower().split())
+    except Exception:
+        pass
+    return words
+
+STOP_WORDS = _build_stop_words()
 
 
 def get_db():

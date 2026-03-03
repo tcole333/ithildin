@@ -636,10 +636,10 @@ def _ensure_schema(db):
         ("finding_evidence", "email_date TEXT"),
         ("finding_evidence", "chain_position INTEGER"),
         # Investigation profile scoping
-        ("leads", "profile_id TEXT DEFAULT 'epstein'"),
-        ("findings", "profile_id TEXT DEFAULT 'epstein'"),
-        ("connections", "profile_id TEXT DEFAULT 'epstein'"),
-        ("investigation_threads", "profile_id TEXT DEFAULT 'epstein'"),
+        ("leads", "profile_id TEXT"),
+        ("findings", "profile_id TEXT"),
+        ("connections", "profile_id TEXT"),
+        ("investigation_threads", "profile_id TEXT"),
         # Source reliability: rename epstein_connection -> subject_connection
         ("source_reliability", "subject_connection TEXT"),
     ]

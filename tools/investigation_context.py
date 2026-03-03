@@ -168,9 +168,12 @@ def get_active_profile_name() -> str:
     if row:
         return row["value"]
 
-    # Default: check if epstein profile exists
-    if (INVESTIGATIONS_DIR / "epstein" / "config.yaml").exists():
-        return "epstein"
+    # No profile set — check if exactly one profile exists and use it
+    if INVESTIGATIONS_DIR.exists():
+        profiles = [d.name for d in INVESTIGATIONS_DIR.iterdir()
+                    if d.is_dir() and d.name != "_template" and (d / "config.yaml").exists()]
+        if len(profiles) == 1:
+            return profiles[0]
     return ""
 
 
