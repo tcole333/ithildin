@@ -10,18 +10,23 @@ Generate a comprehensive status report of the investigation.
 
 ## Process
 
-1. Run `python tools/lead_tracker.py stats` to get lead statistics
-2. Run `python tools/findings_tracker.py stats` to get finding statistics
-3. Run `python tools/source_report.py` to check data source availability
-4. Run `python tools/lead_tracker.py list --status open --priority critical --limit 10` for critical leads
-5. Run `python tools/lead_tracker.py list --status open --priority high --limit 10` for high-priority leads
-6. Run `python tools/lead_tracker.py list --status in_progress --limit 10` for in-progress leads
-7. Run `python tools/findings_tracker.py list --limit 10 -v` for recent findings
-8. Run `python tools/lead_tracker.py list --status open --limit 5` to show newly created leads needing triage
+1. Run `uv run python tools/investigation_context.py show` to display the active investigation profile
+2. Run `uv run python tools/lead_tracker.py stats` to get lead statistics
+3. Run `uv run python tools/findings_tracker.py stats` to get finding statistics
+4. Run `uv run python tools/source_report.py` to check data source availability
+5. Run `uv run python tools/lead_tracker.py list --status open --priority critical --limit 10` for critical leads
+6. Run `uv run python tools/lead_tracker.py list --status open --priority high --limit 10` for high-priority leads
+7. Run `uv run python tools/lead_tracker.py list --status in_progress --limit 10` for in-progress leads
+8. Run `uv run python tools/findings_tracker.py list --limit 10 -v` for recent findings
+9. Run `uv run python tools/lead_tracker.py list --status open --limit 5` to show newly created leads needing triage
 
 ## Output Format
 
 Present a structured report with:
+
+### Active Investigation
+- Profile name, primary subject, description
+- Number of threads, key persons, corpus tools
 
 ### Investigation Dashboard
 - Total leads (open / in_progress / completed / blocked / dead_end)
