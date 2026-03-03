@@ -4,25 +4,27 @@ This document defines how to think as an investigator, not just how to run queri
 
 ## Network Investigation Principles
 
-This investigation is organized around a **network**, not a biography. Jeffrey Epstein is the entry point and a major node, but he is not the sole focus. The investigation follows evidence wherever it leads.
+This investigation is organized around a **network**, not a biography. The primary subject is the entry point and a major node, but they are not the sole focus. The investigation follows evidence wherever it leads.
 
 **Key principles:**
 
-1. **Epstein is a node, not the center.** Many of the most important findings concern relationships between other actors that Epstein connected but didn't mediate. The Mega Group, Apollo's internal dynamics, Deutsche Bank's compliance pipeline, Gulf state operations — these operate with their own logic.
+1. **The primary subject is a node, not the center.** Many of the most important findings concern relationships between other actors that the primary subject connected but didn't mediate. Investigation threads — financial pipelines, institutional dynamics, compliance structures, geographic operations — operate with their own logic.
 
-2. **"No direct Epstein connection" is NOT a close reason.** If a lead reveals network infrastructure, parallel operations, or illuminates how these systems work, it is worth pursuing. NXIVM has no direct Epstein communication trail, but shares Bronfman family connections and parallel trafficking patterns. That matters.
+2. **"No direct connection to the primary subject" is NOT a close reason.** If a lead reveals network infrastructure, parallel operations, or illuminates how these systems work, it is worth pursuing. Peripheral nodes may share family connections, parallel operational patterns, or institutional overlaps with the core network. That matters.
 
-3. **Follow the network, not the biography.** A finding about Leon Black's relationship with Josh Harris is valuable even if Epstein isn't CC'd on the email. Deutsche Bank's RM practices affect many clients beyond Epstein. Mega Group philanthropy reveals coordination patterns independent of any single member.
+3. **Follow the network, not the biography.** A finding about Person A's relationship with Person B is valuable even if the primary subject isn't directly involved. Institutional practices affect many actors beyond any single node. Coordination patterns within investigation threads often operate independently of any single member.
 
 4. **Investigation threads group related work.** Each thread has its own key persons, questions, and relevant sources. A lead belongs to the thread whose questions it answers, not necessarily to the thread where it was discovered.
 
-5. **Cross-thread connections are the highest-value findings.** When a Deutsche Bank thread finding corroborates a Mega Group thread finding through an independent path, that's real intelligence. Watch for these intersections.
+5. **Cross-thread connections are the highest-value findings.** When a finding in one investigation thread corroborates a finding in another thread through an independent path, that's real intelligence. Watch for these intersections.
 
 ## Core Principle: You Are Not a Search Engine
 
 You have deep knowledge of geopolitics, finance, intelligence tradecraft, legal systems, corporate structures, and human behavior baked into your training data. **Use it.** The investigation datasets contain raw signals. Your job is to apply context, pattern recognition, and predictive reasoning to transform signals into intelligence.
 
-When you find that Epstein emailed Rod-Larsen about a "$18M craft purchase" coordinated through a Norwegian Supreme Court lawyer — don't just log it. Ask: Why would a convicted sex offender need a Norwegian lawyer for an $18M transaction? What does "craft" mean in context — a boat? A financial instrument? A euphemism? What was Rod-Larsen doing in 2017-2019 that required Epstein's money? What was Epstein getting in return? Access to the UN Secretary General's office? Norwegian sovereign wealth contacts? IPI's diplomatic cover?
+*Example from Epstein investigation:* When you find that Epstein emailed Rod-Larsen about a "$18M craft purchase" coordinated through a Norwegian Supreme Court lawyer — don't just log it. Ask: Why would a convicted sex offender need a Norwegian lawyer for an $18M transaction? What does "craft" mean in context — a boat? A financial instrument? A euphemism? What was Rod-Larsen doing in 2017-2019 that required Epstein's money? What was Epstein getting in return? Access to the UN Secretary General's office? Norwegian sovereign wealth contacts? IPI's diplomatic cover?
+
+The principle generalizes: when you find an unexplained financial transaction between a subject and a counterparty, don't log it — interrogate it. Why this amount? Why this intermediary? Why this jurisdiction? What does each party gain?
 
 ## The Investigative Mindset
 
@@ -32,140 +34,199 @@ LLMs are extraordinary predictors and simulators of human behavior. Use this.
 
 **Before searching**, form hypotheses:
 - Given what you know about this person's position, incentives, and the time period — what *should* you expect to find?
-- If Epstein was cultivating a relationship with X, what would the progression look like? (flattery → favors → financial entanglement → leverage)
-- If someone was hiding a relationship with Epstein post-2008, what would the concealment pattern look like? (ProtonMail, intermediaries, coded language, meetings in jurisdictions with weak disclosure)
+- If the primary subject was cultivating a relationship with X, what would the progression look like? (flattery → favors → financial entanglement → leverage)
+- If someone was hiding a relationship with the primary subject after a reputational inflection point, what would the concealment pattern look like? (encrypted channels, intermediaries, coded language, meetings in jurisdictions with weak disclosure)
 
 **Then search** to confirm or refute. This is the scientific method applied to investigation. A hypothesis that fails is still valuable — it eliminates a possibility and may reveal something unexpected.
 
-**Example**: You know Epstein had ProtonMail communications (93 DOJ docs). You know he was arrested July 6, 2019. Hypothesis: there should be a spike in ProtonMail activity in early-mid 2019 as heat increased. Search for ProtonMail docs by date. If confirmed, which contacts migrated to encrypted channels? Those are the relationships he was most motivated to protect.
+*Case example (Epstein):* You know Epstein had ProtonMail communications (93 DOJ docs). You know he was arrested July 6, 2019. Hypothesis: there should be a spike in ProtonMail activity in early-mid 2019 as heat increased. Search for ProtonMail docs by date. If confirmed, which contacts migrated to encrypted channels? Those are the relationships he was most motivated to protect.
+
+The general principle: when you identify a subject's adoption of secure/encrypted communication channels, look for temporal spikes that correlate with external pressure. The contacts who migrate to encrypted channels are the relationships the subject most wanted to protect.
 
 ### 2. Simulate the Person
 
 Put yourself in their shoes. These are people at the apex of global power — billionaires, heads of state, intelligence operatives, media moguls, senior lawyers. They don't act randomly. Every relationship has a transactional logic, even when it's wrapped in social pleasantries.
 
 **For each person, ask:**
-- What do they have that Epstein wanted? (access, legitimacy, information, money, political cover)
-- What did Epstein have that they wanted? (money, connections, intelligence, introductions, discretion)
+- What do they have that the primary subject wanted? (access, legitimacy, information, money, political cover)
+- What did the primary subject have that they wanted? (money, connections, intelligence, introductions, discretion)
 - What was their public position vs. their private behavior? The gap is where the story lives.
-- What were they afraid of? After 2008, associating with Epstein carried reputational risk. Who kept coming anyway, and why?
+- What were they afraid of? After a reputational inflection point, association with the primary subject carries risk. Who kept coming anyway, and why?
 - What would exposure cost them specifically? (Career, marriage, freedom, political position)
 
-**For the Epstein node specifically:**
-- He was a master manipulator who played both sides of every relationship
-- He collected leverage systematically — the question with any associate isn't "were they compromised" but "what was the nature of the leverage exchange"
-- He positioned himself as a node connecting worlds that don't normally connect: finance ↔ politics ↔ academia ↔ intelligence ↔ media ↔ royalty
-- His genius was making himself *useful* to powerful people in ways that created dependency
+**Analyzing the Central Node:**
+- How did the primary subject manage relationships? (manipulation, mutual benefit, coercion, charm)
+- Did they collect leverage systematically? The question with any associate isn't "were they compromised" but "what was the nature of the leverage exchange"
+- Did they position themselves as a bridge connecting worlds that don't normally connect? (e.g., finance ↔ politics ↔ academia ↔ intelligence ↔ media)
+- Was their core strategy making themselves *useful* to powerful people in ways that created dependency?
 
-**Other major nodes operate differently:**
-- **Mega Group** (Wexner, Lauder, Steinhardt, Bronfman): Philanthropic/political coordination network. The logic is collective influence, not individual leverage. Members share infrastructure (foundations, political bundling, Israel connections) in ways that create mutual dependency without explicit quid pro quo.
-- **Intelligence actors** (Barak, Maxwell family, Carbyne): Compartmented operations where each participant knows only their piece. The investigation pattern is following clearance levels and access permissions, not email chains.
-- **Financial intermediaries** (Indyke, Kahn, Deutsche Bank RMs): Opacity structuring. Their value is in what they prevent from being visible. Investigate what's missing from the record, not what's in it.
+**Other major nodes operate differently.** Recognize the archetype:
+- **Coordination networks** (philanthropic, political, industry groups): The logic is collective influence, not individual leverage. Members share infrastructure (foundations, political bundling, shared interests) in ways that create mutual dependency without explicit quid pro quo.
+- **Intelligence actors** (state-linked operatives, dual-use companies): Compartmented operations where each participant knows only their piece. The investigation pattern is following clearance levels and access permissions, not email chains.
+- **Financial intermediaries** (personal lawyers, accountants, bank relationship managers): Opacity structuring. Their value is in what they prevent from being visible. Investigate what's missing from the record, not what's in it.
+
+> *Case examples (Epstein):* Mega Group (Wexner, Lauder, Steinhardt, Bronfman) as a coordination network; Barak/Maxwell/Carbyne as intelligence actors; Indyke/Kahn/Deutsche Bank RMs as financial intermediaries.
 
 ### 3. Follow the Incentive Structure
 
 Money flows reveal truth that words obscure.
 
-- $18M between Epstein and Rod-Larsen through a Norwegian lawyer → What service could possibly be worth $18M? This isn't a donation or investment. Follow the money backward and forward.
-- Landon Thomas brokering Masa/SoftBank introduction → A NYT reporter acting as a deal broker is already a massive ethical violation. But *why*? What was Thomas getting? Not just access — he was building a financial dependency with Epstein that would protect him from exposure.
-- Wolff as "PR strategist" not just journalist → 303 emails isn't a source relationship. It's an operational one. What was the information exchange? Who benefited more?
+When analyzing financial flows, always ask: What service could possibly justify this amount? Who benefits, and through what mechanism?
 
-**The "both sides" pattern**: Epstein frequently maintained relationships with opposing parties simultaneously. He advised Weingarten on whether to represent Trump/Kushner while also communicating with people investigating Trump. He maintained relationships with both Israeli intelligence (Barak) and Gulf state figures (Alrasheed, Sultan). He connected Bannon with European heads of state while also feeding information to Wolff who was writing books attacking Bannon's allies. Map who connects to whom and look for the contradictions — they reveal Epstein's actual strategy.
+> *Case examples (Epstein):*
+> - $18M between Epstein and Rod-Larsen through a Norwegian lawyer — What service could possibly be worth $18M? This isn't a donation or investment. Follow the money backward and forward.
+> - Landon Thomas brokering Masa/SoftBank introduction — A NYT reporter acting as a deal broker is already a massive ethical violation. But *why*? What was Thomas getting? Not just access — he was building a financial dependency with Epstein that would protect him from exposure.
+> - Wolff as "PR strategist" not just journalist — 303 emails isn't a source relationship. It's an operational one. What was the information exchange? Who benefited more?
+
+**The "both sides" pattern**: A central node may maintain relationships with opposing parties simultaneously, playing information broker between adversaries. Map who connects to whom and look for the contradictions — they reveal the node's actual strategy.
+
+> *Case example (Epstein):* Epstein advised Weingarten on whether to represent Trump/Kushner while also communicating with people investigating Trump. He maintained relationships with both Israeli intelligence (Barak) and Gulf state figures (Alrasheed, Sultan). He connected Bannon with European heads of state while also feeding information to Wolff who was writing books attacking Bannon's allies.
 
 ### 4. Context Is Everything — Know the Timeline
 
 Events don't happen in isolation. Always check: what else was happening in the world on this date?
 
-- Dec 29, 2016: Epstein offers to arrange Churkin meeting. **Context**: This is 3 weeks after Churkin vetoed a UN Security Council resolution on Syria, 2 months before Churkin's sudden death (Feb 2017), and during the peak of the Russia/Trump controversy.
-- May 2017: Epstein advising Weingarten on Trump/Kushner representation. **Context**: Mueller was just appointed Special Counsel. Flynn had been fired. The stakes were existential for Trump's inner circle.
-- Feb 2019: Wolff sends Rybolovlev manuscript to Epstein. **Context**: Rybolovlev had just had his $2B divorce case resolved, Mueller was wrapping up, and Epstein's own legal situation was about to collapse.
-
 **Always ask**: Why this person, why now, why this topic?
+
+> *Case examples (Epstein):*
+> - Dec 29, 2016: Epstein offers to arrange Churkin meeting. **Context**: This is 3 weeks after Churkin vetoed a UN Security Council resolution on Syria, 2 months before Churkin's sudden death (Feb 2017), and during the peak of the Russia/Trump controversy.
+> - May 2017: Epstein advising Weingarten on Trump/Kushner representation. **Context**: Mueller was just appointed Special Counsel. Flynn had been fired. The stakes were existential for Trump's inner circle.
+> - Feb 2019: Wolff sends Rybolovlev manuscript to Epstein. **Context**: Rybolovlev had just had his $2B divorce case resolved, Mueller was wrapping up, and Epstein's own legal situation was about to collapse.
 
 ### 5. Use Your Multilingual & Multicultural Knowledge
 
-Many of Epstein's associates are international. English-language coverage tells only part of the story.
+Many subjects of network investigations have international associates. English-language coverage tells only part of the story.
 
-- **For Israeli connections** (Barak, Wexner, various intelligence figures): Israeli media covered the Epstein-Barak relationship more aggressively than US media. Hebrew-language reporting may contain details absent from English coverage. When researching Barak, think about what Maariv, Haaretz, and Yedioth Ahronoth reported.
-- **For Russian connections** (Deripaska, Churkin, Lilia): Russian oligarch networks operate by different rules. Understanding *siloviki* vs. *oligarch* dynamics helps explain why Deripaska specifically — he's the aluminum king who survived multiple rounds of Kremlin consolidation. A woman "from WEF who worked for Deripaska" being presented to Epstein is not a random social introduction; it fits a pattern of human intelligence exchange.
-- **For Gulf connections** (Alrasheed, Sultan, MBS): Gulf state power dynamics — particularly the Saudi-Qatari rivalry, MBS's consolidation of power, and the Yemen conflict — provide essential context for the Alrasheed emails. Epstein's "THIS IS NOT WHAT I DO. my expertise is only money" protest is telling — it suggests he was being asked to do something political/intelligence-related that he wanted to distance from.
-- **For Norwegian/European connections** (Rod-Larsen, Jagland, Brende, Lajcak): Nordic financial networks, the IPI's role as a diplomatic back-channel, and WEF connections. Norway's sovereign wealth fund and its intersection with Middle East diplomacy.
+**General principles:**
+- **Local media often covers domestic figures more aggressively** than international outlets. A politician's connections may be well-documented in their home country's press but invisible in English-language coverage.
+- **Different cultures have different power dynamics.** Oligarch networks, Gulf state rivalries, European diplomatic networks, and Asian business conglomerates each operate by their own rules. Understanding those rules is essential to interpreting the evidence.
+- **Diplomatic and financial back-channels** operate across jurisdictions. Sovereign wealth funds, WEF connections, and diplomatic organizations often serve as nodes connecting otherwise separate networks.
 
 When searching, try alternate transliterations, native-language name forms, and consider what sources in that language/culture might reveal that English sources miss.
 
+> *Case examples (Epstein):*
+> - **Israeli connections** (Barak, Wexner): Israeli media covered the Epstein-Barak relationship more aggressively than US media. Hebrew-language reporting (Maariv, Haaretz, Yedioth Ahronoth) contained details absent from English coverage.
+> - **Russian connections** (Deripaska, Churkin): Understanding *siloviki* vs. *oligarch* dynamics explains why Deripaska specifically. A woman "from WEF who worked for Deripaska" being presented to Epstein fits a pattern of human intelligence exchange.
+> - **Gulf connections** (Alrasheed, Sultan, MBS): The Saudi-Qatari rivalry, MBS's consolidation of power, and the Yemen conflict provide essential context for the Alrasheed emails.
+> - **Norwegian/European connections** (Rod-Larsen, Jagland): Nordic financial networks, IPI's role as a diplomatic back-channel, and Norway's sovereign wealth fund intersection with Middle East diplomacy.
+
 ### 6. Understand the Con Artist Playbook
 
-> **Note**: This section describes the Epstein node's operating pattern. Other nodes in the network use different patterns — Mega Group operates through philanthropic coordination, intelligence actors through compartmented ops, financial intermediaries through opacity structuring. Each node requires its own analytical framework.
+> **Note**: This section describes a specific operating pattern — the con artist / dependency cycle — applicable when the central node operates through manufactured dependency rather than direct coercion. Other nodes use different patterns: coordination networks operate through philanthropic/political alignment, intelligence actors through compartmented ops, financial intermediaries through opacity structuring. Each node requires its own analytical framework.
 
-**Epstein was a con artist, not a blackmailer.** This distinction is critical for recognizing the patterns in the data. He didn't simply collect compromising information and threaten people with it. He ran a far more sophisticated operation: create the problem, become the solution, build dependency, accumulate leverage as a natural byproduct of "helping."
+**When the central node operates as a con artist**, the distinction from a blackmailer is critical for recognizing patterns in the data. They don't simply collect compromising information and threaten people with it. They run a far more sophisticated operation: create the problem, become the solution, build dependency, accumulate leverage as a natural byproduct of "helping."
 
-**The Dependency Cycle** (confirmed across multiple targets):
+**The Dependency Cycle:**
 
-1. **Identify vulnerability** — Cultivate wealthy/powerful people with sexual indiscretions, financial exposure, messy personal lives, or ambition that outpaces their network.
+1. **Identify vulnerability** — Cultivate wealthy/powerful people with personal indiscretions, financial exposure, messy personal lives, or ambition that outpaces their network.
 
-2. **Offer help** — Crisis management (Leon Black/Gigi extortion), access brokering (Josh Harris → Gates dinner), legal strategy (Kraft arrest), financial management (Chomsky trusts), PR spin (Wolff), career management (Boris Nikolic's Gates Foundation departure).
+2. **Offer help** — Crisis management, access brokering, legal strategy, financial management, PR spin, career management. The specific form adapts to the target's need.
 
-3. **Embed deeper** — Through "helping," gain access to: private investigation reports, wiretap transcripts, financial structures, tax documents, organizational docs, plea strategies, and personal admissions. Each piece of help creates a new information asymmetry.
+3. **Embed deeper** — Through "helping," gain access to: private investigation reports, financial structures, tax documents, organizational docs, plea strategies, and personal admissions. Each piece of help creates a new information asymmetry.
 
-4. **Accumulate leverage** — The "hypocrisy" file (EFTA02515461, Nov 2014) is a literal kompromat index: "mistresses, drug use, tax evasion, girls under 25, extortion paid re porn" — each item maps to a real person. But this leverage was rarely wielded overtly. It existed as *gravitational pull* — people couldn't leave because Epstein knew too much, and he'd been too helpful.
+4. **Accumulate leverage** — The accumulated information functions as *gravitational pull* — people can't leave because the central node knows too much, and they've been too helpful. This leverage is rarely wielded overtly; its power is in its latent existence.
 
-5. **Create inescapable dependency** — Once someone accepted help, they were locked in. Epstein: "my neck was out long in trying to get very high level friends to intervene on gigi" (EFTA02627089) — explicitly framing his help as a debt owed. He described his approach as **"Standard Procedures"** (EFTA02659977) — a systematized methodology refined over years.
+5. **Create inescapable dependency** — Once someone accepted help, they were locked in. The central node frames their help as a debt owed, creating an obligation cycle that compounds over time.
 
-**Documented examples of the cycle:**
+> *Case examples (Epstein):* Epstein's "hypocrisy" file (EFTA02515461, Nov 2014) was a literal kompromat index: "mistresses, drug use, tax evasion, girls under 25, extortion paid re porn" — each item mapping to a real person. He described his approach as **"Standard Procedures"** (EFTA02659977) — a systematized methodology. He framed debts explicitly: "my neck was out long in trying to get very high level friends to intervene on gigi" (EFTA02627089).
 
-- **Leon Black**: Epstein introduced women → one extorted Black → Epstein led the investigation with Nardello & Co. → deployed surveillance, recommended wiretapping → managed marital crisis when wife discovered the affair → knew about "all the others" → Black paid Epstein $158M+ in "consulting fees"
-- **Josh Harris**: Epstein restructured finances → triggered tax complications → offered to help with the tax problems → gained visibility into Apollo's internal financial structures
-- **Robert Kraft**: Arrested in prostitution sting → Epstein immediately offered help and his Palm Beach lawyer → provided felony threshold analysis ("three instances") → managed plea resolution → controlled information flow ("kraft news... only me and you")
-- **Noam Chomsky**: Inserted himself into estate/trust administration → Chomsky's family confused about charges and money flows → Epstein orchestrating behind the scenes while family turned against each other
-- **Boris Nikolic**: Managed Boris's departure from Gates Foundation → controlled separation agreement terms → ordered no paper trail → directed him to Yuri Milner for next career move → Boris became permanent access broker to Gates/tech world
-- **Bannon/Wolff**: Interacted with Bannon directly while simultaneously coordinating with Wolff (who was writing books attacking Bannon's allies). Wolff: "Brad Karp is super menchy and offering much help on next book" — all orchestrated through Epstein.
-
-**Key operatives in the cycle:**
-- **Brad Karp** (Paul Weiss chairman): Ran Nardello surveillance operations, managed legal crises, edited Wolff manuscripts, provided tax advice. 1,038+ documents.
-- **Boris Nikolic** (Gates' science advisor): Access broker to tech/science world, managed by Epstein through career transitions, offered women to Epstein while on probation. 2,214+ documents.
-- **Nardello & Co.**: Private investigation firm used for surveillance, covert recording, and intelligence gathering against extortionists, potential accusers, and targets.
-
-**When investigating any Epstein relationship, ask:**
+**When investigating any relationship with the central node, ask:**
 - Where in the dependency cycle is this person?
-- What problem did Epstein "help" with?
-- What information did Epstein gain through that help?
-- Who else in Epstein's network was connected to this person's problem?
-- Was the problem actually created or exacerbated by Epstein?
+- What problem did the central node "help" with?
+- What information did the central node gain through that help?
+- Who else in the network was connected to this person's problem?
+- Was the problem actually created or exacerbated by the central node?
+
+> *Case examples (Epstein) — documented instances of the dependency cycle:*
+>
+> - **Leon Black**: Epstein introduced women → one extorted Black → Epstein led the investigation with Nardello & Co. → deployed surveillance, recommended wiretapping → managed marital crisis when wife discovered the affair → knew about "all the others" → Black paid Epstein $158M+ in "consulting fees"
+> - **Josh Harris**: Epstein restructured finances → triggered tax complications → offered to help with the tax problems → gained visibility into Apollo's internal financial structures
+> - **Robert Kraft**: Arrested in prostitution sting → Epstein immediately offered help and his Palm Beach lawyer → provided felony threshold analysis ("three instances") → managed plea resolution → controlled information flow ("kraft news... only me and you")
+> - **Noam Chomsky**: Inserted himself into estate/trust administration → Chomsky's family confused about charges and money flows → Epstein orchestrating behind the scenes while family turned against each other
+> - **Boris Nikolic**: Managed Boris's departure from Gates Foundation → controlled separation agreement terms → ordered no paper trail → directed him to Yuri Milner for next career move → Boris became permanent access broker to Gates/tech world
+> - **Bannon/Wolff**: Interacted with Bannon directly while simultaneously coordinating with Wolff (who was writing books attacking Bannon's allies). Wolff: "Brad Karp is super menchy and offering much help on next book" — all orchestrated through Epstein.
+>
+> **Key operatives in the cycle:**
+> - **Brad Karp** (Paul Weiss chairman): Ran Nardello surveillance operations, managed legal crises, edited Wolff manuscripts, provided tax advice. 1,038+ documents.
+> - **Boris Nikolic** (Gates' science advisor): Access broker to tech/science world, managed by Epstein through career transitions. 2,214+ documents.
+> - **Nardello & Co.**: Private investigation firm used for surveillance, covert recording, and intelligence gathering.
 
 ### 7. Recognize Patterns of Structural Deception
 
-Beyond the interpersonal con, Epstein's network was structurally designed to obscure:
+Networks engaged in illicit or concealed activity are structurally designed to obscure. Look for these patterns:
 
-**Shell company layering**: Dozens of LLCs, trusts, and offshore entities (NES LLC, Maple Inc, Financial Trust Company, Liquid Funding, LSJE LLC, etc.). Every layer of corporate structure is a layer of obfuscation. When you find a new entity name, don't just log it — ask what it was hiding.
+**Shell company layering**: Multiple LLCs, trusts, and offshore entities where every layer of corporate structure is a layer of obfuscation. When you find a new entity name, don't just log it — ask what it was hiding.
 
-**Intermediaries**: Many of Epstein's most important relationships were mediated through intermediaries. Lesley Groff, Christina Galbraith, Darren Indyke — these aren't just assistants. They're cutouts who provide plausible deniability. When you see a communication going through an intermediary, ask: why wasn't this direct?
+**Intermediaries**: Important relationships mediated through intermediaries who aren't just assistants — they're cutouts providing plausible deniability. When you see a communication going through an intermediary, ask: why wasn't this direct?
 
-**Coded language**: "Training Program in Antalya" for placing a young Russian woman at a Turkish resort. "Craft purchase" for $18M through a Norwegian lawyer. "Cognitive intervention" for... what exactly? "Tax on the stupid" for extortion payments. Always question euphemisms.
+**Coded language**: Euphemisms and coded terms for sensitive activities. Always question language that seems disproportionately vague or specific for the context.
 
-**The rehabilitation narrative**: Post-2008, Epstein systematically built a narrative of scientific philanthropy and reformed behavior. The Gates Foundation letters, the Harvard donations, the AI/science conferences — these weren't genuine intellectual interests. They were reputation laundering. Every "scientific" connection should be examined for what it was actually accomplishing.
+**Reputation laundering narratives**: After a reputational inflection point, subjects may systematically build narratives of reform — philanthropic activity, academic connections, public interest work. Every "legitimate" connection formed after the inflection point should be examined for what it was actually accomplishing.
 
-**The "both sides" intelligence operation**: Epstein didn't just play both sides socially — he ran active intelligence operations. Brad Karp coordinated Nardello surveillance teams in London and New York, produced covert recording transcripts, and managed legal crises — all while Epstein maintained the appearance of a social fixer. The distinction between "helpful friend" and "intelligence operation" is where the real story lives.
+**Private intelligence operations**: The distinction between "helpful friend" and "intelligence operation" is where the real story lives. When a subject coordinates surveillance, manages information flow, and deploys professional investigators — that's an operation, not a friendship.
+
+> *Case examples (Epstein):*
+> - **Shell companies**: NES LLC, Maple Inc, Financial Trust Company, Liquid Funding, LSJE LLC — dozens of entities, each a layer of obfuscation.
+> - **Intermediaries**: Lesley Groff, Christina Galbraith, Darren Indyke — cutouts providing plausible deniability.
+> - **Coded language**: "Training Program in Antalya" for placing a young Russian woman at a Turkish resort. "Craft purchase" for $18M through a Norwegian lawyer. "Tax on the stupid" for extortion payments.
+> - **Rehabilitation narrative**: Post-2008, Epstein built a narrative of scientific philanthropy — Gates Foundation letters, Harvard donations, AI/science conferences — all reputation laundering.
+> - **Intelligence operation**: Brad Karp coordinated Nardello surveillance teams in London and New York, produced covert recording transcripts, and managed legal crises — all while Epstein maintained the appearance of a social fixer.
 
 ### 7. What's Missing Is Often More Important Than What's Present
 
-- 835 documented flights from 2013-2019 with **zero** passenger manifests. Why? Who was flying?
-- 40 seized computers and 70+ CDs. Never in the EFTA releases. What's on them?
-- The Epstein-Barak relationship: 444 emails in the EML corpus but only 28 in the HF parquet. Where did the discrepancy come from? What was filtered?
-- ProtonMail adoption: When someone switches to encrypted communications, they're protecting something. The *timing* of the switch is the intelligence.
-- July 6, 2019: Arrest day. Epstein had a Bannon breakfast planned for July 7. What else was scheduled? The calendar in the days surrounding arrest reveals what he thought his immediate future looked like.
+In any investigation, look for:
+- **Records that should exist but don't** — flights without manifests, seized materials never released, meetings with no minutes
+- **Dataset discrepancies** — the same relationship showing different volumes across data sources suggests filtering or compartmentalization
+- **Migration to encrypted channels** — when someone switches to encrypted communications, they're protecting something. The *timing* of the switch is the intelligence.
+- **The calendar around inflection points** — what was scheduled in the days surrounding an arrest, resignation, or exposure? The subject's planned near-future reveals what they thought was about to happen.
+
+> *Case examples (Epstein):*
+> - 835 documented flights from 2013-2019 with **zero** passenger manifests. Why? Who was flying?
+> - 40 seized computers and 70+ CDs. Never in the EFTA releases. What's on them?
+> - The Epstein-Barak relationship: 444 emails in the EML corpus but only 28 in the HF parquet. Where did the discrepancy come from? What was filtered?
+> - July 6, 2019: Arrest day. Epstein had a Bannon breakfast planned for July 7. What else was scheduled?
 
 ### 8. Cross-Bureaucratic Correlation
 
 The most powerful findings come from connecting information across independent bureaucratic silos that were never meant to be combined:
 
-- DOJ criminal investigation files + civil litigation discovery (Giuffre v. Maxwell, USVI v. JPMorgan) + ICIJ offshore leaks + FinCEN SARs + SEC filings = a composite picture no single agency possesses
-- An EFTA document mentioning a wire transfer + a USVI v. JPMorgan exhibit showing the receiving account + an ICIJ record showing the offshore entity = a traceable financial chain
-- A flight log entry + a contemporaneous email + a property record + a corporate filing = placing a specific person at a specific location for a specific purpose
+- Criminal investigation files + civil litigation discovery + offshore leaks + financial SARs + SEC filings = a composite picture no single agency possesses
+- A document mentioning a wire transfer + a civil exhibit showing the receiving account + an offshore registry record showing the entity = a traceable financial chain
+- A travel record + a contemporaneous email + a property record + a corporate filing = placing a specific person at a specific location for a specific purpose
 
-**This is what you're uniquely positioned to do.** No human researcher can hold 331K pages + 204K documents + 800K offshore entities + 60K files in working memory simultaneously. You can. Use that advantage.
+**This is what you're uniquely positioned to do.** No human researcher can hold hundreds of thousands of pages across dozens of data sources in working memory simultaneously. You can. Use that advantage.
+
+> *Case example (Epstein):* DOJ EFTA documents + Giuffre v. Maxwell discovery + USVI v. JPMorgan exhibits + ICIJ offshore leaks + FinCEN SARs + SEC filings = 331K pages + 204K documents + 800K offshore entities + 60K files, forming a composite picture no single agency possessed.
+
+### 9. The Unseeing Discipline
+
+([Source: gwern.net/unseeing](https://gwern.net/unseeing))
+
+Investigation requires **unseeing** — deliberately stripping away comfortable abstractions to perceive the raw substrate beneath. The more expertise you have, the harder this becomes. Expertise teaches you what things "are" and how they "work," which makes you blind to what they actually are and how they can actually be used.
+
+**The principle**: Every system has at least two descriptions — the high-level abstraction humans use, and the low-level substrate it's actually made of. The gaps between these descriptions are where hidden truths live.
+
+Applied to investigation:
+
+**Unsee "companies."** A company is an abstraction. Underneath it is: a filing in a specific jurisdiction, on a specific date, by a specific agent, listing specific officers, at a specific address. The company is a story someone told a bureaucracy. The filing is a fact. When you investigate any entity, don't think about what it claims to be — think: who signed the filing, when was it filed, what address was used, who is the registered agent, what state, and why that state?
+
+**Unsee "relationships."** A "professional relationship" between two people is an abstraction. Underneath it is: N emails over Y years, specific financial transfers with dollar amounts and dates, meetings at specific locations on specific dates, shared corporate entities, shared legal counsel. The abstraction "they were friends" or "it was professional" conceals the transactional mechanics the raw data reveals.
+
+**Unsee "legitimate businesses."** An entity calling itself a trust company, consultancy, or foundation is using a label. Unsee the label. Look at: the filing jurisdiction, the address, the officers, the period of operation, the assets managed, the counterparty relationships. Does it have the infrastructure a real version of what it claims to be would have — employees, offices, clients beyond the principal, regulatory filings? If not, it's not what it claims. It's a filing that calls itself one.
+
+> *Case examples (Epstein):* Gratitude America Ltd — don't think "nonprofit," think: who signed the 990, when was it filed, what address, who is the registered agent, what state, and why? Southern Trust Company — a filing in the USVI with no clients beyond Epstein, no independent operations. It's not a trust company; it's a filing that calls itself one.
+
+**Unsee "official narratives."** A DOJ press release says "the investigation is complete." Unsee that. Underneath it is: specific decisions by specific prosecutors about specific charges, in a specific political context, with specific career incentives. A "completed investigation" may actually be an investigation that was stopped, and the substrate (who decided, when, what they did next) tells you which.
+
+**Unsee infrastructure.** A "website" is an abstraction. Underneath it is: DNS records, IP addresses, SSL certificates, HTTP headers, hosting accounts, deployment pipelines. These reveal relationships, timelines, and capabilities that the visible webpage conceals. A certificate issued 3 weeks before a company was announced reveals pre-operational setup. A CSP header whitelisting `api.openai.com` reveals AI integration. Shared hosting between "separate" organizations reveals common control. (See `/investigate-infra` for the full methodology.)
+
+**The practice**: At every investigative step, ask — *what is this thing actually made of, beneath the label I've been given for it?* The label is the abstraction. The filing, the wire transfer, the DNS record, the email header, the certificate — those are the atoms. Investigate the atoms, not the labels.
+
+**Negative unseeing**: The most powerful application is seeing what *isn't* there. A billion-dollar fund with no EDGAR filings. A "technology company" with no GitHub, no patents, no technical employees. A trust company with no clients besides its creator. A person with 300 email mentions but zero corporate filings. These absences are invisible until you unsee the abstraction that explains them away — and once you unsee it, the absence becomes screaming evidence.
 
 ## When Investigating a Person
 
-1. **Start with what you already know** from training data. Who is this person in the world? What's their public biography? What controversies exist? What's their known role in the network — whether connected through Epstein directly, through a parallel structure like Mega Group, or through institutional ties like Deutsche Bank?
+1. **Start with what you already know** from training data. Who is this person in the world? What's their public biography? What controversies exist? What's their known role in the network — whether connected through the primary subject directly, through a parallel structure, or through institutional ties?
 
 2. **Form hypotheses** about what the relationship actually was. What did each party gain? What would the documentary evidence look like if your hypothesis is correct?
 
@@ -173,15 +234,15 @@ The most powerful findings come from connecting information across independent b
 
 4. **Analyze with context**. Don't just count emails — read them. What's the tone? Is it formal or intimate? Are there requests being made? Favors exchanged? Information shared that shouldn't be? What's conspicuously absent?
 
-5. **Look for the contradiction**. The gap between someone's public position and their private communications with Epstein is the story. A Goldman Sachs General Counsel calling a convicted sex offender "Uncle Jeffrey" — that's not a casual acquaintance.
+5. **Look for the contradiction**. The gap between someone's public position and their private communications with the primary subject is the story. When the tone, frequency, or content of private communications contradicts the public characterization of a relationship — that's not a casual acquaintance.
 
-6. **Map the network**. Who else appears in the same threads? Who are the intermediaries? What other relationships does this person have that connect back to the Epstein network through independent paths?
+6. **Map the network**. Who else appears in the same threads? Who are the intermediaries? What other relationships does this person have that connect back to the primary subject's network through independent paths?
 
 7. **Think about what comes next**. Your investigation should end with new hypotheses to test, not just a list of query results.
 
 ## Tool Discipline: Use ALL Available Sources
 
-**CRITICAL**: The email/document corpus (DOJ Vol 11, DugganUSA, LMSBAND, Unified DB) is NOT the entire investigation. It is ONE evidence stream. Many confirmed Epstein entities, operatives, and financial relationships leave ZERO trace in the email corpus. "Not in the emails" does NOT mean "not connected."
+**CRITICAL**: The primary document corpus is NOT the entire investigation. It is ONE evidence stream. Many confirmed entities, operatives, and financial relationships leave ZERO trace in the document corpus. "Not in the documents" does NOT mean "not connected."
 
 ### The Corpus Fallacy
 
@@ -189,7 +250,7 @@ An entity discovered through a phone pivot, address pivot, or corporate filing t
 - An operational entity that was never discussed over email
 - A logistics/services vendor paid through wire transfers
 - A shell company managed by intermediaries who handled everything verbally
-- A legitimate business with a corporate connection that predates or postdates the corpus period (mostly 2013-2019)
+- A legitimate business with a corporate connection that predates or postdates the corpus period
 
 **The correct response to zero corpus results is to investigate harder using external tools, not to close the lead.**
 
@@ -325,12 +386,12 @@ One good tool serves every future investigation. A 30-minute tool build that sav
 
 ## Thread-Based Investigation
 
-Investigation threads group related leads and findings around a theme or sub-network. They replace the implicit assumption that every lead is "about Epstein."
+Investigation threads group related leads and findings around a theme or sub-network. They replace the implicit assumption that every lead is "about the primary subject."
 
 ### What a Thread Is
 
 A thread is a named grouping with:
-- **Title**: e.g., "Mega Group", "Deutsche Bank Pipeline", "Gulf State Operations"
+- **Title**: e.g., "Financial Pipeline", "Coordination Network", "Geographic Operations"
 - **Key persons**: The major actors whose relationships define the thread
 - **Key questions**: What the thread is trying to answer
 - **Relevant sources**: Which data sources are most productive for this thread
@@ -340,8 +401,8 @@ Leads and findings can be assigned to a thread via `--thread-id N`. Unthreaded i
 ### When to Create a New Thread vs. Extend Existing
 
 **Create a new thread** when:
-- You've identified a distinct sub-network with its own internal logic (e.g., "NXIVM/Bronfman" if it grows beyond a few leads)
-- A geographic or institutional cluster emerges that doesn't fit existing threads (e.g., "UK Operations" if enough London-based findings accumulate)
+- You've identified a distinct sub-network with its own internal logic that doesn't fit existing threads
+- A geographic or institutional cluster emerges (e.g., a specific jurisdiction with enough findings to warrant its own thread)
 
 **Extend an existing thread** when:
 - A new person or entity is discovered that fits an existing thread's questions
@@ -354,7 +415,7 @@ The highest-value findings often bridge threads. When investigating within Threa
 2. Create a lead in Thread B (where it should be followed up)
 3. Note the cross-thread connection in both items
 
-Example: While investigating Deutsche Bank RMs (Thread 3), you discover an RM also managed Mega Group member accounts. The DB finding stays in Thread 3, but you create a Mega Group lead (Thread 2) to investigate those accounts.
+Example: While investigating a financial pipeline thread, you discover a relationship manager also serviced accounts belonging to a coordination network thread. The financial finding stays in its thread, but you create a lead in the coordination network thread to investigate those accounts.
 
 ### Thread Scoping for Agents
 
