@@ -1149,6 +1149,200 @@ def process_connection_persons(db, thread_ids, profile_id, dry_run=False):
     return created, total
 
 
+def process_entity_crossref(db, dry_run=False):
+    """Fuzzy-match newly ingested entities against existing entities/connections/findings.
+
+    Inspired by Aleph/OpenAleph cross-reference on ingest.
+    """
+    from rapidfuzz import fuzz
+
+    try:
+        from tools.entity_resolution import normalize_entity_name
+    except ImportError:
+        from entity_resolution import normalize_entity_name
+
+    THRESHOLD = 85
+
+    # Get entities not yet cross-referenced
+    rows = db.execute("""
+        SELECT id, name, entity_type, jurisdiction
+        FROM entities
+        WHERE id NOT IN (
+            SELECT record_id FROM auto_crossref_log
+            WHERE table_name='entities' AND crossref_type='entity_crossref'
+        )
+    """).fetchall()
+
+    # Load all entity names for matching
+    all_entities = db.execute("SELECT id, name FROM entities").fetchall()
+    entity_names = [(r["id"], r["name"], normalize_entity_name(r["name"])) for r in all_entities]
+
+    # Load connection person names for matching
+    conn_persons = set()
+    for r in db.execute("SELECT DISTINCT person_a FROM connections").fetchall():
+        conn_persons.add(r["person_a"])
+    for r in db.execute("SELECT DISTINCT person_b FROM connections").fetchall():
+        conn_persons.add(r["person_b"])
+
+    # Load finding target names
+    finding_targets = set()
+    for r in db.execute("SELECT DISTINCT target_name FROM findings WHERE target_name IS NOT NULL").fetchall():
+        finding_targets.add(r["target_name"])
+
+    created = 0
+    for row in rows:
+        name = row["name"]
+        if not name or len(name.strip()) < 3:
+            log_processed(db, "entities", row["id"], "entity_crossref")
+            continue
+
+        norm = normalize_entity_name(name)
+        if len(norm) < 3:
+            log_processed(db, "entities", row["id"], "entity_crossref")
+            continue
+
+        matches = []
+
+        # Match against other entities
+        for eid, ename, enorm in entity_names:
+            if eid == row["id"]:
+                continue
+            score = fuzz.token_sort_ratio(norm, enorm)
+            if score >= THRESHOLD:
+                matches.append(("entity", eid, ename, score))
+
+        # Match against connection persons
+        for person in conn_persons:
+            score = fuzz.token_sort_ratio(norm, person.lower())
+            if score >= THRESHOLD:
+                matches.append(("connection_person", None, person, score))
+
+        # Match against finding targets
+        for target in finding_targets:
+            score = fuzz.token_sort_ratio(norm, target.lower())
+            if score >= THRESHOLD:
+                matches.append(("finding_target", None, target, score))
+
+        if matches:
+            # Take best match
+            best = max(matches, key=lambda m: m[3])
+            match_type, match_id, match_name, score = best
+
+            title = f"Entity crossref: '{name.strip()[:30]}' ↔ '{match_name[:30]}' (score={score})"
+            existing = lead_exists(db, f"Entity crossref: '{name.strip()[:30]}'")
+            if existing:
+                log_processed(db, "entities", row["id"], "entity_crossref", existing)
+                continue
+
+            notes = f"Fuzzy match ({score}%) between entity #{row['id']} '{name}' and {match_type} '{match_name}'."
+            if match_id:
+                notes += f" Match entity ID: {match_id}."
+            notes += f" {len(matches)} total matches above {THRESHOLD}% threshold."
+
+            priority = "high" if score >= 95 else "medium"
+
+            if dry_run:
+                print(f"  [DRY] Entity crossref ({priority}): {title}")
+            else:
+                lead_id = create_lead(db, title, "entity", priority,
+                                      "agent:auto_leads:entity_crossref",
+                                      target=name.strip(), notes=notes)
+                log_processed(db, "entities", row["id"], "entity_crossref", lead_id)
+                created += 1
+        else:
+            log_processed(db, "entities", row["id"], "entity_crossref")
+
+    return created, len(rows)
+
+
+def process_person_crossref(db, dry_run=False):
+    """Fuzzy-match entity_roles person names against connections/findings."""
+    from rapidfuzz import fuzz
+
+    try:
+        from tools.entity_resolution import normalize_person_name
+    except ImportError:
+        from entity_resolution import normalize_person_name
+
+    THRESHOLD = 85
+
+    # Get person names from entity_roles not yet cross-referenced
+    rows = db.execute("""
+        SELECT er.id, er.person_name, er.entity_id, e.name as entity_name
+        FROM entity_roles er
+        JOIN entities e ON er.entity_id = e.id
+        WHERE er.id NOT IN (
+            SELECT record_id FROM auto_crossref_log
+            WHERE table_name='entity_roles' AND crossref_type='person_crossref'
+        )
+    """).fetchall()
+
+    # Load connection person names
+    conn_persons = set()
+    for r in db.execute("SELECT DISTINCT person_a FROM connections").fetchall():
+        conn_persons.add(r["person_a"])
+    for r in db.execute("SELECT DISTINCT person_b FROM connections").fetchall():
+        conn_persons.add(r["person_b"])
+
+    # Load finding target names
+    finding_targets = set()
+    for r in db.execute("SELECT DISTINCT target_name FROM findings WHERE target_name IS NOT NULL").fetchall():
+        finding_targets.add(r["target_name"])
+
+    created = 0
+    for row in rows:
+        person = row["person_name"]
+        if not person or len(person.strip()) < 3:
+            log_processed(db, "entity_roles", row["id"], "person_crossref")
+            continue
+
+        norm = normalize_person_name(person)
+        if len(norm) < 3:
+            log_processed(db, "entity_roles", row["id"], "person_crossref")
+            continue
+
+        matches = []
+
+        for cp in conn_persons:
+            score = fuzz.token_sort_ratio(norm, normalize_person_name(cp))
+            if score >= THRESHOLD:
+                matches.append(("connection", cp, score))
+
+        for ft in finding_targets:
+            score = fuzz.token_sort_ratio(norm, ft.lower())
+            if score >= THRESHOLD:
+                matches.append(("finding", ft, score))
+
+        if matches:
+            best = max(matches, key=lambda m: m[2])
+            match_type, match_name, score = best
+
+            title = f"Person crossref: '{person.strip()[:25]}' (officer of {row['entity_name'][:20]}) ↔ '{match_name[:25]}' ({score}%)"
+            existing = lead_exists(db, f"Person crossref: '{person.strip()[:25]}'")
+            if existing:
+                log_processed(db, "entity_roles", row["id"], "person_crossref", existing)
+                continue
+
+            notes = (f"Officer '{person}' of entity '{row['entity_name']}' fuzzy-matches "
+                     f"{match_type} '{match_name}' at {score}%. "
+                     f"{len(matches)} total matches above {THRESHOLD}%.")
+
+            priority = "high" if score >= 95 else "medium"
+
+            if dry_run:
+                print(f"  [DRY] Person crossref ({priority}): {title}")
+            else:
+                lead_id = create_lead(db, title, "person", priority,
+                                      "agent:auto_leads:person_crossref",
+                                      target=person.strip(), notes=notes)
+                log_processed(db, "entity_roles", row["id"], "person_crossref", lead_id)
+                created += 1
+        else:
+            log_processed(db, "entity_roles", row["id"], "person_crossref")
+
+    return created, len(rows)
+
+
 def cmd_run(args):
     global _max_leads_per_run, _leads_created_this_run
     _max_leads_per_run = getattr(args, 'max_leads', 100)
@@ -1223,6 +1417,16 @@ def cmd_run(args):
         c, t = process_jurisdiction_clusters(db, args.dry_run)
         results["jurisdiction_clusters"] = (c, t)
         print(f"  {t} person-jurisdiction pairs checked, {c} leads created")
+
+        print("\n--- Entity Cross-Reference ---")
+        c, t = process_entity_crossref(db, args.dry_run)
+        results["entity_crossref"] = (c, t)
+        print(f"  {t} entities cross-referenced, {c} leads created")
+
+        print("\n--- Person Cross-Reference ---")
+        c, t = process_person_crossref(db, args.dry_run)
+        results["person_crossref"] = (c, t)
+        print(f"  {t} person names cross-referenced, {c} leads created")
 
         # --- Findings-based generators (scoped to active profile's threads) ---
 
