@@ -842,6 +842,27 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       });
     },
   },
+  {
+    id: "ppp",
+    tokenPattern: "PPP:[A-Za-z0-9_-]+",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/PPP:([A-Za-z0-9_-]+)/i);
+      if (!match) return null;
+      const loanRef = match[1];
+      return {
+        key: `ppp:${loanRef.toLowerCase()}`,
+        label: `PPP Loan ${loanRef}`,
+        url: `https://data.sba.gov/dataset/ppp-foia`,
+      };
+    },
+    extract(raw) {
+      return (raw.match(/PPP:[A-Za-z0-9_-]+/gi) || []).map(ref => {
+        const loanRef = ref.split(":")[1];
+        return { key: `ppp:${loanRef.toLowerCase()}`, label: ref, url: `https://data.sba.gov/dataset/ppp-foia` };
+      });
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

@@ -326,6 +326,13 @@ def generate_report():
         ),
     }
 
+    # SBA PPP Loans (bulk parquet)
+    sources["SBA PPP Loans"] = {
+        "description": "~11M PPP/EIDL loans — borrower, address, lender, NAICS, forgiveness",
+        "query_tool": "tools/query_ppp.py",
+        **check_parquet(PROJECT_ROOT / "data" / "ppp_loans.parquet"),
+    }
+
     # Medicaid parquet corpus
     sources["Medicaid Spending Parquet"] = {
         "description": "T-MSIS Medicaid spending parquet (billing, servicing, HCPCS)",
