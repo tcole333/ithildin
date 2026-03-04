@@ -659,6 +659,9 @@ def _ensure_schema(db):
         ("sessions", "connections_created INTEGER DEFAULT 0"),
         ("sessions", "leads_created INTEGER DEFAULT 0"),
         ("sessions", "retractions INTEGER DEFAULT 0"),
+        # Bi-temporal: when the relationship existed in the real world
+        ("connections", "valid_from DATE"),
+        ("connections", "valid_until DATE"),
     ]
     for table, column_def in _migrations:
         try:
