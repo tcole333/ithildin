@@ -502,7 +502,9 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
         # Duplicate — find the existing connection id
         existing = db.execute("""
             SELECT id FROM connections
-            WHERE person_a = ? AND person_b = ? AND relationship_type = ? AND profile_id IS ?
+            WHERE person_a = ? AND person_b = ?
+              AND COALESCE(relationship_type, '') = COALESCE(?, '')
+              AND COALESCE(profile_id, '') = COALESCE(?, '')
         """, (person_a, person_b, relationship_type, profile_id)).fetchone()
         if existing:
             conn_id = existing["id"]

@@ -701,23 +701,37 @@ def _ensure_schema(db):
     except sqlite3.OperationalError:
         pass
 
-    # Deduplicate connections and add UNIQUE constraint
+    # Deduplicate connections and ensure UNIQUE constraint treats NULLs as equal.
+    # Older schema used a plain unique index where NULL relationship_type/profile_id
+    # values could still duplicate. Migrate to a COALESCE expression index.
     try:
-        # Check if index already exists
         existing = db.execute(
-            "SELECT name FROM sqlite_master WHERE type='index' AND name='idx_connections_unique'"
+            "SELECT sql FROM sqlite_master WHERE type='index' AND name='idx_connections_unique'"
         ).fetchone()
-        if not existing:
-            # Remove duplicate connections, keeping the oldest (smallest id) per group
+        existing_sql = (existing["sql"] or "").lower() if existing else ""
+        needs_migration = (
+            not existing
+            or "coalesce(relationship_type" not in existing_sql
+            or "coalesce(profile_id" not in existing_sql
+        )
+        if needs_migration:
+            db.execute("DROP INDEX IF EXISTS idx_connections_unique")
+            # Remove duplicate connections, keeping the oldest (smallest id) per group.
+            # Group by coalesced values so NULLs are deduplicated correctly.
             db.execute("""
                 DELETE FROM connections WHERE id NOT IN (
                     SELECT MIN(id) FROM connections
-                    GROUP BY person_a, person_b, relationship_type, COALESCE(profile_id, '')
+                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
                 )
             """)
             db.execute("""
                 CREATE UNIQUE INDEX idx_connections_unique
-                ON connections(person_a, person_b, relationship_type, profile_id)
+                ON connections(
+                    person_a,
+                    person_b,
+                    COALESCE(relationship_type, ''),
+                    COALESCE(profile_id, '')
+                )
             """)
             db.commit()
     except sqlite3.OperationalError:

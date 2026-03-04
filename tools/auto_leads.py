@@ -1175,70 +1175,80 @@ def cmd_run(args):
         print("[DRY RUN — no leads will be created]")
 
     results = {}
+    stopped_early_reason = None
+    try:
+        # --- Entity-based generators (unscoped — registry data is investigation-agnostic) ---
 
-    # --- Entity-based generators (unscoped — registry data is investigation-agnostic) ---
+        print("\n--- New Addresses ---")
+        c, t = process_new_addresses(db, args.dry_run)
+        results["addresses"] = (c, t)
+        print(f"  {t} new addresses scanned, {c} leads created")
 
-    print("\n--- New Addresses ---")
-    c, t = process_new_addresses(db, args.dry_run)
-    results["addresses"] = (c, t)
-    print(f"  {t} new addresses scanned, {c} leads created")
+        print("\n--- New Officer Roles ---")
+        c, t = process_new_roles(db, args.dry_run)
+        results["roles"] = (c, t)
+        print(f"  {t} new roles scanned, {c} leads created")
 
-    print("\n--- New Officer Roles ---")
-    c, t = process_new_roles(db, args.dry_run)
-    results["roles"] = (c, t)
-    print(f"  {t} new roles scanned, {c} leads created")
+        print("\n--- New Entities ---")
+        c, t = process_new_entities(db, args.dry_run)
+        results["entities"] = (c, t)
+        print(f"  {t} new entities scanned, {c} leads created")
 
-    print("\n--- New Entities ---")
-    c, t = process_new_entities(db, args.dry_run)
-    results["entities"] = (c, t)
-    print(f"  {t} new entities scanned, {c} leads created")
+        print("\n--- New Connections ---")
+        c, t = process_new_connections(db, args.dry_run)
+        results["connections"] = (c, t)
+        print(f"  {t} new connections scanned, {c} leads created")
 
-    print("\n--- New Connections ---")
-    c, t = process_new_connections(db, args.dry_run)
-    results["connections"] = (c, t)
-    print(f"  {t} new connections scanned, {c} leads created")
+        print("\n--- Alumni Clustering ---")
+        c, t = process_alumni_clustering(db, args.dry_run)
+        results["alumni_clustering"] = (c, t)
+        print(f"  {t} institution pairs checked, {c} leads created")
 
-    print("\n--- Alumni Clustering ---")
-    c, t = process_alumni_clustering(db, args.dry_run)
-    results["alumni_clustering"] = (c, t)
-    print(f"  {t} institution pairs checked, {c} leads created")
+        print("\n--- Pillar Gap Analysis ---")
+        c, t = process_pillar_gaps(db, args.dry_run)
+        results["pillar_gaps"] = (c, t)
+        print(f"  {t} multi-institution persons checked, {c} leads created")
 
-    print("\n--- Pillar Gap Analysis ---")
-    c, t = process_pillar_gaps(db, args.dry_run)
-    results["pillar_gaps"] = (c, t)
-    print(f"  {t} multi-institution persons checked, {c} leads created")
+        print("\n--- Serial Director Detection ---")
+        c, t = process_officer_escalation(db, args.dry_run)
+        results["officer_escalation"] = (c, t)
+        print(f"  {t} multi-entity officers checked, {c} escalated/created")
 
-    print("\n--- Serial Director Detection ---")
-    c, t = process_officer_escalation(db, args.dry_run)
-    results["officer_escalation"] = (c, t)
-    print(f"  {t} multi-entity officers checked, {c} escalated/created")
+        print("\n--- Filing Date Clusters ---")
+        c, t = process_filing_clusters(db, args.dry_run)
+        results["filing_clusters"] = (c, t)
+        print(f"  {t} officer filing groups checked, {c} leads created")
 
-    print("\n--- Filing Date Clusters ---")
-    c, t = process_filing_clusters(db, args.dry_run)
-    results["filing_clusters"] = (c, t)
-    print(f"  {t} officer filing groups checked, {c} leads created")
+        print("\n--- Jurisdiction Clusters ---")
+        c, t = process_jurisdiction_clusters(db, args.dry_run)
+        results["jurisdiction_clusters"] = (c, t)
+        print(f"  {t} person-jurisdiction pairs checked, {c} leads created")
 
-    print("\n--- Jurisdiction Clusters ---")
-    c, t = process_jurisdiction_clusters(db, args.dry_run)
-    results["jurisdiction_clusters"] = (c, t)
-    print(f"  {t} person-jurisdiction pairs checked, {c} leads created")
+        # --- Findings-based generators (scoped to active profile's threads) ---
 
-    # --- Findings-based generators (scoped to active profile's threads) ---
+        print("\n--- Findings Coverage Gaps ---")
+        c, t = process_findings_coverage_gaps(db, thread_ids, profile_name, args.dry_run)
+        results["findings_coverage"] = (c, t)
+        print(f"  {t} under-investigated targets checked, {c} leads created")
 
-    print("\n--- Findings Coverage Gaps ---")
-    c, t = process_findings_coverage_gaps(db, thread_ids, profile_name, args.dry_run)
-    results["findings_coverage"] = (c, t)
-    print(f"  {t} under-investigated targets checked, {c} leads created")
+        print("\n--- Contract Patterns ---")
+        c, t = process_contract_patterns(db, thread_ids, profile_name, args.dry_run)
+        results["contract_patterns"] = (c, t)
+        print(f"  {t} contract patterns checked, {c} leads created")
 
-    print("\n--- Contract Patterns ---")
-    c, t = process_contract_patterns(db, thread_ids, profile_name, args.dry_run)
-    results["contract_patterns"] = (c, t)
-    print(f"  {t} contract patterns checked, {c} leads created")
+        print("\n--- Connection Network Nodes ---")
+        c, t = process_connection_persons(db, thread_ids, profile_name, args.dry_run)
+        results["connection_persons"] = (c, t)
+        print(f"  {t} connected persons checked, {c} leads created")
 
-    print("\n--- Connection Network Nodes ---")
-    c, t = process_connection_persons(db, thread_ids, profile_name, args.dry_run)
-    results["connection_persons"] = (c, t)
-    print(f"  {t} connected persons checked, {c} leads created")
+    except LeadLimitReached as exc:
+        stopped_early_reason = str(exc)
+        print(f"\nLead creation limit reached: {stopped_early_reason}. Stopping further generators.")
+    except Exception:
+        if not args.dry_run:
+            db.rollback()
+        db.close()
+        raise
 
     if not args.dry_run:
         db.commit()
@@ -1248,9 +1258,12 @@ def cmd_run(args):
 
     print(f"\n{'=' * 60}")
     print(f"Total: {total_scanned} items scanned, {total_created} leads created")
+    if stopped_early_reason:
+        print(f"Stopped early: {stopped_early_reason}")
     if args.dry_run:
         print("(Dry run — nothing was saved)")
     print(f"{'=' * 60}")
+    db.close()
 
 
 def cmd_stats(args):

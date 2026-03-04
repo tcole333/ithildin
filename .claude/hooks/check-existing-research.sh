@@ -9,11 +9,30 @@ COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
 
 # Check if a finding was just added
 if echo "$COMMAND" | grep -qE "findings_tracker[^ ]*\s+add\s+"; then
-  # Extract target name
-  TARGET=$(echo "$COMMAND" | grep -oP "(?<=--target\s)['\"]([^'\"]+)['\"]" | tr -d "'\"" | head -1)
-  if [ -z "$TARGET" ]; then
-    TARGET=$(echo "$COMMAND" | grep -oP '(?<=--target\s)\S+' | head -1)
-  fi
+  # Extract target name portably (supports --target value and --target=value forms)
+  TARGET=$(COMMAND_STR="$COMMAND" python3 - <<'PY'
+import os
+import shlex
+
+command = os.environ.get("COMMAND_STR", "")
+target = ""
+
+try:
+    parts = shlex.split(command)
+except ValueError:
+    parts = command.split()
+
+for i, part in enumerate(parts):
+    if part == "--target" and i + 1 < len(parts):
+        target = parts[i + 1]
+        break
+    if part.startswith("--target="):
+        target = part.split("=", 1)[1]
+        break
+
+print(target)
+PY
+)
 
   if [ -n "$TARGET" ]; then
     # Check for existing findings on this target using parameterized query
