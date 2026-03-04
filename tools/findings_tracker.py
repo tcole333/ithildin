@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Findings and connections tracker for the Epstein OSINT investigation.
+Findings and connections tracker for OSINT investigations.
 
 Part of investigation.db (shared with lead_tracker.py).
 
@@ -77,6 +77,20 @@ def _get_db_standalone():
 # ── Findings CRUD ────────────────────────────────────────────
 
 
+VALID_SOURCES = [
+    "web_search", "doj_vol11", "duggan", "lmsband", "unified_db",
+    "fec", "edgar", "courtlistener", "990", "registry",
+    "usaspending", "sam_gov", "lobbying", "fara", "littlesis",
+    "gdelt", "aleph", "icij", "acris", "gleif", "opensanctions",
+    "shodan", "crtsh", "wayback", "urlscan", "medicaid",
+    "analysis_run", "offshorealert", "uk_companies_house",
+    "ca_sos", "tx_comptroller", "mi_lara", "nj_rev", "ma_corps",
+    "ny_dos", "nv_sos", "fl_sunbiz", "nm_sos", "dc_dlcp",
+    "usvi", "ds10_financial", "ucc", "faa", "sam_bulk",
+    "highergov", "documentcloud", "muckrock", "fincen",
+    "opencorporates", "zefix", "hudoc", "france_sirene",
+    "panama_rp", "investigations_db",
+]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
 VALID_CORRECTION_TYPES = [
@@ -98,6 +112,20 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
         email_sender: Email sender name to store on EFTA evidence rows.
     Returns: finding ID.
     """
+    if not source_datasets:
+        raise ValueError(
+            "source_datasets is required. Provide the data source(s) that produced this finding "
+            "(e.g., ['web_search'], ['fec'], ['edgar', 'registry'])."
+        )
+
+    # Warn on unknown source names (don't block — allows new sources without code changes)
+    if source_datasets:
+        for src in source_datasets:
+            if src not in VALID_SOURCES:
+                print(f"WARNING: Unknown source '{src}'. Known sources: {', '.join(sorted(VALID_SOURCES)[:10])}... "
+                      f"(If this is a new source, consider adding it to VALID_SOURCES in findings_tracker.py)",
+                      file=sys.stderr)
+
     # Resolve aliases to prevent future duplicates
     try:
         from tools.name_resolver import resolve_canonical
@@ -593,7 +621,7 @@ def format_connection(conn):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Epstein OSINT findings tracker")
+    parser = argparse.ArgumentParser(description="OSINT investigation findings tracker")
     subparsers = parser.add_subparsers(dest="command")
 
     # add
@@ -714,6 +742,11 @@ def main():
         sys.exit(1)
 
     if args.command == "add":
+        if not args.sources:
+            print("ERROR: --sources is required. Specify the data source(s) that produced this finding "
+                  "(e.g., --sources web_search, --sources fec edgar).", file=sys.stderr)
+            sys.exit(1)
+
         # Parse source quotes from CLI (format: "ref:quote text")
         source_quotes = None
         if getattr(args, "source_quote", None):

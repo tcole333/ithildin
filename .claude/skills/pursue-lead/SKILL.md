@@ -6,6 +6,8 @@ user_invocable: true
 
 # /pursue-lead
 
+**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document what you find. Do not theorize, speculate, or apply analytical frameworks. If you notice a pattern, record the raw data — pattern recognition is for Layer 2 analysis agents. Record mundane facts (officer names, addresses, formation dates, filing numbers) even when they don't seem interesting. Record negative results from every source checked.
+
 Claim and investigate the next highest-priority open lead. Operates fully autonomously.
 
 ## Arguments
@@ -74,14 +76,57 @@ if prior:
     # Skip this source, already searched
 ```
 
-### 4. Execute Searches
+### 4. Source Checklist by Target Type
+
+Before searching, identify which sources are mandatory for this lead type. **Do not skip sources because you "found enough" elsewhere.** Check every mandatory source and record the result (including zero-result searches).
+
+**Person leads:**
+- [ ] Investigation corpus (all corpus_tools from profile)
+- [ ] CourtListener (federal litigation: `query_courtlistener.py search/party/cases`)
+- [ ] FEC donations (`query_fec.py donor`)
+- [ ] ProPublica 990 (`query_990.py search` — check if person is officer/director of any nonprofit)
+- [ ] SEC EDGAR (`query_edgar.py search/lookup` — insider filings, mentions in proxy statements)
+- [ ] LittleSis (`query_littlesis.py search` — pre-mapped relationships)
+- [ ] Corporate registries (`query_registry.py officers` — what entities are they officer of?)
+- [ ] FARA (`query_fara.py search` — foreign agent registrations)
+- [ ] Lobbying disclosures (`query_lobbying.py lobbyist`)
+- [ ] OpenSanctions (`query_opensanctions.py search` — PEP/sanctions check)
+- [ ] WebSearch (biography, news, known associations)
+
+**Entity/corporate leads:**
+- [ ] Investigation corpus
+- [ ] Corporate registries (`query_registry.py search` — all jurisdictions)
+- [ ] SEC EDGAR (`query_edgar.py search` — filings mentioning entity)
+- [ ] ProPublica 990 (`query_990.py search` — if nonprofit)
+- [ ] USASpending (`query_usaspending.py awards` — federal contracts/grants)
+- [ ] SAM.gov (`query_sam.py entity/exclusions` — registration, debarments)
+- [ ] CourtListener (`query_courtlistener.py search` — litigation involving entity)
+- [ ] GLEIF (`query_gleif.py search` — LEI records, corporate hierarchy)
+- [ ] Lobbying (`query_lobbying.py client` — lobbying by entity)
+- [ ] FARA (`query_fara.py search` — foreign principal registrations)
+- [ ] State registries (CA/TX/MI/MA/NJ/NY DOS as relevant by jurisdiction)
+- [ ] WebSearch (corporate profile, news)
+
+**Financial leads:**
+- [ ] Investigation corpus
+- [ ] SEC EDGAR (10-K, 10-Q, proxy, insider transactions)
+- [ ] ProPublica 990 (grant flows, officer compensation)
+- [ ] FEC (political spending by entity + executives)
+- [ ] USASpending (contract/grant awards)
+- [ ] DS10 financial records (`parse_ds10_financials.py query`)
+- [ ] ACRIS property records (`query_acris.py party`)
+- [ ] UCC filings (`query_registry.py ucc-search`)
+- [ ] GLEIF hierarchy
+- [ ] CourtListener (financial litigation, SEC enforcement)
+
+### 4b. Execute Searches
 Run queries against relevant sources. For each search:
 1. Query the source
 2. Log the search: `python tools/lead_tracker.py` (use log_search function)
 3. Record notable results as notes on the lead
 4. If a definitive finding is discovered, create a finding in findings_tracker
 
-### 4b. Web Context Research (when relevant)
+### 4c. Web Context Research (when relevant)
 
 For person/entity leads, supplement dataset searches with web research:
 - WebSearch for background on newly discovered names or entities
@@ -308,6 +353,10 @@ lead_id: <ID>
 [count] entities
 ## Negative Results
 - [Sources searched with zero results]
+## Sources Checked
+| Source | Tool Command | Results | Findings Created |
+|--------|-------------|---------|-----------------|
+| [source] | [tool command used] | [count] | [count] |
 ## Gaps / Follow-up Needed
 - [items that couldn't be resolved]
 ## Leads Spawned

@@ -4,6 +4,68 @@ Complete CLI examples for all investigation tools. Referenced from CLAUDE.md.
 
 Run `python tools/source_report.py` for live data source status.
 
+## Canonical Source Names
+
+When using `--sources` on `findings_tracker.py add`, use these canonical names. Using consistent names enables provenance tracking and source coverage analysis.
+
+| Source Name | Tool(s) | Description |
+|-------------|---------|-------------|
+| `web_search` | WebSearch, WebFetch | Open web research |
+| `doj_vol11` | query_doj.py | DOJ Vol 11 document corpus |
+| `duggan` | duggan_search.py | Duggan USA corpus |
+| `lmsband` | query_lmsband.py | LMSBAND document corpus |
+| `unified_db` | query_unified.py | Unified document database |
+| `fec` | query_fec.py | FEC campaign finance |
+| `edgar` | query_edgar.py | SEC EDGAR filings |
+| `courtlistener` | query_courtlistener.py | CourtListener court records |
+| `990` | query_990.py | ProPublica 990 nonprofits |
+| `registry` | query_registry.py | Unified corporate registry |
+| `usaspending` | query_usaspending.py | USASpending federal contracts/grants |
+| `sam_gov` | query_sam.py | SAM.gov API |
+| `sam_bulk` | ingest_sam.py | SAM.gov bulk data (local SQLite) |
+| `lobbying` | query_lobbying.py | LDA lobbying disclosures |
+| `fara` | query_fara.py | FARA foreign agent registrations |
+| `littlesis` | query_littlesis.py | LittleSis relationship maps |
+| `gdelt` | query_gdelt.py | GDELT global news |
+| `aleph` | query_aleph.py | OCCRP Aleph |
+| `icij` | query_icij.py | ICIJ offshore leaks |
+| `acris` | query_acris.py | NYC ACRIS property records |
+| `gleif` | query_gleif.py | GLEIF LEI corporate hierarchy |
+| `opensanctions` | query_opensanctions.py | OpenSanctions PEP/sanctions |
+| `shodan` | query_shodan.py | Shodan internet devices |
+| `crtsh` | query_crtsh.py | crt.sh certificate transparency |
+| `wayback` | query_wayback.py | Wayback Machine |
+| `urlscan` | query_urlscan.py | URLScan.io |
+| `medicaid` | query_medicaid.py | Medicare/Medicaid spending |
+| `highergov` | query_highergov.py | HigherGov contracts/grants |
+| `documentcloud` | query_documentcloud.py | DocumentCloud |
+| `muckrock` | query_muckrock.py | MuckRock FOIA |
+| `fincen` | query_fincen.py | FinCEN filings |
+| `opencorporates` | query_delaware/hongkong/cyprus.py | OpenCorporates API |
+| `hudoc` | query_hudoc.py | ECHR case database |
+| `france_sirene` | query_france.py | French SIRENE registry |
+| `fl_sunbiz` | query_florida.py, ingest_florida.py | Florida SunBiz |
+| `ny_dos` | query_nydos.py | New York DOS |
+| `ca_sos` | query_california.py | California SOS |
+| `tx_comptroller` | query_texas.py | Texas Comptroller |
+| `mi_lara` | query_michigan.py | Michigan LARA |
+| `nj_rev` | query_newjersey.py | New Jersey Revenue |
+| `ma_corps` | query_massachusetts.py | Massachusetts Corporations |
+| `nv_sos` | query_nevada.py | Nevada SOS |
+| `nm_sos` | ingest_newmexico.py | New Mexico SOS |
+| `dc_dlcp` | ingest_dc.py | DC DLCP |
+| `usvi` | ingest_usvi.py | US Virgin Islands |
+| `ds10_financial` | parse_ds10_financials.py | DS10 financial records |
+| `ucc` | query_registry.py ucc-search | UCC filings |
+| `faa` | ingest_faa.py | FAA aircraft registry |
+| `uk_companies_house` | ingest_uk_companies_house.py | UK Companies House |
+| `investigations_db` | query_investigations.py | Ingested investigation reports |
+| `analysis_run` | (synthesis findings) | Agent analysis/synthesis |
+| `panama_rp` | query_panama.py | Panama public registry |
+| `zefix` | query_zefix.py | Swiss commercial registry |
+
+**Important**: Use these exact names. The hook validates `--sources` is present, and `findings_tracker.py` warns on unknown source names. If you need a new source name, add it to `VALID_SOURCES` in `tools/findings_tracker.py`.
+
 ## Core Investigation Tools
 
 ### Queue System (SQLite-first)

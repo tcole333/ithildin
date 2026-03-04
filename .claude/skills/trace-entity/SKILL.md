@@ -6,6 +6,8 @@ user_invocable: true
 
 # /trace-entity
 
+**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document corporate structures, officers, filings, and jurisdictions. Do not theorize about the purpose of structures — record what exists and let Layer 2 analysis agents interpret patterns. Record negative results from every registry checked.
+
 Trace a corporate or financial entity through all available data sources to map ownership chains, financial flows, and jurisdictional connections.
 
 ## Arguments
@@ -183,6 +185,7 @@ python tools/findings_tracker.py add \
     --evidence <IDS> \
     --claim-type <direct_quote|paraphrase|inference> \
     --source-quote "<ID>:exact text from source" \
+    --sources <SOURCE_NAMES> \
     --confidence <LEVEL>
 ```
 

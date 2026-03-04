@@ -6,6 +6,8 @@ user_invocable: true
 
 # /deep-investigate
 
+**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Sub-agents document what they find. They do not theorize, speculate, or apply analytical frameworks. If a pattern is noticed, record the raw data and move on — pattern recognition is for Layer 2 analysis agents (`/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`, `/discover-frameworks`).
+
 Launch an orchestrated investigation of a person, entity, or topic using parallel sub-agents that each cover a dedicated source category. This ensures comprehensive coverage — no source gets skipped because the agent "found enough" in the corpus.
 
 ## Arguments
@@ -31,16 +33,78 @@ record it even if it doesn't obviously connect to the current lead. Use
 directly answer the current question but are worth preserving. These ambient
 findings compound across investigations and surface connections later.
 
+### Documentation Thoroughness
+Sub-agents MUST:
+- **Record negative results.** "Searched CourtListener for X, zero cases found" is a finding. Absence from authoritative sources is investigatively significant.
+- **Record mundane facts.** Officer names, registered agent addresses, formation dates, filing numbers, EINs — even when boring. These become critical during cross-referencing.
+- **Record baseline comparisons.** "GEO Group's 695% profit increase" means nothing without "vs. industry average of X%." Always seek the denominator.
+- **Check ALL required sources for the target type** — not just the ones most likely to return results. See tool checklists in each agent prompt below.
+
 ## Architecture
 
 You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 
 1. Assess the target and determine what's already known
-2. Write focused prompts for 4 parallel sub-agents
-3. Launch all 4 sub-agents simultaneously using the Task tool
-4. Wait for all to complete
-5. Synthesize their results — identify corroboration, contradictions, and gaps
-6. Record final findings and spawn follow-up leads
+2. **Build a research plan** — identify which sources are relevant and assign them to agents
+3. Write focused prompts for 4 parallel sub-agents with explicit source mandates
+4. Launch all 4 sub-agents simultaneously using the Task tool
+5. Wait for all to complete
+6. Synthesize their results — identify corroboration, contradictions, and gaps
+7. Record final findings and spawn follow-up leads
+
+### Research Planning Protocol
+
+**Before writing any agent prompts**, create a source assignment matrix. This prevents agents from defaulting to web searches and ensures every relevant tool gets used.
+
+**Step 1: Identify all relevant sources for this target.** Consider the target type:
+
+| Target Type | Critical Sources (must check) |
+|-------------|-------------------------------|
+| **Person** | CourtListener, FEC, 990s, EDGAR, LittleSis, registries (as officer), FARA, lobbying, OpenSanctions, GDELT |
+| **Corporation** | State registries (DE/NY/FL/CA/TX + incorporation state), EDGAR (10-K, proxy), USASpending, SAM.gov, CourtListener, lobbying, FARA, GLEIF |
+| **Nonprofit** | ProPublica 990 (grants, officers, compensation), EDGAR, state registries, CourtListener, FEC (PAC affiliates) |
+| **Government actor** | FEC, lobbying (post-government), FARA, CourtListener, LittleSis, EDGAR (financial disclosures) |
+| **Financial entity** | EDGAR, GLEIF, DS10, ACRIS, UCC, registries, CourtListener, USASpending |
+
+**Step 2: Assign sources to agents.** The default 4-agent split (corpus, corporate/financial, legal, network/OSINT) works well for single targets. For custom multi-target plans, ensure each source appears in at least one agent's mandate. Create a table:
+
+```
+| Source | Agent |
+|--------|-------|
+| CourtListener | Agent C (legal) |
+| 990s | Agent B (corporate) |
+| FEC | Agent B (corporate) |
+| Registries | Agent B (corporate) |
+| EDGAR | Agent B (corporate) |
+| LittleSis | Agent D (network) |
+| ... | ... |
+```
+
+**Step 3: Include the source list in each agent's prompt.** Don't just say "search relevant sources" — list the specific tools each agent must run. Agents skip sources they aren't explicitly told to check.
+
+### Custom Multi-Target Research Plans
+
+When investigating a new area with multiple targets, use the **Investigation Depth Tiers** from `research/INVESTIGATIVE_METHODOLOGY.md`:
+
+1. **Landscape scan first** — Don't jump to deep dives. Run a light pass over 10-30 targets using WebSearch + 2-3 key sources. Map who's involved and how they relate. Create leads, not findings, for most targets.
+
+2. **Triage and prioritize** — Which targets are structurally important? Which have records to find? Which are central to the investigation's questions? Flag 2-4 targets for deep dives.
+
+3. **Deep dives on selected targets** — Run `/deep-investigate` (this skill, full 4-agent treatment) only on the highest-value targets.
+
+4. **Standard investigation for the rest** — Medium-priority targets get `/pursue-lead` (single-agent, full source checklist). Low-priority targets stay as open leads for later.
+
+When running the deep dives, choose between:
+
+**Option A: Run /deep-investigate per target** (preferred for 2-3 targets)
+- Each target gets the full 4-agent treatment with dedicated source coverage
+- Best source coverage, but uses more agents
+
+**Option B: Organize by topic with source mandates** (for 4+ related targets)
+- Topical agents (e.g., "GEO Group agent", "Miller network agent") are fine
+- BUT each agent's prompt MUST include an explicit source checklist from the matrix above
+- Include this in every topical agent prompt: "You MUST check ALL of these sources, not just web search: [LIST]. Record negative results from each source."
+- After topical agents complete, run a **coverage check**: which sources in the matrix were NOT used? Spawn follow-up agents to fill gaps.
 
 ## Process
 
@@ -124,7 +188,7 @@ Extract: dates, names, financial amounts, relationships, exact quotes.
 RECORD findings using:
 .venv/bin/python3 tools/findings_tracker.py add --target "[TARGET]" --type TYPE \
   --summary "..." --evidence EFTA_ID --claim-type direct_quote \
-  --source-quote "EFTA_ID:exact quote" --confidence LEVEL
+  --source-quote "EFTA_ID:exact quote" --sources doj_vol11 --confidence LEVEL
 
 Record connections using:
 .venv/bin/python3 tools/findings_tracker.py connect --person-a "..." --person-b "..." \
@@ -160,6 +224,10 @@ leads_spawned: [count]
 [count] connections
 ## Negative Results
 - [Sources searched with zero results — investigatively significant]
+## Sources Checked
+| Source | Tool Command | Results | Findings Created |
+|--------|-------------|---------|-----------------|
+| [source] | [tool command used] | [count] | [count] |
 ## Source Gaps Identified
 - [New data sources discovered during investigation]
 ## Follow-Up Leads Created
@@ -253,7 +321,7 @@ For each hit, investigate further (e.g., read SEC filings, pull 990 details, che
 
 Register entities, roles, and addresses in investigation.db as you find them.
 
-RECORD findings using the findings_tracker.py CLI. Even if a search returns zero results, note that in your final summary — negative results from authoritative sources are investigatively significant.
+RECORD findings using the findings_tracker.py CLI. CRITICAL: Always include --sources with the data source name(s) that produced each finding (e.g., --sources registry edgar fec). Even if a search returns zero results, note that in your final summary — negative results from authoritative sources are investigatively significant.
 
 PROACTIVE SOURCE DISCOVERY:
 As you search, be curious about data sources we're missing. If you discover:
@@ -288,6 +356,10 @@ leads_spawned: [count]
 [count] entities (IDs and names)
 ## Negative Results
 - [Sources searched with zero results — investigatively significant]
+## Sources Checked
+| Source | Tool Command | Results | Findings Created |
+|--------|-------------|---------|-----------------|
+| [source] | [tool command used] | [count] | [count] |
 ## Source Gaps Identified
 - [New data sources/registries discovered]
 ## Follow-Up Leads Created
@@ -351,7 +423,7 @@ LOBBYING (deep check):
 INVESTIGATION REPORTS (ingested PDFs):
 11. .venv/bin/python3 tools/query_investigations.py search "[TARGET]" --limit 10 --output [WORKDIR]/c-inv.json
 
-RECORD all findings using the findings_tracker.py CLI. Record connections between the target and any investigation-network persons discovered in litigation.
+RECORD all findings using the findings_tracker.py CLI. CRITICAL: Always include --sources with the data source name(s) (e.g., --sources courtlistener fara lobbying). Record connections between the target and any investigation-network persons discovered in litigation.
 
 Zero court results for a person who should have them (e.g., a practicing attorney) is notable — record it.
 
@@ -384,6 +456,10 @@ leads_spawned: [count]
 [count] connections
 ## Negative Results
 - [Sources searched with zero results — investigatively significant]
+## Sources Checked
+| Source | Tool Command | Results | Findings Created |
+|--------|-------------|---------|-----------------|
+| [source] | [tool command used] | [count] | [count] |
 ## Source Gaps Identified
 - [New courts/legal databases discovered]
 ## Follow-Up Leads Created
@@ -463,7 +539,7 @@ GDELT (global news):
 22. .venv/bin/python3 tools/query_gdelt.py articles "[TARGET]" --limit 30 --output [WORKDIR]/d-gdelt-art.json
 23. .venv/bin/python3 tools/query_gdelt.py context "[TARGET]" --limit 20 --output [WORKDIR]/d-gdelt-ctx.json
 
-RECORD all findings using the findings_tracker.py CLI. Web sources should use claim-type "paraphrase" with the URL as evidence. Record connections to any network-connected persons identified in the investigation profile or discovered during research.
+RECORD all findings using the findings_tracker.py CLI. CRITICAL: Always include --sources with the data source name(s) (e.g., --sources web_search littlesis gdelt). Web sources should use claim-type "paraphrase" with the URL as evidence and --sources web_search. Record connections to any network-connected persons identified in the investigation profile or discovered during research.
 
 For web research: prioritize PRIMARY sources (court filings, government records, corporate registries) over secondary (news articles, Wikipedia). Note source reliability.
 
@@ -502,6 +578,10 @@ leads_spawned: [count]
 [count] connections
 ## Negative Results
 - [Sources searched with zero results]
+## Sources Checked
+| Source | Tool Command | Results | Findings Created |
+|--------|-------------|---------|-----------------|
+| [source] | [tool command used] | [count] | [count] |
 ## Source Gaps Identified
 - [New data sources discovered, with URL and access method]
 ## Follow-Up Leads Created
@@ -541,6 +621,8 @@ Each report is ~2KB (vs 25MB transcript). If you need deeper detail on a specifi
 
 ### 4. Synthesize Results
 
+**Note: The orchestrator's synthesis step is the ONE place in this skill where limited Layer 2 thinking is appropriate.** Sub-agents (Layer 1) gathered facts. The orchestrator now identifies what the combined facts suggest — but keeps interpretation clearly labeled as `claim_type=synthesis` with `confidence=medium`.
+
 After reading all 4 report files:
 
 1. **Count findings**: How many did each agent produce?
@@ -553,6 +635,7 @@ After reading all 4 report files:
 8. **Identify the Character Entry Point**: What aspect of this target's role illuminates the network's design? Every person is a lens onto a different part of the machine — what does THIS person make visible that would otherwise remain hidden? (e.g., a trust administrator reveals the USVI trust architecture; a compliance officer reveals the SAR waterfall)
 9. **Note the Narrative Potential**: What's the most counterintuitive finding? What single fact would most surprise an intelligent person in finance/law/compliance? This is the seed for a future article hook. Record it in the synthesis finding.
 10. **Flag Missing Documents**: What records should exist but don't? Missing SARs, absent emails in a timeline, corporate filings that should be present but aren't. Absence of expected records is itself evidence — record it as a finding.
+11. **Check tool coverage**: Did agents actually use the full source list, or did they skip tools? Flag any sources that should have been checked but weren't, and note it in the summary.
 
 ### 4b. Ingest Agent Learnings
 
@@ -574,7 +657,7 @@ If the sub-agents' individual findings combine to tell a larger story, record a 
 .venv/bin/python3 tools/findings_tracker.py add --target "[TARGET]" --type intelligence \
   --summary "SYNTHESIS: [what the combined evidence shows]" \
   --evidence [ALL_EVIDENCE_REFS] --claim-type synthesis \
-  --source-quote "[REF]:key supporting fact" --confidence medium
+  --source-quote "[REF]:key supporting fact" --sources analysis_run --confidence medium
 ```
 
 ### 6. Spawn Follow-Up Leads

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-OCCRP Aleph API wrapper for the Epstein OSINT investigation.
+OCCRP Aleph API wrapper for OSINT investigations.
 
 Searches the OCCRP Aleph platform — corporate registries, court records,
 sanctions lists, leaks, and investigative datasets from around the world.
@@ -32,6 +32,16 @@ try:
     from tools.output_util import add_output_args, write_output
 except ImportError:
     from output_util import add_output_args, write_output
+
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
 
 BASE_URL = "https://aleph.occrp.org/api/2"
 
@@ -196,6 +206,8 @@ def cmd_search(args):
         params["filter:collection_id"] = args.collection
 
     results, total = _paginate("/entities", params, max_results=args.limit)
+
+    _log(args.query, "aleph", total)
 
     schema_label = f" (schema={args.schema})" if args.schema else ""
     print(f"Found {total} total results for '{args.query}'{schema_label} (showing {len(results)})")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GDELT 2.0 API wrapper for the Epstein OSINT investigation.
+GDELT 2.0 API wrapper for OSINT investigations.
 
 Searches the Global Database of Events, Language, and Tone — global news
 coverage tracking. Useful for media analysis of Epstein-related persons,
@@ -33,6 +33,16 @@ try:
     from tools.output_util import add_output_args, write_output
 except ImportError:
     from output_util import add_output_args, write_output
+
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
 
 DOC_URL = "https://api.gdeltproject.org/api/v2/doc/doc"
 CONTEXT_URL = "https://api.gdeltproject.org/api/v2/context/context"
@@ -147,6 +157,7 @@ def cmd_articles(args):
         return
 
     articles = data.get("articles", [])
+    _log(args.query, "gdelt", len(articles))
     print(f"GDELT articles for '{args.query}': {len(articles)} results")
     print()
 
@@ -193,6 +204,7 @@ def cmd_context(args):
         return
 
     articles = data.get("articles", [])
+    _log(args.query, "gdelt", len(articles))
     print(f"GDELT context for '{args.query}': {len(articles)} snippets")
     print()
 

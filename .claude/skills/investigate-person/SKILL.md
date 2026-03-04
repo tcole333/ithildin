@@ -6,6 +6,8 @@ user_invocable: true
 
 # /investigate-person
 
+**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document what you find. Do not theorize, speculate, or apply analytical frameworks. If you notice a pattern, record the raw data — pattern recognition is for Layer 2 analysis agents. Record mundane facts (employer history, addresses, professional affiliations, board seats) even when they don't seem relevant. Record negative results from every source checked.
+
 Deep-dive investigation of a named individual across all available data sources.
 
 ## Arguments
@@ -369,6 +371,10 @@ leads_spawned: [count]
 - [Key relationships discovered]
 ## Negative Results
 - [Sources searched with zero results]
+## Sources Checked
+| Source | Tool Command | Results | Findings Created |
+|--------|-------------|---------|-----------------|
+| [source] | [tool command used] | [count] | [count] |
 ## Gaps / Follow-up Needed
 - [Sources not searched, hypotheses not tested]
 ## Leads Spawned

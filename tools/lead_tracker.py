@@ -672,6 +672,27 @@ def _ensure_schema(db):
         except sqlite3.OperationalError:
             pass
 
+    # Backfill profile_id for tech-right records (idempotent)
+    # Thread IDs 9-14 belong to tech-right profile; correct the default 'epstein' value
+    try:
+        updated = db.execute("""
+            UPDATE findings SET profile_id = 'tech-right'
+            WHERE thread_id IN (9,10,11,12,13,14) AND COALESCE(profile_id, 'epstein') != 'tech-right'
+        """).rowcount
+        updated += db.execute("""
+            UPDATE leads SET profile_id = 'tech-right'
+            WHERE thread_id IN (9,10,11,12,13,14) AND COALESCE(profile_id, 'epstein') != 'tech-right'
+        """).rowcount
+        updated += db.execute("""
+            UPDATE connections SET profile_id = 'tech-right'
+            WHERE finding_id IN (SELECT id FROM findings WHERE thread_id IN (9,10,11,12,13,14))
+              AND COALESCE(profile_id, 'epstein') != 'tech-right'
+        """).rowcount
+        if updated > 0:
+            db.commit()
+    except sqlite3.OperationalError:
+        pass
+
     # FTS for leads
     try:
         db.execute("""
@@ -952,13 +973,13 @@ def _ensure_schema(db):
 
 def add_lead(title, description=None, category=None, priority="medium",
              source=None, target_name=None, evidence=None, related_leads=None,
-             thread_id=None):
+             thread_id=None, profile_id=None):
     """Add a new lead. Returns the lead ID."""
     db = get_db()
     cursor = db.execute("""
-        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    """, (title, description, category, priority, source, target_name, thread_id))
+        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (title, description, category, priority, source, target_name, thread_id, profile_id))
     lead_id = cursor.lastrowid
 
     if evidence:
@@ -1324,7 +1345,7 @@ def format_lead(lead, verbose=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Epstein OSINT lead tracker")
+    parser = argparse.ArgumentParser(description="OSINT investigation lead tracker")
     subparsers = parser.add_subparsers(dest="command", help="Command")
 
     # add
@@ -1402,6 +1423,17 @@ def main():
     # stats
     stats_p = subparsers.add_parser("stats", help="Show statistics")
     add_output_args(stats_p)
+
+    # tier — tag a lead with investigation depth
+    tier_p = subparsers.add_parser("tier", help="Tag a lead with investigation depth tier")
+    tier_p.add_argument("id", type=int, help="Lead ID")
+    tier_p.add_argument("depth", choices=["scan", "standard", "deep_dive"], help="Investigation depth tier")
+
+    # tier-list — list leads by tier
+    tier_list_p = subparsers.add_parser("tier-list", help="List leads by investigation depth tier")
+    tier_list_p.add_argument("--tier", choices=["scan", "standard", "deep_dive"], help="Filter by tier")
+    tier_list_p.add_argument("--limit", type=int, default=50)
+    add_output_args(tier_list_p)
 
     # thread
     thread_p = subparsers.add_parser("thread", help="Manage investigation threads")
@@ -1549,6 +1581,60 @@ def main():
                 print(f"\nQueues:")
                 for q in queues:
                     print(f"  ** {q} **")
+
+    elif args.command == "tier":
+        try:
+            from tools.tag_manager import add_tag, remove_tag
+        except ImportError:
+            from tag_manager import add_tag, remove_tag
+        for old_tier in ["scan", "standard", "deep_dive"]:
+            remove_tag("leads", args.id, "operational", f"tier:{old_tier}")
+        if add_tag("leads", args.id, "operational", f"tier:{args.depth}", created_by="lead_tracker"):
+            print(f"Tagged lead #{args.id} with tier={args.depth}")
+        else:
+            print(f"Lead #{args.id} already tagged with tier={args.depth}")
+
+    elif args.command == "tier-list":
+        try:
+            from tools.tag_manager import find_tags
+        except ImportError:
+            from tag_manager import find_tags
+        tier_filter = f"tier:{args.tier}" if args.tier else "tier:*"
+        tags = find_tags(tag_type="operational", tag_value=tier_filter, table_name="leads", limit=args.limit)
+        if not tags:
+            tier_msg = f" at tier={args.tier}" if args.tier else ""
+            print(f"No leads tagged with investigation tiers{tier_msg}.")
+        else:
+            # Group by tier
+            by_tier = {}
+            lead_ids = []
+            for t in tags:
+                tier_val = t["tag_value"].replace("tier:", "")
+                by_tier.setdefault(tier_val, []).append(t["record_id"])
+                lead_ids.append(t["record_id"])
+
+            # Fetch lead details
+            db = get_db()
+            leads_by_id = {}
+            for lid in lead_ids:
+                row = db.execute("SELECT id, title, status, priority, category, target_name FROM leads WHERE id = ?", (lid,)).fetchone()
+                if row:
+                    leads_by_id[lid] = dict(row)
+            db.close()
+
+            tier_data = []
+            for tier_name in ["scan", "standard", "deep_dive"]:
+                if tier_name in by_tier:
+                    print(f"\n=== Tier: {tier_name} ({len(by_tier[tier_name])} leads) ===")
+                    for lid in by_tier[tier_name]:
+                        lead = leads_by_id.get(lid)
+                        if lead:
+                            tier_data.append({**lead, "tier": tier_name})
+                            status_icon = {"open": "[ ]", "in_progress": "[~]", "completed": "[x]"}.get(lead["status"], "[?]")
+                            print(f"  {status_icon} #{lead['id']:>4} [{lead.get('priority', '?'):>8}] {lead['title']}")
+
+            if hasattr(args, 'output'):
+                write_output(tier_data, args, summary=f"tier-list: {len(tier_data)} leads")
 
     elif args.command == "thread":
         db = get_db()

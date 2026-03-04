@@ -447,6 +447,113 @@ uv run python tools/model_detector.py detect --finding-id FINDING_ID
 uv run python tools/model_detector.py gaps --finding-id FINDING_ID  # reports when nothing matches
 ```
 
+## Framework Discipline
+
+Frameworks are **pattern detectors**, not interpretive lenses. They help you recognize recurring structures, but they must never drive the investigation or filter what you see.
+
+### Rules
+
+1. **Evidence first, frameworks second.** Document what you find. If a pattern reminds you of a known framework, note it — but never search for evidence to "apply" a framework. The question is always "what does the evidence show?" not "which framework applies here?"
+
+2. **Never force the fit.** If a framework doesn't cleanly match, it doesn't match. A partial match is not a match — it's noise. Resist the urge to populate every cell in a framework × subject matrix. Reality is messy and incomplete matrices are honest.
+
+3. **Actively seek counter-evidence.** For every pattern you identify, ask: what would make this NOT the pattern I think it is? What innocent explanation exists? What evidence would contradict this? If you can't articulate a falsification criterion, the pattern is unfalsifiable and therefore not useful.
+
+4. **Distinguish opportunism from coordination.** Multiple actors profiting from the same conditions is not proof of coordination. Companies lobby for favorable policy regardless of who is president — that's capitalism, not capture. A revolving door rate of X% is only meaningful compared to the baseline rate across government. Always ask: compared to what?
+
+5. **If a framework applies everywhere, it's too loose.** A framework that explains every situation explains nothing. If you find yourself applying the same framework to every thread, the framework needs tightening or you're pattern-matching too aggressively.
+
+6. **Frameworks are reference material, not analytical mandates.** Synthesis agents should never be instructed to "apply these N frameworks to this data." Instead: "Analyze this data. Note any recurring patterns and whether existing analytical models from `research/craft-research/frameworks/` help explain them."
+
+### In Practice
+
+**Good**: "The 36-day contract timeline is unusually fast. For context, standard competitive procurement takes 6-18 months. This could indicate pre-inauguration coordination, or it could reflect legitimate emergency procurement under Proclamation 10886. We'd need transition team communications to distinguish."
+
+**Bad**: "Applying the Crisis Front-Running framework, we find that the 36-day timeline is an instance of pre-positioned capture activated by a self-manufactured crisis."
+
+The first version states facts, provides context, and identifies what additional evidence would resolve the ambiguity. The second version applies a label that forecloses alternative explanations.
+
+## Two-Layer Agent Architecture
+
+Investigation agents operate in two layers with distinct mandates:
+
+### Layer 1: Research Agents (Fact-Gathering)
+**Skills**: `/deep-investigate`, `/pursue-lead`, `/search-all-sources`, `/investigate-person`, `/trace-entity`, `/investigate-infra`
+
+- **Gather, verify, document.** No theorizing, no framework application.
+- Record everything found — including mundane facts, negative results, and baseline comparisons.
+- Follow the source checklist for the target type. Do not skip sources because you "found enough."
+- Findings use `claim_type` of `direct_quote`, `paraphrase`, or (sparingly) `inference` with appropriate confidence caps.
+
+### Layer 2: Analysis Agents (Theory-Building)
+**Skills**: `/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`, `/discover-frameworks`
+
+- **Speculate, hypothesize, identify patterns** — but every theory MUST:
+  1. Produce a falsification criterion (what would disprove it?)
+  2. Include the best innocent explanation for the observed pattern
+  3. Generate at least one research lead with a concrete search plan for Layer 1 agents
+- Findings use `claim_type=synthesis` with `confidence=medium` maximum.
+- Reference `research/craft-research/frameworks/` as pattern detectors, not interpretive lenses.
+- See Framework Discipline section above.
+
+### The Feedback Loop
+```
+Layer 2 generates hypotheses → hypotheses queue research leads →
+Layer 1 agents pursue leads → new findings feed back to Layer 2 →
+hypotheses are supported, complicated, or refuted
+```
+
+### Research Planning Protocol
+Before dispatching research agents (whether via `/deep-investigate` or custom plans), build a **source assignment matrix**: which tools does each agent use? This prevents agents from defaulting to web searches. See `/deep-investigate` SKILL.md for the full protocol.
+
+## Investigation Depth Tiers
+
+Not every target warrants the same level of investigation. Map the landscape first, then go deep selectively.
+
+### Tier 0: Landscape Scan
+**Goal**: Understand who's involved and what the terrain looks like.
+**Depth**: WebSearch + 2-3 key sources per target type. Capture whatever is important — the constraint is source breadth (fewer sources per target), not finding count. Don't suppress findings to hit a number.
+**When**: Starting a new area (e.g., "DHS immigration enforcement nexus"). Covers 10-30 targets quickly.
+**Output**: A map of the major actors, entities, and relationships at headline level. Leads for targets warranting deeper investigation. Enough to know what's worth investigating — not enough to draw conclusions.
+**Skill**: `/landscape-scan` (preferred), custom plan agents, or `/search-all-sources` (abbreviated). Not `/deep-investigate`.
+
+### Tier 1: Standard Investigation
+**Goal**: Build a factual profile of a target across all relevant sources.
+**Depth**: Full source checklist for target type. 3-10 findings.
+**When**: Target flagged as interesting during landscape scan, or auto-generated lead passes triage.
+**Skill**: `/pursue-lead` or `/investigate-person`.
+
+### Tier 2: Deep Dive
+**Goal**: Exhaustive multi-source investigation with parallel agents.
+**Depth**: 4 dedicated sub-agents, each covering a source category. 10-30+ findings.
+**When**: Target is a key actor, a major corporate entity, or a critical node in the network. Reserved — most targets never reach this tier.
+**Skill**: `/deep-investigate`.
+
+### Escalation Criteria
+
+A target moves UP a tier when:
+- **Scan → Standard**: Target appears in 3+ sources during scan, has connections to 2+ known actors, or holds a role that could explain network mechanics (registered agent, compliance officer, fund administrator)
+- **Standard → Deep Dive**: Target is a key actor with high betweenness in the graph, controls significant financial flows, holds concurrent authority positions, or initial investigation reveals unexpected complexity
+
+A target stays at current tier (or gets deprioritized) when:
+- Scan shows the target is well-covered in public reporting and doesn't add to the investigation's structural understanding
+- Standard investigation finds routine facts with no surprises — the target is what they appear to be
+- The target is peripheral to the investigation's central questions
+
+### Multi-Target Research Plans
+
+When planning research across a new area (e.g., a new investigation thread), follow this sequence:
+
+1. **Landscape scan** — Light pass over the whole area. Quick searches across key sources for 10-30 targets. Map the major actors and relationships. Don't create findings for everything — create leads at appropriate priority.
+
+2. **Triage** — Run `/triage-leads` on the batch. Prioritize based on: structural importance (do they connect things?), information richness (are there records to find?), and relevance to the investigation's central questions.
+
+3. **Selective deep dives** — Run `/deep-investigate` only on the 2-4 highest-value targets. Run `/pursue-lead` on medium-priority targets. Leave low-priority targets as open leads.
+
+4. **Iterate** — After deep dives complete, run Layer 2 analysis (`/generate-hunches`, `/analyze-network`). New hypotheses may re-prioritize targets that were initially deprioritized.
+
+This prevents the failure mode of exhaustively investigating every name that surfaces while still capturing enough to know what's worth pursuing.
+
 ## Red Lines
 
 - Don't fabricate evidence or connections that aren't in the data

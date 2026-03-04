@@ -57,6 +57,16 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
+
 # Load .env
 env_path = Path(__file__).parent.parent / ".env"
 if env_path.exists():
@@ -184,6 +194,7 @@ def cmd_donor(args):
         return
 
     total = pagination.get("count", len(results))
+    _log(args.query, "fec", total)
     employer_note = f" at employer '{args.employer}'" if args.employer else ""
     print(f"Found {total} contributions from donors matching '{args.query}'{employer_note} (showing {min(len(results), args.limit)})")
     print()
@@ -225,6 +236,7 @@ def cmd_employer(args):
         return
 
     total = pagination.get("count", len(results))
+    _log(args.query, "fec", total)
     print(f"Found {total} contributions from employees of '{args.query}' (showing {min(len(results), args.limit)})")
     print()
 

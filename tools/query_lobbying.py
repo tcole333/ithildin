@@ -32,6 +32,16 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
+
 BASE_URL = "https://lda.senate.gov/api/v1"
 
 # Filing type codes
@@ -190,6 +200,7 @@ def cmd_client(args):
         params["filing_year"] = args.year
 
     results, total = _paginate("/filings/", params, max_results=args.limit)
+    _log(args.query, "lobbying", total)
 
     if write_output(results, args, summary=f"LDA client '{args.query}'"):
         return
@@ -211,6 +222,7 @@ def cmd_registrant(args):
         params["filing_year"] = args.year
 
     results, total = _paginate("/filings/", params, max_results=args.limit)
+    _log(args.query, "lobbying", total)
 
     if write_output(results, args, summary=f"LDA registrant '{args.query}'"):
         return
@@ -234,6 +246,7 @@ def cmd_lobbyist(args):
     if data and data.get("results"):
         results = data["results"]
         total = data.get("count", len(results))
+        _log(args.query, "lobbying", total)
 
         if write_output(results[:args.limit], args, summary=f"LDA lobbyist '{args.query}'"):
             return
@@ -276,6 +289,7 @@ def cmd_lobbyist(args):
         # Fall back to filings search by lobbyist_name
         params = {"lobbyist_name": args.query}
         results, total = _paginate("/filings/", params, max_results=args.limit)
+        _log(args.query, "lobbying", total)
         print(f"Found {total} filings with lobbyist '{args.query}' (showing {len(results)})")
         print()
         for f in results:
