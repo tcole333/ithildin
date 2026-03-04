@@ -1,6 +1,15 @@
 # Domain Lenses (Tier 2 Analytical Frameworks)
 
-Structured but lightweight analytical frameworks that help research agents extract deeper insights from findings. Each lens is a named pattern with detection markers and grounding evidence from the investigation.
+Structured but lightweight analytical frameworks that help agents recognize recurring patterns. Each lens is a named pattern with detection markers and grounding evidence.
+
+**These frameworks are reference material, not analytical mandates.** They help you recognize patterns you might otherwise miss. They should never drive an investigation or filter what you see. If you find yourself forcing evidence into a framework, step back. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline` for the full policy.
+
+Key principles:
+- Evidence first, frameworks second — document what you find, then check if a pattern matches
+- Actively seek counter-evidence and innocent explanations for any pattern you identify
+- A framework that applies everywhere is too loose to be useful
+- Never populate a "framework × subject" matrix — incomplete is honest, complete is suspicious
+- Every framework application should include boundary conditions (when does it NOT apply?)
 
 ## Tier System
 
@@ -28,8 +37,14 @@ related_models: [model-slug, model-slug, ...]
 ## Detection Markers
 - Bulleted list of what agents should look for
 
+## Boundary Conditions
+- When does this framework NOT apply?
+- What innocent scenarios look similar but aren't instances of this pattern?
+- What baseline comparison makes instances notable? (e.g., "revolving door rate of X% vs. government-wide average of Y%")
+
 ## Limitations
-- When this framework misleads or doesn't apply
+- When this framework misleads or overreaches
+- What confirmation bias risks does it create?
 ```
 
 ## Lifecycle
