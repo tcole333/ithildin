@@ -1429,6 +1429,47 @@ def check_searched(query_text, source):
     return dict(row) if row else None
 
 
+def update_session_metrics(session_id):
+    """Recompute session performance metrics from actual DB counts."""
+    db = get_db()
+    findings = db.execute(
+        "SELECT COUNT(*) FROM findings WHERE session_id = ?", (session_id,)
+    ).fetchone()[0]
+    connections = db.execute(
+        "SELECT COUNT(*) FROM connections WHERE session_id = ?", (session_id,)
+    ).fetchone()[0]
+    leads = db.execute(
+        "SELECT COUNT(*) FROM lead_notes WHERE session_id = ? AND note LIKE 'Claimed by session%'", (session_id,)
+    ).fetchone()[0]
+    retractions = db.execute(
+        "SELECT COUNT(*) FROM findings WHERE session_id = ? AND verification_status = 'retracted'", (session_id,)
+    ).fetchone()[0]
+    db.execute("""
+        UPDATE sessions SET findings_created = ?, connections_created = ?,
+            leads_created = ?, retractions = ?
+        WHERE id = ?
+    """, (findings, connections, leads, retractions, session_id))
+    db.commit()
+    result = {"session_id": session_id, "findings": findings, "connections": connections,
+              "leads": leads, "retractions": retractions}
+    db.close()
+    return result
+
+
+def get_session_stats(limit=20):
+    """Get performance metrics across recent sessions."""
+    db = get_db()
+    rows = db.execute("""
+        SELECT id, agent_id, skill_invoked, started_at, ended_at,
+               findings_created, connections_created, leads_created, retractions
+        FROM sessions
+        ORDER BY started_at DESC
+        LIMIT ?
+    """, (limit,)).fetchall()
+    db.close()
+    return [dict(r) for r in rows]
+
+
 def get_stats():
     """Get summary statistics across the investigation."""
     db = get_db()
@@ -1614,6 +1655,7 @@ def main():
 
     # stats
     stats_p = subparsers.add_parser("stats", help="Show statistics")
+    stats_p.add_argument("--session-stats", action="store_true", help="Include per-session performance metrics")
     add_output_args(stats_p)
 
     # stale — list stale leads
@@ -1796,6 +1838,16 @@ def main():
                 print(f"\nQueues:")
                 for q in queues:
                     print(f"  ** {q} **")
+
+            if args.session_stats:
+                sessions = get_session_stats(limit=10)
+                if sessions:
+                    print(f"\nRecent session performance:")
+                    print(f"  {'ID':>5} {'Agent':<20} {'Skill':<20} {'F':>3} {'C':>3} {'L':>3} {'R':>3}")
+                    for s in sessions:
+                        print(f"  {s['id']:>5} {(s['agent_id'] or '?')[:20]:<20} {(s['skill_invoked'] or '?')[:20]:<20} "
+                              f"{s.get('findings_created') or 0:>3} {s.get('connections_created') or 0:>3} "
+                              f"{s.get('leads_created') or 0:>3} {s.get('retractions') or 0:>3}")
 
     elif args.command == "stale":
         stale = list_stale_leads()
