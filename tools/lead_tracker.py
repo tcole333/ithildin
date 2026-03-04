@@ -642,6 +642,8 @@ def _ensure_schema(db):
         ("investigation_threads", "profile_id TEXT"),
         # Source reliability: rename epstein_connection -> subject_connection
         ("source_reliability", "subject_connection TEXT"),
+        # Actual formation/filing date (distinct from DB ingestion created_at)
+        ("entities", "date_formed TEXT"),
     ]
     for table, column_def in _migrations:
         try:

@@ -84,6 +84,9 @@ def get_profile_thread_ids(db, profile_name, bridge_threads=None):
 def get_db():
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
+    db.execute("PRAGMA journal_mode=WAL")
+    db.execute("PRAGMA busy_timeout=10000")
+    db.execute("PRAGMA foreign_keys=ON")
     return db
 
 
@@ -103,16 +106,33 @@ def log_processed(db, table_name, record_id, crossref_type, lead_id=None):
 
 
 def lead_exists(db, title_fragment):
-    """Check if a similar lead already exists."""
+    """Check if a similar lead already exists.
+
+    Converts regex-style .* to SQL % wildcards for LIKE queries.
+    """
+    # Fix: .* has no meaning in SQL LIKE — convert to %
+    pattern = title_fragment.replace(".*", "%")
     row = db.execute(
-        "SELECT id FROM leads WHERE title LIKE ?", (f"%{title_fragment}%",)
+        "SELECT id FROM leads WHERE title LIKE ?", (f"%{pattern}%",)
     ).fetchone()
     return row["id"] if row else None
+
+
+_leads_created_this_run = 0
+_max_leads_per_run = 100
+
+
+class LeadLimitReached(Exception):
+    """Raised when the per-run lead creation limit is hit."""
+    pass
 
 
 def create_lead(db, title, category, priority, source, target=None, notes=None,
                 profile_id=None, thread_id=None):
     """Create a lead and return its ID. Auto-leads go to pending_triage."""
+    global _leads_created_this_run
+    if _leads_created_this_run >= _max_leads_per_run:
+        raise LeadLimitReached(f"Lead limit ({_max_leads_per_run}) reached for this run")
     db.execute(
         """INSERT INTO leads (title, category, priority, status, source, target_name,
            profile_id, thread_id, created_at)
@@ -125,6 +145,7 @@ def create_lead(db, title, category, priority, source, target=None, notes=None,
             "INSERT INTO lead_notes (lead_id, note, created_at) VALUES (?, ?, datetime('now'))",
             (lead_id, notes)
         )
+    _leads_created_this_run += 1
     return lead_id
 
 
@@ -655,13 +676,14 @@ def process_filing_clusters(db, dry_run=False):
     """Find entities filed within 7 days of each other by the same officer/agent."""
     try:
         # Get entities with known formation dates and officers
+        # Prefer date_formed (actual filing date) over created_at (DB ingestion time)
         entities = db.execute("""
             SELECT e.id, e.name, e.jurisdiction,
                    MIN(er.person_name) as first_officer,
-                   e.created_at as formation_date
+                   COALESCE(e.date_formed, e.created_at) as formation_date
             FROM entities e
             JOIN entity_roles er ON er.entity_id = e.id
-            WHERE e.created_at IS NOT NULL
+            WHERE COALESCE(e.date_formed, e.created_at) IS NOT NULL
             GROUP BY e.id
         """).fetchall()
     except sqlite3.OperationalError:
@@ -1128,6 +1150,10 @@ def process_connection_persons(db, thread_ids, profile_id, dry_run=False):
 
 
 def cmd_run(args):
+    global _max_leads_per_run, _leads_created_this_run
+    _max_leads_per_run = getattr(args, 'max_leads', 100)
+    _leads_created_this_run = 0
+
     db = get_db()
 
     # Load profile for scoping
@@ -1276,6 +1302,8 @@ def main():
     p.add_argument("--dry-run", action="store_true", help="Preview without creating")
     p.add_argument("--profile", type=str, default=None,
                    help="Override active profile (default: use active profile)")
+    p.add_argument("--max-leads", type=int, default=100,
+                   help="Maximum number of leads to create per run (default: 100)")
 
     sub.add_parser("stats", help="Show processing stats")
 
@@ -1284,6 +1312,7 @@ def main():
         args.command = "run"
         args.dry_run = False
         args.profile = None
+        args.max_leads = 100
 
     if args.command == "run":
         cmd_run(args)
