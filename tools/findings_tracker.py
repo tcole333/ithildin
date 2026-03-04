@@ -98,6 +98,12 @@ VALID_CORRECTION_TYPES = [
     "outdated", "refinement", "merge", "retraction",
 ]
 
+# Fields that can be corrected via update_finding() — whitelist to prevent SQL injection
+ALLOWED_CORRECT_FIELDS = {
+    "summary", "detail", "target_name", "date_of_event",
+    "confidence", "finding_type", "claim_type", "thread_id",
+}
+
 
 def add_finding(target_name, summary, finding_type=None, detail=None,
                 evidence_ids=None, source_datasets=None, confidence="medium",
@@ -215,6 +221,12 @@ def get_finding(finding_id):
 def update_finding(finding_id, field, new_value, reason, correction_type="refinement",
                    corrected_by=None):
     """Update a finding field with correction audit trail. Returns True on success."""
+    if field not in ALLOWED_CORRECT_FIELDS:
+        raise ValueError(
+            f"Cannot correct field '{field}'. "
+            f"Allowed: {', '.join(sorted(ALLOWED_CORRECT_FIELDS))}"
+        )
+
     db = _get_db_standalone()
     finding = db.execute("SELECT * FROM findings WHERE id = ?", (finding_id,)).fetchone()
     if not finding:
@@ -846,6 +858,10 @@ def main():
             print(f"Finding #{args.id} not found.")
 
     elif args.command == "correct":
+        if args.field not in ALLOWED_CORRECT_FIELDS:
+            print(f"ERROR: Cannot correct field '{args.field}'. "
+                  f"Allowed: {', '.join(sorted(ALLOWED_CORRECT_FIELDS))}", file=sys.stderr)
+            sys.exit(1)
         if update_finding(args.id, args.field, args.value, args.reason,
                          correction_type=args.correction_type, corrected_by=args.by):
             print(f"Corrected finding #{args.id}.{args.field}")
