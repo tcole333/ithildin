@@ -108,7 +108,8 @@ ALLOWED_CORRECT_FIELDS = {
 def add_finding(target_name, summary, finding_type=None, detail=None,
                 evidence_ids=None, source_datasets=None, confidence="medium",
                 date_of_event=None, lead_id=None, claim_type="inference",
-                source_quotes=None, thread_id=None, email_sender=None):
+                source_quotes=None, thread_id=None, email_sender=None,
+                profile_id=None):
     """Add a new finding with evidence references and provenance.
 
     Args:
@@ -116,6 +117,7 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
                        e.g. {"EFTA02336502": {"quote": "craft purchase 18M", "page": "p3"}}
         thread_id: Investigation thread ID to assign this finding to.
         email_sender: Email sender name to store on EFTA evidence rows.
+        profile_id: Investigation profile. Auto-detected from active profile if None.
     Returns: finding ID.
     """
     if not source_datasets:
@@ -132,6 +134,14 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
                       f"(If this is a new source, consider adding it to VALID_SOURCES in findings_tracker.py)",
                       file=sys.stderr)
 
+    # Auto-detect profile_id from active investigation if not provided
+    if profile_id is None:
+        try:
+            from tools.investigation_context import get_active_profile_id
+            profile_id = get_active_profile_id() or None
+        except Exception:
+            pass
+
     # Resolve aliases to prevent future duplicates
     try:
         from tools.name_resolver import resolve_canonical
@@ -146,10 +156,11 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
         INSERT INTO findings (target_name, finding_type, summary, detail,
                              source_datasets, confidence, date_of_event, lead_id,
                              claim_type, verification_status, thread_id,
-                             quality_state, confidence_requested)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?)
+                             quality_state, confidence_requested, profile_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?)
     """, (target_name, finding_type, summary, detail,
-          sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence))
+          sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence,
+          profile_id))
     finding_id = cursor.lastrowid
 
     if evidence_ids:
@@ -448,8 +459,17 @@ def search_findings(query, thread_id=None):
 
 
 def add_connection(person_a, person_b, relationship_type=None, description=None,
-                   evidence_ids=None, strength="medium", date_range=None, finding_id=None):
+                   evidence_ids=None, strength="medium", date_range=None, finding_id=None,
+                   profile_id=None):
     """Add a connection between two persons/entities."""
+    # Auto-detect profile_id from active investigation if not provided
+    if profile_id is None:
+        try:
+            from tools.investigation_context import get_active_profile_id
+            profile_id = get_active_profile_id() or None
+        except Exception:
+            pass
+
     # Resolve aliases to prevent future duplicates
     try:
         from tools.name_resolver import resolve_canonical
@@ -466,9 +486,10 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
 
     cursor = db.execute("""
         INSERT INTO connections (person_a, person_b, relationship_type, description,
-                                strength, date_range, finding_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id))
+                                strength, date_range, finding_id, profile_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id,
+          profile_id))
     conn_id = cursor.lastrowid
 
     if evidence_ids:
@@ -652,6 +673,7 @@ def main():
                        help="ref:quote pairs, e.g. 'EFTA02336502:craft purchase 18M'")
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
     add_p.add_argument("--email-sender", help="Email sender for EFTA evidence (e.g. 'Jeffrey Epstein')")
+    add_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
 
     # list
     list_p = subparsers.add_parser("list", help="List findings")
@@ -678,6 +700,7 @@ def main():
     conn_p.add_argument("--strength", choices=VALID_STRENGTHS, default="medium")
     conn_p.add_argument("--date-range")
     conn_p.add_argument("--finding-id", type=int)
+    conn_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
 
     # connections
     conns_p = subparsers.add_parser("connections", help="Get connections")
@@ -776,6 +799,7 @@ def main():
             source_quotes=source_quotes,
             thread_id=getattr(args, "thread_id", None),
             email_sender=getattr(args, "email_sender", None),
+            profile_id=getattr(args, "profile", None),
         )
         print(f"Created finding #{fid}: {args.target} - {args.summary}")
 
@@ -809,6 +833,7 @@ def main():
             person_a=args.person_a, person_b=args.person_b, relationship_type=args.rel_type,
             description=args.description, evidence_ids=args.evidence,
             strength=args.strength, date_range=args.date_range, finding_id=args.finding_id,
+            profile_id=getattr(args, "profile", None),
         )
         print(f"Created connection #{cid}: {args.person_a} <-> {args.person_b}")
 

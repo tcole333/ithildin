@@ -181,6 +181,11 @@ def get_active_profile_name() -> str:
     return ""
 
 
+def get_active_profile_id() -> str:
+    """Get the active profile ID (name). Convenience alias for get_active_profile_name()."""
+    return get_active_profile_name()
+
+
 def get_active_profile() -> InvestigationProfile:
     """Load the currently active investigation profile."""
     name = get_active_profile_name()
