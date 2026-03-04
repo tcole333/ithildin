@@ -1080,19 +1080,73 @@ def claim_lead(lead_id, session_id=None):
     """Mark a lead as in_progress."""
     db = get_db()
     now = _utcnow().isoformat()
-    db.execute(
+    cursor = db.execute(
         "UPDATE leads SET status = 'in_progress', updated_at = ? WHERE id = ? AND status = 'open'",
         (now, lead_id)
     )
+    if cursor.rowcount != 1:
+        db.close()
+        return False
     if session_id:
         db.execute(
             "INSERT INTO lead_notes (lead_id, note, session_id) VALUES (?, ?, ?)",
             (lead_id, f"Claimed by session #{session_id}", session_id)
         )
     db.commit()
-    affected = db.total_changes
     db.close()
-    return affected > 0
+    return True
+
+
+def claim_next_lead(category=None, thread_id=None, session_id=None):
+    """Atomically select and claim the next open lead.
+
+    Uses BEGIN IMMEDIATE to acquire a write lock, preventing TOCTOU races
+    where two agents could claim the same lead.
+    """
+    db = get_db()
+    db.execute("BEGIN IMMEDIATE")
+
+    conditions = ["status = 'open'"]
+    params = []
+    if category:
+        conditions.append("category = ?")
+        params.append(category)
+    if thread_id:
+        conditions.append("thread_id = ?")
+        params.append(thread_id)
+
+    where = " AND ".join(conditions)
+    row = db.execute(f"""
+        SELECT * FROM leads WHERE {where}
+        ORDER BY CASE priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1
+                               WHEN 'medium' THEN 2 WHEN 'low' THEN 3 END,
+                 created_at ASC LIMIT 1
+    """, params).fetchone()
+
+    if not row:
+        db.commit()
+        db.close()
+        return None
+
+    now = _utcnow().isoformat()
+    cursor = db.execute(
+        "UPDATE leads SET status='in_progress', updated_at=? WHERE id=? AND status='open'",
+        (now, row["id"]))
+
+    if cursor.rowcount != 1:
+        db.commit()
+        db.close()
+        return None
+
+    if session_id:
+        db.execute("INSERT INTO lead_notes (lead_id, note, session_id) VALUES (?,?,?)",
+                   (row["id"], f"Claimed by session #{session_id}", session_id))
+
+    db.commit()
+    result = dict(row)
+    result["status"] = "in_progress"
+    db.close()
+    return result
 
 
 def add_note(lead_id, note, session_id=None):
@@ -1380,6 +1434,12 @@ def main():
     claim_p = subparsers.add_parser("claim", help="Claim a lead")
     claim_p.add_argument("id", type=int)
 
+    # claim-next (atomic select + claim)
+    claim_next_p = subparsers.add_parser("claim-next", help="Atomically select and claim the next open lead")
+    claim_next_p.add_argument("--category", choices=VALID_CATEGORIES)
+    claim_next_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
+    add_output_args(claim_next_p)
+
     # note
     note_p = subparsers.add_parser("note", help="Add a note")
     note_p.add_argument("id", type=int)
@@ -1486,6 +1546,20 @@ def main():
             print(f"Claimed lead #{args.id}")
         else:
             print(f"Could not claim lead #{args.id} (may not be open)")
+
+    elif args.command == "claim-next":
+        lead = claim_next_lead(
+            category=getattr(args, "category", None),
+            thread_id=getattr(args, "thread_id", None),
+        )
+        if lead:
+            lead_full = get_lead(lead["id"])
+            if not write_output(lead_full, args, summary=f"claimed lead #{lead['id']}"):
+                print(f"Claimed lead #{lead['id']}:")
+                print(format_lead(lead_full, verbose=True))
+        else:
+            cat_msg = f" in category '{args.category}'" if getattr(args, "category", None) else ""
+            print(f"No open leads{cat_msg} to claim.")
 
     elif args.command == "note":
         add_note(args.id, args.text)

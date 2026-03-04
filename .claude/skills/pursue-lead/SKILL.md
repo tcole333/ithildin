@@ -47,11 +47,15 @@ echo "Session workdir: $WORKDIR"
 Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files throughout this session. This prevents parallel `/pursue-lead` instances from overwriting each other's files.
 
 ### 1. Select Lead
-If no specific ID given:
+If no specific ID given, use `claim-next` to atomically select and claim in one step (prevents race conditions with parallel agents):
 ```bash
-python tools/lead_tracker.py next
+python tools/lead_tracker.py claim-next
 ```
-Then claim it:
+To filter by category or thread:
+```bash
+python tools/lead_tracker.py claim-next --category person --thread-id 1
+```
+If a specific lead ID was given, claim it directly:
 ```bash
 python tools/lead_tracker.py claim <ID>
 ```
