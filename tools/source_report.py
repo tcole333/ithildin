@@ -454,12 +454,61 @@ def generate_report():
     return sources
 
 
+def quick_health_check(source_name):
+    """Run health check for a single named source.
+
+    Returns {available: bool, note: str, status: str}.
+    Matches source names case-insensitively.
+    """
+    load_env_file()
+    sources = generate_report()
+
+    # Case-insensitive lookup
+    match = None
+    for name, info in sources.items():
+        if name.lower() == source_name.lower():
+            match = (name, info)
+            break
+    if not match:
+        # Try partial match
+        for name, info in sources.items():
+            if source_name.lower() in name.lower():
+                match = (name, info)
+                break
+
+    if not match:
+        return {"available": False, "note": f"Unknown source: {source_name}", "status": "unknown"}
+
+    name, info = match
+    status = info.get("status", "unknown")
+    available = status in ("available", "running", "configured")
+    note = info.get("error") or info.get("note") or info.get("start_cmd") or ""
+    return {"available": available, "note": note, "status": status, "name": name}
+
+
 def main():
     load_env_file()
 
     parser = argparse.ArgumentParser(description="OSINT data source coverage report")
     parser.add_argument("-j", "--json", action="store_true")
+    sub = parser.add_subparsers(dest="command")
+
+    # check <source_name>
+    check_p = sub.add_parser("check", help="Quick health check for a single source")
+    check_p.add_argument("source_name", help="Source name (case-insensitive, partial match)")
+
     args = parser.parse_args()
+
+    if args.command == "check":
+        result = quick_health_check(args.source_name)
+        if args.json:
+            print(json.dumps(result, indent=2))
+        else:
+            icon = "[OK]" if result["available"] else "[!!]"
+            print(f"{icon} {result.get('name', args.source_name)}: {result['status']}")
+            if result["note"]:
+                print(f"     {result['note']}")
+        return
 
     sources = generate_report()
 
