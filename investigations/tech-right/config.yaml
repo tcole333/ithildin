@@ -1,0 +1,399 @@
+# Tech Right / Pentagon Capture Investigation Profile
+# Silicon Valley to Pentagon pipeline: revolving door, defense capture, conflicts of interest
+
+name: tech-right
+primary_subject: "Silicon Valley Defense Complex"
+description: >
+  Investigation of the Silicon Valley-to-Pentagon pipeline under the second Trump
+  administration. Tracks revolving door appointments (Emil Michael, Pete Hegseth),
+  defense tech capture (SpaceX, Anduril, Palantir, D-Wave), DOGE government
+  restructuring, and conflicts of interest where tech investors shape defense
+  policy that benefits their portfolios. Focus on financial flows, government
+  contracts, ethics waivers, and institutional capture mechanisms.
+
+# Key persons for priority escalation in auto-lead generation
+key_persons:
+  # Pentagon appointments / revolving door
+  - "emil michael"
+  - "pete hegseth"
+  - "kash patel"
+  - "elbridge colby"
+  - "michael kratsios"
+  - "troy meink"
+  # Musk / DOGE orbit
+  - "elon musk"
+  - "vivek ramaswamy"
+  - "steve davis"
+  - "james shedd"
+  # Defense tech founders / executives
+  - "palmer luckey"
+  - "peter thiel"
+  - "alex karp"
+  - "trae stephens"
+  - "brian schimpf"
+  - "matt grimm"
+  # D-Wave / DPCM orbit
+  - "alan baratz"
+  - "kirstjen nielsen"
+  - "jeffrey harris"
+  - "steven west"
+  - "rohit ghai"
+  # Key investors / financiers
+  - "philippe laffont"
+  - "thomas laffont"
+  - "shervin pishevar"
+  - "chamath palihapitiya"
+  - "david sacks"
+  - "keith rabois"
+  - "joe lonsdale"
+  # Uber network (Michael era)
+  - "travis kalanick"
+  - "dara khosrowshahi"
+  - "ian osborne"
+  # Key senators / oversight
+  - "elizabeth warren"
+  - "jack reed"
+
+# Known addresses for priority escalation
+known_addresses:
+  "382 ne 191 street": "DPCM Capital / CDPM Sponsor Group, Miami FL (mail forwarding)"
+  "miami beach, fl": "Emil Michael / M8 Enterprises base"
+  "1 tesla road": "Tesla HQ, Austin TX"
+  "1601 cloverfield blvd": "SpaceX HQ, Hawthorne CA"
+  "2100 crystal drive": "Anduril Industries, Arlington VA"
+  "1555 blake street": "Palantir HQ, Denver CO"
+  "3979 freedom circle": "D-Wave Systems, Santa Clara CA"
+  "3033 wilson blvd": "Pentagon City, Arlington VA"
+
+# Bridge threads — include these thread IDs from other profiles in scoped queries
+# Thread 8 (Trump Family Business Conflicts) is an epstein-profile thread with
+# significant tech-right overlap (DOGE, revolving door, defense contracts)
+bridge_threads: [8]
+
+# Investigation threads
+threads:
+  - id: 1
+    name: "Emil Michael Conflicts"
+    description: "USD(R&E) appointment, D-Wave/DPCM conflicts, ethics agreements, divestiture questions, quantum priority designation"
+    targets:
+      - "emil michael"
+      - "d-wave"
+      - "dpcm capital"
+      - "cdpm sponsor"
+      - "m8 enterprises"
+      - "sk casablanca"
+      - "alan baratz"
+      - "kirstjen nielsen"
+      - "jeffrey harris"
+    keywords:
+      - "usd.r.e"
+      - "under secretary.*research"
+      - "quantum.*priority"
+      - "tradewinds"
+      - "d-wave.*government"
+
+  - id: 2
+    name: "Musk / DOGE / Government Restructuring"
+    description: "DOGE operations, government downsizing, Musk federal contracts vs oversight role, SpaceX/Tesla/xAI consolidation, Starlink defense dependencies"
+    targets:
+      - "elon musk"
+      - "doge"
+      - "steve davis"
+      - "vivek ramaswamy"
+      - "james shedd"
+      - "spacex"
+      - "starlink"
+      - "tesla"
+      - "xai"
+      - "boring company"
+      - "neuralink"
+    keywords:
+      - "doge"
+      - "government efficiency"
+      - "spacex.*contract"
+      - "starlink.*defense"
+      - "musk.*pentagon"
+      - "golden dome"
+
+  - id: 3
+    name: "Defense Tech Ecosystem"
+    description: "Anduril, Palantir, Shield AI, Rebellion Defense, and the new defense industrial base challenging legacy primes. Contract awards, SBIR/STTR, OTA authorities"
+    targets:
+      - "anduril"
+      - "palmer luckey"
+      - "palantir"
+      - "alex karp"
+      - "trae stephens"
+      - "shield ai"
+      - "rebellion defense"
+      - "scale ai"
+      - "alexandr wang"
+      - "founders fund"
+      - "davidson technologies"
+    keywords:
+      - "defense tech"
+      - "other transaction"
+      - "ota.*authority"
+      - "sbir"
+      - "sttr"
+      - "replicator"
+      - "autonomous.*weapon"
+      - "lattice"
+
+  - id: 4
+    name: "Venture Capital / Defense Investment Conflicts"
+    description: "VC firms with defense portfolios whose partners move into government. Coatue, Founders Fund, a16z defense, Lux Capital. Investment-to-policy pipeline"
+    targets:
+      - "coatue"
+      - "philippe laffont"
+      - "thomas laffont"
+      - "founders fund"
+      - "peter thiel"
+      - "lux capital"
+      - "josh wolfe"
+      - "a16z"
+      - "andreessen horowitz"
+      - "marc andreessen"
+      - "ben horowitz"
+      - "8vc"
+      - "joe lonsdale"
+      - "shervin pishevar"
+    keywords:
+      - "venture.*defense"
+      - "defense.*portfolio"
+      - "dual.use"
+      - "defense.*investment"
+      - "conflict.*interest"
+
+  - id: 5
+    name: "Golden Dome / Missile Defense"
+    description: "Iron Dome for America / Golden Dome missile defense program. $175B-542B estimated. SpaceX, Anduril, Palantir, L3Harris, Northrop positioning. D-Wave quantum optimization for missile defense"
+    targets:
+      - "golden dome"
+      - "iron dome"
+      - "missile defense"
+      - "mda"
+      - "l3harris"
+      - "northrop grumman"
+      - "raytheon"
+      - "rtx"
+      - "lockheed martin"
+    keywords:
+      - "golden dome"
+      - "missile defense"
+      - "space.based.*interceptor"
+      - "hypersonic.*defense"
+      - "directed energy"
+
+  - id: 6
+    name: "Ethics & Oversight Gaps"
+    description: "Ethics waivers, missing EOs, OGE 278e disclosures, Senate confirmation fights, recusal commitments, Section 207 compliance, inspector general vacancies"
+    targets:
+      - "oge"
+      - "office of government ethics"
+      - "elizabeth warren"
+      - "jack reed"
+      - "sasc"
+    keywords:
+      - "ethics.*waiver"
+      - "oge.*278"
+      - "financial disclosure"
+      - "recusal"
+      - "section 207"
+      - "conflict.*interest"
+      - "revolving door"
+      - "executive order.*ethics"
+
+# No investigation-specific document corpora — uses generic tools
+# (EDGAR, FEC, CourtListener, USASpending, SAM, registries)
+corpus_tools: []
+
+# Key dates
+key_dates:
+  - date: "2017-06-20"
+    event: "Emil Michael departs Uber amid Holder Report scandals"
+    category: "milestone"
+
+  - date: "2020-10-20"
+    event: "DPCM Capital IPO (Emil Michael SPAC)"
+    category: "financial"
+
+  - date: "2022-08-05"
+    event: "DPCM Capital / D-Wave Quantum merger closes"
+    category: "financial"
+
+  - date: "2024-02-28"
+    event: "Emil Michael donates $1M to Make America Great Again Inc."
+    category: "political"
+
+  - date: "2024-05-31"
+    event: "Emil Michael files Form 144 — proposes D-Wave share sale"
+    category: "financial"
+
+  - date: "2024-10-28"
+    event: "Emil Michael resigns from D-Wave board (3 days before Tradewinds)"
+    category: "milestone"
+
+  - date: "2024-10-31"
+    event: "D-Wave achieves DoD Tradewinds Awardable status"
+    category: "operational"
+
+  - date: "2025-01-20"
+    event: "Trump inaugurated; nominates Emil Michael for USD(R&E)"
+    category: "political"
+
+  - date: "2025-01-20"
+    event: "Trump revokes Biden ethics EO 13989 — no replacement issued"
+    category: "political"
+
+  - date: "2025-03-02"
+    event: "Sen. Warren sends ethics/conflict letter to Emil Michael"
+    category: "legal"
+
+  - date: "2025-05-20"
+    event: "Emil Michael confirmed and sworn in as USD(R&E)"
+    category: "milestone"
+
+  - date: "2025-06-17"
+    event: "Trump announces Golden Dome missile defense initiative"
+    category: "operational"
+
+  - date: "2025-11-01"
+    event: "Michael announces 6 critical tech areas (quantum #4, down from 14)"
+    category: "operational"
+
+  - date: "2025-12-02"
+    event: "D-Wave forms Government Business Unit — cites Michael by name"
+    category: "operational"
+
+  - date: "2026-01-27"
+    event: "D-Wave/Anduril/Davidson missile defense collaboration announced"
+    category: "operational"
+
+  - date: "2026-02-01"
+    event: "Musk consolidates SpaceX + xAI ($1.25T combined valuation)"
+    category: "financial"
+
+# Institutional pillars
+seed_pillars:
+  # Defense agencies
+  - name: "Office of the USD(R&E)"
+    pillar_type: "government"
+    sub_type: "defense_agency"
+    status: "active"
+    significance: "Pentagon CTO — oversees DARPA, defense labs, all R&D. Emil Michael's current role."
+
+  - name: "DARPA"
+    pillar_type: "government"
+    sub_type: "defense_agency"
+    status: "active"
+    significance: "Reports to USD(R&E). $4.5B budget. Key funder of defense tech startups."
+
+  - name: "Missile Defense Agency"
+    pillar_type: "government"
+    sub_type: "defense_agency"
+    status: "active"
+    significance: "Golden Dome program. $175B-542B estimated spend."
+
+  - name: "DOGE"
+    pillar_type: "government"
+    sub_type: "executive_office"
+    status: "active"
+    significance: "Musk-led government restructuring. Structural conflict with Musk's defense contracts."
+
+  # Defense tech companies
+  - name: "SpaceX"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    significance: "$13.7B+ in federal contracts. Starlink defense dependency. Musk's primary defense vehicle."
+
+  - name: "Anduril Industries"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    founded: "2017"
+    significance: "Palmer Luckey's defense AI company. $28B+ valuation. D-Wave missile defense partner."
+
+  - name: "Palantir Technologies"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    founded: "2003"
+    significance: "Peter Thiel co-founded. $70B+ market cap. Pentagon data analytics backbone."
+
+  - name: "D-Wave Quantum"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    founded: "1999"
+    significance: "Emil Michael's SPAC target. Government Business Unit formed Dec 2025. $250M quantum earmark."
+
+  # VC firms
+  - name: "Coatue Management"
+    pillar_type: "operations"
+    sub_type: "investment_fund"
+    status: "active"
+    significance: "Laffont brothers. $10B Anthropic investment. Defense portfolio. Emil Michael advisory connection."
+
+  - name: "Founders Fund"
+    pillar_type: "operations"
+    sub_type: "investment_fund"
+    status: "active"
+    significance: "Peter Thiel's VC. Invested in SpaceX, Anduril, Palantir. Deep defense portfolio."
+
+  - name: "8VC"
+    pillar_type: "operations"
+    sub_type: "investment_fund"
+    status: "active"
+    significance: "Joe Lonsdale's fund. Defense tech focus. Lonsdale co-founded Palantir."
+
+  # Key corporate entities
+  - name: "DPCM Capital Inc"
+    pillar_type: "operations"
+    sub_type: "spac"
+    status: "merged"
+    founded: "2020"
+    dissolved: "2022"
+    jurisdiction: "Delaware"
+    significance: "Emil Michael's SPAC. Merged with D-Wave. CDPM Sponsor Group held 14.4M shares."
+
+  - name: "M8 Enterprises LLC"
+    pillar_type: "operations"
+    sub_type: "consulting"
+    status: "active"
+    significance: "Emil Michael's personal consulting/investment vehicle since 2018."
+
+  - name: "D-Wave Government Inc"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    founded: "2016"
+    jurisdiction: "DC"
+    significance: "D-Wave's federal sales subsidiary. Board chaired by former NRO director Jeffrey Harris."
+
+  # Oversight
+  - name: "Senate Armed Services Committee"
+    pillar_type: "government"
+    sub_type: "congressional_oversight"
+    status: "active"
+    significance: "Confirmed Emil Michael. Warren ethics demands. SASC APQ responses."
+
+  - name: "Office of Government Ethics"
+    pillar_type: "government"
+    sub_type: "ethics_oversight"
+    status: "active"
+    significance: "OGE 278e financial disclosures. No replacement ethics EO since Jan 2025."
+
+# No canonical evidence IDs for this investigation
+evidence_id_prefix: ""
+
+# Exclude primary subject from network graph (not applicable — topic investigation)
+exclude_from_graph: ""
+
+# Source reliability notes
+source_overrides:
+  fortune: "Generally reliable for tech/business reporting"
+  breaking_defense: "Specialized defense trade press — reliable for contract/program details"
+  war_on_the_rocks: "Policy-focused defense analysis — reliable"
+  the_intercept: "Investigate from adversarial perspective — verify claims independently"
