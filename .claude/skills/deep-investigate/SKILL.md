@@ -617,12 +617,13 @@ Read("[WORKDIR]/report-agent-c.md")
 Read("[WORKDIR]/report-agent-d.md")
 ```
 
-**Polling with Timeout:**
+**Polling with Liveness Checks:**
 - Poll every 30 seconds for report files
-- After **10 minutes** (20 polls), stop waiting regardless of how many reports exist
-- Synthesize from whatever reports are available at that point
-- For agents that didn't complete, note which agents are missing and create follow-up leads covering their assigned scope
-- Do NOT wait indefinitely — a stuck agent should not block the entire investigation
+- If an agent has no report after 5 minutes, check its output tail (`TaskOutput` with `block=false`) to see if it's still actively working (making tool calls, writing output)
+- If the agent is still active (output growing), let it continue — complex targets take time
+- If the agent appears hung or crashed (no output change across 2+ checks), stop it and create a follow-up lead covering its assigned scope
+- Synthesize from whatever reports exist once all agents have either completed or been declared hung
+- An actively working agent should never be cut off prematurely
 
 Each report is ~2KB (vs 25MB transcript). If you need deeper detail on a specific finding, read the agent's `--output` JSON files (e.g., `[WORKDIR]/a-doj.json`).
 
