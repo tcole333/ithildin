@@ -96,7 +96,7 @@ VALID_SOURCES = [
     "usvi", "ds10_financial", "ucc", "faa", "sam_bulk",
     "highergov", "documentcloud", "muckrock", "fincen",
     "opencorporates", "zefix", "hudoc", "france_sirene",
-    "panama_rp", "investigations_db",
+    "panama_rp", "investigations_db", "fdic",
 ]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
