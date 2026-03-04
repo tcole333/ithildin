@@ -38,9 +38,10 @@ def convert(csv_paths, append=False):
 
         print(f"Reading {csv_path.name}...")
         # DuckDB auto-detects CSV schema; normalize column names
+        # ignore_errors=true handles non-UTF-8 bytes in SBA data
         con.execute(f"""
             CREATE OR REPLACE TABLE batch_{i} AS
-            SELECT * FROM read_csv_auto('{csv_path}', normalize_names=true)
+            SELECT * FROM read_csv_auto('{csv_path}', normalize_names=true, ignore_errors=true)
         """)
         count = con.execute(f"SELECT COUNT(*) FROM batch_{i}").fetchone()[0]
         print(f"  {count:,} rows")
