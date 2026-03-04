@@ -39,14 +39,20 @@ def _utcnow() -> datetime:
     return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
+_schema_initialized = False
+
+
 def get_db():
     """Get a database connection, creating schema if needed."""
+    global _schema_initialized
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
-    _ensure_schema(db)
+    if not _schema_initialized:
+        _ensure_schema(db)
+        _schema_initialized = True
     return db
 
 
@@ -999,6 +1005,13 @@ def add_lead(title, description=None, category=None, priority="medium",
              source=None, target_name=None, evidence=None, related_leads=None,
              thread_id=None, profile_id=None):
     """Add a new lead. Returns the lead ID."""
+    if target_name:
+        try:
+            from tools.name_resolver import resolve_canonical
+            target_name = resolve_canonical(target_name)
+        except Exception:
+            pass
+
     db = get_db()
     cursor = db.execute("""
         INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id)

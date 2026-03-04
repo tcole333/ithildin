@@ -41,35 +41,42 @@ VALID_RELATIONSHIP_TYPES = [
 VALID_STRENGTHS = ["strong", "medium", "weak", "circumstantial"]
 
 
+_schema_initialized = False
+
+
 def get_db():
     """Get database connection. Schema is created by lead_tracker._ensure_schema()."""
+    global _schema_initialized
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
 
-    # Ensure schema exists (lead_tracker creates all tables)
-    from tools.lead_tracker import _ensure_schema
-    _ensure_schema(db)
+    if not _schema_initialized:
+        from tools.lead_tracker import _ensure_schema
+        _ensure_schema(db)
+        _schema_initialized = True
 
     return db
 
 
 def _get_db_standalone():
     """Standalone DB init (when run directly, not as import)."""
+    global _schema_initialized
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
 
-    # Import from sibling module
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("lead_tracker", Path(__file__).parent / "lead_tracker.py")
-    lt = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(lt)
-    lt._ensure_schema(db)
+    if not _schema_initialized:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("lead_tracker", Path(__file__).parent / "lead_tracker.py")
+        lt = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(lt)
+        lt._ensure_schema(db)
+        _schema_initialized = True
 
     return db
 

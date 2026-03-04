@@ -11,6 +11,10 @@ COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
 
 # Only validate findings_tracker add commands
 if ! echo "$COMMAND" | grep -qE "findings_tracker[^ ]*\s+add\s+"; then
+  # Warn if it looks like a findings_tracker add but didn't match the full regex
+  if echo "$COMMAND" | grep -q "findings_tracker" && echo "$COMMAND" | grep -qw "add"; then
+    echo "WARNING: Command looks like findings_tracker add but didn't match validation regex. Check command formatting." >&2
+  fi
   exit 0
 fi
 

@@ -608,7 +608,7 @@ Instead, agents write structured reports to `[WORKDIR]/report-agent-{a,b,c,d}.md
 
 # Poll for completion (check if report files exist)
 Bash: ls -la [WORKDIR]/report-agent-*.md 2>/dev/null | wc -l
-# Repeat every 30s until count = 4
+# Repeat every 30s until count = 4 OR timeout reached (see below)
 
 # Once all reports exist, read them:
 Read("[WORKDIR]/report-agent-a.md")
@@ -616,6 +616,13 @@ Read("[WORKDIR]/report-agent-b.md")
 Read("[WORKDIR]/report-agent-c.md")
 Read("[WORKDIR]/report-agent-d.md")
 ```
+
+**Polling with Timeout:**
+- Poll every 30 seconds for report files
+- After **10 minutes** (20 polls), stop waiting regardless of how many reports exist
+- Synthesize from whatever reports are available at that point
+- For agents that didn't complete, note which agents are missing and create follow-up leads covering their assigned scope
+- Do NOT wait indefinitely — a stuck agent should not block the entire investigation
 
 Each report is ~2KB (vs 25MB transcript). If you need deeper detail on a specific finding, read the agent's `--output` JSON files (e.g., `[WORKDIR]/a-doj.json`).
 
