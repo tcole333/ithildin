@@ -448,6 +448,49 @@ run("ICIJ: extractEvidenceLinks resolves ICIJ ref", () => {
 });
 
 // ---------------------------------------------------------------------------
+// USAspending
+// ---------------------------------------------------------------------------
+
+run("USAspending: resolves award ID to award URL", () => {
+  const result = applyCitations("See [USASPENDING:CONT_AWD_W91WAW11F0017].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "USAspending Award CONT_AWD_W91WAW11F0017");
+  assert.ok(result.entries[0].url.includes("/award/CONT_AWD_W91WAW11F0017/"));
+});
+
+run("USAspending: resolves recipient UEI to recipient URL", () => {
+  const result = applyCitations("See [USASPENDING:RECIPIENT:RN99S3S7N977].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "USAspending Recipient RN99S3S7N977");
+  assert.ok(result.entries[0].url.includes("/recipient/RN99S3S7N977/latest"));
+});
+
+run("USAspending: extractEvidenceLinks resolves award and recipient", () => {
+  const links = extractEvidenceLinks("Award USASPENDING:ABC-123 and recipient USASPENDING:RECIPIENT:XYZ-789");
+  // We check for the presence of the two canonical URLs we expect
+  const urls = links.map(l => l.url);
+  assert.ok(urls.some(u => u?.includes("/award/ABC-123/")), "should find award URL");
+  assert.ok(urls.some(u => u?.includes("/recipient/XYZ-789/latest")), "should find recipient URL");
+});
+
+// ---------------------------------------------------------------------------
+// Medicare
+// ---------------------------------------------------------------------------
+
+run("Medicare: resolves NPI to search URL", () => {
+  const result = applyCitations("See [MEDICARE:1003000126].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "Medicare Provider 1003000126");
+  assert.ok(result.entries[0].url.includes("search_query=1003000126"));
+});
+
+run("Medicare: extractEvidenceLinks resolves NPI", () => {
+  const links = extractEvidenceLinks("Provider MEDICARE:1003000126");
+  const urls = links.map(l => l.url);
+  assert.ok(urls.some(u => u?.includes("search_query=1003000126")), "should find provider search URL");
+});
+
+// ---------------------------------------------------------------------------
 // Finding references
 // ---------------------------------------------------------------------------
 
@@ -558,10 +601,10 @@ run("getCitationHealthTier: returns skip for unknown prefixes", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Registry: all 19 types resolve through applyCitations
+// Registry: all 26 types resolve through applyCitations
 // ---------------------------------------------------------------------------
 
-run("Registry: all 24 types produce citation entries", () => {
+run("Registry: all 26 types produce citation entries", () => {
   const tokens = [
     "Finding #1",
     "EFTA02504960",
@@ -587,6 +630,8 @@ run("Registry: all 24 types produce citation entries", () => {
     "MUCKROCK:78799",
     "LittleSis:101661",
     "ICIJ:82004676",
+    "USASPENDING:CONT_AWD_W91WAW11F0017",
+    "MEDICARE:1003000126",
   ];
 
   for (const token of tokens) {
@@ -665,9 +710,9 @@ run("Registry: splitCitationGroup recognizes all token types", () => {
 });
 
 run("Registry: splitCitationGroup recognizes new types", () => {
-  const combined = "DOCUMENTCLOUD:24402693, ICIJ:82004676, LittleSis:101661";
+  const combined = "DOCUMENTCLOUD:24402693, ICIJ:82004676, LittleSis:101661, USASPENDING:CONT_AWD_W91WAW11F0017, MEDICARE:1003000126";
   const tokens = splitCitationGroup(combined);
-  assert.equal(tokens.length, 3, `Expected 3 tokens, got ${tokens.length}: ${JSON.stringify(tokens)}`);
+  assert.equal(tokens.length, 5, `Expected 5 tokens, got ${tokens.length}: ${JSON.stringify(tokens)}`);
 });
 
 // ---------------------------------------------------------------------------

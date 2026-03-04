@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Medicaid Explorer{% endblock %}</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --bg-card: #16213e;
+            --bg-table-alt: #1a2744;
+            --text: #e0e0e0;
+            --text-muted: #8892a0;
+            --text-heading: #ffffff;
+            --accent: #4fc3f7;
+            --accent-dim: #2196f3;
+            --link: #64b5f6;
+            --link-hover: #90caf9;
+            --border: #2a3a5c;
+            --danger: #ef5350;
+            --danger-bg: #3e1515;
+            --warning: #ffa726;
+            --warning-bg: #3e2e15;
+            --success: #66bb6a;
+            --success-bg: #1e3e1f;
+            --money: #4caf50;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { color: var(--link-hover); text-decoration: underline; }
+
+        /* Nav */
+        nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        nav .brand {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        nav a { font-size: 0.9rem; }
+
+        /* Layout */
+        .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem 2rem; }
+        h1, h2, h3 { color: var(--text-heading); }
+        h1 { font-size: 1.6rem; margin-bottom: 1rem; }
+        h2 { font-size: 1.2rem; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+        h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th {
+            background: var(--bg-card);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+            user-select: none;
+        }
+        th:hover { color: var(--accent); }
+        tr:nth-child(even) { background: var(--bg-table-alt); }
+        tr:hover { background: rgba(79, 195, 247, 0.05); }
+        td.num { text-align: right; font-variant-numeric: tabular-nums; }
+        td.money { text-align: right; color: var(--money); font-variant-numeric: tabular-nums; }
+
+        /* Search form */
+        .search-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .search-form input[type="text"] {
+            flex: 1;
+            min-width: 300px;
+            padding: 0.6rem 1rem;
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        .search-form input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .search-form select {
+            padding: 0.6rem 0.75rem;
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .search-form button {
+            padding: 0.6rem 1.5rem;
+            background: var(--accent-dim);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .search-form button:hover { background: var(--accent); }
+
+        /* Badges / Flags */
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger); }
+        .badge-warning { background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning); }
+        .badge-success { background: var(--success-bg); color: var(--success); border: 1px solid var(--success); }
+        .badge-info { background: rgba(33,150,243,0.15); color: var(--accent); border: 1px solid var(--accent-dim); }
+
+        .flag-box {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .flag-danger { background: var(--danger-bg); border-left: 4px solid var(--danger); }
+        .flag-warning { background: var(--warning-bg); border-left: 4px solid var(--warning); }
+
+        /* Grid */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+        @media (max-width: 900px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        /* Stats */
+        .stat { text-align: center; }
+        .stat .value { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+        .stat .label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+
+        /* Detail info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.25rem 1rem;
+            font-size: 0.9rem;
+        }
+        .info-grid dt { color: var(--text-muted); font-weight: 600; }
+        .info-grid dd { color: var(--text); }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .pagination a, .pagination span {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        .pagination span.current {
+            background: var(--accent-dim);
+            color: white;
+            border-color: var(--accent-dim);
+        }
+
+        /* Meta line */
+        .meta { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.75rem; }
+
+        /* Chart container */
+        .chart-container { position: relative; height: 300px; }
+
+        /* Scrollable table wrapper */
+        .table-wrap { overflow-x: auto; max-height: 500px; overflow-y: auto; }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <span class="brand">Medicaid Explorer</span>
+        <a href="/">Search Providers</a>
+        <a href="/address">Address Search</a>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+    // Simple table sort
+    document.addEventListener("click", function(e) {
+        const th = e.target.closest("th[data-sort]");
+        if (!th) return;
+        const table = th.closest("table");
+        const tbody = table.querySelector("tbody");
+        if (!tbody) return;
+        const idx = Array.from(th.parentElement.children).indexOf(th);
+        const type = th.dataset.sort;
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const dir = th.dataset.dir === "asc" ? "desc" : "asc";
+        th.dataset.dir = dir;
+
+        rows.sort(function(a, b) {
+            let va = a.children[idx]?.textContent?.trim() || "";
+            let vb = b.children[idx]?.textContent?.trim() || "";
+            if (type === "num") {
+                va = parseFloat(va.replace(/[$,]/g, "")) || 0;
+                vb = parseFloat(vb.replace(/[$,]/g, "")) || 0;
+            }
+            if (dir === "asc") return va > vb ? 1 : va < vb ? -1 : 0;
+            return va < vb ? 1 : va > vb ? -1 : 0;
+        });
+        rows.forEach(function(row) { tbody.appendChild(row); });
+    });
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -33,6 +33,9 @@ Writers include citations as inline tokens in content:
 | `[MUCKROCK:id]` | `[MUCKROCK:78799/Docs.redacted.pdf]` | MuckRock FOIA request |
 | `[LittleSis:id]` | `[LittleSis:101661]` | LittleSis entity profile |
 | `[ICIJ:id]` | `[ICIJ:82004676]` | ICIJ Offshore Leaks node |
+| `[USASPENDING:id]` | `[USASPENDING:W91WAW11F0017]` | USAspending award (contract/grant) |
+| `[USASPENDING:RECIPIENT:uei]` | `[USASPENDING:RECIPIENT:RN99S3S7N977]` | USAspending recipient profile |
+| `[MEDICARE:npi]` | `[MEDICARE:1003000126]` | Medicare provider spending |
 
 ### 2. Processing Pipeline
 

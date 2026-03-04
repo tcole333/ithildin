@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Search: {{ query }} — Medicaid Explorer{% endblock %}
+
+{% block content %}
+<h1>Provider Search</h1>
+
+<form class="search-form" action="/search" method="get">
+    <select name="type">
+        <option value="name" {{ 'selected' if search_type == 'name' }}>Name</option>
+        <option value="npi" {{ 'selected' if search_type == 'npi' }}>NPI Number</option>
+        <option value="address" {{ 'selected' if search_type == 'address' }}>Address</option>
+        <option value="city_state" {{ 'selected' if search_type == 'city_state' }}>City, State</option>
+    </select>
+    <input type="text" name="q" value="{{ query }}" placeholder="Search providers...">
+    <button type="submit">Search</button>
+</form>
+
+{% if query %}
+<p class="meta">
+    {{ total }} result{{ 's' if total != 1 }} for "{{ query }}"
+    {% if elapsed %} ({{ "%.2f"|format(elapsed) }}s){% endif %}
+    — showing {{ providers|length }} on page {{ page }}
+</p>
+
+{% if providers %}
+<div class="table-wrap">
+<table>
+    <thead>
+        <tr>
+            <th data-sort="text">NPI</th>
+            <th data-sort="text">Name</th>
+            <th data-sort="text">Address</th>
+            <th data-sort="text">City</th>
+            <th data-sort="text">State</th>
+            <th data-sort="text">Phone</th>
+            <th data-sort="text">Taxonomy</th>
+            <th data-sort="text">Enum Date</th>
+            <th data-sort="num">Total Paid</th>
+            <th data-sort="num">Total Claims</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in providers %}
+        <tr>
+            <td><a href="/provider/{{ p.npi }}">{{ p.npi }}</a></td>
+            <td><a href="/provider/{{ p.npi }}">{{ p.name }}</a></td>
+            <td>{{ p.address or '' }}</td>
+            <td>{{ p.city or '' }}</td>
+            <td>{{ p.state or '' }}</td>
+            <td>{{ p.phone or '' }}</td>
+            <td>{{ p.taxonomy or '' }}</td>
+            <td>{{ p.enum_date or '' }}</td>
+            <td class="money">
+                {% if p.total_paid is not none %}
+                    ${{ "{:,.0f}".format(p.total_paid) }}
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td class="num">
+                {% if p.total_claims is not none %}
+                    {{ "{:,}".format(p.total_claims) }}
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{# Pagination #}
+{% set total_pages = (total / per_page)|round(0, 'ceil')|int %}
+{% if total_pages > 1 %}
+<div class="pagination">
+    {% if page > 1 %}
+        <a href="?q={{ query }}&type={{ search_type }}&page={{ page - 1 }}">Prev</a>
+    {% endif %}
+    {% for p in range(1, total_pages + 1) %}
+        {% if p == page %}
+            <span class="current">{{ p }}</span>
+        {% elif p <= 3 or p >= total_pages - 1 or (p >= page - 2 and p <= page + 2) %}
+            <a href="?q={{ query }}&type={{ search_type }}&page={{ p }}">{{ p }}</a>
+        {% elif p == 4 or p == total_pages - 2 %}
+            <span>...</span>
+        {% endif %}
+    {% endfor %}
+    {% if page < total_pages %}
+        <a href="?q={{ query }}&type={{ search_type }}&page={{ page + 1 }}">Next</a>
+    {% endif %}
+</div>
+{% endif %}
+
+{% else %}
+<div class="card" style="text-align: center; padding: 2rem;">
+    <p>No providers found for "{{ query }}"</p>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

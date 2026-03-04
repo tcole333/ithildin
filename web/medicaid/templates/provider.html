@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+{% block title %}{{ provider.name }} ({{ provider.npi }}) — Medicaid Explorer{% endblock %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+{# ---- Anomaly flags at top ---- #}
+{% if exclusions %}
+<div class="flag-box flag-danger">
+    <strong>OIG EXCLUDED PROVIDER</strong> —
+    {% for ex in exclusions %}
+        {{ ex.business or (ex.last ~ ', ' ~ ex.first) }},
+        exclusion type {{ ex.type }}, date {{ ex.date }}
+        {% if ex.reinstate %} (reinstated {{ ex.reinstate }}){% endif %}
+        {% if not loop.last %}; {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if growth_flags %}
+{% for gf in growth_flags %}
+<div class="flag-box flag-warning">
+    <strong>GROWTH ANOMALY</strong> — Billing grew <strong>{{ "%.0f"|format(gf.growth_pct) }}%</strong>
+    from {{ gf.prev_year }} (${{ "{:,.0f}".format(gf.prev_paid) }}) to {{ gf.year }} (${{ "{:,.0f}".format(gf.curr_paid) }})
+</div>
+{% endfor %}
+{% endif %}
+
+{% if rate_flags %}
+<div class="flag-box flag-warning">
+    <strong>{{ rate_flags|length }} HCPCS code{{ 's' if rate_flags|length > 1 }} above 95th percentile per-claim rate</strong>
+    {% for rf in rate_flags[:5] %}
+    <br>{{ rf.code }} ({{ rf.description[:60] }}): ${{ "%.2f"|format(rf.per_claim) }}/claim vs p95 ${{ "%.2f"|format(rf.p95) }}, median ${{ "%.2f"|format(rf.p50) }}
+    {% endfor %}
+    {% if rate_flags|length > 5 %}<br>... and {{ rate_flags|length - 5 }} more{% endif %}
+</div>
+{% endif %}
+
+{# ---- Header ---- #}
+<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+    <div>
+        <h1 style="margin-bottom: 0.25rem;">{{ provider.name }}</h1>
+        <p class="meta">NPI {{ provider.npi }}
+            {% if provider.entity_type == 1 %}<span class="badge badge-info">Individual</span>
+            {% elif provider.entity_type == 2 %}<span class="badge badge-info">Organization</span>{% endif %}
+            {% if provider.credential %}<span class="badge badge-info">{{ provider.credential }}</span>{% endif %}
+            — Query time: {{ "%.2f"|format(elapsed) }}s
+        </p>
+    </div>
+    <div>
+        <a href="/search?q={{ provider.address|urlencode }}&type=address" class="badge badge-info" style="font-size: 0.85rem; padding: 0.3rem 0.75rem;">
+            Search this address
+        </a>
+    </div>
+</div>
+
+{# ---- Provider Info + Stats ---- #}
+<div class="grid-2" style="margin-top: 1rem;">
+    <div class="card">
+        <h2>Provider Information</h2>
+        <dl class="info-grid">
+            <dt>NPI</dt><dd>{{ provider.npi }}</dd>
+            {% if provider.org_name %}<dt>Organization</dt><dd>{{ provider.org_name }}</dd>{% endif %}
+            {% if provider.last_name %}<dt>Name</dt><dd>{{ provider.last_name }}, {{ provider.first_name or '' }} {{ provider.middle_name or '' }}</dd>{% endif %}
+            {% if provider.credential %}<dt>Credential</dt><dd>{{ provider.credential }}</dd>{% endif %}
+            {% if provider.sex %}<dt>Sex</dt><dd>{{ provider.sex }}</dd>{% endif %}
+            <dt>Address</dt><dd>{{ provider.address or '' }}<br>{{ provider.city or '' }}, {{ provider.state or '' }} {{ provider.zip or '' }}</dd>
+            {% if provider.phone %}<dt>Phone</dt><dd>{{ provider.phone }}</dd>{% endif %}
+            {% if provider.taxonomy %}<dt>Taxonomy</dt><dd>{{ provider.taxonomy }}</dd>{% endif %}
+            {% if provider.enum_date %}<dt>Enumeration Date</dt><dd>{{ provider.enum_date }}</dd>{% endif %}
+        </dl>
+    </div>
+    <div class="card">
+        <h2>Billing Summary</h2>
+        {% if yearly %}
+        {% set total_paid = yearly|sum(attribute='paid') %}
+        {% set total_claims = yearly|sum(attribute='claims') %}
+        {% set total_benes = yearly|sum(attribute='benes') %}
+        <div class="grid-3" style="margin-bottom: 1rem;">
+            <div class="stat">
+                <div class="value" style="font-size: 1.4rem; color: var(--money);">${{ "{:,.0f}".format(total_paid) }}</div>
+                <div class="label">Total Paid</div>
+            </div>
+            <div class="stat">
+                <div class="value" style="font-size: 1.4rem;">{{ "{:,}".format(total_claims) }}</div>
+                <div class="label">Total Claims</div>
+            </div>
+            <div class="stat">
+                <div class="value" style="font-size: 1.4rem;">{{ "{:,}".format(total_benes) }}</div>
+                <div class="label">Total Beneficiaries</div>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th data-sort="text">Year</th>
+                    <th data-sort="num">Paid</th>
+                    <th data-sort="num">Claims</th>
+                    <th data-sort="num">Beneficiaries</th>
+                    <th data-sort="num">Per Claim</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for y in yearly %}
+                <tr>
+                    <td>{{ y.year }}</td>
+                    <td class="money">${{ "{:,.0f}".format(y.paid) }}</td>
+                    <td class="num">{{ "{:,}".format(y.claims) }}</td>
+                    <td class="num">{{ "{:,}".format(y.benes) }}</td>
+                    <td class="num">${{ "%.2f"|format(y.paid / y.claims) if y.claims else '—' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="meta">No billing records found as billing provider.</p>
+        {% endif %}
+    </div>
+</div>
+
+{# ---- Monthly Chart ---- #}
+{% if monthly %}
+<div class="card">
+    <h2>Monthly Billing Timeline</h2>
+    <div class="chart-container">
+        <canvas id="monthlyChart"></canvas>
+    </div>
+</div>
+{% endif %}
+
+{# ---- HCPCS Breakdown ---- #}
+{% if hcpcs %}
+<div class="card">
+    <h2>Billing by HCPCS Code ({{ hcpcs|length }} codes)</h2>
+    <div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th data-sort="text">Code</th>
+                <th data-sort="text">Description</th>
+                <th data-sort="num">Total Paid</th>
+                <th data-sort="num">Claims</th>
+                <th data-sort="num">Beneficiaries</th>
+                <th data-sort="num">Per Claim</th>
+                <th data-sort="num">Median (p50)</th>
+                <th data-sort="num">95th (p95)</th>
+                <th>Flags</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in hcpcs %}
+            <tr>
+                <td><code>{{ h.code }}</code></td>
+                <td style="max-width: 300px;">{{ h.description }}</td>
+                <td class="money">${{ "{:,.0f}".format(h.paid) }}</td>
+                <td class="num">{{ "{:,}".format(h.claims) }}</td>
+                <td class="num">{{ "{:,}".format(h.benes) }}</td>
+                <td class="num">${{ "%.2f"|format(h.per_claim) if h.per_claim else '—' }}</td>
+                <td class="num">{{ "$%.2f"|format(h.p50) if h.p50 is defined and h.p50 is not none else '—' }}</td>
+                <td class="num">{{ "$%.2f"|format(h.p95) if h.p95 is defined and h.p95 is not none else '—' }}</td>
+                <td>
+                    {% if h.flag_95 %}
+                        <span class="badge badge-danger">&gt; 95th pctl</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endif %}
+
+{# ---- Servicing Providers ---- #}
+{% if servicing %}
+<div class="card">
+    <h2>Servicing Providers ({{ servicing|length }})</h2>
+    <p class="meta">Providers who rendered services billed under this NPI</p>
+    <div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th data-sort="text">NPI</th>
+                <th data-sort="text">Name</th>
+                <th data-sort="text">Taxonomy</th>
+                <th data-sort="num">Total Paid</th>
+                <th data-sort="num">Claims</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in servicing %}
+            <tr>
+                <td><a href="/provider/{{ s.npi }}">{{ s.npi }}</a></td>
+                <td><a href="/provider/{{ s.npi }}">{{ s.name or '(unknown)' }}</a></td>
+                <td>{{ s.taxonomy or '' }}</td>
+                <td class="money">${{ "{:,.0f}".format(s.paid) }}</td>
+                <td class="num">{{ "{:,}".format(s.claims) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endif %}
+
+{# ---- Billing Relationships ---- #}
+{% if billing_for %}
+<div class="card">
+    <h2>Billed Under Other NPIs ({{ billing_for|length }})</h2>
+    <p class="meta">Organizations that bill for this provider's services</p>
+    <div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th data-sort="text">Billing NPI</th>
+                <th data-sort="text">Name</th>
+                <th data-sort="text">Taxonomy</th>
+                <th data-sort="num">Total Paid</th>
+                <th data-sort="num">Claims</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in billing_for %}
+            <tr>
+                <td><a href="/provider/{{ b.npi }}">{{ b.npi }}</a></td>
+                <td><a href="/provider/{{ b.npi }}">{{ b.name or '(unknown)' }}</a></td>
+                <td>{{ b.taxonomy or '' }}</td>
+                <td class="money">${{ "{:,.0f}".format(b.paid) }}</td>
+                <td class="num">{{ "{:,}".format(b.claims) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endif %}
+
+{# ---- Colocated Providers ---- #}
+{% if colocated %}
+<div class="card">
+    <h2>Other Providers at This Address ({{ colocated|length }})</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>NPI</th>
+                <th>Name</th>
+                <th>Taxonomy</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in colocated %}
+            <tr>
+                <td><a href="/provider/{{ c.npi }}">{{ c.npi }}</a></td>
+                <td><a href="/provider/{{ c.npi }}">{{ c.name }}</a></td>
+                <td>{{ c.taxonomy or '' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+{% if monthly %}
+<script>
+const ctx = document.getElementById('monthlyChart').getContext('2d');
+const data = {
+    labels: {{ monthly|map(attribute='month')|list|tojson }},
+    datasets: [
+        {
+            label: 'Paid ($)',
+            data: {{ monthly|map(attribute='paid')|list|tojson }},
+            backgroundColor: 'rgba(76, 175, 80, 0.3)',
+            borderColor: 'rgba(76, 175, 80, 1)',
+            borderWidth: 1.5,
+            yAxisID: 'y',
+            type: 'bar',
+        },
+        {
+            label: 'Claims',
+            data: {{ monthly|map(attribute='claims')|list|tojson }},
+            borderColor: 'rgba(79, 195, 247, 1)',
+            backgroundColor: 'rgba(79, 195, 247, 0.1)',
+            borderWidth: 2,
+            yAxisID: 'y1',
+            type: 'line',
+            pointRadius: 1,
+        }
+    ]
+};
+
+new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+            legend: { labels: { color: '#e0e0e0' } },
+            tooltip: {
+                callbacks: {
+                    label: function(ctx) {
+                        if (ctx.dataset.yAxisID === 'y') {
+                            return 'Paid: $' + ctx.raw.toLocaleString();
+                        }
+                        return 'Claims: ' + ctx.raw.toLocaleString();
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: { color: '#8892a0', maxRotation: 45, autoSkip: true, maxTicksLimit: 24 },
+                grid: { color: 'rgba(42,58,92,0.5)' }
+            },
+            y: {
+                type: 'linear',
+                position: 'left',
+                ticks: {
+                    color: 'rgba(76,175,80,0.8)',
+                    callback: function(v) { return '$' + (v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1e3 ? (v/1e3).toFixed(0)+'K' : v); }
+                },
+                grid: { color: 'rgba(42,58,92,0.3)' }
+            },
+            y1: {
+                type: 'linear',
+                position: 'right',
+                ticks: {
+                    color: 'rgba(79,195,247,0.8)',
+                    callback: function(v) { return v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1e3 ? (v/1e3).toFixed(0)+'K' : v; }
+                },
+                grid: { drawOnChartArea: false }
+            }
+        }
+    }
+});
+</script>
+{% endif %}
+{% endblock %}

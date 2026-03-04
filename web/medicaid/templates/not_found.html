@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}NPI Not Found — Medicaid Explorer{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 3rem auto; text-align: center;">
+    <h1>Provider Not Found</h1>
+    <p>NPI <code>{{ npi }}</code> was not found in billing or servicing provider data.</p>
+    <p style="margin-top: 1rem;">
+        <a href="/search?q={{ npi }}&type=npi">Search for this NPI</a> |
+        <a href="/">Back to search</a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Address Search — Medicaid Explorer{% endblock %}
+
+{% block content %}
+<h1>Address Search</h1>
+<p class="meta">Find all providers registered at a given address with their billing totals.</p>
+
+<form class="search-form" action="/address" method="get">
+    <input type="text" name="q" value="{{ query }}" placeholder="Enter address (e.g., 100 Main St)..." autofocus>
+    <button type="submit">Search</button>
+</form>
+
+{% if query %}
+<p class="meta">
+    {{ providers|length }} provider{{ 's' if providers|length != 1 }} at addresses matching "{{ query }}"
+    {% if elapsed %} ({{ "%.2f"|format(elapsed) }}s){% endif %}
+</p>
+
+{% if providers %}
+{# Group by address #}
+{% set ns = namespace(current_addr='') %}
+<div class="table-wrap">
+<table>
+    <thead>
+        <tr>
+            <th data-sort="text">NPI</th>
+            <th data-sort="text">Name</th>
+            <th data-sort="text">Address</th>
+            <th data-sort="text">City</th>
+            <th data-sort="text">State</th>
+            <th data-sort="text">Taxonomy</th>
+            <th data-sort="num">Total Paid</th>
+            <th data-sort="num">Total Claims</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in providers %}
+        <tr>
+            <td><a href="/provider/{{ p.npi }}">{{ p.npi }}</a></td>
+            <td><a href="/provider/{{ p.npi }}">{{ p.name }}</a></td>
+            <td>{{ p.address or '' }}</td>
+            <td>{{ p.city or '' }}</td>
+            <td>{{ p.state or '' }}</td>
+            <td>{{ p.taxonomy or '' }}</td>
+            <td class="money">
+                {% if p.total_paid is not none %}
+                    ${{ "{:,.0f}".format(p.total_paid) }}
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td class="num">
+                {% if p.total_claims is not none %}
+                    {{ "{:,}".format(p.total_claims) }}
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<div class="card" style="text-align: center; padding: 2rem;">
+    <p>No providers found at "{{ query }}"</p>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

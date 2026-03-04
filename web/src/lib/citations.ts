@@ -94,6 +94,18 @@ function buildIcijUrl(nodeId: string): string {
   return `https://offshoreleaks.icij.org/nodes/${nodeId}`;
 }
 
+function buildUSAspendingAwardUrl(generatedId: string): string {
+  return `https://www.usaspending.gov/award/${generatedId}/`;
+}
+
+function buildUSAspendingRecipientUrl(uei: string): string {
+  return `https://www.usaspending.gov/recipient/${uei}/latest`;
+}
+
+function buildMedicareUrl(npi: string): string {
+  return `https://data.cms.gov/provider-data/search?search_query=${npi}`;
+}
+
 function buildFecCommitteeUrl(committeeId: string): string {
   return `https://www.fec.gov/data/committee/${committeeId}/`;
 }
@@ -760,6 +772,73 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         if (!m) return [];
         const url = buildIcijUrl(m[1]);
         return [{ key: url, label: ref.trim(), url }];
+      });
+    },
+  },
+  {
+    id: "usaspending",
+    tokenPattern: "USASPENDING:(?:RECIPIENT:)?[A-Za-z0-9_-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const recipientMatch = token.match(/USASPENDING:RECIPIENT:([A-Za-z0-9_-]+)/i);
+      if (recipientMatch) {
+        const uei = recipientMatch[1];
+        return {
+          key: `usaspending:recipient:${uei.toLowerCase()}`,
+          label: `USAspending Recipient ${uei}`,
+          url: buildUSAspendingRecipientUrl(uei),
+        };
+      }
+      const awardMatch = token.match(/USASPENDING:([A-Za-z0-9_-]+)/i);
+      if (awardMatch) {
+        const awardId = awardMatch[1];
+        return {
+          key: `usaspending:award:${awardId.toLowerCase()}`,
+          label: `USAspending Award ${awardId}`,
+          url: buildUSAspendingAwardUrl(awardId),
+        };
+      }
+      return null;
+    },
+    extract(raw) {
+      const results: CitationLink[] = [];
+      const awardRefs = raw.match(/USASPENDING:(?:RECIPIENT:)?[A-Za-z0-9_-]+/gi) || [];
+      for (const ref of awardRefs) {
+        const recipientMatch = ref.match(/USASPENDING:RECIPIENT:([A-Za-z0-9_-]+)/i);
+        if (recipientMatch) {
+          const uei = recipientMatch[1];
+          results.push({ key: buildUSAspendingRecipientUrl(uei), label: `USASPENDING:RECIPIENT:${uei}`, url: buildUSAspendingRecipientUrl(uei) });
+          continue;
+        }
+        const awardMatch = ref.match(/USASPENDING:([A-Za-z0-9_-]+)/i);
+        if (awardMatch) {
+          const awardId = awardMatch[1];
+          results.push({ key: buildUSAspendingAwardUrl(awardId), label: `USASPENDING:${awardId}`, url: buildUSAspendingAwardUrl(awardId) });
+        }
+      }
+      return results;
+    },
+    stripPattern: /USASPENDING:(?:RECIPIENT:)?[A-Za-z0-9_-]+/gi,
+  },
+  {
+    id: "medicare",
+    tokenPattern: "MEDICARE:\\d{10}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/MEDICARE:(\d{10})/i);
+      if (!match) return null;
+      const npi = match[1];
+      return {
+        key: `medicare:${npi}`,
+        label: `Medicare Provider ${npi}`,
+        url: buildMedicareUrl(npi),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/MEDICARE:\d{10}/gi) || []).map(ref => {
+        const npi = ref.split(":")[1];
+        const url = buildMedicareUrl(npi);
+        return { key: url, label: `MEDICARE:${npi}`, url };
       });
     },
   },

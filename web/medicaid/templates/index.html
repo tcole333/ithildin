@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Medicaid Provider Explorer{% endblock %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 3rem auto; text-align: center;">
+    <h1>Medicaid Provider Spending Explorer</h1>
+    <p class="meta" style="font-size: 0.95rem; margin-bottom: 2rem;">
+        Search 617K billing providers across 227M Medicaid claims.
+        Identify anomalous billing patterns, explore provider networks, and trace financial flows.
+    </p>
+
+    <form class="search-form" action="/search" method="get" style="justify-content: center;">
+        <select name="type" style="min-width: 140px;">
+            <option value="name">Name</option>
+            <option value="npi">NPI Number</option>
+            <option value="address">Address</option>
+            <option value="city_state">City, State</option>
+        </select>
+        <input type="text" name="q" placeholder="Search providers..." autofocus>
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="grid-3" style="margin-top: 2rem;">
+        <div class="card stat">
+            <div class="value">617K</div>
+            <div class="label">Billing Providers</div>
+        </div>
+        <div class="card stat">
+            <div class="value">227M</div>
+            <div class="label">Claim Records</div>
+        </div>
+        <div class="card stat">
+            <div class="value">82K</div>
+            <div class="label">OIG Exclusions</div>
+        </div>
+    </div>
+
+    <div class="card" style="text-align: left; margin-top: 1rem;">
+        <h3>Quick Access</h3>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+            <a href="/address">Address Search</a> &mdash; Find all providers at a given address
+        </p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+            <strong>Search tips:</strong>
+            Name search matches org name, last name, and first name (case-insensitive contains).
+            City/state search accepts "City, ST" format.
+            Results are ordered by total Medicaid payments descending.
+        </p>
+    </div>
+</div>
+{% endblock %}
