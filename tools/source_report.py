@@ -10,6 +10,7 @@ Usage:
 """
 
 import argparse
+import base64
 import json
 import os
 import sqlite3
@@ -17,6 +18,20 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
+
+
+def load_env_file():
+    """Load key=value pairs from .env into process env (without overriding existing values)."""
+    env_path = PROJECT_ROOT / ".env"
+    if not env_path.exists():
+        return
+
+    for line in env_path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, val = line.split("=", 1)
+        os.environ.setdefault(key.strip(), val.strip().strip('"').strip("'"))
 
 
 def check_sqlite(path, count_query):
@@ -42,6 +57,10 @@ def check_parquet(path):
         df = pd.read_parquet(path)
         size_mb = path.stat().st_size / (1024 * 1024)
         return {"status": "available", "path": str(path), "records": len(df), "size_mb": round(size_mb, 1)}
+    except ModuleNotFoundError:
+        # pandas may not be installed in lightweight environments. Presence + size still indicates availability.
+        size_mb = path.stat().st_size / (1024 * 1024)
+        return {"status": "available", "path": str(path), "records": 0, "size_mb": round(size_mb, 1), "note": "Install pandas to compute row count"}
     except Exception as e:
         return {"status": "error", "path": str(path), "error": str(e)}
 
@@ -73,7 +92,7 @@ def check_neo4j():
         return {"status": "unknown", "start_cmd": "./scripts/start_icij_db.sh"}
 
 
-def check_api(name, test_url=None):
+def check_api(name, test_url=None, headers=None):
     """Check if an API is reachable."""
     if not test_url:
         return {"status": "configured"}
@@ -81,16 +100,17 @@ def check_api(name, test_url=None):
         from urllib.request import Request, urlopen
         from urllib.error import HTTPError, URLError
         # SEC EDGAR requires User-Agent header
-        headers = {"User-Agent": "OSINT-Research osint-research@proton.me"}
+        req_headers = {"User-Agent": "OSINT-Research osint-research@proton.me"}
+        if headers:
+            req_headers.update(headers)
         # DugganUSA requires Bearer token auth
         if "dugganusa.com" in test_url:
-            from tools.duggan_search import _get_api_key
-            api_key = _get_api_key()
+            api_key = os.environ.get("DUGGANUSA_API_KEY")
             if api_key:
-                headers["Authorization"] = f"Bearer {api_key}"
+                req_headers["Authorization"] = f"Bearer {api_key}"
             else:
-                return {"status": "error:no_api_key", "error": "DUGGANUSA_API_KEY not set in .env"}
-        req = Request(test_url, headers=headers)
+                return {"status": "no_api_key", "start_cmd": "export DUGGANUSA_API_KEY=<key>"}
+        req = Request(test_url, headers=req_headers)
         with urlopen(req, timeout=5) as resp:
             return {"status": "available" if resp.status == 200 else f"error:{resp.status}"}
     except HTTPError as e:
@@ -245,6 +265,109 @@ def generate_report():
         ),
     }
 
+    # OpenSanctions (bulk ingested locally)
+    sources["OpenSanctions"] = {
+        "description": "Global sanctions/PEP/debarment graph (local SQLite)",
+        "query_tool": "tools/query_opensanctions.py",
+        **check_sqlite(
+            PROJECT_ROOT / "datasets" / "opensanctions.db",
+            "SELECT COUNT(*) FROM os_entities"
+        ),
+    }
+
+    # CourtListener / RECAP
+    courtlistener_token = os.environ.get("COURTLISTENER_TOKEN")
+    sources["CourtListener / RECAP"] = {
+        "description": "Federal dockets, parties, and RECAP archive records",
+        "query_tool": "tools/query_courtlistener.py",
+        **check_api(
+            "CourtListener",
+            "https://www.courtlistener.com/api/rest/v4/dockets/?page_size=1",
+            headers={"Authorization": f"Token {courtlistener_token}"} if courtlistener_token else None,
+        ),
+    }
+    if not courtlistener_token:
+        sources["CourtListener / RECAP"]["status"] = "no_api_key"
+        sources["CourtListener / RECAP"]["start_cmd"] = "export COURTLISTENER_TOKEN=<token>"
+
+    # UK Companies House
+    companies_house_key = os.environ.get("COMPANIES_HOUSE_API_KEY")
+    ch_headers = None
+    if companies_house_key:
+        auth = base64.b64encode(f"{companies_house_key}:".encode()).decode()
+        ch_headers = {"Authorization": f"Basic {auth}"}
+    sources["UK Companies House"] = {
+        "description": "UK corporate registry + PSC beneficial ownership",
+        "query_tool": "tools/ingest_uk_companies_house.py",
+        **check_api(
+            "Companies House",
+            "https://api.company-information.service.gov.uk/search/companies?q=test&items_per_page=1",
+            headers=ch_headers,
+        ),
+    }
+    if not companies_house_key:
+        sources["UK Companies House"]["status"] = "no_api_key"
+        sources["UK Companies House"]["start_cmd"] = "export COMPANIES_HOUSE_API_KEY=<key>"
+
+    # Swiss Zefix (public SPARQL)
+    sources["Swiss Zefix"] = {
+        "description": "Swiss commercial registry via public SPARQL endpoint",
+        "query_tool": "tools/query_zefix.py",
+        **check_api("Zefix", "https://lindas.admin.ch/query/"),
+    }
+
+    # Medicare API
+    sources["Medicare (CMS API)"] = {
+        "description": "Provider-level Medicare spending (no auth)",
+        "query_tool": "tools/query_medicare.py",
+        **check_api(
+            "CMS",
+            "https://data.cms.gov/data-api/v1/dataset/8889d81e-2ee7-448f-8713-f071038289b5/data?size=1",
+        ),
+    }
+
+    # Medicaid parquet corpus
+    sources["Medicaid Spending Parquet"] = {
+        "description": "T-MSIS Medicaid spending parquet (billing, servicing, HCPCS)",
+        "query_tool": "tools/query_medicaid.py",
+        **check_parquet(PROJECT_ROOT / "data" / "medicaid_spending.parquet"),
+    }
+
+    # FinCEN files (local CSV corpus)
+    sources["FinCEN Files"] = {
+        "description": "Leaked SAR transaction + bank connection datasets",
+        "query_tool": "tools/query_fincen.py",
+        **check_directory(PROJECT_ROOT / "datasets" / "fincen_files"),
+    }
+
+    # DocumentCloud
+    sources["DocumentCloud"] = {
+        "description": "Public document archive + project APIs",
+        "query_tool": "tools/query_documentcloud.py",
+        **check_api("DocumentCloud", "https://api.www.documentcloud.org/api/projects/216915/"),
+    }
+
+    # MuckRock FOIA
+    sources["MuckRock FOIA"] = {
+        "description": "Public FOIA request metadata + release links",
+        "query_tool": "tools/query_muckrock.py",
+        **check_api("MuckRock", "https://www.muckrock.com/api_v1/foia/?page_size=1"),
+    }
+
+    # HigherGov (paid API)
+    highergov_key = os.environ.get("HIGHERGOV_API_KEY")
+    sources["HigherGov"] = {
+        "description": "Federal contract/grant/vehicle intelligence (paid API)",
+        "query_tool": "tools/query_highergov.py",
+        **check_api(
+            "HigherGov",
+            f"https://www.highergov.com/api-external/agency/?api_key={highergov_key}&page_size=1" if highergov_key else None,
+        ),
+    }
+    if not highergov_key:
+        sources["HigherGov"]["status"] = "no_api_key"
+        sources["HigherGov"]["start_cmd"] = "export HIGHERGOV_API_KEY=<key>"
+
     # APIs
     sources["DugganUSA API"] = {
         "description": "329K+ docs across all 12 DOJ datasets",
@@ -332,6 +455,8 @@ def generate_report():
 
 
 def main():
+    load_env_file()
+
     parser = argparse.ArgumentParser(description="OSINT data source coverage report")
     parser.add_argument("-j", "--json", action="store_true")
     args = parser.parse_args()
@@ -349,10 +474,27 @@ def main():
     available = 0
     total = len(sources)
 
+    def status_icon(status):
+        if status in ("available", "running", "configured"):
+            return "[OK]"
+        if status in ("missing", "not_ingested"):
+            return "[--]"
+        if status in ("no_api_key", "unreachable", "unknown"):
+            return "[??]"
+        if isinstance(status, str) and status.startswith("error"):
+            return "[!!]"
+        if status == "stopped":
+            return "[!!]"
+        return "[??]"
+
+    def is_available(status):
+        if status in ("available", "running", "configured"):
+            return True
+        return False
+
     for name, info in sources.items():
         status = info.get("status", "?")
-        icon = {"available": "[OK]", "running": "[OK]", "configured": "[OK]",
-                "missing": "[--]", "stopped": "[!!]", "error": "[!!]", "unknown": "[??]"}.get(status, "[??]")
+        icon = status_icon(status)
 
         records = info.get("records", "")
         records_str = f" ({records:,} records)" if isinstance(records, int) and records > 0 else ""
@@ -364,10 +506,12 @@ def main():
         print(f"     Tool: {info.get('query_tool', '?')}")
         if info.get("start_cmd"):
             print(f"     Start: {info['start_cmd']}")
+        if info.get("note"):
+            print(f"     Note: {info['note']}")
         if info.get("error"):
             print(f"     Error: {info['error']}")
 
-        if status in ("available", "running", "configured"):
+        if is_available(status):
             available += 1
 
     print(f"\n{'='*80}")
