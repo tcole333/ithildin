@@ -728,19 +728,44 @@ def _ensure_schema(db):
             db.execute("DROP INDEX IF EXISTS idx_connections_unique")
             # Remove duplicate connections, keeping the oldest (smallest id) per group.
             # Group by coalesced values so NULLs are deduplicated correctly.
-            # Must delete dependent connection_evidence rows first (FK constraint).
+            # Temporarily disable FK checks for safe dedup migration.
+            # PRAGMA foreign_keys must be set outside a transaction.
+            db.commit()
+            db.execute("PRAGMA foreign_keys=OFF")
+
+            # Copy evidence from duplicate connections to canonical (MIN id).
+            # INSERT OR IGNORE handles the case where canonical already has
+            # the same evidence_ref — no data is lost.
+            db.execute("""
+                INSERT OR IGNORE INTO connection_evidence (connection_id, evidence_type, evidence_ref, source_quote, source_page)
+                SELECT canon.id, ce.evidence_type, ce.evidence_ref, ce.source_quote, ce.source_page
+                FROM connection_evidence ce
+                JOIN connections c ON c.id = ce.connection_id
+                JOIN (
+                    SELECT MIN(id) as id, person_a, person_b,
+                           COALESCE(relationship_type, '') as rt, COALESCE(profile_id, '') as pid
+                    FROM connections
+                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
+                ) canon ON canon.person_a = c.person_a AND canon.person_b = c.person_b
+                    AND canon.rt = COALESCE(c.relationship_type, '')
+                    AND canon.pid = COALESCE(c.profile_id, '')
+                WHERE ce.connection_id != canon.id
+            """)
+            # Remove evidence rows pointing at duplicates (already copied above)
             db.execute("""
                 DELETE FROM connection_evidence WHERE connection_id NOT IN (
                     SELECT MIN(id) FROM connections
                     GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
                 )
             """)
+            # Now safe to delete duplicate connections
             db.execute("""
                 DELETE FROM connections WHERE id NOT IN (
                     SELECT MIN(id) FROM connections
                     GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
                 )
             """)
+            db.execute("PRAGMA foreign_keys=ON")
             db.execute("""
                 CREATE UNIQUE INDEX idx_connections_unique
                 ON connections(
