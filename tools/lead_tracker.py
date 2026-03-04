@@ -21,7 +21,7 @@ import argparse
 import json
 import sqlite3
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 try:
     from tools.output_util import add_output_args, write_output
@@ -650,6 +650,15 @@ def _ensure_schema(db):
         ("source_reliability", "subject_connection TEXT"),
         # Actual formation/filing date (distinct from DB ingestion created_at)
         ("entities", "date_formed TEXT"),
+        # Lead lease tracking (stale-recovery for crashed agents)
+        ("leads", "claimed_by TEXT"),
+        ("leads", "claimed_at TIMESTAMP"),
+        ("leads", "lease_until TIMESTAMP"),
+        # Session performance metrics
+        ("sessions", "findings_created INTEGER DEFAULT 0"),
+        ("sessions", "connections_created INTEGER DEFAULT 0"),
+        ("sessions", "leads_created INTEGER DEFAULT 0"),
+        ("sessions", "retractions INTEGER DEFAULT 0"),
     ]
     for table, column_def in _migrations:
         try:
@@ -674,6 +683,7 @@ def _ensure_schema(db):
         "CREATE INDEX IF NOT EXISTS idx_findings_profile ON findings(profile_id)",
         "CREATE INDEX IF NOT EXISTS idx_connections_profile ON connections(profile_id)",
         "CREATE INDEX IF NOT EXISTS idx_threads_profile ON investigation_threads(profile_id)",
+        "CREATE INDEX IF NOT EXISTS idx_leads_lease ON leads(status, lease_until)",
     ]:
         try:
             db.execute(idx_sql)
@@ -1127,13 +1137,17 @@ def get_lead(lead_id):
     return result
 
 
-def claim_lead(lead_id, session_id=None):
-    """Mark a lead as in_progress."""
+def claim_lead(lead_id, session_id=None, claimed_by=None, lease_hours=2):
+    """Mark a lead as in_progress with a lease."""
     db = get_db()
-    now = _utcnow().isoformat()
+    now = _utcnow()
+    now_iso = now.isoformat()
+    lease_until = (now + timedelta(hours=lease_hours)).isoformat()
     cursor = db.execute(
-        "UPDATE leads SET status = 'in_progress', updated_at = ? WHERE id = ? AND status = 'open'",
-        (now, lead_id)
+        """UPDATE leads SET status = 'in_progress', updated_at = ?,
+           claimed_by = ?, claimed_at = ?, lease_until = ?
+           WHERE id = ? AND status = 'open'""",
+        (now_iso, claimed_by, now_iso, lease_until, lead_id)
     )
     if cursor.rowcount != 1:
         db.close()
@@ -1148,14 +1162,20 @@ def claim_lead(lead_id, session_id=None):
     return True
 
 
-def claim_next_lead(category=None, thread_id=None, session_id=None):
+def claim_next_lead(category=None, thread_id=None, session_id=None,
+                    claimed_by=None, lease_hours=2):
     """Atomically select and claim the next open lead.
 
     Uses BEGIN IMMEDIATE to acquire a write lock, preventing TOCTOU races
     where two agents could claim the same lead.
+
+    Opportunistically recovers stale leads before selecting.
     """
     db = get_db()
     db.execute("BEGIN IMMEDIATE")
+
+    # Recover stale leads before picking next
+    _mark_stale_leads_db(db)
 
     conditions = ["status = 'open'"]
     params = []
@@ -1179,10 +1199,14 @@ def claim_next_lead(category=None, thread_id=None, session_id=None):
         db.close()
         return None
 
-    now = _utcnow().isoformat()
+    now = _utcnow()
+    now_iso = now.isoformat()
+    lease_until = (now + timedelta(hours=lease_hours)).isoformat()
     cursor = db.execute(
-        "UPDATE leads SET status='in_progress', updated_at=? WHERE id=? AND status='open'",
-        (now, row["id"]))
+        """UPDATE leads SET status='in_progress', updated_at=?,
+           claimed_by=?, claimed_at=?, lease_until=?
+           WHERE id=? AND status='open'""",
+        (now_iso, claimed_by, now_iso, lease_until, row["id"]))
 
     if cursor.rowcount != 1:
         db.commit()
@@ -1270,6 +1294,56 @@ def reopen_lead(lead_id):
     )
     db.commit()
     db.close()
+
+
+def _mark_stale_leads_db(db, max_age_hours=2):
+    """Reset stale in_progress leads to open (operates on existing db connection).
+
+    A lead is stale if status='in_progress' and lease_until < NOW().
+    Returns list of recovered lead IDs.
+    """
+    now = _utcnow().isoformat()
+    rows = db.execute("""
+        SELECT id, title FROM leads
+        WHERE status = 'in_progress' AND lease_until IS NOT NULL AND lease_until < ?
+    """, (now,)).fetchall()
+
+    recovered = []
+    for row in rows:
+        db.execute("""
+            UPDATE leads SET status = 'open', updated_at = ?,
+                claimed_by = NULL, claimed_at = NULL, lease_until = NULL
+            WHERE id = ?
+        """, (now, row["id"]))
+        db.execute(
+            "INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
+            (row["id"], "Auto-reopened: lease expired (agent likely crashed)")
+        )
+        recovered.append({"id": row["id"], "title": row["title"]})
+    return recovered
+
+
+def mark_stale_leads(max_age_hours=2):
+    """Find and reset stale in_progress leads. Returns list of recovered leads."""
+    db = get_db()
+    recovered = _mark_stale_leads_db(db, max_age_hours)
+    db.commit()
+    db.close()
+    return recovered
+
+
+def list_stale_leads():
+    """List leads that have exceeded their lease without being completed."""
+    db = get_db()
+    now = _utcnow().isoformat()
+    rows = db.execute("""
+        SELECT id, title, priority, category, claimed_by, claimed_at, lease_until
+        FROM leads
+        WHERE status = 'in_progress' AND lease_until IS NOT NULL AND lease_until < ?
+        ORDER BY lease_until ASC
+    """, (now,)).fetchall()
+    db.close()
+    return [dict(r) for r in rows]
 
 
 def search_leads(query):
@@ -1409,6 +1483,13 @@ def get_stats():
         "SELECT COUNT(*) FROM infra_requests WHERE status IN ('evaluating', 'in_progress')"
     ).fetchone()[0]
 
+    # Stale leads (lease expired)
+    now = _utcnow().isoformat()
+    stats["stale_leads"] = db.execute(
+        "SELECT COUNT(*) FROM leads WHERE status = 'in_progress' AND lease_until IS NOT NULL AND lease_until < ?",
+        (now,)
+    ).fetchone()[0]
+
     db.close()
     return stats
 
@@ -1534,6 +1615,13 @@ def main():
     # stats
     stats_p = subparsers.add_parser("stats", help="Show statistics")
     add_output_args(stats_p)
+
+    # stale — list stale leads
+    stale_p = subparsers.add_parser("stale", help="List leads with expired leases")
+    add_output_args(stale_p)
+
+    # recover-stale — reset stale leads to open
+    recover_p = subparsers.add_parser("recover-stale", help="Reset stale leads to open")
 
     # tier — tag a lead with investigation depth
     tier_p = subparsers.add_parser("tier", help="Tag a lead with investigation depth tier")
@@ -1702,10 +1790,32 @@ def main():
                 queues.append(f"{stats['infra_active']} infra requests in progress")
             if stats.get('blocked_by_infra', 0) > 0:
                 queues.append(f"{stats['blocked_by_infra']} leads blocked on infra")
+            if stats.get('stale_leads', 0) > 0:
+                queues.append(f"{stats['stale_leads']} stale leads (lease expired) → recover-stale")
             if queues:
                 print(f"\nQueues:")
                 for q in queues:
                     print(f"  ** {q} **")
+
+    elif args.command == "stale":
+        stale = list_stale_leads()
+        if not write_output(stale, args, summary=f"{len(stale)} stale leads"):
+            if not stale:
+                print("No stale leads (all leases current).")
+            else:
+                print(f"{len(stale)} stale leads (lease expired):")
+                for s in stale:
+                    print(f"  #{s['id']:>4} [{s['priority']:<8}] {s['title']}")
+                    print(f"         claimed_by={s.get('claimed_by') or '?'}  lease expired: {s['lease_until']}")
+
+    elif args.command == "recover-stale":
+        recovered = mark_stale_leads()
+        if not recovered:
+            print("No stale leads to recover.")
+        else:
+            print(f"Recovered {len(recovered)} stale leads:")
+            for r in recovered:
+                print(f"  #{r['id']:>4} → open: {r['title']}")
 
     elif args.command == "tier":
         try:
