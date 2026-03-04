@@ -6,6 +6,8 @@ user_invocable: true
 
 # /investigate-infra
 
+**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document infrastructure observations (certificates, DNS, hosting) as facts. Do not theorize about intent — record what exists and let Layer 2 analysis agents interpret patterns.
+
 Passive infrastructure reconnaissance of a domain, IP address, organization, or person's digital footprint. Map hosting, certificates, DNS topology, vendor stacks, and deployment patterns using only publicly observable signals.
 
 Inspired by the [vmfunc/Persona investigation](https://vmfunc.re/blog/persona) methodology — every misconfigured header, every certificate SAN, every DNS wildcard is a breadcrumb.

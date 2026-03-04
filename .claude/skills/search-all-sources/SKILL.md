@@ -6,6 +6,8 @@ user_invocable: true
 
 # /search-all-sources
 
+**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Report what each source returns. Do not interpret or apply frameworks.
+
 Search a term across every available data source in parallel. Deduplicates by EFTA ID where possible.
 
 ## Arguments

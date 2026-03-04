@@ -6,6 +6,8 @@ user_invocable: true
 
 # /discover-frameworks
 
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. Frameworks are pattern detectors, not interpretive lenses. Every framework MUST include falsification criteria and boundary conditions. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+
 Identify candidate analytical frameworks through training knowledge, academic/practitioner literature, and investigation data review. Evaluate candidates against the investigation's findings and adopt them at the appropriate tier.
 
 The current 8 core models (Bridge Tax, Manufactured Dependency, etc.) were seeded once. This skill evolves the framework inventory by finding new lenses that explain patterns the existing models miss.
@@ -113,6 +115,8 @@ This is the core intellectual work. Draw on training knowledge across relevant d
 - Detection markers (what agents should look for)
 - Grounding findings (3+ findings from the investigation that instantiate it)
 - What it explains that existing models don't
+- **Boundary conditions** (when does this framework NOT apply? What would it look like if this pattern were absent?)
+- **Overfit risk** (how might this framework cause agents to see false positives? What innocent scenarios could be misread as instances of this pattern?)
 - Limitations (when it misleads or doesn't apply)
 - Related models (which core models or other lenses connect)
 
@@ -128,6 +132,7 @@ Score each candidate on these criteria:
 | **Detectability** | Can we define keyword markers agents can search for? | Medium |
 | **Evidence grounding** | Do we have 3+ independent findings that instantiate it? | High |
 | **Predictive value** | Does it suggest where to look next? | Medium |
+| **Falsifiability** | Can we define what would disprove it? Does a baseline comparison exist? | High |
 
 **Evaluation rubric:**
 - 5+ criteria met strongly → **Tier 2 Lens (adopted)**

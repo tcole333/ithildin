@@ -6,6 +6,8 @@ user_invocable: true
 
 # /timeline-analysis
 
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify temporal patterns and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Temporal proximity is suggestive, not conclusive — always distinguish "these events happened near each other" (fact) from "these events were coordinated" (theory). See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+
 Analyze findings and external events on a timeline to find activity clusters, suspicious timing, silence periods, coordinated action windows, and "before the raid" patterns.
 
 ## Arguments

@@ -108,6 +108,14 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 - `search "QUERY"` | `entity <ID>` | `ingest <ID>` | `ingest-search "QUERY"`
 - Unified query: `query_registry.py search "QUERY"` | `officers "NAME"` | `address "ADDR"`
 
+**HigherGov** (`query_highergov.py`): Federal contract, grant, awardee, IDV, subcontract, vehicle, and partnership intelligence. Richer than USASpending with nested relationships, named vehicle tracking, and teaming data.
+- `contract --parent-award N0002325D0075` | `contract --awardee-uei ZE2JVFS8ML75` | `contract --vehicle-key 8751 --all-pages`
+- `idv --vehicle-key 8751 --all-pages` | `idv --naics 561611` | `idv --award-id N0002325D0075`
+- `awardee --uei ZE2JVFS8ML75` | `awardee --cage 9MFB2` | `subcontract --awardee-uei ZE2JVFS8ML75`
+- `partnership --awardee-key 509623647` | `vehicle --vehicle-key 8751` | `agency --agency-key 904`
+- `opportunity --source-id "26-SOL-DCR01"` | `grant --awardee-uei ZE2JVFS8ML75` | `people --email "name@dhs.gov"`
+- Key vehicle IDs: WEXMAC 2.0 = 8751. 2-week trial. Auth: HIGHERGOV_API_KEY in .env. Rate: 10 req/sec, 10K records/month.
+
 **Shodan** (`query_shodan.py`): Internet-connected device search, DNS enumeration, SSL cert discovery. Paid plan (99 query credits). Auth: SHODAN_API_KEY in .env.
 
 **Medicaid Provider Analysis** (T-MSIS 2018-2024, 227M rows, $1.09T):

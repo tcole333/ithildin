@@ -6,6 +6,8 @@ user_invocable: true
 
 # /generate-hunches
 
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. Your job is to speculate, hypothesize, and identify patterns — but every theory MUST produce a testable prediction that gets queued as a research lead for Layer 1 agents (`/pursue-lead`, `/deep-investigate`). Theories without falsification criteria or testable predictions are not useful. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline` for framework usage rules.
+
 Crawl through findings and entity data to spot emerging themes and recurring patterns that cross unexpected boundaries. NOT template-matching — genuine investigative intuition applied to accumulated data.
 
 Quality bar: Better to generate 3 genuinely interesting hunches than 20 obvious ones.
@@ -120,16 +122,18 @@ For each potential pattern found, apply these filters:
 
 For each pattern that passes the novelty filter:
 
-**Create hypothesis:**
+**Create hypothesis (must include falsification criteria):**
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "EMERGING PATTERN" \
     --pattern-type emerging_theme \
-    --description "WHAT: description. EVIDENCE: 3+ data points. WHY INTERESTING: what it implies." \
+    --description "WHAT: description. EVIDENCE: 3+ data points. WHY INTERESTING: what it implies. FALSIFICATION: What evidence would disprove this? What innocent explanation exists? What baseline comparison makes this notable (or not)?" \
     --predicted-evidence "If this pattern is real, we should also find..." \
     --search-plan "1. Specific search command  2. Another specific search  3. Cross-reference check" \
     --originated-from "analysis:generate-hunches"
 ```
+
+**Disconfirmation requirement:** Every hypothesis MUST include a falsification criterion — what would prove it wrong. Also include the best innocent explanation for the observed pattern. If you cannot articulate what would disprove the hypothesis, it is unfalsifiable and should not be recorded.
 
 **Create lead (only if hypothesis suggests specific new research):**
 ```bash
@@ -194,6 +198,17 @@ complete_analysis_run(RUN_ID, findings_created=0, hypotheses_created=N,
                       report_path='$WORKDIR/report-generate-hunches.md')
 "
 ```
+
+## Theory → Research Loop
+
+This is the core feedback mechanism between Layer 2 (analysis) and Layer 1 (research):
+
+1. **This skill generates hypotheses** — each with a testable prediction and falsification criteria
+2. **Each hypothesis queues a research lead** — with specific tool commands to run, not vague "investigate further"
+3. **Layer 1 agents pursue those leads** — gathering facts, not testing theories
+4. **Results feed back into the next analysis cycle** — new findings either support, complicate, or refute the hypothesis
+
+Every hypothesis MUST produce at least one lead with a concrete search plan. A hypothesis that doesn't generate actionable research is theoretical overhead, not insight.
 
 ## Notes
 

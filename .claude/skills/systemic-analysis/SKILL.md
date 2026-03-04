@@ -6,6 +6,8 @@ user_invocable: true
 
 # /systemic-analysis
 
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify systemic patterns and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Shared attributes (same jurisdiction, same industry, same donor pool) are often coincidental at baseline — always ask "what's the base rate?" before calling something a pattern. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+
 Analyze a group of actors as a SYSTEM — shared board memberships, co-investments, common counsel, jurisdiction clustering, coordinated donations, common grant recipients. Focus on what connects them to each other independent of the primary investigation subject.
 
 ## Arguments
