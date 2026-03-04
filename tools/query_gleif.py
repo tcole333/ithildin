@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GLEIF (Global Legal Entity Identifier Foundation) API wrapper for the Epstein OSINT investigation.
+GLEIF (Global Legal Entity Identifier Foundation) API wrapper for OSINT investigations.
 
 Maps corporate hierarchies (parent-subsidiary relationships) for financial institutions
 in the Epstein network. LEI is the global standard for identifying legal entities in

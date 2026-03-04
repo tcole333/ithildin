@@ -2,19 +2,24 @@
 """
 Post-wave auto-lead generator.
 
-Scans entity tables for new entries not yet cross-referenced and
-generates investigation leads automatically.
+Scans entity tables, findings, and connections for new entries not yet
+cross-referenced and generates investigation leads automatically.
 
 Run after each investigation wave:
     python tools/auto_leads.py
     python tools/auto_leads.py --dry-run    # Preview without creating leads
     python tools/auto_leads.py --stats      # Show what's been processed
 
-Triggers:
+Triggers (entity-based):
     - New entity address → search registries for other entities at that address
     - New entity role (person→entity) → search for person as officer elsewhere
     - New entity → search corporate registries + ACRIS + Aleph
     - New connection with < 5 findings → search corpus for person
+
+Triggers (findings-based):
+    - Findings coverage gap → target with ≤2 findings and no open lead
+    - Contract patterns → shared solicitations, contracting officers, residential addresses
+    - Connection network nodes → persons with 2+ connections but no entity record or lead
 """
 
 import argparse
@@ -25,19 +30,23 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_PATH = PROJECT_ROOT / "investigation.db"
 
+# Ensure project root is on path for tools.* imports when run as script
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-def _load_profile_data():
-    """Load key persons and known addresses from active investigation profile."""
+
+def _load_profile(profile_name=None):
+    """Load the active (or specified) investigation profile."""
     try:
-        from tools.investigation_context import get_active_profile
-        profile = get_active_profile()
-        known_addresses = profile.known_addresses or {}
-        key_persons = set(profile.key_persons or [])
-        primary_subject = profile.primary_subject.lower() if profile.primary_subject else ""
-        return known_addresses, key_persons, primary_subject
-    except Exception:
-        # Fallback: return empty sets if profile system not available
-        return {}, set(), ""
+        if profile_name:
+            from tools.investigation_context import load_profile
+            return load_profile(profile_name)
+        else:
+            from tools.investigation_context import get_active_profile
+            return get_active_profile()
+    except Exception as e:
+        print(f"  Warning: could not load profile: {e}", file=sys.stderr)
+        return None
 
 
 # Loaded lazily on first use
@@ -45,10 +54,31 @@ _profile_cache = None
 
 
 def _get_profile():
+    """Get cached profile. Returns (known_addresses, key_persons, primary_subject)."""
     global _profile_cache
     if _profile_cache is None:
-        _profile_cache = _load_profile_data()
+        profile = _load_profile()
+        if profile:
+            _profile_cache = (
+                profile.known_addresses or {},
+                set(profile.key_persons or []),
+                profile.primary_subject.lower() if profile.primary_subject else "",
+            )
+        else:
+            _profile_cache = ({}, set(), "")
     return _profile_cache
+
+
+def get_profile_thread_ids(db, profile_name, bridge_threads=None):
+    """Get thread IDs belonging to this profile from the DB."""
+    rows = db.execute(
+        "SELECT id FROM investigation_threads WHERE profile_id = ?",
+        (profile_name,)
+    ).fetchall()
+    thread_ids = {row["id"] for row in rows}
+    if bridge_threads:
+        thread_ids.update(bridge_threads)
+    return thread_ids
 
 
 def get_db():
@@ -80,12 +110,14 @@ def lead_exists(db, title_fragment):
     return row["id"] if row else None
 
 
-def create_lead(db, title, category, priority, source, target=None, notes=None):
+def create_lead(db, title, category, priority, source, target=None, notes=None,
+                profile_id=None, thread_id=None):
     """Create a lead and return its ID. Auto-leads go to pending_triage."""
     db.execute(
-        """INSERT INTO leads (title, category, priority, status, source, target_name, created_at)
-           VALUES (?, ?, ?, 'pending_triage', ?, ?, datetime('now'))""",
-        (title, category, priority, source, target)
+        """INSERT INTO leads (title, category, priority, status, source, target_name,
+           profile_id, thread_id, created_at)
+           VALUES (?, ?, ?, 'pending_triage', ?, ?, ?, ?, datetime('now'))""",
+        (title, category, priority, source, target, profile_id, thread_id)
     )
     lead_id = db.execute("SELECT last_insert_rowid()").fetchone()[0]
     if notes:
@@ -740,17 +772,385 @@ def process_jurisdiction_clusters(db, dry_run=False):
     return created, total
 
 
+def _is_address_target(target):
+    """Check if a target looks like an address rather than a person/entity name."""
+    import re
+    t = target.strip()
+    # Starts with digits and has street keywords
+    if re.match(r'^\d+\s', t) and re.search(
+            r'\b(st|street|ave|avenue|rd|road|blvd|boulevard|dr|drive|ln|lane|way|pl|place|ct|court)\b',
+            t, re.IGNORECASE):
+        return True
+    # Common address patterns: "123 E 45th" or "PO Box"
+    if re.match(r'^\d+\s+[NESW]\s+\d', t):
+        return True
+    return False
+
+
+def process_findings_coverage_gaps(db, thread_ids, profile_id, dry_run=False):
+    """Generate leads for finding targets with few findings and no open leads.
+
+    Scoped to the active profile's threads. Only generates leads for targets
+    that have network context (at least 1 connection).
+    """
+    if not thread_ids:
+        return 0, 0
+
+    placeholders = ",".join("?" * len(thread_ids))
+    rows = db.execute(f"""
+        SELECT target_name, COUNT(*) as finding_count,
+               GROUP_CONCAT(DISTINCT thread_id) as threads,
+               MAX(f.id) as latest_finding_id,
+               GROUP_CONCAT(DISTINCT f.finding_type) as finding_types
+        FROM findings f
+        WHERE target_name IS NOT NULL AND LENGTH(TRIM(target_name)) > 3
+          AND f.thread_id IN ({placeholders})
+        GROUP BY LOWER(TRIM(target_name))
+        HAVING COUNT(*) <= 2
+    """, list(thread_ids)).fetchall()
+
+    created = 0
+    total = 0
+    for row in rows:
+        target = row["target_name"].strip()
+        target_lower = target.lower()
+        total += 1
+
+        dedup_key = f"findings_coverage:{target_lower}"
+        if is_processed(db, "findings", row["latest_finding_id"], dedup_key):
+            continue
+
+        # Skip addresses masquerading as targets
+        if _is_address_target(target):
+            log_processed(db, "findings", row["latest_finding_id"], dedup_key)
+            continue
+
+        # Skip very generic targets
+        skip_targets = {
+            "unknown", "n/a", "none", "self", "personal",
+            "department of defense", "united states", "fbi", "doj", "cia",
+            "congress", "white house", "pentagon", "ice", "dhs",
+        }
+        if target_lower in skip_targets:
+            log_processed(db, "findings", row["latest_finding_id"], dedup_key)
+            continue
+
+        # Skip targets that are descriptions, not proper names
+        desc_patterns = ["program", "policy", "analysis", "overview", "summary",
+                         "landscape", "ecosystem", "complex", "pipeline", "nexus",
+                         "network", "search results", "red flags", "conflicts",
+                         "pattern", "architecture", "strategy", "framework"]
+        if any(p in target_lower for p in desc_patterns):
+            log_processed(db, "findings", row["latest_finding_id"], dedup_key)
+            continue
+
+        # Skip targets with " / " compound separators (usually topic descriptions)
+        if " / " in target and not target.endswith("LLC") and not target.endswith("Inc."):
+            log_processed(db, "findings", row["latest_finding_id"], dedup_key)
+            continue
+
+        # Require at least 1 connection (network significance gate)
+        conn_count = db.execute(
+            "SELECT COUNT(*) FROM connections WHERE person_a LIKE ? OR person_b LIKE ?",
+            (f"%{target[:30]}%", f"%{target[:30]}%")
+        ).fetchone()[0]
+        if conn_count == 0:
+            log_processed(db, "findings", row["latest_finding_id"], dedup_key)
+            continue
+
+        # Check if lead already exists for this target
+        existing_lead = db.execute(
+            """SELECT id FROM leads WHERE
+               (target_name LIKE ? OR title LIKE ?)
+               AND status IN ('open', 'in_progress', 'pending_triage')""",
+            (f"%{target[:30]}%", f"%{target[:30]}%")
+        ).fetchone()
+        if existing_lead:
+            log_processed(db, "findings", row["latest_finding_id"], dedup_key, existing_lead["id"])
+            continue
+
+        priority = person_priority(target)
+        if conn_count >= 2 and priority == "medium":
+            priority = "high"
+
+        threads = row["threads"] or "none"
+        title = f"Coverage gap: {target} — only {row['finding_count']} finding(s), expand"
+        notes = (f"Target has {row['finding_count']} finding(s) and {conn_count} connection(s) "
+                 f"in threads [{threads}]. Types: {row['finding_types']}. "
+                 f"Investigate further: corporate registries, SAM.gov, HigherGov, "
+                 f"EDGAR, FEC, CourtListener, media search.")
+
+        if dry_run:
+            print(f"  [DRY] Coverage gap ({priority}): {title}")
+        else:
+            lead_id = create_lead(db, title, "person", priority,
+                                  "agent:auto_leads:coverage_gap", target=target, notes=notes,
+                                  profile_id=profile_id)
+            log_processed(db, "findings", row["latest_finding_id"], dedup_key, lead_id)
+            created += 1
+
+    return created, total
+
+
+def process_contract_patterns(db, thread_ids, profile_id, dry_run=False):
+    """Detect patterns in federal contract findings — shared solicitations,
+    contracting officers, batch awards, and residential addresses.
+
+    Scoped to the active profile's threads.
+    """
+    import re
+
+    if not thread_ids:
+        return 0, 0
+
+    placeholders = ",".join("?" * len(thread_ids))
+    rows = db.execute(f"""
+        SELECT id, target_name, summary, detail, thread_id
+        FROM findings
+        WHERE detail IS NOT NULL AND LENGTH(detail) > 50
+          AND thread_id IN ({placeholders})
+          AND id NOT IN (
+              SELECT record_id FROM auto_crossref_log
+              WHERE table_name='findings' AND crossref_type='contract_pattern'
+          )
+    """, list(thread_ids)).fetchall()
+
+    solicitation_map = {}
+    officer_map = {}
+    residential_flags = []
+
+    for row in rows:
+        detail = (row["detail"] or "") + " " + (row["summary"] or "")
+        target = row["target_name"] or "unknown"
+        fid = row["id"]
+
+        # Extract solicitation numbers (e.g., 26-SOL-DCR-01, 70CDCR26D00000006)
+        for sol in re.findall(r'\b(\d{2}-SOL-[A-Z]+-\d+|\d{2}[A-Z]{4}\d{2}[A-Z]\d{7,})\b', detail):
+            solicitation_map.setdefault(sol, []).append((fid, target))
+
+        # Extract contracting officer codes (e.g., JABYAD7012, SWRAY7012)
+        for officer in re.findall(r'\b([A-Z]{3,6}\d{4})\b', detail):
+            if not re.match(r'^\d', officer) and len(officer) >= 8:
+                officer_map.setdefault(officer, []).append((fid, target))
+
+        # Flag residential address indicators
+        residential_keywords = ["residential", "sleeping dragon", "home address",
+                                "single-family", "apartment", "condo"]
+        if any(kw in detail.lower() for kw in residential_keywords):
+            residential_flags.append((fid, target, row["thread_id"]))
+
+    created = 0
+    total = 0
+
+    for sol_id, entries in solicitation_map.items():
+        unique_targets = set(t for _, t in entries)
+        if len(unique_targets) >= 3:
+            total += 1
+            dedup_key = f"solicitation_cluster:{sol_id}"
+            if is_processed(db, "findings", 0, dedup_key):
+                continue
+            existing = lead_exists(db, sol_id)
+            if existing:
+                log_processed(db, "findings", 0, dedup_key, existing)
+                continue
+
+            title = f"Solicitation cluster: {sol_id} — {len(unique_targets)} awardees to investigate"
+            targets_str = ", ".join(list(unique_targets)[:10])
+            notes = (f"Solicitation {sol_id} awarded to {len(unique_targets)} entities: {targets_str}. "
+                     f"Investigate all awardees for shell companies, shared addresses, batch formation patterns.")
+
+            if dry_run:
+                print(f"  [DRY] Solicitation cluster (high): {title}")
+            else:
+                lead_id = create_lead(db, title, "entity", "high",
+                                      "agent:auto_leads:contract_pattern", notes=notes,
+                                      profile_id=profile_id)
+                log_processed(db, "findings", 0, dedup_key, lead_id)
+                created += 1
+
+    for officer_code, entries in officer_map.items():
+        unique_targets = set(t for _, t in entries)
+        if len(unique_targets) >= 3:
+            total += 1
+            dedup_key = f"officer_cluster:{officer_code}"
+            if is_processed(db, "findings", 0, dedup_key):
+                continue
+            existing = lead_exists(db, officer_code)
+            if existing:
+                log_processed(db, "findings", 0, dedup_key, existing)
+                continue
+
+            title = f"Contracting officer: {officer_code} — approved {len(unique_targets)} entities"
+            targets_str = ", ".join(list(unique_targets)[:10])
+            notes = (f"Officer code {officer_code} appears in findings for {len(unique_targets)} "
+                     f"entities: {targets_str}. Check for internal control violations "
+                     f"(same person as preparer/approver) and conflict of interest.")
+
+            if dry_run:
+                print(f"  [DRY] Officer cluster (high): {title}")
+            else:
+                lead_id = create_lead(db, title, "person", "high",
+                                      "agent:auto_leads:contract_pattern", target=officer_code,
+                                      notes=notes, profile_id=profile_id)
+                log_processed(db, "findings", 0, dedup_key, lead_id)
+                created += 1
+
+    seen_residential = set()
+    for fid, target, thread_id in residential_flags:
+        if target.lower() in seen_residential:
+            continue
+        seen_residential.add(target.lower())
+        total += 1
+        dedup_key = f"residential_flag:{target.lower()}"
+        if is_processed(db, "findings", fid, dedup_key):
+            continue
+        existing = lead_exists(db, f"residential.*{target[:20]}")
+        if existing:
+            log_processed(db, "findings", fid, dedup_key, existing)
+            continue
+
+        title = f"Residential address flag: {target} — operating from home"
+        notes = (f"Finding #{fid} indicates {target} operates from a residential address. "
+                 f"For government contractors, this may indicate shell company or sole proprietor "
+                 f"handling contracts above typical scale. Verify address, check property records.")
+
+        if dry_run:
+            print(f"  [DRY] Residential flag (medium): {title}")
+        else:
+            lead_id = create_lead(db, title, "entity", "medium",
+                                  "agent:auto_leads:contract_pattern", target=target,
+                                  notes=notes, profile_id=profile_id)
+            log_processed(db, "findings", fid, dedup_key, lead_id)
+            created += 1
+
+    for row in rows:
+        log_processed(db, "findings", row["id"], "contract_pattern")
+
+    return created, total
+
+
+def process_connection_persons(db, thread_ids, profile_id, dry_run=False):
+    """Generate leads for persons in connections who lack entities or leads.
+
+    Scoped to the active profile via finding_id → findings.thread_id join.
+    """
+    if not thread_ids:
+        return 0, 0
+
+    placeholders = ",".join("?" * len(thread_ids))
+    rows = db.execute(f"""
+        SELECT person_name, COUNT(*) as conn_count,
+               GROUP_CONCAT(DISTINCT relationship_type) as rel_types
+        FROM (
+            SELECT c.person_a as person_name, c.relationship_type
+            FROM connections c
+            LEFT JOIN findings f ON c.finding_id = f.id
+            WHERE f.thread_id IN ({placeholders})
+               OR (c.finding_id IS NULL AND c.profile_id = ?)
+            UNION ALL
+            SELECT c.person_b as person_name, c.relationship_type
+            FROM connections c
+            LEFT JOIN findings f ON c.finding_id = f.id
+            WHERE f.thread_id IN ({placeholders})
+               OR (c.finding_id IS NULL AND c.profile_id = ?)
+        )
+        WHERE person_name IS NOT NULL AND LENGTH(TRIM(person_name)) > 3
+        GROUP BY LOWER(TRIM(person_name))
+        HAVING COUNT(*) >= 2
+    """, list(thread_ids) + [profile_id] + list(thread_ids) + [profile_id]).fetchall()
+
+    created = 0
+    total = 0
+    for row in rows:
+        person = row["person_name"].strip()
+        person_lower = person.lower()
+        total += 1
+
+        dedup_key = f"connection_person:{person_lower}"
+        if is_processed(db, "connections", 0, dedup_key):
+            continue
+
+        # Skip if already an entity
+        entity_exists = db.execute(
+            "SELECT id FROM entities WHERE LOWER(name) = ?", (person_lower,)
+        ).fetchone()
+        if entity_exists:
+            log_processed(db, "connections", 0, dedup_key)
+            continue
+
+        # Skip if already has an open lead
+        existing_lead = db.execute(
+            """SELECT id FROM leads WHERE
+               (target_name LIKE ? OR title LIKE ?)
+               AND status IN ('open', 'in_progress', 'pending_triage')""",
+            (f"%{person[:30]}%", f"%{person[:30]}%")
+        ).fetchone()
+        if existing_lead:
+            log_processed(db, "connections", 0, dedup_key, existing_lead["id"])
+            continue
+
+        skip_persons = {"donald trump", "joe biden", "barack obama", "hillary clinton",
+                        "vladimir putin", "mike pence", "mbs", "kamala harris"}
+        if person_lower in skip_persons:
+            log_processed(db, "connections", 0, dedup_key)
+            continue
+
+        finding_count = db.execute(
+            "SELECT COUNT(*) FROM findings WHERE LOWER(target_name) LIKE ?",
+            (f"%{person_lower[:30]}%",)
+        ).fetchone()[0]
+
+        if finding_count >= 5:
+            log_processed(db, "connections", 0, dedup_key)
+            continue
+
+        priority = person_priority(person)
+        if row["conn_count"] >= 4:
+            priority = "high"
+
+        rel_types = row["rel_types"] or "unknown"
+        title = f"Network node: {person} — {row['conn_count']} connections, {finding_count} findings"
+        notes = (f"Person has {row['conn_count']} connections ({rel_types}) but only "
+                 f"{finding_count} findings and no entity record. "
+                 f"Investigate: corporate registries, EDGAR, FEC, CourtListener, "
+                 f"SAM.gov, HigherGov, media search.")
+
+        if dry_run:
+            print(f"  [DRY] Network node ({priority}): {title}")
+        else:
+            lead_id = create_lead(db, title, "person", priority,
+                                  "agent:auto_leads:connection_person", target=person,
+                                  notes=notes, profile_id=profile_id)
+            log_processed(db, "connections", 0, dedup_key, lead_id)
+            created += 1
+
+    return created, total
+
+
 def cmd_run(args):
     db = get_db()
+
+    # Load profile for scoping
+    profile = _load_profile(getattr(args, 'profile', None))
+    if profile:
+        profile_name = profile.name
+        bridge = getattr(profile, 'bridge_threads', None) or []
+        thread_ids = get_profile_thread_ids(db, profile_name, bridge)
+    else:
+        profile_name = None
+        thread_ids = set()
 
     print("=" * 60)
     print("AUTO-LEAD GENERATOR — Post-Wave Cross-Reference")
     print("=" * 60)
+    if profile_name:
+        print(f"Profile: {profile_name} (threads: {sorted(thread_ids)})")
     if args.dry_run:
-        print("[DRY RUN — no leads will be created]\n")
+        print("[DRY RUN — no leads will be created]")
 
-    # Process each category
     results = {}
+
+    # --- Entity-based generators (unscoped — registry data is investigation-agnostic) ---
 
     print("\n--- New Addresses ---")
     c, t = process_new_addresses(db, args.dry_run)
@@ -797,6 +1197,23 @@ def cmd_run(args):
     results["jurisdiction_clusters"] = (c, t)
     print(f"  {t} person-jurisdiction pairs checked, {c} leads created")
 
+    # --- Findings-based generators (scoped to active profile's threads) ---
+
+    print("\n--- Findings Coverage Gaps ---")
+    c, t = process_findings_coverage_gaps(db, thread_ids, profile_name, args.dry_run)
+    results["findings_coverage"] = (c, t)
+    print(f"  {t} under-investigated targets checked, {c} leads created")
+
+    print("\n--- Contract Patterns ---")
+    c, t = process_contract_patterns(db, thread_ids, profile_name, args.dry_run)
+    results["contract_patterns"] = (c, t)
+    print(f"  {t} contract patterns checked, {c} leads created")
+
+    print("\n--- Connection Network Nodes ---")
+    c, t = process_connection_persons(db, thread_ids, profile_name, args.dry_run)
+    results["connection_persons"] = (c, t)
+    print(f"  {t} connected persons checked, {c} leads created")
+
     if not args.dry_run:
         db.commit()
 
@@ -814,7 +1231,7 @@ def cmd_stats(args):
     db = get_db()
     print("Auto Cross-Reference Stats")
     print("-" * 40)
-    for table in ["entities", "entity_addresses", "entity_roles", "connections"]:
+    for table in ["entities", "entity_addresses", "entity_roles", "connections", "findings"]:
         total = db.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
         processed = db.execute(
             "SELECT COUNT(DISTINCT record_id) FROM auto_crossref_log WHERE table_name=?",
@@ -827,10 +1244,28 @@ def cmd_stats(args):
         print(f"  {table}: {processed}/{total} processed, {leads} leads created")
 
     print()
-    total_leads = db.execute(
-        "SELECT COUNT(*) FROM leads WHERE source='agent:auto_leads'"
-    ).fetchone()[0]
+    sources = db.execute(
+        """SELECT source, COUNT(*) FROM leads
+           WHERE source LIKE 'agent:auto_leads%'
+           GROUP BY source ORDER BY COUNT(*) DESC"""
+    ).fetchall()
+    total_leads = sum(r[1] for r in sources)
     print(f"Total auto-generated leads: {total_leads}")
+    for source, count in sources:
+        label = source.replace("agent:auto_leads:", "  ").replace("agent:auto_leads", "  (base)")
+        print(f"  {label}: {count}")
+
+    # Per-profile breakdown
+    print()
+    profiles = db.execute(
+        """SELECT COALESCE(profile_id, '(unset)') as pid, COUNT(*) FROM leads
+           WHERE source LIKE 'agent:auto_leads%'
+           GROUP BY pid ORDER BY COUNT(*) DESC"""
+    ).fetchall()
+    if profiles:
+        print("By profile:")
+        for pid, count in profiles:
+            print(f"  {pid}: {count}")
 
 
 def main():
@@ -839,6 +1274,8 @@ def main():
 
     p = sub.add_parser("run", help="Generate leads from new entity data")
     p.add_argument("--dry-run", action="store_true", help="Preview without creating")
+    p.add_argument("--profile", type=str, default=None,
+                   help="Override active profile (default: use active profile)")
 
     sub.add_parser("stats", help="Show processing stats")
 
@@ -846,6 +1283,7 @@ def main():
     if not args.command:
         args.command = "run"
         args.dry_run = False
+        args.profile = None
 
     if args.command == "run":
         cmd_run(args)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FinCEN Files integration for Epstein OSINT investigation.
+FinCEN Files integration for OSINT investigations.
 
 Dataset: 200K+ suspicious activity reports (SARs) from FinCEN leaked to BuzzFeed/ICIJ.
 Covers 2000-2017 transactions ($35B+) flagged by financial institutions.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocumentCloud API wrapper for the Epstein OSINT investigation.
+DocumentCloud API wrapper for OSINT investigations.
 
 Searches DocumentCloud's public document archive. No authentication needed
 for public documents. Text and PDF access via S3 URLs.

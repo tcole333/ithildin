@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-OpenSanctions bulk data query tool for the Epstein OSINT investigation.
+OpenSanctions bulk data query tool for OSINT investigations.
 
 Downloads, ingests, and queries OpenSanctions data locally — sanctions lists
 (OFAC/EU/UN), PEP databases (200+ countries), and crime/terrorism lists.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Hypothesis lifecycle tracker for the Epstein OSINT investigation.
+Hypothesis lifecycle tracker for OSINT investigations.
 
 Structured, trackable hypotheses with evidence tracking and status management.
 Part of investigation.db.

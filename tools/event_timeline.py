@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-External event timeline for temporal correlation in the Epstein OSINT investigation.
+External event timeline for temporal correlation in OSINT investigations.
 
 Maintains a table of key external events (arrests, lawsuits, elections, deaths, etc.)
 for correlation with investigation findings. Seeded with ~100+ key dates.
@@ -302,16 +302,42 @@ SEED_EVENTS = [
 # ── CRUD ────────────────────────────────────────────────────
 
 def seed_events():
-    """Populate event_timeline with ~100+ key dates."""
+    """Populate event_timeline from active investigation profile's key_dates.
+
+    Falls back to legacy SEED_EVENTS list if no profile is active or
+    if the profile has no key_dates defined.
+    """
     db = get_timeline_db()
     added = 0
     skipped = 0
-    for event_date, event_name, category, description, relevance in SEED_EVENTS:
+
+    # Try loading from active investigation profile first
+    profile_events = []
+    try:
+        from tools.investigation_context import get_active_profile
+        profile = get_active_profile()
+        if profile and profile.key_dates:
+            for kd in profile.key_dates:
+                profile_events.append((
+                    kd.get("date", ""),
+                    kd.get("event", ""),
+                    kd.get("category", "other"),
+                    kd.get("event", ""),  # description = event text
+                    None,  # relevance
+                ))
+            print(f"Loading {len(profile_events)} key dates from profile '{profile.name}'")
+    except Exception:
+        pass
+
+    events_to_seed = profile_events if profile_events else SEED_EVENTS
+    source_label = "profile-seed" if profile_events else "seed"
+
+    for event_date, event_name, category, description, relevance in events_to_seed:
         try:
             db.execute("""
                 INSERT INTO event_timeline (event_date, event_name, category, description, relevance, source)
-                VALUES (?, ?, ?, ?, ?, 'seed')
-            """, (event_date, event_name, category, description, relevance))
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, (event_date, event_name, category, description, relevance, source_label))
             added += 1
         except sqlite3.IntegrityError:
             skipped += 1

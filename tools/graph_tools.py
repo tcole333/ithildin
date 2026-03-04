@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Network analysis primitives for the Epstein OSINT investigation.
+Network analysis primitives for OSINT investigations.
 
 Builds an in-memory graph from connections table + name alias resolution,
 then computes centrality, components, bridges, shortest paths, etc.

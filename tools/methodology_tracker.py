@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Operational learning loop for the Epstein OSINT investigation.
+Operational learning loop for OSINT investigations.
 
 Tracks methodology observations from agent reports: tool friction, surprise
 findings, process insights, source quality notes. Detects patterns across

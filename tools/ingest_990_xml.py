@@ -65,7 +65,7 @@ TRACKED_EINS = {
     "133863354": "Dubin Family Foundation",
 }
 
-USER_AGENT = "EpsteinOSINT/1.0 (academic research)"
+USER_AGENT = "OSINT-Research/1.0 (academic research)"
 
 
 def get_db():

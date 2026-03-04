@@ -101,6 +101,9 @@ class InvestigationProfile:
     # Source reliability overrides
     source_overrides: dict = field(default_factory=dict)
 
+    # Bridge threads — thread IDs from other profiles to include in scoped queries
+    bridge_threads: list = field(default_factory=list)
+
 
 def _parse_yaml(path: Path) -> dict:
     """Parse YAML file, with fallback if PyYAML not installed."""
@@ -137,6 +140,7 @@ def load_profile(name: str) -> InvestigationProfile:
         evidence_id_prefix=data.get("evidence_id_prefix", ""),
         exclude_from_graph=data.get("exclude_from_graph", ""),
         source_overrides=data.get("source_overrides", {}),
+        bridge_threads=data.get("bridge_threads", []),
     )
 
 

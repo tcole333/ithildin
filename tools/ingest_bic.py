@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SWIFT BIC Directory integration for Epstein OSINT investigation.
+SWIFT BIC Directory integration for OSINT investigations.
 
 Downloads and indexes SWIFT Business Identifier Codes (BIC) for bank/wire routing analysis.
 Uses OpenSanctions BIC dataset (32K+ entities, daily updates) and GLEIF BIC-to-LEI mapping.

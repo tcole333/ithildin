@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Flexible tag/annotation system for the Epstein OSINT investigation.
+Flexible tag/annotation system for OSINT investigations.
 
 Attach analytical metadata to any record (findings, connections, entities, leads)
 without changing the fixed schema. Analysis agents use tags to mark patterns,

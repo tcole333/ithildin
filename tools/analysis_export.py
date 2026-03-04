@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Bulk data extraction for analysis skills in the Epstein OSINT investigation.
+Bulk data extraction for analysis skills in OSINT investigations.
 
 Provides data export functions that analysis agents use to load investigation
 data for graph analysis, timeline correlation, pattern detection, etc.
