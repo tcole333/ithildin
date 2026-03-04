@@ -728,6 +728,13 @@ def _ensure_schema(db):
             db.execute("DROP INDEX IF EXISTS idx_connections_unique")
             # Remove duplicate connections, keeping the oldest (smallest id) per group.
             # Group by coalesced values so NULLs are deduplicated correctly.
+            # Must delete dependent connection_evidence rows first (FK constraint).
+            db.execute("""
+                DELETE FROM connection_evidence WHERE connection_id NOT IN (
+                    SELECT MIN(id) FROM connections
+                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
+                )
+            """)
             db.execute("""
                 DELETE FROM connections WHERE id NOT IN (
                     SELECT MIN(id) FROM connections
