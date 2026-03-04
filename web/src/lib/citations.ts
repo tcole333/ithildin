@@ -863,6 +863,31 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       });
     },
   },
+  {
+    id: "fdic",
+    tokenPattern: "FDIC:\\d+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/FDIC:(\d+)/i);
+      if (!match) return null;
+      const cert = match[1];
+      return {
+        key: `fdic:${cert}`,
+        label: `FDIC CERT #${cert}`,
+        url: `https://www7.fdic.gov/idasp/AdvSearchLanding.asp?ESSION=${cert}`,
+      };
+    },
+    extract(raw) {
+      return (raw.match(/FDIC:\d+/gi) || []).map(ref => {
+        const cert = ref.split(":")[1];
+        return {
+          key: `fdic:${cert}`,
+          label: `FDIC CERT #${cert}`,
+          url: `https://www7.fdic.gov/idasp/AdvSearchLanding.asp?SESSION=${cert}`,
+        };
+      });
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

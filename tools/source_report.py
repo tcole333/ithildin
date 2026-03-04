@@ -451,6 +451,13 @@ def generate_report():
         **check_api("Wayback", "https://web.archive.org/cdx/search/cdx?url=example.com&output=json&limit=1"),
     }
 
+    # FDIC BankFind
+    sources["FDIC BankFind"] = {
+        "description": "FDIC-insured bank institutions, failures, financials, branches (no auth)",
+        "query_tool": "tools/query_fdic.py",
+        **check_api("FDIC", "https://api.fdic.gov/banks/institutions?limit=1"),
+    }
+
     # URLScan.io
     sources["URLScan.io"] = {
         "description": "Passive web scans — tech stacks, linked domains, hosting, HTTP transactions",
