@@ -693,6 +693,28 @@ def _ensure_schema(db):
     except sqlite3.OperationalError:
         pass
 
+    # Deduplicate connections and add UNIQUE constraint
+    try:
+        # Check if index already exists
+        existing = db.execute(
+            "SELECT name FROM sqlite_master WHERE type='index' AND name='idx_connections_unique'"
+        ).fetchone()
+        if not existing:
+            # Remove duplicate connections, keeping the oldest (smallest id) per group
+            db.execute("""
+                DELETE FROM connections WHERE id NOT IN (
+                    SELECT MIN(id) FROM connections
+                    GROUP BY person_a, person_b, relationship_type, COALESCE(profile_id, '')
+                )
+            """)
+            db.execute("""
+                CREATE UNIQUE INDEX idx_connections_unique
+                ON connections(person_a, person_b, relationship_type, profile_id)
+            """)
+            db.commit()
+    except sqlite3.OperationalError:
+        pass
+
     # FTS for leads
     try:
         db.execute("""

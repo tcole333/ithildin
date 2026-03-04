@@ -485,12 +485,20 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
         person_a, person_b = person_b, person_a
 
     cursor = db.execute("""
-        INSERT INTO connections (person_a, person_b, relationship_type, description,
+        INSERT OR IGNORE INTO connections (person_a, person_b, relationship_type, description,
                                 strength, date_range, finding_id, profile_id)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id,
           profile_id))
     conn_id = cursor.lastrowid
+    if conn_id == 0:
+        # Duplicate — find the existing connection id
+        existing = db.execute("""
+            SELECT id FROM connections
+            WHERE person_a = ? AND person_b = ? AND relationship_type = ? AND profile_id IS ?
+        """, (person_a, person_b, relationship_type, profile_id)).fetchone()
+        if existing:
+            conn_id = existing["id"]
 
     if evidence_ids:
         for ev in evidence_ids:
