@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Query ICIJ Offshore Leaks database (Neo4j, ~800K entities).
+Query ICIJ Offshore Leaks database.
 
-Requires Neo4j running: ./scripts/start_icij_db.sh
+Neo4j commands require Neo4j running: ./scripts/start_icij_db.sh
+Reconciliation API commands work without Neo4j (uses ICIJ's REST API).
 
 Usage:
     python tools/query_icij.py search "Jeffrey Epstein"
@@ -10,16 +11,30 @@ Usage:
     python tools/query_icij.py entity 80063035
     python tools/query_icij.py connections "Liquid Funding" --depth 2
     python tools/query_icij.py officers "Financial Trust"
+    python tools/query_icij.py reconcile "Financial Trust Company"
+    python tools/query_icij.py reconcile-all --threshold 85
+    python tools/query_icij.py reconcile-all --create-leads --threshold 85
 """
 
 import argparse
 import json
+import sqlite3
 import sys
+import time
+from pathlib import Path
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.lead_tracker import log_search
 except ImportError:
     from output_util import add_output_args, write_output
+    from lead_tracker import log_search
+
+PROJECT_ROOT = Path(__file__).parent.parent
+INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+RECONCILE_URL = "https://offshoreleaks.icij.org/api/v1/reconcile"
 
 ICIJ_URI = "bolt://localhost:7689"
 
@@ -165,6 +180,81 @@ def get_officers(entity_name, limit=50):
     return results
 
 
+def reconcile_name(name, limit=5):
+    """Reconcile a single name against ICIJ Offshore Leaks API.
+
+    Uses the OpenRefine Reconciliation API standard. No auth required.
+    Returns list of match candidates with scores.
+    """
+    query_payload = json.dumps({"q0": {"query": name, "limit": limit}})
+    data = f"queries={query_payload}".encode("utf-8")
+
+    req = Request(RECONCILE_URL, data=data, headers={
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": "OSINT-Research/1.0",
+    })
+
+    try:
+        time.sleep(0.5)
+        with urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read().decode())
+    except HTTPError as e:
+        print(f"ERROR: HTTP {e.code} from ICIJ reconcile API", file=sys.stderr)
+        return []
+    except URLError as e:
+        print(f"ERROR: {e.reason}", file=sys.stderr)
+        return []
+
+    candidates = result.get("q0", {}).get("result", [])
+    return [{
+        "name": c.get("name", ""),
+        "id": c.get("id", ""),
+        "score": c.get("score", 0),
+        "match": c.get("match", False),
+        "type": [t.get("name", "") for t in c.get("type", [])],
+    } for c in candidates]
+
+
+def reconcile_batch(names, limit=5):
+    """Reconcile multiple names in a single API call.
+
+    The OpenRefine API supports up to ~50 queries per batch.
+    """
+    queries = {}
+    for i, name in enumerate(names):
+        queries[f"q{i}"] = {"query": name, "limit": limit}
+
+    query_payload = json.dumps(queries)
+    data = f"queries={query_payload}".encode("utf-8")
+
+    req = Request(RECONCILE_URL, data=data, headers={
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": "OSINT-Research/1.0",
+    })
+
+    try:
+        time.sleep(0.5)
+        with urlopen(req, timeout=60) as resp:
+            result = json.loads(resp.read().decode())
+    except (HTTPError, URLError) as e:
+        print(f"ERROR: ICIJ reconcile API: {e}", file=sys.stderr)
+        return {}
+
+    out = {}
+    for i, name in enumerate(names):
+        key = f"q{i}"
+        candidates = result.get(key, {}).get("result", [])
+        out[name] = [{
+            "name": c.get("name", ""),
+            "id": c.get("id", ""),
+            "score": c.get("score", 0),
+            "match": c.get("match", False),
+            "type": [t.get("name", "") for t in c.get("type", [])],
+        } for c in candidates]
+
+    return out
+
+
 def print_results(results, title="Results"):
     """Pretty-print query results."""
     print(f"\n{'='*70}")
@@ -210,6 +300,21 @@ def main():
     o.add_argument("--limit", type=int, default=50)
     o.add_argument("-j", "--json", action="store_true")
     add_output_args(o)
+
+    # reconcile (no Neo4j needed)
+    r = subparsers.add_parser("reconcile", help="Match a name against ICIJ Offshore Leaks API (no Neo4j)")
+    r.add_argument("name", help="Name to reconcile")
+    r.add_argument("--limit", type=int, default=5, help="Max candidates per query")
+    r.add_argument("-j", "--json", action="store_true")
+    add_output_args(r)
+
+    # reconcile-all (no Neo4j needed)
+    ra = subparsers.add_parser("reconcile-all", help="Match all investigation.db entities against ICIJ")
+    ra.add_argument("--threshold", type=int, default=80, help="Min score to report (default: 80)")
+    ra.add_argument("--create-leads", action="store_true", help="Auto-create pending_triage leads for matches")
+    ra.add_argument("--limit", type=int, default=5, help="Max candidates per query")
+    ra.add_argument("-j", "--json", action="store_true")
+    add_output_args(ra)
 
     args = parser.parse_args()
 
@@ -258,6 +363,143 @@ def main():
             print(json.dumps(results, indent=2))
         else:
             print_results(results, f"Officers of entities matching '{args.name}'")
+
+    elif args.command == "reconcile":
+        candidates = reconcile_name(args.name, limit=args.limit)
+        log_search("icij_reconcile", args.name, len(candidates))
+
+        if write_output(candidates, args, summary=f"ICIJ reconcile '{args.name}'"):
+            pass
+        elif args.json:
+            print(json.dumps(candidates, indent=2))
+        else:
+            print(f"\nICIJ Reconciliation: '{args.name}' ({len(candidates)} candidates)")
+            print("=" * 80)
+            for c in candidates:
+                match_flag = " [MATCH]" if c["match"] else ""
+                types = ", ".join(c["type"]) if c["type"] else "?"
+                print(f"  {c['score']:>5.1f}  {c['name']:<40} [{types}]{match_flag}")
+                print(f"         ID: {c['id']}")
+
+    elif args.command == "reconcile-all":
+        if not INVESTIGATION_DB.exists():
+            print(f"ERROR: investigation.db not found at {INVESTIGATION_DB}", file=sys.stderr)
+            sys.exit(1)
+
+        inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+        inv_db.row_factory = sqlite3.Row
+
+        # Gather entity names + connection person names
+        names_to_check = {}
+        try:
+            for e in inv_db.execute("SELECT id, name, entity_type FROM entities").fetchall():
+                name = e["name"].strip()
+                if len(name) >= 3:
+                    names_to_check[name] = {"source": f"entity #{e['id']}", "type": e["entity_type"]}
+        except sqlite3.OperationalError:
+            pass
+
+        try:
+            for col in ("person_a", "person_b"):
+                for r in inv_db.execute(f"SELECT DISTINCT {col} FROM connections").fetchall():
+                    name = (r[0] or "").strip()
+                    if len(name) >= 3 and name not in names_to_check:
+                        names_to_check[name] = {"source": "connection", "type": "person"}
+        except sqlite3.OperationalError:
+            pass
+
+        inv_db.close()
+
+        print(f"Reconciling {len(names_to_check)} names against ICIJ Offshore Leaks (threshold={args.threshold})")
+        print("=" * 90)
+
+        all_matches = []
+        names_list = sorted(names_to_check.keys())
+        batch_size = 25
+
+        for batch_start in range(0, len(names_list), batch_size):
+            batch = names_list[batch_start:batch_start + batch_size]
+            if batch_start > 0:
+                print(f"  ... checked {batch_start}/{len(names_list)}", flush=True)
+
+            batch_results = reconcile_batch(batch, limit=args.limit)
+
+            for name in batch:
+                candidates = batch_results.get(name, [])
+                for c in candidates:
+                    if c["score"] >= args.threshold:
+                        all_matches.append({
+                            "our_name": name,
+                            "our_source": names_to_check[name]["source"],
+                            "icij_name": c["name"],
+                            "icij_id": c["id"],
+                            "score": c["score"],
+                            "match": c["match"],
+                            "type": c["type"],
+                        })
+
+        all_matches.sort(key=lambda m: m["score"], reverse=True)
+
+        # Create leads if requested
+        leads_created = 0
+        if args.create_leads and all_matches:
+            try:
+                from tools.lead_tracker import get_db as get_inv_db
+            except ImportError:
+                from lead_tracker import get_db as get_inv_db
+
+            lead_db = get_inv_db()
+            for m in all_matches:
+                types_str = ", ".join(m["type"]) if m["type"] else "offshore entity"
+                title = f"ICIJ offshore match: {m['our_name']} -> {m['icij_name']} ({types_str})"
+                existing = lead_db.execute(
+                    "SELECT id FROM leads WHERE title = ?", (title,)
+                ).fetchone()
+                if existing:
+                    continue
+                lead_db.execute("""
+                    INSERT INTO leads (title, status, target_name, priority, notes, created_at)
+                    VALUES (?, 'pending_triage', ?, 3, ?, datetime('now'))
+                """, (title, m["our_name"],
+                      f"Score: {m['score']}. ICIJ ID: {m['icij_id']}. "
+                      f"Type: {types_str}. Matched: {m['icij_name']}"))
+                leads_created += 1
+
+            lead_db.commit()
+            lead_db.close()
+
+        log_search("icij_reconcile_all", f"reconcile-all (threshold={args.threshold})", len(all_matches))
+
+        output = {"matches": all_matches, "total_checked": len(names_to_check), "leads_created": leads_created}
+        if write_output(output, args, summary=f"ICIJ reconcile-all ({len(all_matches)} matches)"):
+            pass
+        elif args.json:
+            print(json.dumps(output, indent=2))
+        else:
+            # Group by match quality
+            high = [m for m in all_matches if m["match"]]
+            possible = [m for m in all_matches if not m["match"]]
+
+            if high:
+                print(f"\nSTRONG MATCHES ({len(high)})")
+                print("-" * 90)
+                for m in high:
+                    types_str = ", ".join(m["type"]) if m["type"] else "?"
+                    print(f"  {m['score']:>5.1f}  {m['our_name']:<35} -> {m['icij_name'][:35]:<35} [{types_str}]")
+
+            if possible:
+                print(f"\nPOSSIBLE MATCHES ({len(possible)})")
+                print("-" * 90)
+                for m in possible[:50]:
+                    types_str = ", ".join(m["type"]) if m["type"] else "?"
+                    print(f"  {m['score']:>5.1f}  {m['our_name']:<35} -> {m['icij_name'][:35]:<35} [{types_str}]")
+                if len(possible) > 50:
+                    print(f"  ... and {len(possible) - 50} more")
+
+            print(f"\n{'=' * 90}")
+            print(f"SUMMARY: {len(names_to_check)} names checked, {len(all_matches)} matches >= {args.threshold}")
+            if args.create_leads:
+                print(f"  Leads created: {leads_created}")
 
 
 if __name__ == "__main__":
