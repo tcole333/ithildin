@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """
-Congress.gov API — bills, members, committees, nominations, CRS reports.
+Congress.gov API — members, committees, nominations, committee reports.
 
 Complements GovInfo (full text) with structured legislative metadata.
 Free API key via api.congress.gov. Rate limit: 5,000/hour.
 
+Bill search and CRS search delegate to GovInfo (full-text search).
+
 Usage:
-    python tools/query_congress.py search "Epstein" --type bills
+    python tools/query_congress.py search "corporate transparency"
     python tools/query_congress.py member "Warren"
     python tools/query_congress.py committee SSGA
-    python tools/query_congress.py committee-reports SSGA --congress 118
+    python tools/query_congress.py committee-reports --congress 118 --report-type SRPT
     python tools/query_congress.py nominations --congress 118 --limit 10
     python tools/query_congress.py crs "beneficial ownership"
 """
@@ -90,41 +92,26 @@ def _request(endpoint, params=None):
 
 
 def cmd_search(args):
-    """Search bills by keyword."""
-    params = {
-        "query": args.query,
-        "limit": min(args.limit, 250),
-    }
+    """Search bills by keyword via GovInfo full-text search.
 
-    # Bill search endpoint
-    endpoint = "/bill"
-    if args.congress:
-        endpoint = f"/bill/{args.congress}"
+    The Congress.gov /bill endpoint does not support keyword search — it only
+    lists bills. We delegate to GovInfo's BILLS collection for full-text search,
+    which returns actual keyword-matched results.
+    """
+    import subprocess as sp
+    govinfo_cmd = [
+        sys.executable, str(PROJECT_ROOT / "tools" / "query_govinfo.py"),
+        "search", args.query, "--collection", "BILLS",
+        "--limit", str(args.limit),
+    ]
+    output_path = getattr(args, "output", None)
+    if output_path:
+        govinfo_cmd.extend(["--output", output_path])
 
-    data = _request(endpoint, params)
-    if not data:
-        print("No results or API error.")
-        return
-
-    bills = data.get("bills", [])
-    total = len(bills)
-    output = {"total": total, "bills": bills}
-
-    log_search("congress_bills", args.query, total)
-
-    if not write_output(output, args, summary=f"Congress bills '{args.query}'"):
-        print(f"Congress.gov: {total} bills for '{args.query}'")
-        for b in bills:
-            number = b.get("number", "?")
-            title = b.get("title", "")[:80]
-            bill_type = b.get("type", "?")
-            congress = b.get("congress", "?")
-            date = b.get("latestAction", {}).get("actionDate", "?")
-            action = b.get("latestAction", {}).get("text", "")[:60]
-
-            print(f"\n  {bill_type}{number} ({congress}th Congress)")
-            print(f"  {title}")
-            print(f"  Latest: {date} - {action}")
+    print("Note: Delegating bill search to GovInfo BILLS collection (full-text search).")
+    print("For structured bill lookups, use congress.gov directly.")
+    result = sp.run(govinfo_cmd, capture_output=False)
+    sys.exit(result.returncode)
 
 
 def cmd_member(args):
@@ -220,12 +207,19 @@ def cmd_committee(args):
 
 
 def cmd_committee_reports(args):
-    """Get reports from a specific committee."""
+    """List committee reports by congress and type (SRPT/HRPT).
+
+    The listing endpoint does not include committee codes. To find reports
+    from a specific committee, use GovInfo search instead:
+        query_govinfo.py search "committee name" --collection CRPT
+    """
     params = {"limit": min(args.limit, 250)}
 
-    endpoint = f"/committee-report"
+    endpoint = "/committee-report"
     if args.congress:
         endpoint = f"/committee-report/{args.congress}"
+    if args.report_type:
+        endpoint = f"{endpoint}/{args.report_type.upper()}"
 
     data = _request(endpoint, params)
     if not data:
@@ -233,24 +227,19 @@ def cmd_committee_reports(args):
         return
 
     reports = data.get("reports", [])
-    # Filter by committee code if provided
-    if args.committee:
-        code_lower = args.committee.lower()
-        reports = [r for r in reports if code_lower in json.dumps(r).lower()]
 
-    log_search("congress_reports", f"reports:{args.committee or 'all'}:{args.congress or 'all'}", len(reports))
+    log_search("congress_reports", f"reports:{args.report_type or 'all'}:{args.congress or 'all'}", len(reports))
 
     if not write_output(reports, args, summary=f"Committee reports ({len(reports)})"):
         print(f"Committee reports: {len(reports)}")
         for r in reports:
             number = r.get("number", "?")
-            title = r.get("title", "")[:80]
+            citation = r.get("citation", "")
             report_type = r.get("type", "?")
             congress = r.get("congress", "?")
             date = r.get("updateDate", "?")
 
-            print(f"\n  {report_type} {number} ({congress}th Congress)")
-            print(f"  {title}")
+            print(f"\n  {citation or f'{report_type} {number}'} ({congress}th Congress)")
             print(f"  Updated: {date}")
 
 
@@ -332,8 +321,8 @@ def main():
     add_output_args(p_committee)
 
     # committee-reports
-    p_reports = sub.add_parser("committee-reports", help="Get committee reports")
-    p_reports.add_argument("committee", nargs="?", help="Committee code to filter by")
+    p_reports = sub.add_parser("committee-reports", help="List committee reports by congress/type")
+    p_reports.add_argument("--report-type", choices=["SRPT", "HRPT"], help="Senate (SRPT) or House (HRPT) reports")
     p_reports.add_argument("--congress", type=int, help="Limit to specific congress")
     p_reports.add_argument("--limit", type=int, default=20, help="Max results")
     add_output_args(p_reports)

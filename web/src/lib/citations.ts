@@ -115,7 +115,11 @@ function buildGaoUrl(id: string): string {
 }
 
 function buildCrsUrl(id: string): string {
-  return `https://crsreports.congress.gov/product/pdf/${id}`;
+  // CRS IDs have a type prefix (R, RL, IF, IN) followed by digits
+  // URL format: /product/pdf/{type}/{fullId}
+  const typeMatch = id.match(/^([A-Z]+)/);
+  const reportType = typeMatch ? typeMatch[1] : id;
+  return `https://crsreports.congress.gov/product/pdf/${reportType}/${id}`;
 }
 
 function buildFinraUrl(crd: string): string {

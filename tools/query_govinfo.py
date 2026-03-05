@@ -39,7 +39,7 @@ except ImportError:
 
 BASE_URL = "https://api.govinfo.gov"
 RATE_LIMIT = 0.5
-COLLECTIONS = ["CHRG", "CRPT", "GAOREPORTS", "CPRT", "CDOC", "USCOURTS"]
+COLLECTIONS = ["BILLS", "CHRG", "CRPT", "GAOREPORTS", "CPRT", "CDOC", "USCOURTS"]
 
 PROJECT_ROOT = Path(__file__).parent.parent
 
@@ -98,6 +98,7 @@ def _post_search(query, page_size=20, offset_mark="*"):
         "query": query,
         "pageSize": page_size,
         "offsetMark": offset_mark,
+        "sorts": [{"field": "score", "sortOrder": "DESC"}],
     }).encode("utf-8")
 
     req = Request(url, data=body, headers={
@@ -269,13 +270,12 @@ def cmd_ingest(args):
 
     download = data.get("download", {})
     pdf_url = download.get("pdfLink")
-    if not pdf_url:
-        print(f"ERROR: No PDF link found for {args.package_id}", file=sys.stderr)
-        sys.exit(1)
-
-    # Append API key to download URL
     api_key = _get_api_key()
-    pdf_url = f"{pdf_url}?api_key={api_key}"
+    if pdf_url:
+        pdf_url = f"{pdf_url}?api_key={api_key}"
+    else:
+        # Most packages have PDF at the direct /pdf endpoint
+        pdf_url = f"{BASE_URL}/packages/{args.package_id}/pdf?api_key={api_key}"
 
     title = data.get("title", args.package_id)
     date = data.get("dateIssued", "")

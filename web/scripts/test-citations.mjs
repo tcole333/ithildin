@@ -781,7 +781,7 @@ run("CRS: resolves report number to CRS URL", () => {
   const result = applyCitations("See [CRS:R46843].");
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "CRS R46843");
-  assert.match(result.entries[0].url ?? "", /crsreports\.congress\.gov\/product\/pdf\/R46843/);
+  assert.match(result.entries[0].url ?? "", /crsreports\.congress\.gov\/product\/pdf\/R\/R46843/);
 });
 
 run("CRS: extractEvidenceLinks resolves report number", () => {

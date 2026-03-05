@@ -186,18 +186,8 @@ def reconcile_name(name, limit=5):
     Uses the OpenRefine Reconciliation API standard. No auth required.
     Returns list of match candidates with scores.
     """
-    query_payload = json.dumps({"q0": {"query": name, "limit": limit}})
-    data = f"queries={query_payload}".encode("utf-8")
-
-    req = Request(RECONCILE_URL, data=data, headers={
-        "Content-Type": "application/x-www-form-urlencoded",
-        "User-Agent": "OSINT-Research/1.0",
-    })
-
     try:
-        time.sleep(0.5)
-        with urlopen(req, timeout=30) as resp:
-            result = json.loads(resp.read().decode())
+        result = _do_reconcile_request({"q0": {"query": name, "limit": limit}}, timeout=30)
     except HTTPError as e:
         print(f"ERROR: HTTP {e.code} from ICIJ reconcile API", file=sys.stderr)
         return []
@@ -215,30 +205,44 @@ def reconcile_name(name, limit=5):
     } for c in candidates]
 
 
-def reconcile_batch(names, limit=5):
-    """Reconcile multiple names in a single API call.
-
-    The OpenRefine API supports up to ~50 queries per batch.
-    """
-    queries = {}
-    for i, name in enumerate(names):
-        queries[f"q{i}"] = {"query": name, "limit": limit}
-
+def _do_reconcile_request(queries, timeout=60):
+    """Send a reconcile request with the given queries dict."""
+    from urllib.parse import quote
     query_payload = json.dumps(queries)
-    data = f"queries={query_payload}".encode("utf-8")
+    data = f"queries={quote(query_payload)}".encode("utf-8")
 
     req = Request(RECONCILE_URL, data=data, headers={
         "Content-Type": "application/x-www-form-urlencoded",
         "User-Agent": "OSINT-Research/1.0",
     })
 
+    time.sleep(0.5)
+    with urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode())
+
+
+def reconcile_batch(names, limit=5):
+    """Reconcile multiple names in a single API call.
+
+    The OpenRefine API supports up to ~50 queries per batch.
+    On failure, retries with individual queries to avoid losing the whole batch.
+    """
+    queries = {}
+    for i, name in enumerate(names):
+        queries[f"q{i}"] = {"query": name, "limit": limit}
+
     try:
-        time.sleep(0.5)
-        with urlopen(req, timeout=60) as resp:
-            result = json.loads(resp.read().decode())
+        result = _do_reconcile_request(queries)
     except (HTTPError, URLError) as e:
-        print(f"ERROR: ICIJ reconcile API: {e}", file=sys.stderr)
-        return {}
+        # Batch failed — retry each name individually to salvage what we can
+        print(f"  Batch failed ({e}), retrying individually...", file=sys.stderr)
+        result = {}
+        for i, name in enumerate(names):
+            try:
+                single = _do_reconcile_request({f"q{i}": {"query": name, "limit": limit}})
+                result.update(single)
+            except (HTTPError, URLError):
+                pass  # Skip names that consistently fail
 
     out = {}
     for i, name in enumerate(names):
