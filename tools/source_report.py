@@ -475,6 +475,106 @@ def generate_report():
     if aleph_key:
         sources["OCCRP Aleph"]["auth"] = "api_key"
 
+    # GDELT
+    sources["GDELT"] = {
+        "description": "Global event/news monitoring — themes, organizations, tones, source URLs",
+        "query_tool": "tools/query_gdelt.py",
+        **check_api("GDELT", "https://api.gdeltproject.org/api/v2/doc/doc?query=test&mode=artlist&maxrecords=1&format=json"),
+    }
+
+    # FINRA BrokerCheck
+    sources["FINRA BrokerCheck"] = {
+        "description": "Broker/adviser registration, disciplinary history, CRD lookup",
+        "query_tool": "tools/query_finra.py",
+        **check_api("FINRA", "https://api.brokercheck.finra.org/search/individual?query=test&hl=true&nrows=1"),
+    }
+
+    # France SIRENE
+    sources["France SIRENE"] = {
+        "description": "French company registry (SIREN/SIRET, NAF codes, addresses)",
+        "query_tool": "tools/query_france.py",
+        **check_api("SIRENE", "https://api.insee.fr/api-sirene/3.11/siret?q=denominationUniteLegale:test&nombre=1"),
+    }
+
+    # HUDOC (ECHR)
+    sources["HUDOC (ECHR)"] = {
+        "description": "European Court of Human Rights — judgments, decisions, communications (20K+ judgments)",
+        "query_tool": "tools/query_hudoc.py",
+        **check_api("HUDOC"),
+    }
+
+    # Israel Corp Authority
+    sources["Israel Corp Authority"] = {
+        "description": "Israeli corporate registry — company details, officers, filings",
+        "query_tool": "tools/query_israel.py",
+        **check_api("Israel"),
+    }
+
+    # GLEIF (LEI)
+    sources["GLEIF (LEI)"] = {
+        "description": "Global Legal Entity Identifiers — ownership chains, fund managers, ultimate parents",
+        "query_tool": "tools/query_gleif.py",
+        **check_api("GLEIF", "https://api.gleif.org/api/v1/lei-records?page[size]=1"),
+    }
+
+    # OffshoreAlert
+    sources["OffshoreAlert"] = {
+        "description": "Offshore finance investigations, court filings, regulatory actions",
+        "query_tool": "tools/query_investigations.py (OffshoreAlert category)",
+        "status": "configured",
+    }
+
+    # Blockchain tools
+    etherscan_key = os.environ.get("ETHERSCAN_API_KEY")
+    sources["Etherscan"] = {
+        "description": "Ethereum blockchain — transactions, token transfers, contract interactions",
+        "query_tool": "tools/query_etherscan.py",
+        **check_api("Etherscan", f"https://api.etherscan.io/api?module=stats&action=ethprice&apikey={etherscan_key}" if etherscan_key else None),
+    }
+    if not etherscan_key:
+        sources["Etherscan"]["status"] = "no_api_key"
+
+    sources["Solscan"] = {
+        "description": "Solana blockchain — account activity, token balances, transaction history",
+        "query_tool": "tools/query_solscan.py",
+        **check_api("Solscan"),
+    }
+
+    sources["Dune Analytics"] = {
+        "description": "Cross-chain blockchain analytics via SQL queries",
+        "query_tool": "tools/query_dune.py",
+        "status": "configured",
+    }
+
+    # GovInfo (congressional)
+    govinfo_key = os.environ.get("GOVINFO_API_KEY")
+    sources["GovInfo (GPO)"] = {
+        "description": "Congressional hearings (CHRG), committee reports (CRPT), GAO reports, CRS reports",
+        "query_tool": "tools/query_govinfo.py",
+        **check_api("GovInfo", f"https://api.govinfo.gov/collections?api_key={govinfo_key}&pageSize=1" if govinfo_key else None),
+    }
+    if not govinfo_key:
+        sources["GovInfo (GPO)"]["status"] = "no_api_key"
+        sources["GovInfo (GPO)"]["start_cmd"] = "export GOVINFO_API_KEY=<key> (free at https://api.data.gov/signup/)"
+
+    # Congress.gov
+    congress_key = os.environ.get("CONGRESS_API_KEY")
+    sources["Congress.gov"] = {
+        "description": "Bills, members, committees, nominations, CRS reports (structured metadata)",
+        "query_tool": "tools/query_congress.py",
+        **check_api("Congress", f"https://api.congress.gov/v3/bill?api_key={congress_key}&format=json&limit=1" if congress_key else None),
+    }
+    if not congress_key:
+        sources["Congress.gov"]["status"] = "no_api_key"
+        sources["Congress.gov"]["start_cmd"] = "export CONGRESS_API_KEY=<key> (free at https://api.congress.gov/sign-up/)"
+
+    # ICIJ Reconciliation API (no auth needed)
+    sources["ICIJ Reconciliation API"] = {
+        "description": "Match entity names against 810K+ offshore entities (no Neo4j needed)",
+        "query_tool": "tools/query_icij.py reconcile / reconcile-all",
+        **check_api("ICIJ Reconcile", "https://offshoreleaks.icij.org/api/v1/reconcile"),
+    }
+
     return sources
 
 
