@@ -465,6 +465,16 @@ def generate_report():
         **check_api("URLScan", "https://urlscan.io/api/v1/search/?q=domain:example.com&size=1"),
     }
 
+    # OCCRP Aleph
+    aleph_key = os.environ.get("ALEPH_API_KEY")
+    sources["OCCRP Aleph"] = {
+        "description": "OCCRP investigative datasets — corporate registries, leaks, sanctions, court records (200+ datasets)",
+        "query_tool": "tools/query_aleph.py",
+        **check_api("Aleph", "https://aleph.occrp.org/api/2/statistics"),
+    }
+    if aleph_key:
+        sources["OCCRP Aleph"]["auth"] = "api_key"
+
     return sources
 
 
