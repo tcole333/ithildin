@@ -111,6 +111,7 @@ VALID_CORRECTION_TYPES = [
 ALLOWED_CORRECT_FIELDS = {
     "summary", "detail", "target_name", "date_of_event",
     "confidence", "finding_type", "claim_type", "thread_id",
+    "source_datasets",
 }
 
 

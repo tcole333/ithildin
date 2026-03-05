@@ -26,8 +26,12 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
-# Global SSL context for sites with cert issues (like usaspending.gov in some environments)
-SSL_CONTEXT = ssl.create_default_context()
+# Global SSL context — use certifi bundle (system store may be stale)
+try:
+    import certifi
+    SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
+except ImportError:
+    SSL_CONTEXT = ssl.create_default_context()
 if os.environ.get("OSINT_INSECURE_SSL") == "true" or os.environ.get("PYTHONHTTPSVERIFY") == "0":
     SSL_CONTEXT.check_hostname = False
     SSL_CONTEXT.verify_mode = ssl.CERT_NONE
