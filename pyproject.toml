@@ -13,10 +13,8 @@ dependencies = [
   "pyyaml>=6.0.3",
   "rapidfuzz>=3.6",
   "networkx>=2.6",
+  "followthemoney>=3.5",
 ]
-
-[project.optional-dependencies]
-ftm = ["followthemoney>=3.5"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

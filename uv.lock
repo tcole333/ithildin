@@ -1634,6 +1634,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "duckdb" },
     { name = "flask" },
+    { name = "followthemoney" },
     { name = "maigret" },
     { name = "neo4j" },
     { name = "networkx" },
@@ -1643,16 +1644,11 @@ dependencies = [
     { name = "rapidfuzz" },
 ]
 
-[package.optional-dependencies]
-ftm = [
-    { name = "followthemoney" },
-]
-
 [package.metadata]
 requires-dist = [
     { name = "duckdb", specifier = ">=1.4.4" },
     { name = "flask", specifier = ">=3.0" },
-    { name = "followthemoney", marker = "extra == 'ftm'", specifier = ">=3.5" },
+    { name = "followthemoney", specifier = ">=3.5" },
     { name = "maigret", specifier = ">=0.5.0" },
     { name = "neo4j", specifier = ">=6.1.0" },
     { name = "networkx", specifier = ">=2.6" },
@@ -1661,7 +1657,6 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "rapidfuzz", specifier = ">=3.6" },
 ]
-provides-extras = ["ftm"]
 
 [[package]]
 name = "packaging"
