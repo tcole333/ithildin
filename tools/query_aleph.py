@@ -331,6 +331,124 @@ def cmd_collections(args):
         print(json.dumps(data, indent=2, default=str))
 
 
+def _ingest_entities(entities, source_tag="aleph"):
+    """Import Aleph FtM entities into investigation.db.
+
+    Aleph returns entities in FtM format natively, so we can use
+    ftm_bridge.import_ftm_entities directly.
+    """
+    import sqlite3
+
+    try:
+        from tools.ftm_bridge import import_ftm_entities
+    except ImportError:
+        from ftm_bridge import import_ftm_entities
+
+    try:
+        from tools.lead_tracker import get_db
+    except ImportError:
+        from lead_tracker import get_db
+
+    db = get_db()
+
+    # Patch source to 'aleph' instead of generic 'ftm_import'
+    counts = {"entities": 0, "persons": 0, "relationships": 0, "skipped": 0}
+    entity_schemas = {"Company", "LegalEntity", "Organization", "PublicBody"}
+
+    for entity in entities:
+        schema = entity.get("schema", "")
+        props = entity.get("properties", {})
+        names = props.get("name", [])
+
+        if not names:
+            counts["skipped"] += 1
+            continue
+
+        name = names[0]
+
+        if schema in entity_schemas:
+            entity_type_map = {
+                "Company": "llc", "LegalEntity": "other",
+                "Organization": "other", "PublicBody": "government",
+            }
+            entity_type = entity_type_map.get(schema, "other")
+            jurisdiction = (props.get("jurisdiction", [None]) or [None])[0]
+            address = (props.get("address", [None]) or [None])[0]
+            ein = (props.get("registrationNumber", [None]) or [None])[0]
+
+            try:
+                db.execute("""
+                    INSERT OR IGNORE INTO entities (name, entity_type, jurisdiction, ein, address,
+                                                    source, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+                """, (name, entity_type, jurisdiction, ein, address, source_tag))
+                counts["entities"] += 1
+            except sqlite3.IntegrityError:
+                counts["skipped"] += 1
+
+        elif schema == "Person":
+            counts["persons"] += 1
+
+        elif schema in ("Directorship", "Ownership", "Membership", "Employment",
+                        "Associate", "Family", "UnknownLink", "Representation"):
+            counts["relationships"] += 1
+
+        else:
+            counts["skipped"] += 1
+
+    db.commit()
+    db.close()
+    return counts
+
+
+def cmd_ingest(args):
+    """Ingest an Aleph entity and its relationships into investigation.db."""
+    entity = _request(f"/entities/{args.entity_id}")
+
+    # Get expanded relationships too
+    params = {"limit": 50}
+    expand_data = _request(f"/entities/{args.entity_id}/expand", params)
+
+    all_entities = [entity]
+    for group in expand_data.get("results", []):
+        all_entities.extend(group.get("entities", []))
+
+    counts = _ingest_entities(all_entities, source_tag="aleph")
+    _log(entity.get("properties", {}).get("name", ["?"])[0], "aleph_ingest", counts["entities"])
+
+    print(f"Ingested from Aleph entity {args.entity_id}:")
+    print(f"  Entities:      {counts['entities']}")
+    print(f"  Persons:       {counts['persons']} (tracked in connections)")
+    print(f"  Relationships: {counts['relationships']}")
+    print(f"  Skipped:       {counts['skipped']}")
+
+
+def cmd_ingest_search(args):
+    """Search Aleph and ingest all matching entities into investigation.db."""
+    params = {"q": args.query}
+    if args.schema:
+        params["filter:schemata"] = args.schema
+    if args.countries:
+        params["filter:countries"] = args.countries
+    if args.collection:
+        params["filter:collection_id"] = args.collection
+
+    results, total = _paginate("/entities", params, max_results=args.limit)
+
+    if not results:
+        print(f"No Aleph results for '{args.query}'")
+        return
+
+    counts = _ingest_entities(results, source_tag="aleph")
+    _log(args.query, "aleph_ingest", counts["entities"])
+
+    print(f"Searched '{args.query}' — {total} total, ingested from {len(results)}:")
+    print(f"  Entities:      {counts['entities']}")
+    print(f"  Persons:       {counts['persons']} (tracked in connections)")
+    print(f"  Relationships: {counts['relationships']}")
+    print(f"  Skipped:       {counts['skipped']}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="OCCRP Aleph API for OSINT investigation")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -372,6 +490,19 @@ def main():
     p.add_argument("--limit", type=int, default=20)
     add_output_args(p)
 
+    # ingest
+    p = sub.add_parser("ingest", help="Ingest entity + relationships into investigation.db")
+    p.add_argument("entity_id", help="Aleph entity ID")
+
+    # ingest-search
+    p = sub.add_parser("ingest-search", help="Search and ingest all matches into investigation.db")
+    p.add_argument("query", help="Search term")
+    p.add_argument("--schema", choices=list(SCHEMAS.keys()),
+                   help="Filter by FTM schema type")
+    p.add_argument("--countries", help="Filter by country code")
+    p.add_argument("--collection", help="Filter by collection ID")
+    p.add_argument("--limit", type=int, default=50)
+
     args = parser.parse_args()
 
     handlers = {
@@ -380,6 +511,8 @@ def main():
         "expand": cmd_expand,
         "similar": cmd_similar,
         "collections": cmd_collections,
+        "ingest": cmd_ingest,
+        "ingest-search": cmd_ingest_search,
     }
     handlers[args.command](args)
 
