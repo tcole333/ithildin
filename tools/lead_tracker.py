@@ -1198,14 +1198,21 @@ def claim_lead(lead_id, session_id=None, claimed_by=None, lease_hours=2):
 
 
 def claim_next_lead(category=None, thread_id=None, session_id=None,
-                    claimed_by=None, lease_hours=2):
+                    claimed_by=None, lease_hours=2, profile_id=None):
     """Atomically select and claim the next open lead.
 
     Uses BEGIN IMMEDIATE to acquire a write lock, preventing TOCTOU races
     where two agents could claim the same lead.
 
     Opportunistically recovers stale leads before selecting.
+    Auto-filters by active investigation profile unless overridden.
     """
+    if profile_id is None:
+        try:
+            from tools.investigation_context import get_active_profile
+            profile_id = get_active_profile().name
+        except Exception:
+            pass
     db = get_db()
     db.execute("BEGIN IMMEDIATE")
 
@@ -1214,6 +1221,9 @@ def claim_next_lead(category=None, thread_id=None, session_id=None,
 
     conditions = ["status = 'open'"]
     params = []
+    if profile_id:
+        conditions.append("profile_id = ?")
+        params.append(profile_id)
     if category:
         conditions.append("category = ?")
         params.append(category)
@@ -1398,11 +1408,20 @@ def search_leads(query):
     return [dict(r) for r in rows]
 
 
-def get_next_lead(category=None, thread_id=None):
-    """Get the highest priority open lead."""
+def get_next_lead(category=None, thread_id=None, profile_id=None):
+    """Get the highest priority open lead, filtered by active profile."""
+    if profile_id is None:
+        try:
+            from tools.investigation_context import get_active_profile
+            profile_id = get_active_profile().name
+        except Exception:
+            pass
     db = get_db()
     conditions = ["status = 'open'"]
     params = []
+    if profile_id:
+        conditions.append("profile_id = ?")
+        params.append(profile_id)
     if category:
         conditions.append("category = ?")
         params.append(category)
