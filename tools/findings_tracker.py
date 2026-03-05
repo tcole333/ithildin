@@ -97,6 +97,8 @@ VALID_SOURCES = [
     "highergov", "documentcloud", "muckrock", "fincen",
     "opencorporates", "zefix", "hudoc", "france_sirene",
     "panama_rp", "investigations_db", "fdic",
+    "propublica_disclosures", "propublica_congress", "ppp",
+    "govinfo", "congress_gov",
 ]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
