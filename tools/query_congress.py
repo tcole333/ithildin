@@ -77,6 +77,8 @@ def _request(endpoint, params=None):
             return json.loads(resp.read().decode())
     except HTTPError as e:
         body = e.read().decode() if e.fp else ""
+        if e.code == 404:
+            return None
         if e.code == 429:
             print("ERROR: Rate limit exceeded. Wait and retry.", file=sys.stderr)
         else:
@@ -177,17 +179,23 @@ def cmd_member(args):
 
 def cmd_committee(args):
     """Get committee info and subcommittees."""
-    # Try both senate and house committee codes
-    for chamber in ["senate", "house", "joint"]:
-        data = _request(f"/committee/{chamber}/{args.code}")
+    code = args.code.lower()
+    # Try variations: exact code, with 00 suffix (parent committees use 00)
+    codes_to_try = [code]
+    if not code[-2:].isdigit():
+        codes_to_try.append(f"{code}00")
+
+    data = None
+    for try_code in codes_to_try:
+        for chamber in ["senate", "house", "joint"]:
+            data = _request(f"/committee/{chamber}/{try_code}")
+            if data and data.get("committee"):
+                break
         if data and data.get("committee"):
             break
-    else:
-        # Try without chamber prefix
-        data = _request(f"/committee/{args.code}")
 
     if not data or not data.get("committee"):
-        print(f"Committee {args.code} not found.")
+        print(f"Committee {args.code} not found. Use full system code (e.g., ssga00, ssga01).")
         sys.exit(1)
 
     committee = data["committee"]
@@ -278,31 +286,25 @@ def cmd_nominations(args):
 
 
 def cmd_crs(args):
-    """Search CRS reports."""
-    params = {
-        "query": args.query,
-        "limit": min(args.limit, 250),
-    }
+    """Search for CRS-related content via GovInfo's committee prints collection.
 
-    data = _request("/crs-report", params)
-    if not data:
-        print("No results or API error.")
-        return
+    CRS reports aren't directly available via API. This searches CPRT (committee
+    prints) which often includes CRS reports submitted to committees.
+    """
+    import subprocess as sp
+    govinfo_cmd = [
+        sys.executable, str(PROJECT_ROOT / "tools" / "query_govinfo.py"),
+        "search", args.query, "--collection", "CPRT",
+        "--limit", str(args.limit),
+    ]
+    output_path = getattr(args, "output", None)
+    if output_path:
+        govinfo_cmd.extend(["--output", output_path])
 
-    reports = data.get("CRSReports", [])
-    total = len(reports)
-
-    log_search("congress_crs", args.query, total)
-
-    if not write_output(reports, args, summary=f"CRS reports '{args.query}'"):
-        print(f"CRS Reports: {total} for '{args.query}'")
-        for r in reports:
-            report_number = r.get("reportNumber", "?")
-            title = r.get("title", "")[:80]
-            date = r.get("latestPubDate", "?")
-
-            print(f"\n  [{report_number}] {title}")
-            print(f"  Published: {date}")
+    print("Note: CRS reports aren't directly available via API. Searching committee prints (CPRT).")
+    print("For CRS reports, visit https://crsreports.congress.gov directly.")
+    result = sp.run(govinfo_cmd, capture_output=False)
+    sys.exit(result.returncode)
 
 
 def main():

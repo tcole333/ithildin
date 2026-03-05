@@ -3,15 +3,19 @@
 GovInfo (GPO) congressional hearings, committee reports, GAO reports, and CRS reports.
 
 Covers CHRG (hearings, 1997+), CRPT (committee reports), GAOREPORTS, and CRS collections.
-Free API via api.data.gov key. Rate limit: ~1,000/hour.
+Free API — uses DEMO_KEY by default, or set GOVINFO_API_KEY for higher rate limits.
+Rate limit: ~1,000/hour (DEMO_KEY), higher with registered key.
+
+The /search endpoint requires POST with JSON body. Collection filtering uses
+the query string syntax: "Deutsche Bank collection:CHRG".
 
 Usage:
     python tools/query_govinfo.py search "Deutsche Bank" --collection CHRG
     python tools/query_govinfo.py search "shell companies" --collection GAOREPORTS --limit 10
     python tools/query_govinfo.py search "beneficial ownership" --collection CRS
-    python tools/query_govinfo.py document CHRG-116shrg12345
-    python tools/query_govinfo.py hearing CHRG-116shrg12345
-    python tools/query_govinfo.py ingest CHRG-116shrg12345
+    python tools/query_govinfo.py document GOVPUB-Y4_J89_2-PURL-LPS113630
+    python tools/query_govinfo.py hearing GOVPUB-Y4_J89_2-PURL-LPS113630
+    python tools/query_govinfo.py ingest GOVPUB-Y4_J89_2-PURL-LPS113630
     python tools/query_govinfo.py ingest-search "Epstein" --collection CHRG --limit 5
 """
 
@@ -34,17 +38,16 @@ except ImportError:
     from lead_tracker import log_search
 
 BASE_URL = "https://api.govinfo.gov"
-RATE_LIMIT = 0.5  # seconds between requests
-COLLECTIONS = ["CHRG", "CRPT", "GAOREPORTS", "CRS"]
+RATE_LIMIT = 0.5
+COLLECTIONS = ["CHRG", "CRPT", "GAOREPORTS", "CPRT", "CDOC", "USCOURTS"]
 
 PROJECT_ROOT = Path(__file__).parent.parent
 
 
 def _get_api_key():
-    """Get GovInfo API key from environment."""
+    """Get GovInfo API key. Falls back to DEMO_KEY (works but lower rate limit)."""
     key = os.environ.get("GOVINFO_API_KEY")
     if not key:
-        # Try loading from .env
         env_path = PROJECT_ROOT / ".env"
         if env_path.exists():
             for line in env_path.read_text().splitlines():
@@ -52,24 +55,17 @@ def _get_api_key():
                 if line.startswith("GOVINFO_API_KEY="):
                     key = line.split("=", 1)[1].strip().strip('"').strip("'")
                     break
-    return key
+    return key or "DEMO_KEY"
 
 
-def _request(endpoint, params=None):
-    """Make authenticated request to GovInfo API."""
+def _get(endpoint, params=None):
+    """GET request to GovInfo API (for packages, collections, etc.)."""
     api_key = _get_api_key()
-    if not api_key:
-        print("ERROR: GOVINFO_API_KEY not set. Get a free key at https://api.data.gov/signup/", file=sys.stderr)
-        sys.exit(1)
-
     if params is None:
         params = {}
     params["api_key"] = api_key
 
-    url = f"{BASE_URL}{endpoint}"
-    if params:
-        url = f"{url}?{urlencode(params, doseq=True)}"
-
+    url = f"{BASE_URL}{endpoint}?{urlencode(params, doseq=True)}"
     req = Request(url, headers={
         "Accept": "application/json",
         "User-Agent": "OSINT-Research/1.0",
@@ -81,6 +77,8 @@ def _request(endpoint, params=None):
             return json.loads(resp.read().decode())
     except HTTPError as e:
         body = e.read().decode() if e.fp else ""
+        if e.code == 404:
+            return None
         if e.code == 429:
             print("ERROR: Rate limit exceeded. Wait and retry.", file=sys.stderr)
         else:
@@ -91,70 +89,96 @@ def _request(endpoint, params=None):
         return None
 
 
+def _post_search(query, page_size=20, offset_mark="*"):
+    """POST search request to GovInfo API."""
+    api_key = _get_api_key()
+    url = f"{BASE_URL}/search?api_key={api_key}"
+
+    body = json.dumps({
+        "query": query,
+        "pageSize": page_size,
+        "offsetMark": offset_mark,
+    }).encode("utf-8")
+
+    req = Request(url, data=body, headers={
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "User-Agent": "OSINT-Research/1.0",
+    })
+
+    time.sleep(RATE_LIMIT)
+    try:
+        with urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode())
+    except HTTPError as e:
+        body_text = e.read().decode() if e.fp else ""
+        if e.code == 429:
+            print("ERROR: Rate limit exceeded. Wait and retry.", file=sys.stderr)
+        else:
+            print(f"ERROR: HTTP {e.code}: {body_text[:200]}", file=sys.stderr)
+        return None
+    except URLError as e:
+        print(f"ERROR: {e.reason}", file=sys.stderr)
+        return None
+
+
 def _flatten_result(item):
     """Flatten a GovInfo search result into a clean dict."""
+    gov_author = item.get("governmentAuthor")
+    author_str = ", ".join(gov_author) if isinstance(gov_author, list) else (gov_author or "")
     return {
         "packageId": item.get("packageId"),
+        "granuleId": item.get("granuleId"),
         "title": item.get("title"),
-        "congress": item.get("congress"),
-        "session": item.get("session"),
         "dateIssued": item.get("dateIssued"),
         "collectionCode": item.get("collectionCode"),
-        "category": item.get("category"),
-        "branch": item.get("branch"),
-        "governmentAuthor1": item.get("governmentAuthor1"),
-        "governmentAuthor2": item.get("governmentAuthor2"),
-        "suDocClassNumber": item.get("suDocClassNumber"),
-        "pages": item.get("pages"),
+        "governmentAuthor": author_str,
         "lastModified": item.get("lastModified"),
+        "resultLink": item.get("resultLink"),
+        "pdfLink": (item.get("download") or {}).get("pdfLink"),
     }
 
 
 def _print_result(r):
     """Pretty-print a single search result."""
     pkg = r.get("packageId", "?")
+    granule = r.get("granuleId")
     title = r.get("title", "")
     date = r.get("dateIssued", "?")
     coll = r.get("collectionCode", "?")
-    congress = r.get("congress", "")
-    author = r.get("governmentAuthor1", "")
-    pages = r.get("pages")
+    author = r.get("governmentAuthor", "")
 
-    print(f"\n  [{pkg}]")
+    label = f"{pkg}/{granule}" if granule else pkg
+    print(f"\n  [{label}]")
     print(f"  {title}")
-    parts = [f"Date: {date}", f"Collection: {coll}"]
-    if congress:
-        parts.append(f"Congress: {congress}")
+    parts = [f"Collection: {coll}"]
+    if date:
+        parts.insert(0, f"Date: {date}")
     if author:
         parts.append(f"Author: {author}")
-    if pages:
-        parts.append(f"Pages: {pages}")
     print(f"  {' | '.join(parts)}")
 
 
 def cmd_search(args):
     """Full-text search across GovInfo collections."""
-    params = {
-        "query": args.query,
-        "pageSize": min(args.limit, 100),
-        "offsetMark": "*",
-    }
+    # Collection filtering is done via query string syntax
+    query = args.query
     if args.collection:
-        params["collection"] = args.collection
+        query = f"{args.query} collection:{args.collection}"
 
-    data = _request("/search", params)
+    data = _post_search(query, page_size=min(args.limit, 100))
     if not data:
         print("No results or API error.")
         return
 
     results = [_flatten_result(r) for r in data.get("results", [])]
     total = data.get("count", len(results))
-    output = {"total": total, "query": args.query, "results": results}
+    output = {"total": total, "query": args.query, "collection": args.collection, "results": results}
 
     collection_label = args.collection or "all"
     log_search(f"govinfo_{collection_label.lower()}", args.query, total)
 
-    if not write_output(output, args, summary=f"GovInfo search '{args.query}' ({collection_label})"):
+    if not write_output(output, args, summary=f"GovInfo '{args.query}' ({collection_label}, {total} total)"):
         print(f"GovInfo: {total} results for '{args.query}' in {collection_label}")
         for r in results:
             _print_result(r)
@@ -162,9 +186,11 @@ def cmd_search(args):
 
 def cmd_document(args):
     """Fetch full document metadata by package ID."""
-    data = _request(f"/packages/{args.package_id}/summary")
-    if not data:
+    data = _get(f"/packages/{args.package_id}/summary")
+    if not data or "message" in data:
         print(f"No document found for {args.package_id}")
+        if data and "message" in data:
+            print(f"  {data['message']}", file=sys.stderr)
         sys.exit(1)
 
     log_search("govinfo_document", f"doc:{args.package_id}", 1)
@@ -181,46 +207,43 @@ def cmd_document(args):
         if congress:
             print(f"  Congress: {congress}")
 
-        # Show download links
+        committees = data.get("committees", [])
+        if committees:
+            for c in committees:
+                name = c.get("committeeName") or c.get("authorityId", "?")
+                print(f"  Committee: {name}")
+
         download = data.get("download", {})
         if download:
             print(f"\n  Downloads:")
             for fmt, url in download.items():
                 print(f"    {fmt}: {url}")
 
-        # Show related
-        related = data.get("related", {})
-        if related:
-            print(f"\n  Related:")
-            for rel_type, url in related.items():
-                print(f"    {rel_type}: {url}")
-
 
 def cmd_hearing(args):
     """Fetch hearing details including committee, witnesses, and links."""
-    # Get summary first
-    data = _request(f"/packages/{args.package_id}/summary")
-    if not data:
+    data = _get(f"/packages/{args.package_id}/summary")
+    if not data or "message" in data:
         print(f"No hearing found for {args.package_id}")
         sys.exit(1)
 
     # Get granules (individual testimony, sections)
-    granules = _request(f"/packages/{args.package_id}/granules", {"pageSize": 100})
-    if granules:
-        data["granules"] = granules.get("granules", [])
+    granules = _get(f"/packages/{args.package_id}/granules", {"pageSize": 100, "offsetMark": "*"})
+    if granules and "granules" in granules:
+        data["granules"] = granules["granules"]
 
     log_search("govinfo_hearing", f"hearing:{args.package_id}", 1)
 
     if not write_output(data, args, summary=f"GovInfo hearing {args.package_id}"):
         title = data.get("title", "?")
         date = data.get("dateIssued", "?")
-        committee = data.get("committees", [])
+        committees = data.get("committees", [])
 
         print(f"\n  Hearing: {args.package_id}")
         print(f"  Title: {title}")
         print(f"  Date: {date}")
-        if committee:
-            for c in committee:
+        if committees:
+            for c in committees:
                 name = c.get("committeeName") or c.get("authorityId", "?")
                 print(f"  Committee: {name}")
 
@@ -239,24 +262,26 @@ def cmd_hearing(args):
 
 def cmd_ingest(args):
     """Download PDF and ingest via ingest_pdf.py pipeline."""
-    # Get document summary to find PDF URL
-    data = _request(f"/packages/{args.package_id}/summary")
-    if not data:
+    data = _get(f"/packages/{args.package_id}/summary")
+    if not data or "message" in data:
         print(f"No document found for {args.package_id}")
         sys.exit(1)
 
     download = data.get("download", {})
-    pdf_url = download.get("pdfLink") or download.get("txtLink")
+    pdf_url = download.get("pdfLink")
     if not pdf_url:
-        # Try constructing PDF URL from package ID
-        pdf_url = f"https://www.govinfo.gov/content/pkg/{args.package_id}/pdf/{args.package_id}.pdf"
+        print(f"ERROR: No PDF link found for {args.package_id}", file=sys.stderr)
+        sys.exit(1)
+
+    # Append API key to download URL
+    api_key = _get_api_key()
+    pdf_url = f"{pdf_url}?api_key={api_key}"
 
     title = data.get("title", args.package_id)
     date = data.get("dateIssued", "")
     year = date[:4] if date else None
     collection = data.get("collectionCode", "CHRG")
 
-    # Download PDF to temp location
     import tempfile
     with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
         tmp_path = tmp.name
@@ -269,18 +294,18 @@ def cmd_ingest(args):
                 f.write(resp.read())
     except (HTTPError, URLError) as e:
         print(f"ERROR: Failed to download PDF: {e}", file=sys.stderr)
+        Path(tmp_path).unlink(missing_ok=True)
         sys.exit(1)
 
-    # Map collection to category
     category_map = {
         "CHRG": "congressional",
         "CRPT": "congressional",
         "GAOREPORTS": "government_report",
         "CRS": "government_report",
+        "GOVPUB": "congressional",
     }
     category = category_map.get(collection, "congressional")
 
-    # Ingest via ingest_pdf.py
     ingest_cmd = [
         sys.executable, str(PROJECT_ROOT / "tools" / "ingest_pdf.py"),
         "ingest", tmp_path,
@@ -296,30 +321,24 @@ def cmd_ingest(args):
     if result.returncode != 0:
         print(result.stderr, file=sys.stderr)
 
-    # Clean up
     Path(tmp_path).unlink(missing_ok=True)
-
     log_search("govinfo_ingest", f"ingest:{args.package_id}", 1)
 
 
 def cmd_ingest_search(args):
     """Search and bulk ingest matching documents."""
-    params = {
-        "query": args.query,
-        "pageSize": min(args.limit, 100),
-        "offsetMark": "*",
-    }
+    query = args.query
     if args.collection:
-        params["collection"] = args.collection
+        query = f"{args.query} collection:{args.collection}"
 
-    data = _request("/search", params)
+    data = _post_search(query, page_size=min(args.limit, 100))
     if not data:
         print("No results or API error.")
         return
 
     results = data.get("results", [])
     total = data.get("count", len(results))
-    print(f"Found {total} results for '{args.query}'. Ingesting {len(results)}...")
+    print(f"Found {total} results for '{args.query}'. Ingesting up to {len(results)}...")
 
     ingested = 0
     for r in results:
@@ -328,8 +347,6 @@ def cmd_ingest_search(args):
             continue
 
         print(f"\n--- Ingesting {pkg_id} ---")
-
-        # Create a namespace for the ingest args
         ingest_args = argparse.Namespace(package_id=pkg_id)
         try:
             cmd_ingest(ingest_args)
@@ -346,7 +363,7 @@ def cmd_ingest_search(args):
 def main():
     parser = argparse.ArgumentParser(
         description="GovInfo congressional hearings, reports, GAO, and CRS",
-        epilog="Auth: GOVINFO_API_KEY (free at https://api.data.gov/signup/). Rate: ~1,000/hour.",
+        epilog="Auth: GOVINFO_API_KEY or DEMO_KEY (default). Get a key at https://www.govinfo.gov/api-signup",
     )
     sub = parser.add_subparsers(dest="command")
 
@@ -359,7 +376,7 @@ def main():
 
     # document
     p_doc = sub.add_parser("document", help="Fetch document metadata by package ID")
-    p_doc.add_argument("package_id", help="GovInfo package ID (e.g., CHRG-116shrg12345)")
+    p_doc.add_argument("package_id", help="GovInfo package ID")
     add_output_args(p_doc)
 
     # hearing
