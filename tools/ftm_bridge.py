@@ -56,16 +56,16 @@ ENTITY_TYPE_MAP = {
     "other": "LegalEntity",
 }
 
-# Relationship type -> FtM schema
+# Connection relationship_type -> FtM schema (person↔person relationships)
 RELATIONSHIP_MAP = {
     "financial": "UnknownLink",
     "social": "Associate",
     "legal": "UnknownLink",
     "intelligence": "UnknownLink",
-    "employment": "Employment",
+    "employment": "UnknownLink",
     "familial": "Family",
-    "corporate": "Directorship",
-    "advisory": "Membership",
+    "corporate": "UnknownLink",
+    "advisory": "Associate",
     "political": "Associate",
 }
 
@@ -167,10 +167,15 @@ def export_entities_ftm(db):
 
             rel = model.make_entity(schema)
             rel.id = ftm_id
-            if schema in ("Directorship", "Ownership", "Membership"):
-                rel.add("director" if schema == "Directorship" else "owner" if schema == "Ownership" else "member",
-                         person_id)
-                rel.add("organization", entity_id)
+            # Map person → correct property per schema
+            person_prop = {"Directorship": "director", "Ownership": "owner",
+                           "Membership": "member", "Representation": "agent",
+                           "UnknownLink": "subject"}.get(schema, "subject")
+            org_prop = {"Directorship": "organization", "Membership": "organization",
+                        "Ownership": "asset", "Representation": "client",
+                        "UnknownLink": "object"}.get(schema, "object")
+            rel.add(person_prop, person_id)
+            rel.add(org_prop, entity_id)
             rel.add("role", r["role"])
             if r["date_start"]:
                 rel.add("startDate", r["date_start"])
@@ -183,16 +188,18 @@ def export_entities_ftm(db):
                 "schema": "Person",
                 "properties": {"name": [r["person_name"]]},
             })
-            prop_key_1 = ("director" if schema == "Directorship"
-                          else "owner" if schema == "Ownership"
-                          else "member" if schema == "Membership"
-                          else "subject")
+            person_prop = {"Directorship": "director", "Ownership": "owner",
+                           "Membership": "member", "Representation": "agent",
+                           "UnknownLink": "subject"}.get(schema, "subject")
+            org_prop = {"Directorship": "organization", "Membership": "organization",
+                        "Ownership": "asset", "Representation": "client",
+                        "UnknownLink": "object"}.get(schema, "object")
             ftm_entities.append({
                 "id": ftm_id,
                 "schema": schema,
                 "properties": {
-                    prop_key_1: [person_id],
-                    "organization": [entity_id],
+                    person_prop: [person_id],
+                    org_prop: [entity_id],
                     "role": [r["role"]],
                     **({"startDate": [r["date_start"]]} if r["date_start"] else {}),
                     **({"endDate": [r["date_end"]]} if r["date_end"] else {}),
@@ -220,29 +227,28 @@ def export_connections_ftm(db):
         schema = RELATIONSHIP_MAP.get(r["relationship_type"], "UnknownLink")
         ftm_id = _make_id("inv", "conn", r["id"])
 
+        # Map properties per schema
+        prop_map = {
+            "Associate": ("person", "associate"),
+            "Family": ("person", "relative"),
+            "Employment": ("employee", "employer"),
+            "Representation": ("agent", "client"),
+        }
+        prop_a, prop_b = prop_map.get(schema, ("subject", "object"))
+
         if use_ftm:
             rel = model.make_entity(schema)
             rel.id = ftm_id
-            if schema in ("Associate", "Family"):
-                rel.add("person", _make_id("inv", "person", r["person_a"]))
-                rel.add("associate", _make_id("inv", "person", r["person_b"]))
-            else:
-                rel.add("subject", _make_id("inv", "person", r["person_a"]))
-                rel.add("object", _make_id("inv", "person", r["person_b"]))
+            rel.add(prop_a, _make_id("inv", "person", r["person_a"]))
+            rel.add(prop_b, _make_id("inv", "person", r["person_b"]))
             if r["description"]:
                 rel.add("summary", r["description"])
             ftm_entities.append(rel.to_dict())
         else:
-            if schema in ("Associate", "Family"):
-                props = {
-                    "person": [_make_id("inv", "person", r["person_a"])],
-                    "associate": [_make_id("inv", "person", r["person_b"])],
-                }
-            else:
-                props = {
-                    "subject": [_make_id("inv", "person", r["person_a"])],
-                    "object": [_make_id("inv", "person", r["person_b"])],
-                }
+            props = {
+                prop_a: [_make_id("inv", "person", r["person_a"])],
+                prop_b: [_make_id("inv", "person", r["person_b"])],
+            }
             if r["description"]:
                 props["summary"] = [r["description"]]
             ftm_entities.append({
