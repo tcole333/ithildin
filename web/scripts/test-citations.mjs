@@ -604,7 +604,7 @@ run("getCitationHealthTier: returns skip for unknown prefixes", () => {
 // Registry: all 26 types resolve through applyCitations
 // ---------------------------------------------------------------------------
 
-run("Registry: all 26 types produce citation entries", () => {
+run("Registry: all 35 types produce citation entries", () => {
   const tokens = [
     "Finding #1",
     "EFTA02504960",
@@ -632,6 +632,15 @@ run("Registry: all 26 types produce citation entries", () => {
     "ICIJ:82004676",
     "USASPENDING:CONT_AWD_W91WAW11F0017",
     "MEDICARE:1003000126",
+    "GOVINFO:CHRG-116shrg12345",
+    "GAO:22-105399",
+    "CRS:R46843",
+    "FINRA:4728363",
+    "LEI:549300DTUYXVMJXZNY75",
+    "HUDOC:001-99808",
+    "SAM:ZE2JVFS8ML75",
+    "HIGHERGOV:N0002325D0075",
+    "FINCEN:12345",
   ];
 
   for (const token of tokens) {
@@ -673,6 +682,15 @@ run("Registry: all extractable types produce evidence links", () => {
     { input: "MUCKROCK:78799", expectMin: 1 },
     { input: "LittleSis:101661", expectMin: 1 },
     { input: "ICIJ:82004676", expectMin: 1 },
+    { input: "GOVINFO:CHRG-116shrg12345", expectMin: 1 },
+    { input: "GAO:22-105399", expectMin: 1 },
+    { input: "CRS:R46843", expectMin: 1 },
+    { input: "FINRA:4728363", expectMin: 1 },
+    { input: "LEI:549300DTUYXVMJXZNY75", expectMin: 1 },
+    { input: "HUDOC:001-99808", expectMin: 1 },
+    { input: "SAM:ZE2JVFS8ML75", expectMin: 1 },
+    { input: "HIGHERGOV:N0002325D0075", expectMin: 1 },
+    { input: "FINCEN:12345", expectMin: 1 },
   ];
 
   for (const { input, expectMin } of rawRefs) {
@@ -713,6 +731,181 @@ run("Registry: splitCitationGroup recognizes new types", () => {
   const combined = "DOCUMENTCLOUD:24402693, ICIJ:82004676, LittleSis:101661, USASPENDING:CONT_AWD_W91WAW11F0017, MEDICARE:1003000126";
   const tokens = splitCitationGroup(combined);
   assert.equal(tokens.length, 5, `Expected 5 tokens, got ${tokens.length}: ${JSON.stringify(tokens)}`);
+});
+
+run("Registry: splitCitationGroup recognizes tier1 new types", () => {
+  const combined = "GOVINFO:CHRG-116shrg12345, GAO:22-105399, CRS:R46843, FINRA:4728363";
+  const tokens = splitCitationGroup(combined);
+  assert.equal(tokens.length, 4, `Expected 4 tokens, got ${tokens.length}: ${JSON.stringify(tokens)}`);
+});
+
+// ---------------------------------------------------------------------------
+// GovInfo
+// ---------------------------------------------------------------------------
+
+run("GovInfo: resolves package ID to GovInfo URL", () => {
+  const result = applyCitations("See [GOVINFO:CHRG-116shrg12345].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "GovInfo CHRG-116shrg12345");
+  assert.match(result.entries[0].url ?? "", /govinfo\.gov\/app\/details\/CHRG-116shrg12345/);
+});
+
+run("GovInfo: extractEvidenceLinks resolves package ID", () => {
+  const links = extractEvidenceLinks("GOVINFO:CHRG-116shrg12345");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /govinfo\.gov/);
+});
+
+// ---------------------------------------------------------------------------
+// GAO
+// ---------------------------------------------------------------------------
+
+run("GAO: resolves report ID to GAO URL", () => {
+  const result = applyCitations("See [GAO:22-105399].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "GAO 22-105399");
+  assert.match(result.entries[0].url ?? "", /gao\.gov\/products\/gao-22-105399/);
+});
+
+run("GAO: extractEvidenceLinks resolves report ID", () => {
+  const links = extractEvidenceLinks("GAO:22-105399");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /gao\.gov/);
+});
+
+// ---------------------------------------------------------------------------
+// CRS
+// ---------------------------------------------------------------------------
+
+run("CRS: resolves report number to CRS URL", () => {
+  const result = applyCitations("See [CRS:R46843].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "CRS R46843");
+  assert.match(result.entries[0].url ?? "", /crsreports\.congress\.gov\/product\/pdf\/R46843/);
+});
+
+run("CRS: extractEvidenceLinks resolves report number", () => {
+  const links = extractEvidenceLinks("CRS:R46843");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /crsreports\.congress\.gov/);
+});
+
+// ---------------------------------------------------------------------------
+// FINRA
+// ---------------------------------------------------------------------------
+
+run("FINRA: resolves CRD to BrokerCheck URL", () => {
+  const result = applyCitations("See [FINRA:4728363].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "FINRA CRD 4728363");
+  assert.match(result.entries[0].url ?? "", /brokercheck\.finra\.org\/individual\/summary\/4728363/);
+});
+
+run("FINRA: extractEvidenceLinks resolves CRD", () => {
+  const links = extractEvidenceLinks("FINRA:4728363");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /finra\.org/);
+});
+
+// ---------------------------------------------------------------------------
+// GLEIF (LEI)
+// ---------------------------------------------------------------------------
+
+run("GLEIF: resolves LEI to GLEIF URL", () => {
+  const result = applyCitations("See [LEI:549300DTUYXVMJXZNY75].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "LEI 549300DTUYXVMJXZNY75");
+  assert.match(result.entries[0].url ?? "", /search\.gleif\.org\/#\/record\/549300DTUYXVMJXZNY75/);
+});
+
+run("GLEIF: extractEvidenceLinks resolves LEI", () => {
+  const links = extractEvidenceLinks("LEI:549300DTUYXVMJXZNY75");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /gleif\.org/);
+});
+
+// ---------------------------------------------------------------------------
+// HUDOC
+// ---------------------------------------------------------------------------
+
+run("HUDOC: resolves item ID to HUDOC URL", () => {
+  const result = applyCitations("See [HUDOC:001-99808].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "HUDOC 001-99808");
+  assert.match(result.entries[0].url ?? "", /hudoc\.echr\.coe\.int\/eng\?i=001-99808/);
+});
+
+run("HUDOC: extractEvidenceLinks resolves item ID", () => {
+  const links = extractEvidenceLinks("HUDOC:001-99808");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /hudoc\.echr\.coe\.int/);
+});
+
+// ---------------------------------------------------------------------------
+// SAM
+// ---------------------------------------------------------------------------
+
+run("SAM: resolves UEI to SAM.gov URL", () => {
+  const result = applyCitations("See [SAM:ZE2JVFS8ML75].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "SAM ZE2JVFS8ML75");
+  assert.match(result.entries[0].url ?? "", /sam\.gov\/entity\/ZE2JVFS8ML75/);
+});
+
+run("SAM: extractEvidenceLinks resolves UEI", () => {
+  const links = extractEvidenceLinks("SAM:ZE2JVFS8ML75");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /sam\.gov/);
+});
+
+// ---------------------------------------------------------------------------
+// HigherGov
+// ---------------------------------------------------------------------------
+
+run("HigherGov: resolves contract ID to HigherGov URL", () => {
+  const result = applyCitations("See [HIGHERGOV:N0002325D0075].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "HigherGov N0002325D0075");
+  assert.match(result.entries[0].url ?? "", /highergov\.com\/contract\/N0002325D0075/);
+});
+
+run("HigherGov: extractEvidenceLinks resolves contract ID", () => {
+  const links = extractEvidenceLinks("HIGHERGOV:N0002325D0075");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /highergov\.com/);
+});
+
+// ---------------------------------------------------------------------------
+// FinCEN (label-only)
+// ---------------------------------------------------------------------------
+
+run("FinCEN: resolves to label-only citation (no URL)", () => {
+  const result = applyCitations("See [FINCEN:12345].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "FinCEN 12345");
+  assert.equal(result.entries[0].url, undefined);
+});
+
+run("FinCEN: extractEvidenceLinks returns label without URL", () => {
+  const links = extractEvidenceLinks("FINCEN:12345");
+  assert.equal(links.length, 1);
+  assert.equal(links[0].url, undefined);
+});
+
+// ---------------------------------------------------------------------------
+// getCitationHealthTier: new types
+// ---------------------------------------------------------------------------
+
+run("getCitationHealthTier: returns correct tier for new types", () => {
+  assert.equal(getCitationHealthTier("govinfo:CHRG-116shrg12345"), "tier1");
+  assert.equal(getCitationHealthTier("gao:22-105399"), "tier1");
+  assert.equal(getCitationHealthTier("crs:R46843"), "tier1");
+  assert.equal(getCitationHealthTier("finra:4728363"), "tier1");
+  assert.equal(getCitationHealthTier("gleif:549300DTUYXVMJXZNY75"), "tier1");
+  assert.equal(getCitationHealthTier("hudoc:001-99808"), "tier2");
+  assert.equal(getCitationHealthTier("sam:ZE2JVFS8ML75"), "tier2");
+  assert.equal(getCitationHealthTier("highergov:N0002325D0075"), "tier2");
+  assert.equal(getCitationHealthTier("fincen:12345"), "tier3");
 });
 
 // ---------------------------------------------------------------------------

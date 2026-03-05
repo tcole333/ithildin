@@ -106,6 +106,38 @@ function buildMedicareUrl(npi: string): string {
   return `https://data.cms.gov/provider-data/search?search_query=${npi}`;
 }
 
+function buildGovInfoUrl(packageId: string): string {
+  return `https://www.govinfo.gov/app/details/${packageId}`;
+}
+
+function buildGaoUrl(id: string): string {
+  return `https://www.gao.gov/products/gao-${id}`;
+}
+
+function buildCrsUrl(id: string): string {
+  return `https://crsreports.congress.gov/product/pdf/${id}`;
+}
+
+function buildFinraUrl(crd: string): string {
+  return `https://brokercheck.finra.org/individual/summary/${crd}`;
+}
+
+function buildGleifUrl(lei: string): string {
+  return `https://search.gleif.org/#/record/${lei}`;
+}
+
+function buildHudocUrl(id: string): string {
+  return `https://hudoc.echr.coe.int/eng?i=${id}`;
+}
+
+function buildSamUrl(uei: string): string {
+  return `https://sam.gov/entity/${uei}`;
+}
+
+function buildHigherGovUrl(id: string): string {
+  return `https://www.highergov.com/contract/${id}/`;
+}
+
 function buildFecCommitteeUrl(committeeId: string): string {
   return `https://www.fec.gov/data/committee/${committeeId}/`;
 }
@@ -885,6 +917,202 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
           label: `FDIC CERT #${cert}`,
           url: `https://www7.fdic.gov/idasp/AdvSearchLanding.asp?SESSION=${cert}`,
         };
+      });
+    },
+  },
+  {
+    id: "govinfo",
+    tokenPattern: "GOVINFO:[A-Za-z0-9-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/GOVINFO:([A-Za-z0-9-]+)/i);
+      if (!match) return null;
+      const packageId = match[1];
+      return {
+        key: `govinfo:${packageId.toLowerCase()}`,
+        label: `GovInfo ${packageId}`,
+        url: buildGovInfoUrl(packageId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/GOVINFO:[A-Za-z0-9-]+/gi) || []).map(ref => {
+        const packageId = ref.replace(/GOVINFO:/i, "");
+        const url = buildGovInfoUrl(packageId);
+        return { key: url, label: `GOVINFO:${packageId}`, url };
+      });
+    },
+  },
+  {
+    id: "gao",
+    tokenPattern: "GAO:\\d{2}-\\d+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/GAO:(\d{2}-\d+)/i);
+      if (!match) return null;
+      const id = match[1];
+      return {
+        key: `gao:${id}`,
+        label: `GAO ${id}`,
+        url: buildGaoUrl(id),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/GAO:\d{2}-\d+/gi) || []).map(ref => {
+        const id = ref.replace(/GAO:/i, "");
+        const url = buildGaoUrl(id);
+        return { key: url, label: `GAO:${id}`, url };
+      });
+    },
+  },
+  {
+    id: "crs",
+    tokenPattern: "CRS:[A-Z0-9]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/CRS:([A-Z0-9]+)/i);
+      if (!match) return null;
+      const id = match[1].toUpperCase();
+      return {
+        key: `crs:${id}`,
+        label: `CRS ${id}`,
+        url: buildCrsUrl(id),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/CRS:[A-Z0-9]+/gi) || []).map(ref => {
+        const id = ref.replace(/CRS:/i, "").toUpperCase();
+        const url = buildCrsUrl(id);
+        return { key: url, label: `CRS:${id}`, url };
+      });
+    },
+  },
+  {
+    id: "finra",
+    tokenPattern: "FINRA:\\d+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/FINRA:(\d+)/i);
+      if (!match) return null;
+      const crd = match[1];
+      return {
+        key: `finra:${crd}`,
+        label: `FINRA CRD ${crd}`,
+        url: buildFinraUrl(crd),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/FINRA:\d+/gi) || []).map(ref => {
+        const crd = ref.replace(/FINRA:/i, "");
+        const url = buildFinraUrl(crd);
+        return { key: url, label: `FINRA:${crd}`, url };
+      });
+    },
+  },
+  {
+    id: "gleif",
+    tokenPattern: "LEI:[A-Z0-9]{20}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/LEI:([A-Z0-9]{20})/i);
+      if (!match) return null;
+      const lei = match[1].toUpperCase();
+      return {
+        key: `gleif:${lei}`,
+        label: `LEI ${lei}`,
+        url: buildGleifUrl(lei),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/LEI:[A-Z0-9]{20}/gi) || []).map(ref => {
+        const lei = ref.replace(/LEI:/i, "").toUpperCase();
+        const url = buildGleifUrl(lei);
+        return { key: url, label: `LEI:${lei}`, url };
+      });
+    },
+  },
+  {
+    id: "hudoc",
+    tokenPattern: "HUDOC:\\d{3}-\\d+",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/HUDOC:(\d{3}-\d+)/i);
+      if (!match) return null;
+      const id = match[1];
+      return {
+        key: `hudoc:${id}`,
+        label: `HUDOC ${id}`,
+        url: buildHudocUrl(id),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/HUDOC:\d{3}-\d+/gi) || []).map(ref => {
+        const id = ref.replace(/HUDOC:/i, "");
+        const url = buildHudocUrl(id);
+        return { key: url, label: `HUDOC:${id}`, url };
+      });
+    },
+  },
+  {
+    id: "sam",
+    tokenPattern: "SAM:[A-Z0-9]+",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/SAM:([A-Z0-9]+)/i);
+      if (!match) return null;
+      const uei = match[1].toUpperCase();
+      return {
+        key: `sam:${uei}`,
+        label: `SAM ${uei}`,
+        url: buildSamUrl(uei),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/SAM:[A-Z0-9]+/gi) || []).map(ref => {
+        const uei = ref.replace(/SAM:/i, "").toUpperCase();
+        const url = buildSamUrl(uei);
+        return { key: url, label: `SAM:${uei}`, url };
+      });
+    },
+  },
+  {
+    id: "highergov",
+    tokenPattern: "HIGHERGOV:[A-Za-z0-9-]+",
+    healthTier: "tier2",
+    resolve(token) {
+      const match = token.match(/HIGHERGOV:([A-Za-z0-9-]+)/i);
+      if (!match) return null;
+      const id = match[1];
+      return {
+        key: `highergov:${id.toLowerCase()}`,
+        label: `HigherGov ${id}`,
+        url: buildHigherGovUrl(id),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/HIGHERGOV:[A-Za-z0-9-]+/gi) || []).map(ref => {
+        const id = ref.replace(/HIGHERGOV:/i, "");
+        const url = buildHigherGovUrl(id);
+        return { key: url, label: `HIGHERGOV:${id}`, url };
+      });
+    },
+  },
+  {
+    id: "fincen",
+    tokenPattern: "FINCEN:\\d+",
+    healthTier: "tier3",
+    resolve(token) {
+      const match = token.match(/FINCEN:(\d+)/i);
+      if (!match) return null;
+      const id = match[1];
+      return {
+        key: `fincen:${id}`,
+        label: `FinCEN ${id}`,
+      };
+    },
+    extract(raw) {
+      return (raw.match(/FINCEN:\d+/gi) || []).map(ref => {
+        const id = ref.replace(/FINCEN:/i, "");
+        return { key: `fincen:${id}`, label: `FINCEN:${id}` };
       });
     },
   },
