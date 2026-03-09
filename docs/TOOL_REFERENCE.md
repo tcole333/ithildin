@@ -106,6 +106,8 @@ Agent instruction modules live in `docs/sources/`. Each tells agents HOW to use 
 | `acris-ucc-property.md` | ACRIS property + UCC liens + FAA |
 | `gleif-ds10.md` | GLEIF LEI + DS10 financial records |
 | `sanctions.md` | OpenSanctions |
+| `offshorealert.md` | OffshoreAlert offshore court cases + regulatory actions |
+| `investigations.md` | Ingested investigation reports (Congressional, GAO, IG, enforcement) |
 
 Agents read these via: "Read `docs/sources/courtlistener.md` for protocol, then execute."
 

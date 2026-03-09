@@ -6,7 +6,7 @@ user_invocable: true
 
 # /pursue-lead
 
-**LAYER 1: RESEARCH AGENT** — Read `docs/sources/_preamble.md` for evidence standards, entity registration, and report format.
+**LAYER 1: RESEARCH AGENT** — You MUST read and follow `docs/sources/_preamble.md` before starting. It defines evidence standards, entity registration, and report format.
 
 Claim and investigate the next highest-priority open lead. Operates fully autonomously.
 
@@ -59,17 +59,47 @@ prior = check_searched("target-name", "source_name")
 
 ### 4. Investigate Using Source Modules
 
-**Reason about which sources are relevant for this lead type and target.** Don't mechanically check every source — think about what will answer the lead's question.
+**Reason about which sources are relevant for this lead type and target.** Read the relevant source modules in `docs/sources/` for protocol and commands.
 
-Read the relevant source modules for protocol:
+#### Mandatory Source Checklists
 
-| Lead Type | Primary Source Modules |
-|-----------|----------------------|
-| Person | `corpus.md`, `courtlistener.md`, `fec.md`, `990.md`, `edgar.md`, `littlesis.md`, `registry.md`, `lobbying.md`, `sanctions.md`, `gdelt-web.md` |
-| Entity | `corpus.md`, `registry.md`, `edgar.md`, `990.md`, `usaspending.md`, `courtlistener.md`, `gleif-ds10.md`, `lobbying.md`, `sanctions.md` |
-| Financial | `corpus.md`, `edgar.md`, `990.md`, `fec.md`, `usaspending.md`, `acris-ucc-property.md`, `gleif-ds10.md`, `courtlistener.md` |
+**You MUST check every source listed for the lead type. Do not skip sources because you "found enough" elsewhere.** Record every search result (including zero hits).
 
-**Do not skip sources because you "found enough" elsewhere.** Check every relevant source and record the result (including zero-result searches).
+**Person leads** — MUST check all:
+- [ ] Investigation corpus (`corpus.md`)
+- [ ] Court records (`courtlistener.md`)
+- [ ] Campaign finance (`fec.md`)
+- [ ] Nonprofit filings (`990.md`)
+- [ ] SEC filings (`edgar.md`)
+- [ ] Power network (`littlesis.md`)
+- [ ] Corporate registries (`registry.md`)
+- [ ] Lobbying disclosures (`lobbying.md`)
+- [ ] Sanctions/PEP (`sanctions.md`)
+- [ ] News/web (`gdelt-web.md`)
+- [ ] Offshore records (`offshorealert.md`, `aleph-icij.md`) — if offshore connections suspected
+
+**Entity leads** — MUST check all:
+- [ ] Investigation corpus (`corpus.md`)
+- [ ] Corporate registries (`registry.md`)
+- [ ] SEC filings (`edgar.md`)
+- [ ] Nonprofit filings (`990.md`)
+- [ ] Federal spending (`usaspending.md`)
+- [ ] Court records (`courtlistener.md`)
+- [ ] LEI/financial records (`gleif-ds10.md`)
+- [ ] Lobbying disclosures (`lobbying.md`)
+- [ ] Sanctions/PEP (`sanctions.md`)
+- [ ] Offshore records (`offshorealert.md`, `aleph-icij.md`)
+
+**Financial leads** — MUST check all:
+- [ ] Investigation corpus (`corpus.md`)
+- [ ] SEC filings (`edgar.md`)
+- [ ] Nonprofit filings (`990.md`)
+- [ ] Campaign finance (`fec.md`)
+- [ ] Federal spending (`usaspending.md`)
+- [ ] Property/UCC (`acris-ucc-property.md`)
+- [ ] LEI/financial records (`gleif-ds10.md`)
+- [ ] Court records (`courtlistener.md`)
+- [ ] Offshore records (`offshorealert.md`, `aleph-icij.md`)
 
 ### 5. Record Findings
 

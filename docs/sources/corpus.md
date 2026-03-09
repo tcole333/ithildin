@@ -42,6 +42,20 @@ uv run python tools/<corpus_tool>.py triples --actor "TARGET" --limit 30 --outpu
 - **Timeline clusters**: When do mentions concentrate? What was happening then?
 - **Name variants**: Try alternate spellings, transliterations, maiden names
 
+## Email Analysis (Parquet)
+
+If the investigation has email datasets in parquet format (check `datasets/` or investigation profile):
+```bash
+# Direct parquet query for email patterns
+uv run python -c "
+import pandas as pd
+df = pd.read_parquet('datasets/<email_file>.parquet')
+matches = df[df['body'].str.contains('TARGET', case=False, na=False)]
+print(f'{len(matches)} emails mentioning TARGET')
+print(matches[['date','from','to','subject']].head(20).to_string())
+"
+```
+
 ## Reading Documents
 
 For EVERY document found, read the full text to extract exact quotes:

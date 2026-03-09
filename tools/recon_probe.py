@@ -216,7 +216,7 @@ def probe_registry(target):
     db_path = PROJECT_ROOT / "registry.db"
     count = _sqlite_count(
         db_path,
-        "SELECT COUNT(*) FROM registry_entities WHERE name LIKE ?",
+        "SELECT COUNT(*) FROM registry_entities WHERE entity_name LIKE ?",
         [f"%{target}%"],
     )
     if count is None:
@@ -310,12 +310,47 @@ def probe_corpus(target, tool_name, db_path):
         return (f"corpus_{tool_name}", 0, "error", str(e))
 
 
-# Known corpus database paths
-CORPUS_DBS = {
-    "doj_vol11": Path("/Users/travcole/projects/epstein-docs/output/documents.db"),
-    "lmsband": PROJECT_ROOT / "datasets" / "lmsband_epstein_files.db",
-    "unified": PROJECT_ROOT / "datasets" / "unified_epstein.db",
-}
+def _discover_corpus_dbs():
+    """Discover corpus databases from the active investigation profile.
+
+    Falls back to scanning datasets/ for known SQLite files if no profile
+    is active or corpus_tools don't map to known DB paths.
+    """
+    # Known tool → DB path mappings
+    TOOL_DB_MAP = {
+        "tools/query_doj.py": ("doj_vol11", [
+            PROJECT_ROOT / "datasets" / "documents.db",
+            Path("/Users/travcole/projects/epstein-docs/output/documents.db"),
+        ]),
+        "tools/query_lmsband.py": ("lmsband", [
+            p for p in (PROJECT_ROOT / "datasets").glob("lmsband*.db")
+        ]),
+        "tools/query_unified.py": ("unified", [
+            p for p in (PROJECT_ROOT / "datasets").glob("unified*.db")
+        ]),
+    }
+
+    dbs = {}
+    try:
+        from tools.investigation_context import load_profile
+        profile = load_profile()
+        for ct in profile.corpus_tools:
+            tool_path = ct.get("tool", "")
+            if tool_path in TOOL_DB_MAP:
+                name, candidates = TOOL_DB_MAP[tool_path]
+                for candidate in candidates:
+                    if candidate.exists():
+                        dbs[name] = candidate
+                        break
+    except Exception:
+        # No active profile or import failed — try all known mappings
+        for tool_path, (name, candidates) in TOOL_DB_MAP.items():
+            for candidate in candidates:
+                if candidate.exists():
+                    dbs[name] = candidate
+                    break
+
+    return dbs
 
 
 def build_probe_list(target, target_type="person"):
@@ -340,8 +375,9 @@ def build_probe_list(target, target_type="person"):
         ("crtsh", lambda: probe_crtsh(target)),
     ]
 
-    # Add corpus probes based on known DBs
-    for corpus_name, db_path in CORPUS_DBS.items():
+    # Add corpus probes from investigation profile
+    corpus_dbs = _discover_corpus_dbs()
+    for corpus_name, db_path in corpus_dbs.items():
         name = corpus_name
         probes.append(
             (f"corpus_{name}", lambda n=name, p=db_path: probe_corpus(target, n, p))

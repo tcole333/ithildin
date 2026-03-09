@@ -6,7 +6,7 @@ user_invocable: true
 
 # /trace-entity
 
-**LAYER 1: RESEARCH AGENT** — Read `docs/sources/_preamble.md` for evidence standards, entity registration, and report format.
+**LAYER 1: RESEARCH AGENT** — You MUST read and follow `docs/sources/_preamble.md` before starting. It defines evidence standards, entity registration, and report format.
 
 Trace a corporate or financial entity through all available data sources to map ownership chains, financial flows, and jurisdictional connections.
 
@@ -63,6 +63,7 @@ Read and execute the relevant source modules:
 - `docs/sources/sanctions.md` — PEP/sanctions check
 - `docs/sources/littlesis.md` — Relationship/board mapping
 - `docs/sources/acris-ucc-property.md` — Property records, UCC liens
+- `docs/sources/offshorealert.md` — Offshore court cases, regulatory actions (if offshore jurisdiction)
 
 **Also search:**
 ```bash

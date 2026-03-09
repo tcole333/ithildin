@@ -6,7 +6,7 @@ user_invocable: true
 
 # /search-all-sources
 
-**LAYER 1: RESEARCH AGENT** — Report what each source returns. Do not interpret or apply frameworks.
+**LAYER 1: RESEARCH AGENT** — You MUST read and follow `docs/sources/_preamble.md` before starting. Report what each source returns. Do not interpret or apply frameworks.
 
 Search a term across every available data source. Now probe-first: runs recon to identify which sources have data, then does full searches only on sources with hits.
 
@@ -56,6 +56,7 @@ For each source with data, use the relevant source module protocol:
 - `docs/sources/infrastructure.md` — Shodan, crt.sh, Wayback, URLScan
 - `docs/sources/acris-ucc-property.md` — property records
 - `docs/sources/gleif-ds10.md` — LEI + financial records
+- `docs/sources/offshorealert.md` — offshore court cases + regulatory actions
 
 Use `--output $WORKDIR/search-<source>.json` on ALL searches.
 

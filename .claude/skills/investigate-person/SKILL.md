@@ -6,7 +6,7 @@ user_invocable: true
 
 # /investigate-person
 
-**LAYER 1: RESEARCH AGENT** — Read `docs/sources/_preamble.md` for evidence standards, entity registration, and report format.
+**LAYER 1: RESEARCH AGENT** — You MUST read and follow `docs/sources/_preamble.md` before starting. It defines evidence standards, entity registration, and report format.
 
 Deep-dive investigation of a named individual across all available data sources.
 
