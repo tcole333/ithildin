@@ -37,6 +37,9 @@ VALID_CONFIDENCE = ["confirmed", "high", "medium", "low", "unverified"]
 VALID_RELATIONSHIP_TYPES = [
     "financial", "social", "legal", "intelligence", "employment",
     "familial", "corporate", "advisory", "political",
+    # Entity-to-entity relationship types
+    "owns", "controls", "funds", "subsidiary_of", "contracts_with",
+    "successor_to", "shares_officer", "supplies",
 ]
 VALID_STRENGTHS = ["strong", "medium", "weak", "circumstantial"]
 
@@ -111,7 +114,7 @@ VALID_CORRECTION_TYPES = [
 ALLOWED_CORRECT_FIELDS = {
     "summary", "detail", "target_name", "date_of_event",
     "confidence", "finding_type", "claim_type", "thread_id",
-    "source_datasets",
+    "source_datasets", "profile_id",
 }
 
 
@@ -711,9 +714,9 @@ def main():
     add_output_args(show_p)
 
     # connect
-    conn_p = subparsers.add_parser("connect", help="Add a connection")
-    conn_p.add_argument("--person-a", "-a", required=True)
-    conn_p.add_argument("--person-b", "-b", required=True)
+    conn_p = subparsers.add_parser("connect", help="Add a connection between any two nodes (persons, orgs, programs)")
+    conn_p.add_argument("--person-a", "--node-a", "-a", required=True)
+    conn_p.add_argument("--person-b", "--node-b", "-b", required=True)
     conn_p.add_argument("--type", choices=VALID_RELATIONSHIP_TYPES, dest="rel_type")
     conn_p.add_argument("--description", "-d")
     conn_p.add_argument("--evidence", "-e", nargs="+")
@@ -723,8 +726,8 @@ def main():
     conn_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
 
     # connections
-    conns_p = subparsers.add_parser("connections", help="Get connections")
-    conns_p.add_argument("person")
+    conns_p = subparsers.add_parser("connections", help="Get connections for a node (person, org, or program)")
+    conns_p.add_argument("person", metavar="NODE")
     conns_p.add_argument("--depth", type=int, default=1)
     conns_p.add_argument("--type", choices=VALID_RELATIONSHIP_TYPES, dest="rel_type")
     add_output_args(conns_p)

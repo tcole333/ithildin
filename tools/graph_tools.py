@@ -147,6 +147,33 @@ def build_graph(db=None, as_of=None):
         nodes.add(a)
         nodes.add(b)
 
+    # Also ingest entity_relations (entity-to-entity links stored separately)
+    try:
+        er_rows = db.execute("""
+            SELECT er.id, ea.name AS entity_a, eb.name AS entity_b,
+                   er.relation_type, er.description
+            FROM entity_relations er
+            JOIN entities ea ON ea.id = er.entity_a_id
+            JOIN entities eb ON eb.id = er.entity_b_id
+        """).fetchall()
+        for r in er_rows:
+            a = _canonicalize(r["entity_a"], alias_map)
+            b = _canonicalize(r["entity_b"], alias_map)
+            if not a or not b or a == b:
+                continue
+            edge_data = {
+                "id": f"er:{r['id']}",
+                "type": r["relation_type"],
+                "description": r["description"],
+                "strength": "medium",
+            }
+            adj[a][b].append(edge_data)
+            adj[b][a].append(edge_data)
+            nodes.add(a)
+            nodes.add(b)
+    except sqlite3.OperationalError:
+        pass  # entity_relations table may not exist
+
     if close_db:
         db.close()
 

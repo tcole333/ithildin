@@ -151,7 +151,9 @@ def _ensure_schema(db):
             person_b TEXT NOT NULL,
             relationship_type TEXT CHECK(relationship_type IN (
                 'financial','social','legal','intelligence','employment',
-                'familial','corporate','advisory','political'
+                'familial','corporate','advisory','political',
+                'owns','controls','funds','subsidiary_of','contracts_with',
+                'successor_to','shares_officer','supplies'
             )),
             description TEXT,
             strength TEXT DEFAULT 'medium' CHECK(strength IN (
@@ -711,8 +713,11 @@ def _ensure_schema(db):
         """).rowcount
         if updated > 0:
             db.commit()
-    except sqlite3.OperationalError:
-        pass
+    except (sqlite3.OperationalError, sqlite3.IntegrityError):
+        try:
+            db.rollback()
+        except Exception:
+            pass
 
     # Deduplicate connections and ensure UNIQUE constraint treats NULLs as equal.
     # Older schema used a plain unique index where NULL relationship_type/profile_id
@@ -781,6 +786,64 @@ def _ensure_schema(db):
             db.commit()
     except sqlite3.OperationalError:
         pass
+
+    # Widen connections.relationship_type CHECK constraint to include entity types.
+    # SQLite can't ALTER CHECK constraints, so we rebuild the table if needed.
+    try:
+        table_sql = db.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='connections'"
+        ).fetchone()
+        if table_sql and "'owns'" not in (table_sql[0] or ""):
+            db.commit()
+            db.execute("PRAGMA foreign_keys=OFF")
+            db.execute("""CREATE TABLE connections_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                person_a TEXT NOT NULL,
+                person_b TEXT NOT NULL,
+                relationship_type TEXT CHECK(relationship_type IN (
+                    'financial','social','legal','intelligence','employment',
+                    'familial','corporate','advisory','political',
+                    'owns','controls','funds','subsidiary_of','contracts_with',
+                    'successor_to','shares_officer','supplies'
+                )),
+                description TEXT,
+                strength TEXT DEFAULT 'medium' CHECK(strength IN (
+                    'strong','medium','weak','circumstantial'
+                )),
+                date_range TEXT,
+                finding_id INTEGER REFERENCES findings(id),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                verification_status TEXT DEFAULT 'unverified',
+                verified_by TEXT,
+                verified_at TIMESTAMP,
+                profile_id TEXT DEFAULT 'epstein',
+                valid_from DATE,
+                valid_until DATE
+            )""")
+            db.execute("""INSERT INTO connections_new
+                SELECT id, person_a, person_b, relationship_type, description,
+                       strength, date_range, finding_id, created_at,
+                       verification_status, verified_by, verified_at,
+                       profile_id, valid_from, valid_until
+                FROM connections""")
+            db.execute("DROP TABLE connections")
+            db.execute("ALTER TABLE connections_new RENAME TO connections")
+            db.execute("PRAGMA foreign_keys=ON")
+            # Recreate indexes
+            for idx_sql in [
+                "CREATE INDEX IF NOT EXISTS idx_connections_a ON connections(person_a)",
+                "CREATE INDEX IF NOT EXISTS idx_connections_b ON connections(person_b)",
+                "CREATE INDEX IF NOT EXISTS idx_connections_profile ON connections(profile_id)",
+                """CREATE UNIQUE INDEX IF NOT EXISTS idx_connections_unique
+                   ON connections(person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, ''))""",
+            ]:
+                db.execute(idx_sql)
+            db.commit()
+    except (sqlite3.OperationalError, sqlite3.IntegrityError):
+        try:
+            db.rollback()
+        except Exception:
+            pass
 
     # FTS for leads
     try:

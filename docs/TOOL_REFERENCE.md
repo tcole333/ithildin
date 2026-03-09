@@ -149,8 +149,11 @@ python tools/infra_tracker.py block-lead 42 12        # Lead #42 blocked on infr
 python tools/findings_tracker.py add --target "Rod-Larsen" --type financial \
   --summary "..." --evidence EFTA02336502 --claim-type paraphrase \
   --source-quote "EFTA02336502:craft purchase 18M through bjorn"
-python tools/findings_tracker.py connect --person-a "PERSON_A" --person-b "PERSON_B" --type financial
-python tools/findings_tracker.py connections "PERSON_NAME" --depth 2
+python tools/findings_tracker.py connect --node-a "PERSON_OR_ENTITY_A" --node-b "PERSON_OR_ENTITY_B" --type financial
+# Relationship types: financial, social, legal, intelligence, employment, familial, corporate,
+#   advisory, political, owns, controls, funds, subsidiary_of, contracts_with,
+#   successor_to, shares_officer, supplies
+python tools/findings_tracker.py connections "PERSON_OR_ENTITY" --depth 2
 python tools/findings_tracker.py search "gates foundation"
 python tools/findings_tracker.py timeline --target "Rod-Larsen"
 ```
