@@ -3,7 +3,8 @@
 General-purpose agent-scale network investigation platform. Investigate any public figure or organization through publicly available data — corporate registries, court filings, financial disclosures, government records, and document corpora. Multiple Claude Code sessions pursue leads in parallel.
 
 **Design doc**: `PRD.md` | **Methodology**: `research/INVESTIGATIVE_METHODOLOGY.md`
-**Tool reference**: `docs/TOOL_REFERENCE.md` (complete CLI for all 37+ tools) | **OSINT resources**: `research/OSINT_RESOURCES.md`
+**Tool reference**: `docs/TOOL_REFERENCE.md` (complete CLI for all 37+ tools) | **Source modules**: `docs/sources/` (agent instructions per source)
+**OSINT resources**: `research/OSINT_RESOURCES.md`
 
 ## Config Hierarchy
 
@@ -12,8 +13,10 @@ General-purpose agent-scale network investigation platform. Investigate any publ
 3. `investigations/<name>/config.yaml` — Active investigation profile (key_persons, threads, corpus_tools, etc.)
 4. `investigations/<name>/CLAUDE-ADDENDUM.md` — Investigation-specific context (if exists)
 5. `.claude/skills/<name>/SKILL.md` — On-demand skill files (loaded when invoked)
-6. `memory/*.md` — Shared topic files (api-notes, infrastructure)
-7. `docs/TOOL_REFERENCE.md` — Complete CLI reference for all 37+ tools
+6. `docs/sources/_preamble.md` — Shared research agent boilerplate (evidence standards, entity registration, report format)
+7. `docs/sources/*.md` — Per-source agent instruction modules (protocols, what to look for)
+8. `memory/*.md` — Shared topic files (api-notes, infrastructure)
+9. `docs/TOOL_REFERENCE.md` — Complete CLI reference for all 37+ tools
 
 ## Investigation Profiles
 
@@ -35,7 +38,7 @@ All skills load the active profile at startup. Entities are shared across invest
 ```bash
 /dispatch                   # Queue depths — what needs attention
 /pursue-lead                # Pick up next lead
-/deep-investigate <name>    # 4 parallel sub-agents (preferred)
+/deep-investigate <name>    # Adaptive multi-wave investigation (preferred)
 /triage-leads               # Process pending_triage leads (batch of 20)
 /build-infra                # Build next infra request (or scan for gaps)
 /search-all-sources <term>  # Fan-out search
@@ -110,6 +113,7 @@ Do this AS YOU FIND entities, not as a cleanup step. If a finding mentions an or
 | **Infra** | `infra_tracker.py {add,list,show,claim,evaluate,complete,reject,search,next,stats}` |
 | **Analysis** | `hypothesis_tracker.py`, `tag_manager.py`, `event_timeline.py`, `graph_tools.py`, `analysis_export.py`, `methodology_tracker.py` |
 | **Pillars** | `pillar_tracker.py {register,list,show,seed,arc,career,event,events,bootstrap,alumni,cohort,dispersal,overlap,timeline,score,gaps,cross-pillar,pillar-network,stats}` |
+| **Recon** | `recon_probe.py probe "TARGET" [--type person|entity]` — fast parallel count-only queries across all sources, returns heat map |
 | **Profile** | `investigation_context.py {show,list,set}` |
 
 Pillar system (`pillar_tracker.py`) tracks institutional pillars, career arcs, and alumni dynamics. Orchestrator scores measure documentation completeness (not true importance) — gaps are often the most interesting output.

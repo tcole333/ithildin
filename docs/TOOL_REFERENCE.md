@@ -66,6 +66,49 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 
 **Important**: Use these exact names. The hook validates `--sources` is present, and `findings_tracker.py` warns on unknown source names. If you need a new source name, add it to `VALID_SOURCES` in `tools/findings_tracker.py`.
 
+## Recon Probe
+
+Fast parallel count-only queries across all data sources. Returns a structured JSON heat map for orchestrator planning.
+
+```bash
+# Probe all sources for a person
+uv run python tools/recon_probe.py probe "Drew Horn" --output $WORKDIR/recon.json
+
+# Probe for an entity
+uv run python tools/recon_probe.py probe "Barkmere Group Ltd" --type entity --output $WORKDIR/recon.json
+```
+
+**Output**: JSON with `sources` (per-source counts + status), `heat_map` (high/medium/low/zero classification), and `summary` (totals).
+
+**Sources probed** (parallel, 10-second timeouts): CourtListener, EDGAR, FEC, ProPublica 990, LDA lobbying (3 dimensions), FARA, LittleSis, Aleph, GDELT, USASpending, unified registry, OpenSanctions, SAM bulk, Shodan, crt.sh, plus corpus DBs.
+
+**Used by**: `/deep-investigate` (Phase 0), `/search-all-sources` (pre-sweep filter).
+
+## Source Instruction Modules
+
+Agent instruction modules live in `docs/sources/`. Each tells agents HOW to use a source:
+
+| Module | Sources Covered |
+|--------|----------------|
+| `_preamble.md` | Shared boilerplate: session setup, evidence standards, entity registration, report format |
+| `courtlistener.md` | CourtListener / RECAP |
+| `edgar.md` | SEC EDGAR |
+| `fec.md` | FEC campaign finance |
+| `990.md` | ProPublica 990 nonprofits |
+| `lobbying.md` | LDA lobbying + FARA |
+| `registry.md` | Unified corporate registry (15 jurisdictions) + UCC |
+| `littlesis.md` | LittleSis relationship mapping |
+| `aleph-icij.md` | OCCRP Aleph + ICIJ Offshore Leaks |
+| `usaspending.md` | USASpending + SAM.gov + HigherGov |
+| `infrastructure.md` | Shodan, crt.sh, Wayback, URLScan |
+| `gdelt-web.md` | GDELT + WebSearch/WebFetch |
+| `corpus.md` | Investigation corpus tools (parameterized by profile) |
+| `acris-ucc-property.md` | ACRIS property + UCC liens + FAA |
+| `gleif-ds10.md` | GLEIF LEI + DS10 financial records |
+| `sanctions.md` | OpenSanctions |
+
+Agents read these via: "Read `docs/sources/courtlistener.md` for protocol, then execute."
+
 ## Core Investigation Tools
 
 ### Queue System (SQLite-first)
