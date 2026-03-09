@@ -52,15 +52,40 @@ uv run python tools/query_edgar.py insider CIK
 - Some older filings lack full-text indexing
 - Form type filter is exact match (use `10-K` not `10K`)
 
-## Example Queries
+## Protocol
+
+1. Full-text search with `--facets` to see entity/form-type distribution
+2. Lookup the target's CIK if they're a filer
+3. Search for the target paired with associated entities
+4. Check insider transactions if CIK found
+5. Read specific filings (proxy statements DEF 14A, 10-K, 8-K) for named individuals
 
 ```bash
-# Full-text search across all filings
-uv run python tools/query_edgar.py search "Jeffrey Epstein" --limit 20
-
-# Get a specific filing
-uv run python tools/query_edgar.py filing 0001193125-21-123456
-
-# All 10-K filings for a company
-uv run python tools/query_edgar.py company 1166559 --form-type 10-K
+uv run python tools/query_edgar.py search "TARGET" --size 20 --facets --output $WORKDIR/edgar-search.json
+uv run python tools/query_edgar.py lookup "TARGET" --output $WORKDIR/edgar-lookup.json
+uv run python tools/query_edgar.py search "TARGET" "ASSOCIATED_ENTITY" --size 10 --output $WORKDIR/edgar-cross.json
+# If CIK found:
+uv run python tools/query_edgar.py insider CIK --detail --limit 10 --output $WORKDIR/edgar-insider.json
+uv run python tools/query_edgar.py filings CIK --form "DEF 14A" --output $WORKDIR/edgar-proxy.json
+# Read a specific filing:
+uv run python tools/query_edgar.py read "FILING_URL" --lines 200
 ```
+
+## What To Look For
+
+- **Named individuals**: Officers, directors, beneficial owners in proxy statements
+- **Related party transactions**: Section in 10-K that reveals entity relationships
+- **Insider transactions**: Form 4 filings show stock trades by insiders
+- **SC 13D**: Beneficial ownership above 5% — reveals major stakeholders
+- **8-K**: Material events — executive changes, acquisitions, legal proceedings
+- **Enforcement actions**: SEC complaints and administrative proceedings
+
+## Output
+
+`--output $WORKDIR/<prefix>-edgar-*.json`
+
+## Findings
+
+- Filing text quotes: `claim_type=direct_quote`
+- Filing summaries: `claim_type=paraphrase`
+- `--sources edgar`

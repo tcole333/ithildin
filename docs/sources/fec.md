@@ -53,15 +53,31 @@ uv run python tools/query_fec.py donors --employer "COMPANY" [--min-amount 1000]
 - Very large donors may have thousands of itemized contributions
 - Schedule A (contributions) has different endpoints from Schedule B (disbursements)
 
-## Example Queries
+## Protocol
+
+1. Search for individual as donor
+2. Search for employer name to find employee donation patterns
+3. If entity, search as employer across all donors
 
 ```bash
-# Search for individual donor contributions
-uv run python tools/query_fec.py search "Leslie Wexner" --limit 20
-
-# Look up a specific committee
-uv run python tools/query_fec.py committee C00431445
-
-# Find all donors from a specific employer
-uv run python tools/query_fec.py donors --employer "Apollo Global" --min-amount 5000
+uv run python tools/query_fec.py donor "TARGET" --limit 20 --output $WORKDIR/fec-donor.json
+uv run python tools/query_fec.py employer "TARGET_EMPLOYER" --output $WORKDIR/fec-employer.json
 ```
+
+## What To Look For
+
+- **Donation patterns**: Total amounts, recipient diversity, timing vs. legislative events
+- **Employer network**: Who else at the same company donates to the same candidates?
+- **Bundling patterns**: Multiple donations on the same date to the same committee
+- **PAC affiliations**: Entity-connected PACs reveal political strategy
+- **Straw donor indicators**: Family members donating identical amounts on the same date
+
+## Output
+
+`--output $WORKDIR/<prefix>-fec-*.json`
+
+## Findings
+
+- Donation records: `claim_type=direct_quote` (FEC filings are primary sources)
+- Donation pattern analysis: `claim_type=inference`
+- `--sources fec`

@@ -53,15 +53,38 @@ uv run python tools/query_courtlistener.py opinions "QUERY"
 - Docket entry descriptions may be cryptic (court-specific abbreviations)
 - Rate limit is per-day, not per-second — burst queries are fine within daily limit
 
-## Example Queries
+## Protocol
+
+1. Search with `search` AND `party` AND `cases` (different indices return different results)
+2. Search for `opinions` mentioning the target
+3. Pull full `docket` for each case found
+4. Extract: parties, timeline, related persons, nature of suit
+5. Log each search: `log_search("QUERY", "courtlistener", count)`
 
 ```bash
-# Search for cases involving a person/entity
-uv run python tools/query_courtlistener.py search "Jeffrey Epstein" --limit 20
-
-# Get full docket details
-uv run python tools/query_courtlistener.py docket 12345678
-
-# Search published opinions
-uv run python tools/query_courtlistener.py opinions "securities fraud" --court scotus
+uv run python tools/query_courtlistener.py search "TARGET" --output $WORKDIR/cl-search.json
+uv run python tools/query_courtlistener.py party "TARGET" --output $WORKDIR/cl-party.json
+uv run python tools/query_courtlistener.py cases "TARGET" --output $WORKDIR/cl-cases.json
+uv run python tools/query_courtlistener.py opinions "TARGET" --limit 10 --output $WORKDIR/cl-opinions.json
+# For each docket found:
+uv run python tools/query_courtlistener.py docket DOCKET_ID --output $WORKDIR/cl-docket-ID.json
 ```
+
+## What To Look For
+
+- **Litigation patterns**: Repeated plaintiff/defendant roles, jurisdiction clustering
+- **Co-parties**: Who appears alongside the target in cases?
+- **Sealed filings**: Docket entries marked sealed or under protective order
+- **Settlement patterns**: Cases terminated quickly after filing may indicate settlement
+- **Regulatory actions**: SEC enforcement, FTC complaints, DOJ civil actions
+- **Zero results is notable**: A practicing attorney with no CourtListener cases warrants investigation — it may mean state-level practice only or name variants
+
+## Output
+
+`--output $WORKDIR/<prefix>-cl-*.json`
+
+## Findings
+
+- Court opinions: `claim_type=direct_quote` (judicial statements)
+- Docket summaries: `claim_type=paraphrase`
+- `--sources courtlistener`

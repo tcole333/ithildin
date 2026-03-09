@@ -63,15 +63,50 @@ uv run python tools/query_usaspending.py agencies
 - Very large result sets (>10K) require pagination with `page` parameter
 - Agency name formats vary between endpoints
 
-## Example Queries
+## Protocol
+
+1. Search for contracts and grants separately
+2. Check subawards (reveals subcontractor relationships)
+3. Timeline view to see spending patterns over years
+4. Cross-reference with SAM.gov for entity registration details
 
 ```bash
-# Search for a contractor
-uv run python tools/query_usaspending.py search "Booz Allen Hamilton" --limit 10
-
-# Get all awards for a specific UEI
-uv run python tools/query_usaspending.py awards --recipient-uei ZE2JVFS8ML75
-
-# Timeline of spending to a recipient
-uv run python tools/query_usaspending.py timeline --recipient "Palantir"
+uv run python tools/query_usaspending.py awards "TARGET" --output $WORKDIR/usa-contracts.json
+uv run python tools/query_usaspending.py awards "TARGET" --grants --output $WORKDIR/usa-grants.json
+uv run python tools/query_usaspending.py subawards "TARGET" --output $WORKDIR/usa-subs.json
+uv run python tools/query_usaspending.py timeline "TARGET" --group fiscal_year --output $WORKDIR/usa-timeline.json
+# For specific awards:
+uv run python tools/query_usaspending.py award AWARD_ID --output $WORKDIR/usa-award.json
 ```
+
+Also search SAM.gov and SAM Bulk:
+```bash
+uv run python tools/query_sam.py entity "TARGET" --output $WORKDIR/sam-entity.json
+uv run python tools/query_sam.py exclusions "TARGET" --output $WORKDIR/sam-exclusions.json
+uv run python tools/ingest_sam.py search "TARGET" --output $WORKDIR/sam-bulk.json
+```
+
+For richer data (vehicle tracking, teaming data):
+```bash
+uv run python tools/query_highergov.py contract --awardee-uei UEI --output $WORKDIR/hg-contracts.json
+uv run python tools/query_highergov.py partnership --awardee-key KEY --output $WORKDIR/hg-partners.json
+```
+
+## What To Look For
+
+- **Award concentration**: Few large contracts vs. many small ones
+- **Agency relationships**: Which agencies fund this entity?
+- **Subaward chains**: Who are the subcontractors? (Often more revealing than prime)
+- **Geographic patterns**: Place of performance vs. entity registration
+- **Exclusions/debarments**: SAM.gov exclusion = government blacklist
+- **Spending timeline**: Sudden spikes or drops correlate with policy changes or events
+
+## Output
+
+`--output $WORKDIR/<prefix>-usa-*.json`, `$WORKDIR/<prefix>-sam-*.json`, `$WORKDIR/<prefix>-hg-*.json`
+
+## Findings
+
+- Award records: `claim_type=direct_quote` (government records)
+- Spending pattern analysis: `claim_type=inference`
+- `--sources usaspending sam highergov`

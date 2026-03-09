@@ -69,15 +69,39 @@ uv run python tools/query_florida_corps.py ingest-search "ENTITY NAME"
 - Panama registry returns Spanish-language results
 - UK Companies House requires base64-encoded API key in Basic auth header
 
-## Example Queries
+## Protocol
+
+1. Unified search across all ingested registries
+2. Officer name search (finds entities where person serves)
+3. Address search (finds entity clusters at shared addresses)
+4. UCC filing search (liens, secured transactions)
+5. For specific entities found, pull full details + filings from the state registry
 
 ```bash
-# Search across all ingested registries
-uv run python tools/query_registry.py search "Financial Trust Company"
-
-# Find all entities with a specific officer
-uv run python tools/query_registry.py officers "John Smith"
-
-# Ingest a Florida entity into registry.db
-uv run python tools/query_florida_corps.py ingest-search "Southern Trust"
+uv run python tools/query_registry.py search "ENTITY" --output $WORKDIR/registry-search.json
+uv run python tools/query_registry.py officers "PERSON" --output $WORKDIR/registry-officers.json
+uv run python tools/query_registry.py address "ADDRESS" --output $WORKDIR/registry-addr.json
+uv run python tools/query_registry.py ucc-search "TARGET" --output $WORKDIR/ucc-search.json
+# State-specific deep dive:
+uv run python tools/query_florida_corps.py ingest-search "ENTITY" --output $WORKDIR/registry-fl.json
+uv run python tools/query_ny_corps.py search "ENTITY" --output $WORKDIR/registry-ny.json
 ```
+
+## What To Look For
+
+- **Officer networks**: Same person serving as officer across multiple entities
+- **Address clusters**: Multiple entities at the same registered address (shell company indicators)
+- **Registered agent patterns**: Shared agents link otherwise disconnected entities (filter mass-market agents like CT Corp, CSC)
+- **Formation date clustering**: Entities formed the same week by the same agent
+- **Status changes**: Active → Dissolved timing relative to investigation events
+- **Jurisdiction shopping**: Why was THIS state chosen? (Delaware for liability shield, USVI for tax benefits, etc.)
+
+## Output
+
+`--output $WORKDIR/<prefix>-registry-*.json`
+
+## Findings
+
+- Registry filings: `claim_type=direct_quote` (government records are primary sources)
+- Officer network analysis: `claim_type=inference`
+- `--sources registry` (or `--sources fl_sunbiz ny_dos` for state-specific)
