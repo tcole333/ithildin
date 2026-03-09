@@ -319,7 +319,16 @@ DS10 DEUTSCHE BANK FINANCIAL RECORDS:
 
 For each hit, investigate further (e.g., read SEC filings, pull 990 details, check filing histories).
 
-Register entities, roles, and addresses in investigation.db as you find them.
+ENTITY REGISTRATION (CRITICAL — do this AS YOU FIND entities, not as cleanup):
+Every organization and person discovered MUST be registered. This powers cross-investigation network discovery.
+```bash
+# 1. Check if entity exists: uv run python tools/entity_tracker.py lookup --name "ENTITY"
+# 2. Register org: uv run python tools/entity_tracker.py add-entity --name "ENTITY" --entity-type inc --jurisdiction "STATE" --source "SOURCE" --notes "CONTEXT"
+#    Entity types: llc, inc, ltd, trust, foundation, nonprofit, partnership, fund, association, government, unknown
+# 3. Assign roles: uv run python tools/entity_tracker.py add-role --entity-id ID --person-name "PERSON" --role "ROLE" --source "SOURCE"
+# 4. Add addresses: uv run python tools/entity_tracker.py add-address --entity-id ID --address "ADDR" --address-type registered --source "SOURCE"
+# 5. Link entities: uv run python tools/entity_tracker.py add-relation --entity-a-id ID --entity-b-id ID --relation-type "funds" --description "DESC"
+```
 
 RECORD findings using the findings_tracker.py CLI. CRITICAL: Always include --sources with the data source name(s) that produced each finding (e.g., --sources registry edgar fec). Even if a search returns zero results, note that in your final summary — negative results from authoritative sources are investigatively significant.
 

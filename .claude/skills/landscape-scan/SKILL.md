@@ -154,10 +154,13 @@ uv run python tools/findings_tracker.py connect \
     --evidence <REFS>
 ```
 
-Register entities and roles as you find them:
+Register entities and roles AS YOU FIND THEM (not as cleanup):
 ```bash
-uv run python tools/entity_tracker.py add-entity --name "<ENTITY>" --entity-type <TYPE> --jurisdiction <JUR> --source "<SOURCE>"
+uv run python tools/entity_tracker.py lookup --name "<ENTITY>"  # Check first
+uv run python tools/entity_tracker.py add-entity --name "<ENTITY>" --entity-type <TYPE> --jurisdiction <JUR> --source "<SOURCE>" --notes "<CONTEXT>"
 uv run python tools/entity_tracker.py add-role --entity-id <ID> --person-name "<NAME>" --role "<ROLE>" --source "<SOURCE>"
+uv run python tools/entity_tracker.py add-address --entity-id <ID> --address "<ADDR>" --address-type registered --source "<SOURCE>"
+uv run python tools/entity_tracker.py add-relation --entity-a-id <ID> --entity-b-id <ID> --relation-type "funds" --description "<DESC>"
 ```
 
 ### 7. Triage and Recommend

@@ -205,60 +205,32 @@ python tools/findings_tracker.py connect \
 
 ### 6b. Register Entities, Roles & Relations
 
-**CRITICAL**: When you discover entities (companies, trusts, foundations, law firms) or person-entity relationships during investigation, register them in the structured entity tables — not just in findings text.
+**CRITICAL**: When you discover entities (companies, trusts, foundations, law firms) or person-entity relationships during investigation, register them using `entity_tracker.py` — not just in findings text. This powers cross-investigation network discovery via `auto_leads.py` and graph analysis.
 
 ```bash
-# Check if entity exists
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-rows = db.execute('SELECT id, name, entity_type FROM entities WHERE name LIKE ?', ('%ENTITY_NAME%',)).fetchall()
-for r in rows: print(r)
-"
+# 1. Check if entity exists first
+uv run python tools/entity_tracker.py lookup --name "ENTITY_NAME"
 
-# Register new entity (if not found)
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-db.execute('INSERT INTO entities (name, entity_type, jurisdiction, status, source, notes) VALUES (?, ?, ?, ?, ?, ?)',
-    ('Entity Name', 'type', 'jurisdiction', 'active', 'source_ref', 'notes'))
-db.commit()
-print('Entity ID:', db.execute('SELECT last_insert_rowid()').fetchone()[0])
-"
-# entity_type: llc, trust, foundation, law_firm, bank, shell_company, nonprofit, corporation, investment_fund, government
-# jurisdiction: ny, fl, nm, usvi, bvi, de, uk, etc.
+# 2. Register new entity (note the ID returned)
+uv run python tools/entity_tracker.py add-entity --name "Entity Name" --entity-type inc \
+  --jurisdiction "NY" --source "state_sos" --notes "Context about the entity"
+# entity_type: llc, inc, ltd, trust, foundation, nonprofit, partnership, fund, association, government, unknown
 
-# Register person's role at entity
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-db.execute('INSERT INTO entity_roles (entity_id, person_name, role, date_start, date_end, source) VALUES (?, ?, ?, ?, ?, ?)',
-    (ENTITY_ID, 'Person Name', 'role', '2010-01', '2019-07', 'EFTA02XXXXXX'))
-db.commit()
-"
-# role: officer, director, trustee, secretary, vp, president, registered_agent, partner, counsel, beneficiary, signatory
+# 3. Assign person's role at entity
+uv run python tools/entity_tracker.py add-role --entity-id ENTITY_ID \
+  --person-name "Person Name" --role "director" --date-start "2010-01" --date-end "2019-07" --source "SOURCE"
 
-# Register entity address
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-db.execute('INSERT INTO entity_addresses (entity_id, address, address_type, date_observed, source) VALUES (?, ?, ?, ?, ?)',
-    (ENTITY_ID, '123 Main St, City, ST 00000', 'registered', '2019', 'state_sos'))
-db.commit()
-"
+# 4. Register entity address
+uv run python tools/entity_tracker.py add-address --entity-id ENTITY_ID \
+  --address "123 Main St, City, ST 00000" --address-type registered --source "state_sos"
 
-# Register entity-to-entity relationship
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-db.execute('INSERT INTO entity_relations (entity_a_id, entity_b_id, relation_type, description, source) VALUES (?, ?, ?, ?, ?)',
-    (ENTITY_A_ID, ENTITY_B_ID, 'funds', 'Entity A donated $10M to Entity B via shell LLC', 'SOURCE_REF'))
-db.commit()
-"
-# relation_type: owns, controls, funds, shares_officer, subsidiary, successor, shares_address, client_of, banks_with
+# 5. Link entities to each other
+uv run python tools/entity_tracker.py add-relation --entity-a-id ID_A --entity-b-id ID_B \
+  --relation-type "funds" --description "Entity A donated $10M to Entity B" --source "SOURCE"
+# relation_type: owns, controls, funds, shares_officer, subsidiary_of, successor_to
 ```
 
-**Register these as you find them:**
+**Register these AS YOU FIND THEM, not as a cleanup step:**
 - Every entity the person is connected to (employer, board seat, trust, foundation, shell company)
 - The person's specific role at each entity (director, trustee, counsel, etc.) with date range
 - Every entity address discovered (registered, mailing, physical)

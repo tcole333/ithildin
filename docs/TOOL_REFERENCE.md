@@ -158,6 +158,33 @@ python tools/findings_tracker.py search "gates foundation"
 python tools/findings_tracker.py timeline --target "Rod-Larsen"
 ```
 
+### Entity Registry (CRITICAL — register every org and person discovered)
+```bash
+# Lookup before adding (avoid duplicates)
+python tools/entity_tracker.py lookup --name "Goldman Sachs"
+
+# Register organizations
+python tools/entity_tracker.py add-entity --name "GreenMet" --entity-type inc --jurisdiction "DC" \
+  --source "OCCRP" --notes "Beneficial owners: Sorial, Schiller. CEO: Horn"
+# Entity types: llc, inc, ltd, trust, foundation, nonprofit, partnership, fund, association, government, unknown
+
+# Assign person roles (use entity ID returned from add-entity)
+python tools/entity_tracker.py add-role --entity-id 767 --person-name "Drew Horn" --role "CEO" \
+  --source "OCCRP" --date-start "2024"
+
+# Add addresses
+python tools/entity_tracker.py add-address --entity-id 767 --address "Washington, DC" \
+  --address-type registered --source "DC corporate registry"
+
+# Link entities to each other
+python tools/entity_tracker.py add-relation --entity-a-id 767 --entity-b-id 769 \
+  --relation-type "funds" --description "Strategic partnership for Tanbreez offtake"
+# Relation types: owns, controls, funds, shares_officer, subsidiary_of, successor_to
+
+# View full entity details
+python tools/entity_tracker.py show --id 767
+```
+
 ### Audit & Verification
 ```bash
 python tools/findings_tracker.py unverified             # List findings needing human review
