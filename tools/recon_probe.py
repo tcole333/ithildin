@@ -38,7 +38,7 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
-TIMEOUT = 10  # seconds per probe
+TIMEOUT = 15  # seconds per probe
 MAX_WORKERS = 10
 
 
@@ -111,8 +111,14 @@ def probe_fec(target):
 
 def probe_990(target):
     url = f"https://projects.propublica.org/nonprofits/api/v2/search.json?q={quote_plus(target)}"
-    data = _http_get(url)
-    return ("990", data.get("total_results", 0), "ok", None)
+    try:
+        data = _http_get(url)
+        return ("990", data.get("total_results", 0), "ok", None)
+    except HTTPError as e:
+        if e.code == 404:
+            # ProPublica returns 404 for queries with no org name matches
+            return ("990", 0, "ok", None)
+        raise
 
 
 def probe_lobbying_client(target):
@@ -164,10 +170,10 @@ def probe_littlesis(target):
 
 
 def probe_aleph(target):
-    headers = {}
     api_key = os.environ.get("ALEPH_API_KEY")
-    if api_key:
-        headers["Authorization"] = f"Token {api_key}"
+    if not api_key:
+        return ("aleph", 0, "skipped", "No ALEPH_API_KEY (no free tier)")
+    headers = {"Authorization": f"Token {api_key}"}
     url = f"https://aleph.occrp.org/api/2/entities?q={quote_plus(target)}&limit=0"
     data = _http_get(url, headers=headers)
     return ("aleph", data.get("total", 0), "ok", None)
@@ -258,6 +264,30 @@ def probe_sam_bulk(target):
     return ("sam_bulk", count, "ok", None)
 
 
+def probe_990_bulk(target):
+    """Probe local IRS 990 grants database (22M+ grants)."""
+    db_path = PROJECT_ROOT / "datasets" / "irs990_grants.db"
+    if not db_path.exists():
+        return ("990_bulk", 0, "no_db", "irs990_grants.db missing")
+    try:
+        db = sqlite3.connect(str(db_path), timeout=5)
+        # Search grants FTS and related_orgs FTS
+        total = 0
+        for table in ["grants_fts", "related_orgs_fts"]:
+            try:
+                count = db.execute(
+                    f"SELECT COUNT(*) FROM (SELECT rowid FROM {table} WHERE {table} MATCH ? LIMIT 500)",
+                    [f'"{target}"'],
+                ).fetchone()[0]
+                total += count
+            except sqlite3.OperationalError:
+                pass
+        db.close()
+        return ("990_bulk", total, "ok", None)
+    except Exception as e:
+        return ("990_bulk", 0, "error", str(e))
+
+
 def probe_crtsh(target):
     # Only useful for domains/orgs, not persons
     url = f"https://crt.sh/?q={quote_plus(target)}&output=json"
@@ -283,7 +313,7 @@ def probe_corpus(target, tool_name, db_path):
     try:
         db = sqlite3.connect(str(db_path), timeout=5)
         # Try common FTS5 table patterns
-        for table in ["documents_fts", "files_fts", "emails_fts"]:
+        for table in ["documents_fts", "files_fts", "emails_fts", "text_fts"]:
             try:
                 count = db.execute(
                     f"SELECT COUNT(*) FROM (SELECT rowid FROM {table} WHERE {table} MATCH ? LIMIT 500)",
@@ -360,6 +390,7 @@ def build_probe_list(target, target_type="person"):
         ("edgar", lambda: probe_edgar(target)),
         ("fec", lambda: probe_fec(target)),
         ("990", lambda: probe_990(target)),
+        ("990_bulk", lambda: probe_990_bulk(target)),
         ("lobbying_client", lambda: probe_lobbying_client(target)),
         ("lobbying_registrant", lambda: probe_lobbying_registrant(target)),
         ("lobbying_lobbyist", lambda: probe_lobbying_lobbyist(target)),
