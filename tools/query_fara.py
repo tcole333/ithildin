@@ -38,6 +38,16 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
+
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "datasets" / "fara"
 DB_PATH = PROJECT_ROOT / "investigation.db"
@@ -396,6 +406,7 @@ def cmd_search(args):
                 ORDER BY date DESC LIMIT ?
             """, [f"%{query}%", f"%{query}%", args.limit]).fetchall()
         all_data["foreign_principals"] = [dict(r) for r in fps]
+        _log(query, "fara", len(regs) + len(fps))
 
         if write_output(all_data, args, summary=f"FARA search '{query}'"):
             return
@@ -452,6 +463,7 @@ def cmd_search(args):
             LIMIT ?
         """, [f"%{query}%", f"%{query}%", args.limit]).fetchall()
 
+    _log(query, "fara", len(results) + len(fp_results))
     print(f"Found {len(fp_results)} foreign principals")
     for fp in fp_results:
         print(f"\n  {fp['foreign_principal']} ({fp['foreign_principal_country']})")

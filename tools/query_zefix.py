@@ -46,7 +46,7 @@ def sparql_query(query, max_retries=3):
             data = urlencode({"query": query}).encode("utf-8")
             req = Request(SPARQL_ENDPOINT, data=data, method="POST")
             req.add_header("Accept", "application/sparql-results+json")
-            req.add_header("User-Agent", "Epstein-OSINT-Research/1.0")
+            req.add_header("User-Agent", "OSINT-Research/1.0")
 
             with urlopen(req, timeout=60) as resp:
                 result = json.loads(resp.read().decode("utf-8"))

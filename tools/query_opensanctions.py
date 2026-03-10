@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-OpenSanctions bulk data query tool for the Epstein OSINT investigation.
+OpenSanctions bulk data query tool for OSINT investigations.
 
 Downloads, ingests, and queries OpenSanctions data locally — sanctions lists
 (OFAC/EU/UN), PEP databases (200+ countries), and crime/terrorism lists.
@@ -901,6 +901,205 @@ def cmd_stats(args):
     db.close()
 
 
+def cmd_reconcile_ftm(args):
+    """Fuzzy reconciliation of investigation.db entities against OpenSanctions.
+
+    Uses FTS for candidate retrieval + rapidfuzz for scoring, producing
+    ranked matches with confidence scores. Optionally creates leads for
+    sanctioned/PEP matches above threshold.
+    """
+    from rapidfuzz import fuzz
+
+    try:
+        from tools.entity_resolution import normalize_entity_name
+    except ImportError:
+        from entity_resolution import normalize_entity_name
+
+    db = _get_db(readonly=True)
+
+    if not INVESTIGATION_DB.exists():
+        print(f"ERROR: investigation.db not found at {INVESTIGATION_DB}", file=sys.stderr)
+        sys.exit(1)
+
+    inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+    inv_db.row_factory = sqlite3.Row
+
+    # Gather all entities + connection persons from investigation.db
+    names_to_check = {}
+    try:
+        for e in inv_db.execute("SELECT id, name, entity_type FROM entities").fetchall():
+            name = e["name"].strip()
+            if len(name) >= 3:
+                names_to_check[name] = {"source": f"entity #{e['id']}", "type": e["entity_type"]}
+    except sqlite3.OperationalError:
+        pass
+
+    try:
+        for col in ("person_a", "person_b"):
+            for r in inv_db.execute(f"SELECT DISTINCT {col} FROM connections").fetchall():
+                name = (r[0] or "").strip()
+                if len(name) >= 3 and name not in names_to_check:
+                    names_to_check[name] = {"source": "connection", "type": "person"}
+    except sqlite3.OperationalError:
+        pass
+
+    inv_db.close()
+
+    print(f"Reconciling {len(names_to_check)} names against OpenSanctions (threshold={args.threshold})")
+    print("=" * 90)
+    print()
+
+    matches = []
+
+    for i, (name, info) in enumerate(sorted(names_to_check.items()), 1):
+        if i % 50 == 0:
+            print(f"  ... checked {i}/{len(names_to_check)}", flush=True)
+
+        name_normalized = normalize_entity_name(name)
+
+        # Use FTS for candidate retrieval (fast)
+        query_escaped = name.replace('"', '""')
+        # Use individual words for broader FTS coverage
+        words = [w for w in name.split() if len(w) >= 3]
+        if not words:
+            continue
+        fts_query = " OR ".join(f'"{w}"' for w in words[:4])
+
+        try:
+            candidates = db.execute("""
+                SELECT e.* FROM os_entities e
+                JOIN os_entities_fts f ON e.rowid = f.rowid
+                WHERE os_entities_fts MATCH ?
+                LIMIT 30
+            """, (fts_query,)).fetchall()
+        except sqlite3.OperationalError:
+            continue
+
+        # Score each candidate with rapidfuzz
+        for cand in candidates:
+            caption = (cand["caption"] or "").strip()
+            if not caption:
+                continue
+            cand_normalized = normalize_entity_name(caption)
+            score = fuzz.token_sort_ratio(name_normalized, cand_normalized)
+
+            if score >= args.threshold:
+                try:
+                    topics = json.loads(cand["topics"] or "[]")
+                except (json.JSONDecodeError, TypeError):
+                    topics = []
+                try:
+                    datasets = json.loads(cand["datasets"] or "[]")
+                except (json.JSONDecodeError, TypeError):
+                    datasets = []
+                try:
+                    countries = json.loads(cand["countries"] or "[]")
+                except (json.JSONDecodeError, TypeError):
+                    countries = []
+
+                matches.append({
+                    "our_name": name,
+                    "our_source": info["source"],
+                    "os_id": cand["id"],
+                    "os_caption": caption,
+                    "os_schema": cand["schema"],
+                    "score": score,
+                    "topics": topics,
+                    "datasets": datasets[:5],
+                    "countries": countries,
+                })
+
+    # Sort by score descending
+    matches.sort(key=lambda m: m["score"], reverse=True)
+    if args.limit:
+        matches = matches[:args.limit]
+
+    # Categorize
+    sanctioned = [m for m in matches if "sanction" in m["topics"]]
+    peps = [m for m in matches if "pep" in m["topics"]]
+    crime = [m for m in matches if "crime" in m["topics"]]
+    other = [m for m in matches if not (set(m["topics"]) & {"sanction", "pep", "crime"})]
+
+    # Create leads for sanctioned/PEP matches if requested
+    leads_created = 0
+    if args.create_leads and (sanctioned or peps):
+        try:
+            from tools.lead_tracker import get_db as get_inv_db
+        except ImportError:
+            from lead_tracker import get_db as get_inv_db
+
+        lead_db = get_inv_db()
+        for m in sanctioned + peps:
+            topic_str = ", ".join(m["topics"])
+            title = f"OpenSanctions match: {m['our_name']} -> {m['os_caption']} ({topic_str})"
+            # Check for duplicate lead
+            existing = lead_db.execute(
+                "SELECT id FROM leads WHERE title = ?", (title,)
+            ).fetchone()
+            if existing:
+                continue
+            lead_db.execute("""
+                INSERT INTO leads (title, status, target_name, priority, notes, created_at)
+                VALUES (?, 'pending_triage', ?, 3, ?, datetime('now'))
+            """, (title, m["our_name"],
+                  f"Score: {m['score']}. OS ID: {m['os_id']}. Schema: {m['os_schema']}. "
+                  f"Datasets: {', '.join(m['datasets'])}"))
+            leads_created += 1
+
+        lead_db.commit()
+        lead_db.close()
+
+    # Output
+    if write_output({"sanctioned": sanctioned, "peps": peps, "crime": crime,
+                      "other": other, "leads_created": leads_created},
+                    args, summary=f"FtM reconciliation ({len(matches)} matches)"):
+        db.close()
+        return
+
+    if sanctioned:
+        print(f"SANCTIONED ({len(sanctioned)} matches)")
+        print("-" * 90)
+        for m in sanctioned:
+            print(f"  {m['score']:>3}  {m['our_name']:<35} -> {m['os_caption'][:35]:<35} [{m['os_schema']}]")
+            if m["datasets"]:
+                print(f"       Lists: {', '.join(m['datasets'])}")
+        print()
+
+    if peps:
+        print(f"POLITICALLY EXPOSED ({len(peps)} matches)")
+        print("-" * 90)
+        for m in peps:
+            print(f"  {m['score']:>3}  {m['our_name']:<35} -> {m['os_caption'][:35]:<35} [{m['os_schema']}]")
+        print()
+
+    if crime:
+        print(f"CRIME-RELATED ({len(crime)} matches)")
+        print("-" * 90)
+        for m in crime:
+            print(f"  {m['score']:>3}  {m['our_name']:<35} -> {m['os_caption'][:35]:<35} [{m['os_schema']}]")
+        print()
+
+    if other:
+        print(f"OTHER ({len(other)} matches)")
+        print("-" * 90)
+        for m in other[:30]:
+            print(f"  {m['score']:>3}  {m['our_name']:<35} -> {m['os_caption'][:35]:<35} [{m['os_schema']}]")
+        if len(other) > 30:
+            print(f"  ... and {len(other) - 30} more")
+        print()
+
+    print("=" * 90)
+    print(f"SUMMARY: {len(names_to_check)} names checked, {len(matches)} matches above threshold {args.threshold}")
+    print(f"  Sanctioned:   {len(sanctioned)}")
+    print(f"  PEPs:         {len(peps)}")
+    print(f"  Crime-listed: {len(crime)}")
+    print(f"  Other:        {len(other)}")
+    if args.create_leads:
+        print(f"  Leads created: {leads_created}")
+
+    db.close()
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="OpenSanctions bulk data query tool for OSINT investigation"
@@ -955,6 +1154,17 @@ def main():
     p = sub.add_parser("stats", help="Database statistics")
     add_output_args(p)
 
+    # reconcile-ftm
+    p = sub.add_parser("reconcile-ftm",
+                       help="Fuzzy reconciliation with confidence scores (uses rapidfuzz)")
+    p.add_argument("--threshold", type=int, default=85,
+                   help="Minimum fuzzy match score (default: 85)")
+    p.add_argument("--limit", type=int, default=100,
+                   help="Max matches to return (default: 100)")
+    p.add_argument("--create-leads", action="store_true",
+                   help="Create pending_triage leads for sanctioned/PEP matches")
+    add_output_args(p)
+
     args = parser.parse_args()
 
     handlers = {
@@ -965,6 +1175,7 @@ def main():
         "match-entities": cmd_match_entities,
         "pep-check": cmd_pep_check,
         "stats": cmd_stats,
+        "reconcile-ftm": cmd_reconcile_ftm,
     }
     handlers[args.command](args)
 

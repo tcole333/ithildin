@@ -25,6 +25,16 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
+
 BASE_URL = "https://projects.propublica.org/nonprofits/api/v2"
 
 
@@ -54,6 +64,7 @@ def search_orgs(query, state=None, page=0, limit=25):
 
     orgs = data.get("organizations", [])
     total = data.get("total_results", 0)
+    _log(query, "990", total)
     print(f"Found {total} organizations matching '{query}' (showing page {page})")
     print()
 

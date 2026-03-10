@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CourtListener API wrapper for the Epstein OSINT investigation.
+CourtListener API wrapper for OSINT investigations.
 
 Thin wrapper around sec_scraper/courtlistener/api_client.py that loads
 credentials from .env and provides investigation-friendly output.
@@ -25,6 +25,16 @@ try:
     from tools.output_util import add_output_args, write_output
 except ImportError:
     from output_util import add_output_args, write_output
+
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
 
 # Load .env
 env_path = Path(__file__).parent.parent / ".env"
@@ -65,6 +75,8 @@ def cmd_search(args):
         max_results=args.limit,
     )
 
+    _log(args.query, "courtlistener", len(results))
+
     if write_output(results, args, summary=f"CourtListener search '{args.query}'"):
         return
     if getattr(args, "json_out", False):
@@ -101,6 +113,7 @@ def cmd_cases(args):
         date_filed_before=args.before,
         max_results=args.limit,
     )
+    _log(args.query, "courtlistener", len(results))
     print(f"Found {len(results)} cases for '{args.query}'")
     print()
     for r in results:
@@ -152,6 +165,7 @@ def cmd_party(args):
     """Search parties across all cases."""
     client = _client()
     parties = client.search_party_by_name(args.name, max_results=args.limit)
+    _log(args.name, "courtlistener", len(parties))
     print(f"Found {len(parties)} party records for '{args.name}'")
     print()
     for p in parties:

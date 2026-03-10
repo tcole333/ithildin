@@ -1,0 +1,277 @@
+# Investigation Profile: John Hagee
+# Pastor, Christian Zionist leader, media empire, political influence network
+
+name: "hagee"
+
+primary_subject: "John Hagee"
+
+description: "Investigation of Pastor John Hagee's financial empire, political influence network, and institutional infrastructure spanning Cornerstone Church, Christians United for Israel (CUFI), John Hagee Ministries, and affiliated entities. Focus on financial flows, real estate holdings, political relationships, and cross-entity governance."
+
+key_persons:
+  - "john hagee"
+  - "diana hagee"          # wife, co-pastor, board member across entities
+  - "matt hagee"           # son, lead pastor of Cornerstone Church
+  - "kendal hagee"         # son, involved in ministry operations
+  - "christopher hagee"    # son, involved in ministry media
+  - "sandy hagee"          # daughter
+  - "martha hagee"         # first wife (divorced 1975)
+  - "david brog"           # former CUFI executive director
+  - "shari dollinger"      # CUFI leadership
+  - "gary bauer"           # CUFI board, political operative
+  - "george morrison"      # CUFI leadership
+  - "victor mordecai"      # associate, Israeli affairs
+  - "rod parsley"          # allied pastor, political ally
+  - "john mccain"          # rejected Hagee endorsement 2008
+  - "mike pompeo"          # political ally, CUFI speaker
+  - "ted cruz"             # political ally, CUFI speaker
+  - "mike huckabee"        # political ally, CUFI speaker
+  - "ron dermer"           # Israeli ambassador, CUFI relationship
+  - "benjamin netanyahu"   # Israeli PM, CUFI relationship
+
+known_addresses:
+  "cornerstone": "Cornerstone Church campus, San Antonio TX"
+  "san antonio": "Hagee base of operations"
+  "5515 usaa": "Cornerstone Church area, San Antonio TX"
+  "global evangelism": "Global Evangelism Television offices"
+  "the dominion": "Upscale San Antonio neighborhood, Hagee residence area"
+
+threads:
+  - id: 1
+    name: "Hagee Ministry Financial Empire"
+    description: "Financial structure of John Hagee Ministries, Cornerstone Church, Global Evangelism Television, and affiliated 501(c)(3) entities. Compensation, real estate, related-party transactions."
+    targets:
+      - "john hagee"
+      - "diana hagee"
+      - "matt hagee"
+      - "cornerstone church"
+      - "john hagee ministries"
+      - "global evangelism"
+      - "hagee communications"
+    keywords:
+      - "(?i)hagee"
+      - "(?i)cornerstone.*church"
+      - "(?i)global evangelism"
+      - "(?i)501\\(c\\)"
+      - "(?i)parsonage"
+      - "(?i)clergy.*housing"
+
+  - id: 2
+    name: "CUFI Political Machine"
+    description: "Christians United for Israel — lobbying arm, political endorsements, campaign contributions, Congressional influence, annual summits, relationship with Israeli government."
+    targets:
+      - "christians united for israel"
+      - "cufi"
+      - "cufi action fund"
+      - "david brog"
+      - "gary bauer"
+      - "shari dollinger"
+    keywords:
+      - "(?i)christians united"
+      - "(?i)cufi"
+      - "(?i)israel.*lobby"
+      - "(?i)pro.israel"
+      - "(?i)aipac"
+      - "(?i)zionist"
+
+  - id: 3
+    name: "Media & Broadcasting Empire"
+    description: "Television ministry, TBN relationships, Daystar, book publishing, media production companies, broadcast licensing, digital media."
+    targets:
+      - "global evangelism television"
+      - "tbn"
+      - "daystar"
+      - "hagee communications"
+    keywords:
+      - "(?i)broadcast"
+      - "(?i)television.*ministry"
+      - "(?i)tbn"
+      - "(?i)daystar"
+      - "(?i)charisma.*media"
+      - "(?i)book.*deal"
+
+  - id: 4
+    name: "Real Estate & Asset Holdings"
+    description: "Church properties, parsonage exemptions, ranch properties, personal real estate holdings of Hagee family in Bexar County and beyond."
+    targets:
+      - "john hagee"
+      - "diana hagee"
+      - "cornerstone church"
+    keywords:
+      - "(?i)real estate"
+      - "(?i)property"
+      - "(?i)parsonage"
+      - "(?i)ranch"
+      - "(?i)bexar.*county"
+      - "(?i)dominion"
+
+  - id: 5
+    name: "Political Endorsements & Controversy"
+    description: "Political endorsement history, McCain 2008 rejection, Trump relationship, controversial theological statements (Catholicism, Holocaust, Hurricane Katrina), Grassley investigation."
+    targets:
+      - "john mccain"
+      - "donald trump"
+      - "chuck grassley"
+    keywords:
+      - "(?i)endorse"
+      - "(?i)grassley"
+      - "(?i)senate.*finance"
+      - "(?i)prosperity.*gospel"
+      - "(?i)controversy"
+      - "(?i)catholic"
+      - "(?i)holocaust"
+
+  - id: 6
+    name: "Philanthropic & Humanitarian Operations"
+    description: "Charitable giving patterns, Israel-directed aid, humanitarian projects, Exodus II aliyah operations, relationship with Israeli charities and settlements."
+    targets:
+      - "exodus"
+      - "aliyah"
+    keywords:
+      - "(?i)philanthrop"
+      - "(?i)charit"
+      - "(?i)aliyah"
+      - "(?i)exodus"
+      - "(?i)settlement"
+      - "(?i)humanitarian"
+      - "(?i)grant"
+
+  - id: 7
+    name: "Governance & Board Interlocks"
+    description: "Board composition across Hagee entities, family governance, overlapping directorships, compensation committee structures, related-party governance."
+    targets:
+      - "john hagee"
+      - "diana hagee"
+      - "matt hagee"
+    keywords:
+      - "(?i)board.*director"
+      - "(?i)trustee"
+      - "(?i)officer"
+      - "(?i)compensation"
+      - "(?i)related.*party"
+      - "(?i)interlock"
+      - "(?i)governance"
+
+corpus_tools: []
+
+key_dates:
+  - date: "1966-01-01"
+    event: "John Hagee begins pastoral ministry"
+    category: "milestone"
+  - date: "1975-01-01"
+    event: "Divorce from first wife Martha Downing"
+    category: "milestone"
+  - date: "1975-01-01"
+    event: "Marries Diana Castro"
+    category: "milestone"
+  - date: "1975-01-01"
+    event: "Founds Cornerstone Church (originally Church of Castle Hills)"
+    category: "operational"
+  - date: "1987-01-01"
+    event: "Global Evangelism Television launched"
+    category: "operational"
+  - date: "2006-02-01"
+    event: "Christians United for Israel (CUFI) founded"
+    category: "political"
+  - date: "2008-02-01"
+    event: "Endorses John McCain for president"
+    category: "political"
+  - date: "2008-05-22"
+    event: "McCain rejects Hagee endorsement after Holocaust sermon surfaces"
+    category: "political"
+  - date: "2007-11-06"
+    event: "Sen. Chuck Grassley launches investigation into six televangelists (NOT Hagee — but Trinity Foundation submitted financial report on Hagee to Committee)"
+    category: "legal"
+  - date: "2009-01-01"
+    event: "Trinity Foundation prepares financial report on Hagee for Senate Finance Committee testimony"
+    category: "legal"
+  - date: "2011-01-06"
+    event: "Grassley investigation concludes — recommends self-governance reforms but no legislation"
+    category: "legal"
+  - date: "2014-01-01"
+    event: "Matt Hagee becomes lead pastor of Cornerstone Church"
+    category: "operational"
+  - date: "2020-01-01"
+    event: "CUFI claims 10 million members"
+    category: "milestone"
+  - date: "2015-01-01"
+    event: "Cornerstone Church campus expansion and debt"
+    category: "financial"
+
+seed_pillars:
+  - name: "Cornerstone Church"
+    pillar_type: "operations"
+    sub_type: "megachurch"
+    status: "active"
+    founded: "1975"
+    jurisdiction: "TX"
+    significance: "Primary institutional base — 22,000+ member megachurch in San Antonio, tax-exempt, Hagee family controlled"
+
+  - name: "John Hagee Ministries"
+    pillar_type: "operations"
+    sub_type: "nonprofit_ministry"
+    status: "active"
+    jurisdiction: "TX"
+    significance: "Umbrella ministry organization for television, publishing, and outreach — files Form 990"
+
+  - name: "Christians United for Israel"
+    pillar_type: "operations"
+    sub_type: "advocacy_organization"
+    status: "active"
+    founded: "2006"
+    jurisdiction: "DC"
+    significance: "Largest pro-Israel organization in the US — claims 10M+ members, significant political lobbying arm"
+
+  - name: "CUFI Action Fund"
+    pillar_type: "operations"
+    sub_type: "political_action"
+    status: "active"
+    jurisdiction: "DC"
+    significance: "501(c)(4) political arm of CUFI — lobbying, political endorsements, campaign activity"
+
+  - name: "Global Evangelism Television"
+    pillar_type: "media"
+    sub_type: "broadcast"
+    status: "active"
+    founded: "1987"
+    jurisdiction: "TX"
+    significance: "Television broadcasting arm — produces and distributes Hagee programming nationally"
+
+  - name: "Hagee Communications"
+    pillar_type: "media"
+    sub_type: "publishing"
+    status: "active"
+    jurisdiction: "TX"
+    significance: "Publishing and media production — books, DVDs, digital content"
+
+  - name: "Trinity Broadcasting Network"
+    pillar_type: "media"
+    sub_type: "broadcast_network"
+    status: "active"
+    significance: "Primary broadcast distribution partner for Hagee television programming"
+
+  - name: "Senate Finance Committee"
+    pillar_type: "government"
+    sub_type: "congressional_oversight"
+    status: "active"
+    jurisdiction: "DC"
+    significance: "Grassley investigation 2007-2011 examined six other televangelists (NOT Hagee directly), but Trinity Foundation submitted Hagee financial report to Committee"
+
+  - name: "Evangelical Council for Financial Accountability"
+    pillar_type: "operations"
+    sub_type: "self_regulatory"
+    status: "active"
+    jurisdiction: "DC"
+    significance: "ECFA membership/compliance — key question is whether Hagee entities are members and compliant"
+
+  - name: "Israeli Government"
+    pillar_type: "government"
+    sub_type: "foreign_government"
+    status: "active"
+    jurisdiction: "IL"
+    significance: "Institutional partner — CUFI functions as unofficial liaison between evangelical base and Israeli government"
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "john hagee"
+
+source_overrides: {}

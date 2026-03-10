@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Hypothesis lifecycle tracker for the Epstein OSINT investigation.
+Hypothesis lifecycle tracker for OSINT investigations.
 
 Structured, trackable hypotheses with evidence tracking and status management.
 Part of investigation.db.
@@ -65,6 +65,22 @@ def _ensure_hypothesis_schema(db):
         CREATE INDEX IF NOT EXISTS idx_hypotheses_status ON hypotheses(status);
         CREATE INDEX IF NOT EXISTS idx_hypotheses_pattern ON hypotheses(pattern_type);
         CREATE INDEX IF NOT EXISTS idx_hypotheses_thread ON hypotheses(thread_id);
+
+        CREATE TABLE IF NOT EXISTS hypothesis_evidence_matrix (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            hypothesis_id INTEGER NOT NULL REFERENCES hypotheses(id),
+            finding_id INTEGER NOT NULL REFERENCES findings(id),
+            assessment TEXT NOT NULL CHECK(assessment IN (
+                'consistent','inconsistent','neutral','not_applicable'
+            )),
+            assessed_by TEXT,
+            assessed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            notes TEXT,
+            UNIQUE(hypothesis_id, finding_id, assessed_by)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_hem_hypothesis ON hypothesis_evidence_matrix(hypothesis_id);
+        CREATE INDEX IF NOT EXISTS idx_hem_finding ON hypothesis_evidence_matrix(finding_id);
     """)
 
 
@@ -245,6 +261,153 @@ def add_evidence(hyp_id, evidence, direction="for"):
     return True
 
 
+def evaluate_evidence(hypothesis_id, finding_id, assessment, assessed_by=None, notes=None):
+    """Score a finding against a hypothesis in the ACH matrix."""
+    valid = ("consistent", "inconsistent", "neutral", "not_applicable")
+    if assessment not in valid:
+        print(f"ERROR: assessment must be one of {valid}")
+        return False
+
+    db = get_hypothesis_db()
+    # Verify both exist
+    if not db.execute("SELECT id FROM hypotheses WHERE id = ?", (hypothesis_id,)).fetchone():
+        print(f"ERROR: Hypothesis #{hypothesis_id} not found")
+        db.close()
+        return False
+    if not db.execute("SELECT id FROM findings WHERE id = ?", (finding_id,)).fetchone():
+        print(f"ERROR: Finding #{finding_id} not found")
+        db.close()
+        return False
+
+    db.execute("""
+        INSERT OR REPLACE INTO hypothesis_evidence_matrix
+            (hypothesis_id, finding_id, assessment, assessed_by, notes)
+        VALUES (?, ?, ?, ?, ?)
+    """, (hypothesis_id, finding_id, assessment, assessed_by, notes))
+    db.commit()
+    db.close()
+    return True
+
+
+def get_ach_matrix():
+    """Build the full evidence×hypothesis matrix with scores.
+
+    Returns dict with:
+      hypotheses: list of {id, title, status, scores}
+      findings: list of {id, summary}
+      matrix: dict[(hyp_id, finding_id)] -> assessment
+    """
+    db = get_hypothesis_db()
+
+    # Get active hypotheses (proposed/investigating)
+    hyps = db.execute("""
+        SELECT id, title, status FROM hypotheses
+        WHERE status IN ('proposed', 'investigating')
+        ORDER BY id
+    """).fetchall()
+
+    # Get all evaluated findings
+    evals = db.execute("""
+        SELECT hypothesis_id, finding_id, assessment, assessed_by
+        FROM hypothesis_evidence_matrix
+        WHERE hypothesis_id IN (SELECT id FROM hypotheses WHERE status IN ('proposed', 'investigating'))
+    """).fetchall()
+
+    # Get unique finding IDs from evaluations
+    finding_ids = sorted({e["finding_id"] for e in evals})
+    findings = []
+    for fid in finding_ids:
+        row = db.execute("SELECT id, target_name, summary FROM findings WHERE id = ?", (fid,)).fetchone()
+        if row:
+            findings.append(dict(row))
+
+    db.close()
+
+    # Build matrix
+    matrix = {}
+    for e in evals:
+        matrix[(e["hypothesis_id"], e["finding_id"])] = {
+            "assessment": e["assessment"],
+            "assessed_by": e["assessed_by"],
+        }
+
+    # Score each hypothesis
+    hypothesis_list = []
+    for h in hyps:
+        hid = h["id"]
+        scores = {"consistent": 0, "inconsistent": 0, "neutral": 0, "not_applicable": 0, "unevaluated": 0}
+        for fid in finding_ids:
+            key = (hid, fid)
+            if key in matrix:
+                scores[matrix[key]["assessment"]] += 1
+            else:
+                scores["unevaluated"] += 1
+
+        # ACH inconsistency score: lower = stronger hypothesis
+        total_evaluated = scores["consistent"] + scores["inconsistent"] + scores["neutral"]
+        inconsistency_ratio = scores["inconsistent"] / max(total_evaluated, 1)
+
+        hypothesis_list.append({
+            "id": hid,
+            "title": h["title"],
+            "status": h["status"],
+            "consistent": scores["consistent"],
+            "inconsistent": scores["inconsistent"],
+            "neutral": scores["neutral"],
+            "not_applicable": scores["not_applicable"],
+            "unevaluated": scores["unevaluated"],
+            "inconsistency_ratio": round(inconsistency_ratio, 4),
+        })
+
+    return {
+        "hypotheses": hypothesis_list,
+        "findings": findings,
+        "matrix": {f"{k[0]},{k[1]}": v for k, v in matrix.items()},
+    }
+
+
+def compete_hypotheses():
+    """Rank active hypotheses by inconsistency score (Heuer ACH method).
+
+    Fewer inconsistencies = stronger hypothesis.
+    """
+    data = get_ach_matrix()
+    ranked = sorted(data["hypotheses"], key=lambda h: h["inconsistency_ratio"])
+    return ranked
+
+
+def diagnose_disagreements():
+    """Find findings where different assessors disagree on the same hypothesis."""
+    db = get_hypothesis_db()
+    # Find hypothesis-finding pairs with multiple assessors giving different assessments
+    rows = db.execute("""
+        SELECT hypothesis_id, finding_id,
+               GROUP_CONCAT(DISTINCT assessment) as assessments,
+               GROUP_CONCAT(DISTINCT assessed_by) as assessors,
+               COUNT(DISTINCT assessment) as n_assessments
+        FROM hypothesis_evidence_matrix
+        GROUP BY hypothesis_id, finding_id
+        HAVING COUNT(DISTINCT assessment) > 1
+        ORDER BY n_assessments DESC
+    """).fetchall()
+
+    disagreements = []
+    for r in rows:
+        h = db.execute("SELECT title FROM hypotheses WHERE id = ?", (r["hypothesis_id"],)).fetchone()
+        f = db.execute("SELECT summary FROM findings WHERE id = ?", (r["finding_id"],)).fetchone()
+        disagreements.append({
+            "hypothesis_id": r["hypothesis_id"],
+            "hypothesis_title": h["title"] if h else "?",
+            "finding_id": r["finding_id"],
+            "finding_summary": (f["summary"][:80] + "...") if f and len(f["summary"]) > 80 else (f["summary"] if f else "?"),
+            "assessments": r["assessments"],
+            "assessors": r["assessors"],
+        })
+
+    db.close()
+    return disagreements
+
+
 def search_hypotheses(query, limit=50):
     """Search hypotheses by text across title, description, predicted_evidence, search_plan."""
     db = get_hypothesis_db()
@@ -370,6 +533,27 @@ def main():
     p_ev.add_argument("--for", dest="evidence_for")
     p_ev.add_argument("--against", dest="evidence_against")
 
+    # evaluate (ACH)
+    p_eval = sub.add_parser("evaluate", help="Score a finding against a hypothesis (ACH matrix)")
+    p_eval.add_argument("--hypothesis-id", type=int, required=True)
+    p_eval.add_argument("--finding-id", type=int, required=True)
+    p_eval.add_argument("--assessment", required=True,
+                        choices=["consistent", "inconsistent", "neutral", "not_applicable"])
+    p_eval.add_argument("--assessed-by")
+    p_eval.add_argument("--notes")
+
+    # matrix (ACH)
+    p_matrix = sub.add_parser("matrix", help="Display the evidence×hypothesis ACH matrix")
+    add_output_args(p_matrix)
+
+    # compete (ACH)
+    p_compete = sub.add_parser("compete", help="Rank hypotheses by ACH inconsistency score")
+    add_output_args(p_compete)
+
+    # diagnose (ACH)
+    p_diag = sub.add_parser("diagnose", help="Show where assessors disagree on evidence")
+    add_output_args(p_diag)
+
     # search
     p_search = sub.add_parser("search", help="Search hypotheses by text")
     p_search.add_argument("query")
@@ -465,6 +649,76 @@ def main():
                 print(f"Added contradicting evidence to hypothesis #{args.id}")
         if not args.evidence_for and not args.evidence_against:
             print("ERROR: Provide --for or --against with evidence text")
+
+    elif args.command == "evaluate":
+        if evaluate_evidence(args.hypothesis_id, args.finding_id, args.assessment,
+                             assessed_by=args.assessed_by, notes=args.notes):
+            print(f"Evaluated: finding #{args.finding_id} is {args.assessment} "
+                  f"with hypothesis #{args.hypothesis_id}")
+
+    elif args.command == "matrix":
+        data = get_ach_matrix()
+        if write_output(data, args, summary="ACH evidence-hypothesis matrix"):
+            return
+        if not data["hypotheses"]:
+            print("No active hypotheses with evaluations. Use 'evaluate' to score findings.")
+            return
+        # Display matrix
+        print(f"\nACH Evidence×Hypothesis Matrix")
+        print(f"  {len(data['hypotheses'])} active hypotheses, {len(data['findings'])} evaluated findings\n")
+        # Header
+        print(f"  {'Finding':<50} ", end="")
+        for h in data["hypotheses"]:
+            print(f"H{h['id']:>3} ", end="")
+        print()
+        print("  " + "-" * (50 + 5 * len(data["hypotheses"])))
+        # Rows
+        assessment_chars = {"consistent": "+", "inconsistent": "-", "neutral": ".", "not_applicable": " "}
+        for f in data["findings"]:
+            label = f"{f.get('target_name', '')} — {f['summary']}"[:48]
+            print(f"  {label:<50} ", end="")
+            for h in data["hypotheses"]:
+                key = f"{h['id']},{f['id']}"
+                if key in data["matrix"]:
+                    char = assessment_chars.get(data["matrix"][key]["assessment"], "?")
+                    print(f"  {char}  ", end="")
+                else:
+                    print(f"  ?  ", end="")
+            print()
+        # Summary
+        print()
+        print(f"  {'Hypothesis':<50} {'Con':>4} {'Inc':>4} {'Neu':>4} {'Ratio':>6}")
+        print("  " + "-" * 70)
+        for h in sorted(data["hypotheses"], key=lambda x: x["inconsistency_ratio"]):
+            print(f"  H{h['id']}: {h['title'][:44]:<46} {h['consistent']:>4} "
+                  f"{h['inconsistent']:>4} {h['neutral']:>4} {h['inconsistency_ratio']:>6.2f}")
+
+    elif args.command == "compete":
+        ranked = compete_hypotheses()
+        if write_output(ranked, args, summary="ACH hypothesis competition"):
+            return
+        if not ranked:
+            print("No active hypotheses with evaluations.")
+            return
+        print(f"\nACH Hypothesis Competition (lower inconsistency = stronger)")
+        print(f"{'Rank':>4}  {'ID':>3}  {'Title':<45} {'Inc':>4} {'Con':>4} {'Ratio':>6}")
+        print("-" * 75)
+        for i, h in enumerate(ranked):
+            print(f"{i+1:>4}  {h['id']:>3}  {h['title'][:45]:<45} "
+                  f"{h['inconsistent']:>4} {h['consistent']:>4} {h['inconsistency_ratio']:>6.2f}")
+
+    elif args.command == "diagnose":
+        disagreements = diagnose_disagreements()
+        if write_output(disagreements, args, summary="ACH disagreements"):
+            return
+        if not disagreements:
+            print("No disagreements found across assessors.")
+            return
+        print(f"\nACH Disagreements ({len(disagreements)}):")
+        for d in disagreements:
+            print(f"  H#{d['hypothesis_id']} ({d['hypothesis_title'][:30]}) × "
+                  f"F#{d['finding_id']} ({d['finding_summary'][:30]})")
+            print(f"    Assessments: {d['assessments']}  Assessors: {d['assessors']}")
 
     elif args.command == "search":
         results = search_hypotheses(args.query, limit=args.limit)

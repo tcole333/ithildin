@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Lead tracking for the Epstein OSINT investigation.
+Lead tracking for OSINT investigations.
 
 Part of investigation.db (shared with findings_tracker.py).
 
@@ -21,7 +21,7 @@ import argparse
 import json
 import sqlite3
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 try:
     from tools.output_util import add_output_args, write_output
@@ -39,14 +39,20 @@ def _utcnow() -> datetime:
     return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
+_schema_initialized = False
+
+
 def get_db():
     """Get a database connection, creating schema if needed."""
+    global _schema_initialized
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
-    _ensure_schema(db)
+    if not _schema_initialized:
+        _ensure_schema(db)
+        _schema_initialized = True
     return db
 
 
@@ -145,7 +151,9 @@ def _ensure_schema(db):
             person_b TEXT NOT NULL,
             relationship_type TEXT CHECK(relationship_type IN (
                 'financial','social','legal','intelligence','employment',
-                'familial','corporate','advisory','political'
+                'familial','corporate','advisory','political',
+                'owns','controls','funds','subsidiary_of','contracts_with',
+                'successor_to','shares_officer','supplies'
             )),
             description TEXT,
             strength TEXT DEFAULT 'medium' CHECK(strength IN (
@@ -263,13 +271,13 @@ def _ensure_schema(db):
                 'primary_corporate',        -- SEC filings, corporate registries, 990s
                 'primary_correspondence',   -- Actual emails, letters from corpus
                 'secondary_quality',        -- Reputable investigative journalism (with caveats)
-                'secondary_compromised',    -- Media with known Epstein connections (NYT/Thomas, Wolff)
+                'secondary_compromised',    -- Media with known subject connections
                 'secondary_blog',           -- Independent researchers, blogs (verify everything)
                 'tertiary_wiki',            -- Wikipedia, social media (use only as starting point)
                 'unknown'
             )),
             reliability_notes TEXT,         -- Known biases, conflicts, limitations
-            epstein_connection TEXT,        -- If this source had a known relationship with Epstein
+            epstein_connection TEXT,        -- DEPRECATED: use subject_connection instead
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
 
@@ -595,6 +603,13 @@ def _ensure_schema(db):
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )""")
 
+    # Investigation config — key/value store for profile settings
+    db.execute("""CREATE TABLE IF NOT EXISTS investigation_config (
+        key TEXT PRIMARY KEY,
+        value TEXT NOT NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )""")
+
     # ── Schema migrations: add columns to existing tables ──
     # SQLite ALTER TABLE ADD COLUMN is safe — errors if column exists, which we catch.
     _migrations = [
@@ -628,6 +643,27 @@ def _ensure_schema(db):
         ("finding_evidence", "email_sender TEXT"),
         ("finding_evidence", "email_date TEXT"),
         ("finding_evidence", "chain_position INTEGER"),
+        # Investigation profile scoping
+        ("leads", "profile_id TEXT"),
+        ("findings", "profile_id TEXT"),
+        ("connections", "profile_id TEXT"),
+        ("investigation_threads", "profile_id TEXT"),
+        # Source reliability: rename epstein_connection -> subject_connection
+        ("source_reliability", "subject_connection TEXT"),
+        # Actual formation/filing date (distinct from DB ingestion created_at)
+        ("entities", "date_formed TEXT"),
+        # Lead lease tracking (stale-recovery for crashed agents)
+        ("leads", "claimed_by TEXT"),
+        ("leads", "claimed_at TIMESTAMP"),
+        ("leads", "lease_until TIMESTAMP"),
+        # Session performance metrics
+        ("sessions", "findings_created INTEGER DEFAULT 0"),
+        ("sessions", "connections_created INTEGER DEFAULT 0"),
+        ("sessions", "leads_created INTEGER DEFAULT 0"),
+        ("sessions", "retractions INTEGER DEFAULT 0"),
+        # Bi-temporal: when the relationship existed in the real world
+        ("connections", "valid_from DATE"),
+        ("connections", "valid_until DATE"),
     ]
     for table, column_def in _migrations:
         try:
@@ -635,14 +671,178 @@ def _ensure_schema(db):
         except sqlite3.OperationalError:
             pass  # column already exists
 
-    # Thread indexes
+    # Migrate epstein_connection data to subject_connection (one-time)
+    try:
+        db.execute("""
+            UPDATE source_reliability SET subject_connection = epstein_connection
+            WHERE subject_connection IS NULL AND epstein_connection IS NOT NULL
+        """)
+    except sqlite3.OperationalError:
+        pass  # epstein_connection column doesn't exist (fresh DB)
+
+    # Thread and profile indexes
     for idx_sql in [
         "CREATE INDEX IF NOT EXISTS idx_leads_thread ON leads(thread_id)",
         "CREATE INDEX IF NOT EXISTS idx_findings_thread ON findings(thread_id)",
+        "CREATE INDEX IF NOT EXISTS idx_leads_profile ON leads(profile_id)",
+        "CREATE INDEX IF NOT EXISTS idx_findings_profile ON findings(profile_id)",
+        "CREATE INDEX IF NOT EXISTS idx_connections_profile ON connections(profile_id)",
+        "CREATE INDEX IF NOT EXISTS idx_threads_profile ON investigation_threads(profile_id)",
+        "CREATE INDEX IF NOT EXISTS idx_leads_lease ON leads(status, lease_until)",
     ]:
         try:
             db.execute(idx_sql)
         except sqlite3.OperationalError:
+            pass
+
+    # Backfill profile_id for tech-right records (idempotent)
+    # Thread IDs 9-14 belong to tech-right profile; correct the default 'epstein' value
+    try:
+        updated = db.execute("""
+            UPDATE findings SET profile_id = 'tech-right'
+            WHERE thread_id IN (9,10,11,12,13,14) AND COALESCE(profile_id, 'epstein') != 'tech-right'
+        """).rowcount
+        updated += db.execute("""
+            UPDATE leads SET profile_id = 'tech-right'
+            WHERE thread_id IN (9,10,11,12,13,14) AND COALESCE(profile_id, 'epstein') != 'tech-right'
+        """).rowcount
+        updated += db.execute("""
+            UPDATE connections SET profile_id = 'tech-right'
+            WHERE finding_id IN (SELECT id FROM findings WHERE thread_id IN (9,10,11,12,13,14))
+              AND COALESCE(profile_id, 'epstein') != 'tech-right'
+        """).rowcount
+        if updated > 0:
+            db.commit()
+    except (sqlite3.OperationalError, sqlite3.IntegrityError):
+        try:
+            db.rollback()
+        except Exception:
+            pass
+
+    # Deduplicate connections and ensure UNIQUE constraint treats NULLs as equal.
+    # Older schema used a plain unique index where NULL relationship_type/profile_id
+    # values could still duplicate. Migrate to a COALESCE expression index.
+    try:
+        existing = db.execute(
+            "SELECT sql FROM sqlite_master WHERE type='index' AND name='idx_connections_unique'"
+        ).fetchone()
+        existing_sql = (existing["sql"] or "").lower() if existing else ""
+        needs_migration = (
+            not existing
+            or "coalesce(relationship_type" not in existing_sql
+            or "coalesce(profile_id" not in existing_sql
+        )
+        if needs_migration:
+            db.execute("DROP INDEX IF EXISTS idx_connections_unique")
+            # Remove duplicate connections, keeping the oldest (smallest id) per group.
+            # Group by coalesced values so NULLs are deduplicated correctly.
+            # Temporarily disable FK checks for safe dedup migration.
+            # PRAGMA foreign_keys must be set outside a transaction.
+            db.commit()
+            db.execute("PRAGMA foreign_keys=OFF")
+
+            # Copy evidence from duplicate connections to canonical (MIN id).
+            # INSERT OR IGNORE handles the case where canonical already has
+            # the same evidence_ref — no data is lost.
+            db.execute("""
+                INSERT OR IGNORE INTO connection_evidence (connection_id, evidence_type, evidence_ref, source_quote, source_page)
+                SELECT canon.id, ce.evidence_type, ce.evidence_ref, ce.source_quote, ce.source_page
+                FROM connection_evidence ce
+                JOIN connections c ON c.id = ce.connection_id
+                JOIN (
+                    SELECT MIN(id) as id, person_a, person_b,
+                           COALESCE(relationship_type, '') as rt, COALESCE(profile_id, '') as pid
+                    FROM connections
+                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
+                ) canon ON canon.person_a = c.person_a AND canon.person_b = c.person_b
+                    AND canon.rt = COALESCE(c.relationship_type, '')
+                    AND canon.pid = COALESCE(c.profile_id, '')
+                WHERE ce.connection_id != canon.id
+            """)
+            # Remove evidence rows pointing at duplicates (already copied above)
+            db.execute("""
+                DELETE FROM connection_evidence WHERE connection_id NOT IN (
+                    SELECT MIN(id) FROM connections
+                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
+                )
+            """)
+            # Now safe to delete duplicate connections
+            db.execute("""
+                DELETE FROM connections WHERE id NOT IN (
+                    SELECT MIN(id) FROM connections
+                    GROUP BY person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, '')
+                )
+            """)
+            db.execute("PRAGMA foreign_keys=ON")
+            db.execute("""
+                CREATE UNIQUE INDEX idx_connections_unique
+                ON connections(
+                    person_a,
+                    person_b,
+                    COALESCE(relationship_type, ''),
+                    COALESCE(profile_id, '')
+                )
+            """)
+            db.commit()
+    except sqlite3.OperationalError:
+        pass
+
+    # Widen connections.relationship_type CHECK constraint to include entity types.
+    # SQLite can't ALTER CHECK constraints, so we rebuild the table if needed.
+    try:
+        table_sql = db.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='connections'"
+        ).fetchone()
+        if table_sql and "'owns'" not in (table_sql[0] or ""):
+            db.commit()
+            db.execute("PRAGMA foreign_keys=OFF")
+            db.execute("""CREATE TABLE connections_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                person_a TEXT NOT NULL,
+                person_b TEXT NOT NULL,
+                relationship_type TEXT CHECK(relationship_type IN (
+                    'financial','social','legal','intelligence','employment',
+                    'familial','corporate','advisory','political',
+                    'owns','controls','funds','subsidiary_of','contracts_with',
+                    'successor_to','shares_officer','supplies'
+                )),
+                description TEXT,
+                strength TEXT DEFAULT 'medium' CHECK(strength IN (
+                    'strong','medium','weak','circumstantial'
+                )),
+                date_range TEXT,
+                finding_id INTEGER REFERENCES findings(id),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                verification_status TEXT DEFAULT 'unverified',
+                verified_by TEXT,
+                verified_at TIMESTAMP,
+                profile_id TEXT DEFAULT 'epstein',
+                valid_from DATE,
+                valid_until DATE
+            )""")
+            db.execute("""INSERT INTO connections_new
+                SELECT id, person_a, person_b, relationship_type, description,
+                       strength, date_range, finding_id, created_at,
+                       verification_status, verified_by, verified_at,
+                       profile_id, valid_from, valid_until
+                FROM connections""")
+            db.execute("DROP TABLE connections")
+            db.execute("ALTER TABLE connections_new RENAME TO connections")
+            db.execute("PRAGMA foreign_keys=ON")
+            # Recreate indexes
+            for idx_sql in [
+                "CREATE INDEX IF NOT EXISTS idx_connections_a ON connections(person_a)",
+                "CREATE INDEX IF NOT EXISTS idx_connections_b ON connections(person_b)",
+                "CREATE INDEX IF NOT EXISTS idx_connections_profile ON connections(profile_id)",
+                """CREATE UNIQUE INDEX IF NOT EXISTS idx_connections_unique
+                   ON connections(person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, ''))""",
+            ]:
+                db.execute(idx_sql)
+            db.commit()
+    except (sqlite3.OperationalError, sqlite3.IntegrityError):
+        try:
+            db.rollback()
+        except Exception:
             pass
 
     # FTS for leads
@@ -925,13 +1125,20 @@ def _ensure_schema(db):
 
 def add_lead(title, description=None, category=None, priority="medium",
              source=None, target_name=None, evidence=None, related_leads=None,
-             thread_id=None):
+             thread_id=None, profile_id=None):
     """Add a new lead. Returns the lead ID."""
+    if target_name:
+        try:
+            from tools.name_resolver import resolve_canonical
+            target_name = resolve_canonical(target_name)
+        except Exception:
+            pass
+
     db = get_db()
     cursor = db.execute("""
-        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    """, (title, description, category, priority, source, target_name, thread_id))
+        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (title, description, category, priority, source, target_name, thread_id, profile_id))
     lead_id = cursor.lastrowid
 
     if evidence:
@@ -1028,23 +1235,101 @@ def get_lead(lead_id):
     return result
 
 
-def claim_lead(lead_id, session_id=None):
-    """Mark a lead as in_progress."""
+def claim_lead(lead_id, session_id=None, claimed_by=None, lease_hours=2):
+    """Mark a lead as in_progress with a lease."""
     db = get_db()
-    now = _utcnow().isoformat()
-    db.execute(
-        "UPDATE leads SET status = 'in_progress', updated_at = ? WHERE id = ? AND status = 'open'",
-        (now, lead_id)
+    now = _utcnow()
+    now_iso = now.isoformat()
+    lease_until = (now + timedelta(hours=lease_hours)).isoformat()
+    cursor = db.execute(
+        """UPDATE leads SET status = 'in_progress', updated_at = ?,
+           claimed_by = ?, claimed_at = ?, lease_until = ?
+           WHERE id = ? AND status = 'open'""",
+        (now_iso, claimed_by, now_iso, lease_until, lead_id)
     )
+    if cursor.rowcount != 1:
+        db.close()
+        return False
     if session_id:
         db.execute(
             "INSERT INTO lead_notes (lead_id, note, session_id) VALUES (?, ?, ?)",
             (lead_id, f"Claimed by session #{session_id}", session_id)
         )
     db.commit()
-    affected = db.total_changes
     db.close()
-    return affected > 0
+    return True
+
+
+def claim_next_lead(category=None, thread_id=None, session_id=None,
+                    claimed_by=None, lease_hours=2, profile_id=None):
+    """Atomically select and claim the next open lead.
+
+    Uses BEGIN IMMEDIATE to acquire a write lock, preventing TOCTOU races
+    where two agents could claim the same lead.
+
+    Opportunistically recovers stale leads before selecting.
+    Auto-filters by active investigation profile unless overridden.
+    """
+    if profile_id is None:
+        try:
+            from tools.investigation_context import get_active_profile
+            profile_id = get_active_profile().name
+        except Exception:
+            pass
+    db = get_db()
+    db.execute("BEGIN IMMEDIATE")
+
+    # Recover stale leads before picking next
+    _mark_stale_leads_db(db)
+
+    conditions = ["status = 'open'"]
+    params = []
+    if profile_id:
+        conditions.append("profile_id = ?")
+        params.append(profile_id)
+    if category:
+        conditions.append("category = ?")
+        params.append(category)
+    if thread_id:
+        conditions.append("thread_id = ?")
+        params.append(thread_id)
+
+    where = " AND ".join(conditions)
+    row = db.execute(f"""
+        SELECT * FROM leads WHERE {where}
+        ORDER BY CASE priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1
+                               WHEN 'medium' THEN 2 WHEN 'low' THEN 3 END,
+                 created_at ASC LIMIT 1
+    """, params).fetchone()
+
+    if not row:
+        db.commit()
+        db.close()
+        return None
+
+    now = _utcnow()
+    now_iso = now.isoformat()
+    lease_until = (now + timedelta(hours=lease_hours)).isoformat()
+    cursor = db.execute(
+        """UPDATE leads SET status='in_progress', updated_at=?,
+           claimed_by=?, claimed_at=?, lease_until=?
+           WHERE id=? AND status='open'""",
+        (now_iso, claimed_by, now_iso, lease_until, row["id"]))
+
+    if cursor.rowcount != 1:
+        db.commit()
+        db.close()
+        return None
+
+    if session_id:
+        db.execute("INSERT INTO lead_notes (lead_id, note, session_id) VALUES (?,?,?)",
+                   (row["id"], f"Claimed by session #{session_id}", session_id))
+
+    db.commit()
+    result = dict(row)
+    result["status"] = "in_progress"
+    db.close()
+    return result
 
 
 def add_note(lead_id, note, session_id=None):
@@ -1119,6 +1404,56 @@ def reopen_lead(lead_id):
     db.close()
 
 
+def _mark_stale_leads_db(db, max_age_hours=2):
+    """Reset stale in_progress leads to open (operates on existing db connection).
+
+    A lead is stale if status='in_progress' and lease_until < NOW().
+    Returns list of recovered lead IDs.
+    """
+    now = _utcnow().isoformat()
+    rows = db.execute("""
+        SELECT id, title FROM leads
+        WHERE status = 'in_progress' AND lease_until IS NOT NULL AND lease_until < ?
+    """, (now,)).fetchall()
+
+    recovered = []
+    for row in rows:
+        db.execute("""
+            UPDATE leads SET status = 'open', updated_at = ?,
+                claimed_by = NULL, claimed_at = NULL, lease_until = NULL
+            WHERE id = ?
+        """, (now, row["id"]))
+        db.execute(
+            "INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
+            (row["id"], "Auto-reopened: lease expired (agent likely crashed)")
+        )
+        recovered.append({"id": row["id"], "title": row["title"]})
+    return recovered
+
+
+def mark_stale_leads(max_age_hours=2):
+    """Find and reset stale in_progress leads. Returns list of recovered leads."""
+    db = get_db()
+    recovered = _mark_stale_leads_db(db, max_age_hours)
+    db.commit()
+    db.close()
+    return recovered
+
+
+def list_stale_leads():
+    """List leads that have exceeded their lease without being completed."""
+    db = get_db()
+    now = _utcnow().isoformat()
+    rows = db.execute("""
+        SELECT id, title, priority, category, claimed_by, claimed_at, lease_until
+        FROM leads
+        WHERE status = 'in_progress' AND lease_until IS NOT NULL AND lease_until < ?
+        ORDER BY lease_until ASC
+    """, (now,)).fetchall()
+    db.close()
+    return [dict(r) for r in rows]
+
+
 def search_leads(query):
     """Full-text search across lead content. Wraps terms in quotes for safety."""
     db = get_db()
@@ -1136,11 +1471,20 @@ def search_leads(query):
     return [dict(r) for r in rows]
 
 
-def get_next_lead(category=None, thread_id=None):
-    """Get the highest priority open lead."""
+def get_next_lead(category=None, thread_id=None, profile_id=None):
+    """Get the highest priority open lead, filtered by active profile."""
+    if profile_id is None:
+        try:
+            from tools.investigation_context import get_active_profile
+            profile_id = get_active_profile().name
+        except Exception:
+            pass
     db = get_db()
     conditions = ["status = 'open'"]
     params = []
+    if profile_id:
+        conditions.append("profile_id = ?")
+        params.append(profile_id)
     if category:
         conditions.append("category = ?")
         params.append(category)
@@ -1202,6 +1546,47 @@ def check_searched(query_text, source):
     return dict(row) if row else None
 
 
+def update_session_metrics(session_id):
+    """Recompute session performance metrics from actual DB counts."""
+    db = get_db()
+    findings = db.execute(
+        "SELECT COUNT(*) FROM findings WHERE session_id = ?", (session_id,)
+    ).fetchone()[0]
+    connections = db.execute(
+        "SELECT COUNT(*) FROM connections WHERE session_id = ?", (session_id,)
+    ).fetchone()[0]
+    leads = db.execute(
+        "SELECT COUNT(*) FROM lead_notes WHERE session_id = ? AND note LIKE 'Claimed by session%'", (session_id,)
+    ).fetchone()[0]
+    retractions = db.execute(
+        "SELECT COUNT(*) FROM findings WHERE session_id = ? AND verification_status = 'retracted'", (session_id,)
+    ).fetchone()[0]
+    db.execute("""
+        UPDATE sessions SET findings_created = ?, connections_created = ?,
+            leads_created = ?, retractions = ?
+        WHERE id = ?
+    """, (findings, connections, leads, retractions, session_id))
+    db.commit()
+    result = {"session_id": session_id, "findings": findings, "connections": connections,
+              "leads": leads, "retractions": retractions}
+    db.close()
+    return result
+
+
+def get_session_stats(limit=20):
+    """Get performance metrics across recent sessions."""
+    db = get_db()
+    rows = db.execute("""
+        SELECT id, agent_id, skill_invoked, started_at, ended_at,
+               findings_created, connections_created, leads_created, retractions
+        FROM sessions
+        ORDER BY started_at DESC
+        LIMIT ?
+    """, (limit,)).fetchall()
+    db.close()
+    return [dict(r) for r in rows]
+
+
 def get_stats():
     """Get summary statistics across the investigation."""
     db = get_db()
@@ -1256,6 +1641,13 @@ def get_stats():
         "SELECT COUNT(*) FROM infra_requests WHERE status IN ('evaluating', 'in_progress')"
     ).fetchone()[0]
 
+    # Stale leads (lease expired)
+    now = _utcnow().isoformat()
+    stats["stale_leads"] = db.execute(
+        "SELECT COUNT(*) FROM leads WHERE status = 'in_progress' AND lease_until IS NOT NULL AND lease_until < ?",
+        (now,)
+    ).fetchone()[0]
+
     db.close()
     return stats
 
@@ -1297,7 +1689,7 @@ def format_lead(lead, verbose=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Epstein OSINT lead tracker")
+    parser = argparse.ArgumentParser(description="OSINT investigation lead tracker")
     subparsers = parser.add_subparsers(dest="command", help="Command")
 
     # add
@@ -1331,6 +1723,12 @@ def main():
     # claim
     claim_p = subparsers.add_parser("claim", help="Claim a lead")
     claim_p.add_argument("id", type=int)
+
+    # claim-next (atomic select + claim)
+    claim_next_p = subparsers.add_parser("claim-next", help="Atomically select and claim the next open lead")
+    claim_next_p.add_argument("--category", choices=VALID_CATEGORIES)
+    claim_next_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
+    add_output_args(claim_next_p)
 
     # note
     note_p = subparsers.add_parser("note", help="Add a note")
@@ -1374,7 +1772,26 @@ def main():
 
     # stats
     stats_p = subparsers.add_parser("stats", help="Show statistics")
+    stats_p.add_argument("--session-stats", action="store_true", help="Include per-session performance metrics")
     add_output_args(stats_p)
+
+    # stale — list stale leads
+    stale_p = subparsers.add_parser("stale", help="List leads with expired leases")
+    add_output_args(stale_p)
+
+    # recover-stale — reset stale leads to open
+    recover_p = subparsers.add_parser("recover-stale", help="Reset stale leads to open")
+
+    # tier — tag a lead with investigation depth
+    tier_p = subparsers.add_parser("tier", help="Tag a lead with investigation depth tier")
+    tier_p.add_argument("id", type=int, help="Lead ID")
+    tier_p.add_argument("depth", choices=["scan", "standard", "deep_dive"], help="Investigation depth tier")
+
+    # tier-list — list leads by tier
+    tier_list_p = subparsers.add_parser("tier-list", help="List leads by investigation depth tier")
+    tier_list_p.add_argument("--tier", choices=["scan", "standard", "deep_dive"], help="Filter by tier")
+    tier_list_p.add_argument("--limit", type=int, default=50)
+    add_output_args(tier_list_p)
 
     # thread
     thread_p = subparsers.add_parser("thread", help="Manage investigation threads")
@@ -1427,6 +1844,20 @@ def main():
             print(f"Claimed lead #{args.id}")
         else:
             print(f"Could not claim lead #{args.id} (may not be open)")
+
+    elif args.command == "claim-next":
+        lead = claim_next_lead(
+            category=getattr(args, "category", None),
+            thread_id=getattr(args, "thread_id", None),
+        )
+        if lead:
+            lead_full = get_lead(lead["id"])
+            if not write_output(lead_full, args, summary=f"claimed lead #{lead['id']}"):
+                print(f"Claimed lead #{lead['id']}:")
+                print(format_lead(lead_full, verbose=True))
+        else:
+            cat_msg = f" in category '{args.category}'" if getattr(args, "category", None) else ""
+            print(f"No open leads{cat_msg} to claim.")
 
     elif args.command == "note":
         add_note(args.id, args.text)
@@ -1518,10 +1949,96 @@ def main():
                 queues.append(f"{stats['infra_active']} infra requests in progress")
             if stats.get('blocked_by_infra', 0) > 0:
                 queues.append(f"{stats['blocked_by_infra']} leads blocked on infra")
+            if stats.get('stale_leads', 0) > 0:
+                queues.append(f"{stats['stale_leads']} stale leads (lease expired) → recover-stale")
             if queues:
                 print(f"\nQueues:")
                 for q in queues:
                     print(f"  ** {q} **")
+
+            if args.session_stats:
+                sessions = get_session_stats(limit=10)
+                if sessions:
+                    print(f"\nRecent session performance:")
+                    print(f"  {'ID':>5} {'Agent':<20} {'Skill':<20} {'F':>3} {'C':>3} {'L':>3} {'R':>3}")
+                    for s in sessions:
+                        print(f"  {s['id']:>5} {(s['agent_id'] or '?')[:20]:<20} {(s['skill_invoked'] or '?')[:20]:<20} "
+                              f"{s.get('findings_created') or 0:>3} {s.get('connections_created') or 0:>3} "
+                              f"{s.get('leads_created') or 0:>3} {s.get('retractions') or 0:>3}")
+
+    elif args.command == "stale":
+        stale = list_stale_leads()
+        if not write_output(stale, args, summary=f"{len(stale)} stale leads"):
+            if not stale:
+                print("No stale leads (all leases current).")
+            else:
+                print(f"{len(stale)} stale leads (lease expired):")
+                for s in stale:
+                    print(f"  #{s['id']:>4} [{s['priority']:<8}] {s['title']}")
+                    print(f"         claimed_by={s.get('claimed_by') or '?'}  lease expired: {s['lease_until']}")
+
+    elif args.command == "recover-stale":
+        recovered = mark_stale_leads()
+        if not recovered:
+            print("No stale leads to recover.")
+        else:
+            print(f"Recovered {len(recovered)} stale leads:")
+            for r in recovered:
+                print(f"  #{r['id']:>4} → open: {r['title']}")
+
+    elif args.command == "tier":
+        try:
+            from tools.tag_manager import add_tag, remove_tag
+        except ImportError:
+            from tag_manager import add_tag, remove_tag
+        for old_tier in ["scan", "standard", "deep_dive"]:
+            remove_tag("leads", args.id, "operational", f"tier:{old_tier}")
+        if add_tag("leads", args.id, "operational", f"tier:{args.depth}", created_by="lead_tracker"):
+            print(f"Tagged lead #{args.id} with tier={args.depth}")
+        else:
+            print(f"Lead #{args.id} already tagged with tier={args.depth}")
+
+    elif args.command == "tier-list":
+        try:
+            from tools.tag_manager import find_tags
+        except ImportError:
+            from tag_manager import find_tags
+        tier_filter = f"tier:{args.tier}" if args.tier else "tier:*"
+        tags = find_tags(tag_type="operational", tag_value=tier_filter, table_name="leads", limit=args.limit)
+        if not tags:
+            tier_msg = f" at tier={args.tier}" if args.tier else ""
+            print(f"No leads tagged with investigation tiers{tier_msg}.")
+        else:
+            # Group by tier
+            by_tier = {}
+            lead_ids = []
+            for t in tags:
+                tier_val = t["tag_value"].replace("tier:", "")
+                by_tier.setdefault(tier_val, []).append(t["record_id"])
+                lead_ids.append(t["record_id"])
+
+            # Fetch lead details
+            db = get_db()
+            leads_by_id = {}
+            for lid in lead_ids:
+                row = db.execute("SELECT id, title, status, priority, category, target_name FROM leads WHERE id = ?", (lid,)).fetchone()
+                if row:
+                    leads_by_id[lid] = dict(row)
+            db.close()
+
+            tier_data = []
+            for tier_name in ["scan", "standard", "deep_dive"]:
+                if tier_name in by_tier:
+                    print(f"\n=== Tier: {tier_name} ({len(by_tier[tier_name])} leads) ===")
+                    for lid in by_tier[tier_name]:
+                        lead = leads_by_id.get(lid)
+                        if lead:
+                            tier_data.append({**lead, "tier": tier_name})
+                            status_icon = {"open": "[ ]", "in_progress": "[~]", "completed": "[x]"}.get(lead["status"], "[?]")
+                            print(f"  {status_icon} #{lead['id']:>4} [{lead.get('priority', '?'):>8}] {lead['title']}")
+
+            if hasattr(args, 'output'):
+                write_output(tier_data, args, summary=f"tier-list: {len(tier_data)} leads")
 
     elif args.command == "thread":
         db = get_db()
@@ -1560,23 +2077,29 @@ def main():
             print(f"Created thread #{cursor.lastrowid}: {args.title}")
 
         elif args.thread_command == "seed":
-            SEED_THREADS = [
-                ("Epstein Core Network", "Primary investigation thread — Epstein's direct relationships, operations, and infrastructure"),
-                ("Mega Group", "Wexner-Lauder-Steinhardt-Bronfman philanthropic/intelligence network and parallel structures"),
-                ("Deutsche Bank Pipeline", "DB accounts, SARs, relationship manager network, compliance failures, and connected financial flows"),
-                ("Israeli Intelligence Nexus", "Barak, Carbyne, Maxwell family, Mossad connections, and Israeli state actor operations"),
-                ("Apollo / Leon Black Financial", "Black-STC flows, all 3 Apollo founders, Dechert report, and related fund movements"),
-                ("Gulf State Operations", "Qatar/Saudi/UAE three-tier structure, Broidy/Nader, Ruemmler, and Middle East operations"),
-            ]
+            from tools.investigation_context import get_active_profile
+            profile = get_active_profile()
+            if not profile.threads:
+                print("No threads defined in active investigation profile.")
+                db.close()
+                return
             created = 0
-            for title, desc in SEED_THREADS:
+            for thread_def in profile.threads:
+                title = thread_def.get("name", "")
+                desc = thread_def.get("description", "")
+                if not title:
+                    continue
                 existing = db.execute("SELECT id FROM investigation_threads WHERE title = ?", (title,)).fetchone()
                 if not existing:
-                    db.execute("INSERT INTO investigation_threads (title, description) VALUES (?, ?)", (title, desc))
+                    profile_id = profile.name
+                    db.execute(
+                        "INSERT INTO investigation_threads (title, description, profile_id) VALUES (?, ?, ?)",
+                        (title, desc, profile_id)
+                    )
                     created += 1
             db.commit()
             db.close()
-            print(f"Seeded {created} threads ({len(SEED_THREADS) - created} already existed)")
+            print(f"Seeded {created} threads ({len(profile.threads) - created} already existed)")
 
         else:
             thread_p.print_help()

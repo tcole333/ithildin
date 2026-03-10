@@ -48,7 +48,7 @@ S3_BASE = "https://gt990datalake-rawdata.s3.us-east-1.amazonaws.com"
 INDEX_KEY = "Indices/990xmls/index_all_years_efiledata_xmls_created_on_2025-12-09.parquet"
 XML_PATTERN = "EfileData/XmlFiles/{object_id}_public.xml"
 
-USER_AGENT = "EpsteinOSINT/1.0 (academic research)"
+USER_AGENT = "OSINT-Research/1.0 (academic research)"
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS filings (

@@ -53,7 +53,7 @@ if env_path.exists():
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             key, val = line.split("=", 1)
-            os.environ.setdefault(key.strip(), val.strip().strip('"'))
+            os.environ[key.strip()] = val.strip().strip('"')
 
 BASE_URL = "https://api.company-information.service.gov.uk"
 
@@ -659,6 +659,118 @@ def cmd_officer_appointments(args):
         print(json.dumps(items, indent=2, default=str))
 
 
+def cmd_insolvency(args):
+    """Get insolvency cases for a company."""
+    data = _request(f"/company/{args.number}/insolvency")
+    if not data:
+        print(f"No insolvency data for company {args.number} (may not have any cases).")
+        return
+
+    company = _request(f"/company/{args.number}")
+    company_name = company.get("company_name", args.number) if company else args.number
+
+    cases = data.get("cases", [])
+    print(f"Insolvency cases for {company_name} ({args.number}): {len(cases)}")
+    print()
+
+    for i, case in enumerate(cases, 1):
+        case_number = case.get("number", i)
+        case_type = case.get("type", "?")
+        print(f"  Case #{case_number} — {case_type}")
+
+        dates = case.get("dates", [])
+        for d in dates:
+            print(f"    {d.get('type', '?')}: {d.get('date', '?')}")
+
+        notes = case.get("notes", [])
+        for n in notes:
+            print(f"    Note: {n}")
+
+        practitioners = case.get("practitioners", [])
+        for p in practitioners:
+            name = p.get("name", "?")
+            role = p.get("role", "?")
+            addr = _format_address(p.get("address", {}))
+            print(f"    Practitioner: {name} ({role})")
+            if addr:
+                print(f"      Address: {addr}")
+
+        print()
+
+    if args.json_out:
+        print(json.dumps(data, indent=2, default=str))
+
+
+def cmd_ingest_insolvency(args):
+    """Ingest insolvency data as findings into investigation.db."""
+    data = _request(f"/company/{args.number}/insolvency")
+    if not data:
+        print(f"No insolvency data for company {args.number}.")
+        return
+
+    company = _request(f"/company/{args.number}")
+    company_name = company.get("company_name", args.number) if company else args.number
+
+    cases = data.get("cases", [])
+    if not cases:
+        print(f"No insolvency cases for {company_name}.")
+        return
+
+    # Import findings tracker
+    try:
+        from tools.findings_tracker import add_finding
+    except ImportError:
+        from findings_tracker import add_finding
+
+    count = 0
+    for case in cases:
+        case_number = case.get("number", "?")
+        case_type = case.get("type", "unknown")
+
+        dates = case.get("dates", [])
+        date_str = ""
+        for d in dates:
+            if d.get("type") in ("wound-up-on", "petitioned-on", "due-to-be-dissolved-on"):
+                date_str = d.get("date", "")
+                break
+        if not date_str and dates:
+            date_str = dates[0].get("date", "")
+
+        practitioners = case.get("practitioners", [])
+        practitioner_names = [p.get("name", "?") for p in practitioners]
+
+        detail_parts = [f"Type: {case_type}", f"Case #{case_number}"]
+        for d in dates:
+            detail_parts.append(f"{d.get('type', '?')}: {d.get('date', '?')}")
+        if practitioner_names:
+            detail_parts.append(f"Practitioners: {', '.join(practitioner_names)}")
+        for p in practitioners:
+            addr = _format_address(p.get("address", {}))
+            if addr:
+                detail_parts.append(f"  {p.get('name', '?')} address: {addr}")
+
+        summary = f"UK insolvency case #{case_number} ({case_type}) for {company_name}"
+        detail = "; ".join(detail_parts)
+        source_url = f"https://find-and-update.company-information.service.gov.uk/company/{args.number}/insolvency"
+
+        finding_id = add_finding(
+            target_name=company_name,
+            finding_type="legal",
+            summary=summary,
+            detail=detail,
+            source_datasets="UK Companies House Insolvency API",
+            confidence="confirmed",
+            date_of_event=date_str or None,
+            evidence_ids=[source_url],
+            claim_type="direct_quote",
+            source_quotes=[f"Insolvency case #{case_number}, type: {case_type}"],
+        )
+        print(f"  Finding #{finding_id}: {summary}")
+        count += 1
+
+    print(f"\nIngested {count} insolvency cases for {company_name}")
+
+
 # ══════════════════════════════════════════════════════════
 # COMMANDS: Ingest into registry.db
 # ══════════════════════════════════════════════════════════
@@ -1109,6 +1221,14 @@ def main():
     p = sub.add_parser("ingest-entity", help="Ingest a company + officers + PSC into registry.db")
     p.add_argument("number", help="Company number")
 
+    # insolvency
+    p = sub.add_parser("insolvency", help="Get insolvency cases for a company")
+    p.add_argument("number", help="Company number")
+
+    # ingest-insolvency
+    p = sub.add_parser("ingest-insolvency", help="Ingest insolvency data as findings")
+    p.add_argument("number", help="Company number")
+
     # ingest-batch
     p = sub.add_parser("ingest-batch", help="Search and ingest all matching companies")
     p.add_argument("query")
@@ -1126,6 +1246,8 @@ def main():
         "filings": cmd_filings,
         "officer-search": cmd_officer_search,
         "officer-appointments": cmd_officer_appointments,
+        "insolvency": cmd_insolvency,
+        "ingest-insolvency": cmd_ingest_insolvency,
         "ingest-entity": cmd_ingest_entity,
         "ingest-batch": cmd_ingest_batch,
     }

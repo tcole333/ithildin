@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Findings and connections tracker for the Epstein OSINT investigation.
+Findings and connections tracker for OSINT investigations.
 
 Part of investigation.db (shared with lead_tracker.py).
 
@@ -37,39 +37,49 @@ VALID_CONFIDENCE = ["confirmed", "high", "medium", "low", "unverified"]
 VALID_RELATIONSHIP_TYPES = [
     "financial", "social", "legal", "intelligence", "employment",
     "familial", "corporate", "advisory", "political",
+    # Entity-to-entity relationship types
+    "owns", "controls", "funds", "subsidiary_of", "contracts_with",
+    "successor_to", "shares_officer", "supplies",
 ]
 VALID_STRENGTHS = ["strong", "medium", "weak", "circumstantial"]
 
 
+_schema_initialized = False
+
+
 def get_db():
     """Get database connection. Schema is created by lead_tracker._ensure_schema()."""
+    global _schema_initialized
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
 
-    # Ensure schema exists (lead_tracker creates all tables)
-    from tools.lead_tracker import _ensure_schema
-    _ensure_schema(db)
+    if not _schema_initialized:
+        from tools.lead_tracker import _ensure_schema
+        _ensure_schema(db)
+        _schema_initialized = True
 
     return db
 
 
 def _get_db_standalone():
     """Standalone DB init (when run directly, not as import)."""
+    global _schema_initialized
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
 
-    # Import from sibling module
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("lead_tracker", Path(__file__).parent / "lead_tracker.py")
-    lt = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(lt)
-    lt._ensure_schema(db)
+    if not _schema_initialized:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("lead_tracker", Path(__file__).parent / "lead_tracker.py")
+        lt = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(lt)
+        lt._ensure_schema(db)
+        _schema_initialized = True
 
     return db
 
@@ -77,6 +87,22 @@ def _get_db_standalone():
 # ── Findings CRUD ────────────────────────────────────────────
 
 
+VALID_SOURCES = [
+    "web_search", "doj_vol11", "duggan", "lmsband", "unified_db",
+    "fec", "edgar", "courtlistener", "990", "registry",
+    "usaspending", "sam_gov", "lobbying", "fara", "littlesis",
+    "gdelt", "aleph", "icij", "acris", "gleif", "opensanctions",
+    "shodan", "crtsh", "wayback", "urlscan", "medicaid",
+    "analysis_run", "offshorealert", "uk_companies_house",
+    "ca_sos", "tx_comptroller", "mi_lara", "nj_rev", "ma_corps",
+    "ny_dos", "nv_sos", "fl_sunbiz", "nm_sos", "dc_dlcp",
+    "usvi", "ds10_financial", "ucc", "faa", "sam_bulk",
+    "highergov", "documentcloud", "muckrock", "fincen",
+    "opencorporates", "zefix", "hudoc", "france_sirene",
+    "panama_rp", "investigations_db", "fdic",
+    "propublica_disclosures", "propublica_congress", "ppp",
+    "govinfo", "congress_gov",
+]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
 VALID_CORRECTION_TYPES = [
@@ -84,11 +110,19 @@ VALID_CORRECTION_TYPES = [
     "outdated", "refinement", "merge", "retraction",
 ]
 
+# Fields that can be corrected via update_finding() — whitelist to prevent SQL injection
+ALLOWED_CORRECT_FIELDS = {
+    "summary", "detail", "target_name", "date_of_event",
+    "confidence", "finding_type", "claim_type", "thread_id",
+    "source_datasets", "profile_id",
+}
+
 
 def add_finding(target_name, summary, finding_type=None, detail=None,
                 evidence_ids=None, source_datasets=None, confidence="medium",
                 date_of_event=None, lead_id=None, claim_type="inference",
-                source_quotes=None, thread_id=None, email_sender=None):
+                source_quotes=None, thread_id=None, email_sender=None,
+                profile_id=None):
     """Add a new finding with evidence references and provenance.
 
     Args:
@@ -96,8 +130,31 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
                        e.g. {"EFTA02336502": {"quote": "craft purchase 18M", "page": "p3"}}
         thread_id: Investigation thread ID to assign this finding to.
         email_sender: Email sender name to store on EFTA evidence rows.
+        profile_id: Investigation profile. Auto-detected from active profile if None.
     Returns: finding ID.
     """
+    if not source_datasets:
+        raise ValueError(
+            "source_datasets is required. Provide the data source(s) that produced this finding "
+            "(e.g., ['web_search'], ['fec'], ['edgar', 'registry'])."
+        )
+
+    # Warn on unknown source names (don't block — allows new sources without code changes)
+    if source_datasets:
+        for src in source_datasets:
+            if src not in VALID_SOURCES:
+                print(f"WARNING: Unknown source '{src}'. Known sources: {', '.join(sorted(VALID_SOURCES)[:10])}... "
+                      f"(If this is a new source, consider adding it to VALID_SOURCES in findings_tracker.py)",
+                      file=sys.stderr)
+
+    # Auto-detect profile_id from active investigation if not provided
+    if profile_id is None:
+        try:
+            from tools.investigation_context import get_active_profile_id
+            profile_id = get_active_profile_id() or None
+        except Exception:
+            pass
+
     # Resolve aliases to prevent future duplicates
     try:
         from tools.name_resolver import resolve_canonical
@@ -112,10 +169,11 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
         INSERT INTO findings (target_name, finding_type, summary, detail,
                              source_datasets, confidence, date_of_event, lead_id,
                              claim_type, verification_status, thread_id,
-                             quality_state, confidence_requested)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?)
+                             quality_state, confidence_requested, profile_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?)
     """, (target_name, finding_type, summary, detail,
-          sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence))
+          sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence,
+          profile_id))
     finding_id = cursor.lastrowid
 
     if evidence_ids:
@@ -136,12 +194,34 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
     return finding_id
 
 
+def _resolve_profile(profile_id=None, all_profiles=False):
+    """Resolve profile_id: explicit > active profile > None. Returns None if all_profiles."""
+    if all_profiles:
+        return None
+    if profile_id is not None:
+        return profile_id
+    try:
+        from tools.investigation_context import get_active_profile_id
+        return get_active_profile_id() or None
+    except ImportError:
+        try:
+            from investigation_context import get_active_profile_id
+            return get_active_profile_id() or None
+        except ImportError:
+            return None
+
+
 def list_findings(target=None, finding_type=None, confidence=None, limit=50,
-                  thread_id=None):
+                  thread_id=None, profile_id=None, all_profiles=False):
     """List findings with optional filters."""
     db = _get_db_standalone()
     conditions = []
     params = []
+
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+    if resolved_profile:
+        conditions.append("profile_id = ?")
+        params.append(resolved_profile)
 
     if target:
         conditions.append("target_name LIKE ?")
@@ -187,6 +267,12 @@ def get_finding(finding_id):
 def update_finding(finding_id, field, new_value, reason, correction_type="refinement",
                    corrected_by=None):
     """Update a finding field with correction audit trail. Returns True on success."""
+    if field not in ALLOWED_CORRECT_FIELDS:
+        raise ValueError(
+            f"Cannot correct field '{field}'. "
+            f"Allowed: {', '.join(sorted(ALLOWED_CORRECT_FIELDS))}"
+        )
+
     db = _get_db_standalone()
     finding = db.execute("SELECT * FROM findings WHERE id = ?", (finding_id,)).fetchone()
     if not finding:
@@ -378,28 +464,30 @@ def get_provenance(finding_id):
     return result
 
 
-def search_findings(query, thread_id=None):
+def search_findings(query, thread_id=None, profile_id=None, all_profiles=False):
     """Full-text search across findings. Wraps terms in quotes for safety."""
     db = _get_db_standalone()
     safe_query = '"' + query.replace('"', '""') + '"'
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+
+    conditions = ["findings_fts MATCH ?"]
+    params = [safe_query]
     if thread_id:
-        rows = db.execute("""
-            SELECT findings.*, findings_fts.rank
-            FROM findings_fts
-            JOIN findings ON findings.id = findings_fts.rowid
-            WHERE findings_fts MATCH ? AND findings.thread_id = ?
-            ORDER BY findings_fts.rank
-            LIMIT 30
-        """, (safe_query, thread_id)).fetchall()
-    else:
-        rows = db.execute("""
-            SELECT findings.*, findings_fts.rank
-            FROM findings_fts
-            JOIN findings ON findings.id = findings_fts.rowid
-            WHERE findings_fts MATCH ?
-            ORDER BY findings_fts.rank
-            LIMIT 30
-        """, (safe_query,)).fetchall()
+        conditions.append("findings.thread_id = ?")
+        params.append(thread_id)
+    if resolved_profile:
+        conditions.append("findings.profile_id = ?")
+        params.append(resolved_profile)
+
+    where = " AND ".join(conditions)
+    rows = db.execute(f"""
+        SELECT findings.*, findings_fts.rank
+        FROM findings_fts
+        JOIN findings ON findings.id = findings_fts.rowid
+        WHERE {where}
+        ORDER BY findings_fts.rank
+        LIMIT 30
+    """, params).fetchall()
     db.close()
     return [dict(r) for r in rows]
 
@@ -408,8 +496,17 @@ def search_findings(query, thread_id=None):
 
 
 def add_connection(person_a, person_b, relationship_type=None, description=None,
-                   evidence_ids=None, strength="medium", date_range=None, finding_id=None):
+                   evidence_ids=None, strength="medium", date_range=None, finding_id=None,
+                   profile_id=None):
     """Add a connection between two persons/entities."""
+    # Auto-detect profile_id from active investigation if not provided
+    if profile_id is None:
+        try:
+            from tools.investigation_context import get_active_profile_id
+            profile_id = get_active_profile_id() or None
+        except Exception:
+            pass
+
     # Resolve aliases to prevent future duplicates
     try:
         from tools.name_resolver import resolve_canonical
@@ -425,11 +522,22 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
         person_a, person_b = person_b, person_a
 
     cursor = db.execute("""
-        INSERT INTO connections (person_a, person_b, relationship_type, description,
-                                strength, date_range, finding_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id))
+        INSERT OR IGNORE INTO connections (person_a, person_b, relationship_type, description,
+                                strength, date_range, finding_id, profile_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id,
+          profile_id))
     conn_id = cursor.lastrowid
+    if conn_id == 0:
+        # Duplicate — find the existing connection id
+        existing = db.execute("""
+            SELECT id FROM connections
+            WHERE person_a = ? AND person_b = ?
+              AND COALESCE(relationship_type, '') = COALESCE(?, '')
+              AND COALESCE(profile_id, '') = COALESCE(?, '')
+        """, (person_a, person_b, relationship_type, profile_id)).fetchone()
+        if existing:
+            conn_id = existing["id"]
 
     if evidence_ids:
         for ev in evidence_ids:
@@ -444,9 +552,11 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
     return conn_id
 
 
-def get_connections(person, depth=1, relationship_type=None):
+def get_connections(person, depth=1, relationship_type=None, profile_id=None,
+                    all_profiles=False):
     """Get all connections for a person, optionally multi-hop."""
     db = _get_db_standalone()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
 
     visited = set()
     current_layer = {person.lower()}
@@ -463,6 +573,9 @@ def get_connections(person, depth=1, relationship_type=None):
         if relationship_type:
             conditions.append("relationship_type = ?")
             params.append(relationship_type)
+        if resolved_profile:
+            conditions.append("profile_id = ?")
+            params.append(resolved_profile)
 
         where = " AND ".join(conditions)
         rows = db.execute(f"SELECT * FROM connections WHERE {where}", params).fetchall()
@@ -483,11 +596,17 @@ def get_connections(person, depth=1, relationship_type=None):
     return all_connections
 
 
-def get_timeline(target=None, start_date=None, end_date=None, limit=100):
+def get_timeline(target=None, start_date=None, end_date=None, limit=100,
+                 profile_id=None, all_profiles=False):
     """Get findings ordered by event date."""
     db = _get_db_standalone()
     conditions = ["date_of_event IS NOT NULL AND date_of_event != ''"]
     params = []
+
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+    if resolved_profile:
+        conditions.append("profile_id = ?")
+        params.append(resolved_profile)
 
     if target:
         conditions.append("target_name LIKE ?")
@@ -508,31 +627,41 @@ def get_timeline(target=None, start_date=None, end_date=None, limit=100):
     return [dict(r) for r in rows]
 
 
-def get_stats():
+def get_stats(profile_id=None, all_profiles=False):
     """Findings and connections statistics."""
     db = _get_db_standalone()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
     stats = {}
 
-    stats["total_findings"] = db.execute("SELECT COUNT(*) FROM findings").fetchone()[0]
-    stats["total_connections"] = db.execute("SELECT COUNT(*) FROM connections").fetchone()[0]
+    f_where = "WHERE profile_id = ?" if resolved_profile else ""
+    c_where = "WHERE profile_id = ?" if resolved_profile else ""
+    f_params = [resolved_profile] if resolved_profile else []
+    c_params = [resolved_profile] if resolved_profile else []
+
+    stats["total_findings"] = db.execute(f"SELECT COUNT(*) FROM findings {f_where}", f_params).fetchone()[0]
+    stats["total_connections"] = db.execute(f"SELECT COUNT(*) FROM connections {c_where}", c_params).fetchone()[0]
+    if resolved_profile:
+        stats["profile_id"] = resolved_profile
 
     rows = db.execute(
-        "SELECT finding_type, COUNT(*) as cnt FROM findings GROUP BY finding_type"
+        f"SELECT finding_type, COUNT(*) as cnt FROM findings {f_where} GROUP BY finding_type", f_params
     ).fetchall()
     stats["by_type"] = {r["finding_type"]: r["cnt"] for r in rows}
 
     rows = db.execute(
-        "SELECT confidence, COUNT(*) as cnt FROM findings GROUP BY confidence"
+        f"SELECT confidence, COUNT(*) as cnt FROM findings {f_where} GROUP BY confidence", f_params
     ).fetchall()
     stats["by_confidence"] = {r["confidence"]: r["cnt"] for r in rows}
 
     rows = db.execute(
-        "SELECT target_name, COUNT(*) as cnt FROM findings GROUP BY target_name ORDER BY cnt DESC LIMIT 20"
+        f"SELECT target_name, COUNT(*) as cnt FROM findings {f_where} GROUP BY target_name ORDER BY cnt DESC LIMIT 20",
+        f_params
     ).fetchall()
     stats["top_targets"] = {r["target_name"]: r["cnt"] for r in rows}
 
     rows = db.execute(
-        "SELECT relationship_type, COUNT(*) as cnt FROM connections GROUP BY relationship_type"
+        f"SELECT relationship_type, COUNT(*) as cnt FROM connections {c_where} GROUP BY relationship_type",
+        c_params
     ).fetchall()
     stats["connection_types"] = {r["relationship_type"]: r["cnt"] for r in rows}
 
@@ -593,7 +722,7 @@ def format_connection(conn):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Epstein OSINT findings tracker")
+    parser = argparse.ArgumentParser(description="OSINT investigation findings tracker")
     subparsers = parser.add_subparsers(dest="command")
 
     # add
@@ -612,6 +741,7 @@ def main():
                        help="ref:quote pairs, e.g. 'EFTA02336502:craft purchase 18M'")
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
     add_p.add_argument("--email-sender", help="Email sender for EFTA evidence (e.g. 'Jeffrey Epstein')")
+    add_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
 
     # list
     list_p = subparsers.add_parser("list", help="List findings")
@@ -621,6 +751,8 @@ def main():
     list_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
     list_p.add_argument("--limit", type=int, default=50)
     list_p.add_argument("-v", "--verbose", action="store_true")
+    list_p.add_argument("--profile", help="Investigation profile (default: active)")
+    list_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(list_p)
 
     # show
@@ -629,27 +761,32 @@ def main():
     add_output_args(show_p)
 
     # connect
-    conn_p = subparsers.add_parser("connect", help="Add a connection")
-    conn_p.add_argument("--person-a", "-a", required=True)
-    conn_p.add_argument("--person-b", "-b", required=True)
+    conn_p = subparsers.add_parser("connect", help="Add a connection between any two nodes (persons, orgs, programs)")
+    conn_p.add_argument("--person-a", "--node-a", "-a", required=True)
+    conn_p.add_argument("--person-b", "--node-b", "-b", required=True)
     conn_p.add_argument("--type", choices=VALID_RELATIONSHIP_TYPES, dest="rel_type")
     conn_p.add_argument("--description", "-d")
     conn_p.add_argument("--evidence", "-e", nargs="+")
     conn_p.add_argument("--strength", choices=VALID_STRENGTHS, default="medium")
     conn_p.add_argument("--date-range")
     conn_p.add_argument("--finding-id", type=int)
+    conn_p.add_argument("--profile", help="Investigation profile ID (auto-detected if omitted)")
 
     # connections
-    conns_p = subparsers.add_parser("connections", help="Get connections")
-    conns_p.add_argument("person")
+    conns_p = subparsers.add_parser("connections", help="Get connections for a node (person, org, or program)")
+    conns_p.add_argument("person", metavar="NODE")
     conns_p.add_argument("--depth", type=int, default=1)
     conns_p.add_argument("--type", choices=VALID_RELATIONSHIP_TYPES, dest="rel_type")
+    conns_p.add_argument("--profile", help="Investigation profile (default: active)")
+    conns_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(conns_p)
 
     # search
     search_p = subparsers.add_parser("search", help="Full-text search")
     search_p.add_argument("query")
     search_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
+    search_p.add_argument("--profile", help="Investigation profile (default: active)")
+    search_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(search_p)
 
     # timeline
@@ -658,6 +795,8 @@ def main():
     tl_p.add_argument("--start")
     tl_p.add_argument("--end")
     tl_p.add_argument("--limit", type=int, default=100)
+    tl_p.add_argument("--profile", help="Investigation profile (default: active)")
+    tl_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(tl_p)
 
     # verify
@@ -706,6 +845,8 @@ def main():
 
     # stats
     stats_p = subparsers.add_parser("stats", help="Show statistics")
+    stats_p.add_argument("--profile", help="Investigation profile (default: active)")
+    stats_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(stats_p)
 
     args = parser.parse_args()
@@ -714,6 +855,11 @@ def main():
         sys.exit(1)
 
     if args.command == "add":
+        if not args.sources:
+            print("ERROR: --sources is required. Specify the data source(s) that produced this finding "
+                  "(e.g., --sources web_search, --sources fec edgar).", file=sys.stderr)
+            sys.exit(1)
+
         # Parse source quotes from CLI (format: "ref:quote text")
         source_quotes = None
         if getattr(args, "source_quote", None):
@@ -731,6 +877,7 @@ def main():
             source_quotes=source_quotes,
             thread_id=getattr(args, "thread_id", None),
             email_sender=getattr(args, "email_sender", None),
+            profile_id=getattr(args, "profile", None),
         )
         print(f"Created finding #{fid}: {args.target} - {args.summary}")
 
@@ -739,6 +886,8 @@ def main():
             target=args.target, finding_type=args.finding_type,
             confidence=args.confidence, limit=args.limit,
             thread_id=getattr(args, "thread_id", None),
+            profile_id=getattr(args, "profile", None),
+            all_profiles=getattr(args, "all_profiles", False),
         )
         if not write_output(findings, args, summary=f"findings list: {len(findings)} results"):
             if not findings:
@@ -764,11 +913,14 @@ def main():
             person_a=args.person_a, person_b=args.person_b, relationship_type=args.rel_type,
             description=args.description, evidence_ids=args.evidence,
             strength=args.strength, date_range=args.date_range, finding_id=args.finding_id,
+            profile_id=getattr(args, "profile", None),
         )
         print(f"Created connection #{cid}: {args.person_a} <-> {args.person_b}")
 
     elif args.command == "connections":
-        conns = get_connections(args.person, depth=args.depth, relationship_type=args.rel_type)
+        conns = get_connections(args.person, depth=args.depth, relationship_type=args.rel_type,
+                               profile_id=getattr(args, "profile", None),
+                               all_profiles=getattr(args, "all_profiles", False))
         if not write_output(conns, args, summary=f"connections for '{args.person}': {len(conns)} results"):
             if not conns:
                 print(f"No connections found for '{args.person}'")
@@ -778,7 +930,9 @@ def main():
                     print(format_connection(c))
 
     elif args.command == "search":
-        results = search_findings(args.query, thread_id=getattr(args, "thread_id", None))
+        results = search_findings(args.query, thread_id=getattr(args, "thread_id", None),
+                                  profile_id=getattr(args, "profile", None),
+                                  all_profiles=getattr(args, "all_profiles", False))
         if not write_output(results, args, summary=f"findings search '{args.query}': {len(results)} results"):
             if not results:
                 print(f"No findings matching '{args.query}'")
@@ -788,7 +942,9 @@ def main():
                     print(format_finding(f))
 
     elif args.command == "timeline":
-        events = get_timeline(target=args.target, start_date=args.start, end_date=args.end, limit=args.limit)
+        events = get_timeline(target=args.target, start_date=args.start, end_date=args.end, limit=args.limit,
+                              profile_id=getattr(args, "profile", None),
+                              all_profiles=getattr(args, "all_profiles", False))
         if not write_output(events, args, summary=f"timeline: {len(events)} events"):
             if not events:
                 print("No dated findings found.")
@@ -813,6 +969,10 @@ def main():
             print(f"Finding #{args.id} not found.")
 
     elif args.command == "correct":
+        if args.field not in ALLOWED_CORRECT_FIELDS:
+            print(f"ERROR: Cannot correct field '{args.field}'. "
+                  f"Allowed: {', '.join(sorted(ALLOWED_CORRECT_FIELDS))}", file=sys.stderr)
+            sys.exit(1)
         if update_finding(args.id, args.field, args.value, args.reason,
                          correction_type=args.correction_type, corrected_by=args.by):
             print(f"Corrected finding #{args.id}.{args.field}")
@@ -899,24 +1059,33 @@ def main():
                     print(f"         Evidence: {refs}")
 
     elif args.command == "stats":
-        stats = get_stats()
+        p_id = getattr(args, "profile", None)
+        p_all = getattr(args, "all_profiles", False)
+        stats = get_stats(profile_id=p_id, all_profiles=p_all)
         # Augment with audit stats
+        resolved_profile = _resolve_profile(p_id, p_all)
         db = _get_db_standalone()
+        profile_cond = " AND profile_id = ?" if resolved_profile else ""
+        profile_params = [resolved_profile] if resolved_profile else []
         total_corrections = db.execute("SELECT COUNT(*) FROM corrections").fetchone()[0]
         hallucinations = db.execute(
             "SELECT COUNT(*) FROM corrections WHERE correction_type = 'hallucination'"
         ).fetchone()[0]
         retracted = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE verification_status = 'retracted'"
+            f"SELECT COUNT(*) FROM findings WHERE verification_status = 'retracted'{profile_cond}",
+            profile_params
         ).fetchone()[0]
         verified = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE verification_status = 'verified'"
+            f"SELECT COUNT(*) FROM findings WHERE verification_status = 'verified'{profile_cond}",
+            profile_params
         ).fetchone()[0]
         unverified_ct = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE verification_status = 'unverified'"
+            f"SELECT COUNT(*) FROM findings WHERE verification_status = 'unverified'{profile_cond}",
+            profile_params
         ).fetchone()[0]
         disputed = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE verification_status = 'disputed'"
+            f"SELECT COUNT(*) FROM findings WHERE verification_status = 'disputed'{profile_cond}",
+            profile_params
         ).fetchone()[0]
         db.close()
         stats["audit"] = {

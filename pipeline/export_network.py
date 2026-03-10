@@ -92,7 +92,7 @@ def export_network(db_path: str | Path = DB_PATH) -> dict:
     conn_rows = conn.execute(
         """
         SELECT id, person_a, person_b, relationship_type, description,
-               strength, date_range, verification_status
+               strength, date_range, verification_status, profile_id
         FROM connections
         WHERE verification_status != 'retracted'
         ORDER BY id
@@ -128,6 +128,7 @@ def export_network(db_path: str | Path = DB_PATH) -> dict:
             "strength": row["strength"],
             "date_range": row["date_range"],
             "verified": row["verification_status"] == "verified",
+            "profile_ids": [row["profile_id"]] if row["profile_id"] else [],
         })
 
     # 3. Add entity_roles edges (person -> entity) with alias resolution
@@ -170,6 +171,7 @@ def export_network(db_path: str | Path = DB_PATH) -> dict:
             "strength": "strong",
             "date_range": f"{row['date_start'] or '?'} - {row['date_end'] or 'present'}",
             "verified": True,
+            "profile_ids": [],
         })
 
     # 4. Add entity_relations edges (entity -> entity)
@@ -199,6 +201,7 @@ def export_network(db_path: str | Path = DB_PATH) -> dict:
             "description": row["description"],
             "strength": "strong",
             "verified": True,
+            "profile_ids": [],
         })
 
     # 5. Add finding counts (resolve target names through aliases)
@@ -233,6 +236,10 @@ def export_network(db_path: str | Path = DB_PATH) -> dict:
             if strength_order.index(edge.get("strength", "medium")) < strength_order.index(existing.get("strength", "medium")):
                 existing["strength"] = edge["strength"]
             existing["verified"] = existing.get("verified", False) or edge.get("verified", False)
+            # Merge profile_ids
+            merged = set(existing.get("profile_ids", []))
+            merged.update(edge.get("profile_ids", []))
+            existing["profile_ids"] = sorted(merged)
         else:
             edge_map[key] = edge
 

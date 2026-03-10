@@ -11,6 +11,7 @@
   --color-moonlight: #c7d0d9;
   --color-icy: #8fd3e8;
   --color-ember: #d1b36a;
+  --color-sage: #a8c97a;
 
   --font-display: "Cinzel", serif;
   --font-ui: "Space Grotesk", sans-serif;
@@ -966,4 +967,72 @@ a:hover {
 @keyframes backlink-pulse {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
+}
+
+/* ---------------------------------------------------------------------------
+   Investigation Filter
+   --------------------------------------------------------------------------- */
+
+.inv-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.inv-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-ash);
+  color: var(--color-mithril);
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  background: transparent;
+  user-select: none;
+}
+
+.inv-pill:hover {
+  color: var(--color-moonlight);
+  border-color: rgba(143, 211, 232, 0.25);
+}
+
+.inv-pill--active {
+  color: var(--color-moonlight);
+  border-color: var(--inv-color, rgba(143, 211, 232, 0.35));
+  background: rgba(18, 21, 27, 0.7);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--inv-color, var(--color-icy)) 18%, transparent);
+}
+
+.inv-pill__count {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+
+.inv-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  border-radius: 3px;
+  border: 1px solid;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.inv-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }

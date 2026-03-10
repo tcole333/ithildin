@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SEC EDGAR full-text search (EFTS) wrapper for the Epstein OSINT investigation.
+SEC EDGAR full-text search (EFTS) wrapper for OSINT investigations.
 
 Searches the full text of all SEC filings. No authentication required,
 but a User-Agent header with contact info is mandatory.
@@ -49,6 +49,16 @@ try:
     from tools.output_util import add_output_args, write_output
 except ImportError:
     from output_util import add_output_args, write_output
+
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
 
 EFTS_URL = "https://efts.sec.gov/LATEST/search-index"
 SUBMISSIONS_URL = "https://data.sec.gov/submissions"
@@ -166,6 +176,8 @@ def cmd_search(args):
         results.sort(key=lambda h: h.get("_source", {}).get("file_date", ""), reverse=True)
     elif args.sort == "date-asc":
         results.sort(key=lambda h: h.get("_source", {}).get("file_date", ""))
+
+    _log(query, "edgar", total)
 
     # Check output options FIRST
     if write_output(data, args, summary=f"EDGAR search '{query}'"):

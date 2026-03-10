@@ -1,14 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import DossierIndex from '../../components/DossierIndex';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
 const contentDir = resolve(process.cwd(), '..', 'content');
 const dossierIndexPath = resolve(contentDir, 'dossiers', '_index.json');
+const investigationsPath = resolve(contentDir, 'investigations.json');
 
-let dossierIndex: Array<{ name: string; slug: string; stats: any; last_updated?: string }> = [];
+let dossierIndex: Array<{ name: string; slug: string; profile_ids: string[]; stats: any; last_updated?: string }> = [];
 if (existsSync(dossierIndexPath)) {
   dossierIndex = JSON.parse(readFileSync(dossierIndexPath, 'utf-8'));
+}
+
+let investigations: Array<{ id: string; name: string; description: string; color: string }> = [];
+if (existsSync(investigationsPath)) {
+  investigations = JSON.parse(readFileSync(investigationsPath, 'utf-8'));
 }
 ---
 <BaseLayout title="Dossiers">
@@ -31,32 +38,10 @@ if (existsSync(dossierIndexPath)) {
       </div>
     </section>
 
-    <div class="grid gap-3">
-      {dossierIndex.map((d, idx) => (
-        <a
-          href={`/dossiers/${d.slug}`}
-          class="surface p-5 transition reveal"
-          style={`--delay: ${Math.min(idx * 0.02, 0.4)}s;`}
-        >
-          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div class="space-y-2">
-              <div class="text-moon font-semibold">{d.name}</div>
-              {d.stats.finding_types && (
-                <div class="flex flex-wrap gap-2 text-xs text-mithril">
-                  {Object.entries(d.stats.finding_types).slice(0, 4).map(([type, count]) => (
-                    <span class="chip" style="letter-spacing: 0.14em;">{type}: {count}</span>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div class="flex flex-wrap gap-4 text-xs text-mithril font-mono">
-              <span>{d.stats.total_findings} findings</span>
-              <span>{d.stats.total_connections} connections</span>
-              <span>{d.stats.total_entities} entities</span>
-            </div>
-          </div>
-        </a>
-      ))}
-    </div>
+    <DossierIndex
+      client:load
+      dossiers={dossierIndex}
+      investigations={investigations}
+    />
   </div>
 </BaseLayout>

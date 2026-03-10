@@ -72,7 +72,7 @@ def ckan_request(params, max_retries=3):
     for attempt in range(max_retries):
         try:
             req = Request(url)
-            req.add_header("User-Agent", "Epstein-OSINT-Research/1.0")
+            req.add_header("User-Agent", "OSINT-Research/1.0")
             with urlopen(req, timeout=30) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
                 if not data.get("success"):

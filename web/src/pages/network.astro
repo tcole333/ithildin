@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import NetworkGraph from '../components/NetworkGraph';
+import NetworkPage from '../components/NetworkPage';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
 const contentDir = resolve(process.cwd(), '..', 'content');
 const networkPath = resolve(contentDir, 'network.json');
 const dossierIndexPath = resolve(contentDir, 'dossiers', '_index.json');
+const investigationsPath = resolve(contentDir, 'investigations.json');
 
 let networkData = { nodes: [], edges: [], stats: { total_nodes: 0, person_nodes: 0, entity_nodes: 0, total_edges: 0 } };
 if (existsSync(networkPath)) {
@@ -17,6 +18,11 @@ let dossierSlugs: string[] = [];
 if (existsSync(dossierIndexPath)) {
   const dossierIndex = JSON.parse(readFileSync(dossierIndexPath, 'utf-8'));
   dossierSlugs = dossierIndex.map((d: any) => d.slug).filter(Boolean);
+}
+
+let investigations: Array<{ id: string; name: string; description: string; color: string }> = [];
+if (existsSync(investigationsPath)) {
+  investigations = JSON.parse(readFileSync(investigationsPath, 'utf-8'));
 }
 ---
 <BaseLayout title="Network Graph">
@@ -31,10 +37,11 @@ if (existsSync(dossierIndexPath)) {
         </p>
       </div>
     </section>
-    <div class="surface p-4">
-      <div class="h-[70vh] md:h-[75vh] rounded-sm overflow-hidden">
-        <NetworkGraph data={networkData} dossierSlugs={dossierSlugs} client:only="react" />
-      </div>
-    </div>
+    <NetworkPage
+      client:only="react"
+      data={networkData}
+      dossierSlugs={dossierSlugs}
+      investigations={investigations}
+    />
   </div>
 </BaseLayout>

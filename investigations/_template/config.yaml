@@ -1,0 +1,74 @@
+# Investigation Profile Template
+# Copy this directory to investigations/<name>/ and fill in values.
+# See investigations/epstein/config.yaml for a complete example.
+
+# Unique identifier for this investigation (used in DB profile_id)
+name: ""
+
+# The primary subject of this investigation
+primary_subject: ""
+
+# Brief description of the investigation scope
+description: ""
+
+# Key persons for priority escalation in auto-lead generation.
+# When these names appear as entity officers, leads get high priority.
+# Use lowercase names.
+key_persons: []
+  # - "person name"
+
+# Known addresses for priority escalation.
+# When entities are registered at these addresses, leads get high priority.
+# Keys are partial address patterns (lowercase), values are descriptions.
+known_addresses: {}
+  # "123 main st": "Subject's primary office"
+
+# Investigation threads for organizing leads and findings.
+# Each thread groups related work under a theme.
+# targets: lowercase names that should auto-classify into this thread
+# keywords: regex patterns for auto-classification
+threads: []
+  # - id: 1
+  #   name: "Core Network"
+  #   description: "Direct relationships and infrastructure"
+  #   targets: []
+  #   keywords: []
+
+# Document corpus tools specific to this investigation.
+# Generic tools (EDGAR, FEC, CourtListener, etc.) are always available.
+# List here only case-specific document collections.
+corpus_tools: []
+  # - tool: "tools/query_example.py"
+  #   name: "Example Corpus"
+  #   description: "Description of this document collection"
+  #   commands: ["search", "document"]
+
+# Key dates in the investigation timeline.
+# These are loaded into the event_timeline system and used by timeline-analysis.
+key_dates: []
+  # - date: "2020-01-15"
+  #   event: "Subject arrested"
+  #   category: "legal"  # legal, financial, media, operational, political, milestone
+
+# Institutional pillars to seed into the pillar system.
+# Organizations that form the structural backbone of the network.
+seed_pillars: []
+  # - name: "Organization Name"
+  #   pillar_type: "banking"  # banking, legal, accounting, government, intelligence, media, philanthropy, academia, operations
+  #   sub_type: "investment_bank"
+  #   status: "active"  # active, dissolved, unknown
+  #   founded: "1990"
+  #   dissolved: null
+  #   jurisdiction: null
+  #   significance: "Why this institution matters to the investigation"
+
+# Evidence ID prefix for the primary document corpus (if any).
+# e.g., "EFTA" for DOJ Epstein docs, "SEC" for SEC filings.
+evidence_id_prefix: ""
+
+# Primary subject name to optionally exclude from network graph.
+# Removing the central node reveals the structure of the rest of the network.
+exclude_from_graph: ""
+
+# Source reliability overrides for this investigation.
+source_overrides: {}

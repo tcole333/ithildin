@@ -63,6 +63,13 @@ if (!dossier) {
   return Astro.redirect('/dossiers');
 }
 
+const investigationsPath = resolve(process.cwd(), '..', 'content', 'investigations.json');
+let investigationsData: Array<{ id: string; name: string; description: string; color: string }> = [];
+if (existsSync(investigationsPath)) {
+  investigationsData = JSON.parse(readFileSync(investigationsPath, 'utf-8'));
+}
+const invById = new Map(investigationsData.map(i => [i.id, i]));
+
 const backlinksPath = resolve(process.cwd(), '..', 'content', 'backlinks.json');
 let relatedDossiers: any[] = [];
 let relatedArticles: any[] = [];
@@ -155,6 +162,25 @@ const supportSummary = supportMetrics.total_sentences > 0
           {dossier.aliases?.length > 0 && (
             <div class="text-sm text-mithril font-body">
               Aliases: {dossier.aliases.join(', ')}
+            </div>
+          )}
+          {dossier.profile_ids?.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-1">
+              {dossier.profile_ids.map((pid: string) => {
+                const inv = invById.get(pid);
+                return inv ? (
+                  <span
+                    class="inv-badge"
+                    style={`border-color: ${inv.color}; color: ${inv.color};`}
+                  >
+                    {inv.name}
+                  </span>
+                ) : (
+                  <span class="inv-badge" style="border-color: var(--color-mithril); color: var(--color-mithril);">
+                    {pid}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>
@@ -422,7 +448,16 @@ const supportSummary = supportMetrics.total_sentences > 0
                   <h3 class="section-label mb-3">{type} ({findingsByType[type].length})</h3>
                   <div class="space-y-3">
                     {findingsByType[type].slice(0, 20).map((f: any) => (
-                      <FindingCard finding={f} />
+                      <div class="relative">
+                        {f.profile_id && invById.has(f.profile_id) && (
+                          <span
+                            class="inv-dot absolute top-3 right-3"
+                            style={`background-color: ${invById.get(f.profile_id)!.color};`}
+                            title={invById.get(f.profile_id)!.name}
+                          />
+                        )}
+                        <FindingCard finding={f} />
+                      </div>
                     ))}
                     {findingsByType[type].length > 20 && (
                       <details>
@@ -431,7 +466,16 @@ const supportSummary = supportMetrics.total_sentences > 0
                         </summary>
                         <div class="space-y-3 mt-3">
                           {findingsByType[type].slice(20).map((f: any) => (
-                            <FindingCard finding={f} />
+                            <div class="relative">
+                              {f.profile_id && invById.has(f.profile_id) && (
+                                <span
+                                  class="inv-dot absolute top-3 right-3"
+                                  style={`background-color: ${invById.get(f.profile_id)!.color};`}
+                                  title={invById.get(f.profile_id)!.name}
+                                />
+                              )}
+                              <FindingCard finding={f} />
+                            </div>
                           ))}
                         </div>
                       </details>

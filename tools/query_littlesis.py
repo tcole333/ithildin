@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LittleSis API wrapper for the Epstein OSINT investigation.
+LittleSis API wrapper for OSINT investigations.
 
 LittleSis is a free database of who-knows-who at the heights of business and
 government. Epstein is entity 36043 with 500+ pre-mapped relationships.
@@ -34,6 +34,16 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
+
 BASE_URL = "https://littlesis.org/api"
 
 CATEGORIES = {
@@ -60,7 +70,7 @@ def _request(path, params=None, retries=4):
 
     headers = {
         "Accept": "application/json",
-        "User-Agent": "OSINT-Research/1.0 (Epstein investigation)",
+        "User-Agent": "OSINT-Research/1.0",
     }
 
     for attempt in range(retries):
@@ -158,6 +168,7 @@ def cmd_search(args):
     entities = data.get("data", [])
     meta = data.get("meta", {})
     total = meta.get("pageCount", len(entities))
+    _log(args.query, "littlesis", len(entities))
 
     if write_output(data, args, summary=f"LittleSis search '{args.query}'"):
         return

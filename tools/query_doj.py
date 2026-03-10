@@ -21,6 +21,16 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
+
+def _log(query, source, count):
+    """Log search to prevent redundant queries."""
+    try:
+        from tools.lead_tracker import log_search
+        log_search(query, source, count)
+    except Exception:
+        pass
+
+
 DB_PATH = "/Users/travcole/projects/epstein-docs/output/documents.db"
 
 
@@ -125,6 +135,7 @@ def main():
 
     if args.command == "search":
         results = search(args.query, limit=args.limit, context_chars=args.context)
+        _log(args.query, "doj_vol11", len(results))
         if write_output(results, args, summary=f"DOJ search '{args.query}'"):
             pass
         elif args.json:

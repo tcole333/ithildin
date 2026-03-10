@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MuckRock FOIA API wrapper for the Epstein OSINT investigation.
+MuckRock FOIA API wrapper for OSINT investigations.
 
 Searches public FOIA requests on MuckRock, downloads released documents,
 and navigates the Epstein FOIA project (ID 507, 21 requests).
@@ -42,9 +42,9 @@ except ImportError:
 
 BASE_URL = "https://www.muckrock.com/api_v1"
 CDN_BASE = "https://cdn.muckrock.com"
-USER_AGENT = "OSINT-Research/1.0 (Epstein OSINT Investigation)"
+USER_AGENT = "OSINT-Research/1.0"
 RATE_LIMIT_DELAY = 1.0  # 1 request per second
-DEFAULT_PROJECT_ID = 507  # Epstein FOIA project
+DEFAULT_PROJECT_ID = None  # Set via --project or MUCKROCK_PROJECT_ID env var
 DEFAULT_DOWNLOAD_DIR = "datasets/muckrock"
 
 _last_request_time = 0
@@ -608,7 +608,7 @@ def cmd_agencies(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="MuckRock FOIA API tool for Epstein OSINT investigation",
+        description="MuckRock FOIA API tool for OSINT investigations",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

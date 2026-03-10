@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Network analysis primitives for the Epstein OSINT investigation.
+Network analysis primitives for OSINT investigations.
 
 Builds an in-memory graph from connections table + name alias resolution,
 then computes centrality, components, bridges, shortest paths, etc.
@@ -38,6 +38,25 @@ try:
     from tools.lead_tracker import get_db
 except ImportError:
     from lead_tracker import get_db
+
+try:
+    from tools.investigation_context import get_active_profile_id
+except ImportError:
+    try:
+        from investigation_context import get_active_profile_id
+    except ImportError:
+        def get_active_profile_id():
+            return ""
+
+
+def _resolve_profile(profile_id=None, all_profiles=False):
+    """Resolve profile_id: explicit > active profile > None."""
+    if all_profiles:
+        return None
+    if profile_id is not None:
+        return profile_id
+    return get_active_profile_id() or None
+
 
 VALID_METRICS = ["degree", "betweenness", "closeness"]
 
@@ -91,8 +110,17 @@ def _canonicalize(name, alias_map):
     return alias_map.get(lower, name.strip())
 
 
-def build_graph(db=None):
+def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
     """Build adjacency list from connections table with alias resolution.
+
+    Args:
+        db: Optional database connection.
+        as_of: Optional date string (YYYY-MM-DD). If provided, only include
+               connections where valid_from <= as_of and (valid_until IS NULL
+               or valid_until >= as_of). Connections without temporal data
+               are always included.
+        profile_id: Scope to connections from this profile. Defaults to active profile.
+        all_profiles: If True, include all profiles regardless of active profile.
 
     Returns:
         adj: dict[str, dict[str, list[dict]]] — adj[a][b] = list of connection records
@@ -103,13 +131,26 @@ def build_graph(db=None):
         db = get_graph_db()
         close_db = True
 
+    resolved = _resolve_profile(profile_id, all_profiles)
     alias_map = _load_aliases(db)
 
-    rows = db.execute("""
-        SELECT id, person_a, person_b, relationship_type, description,
-               strength, created_at
-        FROM connections
-    """).fetchall()
+    conditions = []
+    params = []
+    if resolved:
+        conditions.append("profile_id = ?")
+        params.append(resolved)
+    if as_of:
+        conditions.append("(valid_from IS NULL OR valid_from <= ?)")
+        conditions.append("(valid_until IS NULL OR valid_until >= ?)")
+        params.extend([as_of, as_of])
+
+    where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    cols = "id, person_a, person_b, relationship_type, description, strength, created_at"
+    if as_of:
+        cols += ", valid_from, valid_until"
+    rows = db.execute(f"""
+        SELECT {cols} FROM connections {where}
+    """, params).fetchall()
 
     adj = defaultdict(lambda: defaultdict(list))
     nodes = set()
@@ -130,6 +171,33 @@ def build_graph(db=None):
         adj[b][a].append(edge_data)
         nodes.add(a)
         nodes.add(b)
+
+    # Also ingest entity_relations (entity-to-entity links stored separately)
+    try:
+        er_rows = db.execute("""
+            SELECT er.id, ea.name AS entity_a, eb.name AS entity_b,
+                   er.relation_type, er.description
+            FROM entity_relations er
+            JOIN entities ea ON ea.id = er.entity_a_id
+            JOIN entities eb ON eb.id = er.entity_b_id
+        """).fetchall()
+        for r in er_rows:
+            a = _canonicalize(r["entity_a"], alias_map)
+            b = _canonicalize(r["entity_b"], alias_map)
+            if not a or not b or a == b:
+                continue
+            edge_data = {
+                "id": f"er:{r['id']}",
+                "type": r["relation_type"],
+                "description": r["description"],
+                "strength": "medium",
+            }
+            adj[a][b].append(edge_data)
+            adj[b][a].append(edge_data)
+            nodes.add(a)
+            nodes.add(b)
+    except sqlite3.OperationalError:
+        pass  # entity_relations table may not exist
 
     if close_db:
         db.close()
@@ -551,6 +619,126 @@ def find_cliques(adj, nodes, min_size=4):
     return cliques
 
 
+def detect_communities(adj, nodes, resolution=1.0):
+    """Detect communities using Louvain algorithm via networkx.
+
+    Falls back to connected components if networkx is not available.
+
+    Args:
+        adj: adjacency list
+        nodes: set of node names
+        resolution: Louvain resolution parameter (higher = more communities)
+
+    Returns:
+        list of communities, each a dict with: id, members, size, internal_edges, bridge_nodes
+    """
+    try:
+        import networkx as nx
+
+        G = nx.Graph()
+        G.add_nodes_from(nodes)
+        seen_edges = set()
+        for a in adj:
+            for b in adj[a]:
+                key = tuple(sorted([a, b]))
+                if key not in seen_edges:
+                    seen_edges.add(key)
+                    # Weight by number of connection records
+                    weight = len(adj[a][b])
+                    G.add_edge(a, b, weight=weight)
+
+        communities_gen = nx.community.louvain_communities(G, resolution=resolution, seed=42)
+        raw_communities = [sorted(c) for c in communities_gen]
+    except ImportError:
+        print("  Warning: networkx not installed. Falling back to connected components.")
+        raw_communities = find_components(adj, nodes)
+
+    raw_communities.sort(key=len, reverse=True)
+
+    results = []
+    for i, members in enumerate(raw_communities):
+        member_set = set(members)
+        # Count internal edges
+        internal_edges = 0
+        for m in members:
+            for neighbor in adj.get(m, {}):
+                if neighbor in member_set:
+                    internal_edges += 1
+        internal_edges //= 2  # each edge counted twice
+
+        # Find bridge nodes (members connected to other communities)
+        bridge_nodes = []
+        for m in members:
+            for neighbor in adj.get(m, {}):
+                if neighbor not in member_set:
+                    bridge_nodes.append(m)
+                    break
+
+        results.append({
+            "id": i,
+            "members": members,
+            "size": len(members),
+            "internal_edges": internal_edges,
+            "bridge_nodes": sorted(bridge_nodes),
+        })
+
+    return results
+
+
+def community_summary(adj, nodes, db=None, resolution=1.0, profile_id=None,
+                      all_profiles=False):
+    """Generate LLM-friendly community summaries with top findings per member.
+
+    Returns list of community dicts with member lists + top findings.
+    """
+    close_db = False
+    if db is None:
+        db = get_graph_db()
+        close_db = True
+
+    resolved = _resolve_profile(profile_id, all_profiles)
+    communities = detect_communities(adj, nodes, resolution=resolution)
+
+    # Load findings for summary
+    all_findings = {}
+    if resolved:
+        rows = db.execute("""
+            SELECT id, target_name, summary, finding_type, confidence
+            FROM findings WHERE profile_id = ? ORDER BY id DESC
+        """, (resolved,)).fetchall()
+    else:
+        rows = db.execute("""
+            SELECT id, target_name, summary, finding_type, confidence
+            FROM findings ORDER BY id DESC
+        """).fetchall()
+    for r in rows:
+        name = r["target_name"]
+        if name not in all_findings:
+            all_findings[name] = []
+        all_findings[name].append(dict(r))
+
+    if close_db:
+        db.close()
+
+    for comm in communities:
+        # Gather top findings for community members
+        top_findings = []
+        for member in comm["members"]:
+            member_findings = all_findings.get(member, [])
+            for f in member_findings[:3]:  # top 3 per member
+                top_findings.append(f)
+
+        # Sort by finding ID desc (most recent first), limit to 10
+        top_findings.sort(key=lambda f: f["id"], reverse=True)
+        comm["top_findings"] = top_findings[:10]
+        # Don't include full member list in summary to keep concise
+        comm["member_preview"] = comm["members"][:10]
+        if len(comm["members"]) > 10:
+            comm["member_preview"].append(f"... +{len(comm['members']) - 10} more")
+
+    return communities
+
+
 def ego_network(adj, center, depth=2):
     """Get ego network: all nodes within N hops of center."""
     distances = _bfs_distances(adj, center, max_depth=depth)
@@ -641,6 +829,8 @@ def cache_metrics(metrics, metric_type, run_id=None):
 
 def main():
     parser = argparse.ArgumentParser(description="Network analysis tools for investigation graph")
+    parser.add_argument("--profile", default=None, help="Investigation profile (default: active)")
+    parser.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     sub = parser.add_subparsers(dest="command")
 
     # centrality
@@ -648,6 +838,7 @@ def main():
     p_cent.add_argument("--metric", choices=VALID_METRICS, default="degree")
     p_cent.add_argument("--top", type=int, default=30)
     p_cent.add_argument("--cache", action="store_true", help="Cache results in graph_metrics table")
+    p_cent.add_argument("--as-of", help="Temporal snapshot date (YYYY-MM-DD)")
     add_output_args(p_cent)
 
     # components
@@ -709,13 +900,34 @@ def main():
     p_clust.add_argument("--top", type=int, default=50)
     add_output_args(p_clust)
 
+    # communities
+    p_comm = sub.add_parser("communities", help="Detect communities in the connection graph")
+    p_comm.add_argument("--resolution", type=float, default=1.0,
+                        help="Louvain resolution (higher = more communities)")
+    add_output_args(p_comm)
+
+    # community (single)
+    p_comm1 = sub.add_parser("community", help="Show details for a specific community")
+    p_comm1.add_argument("id", type=int, help="Community ID from 'communities' output")
+    p_comm1.add_argument("--resolution", type=float, default=1.0)
+    add_output_args(p_comm1)
+
+    # community-summary
+    p_csum = sub.add_parser("community-summary", help="LLM-friendly community summaries with findings")
+    p_csum.add_argument("--resolution", type=float, default=1.0)
+    add_output_args(p_csum)
+
     # stats
-    sub.add_parser("stats", help="Graph summary statistics")
+    p_stats = sub.add_parser("stats", help="Graph summary statistics")
+    p_stats.add_argument("--as-of", help="Temporal snapshot date (YYYY-MM-DD)")
 
     args = parser.parse_args()
+    p_id = getattr(args, "profile", None)
+    p_all = getattr(args, "all_profiles", False)
 
     if args.command == "centrality":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(as_of=getattr(args, 'as_of', None),
+                                 profile_id=p_id, all_profiles=p_all)
         if args.metric == "degree":
             metrics = degree_centrality(adj, nodes)
         elif args.metric == "betweenness":
@@ -742,7 +954,7 @@ def main():
             print(f"{r['rank']:>4}  {r['node']:<40} {r[args.metric]:>12.4f}")
 
     elif args.command == "components":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         components = find_components(adj, nodes)
         filtered = [c for c in components if len(c) >= args.min_size]
         results = [{"component_id": i + 1, "size": len(c), "members": c}
@@ -758,7 +970,7 @@ def main():
             print(f"  Component #{r['component_id']} ({r['size']} nodes): {members_preview}")
 
     elif args.command == "bridges":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         bridges = find_bridges(adj, nodes)
         if write_output(bridges, args, summary=f"bridge nodes ({len(bridges)})"):
             return
@@ -770,7 +982,7 @@ def main():
             print(f"  {b['node']:<40} degree={b['degree']:<3}  neighbors: {neighbor_preview}")
 
     elif args.command == "paths":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         path = _bfs_shortest_path(adj, args.source, args.target, max_depth=args.max_hops)
         if path:
             print(f"\nShortest path ({len(path) - 1} hops):")
@@ -794,7 +1006,7 @@ def main():
                 print(f"  Similar to '{args.target}': {', '.join(close_target[:5])}")
 
     elif args.command == "neighbors":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         if args.center not in nodes:
             # Try fuzzy match
             matches = [n for n in nodes if args.center.lower() in n.lower()]
@@ -814,7 +1026,7 @@ def main():
             print(f"  [{dist_marker}] {n['name']:<40} degree={n['degree']}")
 
     elif args.command == "holes":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         holes = find_structural_holes(adj, nodes, min_degree=args.min_degree)
         if write_output(holes, args, summary=f"structural holes (min degree {args.min_degree})"):
             return
@@ -826,7 +1038,7 @@ def main():
                   f"{h['neighbor_density']:>11.3f}")
 
     elif args.command == "cliques":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         cliques = find_cliques(adj, nodes, min_size=args.min_size)
         if write_output(cliques, args, summary=f"cliques (min size {args.min_size})"):
             return
@@ -854,7 +1066,7 @@ def main():
             print(f"No people with career arcs at {args.pillar_type} institutions")
             sys.exit(0)
 
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         # Filter to only nodes that are in pillar_people
         sub_nodes = {n for n in nodes if n.lower() in pillar_people}
         sub_adj = {}
@@ -935,7 +1147,7 @@ def main():
 
     elif args.command == "triangles":
         db = get_graph_db()
-        adj, nodes = build_graph(db)
+        adj, nodes = build_graph(db, profile_id=p_id, all_profiles=p_all)
         triads = find_open_triads(
             adj, nodes, db=db, top=args.top,
             min_strength=args.min_strength, rel_type=args.rel_type,
@@ -950,7 +1162,7 @@ def main():
                   f"{t['closure_score']:>6.3f} {t['pivot_count']:>6}")
 
     elif args.command == "clustering":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         coefficients = clustering_coefficient(adj, nodes, min_degree=args.min_degree)
         ranked = sorted(coefficients.items(), key=lambda x: x[1], reverse=True)[:args.top]
         results = [{"rank": i + 1, "node": n, "clustering_coefficient": v, "degree": len(adj.get(n, {}))}
@@ -964,8 +1176,66 @@ def main():
         for r in results:
             print(f"{r['rank']:>4}  {r['node']:<40} {r['clustering_coefficient']:>11.4f} {r['degree']:>6}")
 
+    elif args.command == "communities":
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
+        communities = detect_communities(adj, nodes, resolution=args.resolution)
+        if write_output(communities, args, summary=f"communities (resolution={args.resolution})"):
+            return
+        print(f"\nCommunities Detected: {len(communities)} (resolution={args.resolution})")
+        print(f"{'ID':>3}  {'Size':>5}  {'Internal':>8}  {'Bridges':>7}  Members")
+        print("-" * 90)
+        for c in communities:
+            preview = ", ".join(c["members"][:5])
+            if len(c["members"]) > 5:
+                preview += f" ... (+{len(c['members']) - 5})"
+            print(f"{c['id']:>3}  {c['size']:>5}  {c['internal_edges']:>8}  "
+                  f"{len(c['bridge_nodes']):>7}  {preview}")
+
+    elif args.command == "community":
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
+        communities = detect_communities(adj, nodes, resolution=args.resolution)
+        target_id = args.id
+        if target_id >= len(communities):
+            print(f"ERROR: Community #{target_id} not found. Max ID: {len(communities) - 1}")
+            sys.exit(1)
+        c = communities[target_id]
+        if write_output(c, args, summary=f"community #{target_id}"):
+            return
+        print(f"\nCommunity #{target_id} ({c['size']} members, {c['internal_edges']} internal edges)")
+        print(f"\nMembers:")
+        for m in c["members"]:
+            degree = len(adj.get(m, {}))
+            is_bridge = "B" if m in c["bridge_nodes"] else " "
+            print(f"  [{is_bridge}] {m:<40} degree={degree}")
+        if c["bridge_nodes"]:
+            print(f"\nBridge nodes (connected to other communities):")
+            for b in c["bridge_nodes"]:
+                external = [n for n in adj.get(b, {}) if n not in set(c["members"])]
+                print(f"  {b} → {', '.join(external[:5])}")
+
+    elif args.command == "community-summary":
+        db = get_graph_db()
+        adj, nodes = build_graph(db, profile_id=p_id, all_profiles=p_all)
+        summaries = community_summary(adj, nodes, db=db, resolution=args.resolution,
+                                      profile_id=p_id, all_profiles=p_all)
+        if write_output(summaries, args, summary=f"community summaries"):
+            return
+        for c in summaries:
+            if c["size"] < 2:
+                continue
+            print(f"\n{'='*60}")
+            print(f"Community #{c['id']} — {c['size']} members, "
+                  f"{c['internal_edges']} internal edges, {len(c['bridge_nodes'])} bridges")
+            print(f"Members: {', '.join(c['member_preview'])}")
+            if c["top_findings"]:
+                print(f"Key findings:")
+                for f in c["top_findings"][:5]:
+                    conf = f.get("confidence", "?")
+                    print(f"  F#{f['id']} [{conf}] {f['target_name']}: {f['summary'][:70]}")
+
     elif args.command == "stats":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(as_of=getattr(args, 'as_of', None),
+                                 profile_id=p_id, all_profiles=p_all)
         s = graph_stats(adj, nodes)
         print("Graph Statistics")
         print("=" * 40)

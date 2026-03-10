@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Infrastructure request queue for the Epstein OSINT investigation.
+Infrastructure request queue for OSINT investigations.
 
 Tracks new data sources, registries, tool improvements, and feature requests
 discovered by agents during investigation. Part of investigation.db.

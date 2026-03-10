@@ -23,8 +23,9 @@ def run(cmd: list[str], label: str) -> bool:
 
 def main():
     steps = [
-        (["uv", "run", "python", str(PIPELINE_DIR / "export_dossiers.py")], "Export dossiers"),
-        (["uv", "run", "python", str(PIPELINE_DIR / "curate_dossier.py"), "--all"], "Curate dossiers"),
+        (["uv", "run", "python", str(PIPELINE_DIR / "export_investigations.py")], "Export investigations"),
+        (["uv", "run", "python", str(PIPELINE_DIR / "export_dossiers.py"), "--all-profiles"], "Export dossiers"),
+        (["uv", "run", "python", str(PIPELINE_DIR / "curate_dossier.py"), "--all", "--all-profiles"], "Curate dossiers"),
         (["uv", "run", "python", str(PIPELINE_DIR / "export_network.py")], "Export network graph"),
         (["uv", "run", "python", str(PIPELINE_DIR / "export_financials.py")], "Export financial flows"),
         (["uv", "run", "python", str(PIPELINE_DIR / "story_clustering.py")], "Export story clusters"),
