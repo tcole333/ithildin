@@ -22,6 +22,22 @@ except ImportError:
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
 OUTPUT_DIR = Path(__file__).parent.parent / "content" / "dossiers"
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+try:
+    from tools.investigation_context import get_active_profile_id
+except ImportError:
+    def get_active_profile_id():
+        return ""
+
+
+def _resolve_profile(profile_id=None, all_profiles=False):
+    """Resolve profile_id: explicit > active profile > None."""
+    if all_profiles:
+        return None
+    if profile_id is not None:
+        return profile_id
+    return get_active_profile_id() or None
+
 
 def slugify(name: str) -> str:
     import re
@@ -90,7 +106,8 @@ def _resolve(name: str, raw_to_canonical: dict[str, str]) -> str:
     return raw_to_canonical.get(name.lower(), name)
 
 
-def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list[str]) -> dict:
+def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list[str],
+                  profile_id: str | None = None) -> dict:
     """Export all data for a single target, aggregating across all name variants."""
 
     # Build placeholders for all name variants
@@ -99,16 +116,18 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
     # Findings with evidence (across all name variants)
     findings = []
     last_updated = None
+    profile_cond = " AND f.profile_id = ?" if profile_id else ""
+    profile_params = [profile_id] if profile_id else []
     rows = conn.execute(
         f"""
         SELECT f.id, f.finding_type, f.summary, f.detail, f.source_datasets,
                f.confidence, f.date_of_event, f.claim_type, f.verification_status,
                f.created_at, f.target_name
         FROM findings f
-        WHERE f.target_name IN ({placeholders}) AND f.verification_status != 'retracted'
+        WHERE f.target_name IN ({placeholders}) AND f.verification_status != 'retracted'{profile_cond}
         ORDER BY f.date_of_event IS NULL, f.date_of_event, f.created_at
         """,
-        all_names,
+        all_names + profile_params,
     ).fetchall()
 
     for row in rows:
@@ -138,19 +157,20 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
     raw_to_canonical, _ = _load_alias_groups(conn)
 
     for name in all_names:
+        conn_params = [name, name] + profile_params
         conn_rows = conn.execute(
-            """
+            f"""
             SELECT c.id, c.person_a, c.person_b, c.relationship_type, c.description,
                    c.strength, c.date_range, c.verification_status, c.created_at
             FROM connections c
-            WHERE (c.person_a = ? OR c.person_b = ?) AND c.verification_status != 'retracted'
+            WHERE (c.person_a = ? OR c.person_b = ?) AND c.verification_status != 'retracted'{profile_cond.replace('f.', 'c.')}
             ORDER BY
                 CASE c.strength
                     WHEN 'strong' THEN 1 WHEN 'medium' THEN 2
                     WHEN 'weak' THEN 3 WHEN 'circumstantial' THEN 4 ELSE 5
                 END, c.created_at
             """,
-            (name, name),
+            conn_params,
         ).fetchall()
 
         for row in conn_rows:
@@ -253,7 +273,8 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
     }
 
 
-def get_targets(conn: sqlite3.Connection, min_findings: int = 5) -> list[tuple[str, list[str]]]:
+def get_targets(conn: sqlite3.Connection, min_findings: int = 5,
+                profile_id: str | None = None) -> list[tuple[str, list[str]]]:
     """Get canonical targets with all their name variants.
 
     Returns: [(canonical_name, [all_names_including_canonical]), ...]
@@ -261,14 +282,25 @@ def get_targets(conn: sqlite3.Connection, min_findings: int = 5) -> list[tuple[s
     raw_to_canonical, canonical_to_aliases = _load_alias_groups(conn)
 
     # Get all target names with finding counts
-    rows = conn.execute(
-        """
-        SELECT target_name, COUNT(*) as cnt
-        FROM findings
-        WHERE verification_status != 'retracted'
-        GROUP BY target_name
-        """,
-    ).fetchall()
+    if profile_id:
+        rows = conn.execute(
+            """
+            SELECT target_name, COUNT(*) as cnt
+            FROM findings
+            WHERE verification_status != 'retracted' AND profile_id = ?
+            GROUP BY target_name
+            """,
+            (profile_id,),
+        ).fetchall()
+    else:
+        rows = conn.execute(
+            """
+            SELECT target_name, COUNT(*) as cnt
+            FROM findings
+            WHERE verification_status != 'retracted'
+            GROUP BY target_name
+            """,
+        ).fetchall()
 
     # Group by canonical name
     canonical_counts: dict[str, int] = {}
@@ -306,19 +338,24 @@ def main():
     parser.add_argument("--list", action="store_true", help="List targets that would be exported")
     parser.add_argument("--incremental", action="store_true", help="Skip dossiers with no new updates")
     parser.add_argument("--curate", action="store_true", help="Run curation pipeline after export")
+    parser.add_argument("--profile", default=None, help="Investigation profile (default: active)")
+    parser.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     args = parser.parse_args()
 
+    resolved_profile = _resolve_profile(args.profile, args.all_profiles)
     conn = get_connection()
 
     if args.list:
-        targets = get_targets(conn, args.min_findings)
+        targets = get_targets(conn, args.min_findings, profile_id=resolved_profile)
         print(f"{len(targets)} targets with >= {args.min_findings} findings:")
         for canonical, all_names in targets:
             # Sum findings across all name variants
+            profile_cond = " AND profile_id = ?" if resolved_profile else ""
+            profile_params_list = [resolved_profile] if resolved_profile else []
             total = sum(
                 conn.execute(
-                    "SELECT COUNT(*) FROM findings WHERE target_name = ? AND verification_status != 'retracted'",
-                    (n,),
+                    f"SELECT COUNT(*) FROM findings WHERE target_name = ? AND verification_status != 'retracted'{profile_cond}",
+                    [n] + profile_params_list,
                 ).fetchone()[0]
                 for n in all_names
             )
@@ -337,7 +374,7 @@ def main():
         all_names = sorted(set(all_names))
         targets = [(canonical, all_names)]
     else:
-        targets = get_targets(conn, args.min_findings)
+        targets = get_targets(conn, args.min_findings, profile_id=resolved_profile)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -345,7 +382,7 @@ def main():
     redirects = {}  # old_slug -> canonical_slug
 
     for canonical, all_names in targets:
-        dossier = export_target(conn, canonical, all_names)
+        dossier = export_target(conn, canonical, all_names, profile_id=resolved_profile)
         out_path = args.output_dir / f"{dossier['slug']}.json"
 
         dossier_for_index = dossier
