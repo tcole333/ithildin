@@ -1,6 +1,7 @@
 ---
 name: dispatch
 description: Show queue depths and suggest which agents to launch next
+user_invocable: true
 ---
 
 # /dispatch
@@ -69,6 +70,36 @@ print(f'total_leads={total_leads}')
 "
 ```
 
+Then query tier distribution:
+
+```bash
+uv run python -c "
+import sqlite3
+db = sqlite3.connect('investigation.db')
+
+# Tier distribution (from tags)
+try:
+    tiers = db.execute(\"\"\"
+        SELECT tag_value, COUNT(*) as cnt
+        FROM tags
+        WHERE table_name='leads' AND tag_type='operational' AND tag_value LIKE 'tier:%'
+        GROUP BY tag_value
+    \"\"\").fetchall()
+    for t in tiers:
+        tier_name = t[0].replace('tier:', '')
+        print(f'tier_{tier_name}={t[1]}')
+except:
+    print('tier_scan=0')
+    print('tier_standard=0')
+    print('tier_deep_dive=0')
+
+# Source coverage (from search_log)
+source_coverage = db.execute('SELECT source, COUNT(*) as cnt FROM search_log GROUP BY source ORDER BY cnt DESC LIMIT 10').fetchall()
+for s in source_coverage:
+    print(f'source_{s[0]}={s[1]}')
+"
+```
+
 Then query analysis state:
 
 ```bash
@@ -105,6 +136,15 @@ ANALYSIS:
    /timeline-analysis  +<N> findings since last run (threshold=30, cooldown=72h) [READY/wait]
    /systemic-analysis  +<N> findings since last run (threshold=50, cooldown=168h) [READY/wait]
    Hypotheses: <N> proposed, <M> investigating
+
+INVESTIGATION DEPTH:
+   Tier 0 (scan):        <N> leads
+   Tier 1 (standard):    <N> leads
+   Tier 2 (deep dive):   <N> leads
+   Untiered:             <N> leads
+
+SOURCE COVERAGE (search_log):
+   <source>: <N> queries | <source>: <N> queries | ...
 
 RECENT (7d):
    <N> leads completed

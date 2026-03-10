@@ -1,6 +1,7 @@
 ---
 name: curate-dossier
 description: Generate narrative wiki-style dossier curation with sectioned prose and contextual visualizations
+user_invocable: true
 ---
 
 # /curate-dossier
@@ -9,7 +10,7 @@ Generate encyclopedic wiki-style narrative for dossier entries. Produces a `lead
 
 ## Arguments
 
-- Required: target name (e.g., `/curate-dossier "Leon Black"`)
+- Required: target name (e.g., `/curate-dossier "Person Name"`)
 - Optional `--batch N`: curate N dossiers with the most findings that lack narratives
 - Optional `--refresh`: regenerate narratives even if they already exist
 - Optional `--dry-run`: show section suggestions without generating
@@ -48,8 +49,8 @@ Key fields to use:
 ### 3. Research Context
 
 ```bash
-uv run python tools/findings_tracker.py search --target "TARGET_NAME" --output $WORKDIR/findings.json
-uv run python tools/lead_tracker.py search --query "TARGET_NAME" --output $WORKDIR/leads.json
+uv run python tools/findings_tracker.py search "TARGET_NAME" --output $WORKDIR/findings.json
+uv run python tools/lead_tracker.py search "TARGET_NAME" --output $WORKDIR/leads.json
 ```
 
 ### 4. Generate Narrative
@@ -74,7 +75,7 @@ The lead should work for people, entities, AND events — adapt the structure to
 
 #### `system_role` (plain text, 1-2 sentences)
 
-What this entity reveals about how the network operates. The "lens onto the machine" principle.
+What this subject reveals about how power, money, or institutions operate. For people: what structural role they play. For entities: what function they serve. For events: what mechanism they demonstrate.
 
 #### `sections` (array of objects)
 
@@ -118,6 +119,51 @@ Each section has:
 
 Check `content/models/` for which analytical models apply. Use model IDs.
 
+### Editorial Standards
+
+Dossiers are reference material, not investigative journalism. Apply Wikipedia's core content policies:
+
+#### Verifiability
+- **Every factual claim must be supported by a citation in the same sentence.** No exceptions.
+- Claims supported only by synthesis findings (claim_type: synthesis, confidence: medium) must be attributed: "According to analysis of [X findings]..." or "Network analysis identified..."
+- If a fact cannot be cited to a primary or secondary source, it does not belong in the dossier.
+
+#### No Original Research
+- Do not draw conclusions beyond what the cited sources state.
+- Synthesis findings from `/generate-hunches`, `/systemic-analysis`, `/timeline-analysis` may be referenced but must be clearly labeled as analytical conclusions, not established facts.
+- Do not present hypotheses as findings. If a hypothesis is relevant, state it as: "Hypothesis #N proposes that..." with the hypothesis ID cited.
+
+#### Neutral Point of View
+- State facts without editorializing. Not "a troubling pattern of conflicts" but "six officials held financial positions in companies they regulated [Finding #N]."
+- Attribute characterizations to their source: "Ethics experts described the arrangement as 'unprecedented' [Finding #N]" — not "the arrangement was unprecedented."
+- Avoid: "suggests," "raises questions," "appears to," "may indicate" — unless quoting a source that uses these phrases. Instead, state the documented facts and let the reader draw conclusions.
+- Reserve speculative framing for `open_questions` only.
+
+#### Claim Type Mapping
+- `direct_quote` / `confirmed` findings → state as fact with citation
+- `paraphrase` / `high` confidence → state as fact with citation
+- `inference` / `medium` confidence → attribute: "Analysis of [source] indicates..."
+- `synthesis` → attribute: "Cross-reference of [N] findings shows..."
+- `user_provided` → attribute to the providing source
+- Hypotheses → "Hypothesis #N proposes..." (never state as fact)
+
+#### Specificity Over Generality
+- Dollar amounts, dates, entity names, jurisdiction, case numbers — always include when available
+- Not "significant government contracts" but "$970.5M in federal contracts in 2025 [Finding #N]"
+- Not "multiple agencies" but "DOE, FBI, Interior, and SSA [Finding #N]"
+
+### Evidence Quality Tiers
+
+The curation pipeline produces `curation.evidence_quality` with three tiers:
+
+- **Strong** (`strong_ids`): Primary source evidence — government filings, court documents, corporate registries, official correspondence. Cite as fact.
+- **Moderate** (`moderate_ids`): Structured data — USASpending queries, SAM records, FEC data, API results. Cite with source attribution: "Federal spending records show..." or "FEC filings indicate..."
+- **Weak** (`weak_ids`): Web search results, news article paraphrases, secondary reporting without primary verification. Cite with publication attribution: "According to [publication]..." or "As reported by [outlet]..."
+
+When a section depends primarily on weak-sourced findings, add to `open_questions`: "Primary source verification needed for [topic] — current evidence relies on secondary reporting."
+
+Prefer strong and moderate findings over weak ones when multiple findings cover the same fact. If a strong finding and a weak finding say the same thing, cite the strong one.
+
 ### 5. Citation Format
 
 Dossier content uses the same citation system as articles. Use these inline tokens:
@@ -141,6 +187,7 @@ Dossier content uses the same citation system as articles. Use these inline toke
 - The page auto-generates a Sources footnote section from all citations
 - Finding citations resolve to their evidence sources (e.g., `[Finding #6]` → EFTA links)
 - Use bracket tokens only. Do **not** use parenthetical formats like `(Finding #6, EFTA02576529)`.
+- Support spans are sentence-level: every factual sentence should include explicit citation tokens in that same sentence.
 
 ### 6. Write JSON
 
@@ -162,7 +209,7 @@ dossier["curation"]["applicable_models"] = applicable_models
 path.write_text(json.dumps(dossier, indent=2, default=str))
 ```
 
-If you run this from shell, avoid `uv run python -c "..."` for large HTML strings. Dollar amounts like `$250,000` will be shell-expanded and corrupted.
+If you run this from shell, avoid `python -c "..."` for large HTML strings. Dollar amounts like `$250,000` will be shell-expanded and corrupted.
 
 ### 7. Quality Checks
 
@@ -170,8 +217,11 @@ Before writing:
 - [ ] Lead is standalone — makes sense without reading sections
 - [ ] Every section has prose paragraphs, not bullet lists
 - [ ] People/entities mentioned link to their dossiers where they exist (`<a href="/dossiers/SLUG">Name</a>`)
-- [ ] **Every factual claim has an inline citation** — `[EFTAxxxxxx]`, `[Finding #N]`, etc.
-- [ ] No confidence inflation — inferences not stated as confirmed facts
+- [ ] **Every factual claim has an inline citation in the same sentence**
+- [ ] Sentence-local support: no factual sentence depends on citations in neighboring sentences
+- [ ] **No speculative language** — no "suggests," "raises questions," "may indicate" unless quoting a source
+- [ ] **Synthesis/inference findings attributed** — not stated as confirmed fact
+- [ ] **Hypotheses cited by ID** — "Hypothesis #N proposes..." not stated as established
 - [ ] Sections match what the data supports — don't force sections with thin evidence
 - [ ] Viz assignments are contextual — ego_network with relationships, timeline with chronological content
 - [ ] Tone is encyclopedic reference throughout — not narrative journalism, not data dump
@@ -187,3 +237,12 @@ When `--batch N`:
 ## Output
 
 Updates dossier JSON in place. Prints summary of sections generated.
+
+After writing, run support-coverage metrics:
+
+```bash
+cd /Users/travcole/projects/osint-research/web
+npm run report:support-coverage:changed -- --base-ref HEAD~1 --head-ref HEAD
+```
+
+Inspect unsupported sentences, orphan citations, and source fanout before publishing.

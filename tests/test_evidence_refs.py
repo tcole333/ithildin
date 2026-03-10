@@ -65,6 +65,23 @@ class EvidenceRefCanonicalizationTests(unittest.TestCase):
             ["https://www.sec.gov/edgar/search/#/q=CIK+901359+Form4+2021-07-20"],
         )
 
+    def test_normalizes_hyphenated_990_refs_with_suffixes(self):
+        value = "990:46-1868892:2021:PartVII"
+        self.assertEqual(
+            canonicalize_evidence_ref(value),
+            ["990:461868892"],
+        )
+
+    def test_normalizes_courtlistener_opinion_and_docket_variants(self):
+        value = "CL:opinion-3111133,CL:docket:69710653"
+        self.assertEqual(
+            canonicalize_evidence_ref(value),
+            [
+                "https://www.courtlistener.com/opinion/3111133/",
+                "CL:69710653",
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

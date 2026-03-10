@@ -1,6 +1,7 @@
 ---
 name: triage-leads
 description: Process pending_triage leads — deduplicate, prioritize, link, and promote to open
+user_invocable: true
 ---
 
 # /triage-leads
@@ -12,6 +13,14 @@ Process a batch of `pending_triage` leads created by `auto_leads.py`. Deduplicat
 - No arguments: process the next batch (up to 20 leads)
 - `--batch-size N`: process N leads instead of default 20
 - `--dry-run`: preview triage decisions without modifying the DB
+
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
 
 ## Process
 
@@ -114,28 +123,20 @@ Adjust priority based on:
 
 | Signal | Priority Change |
 |--------|----------------|
-| Target is key person (Wexner, Black, Indyke, etc.) | Raise to `high` |
+| Target is a key person from the investigation profile | Raise to `high` |
 | Financial angle (trust, LLC, fund, transfer) | Raise by one level |
 | Entity with 3+ roles in entity_roles | Raise to `medium` minimum |
 | Target has 5+ existing findings | Lower by one level |
 | Generic cross-ref with low-value target | Lower to `low` |
 | Address-only lead at non-key address | Lower to `low` |
 
-Key persons to check (raise priority if target matches):
-- Wexner, Black, Indyke, Kahn, Groff, Maxwell, Dubin, Summers
-- Ruemmler, Barak, Rod-Larsen, Bannon, Wolff, Thomas
+Elevate priority for key persons listed in the active investigation profile (loaded via `investigation_context.py`). Also elevate:
 - Any person with 10+ email correspondences
-- Thread-specific key persons may vary — check the thread description for guidance
+- Thread-specific key persons — check the thread description for guidance
 
 #### 3c-bis. Thread Assignment
 
-If a lead clearly belongs to an investigation thread, assign it:
-- Mega Group targets (Lauder, Steinhardt, Bronfman, Lender, Fisher, Crown) → thread_id=2
-- Deutsche Bank / banking targets → thread_id=3
-- Israeli intelligence targets (Barak, Carbyne, Maxwell family) → thread_id=4
-- Apollo / Leon Black financial targets → thread_id=5
-- Gulf state targets (Al Thani, Alsabbagh, Broidy, Nader) → thread_id=6
-- General Epstein network → thread_id=1 (or leave NULL if unclear)
+If a lead clearly belongs to an investigation thread, assign it based on the investigation profile's thread definitions (loaded via `investigation_context.py`). Match targets to threads by their described scope and key persons. Leave thread_id NULL if the match is unclear.
 
 Threads with fewer findings should get a slight priority boost to balance coverage across threads.
 
@@ -229,28 +230,28 @@ After processing the batch, summarize:
 ### Priority Changes
 | Lead # | Title | Old Priority | New Priority | Reason |
 |--------|-------|-------------|-------------|--------|
-| #1235  | Cross-ref registry: Wexner Trust | medium | high | Key person target |
+| #1235  | Cross-ref registry: Example Trust | medium | high | Key person target |
 
 ### Links Created
-- Lead #1236 ↔ Lead #1237 (shared target: "457 Madison")
+- Lead #1236 ↔ Lead #1237 (shared target: "123 Main St")
 ```
 
 ## Triage Philosophy
 
 ### What to Dead-End
 - Exact or near-exact duplicates of existing leads
-- Cross-refs for well-known public entities (Goldman Sachs, Harvard) with no specific Epstein angle
-- Address cross-refs for generic addresses (c/o, PO Box, major commercial buildings not in key addresses list)
+- Cross-refs for well-known public entities (Goldman Sachs, Harvard) with no specific investigation angle
+- Address cross-refs for generic addresses (c/o, PO Box, major commercial buildings not in known investigation addresses)
 
 ### What to Keep
 - Any lead targeting a person with < 3 findings
 - Any lead with a financial or corporate angle
-- Any lead targeting an entity at a known Epstein address
-- Cross-refs for officers at 2+ Epstein-linked entities
+- Any lead targeting an entity at a known investigation address (from the profile's known_addresses)
+- Cross-refs for officers at 2+ investigation-linked entities
 
 ### What to Raise Priority
-- Leads connected to the financial flow investigation (Black, STC, Deutsche Bank)
-- Leads targeting the 5-tier corporate architecture entities
+- Leads connected to financial flow investigation threads
+- Leads targeting entities in the corporate architecture under investigation
 - Cross-refs that could reveal new lateral connections
 
 ## Autonomy Level

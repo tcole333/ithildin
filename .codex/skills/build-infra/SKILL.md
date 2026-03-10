@@ -1,6 +1,7 @@
 ---
 name: build-infra
 description: Build new data source tools and infrastructure from the infra request queue
+user_invocable: true
 ---
 
 # /build-infra
@@ -12,6 +13,14 @@ Claim an infrastructure request and build the tool, or scan for infrastructure g
 - No arguments: claim the next open infra request and build it
 - `scan`: scan for infrastructure gaps and create requests
 - `<ID>`: claim a specific infra request by ID
+
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
 
 ## Modes
 
@@ -92,11 +101,11 @@ Follow existing tool patterns. Reference similar tools in `tools/` for structure
 ```python
 #!/usr/bin/env python3
 """
-<Source Name> integration for Epstein OSINT investigation.
+<Source Name> integration for OSINT investigation.
 
 Usage:
-    uv run python tools/query_<source>.py search "query"
-    uv run python tools/query_<source>.py entity <id>
+    python tools/query_<source>.py search "query"
+    python tools/query_<source>.py entity <id>
 """
 import argparse
 import sys
@@ -125,13 +134,13 @@ if __name__ == "__main__":
 
 ### 4. Test the Tool
 
-Run the tool against known targets to verify:
+Run the tool against known targets to verify (use key_persons from the investigation profile):
 ```bash
 # Test basic search
-uv run python tools/query_<source>.py search "Epstein" --output /tmp/test-search.json
+uv run python tools/query_<source>.py search "{TARGET}" --output /tmp/test-search.json
 
 # Test with known entities
-uv run python tools/query_<source>.py search "Leon Black" --output /tmp/test-black.json
+uv run python tools/query_<source>.py search "{TARGET}" --output /tmp/test-entity.json
 
 # Verify output format
 uv run python -c "import json; d=json.load(open('/tmp/test-search.json')); print(len(d), type(d))"

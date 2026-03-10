@@ -1,6 +1,7 @@
 ---
 name: ingest-source
 description: Add a new data source to the investigation infrastructure
+user_invocable: true
 ---
 
 # /ingest-source
@@ -25,7 +26,7 @@ For downloadable datasets:
 ```bash
 # HuggingFace datasets
 pip install datasets  # if needed
-uv run python -c "from datasets import load_dataset; ds = load_dataset('<ID>'); ds.save_to_disk('datasets/<name>')"
+python -c "from datasets import load_dataset; ds = load_dataset('<ID>'); ds.save_to_disk('datasets/<name>')"
 
 # Or direct download
 curl -L <URL> -o datasets/<filename>
@@ -75,7 +76,7 @@ See existing wrappers for reference:
 Test the new source against core targets. Pull the top entities dynamically from the database rather than using a hardcoded list:
 ```bash
 # Get the most-investigated targets from existing findings
-uv run python -c "
+python -c "
 import sqlite3
 db = sqlite3.connect('investigation.db')
 rows = db.execute('''
@@ -91,7 +92,7 @@ Also always include the primary subject and core inner circle members as search 
 ### 6. Create Leads from Findings
 For any significant new results, create leads:
 ```bash
-uv run python tools/lead_tracker.py add \
+python tools/lead_tracker.py add \
     --title "New data in <source>: <description>" \
     --category document \
     --priority medium \

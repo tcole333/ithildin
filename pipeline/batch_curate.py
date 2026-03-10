@@ -9,12 +9,14 @@ Usage:
 
 import argparse
 import json
-import os
 from pathlib import Path
 
 DOSSIER_DIR = Path("content/dossiers")
 AGENT_CONTEXT_DIR = Path("content/agent-context")
 MODELS_DIR = Path("content/models")
+SUMMARY_LIMIT = 240
+DETAIL_LIMIT = 180
+EVIDENCE_REF_LIMIT = 4
 
 
 def get_dossiers_needing_curation():
@@ -52,6 +54,77 @@ def get_model_ids():
     return sorted(ids)
 
 
+def truncate(text: str, limit: int) -> str:
+    """Trim long strings for prompt readability."""
+    text = (text or "").strip()
+    if len(text) <= limit:
+        return text
+    return text[: limit - 3].rstrip() + "..."
+
+
+def format_evidence_refs(evidence: list[dict], limit: int = EVIDENCE_REF_LIMIT) -> str:
+    """Summarize evidence refs without dumping full evidence payloads."""
+    refs = []
+    for ev in evidence or []:
+        ref = (ev.get("evidence_ref") or "").strip()
+        if ref:
+            refs.append(ref)
+    if not refs:
+        return ""
+    shown = refs[:limit]
+    suffix = "" if len(refs) <= limit else f" (+{len(refs) - limit} more)"
+    return ", ".join(shown) + suffix
+
+
+def format_finding_summary(finding: dict, key_ids: set[int]) -> str:
+    """Format one finding for the prompt."""
+    fid = finding.get("id", "?")
+    ftype = finding.get("finding_type") or finding.get("type") or "?"
+    conf = finding.get("confidence", "?")
+    claim_type = finding.get("claim_type", "?")
+    verification = finding.get("verification_status", "?")
+    summary = truncate(finding.get("summary", ""), SUMMARY_LIMIT)
+    detail = truncate(finding.get("detail", ""), DETAIL_LIMIT)
+    evidence_refs = format_evidence_refs(finding.get("evidence", []))
+    is_key = " [KEY]" if fid in key_ids else ""
+
+    lines = [
+        f"  - Finding #{fid} [{ftype}/{conf}/{claim_type}/{verification}]{is_key}: {summary}"
+    ]
+    if detail:
+        lines.append(f"    Detail: {detail}")
+    if evidence_refs:
+        lines.append(f"    Evidence refs: {evidence_refs}")
+    return "\n".join(lines)
+
+
+def format_connection_summary(connection: dict) -> str:
+    """Format one connection for the prompt."""
+    left = (
+        connection.get("person_a")
+        or connection.get("source_name")
+        or connection.get("source")
+        or "?"
+    )
+    right = (
+        connection.get("person_b")
+        or connection.get("target_name")
+        or connection.get("target")
+        or "?"
+    )
+    ctype = connection.get("connection_type") or connection.get("relationship_type") or "?"
+    strength = connection.get("strength") or connection.get("confidence") or "?"
+    detail = truncate(connection.get("detail") or connection.get("description") or "", DETAIL_LIMIT)
+    evidence_refs = format_evidence_refs(connection.get("evidence", []))
+
+    lines = [f"  - {left} <-> {right} ({ctype}, {strength})"]
+    if detail:
+        lines.append(f"    Detail: {detail}")
+    if evidence_refs:
+        lines.append(f"    Evidence refs: {evidence_refs}")
+    return "\n".join(lines)
+
+
 def generate_prompt(slug: str) -> str:
     """Generate a curation prompt for a given dossier slug."""
     dossier_path = DOSSIER_DIR / f"{slug}.json"
@@ -73,31 +146,64 @@ def generate_prompt(slug: str) -> str:
 
     # Get key finding IDs
     key_ids = c.get("key_finding_ids", [])
+    key_id_set = {fid for fid in key_ids if isinstance(fid, int)}
 
-    # Get findings summary
+    # Index findings and connections for section evidence packs
     findings = d.get("findings", [])
-    findings_text = ""
-    for f_item in findings[:20]:  # Top 20 findings
-        fid = f_item.get("id", "?")
-        ftype = f_item.get("type", "?")
-        conf = f_item.get("confidence", "?")
-        summary = f_item.get("summary", "")[:200]
-        evidence = f_item.get("evidence", "")
-        is_key = " [KEY]" if fid in key_ids else ""
-        findings_text += f"  - Finding #{fid} [{ftype}/{conf}]{is_key}: {summary}\n"
-        if evidence:
-            findings_text += f"    Evidence: {evidence}\n"
-
-    # Get connections summary
     connections = d.get("connections", [])
-    conn_text = ""
-    for conn in connections[:20]:
-        pa = conn.get("person_a", "?")
-        pb = conn.get("person_b", "?")
-        ct = conn.get("connection_type", "?")
-        strength = conn.get("strength", "?")
-        detail = conn.get("detail", "")[:150]
-        conn_text += f"  - {pa} <-> {pb} ({ct}, {strength}): {detail}\n"
+    findings_by_id = {f.get("id"): f for f in findings if f.get("id") is not None}
+    connections_by_id = {c_item.get("id"): c_item for c_item in connections if c_item.get("id") is not None}
+
+    # Key findings summary
+    key_findings_text = ""
+    for fid in key_ids:
+        finding = findings_by_id.get(fid)
+        if finding:
+            key_findings_text += format_finding_summary(finding, key_id_set) + "\n"
+    if not key_findings_text:
+        key_findings_text = "  - No automated key findings available.\n"
+
+    # Section-scoped evidence packs
+    section_evidence_text = ""
+    for section in suggestions:
+        section_evidence_text += f"### {section['title']} [{section['id']}]\n"
+        section_evidence_text += f"- Guidance: {section.get('guidance', '')}\n"
+        section_evidence_text += f"- Viz: {section.get('viz', 'null')}\n"
+
+        section_finding_ids = section.get("finding_ids", [])
+        if section_finding_ids:
+            section_evidence_text += "- Findings:\n"
+            for fid in section_finding_ids:
+                finding = findings_by_id.get(fid)
+                if finding:
+                    section_evidence_text += format_finding_summary(finding, key_id_set) + "\n"
+        else:
+            section_evidence_text += "- Findings: none selected\n"
+
+        section_connection_ids = section.get("connection_ids", [])
+        if section_connection_ids:
+            section_evidence_text += "- Connections:\n"
+            for conn_id in section_connection_ids:
+                conn = connections_by_id.get(conn_id)
+                if conn:
+                    section_evidence_text += format_connection_summary(conn) + "\n"
+        else:
+            section_evidence_text += "- Connections: none selected\n"
+
+        section_evidence_text += "\n"
+
+    # Evidence quality tiers from automated curation pipeline
+    evidence_quality = c.get("evidence_quality", {})
+    evidence_quality_text = ""
+    if evidence_quality:
+        evidence_quality_text += f"- Summary: {evidence_quality.get('summary', 'n/a')}\n"
+        evidence_quality_text += (
+            f"- Strong IDs: {evidence_quality.get('strong_ids', [])}\n"
+            f"- Moderate IDs: {evidence_quality.get('moderate_ids', [])}\n"
+            f"- Weak IDs: {evidence_quality.get('weak_ids', [])}\n"
+        )
+    else:
+        evidence_quality_text = "- No evidence quality summary available.\n"
 
     # Get entity roles
     entities = d.get("entities", [])
@@ -116,6 +222,30 @@ def generate_prompt(slug: str) -> str:
     model_ids = get_model_ids()
     models_text = ", ".join(model_ids)
 
+    # Key identifiers
+    key_identifiers = c.get("key_identifiers", {})
+    jurisdictions = key_identifiers.get("jurisdictions", [])
+    officers = key_identifiers.get("officers", [])
+    key_identifier_text = ""
+    if jurisdictions:
+        key_identifier_text += f"- Jurisdictions: {', '.join(jurisdictions)}\n"
+    if officers:
+        key_identifier_text += "- Officers / roles:\n"
+        for officer in officers:
+            role = officer.get("role", "?")
+            entity = officer.get("entity", "?")
+            start = officer.get("start")
+            end = officer.get("end")
+            date_bits = []
+            if start:
+                date_bits.append(f"start={start}")
+            if end:
+                date_bits.append(f"end={end}")
+            suffix = f" ({', '.join(date_bits)})" if date_bits else ""
+            key_identifier_text += f"  - {role} at {entity}{suffix}\n"
+    if not key_identifier_text:
+        key_identifier_text = "- No key identifiers available.\n"
+
     # Read agent context if available
     agent_ctx_path = AGENT_CONTEXT_DIR / f"{slug}.md"
     agent_ctx = ""
@@ -132,11 +262,17 @@ def generate_prompt(slug: str) -> str:
 
 ## Key Finding IDs: {key_ids}
 
-## Findings (top 20)
-{findings_text}
+## Key Findings (automated selection)
+{key_findings_text}
 
-## Connections (top 20)
-{conn_text}
+## Section Evidence Packs
+{section_evidence_text}
+
+## Evidence Quality
+{evidence_quality_text}
+
+## Key Identifiers
+{key_identifier_text}
 
 ## Entity Roles
 {entity_text}
@@ -148,6 +284,17 @@ def generate_prompt(slug: str) -> str:
 {models_text}
 
 ## YOUR TASK
+
+Before writing, read the full dossier JSON at `content/dossiers/{slug}.json`.
+The summaries above are scaffolding, not the full record.
+Use the full dossier's findings, connections, entities, section suggestions, and evidence quality tiers.
+
+Editorial rules from the current curation workflow:
+- Every factual claim must have an inline citation in the same sentence
+- Dossiers are reference material, not narrative journalism
+- Do not present inference or synthesis findings as confirmed facts; attribute them
+- Prefer strong/moderate evidence over weak evidence when multiple findings support the same fact
+- If a claim depends only on weak evidence, either attribute it clearly or move it to `open_questions`
 
 Generate narrative content for this dossier. Write the following fields:
 
@@ -219,7 +366,7 @@ IMPORTANT: Use triple-quoted strings for the HTML content. Escape any quotes pro
 IMPORTANT: Do NOT use `python -c "..."` to write narrative HTML containing dollar amounts (`$250,000` etc). Shell expansion will corrupt numbers.
 IMPORTANT: The content is HTML rendered via set:html — use <p>, <a>, <strong>, <em> tags.
 IMPORTANT: Keep sections substantive (2-4 paragraphs each) but focused. Quality over quantity.
-IMPORTANT: Do NOT read the full dossier JSON yourself — all the data you need is provided above.
+IMPORTANT: Read the full dossier JSON before writing so you do not miss high-signal findings outside the automated summaries.
 """
     return prompt
 

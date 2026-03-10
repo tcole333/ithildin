@@ -1,527 +1,274 @@
 ---
 name: deep-investigate
 description: Orchestrated multi-source investigation using parallel sub-agents
+user_invocable: true
 ---
 
 # /deep-investigate
 
-Launch an orchestrated investigation of a person, entity, or topic using parallel sub-agents that each cover a dedicated source category. This ensures comprehensive coverage — no source gets skipped because the agent "found enough" in the corpus.
+Adaptive multi-wave investigation using parallel sub-agents. The orchestrator reasons about agent allocation based on actual data volume, investigation context, and target type — no fixed templates.
 
 ## Arguments
 
 - Required: target name or topic (e.g., `/deep-investigate Ron Soffer`, `/deep-investigate Barkmere Group Ltd`)
-- Optional context after the name: `/deep-investigate Ron Soffer — French/Israeli lawyer referenced in SoftBank caper, Weingarten considering deploying him Jan 2019`
+- Optional context after the name: `/deep-investigate Ron Soffer — French/Israeli lawyer referenced in SoftBank caper`
 
-## Architecture
+## Architecture: 5 Phases
 
-You are the **orchestrator**. You do NOT search sources yourself. Instead you:
+```
+Phase 0: Recon Probe (~30 seconds)
+    ↓ source heat map + existing knowledge
+Phase 1: Planning & Agent Design (orchestrator reasons about strategy)
+    ↓ agent plan with specific scopes + rationale
+Phase 2: Research Wave 1 (focused Sonnet agents, each with narrow scope)
+    ↓ reports + findings + entity registrations
+Phase 3: Adaptive Wave 2+ (designed from Wave 1 findings)
+    ↓ reports + findings
+Phase 4: Synthesis (read all reports, record synthesis, auto_leads, graph)
+```
 
-1. Assess the target and determine what's already known
-2. Write focused prompts for 4 parallel sub-agents
-3. Launch all 4 sub-agents simultaneously using the Task tool
-4. Wait for all to complete
-5. Synthesize their results — identify corroboration, contradictions, and gaps
-6. Record final findings and spawn follow-up leads
+## Phase 0: Recon
 
-## Process
-
-### 0. Session Setup — Prevent File Collisions
-
-Create a unique working directory for this investigation. This prevents parallel `/deep-investigate` runs from overwriting each other's temp files.
+### 0a. Session Setup
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
 echo "Session workdir: $WORKDIR"
 ```
 
-Store this path. ALL `--output` paths and report file paths in this session use this directory instead of `/tmp/`. When writing sub-agent prompts below, substitute the actual `WORKDIR` path everywhere you see `[WORKDIR]`.
-
-### 1. Pre-Flight: Assess the Target
-
-Before launching agents, gather what's already known:
+### 0b. Load Investigation Context
 
 ```bash
-# Existing findings
-uv run python tools/findings_tracker.py search "<TARGET>"
-
-# Existing leads
-uv run python tools/lead_tracker.py search "<TARGET>"
-
-# Existing entity records
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-for r in db.execute('SELECT id, name FROM entities WHERE name LIKE ?', ('%TARGET%',)).fetchall():
-    print(r)
-for r in db.execute('SELECT id, person_name, role FROM entity_roles WHERE person_name LIKE ?', ('%TARGET%',)).fetchall():
-    print(r)
-"
+uv run python tools/investigation_context.py show
 ```
 
-Determine:
-- Is this a **person** or **entity**?
-- What's the investigative context? (Why are we looking at this target?)
-- What's already known? (Avoid duplicating existing findings)
-- What hypotheses should the agents test?
+### 0c. Run Recon Probe
 
-Write a **target briefing** — a 2-3 sentence summary of who/what this is and why it matters. Every sub-agent gets this briefing.
-
-### 2. Launch 4 Parallel Sub-Agents
-
-Use the Task tool to launch ALL FOUR agents simultaneously in a single message. Each agent gets:
-- The target briefing
-- Its specific source mandate
-- Instructions to record findings via the CLI tools
-- The reminder: "Zero results is investigatively valuable — record negative searches too"
-- **CRITICAL: Use `--output [WORKDIR]/<agent>-<query>.json` on ALL search commands** to keep context lean. Read the JSON files only when you need specific details.
-
-#### Agent A: Document Corpus
-
-**Sources**: DOJ Vol 11, DugganUSA, LMSBAND, Unified DB, Epstein Files 20K, HF Parquet, Barak emails
-
-**Prompt template**:
-```
-You are investigating [TARGET]. [THREAD CONTEXT — e.g. "This is part of the Mega Group investigation thread." or "This is part of the Epstein Core Network thread." if applicable]
-
-TARGET BRIEFING: [2-3 sentences of context]
-
-ALREADY KNOWN: [List existing findings or "None"]
-
-YOUR MANDATE: Search ALL local document databases exhaustively for any mention of this target. Use alternate spellings, name variants, and associated terms.
-
-IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
-
-REQUIRED SEARCHES:
-1. uv run python tools/query_doj.py search "[TARGET]" --limit 30 --output [WORKDIR]/a-doj.json
-2. uv run python tools/query_doj.py search "[VARIANT]" --limit 20 --output [WORKDIR]/a-doj-var.json
-3. uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/a-duggan.json
-4. uv run python tools/query_lmsband.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-lmsband.json
-5. uv run python tools/query_lmsband.py entities "[TARGET]" --output [WORKDIR]/a-lmsband-ent.json
-6. uv run python tools/query_lmsband.py cooccurrence "[TARGET]" --top 20 --output [WORKDIR]/a-lmsband-cooc.json
-7. uv run python tools/query_unified.py emails "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-email.json
-8. uv run python tools/query_unified.py docs "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-docs.json
-9. uv run python tools/query_unified.py entities "[TARGET]" --output [WORKDIR]/a-unified-ent.json
-10. uv run python tools/query_unified.py triples --actor "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-trip-act.json
-11. uv run python tools/query_unified.py triples --target "[TARGET]" --limit 20 --output [WORKDIR]/a-unified-trip-tgt.json
-12. uv run python tools/ingest_epstein_20k.py search "[TARGET]" --limit 20 --output [WORKDIR]/a-20k.json
-
-For EVERY document found, read the full text:
-uv run python tools/query_doj.py efta EFTA_ID --text
-
-Extract: dates, names, financial amounts, relationships, exact quotes.
-
-RECORD findings using:
-uv run python tools/findings_tracker.py add --target "[TARGET]" --type TYPE \
-  --summary "..." --evidence EFTA_ID --claim-type direct_quote \
-  --source-quote "EFTA_ID:exact quote" --confidence LEVEL
-
-Record connections using:
-uv run python tools/findings_tracker.py connect --person-a "..." --person-b "..." \
-  --type TYPE --detail "..." --evidence EFTA_ID --confidence LEVEL
-
-If zero results: record a finding noting the search scope and negative result — absence of evidence IS evidence when the corpus has 331K pages.
-
-PROACTIVE SOURCE DISCOVERY:
-As you search, be curious. If documents reference data sources we don't have tools for, or mention databases/registries/archives that could be queried, note them. For example:
-- A document mentions a filing in a court we don't cover → note the court and docket
-- An email references a foreign corporate registry entry → note the registry and entity
-- A record mentions a dataset or database we haven't ingested → note what it is and where to get it
-At the end of your investigation, list any SOURCE GAPS you identified and create infrastructure requests for valuable ones:
-uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
-
-FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-a.md using this format:
-# Agent A Report: [TARGET]
-## Status: completed | partial | blocked
-## Findings Added
-[count] findings (IDs: list them)
-## Connections Added
-[count] connections
-## Key Discoveries
-- [1-2 sentence summary of each significant finding]
-## Negative Results
-- [Sources searched with zero results — investigatively significant]
-## Source Gaps Identified
-- [New data sources discovered during investigation]
-## Follow-Up Leads Created
-- Lead #X: [description]
-
-Use uv run python for all commands.
+```bash
+uv run python tools/recon_probe.py probe "TARGET" --output $WORKDIR/recon.json
 ```
 
-#### Agent B: Corporate, Financial & Property Records
+Read the output. This shows which sources have data and how much.
 
-**Sources**: Corporate Registry (FL/NY/NM/PA/UK/USVI), SEC EDGAR, NYC ACRIS, FEC, ProPublica 990, UCC, FAA, LDA Lobbying, FARA, GLEIF, OpenSanctions, DS10 Financial
+### 0d. Check Existing Knowledge
 
-**Prompt template**:
-```
-You are investigating [TARGET]. [THREAD CONTEXT if applicable]
-
-TARGET BRIEFING: [2-3 sentences of context]
-
-ALREADY KNOWN: [List existing findings or "None"]
-
-YOUR MANDATE: Search ALL corporate, financial, property, and regulatory databases for this target. You are looking for: corporate registrations, SEC filings, property records, political donations, lobbying activity, foreign agent registrations, nonprofit filings, UCC liens, and aircraft registrations.
-
-IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
-
-CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/b-doj.json
-2. uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/b-duggan.json
-3. uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/b-lmsband.json
-4. uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/b-unified.json
-For EVERY document found, read the full text with: uv run python tools/query_doj.py efta EFTA_ID --text
-Extract: dates, names, financial amounts, relationships, exact quotes.
-
-REQUIRED SEARCHES (do ALL of these — use --output on every search):
-
-CORPORATE REGISTRIES:
-1. uv run python tools/query_registry.py search "[TARGET]" --output [WORKDIR]/b-registry.json
-2. uv run python tools/query_registry.py officers "[TARGET]" --output [WORKDIR]/b-officers.json
-3. uv run python tools/query_registry.py address "[KNOWN_ADDRESS]" --output [WORKDIR]/b-addr.json  (if applicable)
-
-SEC EDGAR:
-4. uv run python tools/query_edgar.py search "[TARGET]" --size 20 --facets --output [WORKDIR]/b-edgar.json
-5. uv run python tools/query_edgar.py lookup "[TARGET]"
-6. uv run python tools/query_edgar.py search "[TARGET]" "[ASSOCIATED_ENTITY]" --size 10 --output [WORKDIR]/b-edgar2.json  (if applicable)
-
-PROPERTY (NYC):
-7. uv run python tools/query_acris.py party "[TARGET]" --output [WORKDIR]/b-acris.json
-
-CAMPAIGN FINANCE:
-8. uv run python tools/query_fec.py donor "[TARGET]" --limit 20 --output [WORKDIR]/b-fec.json
-9. uv run python tools/query_fec.py employer "[TARGET]" --output [WORKDIR]/b-fec-emp.json  (if entity)
-
-NONPROFITS:
-10. uv run python tools/query_990.py search "[TARGET]" --output [WORKDIR]/b-990.json
-
-LOBBYING:
-11. uv run python tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/b-lda-client.json
-12. uv run python tools/query_lobbying.py registrant "[TARGET]" --output [WORKDIR]/b-lda-reg.json
-13. uv run python tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/b-lda-lob.json
-
-FOREIGN AGENTS:
-14. uv run python tools/query_fara.py search "[TARGET]" --output [WORKDIR]/b-fara.json
-
-UCC FILINGS:
-15. uv run python tools/query_registry.py ucc-search "[TARGET]" --output [WORKDIR]/b-ucc.json
-
-FAA AIRCRAFT:
-16. uv run python tools/ingest_faa.py search "[TARGET]"
-
-GLEIF (corporate hierarchy — financial entities):
-17. uv run python tools/query_gleif.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-gleif.json
-18. If LEI found: uv run python tools/query_gleif.py hierarchy <LEI> --output [WORKDIR]/b-gleif-hier.json
-
-UK COMPANIES HOUSE (if API key configured):
-19. uv run python tools/ingest_uk_companies_house.py search "[TARGET]" --limit 10
-20. If found: uv run python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER>
-21. If found: uv run python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER>
-
-OPENSANCTIONS (PEP/sanctions check — if ingested):
-22. uv run python tools/query_opensanctions.py search "[TARGET]" --limit 10 --output [WORKDIR]/b-sanctions.json
-
-USVI CORPORATE REGISTRY:
-23. uv run python tools/ingest_usvi.py search "[TARGET]"
-
-DS10 DEUTSCHE BANK FINANCIAL RECORDS:
-24. uv run python tools/parse_ds10_financials.py query --entity "[TARGET]"
-
-For each hit, investigate further (e.g., read SEC filings, pull 990 details, check filing histories).
-
-Register entities, roles, and addresses in investigation.db as you find them.
-
-RECORD findings using the findings_tracker.py CLI. Even if a search returns zero results, note that in your final summary — negative results from authoritative sources are investigatively significant.
-
-PROACTIVE SOURCE DISCOVERY:
-As you search, be curious about data sources we're missing. If you discover:
-- A corporate registry in a jurisdiction we don't cover (e.g., Cayman, BVI, Liechtenstein, Luxembourg, Jersey, Delaware) → note the registry URL/API and create an infrastructure lead
-- A specialized financial database or regulatory filing system → note how to access it
-- A nonprofit, foundation, or entity registered somewhere we can't currently search → note the gap
-- An SEC filing type or EDGAR feature we're not using → note the enhancement
-At the end of your investigation, list SOURCE GAPS and create infrastructure requests:
-uv run python tools/infra_tracker.py add --title "Add [JURISDICTION] registry" --type new_registry --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[REGISTRY]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
-
-If you find a data source that would immediately help AND it has a free, accessible API — you may build the tool yourself. Probe the endpoint first, confirm it works, then write the integration. Update CLAUDE.md and /search-all-sources after.
-
-FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-b.md using this format:
-# Agent B Report: [TARGET]
-## Status: completed | partial | blocked
-## Findings Added
-[count] findings (IDs: list them)
-## Connections Added
-[count] connections
-## Entities Registered
-[count] entities (IDs and names)
-## Key Discoveries
-- [1-2 sentence summary of each significant finding]
-## Negative Results
-- [Sources searched with zero results — investigatively significant]
-## Source Gaps Identified
-- [New data sources/registries discovered]
-## Follow-Up Leads Created
-- Lead #X: [description]
-
-Use uv run python for all commands.
+```bash
+uv run python tools/findings_tracker.py search "TARGET" --output $WORKDIR/existing-findings.json
+uv run python tools/lead_tracker.py search "TARGET" --output $WORKDIR/existing-leads.json
+uv run python tools/entity_tracker.py lookup --name "TARGET"
 ```
 
-#### Agent C: Legal & Court Records
+## Phase 1: Planning & Agent Design
 
-**Sources**: CourtListener (dockets, opinions, parties, judges), FARA (detailed review), LDA Lobbying (detailed review)
+**This is where the orchestrator thinks.** You have the recon heat map, existing knowledge, and investigation context. Now reason about:
 
-**Prompt template**:
-```
-You are investigating [TARGET]. [THREAD CONTEXT if applicable]
+### Investigation Type
 
-TARGET BRIEFING: [2-3 sentences of context]
+Different strategies for different targets:
 
-ALREADY KNOWN: [List existing findings or "None"]
+- **Person deep-dive**: Career, finances, legal, network. Sources depend on role — government official (FEC, lobbying, ProPublica), corporate exec (EDGAR, registries, SAM), nonprofit figure (990s, grants).
+- **Entity trace**: Corporate chain, officers, addresses, filings. Heavy on registries, EDGAR, SAM, GLEIF.
+- **Theory/connection investigation**: Multiple targets, need to establish links. Separate agents per target with synthesis looking for overlap.
+- **Financial thread**: Follow money — FEC, 990s, USASpending, EDGAR, ACRIS, lobbying.
+- **Geographic/jurisdictional**: Registry traces in specific jurisdictions, international tools, infrastructure recon.
 
-YOUR MANDATE: Search ALL legal and court databases for this target. You are looking for: federal litigation (as party, witness, or mentioned), state court cases, judicial opinions, regulatory actions, enforcement proceedings, FARA registrations, and lobbying disclosures.
+### Tool Relevance
 
-IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
+Reason about which sources make sense for THIS target:
 
-CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/c-doj.json
-2. uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/c-duggan.json
-3. uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/c-lmsband.json
-4. uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/c-unified.json
-For EVERY document found, read the full text with: uv run python tools/query_doj.py efta EFTA_ID --text
-Extract: dates, names, financial amounts, relationships, exact quotes.
+- What is this person/entity known for? (determines which sources are high-priority)
+- What does the recon heat map show? (focus on rich sources, skip zero-hit sources)
+- Are there investigation-specific corpus tools that apply?
+- Is infrastructure recon relevant? (only if there's a domain/digital footprint)
+- What investigation are we in? (the active profile shapes which tools matter)
 
-REQUIRED SEARCHES (use --output on all):
+### Agent Design
 
-COURTLISTENER (federal courts):
-1. uv run python tools/query_courtlistener.py search "[TARGET]" --output [WORKDIR]/c-cl-search.json
-2. uv run python tools/query_courtlistener.py party "[TARGET]"
-3. uv run python tools/query_courtlistener.py cases "[TARGET]"
-4. uv run python tools/query_courtlistener.py opinions "[TARGET]" --limit 10
-5. If any dockets found: uv run python tools/query_courtlistener.py docket <DOCKET_ID> --output [WORKDIR]/c-cl-docket.json
+Based on the data volume and diversity, decide:
 
-For each case found:
-- What is the nature of the case?
-- Who are the other parties?
-- What is the timeline?
-- Are any Epstein-associated persons or entities involved?
-- What do the opinions/rulings reveal?
+- **How many agents** — more agents for more diverse data; fewer for concentrated sources
+- **Each agent's narrow scope** — a clear, bounded mandate
+- **Which source modules each agent reads** — reference `docs/sources/<module>.md`
+- **Specific queries to run** — informed by recon counts so agents know what to expect
+- **Batching** — if a single source has very high volume, dedicate an agent to it
 
-FARA (deep check):
-6. uv run python tools/query_fara.py search "[TARGET]" --output [WORKDIR]/c-fara.json
-7. If found: uv run python tools/query_fara.py detail <REG_NUM> --output [WORKDIR]/c-fara-detail.json
+**Write the plan** to `$WORKDIR/agent-plan.md` before launching agents.
 
-LOBBYING (deep check):
-8. uv run python tools/query_lobbying.py lobbyist "[TARGET]" --output [WORKDIR]/c-lda-lob.json
-9. uv run python tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/c-lda-client.json
-10. If filings found: uv run python tools/query_lobbying.py filings --client "[TARGET]" --output [WORKDIR]/c-lda-filings.json
+### Agent Count Guidelines (reasoning inputs, not rules)
 
-INVESTIGATION REPORTS (ingested PDFs):
-11. uv run python tools/query_investigations.py search "[TARGET]" --limit 10 --output [WORKDIR]/c-inv.json
+- 2-3 sources with data → 2 agents may suffice
+- 5-10 sources with data across different categories → 3-5 agents
+- 15+ sources with data → 5-7 agents, each owning 2-3 related sources
+- A single source with 50+ results → may deserve its own agent
+- Corpus tools always get at least one agent if they have hits
 
-RECORD all findings using the findings_tracker.py CLI. Record connections between the target and any Epstein-network persons discovered in litigation.
+## Phase 2: Launch Wave 1 Agents
 
-Zero court results for a person who should have them (e.g., a practicing attorney) is notable — record it.
+Each agent gets a prompt that includes:
 
-PROACTIVE SOURCE DISCOVERY:
-As you search court records, look for:
-- Court systems we don't currently query (state courts, bankruptcy courts, immigration courts, foreign proceedings)
-- Specific dockets referenced in documents that should be ingested (PACER dockets, SDNY exhibits)
-- Legal databases that would help (state bar records, judicial disclosure databases, arbitration records)
-- Government investigation reports or hearing transcripts not yet in our investigations.db
-If you find a new court system or legal database with a public API, create an infrastructure request. If it's simple enough, build the tool:
-uv run python tools/infra_tracker.py add --title "Integrate [COURT/DATABASE]" --type new_source --description "Discovered during [TARGET] investigation. [Details, URL, access method]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
+1. **Preamble reference**: "Read `docs/sources/_preamble.md` for evidence standards, entity registration, and report format."
+2. **Target briefing**: 2-3 sentences of context from the orchestrator's assessment
+3. **Existing knowledge**: What's already in the DB (avoid duplication)
+4. **Narrow scope assignment**: Exactly which sources to search and what to look for
+5. **Source module references**: "Read `docs/sources/courtlistener.md` for protocol, then execute."
+6. **Recon counts**: "CourtListener has ~12 cases for this target" — agents know what to expect
+7. **WORKDIR and output prefix**: `$WORKDIR` path and file naming convention
+8. **Report file path**: `$WORKDIR/report-wave1-<agent-name>.md`
 
-FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-c.md using this format:
-# Agent C Report: [TARGET]
-## Status: completed | partial | blocked
-## Findings Added
-[count] findings (IDs: list them)
-## Connections Added
-[count] connections
-## Key Discoveries
-- [1-2 sentence summary of each significant finding]
-## Negative Results
-- [Sources searched with zero results — investigatively significant]
-## Source Gaps Identified
-- [New courts/legal databases discovered]
-## Follow-Up Leads Created
-- Lead #X: [description]
-
-Use uv run python for all commands.
-```
-
-#### Agent D: Network, OSINT & Open Web
-
-**Sources**: LittleSis, ICIJ/Aleph, EpsteinExposed, WebSearch, WebFetch, GDELT
-
-**Prompt template**:
-```
-You are investigating [TARGET]. [THREAD CONTEXT if applicable]
-
-TARGET BRIEFING: [2-3 sentences of context]
-
-ALREADY KNOWN: [List existing findings or "None"]
-
-YOUR MANDATE: Search ALL network mapping, offshore leak, and open web sources for this target. You are looking for: pre-mapped relationships, offshore entities, public reporting, news coverage, and biographical information that provides context.
-
-IMPORTANT: Use --output on ALL search commands to keep context lean. Read the JSON files when you need details.
-
-CORPUS BASELINE (do these FIRST — every agent searches the document corpus):
-1. uv run python tools/query_doj.py search "[TARGET]" --limit 20 --output [WORKDIR]/d-doj.json
-2. uv run python tools/duggan_search.py "[TARGET]" --output [WORKDIR]/d-duggan.json
-3. uv run python tools/query_lmsband.py search "[TARGET]" --limit 15 --output [WORKDIR]/d-lmsband.json
-4. uv run python tools/query_unified.py docs "[TARGET]" --limit 15 --output [WORKDIR]/d-unified.json
-For EVERY document found, read the full text with: uv run python tools/query_doj.py efta EFTA_ID --text
-Extract: dates, names, financial amounts, relationships, exact quotes.
-
-REQUIRED SEARCHES (use --output on all):
-
-LITTLESIS (relationship mapping):
-1. uv run python tools/query_littlesis.py search "[TARGET]" --output [WORKDIR]/d-ls-search.json
-2. If found: uv run python tools/query_littlesis.py entity <ID> --output [WORKDIR]/d-ls-entity.json
-3. If found: uv run python tools/query_littlesis.py relationships <ID> --limit 50 --output [WORKDIR]/d-ls-rels.json
-
-OCCRP ALEPH (corporate registries, leaks, sanctions):
-4. uv run python tools/query_aleph.py search "[TARGET]" --schema Person --output [WORKDIR]/d-aleph-person.json
-5. uv run python tools/query_aleph.py search "[TARGET]" --schema Company --output [WORKDIR]/d-aleph-company.json
-6. If found: uv run python tools/query_aleph.py expand <ENTITY_ID> --output [WORKDIR]/d-aleph-expand.json
-
-ICIJ OFFSHORE LEAKS (if Neo4j running):
-7. uv run python tools/query_icij.py search "[TARGET]" --output [WORKDIR]/d-icij.json
-
-WEB SEARCH (use WebSearch tool directly — NOT bash):
-8. "[TARGET]" — basic biography
-9. "[TARGET]" Jeffrey Epstein — known connections
-10. "[TARGET]" lawsuit OR investigation OR scandal
-11. "[TARGET]" [ASSOCIATED_CONTEXT] — e.g., "Ron Soffer lawyer Paris SoftBank"
-12. "[TARGET]" site:opencorporates.com OR site:linkedin.com
-
-WEB FETCH (use WebFetch tool for key pages):
-- If Wikipedia page exists, fetch it
-- If company/firm website found, fetch the about/team page
-- If relevant news articles found, fetch and extract key facts
-
-EPSTEINEXPOSED (pre-mapped persons, documents, flights):
-13. uv run python tools/ingest_epstein_exposed.py search "[TARGET]" --output [WORKDIR]/d-exposed.json
-
-GDELT (global news):
-14. uv run python tools/query_gdelt.py articles "[TARGET]" --limit 30 --output [WORKDIR]/d-gdelt-art.json
-15. uv run python tools/query_gdelt.py context "[TARGET]" --limit 20 --output [WORKDIR]/d-gdelt-ctx.json
-
-RECORD all findings using the findings_tracker.py CLI. Web sources should use claim-type "paraphrase" with the URL as evidence. Record connections to network-connected persons (not just Epstein — any relevant network actor).
-
-For web research: prioritize PRIMARY sources (court filings, government records, corporate registries) over secondary (news articles, Wikipedia). Note source reliability.
-
-PROACTIVE SOURCE DISCOVERY (CRITICAL — this is your strongest mandate):
-You have the widest view of any agent because you search the open web. As you research, actively look for:
-- **New data sources**: Government databases, public registries, FOIA libraries, leaked document archives, investigation reports, congressional hearing transcripts that we haven't ingested
-- **Foreign registries**: If the target has connections to specific countries, search for that country's corporate registry, court system, or financial authority database. Note the URL, access method (API? bulk download? web scrape?), and authentication requirements.
-- **Specialized databases**: Import/export records (ImportGenius, Panjiva), shipping registries (MarineTraffic, IMO), patent databases (USPTO, EPO), academic affiliations (ORCID), sanctions lists beyond OpenSanctions, beneficial ownership registries (UK PSC, EU BORIS)
-- **Downloadable datasets**: HuggingFace, data.gov, archive.org, specific investigation archives that could be bulk-ingested
-- **Existing tool improvements**: If you use a web search to answer something that one of our tools SHOULD be able to answer, note the gap
-
-For each new source discovered:
-1. Note: name, URL, data type, access method, relevance to investigation
-2. Create an infrastructure lead if it has broad investigative value
-3. If it's a free API with clear documentation, you may build the integration tool yourself — probe first, confirm it works, then write `tools/query_[source].py` or `tools/ingest_[source].py`
-
-uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] web research. URL: [URL]. Data: [WHAT]. Access: [HOW]. Value: [WHY]." --source-name "[SOURCE]" --source-url "[URL]" --priority [high/medium] --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
-
-FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-d.md using this format:
-# Agent D Report: [TARGET]
-## Status: completed | partial | blocked
-## Findings Added
-[count] findings (IDs: list them)
-## Connections Added
-[count] connections
-## Key Discoveries
-- [1-2 sentence summary of each significant finding]
-## Negative Results
-- [Sources searched with zero results]
-## Source Gaps Identified
-- [New data sources discovered, with URL and access method]
-## Follow-Up Leads Created
-- Lead #X: [description]
-
-Use uv run python for all commands.
-```
-
-### 3. Wait for Agents and Read Reports
-
-**DO NOT use TaskOutput to retrieve agent results.** Agent transcripts are 10-50MB and will bloat context.
-
-Instead, agents write structured reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`. Poll for completion, then read the reports:
+### Agent Prompt Template
 
 ```
-# Launch all 4 agents with run_in_background=true
-# Each agent's prompt instructs it to write [WORKDIR]/report-agent-{a,b,c,d}.md
+Read docs/sources/_preamble.md for evidence standards, entity registration, and report format.
 
-# Poll for completion (check if report files exist)
-Bash: ls -la [WORKDIR]/report-agent-*.md 2>/dev/null | wc -l
-# Repeat every 30s until count = 4
+TARGET: [NAME]
+BRIEFING: [2-3 sentences of context]
+EXISTING KNOWLEDGE: [summary or "None"]
+INVESTIGATION PROFILE: [key details from profile]
 
-# Once all reports exist, read them:
-Read("[WORKDIR]/report-agent-a.md")
-Read("[WORKDIR]/report-agent-b.md")
-Read("[WORKDIR]/report-agent-c.md")
-Read("[WORKDIR]/report-agent-d.md")
+YOUR SCOPE: [precise description of what this agent investigates]
+
+SOURCE MODULES (read these for protocol):
+- docs/sources/[module1].md
+- docs/sources/[module2].md
+
+EXPECTED DATA VOLUME (from recon):
+- [source1]: ~[count] results
+- [source2]: ~[count] results
+
+WORKDIR: [actual path]
+OUTPUT PREFIX: [e.g., "w1a" for wave 1, agent a]
+REPORT: Write to [WORKDIR]/report-wave1-[agent-name].md
+
+CRITICAL: Be thorough within your scope. Document everything. Register every
+entity and person-role. Record negative results. Your job is to build the
+knowledge graph comprehensively within your assigned sources.
 ```
 
-Each report is ~2KB (vs 25MB transcript). If you need deeper detail on a specific finding, read the agent's `--output` JSON files (e.g., `[WORKDIR]/a-doj.json`).
+### Launch
 
-### 4. Synthesize Results
+Launch all Wave 1 agents simultaneously:
+- Use a general-purpose research sub-agent/task type
+- Use a high-capability research model if the tooling exposes model selection
+- Launch agents asynchronously/backgrounded when the tooling supports it
 
-After reading all 4 report files:
+### Wait for Completion
+
+**DO NOT pull full task transcripts to retrieve agent results.** Transcripts can be 10-50MB.
+
+Agents write reports to `$WORKDIR/report-wave1-*.md`. Poll for completion:
+```bash
+ls -la $WORKDIR/report-wave1-*.md 2>/dev/null | wc -l
+```
+
+Once all reports exist, read them with the Read tool. Each report is ~2KB.
+
+**Liveness checks**: If an agent has no report after 5 minutes, poll task/session output non-blockingly. If it is still active (output growing), let it continue. If hung, stop it and note the gap.
+
+## Phase 3: Decision Point & Wave 2+
+
+The orchestrator reads all Wave 1 reports and reasons about what to do next:
+
+- What new persons/entities were discovered that need their own investigation?
+- What contradictions need resolution?
+- What sources turned out richer than expected and need deeper reading?
+- What cross-references between Wave 1 findings suggest new lines of inquiry?
+- Are there specific documents (EDGAR filings, court dockets, 990 schedules) that need detailed reading?
+
+**Design Wave 2 agents from this analysis.** Wave 2 agents are typically more targeted:
+- "Read these 5 specific EDGAR filings and extract officer names"
+- "Trace this newly discovered company through 3 state registries"
+- "Cross-reference this lobbyist against all corpus tools"
+
+Additional waves if needed — iterate until diminishing returns.
+
+Wave 2+ agents also use the default high-capability research model unless the task requires heavier reasoning.
+
+## Phase 4: Synthesis
+
+The orchestrator handles synthesis:
+
+### 4a. Read All Reports
+
+Read all `$WORKDIR/report-*.md` files across all waves.
+
+### 4b. Analyze
 
 1. **Count findings**: How many did each agent produce?
-2. **Identify corroboration**: Did multiple agents find the same facts from independent sources? (e.g., corpus email confirms a corporate filing)
-3. **Identify contradictions**: Do any findings conflict?
-4. **Identify gaps**: Did any agent return zero results from sources that should have data?
-5. **Map the network**: Who does this target connect to? Draw the relationship map.
-6. **Collect infrastructure recommendations**: What new data sources, tools, or tool improvements did agents identify? Consolidate into actionable items.
-7. **Drill down selectively**: If a report mentions a critical finding, read the specific `--output` JSON for details. Do NOT read all JSON files — only the ones relevant to synthesis.
-8. **Identify the Character Entry Point**: What aspect of this target's role illuminates the network's design? Every person is a lens onto a different part of the machine — what does THIS person make visible that would otherwise remain hidden? (e.g., a trust administrator reveals the USVI trust architecture; a compliance officer reveals the SAR waterfall)
-9. **Note the Narrative Potential**: What's the most counterintuitive finding? What single fact would most surprise an intelligent person in finance/law/compliance? This is the seed for a future article hook. Record it in the synthesis finding.
-10. **Flag Missing Documents**: What records should exist but don't? Missing SARs, absent emails in a timeline, corporate filings that should be present but aren't. Absence of expected records is itself evidence — record it as a finding.
+2. **Corroboration**: Multiple agents finding the same facts from independent sources
+3. **Contradictions**: Conflicting findings that need resolution
+4. **Gaps**: Sources that should have data but returned zero results
+5. **Network map**: Who does this target connect to?
+6. **Character entry point**: What aspect of this target illuminates the network's design?
+7. **Narrative potential**: Most counterintuitive finding — the seed for a future article
+8. **Missing documents**: Records that should exist but don't (absent SARs, email gaps)
+9. **Tool coverage check**: Did agents actually use their full source list?
 
-### 5. Record Synthesis Findings
+### 4c. Record Synthesis Finding
 
-If the sub-agents' individual findings combine to tell a larger story, record a synthesis finding:
-
+If the combined evidence tells a larger story:
 ```bash
-uv run python tools/findings_tracker.py add --target "[TARGET]" --type intelligence \
+uv run python tools/findings_tracker.py add --target "TARGET" --type intelligence \
   --summary "SYNTHESIS: [what the combined evidence shows]" \
   --evidence [ALL_EVIDENCE_REFS] --claim-type synthesis \
-  --source-quote "[REF]:key supporting fact" --confidence medium
+  --source-quote "[REF]:key supporting fact" --sources analysis_run --confidence medium
 ```
 
-### 6. Spawn Follow-Up Leads
+### 4d. Run Auto-Leads
+
+```bash
+uv run python tools/auto_leads.py run
+```
+
+### 4e. Graph Analysis
+
+```bash
+uv run python tools/graph_tools.py neighborhood "TARGET" --depth 2
+```
+
+### 4f. Ingest Agent Learnings
+
+```bash
+for report in $WORKDIR/report-*.md; do
+    uv run python tools/methodology_tracker.py ingest-report "$report" --skill deep-investigate
+done
+```
+
+### 4g. Complete the Originating Lead
+
+If this investigation was launched from a lead:
+```bash
+uv run python tools/lead_tracker.py complete LEAD_ID --findings "Summary of what was found"
+```
+
+### 4h. Spawn Follow-Up Leads
 
 Create leads for:
 - New persons discovered across multiple agents
-- Entities that need their own `/deep-investigate`
-- Financial trails requiring further tracing
+- Entities that need their own investigation
+- Financial trails requiring tracing
 - Sources that weren't available (e.g., ICIJ Neo4j wasn't running)
-- Hypotheses generated by the synthesis
-- **Infrastructure requests**: New data sources to integrate, tools to build, existing tools to extend. Use `infra_tracker.py add` (not lead_tracker) and include URL, access method, and investigative value.
+- Hypotheses generated by synthesis
+- Infrastructure requests: `uv run python tools/infra_tracker.py add ...`
 
-### 7. Present Summary to User
+## Present Summary to User
 
-Format:
 ```
 ## /deep-investigate [TARGET] — Results
 
 ### Target Profile
 [1-2 sentences]
 
-### Agent Results
-| Agent | Findings | Connections | Key Discovery |
-|-------|----------|-------------|---------------|
-| Corpus | X | Y | ... |
-| Corporate/Financial | X | Y | ... |
-| Legal/Court | X | Y | ... |
-| Network/OSINT | X | Y | ... |
+### Recon Summary
+[Sources probed, data distribution]
+
+### Agent Deployment
+| Wave | Agent | Scope | Findings | Entities |
+|------|-------|-------|----------|----------|
+| 1 | [name] | [scope] | [count] | [count] |
+| ... | ... | ... | ... | ... |
 
 ### Key Findings
-1. [Most significant finding]
+1. [Most significant]
 2. [Second most significant]
 ...
 
@@ -533,36 +280,23 @@ Format:
 
 ### Follow-Up Leads Spawned
 - Lead #X: [description]
-...
 
 ### Infrastructure Recommendations
-- [New data source discovered, with URL and access method]
-- [Existing tool improvement identified]
-- [New jurisdiction/registry to add]
+- [New data sources discovered]
 ```
 
 ## Context Management (CRITICAL)
 
-**The #1 cause of session crashes is agent transcript bloat.** Follow these rules:
-
-1. **Never call TaskOutput on completed agents.** Read their report files instead.
-2. **Always use `run_in_background=true`** when launching agents.
-3. **All searches use `--output [WORKDIR]/...`** — this keeps both the agent's AND your context lean.
-4. **Never `cat` or `Read` full document text** unless you need a specific quote. Read the `--output` JSON selectively.
-5. **Report files are disposable** — they live in `/tmp/` and don't persist across sessions.
-
-## Tool Bug Reporting
-If you encounter bugs in CLI tools (crashes, incorrect output, missing features), submit them to the infra queue:
-`uv run python tools/infra_tracker.py add --title "Bug: <description>" --type tool_improvement --priority high --description "<details including the error traceback>"`
+1. **Never read full completed-agent transcripts when report files exist.** Read report files instead.
+2. **Launch agents in background/asynchronously when the tooling supports it.**
+3. **All searches use `--output $WORKDIR/...`** — keeps both agent and orchestrator context lean.
+4. **Report files are disposable** — they live in `/tmp/` and don't persist.
 
 ## Notes
 
-- Launch all 4 agents in a SINGLE message with 4 Task tool calls — this maximizes parallelism
-- Each agent should be `subagent_type: "general-purpose"` with `run_in_background: true`
+- Launch Wave 1 agents in a SINGLE message with parallel sub-agent/task calls
+- Each agent: general-purpose research scope, high-capability model if selectable, launched asynchronously when supported
 - The orchestrator does NOT search sources directly — that's the agents' job
-- If the target is clearly only a person OR only an entity, you can still run all 4 agents — some will just return fewer results
-- For very simple targets where you're confident only 1-2 source categories are relevant, you can skip agents that clearly won't help (e.g., FAA for a French lawyer). But err on the side of launching all 4.
-- Agents MUST record their findings via the CLI tools, not just report them as text
-- **Agents write reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`** — orchestrator reads these, NOT TaskOutput
-- **Agents should be curious and proactive.** Don't just execute the search checklist mechanically — follow unexpected threads, investigate surprises, and identify infrastructure improvements. If a search reveals a data source we don't have, note it. If a tool could be extended to answer a question better, say so. The investigation platform should get stronger with every wave.
-- **Agents may build tools.** If an agent discovers a free, accessible data source during investigation and it would help answer the current question, the agent can build the integration tool (probe-before-code applies). Update CLAUDE.md and /search-all-sources after building.
+- Agents MUST record findings via CLI tools, not just report text
+- **Agents write reports to `$WORKDIR/report-wave1-*.md`** — orchestrator reads these
+- Agents may build tools if they discover a free accessible data source (probe-before-code applies)

@@ -1,11 +1,14 @@
 ---
 name: systemic-analysis
-description: Deep entity patterns beyond Epstein — shared boards, co-investments, common counsel, jurisdiction clustering
+description: Deep entity patterns beyond the primary subject — shared boards, co-investments, common counsel, jurisdiction clustering
+user_invocable: true
 ---
 
 # /systemic-analysis
 
-Analyze a group of actors as a SYSTEM — shared board memberships, co-investments, common counsel, jurisdiction clustering, coordinated donations, common grant recipients. Focus on what connects them to each other independent of Epstein.
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify systemic patterns and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Shared attributes (same jurisdiction, same industry, same donor pool) are often coincidental at baseline — always ask "what's the base rate?" before calling something a pattern. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+
+Analyze a group of actors as a SYSTEM — shared board memberships, co-investments, common counsel, jurisdiction clustering, coordinated donations, common grant recipients. Focus on what connects them to each other independent of the primary investigation subject.
 
 ## Arguments
 
@@ -14,6 +17,14 @@ Analyze a group of actors as a SYSTEM — shared board memberships, co-investmen
 - `--cluster "label"`: analyze a tagged cluster from previous analysis
 
 Without arguments: analyzes the highest-priority thread or the largest tagged cluster.
+
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
 
 ## Process
 
@@ -104,14 +115,14 @@ Focus on patterns shared by 3+ members — these indicate systemic behavior, not
 
 ### 5. Look Beyond Investigation Context
 
-For each member, investigate their activities INDEPENDENT of Epstein:
-- What boards do they sit on together (without Epstein)?
+For each member, investigate their activities INDEPENDENT of the primary subject:
+- What boards do they sit on together (without the primary subject)?
 - What deals have they co-invested in?
 - What political causes do they jointly support?
 - What counsel/advisors do they share?
 - What jurisdictions do they cluster in?
 
-This reveals the SYSTEM — the pre-existing or parallel structure that Epstein operated within.
+This reveals the SYSTEM — the pre-existing or parallel structure that the primary subject operated within.
 
 ### 6. Record Systemic Findings
 
@@ -119,7 +130,7 @@ For each systemic pattern:
 
 ```bash
 uv run python tools/findings_tracker.py add \
-    --target "SYSTEM_NAME (e.g., 'Mega Group philanthropy network')" \
+    --target "SYSTEM_NAME (e.g., 'philanthropy network' or 'board overlap cluster')" \
     --type relationship \
     --summary "SYSTEMIC PATTERN: N members share X" \
     --detail "Members: A, B, C. Pattern: DESCRIPTION. Significance: IMPLICATION." \
@@ -201,8 +212,8 @@ Write to `$WORKDIR/report-systemic-analysis.md`:
 ## Comparison Matrix
 [Table of shared patterns]
 
-## Non-Epstein System Structure
-[What connects these actors to each other independent of Epstein]
+## Non-Subject System Structure
+[What connects these actors to each other independent of the primary subject]
 
 ## Systemic Hypotheses
 [Generated hypotheses with IDs]
@@ -231,5 +242,5 @@ complete_analysis_run(RUN_ID, findings_created=N, hypotheses_created=M,
 - All findings: `claim_type=synthesis`, max confidence `medium`
 - Use LittleSis as primary system-mapping source (pre-built relationship data)
 - The comparison matrix is the core deliverable — it reveals shared infrastructure
-- Most valuable insight: what connects network members to each other WITHOUT going through Epstein
+- Most valuable insight: what connects network members to each other WITHOUT going through the primary subject
 - Rate-limit external API calls. LittleSis retries on 503. EDGAR needs User-Agent. FEC needs API key.

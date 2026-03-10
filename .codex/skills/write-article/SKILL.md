@@ -1,6 +1,7 @@
 ---
 name: write-article
 description: Generate a long-form investigative MDX article from a story cluster using a five-phase workflow (research dossier, structure, draft, verify, revise). Use for evidence-heavy article writing or major article rewrites.
+user_invocable: true
 ---
 
 # /write-article
@@ -11,9 +12,17 @@ Phase 0 `research dossier` -> Phase 1 `structure` -> Phase 2 `draft` -> Phase 3 
 
 ## Arguments
 
-- Required: cluster ID (example: `/write-article apollo-money-pipeline`)
+- Required: cluster ID (example: `/write-article <cluster-id>` — run `uv run python pipeline/story_clustering.py --list` for available clusters)
 - Optional `--dry-run`: run only Phase 0 and stop after the dossier
 - No arguments: list available clusters
+
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
 
 ## Non-Negotiable Defaults
 
@@ -43,7 +52,7 @@ Phase 4: REVISE           -> updated article + revision summary
 
 ## Phase 0: Research Dossier
 
-Search across corpus + structured + legal/network sources. Do not limit research to EFTA/DOJ.
+Search across corpus + structured + legal/network sources. Use corpus tools from the investigation profile rather than assuming specific corpus databases.
 
 ### 0.1 Discover Cluster Context
 
@@ -56,10 +65,10 @@ uv run python pipeline/story_clustering.py --list
 With a cluster:
 
 ```bash
-uv run python pipeline/story_clustering.py --cluster <CLUSTER_ID> --output-dir "$WORKDIR"
+uv run python pipeline/story_clustering.py --cluster <CLUSTER_ID>
 ```
 
-Read `$WORKDIR/cluster-<CLUSTER_ID>.json` (single-cluster export) and capture:
+Read `content/clusters.json`, locate the selected cluster, and capture:
 - title
 - targets
 - `source_diversity`
@@ -72,9 +81,14 @@ uv run python scripts/evidence_audit.py report
 ```
 
 Block writing if any are true:
-- >10% of cluster findings have missing `source_quote`
+- >10% of **document-sourced** evidence rows have missing `source_quote`
 - Any `direct_quote`/`confirmed` finding has a cross-check mismatch
 - >5 unresolved duplicate clusters within the article's scope
+
+Evidence category rules:
+- **Document** (EFTA, DOJ, court filings, etc.): `source_quote` required — quote proves claim is in actual document
+- **Structured** (FEC, IRS 990, ACRIS, FARA, LDA, SEC, etc.): `source_quote` optional — the evidence_ref itself is the verification. Quote can hold extracted values (e.g., `"amount: $650,000; recipient: IPI"`)
+- **Web/Media** (URLs, GDELT, etc.): `source_quote` recommended but not blocking — URLs go dead, quote preserves context
 
 ### 0.3 Source Diversity Assessment
 
@@ -92,15 +106,12 @@ Run three tracks in parallel and write markdown reports:
 
 Track A: Corpus deep-dive
 ```
-uv run python tools/query_doj.py search "<QUERY>" --limit 20 --output "$WORKDIR/corpus-doj.json"
-uv run python tools/duggan_search.py "<QUERY>" --output "$WORKDIR/corpus-duggan.json"
-uv run python tools/query_lmsband.py search "<QUERY>" --limit 15 --output "$WORKDIR/corpus-lmsband.json"
-uv run python tools/query_unified.py docs "<QUERY>" --limit 15 --output "$WORKDIR/corpus-unified-docs.json"
-uv run python tools/query_unified.py emails "<QUERY>" --limit 15 --output "$WORKDIR/corpus-unified-emails.json"
-uv run python tools/ingest_epstein_20k.py search "<QUERY>" --limit 15 --output "$WORKDIR/corpus-20k.json"
+# Search all corpus tools from the investigation profile.
+# For each corpus_tool in the profile, run:
+uv run python tools/<corpus_tool>.py search "<QUERY>" --limit 20 --output "$WORKDIR/corpus-<tool-name>.json"
 
-# Pull full text for key references
-uv run python tools/query_doj.py efta EFTA_ID --text --output "$WORKDIR/efta-EFTA_ID.json"
+# For tools supporting sub-commands (emails, docs, entities, triples), run those too.
+# Pull full text for key references found in search results.
 ```
 
 Track B: Financial/corporate/property
@@ -113,7 +124,7 @@ uv run python tools/query_fec.py donor "<TARGET>" --limit 20 --output "$WORKDIR/
 uv run python tools/query_fec.py employer "<TARGET>" --limit 20 --output "$WORKDIR/fin-fec-employer.json"
 uv run python tools/query_registry.py search "<TARGET>" --output "$WORKDIR/fin-registry.json"
 uv run python tools/query_gleif.py search "<TARGET>" --limit 10 --output "$WORKDIR/fin-gleif.json"
-uv run python tools/ingest_faa.py search "<TARGET>" --limit 20 --output "$WORKDIR/fin-faa.json"
+uv run python tools/ingest_faa.py --json search "<TARGET>" --limit 20 > "$WORKDIR/fin-faa.json"
 ```
 
 Track C: Legal/court/network
@@ -148,7 +159,7 @@ Wait for all track reports, then write `$WORKDIR/research-dossier.md`:
 ## Evidence Inventory
 | Source Type | Count | Key Items |
 |-------------|-------|-----------|
-| EFTA corpus | 280   | EFTA02576529 (ARRC minutes), ... |
+| DOJ corpus  | 280   | [key document IDs and descriptions] |
 | SEC EDGAR   | 12    | 10-K disclosures, Form D filings |
 | IRS 990     | 8     | Gratitude America grants |
 | ACRIS       | 15    | Property transfers |
@@ -246,6 +257,10 @@ Use the structured citation tokens that render as linked footnotes:
 - `[DS10]` — DS10 financial dataset
 - `[text](url)` — Markdown link for contextual claims
 
+Evidence-support mapping now runs at sentence granularity in the web UI:
+- Every factual sentence must carry explicit inline citation tokens in that same sentence.
+- Do not rely on citations in adjacent sentences; support mode will mark those claims unsupported.
+
 ### Article format
 
 Write `content/articles/<cluster-id>.mdx` with YAML frontmatter:
@@ -281,7 +296,7 @@ When evidence exemplifies an analytical model, insert a callout block:
 ```mdx
 > **Manufactured Dependency** — Creating conditions for problems, then selling the solution. [Full analysis →](/models/manufactured-dependency)
 >
-> Evidence: [EFTA02576529] — Epstein introduced Black to the extortionist years before the "rescue."
+> Evidence: [CITATION_ID] — [Specific evidence from corpus supporting this model application]
 ```
 
 Available models: manufactured-dependency, bridge-tax, private-order, narrative-shield, jurisdictional-arbitrage, parallel-financial-system, enabler-gradient, complexity-as-credential.
@@ -307,6 +322,19 @@ Run `/review-article <cluster-id> --workdir $WORKDIR`. The reviewer writes `$WOR
 
 The reviewer does NOT edit the article directly — it reports problems for Phase 4 to fix.
 
+Then run support-coverage metrics for the draft:
+
+```bash
+cd /Users/travcole/projects/osint-research/web
+npm run report:support-coverage:changed -- --base-ref HEAD~1 --head-ref HEAD
+```
+
+Review:
+- supported sentence %
+- unsupported sentence count
+- orphan citations
+- source fanout
+
 ---
 
 ## Phase 4: Revise
@@ -326,7 +354,7 @@ Read the verification report and apply fixes.
 - Apply if they improve the article without disrupting its architecture
 
 ### 4.4. Backlinks pass
-- Link named persons/entities to their dossier pages: `[Leon Black](/dossiers/leon-black)`
+- Link named persons/entities to their dossier pages: `[Person Name](/dossiers/person-slug)`
 - Cross-reference other articles where relevant
 - Link external registry entries
 
@@ -368,20 +396,13 @@ Output to the user:
 
 ## Cluster Reference
 
-| ID | Title | Key Angle |
-|----|-------|-----------|
-| apollo-money-pipeline | The Apollo Money Pipeline | How do you move $40M to a felon through legitimate banking? |
-| wexner-trust-architecture | Wexner Trust Architecture | A masterclass in using trusts to obscure beneficial ownership |
-| deutsche-bank-plumbing | Deutsche Bank Plumbing | What 579 transactions and $304M tell us about compliance theater |
-| gulf-intelligence-web | The Gulf Intelligence Web | The geopolitics of a financier's Rolodex |
-| shadow-lobbying-empire | Shadow Lobbying Empire | How to lobby Congress without technically lobbying Congress |
-| corporate-shell-network | The Corporate Shell Network | The corporate structure diagram that takes a full wall |
-| legal-shield | The Legal Shield | When your lawyers are also your intelligence service |
-| science-tech-interface | Science & Tech Interface | Philanthropy as a social technology |
-| norwegian-connection | The Norwegian Connection | An ex-diplomat, a defense minister, and a registered sex offender |
-| inner-circle-operations | Inner Circle Operations | The org chart of a criminal enterprise that filed its taxes |
-| usvi-operations | USVI Operations | Why the US Virgin Islands is the Delaware of the Caribbean |
-| political-influence-machine | The Political Influence Machine | Campaign finance as relationship management |
+Load available clusters dynamically:
+
+```bash
+uv run python pipeline/story_clustering.py --list
+```
+
+This returns all active story clusters with their IDs, titles, key angles, and readiness metrics. Use the output rather than a hardcoded table, as clusters evolve with the investigation.
 
 ## Readiness Criteria
 

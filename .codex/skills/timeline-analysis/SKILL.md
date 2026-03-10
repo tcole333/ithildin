@@ -1,9 +1,12 @@
 ---
 name: timeline-analysis
 description: Temporal correlation — activity clusters, suspicious timing, silence periods, coordinated action windows
+user_invocable: true
 ---
 
 # /timeline-analysis
+
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify temporal patterns and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Temporal proximity is suggestive, not conclusive — always distinguish "these events happened near each other" (fact) from "these events were coordinated" (theory). See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
 
 Analyze findings and external events on a timeline to find activity clusters, suspicious timing, silence periods, coordinated action windows, and "before the raid" patterns.
 
@@ -12,6 +15,14 @@ Analyze findings and external events on a timeline to find activity clusters, su
 - No arguments: full timeline analysis
 - `--thread N`: focus on a specific thread
 - `--window YYYY-MM-DD YYYY-MM-DD`: analyze a specific date range
+
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
 
 ## Process
 
@@ -79,7 +90,7 @@ Look for activity spikes in the 30 days BEFORE major events (arrests, lawsuits, 
 - Entity formations before arrests
 - Financial transfers before regulatory actions
 - Agent resignations before indictments
-Key dates to check: 2019-07-06 (arrest), 2019-08-10 (death), 2020-07-02 (Maxwell arrest)
+Use key_dates from the investigation profile (loaded via `uv run python tools/investigation_context.py show --json`) to identify the critical dates to check.
 
 **d) Silence periods**
 For active targets (10+ findings), find gaps of 30+ days with no findings. Compare against:
@@ -95,19 +106,21 @@ Find weeks where 2+ unrelated targets show activity simultaneously:
 
 ### 5. Key Time Periods to Analyze
 
-These periods are investigatively significant — check for patterns in each:
+Load key dates and time periods from the active investigation profile:
 
-| Period | Event | What to look for |
-|--------|-------|------------------|
-| 2002-2003 | USVI entity formations | Coordinated corporate setup |
-| 2005-2006 | Palm Beach investigation | Evidence destruction, witness coordination |
-| 2007-2008 | NPA + plea deal | Legal coordination, financial movements |
-| 2013 | Peak STC transfers | Black payments ($40M), other flows |
-| 2016 late | Enhanced CBP screening | Travel changes, operational adjustments |
-| 2018 Nov-Dec | Miami Herald series | Reputation damage control, document management |
-| 2019 Jan-Jun | Pre-arrest period | Financial restructuring, trust modifications |
-| 2019 Jul 6-Aug 10 | Arrest to death | Emergency actions, document handling |
-| 2019 Aug-Dec | Post-death | Estate actions, evidence requests, account closures |
+```bash
+uv run python tools/investigation_context.py show --json
+```
+
+The profile's `key_dates` field contains investigatively significant periods and events. For each period, check for patterns including:
+- Coordinated corporate setup (entity formations in the same window)
+- Evidence destruction or witness coordination around legal milestones
+- Legal coordination and financial movements around plea deals or indictments
+- Peak financial transfer periods
+- Operational adjustments before/after media exposure
+- Financial restructuring before arrests
+- Emergency actions during crisis windows
+- Post-event estate actions, evidence requests, account closures
 
 ### 6. Record Findings
 
