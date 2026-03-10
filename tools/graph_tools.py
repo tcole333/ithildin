@@ -39,6 +39,25 @@ try:
 except ImportError:
     from lead_tracker import get_db
 
+try:
+    from tools.investigation_context import get_active_profile_id
+except ImportError:
+    try:
+        from investigation_context import get_active_profile_id
+    except ImportError:
+        def get_active_profile_id():
+            return ""
+
+
+def _resolve_profile(profile_id=None, all_profiles=False):
+    """Resolve profile_id: explicit > active profile > None."""
+    if all_profiles:
+        return None
+    if profile_id is not None:
+        return profile_id
+    return get_active_profile_id() or None
+
+
 VALID_METRICS = ["degree", "betweenness", "closeness"]
 
 
@@ -91,7 +110,7 @@ def _canonicalize(name, alias_map):
     return alias_map.get(lower, name.strip())
 
 
-def build_graph(db=None, as_of=None):
+def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
     """Build adjacency list from connections table with alias resolution.
 
     Args:
@@ -100,6 +119,8 @@ def build_graph(db=None, as_of=None):
                connections where valid_from <= as_of and (valid_until IS NULL
                or valid_until >= as_of). Connections without temporal data
                are always included.
+        profile_id: Scope to connections from this profile. Defaults to active profile.
+        all_profiles: If True, include all profiles regardless of active profile.
 
     Returns:
         adj: dict[str, dict[str, list[dict]]] — adj[a][b] = list of connection records
@@ -110,22 +131,26 @@ def build_graph(db=None, as_of=None):
         db = get_graph_db()
         close_db = True
 
+    resolved = _resolve_profile(profile_id, all_profiles)
     alias_map = _load_aliases(db)
 
+    conditions = []
+    params = []
+    if resolved:
+        conditions.append("profile_id = ?")
+        params.append(resolved)
     if as_of:
-        rows = db.execute("""
-            SELECT id, person_a, person_b, relationship_type, description,
-                   strength, created_at, valid_from, valid_until
-            FROM connections
-            WHERE (valid_from IS NULL OR valid_from <= ?)
-              AND (valid_until IS NULL OR valid_until >= ?)
-        """, (as_of, as_of)).fetchall()
-    else:
-        rows = db.execute("""
-            SELECT id, person_a, person_b, relationship_type, description,
-                   strength, created_at
-            FROM connections
-        """).fetchall()
+        conditions.append("(valid_from IS NULL OR valid_from <= ?)")
+        conditions.append("(valid_until IS NULL OR valid_until >= ?)")
+        params.extend([as_of, as_of])
+
+    where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    cols = "id, person_a, person_b, relationship_type, description, strength, created_at"
+    if as_of:
+        cols += ", valid_from, valid_until"
+    rows = db.execute(f"""
+        SELECT {cols} FROM connections {where}
+    """, params).fetchall()
 
     adj = defaultdict(lambda: defaultdict(list))
     nodes = set()
@@ -660,7 +685,8 @@ def detect_communities(adj, nodes, resolution=1.0):
     return results
 
 
-def community_summary(adj, nodes, db=None, resolution=1.0):
+def community_summary(adj, nodes, db=None, resolution=1.0, profile_id=None,
+                      all_profiles=False):
     """Generate LLM-friendly community summaries with top findings per member.
 
     Returns list of community dicts with member lists + top findings.
@@ -670,14 +696,21 @@ def community_summary(adj, nodes, db=None, resolution=1.0):
         db = get_graph_db()
         close_db = True
 
+    resolved = _resolve_profile(profile_id, all_profiles)
     communities = detect_communities(adj, nodes, resolution=resolution)
 
     # Load findings for summary
     all_findings = {}
-    rows = db.execute("""
-        SELECT id, target_name, summary, finding_type, confidence
-        FROM findings ORDER BY id DESC
-    """).fetchall()
+    if resolved:
+        rows = db.execute("""
+            SELECT id, target_name, summary, finding_type, confidence
+            FROM findings WHERE profile_id = ? ORDER BY id DESC
+        """, (resolved,)).fetchall()
+    else:
+        rows = db.execute("""
+            SELECT id, target_name, summary, finding_type, confidence
+            FROM findings ORDER BY id DESC
+        """).fetchall()
     for r in rows:
         name = r["target_name"]
         if name not in all_findings:
@@ -796,6 +829,8 @@ def cache_metrics(metrics, metric_type, run_id=None):
 
 def main():
     parser = argparse.ArgumentParser(description="Network analysis tools for investigation graph")
+    parser.add_argument("--profile", default=None, help="Investigation profile (default: active)")
+    parser.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     sub = parser.add_subparsers(dest="command")
 
     # centrality
@@ -887,9 +922,12 @@ def main():
     p_stats.add_argument("--as-of", help="Temporal snapshot date (YYYY-MM-DD)")
 
     args = parser.parse_args()
+    p_id = getattr(args, "profile", None)
+    p_all = getattr(args, "all_profiles", False)
 
     if args.command == "centrality":
-        adj, nodes = build_graph(as_of=getattr(args, 'as_of', None))
+        adj, nodes = build_graph(as_of=getattr(args, 'as_of', None),
+                                 profile_id=p_id, all_profiles=p_all)
         if args.metric == "degree":
             metrics = degree_centrality(adj, nodes)
         elif args.metric == "betweenness":
@@ -916,7 +954,7 @@ def main():
             print(f"{r['rank']:>4}  {r['node']:<40} {r[args.metric]:>12.4f}")
 
     elif args.command == "components":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         components = find_components(adj, nodes)
         filtered = [c for c in components if len(c) >= args.min_size]
         results = [{"component_id": i + 1, "size": len(c), "members": c}
@@ -932,7 +970,7 @@ def main():
             print(f"  Component #{r['component_id']} ({r['size']} nodes): {members_preview}")
 
     elif args.command == "bridges":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         bridges = find_bridges(adj, nodes)
         if write_output(bridges, args, summary=f"bridge nodes ({len(bridges)})"):
             return
@@ -944,7 +982,7 @@ def main():
             print(f"  {b['node']:<40} degree={b['degree']:<3}  neighbors: {neighbor_preview}")
 
     elif args.command == "paths":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         path = _bfs_shortest_path(adj, args.source, args.target, max_depth=args.max_hops)
         if path:
             print(f"\nShortest path ({len(path) - 1} hops):")
@@ -968,7 +1006,7 @@ def main():
                 print(f"  Similar to '{args.target}': {', '.join(close_target[:5])}")
 
     elif args.command == "neighbors":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         if args.center not in nodes:
             # Try fuzzy match
             matches = [n for n in nodes if args.center.lower() in n.lower()]
@@ -988,7 +1026,7 @@ def main():
             print(f"  [{dist_marker}] {n['name']:<40} degree={n['degree']}")
 
     elif args.command == "holes":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         holes = find_structural_holes(adj, nodes, min_degree=args.min_degree)
         if write_output(holes, args, summary=f"structural holes (min degree {args.min_degree})"):
             return
@@ -1000,7 +1038,7 @@ def main():
                   f"{h['neighbor_density']:>11.3f}")
 
     elif args.command == "cliques":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         cliques = find_cliques(adj, nodes, min_size=args.min_size)
         if write_output(cliques, args, summary=f"cliques (min size {args.min_size})"):
             return
@@ -1028,7 +1066,7 @@ def main():
             print(f"No people with career arcs at {args.pillar_type} institutions")
             sys.exit(0)
 
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         # Filter to only nodes that are in pillar_people
         sub_nodes = {n for n in nodes if n.lower() in pillar_people}
         sub_adj = {}
@@ -1109,7 +1147,7 @@ def main():
 
     elif args.command == "triangles":
         db = get_graph_db()
-        adj, nodes = build_graph(db)
+        adj, nodes = build_graph(db, profile_id=p_id, all_profiles=p_all)
         triads = find_open_triads(
             adj, nodes, db=db, top=args.top,
             min_strength=args.min_strength, rel_type=args.rel_type,
@@ -1124,7 +1162,7 @@ def main():
                   f"{t['closure_score']:>6.3f} {t['pivot_count']:>6}")
 
     elif args.command == "clustering":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         coefficients = clustering_coefficient(adj, nodes, min_degree=args.min_degree)
         ranked = sorted(coefficients.items(), key=lambda x: x[1], reverse=True)[:args.top]
         results = [{"rank": i + 1, "node": n, "clustering_coefficient": v, "degree": len(adj.get(n, {}))}
@@ -1139,7 +1177,7 @@ def main():
             print(f"{r['rank']:>4}  {r['node']:<40} {r['clustering_coefficient']:>11.4f} {r['degree']:>6}")
 
     elif args.command == "communities":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         communities = detect_communities(adj, nodes, resolution=args.resolution)
         if write_output(communities, args, summary=f"communities (resolution={args.resolution})"):
             return
@@ -1154,7 +1192,7 @@ def main():
                   f"{len(c['bridge_nodes']):>7}  {preview}")
 
     elif args.command == "community":
-        adj, nodes = build_graph()
+        adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         communities = detect_communities(adj, nodes, resolution=args.resolution)
         target_id = args.id
         if target_id >= len(communities):
@@ -1177,8 +1215,9 @@ def main():
 
     elif args.command == "community-summary":
         db = get_graph_db()
-        adj, nodes = build_graph(db)
-        summaries = community_summary(adj, nodes, db=db, resolution=args.resolution)
+        adj, nodes = build_graph(db, profile_id=p_id, all_profiles=p_all)
+        summaries = community_summary(adj, nodes, db=db, resolution=args.resolution,
+                                      profile_id=p_id, all_profiles=p_all)
         if write_output(summaries, args, summary=f"community summaries"):
             return
         for c in summaries:
@@ -1195,7 +1234,8 @@ def main():
                     print(f"  F#{f['id']} [{conf}] {f['target_name']}: {f['summary'][:70]}")
 
     elif args.command == "stats":
-        adj, nodes = build_graph(as_of=getattr(args, 'as_of', None))
+        adj, nodes = build_graph(as_of=getattr(args, 'as_of', None),
+                                 profile_id=p_id, all_profiles=p_all)
         s = graph_stats(adj, nodes)
         print("Graph Statistics")
         print("=" * 40)
