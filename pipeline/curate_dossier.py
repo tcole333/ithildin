@@ -41,7 +41,12 @@ def _resolve_profile(profile_id=None, all_profiles=False):
 
 STRENGTH_MAP = {"strong": 1.0, "medium": 0.7, "weak": 0.4, "circumstantial": 0.2}
 CONFIDENCE_RANK = {"confirmed": 4, "high": 3, "medium": 2, "low": 1, "unverified": 0}
-PRIORITY_TYPES = {"financial": 5, "corporate": 4, "legal": 3, "communication": 2, "intelligence": 2}
+PRIORITY_TYPES = {
+    "financial": 5, "corporate": 4, "legal": 3,
+    "communication": 2, "intelligence": 2,
+    "relationship": 3, "identity": 1, "document": 2,
+    "location": 1,
+}
 
 # Minimum findings of a type to warrant its own section
 SECTION_THRESHOLD = 2
@@ -224,6 +229,68 @@ def suggest_sections(dossier: dict) -> list[dict]:
             "guidance": "Narrative about documented communications — emails, calls, messages. Focus on what they reveal about the relationship or operation.",
         })
 
+    # Government Contracts — if findings reference federal procurement
+    contract_findings = [f for f in findings if any(
+        term in (f.get("summary", "") + " " + (f.get("detail") or "")).lower()
+        for term in ("contract", "usaspending", "sam.gov", "procurement", "bpa", "idv", "task order", "sole-source", "ota")
+    )]
+    if len(contract_findings) >= SECTION_THRESHOLD:
+        sections.append({
+            "id": "government-contracts",
+            "title": "Government Contracts and Procurement",
+            "viz": None,
+            "finding_ids": [f["id"] for f in contract_findings[:10]],
+            "connection_ids": [c["id"] for c in connection_types.get("contracts_with", [])[:6]],
+            "guidance": "Narrative about federal contracts, procurement vehicles, dollar amounts, agency relationships. Include specific contract IDs, BPA numbers, and dollar figures.",
+        })
+
+    # Political Activity — if political connections or donation findings exist
+    political_connections = connection_types.get("political", [])
+    political_findings = [f for f in findings if any(
+        term in (f.get("summary", "") + " " + (f.get("detail") or "")).lower()
+        for term in ("fec", "donation", "pac", "campaign", "lobby", "political", "super pac", "committee")
+    )]
+    if len(political_connections) >= SECTION_THRESHOLD or len(political_findings) >= SECTION_THRESHOLD:
+        sections.append({
+            "id": "political-activity",
+            "title": "Political Activity and Donations",
+            "viz": None,
+            "finding_ids": [f["id"] for f in political_findings[:10]],
+            "connection_ids": [c["id"] for c in political_connections[:8]],
+            "guidance": "Narrative about political donations, PAC contributions, lobbying activity, political appointments. Include FEC committee IDs, dollar amounts, recipient names.",
+        })
+
+    # Personnel Placements — if employment connections exist
+    employment_connections = connection_types.get("employment", [])
+    placement_findings = [f for f in findings if any(
+        term in (f.get("summary", "") + " " + (f.get("detail") or "")).lower()
+        for term in ("appointed", "placement", "cio", "cto", "doge", "detailed", "special government employee", "revolving door", "recusal", "ethics")
+    )]
+    if len(employment_connections) >= SECTION_THRESHOLD or len(placement_findings) >= SECTION_THRESHOLD:
+        sections.append({
+            "id": "personnel-placements",
+            "title": "Personnel Placements and Conflicts of Interest",
+            "viz": None,
+            "finding_ids": [f["id"] for f in placement_findings[:10]],
+            "connection_ids": [c["id"] for c in employment_connections[:8]],
+            "guidance": "Narrative about government appointments, agency placements, ethics conflicts, recusal status, prior employer relationships. Name specific people, agencies, and dates.",
+        })
+
+    # Regulatory Conflicts — if findings mention regulatory actions or oversight
+    regulatory_findings = [f for f in findings if any(
+        term in (f.get("summary", "") + " " + (f.get("detail") or "")).lower()
+        for term in ("faa", "fda", "nhtsa", "sec ", "osha", "cfpb", "nlrb", "regulatory", "oversight", "enforcement", "investigation", "compliance")
+    )]
+    if len(regulatory_findings) >= SECTION_THRESHOLD:
+        sections.append({
+            "id": "regulatory-conflicts",
+            "title": "Regulatory Conflicts",
+            "viz": None,
+            "finding_ids": [f["id"] for f in regulatory_findings[:10]],
+            "connection_ids": [],
+            "guidance": "Narrative about regulatory oversight, enforcement actions, compliance issues, agency conflicts. Include specific agency names, case numbers, and outcomes.",
+        })
+
     # If no specific sections qualified, create a general "Background" section
     if not sections:
         all_finding_ids = [f["id"] for f in sorted(findings, key=lambda f: _score_finding(f, {}), reverse=True)[:10]]
@@ -392,6 +459,48 @@ def extract_key_identifiers(dossier: dict) -> dict:
     }
 
 
+def audit_evidence_quality(dossier: dict) -> dict:
+    """Assess evidence quality for each finding. Returns summary stats."""
+    findings = dossier.get("findings", [])
+
+    primary_source_types = {"primary", "court_filing", "government_record"}
+    primary_evidence_prefixes = (
+        "EFTA", "HOUSE_OVERSIGHT", "SEC:", "EDGAR:", "CL:", "ACRIS:",
+        "REG:", "990:", "FEC:", "FARA:", "LDA:",
+    )
+
+    strong = []   # Has primary source evidence
+    moderate = [] # Has structured data citation
+    weak = []     # Only web search / news paraphrase
+
+    for f in findings:
+        evidence = f.get("evidence", [])
+        has_primary = any(
+            e.get("evidence_type") in primary_source_types
+            or any((e.get("evidence_ref") or "").startswith(p) for p in primary_evidence_prefixes)
+            for e in evidence
+        )
+        has_structured = any(
+            (e.get("evidence_ref") or "").startswith(("USASpending", "SAM", "HigherGov", "FEC", "OpenSanctions"))
+            or e.get("evidence_type") in ("api_data", "database_record")
+            for e in evidence
+        )
+
+        if has_primary:
+            strong.append(f["id"])
+        elif has_structured or f.get("claim_type") == "direct_quote":
+            moderate.append(f["id"])
+        else:
+            weak.append(f["id"])
+
+    return {
+        "strong_ids": strong,
+        "moderate_ids": moderate,
+        "weak_ids": weak,
+        "summary": f"{len(strong)} primary-sourced, {len(moderate)} structured-data, {len(weak)} web-only",
+    }
+
+
 def curate_dossier(dossier_path: Path, db_path: Path = DB_PATH, viz_only: bool = False,
                    profile_id: str | None = None) -> dict:
     """Add curation scaffold and viz_data to a dossier JSON file.
@@ -414,6 +523,7 @@ def curate_dossier(dossier_path: Path, db_path: Path = DB_PATH, viz_only: bool =
     key_finding_ids = select_key_findings(dossier)
     key_identifiers = extract_key_identifiers(dossier)
     section_suggestions = suggest_sections(dossier)
+    evidence_quality = audit_evidence_quality(dossier)
     ego_network = build_ego_network(dossier, db_path, profile_id=profile_id)
     timeline_events = build_timeline_events(dossier)
 
@@ -421,6 +531,7 @@ def curate_dossier(dossier_path: Path, db_path: Path = DB_PATH, viz_only: bool =
         "key_finding_ids": key_finding_ids,
         "key_identifiers": key_identifiers,
         "section_suggestions": section_suggestions,
+        "evidence_quality": evidence_quality,
         "curated_at": _utcnow(),
     }
 
@@ -499,8 +610,10 @@ def main():
             ego_count = len(dossier.get("viz_data", {}).get("ego_network", {}).get("connections", []))
 
             section_names = [s["id"] for s in suggestions]
+            eq = curation.get("evidence_quality", {})
+            eq_summary = eq.get("summary", "")
             status = "[has narrative]" if has_lead and has_sections else "[needs /curate-dossier]"
-            print(f"  {name}: {key_count} key findings, {ego_count} connections, sections: {', '.join(section_names)} {status}")
+            print(f"  {name}: {key_count} key findings, {ego_count} connections, sections: {', '.join(section_names)} | evidence: {eq_summary} {status}")
         except Exception as e:
             print(f"  ERROR {path.stem}: {e}", file=sys.stderr)
 
