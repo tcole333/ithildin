@@ -1,6 +1,7 @@
 ---
 name: add-registry
 description: Add a new state/country corporate registry to the unified registry system
+user_invocable: true
 ---
 
 # /add-registry
@@ -10,6 +11,14 @@ Add a new state or country corporate registry as a data source, creating an inge
 ## Arguments
 
 - Required: jurisdiction identifier (e.g., `/add-registry florida`, `/add-registry usvi`, `/add-registry bermuda`)
+
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
 
 ## Context
 
@@ -24,15 +33,15 @@ Corporate registries are primary sources for investigation — they show who con
 
 ```bash
 # Unified query tool (searches all ingested registries)
-uv run python tools/query_registry.py search "Entity Name"
-uv run python tools/query_registry.py officers "Person Name"
-uv run python tools/query_registry.py address "457 Madison"
-uv run python tools/query_registry.py stats
+python tools/query_registry.py search "Entity Name"
+python tools/query_registry.py officers "Person Name"
+python tools/query_registry.py address "ADDRESS"
+python tools/query_registry.py stats
 
 # Existing ingesters
-uv run python tools/ingest_florida.py download && uv run python tools/ingest_florida.py ingest
-uv run python tools/ingest_newyork.py search "Entity Name"
-uv run python tools/ingest_newyork.py ingest-batch "Epstein" --with-filings
+python tools/ingest_florida.py download && python tools/ingest_florida.py ingest
+python tools/ingest_newyork.py search "Entity Name"
+python tools/ingest_newyork.py ingest-batch "{primary_subject}" --with-filings
 ```
 
 ## Unified Schema (registry.db)
@@ -131,9 +140,9 @@ Create `tools/ingest_<jurisdiction>.py` following the pattern:
 Feeds into registry.db via the unified schema.
 
 Usage:
-    uv run python tools/ingest_<jurisdiction>.py search "query"
-    uv run python tools/ingest_<jurisdiction>.py ingest-entity <id>
-    uv run python tools/ingest_<jurisdiction>.py ingest-batch "query"
+    python tools/ingest_<jurisdiction>.py search "query"
+    python tools/ingest_<jurisdiction>.py ingest-entity <id>
+    python tools/ingest_<jurisdiction>.py ingest-batch "query"
 """
 
 import sys
@@ -168,7 +177,7 @@ Every registry has different field names. Create a mapping:
 
 ### 5. Test with Investigation Targets
 
-After building, test against known Epstein-related entities:
+After building, test against known investigation entities:
 ```bash
 # Pull current investigation targets dynamically
 python3 -c "
@@ -186,18 +195,14 @@ for r in rows:
 "
 ```
 
-Also search known addresses:
-- 9 East 71st St, New York
-- 358 El Brillo Way, Palm Beach
-- 457 Madison Ave, New York
-- 6100 Red Hook Rd, St Thomas
+Also search known_addresses from the investigation profile (loaded via `investigation_context.py show`).
 
 ### 6. Log and Update
 
 ```bash
 # Verify the ingest
-uv run python tools/query_registry.py stats
-uv run python tools/query_registry.py jurisdictions
+python tools/query_registry.py stats
+python tools/query_registry.py jurisdictions
 
 # Update CLAUDE.md data source inventory
 # Update the search-all-sources skill to include registry queries
@@ -207,11 +212,13 @@ uv run python tools/query_registry.py jurisdictions
 
 | Jurisdiction | Code | Why | Access |
 |-------------|------|-----|--------|
-| **Florida** | `fl` | Palm Beach entities, bearer share LLCs | SFTP bulk (DONE) |
-| **New York** | `ny` | 9 E 71st, 457 Madison, corporate HQ | SODA API (DONE) |
-| **US Virgin Islands** | `vi` | Southern Trust, Little St. Jeff's, LSJE LLC | Web portal (Playwright) |
-| **New Mexico** | `nm` | Zorro Ranch entities | REST API (DONE) |
-| **Panama** | `pa` | Mossack Fonseca entities, offshore shells | Hybrid ICIJ+Aleph (DONE) |
-| Delaware | `de` | Shell companies | CAPTCHA (hard) |
-| British Virgin Islands | `vg` | Liquid Funding, offshore shells | Paid per-search |
-| Bermuda | `bm` | Insurance vehicles | Limited access |
+| **Florida** | `fl` | High-volume entity registrations | SFTP bulk (DONE) |
+| **New York** | `ny` | Corporate headquarters, financial entities | SODA API (DONE) |
+| **US Virgin Islands** | `vi` | Offshore-adjacent entities, trusts | Web portal (Playwright) |
+| **New Mexico** | `nm` | Property-linked entities | REST API (DONE) |
+| **Panama** | `pa` | Offshore shells, leaked registry data | Hybrid ICIJ+Aleph (DONE) |
+| Delaware | `de` | Shell companies, privacy-favoring registrations | CAPTCHA (hard) |
+| British Virgin Islands | `vg` | Offshore shells, nominee directors | Paid per-search |
+| Bermuda | `bm` | Insurance vehicles, reinsurance structures | Limited access |
+
+Prioritize jurisdictions where the investigation profile's known_addresses are located, or where entities have been discovered during investigation.

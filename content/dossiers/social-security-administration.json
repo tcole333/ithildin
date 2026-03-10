@@ -1,0 +1,220 @@
+{
+  "name": "Social Security Administration",
+  "slug": "social-security-administration",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.540022",
+  "last_updated": "2026-03-09T20:35:19",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 3,
+      "legal": 3
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-09T20:35:19"
+  },
+  "findings": [
+    {
+      "id": 6432,
+      "finding_type": "intelligence",
+      "summary": "March 3 2025: DOGE SSA member sent encrypted password-protected file containing names and addresses of ~1,000 people to DHS, copying DOGE adviser Steve Davis and a DOGE Department of Labor employee. SSA's CIO has been unable to access the file to determine its contents. Revealed in DOJ Notice of Corrections to Record (AFSCME v. SSA, D.Md.) filed January 16 2026.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:33:01",
+      "target_name": "Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DOJ-Notice-of-Corrections-AFSCME-v-SSA-2026-01-16",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6404,
+      "finding_type": "intelligence",
+      "summary": "Between March 7-17, 2025, DOGE SSA team members shared data through Cloudflare \u2014 a third-party server not approved for storing SSA data and outside SSA security protocols. On March 3, a DOGE SSA member sent an encrypted password-protected file with names and addresses of ~1,000 people to DHS, copying DOGE adviser Steve Davis and a DOGE DOL employee. SSA cannot access that file to determine contents. As of DOJ court filing (Jan 2026), SSA cannot determine if data still exists on Cloudflare.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-07",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:06",
+      "target_name": "Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/?q=AFSCME+SSA+Maryland",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.justice.gov/search?query=Notice%20of%20Corrections%20to%20Record%20SSA%20Cloudflare",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6410,
+      "finding_type": "legal",
+      "summary": "On March 24 2025, a DOGE SSA team member signed a 'Voter Data Agreement' in his capacity as an SSA employee with an unnamed political advocacy group. The group's stated aim: find evidence of voter fraud and overturn election results in certain states. The group had acquired state voter rolls and sought to match them to SSA data to find noncitizens. SSA first discovered this agreement in November 2025 during an unrelated review. Two Hatch Act referrals made to Office of Special Counsel in December 2025. True the Vote published an 'Appeal to DOGE' in March 2025 and is suspected but denies involvement. No evidence SSA data was actually transferred to the advocacy group.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-24",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:31",
+      "target_name": "Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFSCME-v-SSA-D.Md.-DOJ-Notice-of-Corrections-2026-01-16",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6407,
+      "finding_type": "intelligence",
+      "summary": "After Supreme Court lifted DOGE access ban (June 6 2025), DOGE employees transferred a live copy of the Social Security NUMIDENT database to a cloud server without independent security controls. NUMIDENT contains: SSNs for 300M+ Americans, names, addresses, dates/places of birth, parents' names. Aram Moghaddassi authorized the operation via July 15 2025 memo accepting security risks. SSA CDO Charles Borges filed whistleblower complaint August 26 2025 and resigned August 29 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-06",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:18",
+      "target_name": "Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "nbcnews.com/fedscoop.com/npr.org:whistleblower-complaint-borges-2025-08-26",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6414,
+      "finding_type": "legal",
+      "summary": "AFSCME AFL-CIO v. Social Security Administration (D.Md., CL:69664313) filed Feb 21 2025. March 20 2025: federal judge issued TRO blocking DOGE access to SSA data. June 6 2025: Supreme Court overturned the TRO, allowing DOGE access to resume. January 16 2026: DOJ filed Notice of Corrections to Court Record revealing misstatements in earlier court filings \u2014 DOGE had in fact been accessing SSA data and exfiltrating it to Cloudflare (unapproved third party). Democracy Forward moved for discovery and depositions on DOGE's unlawful SSA data access.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:49",
+      "target_name": "Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:69664313",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6440,
+      "finding_type": "legal",
+      "summary": "SpaceX v. NLRB constitutional conflict: Elon Musk's DOGE accessed NLRB case management data (NxGen) in March 2025 while SpaceX has pending NLRB cases (19-CA-309274) and Musk is pursuing constitutional challenge to NLRB structure. The NLRB NxGen data exfiltrated includes trade secrets, witness testimony, and ongoing case data. Fifth Circuit dismissed SpaceX's appeal for lack of jurisdiction March 2025; constitutional challenge continues. Over a dozen federal court cases involve DOGE data access questions per NPR.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:35:19",
+      "target_name": "Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "npr.org:2025-04-16:doge-nlrb-whistleblower-musk-data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-03-03",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "March 3 2025: DOGE SSA member sent encrypted password-protected file containing names and addresses of ~1,000 people to DHS, copying DOGE adviser Steve Davis and a DOGE Department of Labor employee. SSA's CIO has been unable to access the file to determine its contents. Revealed in DOJ Notice of Corrections to Record (AFSCME v. SSA, D.Md.) filed January 16 2026.",
+      "confidence": "confirmed",
+      "id": 6432
+    },
+    {
+      "date": "2025-03-07",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Between March 7-17, 2025, DOGE SSA team members shared data through Cloudflare \u2014 a third-party server not approved for storing SSA data and outside SSA security protocols. On March 3, a DOGE SSA member sent an encrypted password-protected file with names and addresses of ~1,000 people to DHS, copying DOGE adviser Steve Davis and a DOGE DOL employee. SSA cannot access that file to determine contents. As of DOJ court filing (Jan 2026), SSA cannot determine if data still exists on Cloudflare.",
+      "confidence": "confirmed",
+      "id": 6404
+    },
+    {
+      "date": "2025-03-24",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "On March 24 2025, a DOGE SSA team member signed a 'Voter Data Agreement' in his capacity as an SSA employee with an unnamed political advocacy group. The group's stated aim: find evidence of voter fraud and overturn election results in certain states. The group had acquired state voter rolls and sought to match them to SSA data to find noncitizens. SSA first discovered this agreement in November 2025 during an unrelated review. Two Hatch Act referrals made to Office of Special Counsel in December 2025. True the Vote published an 'Appeal to DOGE' in March 2025 and is suspected but denies involvement. No evidence SSA data was actually transferred to the advocacy group.",
+      "confidence": "confirmed",
+      "id": 6410
+    },
+    {
+      "date": "2025-06-06",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "After Supreme Court lifted DOGE access ban (June 6 2025), DOGE employees transferred a live copy of the Social Security NUMIDENT database to a cloud server without independent security controls. NUMIDENT contains: SSNs for 300M+ Americans, names, addresses, dates/places of birth, parents' names. Aram Moghaddassi authorized the operation via July 15 2025 memo accepting security risks. SSA CDO Charles Borges filed whistleblower complaint August 26 2025 and resigned August 29 2025.",
+      "confidence": "high",
+      "id": 6407
+    }
+  ]
+}

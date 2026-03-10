@@ -100,6 +100,13 @@ def _normalize_990_ein(token: str) -> str:
     return f"990:{match.group(1)}"
 
 
+def _normalize_990_prefixed(token: str) -> str:
+    match = re.search(r"990:\s*([0-9]{2})-?([0-9]{7})", token, re.IGNORECASE)
+    if not match:
+        return token
+    return f"990:{match.group(1)}{match.group(2)}"
+
+
 def _normalize_acris_ft(token: str) -> str:
     match = re.search(r"FT[_-]?([0-9]{13,16})", token, re.IGNORECASE)
     if not match:
@@ -150,6 +157,26 @@ def _normalize_bare_url_with_description(token: str) -> str:
     return match.group(1)
 
 
+def _normalize_cl_token(token: str) -> str:
+    body = token.split(":", 1)[1].strip()
+    if not body:
+        return token
+
+    opinion_match = re.match(r"opinion[-:_/\s]*(\d+)$", body, re.IGNORECASE)
+    if opinion_match:
+        return f"https://www.courtlistener.com/opinion/{opinion_match.group(1)}/"
+
+    docket_match = re.match(r"docket[-:_/\s]*(\d+)$", body, re.IGNORECASE)
+    if docket_match:
+        return f"CL:{docket_match.group(1)}"
+
+    search_body = re.sub(r"^search[-:_/\s]*", "", body, flags=re.IGNORECASE).strip()
+    if search_body:
+        return f"https://www.courtlistener.com/?q={quote_plus(search_body.replace('/', ' '))}"
+
+    return token
+
+
 TOKEN_PATTERNS: list[tuple[re.Pattern[str], callable]] = [
     (re.compile(r"https?://[^\s,;]+", re.IGNORECASE), lambda m: _normalize_url(m.group(0))),
     (re.compile(r"EFTA\d{6,}", re.IGNORECASE), lambda m: m.group(0).upper()),
@@ -164,11 +191,13 @@ TOKEN_PATTERNS: list[tuple[re.Pattern[str], callable]] = [
     (re.compile(r"EDGAR:\d{10}-\d{2}-\d{6}", re.IGNORECASE), lambda m: _normalize_prefixed(m.group(0), "EDGAR")),
     (re.compile(r"EDGAR:[^,;\n]+", re.IGNORECASE), lambda m: _normalize_edgar_fallback_to_url(m.group(0))),
     (re.compile(r"990:EIN[0-9:A-Za-z._-]+", re.IGNORECASE), lambda m: _normalize_990_ein(m.group(0))),
+    (re.compile(r"990:[^,;\n]*\d{2}-?\d{7}[^,;\n]*", re.IGNORECASE), lambda m: _normalize_990_prefixed(m.group(0))),
     (re.compile(r"990:\d{9}", re.IGNORECASE), lambda m: _normalize_prefixed(m.group(0), "990")),
     (re.compile(r"ACRIS:FT[_-]?\d{13,16}", re.IGNORECASE), lambda m: _normalize_acris_ft(m.group(0))),
     (re.compile(r"ACRIS:\d{13,16}", re.IGNORECASE), lambda m: _normalize_prefixed(m.group(0), "ACRIS")),
     (re.compile(r"ACRIS:(?:batch|search|bulk)[^,;\n]*", re.IGNORECASE), lambda m: _normalize_acris_search_url(m.group(0))),
     (re.compile(r"CL:\d+", re.IGNORECASE), lambda m: _normalize_prefixed(m.group(0), "CL")),
+    (re.compile(r"CL:[^,;\n]+", re.IGNORECASE), lambda m: _normalize_cl_token(m.group(0))),
     (re.compile(r"FEC:C\d{8}(?:-\d{4}|/schedule_a)?", re.IGNORECASE), lambda m: _normalize_fec(m.group(0))),
     (re.compile(r"FEC:[A-Za-z0-9_]+", re.IGNORECASE), lambda m: _normalize_fec(m.group(0))),
     (re.compile(r"FEC:[^,;\n]+", re.IGNORECASE), lambda m: _normalize_fec_search_url(m.group(0))),

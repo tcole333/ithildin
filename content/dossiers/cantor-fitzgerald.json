@@ -1,0 +1,1014 @@
+{
+  "name": "Cantor Fitzgerald",
+  "slug": "cantor-fitzgerald",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.450917",
+  "last_updated": "2026-03-09T17:57:28",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 14,
+    "total_entities": 0,
+    "finding_types": {
+      "legal": 3,
+      "financial": 9
+    },
+    "connection_types": {
+      "corporate": 5,
+      "financial": 7,
+      "employment": 1,
+      "owns": 1
+    },
+    "last_updated": "2026-03-09T17:57:28"
+  },
+  "findings": [
+    {
+      "id": 3866,
+      "finding_type": "legal",
+      "summary": "CANTOR FITZGERALD LOBBIED COMMERCE DEPT AND WHITE HOUSE IN 2020: LDA filings show Cantor Fitzgerald hired ML Strategies LLC (Mintz) in Q1 2020 for 'International Economic and Judicial Issues' lobbying. Client listed as 'MINTZ (ON BEHALF OF CANTOR FITZGERALD)'. Lobbyist: Frank Guinta (former Member of Congress, NH 1st District). Q2-Q4 2020 filings show $150K/quarter payments ($300K total confirmed). Government entities targeted: Commerce Dept (DOC), White House Office, Office of the Vice President, State Dept (DOS), Treasury Dept. This pre-dates Lutnick's Commerce Secretary appointment but shows Cantor already had established lobbying relationships with the very department Lutnick would later lead.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:17:04",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:Cantor-MLStrategies-2020",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3883,
+      "finding_type": "financial",
+      "summary": "Cantor Fitzgerald LP registered NEW lobbying relationship with Checkmate Government Relations in January 2026 \u2014 11 months into Lutnick's tenure as Commerce Secretary. Issues covered: Financial Institutions/Investments/Securities and Fuel/Gas/Oil. Spending: 80K per quarter. This is concurrent with Tether's own separate lobbying operation on stablecoin legislation, creating dual lobbying pressure from both the custodian (Cantor) and the issuer (Tether) on the same regulatory question.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:20:44",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate LDA lobbying disclosure, Checkmate Government Relations filing 2026-01-21",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3890,
+      "finding_type": "financial",
+      "summary": "NY DOS shows 26 Cantor Fitzgerald entities registered in New York. Key active entities: Cantor Fitzgerald LP (DE limited partnership, DOS ID 1681035, filed 1992); Cantor Fitzgerald II LLC (DE LLC, DOS ID 1952565, filed 1995); The Cantor Fitzgerald Foundation (NPO, DOS ID 781261, filed 1982); The Cantor Fitzgerald Relief Fund (DE NPO, DOS ID 2694253, filed 2001-10-30 \u2014 one month after 9/11); Children of Cantor Fitzgerald High Yield Group Foundation (NY NPO, DOS ID 2887924, filed 2003). Historic entities span back to 1947. EDGAR shows 10 registered Cantor entities including CIK 1024896 (Cantor Fitzgerald LP, DE), CIK 1127534 (Cantor Fitzgerald & Co, NY broker-dealer SIC:6211), CIK 1666244 (CF Income Trust, MD SIC:6798). GLEIF shows 10 Cantor Fitzgerald fund entities all domiciled in Dublin, Ireland via Cantor Fitzgerald Asset Management Europe Limited, Cantor Fitzgerald House, 23 Saint Stephen's Green, Dublin D02 AR55.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:21:16",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY DOS search Cantor Fitzgerald; SEC EDGAR lookup; GLEIF search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3901,
+      "finding_type": "financial",
+      "summary": "Cantor Fitzgerald tariff-refund trading scheme: In 2025, Cantor traders purchased rights to hundreds of millions of dollars of tariff refunds at 20-30 cents on the dollar \u2014 betting tariffs would be struck down in court. When SCOTUS ruled 6-3 in Feb 2026 that Trump's tariffs were unlawful, potential windfall was enormous. Cantor denied executing transactions but Wyden/Warren probed conflict in Aug 2025 letter. Brandon Lutnick (chairman) and Kyle Lutnick (exec vice chairman) run the firm while father serves as Commerce Secretary responsible for trade policy. Cantor also positioned as lead underwriter for deals aligned with Trump admin agenda (crypto, AI, energy, defense).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:22:17",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Daily Beast 2026-02-22",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Finance Committee Wyden/Warren 2025-08-14",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Semafor 2026-02-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wired July 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3918,
+      "finding_type": "financial",
+      "summary": "FBI FD-302 alleges Cantor Fitzgerald charity day revenue manipulation: Annual global charity day in NY and London raised $9-10M each year. Whistleblower found it suspicious the amount was nearly identical every year. If CF was 'stealing entire global revenues for the charity day, brokers couldn't earn their commission.' Trading day would shift if publicized day was not successful. Parabridge International Services handled all UK charity day funds and wire transfers. Sarah Ferguson (Duchess of York) given office space above CF for Children In Crisis charity. Ghislaine Maxwell and Ferguson attended Dolce Vita Parties raising money for CIC and Stow School.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 04:50:11",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01249207",
+          "source_quote": "Charity days raised $9-10 million each year, and thought it was strange it raised nearly the same amount every year. Brokers were not given tax relief for the loss of revenue on charity days. PIS handled all the funds raised in the United Kingdom on charity days and the associated wire transfers",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3958,
+      "finding_type": "financial",
+      "summary": "Cantor Fitzgerald pitched tariff-refund rights trading product: offered companies 20-30% of paid tariff duties in exchange for legal claim to future refund if IEEPA tariffs were struck down. Internal Cantor salesman email claimed firm had 'already put a trade through representing about ~$10 million' and anticipated that number 'would balloon in coming weeks.' Firm claimed capacity to trade 'up to several hundred million' in tariff-refund rights.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 05:04:19",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WIRED July 2025 report; Senate Finance Committee press release 2025-08-14; Wyden-Warren letter to Brandon Lutnick 2025-08-13",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3960,
+      "finding_type": "legal",
+      "summary": "Wyden-Warren letter to Brandon Lutnick (Aug 13, 2025) demanded: (1) how many tariff refund agreements drafted, finalized, and with how many counterparties; (2) whether product was client-requested or internally originated; (3) whether anyone at Cantor communicated with Trump, Secretary Lutnick, or other administration officials about tariffs. Letter characterized firm's actions as raising 'obvious conflict-of-interest and insider dealing concerns.' No public evidence of formal SEC or DOJ investigation.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 05:04:40",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Politico Pro 2025-08-14",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate Finance Committee letter 2025-08-13 PDF",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Hill 2025-08-14",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3961,
+      "finding_type": "financial",
+      "summary": "Cantor Fitzgerald issued contradictory statements: spokesperson said reports of crafting financial products betting on tariff outcomes was 'absolutely false' and firm 'has never executed any transactions or taken risk on the legality of tariffs.' But Bloomberg reported firm had internal discussions about facilitating tariff trades for hedge funds before shutting them down. Cantor spokesman acknowledged salesman 'erroneously' believed firm would greenlight the business and went looking for counterparties. Internal salesman email showed $10M trade claim.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 05:04:50",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg 2025-08-14",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Newsweek 2026-02-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Semafor 2026-02-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3971,
+      "finding_type": "financial",
+      "summary": "Cantor Fitzgerald Q4 2025 lobbying: hired Checkmate Government Relations for Financial Institutions/Investments/Securities and Fuel/Gas/Oil issues. Prior lobbying history shows Ernst & Young and Morgan Lewis for tax issues (2001-2002 post-9/11), Dickstein Shapiro for Homeland Security (2004-2005), and ML Strategies/Mintz for 'International Economic and Judicial Issues' (2020-2021). The 2025 lobbying coincides with the tariff-refund controversy and broader Lutnick family financial conflicts.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 05:05:38",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3993,
+      "finding_type": "financial",
+      "summary": "Cantor/BGC Charity Day and Dolce Vita Fund Flow: Per FBI FD-302 (EFTA01249207), Cantor raises $9-10M annually on charity days, with Parabridge International Services handling UK wire transfers. The La Dolce Vita fundraising parties were held at Stowe School in aid of the Cantor Fitzgerald Fund, with Ghislaine Maxwell co-managing funds. Children in Crisis (CIC, UK charity 1020488, founded 1993 by Sarah Ferguson) was given office space above Cantor Fitzgerald. CIC merged with Street Child in 2018 but still operates (FY2025: income GBP536K). The fund flow chain: Cantor charity day -> PIS wire transfers -> UK charities (CIC, Stowe School) -> Dolce Vita parties co-managed by Maxwell.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 05:38:27",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01249207",
+          "source_quote": " PIS was where payroll passed through in addition to the money raised on charity days; gettyimages.ae: La Dolce Vita party in aid of the Cantor Fitzgerald Fund held at Stowe School",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4192,
+      "finding_type": "financial",
+      "summary": "Cantor Fitzgerald holds a 5% ownership stake in Tether (valued at ~M when negotiated in Nov 2024), manages the majority of Tether's B in reserves (US Treasuries), and also manages reserves for Tether's new GENIUS Act-compliant USAT stablecoin. Brandon Lutnick (Howard's son) chairs Cantor Fitzgerald and launched Twenty One Capital \u2014 a Bitcoin acquisition vehicle backed by Tether, SoftBank, and Bitfinex \u2014 via Cantor Equity Partners SPAC. The Lutnick family thus has direct financial interests in both the largest existing stablecoin (Tether/USDT) and the regulatory framework governing stablecoins.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:53:33",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/crypto/2024/11/24/howard-lutnick-cantor-fitzgerald-tether-stablecoin-2-billion-bitcoin-lending/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.coindesk.com/markets/2025/04/23/commerce-secretary-lutnick-s-son-teams-up-with-tether-softbank-for-usd3b-bitcoin-spac-ft",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.theblock.co/post/327961/lutnick-cantor-fitzgerald-negotiated-a-5-ownership-stake-in-tether-wsj",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4300,
+      "finding_type": "legal",
+      "summary": "Cantor Fitzgerald LP and Cantor Futures Exchange historical lobbying on Dodd-Frank OTC derivatives regulation",
+      "detail": "LDA filings show Cantor Fitzgerald LP and Cantor Futures Exchange lobbied extensively during Dodd-Frank era (2009-2011) on: 'H.R. 4173, Dodd-Frank Wall Street Reform and Consumer Protection Act -- issues related to OTC derivatives and futures contacts', 'Financial Reform legislation S. 3217'. Multiple law firms registered as lobbyists. No recent crypto-specific lobbying filings found under Cantor name \u2014 lobbying activity on crypto apparently flows through Tether directly.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:40:44",
+      "target_name": "Cantor Fitzgerald",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings for Cantor Fitzgerald LP",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings for Cantor Futures Exchange",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2252,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "US Commerce Department",
+      "relationship_type": "corporate",
+      "description": "Cantor Fitzgerald had established lobbying relationship with Commerce Dept since Q1 2020 via ML Strategies/Mintz ($300K, 2020 Q2-Q4) on International Economic and Judicial Issues. In Feb 2025, Cantor's CEO Howard Lutnick became Commerce Secretary, completing a transition from lobbyist-client to agency head.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:18:43",
+      "profile_id": "epstein",
+      "other_person": "US Commerce Department",
+      "other_person_slug": "us-commerce-department",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:Cantor-MLStrategies-2020",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2253,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Tether Operations Limited",
+      "relationship_type": "financial",
+      "description": "Cantor Fitzgerald custodies majority of Tether USDT reserves. Both entities had parallel lobbying campaigns (Cantor: Commerce/Treasury/WH via ML Strategies 2020; Tether: Congress via FTI/Continental/DMM 2022-2023). Cantor continued lobbying post-Lutnick appointment via Checkmate 2025 Q4. Combined lobbying spend exceeds $1.7M on overlapping financial services issues.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:18:48",
+      "profile_id": "epstein",
+      "other_person": "Tether Operations Limited",
+      "other_person_slug": "tether-operations-limited",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:Cantor-MLStrategies-2020,LDA:Cantor-Checkmate-2025Q4,LDA:Tether-FTI-2022-2023,LDA:Tether-Continental-2023",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2258,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Howard Lutnick",
+      "relationship_type": "corporate",
+      "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald and BGC Group until Feb 2025 Senate confirmation. Held 23.5% of BGC Group (110.8M shares). Divested to son Brandon by Oct 2025. 13.8M+ in political donations from CF employment. CF Relief Fund at same address.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:22:07",
+      "profile_id": "epstein",
+      "other_person": "Howard Lutnick",
+      "other_person_slug": "howard-lutnick",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC 13D/A; FEC donor records",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2259,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Tether Holdings Limited",
+      "relationship_type": "financial",
+      "description": "Cantor Fitzgerald manages majority of Tether USDT reserves (80B+ in Treasury securities) and holds convertible debt stake in Tether. Both entities lobby separately on stablecoin legislation. CF via Checkmate Govt Relations (Jan 2026, 80K/qtr). Tether via FTI Govt Affairs, Continental Strategy, DMM Consulting (since 2022, 1.5M+ total).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:22:14",
+      "profile_id": "epstein",
+      "other_person": "Tether Holdings Limited",
+      "other_person_slug": "tether-holdings-limited",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA lobbying disclosures; public reporting on CF-Tether relationship",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2260,
+      "person_a": "BGC Group",
+      "person_b": "Cantor Fitzgerald",
+      "relationship_type": "corporate",
+      "description": "Cantor Fitzgerald LP is the controlling entity of BGC Group Inc. CF Group Management Inc (CFGM) is the managing general partner of Cantor Fitzgerald LP. CFGM voting shares transferred from Howard to Brandon Lutnick trusts for 200K. BGC Group trades on Nasdaq (ticker BGC), CIK 1094831, HQ 499 Park Ave NY.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:22:20",
+      "profile_id": "epstein",
+      "other_person": "BGC Group",
+      "other_person_slug": "bgc-group",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 8-K BGC Group 2025-10-06; EDGAR CIK 1094831",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2273,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Parabridge International Services",
+      "relationship_type": "corporate",
+      "description": "PIS was an affiliate of Cantor Fitzgerald. Handled payroll and UK charity day fund transfers.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 04:51:03",
+      "profile_id": "epstein",
+      "other_person": "Parabridge International Services",
+      "other_person_slug": "parabridge-international-services",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01249207",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2294,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Tether Investments",
+      "relationship_type": "financial",
+      "description": "Cantor Fitzgerald custodies approximately 99% of Tether B+ reserves (primarily US Treasuries). Cantor purchased convertible 5% equity stake in Tether for M+. Tether contributed 24,500 BTC to Twenty One Capital which was created via Cantor-sponsored SPAC. Tether purchased ALL PIPE Bitcoin (.7M) on behalf of XXI and SoftBank.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 04:57:45",
+      "profile_id": "epstein",
+      "other_person": "Tether Investments",
+      "other_person_slug": "tether-investments",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CoinDesk:Most Influential 2025-12-09",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1865602",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2298,
+      "person_a": "Brandon Lutnick",
+      "person_b": "Cantor Fitzgerald",
+      "relationship_type": "employment",
+      "description": "Chairman of Cantor Fitzgerald LP and CEO/Chairman of Cantor Equity Partners Inc (SPAC). Previously was under Howard Lutnick. Now runs the serial SPAC factory (CEP I through VI) while Cantor custodies Tether reserves and holds 5% equity stake in Tether.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 04:57:57",
+      "profile_id": "epstein",
+      "other_person": "Brandon Lutnick",
+      "other_person_slug": "brandon-lutnick",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1865602",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2300,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "USAT Holdings Inc",
+      "relationship_type": "financial",
+      "description": "Cantor Fitzgerald serves as USAT reserve custodian and preferred primary dealer",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 04:59:07",
+      "profile_id": "epstein",
+      "other_person": "USAT Holdings Inc",
+      "other_person_slug": "usat-holdings-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "tether.io",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2449,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "SoftBank Group",
+      "relationship_type": "financial",
+      "description": "SoftBank and Cantor Fitzgerald co-founded Twenty One Capital (Bitcoin treasury company) via SPAC merger. SoftBank contributed $900M BTC initially, then bought additional $780M shares. Brandon Lutnick (son of Commerce Sec Howard Lutnick) chairs Cantor. Tether is third partner. Sullivan & Cromwell advised SoftBank.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 15:55:42",
+      "profile_id": "epstein",
+      "other_person": "SoftBank Group",
+      "other_person_slug": "softbank-group",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC S-4 Twenty One Capital, Cantor press release 2025-04-23",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2524,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Tether",
+      "relationship_type": "financial",
+      "description": "Cantor holds 5% ownership stake in Tether (~$600M), manages majority of Tether's $133B reserves (US Treasuries), and earns tens of millions in annual fees. Also manages reserves for Tether's GENIUS Act-compliant USAT stablecoin. Brandon Lutnick (Howard's son) launched Twenty One Capital with Tether/SoftBank.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:55:13",
+      "profile_id": "epstein",
+      "other_person": "Tether",
+      "other_person_slug": "tether",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.theblock.co/post/327961/lutnick-cantor-fitzgerald-negotiated-a-5-ownership-stake-in-tether-wsj",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3164,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "USA Rare Earth",
+      "relationship_type": "financial",
+      "description": "1.5B PIPE led by Cantor Fitzgerald",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:54:39",
+      "profile_id": "tech-right",
+      "other_person": "USA Rare Earth",
+      "other_person_slug": "usa-rare-earth",
+      "evidence": []
+    },
+    {
+      "id": 3202,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Critical Metals Corp",
+      "relationship_type": "owns",
+      "description": "Cantor Fitzgerald LP is owner of CRML (LittleSis). Held 1.25M shares (deferred SPAC underwriting), divested to 190K by Q3 2025.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:57:20",
+      "profile_id": "tech-right",
+      "other_person": "Critical Metals Corp",
+      "other_person_slug": "critical-metals-corp",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "LittleSis:rel/2043850",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3204,
+      "person_a": "Cantor Fitzgerald",
+      "person_b": "Howard Lutnick",
+      "relationship_type": "corporate",
+      "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald until becoming US Commerce Secretary. Divested ownership to sons Brandon (Chairman) and Kyle (Exec Vice Chairman) via trusts May 2025.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:57:28",
+      "profile_id": "tech-right",
+      "other_person": "Howard Lutnick",
+      "other_person_slug": "howard-lutnick",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q16194176,Bloomberg:2025-05-19",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      3918,
+      3993,
+      3961,
+      4192,
+      3960,
+      3866,
+      4300,
+      3883,
+      3971,
+      3901,
+      3890,
+      3958
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          2252,
+          2253,
+          2258,
+          2259,
+          2260,
+          2273,
+          2294,
+          2298,
+          2300,
+          2449,
+          2524,
+          3164,
+          3202,
+          3204
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          3883,
+          3890,
+          3901,
+          3918,
+          3958,
+          3961,
+          3971,
+          3993,
+          4192
+        ],
+        "connection_ids": [
+          2253,
+          2259,
+          2294,
+          2300,
+          2449,
+          2524,
+          3164
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          3866,
+          3960,
+          4300
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      },
+      {
+        "id": "political-activity",
+        "title": "Political Activity and Donations",
+        "viz": null,
+        "finding_ids": [
+          3866,
+          3883,
+          3918,
+          3958,
+          3971,
+          3993,
+          4192,
+          4300
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about political donations, PAC contributions, lobbying activity, political appointments. Include FEC committee IDs, dollar amounts, recipient names."
+      },
+      {
+        "id": "personnel-placements",
+        "title": "Personnel Placements and Conflicts of Interest",
+        "viz": null,
+        "finding_ids": [
+          3918,
+          3961
+        ],
+        "connection_ids": [
+          2298
+        ],
+        "guidance": "Narrative about government appointments, agency placements, ethics conflicts, recusal status, prior employer relationships. Name specific people, agencies, and dates."
+      },
+      {
+        "id": "regulatory-conflicts",
+        "title": "Regulatory Conflicts",
+        "viz": null,
+        "finding_ids": [
+          3883,
+          3960,
+          4192
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about regulatory oversight, enforcement actions, compliance issues, agency conflicts. Include specific agency names, case numbers, and outcomes."
+      }
+    ],
+    "evidence_quality": {
+      "strong_ids": [
+        3866,
+        3918,
+        3993
+      ],
+      "moderate_ids": [
+        3883
+      ],
+      "weak_ids": [
+        3890,
+        3901,
+        3958,
+        3960,
+        3961,
+        3971,
+        4192,
+        4300
+      ],
+      "summary": "3 primary-sourced, 1 structured-data, 8 web-only"
+    },
+    "lead": "<p><strong>Cantor Fitzgerald</strong> is a New York financial firm whose significance in this investigation centers on the overlap between its lobbying activity, its former chief executive <a href='/dossiers/howard-lutnick'>Howard Lutnick</a>, and its role in crypto reserve custody [Finding #3866]. LDA filings summarized in the dossier show that Cantor hired ML Strategies in 2020 to lobby the Commerce Department, White House, State Department, Treasury Department, and Office of the Vice President on international economic issues [Finding #3866]. A January 2026 disclosure summarized in the dossier shows the firm retaining Checkmate Government Relations on financial-services and energy issues during Lutnick's tenure as Commerce Secretary [Finding #3883].</p><p>Public reporting summarized in the dossier describes Cantor as a 5% equity holder in Tether and a manager of most of Tether's Treasury reserves, while the same reporting says <a href='/dossiers/brandon-lutnick'>Brandon Lutnick</a> used Cantor Equity Partners to launch Twenty One Capital with Tether and <a href='/dossiers/softbank-group'>SoftBank Group</a> [Finding #4192]. Separately, an FBI FD-302 summary says Cantor affiliate Parabridge International Services handled UK charity-day funds and wire transfers and places Cantor-linked charitable activity in the same orbit as events attended by <a href='/dossiers/ghislaine-maxwell'>Ghislaine Maxwell</a> and Sarah Ferguson [Finding #3918]. A compiled cross-reference of New York DOS, EDGAR, and GLEIF records summarized in the dossier identified 26 Cantor Fitzgerald entities in New York and ten Cantor-linked fund entities in Dublin, showing that the brand spans partnerships, broker-dealer operations, charities, and investment vehicles rather than a single operating company [Finding #3890].</p>",
+    "system_role": "Cantor Fitzgerald shows how a private intermediary can turn custody, underwriting, lobbying, and branded deal vehicles into a single access position between markets and the state. Its importance here is structural: the firm links executive-branch influence, crypto reserve infrastructure, and private capital formation under one network.",
+    "sections": [
+      {
+        "id": "corporate-footprint",
+        "title": "Corporate Footprint",
+        "content": "<p>A compiled cross-reference of New York DOS, EDGAR, and GLEIF records summarized in the dossier identified 26 Cantor Fitzgerald entities in New York and ten Cantor-linked fund entities domiciled in Dublin [Finding #3890]. The same finding lists Cantor Fitzgerald LP, Cantor Fitzgerald II LLC, the Cantor Fitzgerald Foundation, and the Cantor Fitzgerald Relief Fund among the active entities in that footprint [Finding #3890].</p><p>This structure matters because the dossier does not describe a single broker-dealer operating in isolation; it describes a branded network of partnerships, charities, and investment vehicles that can be deployed across different regulatory and commercial settings [Finding #3890]. Public reporting summarized in the dossier also places Cantor inside Tether's reserve and equity structure, showing how the firm's legacy securities platform now overlaps with crypto custody and SPAC formation [Finding #4192].</p>",
+        "viz": null
+      },
+      {
+        "id": "key-relationships",
+        "title": "Lutnick, Tether, and the Reserve-Custody Nexus",
+        "content": "<p>LDA filings summarized in the dossier show that Cantor hired ML Strategies in 2020 to lobby Commerce, the White House, State, Treasury, and the vice president's office on international economic issues [Finding #3866]. A January 2026 filing summarized in the dossier shows Cantor registering Checkmate Government Relations on financial-services and energy issues while <a href='/dossiers/howard-lutnick'>Howard Lutnick</a> was serving as Commerce Secretary [Finding #3883].</p><p>Public reporting summarized in the dossier describes Cantor as both a reserve manager and a 5% equity holder in Tether, while the same reporting says <a href='/dossiers/brandon-lutnick'>Brandon Lutnick</a> used Cantor Equity Partners to launch Twenty One Capital with Tether and <a href='/dossiers/softbank-group'>SoftBank Group</a> [Finding #4192]. Together those links place Cantor between federal policy access, stablecoin reserve management, and sponsored deal vehicles rather than in a single line of business [Finding #3866][Finding #3883][Finding #4192].</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "regulatory-conflicts",
+        "title": "Lobbying and Regulatory Exposure",
+        "content": "<p>Press summaries and the August 13, 2025 Wyden-Warren letter collected in the dossier describe Cantor marketing tariff-refund rights, discussing an internal $10 million trade, and then publicly denying that the firm had executed or risked such transactions [Finding #3958][Finding #3960][Finding #3961]. The same materials frame the issue as a conflict-of-interest question because the firm's principals were tied to trade policy while Howard Lutnick was serving in the administration [Finding #3960][Finding #3961].</p><p>The Wyden-Warren letter summarized in the dossier asked how many agreements Cantor drafted, whether the product was internally originated, and whether anyone at the firm communicated with administration officials about tariffs [Finding #3960]. A separate dossier finding traces related Cantor lobbying campaigns from the post-9/11 tax period through 2020 and 2025, indicating continuity rather than a one-off episode [Finding #3971].</p>",
+        "viz": null
+      },
+      {
+        "id": "charity-day",
+        "title": "Charity Day and UK Transfer Infrastructure",
+        "content": "<p>An FBI FD-302 summary in the dossier states that Cantor's annual charity days in New York and London raised roughly $9 million to $10 million each year and that a whistleblower viewed the near-identical totals as suspicious [Finding #3918]. The same interview summary says Parabridge International Services handled the UK charity-day funds and associated wire transfers [Finding #3918].</p><p>That same FD-302 summary places Children in Crisis above Cantor's offices and says <a href='/dossiers/ghislaine-maxwell'>Ghislaine Maxwell</a> and Sarah Ferguson attended La Dolce Vita events benefiting Children in Crisis and Stowe School [Finding #3918]. An attributed synthesis finding in the dossier further describes those events as part of a fund-flow chain connecting Cantor charity-day proceeds, UK transfers, and Maxwell-linked fundraising activity [Finding #3993].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What are the contractual terms of Cantor Fitzgerald's equity and convertible-debt relationship with Tether, and which Cantor entities hold those interests?",
+      "Which counterparties entered tariff-refund rights trades or draft agreements with Cantor in 2025, and did any communicate with Commerce or White House officials at the same time?",
+      "What records exist for Parabridge International Services' handling of UK charity-day wire transfers, payroll flows, and beneficiary distributions?",
+      "How did Cantor's placements in critical-minerals and Bitcoin treasury deals overlap with policy decisions affecting Tether, USA Rare Earth, or Critical Metals Corp?",
+      "Which Cantor-affiliated charities or relief funds shared vendors, officers, or addresses with the operating partnership and broker-dealer entities?"
+    ],
+    "applicable_models": [
+      "bridge-tax",
+      "private-order"
+    ],
+    "curated_at": "2026-03-10T16:24:23.604998"
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Cantor Fitzgerald",
+      "connections": [
+        {
+          "target": "US Commerce Department",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "LDA:Cantor-MLStrategies-2020",
+          "description": "Cantor Fitzgerald had established lobbying relationship with Commerce Dept since Q1 2020 via ML Strategies/Mintz ($300K, 2020 Q2-Q4) on International Economic and Judicial Issues. In Feb 2025, Cantor's CEO Howard Lutnick became Commerce Secretary, completing a transition from lobbyist-client to agency head."
+        },
+        {
+          "target": "Tether Operations Limited",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "LDA:Cantor-MLStrategies-2020,LDA:Cantor-Checkmate-2025Q4,LDA:Tether-FTI-2022-2023,LDA:Tether-Continental-2023",
+          "description": "Cantor Fitzgerald custodies majority of Tether USDT reserves. Both entities had parallel lobbying campaigns (Cantor: Commerce/Treasury/WH via ML Strategies 2020; Tether: Congress via FTI/Continental/DMM 2022-2023). Cantor continued lobbying post-Lutnick appointment via Checkmate 2025 Q4. Combined lobbying spend exceeds $1.7M on overlapping financial services issues."
+        },
+        {
+          "target": "Howard Lutnick",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "SEC 13D/A; FEC donor records",
+          "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald and BGC Group until Feb 2025 Senate confirmation. Held 23.5% of BGC Group (110.8M shares). Divested to son Brandon by Oct 2025. 13.8M+ in political donations from CF employment. CF Relief Fund at same address."
+        },
+        {
+          "target": "Tether Holdings Limited",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "LDA lobbying disclosures; public reporting on CF-Tether relationship",
+          "description": "Cantor Fitzgerald manages majority of Tether USDT reserves (80B+ in Treasury securities) and holds convertible debt stake in Tether. Both entities lobby separately on stablecoin legislation. CF via Checkmate Govt Relations (Jan 2026, 80K/qtr). Tether via FTI Govt Affairs, Continental Strategy, DMM Consulting (since 2022, 1.5M+ total)."
+        },
+        {
+          "target": "BGC Group",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "SEC 8-K BGC Group 2025-10-06; EDGAR CIK 1094831",
+          "description": "Cantor Fitzgerald LP is the controlling entity of BGC Group Inc. CF Group Management Inc (CFGM) is the managing general partner of Cantor Fitzgerald LP. CFGM voting shares transferred from Howard to Brandon Lutnick trusts for 200K. BGC Group trades on Nasdaq (ticker BGC), CIK 1094831, HQ 499 Park Ave NY."
+        },
+        {
+          "target": "Parabridge International Services",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "EFTA01249207",
+          "description": "PIS was an affiliate of Cantor Fitzgerald. Handled payroll and UK charity day fund transfers."
+        },
+        {
+          "target": "Tether Investments",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "CoinDesk:Most Influential 2025-12-09",
+          "description": "Cantor Fitzgerald custodies approximately 99% of Tether B+ reserves (primarily US Treasuries). Cantor purchased convertible 5% equity stake in Tether for M+. Tether contributed 24,500 BTC to Twenty One Capital which was created via Cantor-sponsored SPAC. Tether purchased ALL PIPE Bitcoin (.7M) on behalf of XXI and SoftBank."
+        },
+        {
+          "target": "Brandon Lutnick",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "https://www.sec.gov/edgar/browse/?CIK=1865602",
+          "description": "Chairman of Cantor Fitzgerald LP and CEO/Chairman of Cantor Equity Partners Inc (SPAC). Previously was under Howard Lutnick. Now runs the serial SPAC factory (CEP I through VI) while Cantor custodies Tether reserves and holds 5% equity stake in Tether."
+        },
+        {
+          "target": "USAT Holdings Inc",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "tether.io",
+          "description": "Cantor Fitzgerald serves as USAT reserve custodian and preferred primary dealer"
+        },
+        {
+          "target": "SoftBank Group",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SEC S-4 Twenty One Capital, Cantor press release 2025-04-23",
+          "description": "SoftBank and Cantor Fitzgerald co-founded Twenty One Capital (Bitcoin treasury company) via SPAC merger. SoftBank contributed $900M BTC initially, then bought additional $780M shares. Brandon Lutnick (son of Commerce Sec Howard Lutnick) chairs Cantor. Tether is third partner. Sullivan & Cromwell advised SoftBank."
+        },
+        {
+          "target": "Tether",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "https://www.theblock.co/post/327961/lutnick-cantor-fitzgerald-negotiated-a-5-ownership-stake-in-tether-wsj",
+          "description": "Cantor holds 5% ownership stake in Tether (~$600M), manages majority of Tether's $133B reserves (US Treasuries), and earns tens of millions in annual fees. Also manages reserves for Tether's GENIUS Act-compliant USAT stablecoin. Brandon Lutnick (Howard's son) launched Twenty One Capital with Tether/SoftBank."
+        },
+        {
+          "target": "USA Rare Earth",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "1.5B PIPE led by Cantor Fitzgerald"
+        },
+        {
+          "target": "Critical Metals Corp",
+          "type": "owns",
+          "strength": 1.0,
+          "evidence_ref": "LittleSis:rel/2043850",
+          "description": "Cantor Fitzgerald LP is owner of CRML (LittleSis). Held 1.25M shares (deferred SPAC underwriting), divested to 190K by Q3 2025."
+        },
+        {
+          "target": "Howard Lutnick",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "OpenSanctions:Q16194176,Bloomberg:2025-05-19",
+          "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald until becoming US Commerce Secretary. Divested ownership to sons Brandon (Chairman) and Kyle (Exec Vice Chairman) via trusts May 2025."
+        }
+      ],
+      "secondHop": {
+        "Critical Metals Corp": [
+          {
+            "target": "GreenMet",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tanbreez offtake partnership for DoD REE supply"
+          },
+          {
+            "target": "GreenMet",
+            "type": "contracts_with",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Alyeska Investment Group",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Alyeska Master Fund LP deployed ~$85M in two PIPE tranches in October 2025 to acquire 9.9% of CRML. Also bought ~5M secondary shares from European Lithium and Rimbal."
+          },
+          {
+            "target": "Matt Schnappauf",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Schnappauf registered as Cornerstone lobbyist for CRML Q1-Q3 2025, K/quarter. Lobbied DOD, State, EXIM, EOP for critical minerals policy."
+          },
+          {
+            "target": "Howard Lutnick",
+            "type": "owns",
+            "strength": 0.7,
+            "description": "Howard Lutnick (US Commerce Secretary) listed as indirect owner of CRML via Cantor Fitzgerald (LittleSis). Divested in May 2025 via trust to children."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
+}

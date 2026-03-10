@@ -1,6 +1,7 @@
 ---
 name: review-article
 description: Adversarial verification agent for articles and dossiers
+user_invocable: true
 ---
 
 # /review-article
@@ -70,13 +71,17 @@ STATUS: [verified / needs-softening / needs-source / unsupported]
 
 The skeleton separates the argument from the writing. If the skeleton has logical gaps or unsupported leaps, the article needs revision regardless of how well it reads.
 
+Also evaluate sentence-level explicit support:
+- Evidence mode maps support sentence-by-sentence.
+- A factual sentence is unsupported if it lacks explicit inline citation tokens in that same sentence, even if nearby sentences are cited.
+
 ### 4. Fact-Check Every Claim
 
 #### 4a. Dollar Amounts
 Every financial figure must trace to a source:
 ```bash
 uv run python tools/findings_tracker.py search "$40M" --output $WORKDIR/verify-amounts.json
-uv run python tools/parse_ds10_financials.py query --entity "Southern Trust" --output $WORKDIR/verify-ds10.json
+uv run python tools/parse_ds10_financials.py query --entity "ENTITY_NAME" > $WORKDIR/verify-ds10.txt
 ```
 - Does the amount match the source exactly?
 - Is the date correct?
@@ -90,6 +95,19 @@ uv run python tools/query_doj.py efta EFTA02576529 --text --output $WORKDIR/veri
 - Does the document actually say what the article claims?
 - Is the quote accurate (for direct_quote claims)?
 - Is the inference reasonable (for inference claims)?
+
+Run support coverage metrics and include key outputs in the review:
+
+```bash
+cd /Users/travcole/projects/osint-research/web
+npm run report:support-coverage:changed -- --base-ref HEAD~1 --head-ref HEAD
+```
+
+Capture:
+- supported sentence %
+- unsupported sentence count
+- orphan citation keys
+- source fanout anomalies (sources with unexpectedly broad dependency)
 
 #### 4c. Named Persons and Entities
 ```bash
@@ -281,7 +299,7 @@ Check if applicable analytical models are referenced. Missing model references �
 ```bash
 ls content/dossiers/ | grep -i "<name>"
 ```
-Every person with a dossier should be linked: `[Leon Black](/dossiers/leon-black)`
+Every person with a dossier should be linked: `[Person Name](/dossiers/person-slug)`
 
 #### Article → Article Cross-References
 Check if the article references topics covered by other articles.
@@ -304,7 +322,7 @@ Write `$WORKDIR/verification-report.md`:
 # Verification Report: [TITLE]
 
 ## BLOCKING (must fix before publication)
-- [LINE X] "Black paid Epstein $40M" — NEEDS: EFTA reference for specific amount
+- [LINE X] "Person A paid Person B $40M" — NEEDS: primary source reference for specific amount
 - [LINE Y] "31 CFR 1020.230" — WRONG CITE: correct is 31 CFR 1010.230
 - [LINE Z] "positioned himself as an intelligence asset" — inference presented as fact
 
@@ -338,7 +356,7 @@ Available but uncited: 8 IRS 990 findings, 15 ACRIS records, 6 CourtListener doc
 ### Dossier Links
 | Text | Target | Confidence |
 |------|--------|------------|
-| "Leon Black" | /dossiers/leon-black | high |
+| "Person Name" | /dossiers/person-slug | high |
 
 ### Cross-Article Links
 | Reference | Target Article | Anchor Text |

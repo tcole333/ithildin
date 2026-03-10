@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, existsSync, writeFileSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { execFileSync } from "node:child_process";
 import { createJiti } from "jiti";
@@ -8,8 +8,6 @@ const projectRoot = resolve(cwd, "..");
 const contentRoot = resolve(projectRoot, "content");
 const articlesDir = resolve(contentRoot, "articles");
 const dossiersDir = resolve(contentRoot, "dossiers");
-const baselinePath = resolve(cwd, "scripts", "citation-lint-baseline.json");
-
 const argv = process.argv.slice(2);
 const args = new Set(argv.filter((arg) => arg.startsWith("--")));
 
@@ -22,11 +20,15 @@ function readArgValue(flag) {
 }
 
 const strict = args.has("--strict");
-const updateBaseline = args.has("--update-baseline");
 const changedFilesMode = args.has("--changed-files");
 const strictChangedFiles = args.has("--strict-changed-files");
 const baseRef = readArgValue("--base-ref") || process.env.CITATION_LINT_BASE_REF || "";
 const headRef = readArgValue("--head-ref") || process.env.CITATION_LINT_HEAD_REF || "HEAD";
+
+if (args.has("--update-baseline")) {
+  process.stderr.write("The citation lint baseline has been removed. Fix the cited refs instead of updating an ignore list.\n");
+  process.exit(2);
+}
 
 const jiti = createJiti(import.meta.url);
 const { applyCitations, createCitationState } = jiti(resolve(cwd, "src", "lib", "citations.ts"));
@@ -211,30 +213,6 @@ function lintEvidenceRef(file, findingId, ref) {
   }
 }
 
-function loadBaseline() {
-  if (!existsSync(baselinePath)) {
-    return new Set();
-  }
-
-  try {
-    const parsed = JSON.parse(readFileSync(baselinePath, "utf-8"));
-    if (!Array.isArray(parsed.ignored)) {
-      return new Set();
-    }
-    return new Set(parsed.ignored.map(String));
-  } catch {
-    return new Set();
-  }
-}
-
-function saveBaseline(issueKeys) {
-  const payload = {
-    generated_at: new Date().toISOString(),
-    ignored: issueKeys,
-  };
-  writeFileSync(baselinePath, `${JSON.stringify(payload, null, 2)}\n`, "utf-8");
-}
-
 function runGit(args) {
   try {
     return execFileSync("git", args, { cwd: projectRoot, encoding: "utf-8" }).trim();
@@ -381,37 +359,18 @@ if (changedContentFiles && changedContentFiles.size === 0) {
 lintArticles(changedContentFiles);
 lintDossiers(changedContentFiles);
 
-const baseline = loadBaseline();
-const allKeys = issues.map(issueKey).sort();
-
-if (updateBaseline) {
-  saveBaseline(allKeys);
-  process.stdout.write(`Updated citation lint baseline with ${allKeys.length} issue key(s).\n`);
-  process.exit(0);
-}
-
-const existing = [];
-const fresh = [];
-for (const issue of issues) {
-  if (baseline.has(issueKey(issue))) {
-    existing.push(issue);
-  } else {
-    fresh.push(issue);
-  }
-}
-
-const freshErrors = fresh.filter((i) => i.severity === "error");
-const freshWarnings = fresh.filter((i) => i.severity === "warning");
+const errors = issues.filter((i) => i.severity === "error");
+const warnings = issues.filter((i) => i.severity === "warning");
 
 const scopeLabel = changedContentFiles
   ? `changed scope (${changedContentFiles.size} file(s))`
   : "full scope";
 
 process.stdout.write(
-  `Citation lint scanned ${issues.length} unique issue(s) in ${scopeLabel}: ${existing.length} baseline, ${fresh.length} new.\n`,
+  `Citation lint scanned ${issues.length} unique issue(s) in ${scopeLabel}: ${errors.length} error(s), ${warnings.length} warning(s).\n`,
 );
 
-function printIssueBucket(label, bucket, headingPrefix = "New") {
+function printIssueBucket(label, bucket, headingPrefix = "Current") {
   if (bucket.length === 0) return;
   process.stdout.write(`\n${headingPrefix} ${label}s (${bucket.length}):\n`);
   for (const issue of bucket.slice(0, 200)) {
@@ -422,27 +381,25 @@ function printIssueBucket(label, bucket, headingPrefix = "New") {
   }
 }
 
-if (fresh.length > 0) {
-  printIssueBucket("error", freshErrors);
-  printIssueBucket("warning", freshWarnings);
+if (issues.length > 0) {
+  printIssueBucket("error", errors);
+  printIssueBucket("warning", warnings);
 }
 
 if (strictChangedFiles && issues.length > 0) {
-  const changedErrors = issues.filter((i) => i.severity === "error");
-  const changedWarnings = issues.filter((i) => i.severity === "warning");
   process.stdout.write(
-    "\nStrict changed-file mode failed: citation issues are not allowed in modified article/dossier files, even if baseline-listed.\n",
+    "\nStrict changed-file mode failed: citation issues are not allowed in modified article/dossier files.\n",
   );
-  printIssueBucket("error", changedErrors, "Changed-file");
-  printIssueBucket("warning", changedWarnings, "Changed-file");
+  printIssueBucket("error", errors, "Changed-file");
+  printIssueBucket("warning", warnings, "Changed-file");
   process.exit(1);
 }
 
-if (freshErrors.length > 0) {
+if (errors.length > 0) {
   process.exit(1);
 }
 
-if (strict && freshWarnings.length > 0) {
+if (strict && warnings.length > 0) {
   process.exit(1);
 }
 
