@@ -23,6 +23,22 @@ from pathlib import Path
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
 DOSSIER_DIR = Path(__file__).parent.parent / "content" / "dossiers"
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+try:
+    from tools.investigation_context import get_active_profile_id
+except ImportError:
+    def get_active_profile_id():
+        return ""
+
+
+def _resolve_profile(profile_id=None, all_profiles=False):
+    """Resolve profile_id: explicit > active profile > None."""
+    if all_profiles:
+        return None
+    if profile_id is not None:
+        return profile_id
+    return get_active_profile_id() or None
+
 STRENGTH_MAP = {"strong": 1.0, "medium": 0.7, "weak": 0.4, "circumstantial": 0.2}
 CONFIDENCE_RANK = {"confirmed": 4, "high": 3, "medium": 2, "low": 1, "unverified": 0}
 PRIORITY_TYPES = {"financial": 5, "corporate": 4, "legal": 3, "communication": 2, "intelligence": 2}
@@ -242,7 +258,8 @@ def suggest_sections(dossier: dict) -> list[dict]:
     return sections
 
 
-def build_ego_network(dossier: dict, db_path: Path = DB_PATH) -> dict:
+def build_ego_network(dossier: dict, db_path: Path = DB_PATH,
+                      profile_id: str | None = None) -> dict:
     """Build EgoNetwork component props from dossier connections."""
     center = dossier["name"]
     connections = []
@@ -268,18 +285,20 @@ def build_ego_network(dossier: dict, db_path: Path = DB_PATH) -> dict:
             db.row_factory = sqlite3.Row
             first_hop_names = [c["target"] for c in connections[:20]]
             placeholders = ",".join("?" * len(first_hop_names))
+            profile_cond = " AND c.profile_id = ?" if profile_id else ""
+            profile_params = [profile_id] if profile_id else []
             rows = db.execute(
                 f"""
                 SELECT c.person_a, c.person_b, c.relationship_type, c.strength, c.description
                 FROM connections c
                 WHERE c.verification_status != 'retracted'
-                  AND (c.person_a IN ({placeholders}) OR c.person_b IN ({placeholders}))
+                  AND (c.person_a IN ({placeholders}) OR c.person_b IN ({placeholders})){profile_cond}
                 ORDER BY CASE c.strength
                     WHEN 'strong' THEN 1 WHEN 'medium' THEN 2
                     WHEN 'weak' THEN 3 ELSE 4 END
                 LIMIT 200
                 """,
-                first_hop_names + first_hop_names,
+                first_hop_names + first_hop_names + profile_params,
             ).fetchall()
 
             for row in rows:
@@ -373,7 +392,8 @@ def extract_key_identifiers(dossier: dict) -> dict:
     }
 
 
-def curate_dossier(dossier_path: Path, db_path: Path = DB_PATH, viz_only: bool = False) -> dict:
+def curate_dossier(dossier_path: Path, db_path: Path = DB_PATH, viz_only: bool = False,
+                   profile_id: str | None = None) -> dict:
     """Add curation scaffold and viz_data to a dossier JSON file.
 
     Preserves any existing LLM-generated fields in curation
@@ -394,7 +414,7 @@ def curate_dossier(dossier_path: Path, db_path: Path = DB_PATH, viz_only: bool =
     key_finding_ids = select_key_findings(dossier)
     key_identifiers = extract_key_identifiers(dossier)
     section_suggestions = suggest_sections(dossier)
-    ego_network = build_ego_network(dossier, db_path)
+    ego_network = build_ego_network(dossier, db_path, profile_id=profile_id)
     timeline_events = build_timeline_events(dossier)
 
     curation = {
@@ -426,7 +446,10 @@ def main():
     parser.add_argument("--viz-only", action="store_true", help="Only update viz_data, skip curation scaffold")
     parser.add_argument("--dossier-dir", type=Path, default=DOSSIER_DIR)
     parser.add_argument("--db", type=Path, default=DB_PATH)
+    parser.add_argument("--profile", default=None, help="Investigation profile (default: active)")
+    parser.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     args = parser.parse_args()
+    resolved_profile = _resolve_profile(args.profile, getattr(args, "all_profiles", False))
 
     if not args.target and not args.all:
         parser.error("Specify --target NAME or --all")
@@ -465,7 +488,8 @@ def main():
     print(f"Curating {len(dossier_files)} dossier(s)...")
     for path in dossier_files:
         try:
-            dossier = curate_dossier(path, db_path=args.db, viz_only=args.viz_only)
+            dossier = curate_dossier(path, db_path=args.db, viz_only=args.viz_only,
+                                     profile_id=resolved_profile)
             name = dossier.get("name", path.stem)
             curation = dossier.get("curation", {})
             suggestions = curation.get("section_suggestions", [])
