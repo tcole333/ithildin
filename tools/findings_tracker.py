@@ -203,8 +203,12 @@ def _resolve_profile(profile_id=None, all_profiles=False):
     try:
         from tools.investigation_context import get_active_profile_id
         return get_active_profile_id() or None
-    except Exception:
-        return None
+    except ImportError:
+        try:
+            from investigation_context import get_active_profile_id
+            return get_active_profile_id() or None
+        except ImportError:
+            return None
 
 
 def list_findings(target=None, finding_type=None, confidence=None, limit=50,
