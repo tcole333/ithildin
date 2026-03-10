@@ -211,7 +211,7 @@ This document outlines the data sources available for investigative research, th
 1. **Assess value**: Does this source provide new entity/relationship data?
 2. **Check access**: Is bulk download available? API? Web scraping needed?
 3. **Design schema**: What node types and relationships will be created?
-4. **Build parser**: Create parser in `sec_scraper/` following existing patterns
+4. **Build parser**: Create parser in `tools/` following existing patterns
 5. **Add loader**: Extend `neo4j_loader.py` with new load method
 6. **Document**: Add to this file and update CLAUDE.md schema docs
 

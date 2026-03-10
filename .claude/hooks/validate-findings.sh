@@ -11,6 +11,10 @@ COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
 
 # Only validate findings_tracker add commands
 if ! echo "$COMMAND" | grep -qE "findings_tracker[^ ]*\s+add\s+"; then
+  # Warn if it looks like a findings_tracker add but didn't match the full regex
+  if echo "$COMMAND" | grep -q "findings_tracker" && echo "$COMMAND" | grep -qw "add"; then
+    echo "WARNING: Command looks like findings_tracker add but didn't match validation regex. Check command formatting." >&2
+  fi
   exit 0
 fi
 
@@ -30,10 +34,16 @@ fi
 if [ -z "$EVIDENCE_VAL" ]; then
   EVIDENCE_VAL=$(echo "$COMMAND" | awk '{for(i=1;i<=NF;i++) if($i=="--evidence") print $(i+1)}')
 fi
-# Check if evidence is a structured data type (source_quote optional)
+# Check if evidence is a compact structured data identifier (source_quote optional).
+# Only exempt compact IDs like "FEC:C00001234", "990:EIN123456", "FL:P19000012345".
+# NOT exempt: "SEC EDGAR CIK 0000923796 Form 4 filings" — that's a prose description
+# needing a real source_quote. Rule: no spaces or semicolons in the identifier.
 IS_STRUCTURED=false
 if echo "$EVIDENCE_VAL" | grep -qiE "^(FEC|IRS.?990|990:|ProPublica|PP990|PROPUBLICA|ACRIS|FARA|LDA|SEC|EDGAR|FAA|UCC|GLEIF|OpenSanctions|ICIJ|OCCRP|FL_SUNBIZ|FL.SunBiz|FL:|NY_DOS|NY.SoS|NY.DOS|NM.SoS|DC_|OC:|UK.Companies|USVI)"; then
-  IS_STRUCTURED=true
+  # Only exempt if the entire value is a compact identifier (no spaces or semicolons)
+  if ! echo "$EVIDENCE_VAL" | grep -qE "[ ;]"; then
+    IS_STRUCTURED=true
+  fi
 fi
 
 if [ "$IS_STRUCTURED" = "false" ] && ! echo "$COMMAND" | grep -q -- "--source-quote"; then
@@ -57,7 +67,13 @@ if echo "$COMMAND" | grep -qE "\-\-confidence +confirmed"; then
   fi
 fi
 
-# 5. Reject header-only source_quote for direct_quote claims
+# 5. Require --sources (tool/dataset attribution)
+if ! echo "$COMMAND" | grep -q -- "--sources"; then
+  echo "BLOCKED: findings_tracker add requires --sources flag. Every finding must attribute the data source(s) that produced it. Use --sources <source_name> (e.g., web_search, fec, edgar, courtlistener, registry, usaspending, 990, analysis_run)." >&2
+  exit 2
+fi
+
+# 6. Reject header-only source_quote for direct_quote claims
 if echo "$COMMAND" | grep -q -- "--claim-type direct_quote"; then
   # Extract the source-quote value (text after --source-quote up to next --)
   SQ=$(echo "$COMMAND" | sed -n "s/.*--source-quote[= ]*'\([^']*\)'.*/\1/p")

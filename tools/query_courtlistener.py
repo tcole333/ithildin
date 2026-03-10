@@ -2,8 +2,7 @@
 """
 CourtListener API wrapper for OSINT investigations.
 
-Thin wrapper around sec_scraper/courtlistener/api_client.py that loads
-credentials from .env and provides investigation-friendly output.
+Loads credentials from .env and provides investigation-friendly output.
 
 Usage:
     python tools/query_courtlistener.py search "Jeffrey Epstein"
@@ -45,19 +44,12 @@ if env_path.exists():
             key, val = line.split("=", 1)
             os.environ.setdefault(key.strip(), val.strip().strip('"'))
 
-# Import CourtListenerClient directly from its file to avoid triggering
-# sec_scraper/__init__.py, which eagerly imports pydantic models unrelated
-# to the CourtListener client.
-import importlib.util
-
-_api_client_path = Path(__file__).parent.parent / "sec_scraper" / "courtlistener" / "api_client.py"
-_spec = importlib.util.spec_from_file_location("api_client", _api_client_path)
-_mod = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_mod)
-CourtListenerClient = _mod.CourtListenerClient
-
-
 def _client():
+    try:
+        from tools.courtlistener_api_client import CourtListenerClient
+    except ImportError:
+        from courtlistener_api_client import CourtListenerClient
+
     token = os.environ.get("COURTLISTENER_TOKEN")
     if not token:
         print("ERROR: COURTLISTENER_TOKEN not set in .env", file=sys.stderr)

@@ -46,6 +46,7 @@ interface NetworkData {
 interface Props {
   data: NetworkData;
   dossierSlugs?: string[];
+  primarySubjectId?: string;
 }
 
 const COLORS = {
@@ -73,7 +74,8 @@ const STRENGTH_OPACITY: Record<string, number> = {
   circumstantial: 0.3,
 };
 
-const EPSTEIN_ID = 'Jeffrey Epstein';
+// Default primary subject ID — overridden by primarySubjectId prop
+const DEFAULT_PRIMARY_SUBJECT = 'Jeffrey Epstein';
 
 function slugify(value: string): string {
   return value
@@ -98,7 +100,8 @@ function formatEntityType(value?: string): string {
   return value.replace(/_/g, ' ');
 }
 
-export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
+export default function NetworkGraph({ data, dossierSlugs = [], primarySubjectId }: Props) {
+  const PRIMARY_ID = primarySubjectId || DEFAULT_PRIMARY_SUBJECT;
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<d3.Selection<HTMLDivElement, unknown, HTMLElement, any> | null>(null);
@@ -145,7 +148,7 @@ export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
   const [focusMode, setFocusMode] = useState(false);
   const [depth, setDepth] = useState(2);
   const [includePersons, setIncludePersons] = useState(true);
-  const [excludeEpstein, setExcludeEpstein] = useState(false);
+  const [excludePrimary, setExcludePrimary] = useState(false);
   const [selectedEntityTypes, setSelectedEntityTypes] = useState(() => entityTypeStats.map(([type]) => type));
   const [selectedRelTypes, setSelectedRelTypes] = useState(() => relationshipStats.map(([type]) => type));
   const [selectedStrengths, setSelectedStrengths] = useState(() => strengthStats.map(([type]) => type));
@@ -181,11 +184,11 @@ export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
     const term = query.trim().toLowerCase();
     if (!term) return [];
     return data.nodes
-      .filter(node => !(excludeEpstein && node.id === EPSTEIN_ID))
+      .filter(node => !(excludePrimary && node.id === PRIMARY_ID))
       .filter(node => (node.name || node.id).toLowerCase().includes(term))
       .sort((a, b) => (b.connections || 0) - (a.connections || 0))
       .slice(0, 8);
-  }, [data, query, excludeEpstein]);
+  }, [data, query, excludePrimary]);
 
   const graphState = useMemo(() => {
     const selectedSet = new Set(selectedNodes);
@@ -194,7 +197,7 @@ export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
     const allowedStrengths = new Set(selectedStrengths);
 
     const filteredNodes = data.nodes.filter(node => {
-      if (excludeEpstein && node.id === EPSTEIN_ID) return false;
+      if (excludePrimary && node.id === PRIMARY_ID) return false;
       if (selectedSet.has(node.id)) return true;
       if (node.type === 'person') return includePersons;
       return allowedEntityTypes.has(node.entity_type || 'unknown');
@@ -309,7 +312,7 @@ export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
     verifiedOnly,
     focusMode,
     depth,
-    excludeEpstein,
+    excludePrimary,
   ]);
 
   const labelIds = useMemo(() => {
@@ -546,9 +549,9 @@ export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
   }, [selectedNodes, graphState.distances]);
 
   useEffect(() => {
-    if (!excludeEpstein) return;
-    setSelectedNodes(prev => prev.filter(id => id !== EPSTEIN_ID));
-  }, [excludeEpstein]);
+    if (!excludePrimary) return;
+    setSelectedNodes(prev => prev.filter(id => id !== PRIMARY_ID));
+  }, [excludePrimary]);
 
   const selectedDetails = selectedNodes
     .map(id => nodeById.get(id))
@@ -556,7 +559,7 @@ export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
 
   const resetFilters = () => {
     setIncludePersons(true);
-    setExcludeEpstein(false);
+    setExcludePrimary(false);
     setSelectedEntityTypes(entityTypeStats.map(([type]) => type));
     setSelectedRelTypes(relationshipStats.map(([type]) => type));
     setSelectedStrengths(strengthStats.map(([type]) => type));
@@ -694,10 +697,10 @@ export default function NetworkGraph({ data, dossierSlugs = [] }: Props) {
                 <label className="mt-2 flex items-center gap-2 text-xs text-mithril">
                   <input
                     type="checkbox"
-                    checked={excludeEpstein}
-                    onChange={e => setExcludeEpstein(e.target.checked)}
+                    checked={excludePrimary}
+                    onChange={e => setExcludePrimary(e.target.checked)}
                   />
-                  Exclude Jeffrey Epstein
+                  Exclude {PRIMARY_ID}
                 </label>
                 <div className="mt-2 grid grid-cols-2 gap-2">
                   {entityTypeStats.map(([type, count]) => (

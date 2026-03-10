@@ -4,6 +4,11 @@ import TimelineChart from '../components/TimelineChart';
 import TransactionTable from '../components/TransactionTable';
 import EgoNetwork from '../components/EgoNetwork';
 import CorporateStructure from '../components/CorporateStructure';
+import CorporateStructureV2 from '../components/CorporateStructureV2';
+import StepDiagram from '../components/StepDiagram';
+
+// Load full shell network hierarchy data
+import shellNetworkData from '../../../content/structures/shell-network-hierarchy.json';
 
 const timelineEvents = [
   { date: '1995-03-15', label: 'Wexner grants POA to Epstein', type: 'legal', entity: 'Leslie Wexner', evidence_ref: 'EFTA02336502' },
@@ -120,6 +125,28 @@ const structureData = {
     { id: 'ann-2', targetId: 'entity:bfp', text: 'Funds from Black Family Partners enter as management fees.' },
   ],
 };
+
+const waterfallData = {
+  "title": "Who Owns This Money?",
+  "subtitle": "Tracing beneficial ownership through the shell network — information degrades at every layer",
+  "nodes": [
+    { "id": "question", "name": "Who owns this $56.5M?", "category": "question" },
+    { "id": "db_account", "name": "Deutsche Bank Account", "category": "bank" },
+    { "id": "stc", "name": "Southern Trust Company, Inc.", "category": "entity" },
+    { "id": "bbvi", "name": "Business Basics VI, LLC", "category": "entity" },
+    { "id": "kellerhals", "name": "Kellerhals Ferguson Kroblin", "category": "person" },
+    { "id": "usvi_registry", "name": "USVI Corporate Registry", "category": "registry" },
+    { "id": "beneficial_owner", "name": "Jeffrey Epstein (invisible)", "category": "person" }
+  ],
+  "links": [
+    { "source": "question", "target": "db_account", "value": 100, "label": "Bank statement shows: Southern Trust Company, Inc.", "info_loss": "0%" },
+    { "source": "db_account", "target": "stc", "value": 80, "label": "STC registered in USVI. Address: 6100 Red Hook Quarter B3.", "info_loss": "20% — entity is in a different jurisdiction from the bank" },
+    { "source": "stc", "target": "usvi_registry", "value": 60, "label": "USVI registry shows: Registered agent is Business Basics VI, LLC", "info_loss": "40% — no beneficial owner disclosed in USVI filings" },
+    { "source": "usvi_registry", "target": "bbvi", "value": 40, "label": "BBVI at 9053 Estate Thomas. Agent: Erika Kellerhals. Purpose: 'Other.'", "info_loss": "60% — BBVI has zero internet presence, zero litigation history" },
+    { "source": "bbvi", "target": "kellerhals", "value": 20, "label": "Law firm handles all entity formation. No public client list.", "info_loss": "80% — attorney-client privilege blocks further inquiry" },
+    { "source": "kellerhals", "target": "beneficial_owner", "value": 5, "label": "Jeffrey Epstein — 'Sole shareholder' per DB KYC (not public)", "info_loss": "95% — beneficial ownership only visible in bank's own internal records" }
+  ]
+};
 ---
 <BaseLayout title="Visualization Demo">
   <div class="space-y-10">
@@ -204,6 +231,53 @@ const structureData = {
       <CorporateStructure
         data={structureData}
         height={600}
+        client:visible
+      />
+    </section>
+
+    <!-- Corporate Structure V2 -->
+    <section class="space-y-4 reveal" style="--delay: 0.36s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Corporate Structure V2 (Left-to-Right)</h2>
+        <span class="text-xs text-mithril font-mono">CorporateStructureV2.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        Horizontal ownership diagram using Sugiyama DAG layout. Solves the horizontal sprawl issue by scrolling vertically. Entity types encoded as shapes, jurisdictions as stroke colors, relationship types as edge colors, evidence quality as dashes.
+      </p>
+      <CorporateStructureV2
+        data={structureData}
+        height={800}
+        client:visible
+      />
+    </section>
+
+    <!-- Corporate Structure V2 - Full Network -->
+    <section class="space-y-4 reveal" style="--delay: 0.365s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Corporate Structure V2 - Full Shell Network</h2>
+        <span class="text-xs text-mithril font-mono">CorporateStructureV2.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        Testing the V2 component with the full, dense 30+ entity network structure used in the main article.
+      </p>
+      <CorporateStructureV2
+        data={shellNetworkData}
+        height={600}
+        client:visible
+      />
+    </section>
+
+    <!-- Information Waterfall (Step Diagram) -->
+    <section class="space-y-4 reveal" style="--delay: 0.37s;">
+      <div class="flex items-baseline gap-4">
+        <h2 class="text-xl font-display text-moon">Information Waterfall</h2>
+        <span class="text-xs text-mithril font-mono">StepDiagram.tsx</span>
+      </div>
+      <p class="text-sm text-mithril">
+        A progressive disclosure diagram showing information degradation step-by-step. Replaces the Sankey diagram which is unsuitable for non-financial or sequential qualitative flows.
+      </p>
+      <StepDiagram
+        data={waterfallData}
         client:visible
       />
     </section>

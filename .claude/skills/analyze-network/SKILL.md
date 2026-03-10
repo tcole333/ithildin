@@ -6,12 +6,22 @@ user_invocable: true
 
 # /analyze-network
 
-Analyze the investigation graph to find structurally important nodes, dense clusters, bridge positions, cross-thread actors, and under-investigated high-connectivity targets. Focuses on non-Epstein edges — what connects actors to each other independently?
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify structural patterns in the graph and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Do not apply analytical frameworks as interpretive lenses — use them only as pattern detectors. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`. Distinguish structural observations (fact: "Node X has high betweenness") from interpretive claims (theory: "Node X is a gatekeeper") — label them differently.
+
+Analyze the investigation graph to find structurally important nodes, dense clusters, bridge positions, cross-thread actors, and under-investigated high-connectivity targets. Focuses on non-subject edges — what connects actors to each other independently?
 
 ## Arguments
 
 - No arguments: full analysis
 - `--thread N`: focus on a specific thread's subgraph
+
+### Context Loading
+Load the active investigation context before executing:
+```bash
+uv run python tools/investigation_context.py show
+```
+This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+Use these values instead of hardcoded names throughout this skill.
 
 ## Process
 
@@ -91,10 +101,10 @@ Using findings-dump, find persons who appear in 2+ threads:
 ```bash
 uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.json
 ```
-Then identify target_names appearing across different thread_ids. These cross-thread actors may be system-level connectors, not just Epstein associates.
+Then identify target_names appearing across different thread_ids. These cross-thread actors may be system-level connectors, not just direct associates of the primary subject.
 
-**f) Non-Epstein edges**
-In the connections graph, find edges where neither endpoint is "Jeffrey Epstein". What's the densest non-Epstein subgraph? This reveals the system that exists independent of Epstein.
+**f) Non-subject edges**
+In the connections graph, find edges where neither endpoint is the primary_subject from the investigation profile. What's the densest non-subject subgraph? This reveals the system that exists independent of the primary subject.
 
 **g) Open triads (triadic closure)**
 Which missing edges are most surprising? High closure scores mean B and C share strong connections through mutual pivots, have overlapping relationship types, and share institutional affiliations — yet have no documented direct link. Cross-reference with the coverage matrix: if both B and C are under-investigated, the gap may reflect our ignorance rather than reality. If both are well-documented with many findings, the missing edge is genuinely surprising and may indicate a deliberate separation or a relationship conducted through intermediaries.
@@ -184,7 +194,7 @@ complete_analysis_run(RUN_ID, findings_created=N, hypotheses_created=M,
 ## Notes
 
 - All findings: `claim_type=synthesis`, max confidence `medium`
-- Focus on NON-Epstein edges — what connects actors to each other?
+- Focus on NON-subject edges — what connects actors to each other?
 - The coverage gap analysis is especially valuable: high-connectivity nodes with few findings indicate blind spots
 - Use `--thread-id` on hypothesis/lead creation to assign to appropriate thread
 - Tag everything you find for future analysis runs to build on
