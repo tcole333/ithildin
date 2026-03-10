@@ -1,0 +1,784 @@
+{
+  "name": "Coatue Management",
+  "slug": "coatue-management",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.375149",
+  "last_updated": "2026-03-06T03:48:03",
+  "stats": {
+    "total_findings": 25,
+    "total_connections": 5,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 17,
+      "identity": 2,
+      "relationship": 1,
+      "intelligence": 5
+    },
+    "connection_types": {
+      "corporate": 2,
+      "financial": 2,
+      "advisory": 1
+    },
+    "last_updated": "2026-03-06T03:48:03"
+  },
+  "findings": [
+    {
+      "id": 4643,
+      "finding_type": "financial",
+      "summary": "Coatue Management: $40B+ AUM tech fund with defense-adjacent portfolio, lobbying via Gibson Dunn, and Anthropic lead investor",
+      "detail": "Coatue Management LLC (CIK 0001135730, founded 1999 by Philippe Laffont, NY) manages $40B+ AUM with 1,338 EDGAR filings. Q4 2025 13F shows top holdings in TSM, MSFT, META, AMZN, GEV. Portfolio includes investments in SpaceX, OpenAI, xAI, Scale AI. Led Anthropic's $30B Series G at $380B valuation (Jan 2026) and earlier $10B round. Launched CTEK innovation fund backed by Bezos and Dell family offices ($1B). LDA filings show Coatue PE Asia 34 LLC engaged Gibson Dunn & Crutcher for lobbying State Department on financial/government issues (Q3-Q4 2020, $10,000). Not a traditional defense investor but deeply positioned in AI/autonomy ecosystem that increasingly serves defense market.",
+      "source_datasets": [
+        "sec_edgar",
+        "lobbying"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 18:31:32",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CIK 0001135730; LDA filing c73184c4-0396-4b6e-8a58-79b8da3f076f (Q3 2020); 13F-HR filings through 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4711,
+      "finding_type": "financial",
+      "summary": "Coatue Management defense exposure deep dive: $40B+ AUM tech fund. 13F (Q4 2025): 52 holdings totaling $40B in public equities -- top positions TSM, MSFT, META, AMZN, GEV. Defense-relevant public holdings include technology platforms used by military. Private investments: major Shield AI investor ($72.1M federal contracts, V-BAT UAS, $8B EWACC position), co-invested with a16z in defense portfolio overlap. Lead investor in Anthropic ($10B at $350B valuation, Jan 2026 -- 4 weeks before Trump admin banned Anthropic from federal use). PE Asia 34 LLC lobbied via Gibson Dunn on government/financial issues. Emil Michael served as Coatue senior advisor from Oct 2018 until Pentagon appointment (May 2025).",
+      "detail": "Emil Michael-Coatue conflict surface:\n\nMichael joined Coatue Management as senior advisor/consultant in October 2017 after leaving Uber. As USD(R&E), he now oversees:\n- Defense Innovation Unit (DIU) \u2014 prototyping and rapid acquisition\n- Office of Strategic Capital (OSC) \u2014 loans to defense startups  \n- Chief Digital and AI Office (CDAO) \u2014 AI procurement\n- Critical technology areas (trimmed from 14 to 6)\n\nCoatue's defense-adjacent portfolio creates potential conflicts:\n1. SHIELD AI: Coatue is major investor. Shield AI has $72.1M federal contracts, $8B EWACC contract position, V-BAT UAS ISR services. Michael's office sets technology priorities that affect Shield AI contract eligibility.\n2. ANTHROPIC: Coatue invested $10B in Anthropic at $350B valuation (Jan 2026). Four weeks later, Michael publicly attacked Anthropic CEO Dario Amodei, called him a 'liar' with 'God complex.' Trump admin then designated Anthropic a 'supply-chain risk' and banned federal use of Claude AI. OpenAI got replacement contract within hours. Whether Michael's actions benefited or harmed Coatue's Anthropic position is complex \u2014 the ban likely damaged the investment.\n\n3. TECHNOLOGY PLATFORM HOLDINGS: Coatue holds major positions in Microsoft, Amazon (AWS), Meta \u2014 all of which have defense contracts. Michael's technology priority decisions affect demand for these platforms.\n\nPhilippe Laffont FEC: $6,695 total, primarily Democratic ($5K Schumer, $1.3K DSCC, various Democratic Senate candidates). Small $1.8K to WinRed. This is unusual in the tech-right ecosystem \u2014 Laffont donates to Democrats while his fund's senior advisor (Michael) serves a Republican administration.\n\nCoatue PE Asia 34 LLC: Registered lobbying through Gibson Dunn and Crutcher LLP on government issues and financial securities issues. This suggests Coatue has direct government affairs capacity.",
+      "source_datasets": [
+        "usaspending",
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 19:36:32",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "WhalWisdom 13F data, EDGAR CIK 0001135730, Shield AI federal contracts (USASpending), FEC donor records, Dealbreaker Oct 2018 (Michael-Coatue), CBS/NBC News (Anthropic dispute)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4736,
+      "finding_type": "financial",
+      "summary": "Coatue invested in BOTH Anthropic (B Series G co-lead, Feb 12 2026) AND OpenAI (B round, Feb 27 2026) -- the OpenAI investment closing the SAME DAY Trump banned Anthropic from all federal use. Coatue holds significant positions in both competing AI companies simultaneously.",
+      "detail": "Timeline: Feb 12 2026 - Coatue co-leads Anthropic $30B Series G at $380B valuation. Feb 27 2026 - Trump bans Anthropic from all federal use, Hegseth designates 'supply-chain risk.' Feb 27 2026 - OpenAI announces $110B round at $730B, Coatue among investors. Feb 27 2026 - OpenAI announces Pentagon deal 'within hours' of Anthropic ban. Coatue thus profits from Anthropic's growth via Series G while simultaneously positioned to benefit from Anthropic's competitor via OpenAI investment. The ban creates a zero-sum dynamic that transfers government AI market share from one Coatue portfolio company to another. Philippe Laffont's stated reason for Anthropic investment: 'agentic coding and enterprise-grade AI systems' -- notably commercial, not military. Former Coatue advisor Emil Michael led the Pentagon standoff that produced the ban.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 21:43:16",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch Feb 12 2026, CNBC Feb 27 2026, Tracxn Coatue investor profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4740,
+      "finding_type": "financial",
+      "summary": "Coatue BS LLC (NY DOS #7836165) formed Feb 17 2026 -- 5 days after Anthropic Series G close and 10 days before Anthropic federal ban. Delaware foreign LLC, service at 9 West 57th St 25th Floor (Coatue Management HQ). Purpose unknown but timing aligns with Anthropic investment window.",
+      "detail": "New entity COATUE BS LLC filed application of authority in NY on Feb 17, 2026. Delaware-formed foreign LLC. Registered to Coatue Management's main office at 9 West 57th Street, 25th Floor, New York, NY 10019. Formation date falls between: Feb 12 (Anthropic $30B Series G close, Coatue co-lead) and Feb 27 (Trump bans Anthropic from all federal use). The 'BS' designation follows Coatue's typical SPV naming convention (CT = Coatue Tech, other letter codes for other fund vehicles). Could be a vehicle for the Anthropic or OpenAI investment, or an unrelated fund entity. Timing is notable but not conclusive.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 21:44:10",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY DOS entity 7836165, query_nydos.py entity lookup",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4742,
+      "finding_type": "financial",
+      "summary": "Coatue 13F-HR Q4 2025: $40B public equity portfolio with ZERO direct defense holdings. Top: META $1.7B, AMZN $1.5B, MSFT $1.2B, NVDA $1.2B, GEV $1.1B, TSM $1.05B. Holds $650M TSLA (Musk/DOGE conflict relevant). Defense exposure entirely through private investments (Anthropic, OpenAI, SpaceX, Shield AI, xAI, Scale AI) with undisclosed amounts.",
+      "detail": "SEC EDGAR 13F-HR filing accession 0000919574-26-001239, filed Feb 17, 2026, CIK 0001135730. 257 public equity holdings. No Palantir, L3Harris, RTX, Northrop, or other defense primes in public portfolio. Private AI/defense investments not disclosed in 13F. Also notable: RDDT $826M, SPOT $831M, APP $777M. The absence of public defense stocks while being deeply invested in private defense-adjacent AI companies suggests Coatue's defense technology exposure is deliberately structured through private markets where disclosure is minimal.",
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 22:08:19",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR 13F-HR 0000919574-26-001239",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4743,
+      "finding_type": "identity",
+      "summary": "Coatue Form D extraction: 21 natural persons identified across 251 SEC filings, 133 fund entities. Philippe Laffont (61 filings, 13 funds) dominates. Thomas Laffont appears only on OneTrust board, not fund filings. Key offshore directors: Christopher Bowring (42 filings, 2009-2025), Tim Woolaver (36 filings, 2012-2025) \u2014 both at International Management Services, Cayman.",
+      "detail": "Full personnel extracted from SEC EDGAR Form D/A filings for CIK 0001135730. Corporate structure: Coatue Management LLC is executive officer on 104 fund entities (183 filings). Coatue Capital CI LLC manages 60+ co-investment vehicles. Each strategy has dedicated GP LLC. Exuma-branded funds were early vehicles now superseded. Recent additions: Eric Sacks (Director, Offshore Fund II, Oct 2025), Agne Miller/Max Schwartz/Tammy Seymour (iCapital access fund, Sep 2025). JPM Private Investments manages 15 Private Investors feeder vehicles. BBH managed early sub-trust vehicles 2013-2014.",
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 22:08:29",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR Form D filings CIK 0001135730 (251 filings, 2009-2026)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4744,
+      "finding_type": "financial",
+      "summary": "JPMorgan serves as executive officer/promoter for 15 Coatue Private Investors feeder fund vehicles across 27 filings. JPM private wealth clients access Coatue strategies through these branded feeders. Christopher Faricelli (JPM, 390 Madison Ave) serves as executive officer for Structured Fund vehicles 2022-2024. This creates an institutional pipeline between JPM private banking and Coatue's defense-adjacent AI portfolio.",
+      "detail": "J.P. Morgan Private Investments Inc. listed as Executive Officer and Promoter across 15 distinct Coatue fund entities in SEC Form D filings. Vehicles include: Growth Fund IV/V Private Investors, Structured Fund Private Investors, Asia Fund I Private Investors, Early Stage Fund Private Investors, Kona III Private Investors. These JPM-branded vehicles funnel private wealth capital into Coatue's investment strategies, including the AI/defense portfolio. Brown Brothers Harriman previously managed Coatue sub-trust vehicles 2013-2014.",
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 22:08:38",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR Form D filings CIK 0001135730",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4936,
+      "finding_type": "identity",
+      "summary": "Coatue Europe Ltd - Philippe Laffont sole PSC with 75-100% control",
+      "detail": "Coatue Europe Ltd. (13971484, incorporated 2022-03-11). Address: 1 Chamberlain Square Cs, Birmingham. Sole director: Matthew Shoenthal (American, address 9 West 57th Street 25th Floor, NYC - Coatue HQ). PSC: Philippe Laffont (American) with 75-100% share ownership, voting rights, and right to appoint/remove directors. This confirms Philippe Laffont (key person in investigation) personally controls the UK entity.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 18:22:32",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 13971484",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4968,
+      "finding_type": "financial",
+      "summary": "Coatue 13F Q4 2025: $40B AUM, 257 positions including $2.2B GE Vernova, $2.1B Constellation Energy, $738M Tesla, $88M Axon",
+      "detail": "SEC 13F-HR filed 2026-02-17 for Q4 2025. CIK 0001135730. 257 holdings, $40B total. 51 unique issuers. Key defense/energy/government-adjacent positions: GE Vernova $2.2B (defense energy systems), Constellation Energy $2.1B (nuclear power for AI/defense), Tesla $738M (Musk government role), Axon Enterprise $88M (law enforcement tech \u2014 Tasers, body cams, digital evidence), QuantumScape $38.5M (quantum battery tech). Private portfolio not on 13F includes Anduril, Applied Intuition (DoD contracts), Anthropic ($30B Series G co-led by Coatue at $380B valuation), Shield AI. The public portfolio shows massive energy bets (Constellation + GE Vernova = $4.3B) consistent with defense energy infrastructure play. Eaton Corp $1.5B is also relevant (power management for defense/industrial). Emil Michael served as senior advisor Oct 2018 to May 2025 Pentagon appointment.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:45:37",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC 13F-HR CIK:0001135730 filed 2026-02-17, Accession 0000919574-26-001239",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4971,
+      "finding_type": "financial",
+      "summary": "Coatue co-led Anthropic $30B Series G at $380B valuation \u2014 then Trump admin banned Anthropic from federal use",
+      "detail": "Coatue co-led (with GIC) Anthropic Series G: $30B raise at $380B post-money valuation. Anthropic run-rate revenue reached $14B, growing 10x annually for 3 consecutive years. This investment occurred approximately 4 weeks before the Trump administration banned Anthropic from federal use (per Lawfare analysis, the Pentagon designation wont survive legal challenge). The banning creates a paradox: Coatue has massive Anthropic exposure AND its former advisor Emil Michael is now USD(R&E) at the Pentagon \u2014 the office that would determine which AI companies get defense contracts. Applied Intuition (also Coatue portfolio) secured DSTL UK defense contract and DoD swarm programs. Anduril (Coatue portfolio) raised $2.5B Series G at $30.5B valuation led by Founders Fund (Thiel).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:45:49",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Stableton Navigator Feb 2026, CNBC Coatue Laffont interview 2026-02-13, Lawfare Anthropic analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4980,
+      "finding_type": "financial",
+      "summary": "Coatue 13F Q4 2025: $40B portfolio, 52 public holdings \u2014 NO positions in traditional defense primes or Palantir. Defense exposure is entirely through private holdings not disclosed on 13F",
+      "detail": "Coatue Management (CIK 0001135730) Q4 2025 13F filing (Feb 17, 2026) shows $40B in 52 public holdings. Top positions: TSM ($2.6B), MSFT ($2.5B), CEG ($2.1B), NVDA ($1.7B). Zero positions in: Palantir (PLTR), Booz Allen (BAH), Leidos (LDOS), L3Harris (LHX), Northrop Grumman (NOC), RTX, General Dynamics (GD), Lockheed Martin (LMT), CrowdStrike (CRWD), Palo Alto Networks (PANW). Coatue's defense-adjacent exposure is entirely through PRIVATE investments not captured on 13F: SpaceX, Scale AI, and Anthropic confirmed. This means the conflict-of-interest surface between Michael's former advisory role and Coatue's defense portfolio cannot be fully traced via public SEC filings alone.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:35",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR 13F-HR CIK 0001135730 filed 2026-02-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "InsideArbitrage Coatue holdings analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4984,
+      "finding_type": "relationship",
+      "summary": "Coatue co-led Anthropic's $10B round (Jan 2026) and $30B round (Feb 2026) at $380B valuation \u2014 while former Coatue advisor Emil Michael simultaneously leads Pentagon conflict with Anthropic",
+      "detail": "Coatue Management co-led (with GIC) Anthropic's $10B funding round in January 2026 at $350B valuation, followed by a $30B round in February 2026 at $380B. Other participants: D.E. Shaw Ventures, Dragoneer, Founders Fund, ICONIQ, MGX. Simultaneously, former Coatue advisory board member Emil Michael (now USD(R&E)) has been leading the Pentagon's confrontation with Anthropic over AI usage restrictions. Michael called Anthropic CEO Dario Amodei a 'liar' with a 'God-complex.' Defense Secretary Hegseth then declared Anthropic a 'supply chain risk to national security,' restricting military contractors from using Anthropic. The sequence: (1) Coatue invests billions in Anthropic, (2) former Coatue advisor Michael publicly attacks Anthropic from his government position, (3) Pentagon blacklists Anthropic. The SASC APQ confirms Michael's only ethics commitment was bare-minimum 18 USC 208 compliance \u2014 no Coatue-specific recusal.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:47",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CBS News: Pentagon-Anthropic feud",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Feb 12, 2026: Anthropic $30B close",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Jan 7, 2026: Anthropic $10B round",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Hill: Michael calls Amodei God-complex",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4986,
+      "finding_type": "financial",
+      "summary": "Coatue private defense-adjacent portfolio includes SpaceX, Scale AI, and Anthropic \u2014 none visible on 13F",
+      "detail": "Coatue Management's defense-adjacent private portfolio (not captured on 13F-HR): (1) SpaceX - Defense satellite comms, Starlink military, Golden Dome missile defense bidder; (2) Scale AI - Won prime Thunderforge contract (DoD AI agent program for military planning), partnering with Anduril and Microsoft; (3) Anthropic - Claude model cleared for classified defense environments, embedded in defense workflows through Palantir, declared 'supply chain risk' by Pentagon Feb 2026. Coatue also launched CTEK Innovation Fund (May 2025) with $1B from Bezos and Dell family offices. Emil Michael served as Coatue advisory board member before joining DoD. Full private portfolio unknown \u2014 Coatue website lists 367+ portfolio companies.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:46:58",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Anthropic defense use via Palantir",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC: Scale AI Thunderforge contract",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Coatue.com portfolio page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5359,
+      "finding_type": "intelligence",
+      "summary": "Coatue PE Asia 34 LLC lobbying via Gibson Dunn (Sep-Dec 2020): Registered lobbyist Roscoe Jones Jr. lobbied the State Department to authenticate Coatue PE Asia 34 LLC's Certificate of Formation. Issues coded as 'Government Issues' and 'Financial Institutions/Investments/Securities'. Gibson Dunn paid $10,000 for Q3 2020. Engagement terminated Q4 2020 with no activity. The need for State Department authentication of a Certificate of Formation suggests the entity was being used for cross-border investment requiring apostille/authentication for foreign jurisdiction acceptance -- consistent with an Asia-focused private equity vehicle needing US formation documents authenticated for operations in Asian markets.",
+      "detail": null,
+      "source_datasets": [
+        "lda"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:20:43",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filing c73184c4-0396-4b6e-8a58-79b8da3f076f (Registration); LDA filing for Q3 2020 Amendment showing $10,000 income",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5364,
+      "finding_type": "financial",
+      "summary": "Coatue CTEK (Coatue Innovation Fund) launched May 2025 as closed-end tender offer fund for qualified individual investors. Anchor capital: $1B combined from Jeff Bezos (Bezos Expeditions) and Michael Dell (DFO Management). Fund provides retail access to Coatue's private tech portfolio (SpaceX, Anthropic, OpenAI exposure). Renamed to 'Coatue Innovative Strategies Fund' Nov 2025. SEC CIK: 2044519. Managed by Philippe Laffont. Quarterly 5% liquidity via repurchase offers. This is the vehicle through which HNW individuals gain exposure to Coatue's defense-adjacent private portfolio -- Bezos and Dell anchor capital creates alignment between these billionaires and Coatue's AI/defense investment thesis.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:05",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CIK 2044519 N-2A filing; Coatue CTEK website; press release",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5365,
+      "finding_type": "financial",
+      "summary": "Coatue co-led OpenAI's $110B fundraise at $840B valuation (early 2026) alongside GIC (Singapore sovereign wealth fund). This is IN ADDITION to co-leading Anthropic's $10B round at $350B (Jan 2026) and $30B Series G at $380B (Feb 2026). Coatue is the ONLY known investor to co-lead major rounds in both OpenAI and Anthropic simultaneously. OpenAI's round followed the Trump administration's ban on Anthropic from federal use (Feb 27, 2026). Coatue's dual investment creates an extraordinary hedging position: regardless of which AI company wins the Pentagon AI contract battle, Coatue profits. Combined AI exposure likely exceeds $5B across both companies.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:17",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC 2026-01-07; TechCrunch; Globe and Mail; Tracxn OpenAI funding rounds",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5366,
+      "finding_type": "financial",
+      "summary": "CORRECTED: Coatue Q4 2025 13F had 257 positions (not 52 as originally stated), totaling $40.0B across 20+ sub-funds. Zero defense primes remains accurate.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:31",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "13f.info accession 000091957426001239; InsideArbitrage Q4 2025 holdings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5368,
+      "finding_type": "intelligence",
+      "summary": "Laffont brothers FEC donation strategy reveals coordinated bipartisan access-buying: Philippe (founder/CIO) donates almost exclusively Democratic -- $50K Schumer, $20.3K DSCC, Buttigieg, multiple D Senate races. Thomas (co-founder, private equity CIO) donates bipartisan with $10K to Mitch McConnell (2020), $2,700 Jeb Bush, $2,800 Cory Gardner (R), alongside Biden, Booker, Buttigieg. Together: the brothers cover BOTH parties' leadership -- Schumer (D Senate leader) via Philippe, McConnell (R Senate leader) via Thomas. This is a classic hedge fund access strategy where family members diversify political exposure. Combined identified donations: Philippe ~$93K (mostly D) + Thomas ~$34K (mixed) = ~$127K in direct federal contributions.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:53",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC individual contribution records for both Philippe and Thomas Laffont",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5370,
+      "finding_type": "intelligence",
+      "summary": "Coatue private defense/AI portfolio creates invisible government contract exposure: Private investments (not on 13F) include SpaceX (defense launch provider, Starshield, Golden Dome), Shield AI (autonomous drones, $5.6B valuation), Anthropic (AI for government, now banned), OpenAI (Pentagon AI provider post-ban), and Scale AI (military data labeling). Public 13F shows ZERO defense primes. This means Coatue's actual defense exposure is completely invisible to standard 13F-based analysis. The CTEK fund ($1B Bezos/Dell anchor) provides HNW retail investors access to this invisible defense portfolio. Coatue's $58.6B AUM ($40B public + ~$18.6B private) has a significant undisclosed defense technology concentration through private markets.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:22:17",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "13F Q4 2025 showing zero defense; Coatue portfolio page listing private investments; web search confirming SpaceX, Shield AI, Anthropic, OpenAI investments",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5371,
+      "finding_type": "intelligence",
+      "summary": "Philippe Laffont CNBC Feb 13, 2026: 'The world is moving to the token economy.' Laffont positioned Coatue as an AI-first fund, with Anthropic investment framed around 'AI agents and enterprise-level systems enabling rapid large-scale implementation.' This public statement came 2 weeks before Trump banned Anthropic from federal use (Feb 27). Laffont's quote about 'first investment in 2025' confirms Coatue's Anthropic relationship began with Series F (Sep 2025), then accelerated to co-lead $10B (Jan 2026) and $30B (Feb 2026). Total Anthropic commitment likely $2-5B. Simultaneously, Coatue co-led OpenAI's $110B round. Laffont's public AI evangelism contrasts with the fund's avoidance of any public defense stocks.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:22:29",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC video Feb 13, 2026: Coatue founder Philippe Laffont interview",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5373,
+      "finding_type": "intelligence",
+      "summary": "CORRECTED: Coatue 13F trajectory 2024-2025 actual counts: Q4 2024: 245 positions $29.7B, Q1 2025: 201 positions $22.7B, Q2 2025: 212 positions $36.0B, Q3 2025: 258 positions $40.8B, Q4 2025: 257 positions $40.0B. Previous trajectory (245->70->70->74->52) was incorrect. Positions fluctuated but remained in the 200-258 range. Portfolio grew from $29.7B to $40.0B.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:22:52",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "13f.info filing history CIK 0001135730; InsideArbitrage; Seeking Alpha Q3 2025 analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5383,
+      "finding_type": "financial",
+      "summary": "Coatue Management (CIK 0001135730, Philippe Laffont) held ZERO defense prime equities across all 5 quarters Q4 2024-Q4 2025 (confirming and extending findings #4975, #5366). Portfolio: 201-258 positions, $22.7B-$40.0B. AI/compute positions (NVDA, MSFT, META, AMZN, GOOG, ORCL, AMD, TSLA) totaled $13.6B in Q4 2025 (34% of portfolio). No Palantir, no Lockheed, no Northrop, no RTX, no quantum stocks. Correction: previous finding #5366 claimed 52 positions in Q4 2025; actual count is 257 positions per SEC filing.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:40:57",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR 13F-HR filing, CIK 0001135730, filed 2026-02-17, period 12-31-2025. tableEntryTotal: 257, tableValueTotal: 39962643007",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5395,
+      "finding_type": "financial",
+      "summary": "Coatue Management held Tesla (TSLA) positions across Q4 2024-Q4 2025, growing from approximately $370M to $738M across multiple sub-fund accounts. In Q4 2025: 5 separate Tesla line items totaling $738.2M (1,641,406 total shares across sub-funds). This makes Coatue a significant institutional Tesla holder. Given Musk's DOGE role and Tesla's growing relationship with government (EV policy, SpaceX/defense overlap), this is the only position in these funds connecting to the Musk defense/government nexus.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:41:44",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR 13F-HR filing, CIK 0001135730, period 12-31-2025, filed 2026-02-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5405,
+      "finding_type": "financial",
+      "summary": "Coatue Management LLC's Q4 2025 13F filing reveals a complex multi-fund structure with 20 included managers/sub-funds: Coatue Offshore Master Fund, Strategic Maple Long Only, Long Only Offshore, F1 LP, Smart Transportation Fund I, Climate Tech Fund II, Opportunity Fund II, Cardinal Main Fund, Asia Fund, Kona III, US 44, Growth Fund IV/V, Structured Co-Investment Offshore, Tactical Solutions CT, Innovative Strategies Fund, Structured Fund, CT 88, CT 158, Early Stage Fund. The 257 positions represent aggregate holdings across all sub-funds, explaining duplicate line items for the same stock (e.g., 5 Tesla entries, 6+ NVIDIA entries).",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:42:20",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR 13F-HR filing, CIK 0001135730, primary_doc.xml, period 12-31-2025, otherIncludedManagersCount: 20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5822,
+      "finding_type": "financial",
+      "summary": "Led Anthropic $30B Series G at $380B valuation \u2014 dual AI model investment strategy",
+      "detail": "Coatue co-led Anthropic $30B Series G funding at $380B post-money valuation, alongside GIC (Singapore sovereign wealth). Also invested in OpenAI $40B round, Anysphere/Cursor $2.3B round, and Databricks. Dual investment in competing AI foundation models positions Coatue at center of AI defense applications regardless of which model wins government contracts.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:48:03",
+      "target_name": "Coatue Management",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Anthropic press release Feb 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SiliconRepublic.com Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2776,
+      "person_a": "Coatue Management",
+      "person_b": "Philippe Laffont",
+      "relationship_type": "corporate",
+      "description": "Founder, Director, and Executive Officer of Coatue Management LLC (104 fund entities). Listed on 61 Form D filings across 13 fund vehicles 2009-2025. HQ: 9 West 57th Street, 25th Floor, New York.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 22:08:58",
+      "profile_id": "tech-right",
+      "other_person": "Philippe Laffont",
+      "other_person_slug": "philippe-laffont",
+      "evidence": []
+    },
+    {
+      "id": 2778,
+      "person_a": "Coatue Management",
+      "person_b": "J.P. Morgan Private Investments",
+      "relationship_type": "financial",
+      "description": "JPM Private Investments serves as Executive Officer/Promoter for 15 Coatue Private Investors feeder fund vehicles (27 filings). Channels JPM private wealth capital into Coatue strategies including defense-adjacent AI investments.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 22:08:58",
+      "profile_id": "tech-right",
+      "other_person": "J.P. Morgan Private Investments",
+      "other_person_slug": "jp-morgan-private-investments",
+      "evidence": []
+    },
+    {
+      "id": 2773,
+      "person_a": "Anthropic",
+      "person_b": "Coatue Management",
+      "relationship_type": "financial",
+      "description": "Coatue dual-bet: invested in both Anthropic Series G and OpenAI round on same day as Anthropic federal ban",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 21:44:49",
+      "profile_id": "tech-right",
+      "other_person": "Anthropic",
+      "other_person_slug": "anthropic",
+      "evidence": []
+    },
+    {
+      "id": 2777,
+      "person_a": "Coatue Management",
+      "person_b": "Thomas Laffont",
+      "relationship_type": "corporate",
+      "description": "Co-founder of Coatue, focused on private investments. Appears only as Director of OneTrust LLC (portfolio company) in Form D filings \u2014 notably absent from all Coatue fund-level filings.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 22:08:58",
+      "profile_id": "tech-right",
+      "other_person": "Thomas Laffont",
+      "other_person_slug": "thomas-laffont",
+      "evidence": []
+    },
+    {
+      "id": 2779,
+      "person_a": "Coatue Management",
+      "person_b": "Emil Michael",
+      "relationship_type": "advisory",
+      "description": "Emil Michael nominated as Under Secretary of Defense (A&S) while Coatue invested in Anthropic (which Michael co-founded DPCM Capital SPAC era connections). Coatue also invested in OpenAI and Shield AI \u2014 all potential beneficiaries of DoD acquisition decisions Michael would oversee.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 22:08:58",
+      "profile_id": "tech-right",
+      "other_person": "Emil Michael",
+      "other_person_slug": "emil-michael",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

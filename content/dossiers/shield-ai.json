@@ -1,0 +1,152 @@
+{
+  "name": "Shield AI",
+  "slug": "shield-ai",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.550810",
+  "last_updated": "2026-03-05T20:30:25",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3,
+      "identity": 1,
+      "relationship": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-05T20:30:25"
+  },
+  "findings": [
+    {
+      "id": 4559,
+      "finding_type": "financial",
+      "summary": "Shield AI total federal contract obligations: .1M all-time. FY2024: .1M. FY2025: .1M. FY2026: .7M. Key agencies: DHS/Coast Guard (.3M), Air Force (.4M), Navy (.6M), SOCOM (K). Key programs: V-BAT VTOL UAV, autonomous AI behaviors, shore-based VBAT deployments. Coatue Management is a major Shield AI investor -- Coatue's Philippe Laffont has close ties to tech-right network.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "disputed",
+      "created_at": "2026-03-03 16:54:15",
+      "target_name": "Shield AI",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending API timeline + awards search, queried 2026-03-03",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4942,
+      "finding_type": "identity",
+      "summary": "Shield AI UK Ltd incorporated September 2025 - new UK defense tech expansion",
+      "detail": "Shield AI UK Ltd (16696206, incorporated 2025-09-05). Address: C/O Womble Bond Dickinson (UK) LLP, 4 More London Riverside, London SE1 2AU. Directors: Kingsley Afemikhe (British, resident USA, appointed 2025-09-05), Michael Yang (American, appointed 2025-09-23). Corporate secretary: Prima Secretary Limited. Very new entity, only 3 filings. No PSC data. Shield AI is a major US defense AI company (autonomous drones). UK expansion is notable for Five Eyes defense collaboration.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 18:23:23",
+      "target_name": "Shield AI",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "UK Companies House 16696206",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4970,
+      "finding_type": "financial",
+      "summary": "Shield AI total federal spending: DOD 33.8M, DHS 31.2M. Total 65M. Small footprint relative to peers. Focused on autonomous flight systems.",
+      "detail": "Shield AI at 65M total is significantly smaller than Anduril (2.32B), Palantir (3.42B), or SpaceX (14.6B). Split between DOD and DHS roughly equally. Company focuses on AI-powered autonomous flight \u2014 their Hivemind system for autonomous drone operations. The relatively small contract base may reflect early-stage government adoption or reliance on OTA/SBIR mechanisms not fully captured in USASpending.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:45:40",
+      "target_name": "Shield AI",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient query Shield AI",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5084,
+      "finding_type": "relationship",
+      "summary": "Shield AI lists CHRIS MILLER as lobbyist \u2014 if former Acting SecDef, major revolving-door indicator",
+      "detail": "Shield AI lobbying records (100 filings, $6.85M, 2018-2024) list CHRIS MILLER among lobbyists. Christopher Miller served as Acting Secretary of Defense Nov 2020-Jan 2021. If this is the same person, it represents a significant revolving-door relationship \u2014 the former acting head of the DoD lobbying for a defense AI company. Shield AI's lobbying is 100% Defense-focused. Company established in-house lobbying (SHIELD AI as registrant, $4.15M) in 2021, same year it hired multiple external firms (Crossroads Strategies, J.A. Green, American Defense International, C. Baker Consulting, Liz Williams). Requires verification of whether CHRIS MILLER the lobbyist is the same as the former Acting SecDef.",
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:34:55",
+      "target_name": "Shield AI",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5375,
+      "finding_type": "financial",
+      "summary": "USASpending: Shield AI holds $52.1M in 20 federal contracts. $18.2M USCG V-BAT drone deployments, $16.4M USAF autonomous systems R&D, $7.9M Navy V-BAT VTOL, $4.5M autonomous capabilities. a16z American Dynamism portfolio company.",
+      "detail": "Largest awards: COVID-19 reinforcement learning for autonomous systems ($16.4M FA864920C0158, USAF), USCG V-BAT shore-based drone deployments (5 DHS task orders totaling $18.2M), Navy V-BAT VTOL aircraft ($7.9M N0001925F0971), Hivemind software ($1.83M FA865822CB011), autonomous capabilities ($4.48M FA228023C0008). Shield AI is an a16z American Dynamism and Coatue co-investment.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:30:25",
+      "target_name": "Shield AI",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending API query: awards for SHIELD AI INC, retrieved 2026-03-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": []
+}

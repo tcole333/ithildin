@@ -1,0 +1,492 @@
+{
+  "name": "Affinity Partners",
+  "slug": "affinity-partners",
+  "aliases": [],
+  "profile_ids": [
+    "epstein"
+  ],
+  "generated_at": "2026-03-10T15:20:13.417262",
+  "last_updated": "2026-02-27T15:23:47",
+  "stats": {
+    "total_findings": 16,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 7,
+      "legal": 6,
+      "location": 2,
+      "identity": 1
+    },
+    "connection_types": {
+      "financial": 2
+    },
+    "last_updated": "2026-02-27T15:23:47"
+  },
+  "findings": [
+    {
+      "id": 4321,
+      "finding_type": "financial",
+      "summary": "Affinity Partners GP LP files quarterly 13F-HR with SEC as institutional investment manager with 630M in holdings",
+      "detail": "CIK 0002059583. Address 16690 Collins Ave Sunny Isles Beach FL 33160. CLO Ian Brekke. 7 SEC filings incl 5 quarterly 13F-HR and 2 Schedule 13D for QXO. Q4 2025 shows 630.5M total in 2 QXO positions. Co-manager entity Affinity Partners Fund I Co-Invest GP LP CIK 0002069999.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 00:48:25",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CIK 0002059583",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4324,
+      "finding_type": "financial",
+      "summary": "No SEC Form D private placement filing found for Affinity Partners despite reported 3B fundraise from Saudi PIF and other sovereign wealth",
+      "detail": "Despite widespread reporting that Affinity Partners raised approximately 3B including 2B from Saudi PIF, no Form D private placement notice was found on EDGAR. This is unusual for a large fund raise. Could indicate Rule 506(b) exemption with all accredited investors and no general solicitation, or the fund entities may have filed under different names. The absence of Form D means the SEC has no public record of the fund offering terms or investor composition.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 00:49:00",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR full-text search for Affinity Partners, CIK 0002059583 filing history",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4325,
+      "finding_type": "legal",
+      "summary": "No FARA registration for Affinity Partners or any Kushner entity despite approximately 2B from Saudi PIF sovereign wealth fund",
+      "detail": "FARA database search for Kushner, Affinity Partners, and Avi Berkowitz returned zero relevant registrations. FARA requires registration by anyone acting as agent of a foreign principal in the US. The absence of FARA registration despite Affinity Partners reported receipt of approximately 2B from Saudi PIF and additional Gulf sovereign wealth fund capital has been subject of Congressional scrutiny. Whether the investment structure creates an agency relationship requiring registration is a legal question at the center of political controversy.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 00:49:08",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DOJ FARA database search results 2026-02-26",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4335,
+      "finding_type": "location",
+      "summary": "Affinity Partners registered at 16690 Collins Avenue Sunny Isles Beach FL known as Little Moscow for Russian-speaking population and real estate concerns",
+      "detail": "SEC 13F filings show Affinity Partners GP LP registered at 16690 Collins Avenue Sunny Isles Beach FL 33160. Sunny Isles Beach has been widely reported as Little Moscow due to its large Russian-speaking population and has been flagged in multiple investigations for real estate money laundering concerns. The address appears to be a luxury condominium or office building on Collins Avenue. Separately Affinity Partners Fund I Co-Invest GP LP lists phone 786-815-9041 at same address. CLO is Ian Brekke.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 00:50:47",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CIK 0002059583 13F-HR filings Q4 2024 through Q4 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4338,
+      "finding_type": "identity",
+      "summary": "Affinity Partners website affinitypartners.com has minimal content with pay subdomain and 93 SSL certs hosted at IP 104.131.93.18",
+      "detail": "Certificate transparency via crt.sh shows 4 subdomains: affinitypartners.com, www.affinitypartners.com, pay.affinitypartners.com, www.pay.affinitypartners.com with 93 total certificates. URLScan from March 2023 shows site hosted on Apache at IP 104.131.93.18. Wayback Machine shows domain existed since 1999 (different company), was a parked GoDaddy page in Feb 2021, and became a minimal content landing page by 2023 using Montserrat font. The pay subdomain suggests a payment or investor portal. Domain gap 2008-2014 between prior owner and Kushner acquisition.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 00:51:48",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "crt.sh subdomains affinitypartners.com; URLScan 2023-03-09; Wayback Machine timeline 1999-2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4341,
+      "finding_type": "financial",
+      "summary": "Schedule 13D reveals 8+ Affinity Partners fund vehicles with Cayman Islands parallel fund and A Fin Management LLC as investment manager controlled by Kushner as CEO",
+      "detail": "SEC Schedule 13D (2025-05-06) and 13D/A (2025-08-14) for QXO Inc reveal the full Affinity Partners structure: Affinity Partners Fund I LP (Delaware, 164310 shares), Affinity Partners Parallel Fund I LP (CAYMAN ISLANDS, 16247069 shares), Affinity QXO 1 LLC (Delaware SPV, 16260163 shares via Co-Invest Delta/Delta II/Sigma/Sigma II LPs), controlled by Affinity Partners GP LP which is managed by A Fin Management LLC where Jared Kushner is CEO. Total QXO investment approximately 350M across two private placements: 150M at 9.14 per share (Jul 2024) and 200M at 12.30 per share (Apr 2025). Source of funds listed as AF (Affiliate). Ian Brekke is Secretary of SPV.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 00:57:24",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "SEC Schedule 13D Accession 0001140361-25-017533; 13D/A Accession 0001140361-25-031371",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4343,
+      "finding_type": "financial",
+      "summary": "Affinity Partners Parallel Fund I LP domiciled in Cayman Islands with multi-vehicle co-invest structure suggesting compartmentalized sovereign wealth fund investors",
+      "detail": "The QXO Schedule 13D reveals Affinity Partners Parallel Fund I LP is domiciled in the Cayman Islands while the main fund is Delaware. The Cayman structure is standard for accepting sovereign wealth fund capital as offshore investors prefer Cayman for tax and regulatory reasons. Additionally the co-invest vehicles are named Delta Delta II Sigma Sigma II suggesting different investor classes or vintages. This compartmentalization is consistent with having multiple sovereign wealth fund LPs (reported: Saudi PIF at 2B, Qatar Investment Authority, Abu Dhabi sovereign wealth) who may require separate investment vehicles for governance or confidentiality reasons. Combined with no Form D no FARA and source of funds listed only as AF (Affiliate), the actual capital sources remain opaque despite 350M in documented public market deployment.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 00:57:44",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Schedule 13D Accession 0001140361-25-017533",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4346,
+      "finding_type": "financial",
+      "summary": "Wyden Senate investigation: Affinity extracted M in fees (M from Saudi) with zero returns; likely FARA-circumventing compensation scheme",
+      "detail": "Senate Finance Committee Chair Ron Wyden investigation findings: 99 percent of Affinity capital from foreign sources (Saudi PIF, UAE, Qatar sovereign wealth funds). M total fees extracted from foreign clients, M from Saudi government alone. Fee structure: 1.25 percent annual on Saudi PIF B, approximately 2 percent for others. No returns on investment as of July 2024 (marked N/A in financial statements). Questionable Albania and Serbia real estate deals where foreign governments control permitting and taxation. Ivanka Trump directly involved in Albania negotiations. Investment agreements renegotiable August 2026 during Trump second term. Wyden concluded: Affinity is likely part of a compensation scheme involving US political figures designed to circumvent FARA.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 01:24:25",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate Finance Committee letters (Wyden investigation 2023-2024)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4348,
+      "finding_type": "location",
+      "summary": "Milton Tower (16690 Collins Ave, Sunny Isles Beach) houses both Affinity Partners (9th floor) and Icahn Enterprises (12th floor + penthouse)",
+      "detail": "Milton Tower completed March 2020 by J. Milton and Associates. 102K sq ft, 14 stories. Icahn Enterprises relocated from Manhattan in 2020, occupies approximately 20 percent of building. Affinity Partners established there 2021 post-White House. June 2024 refinancing noted Icahn and Kushner tenancies as key to building value. Building located in Sunny Isles Beach known as Little Moscow for concentration of Russian/Eastern European residents. SEC Form D confirms Affinity mailing address as 16690 Collins Avenue.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 01:57:42",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://commercialobserver.com/2024/06/jared-kushner-carl-icahn-milton-towers/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://commercialobserver.com/2021/07/jared-kushner-investment-firm-affinity-partners-miami/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4361,
+      "finding_type": "legal",
+      "summary": "Serbia Belgrade Trump Tower: 500M luxury hotel on former Yugoslav Army General Staff Building. Culture Minister Selakovic indicted Dec 15 2025 for illegally removing cultural heritage. Official Vasic admitted fabricating expert opinion. 99-year free land lease. Affinity withdrew Dec 16 2025.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:23:15",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BIRN:BalkanInsight-Dec16-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DW:a-75185712",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "RFERL:33624642",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4362,
+      "finding_type": "legal",
+      "summary": "Albania Sazan Island luxury resort: EUR 1.4B project via Affinity Global Development on former military island in Marine National Park. Albania passed Law 21/2024 enabling construction in protected areas. 45 hectares. Ivanka Trump met PM Rama in Vlore Jan 2026. 40+ environmental orgs from 28 countries opposed.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:23:17",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Euronews:Green-Jan27-2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GDELT:Albania-Kushner-corpus",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TiranaTimes:Dec17-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4363,
+      "finding_type": "legal",
+      "summary": "FARA non-registration exploits investment fund commercial exemption 22 USC 613d. Zero FARA registrations for Affinity Kushner or Berkowitz confirmed. Exemption designed for fund managers with incidental sovereign LPs but Affinity has 99pct foreign sovereign capital zero returns 157M fees. Every deal requires foreign government action. Agreements renegotiable Aug 2026 during Trump second term.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:23:19",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA-DB:zero-results",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CIK-0002059583",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wyden-investigation:F-4346",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4364,
+      "finding_type": "legal",
+      "summary": "Serbia Belgrade Trump Tower deal WITHDRAWN Dec 16, 2025 after Culture Minister indicted for forging heritage removal \u2014 Serbian government removed cultural heritage protections to enable Kushner 99-year free land lease",
+      "detail": "Affinity Global Development planned approximately 500M Trump-branded tower at former Yugoslav Army General Staff Building in central Belgrade (NATO-bombed 1999, protected cultural heritage site). Required 99-year free land lease from Serbian government and removal of cultural heritage designation. Culture Minister Nikola Selakovic indicted Dec 15 2025 for unlawfully removing cultural heritage status. Acting director Goran Vasic arrested May 2025, admitted fabricating expert opinion to justify heritage removal. Project championed by President Aleksandar Vucic who claimed EUR 750M-1.5B total economic value. Affinity withdrew Dec 16 2025: Because meaningful projects should unite rather than divide and out of respect for the people of Serbia.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:23:21",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "RFERL rferl.org/a/kushner-affinity-belgrade-project-controversy-vucic/33624642.html; BalkanInsight BIRN Dec 2025; GDELT article corpus",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4365,
+      "finding_type": "financial",
+      "summary": "Albania Sazan Island EUR 1.4B luxury resort ACTIVE \u2014 Albania passed Law 21/2024 enabling five-star hotels in protected areas; Ivanka Trump personally met PM Rama Jan 2026; 40+ environmental groups from 28 countries oppose",
+      "detail": "Affinity Global Development backed by Jared and Ivanka Kushner planning EUR 1.4B resort on Sazan Island off Vlore Albania. Island is former military base in a Marine National Park and Specially Protected Area of Mediterranean Importance (SPAMI). Albania passed Law 21/2024 specifically permitting five-star hotel construction in protected natural areas, enabling the project. Ivanka Trump visited Albania Jan 21-23 2026, dined with PM Edi Rama in Vlore, visited Prime Ministers Office Jan 22. 40+ environmental organizations from 28 countries formally urged suspension citing threats to Mediterranean monk seals, Posidonia meadows, coastal caves. Project contradicts Albanias EU accession environmental commitments. After Serbia withdrawal Dec 2025 Vucic himself pointed to Albania as next focus.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:23:29",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Euronews Green Jan 2026; GDELT article corpus 50+ articles; Albanian media reports",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4366,
+      "finding_type": "financial",
+      "summary": "Affinity Partners attempted Warner Bros Discovery takeover Dec 2025 using sovereign wealth fund capital \u2014 WITHDRAWN same day as Serbia deal withdrawal; would have raised CFIUS/national security concerns",
+      "detail": "Reports emerged Dec 16-17 2025 of Affinity Partners interest in Warner Bros Discovery takeover. Withdrawn same day as Serbia project. An acquisition of a major US media company using capital from Saudi PIF and other Gulf sovereign wealth funds would raise significant CFIUS and national security concerns. The dual withdrawal (Serbia Dec 16, WBD Dec 17) suggests coordinated pullback, possibly driven by regulatory or political risk assessment.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:23:34",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GDELT media coverage Dec 16-17 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4369,
+      "finding_type": "legal",
+      "summary": "FARA loophole analysis: Affinity exploits investment fund commercial exemption under 22 USC 613(d), but structure fails the exemption test \u2014 99% sovereign capital, zero returns, deals requiring foreign government action",
+      "detail": "FARA exemption analysis: Affinity appears to rely on 22 USC 613(d) commercial exemption, claiming A Fin Management LLC manages capital for return as registered investment adviser. Four reasons exemption does not fit: (1) 99 percent foreign sovereign capital is not a diversified LP base with incidental sovereign money. (2) Zero returns means no bona fide commercial purpose \u2014 157M in fees flows one direction. (3) Every deal requires foreign government action: Serbia (heritage removal, free lease), Albania (new legislation Law 21/2024, protected area permits), Saudi (sovereign capital commitment IS the government action). (4) August 2026 renegotiation window creates ongoing leverage over Kushner during Trump second term. The Trump family IS the leverage \u2014 Ivanka personally negotiates Albania, Trump Tower branding is the Serbia product. FARA commercial exemption was designed for ordinary commerce that happens to involve foreign principals, not business models where the foreign principal relationship IS the product.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 15:23:47",
+      "target_name": "Affinity Partners",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "22 USC 613(d); FARA database zero results for Affinity/Kushner; Wyden Senate Finance investigation; F-4346 F-4364 F-4365",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2598,
+      "person_a": "Affinity Partners",
+      "person_b": "Saudi PIF",
+      "relationship_type": "financial",
+      "description": "Saudi PIF committed 2B to Affinity within weeks of launch despite advisory board opposing; 87M in fees paid with zero returns; Wyden: likely FARA-circumventing compensation scheme",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 01:58:18",
+      "profile_id": "epstein",
+      "other_person": "Saudi PIF",
+      "other_person_slug": "saudi-pif",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finance.senate.gov/chairmans-news/wyden-investigation-of-kushner-firm-continues",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2600,
+      "person_a": "Affinity Partners",
+      "person_b": "Stargate",
+      "relationship_type": "financial",
+      "description": "Parallel Gulf-backed Trump investment vehicles: Affinity (Saudi PIF 2B) and Stargate (MGX/SoftBank 500B) both channel sovereign wealth through politically-connected structures; Thrive Capital (Josh Kushner) is OpenAI investor connecting both",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 11:24:25",
+      "profile_id": "epstein",
+      "other_person": "Stargate",
+      "other_person_slug": "stargate",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "F-4109 (MGX-Stargate), F-4346 (Wyden Affinity), F-4337 (Thrive Capital entities)",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

@@ -50,6 +50,9 @@ key_persons:
   - "travis kalanick"
   - "dara khosrowshahi"
   - "ian osborne"
+  # DHS / political operatives
+  - "corey lewandowski"
+  - "kristi noem"
   # Key senators / oversight
   - "elizabeth warren"
   - "jack reed"
@@ -204,6 +207,76 @@ threads:
       - "revolving door"
       - "executive order.*ethics"
 
+  - id: 7
+    name: "DHS Procurement & Political Gatekeeping"
+    description: "Lewandowski as DHS SGE with contract approval authority >$100K. HSAC as institutional mixer (Lewandowski, Andreessen, Giuliani). DHS contracts to defense tech companies. Noem oversight. AMMC LLC scandal. FOIA litigation."
+    targets:
+      - "corey lewandowski"
+      - "kristi noem"
+      - "dhs"
+      - "homeland security"
+      - "hsac"
+      - "homeland security advisory council"
+      - "ammc"
+      - "avenue strategies"
+      - "turnberry solutions"
+      - "nicholas luna"
+      - "jim pallotta"
+      - "david chesnoff"
+    keywords:
+      - "dhs.*contract"
+      - "dhs.*procurement"
+      - "hsac"
+      - "homeland.*advisory"
+      - "lewandowski.*dhs"
+      - "noem.*contract"
+      - "blanket purchase"
+      - "oge.*278"
+
+  - id: 8
+    name: "DOGE Operations & Personnel"
+    description: "Full mapping of DOGE employees, roles, government agency interactions, and authority. Who are they, what access do they have, what decisions are they making, what systems are they touching. Track firings, restructurings, and agency infiltration."
+    targets:
+      - "doge"
+      - "department of government efficiency"
+      - "elon musk"
+      - "vivek ramaswamy"
+      - "steve davis"
+      - "james shedd"
+    keywords:
+      - "doge.*employee"
+      - "doge.*staff"
+      - "doge.*access"
+      - "government efficiency.*personnel"
+      - "doge.*agency"
+      - "doge.*system"
+      - "doge.*fired"
+      - "doge.*restructur"
+
+  - id: 9
+    name: "Tariff Collection, Refunds & Revenue Flows"
+    description: "How tariff revenue flows from collection (CBP) through Treasury to congressional allocation. Supreme Court overrulings and resulting refund mechanisms. DHS/CBP fee retention and contractor payments from tariff revenue. Opportunities for fraud, grift, or diversion in the chaotic high-volume tariff regime. Who handles refund processing and routing?"
+    targets:
+      - "cbp"
+      - "customs and border protection"
+      - "tariff"
+      - "trade"
+      - "treasury"
+      - "customs duties"
+    keywords:
+      - "tariff.*collect"
+      - "tariff.*refund"
+      - "tariff.*revenue"
+      - "customs.*dut"
+      - "cbp.*fee"
+      - "trade.*revenue"
+      - "tariff.*supreme court"
+      - "merchandise processing fee"
+      - "harbor maintenance"
+      - "customs.*user fee"
+      - "drawback"
+      - "tariff.*reimburse"
+
 # No investigation-specific document corpora — uses generic tools
 # (EDGAR, FEC, CourtListener, USASpending, SAM, registries)
 corpus_tools: []
@@ -270,9 +343,33 @@ key_dates:
     event: "D-Wave/Anduril/Davidson missile defense collaboration announced"
     category: "operational"
 
+  - date: "2025-01-20"
+    event: "Lewandowski begins as unpaid SGE/de facto chief of staff at DHS under Noem"
+    category: "milestone"
+
+  - date: "2025-06-01"
+    event: "HSAC reconstituted — Lewandowski, Andreessen, Giuliani, Luna, Pallotta, Chesnoff appointed"
+    category: "political"
+
+  - date: "2025-09-01"
+    event: "Rep. Garcia demands Lewandowski OGE 278e financial disclosure"
+    category: "legal"
+
+  - date: "2025-09-01"
+    event: "American Oversight files first FOIA lawsuit on HSAC appointments (1:25-cv-03113)"
+    category: "legal"
+
   - date: "2026-02-01"
     event: "Musk consolidates SpaceX + xAI ($1.25T combined valuation)"
     category: "financial"
+
+  - date: "2026-02-01"
+    event: "Palantir awarded $1B DHS blanket purchase agreement for AI/data analytics"
+    category: "financial"
+
+  - date: "2026-03-03"
+    event: "Noem congressional testimony — misled Congress about Lewandowski contract authority (ProPublica)"
+    category: "legal"
 
 # Institutional pillars
 seed_pillars:

@@ -1,0 +1,352 @@
+{
+  "name": "DHS Procurement",
+  "slug": "dhs-procurement",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.438758",
+  "last_updated": "2026-03-05T17:22:19",
+  "stats": {
+    "total_findings": 13,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 11,
+      "legal": 1,
+      "relationship": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-05T17:22:19"
+  },
+  "findings": [
+    {
+      "id": 5170,
+      "finding_type": "financial",
+      "summary": "DHS-Palantir B BPA: Five-year blanket purchase agreement for AI/data analytics platforms (Gotham, Foundry) awarded Feb 2026. Allows CBP, ICE, USCIS to bypass competitive bidding. Covers investigative case management, threat identification, logistics, emergency response.",
+      "detail": null,
+      "source_datasets": [
+        "USASpending,SiliconAngle"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:11",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:multiple_task_orders; SiliconAngle:2026-02-19",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5171,
+      "finding_type": "financial",
+      "summary": "DHS-Palantir ImmigrationOS: M sole-source contract to Palantir (Apr 2025) for Immigration Lifecycle Operating System. Tracks immigrants, generates enforcement dossiers (ELITE tool), maps deportation targets. Sole-source justified as 'urgent and compelling need.'",
+      "detail": null,
+      "source_datasets": [
+        "USASpending,Axios,OrangeSlicesAI"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:16",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:ICE_contract; ImmPolicyTracking; Axios:2025-05-01",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5172,
+      "finding_type": "financial",
+      "summary": "DHS-Palantir VOWS Platform: Three USCIS task orders (Oct 2025 - Mar 2026) totaling ~K for 'Vetting of Wedding-Based Schemes' platform to detect marriage fraud. Phase 0 (K), Phase 1 (.5K), Phase 2 (.5K).",
+      "detail": null,
+      "source_datasets": [
+        "USASpending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:21",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:70SBUR26F00000003,70SBUR26F00000026,70SBUR26F00000055",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5173,
+      "finding_type": "financial",
+      "summary": "DHS-Palantir ICM Contract: .3M active contract (Sep 2022 - Apr 2026) for Investigative Case Management O&M and custom enhancements for ICE. Ongoing from prior administration.",
+      "detail": null,
+      "source_datasets": [
+        "USASpending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:25",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:CONT_AWD_70CTD022FR0000170_7012_GS35F0086U_4730",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5174,
+      "finding_type": "financial",
+      "summary": "DHS-Anduril .5M (Jan 2025-present): Anduril Industries is 12th largest DHS recipient (.5M since Jan 2025). Major contracts: M SBIR Phase III tower IDIQ (Dec 2025), .7M award (Sep 2025), M O&S Year 5 (Sep 2025), .9M DO18 (Aug 2025). All through CBP for Autonomous Surveillance Towers.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:34",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:DHS_top_recipients_2025-2026; multiple_delivery_orders",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5175,
+      "finding_type": "financial",
+      "summary": "DHS-Safe America Media .8M: Three no-bid contracts to Safe America Media LLC (Feb-Aug 2025) for 'Stronger Borders, Stronger America' ad campaign. Task 1: .8M (Feb 2025), Task 4: M (Aug 2025), ICE recruitment: M (Aug 2025). Company formed 8 days before first contract. Subcontractor Strategy Group tied to Noem's political operation, CEO married to DHS spokesperson Tricia McLaughlin.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:40",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:70RDA225FR0000009,70RDA225FR0000034,70CMSW25FR0000082; ProPublica:2025-11-14",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5176,
+      "finding_type": "financial",
+      "summary": "DHS-Nextech/Wraithwatch .5M: Sole-bidder contract to Nextech Solutions LLC (Jan 2026) for Wraithwatch Enterprise Security Software. Wraithwatch founded by ex-Anduril CIO (Nik Seetharaman), ex-SpaceX insider threat leads. CEO previously Anduril CIO, SpaceX cybersecurity lead, Palantir international cyber programs, and JSOC operator.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:46",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:70RTAC26FR0000005; Wraithwatch:PR-2026-02-20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5177,
+      "finding_type": "financial",
+      "summary": "DHS-Clearview AI .75M: ICE-HSI contract (Sep 2025) for facial recognition software. Largest DHS Clearview purchase to date, obligated .75M up front. Also CBP purchases of K-K for Yuma/Spokane sectors. Total DHS Clearview spending since 2020: ~.1M.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:50",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:70CMSD25P00000111,70B03C25P00000322,70B03C25P00000321",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5178,
+      "finding_type": "financial",
+      "summary": "DHS-Paragon Solutions M: ICE contract for Graphite spyware reactivated Sep 2025 after Israeli company acquired by U.S. PE firm AE Industrial Partners, circumventing Biden-era foreign spyware executive order. Can covertly access encrypted phone data without user interaction.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:55",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch:2025-09-02; AccessNow; Congressional_letters",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5179,
+      "finding_type": "financial",
+      "summary": "DHS-AMMC LLC K: PR contract to American Made Media Company LLC, founding partners both worked with Lewandowski and Trump campaigns. 31-hour bid window. Contract required 'established track record of promoting Trump administration policies.' DHS demanded partisan loyalty in work description.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:21:59",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TheDailyBeast:2026-02-26; TheMirror:2026; Guardian",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5180,
+      "finding_type": "legal",
+      "summary": "Lewandowski Contract Authority: Internal DHS records (ProPublica, Mar 2026) show Lewandowski personally approves multimillion-dollar contracts despite Noem telling Senate Judiciary he has 'no' role. Policy requires Noem to review all contracts >K; Lewandowski's name typically appears last on approval checklist before Noem's.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:22:13",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica:2026-03-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5181,
+      "finding_type": "financial",
+      "summary": "DHS-Fisher Sand & Gravel .7B: Top DHS recipient since Jan 2025. Smart Wall border construction: El Centro (M), Tucson 2 (.495B), NM Bootheel (.679B), Laredo projects (M). Fisher is a North Dakota company that was controversially awarded Trump-era wall contracts.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:22:15",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending:DHS_top_recipients; CBP.gov:2025-10-10",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5182,
+      "finding_type": "relationship",
+      "summary": "HSAC Conflict of Interest: Marc Andreessen (a16z co-founder) and Corey Lewandowski both appointed to DHS Homeland Security Advisory Council (Jun 2025). Andreessen's a16z has portfolio companies bidding for DHS contracts. Lewandowski has contract approval authority per internal DHS records. First HSAC meeting Jul 2, 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:22:19",
+      "target_name": "DHS Procurement",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS.gov:2025-06-24; HSAC_minutes:2025-07-02",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": []
+}

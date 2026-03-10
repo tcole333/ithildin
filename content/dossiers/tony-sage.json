@@ -1,0 +1,268 @@
+{
+  "name": "Tony Sage",
+  "slug": "tony-sage",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.554182",
+  "last_updated": "2026-03-09T19:15:44",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 2,
+    "total_entities": 6,
+    "finding_types": {
+      "intelligence": 2,
+      "legal": 1,
+      "relationship": 1,
+      "financial": 1
+    },
+    "connection_types": {
+      "corporate": 1,
+      "financial": 1
+    },
+    "last_updated": "2026-03-09T19:15:44"
+  },
+  "findings": [
+    {
+      "id": 6253,
+      "finding_type": "intelligence",
+      "summary": "Tony Sage background: Australian mining entrepreneur, born ~1958, Perth WA. Founding director of International Goldfields/Hamill Resources (merged as Cape Lambert Resources, ASX: CFE). Executive Chairman Cape Lambert Resources Ltd \u2014 ATO investigated 2012-2014 on fraud/evasion claims, M assessment, share value dropped 75%, settled for .4M. Sage fought to access criminal investigation reports per Jan 2023 West Australian report. Also sued Metallurgical Corporation of China for AM iron-ore asset sale. Filed suit vs Timis Mining (Sierra Leone) for M loan + royalties. CAPE LAMBERT CORPORATION (separate entity) appears in Panama Papers via Mossack Fonseca, incorporated Panama Feb 2007, intermediary Consulco International Ltd (Ras Al Khaimah Free Trade Zone UAE). Sage owns Perth Glory FC (A-League). Current roles: CEO/Exec Chairman CRML; Exec Chairman CuFe Ltd (ASX: CUF); Exec Chairman European Lithium (ASX: EUR); Exec Director Cyclone Metals (ASX).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:56:29",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ATO:Cape-Lambert-Investigation,GroundNews:2023-01-15,ICIJ:10048336",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6353,
+      "finding_type": "intelligence",
+      "summary": "CAPE LAMBERT CORPORATION (ICIJ node 10048336) is a Panama entity incorporated Feb 6, 2007 via Mossack Fonseca, with Consulco International Limited (RAK FTZ, UAE) as intermediary. NO officers or beneficial owners are named in the ICIJ database. Connection to Tony Sage / ASX:CFE Cape Lambert Resources Ltd is UNVERIFIED \u2014 the name match is suggestive but no public evidence confirms Sage as an officer or beneficiary of this Panamanian entity. The ATO investigation of Sage's Cape Lambert Resources resulted in a M assessment settled for .4M, with Sage seeking access to ATO criminal investigation reports in Jan 2023 \u2014 implying criminal fraud/evasion referrals were made.",
+      "detail": null,
+      "source_datasets": [
+        "ICIJ_Panama_Papers,WebSearch,Ground_News"
+      ],
+      "confidence": "low",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:48:31",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "6253",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6381,
+      "finding_type": "legal",
+      "summary": "Australian Federal Police Operation Lemans (launched 2012): untested court allegations against Tony Sage include bribing a Sierra Leone official for the Marampa iron ore project, paying secret commissions, insider trading, and tax fraud including disguising $19.8 million as loans via offshore entities. No charges filed as of 2023. Separate ATO investigation 2012-2014: $96M assessment issued to Cape Lambert Resources, settled for $2.4M.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:15:24",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web_search:operation_lemans_afp",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6382,
+      "finding_type": "relationship",
+      "summary": "Tony Sage corporate network (partial list): Executive Chairman/CEO of Critical Metals Corp (NASDAQ:CRML, BVI incorporated); Executive Chairman of European Lithium Ltd (ASX:EUR, 32 Harrogate St, West Leederville, WA \u2014 holds 39.5% of CRML worth A$1.2B Jan 2026); Executive Chairman of CuFe Ltd (ASX:CUF); Managing Director Okewood Pty Ltd (consulting, founded 1997); director of Cape Lambert Resources (ASX:CFE); former Cape Lambert chairman; former Perth Glory FC owner (stepped down 2023, club went into receivership); non-exec director Kupang Resources, Caeneus Minerals, International Petroleum. Additional private entities: Marampa Iron Ore Ltd, Metal Exploration Mauritius Ltd, Metals Exploration Pty Ltd, Millennium Minerals (Operations) Pty Ltd, Mineral Securities Investments Australia Pty Ltd, Mooloogool Pty Ltd, Eastern Petroleum Australia Pty Ltd.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:15:36",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "marketscreener:TONY-SAGE-A0BMOG,tonysage.com.au,wikipedia",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6383,
+      "finding_type": "financial",
+      "summary": "Tony Sage Cyclone Metals boardroom battle 2025: removed as chairman October 2025. Launched spill motion against new MD while selling down shareholdings. Submitted application to Takeovers Panel (December 19, 2025) alleging undisclosed association among Cyclone shareholders who voted for his removal \u2014 Panel declined to conduct proceedings. Sage was founding director of Cyclone (24 years). Perth Glory FC went into receivership in 2023 after Sage stepped down, unable to play home games during COVID proving costly.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:15:44",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "theassay.com:CRML-cyclone,takeovers.gov.au:TP26-002",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3205,
+      "person_a": "Michael C. Ryan",
+      "person_b": "Tony Sage",
+      "relationship_type": "corporate",
+      "description": "Ryan appointed to CRML board under Sage's chairmanship. Both serve on Critical Metals Corp board.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:57:30",
+      "profile_id": "tech-right",
+      "other_person": "Michael C. Ryan",
+      "other_person_slug": "michael-c-ryan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GlobeNewswire:2025-02-26",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3208,
+      "person_a": "Greg Barnes",
+      "person_b": "Tony Sage",
+      "relationship_type": "financial",
+      "description": "Sage (CRML CEO) and Barnes (Rimbal/Tanbreez founder) are parties to Heads of Agreement. CRML acquiring Tanbreez from Rimbal via share-for-equity deal. Both signed Oct 2025 PIPE agreement with Alyeska.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:00:48",
+      "profile_id": "tech-right",
+      "other_person": "Greg Barnes",
+      "other_person_slug": "greg-barnes",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=0001951089%3A20F-2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "executive chairman",
+      "date_start": null,
+      "date_end": null,
+      "source": "SEC/Nasdaq CRML",
+      "entity_id": 769,
+      "entity_name": "Critical Metals Corp",
+      "entity_type": "inc",
+      "jurisdiction": "New York",
+      "entity_status": "active"
+    },
+    {
+      "role": "CEO & Executive Chairman",
+      "date_start": null,
+      "date_end": null,
+      "source": "CRML website, SEC filings",
+      "entity_id": 769,
+      "entity_name": "Critical Metals Corp",
+      "entity_type": "inc",
+      "jurisdiction": "New York",
+      "entity_status": "active"
+    },
+    {
+      "role": "Executive Chairman",
+      "date_start": null,
+      "date_end": null,
+      "source": "web_search",
+      "entity_id": 828,
+      "entity_name": "Cape Lambert Resources Ltd",
+      "entity_type": "inc",
+      "jurisdiction": "Australia",
+      "entity_status": "active"
+    },
+    {
+      "role": "Executive Chairman / CEO (also CEO of CRML)",
+      "date_start": null,
+      "date_end": null,
+      "source": "SC 13D/A 0001213900-24-108875 + 6-K 0001213900-25-099343",
+      "entity_id": 817,
+      "entity_name": "European Lithium Ltd",
+      "entity_type": "inc",
+      "jurisdiction": "Austria",
+      "entity_status": "active"
+    },
+    {
+      "role": "Managing Director",
+      "date_start": null,
+      "date_end": null,
+      "source": "web_search:okewood.com.au",
+      "entity_id": 885,
+      "entity_name": "Okewood Pty Ltd",
+      "entity_type": "inc",
+      "jurisdiction": "Australia",
+      "entity_status": "active"
+    },
+    {
+      "role": "Executive Chairman",
+      "date_start": null,
+      "date_end": null,
+      "source": "web_search:marketscreener.com",
+      "entity_id": 886,
+      "entity_name": "CuFe Ltd",
+      "entity_type": "inc",
+      "jurisdiction": "Australia",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": []
+}

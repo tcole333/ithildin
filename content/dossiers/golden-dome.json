@@ -1,0 +1,453 @@
+{
+  "name": "Golden Dome",
+  "slug": "golden-dome",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.454867",
+  "last_updated": "2026-03-09T04:45:37",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 6,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 10,
+      "intelligence": 2
+    },
+    "connection_types": {
+      "financial": 3,
+      "corporate": 1,
+      "contracts_with": 1,
+      "political": 1
+    },
+    "last_updated": "2026-03-09T04:45:37"
+  },
+  "findings": [
+    {
+      "id": 4582,
+      "finding_type": "financial",
+      "summary": "MDA awarded SHIELD (Scalable Homeland Innovative Enterprise Layered Defense) contract to 2,100+ companies with $151B ceiling. Initial 1,014 awards Dec 2, 2025 + 1,086 more Dec 18, 2025. Primes include Lockheed Martin, Northrop Grumman, RTX/Raytheon, Anduril, SpaceX, True Anomaly. Space-based interceptor contracts awarded 'in secret' Nov 2025 to Anduril, Lockheed, Northrop, True Anomaly. SpaceX reportedly receiving $2B for 600-satellite tracking constellation. FY2026 defense bill includes $13.4B for Golden Dome. Total program estimated $175B over 3 years. SpaceX formed consortium with Anduril and Palantir for Golden Dome bid.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 16:59:13",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Defense One Dec 2025; GovConWire; WSJ; FY2026 defense appropriations",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4716,
+      "finding_type": "financial",
+      "summary": "Golden Dome total funding: 37.8B appropriated (24.4B reconciliation + 13.4B FY2026 defense appropriations). Reconciliation: 18.8B next-gen missile defense tech + 5.9B layered homeland defense. CBO estimates limited SBI system alone costs 500B+.",
+      "detail": "P.L. 119-21 Title II sec 20003 appropriated 24.4B to SecDef for integrated air and missile defense thru Sept 2029. Breakdown: 7.2B space-based sensors, 5.6B space-based intercept, 2.4B non-kinetic defense, 2B air moving target indicator satellites, 2.2B hypersonic defense, 1.9B ground-based radars, 800M next-gen ICBM defense. FY2026 appropriations added 13.4B. Despite 37.8B total, Congress has not received master deployment schedule, cost schedule, performance metrics, or finalized system architecture. Taxpayers for Common Sense Feb 2026 report estimates full cost at 3.6T over 20 years.",
+      "source_datasets": [
+        "congress_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 20:21:35",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Congress.gov CRS IN12576; Congress.gov CRS IF13115; Taxpayer.net Feb 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4718,
+      "finding_type": "financial",
+      "summary": "SHIELD IDIQ contract: 10-year, 151B ceiling, 2,100+ awardees in two tranches (1,014 on Dec 2 2025, 1,086 on Dec 18 2025). Primary acquisition vehicle for Golden Dome. Awardees include Lockheed Martin, Northrop Grumman, RTX/Raytheon, Anduril, SpaceX, Palantir, True Anomaly, Sidus Space, and 2,090+ others. Individual task orders to be competed among pool.",
+      "detail": "MDA awarded SHIELD (Scalable Homeland Innovative Enterprise Layered Defense) as the primary IDIQ framework for Golden Dome. 10-year contract with 151B ceiling. First tranche Dec 2 2025 (1,014 companies), second tranche Dec 18 2025 (1,086 companies). All federal agencies can issue task orders, not just DoD. This is the contract vehicle, not direct funding -- actual money flows through competed task orders within the pool. Both traditional primes (Lockheed, Northrop, RTX) and new entrants (Anduril, SpaceX, Palantir, True Anomaly) are awardees. The breadth (2100+ companies) suggests inclusive qualification but competition will narrow significantly at task order level.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 20:21:49",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DefenseOne Dec 2025; DefenseScoop Dec 3 2025; DSM Forecast Intl Jan 16 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4720,
+      "finding_type": "financial",
+      "summary": "Space Force awarded 18 classified OTA contracts for space-based interceptor (SBI) prototypes under Golden Dome. OTA mechanism bypasses DFARS public disclosure requirements. Known awardees include Northrop Grumman, Lockheed Martin, Anduril, True Anomaly. Initial prize funds ~120K each with three 1-year options for ground demo. Estimated 9-10M per company. Full awardee list classified.",
+      "detail": "Gen. Michael Guetlein confirmed Dec 6 2025 at Reagan National Defense Forum that 18 OTA contracts were awarded for boost-phase SBI prototypes. Because awards are OTAs, they fall outside DFARS and do not require public disclosure. Space Force stated contractor names are not releasable due to enhanced security measures. Scope: rapid prototyping of orbital Kinetic Kill Vehicles (KKVs) for neutralizing hypersonic glide vehicles during upper-atmosphere glide phase. Known awardees (confirmed by companies themselves): Northrop Grumman, Lockheed Martin, Anduril Industries, True Anomaly. 14 of 18 awardees remain classified. Post-2028 production contracts estimated at 1.8B-3.4B annually. The OTA mechanism is critical: it allows the Pentagon to funnel billions to specific companies without the transparency safeguards that traditional FAR/DFARS contracts require.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 20:22:04",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Aviation Week Dec 7 2025; Air and Space Forces Magazine; Breaking Defense Nov 2025; SatNews Dec 5 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4722,
+      "finding_type": "financial",
+      "summary": "SpaceX-Anduril-Palantir consortium proposal for Golden Dome: 400-1,000 detection/tracking satellites + 200 attack satellites with lasers/missiles. SpaceX as prime integrator for tracking constellation. Initial engineering 6-10B. SpaceX proposed subscription model (govt pays for access, not ownership). 42 Congress members asked DoD IG to review Musk involvement citing subscription model could give Musk undue influence over national security.",
+      "detail": "The consortium proposal has two layers: (1) Detection Layer: 400-1,000 satellites for continuous missile/aircraft tracking, feeding data into kill chain. SpaceX leverages Starlink factory tempo and flight cadence. (2) Attack Layer: ~200 satellites with missiles and directed energy weapons. SpaceX group would build detection layer but not weaponize attack satellites (separate contractors). SpaceX proposed government pays for access rather than ownership -- a SaaS model for national missile defense. This subscription model was flagged by 42 Congress members in May 2025 who formally asked DoD IG to review Musk involvement, citing concerns over deviations from standard acquisition processes. SpaceX reportedly receiving 2B for 600-satellite air moving target indicator constellation. For SpaceX, this formalizes evolution from launch provider to prime integrator on national security constellations.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 20:22:18",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SpaceExplored Apr 2025; FastCompany; NextBigFuture Apr 2025; FoxBusiness; GovConWire",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4724,
+      "finding_type": "financial",
+      "summary": "Golden Dome oversight deliberately undermined: (1) DOT&E drafted memo placing Golden Dome on oversight list per law (programs >3B). Days later, DOGE requested meeting with DOT&E. DOT&E staff then summoned and told office cut from 100+ to 30 people. Hegseth decision to restructure DOT&E was partially triggered by its plans to oversee Golden Dome. (2) OMB holding up 14B in approved Golden Dome space spending. (3) Congress has not received required deployment schedule, cost schedule, or system architecture.",
+      "detail": "Three distinct oversight failures documented: (1) DOT&E Gutting: In April 2025, DOT&E determined Golden Dome fell under its oversight per law (programs with procurements >3B). Days later, DOGE -- whose principals (Musk) have companies bidding on Golden Dome (SpaceX) -- requested a meeting. DOT&E was then cut from 100+ to 30 staff. Defense officials told CNN they believed DOGE wanted to prevent DOT&E conducting independent oversight of Golden Dome. This is unprecedented: the testing office was cut specifically because it attempted to oversee a program where the budget cutter had financial interest. (2) OMB Hold: 14B in approved spending held up by Russell Vought OMB, including 7.2B space sensors, 3.6B military satellites, 2B targeting satellites. Could push spending to FY2027. (3) Congressional Blindspot: Despite 37.8B appropriated, lawmakers have received no master deployment schedule, cost schedule, performance metrics, or finalized system architecture. Appropriations bill now requires unclassified reports within 2 months.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 20:22:36",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNN May 30 2025; Defense News May 30 2025; ForeignPolicy Feb 23 2026; FederalNewsNetwork Jan 2026; DefenseOne Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4726,
+      "finding_type": "financial",
+      "summary": "Guetlein (Golden Dome director) reports directly to DepSecDef Feinberg, not through normal acquisition chains. Office of Golden Dome for America operates outside standard service acquisition, with budget, acquisition, direct hiring, technical, architectural, and liaison authorities. Staff: 52, growing to 100, authorized 300. Held secret 1-on-1 talks with 300+ companies. Architecture to be finalized in 60 days from late 2025. First major test scheduled just before 2028 election.",
+      "detail": "Golden Dome organizational structure is unprecedented in its concentration of authority and lack of normal oversight: Gen. Michael Guetlein serves as Direct Reporting Program Manager, bypassing USD(AT&L) and reporting directly to DepSecDef Steve Feinberg. This is significant because Feinberg (Cerberus Capital founder) has his own defense industry conflicts. Guetlein was given sweeping authorities across budget, acquisition, hiring, technical decisions, and architecture. He held private one-on-one meetings with 300+ companies on classified architecture, defended secrecy by saying there are likely people in that audience that I dont want to know what we are doing. First priority identified as command and control (C2) -- exactly what Palantir Gotham is positioned to provide. First major test scheduled just before 2028 election per CNN reporting -- political timeline driving technical milestones. Combatant command liaison officers embedded in Pentagon with Guetlein team (NORTHCOM, SPACECOM, STRATCOM).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 20:22:52",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Air and Space Forces Magazine; GlobalSecurity.org; CNN Aug 1 2025; SpacePolicyOnline; Washington Times Dec 7 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4729,
+      "finding_type": "financial",
+      "summary": "SDA Tranche 3 Tracking Layer: 3.5B awarded Dec 2025 to Lockheed Martin, Rocket Lab, Northrop Grumman, L3Harris for 72 missile tracking satellites (18 each). SpaceX was in earlier tranches (0-2, 4.7B total for 101 satellites) but NOT in Tranche 3. SDA total tracking layer now 8.2B for 173 satellites. Launch NLT 2029. This is separate from but feeds into Golden Dome architecture.",
+      "detail": "Space Development Agency tracking layer is the existing missile tracking satellite constellation that predates Golden Dome but will integrate into it. Tranches 0-2: 4.7B for 101 satellites to six primes (L3Harris, Lockheed, Northrop, Raytheon, Sierra Space, SpaceX). Tranche 3 (Dec 2025): 3.5B for 72 satellites -- notably SpaceX was NOT selected. Winners: Lockheed Martin, Rocket Lab USA, Northrop Grumman, L3Harris (18 satellites each). Tranche 1 launches through 2026-2027. Initial warfighting capability expected 2027. Tranche 3 launches NLT 2029. GAO warned SDA must be more realistic about risks. FY2026 appropriations included 1.7B for SDA tracking layer. This is distinct from the separate SpaceX-led 600-satellite air moving target indicator proposal which would be a new constellation, not part of SDA tranches.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 20:23:20",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Spaceflight Now Dec 20 2025; SatelliteToday Dec 19 2025; PayloadSpace; Breaking Defense Jan 2026 GAO",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4735,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Golden Dome Conflict-of-Interest Map. Seven distinct conflict vectors converge on 37.8B+ in contracts: (1) Michael/USD(R&E): chairs MDEB, MDA reports to him, holds 887K D-Wave shares while D-Wave pursues missile defense quantum contracts through his authority channels. (2) Feinberg/DepSecDef: Guetlein reports directly to him, Cerberus Capital defense portfolio. (3) Musk/DOGE: SpaceX bidding 2B+ Golden Dome constellation while DOGE gutted DOT&E that tried to oversee program. (4) Trump Jr/1789 Capital: 2B AUM fund holding SpaceX, Anduril, Hadrian. (5) Vance/Narya: retained 500K-1M stake, Narya portfolio company True Anomaly won SBI contract. (6) Williams/OMB: Palantir stock while overseeing Golden Dome budget. (7) Barbaccia/CIO: ex-Palantir, Anduril stake. OTA mechanism deliberately shields 18 SBI contracts from public disclosure. DOT&E oversight gutted. Congress has not received basic program architecture.",
+      "detail": "The Golden Dome program represents the largest single convergence of financial conflicts in the current administration. Every major contract decision touches at least one conflicted official. The conflict architecture is reinforced by structural opacity: (a) 18 SBI contracts awarded via OTA, bypassing DFARS public disclosure; (b) DOT&E testing oversight gutted after it asserted jurisdiction; (c) Guetlein holds secret 1-on-1 meetings with 300+ companies on classified architecture; (d) OMB holding up 14B in approved spending; (e) Congress unable to assess program elements due to insufficient budgetary information. The program has no master deployment schedule, cost schedule, performance metrics, or finalized system architecture despite 37.8B appropriated. Cost estimates range from 175B (White House) to 3.6T (Taxpayer.net) over 20 years. First test scheduled just before 2028 election -- political timeline driving technical milestones. The subscription model proposed by SpaceX would give Musk ongoing national security leverage. Every known SBI contract awardee has financial connections to administration officials: Anduril (Founders Fund/Thiel, 1789/Trump Jr), True Anomaly (Narya/Vance), SpaceX (Musk/DOGE, 1789/Trump Jr). Even traditional primes like Lockheed and Northrop are SHIELD awardees navigating an acquisition process designed and overseen by officials with competing interests.",
+      "source_datasets": [
+        "pogo"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 20:25:36",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO Gold Rush; CNN May 2025; ForeignPolicy Feb 2026; Aviation Week Dec 2025; Accountable.US July 2025; ReadSludge June 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4973,
+      "finding_type": "financial",
+      "summary": "New defense tech vs legacy primes spending comparison: Legacy primes hold 580B+ DOD (Lockheed 579B, Boeing 394B, Raytheon 277B, Northrop 164B). New entrants combined: SpaceX 7.2B DOD, Palantir 2.3B DOD, Anduril 1.4B DOD, Shield AI 34M DOD. Legacy primes hold 99.3% of DOD contract value. Golden Dome 175-542B program would be transformative for new entrants if they capture even small share.",
+      "detail": "SYNTHESIS: The new defense tech ecosystem (SpaceX+Palantir+Anduril+Shield AI) holds approximately 10.9B in DOD contracts combined, versus 1.41T+ for the four legacy primes. This is 0.77% market share. However the trajectory matters: these companies are growing rapidly and Golden Dome (175-542B) represents a generational procurement opportunity. SpaceX at 7.2B DOD is already approaching the lower bound of prime contractor territory. Palantir at 2.3B DOD is the second-largest. Anduril at 1.4B DOD is third. A 5% Golden Dome capture would mean 8.8-27.1B in new contracts for these companies \u2014 potentially doubling their DOD revenue.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 03:45:54",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending recipient queries for all 8 companies, HigherGov NAICS 336414 analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5102,
+      "finding_type": "financial",
+      "summary": "Golden Dome $23B appropriated (FY26), OMB holding up approved spending as of Feb 2026, C2 demo planned for summer 2026",
+      "detail": "Golden Dome program status as of Feb 2026: (1) $23B appropriated in FY26 defense bill passed Feb 3, 2026, including $13.4B for space and missile defense. (2) Foreign Policy reported Feb 23, 2026 that OMB is holding up approved Golden Dome spending - a significant bottleneck. (3) Golden Dome czar (Guetlein) stated C2 capability must be demonstrated to the president by summer 2026, with interceptor integration by summer 2027. (4) Pentagon started contractor selection process Sep 11, 2025. (5) GOLDEN DOME Act (S.2142/HR.4107) introduced June 2025 in both chambers. SpaceX, Palantir, and Anduril lead the race per media coverage. Lead #14937.",
+      "source_datasets": [
+        "web_search",
+        "congress_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:39:06",
+      "target_name": "Golden Dome",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Congress.gov S.2142 and HR.4107",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Federal News Network Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Foreign Policy Feb 23 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "US News Sep 11 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6136,
+      "finding_type": "intelligence",
+      "summary": "Golden Dome architecture: 3-tier defense with space sensors, ground radars, AI battle management; $13.4B FY2026; $151B SHIELD IDIQ",
+      "detail": "Space layer: SDA PWSA tracking (600+ satellites), SpaceX custody layer ($2B contract, $6-10B custody phase), SBI prototypes (Northrop/Lockheed/Anduril/True Anomaly). Ground: AN/TPY-2 GaN radar, LRDR Alaska, UEWR Pituffik, GMD interceptors, THAAD, Patriot. Sea: Aegis SM-3/SM-6. BMC3 ground-based for now. No hardware deployed as of early 2026.",
+      "source_datasets": [
+        "Arms Control Center",
+        "Air and Space Forces Magazine"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:45:37",
+      "target_name": "Golden Dome",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://armscontrolcenter.org/fact-sheet-golden-dome/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.airandspaceforces.com/article/realistic-expectations-for-golden-dome-by-2028/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2691,
+      "person_a": "Donald Trump Jr",
+      "person_b": "Golden Dome",
+      "relationship_type": "financial",
+      "description": "Trump Jr via 1789 Capital holds investments in SpaceX and Anduril, both frontrunners for $151B+ Golden Dome contracts. Father is president who announced the program.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:01:39",
+      "profile_id": "epstein",
+      "other_person": "Donald Trump Jr",
+      "other_person_slug": "donald-trump-jr",
+      "evidence": []
+    },
+    {
+      "id": 2768,
+      "person_a": "Emil Michael",
+      "person_b": "Golden Dome",
+      "relationship_type": "corporate",
+      "description": "Michael chairs Missile Defense Executive Board; MDA reports directly to USD(R&E). Controls requirements driving Golden Dome procurement.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 20:24:38",
+      "profile_id": "tech-right",
+      "other_person": "Emil Michael",
+      "other_person_slug": "emil-michael",
+      "evidence": []
+    },
+    {
+      "id": 2769,
+      "person_a": "Donald Trump Jr",
+      "person_b": "Golden Dome",
+      "relationship_type": "financial",
+      "description": "Trump Jr partner at 1789 Capital (2B AUM) holding SpaceX, Anduril, Hadrian -- all Golden Dome contractors",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 20:24:38",
+      "profile_id": "tech-right",
+      "other_person": "Donald Trump Jr",
+      "other_person_slug": "donald-trump-jr",
+      "evidence": []
+    },
+    {
+      "id": 2803,
+      "person_a": "Golden Dome",
+      "person_b": "SpaceX/Starshield",
+      "relationship_type": "financial",
+      "description": "Starshield NRO spy constellation provides infrastructure base for Golden Dome custody layer; $2B contract expected for 400-1000 tracking satellites",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:55:24",
+      "profile_id": "tech-right",
+      "other_person": "SpaceX/Starshield",
+      "other_person_slug": "spacexstarshield",
+      "evidence": []
+    },
+    {
+      "id": 3143,
+      "person_a": "Anduril Industries",
+      "person_b": "Golden Dome",
+      "relationship_type": "contracts_with",
+      "description": "Anduril received SBI prototype contract Nov 2025 and selected for $151B SHIELD IDIQ Dec 2025. Frontrunner for space-based interceptor component.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:40:52",
+      "profile_id": null,
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": []
+    },
+    {
+      "id": 3144,
+      "person_a": "Golden Dome",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "political",
+      "description": "As Ambassador to Denmark, oversees Pituffik Space Base (stated priority #3). Pituffik NOC upgrade for Golden Dome data throughput. Primary US diplomatic channel for Greenland infrastructure decisions.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:40:59",
+      "profile_id": null,
+      "other_person": "Kenneth Howery",
+      "other_person_slug": "kenneth-howery",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

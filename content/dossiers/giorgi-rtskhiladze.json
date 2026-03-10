@@ -1,0 +1,405 @@
+{
+  "name": "Giorgi Rtskhiladze",
+  "slug": "giorgi-rtskhiladze",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.470067",
+  "last_updated": "2026-03-09T19:21:22",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 2,
+    "total_entities": 4,
+    "finding_types": {
+      "relationship": 2,
+      "financial": 2,
+      "document": 1,
+      "intelligence": 5,
+      "legal": 1
+    },
+    "connection_types": {
+      "corporate": 2
+    },
+    "last_updated": "2026-03-09T19:21:22"
+  },
+  "findings": [
+    {
+      "id": 6364,
+      "finding_type": "relationship",
+      "summary": "Rtskhiladze has longstanding personal and business relationships with Trump's inner circle. He brokered Trump Tower Batumi (Georgia) and discussed Trump Tower Moscow/Astana with Michael Cohen. He was cited in Mueller Report footnote regarding alleged Trump tapes (text: 'stopped flow of tapes from Russia'). His defamation suit (Rtskhiladze v. Mueller, Case 1:20-cv-01591) allowed to proceed by DC Circuit in Aug 2024. He donates to Trump PACs 'Never Surrender Inc' (Trump 2024 leadership PAC) and Trump National Committee JFC in 2025, from 32 Old Bethel Rd, Newtown CT.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "fec",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:57:54",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6366,
+      "finding_type": "relationship",
+      "summary": "Rtskhiladze's business portfolio spans Russia/Kazakhstan/Georgia energy and investment sectors with potential asbestos industry exposure. His Toroil Group conducts oil/energy deals in Russian Federation. His Silk Road Transatlantic Alliance is connected to Silk Road Group (Georgia), which was funded by BTA Bank Kazakhstan \u2014 the same jurisdiction as Kostanai Minerals, the world's largest chrysotile asbestos producer. Rtskhiladze's investments in the Former USSR energy sector, combined with 2025 active donations to Trump PACs while running Logical Strategies LLC's EPA asbestos lobbying campaign, establish a clear pattern: access-based lobbying leveraging pre-existing Trump relationships to influence a high-value regulatory outcome for a client with CIS/Former USSR connections.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:58:17",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LinkedIn:vividstrategies.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6384,
+      "finding_type": "financial",
+      "summary": "Logical Strategies LLC paid Javelin Advisors (Sorial/Schiller/Seiden) $1.2M in Q3 2025 to lobby on EPA Asbestos Part 1 chrysotile rule (TSCA) and government contracts. Q4 2025 report shows no further activity \u2014 lobbying ceased after EPA withdrew its reconsideration motion in July 2025.",
+      "detail": null,
+      "source_datasets": [
+        "lda_senate"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:20:10",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:dce3c038-9695-483f-b2ca-a2b1cec1dbc2",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6385,
+      "finding_type": "document",
+      "summary": "No FARA registration found for Rtskhiladze, Logical Strategies LLC, or Toroil Group in DOJ FARA database. Lobbying registered under LDA (domestic lobbying framework), not FARA (foreign agent framework). If Rtskhiladze is acting on behalf of foreign asbestos producers, the LDA filing would be legally insufficient \u2014 FARA exemption requires no foreign government or principal directing the work.",
+      "detail": null,
+      "source_datasets": [
+        "fara"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:20:20",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://efile.fara.gov/ords/f?p=1381:200#q=search%3ARtskhiladze%3D0results",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://efile.fara.gov/ords/f?p=1381:200#q=search%3ALogicalStrategies%3D0results",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6386,
+      "finding_type": "financial",
+      "summary": "Rtskhiladze made at least $1,337.72 in 2025 political contributions to Trump-aligned committees: TRUMP NATIONAL COMMITTEE JFC INC ($468.46), WINRED ($468.46), NEVER SURRENDER INC ($262.86), RNC ($137.94). All contributions clustered February-May 2025, overlapping with the lobbying engagement. No employer or occupation listed on FEC records.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:20:28",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=individual-contributions%3A2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6387,
+      "finding_type": "intelligence",
+      "summary": "Uralasbest (Russia's largest chrysotile asbestos producer, 21% of global output) publicly praised Trump in 2018 with 'APPROVED BY DONALD TRUMP' on asbestos packaging. Kostanai Minerals (Kazakhstan, 20% global output) shared the post. Neither company has any detected FARA or LDA registrations in the US. The EPA chrysotile ban (March 2024) devastated these producers' US market access. Russia and Kazakhstan together represent ~68% of global chrysotile production.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:20:36",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EWG:2018-07-11:uralasbest-trump; ICIJ:uralasbest-behemoth; USGS:mcs2024-asbestos",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6388,
+      "finding_type": "intelligence",
+      "summary": "EPA reconsideration timeline maps directly to Logical Strategies lobbying: Rtskhiladze hired Javelin Advisors in July 2025 (Q3 registration). On June 16 2025, EPA filed with Fifth Circuit to reconsider the chrysotile ban, seeking 30-month delay. On July 7 2025, EPA reversed course and withdrew the motion \u2014 shortly after public opposition. Rtskhiladze's Q4 2025 LDA report shows zero activity, consistent with lobbying objective collapsing after EPA withdrawal.",
+      "detail": null,
+      "source_datasets": [
+        "lda_senate"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:20:45",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:0603c969-Q4-2025-no-activity; web_search:EPA-withdrawal-july-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6389,
+      "finding_type": "intelligence",
+      "summary": "OxyChem (Occidental Chemical) is the only US company that was still importing raw chrysotile asbestos as of 2023-2024, sourcing from Brazil and China (not Russia/Kazakhstan). Olin and Westlake had stopped importing by 2021 and 2016 respectively. The primary US beneficiaries of delaying the chrysotile ban are domestic chlor-alkali producers (OxyChem, Olin, Westlake), not Russian/Kazakh exporters directly \u2014 who lost US market access under the 2024 ban. Key question: who would specifically benefit from the EPA rule reconsideration if Rtskhiladze is the intermediary?",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:20:54",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web_search:OxyChem-asbestos-imports-2023; ADAO:oxychem-lobbies-15year",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6390,
+      "finding_type": "legal",
+      "summary": "Rtskhiladze v. Mueller active as of 2025: DC Circuit reversed district court dismissal in August 2024, remanding retraction claim. District court issued opinion May 30 2025 granting/denying in part motion to dismiss; parties required to file joint status report by June 13 2025. Case terminated December 31 2025 per CourtListener. The Mueller footnote at issue states Rtskhiladze texted Cohen he 'stopped flow of some tapes from Russia' \u2014 the case is about defamation/retraction, not criminal liability.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:21:03",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CL:17256270",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6391,
+      "finding_type": "intelligence",
+      "summary": "Toroil Group (Rtskhiladze as President) brokered oil/energy deals in Russia including advising on Russia's largest commercial wind farm. Rtskhiladze is also Managing Partner of Green Wind Energy Group Inc, working with US investment firms to develop wind farms in Former Soviet region. Silk Road Transatlantic Alliance (US subsidiary) brokered Trump Tower Batumi and explored Trump Tower Astana with Michael Cohen in 2011. BTA Bank Kazakhstan was 51% co-owner of Silk Road Bank Georgia until 2014. Silk Road Group acquired BTA's 49% in October 2014 \u2014 BTA Bank was embroiled in a massive fraud scandal under former chairman Mukhtar Ablyazov.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:21:14",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LinkedIn:giorgi-rtskhiladze; web_search:silk-road-bta-bank; wiki:ragepath-silk-road-group",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6392,
+      "finding_type": "intelligence",
+      "summary": "OpenSanctions search for 'Rtskhiladze' returns only Shalva Rtskhiladze (Georgian asset declaration dataset, ge_declarations), not Giorgi. No sanctions matches for Uralasbest or Kostanai Minerals. No EDGAR filings found for Uralasbest, Kostanai Minerals, Logical Strategies, or Rtskhiladze as SEC filers or named individuals. No active FARA registrations for Russia- or Kazakhstan-linked entities working on asbestos in the US.",
+      "detail": null,
+      "source_datasets": [
+        "opensanctions"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:21:22",
+      "target_name": "Giorgi Rtskhiladze",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=search%3AUralasbest%3D1result-not-related",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3235,
+      "person_a": "Giorgi Rtskhiladze",
+      "person_b": "Keith Schiller",
+      "relationship_type": "corporate",
+      "description": "Rtskhiladze (Logical Strategies) retained Schiller (Javelin Advisors) as covered official lobbyist. Schiller's covered position: Deputy Assistant to President Trump, Director of Oval Office Operations.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:58:30",
+      "profile_id": "tech-right",
+      "other_person": "Keith Schiller",
+      "other_person_slug": "keith-schiller",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:52b3a9dd-8f59-48c4-929f-90b04e0697bf",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3234,
+      "person_a": "George Sorial",
+      "person_b": "Giorgi Rtskhiladze",
+      "relationship_type": "corporate",
+      "description": "Rtskhiladze (Logical Strategies LLC founder) hired Sorial (Javelin Advisors co-founder) for $1.2M Q3 2025 EPA asbestos lobbying",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:58:30",
+      "profile_id": "tech-right",
+      "other_person": "George Sorial",
+      "other_person_slug": "george-sorial",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:52b3a9dd-8f59-48c4-929f-90b04e0697bf",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "Founding Partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "LinkedIn:giorgi-rtskhiladze-7aa0b01a8",
+      "entity_id": 849,
+      "entity_name": "Logical Strategies LLC",
+      "entity_type": "llc",
+      "jurisdiction": "NY",
+      "entity_status": "active"
+    },
+    {
+      "role": "President",
+      "date_start": null,
+      "date_end": null,
+      "source": "LinkedIn:giorgi-rtskhiladze-3b889834",
+      "entity_id": 878,
+      "entity_name": "Toroil Group",
+      "entity_type": "unknown",
+      "jurisdiction": "US",
+      "entity_status": "active"
+    },
+    {
+      "role": "Co-Owner",
+      "date_start": null,
+      "date_end": null,
+      "source": "web_search:EverybodyWiki",
+      "entity_id": 879,
+      "entity_name": "Silk Road Transatlantic Alliance",
+      "entity_type": "unknown",
+      "jurisdiction": "US",
+      "entity_status": "active"
+    },
+    {
+      "role": "Managing Partner",
+      "date_start": null,
+      "date_end": null,
+      "source": "web_search:vividstrategies.com",
+      "entity_id": 890,
+      "entity_name": "Green Wind Energy Group Inc",
+      "entity_type": "inc",
+      "jurisdiction": "US",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": []
+}

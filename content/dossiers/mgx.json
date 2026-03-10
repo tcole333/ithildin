@@ -1,0 +1,559 @@
+{
+  "name": "MGX",
+  "slug": "mgx",
+  "aliases": [],
+  "profile_ids": [
+    "epstein"
+  ],
+  "generated_at": "2026-03-10T15:20:13.455641",
+  "last_updated": "2026-02-26T15:55:51",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 11,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 5,
+      "intelligence": 2,
+      "legal": 5
+    },
+    "connection_types": {
+      "financial": 5,
+      "corporate": 6
+    },
+    "last_updated": "2026-02-26T15:55:51"
+  },
+  "findings": [
+    {
+      "id": 3755,
+      "finding_type": "financial",
+      "summary": "MGX is an Abu Dhabi-based technology and AI-focused investment entity chaired by Sheikh Tahnoon bin Zayed Al Nahyan, brother of UAE President Mohammed bin Zayed (MBZ) and UAE National Security Adviser. MGX launched in March 2024, positions itself as an AI-focused investment vehicle. It is NOT a traditional sovereign wealth fund like ADIA or Mubadala, but is state-backed through Tahnoon's government roles. MGX participated in OpenAI's $6.6B funding round (Oct 2025, $500B valuation), invested $2B in Binance (March 2025), and is targeted for OpenAI's $50B Middle East expansion alongside Saudi PIF.",
+      "detail": "MGX launched March 2024 as Abu Dhabi tech investment entity. Chaired by Sheikh Tahnoon bin Zayed Al Nahyan (b. Dec 4, 1968, Abu Dhabi). Tahnoon is brother of UAE President MBZ, serves as UAE National Security Adviser. Also connected to G42 (Abu Dhabi AI company). MGX is distinct from ADIA and Mubadala but operates within Tahnoon's constellation of state-backed tech/AI entities. Key investments: $2B Binance (March 2025), OpenAI $6.6B round (Oct 2025), targeted for OpenAI $50B Middle East expansion. MGX also backed the UAE's first international Stargate AI facility (launched May 2025 with Sam Altman). Not a regulated financial institution \u2014 no GLEIF LEI registration, no EDGAR filings, no FARA registration.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:57:50",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GDELT news coverage; OpenSanctions PEP record Q85804913; GLEIF negative result; EDGAR negative result",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3757,
+      "finding_type": "financial",
+      "summary": "Aryam Investment 1, an Abu Dhabi entity backed by Sheikh Tahnoon bin Zayed, purchased a 49% stake in World Liberty Financial for $500M in January 2025, days before Trump's inauguration. Eric Trump signed the agreement. $250M paid upfront, with $187M directed to Trump family entities. G42 executives (from Tahnoon's AI company) took WLFI board seats. Deal remained undisclosed for over a year until WSJ reported it Feb 1, 2026.",
+      "detail": "Investment vehicle: Aryam Investment 1 (Abu Dhabi). Backer: Sheikh Tahnoon bin Zayed Al Nahyan. Target: World Liberty Financial (WLFI). Stake: 49%. Price: $500M total. Payment: $250M upfront, remainder deferred. Cash flow: $187M directed to Trump family entities, additional tens of millions to co-founder-linked entities (Witkoff family). Signatory: Eric Trump executed the agreement. Timing: January 2025, days before Trump's second inauguration Jan 20, 2025. Board changes: G42 executives (Tahnoon's AI company) took WLFI board seats. Disclosure: deal kept secret for over a year, reported by WSJ Feb 1, 2026. No EDGAR filings for Aryam Investment. No GLEIF LEI. No FARA registration for any party. Revenue structure per existing findings: Trump family (DT Marks DEFI LLC) receives 75% of WLFI net revenue.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:58:18",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WSJ reporting via ZeroHedge Feb 3, 2026; Gizmodo Feb 3, 2026; Democracy Now Feb 5, 2026; EDGAR negative search; GLEIF negative search; FARA negative search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3762,
+      "finding_type": "financial",
+      "summary": "MGX invested $2B in Binance in March 2025, settlement conducted using USD1 (WLFI stablecoin). Zach Witkoff (WLFI CEO, son of Trump Special Envoy Steve Witkoff) announced this at Dubai crypto conference May 2025. Binance holds approximately 87% of all USD1 in circulation ($4.7B). Bloomberg/WSJ reported Binance helped create USD1. The settlement created a circular flow: UAE sovereign capital -> Binance -> denominated in Trump family stablecoin.",
+      "detail": "MGX $2B Binance investment announced March 12, 2025. Settlement currency: USD1 (World Liberty Financial stablecoin, contract 0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d). Announced by Zach Witkoff at Dubai crypto conference May 2025. Binance holds ~87% of USD1 supply (~$4.7B as of Feb 2026). Bloomberg and WSJ reported Binance helped create USD1. This creates a financial loop: (1) Tahnoon's Aryam Investment 1 buys 49% of WLFI for $500M -> Trump family gets $187M+; (2) Tahnoon's MGX invests $2B in Binance using WLFI's USD1 -> generates demand/legitimacy for USD1; (3) Binance holds 87% of USD1 supply -> Binance becomes USD1's primary use case; (4) Trump pardons CZ Oct 23, 2025 -> Binance regulatory normalization. The USD1 settlement was not economically necessary \u2014 it served to create a flagship use case for WLFI's stablecoin and link it to a major institutional transaction.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:58:33",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Cointelegraph Feb 23, 2026; SL Guardian Dec 2025; ZeroHedge/WSJ Feb 3, 2026; existing finding #3680",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3768,
+      "finding_type": "intelligence",
+      "summary": "Policy quid pro quo timeline: Jan 2025 Tahnoon's entity pays $500M for WLFI stake; March 2025 MGX invests $2B in Binance via USD1; within months Trump admin committed to granting UAE access to hundreds of thousands of advanced AI chips annually (reversing Biden-era restrictions). Sen. Warren called for reversal of chip sales after 'Spy Sheikh' revelations. Sen. Murphy called arrangement 'mind-blowing corruption.' Rep. Khanna: UAE officials lobbied Trump to lessen export controls while buying stake in his family's business.",
+      "detail": "Alleged quid pro quo pattern: (1) Pre-inauguration Jan 2025: Tahnoon/Aryam pays $500M for 49% WLFI -> $187M to Trump family; (2) Post-inauguration months: Trump admin reverses Biden restrictions, grants UAE access to hundreds of thousands of advanced Nvidia AI chips annually; (3) March 2025: MGX $2B Binance investment via USD1; (4) May 2025: UAE Stargate AI facility launched; (5) Oct 2025: Trump pardons CZ. Congressional responses: Sen. Elizabeth Warren called for reversal of UAE chip sales (CNBC, Feb 5, 2026). Sen. Chris Murphy: 'mind-blowing corruption' (Gizmodo, Feb 3, 2026). Rep. Ro Khanna: 'You have senior people at UAE buy a huge stake, 49% stake, in Trump's kids family business in cryptocurrency, and at the same time, you have these people from UAE lobbying Trump and his administration to lessen export controls and allow America to sell the most sensitive technology and chips to UAE' (Democracy Now, Feb 5, 2026). David Sacks (Trump AI adviser) praised UAE as 'great partner' at WEF Davos Jan 2026.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:59:02",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Democracy Now Feb 5, 2026 (Khanna interview); CNBC Feb 5, 2026; Gizmodo Feb 3, 2026; ZeroHedge/WSJ Feb 3, 2026; GDELT article corpus",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3771,
+      "finding_type": "financial",
+      "summary": "MGX broader investment portfolio reveals pattern of politically significant technology investments: (1) $2B Binance (March 2025, via USD1); (2) OpenAI $6.6B round participation (Oct 2025, $500B valuation); (3) Target of OpenAI $50B Middle East expansion with Saudi PIF; (4) UAE's first international Stargate AI facility (May 2025, with Sam Altman). All investments position UAE as critical node in global AI infrastructure, contingent on US chip export policy. Altman described Tahnoon as 'dear personal friend.'",
+      "detail": "MGX investment portfolio positions Abu Dhabi at center of global AI infrastructure buildout. Key investments: (1) Binance $2B (March 2025) \u2014 crypto exchange integration; (2) OpenAI $6.6B round (Oct 2025) \u2014 AI model development; (3) OpenAI $50B Middle East expansion target \u2014 data center infrastructure; (4) UAE Stargate AI facility (May 2025) \u2014 compute infrastructure. Sam Altman called Tahnoon a 'dear personal friend.' MGX also participated in OpenAI's conversion from nonprofit to public benefit corporation. All of these investments depend on continued US willingness to export advanced AI chips (Nvidia H100/B200) to UAE, making chip export policy the leverage point. Abu Dhabi Investment Council separately holds Bitcoin ETF positions. The convergence of sovereign wealth, AI infrastructure, crypto, and chip access creates multiple vectors of influence over US policy.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:59:16",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WebProNews Jan 2026; SL Guardian Dec 2025; GDELT article corpus; OpenSanctions Mubadala records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3774,
+      "finding_type": "legal",
+      "summary": "FARA/lobbying gap: No FARA registration exists for MGX, Aryam Investment 1, G42, or any entity directly associated with the Tahnoon-WLFI transaction. UAE has multiple FARA-registered agents (Akin Gump/Bullpen Strategy Group, DLA Piper, Fleishman-Hillard for UAE entities), but none specifically for MGX's dealings with Trump-connected businesses. The UAE Ministry of Investment is represented by theGroup DC LLC (reg Dec 2025). No Steve Witkoff or Zach Witkoff FARA registrations. This parallels the Tom Barrack pattern \u2014 unregistered foreign agent activity on behalf of UAE.",
+      "detail": "FARA search results: MGX \u2014 zero results. Tahnoon \u2014 zero results. Witkoff \u2014 zero results. Aryam \u2014 zero (not searched but no entity). Mubadala \u2014 zero results. UAE FARA-registered agents: Fleishman-Hillard (UAE Govt Media Office, terminated 2024), DLA Piper (UAE Embassy, terminated 2018), Akin Gump/Bullpen Strategy (UAE Embassy, 2017), theGroup DC (UAE Ministry of Investment, active Dec 2025), Miller Strategies (Emirates Global Aluminium, active Dec 2025), Burson Group (UAE Climate Envoy, terminated 2022), Camstoll Group (Outlook Energy/Abu Dhabi, 2012), Stryk Global Diplomacy (Chessworth DMCC Dubai, Dec 2024). None of these registrations cover the WLFI/crypto/AI chip nexus. The Barrack precedent (finding #2803): Barrack was indicted for unregistered UAE foreign agent activity 2016-2018 but acquitted. If anyone acted as conduit between UAE investment interests and Trump policy decisions regarding chip exports, FARA would apply.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:59:33",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA database search: MGX, Tahnoon, Witkoff, UAE \u2014 see search outputs; existing findings #2803, #2789 (Barrack precedent)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3779,
+      "finding_type": "financial",
+      "summary": "USD1 stablecoin under coordinated attack Feb 23, 2026: WLFI reported hacked cofounder accounts, massive short positions on WLFI token, and paid FUD campaign. WLFI token dropped ~7% to $0.1128; USD1 briefly lost peg at $0.994 before recovering to $0.999+. Binance holds 87% of USD1 supply (~$4.7B). The attack/recovery demonstrated USD1's dependence on Binance as custodian/market maker, further exposing the circular relationship between WLFI, Binance, and Abu Dhabi sovereign capital.",
+      "detail": "Feb 23, 2026 attack: Three-pronged per WLFI statement: (1) hacked cofounder accounts; (2) massive shorts on WLFI token; (3) paid influencer FUD campaign. WLFI token: dropped ~7% to $0.1128. USD1: briefly $0.994 (lost dollar peg), recovered to $0.999+. Key metric: Binance holds 87% of USD1 supply (~$4.7B). This concentration means: (a) USD1 is effectively a Binance-dependent stablecoin, not independently distributed; (b) The MGX $2B settlement via USD1 was the foundational use case; (c) If Binance were to exit USD1, the stablecoin would face existential crisis. The 87% concentration also means the GENIUS Act's regulatory framework for stablecoins \u2014 which Trump signed July 2025 \u2014 primarily protects Binance's USD1 custody, not diverse market participants.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:00:02",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Cointelegraph Feb 23, 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3783,
+      "finding_type": "legal",
+      "summary": "EDGAR/SEC: No US securities filings for MGX (Abu Dhabi), Aryam Investment 1, or G42. EDGAR search for 'MGX' returns only Metagenomi Inc (ticker MGX, CIK 0001785279, biotech, Emeryville CA). Search for 'Aryam Investment' returns zero results. Search for 'MGX Group' returns zero. This confirms MGX operates entirely outside US securities regulation despite investing $2B through USD1 and its affiliate acquiring 49% of a US company (WLFI is a Delaware corporation).",
+      "detail": "EDGAR full-text search results: 'MGX' \u2014 813 hits, all for Metagenomi Inc (CIK 0001785279, SIC 2836, CA). 'Aryam Investment' \u2014 zero hits. 'MGX Group' \u2014 zero hits. 'World Liberty Financial' \u2014 some hits (existing WLFI Form D filings). The absence of any MGX or Aryam filings means: (1) No beneficial ownership disclosure in US; (2) No Schedule 13D (>5% ownership of public company) \u2014 WLFI is private; (3) No investment adviser registration; (4) No broker-dealer registration. However, WLFI itself filed Form D (CIK 0002043140) disclosing a $300M offering with 97.3% to insiders per finding #3695. The Aryam 49% stake was apparently structured to avoid US filing requirements.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:00:16",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR full-text search: MGX (813 results, all Metagenomi), Aryam Investment (0 results), MGX Group (0 results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3786,
+      "finding_type": "legal",
+      "summary": "GLEIF: No LEI registration for MGX (Abu Dhabi), Aryam Investment 1, or any Tahnoon-associated entity. 12 GLEIF results for 'MGX' are all unrelated entities (US, Sweden, Netherlands, Brazil, India). 4 results for 'Aryam' are unrelated (Australia, India). Absence of LEI means MGX is not registered in the global legal entity identifier system used by financial regulators worldwide, despite conducting $2B+ transactions.",
+      "detail": "GLEIF search 'MGX': 12 results, none Abu Dhabi. Entities found: MGX Inc (US-DE, Fenton MO), MGX AB (Sweden), MGX Holding BV (Netherlands), MGX Capital BV (Netherlands), MGX Group BV (Netherlands), MGX Minerals Inc (Canada), MGX Holdings Inc (US-MO), MGX Renewables Inc (Canada), others in Belgium, India, Brazil. GLEIF search 'Aryam': 4 results (Australia, India x2, India). Zero Abu Dhabi entities. LEI registration is standard for entities involved in OTC derivatives, securities trading, and major financial transactions per ESMA/SEC requirements. The absence suggests MGX structures transactions to avoid regulated financial infrastructure.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:00:27",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF API search results for 'MGX' (12 results) and 'Aryam' (4 results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3790,
+      "finding_type": "legal",
+      "summary": "Warren/Merkley Senate Banking inquiry status: Original May 14, 2025 letter demanded WLFI records on UAE/Binance communications. By Feb 2026, the investigation has expanded: Warren called for reversal of UAE chip sales after 'Spy Sheikh' revelations (CNBC Feb 5, 2026). Forbes analysis (Feb 2, 2026) described the UAE deal as 'sweetheart deal' that made 'no financial sense for the Emiratis' \u2014 implying the premium paid was for political access. Democratic conditions for crypto legislation now include prohibiting senior government officials from significant crypto business interests.",
+      "detail": "Congressional investigation timeline: (1) May 14, 2025: Sens. Warren and Merkley send letter to WLFI demanding records on UAE/Binance communications; (2) Feb 1, 2026: WSJ breaks story of Aryam Investment 1 / $500M / 49% stake; (3) Feb 2, 2026: Massive media coverage \u2014 Guardian, Forbes, NYPost, DailyMail, etc.; (4) Feb 5, 2026: Warren calls for reversal of UAE chip sales (CNBC); Rep. Khanna calls for investigation on Democracy Now; (5) Feb 2026 ongoing: Democrats conditioning stablecoin legislation progress on prohibition of senior government officials holding significant crypto business interests (per CoinDesk Feb 19, 2026). Forbes analysis specifically questioned why UAE paid $500M for 49% of a company where 97.3% of proceeds went to insiders \u2014 no rational economic justification except political access. The GENIUS Act (signed July 2025) is now law but its market structure companion legislation is stalled over these conflict-of-interest concerns.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:00:43",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GDELT article corpus; Forbes Feb 2, 2026; CNBC Feb 5, 2026; Democracy Now Feb 5, 2026; CoinDesk Feb 19, 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3801,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Tahnoon-Trump-Binance nexus mirrors historical Epstein Gulf patterns. The Epstein investigation documented UAE back-channels through Sultan Bin Sulayem (DP World chairman, DPWORLD registered under FARA through firm employing Israeli intelligence operative Ari Ben-Menashe). Epstein connected UAE officials to Israeli establishment. Tom Barrack indicted as unregistered UAE foreign agent (acquitted). Elliott Broidy pled guilty to FARA conspiracy for UAE/Saudi lobbying, pardoned by Trump Jan 2021. The MGX-WLFI deal follows an established pattern: UAE sovereign capital flows to politically connected Americans in exchange for policy access, operating outside FARA registration.",
+      "detail": "Pattern analysis connecting MGX to broader investigation themes: (1) UAE-US influence operations have a documented history: Broidy (FARA guilty plea, Trump pardon), Barrack (FARA indictment, acquittal), Sulayem (FARA-registered through Ben-Menashe-connected firm); (2) Epstein served as UAE-Israel connector (Sulayem-Barak back-channel, finding #353); (3) The Tahnoon operation is structurally similar but uses crypto rather than real estate or political consulting as the intermediary vehicle; (4) The 'Spy Sheikh' alias for Tahnoon mirrors the intelligence tradecraft dimensions of Epstein's Gulf operations; (5) Binance's Abu Dhabi licensing (Dec 2025) parallels how Epstein-connected entities established regulatory footholds through personal relationships with rulers. The critical difference: the scale. Tahnoon's operation involves $500M (WLFI) + $2B (Binance) + OpenAI participation + hundreds of thousands of AI chips \u2014 an order of magnitude larger than documented Epstein-era Gulf influence operations. The convergence of sovereign wealth, AI infrastructure, crypto, and chip policy creates a multi-vector influence architecture that dwarfs historical precedents in this investigation.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:01:44",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Synthesis of investigation findings: #353 (Sulayem-Barak), #396 (DPWORLD-Ben-Menashe FARA), #1347 (Broidy FARA/pardon), #2803 (Barrack UAE indictment), #3755-3790 (MGX investigation)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3818,
+      "finding_type": "legal",
+      "summary": "No Abu Dhabi-linked MGX entities found in US state corporate registries (FL, NV, NY domestic), only US-based businesses with coincidental MGX names",
+      "detail": "Comprehensive search of FL Sunbiz (14 results), NV SOS (4 results), and NY DOS (45 results) for 'MGX' returned only US-based small businesses unrelated to the Abu Dhabi investment vehicle. The sole exception is MGX Fund Management (US) LLC (NY DOS 7412102), a foreign LLC from Delaware. The Abu Dhabi MGX itself has no SEC CIK number and no direct US corporate registration beyond the Delaware/NY fund management entity, suggesting it operates primarily through the Mubadala corporate umbrella for US-facing activities.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:02:37",
+      "target_name": "MGX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL Sunbiz search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NV SOS search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY DOS search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR lookup",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2167,
+      "person_a": "MGX",
+      "person_b": "World Liberty Financial",
+      "relationship_type": "financial",
+      "description": "USD1 stablecoin used to settle MGX's $2B investment in Binance. Creates financial dependency between Trump family crypto venture and Abu Dhabi sovereign fund.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:28:01",
+      "profile_id": "epstein",
+      "other_person": "World Liberty Financial",
+      "other_person_slug": "world-liberty-financial",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg May 2025; Fortune Crypto May 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2204,
+      "person_a": "MGX",
+      "person_b": "Tahnoon bin Zayed Al Nahyan",
+      "relationship_type": "corporate",
+      "description": "Tahnoon chairs MGX; MGX is his AI-focused investment vehicle in Abu Dhabi",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:00:51",
+      "profile_id": "epstein",
+      "other_person": "Tahnoon bin Zayed Al Nahyan",
+      "other_person_slug": "tahnoon-bin-zayed-al-nahyan",
+      "evidence": []
+    },
+    {
+      "id": 2206,
+      "person_a": "Binance",
+      "person_b": "MGX",
+      "relationship_type": "financial",
+      "description": "MGX invested $2B in Binance March 2025, settled using USD1 stablecoin",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:00:54",
+      "profile_id": "epstein",
+      "other_person": "Binance",
+      "other_person_slug": "binance",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Multiple news sources May 2025",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Public reporting",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2213,
+      "person_a": "MGX",
+      "person_b": "OpenAI",
+      "relationship_type": "financial",
+      "description": "MGX participated in OpenAI $6.6B round (Oct 2025); targeted for $50B Middle East expansion; Altman called Tahnoon 'dear personal friend'",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:01:13",
+      "profile_id": "epstein",
+      "other_person": "OpenAI",
+      "other_person_slug": "openai",
+      "evidence": []
+    },
+    {
+      "id": 2220,
+      "person_a": "MGX",
+      "person_b": "Mubadala Investment Co PJSC",
+      "relationship_type": "corporate",
+      "description": "MGX is an Abu Dhabi tech investment vehicle backed by Mubadala sovereign wealth fund. MGX Fund Management (US) LLC is the US-registered entity.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:02:45",
+      "profile_id": "epstein",
+      "other_person": "Mubadala Investment Co PJSC",
+      "other_person_slug": "mubadala-investment-co-pjsc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY DOS 7412102",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2223,
+      "person_a": "MGX",
+      "person_b": "Tahnoun bin Zayed Al Nahyan",
+      "relationship_type": "corporate",
+      "description": "Tahnoun connected to MGX through Mubadala/IHC investment vehicle structure. UAE National Security Advisor overseeing tech investment arm.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:02:53",
+      "profile_id": "epstein",
+      "other_person": "Tahnoun bin Zayed Al Nahyan",
+      "other_person_slug": "tahnoun-bin-zayed-al-nahyan",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY DOS",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2325,
+      "person_a": "Aryam Investment 1",
+      "person_b": "MGX",
+      "relationship_type": "corporate",
+      "description": "Both controlled by Tahnoon. MGX used WLFI USD1 stablecoin for 2B Binance investment. Shared management via G42 executives.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 05:37:37",
+      "profile_id": "epstein",
+      "other_person": "Aryam Investment 1",
+      "other_person_slug": "aryam-investment-1",
+      "evidence": []
+    },
+    {
+      "id": 2329,
+      "person_a": "MGX",
+      "person_b": "Sheikh Tahnoon bin Zayed Al Nahyan",
+      "relationship_type": "corporate",
+      "description": "Chairman of MGX board. MGX co-founded by G42 and Mubadala in 2024, manages up to 100B in AI assets",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 05:37:48",
+      "profile_id": "epstein",
+      "other_person": "Sheikh Tahnoon bin Zayed Al Nahyan",
+      "other_person_slug": "sheikh-tahnoon-bin-zayed-al-nahyan",
+      "evidence": []
+    },
+    {
+      "id": 2360,
+      "person_a": "Changpeng Zhao",
+      "person_b": "MGX",
+      "relationship_type": "financial",
+      "description": "MGX invested $2B in Binance using USD1 stablecoin; CZ pardoned 7 months later",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 05:42:21",
+      "profile_id": "epstein",
+      "other_person": "Changpeng Zhao",
+      "other_person_slug": "changpeng-zhao",
+      "evidence": []
+    },
+    {
+      "id": 2404,
+      "person_a": "G42",
+      "person_b": "MGX",
+      "relationship_type": "corporate",
+      "description": "G42 is parent: G42 Holding 75%+ of GX Investments 50-75% of MGX Group Holding 1 LTD. MGX launched Mar 2024 targeting USD100B AUM.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 06:02:50",
+      "profile_id": "epstein",
+      "other_person": "G42",
+      "other_person_slug": "g42",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MGX Form ADV; Finding #3999",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2451,
+      "person_a": "MGX",
+      "person_b": "SoftBank Group",
+      "relationship_type": "financial",
+      "description": "Co-investors in Stargate LLC (SoftBank 40%, MGX 10%). Both participate in Stargate UAE with G42, Nvidia, Oracle, OpenAI, Cisco. MGX launched by Mubadala/G42 in 2024 with $100B AUM target. MGX also invested in OpenAI secondary sale. Both funded by Middle East sovereign wealth.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 15:55:51",
+      "profile_id": "epstein",
+      "other_person": "SoftBank Group",
+      "other_person_slug": "softbank-group",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Stargate equity structure, Stargate UAE announcement, MGX Wikipedia",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

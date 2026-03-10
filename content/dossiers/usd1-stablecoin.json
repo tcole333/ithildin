@@ -1,0 +1,251 @@
+{
+  "name": "USD1 Stablecoin",
+  "slug": "usd1-stablecoin",
+  "aliases": [],
+  "profile_ids": [
+    "epstein"
+  ],
+  "generated_at": "2026-03-10T15:20:13.555607",
+  "last_updated": "2026-02-26T17:55:25",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "financial": 2
+    },
+    "last_updated": "2026-02-26T17:55:25"
+  },
+  "findings": [
+    {
+      "id": 4167,
+      "finding_type": "financial",
+      "summary": "USD1 stablecoin launched March 2025 by World Liberty Financial. As of Feb 2026: $5.37B market cap, with Binance holding ~87% ($4.7B) of total supply. Reserves backed by short-term US Treasuries, USD deposits, cash equivalents. Custodian: BitGo Trust Company (South Dakota). Monthly third-party attestations. Key event: Abu Dhabi-backed MGX used $2B worth of USD1 to settle investment in Binance (May 2025), which placed massive supply on Binance. Deployed on Ethereum, BNB Chain, Solana, Tron. USD1 brand co-owned by SC Financial Technologies LLC (Zach Witkoff CEO).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:16:42",
+      "target_name": "USD1 Stablecoin",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BusinessWire Dec 2025 - USD1 crosses $3B market cap",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CoinMarketCap, CoinGecko market data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forbes Feb 2026 - Binance holds 87% of USD1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4188,
+      "finding_type": "financial",
+      "summary": "USD1 is 100% backed by short-term US government Treasuries (<=93 day maturity), US dollar deposits, and other cash equivalents. Reserves are held by BitGo Trust Company (South Dakota-chartered trust company) with Fidelity Investments managing the investment portfolio. Monthly attestation reports are published by an independent accounting firm per 2025 AICPA Criteria for Asset-Backed Fiat-Pegged Tokens, though reporting gaps have occurred (e.g., July 2025 was the most recent report as of October 2025).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:53:06",
+      "target_name": "USD1 Stablecoin",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bitgo.com/usd1/attestations/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://worldlibertyfinancial.com/usd1",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.coindesk.com/business/2025/10/05/trump-linked-world-liberty-financial-s-stablecoin-needs-better-attestation-reports-nydig-says",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4197,
+      "finding_type": "financial",
+      "summary": "The first major use of USD1 was settling MGX's $2B investment in Binance (announced May 2025). The timing is significant: the UAE-based MGX (led by Sheikh Tahnoon bin Zayed Al Nahyan) purchased $2B in USD1 tokens weeks before the Trump administration signed a framework granting the UAE access to hundreds of thousands of advanced AI chips. Separately, Tahnoon-backed entity Aryam Investment 1 had secretly acquired a 49% stake in World Liberty Financial for $500M four days before inauguration, with $187M flowing to Trump family entities.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:53:56",
+      "target_name": "USD1 Stablecoin",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://cointelegraph.com/news/eric-trump-usd1-used-2-b-mgx-investment-binance",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2026/02/02/world-liberty-financial-spy-sheikh-500-million-trump-family-conflicts-of-interest/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.banking.senate.gov/newsroom/minority/warren-merkley-seek-world-liberty-financial-records-on-2-billion-trump-stablecoin-deal-involving-uae-firm-and-binance",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4201,
+      "finding_type": "financial",
+      "summary": "USD1 currently operates under BitGo's regulatory umbrella: BitGo Trust Company Inc. (SD-chartered trust company) holds reserves, while BitGo Technologies LLC is a federally registered money services business and state-licensed money transmitter. USD1 is deployed on both Ethereum and Binance Smart Chain (BNB Chain), with BNB running zero-fee stablecoin transfers for USD1. The stablecoin reached $1B market cap within its first month (April 2025), $3B by December 2025, and approximately $5.37B by February 2026, with ~87% ($4.7B) held on Binance. It also integrates with Tron blockchain.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:54:17",
+      "target_name": "USD1 Stablecoin",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bitgo.com/resources/blog/usd1-the-blueprint-for-bitgos-stablecoin-as-a-service/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bitgo.com/usd1/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.businesswire.com/news/home/20251225249806/en/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4206,
+      "finding_type": "intelligence",
+      "summary": "On Feb 23, 2026, USD1 experienced a coordinated attack: hackers compromised co-founder accounts, paid influencers to spread FUD, and opened short positions on WLFI to trigger panic. USD1 briefly depegged to $0.994 (0.6% below peg) before recovering within ~30 minutes. No smart contracts or treasury reserves were compromised. WLFI credited the 1:1 dollar redemption feature for maintaining confidence. The attack may test the structural resilience of a politically-connected stablecoin and its dependence on centralized trust rather than market mechanisms.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:54:38",
+      "target_name": "USD1 Stablecoin",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://coinpedia.org/news/world-liberty-financial-stablecoin-usd1-prevails-over-fud-attack/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.coindesk.com/markets/2026/02/23/trump-linked-stablecoin-wobbles-as-wlfi-says-it-s-under-coordinated-attack",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2501,
+      "person_a": "Binance",
+      "person_b": "USD1 Stablecoin",
+      "relationship_type": "financial",
+      "description": "Binance holds ~87% of all USD1 supply ($4.7B of $5.4B). MGX used $2B USD1 to settle investment in Binance (May 2025), placing massive supply on platform. Binance launched 20% yield promotion for USD1, driving market cap surge. This concentration creates systemic risk and mutual dependency between Trump family stablecoin and world's largest crypto exchange.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:38:26",
+      "profile_id": "epstein",
+      "other_person": "Binance",
+      "other_person_slug": "binance",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forbes Feb 2026 - Binance holds 87% of USD1",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2527,
+      "person_a": "BitGo Holdings",
+      "person_b": "USD1 Stablecoin",
+      "relationship_type": "financial",
+      "description": "BitGo is the custodian and infrastructure provider for USD1. BitGo Trust Company (SD trust charter, now converting to national bank) holds reserves. BitGo Technologies LLC is the licensed money transmitter. BitGo's Stablecoin-as-a-Service uses USD1 as its blueprint.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:55:25",
+      "profile_id": "epstein",
+      "other_person": "BitGo Holdings",
+      "other_person_slug": "bitgo-holdings",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bitgo.com/usd1/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

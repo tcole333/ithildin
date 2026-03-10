@@ -1,0 +1,435 @@
+{
+  "name": "DOGE Personnel",
+  "slug": "doge-personnel",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.439460",
+  "last_updated": "2026-03-06T18:26:47",
+  "stats": {
+    "total_findings": 13,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 6,
+      "relationship": 3,
+      "financial": 3,
+      "unknown": 1
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-06T18:26:47"
+  },
+  "findings": [
+    {
+      "id": 4708,
+      "finding_type": "intelligence",
+      "summary": "ProPublica identified 109 DOGE staffers -- 38 from Musk companies, 83% male, 60%+ in 20s-30s, 23 making cuts at agencies regulating their former employers, 12 still on corporate payrolls",
+      "detail": "ProPublica comprehensive tracker identified 109 DOGE staff members: 90 men, 19 women (83% male), more than 60% in their 20s or 30s, one who was 19 when joined. At least 38 currently work or have worked for Musk businesses (SpaceX, Tesla, xAI, Neuralink, X/Twitter). At least 23 DOGE officials making cuts at agencies that regulate their former employers. At least 12 remain employees or advisers of pre-DOGE companies. At least 9 continue to receive corporate benefits from private-sector employers including health insurance, stock vesting plans, or retirement savings programs. Key Pentagon team led by Yinon Weiss -- FEC records show prior employers Cardash, RallyPoint, Stress-Free Auto Care, Harvard Business School with donations to Ted Cruz and Trump-affiliated PACs. Steve Davis (Boring Company president) served as effective DOGE leader from GSA HQ with armed security detail, wife Nicole Hollander placed at GSA handling real estate. Davis departed May 2025 but reportedly continued asserting control, defying White House orders.",
+      "source_datasets": [
+        "propublica",
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 19:36:01",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/doge-elon-musk-trump-staffers-tracker-update",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5754,
+      "finding_type": "intelligence",
+      "summary": "Systemic pattern: OPM packed with Silicon Valley operatives -- Kupor, Scales, Kliger all at same agency",
+      "detail": "Three DOGE-linked operatives were placed at the Office of Personnel Management: Scott Kupor (Director, a16z Managing Partner with $182M-573M net worth), Amanda Scales (Chief of Staff, xAI Recruiting Leader), and Gavin Kliger (Senior Advisor for Technology, Databricks engineer). OPM controls federal hiring, firing, benefits, retirement, and workforce technology. The concentration of Musk orbit (Scales from xAI) and VC (Kupor from a16z, Kliger from Databricks) personnel at the agency responsible for the federal workforce is structurally significant -- it positions tech industry insiders to reshape government employment in ways that benefit their former and current financial interests.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:08",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosures kupor-scott-aaron, scales-amanda-d, kliger-gavin",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5756,
+      "finding_type": "relationship",
+      "summary": "Musk companies pipeline: Alm (Tesla-to-DHS), Scales (xAI-to-OPM), Shedd (Tesla-to-GSA) all entered govt Jan 2025",
+      "detail": "Three appointees from Musk companies entered federal government on or near inauguration day 1/20/2025: Thomas Shedd (Tesla 4/2022-1/2025 to GSA Director of Technology), Amanda Scales (xAI 10/2024-Present to OPM Chief of Staff), and Joseph Alm (Tesla 6/2020-12/2023 then Kraken to DHS via DOGE). This represents a coordinated placement of Musk company personnel across agencies that control federal technology (GSA), federal workforce (OPM), and economic security (DHS). Combined with Musk own role leading DOGE, these placements create structural control over government systems by individuals with ongoing financial ties to Musk enterprises.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:16",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosures shedd-thomas, scales-amanda-d, alm-joseph",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5760,
+      "finding_type": "financial",
+      "summary": "Crypto holdings cluster: Alm (Kraken stock), Mishory (Kalshi stock at SEC), Kliger (Bitcoin/Solana at OPM), Snyder (Dogecoin at DOT)",
+      "detail": "At least four DOGE-linked appointees hold cryptocurrency or crypto company equity: Elie Mishory (SEC Senior Advisor) holds $1M-5M in Kalshi stock at the agency regulating crypto/prediction markets; Joseph Alm (DHS) holds Kraken/Payward stock options from prior employment as associate general counsel; Gavin Kliger (OPM) holds $100K-250K in Bitcoin and Solana on Robinhood plus $50K-100K Robinhood Markets stock; Ryan Snyder (DOT) holds Dogecoin. This crypto-holding cluster across multiple agencies is consistent with the broader DOGE agenda to promote crypto-friendly regulation.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:28",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosures mishory-elie, alm-joseph, kliger-gavin, snyder-ryan",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5769,
+      "finding_type": "financial",
+      "summary": "Defense tech holdings across DOGE appointees: Barbaccia (Anduril/Palantir/LMT/BA), Snyder (Palantir), Kupor (Palantir)",
+      "detail": "At least three DOGE-linked appointees hold defense technology or defense prime contractor stock: Gregory Barbaccia (Federal CIO) holds Anduril venture position ($50K-100K), Palantir (PLTR), Lockheed Martin (LMT), Boeing (BA), BAE Systems (BAESY), and Rheinmetall (RNMBY). Ryan Snyder (DOT) holds Palantir (PLTR). Scott Kupor (OPM) holds Palantir (PLTR, though small). Combined with DOGE role in cutting oversight agencies and restructuring procurement, these holdings represent a pattern where operatives restructuring government hold equity in defense companies that benefit from reduced regulation and streamlined contracting.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:03",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosures barbaccia-gregory-j, snyder-ryan, kupor-scott-aaron",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5778,
+      "finding_type": "intelligence",
+      "summary": "Missing disclosures: No ProPublica 278 found for 8 of 14 priority DOGE operatives including Davis, Bobba, Coristine, Elez",
+      "detail": "Of 14 priority DOGE operatives searched, 8 have no financial disclosure in ProPublica database: Steve Davis (Boring Company, DOGE operations chief), Akash Bobba (ex-Palantir), Ed Coristine (19-year-old DOGE engineer), Marko Elez (fired/rehired over racist posts), Luke Farritor (AI developer), Kyle Kliger, Joe Gebbia (Airbnb co-founder), and Yinon Weiss (military veteran). The absence of disclosures for known DOGE operatives may indicate: (1) they served as informal advisors without filing requirements, (2) SGE status exempting them, (3) disclosures not yet processed, or (4) they avoided formal government appointment. Davis and Coristine are particularly notable absences given their documented access to federal systems.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:53",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica disclosures database search results - zero results for 8 names",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5781,
+      "finding_type": "intelligence",
+      "summary": "ProPublica identified 109 DOGE staffers across federal agencies",
+      "detail": "ProPublica compiled a tracker identifying 109 DOGE staffers spread throughout the government, from DoD to GSA to SEC. 90 men (83%) and 19 women. 60%+ in their 20s or 30s, with the youngest being 19. 80%+ had no prior government experience. 38 currently or previously worked for Musk companies. 23 are making cuts at agencies that regulated their former industries. 12 remain employees of previous companies on paper. 9 continue receiving corporate benefits.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:44:21",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "ProPublica DOGE Tracker, projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5945,
+      "finding_type": null,
+      "summary": "SYNTHESIS: Temporary-to-Permanent Pipeline \u2014 At least 8 DOGE operatives transitioned from temporary advisory roles to permanent embedded government positions across agencies despite formal dissolution in November 2025",
+      "detail": "PATTERN: Despite DOGE formal dissolution in November 2025 (8 months early), its personnel were absorbed into permanent government positions rather than removed. OPM Director Kupor stated DOGE 'does not exist' while confirming operatives remained embedded. Documented transitions:\n\n1. Rachel Riley: DOGE HHS adviser -> Acting Chief of Naval Research (replaced Rear Adm. Rothenhaus, Oct 2025)\n2. Zachary Terrell (age 23): DOGE -> HHS CTO (permanent, overseeing Medicare data systems)\n3. Mike Russo: DOGE -> SSA CIO (installed Feb 2025, controls 1.5T benefit payment systems)\n4. Aram Moghaddassi: DOGE -> SSA CIO (succeeded Russo, listed Sept 2025 executive leadership)\n5. Edward Coristine (age 19-20): cycled GSA -> DOGE resignation -> SSA -> National Design Studio\n6. Thomas Shedd: DOGE -> GSA TTS Director (permanent)\n7. Sam Corcos: DOGE -> Treasury CIO\n8. Joe Gebbia: DOGE -> White House Chief Design Officer, created National Design Studio\n\nNo DOGE personnel formally converted to career civil service (avoiding burrowing-in designation), but all hold political appointments with equivalent authority. Fortune reported DOGE was absorbed into the bloodstream of the government. OPM vision: far more institutionalized at the actual agency level.\n\nINFERENCE: The temporary advisory framing was a legal strategy to bypass disclosure and ethics requirements during initial access phase, with permanent placement always being the intended outcome.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:23:10",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2025/12/12/doge-is-still-alive-federal-employees-irs-nih-elon-musk/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.govexec.com/management/2025/08/all-remaining-doge-staff-are-political-positions-despite-concerns-burrowing/407301/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/digital-government/2025/11/doge-no-longer-has-centralized-leadership-under-white-house-tech-team-personnel-head-says/409765/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5966,
+      "finding_type": "intelligence",
+      "summary": "Systemic pattern: 8 of 12 priority embedded operatives lack ProPublica 278 financial disclosures",
+      "detail": "Of 12 priority DOGE operatives confirmed as still embedded or recently embedded in government, only 4 have public financial disclosures in ProPublica's database: Greg Hogan (OPM CIO, $1.9M-7.2M), Thomas Shedd (GSA TTS, $1.6M-3.5M), Amanda Scales (OPM CoS, $415K-1M), plus previously documented Kupor, Barbaccia, Minor. Missing disclosures: Sam Corcos (Treasury CIO -- no ProPublica result despite being CIO of major department), Zachary Terrell (HHS CTO -- no disclosure), Jeremy Lewin (Acting Under Secretary -- no disclosure despite controlling billions in foreign aid), Ryan Riedel (DOE CIO 60-day detail -- no disclosure), Edward Coristine (9+ agencies -- no disclosure), Joe Gebbia (CDO -- no disclosure despite Tesla board seat). This pattern suggests systematic circumvention of disclosure requirements through special government employee status, temporary details, or deliberate non-compliance.",
+      "source_datasets": [
+        "web_search",
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:24:53",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Existing findings database cross-reference",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica disclosure searches for all 12 targets",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5971,
+      "finding_type": "intelligence",
+      "summary": "Age-experience profile: 4 of 12 embedded operatives aged 19-28 with zero government experience placed in senior positions",
+      "detail": "Among the 12 priority embedded DOGE operatives, an unprecedented cluster of young, inexperienced individuals were placed in positions of extraordinary authority: (1) Edward Coristine, age 19-20, Neuralink intern, accessed 9+ agency systems including CISA/DHS cybersecurity; (2) Zachary Terrell, age 23, crypto startup founder with 2022 bachelor's, became HHS CTO and blocked NSF grants; (3) Jeremy Lewin, age 28, tech entrepreneur with zero government experience, became Acting Under Secretary controlling billions in foreign aid; (4) Ryan Riedel, SpaceX network engineer, 60-day detail as DOE CIO overseeing nuclear weapons lab IT. None had previous government experience. All were placed in positions that traditionally require decades of public service, security clearances, and domain expertise. The speed of their advancement (Lewin: DOGE volunteer to Under Secretary in 4 months) bypassed normal vetting processes.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:25:12",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop and Nextgov appointment reports",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "State.gov Lewin biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia and news profiles for all 4 individuals",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5973,
+      "finding_type": "relationship",
+      "summary": "Employer pipeline pattern: 5 operatives from Musk companies (Tesla/SpaceX/xAI), 3 from Palantir, 2 from a16z ecosystem",
+      "detail": "The 12 priority embedded operatives reveal three primary employer pipelines into government: MUSK COMPANIES (5): Thomas Shedd (Tesla, GSA/DOL), Amanda Scales (xAI, OPM), Ryan Riedel (SpaceX, DOE), Greg Hogan (comma.ai/a16z, OPM), Edward Coristine (Neuralink, multiple agencies). PALANTIR (3): Gregory Barbaccia (10yr Palantir, Federal CIO), Clark Minor (12yr Palantir, HHS CIO), plus overlap with OMB/GSA roles. A16Z ECOSYSTEM (2): Scott Kupor (a16z managing partner, OPM Director), Sam Corcos (Levels Health/a16z-funded, Treasury CIO). CRYPTO (1): Zachary Terrell (Spindl/Coinbase, HHS CTO). UNAFFILIATED (1): Jeremy Lewin (no clear corporate pipeline, but rapid DOGE promotion). These pipelines concentrate at agencies controlling: IT procurement (OMB), personnel management (OPM), health data (HHS), energy (DOE), contracting (GSA), tax systems (Treasury), and foreign aid (State).",
+      "source_datasets": [
+        "web_search",
+        "propublica_disclosures",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:25:21",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Existing findings database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica disclosures",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Web search employment histories",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5990,
+      "finding_type": "relationship",
+      "summary": "Return-to-employer pattern: at least 3 of 12 operatives returned to prior companies (Riedel to SpaceX, Scales to xAI, Hogan departed after 7.5 months)",
+      "detail": "Among 12 priority embedded operatives, a pattern of brief government service followed by return to private sector: (1) Ryan Riedel: SpaceX network engineer, served ~60 days as DOE CIO, returned to SpaceX; (2) Amanda Scales: xAI recruiting leader, served ~3 months as OPM Chief of Staff, returned to xAI by April 2025; (3) Greg Hogan: comma.ai VP Infrastructure, served 7.5 months as OPM CIO, departed September 2025. This pattern suggests these deployments were reconnaissance-style operations rather than genuine public service commitments. During their brief tenures, all three gained access to sensitive systems: Riedel to DOE IT (nuclear weapons labs), Scales to OPM personnel records (millions of federal employees), Hogan to OPM IT systems (mass email and data access capabilities). The 60-day detail structure used for Riedel specifically avoids disclosure requirements for temporary assignments.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:26:38",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FedScoop/Nextgov departure reports",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MeriTalk Riedel return to SpaceX",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Revolving Door Project profiles",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5993,
+      "finding_type": "financial",
+      "summary": "Combined financial exposure: 12 embedded operatives hold estimated $250M+ in employer stock while overseeing agencies regulating those employers",
+      "detail": "Aggregate financial conflicts across 12 priority embedded operatives: (1) Scott Kupor: $182M-573M+ net worth, $250-500M Airbnb stock, Palantir/defense contractor stock, 38 a16z fund positions; (2) Thomas Shedd: $5-25M Tesla ESPP, RSUs, options, on unpaid leave from Tesla; (3) Clark Minor: $1M-5M Palantir stock plus 401(k)/IRA Palantir holdings; (4) Gregory Barbaccia: Anduril position, Palantir stock, LMT, BA, Rheinmetall defense stock; (5) Joe Gebbia: liquidated $30M+ ABNB stock, Tesla board member; (6) Amanda Scales: xAI equity, Uber stock $50K-100K; (7) Greg Hogan: comma.ai $1M-5M+ in ISOs; (8-12) Corcos, Terrell, Lewin, Riedel, Coristine: no disclosures available. Combined disclosed holdings in employer and related stock exceeds $250M conservatively. Each individual's agency oversees or regulates their former or current employer.",
+      "source_datasets": [
+        "propublica_disclosures",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:26:47",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 278 disclosures for all documented operatives",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form 4 Gebbia filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": []
+}

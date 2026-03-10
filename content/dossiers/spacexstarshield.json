@@ -1,0 +1,306 @@
+{
+  "name": "SpaceX/Starshield",
+  "slug": "spacexstarshield",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.522836",
+  "last_updated": "2026-03-05T04:32:41",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 2,
+    "total_entities": 0,
+    "finding_types": {
+      "intelligence": 1,
+      "financial": 4,
+      "relationship": 2,
+      "identity": 1
+    },
+    "connection_types": {
+      "intelligence": 1,
+      "financial": 1
+    },
+    "last_updated": "2026-03-05T04:32:41"
+  },
+  "findings": [
+    {
+      "id": 4762,
+      "finding_type": "intelligence",
+      "summary": "Starshield NRO spy satellite network: .8B classified contract (2021), 200+ satellites launched since May 2024, operating outside ITU radio regulations",
+      "detail": "Starshield is SpaceX's classified satellite constellation built under a $1.8 billion NRO contract signed 2021, revealed publicly 2023. As of early 2026, 200+ Starshield satellites launched across 11+ missions (NROL-145, NROL-146 etc). Key concerns: (1) Amateur astronomer Scott Tilley (British Columbia) discovered Oct 2025 that Starshield satellites are emitting unauthorized downlink signals in the 2025-2110 MHz band, which ITU allocates exclusively for uplink. No public ITU MIFR authorization exists. Potential violation of ITU Radio Regulation Footnote 5.392. (2) Risk of interference with other scientific and commercial satellites. (3) Neither SpaceX nor NRO responded to NPR's Oct 2025 request for comment. (4) Network designed for Earth observation swarm providing data 'in minutes or seconds' to 54 mission partners across Army, Navy, Air Force, Coast Guard. (5) GAO warned satellite cross-link reliability issues between different orbital planes.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:53:29",
+      "target_name": "SpaceX/Starshield",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR 2025-10-17; IFLScience Jan 2026; Payload Space; SpaceX Starshield Wikipedia; GAO report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4763,
+      "finding_type": "financial",
+      "summary": "Starshield Golden Dome nexus: SpaceX expected to receive $2B contract for 400-1000 satellite custody layer tracking missiles",
+      "detail": "SpaceX is expected to receive a $2 billion contract to build the 'custody layer' of the Golden Dome missile defense system \u2014 a constellation of 400-1000 satellites functioning as an 'air moving target indicator' system to detect and track missiles in flight. This connects Starshield (NRO spy satellites) to Golden Dome (missile defense) creating dual-use infrastructure. Key details: (1) WSJ reported SpaceX 'set to receive' contract as of Dec 2025 but no public award announced. (2) Gen Terrence O'Shaughnessy has high-level role at Starshield overseeing Golden Dome positioning. (3) GAO warned that PWSA and Starshield satellites have NOT demonstrated reliable cross-plane satellite links due to high relative motion \u2014 a fundamental technical gap. (4) Combined with existing $1.8B NRO Starshield contract and $5.9B Space Force launch contract (Apr 2025), SpaceX's classified/defense portfolio exceeds $9.5B per Congressional investigation (Reps Lynch/Connolly Apr 2025).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:53:42",
+      "target_name": "SpaceX/Starshield",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Tom's Hardware; GovConWire; WSJ (via Wikipedia); Lynch-Connolly oversight letter Apr 2025; GAO report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5068,
+      "finding_type": "financial",
+      "summary": "SpaceX holds $22.3B in potential federal contract value across 100+ contracts. Key defense/intel: SDA Tracking Layer T0 WFOV ($308M, HQ085021C0001), DEUCSI space internet ($228M + $53M), NSSL Phase 2/3 ($540M+). SAM UEI C6M7C2FLKER5, CAGE 3BVL8, 6 registrations.",
+      "detail": null,
+      "source_datasets": [
+        "highergov",
+        "sam_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:31:15",
+      "target_name": "SpaceX/Starshield",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov:awardee-uei:C6M7C2FLKER5",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov:UEI:C6M7C2FLKER5",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5070,
+      "finding_type": "financial",
+      "summary": "Starshield-specific contracts identified: (1) FA254125DB021-FA254126FB008 Starshield Service Support $135M potential, period 2025-11 to 2027-05; (2) FA254125CB041 Starshield service plans/portal/FSR support $46.7M, 2025-04 to 2025-11; (3) FA881924CB005 FREESOL BAA Starshield Block 2 $21.5M, 2024-08 to 2025-12; (4) HC101323D9000-HC101325F0095 Starshield KA Band High $12.9M, 2025-06 to 2026-06; (5) 80NSSC26P0105 Starshield terminals with global access $265K (NASA). Total identified Starshield-labeled contracts: ~$216M.",
+      "detail": null,
+      "source_datasets": [
+        "highergov"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:31:27",
+      "target_name": "SpaceX/Starshield",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov:contract:FA254125CB041",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov:contract:FA254125DB021",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov:contract:FA881924CB005",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5071,
+      "finding_type": "financial",
+      "summary": "SpaceX Ukraine Starlink contracts: HC101323D9000-HC101324F0143 Best Effort Subscription and Terminals Ukraine $537.7M potential/$138M obligated (2024-08 to 2025-11); HC101323D9000-HC101324F0144 SBS003512 Best Effort $228.8M/$198.6M obligated (2024-09 to 2026-09). Combined Ukraine-related Starlink: $766.6M potential. These are under DoD contract vehicle HC101323D9000.",
+      "detail": null,
+      "source_datasets": [
+        "highergov"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:31:34",
+      "target_name": "SpaceX/Starshield",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov:contract:HC101323D9000-HC101324F0143",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov:contract:HC101323D9000-HC101324F0144",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5072,
+      "finding_type": "relationship",
+      "summary": "White House Communications Agency procured Starlink Mobile Priority Service from SpaceX (47QRAA21D007N-FA254125FB010, $241,814, 2025-03 to 2026-03). This means SpaceX provides communications infrastructure to the White House while Musk simultaneously runs DOGE with extraordinary access to federal systems. Additional Starlink procurement by various DoD/DHS units via GSA contract vehicle 47QRAA21D007N.",
+      "detail": null,
+      "source_datasets": [
+        "highergov"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:31:41",
+      "target_name": "SpaceX/Starshield",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HigherGov:contract:47QRAA21D007N-FA254125FB010",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5073,
+      "finding_type": "relationship",
+      "summary": "SpaceX lobbying history: registered lobbyists since 2003 on Defense, Aerospace, Budget/Appropriations, Science/Technology issues. Key registrants include Squire Patton Boggs ($90K/quarter in 2013-2014), The Nickles Group ($54K/quarter), American Defense International, J.A. Green and Company. Also registered as own lobbyist. LDA filings show consistent focus on defense procurement and budget appropriations.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying_disclosure"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:32:32",
+      "target_name": "SpaceX/Starshield",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:client:Space Exploration Technologies",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:client:SpaceX",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5074,
+      "finding_type": "identity",
+      "summary": "SpaceX is a private company (not SEC-reporting). EDGAR search returns 3,337 mentions in other companies' filings (e.g., AST SpaceMobile 8-K) but no direct SpaceX filings. No insider transaction data available through EDGAR. FEC employer search shows minimal political donations from SpaceX employees: only $4,966 total across 15 donors, with the largest being $842 (Austin Shaw). This is strikingly low for a 13,000+ employee company.",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 04:32:41",
+      "target_name": "SpaceX/Starshield",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=search%3ASpaceX",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=employer%3ASpaceX",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2766,
+      "person_a": "Operation Epic Fury",
+      "person_b": "SpaceX/Starshield",
+      "relationship_type": "intelligence",
+      "description": "SpaceX Starshield provides satellite communications backbone for LUCAS drones and autonomous systems in Iran operations",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 20:24:05",
+      "profile_id": "tech-right",
+      "other_person": "Operation Epic Fury",
+      "other_person_slug": "operation-epic-fury",
+      "evidence": []
+    },
+    {
+      "id": 2803,
+      "person_a": "Golden Dome",
+      "person_b": "SpaceX/Starshield",
+      "relationship_type": "financial",
+      "description": "Starshield NRO spy constellation provides infrastructure base for Golden Dome custody layer; $2B contract expected for 400-1000 tracking satellites",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:55:24",
+      "profile_id": "tech-right",
+      "other_person": "Golden Dome",
+      "other_person_slug": "golden-dome",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

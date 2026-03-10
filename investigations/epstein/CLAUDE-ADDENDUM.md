@@ -2,6 +2,11 @@
 
 Case-specific context for agents working on the Epstein investigation profile. This supplements the generic platform instructions in `CLAUDE.md`.
 
+## User Priorities
+- **Financial & business mapping focus** — money flows, corporate structures, fund movements, entity traces over biographical/political threads
+- Death circumstances / prison investigation deprioritized
+- Query `investigation.db` for current counts rather than relying on snapshots
+
 ## Narrative Case File
 
 `research/master.md` — the evolving narrative case file with structured analysis across all investigation threads.
@@ -38,6 +43,13 @@ Case-specific context for agents working on the Epstein investigation profile. T
 | USVI v. JPMorgan exhibits (SDNY 1:22-cv-10904) | Financial evidence |
 | DE corporate registry | Next state for `/add-registry` |
 
-## Key Identifiers
+## Reference Files
 
-See `memory/key-identifiers.md` for Epstein emails, inner circle contacts, addresses, and correspondents.
+These files contain detailed investigation context. Read on demand, not every session.
+
+| File | Contents |
+|------|----------|
+| `investigations/epstein/key-identifiers.md` | Epstein emails, inner circle contacts, addresses, correspondents, EINs |
+| `investigations/epstein/wave-results.md` | Detailed wave findings (W1-W12 + K&E) |
+| `investigations/epstein/investigation-context.md` | Wave summaries, critical intelligence, registry findings |
+| `investigations/epstein/990-findings.md` | IRS 990 grant breakdowns (71 filings, 219 grants, $30.6M) |
