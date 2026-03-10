@@ -122,7 +122,7 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
         f"""
         SELECT f.id, f.finding_type, f.summary, f.detail, f.source_datasets,
                f.confidence, f.date_of_event, f.claim_type, f.verification_status,
-               f.created_at, f.target_name
+               f.created_at, f.target_name, f.profile_id
         FROM findings f
         WHERE f.target_name IN ({placeholders}) AND f.verification_status != 'retracted'{profile_cond}
         ORDER BY f.date_of_event IS NULL, f.date_of_event, f.created_at
@@ -161,7 +161,8 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
         conn_rows = conn.execute(
             f"""
             SELECT c.id, c.person_a, c.person_b, c.relationship_type, c.description,
-                   c.strength, c.date_range, c.verification_status, c.created_at
+                   c.strength, c.date_range, c.verification_status, c.created_at,
+                   c.profile_id
             FROM connections c
             WHERE (c.person_a = ? OR c.person_b = ?) AND c.verification_status != 'retracted'{profile_cond.replace('f.', 'c.')}
             ORDER BY
@@ -252,10 +253,20 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
     last_updated_str = last_updated.isoformat() if last_updated else None
     generated_at = _utcnow().isoformat()
 
+    # Collect all investigation profiles that contributed data
+    profile_ids_set = set()
+    for f in findings:
+        if f.get("profile_id"):
+            profile_ids_set.add(f["profile_id"])
+    for c in connections:
+        if c.get("profile_id"):
+            profile_ids_set.add(c["profile_id"])
+
     return {
         "name": canonical_name,
         "slug": slugify(canonical_name),
         "aliases": [n for n in all_names if n != canonical_name],
+        "profile_ids": sorted(profile_ids_set),
         "generated_at": generated_at,
         "last_updated": last_updated_str,
         "stats": {
@@ -408,6 +419,7 @@ def main():
         index.append({
             "name": dossier_for_index["name"],
             "slug": dossier_for_index["slug"],
+            "profile_ids": dossier_for_index.get("profile_ids", []),
             "stats": dossier_for_index["stats"],
             "last_updated": dossier_for_index.get("last_updated"),
         })

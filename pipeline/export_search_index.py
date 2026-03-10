@@ -73,6 +73,7 @@ def export_dossiers() -> list[dict]:
             "mentionCount": mention_count,
             "stats": _format_stats(data.get("stats", {})),
             "href": f"/dossiers/{slug}",
+            "profile_ids": data.get("profile_ids", []),
         })
 
     return docs
