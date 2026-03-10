@@ -194,12 +194,30 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
     return finding_id
 
 
+def _resolve_profile(profile_id=None, all_profiles=False):
+    """Resolve profile_id: explicit > active profile > None. Returns None if all_profiles."""
+    if all_profiles:
+        return None
+    if profile_id is not None:
+        return profile_id
+    try:
+        from tools.investigation_context import get_active_profile_id
+        return get_active_profile_id() or None
+    except Exception:
+        return None
+
+
 def list_findings(target=None, finding_type=None, confidence=None, limit=50,
-                  thread_id=None):
+                  thread_id=None, profile_id=None, all_profiles=False):
     """List findings with optional filters."""
     db = _get_db_standalone()
     conditions = []
     params = []
+
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+    if resolved_profile:
+        conditions.append("profile_id = ?")
+        params.append(resolved_profile)
 
     if target:
         conditions.append("target_name LIKE ?")
@@ -442,28 +460,30 @@ def get_provenance(finding_id):
     return result
 
 
-def search_findings(query, thread_id=None):
+def search_findings(query, thread_id=None, profile_id=None, all_profiles=False):
     """Full-text search across findings. Wraps terms in quotes for safety."""
     db = _get_db_standalone()
     safe_query = '"' + query.replace('"', '""') + '"'
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+
+    conditions = ["findings_fts MATCH ?"]
+    params = [safe_query]
     if thread_id:
-        rows = db.execute("""
-            SELECT findings.*, findings_fts.rank
-            FROM findings_fts
-            JOIN findings ON findings.id = findings_fts.rowid
-            WHERE findings_fts MATCH ? AND findings.thread_id = ?
-            ORDER BY findings_fts.rank
-            LIMIT 30
-        """, (safe_query, thread_id)).fetchall()
-    else:
-        rows = db.execute("""
-            SELECT findings.*, findings_fts.rank
-            FROM findings_fts
-            JOIN findings ON findings.id = findings_fts.rowid
-            WHERE findings_fts MATCH ?
-            ORDER BY findings_fts.rank
-            LIMIT 30
-        """, (safe_query,)).fetchall()
+        conditions.append("findings.thread_id = ?")
+        params.append(thread_id)
+    if resolved_profile:
+        conditions.append("findings.profile_id = ?")
+        params.append(resolved_profile)
+
+    where = " AND ".join(conditions)
+    rows = db.execute(f"""
+        SELECT findings.*, findings_fts.rank
+        FROM findings_fts
+        JOIN findings ON findings.id = findings_fts.rowid
+        WHERE {where}
+        ORDER BY findings_fts.rank
+        LIMIT 30
+    """, params).fetchall()
     db.close()
     return [dict(r) for r in rows]
 
@@ -528,9 +548,11 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
     return conn_id
 
 
-def get_connections(person, depth=1, relationship_type=None):
+def get_connections(person, depth=1, relationship_type=None, profile_id=None,
+                    all_profiles=False):
     """Get all connections for a person, optionally multi-hop."""
     db = _get_db_standalone()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
 
     visited = set()
     current_layer = {person.lower()}
@@ -547,6 +569,9 @@ def get_connections(person, depth=1, relationship_type=None):
         if relationship_type:
             conditions.append("relationship_type = ?")
             params.append(relationship_type)
+        if resolved_profile:
+            conditions.append("profile_id = ?")
+            params.append(resolved_profile)
 
         where = " AND ".join(conditions)
         rows = db.execute(f"SELECT * FROM connections WHERE {where}", params).fetchall()
@@ -567,11 +592,17 @@ def get_connections(person, depth=1, relationship_type=None):
     return all_connections
 
 
-def get_timeline(target=None, start_date=None, end_date=None, limit=100):
+def get_timeline(target=None, start_date=None, end_date=None, limit=100,
+                 profile_id=None, all_profiles=False):
     """Get findings ordered by event date."""
     db = _get_db_standalone()
     conditions = ["date_of_event IS NOT NULL AND date_of_event != ''"]
     params = []
+
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+    if resolved_profile:
+        conditions.append("profile_id = ?")
+        params.append(resolved_profile)
 
     if target:
         conditions.append("target_name LIKE ?")
@@ -592,31 +623,41 @@ def get_timeline(target=None, start_date=None, end_date=None, limit=100):
     return [dict(r) for r in rows]
 
 
-def get_stats():
+def get_stats(profile_id=None, all_profiles=False):
     """Findings and connections statistics."""
     db = _get_db_standalone()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
     stats = {}
 
-    stats["total_findings"] = db.execute("SELECT COUNT(*) FROM findings").fetchone()[0]
-    stats["total_connections"] = db.execute("SELECT COUNT(*) FROM connections").fetchone()[0]
+    f_where = "WHERE profile_id = ?" if resolved_profile else ""
+    c_where = "WHERE profile_id = ?" if resolved_profile else ""
+    f_params = [resolved_profile] if resolved_profile else []
+    c_params = [resolved_profile] if resolved_profile else []
+
+    stats["total_findings"] = db.execute(f"SELECT COUNT(*) FROM findings {f_where}", f_params).fetchone()[0]
+    stats["total_connections"] = db.execute(f"SELECT COUNT(*) FROM connections {c_where}", c_params).fetchone()[0]
+    if resolved_profile:
+        stats["profile_id"] = resolved_profile
 
     rows = db.execute(
-        "SELECT finding_type, COUNT(*) as cnt FROM findings GROUP BY finding_type"
+        f"SELECT finding_type, COUNT(*) as cnt FROM findings {f_where} GROUP BY finding_type", f_params
     ).fetchall()
     stats["by_type"] = {r["finding_type"]: r["cnt"] for r in rows}
 
     rows = db.execute(
-        "SELECT confidence, COUNT(*) as cnt FROM findings GROUP BY confidence"
+        f"SELECT confidence, COUNT(*) as cnt FROM findings {f_where} GROUP BY confidence", f_params
     ).fetchall()
     stats["by_confidence"] = {r["confidence"]: r["cnt"] for r in rows}
 
     rows = db.execute(
-        "SELECT target_name, COUNT(*) as cnt FROM findings GROUP BY target_name ORDER BY cnt DESC LIMIT 20"
+        f"SELECT target_name, COUNT(*) as cnt FROM findings {f_where} GROUP BY target_name ORDER BY cnt DESC LIMIT 20",
+        f_params
     ).fetchall()
     stats["top_targets"] = {r["target_name"]: r["cnt"] for r in rows}
 
     rows = db.execute(
-        "SELECT relationship_type, COUNT(*) as cnt FROM connections GROUP BY relationship_type"
+        f"SELECT relationship_type, COUNT(*) as cnt FROM connections {c_where} GROUP BY relationship_type",
+        c_params
     ).fetchall()
     stats["connection_types"] = {r["relationship_type"]: r["cnt"] for r in rows}
 
@@ -706,6 +747,8 @@ def main():
     list_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
     list_p.add_argument("--limit", type=int, default=50)
     list_p.add_argument("-v", "--verbose", action="store_true")
+    list_p.add_argument("--profile", help="Investigation profile (default: active)")
+    list_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(list_p)
 
     # show
@@ -730,12 +773,16 @@ def main():
     conns_p.add_argument("person", metavar="NODE")
     conns_p.add_argument("--depth", type=int, default=1)
     conns_p.add_argument("--type", choices=VALID_RELATIONSHIP_TYPES, dest="rel_type")
+    conns_p.add_argument("--profile", help="Investigation profile (default: active)")
+    conns_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(conns_p)
 
     # search
     search_p = subparsers.add_parser("search", help="Full-text search")
     search_p.add_argument("query")
     search_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
+    search_p.add_argument("--profile", help="Investigation profile (default: active)")
+    search_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(search_p)
 
     # timeline
@@ -744,6 +791,8 @@ def main():
     tl_p.add_argument("--start")
     tl_p.add_argument("--end")
     tl_p.add_argument("--limit", type=int, default=100)
+    tl_p.add_argument("--profile", help="Investigation profile (default: active)")
+    tl_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(tl_p)
 
     # verify
@@ -792,6 +841,8 @@ def main():
 
     # stats
     stats_p = subparsers.add_parser("stats", help="Show statistics")
+    stats_p.add_argument("--profile", help="Investigation profile (default: active)")
+    stats_p.add_argument("--all-profiles", action="store_true", help="Include all profiles")
     add_output_args(stats_p)
 
     args = parser.parse_args()
@@ -831,6 +882,8 @@ def main():
             target=args.target, finding_type=args.finding_type,
             confidence=args.confidence, limit=args.limit,
             thread_id=getattr(args, "thread_id", None),
+            profile_id=getattr(args, "profile", None),
+            all_profiles=getattr(args, "all_profiles", False),
         )
         if not write_output(findings, args, summary=f"findings list: {len(findings)} results"):
             if not findings:
@@ -861,7 +914,9 @@ def main():
         print(f"Created connection #{cid}: {args.person_a} <-> {args.person_b}")
 
     elif args.command == "connections":
-        conns = get_connections(args.person, depth=args.depth, relationship_type=args.rel_type)
+        conns = get_connections(args.person, depth=args.depth, relationship_type=args.rel_type,
+                               profile_id=getattr(args, "profile", None),
+                               all_profiles=getattr(args, "all_profiles", False))
         if not write_output(conns, args, summary=f"connections for '{args.person}': {len(conns)} results"):
             if not conns:
                 print(f"No connections found for '{args.person}'")
@@ -871,7 +926,9 @@ def main():
                     print(format_connection(c))
 
     elif args.command == "search":
-        results = search_findings(args.query, thread_id=getattr(args, "thread_id", None))
+        results = search_findings(args.query, thread_id=getattr(args, "thread_id", None),
+                                  profile_id=getattr(args, "profile", None),
+                                  all_profiles=getattr(args, "all_profiles", False))
         if not write_output(results, args, summary=f"findings search '{args.query}': {len(results)} results"):
             if not results:
                 print(f"No findings matching '{args.query}'")
@@ -881,7 +938,9 @@ def main():
                     print(format_finding(f))
 
     elif args.command == "timeline":
-        events = get_timeline(target=args.target, start_date=args.start, end_date=args.end, limit=args.limit)
+        events = get_timeline(target=args.target, start_date=args.start, end_date=args.end, limit=args.limit,
+                              profile_id=getattr(args, "profile", None),
+                              all_profiles=getattr(args, "all_profiles", False))
         if not write_output(events, args, summary=f"timeline: {len(events)} events"):
             if not events:
                 print("No dated findings found.")
@@ -996,24 +1055,33 @@ def main():
                     print(f"         Evidence: {refs}")
 
     elif args.command == "stats":
-        stats = get_stats()
+        p_id = getattr(args, "profile", None)
+        p_all = getattr(args, "all_profiles", False)
+        stats = get_stats(profile_id=p_id, all_profiles=p_all)
         # Augment with audit stats
+        resolved_profile = _resolve_profile(p_id, p_all)
         db = _get_db_standalone()
+        profile_cond = " AND profile_id = ?" if resolved_profile else ""
+        profile_params = [resolved_profile] if resolved_profile else []
         total_corrections = db.execute("SELECT COUNT(*) FROM corrections").fetchone()[0]
         hallucinations = db.execute(
             "SELECT COUNT(*) FROM corrections WHERE correction_type = 'hallucination'"
         ).fetchone()[0]
         retracted = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE verification_status = 'retracted'"
+            f"SELECT COUNT(*) FROM findings WHERE verification_status = 'retracted'{profile_cond}",
+            profile_params
         ).fetchone()[0]
         verified = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE verification_status = 'verified'"
+            f"SELECT COUNT(*) FROM findings WHERE verification_status = 'verified'{profile_cond}",
+            profile_params
         ).fetchone()[0]
         unverified_ct = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE verification_status = 'unverified'"
+            f"SELECT COUNT(*) FROM findings WHERE verification_status = 'unverified'{profile_cond}",
+            profile_params
         ).fetchone()[0]
         disputed = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE verification_status = 'disputed'"
+            f"SELECT COUNT(*) FROM findings WHERE verification_status = 'disputed'{profile_cond}",
+            profile_params
         ).fetchone()[0]
         db.close()
         stats["audit"] = {
