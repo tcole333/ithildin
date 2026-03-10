@@ -1,0 +1,595 @@
+{
+  "name": "GreenMet",
+  "slug": "greenmet",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.472091",
+  "last_updated": "2026-03-09T14:54:51",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 3,
+      "identity": 1,
+      "relationship": 4,
+      "intelligence": 3
+    },
+    "connection_types": {
+      "corporate": 3,
+      "financial": 2,
+      "employment": 1,
+      "contracts_with": 2
+    },
+    "last_updated": "2026-03-09T14:54:51"
+  },
+  "findings": [
+    {
+      "id": 6154,
+      "finding_type": "financial",
+      "summary": "GreenMet: Trump Org veterans Sorial and Schiller hold shares in Greenland rare earth company",
+      "detail": "GreenMet (Greentech Minerals Holdings Inc.) CEO Drew Horn (former Pence aide, national security official). Shareholders include George Sorial (Trump Org EVP 2002-2019) and Keith Schiller (Trump Org security director, ran Oval Office ops). Both resigned as board members/advisors early 2025 but remain passive minority shareholders. Former Chief Geologist Ned Mamula (ex-CIA analyst) became USGS Director (Oct 2025), recently divested. GreenMet partnered with Tanbreez Mining Greenland A/S (Apr 2025) for rare earth mining - described as 'only shovel ready rare earth project in Greenland'. Helped secure $120M EXIM letter of interest for Tanbreez. Critical Metals Corp took controlling interest in Tanbreez (Sep 2025).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:10:31",
+      "target_name": "GreenMet",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GreenMet press releases",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP investigation Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6164,
+      "finding_type": "identity",
+      "summary": "GreenMet (Greentech Minerals Holdings Inc.) is a Delaware-incorporated company registered at 1825 K St NW Ste 515, DC 20006. SAM.gov: UEI ZD31U1MMR4J7, CAGE 9VEL9, incorporated 2021-04-09. Primary NAICS 551114. SAM POCs: Andrew Horn (CEO) and Nicholas Denno (Dir Ops). Two related DC-registered LLCs at same address (GreenMet Consulting LLC and GreenMet Real Asset Management LLC), both now withdrawn.",
+      "detail": null,
+      "source_datasets": [
+        "sam_gov",
+        "dc_dlcp"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:12:59",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DC_Corp_Registry_C00007696390",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov_UEI_ZD31U1MMR4J7",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6166,
+      "finding_type": "relationship",
+      "summary": "Three Trump-era officials are beneficial owners of GreenMet: George Sorial (Trump Org EVP/Chief Compliance Counsel 2002-2019), Keith Schiller (Trump bodyguard/Dir Oval Office Operations), and Drew Horn (aide to VP Pence, national security official, ex-Army Special Forces/USMC). Sorial and Schiller resigned board/advisory roles early 2025 but remain passive shareholders. Ned Mamula served as GreenMet Chief Geologist before being confirmed as USGS Director (Oct 2025); filed divestiture Jan 2026. In Dec 2024, Sorial and Schiller formed Javelin Advisors LLC, a government relations firm now registered as foreign agent for Pakistan on rare earth minerals deal.",
+      "detail": null,
+      "source_datasets": [
+        "investigative_journalism",
+        "dc_dlcp"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:13:11",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DC_Corp_Registry_beneficial_owners",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA_filings_2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP_Jan_2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6168,
+      "finding_type": "financial",
+      "summary": "GreenMet brokered partnership between Critical Metals Corp (NASDAQ: CRML) and Tanbreez Mining Greenland A/S for Greenland REE development. Critical Metals acquiring 42-92.5% of Tanbreez from Rimbal Pty Ltd (Gregory Barnes). EXIM Bank issued M LOI for 15-year term loan under Supply Chain Resiliency Initiative. Tanbreez PEA: NPV .04B, IRR 180%, 4.7B tonne deposit with 27% HREE content. GreenMet also facilitated 10-year offtake between Critical Metals and Ucore Rare Metals for up to 10K tonnes/year REE concentrates to Ucore DoD-funded Strategic Metals Complex in Louisiana.",
+      "detail": null,
+      "source_datasets": [
+        "investigative_journalism",
+        "sec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:13:20",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Critical_Metals_SEC_filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EXIM_Bank_LOI",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MINING.COM_2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6169,
+      "finding_type": "financial",
+      "summary": "Libra Group (CEO: George Logothetis) made strategic investment in GreenMet in March 2022. Four Libra Group executive team members appointed to GreenMet board. Libra Group is an international business group with subsidiaries in 50+ countries spanning energy, shipping, real estate, and hospitality. This investment provided GreenMet capital and board-level international business connections.",
+      "detail": null,
+      "source_datasets": [
+        "investigative_journalism"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:13:24",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PRNewswire_2022-03-17",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6170,
+      "finding_type": "intelligence",
+      "summary": "GreenMet lobbied continuously from Q2 2021 through 2023 on critical minerals policy, targeting DEF (defense), NAT (natural resources), and ENG (energy) issue areas. Lobbying focused on NDAA critical minerals provisions, rare earth policy development, and mining permitting. Critical Metals Corp also began lobbying in 2025 on critical minerals supply chain advocacy. GreenMet registered in SAM.gov (March 2024) for government contracting eligibility, purpose code Z2 (federal assistance).",
+      "detail": null,
+      "source_datasets": [
+        "lda",
+        "sam_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:13:34",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA_filings_2021-2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov_registration",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6172,
+      "finding_type": "intelligence",
+      "summary": "GreenMet CEO Drew Horn is pursuing a 1.5-gigawatt AI data center in Greenland (Kangerlussuaq area), projected multi-billion dollar cost. Aims for 300MW by mid-2027, 1.5GW by end 2028. GreenMet claims binding investor commitments for half of initial and final phase. However, Greenland government told CNBC it has not engaged in dialogue with Horn or GreenMet about the project. No land or local approvals secured. This represents expansion beyond minerals into AI infrastructure.",
+      "detail": null,
+      "source_datasets": [
+        "media"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:13:40",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ArcticToday",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC_Jan_2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6206,
+      "finding_type": "relationship",
+      "summary": "McKeon Group lobbied for both GreenMet and USA Rare Earth -- shared lobbying firm between two rare earth companies in investigation",
+      "detail": "The McKeon Group Inc., headed by former House Armed Services Committee Chairman Howard Buck McKeon, lobbied for GreenMet from Q4 2021 through Q3 2023 (total ~269500 income). McKeon Group also lobbied for USA Rare Earth (identified in LDA 2024 filings). This connects two rare earth/critical minerals companies in the investigation through a common defense-focused lobbying firm led by a former HASC chairman.",
+      "source_datasets": [
+        "lda_lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 14:54:26",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings for McKeon Group Inc. registrant 2021-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "McKeon Group 2024 LDA filings listing USA RARE as client",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6207,
+      "finding_type": "relationship",
+      "summary": "Cogent Strategies lobbyist Andrew Kauders: revolving door from Podesta Group, House Dem Caucus, adviser to Sen. Menendez (later convicted of bribery)",
+      "detail": "Andrew Kauders, Managing Director at Cogent Strategies who lobbied for GreenMet in Q1-Q2 2024, has a notable revolving-door career: Executive Director of House Democratic Caucus, Senior Adviser to Sen. Robert Menendez (D-NJ, later convicted of bribery in 2024), spokesperson for USDA and White House Climate Change Task Force under Clinton, then Podesta Group lobbyist before co-founding Cogent. LittleSis describes him as former Senior Adviser to R. Menendez of NJ, current Podesta lobbyist. Named Hill Top Lobbyist 2023.",
+      "source_datasets": [
+        "web_search",
+        "littlesis",
+        "opensecrets"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 14:54:51",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Cogent Strategies website biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity ID 15532",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSecrets lobbyist profile Y0000011869L",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6208,
+      "finding_type": "relationship",
+      "summary": "GreenMet's former Chief Govt Affairs Officer Nicole Rodgers founded Alliance for Mineral Security, now at Squire Patton Boggs",
+      "detail": "Nicole Rodgers served as GreenMets Chief Government and External Affairs Officer and in-house lobbyist from Q3 2023 through Q2 2024 termination. She founded the Alliance for Mineral Security (AMS), a national coalition advocating for US mineral independence. After leaving GreenMet, she became Senior Director at Clark Hill Public Strategies and then joined Squire Patton Boggs advisory group. She testified before Congress on critical minerals.",
+      "source_datasets": [
+        "web_search",
+        "congress_gov"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 14:54:51",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Congressional testimony HHRG-119-SM00-20250624-SD007",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Squire Patton Boggs announcement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6209,
+      "finding_type": "intelligence",
+      "summary": "GreenMet lobbying strategy evolved through 4 phases over 37 LDA filings: external firms, in-house team expansion, then contraction to sole lobbyist",
+      "detail": "Phase 1 (Q2-Q4 2021): Strategies 360 with Ami Sanchez, 10K. Phase 2 (Q4 2021-Q3 2023): McKeon Group with Adam Raezler, 269500. Phase 3 (Q2 2023-Q2 2024): In-house team of 6 lobbyists covering NDAA, DPA, critical mineral appropriations, IRA magnet tax credit, national lab R&D. Phase 4 (Q3 2024-present): Sole lobbyist Sabrina Katz on defense, energy, manufacturing, natural resources, trade/tariff. Cogent Strategies overlapped Phase 3 adding 20K. Total external lobbying spend: ~299500. Issues expanded from pure defense to include tariffs by late 2024.",
+      "source_datasets": [
+        "lda_lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 14:54:51",
+      "target_name": "GreenMet",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "37 unique LDA Senate filings for GreenMet/Greentech Minerals (2021-2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3157,
+      "person_a": "Critical Metals Corp",
+      "person_b": "GreenMet",
+      "relationship_type": "corporate",
+      "description": "Tanbreez offtake partnership for DoD REE supply",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:54:30",
+      "profile_id": "tech-right",
+      "other_person": "Critical Metals Corp",
+      "other_person_slug": "critical-metals-corp",
+      "evidence": []
+    },
+    {
+      "id": 3158,
+      "person_a": "GreenMet",
+      "person_b": "Ucore Rare Metals",
+      "relationship_type": "corporate",
+      "description": "Facilitated 10-year offtake agreement",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:54:31",
+      "profile_id": "tech-right",
+      "other_person": "Ucore Rare Metals",
+      "other_person_slug": "ucore-rare-metals",
+      "evidence": []
+    },
+    {
+      "id": 3171,
+      "person_a": "GreenMet",
+      "person_b": "Keith Schiller",
+      "relationship_type": "financial",
+      "description": "Passive minority shareholder, former board member",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:11:23",
+      "profile_id": null,
+      "other_person": "Keith Schiller",
+      "other_person_slug": "keith-schiller",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3173,
+      "person_a": "GreenMet",
+      "person_b": "Ned Mamula",
+      "relationship_type": "employment",
+      "description": "Former Chief Geologist; now USGS Director (divested)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:11:23",
+      "profile_id": null,
+      "other_person": "Ned Mamula",
+      "other_person_slug": "ned-mamula",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USGS announcement",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3170,
+      "person_a": "George Sorial",
+      "person_b": "GreenMet",
+      "relationship_type": "financial",
+      "description": "Passive minority shareholder, former board member",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:11:23",
+      "profile_id": null,
+      "other_person": "George Sorial",
+      "other_person_slug": "george-sorial",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3172,
+      "person_a": "Drew Horn",
+      "person_b": "GreenMet",
+      "relationship_type": "corporate",
+      "description": "CEO and founder of GreenMet",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:11:23",
+      "profile_id": null,
+      "other_person": "Drew Horn",
+      "other_person_slug": "drew-horn",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GreenMet website",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3182,
+      "person_a": "Critical Metals Corp",
+      "person_b": "GreenMet",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:14:18",
+      "profile_id": "tech-right",
+      "other_person": "Critical Metals Corp",
+      "other_person_slug": "critical-metals-corp",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GreenMet brokered Critical Metals partnership with Tanbreez; facilitated EXIM LOI",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3183,
+      "person_a": "GreenMet",
+      "person_b": "Ucore Rare Metals",
+      "relationship_type": "contracts_with",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:14:18",
+      "profile_id": "tech-right",
+      "other_person": "Ucore Rare Metals",
+      "other_person_slug": "ucore-rare-metals",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "GreenMet facilitated 10-year offtake between Critical Metals/Tanbreez and Ucore",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

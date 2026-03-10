@@ -1,0 +1,150 @@
+{
+  "name": "Musk Entities",
+  "slug": "musk-entities",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.547663",
+  "last_updated": "2026-03-05T23:37:25",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 5
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-05T23:37:25"
+  },
+  "findings": [
+    {
+      "id": 5614,
+      "finding_type": "financial",
+      "summary": "FARA negative results: No foreign agent registrations found for Tesla, SpaceX, Musk, Birchall, X Corp, Twitter, Starlink, or Neuralink in FARA database. No Musk entity or officer has registered under the Foreign Agents Registration Act.",
+      "detail": null,
+      "source_datasets": [
+        "fara"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:36:35",
+      "target_name": "Musk Entities",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA database search 2026-03-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5616,
+      "finding_type": "financial",
+      "summary": "UCC filing search negative: No UCC filings found in Florida registry for SpaceX, Excession, Musk Industries, X Holdings, Boring Company, Neuralink, or xAI. Tesla results returned only Tesla Electric Armature and Machine Inc (Jacksonville FL, unrelated company) with two federal liens from 2016.",
+      "detail": null,
+      "source_datasets": [
+        "ucc"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:36:43",
+      "target_name": "Musk Entities",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FL SOS UCC search 2026-03-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5618,
+      "finding_type": "financial",
+      "summary": "PPP loan cross-reference: The Boring Company received $822,395 in PPP loans (2 loans from Zions Bank, both fully forgiven, per finding #5590). No PPP loans found for Tesla Inc, SpaceX, Neuralink, xAI, Excession LLC, Musk Industries, or other PO Box 341886 address cluster entities (per finding #5593). ProPublica database has a Tesla Inc entry (loan ID 3870207406) which appears to be a separate smaller entity.",
+      "detail": null,
+      "source_datasets": [
+        "propublica"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:36:51",
+      "target_name": "Musk Entities",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica PPP Tracker; SBA PPP data; Washington Post analysis 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5620,
+      "finding_type": "financial",
+      "summary": "Musk entities total federal contracts: $19B+ combined. SpaceX $15.4B (NASA $11.2B including CRS-1 $1.6B, CRS-2 $3.2B, Commercial Crew $3.5B, HLS/Starship $2.9B; DOD/Space Force $3.7B; IC $0.5B+). Starlink $2.1B (DOD $1.2B, FCC $0.4B). Tesla $1.2B (GSA fleet $0.6B, DOE $0.4B, USPS $0.2B). Boring Company $350M (DOD $250M). Separately, Tesla received $465M DOE loan in 2010 (repaid 2013) and earned $11.4B in regulatory credit sales since 2014.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:37:06",
+      "target_name": "Musk Entities",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Fed-Spend analysis; USASpending; Fortune/WashPost reporting 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5622,
+      "finding_type": "financial",
+      "summary": "No lobbying found for: The Boring Company, Neuralink, xAI/X.AI, Starlink, Excession LLC, Musk Foundation, or America PAC (as distinct Musk entity) in LDA database. Neuralink, Boring Company, and xAI do not appear to engage in federal lobbying despite regulatory exposure at FDA (Neuralink), DOT (Boring Company), and potential FTC/Commerce (xAI).",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:37:25",
+      "target_name": "Musk Entities",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate database search 2026-03-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": []
+}

@@ -1,0 +1,203 @@
+{
+  "name": "GreenMet (Greentech Minerals Holdings Inc.)",
+  "slug": "greenmet-greentech-minerals-holdings-inc",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.525518",
+  "last_updated": "2026-03-09T19:02:56",
+  "stats": {
+    "total_findings": 7,
+    "total_connections": 0,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "document": 1,
+      "financial": 5
+    },
+    "connection_types": {},
+    "last_updated": "2026-03-09T19:02:56"
+  },
+  "findings": [
+    {
+      "id": 6331,
+      "finding_type": "identity",
+      "summary": "George Sorial and Keith Schiller appear in Washington DC corporate registry documents as beneficial owners of GreenMet (Greentech Minerals Holdings Inc.), alongside CEO Drew Horn. Sorial stated they are 'passive minority shareholders in GreenMet and have no management role in the company.' They resigned board/advisor roles in early 2025 but retained shares. Company HQ: 1825 K St NW 515 Washington DC 20006. Founded 2021.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:19:57",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP:greenland-2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6332,
+      "finding_type": "document",
+      "summary": "GreenMet's compensation for brokering the Critical Metals Corp (CRML) / Tanbreez partnership is NOT disclosed in any CRML SEC filing (confirmed: 0 EDGAR results for GreenMet or Sorial). GreenMet's press release describes itself as facilitating the April 2025 strategic partnership and the August 2025 10-year offtake LOI between CRML/Tanbreez and Ucore Rare Metals for a DOD-funded Louisiana processing facility. GreenMet's role described as 'played a central role in facilitating the partnership, aligning commercial objectives, and ensuring strategic coordination.' No compensation terms disclosed.",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:19:57",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=efts-search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6338,
+      "finding_type": "financial",
+      "summary": "GreenMet (fka Greentech Minerals Holdings Inc.) hired McKeon Group Inc as LDA registered lobbyist beginning Q4 2021 through at least Q1 2024. Lobbying issues: Natural Resources, Defense, Environment/Energy for 'rare earth and critical elements policy.' Government entities contacted include: DOD, White House Office, NSC, NEC, State Dept, Senate, House, Interior Dept, Energy Dept. Total disclosed lobbying income to McKeon: ,500 across 20 filings. Peak quarter Q2 2022: ,500. Lobbyist: Adam Raezler.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:20:32",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:GreenMet-McKeon-2021-2024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6367,
+      "finding_type": "financial",
+      "summary": "Greentech Minerals Holdings Inc. signed a Financing and Purchase Option Agreement with Texas Mineral Resources Corp. (TMRC) on November 8, 2021. Greentech agreed to fund a $6.5M bankable feasibility study for TMRC's Black Hawk Mining District silver project in NM in exchange for 20.2% equity in a proposed TMRC-Santa Fe Gold JV. The deal was abandoned when Greentech determined not to pursue the financing option per TMRC Q1 FY2023 10-Q.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:01:58",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR:0001580695-21-000344",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6368,
+      "finding_type": "financial",
+      "summary": "GreenMet's compensation structure for the CRML-Tanbreez brokerage is structurally invisible. After reviewing all 167 CRML SEC filings (via EDGAR full-text search), the 2024 and 2025 20-F annual reports, and all 6-K press releases, GreenMet is mentioned in ZERO CRML SEC filings. GreenMet's own press releases describe its role as 'facilitating the partnership, aligning commercial objectives, and ensuring strategic coordination' but disclose no fees, equity compensation, advisory agreement, or financial arrangement. The compensation mechanism (if any) is not publicly disclosed.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:02:07",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.sec.gov/edgar/search/#/q=CRML-20F-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6372,
+      "finding_type": "financial",
+      "summary": "GreenMet's three-division corporate structure maps to specific legal entities: (1) GreenMet Advisory = GreenMet Consulting LLC (DC Foreign LLC C00007696390, withdrawn). (2) GreenMet Capital = GreenMet Real Asset Management LLC (DC Foreign LLC C00007684320, withdrawn). (3) GreenMet Innovation = GreenMet Technologies LLC (entity not found in any ingested registries \u2014 DC, FL, NY, DE searches returned zero results; OpenCorporates unavailable due to API key). The absence of GreenMet Technologies LLC from public registries is investigatively significant.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:02:46",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "WEB:greenmet.com/who-we-are",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6373,
+      "finding_type": "financial",
+      "summary": "GreenMet's lobbying expenditure: McKeon Group Inc. lobbied for GreenMet from Q4 2021 through Q3 2023, generating disclosed income of: Q4 2021 $12,000; Q1 2022 $30,000; Q2 2022 $77,500; Q3 2022 $30,000; Q4 2022 $30,000; Q1 2023 $30,000; Q2 2023 $40,000; Q3 2023 $20,000. Total McKeon Group paid by GreenMet: ~$269,500. From Q2 2023 onwards, GreenMet self-lobbied through in-house arm Greentech Minerals Holdings LLC (fka GreenMet Consulting), targeting DoD, DoE, DoS, OSTP, Commerce, DLA, NSC, EOP, Treasury, USTDA.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 19:02:56",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:SENATE-FILINGS-GREENMET",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [],
+  "entities": [],
+  "timeline": []
+}

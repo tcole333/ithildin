@@ -271,12 +271,12 @@
   "timeline": [],
   "curation": {
     "key_finding_ids": [
+      1556,
       582,
       584,
-      1556,
       645,
-      611,
       585,
+      611,
       644
     ],
     "key_identifiers": {
@@ -314,9 +314,35 @@
           774
         ],
         "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "government-contracts",
+        "title": "Government Contracts and Procurement",
+        "viz": null,
+        "finding_ids": [
+          582,
+          584,
+          644
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about federal contracts, procurement vehicles, dollar amounts, agency relationships. Include specific contract IDs, BPA numbers, and dollar figures."
       }
     ],
-    "curated_at": "2026-02-20T01:17:47.432894",
+    "evidence_quality": {
+      "strong_ids": [
+        582,
+        584,
+        585,
+        611,
+        644,
+        645,
+        1556
+      ],
+      "moderate_ids": [],
+      "weak_ids": [],
+      "summary": "7 primary-sourced, 0 structured-data, 0 web-only"
+    },
+    "curated_at": "2026-03-10T13:41:28.651305",
     "lead": "<p>Elizabeth Ross Johnson (1925\u20132017), known as Libet Johnson, was an heiress to the Johnson & Johnson pharmaceutical fortune and a prominent Manhattan real estate holder whose documented financial relationship with <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> represents one of the earliest known cases of Epstein\u2019s pattern of gaining financial control over ultra-wealthy individuals. Deutsche Bank due diligence records (EFTA01296720) reveal that Johnson added Epstein as co-owner of her $19.28 million Vail, Colorado estate at 375 Mill Creek Circle, with both parties listing Epstein\u2019s business address at 457 Madison Avenue, New York, as their own \u2014 the same address used by J. Epstein & Co. and numerous other Epstein entities (Findings #582, #585). Epstein\u2019s access to Johnson\u2019s wealth reportedly originated through <a href=\"/dossiers/les-wexner\">Les Wexner</a>: \u201cWexner gave him legitimacy as a money manager for the wealthy, and he began handling the portfolio of Elizabeth Ross Johnson\u201d (EFTA01365971, Finding #1556).</p><p>The Vail property co-ownership was dissolved on August 26, 1998, through a transaction classified as an \u201cINTRAFAMILY TRANSFER AND DISSOLUTION\u201d \u2014 a designation that implies the relationship was characterized as familial in nature (Finding #584). Within three months, Johnson restructured her financial management by amending her revocable trust on May 13, 1998, installing family member Christopher Wold Johnson as co-trustee and routing all subsequent property transactions through professional counsel at Baer Marks and Upham LLP rather than through Epstein\u2019s office (Finding #645). This coordinated unwinding suggests a deliberate separation from Epstein\u2019s financial operations.</p><p>Johnson\u2019s documented NYC real estate portfolio exceeded $65 million across multiple units at 1 Central Park West, managed through the Elizabeth Ross Johnson Amended and Restated Revocable Trust (Finding #644). Her family connections include <a href=\"/dossiers/woody-johnson\">Woody Johnson</a> (Robert Wood Johnson IV), owner of the New York Jets and later U.S. Ambassador to the United Kingdom. A \u201ctabloid fixture in New York with five husbands and years of family drama\u201d (EFTA01365971), Johnson also maintained a social relationship with celebrity hairstylist Frederic Fekkai, who was reportedly gifted a Gulfstream jet by a wealthy girlfriend (EFTA01334074, Finding #1556). Johnson died in 2017 at age 92, before the full scope of Epstein\u2019s operations became public.</p>",
     "sections": [
       {
@@ -381,34 +407,22 @@
       "secondHop": {
         "Jeffrey Epstein": [
           {
-            "target": "Leon Black",
+            "target": "Paul Anthony Novelly",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Both officers of Liquid Funding, Ltd. (Bermuda). Novelly is associated with multiple GRAT trusts and A.I.C. LIMITED in the ICIJ data, registered at 8235 Forsyth Blvd Suite 400, Clayton MO 63105."
+          },
+          {
+            "target": "Ronald S. Lauder",
+            "type": "corporate",
+            "strength": 0.7,
+            "description": "Shared Bermuda registered addresses: Epstein's Liquid Funding, Ltd. and Lauder's Tech Water, Ltd. both registered at Canon's Court, 22 Victoria St, Hamilton HM 12 and Argyle House, 41a Cedar Ave, Hamilton HM 12, Bermuda. Both serviced by Appleby Services (Bermuda) Ltd."
+          },
+          {
+            "target": "Stephen Feinberg",
             "type": "financial",
-            "strength": 1.0,
-            "description": "$158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019."
-          },
-          {
-            "target": "Kathy Ruemmler",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will."
-          },
-          {
-            "target": "Reid Weingarten",
-            "type": "legal",
-            "strength": 1.0,
-            "description": "Defense counsel 19 Cr. 490 (SDNY 2019). Personal advisor 2011-2019, 245+ emails. ~450K paid in Steptoe fees, 300K owed. Paris travel Sept 2011. Regular breakfast meetings at 71st St."
-          },
-          {
-            "target": "Landon Thomas Jr",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "185-email correspondence 2007-2019. Thomas served as Epstein media asset: advance warning of investigations, brokered intros to Masa Son and Tom Barrack, received 40K+ payments to charity, wrote defining 2002 profile and 2008 NYT piece. Classified as compromised source."
-          },
-          {
-            "target": "Landon Thomas Jr",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Epstein directed 40K+ to Thomas charity (Ricardo O Gorman Garden): 10K from foundation in Mar 2015 plus 30K from Gratitude America in Aug 2017. Thomas provided wire instructions for TD Bank account."
+            "strength": 0.2,
+            "description": "POGO: Epstein files show financial ties to Feinberg. Feinberg now serves as #2 at Pentagon."
           }
         ]
       },

@@ -1,0 +1,431 @@
+{
+  "name": "America PAC",
+  "slug": "america-pac",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.505742",
+  "last_updated": "2026-03-05T23:37:19",
+  "stats": {
+    "total_findings": 9,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 6,
+      "legal": 2,
+      "relationship": 1
+    },
+    "connection_types": {
+      "financial": 5,
+      "political": 3
+    },
+    "last_updated": "2026-03-05T23:37:19"
+  },
+  "findings": [
+    {
+      "id": 4384,
+      "finding_type": "financial",
+      "summary": "Four Musk personal LLCs funneled ~80M in services to America PAC for Trump 2024 campaign: Europa 100 LLC (oldest Musk entity, also paid PAC treasurer Chris Young up to 1M salary), United States of America Inc (voter outreach with 47-dollar checks for petition signing), Group America LLC (campaign expenses), Excession LLC (family office, retirement plan contributions). The 47-dollar payment scheme operated as petition signing for First/Second Amendment support. Europa 100 previously used to pay nannies, repurposed for massive political spending. This structure routes campaign spending through personal LLCs rather than direct donations.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:45:36",
+      "target_name": "America PAC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NYT 2026-02-27, FEC filings for America PAC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4404,
+      "finding_type": "legal",
+      "summary": "America PAC voter payment scheme and legal challenges: PAC offered 47-dollar then 100-dollar payments to registered voters in swing states who signed petition supporting free speech and gun rights. Also ran 1M lottery-style giveaways. Philadelphia DA Larry Krasner sued alleging illegal unregulated lottery under PA law. PA judge declined to enjoin, allowing final giveaway to proceed. PAC defense: winners are spokespeople who 'earn' money, not lottery. Forum shopping: America PAC sought to move Krasner suit to federal court. Total ~80M funneled through Europa 100 LLC, United States of America Inc, Group America LLC, and Excession LLC. Chris Young (PAC treasurer) earned up to 1M from Europa 100.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:49:36",
+      "target_name": "America PAC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News 2024, Rolling Stone 2024, PA Capital-Star 2024, Democracy Docket, FedSoc commentary",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4421,
+      "finding_type": "financial",
+      "summary": "America PAC (C00879510) operational scale: 2024 cycle receipts 263.5M, disbursements 261.3M, independent expenditures 173.7M. 99.25% individual contributions (virtually all Musk). Only 20 dollars in unitemized contributions \u2014 single-donor vehicle. 2026 cycle already 48.2M receipts, 50.2M disbursements, 37.4M operating expenses but only 87K in IE \u2014 building midterm infrastructure. Georgia State Election Board reprimanded PAC for sending pre-filled absentee ballot applications violating GA election law. PAC formed May 2024, treasurer Chris Young (Texas-based GOP campaign finance lawyer Chris Gober formed it). Musk total 2024 election spending: 290M+ per CNN.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:52:10",
+      "target_name": "America PAC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC committee financials C00879510, CNN 2025-02-01, The Verge 2026-02-21, Black Enterprise 2026-02-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4430,
+      "finding_type": "financial",
+      "summary": "America PAC vendor network: 2024 cycle disbursements dominated by USA Inc (11.2M in-kind), Blitz Canvassing (54M+ canvassing), Red Elephant Strategy (35K), IMGE LLC (21K consulting). 2025-2026 cycle: USA Inc (27.3M in-kind), Lex Politica PLLC (217K legal), IMGE LLC (92K digital), Rightside Compliance (30K), ALX (20K social media), CSC LLC (5K strategy), Excession LLC (3.3K in-kind). Key canvassing vendors: Blitz Canvassing LLC, Patriot Grassroots LLC, Echo Canyon Consulting, Synapse Group.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 21:10:52",
+      "target_name": "America PAC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC C00879510 Schedule B disbursements 2024 and 2026 cycles",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4431,
+      "finding_type": "relationship",
+      "summary": "America PAC shell entity hierarchy confirmed via TX Comptroller: United States of America Inc (TID 32097038932, SOS 0805733050, formed 10/2/2024) \u2014 Musk as President, Birchall as Secretary, address 2025 Guadalupe St Suite 260 Austin TX. USA Inc is sole member of Group America LLC (TID 32097028388, formed 10/2/2024). Europa 100 LLC (TID 32075024482, formed 7/14/2020) and Excession LLC (TID 32075024201, formed 7/14/2020) are older Birchall-managed entities at PO Box 341886 Austin TX. All use Registered Agent Solutions Inc. Europa 100 pays Chris Young; Excession provides his retirement plan.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 21:11:01",
+      "target_name": "America PAC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX Comptroller entity records: TIDs 32097038932, 32097028388, 32075024482, 32075024201",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4433,
+      "finding_type": "legal",
+      "summary": "America PAC legal challenges: (1) PA Commonwealth Court: Phila DA Larry Krasner sued over 1M/day sweepstakes as illegal lottery. Judge Angelo Foglietta allowed it to continue Nov 2024 after Young testified winners were pre-selected, not random. (2) GA State Election Board: formal reprimand for sending pre-filled absentee ballot applications violating O.C.G.A. 21-2-381. Counties: Chattooga, Cherokee, Coweta, Floyd, Whitfield. (3) NC/MI investigations into voter registration fraud. (4) Federal cases: Doe v. America PAC (E.D. Pa. 2:25-cv-01691), Henderson v. America PAC (E.D.N.C. 4:25-cv-00012), Crawford v. America PAC (D. Ariz. 2:25-cv-00338).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 21:11:11",
+      "target_name": "America PAC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket search; PBS News; 11alive.com GA election board report; CNBC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4467,
+      "finding_type": "financial",
+      "summary": "America PAC (C00879510) raised $263.5M and spent $261.3M in 2024 cycle. Made $78.8M in in-kind contributions to United States of America Inc (Musk entity, TID 32097038932). Treasurer: Chris Gober. Director/Treasurer also Chris Young. PAC replaced September Group canvassing vendor (paid $1.4M) with GP3 subsidiary Blitz Canvassing in Sept 2024. Also paid Synapse Group LLC $6M+ for canvassing and $1M each to 10+ spokesperson consultants.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 21:35:13",
+      "target_name": "America PAC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC committee C00879510 totals",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX Comptroller TID 32097038932 USA Inc",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nbcnews.com/politics/2024-election/elon-musks-high-stakes-trump-door-knocking-effort-america-pac-rcna176255",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5601,
+      "finding_type": "financial",
+      "summary": "America PAC (C00879510) is a Super PAC (Independent Expenditure-Only) headquartered in TX. Treasurer: Chris Young. Founded 2024-05-22. 2024 cycle: raised .5M, disbursed .3M, made .7M in independent expenditures (66.5% of spending). 2025/2026 cycle (through Dec 2025): raised .2M, disbursed .2M, operating expenditures .4M, only K in IEs. Cash on hand at end of 2025: K. Key donors: Elon Musk (.8M), United States of America Inc (.9M). Key disbursement recipients: United States of America Inc (.3M in-kind), three M spokesperson consultants (Diestler, Jacobs, Ainsworth). IEs supported Trump (.3M) and opposed Harris (K) in 2024.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:35:21",
+      "target_name": "America PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FEC financial summary C00879510; FEC Schedule A/B/E filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5607,
+      "finding_type": "financial",
+      "summary": "America PAC receipts show Excession LLC (,324 in-kind contribution, Jun 2025), Group America LLC (,752, 4 contributions, Dec 2024), Europa 100 LLC (,811, 2 contributions, Dec 2024), 333 Main LLC (,840, Apr 2025), and Elon Musk Revocable Trust (,425, Apr 2025) as donors. Excession LLC is Musk's personal holding company; its appearance confirms direct financial linkage. America PAC disbursed ,324 back to Excession LLC and ,425 to Elon Musk Revocable Trust as in-kind contributions. These in-kind flows suggest the PAC used Musk-controlled entities for operational expenses that were then classified as in-kind donations.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:36:02",
+      "target_name": "America PAC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FEC Schedule A/B filings for America PAC C00879510",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2639,
+      "person_a": "America PAC",
+      "person_b": "Phil Cox",
+      "relationship_type": "financial",
+      "description": "Cox co-founded GP3 LLC which owns Blitz Canvassing LLC. Simultaneously operated America PAC starting July 2024. Directed 64.6M in PAC funds to his own subsidiary \u2014 25% of total PAC spending.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 21:38:45",
+      "profile_id": "epstein",
+      "other_person": "Phil Cox",
+      "other_person_slug": "phil-cox",
+      "evidence": []
+    },
+    {
+      "id": 3027,
+      "person_a": "America PAC",
+      "person_b": "Elon Musk",
+      "relationship_type": "financial",
+      "description": "Musk is primary funder of America PAC (.8M in 2024-2025)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:37:12",
+      "profile_id": "tech-right",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC C00879510",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3028,
+      "person_a": "America PAC",
+      "person_b": "United States of America Inc",
+      "relationship_type": "financial",
+      "description": "Circular financial flow: USA Inc donates .9M to America PAC, America PAC makes .3M in-kind to USA Inc",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:37:14",
+      "profile_id": "tech-right",
+      "other_person": "United States of America Inc",
+      "other_person_slug": "united-states-of-america-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC C00879510",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3029,
+      "person_a": "America PAC",
+      "person_b": "Antonio Gracias",
+      "relationship_type": "financial",
+      "description": "Gracias donated M to America PAC (Jun 2024), plus M to MAGA Inc (Jan 2025)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:37:16",
+      "profile_id": "tech-right",
+      "other_person": "Antonio Gracias",
+      "other_person_slug": "antonio-gracias",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2636,
+      "person_a": "America PAC",
+      "person_b": "Phil Cox",
+      "relationship_type": "political",
+      "description": "Cox is GP3 co-founder/partner. GP3 subsidiary Blitz Canvassing received $64.6M from America PAC in 2024. Cox, Peck, Rexrode took guiding positions at America PAC in July 2024 while their company received the PAC's largest vendor payments.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 21:35:50",
+      "profile_id": "epstein",
+      "other_person": "Phil Cox",
+      "other_person_slug": "phil-cox",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TX Comptroller TID 32079693290 GP3 LLC",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.rollingstone.com/politics/politics-news/elon-musk-trump-super-pac-desantis-1235083012/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2637,
+      "person_a": "America PAC",
+      "person_b": "Chris Young",
+      "relationship_type": "political",
+      "description": "Young is Director and Treasurer of America PAC. Hired by Musk Aug 2024 to oversee PAC operations. Young audited Blitz canvassing tallies in NV. PAC spent $261M in 2024 cycle including $78.8M in-kind to Musk's USA Inc entity where Young is VP.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 21:35:56",
+      "profile_id": "epstein",
+      "other_person": "Chris Young",
+      "other_person_slug": "chris-young",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC C00879510",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/young-chris-doge-agent/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3020,
+      "person_a": "America PAC",
+      "person_b": "Chris Young",
+      "relationship_type": "political",
+      "description": "Treasurer of America PAC which received 239M+ in direct contributions from Musk.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:21:21",
+      "profile_id": "tech-right",
+      "other_person": "Chris Young",
+      "other_person_slug": "chris-young",
+      "evidence": []
+    },
+    {
+      "id": 3031,
+      "person_a": "America PAC",
+      "person_b": "Excession LLC",
+      "relationship_type": "financial",
+      "description": "Excession LLC (Musk personal holding) appears as America PAC in-kind donor (,324)",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:37:19",
+      "profile_id": "tech-right",
+      "other_person": "Excession LLC",
+      "other_person_slug": "excession-llc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC C00879510",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

@@ -1,0 +1,442 @@
+{
+  "name": "8VC",
+  "slug": "8vc",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.517606",
+  "last_updated": "2026-03-05T20:43:09",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 8,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4,
+      "intelligence": 3,
+      "relationship": 1
+    },
+    "connection_types": {
+      "corporate": 1,
+      "employment": 3,
+      "financial": 4
+    },
+    "last_updated": "2026-03-05T20:43:09"
+  },
+  "findings": [
+    {
+      "id": 4593,
+      "finding_type": "financial",
+      "summary": "8VC defense portfolio: Joe Lonsdale (Palantir co-founder) is founding partner. Key defense investments: Epirus Inc (drone detection/intercept, co-founded by Lonsdale 2018), Saronic (robotic boat drones, seed 2022, raising M at B), Overland AI (autonomous defense vehicles), Terra Industries (Nigerian drone startup, .8M). Seeking B for Fund VI. Lonsdale FEC donations: K+ total, heavily Republican -- .8K Trump 47 Committee, K RNC, K Grow The Majority, K NRCC.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:00:20",
+      "target_name": "8VC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Yahoo Finance, TechCrunch 2025-01-29, FEC filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4699,
+      "finding_type": "intelligence",
+      "summary": "8VC deep dive: Joe Lonsdale's $6B+ VC firm employs sons of two sanctioned Russian oligarchs while investing heavily in US defense companies. Jack Moshkovich (son of Vadim Moshkovich, sanctioned by EU/UK/Switzerland/Canada/Australia) joined as analyst 2018, obtained US permanent residency 2024. Denis Aven (son of Petr Aven, Alfa Group co-founder, sanctioned by EU/UK/US) joined 2022 \u2014 hired after another PE firm refused him due to sanctions risk. 8VC defense portfolio: Palantir, Anduril, Saronic (robotic boats), Epirus (counter-drone), Overland AI (autonomous vehicles), Terrahaptix (Nigerian drone startup, $11.8M). Also investor in Erebor Bank. Lonsdale FEC: $80.5K in 2025, all Republican.",
+      "detail": "Russian oligarch connections:\nJack Moshkovich: Stanford grad, joined 8VC 2018 as analyst. Father Vadim Moshkovich founded Rusagro agricultural conglomerate. Sanctioned by EU, UK, Switzerland, Canada, Australia after Russia's 2022 Ukraine invasion for alleged Kremlin ties. Jack obtained US permanent residency summer 2024.\n\nDenis Aven: Joined 8VC 2022. Father Petr Aven is president of Alfa Group (one of Russia's largest financial/industrial consortia). Sanctioned by EU and UK pre-2023, US blacklisted 2023. Per Forbes, Denis was hired after another PE firm refused him due to sanctions concerns.\n\nUS National Counterintelligence and Security Center issued bulletin warning Silicon Valley about foreign countries using investment firms to access classified data/technologies. 8VC's defense portfolio includes companies with classified government contracts.\n\nLonsdale's response: 'strict compliance and legal framework.' No evidence fathers have financial relationship with 8VC. But the counterintelligence concern isn't about money \u2014 it's about access to information about defense technology companies through employment at the fund.\n\nPolitical donations (FEC 2025):\nJoe Lonsdale: $80.5K total, all Republican\n  - $10K WinRed, $10K Cotton Majority Committee\n  - $5K each: WinRed, Republican Majority Fund, Restore Trust PAC\n  - $3.5K each: multiple individual Republican campaigns (Womack, Risch, Collins, Mike Lee)\n  - Pattern: strategic donations to defense-relevant committee members\n\n8VC model: 25-30% of capital dedicated to co-founding startups through 'Build' program. Recruits 'top-1% specialists like Navy SEALs, Nobel winners, and Palantir alumni.' Focus on 'national capability' companies.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 19:35:09",
+      "target_name": "8VC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forbes August 2024 (8VC-oligarch report), Money Down investigation, New Voice of Ukraine, FEC individual contribution records 2025, 8VC website",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4746,
+      "finding_type": "intelligence",
+      "summary": "8VC employs sons of two sanctioned Russian oligarchs: Jack Moshkovich (son of Vadim Moshkovich, EU-sanctioned Rusagro founder) and Denis Aven (son of Petr Aven, US/EU/UK-sanctioned Alfa Group co-founder)",
+      "detail": "Jack Moshkovich joined 8VC as analyst in 2018 after Stanford BS in Management Science & Engineering and McKinsey Moscow office. Now promoted to Partner (Jan 2025). Denis Aven joined 8VC in 2022 (after Yale BA, Lazard, Warburg Pincus, Harvard MBA with Distinction). Forbes reported Aug 2024. Lonsdale confirmed hiring, stated strict compliance framework. Neither son reportedly worked on military-related deals. Moshkovich introduced Aven to 8VC. Aven was hired after another PE firm refused him due to sanctions fears.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:12:34",
+      "target_name": "8VC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forbes report Aug 2024 (David Jeans)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "InformNapalm Sins of the Fathers",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NV.UA English edition",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4749,
+      "finding_type": "financial",
+      "summary": "8VC manages 6B+ in committed capital across 60+ SEC-registered fund entities; Fund VI (998M, Jan 2025) and Entrepreneurs Fund VI (10.5M); all Delaware LPs/LLCs headquartered at 907 S Congress Ave, Austin TX",
+      "detail": "SEC EDGAR shows 60+ 8VC fund entities with Form D filings. Key funds: Fund VI LP (998M, filed 2025-01-29, CIK 0002041827), Fund V LP (880M, 2023), Fund IV LP, Fund III LP, Fund II LP. Defense-related SPVs: Build Saronic SPV II LLC (53.35M offering/47M sold, 27 investors), EPSD SPV LLC (5M Epirus), ERSA SPV LLC (42.15M fully sold, 30 investors). Also: 6 AI Fund vehicles, multiple Entrepreneurs Funds, Access Funds. All funds list Joseph Lonsdale as sole executive officer (Managing Member of General Partner). Legal name: Eight Partners LLC. Formed in Delaware.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:09",
+      "target_name": "8VC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CIK 0002041827",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CIK 0002051048",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CIK 0002056351",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CIK 0002076994",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR Form D filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4750,
+      "finding_type": "relationship",
+      "summary": "8VC defense portfolio includes Palantir, Anduril, Saronic (4B valuation), Epirus (550M+ raised), Chaos Industries (4.5B valuation), Gallatin AI, CX2, iCOMAT, and Terra; Alex Moore (Palantir employee #1) runs 8VC Defense",
+      "detail": "8VC is one of the most concentrated defense-tech investors in Silicon Valley. Alex Moore, first employee of Palantir Technologies, runs Defense for 8VC and sits on boards for Palantir, Saronic, Epirus, Chaos, Gallatin, CX2, iCOMAT, and Terra. Saronic builds autonomous naval vessels (4B valuation). Epirus develops directed energy anti-drone systems (250M Series D, 550M+ total, co-led by 8VC). Chaos Industries builds defense technology (4.5B valuation after Series D). Gallatin does AI-fueled military logistics (15M seed from 8VC). Terra is Nigerian drone startup. Combined these companies hold billions in Pentagon/DOD contracts.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:20",
+      "target_name": "8VC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "8VC team page (Alex Moore)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Crunchbase",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Technology",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4752,
+      "finding_type": "intelligence",
+      "summary": "8VC-Erebor Bank connection: 8VC is investor in Erebor, a digital bank co-founded by Palmer Luckey (Anduril founder) with OCC charter, 635M capital, 4.35B valuation; backed by Founders Fund, 8VC, Lux Capital",
+      "detail": "Erebor Bank secured first new US bank charter under Trump second term. OCC approval plus FDIC deposit insurance. Digital-first bank focused on crypto, AI, defense, and advanced manufacturing sectors. Raised 350M at 4.35B valuation led by Lux Capital with participation from Founders Fund, 8VC, Haun Ventures. Co-founded by Palmer Luckey (also founder of Oculus VR and Anduril Industries). Aims to serve startups and venture-backed companies post-SVB collapse. 8VC thus has investment overlap with Anduril (defense) and Erebor (banking for defense-tech ecosystem).",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:43",
+      "target_name": "8VC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AInvest",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PitchBook",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Traded.co",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TradersUnion",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5380,
+      "finding_type": "financial",
+      "summary": "8VC GP I (CIK 0001667766, Joe Lonsdale) held Joby Aviation (JOBY) as its sole material public equity position across Q4 2024-Q4 2025. Halved position from 9.6M to 4.8M shares between Q2-Q3 2025. Values: Q4 2024 $78.0M (9.6M shares), Q1 2025 $57.8M, Q2 2025 $101.2M, Q3 2025 $77.4M (4.8M shares), Q4 2025 $63.3M. Joby has $163M in DoD contracts (USAF Agility Prime, USSOCOM logistics). Partnered with L3Harris on hybrid VTOL for military in Aug 2025.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:40:37",
+      "target_name": "8VC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR 13F-HR filings, CIK 0001667766, Q4 2024 through Q4 2025; Joby Aviation press releases re DoD contracts",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5393,
+      "finding_type": "financial",
+      "summary": "8VC's entire 13F public equity portfolio is a single stock: Joby Aviation. Across Q4 2024-Q4 2025, 8VC held only Joby plus one micro-cap biotech (Senti Biosciences, dropped in Q4 2025). This is extraordinary concentration -- Lonsdale's fund has $63M in a single defense eVTOL company and nothing else. Joby has $163M in DoD contracts (Agility Prime, USSOCOM/CENTCOM logistics at MacDill AFB) and partnered with L3Harris on hybrid VTOL for military (Aug 2025). 8VC sold half its Joby position (9.6M to 4.8M shares) between Q2-Q3 2025.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:41:34",
+      "target_name": "8VC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR 13F-HR filings, CIK 0001667766, Q4 2024 through Q4 2025; Joby Aviation press releases on DoD contracts (total value $163M)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2705,
+      "person_a": "8VC",
+      "person_b": "Joe Lonsdale",
+      "relationship_type": "corporate",
+      "description": "Lonsdale founded 8VC; Palantir co-founder; defense portfolio includes Epirus, Saronic, Overland AI",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:02:38",
+      "profile_id": "tech-right",
+      "other_person": "Joe Lonsdale",
+      "other_person_slug": "joe-lonsdale",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "8vc.com",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "8vc.com, Wikipedia",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2780,
+      "person_a": "8VC",
+      "person_b": "Jack Moshkovich",
+      "relationship_type": "employment",
+      "description": "Partner at 8VC since 2018 (analyst->principal->partner Jan 2025), son of sanctioned Vadim Moshkovich",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:57",
+      "profile_id": "epstein",
+      "other_person": "Jack Moshkovich",
+      "other_person_slug": "jack-moshkovich",
+      "evidence": []
+    },
+    {
+      "id": 2781,
+      "person_a": "8VC",
+      "person_b": "Denis Aven",
+      "relationship_type": "employment",
+      "description": "Investor at 8VC since 2022, son of OFAC-sanctioned Petr Aven (Alfa Group)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:57",
+      "profile_id": "epstein",
+      "other_person": "Denis Aven",
+      "other_person_slug": "denis-aven",
+      "evidence": []
+    },
+    {
+      "id": 2782,
+      "person_a": "8VC",
+      "person_b": "Joe Lonsdale",
+      "relationship_type": "employment",
+      "description": "Founder and Managing Partner of 8VC; sole executive officer on all Form D filings",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:57",
+      "profile_id": "epstein",
+      "other_person": "Joe Lonsdale",
+      "other_person_slug": "joe-lonsdale",
+      "evidence": []
+    },
+    {
+      "id": 2783,
+      "person_a": "8VC",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "financial",
+      "description": "8VC investor in Palantir; Lonsdale co-founded Palantir; Alex Moore was Palantir employee #1",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:57",
+      "profile_id": "epstein",
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": []
+    },
+    {
+      "id": 2784,
+      "person_a": "8VC",
+      "person_b": "Anduril Industries",
+      "relationship_type": "financial",
+      "description": "8VC early investor in Anduril; defense technology company with billion-dollar Pentagon contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:57",
+      "profile_id": "epstein",
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": []
+    },
+    {
+      "id": 2785,
+      "person_a": "8VC",
+      "person_b": "Apollo Global Management",
+      "relationship_type": "financial",
+      "description": "Strategic partnership Oct 2025 to deploy several billion dollars in defense, manufacturing, energy",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 23:13:57",
+      "profile_id": "epstein",
+      "other_person": "Apollo Global Management",
+      "other_person_slug": "apollo-global-management",
+      "evidence": []
+    },
+    {
+      "id": 2966,
+      "person_a": "8VC",
+      "person_b": "Joby Aviation",
+      "relationship_type": "financial",
+      "description": "8VC sole public equity holding: 4.8M shares of Joby Aviation ($63M), a defense eVTOL company with $163M in DoD contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:43:09",
+      "profile_id": "tech-right",
+      "other_person": "Joby Aviation",
+      "other_person_slug": "joby-aviation",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

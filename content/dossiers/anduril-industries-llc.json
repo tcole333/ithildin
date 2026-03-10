@@ -1,0 +1,475 @@
+{
+  "name": "Anduril Industries LLC",
+  "slug": "anduril-industries-llc",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.462816",
+  "last_updated": "2026-03-03T17:00:10",
+  "stats": {
+    "total_findings": 11,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 5,
+      "intelligence": 4,
+      "legal": 1,
+      "identity": 1
+    },
+    "connection_types": {
+      "corporate": 3
+    },
+    "last_updated": "2026-03-03T17:00:10"
+  },
+  "findings": [
+    {
+      "id": 4565,
+      "finding_type": "financial",
+      "summary": "Anduril Industries, Inc. is incorporated in Delaware (file #6386483), formed April 20, 2017. Legal address: c/o Incorporating Services, Ltd., 3500 S DuPont Hwy, Dover, DE 19901. HQ: 1375 Sunflower Avenue, Costa Mesa, CA 92626. LEI: 254900CIXLZUXXNYQW57. Total funding: .26B. Series G (June 2025): .5B at .5B valuation led by Founders Fund (B). Series F (Aug 2024) at B. Currently seeking B raise at B+ valuation for 2026.",
+      "detail": null,
+      "source_datasets": [
+        "gleif"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 16:55:12",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC 2025-06-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF API",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch 2025-06-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4566,
+      "finding_type": "financial",
+      "summary": "Anduril PAC (Anduril Industries, Inc. Political Action Committee) receives donations from senior employees. Key donors: Sam Yoon (,000), Gregory Kausner (,696), Matthew Steckman (,848), Chris Brose (,496), Keith Flynn (,496), Megan Milam (,496), Zachary Mears (,152). Several are former senior government officials - Brose was SASC staff director, Milam is registered lobbyist, Kausner was DOD official.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:55:15",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC API",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4567,
+      "finding_type": "intelligence",
+      "summary": "Anduril lobbying began September 2017 (same month as founding) through Invariant LLC (Heather Podesta's firm). Lobbying issues: Defense, Homeland Security, Budget/Appropriations, Law Enforcement. Lobbying spend via Invariant escalated from K (Q3 2017) to K/quarter by 2020. Key lobbyists: Heather Podesta (former Congressional counsel), Benjamin Klein (former Sen. Dorgan staff), Robert Hoffman (former Sen. DeWine staff), Sean Joyce (former Rep. Shuster/McHenry staff). By Q4 2020, Anduril added 3 more lobbying firms: self-registered in-house (Megan Milam), Thorn Run Partners, and Cornerstone Government Affairs.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:55:22",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate Lobbying Database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4568,
+      "finding_type": "intelligence",
+      "summary": "Anduril selected alongside Palantir as prime contractor for Army TITAN (Tactical Intelligence Targeting Access Node) deep-sensing system for long-range fires. Palantir awarded .4M prime agreement; Anduril leads hardware design, development, and scaled manufacturing across 10 TITAN vehicles. First TITAN Basic and second TITAN Advanced prototypes delivered on-time (2025). Production decision expected FY2026. Anduril manufacturing in Costa Mesa, CA.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:55:31",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Anduril press release 2024-03-08",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Axios 2025-03-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4569,
+      "finding_type": "intelligence",
+      "summary": "Anduril among awardees of up to B Golden Dome missile defense contract. Consortium includes SpaceX, Palantir, Anduril, Northrop Grumman, Lockheed Martin, True Anomaly, Firefly Aerospace, AeroVironment, Blue Origin, Redwire. SpaceX-Anduril-Palantir partnership presented proposal for 400-1000+ tracking satellites plus 200 attack satellites with missiles/lasers. Final Golden Dome contract decisions expected early 2026.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:55:37",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC 2026-01-27",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Fortune 2025-05-21",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovExec 2025-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4573,
+      "finding_type": "legal",
+      "summary": "Key litigation: (1) Total Recall Technologies v. Palmer Luckey (N.D. Cal. 3:15-cv-02281, filed 2015, appealed to 9th Cir. 19-15544) - contract dispute over Oculus VR origins. (2) ZeniMax Media v. Oculus VR (N.D. Tex. 3:14-cv-01849, filed 2014) - copyright/trade secrets, jury found M damages against Facebook, Luckey personally ordered to pay M for NDA violation. (3) Iron Bird LLC v. Anduril Industries (D. Del. 1:25-cv-00210, filed 2025-02-20, terminated 2025-03-26) - patent infringement claim.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis",
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:56:05",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener",
+          "source_quote": "cases search Palmer Luckey - 20 results; LittleSis:entity 158415 summary",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4574,
+      "finding_type": "financial",
+      "summary": "SEC EDGAR reveals extensive secondary market for Anduril shares. At least 20+ SPVs filing Form D: Dominari Master SPV Series XIV/XXVII Anduril, Augurey Ventures II/III/IV Series Anduril, Aurochs Capital Fund Series Anduril, Tomales Bay Capital Anduril I/II/III (Lux Capital), Anduril Holdings SPV LP, EQ AD Anduril, Bloom Opportunities Anduril, Inflection Ventures Anduril Fund IV, OPX Anduril (Opulentia Ventures), Greenbird Intelligence Fund Series O/T Anduril, JDY Anduril SPV. Major mutual fund holders: Fidelity (multiple funds), Franklin Strategic Series, BlackRock Science & Technology Trust, Variable Insurance Products Fund.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 16:56:16",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR EFTS",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4576,
+      "finding_type": "intelligence",
+      "summary": "Anduril leadership pipeline from national security establishment. Christian Brose: promoted to President & Chief Strategy Officer (Jan 2025), former Staff Director of Senate Armed Services Committee for 3 years under Sen. John McCain, Senior Fellow at Carnegie Endowment, member Aspen Strategy Group, author of 'The Kill Chain'. Matthew Steckman: COO. Megan Milam: registered federal lobbyist. Gregory Kausner: former DOD official. This revolving door between SASC/DOD and Anduril is the primary mechanism for defense procurement access.",
+      "detail": null,
+      "source_datasets": [
+        "fec",
+        "lobbying"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:56:27",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Anduril.com leadership page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4577,
+      "finding_type": "financial",
+      "summary": "USASpending confirms Anduril Industries, Inc. as federal contractor. Also lists Anduril LLC and Anduril Engineering LLC as separate entities receiving federal funds. Anduril reported approximately B in revenue in 2024, nearly doubling from prior year. Secured defense contracts totaling approximately .5B. Key contract: CONT_AWD_FA865020C9300_9700 (Air Force). Products include: Lattice AI platform, Ghost autonomous drones, Altius munitions (loitering), Menace counter-UAS, TITAN vehicles, Autonomous fighter jet (in development).",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 16:57:11",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Fortune 2025-06-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending API",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4578,
+      "finding_type": "identity",
+      "summary": "Anduril has no FARA registrations (not acting as foreign agent). GLEIF shows 4 LEI records for 'Anduril' entities: (1) Anduril Industries, Inc. (US-DE, LEI 254900CIXLZUXXNYQW57), (2) Anduril Ventures GmbH (Munich, Germany - unrelated), (3) ANDURIL INV SL (Tortella, Spain - unrelated), (4) Anduril Oy (Helsinki, Finland - unrelated). Only the Delaware entity is the defense company. Delaware file #6386483 via Incorporating Services, Ltd.",
+      "detail": null,
+      "source_datasets": [
+        "fara",
+        "gleif"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:57:18",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FARA database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF API",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4591,
+      "finding_type": "financial",
+      "summary": "Anduril DOD contracts: .5B+ total contracts (+ from DOD), assumed Microsoft  IVAS AR headset contract (Army),  autonomous aircraft program with General Atomics,  SOCOM counter-drone contract,  Navy counter-drone. Revenue doubled to  in 2024. Valuation .5B. Co-founded by Trae Stephens (FF partner) and Palmer Luckey. Lobbied via Invariant LLC (.1M+), focused on defense/homeland security.",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 17:00:10",
+      "target_name": "Anduril Industries LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DefenseNews 2024-10-08, Wikipedia, Fortune 2025-06-05, LDA filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2684,
+      "person_a": "Anduril Industries LLC",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "corporate",
+      "description": "Founder and CEO of Anduril Industries since 2017. Address: 1375 Sunflower Ave, Costa Mesa CA. Controls company valued at .5B.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:56:50",
+      "profile_id": "tech-right",
+      "other_person": "Palmer Luckey",
+      "other_person_slug": "palmer-luckey",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2685,
+      "person_a": "Anduril Industries LLC",
+      "person_b": "Trae Stephens",
+      "relationship_type": "corporate",
+      "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:56:53",
+      "profile_id": "tech-right",
+      "other_person": "Trae Stephens",
+      "other_person_slug": "trae-stephens",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Fortune 2024-11-16",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia, Founders Fund",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2688,
+      "person_a": "Anduril Industries LLC",
+      "person_b": "Palantir Technologies Inc",
+      "relationship_type": "corporate",
+      "description": "Joint prime contractors on Army TITAN program (.4M). Both in Golden Dome consortium. Palantir-Anduril-SpaceX triangle proposing satellite missile defense. Trae Stephens worked at Palantir 2008-2014 before co-founding Anduril.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:57:00",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies Inc",
+      "other_person_slug": "palantir-technologies-inc",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Anduril press release",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Golden Dome",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

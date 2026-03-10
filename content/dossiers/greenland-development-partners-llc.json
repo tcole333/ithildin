@@ -1,0 +1,245 @@
+{
+  "name": "Greenland Development Partners LLC",
+  "slug": "greenland-development-partners-llc",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.545900",
+  "last_updated": "2026-03-09T18:20:12",
+  "stats": {
+    "total_findings": 5,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 2,
+      "document": 2,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "financial": 1,
+      "owns": 2
+    },
+    "last_updated": "2026-03-09T18:20:12"
+  },
+  "findings": [
+    {
+      "id": 6171,
+      "finding_type": "financial",
+      "summary": "Lauder Greenland corporate structure: GDP LLC (Delaware) -> owns stake in Greenland Investment Group (Sheeran chairs) -> bidding on Lake Tasersiaq hydroelectric. GDP also -> Greenland Water Bank (Disko Island bottling, Imivik brand). GDP is the US vehicle; GIG is the operating entity.",
+      "detail": "Corporate structure of Lauder's Greenland consortium: (1) Greenland Development Partners LLC - Delaware-registered investor consortium. Ronald Lauder is member/investor. Josette Sheeran leads the portfolio. (2) Greenland Investment Group - Greenland-based operating entity. Sheeran is Chair/CEO. Bidding on hydroelectric project at Lake Tasersiaq (Greenland's largest lake, 65km long, SW Greenland). The hydroelectric project would power an aluminium smelter. Greenland's Minister Kalistat Lund announced the Tasersiaq tender. (3) Greenland Water Bank - Bottles spring water from Lyngmark Spring, Qeqertarsuaq, Disko Island under brand Imivik. 20-year license. Originally fully owned by Svend Hardenberg and Jorgen Waever Johansen. Partial stakes sold to Lauder group. Company registered at abandoned former school building in Nuuk with new security cameras installed. Operating at a loss after nearly a decade. Parent entity: Danish Water Bank. (4) Greenland Water Bank board included FM Vivian Motzfeldt. Lead: 21192.",
+      "source_datasets": [
+        "web_search",
+        "registry"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:13:37",
+      "target_name": "Greenland Development Partners LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ArcticToday",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Fortune",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Irish Times",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6283,
+      "finding_type": "financial",
+      "summary": "GDP LLC (entity #766, Delaware) holds 25-33.32% of Greenland Water Bank ApS (Danish CVR 12941218). Greenland Invest ApS holds the majority 66.67-89.99%. First confirmed quantified ownership stake for GDP LLC in any operating entity.",
+      "detail": null,
+      "source_datasets": [
+        "bisbase"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:14:39",
+      "target_name": "Greenland Development Partners LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "bisbase:DK1670228",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6293,
+      "finding_type": "document",
+      "summary": "Delaware LLC registry search returns 0 results for GDP LLC in the unified tool's local registry \u2014 confirmed that Delaware LLC formation documents are not ingested and members are not publicly disclosed per Delaware LLC law. The ArcticToday/Irish Times investigative reporting confirms investments were not publicly disclosed and do not appear in accessible corporate registries.",
+      "detail": null,
+      "source_datasets": [
+        "registry",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:15:20",
+      "target_name": "Greenland Development Partners LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "query_registry.py-output registry-search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6317,
+      "finding_type": "document",
+      "summary": "Greenland Development Partners LLC is a Delaware-registered investor consortium (entity #766). It holds ownership stakes in Greenland Investment Group ApS (#782) and Greenland Water Bank ApS (#790). Members confirmed: Ronald Lauder (investor), Josette Sheeran (Portfolio Lead/Chair). Delaware registration chosen for opacity; no registered agent or formation date publicly disclosed.",
+      "detail": null,
+      "source_datasets": [
+        "arctictoday",
+        "politiken"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:19:22",
+      "target_name": "Greenland Development Partners LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "ArcticToday-2025 / Politiken reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6335,
+      "finding_type": "intelligence",
+      "summary": "IMPORTANT CORRECTION: The briefing named 'John Sheeran' as co-investor. This appears to be a confusion or early misreport. The actual figure is JOSETTE SHEERAN (female), former US Deputy Secretary of State, who serves as Chair/Portfolio Lead of the consortium. No 'John Sheeran' appears in any source related to this investment. Josette Sheeran's LittleSis ID is 82179.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:20:12",
+      "target_name": "Greenland Development Partners LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "ArcticToday / Politiken / LittleSis 82179",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3163,
+      "person_a": "Greenland Development Partners LLC",
+      "person_b": "Greenland Investment Group",
+      "relationship_type": "financial",
+      "description": "Lauder consortium bought stakes from GIG",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 04:54:37",
+      "profile_id": "tech-right",
+      "other_person": "Greenland Investment Group",
+      "other_person_slug": "greenland-investment-group",
+      "evidence": []
+    },
+    {
+      "id": 3190,
+      "person_a": "Greenland Development Partners LLC",
+      "person_b": "Greenland Investment Group",
+      "relationship_type": "owns",
+      "description": "GDP LLC (Delaware) owns stake in Greenland Investment Group",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:14:23",
+      "profile_id": "tech-right",
+      "other_person": "Greenland Investment Group",
+      "other_person_slug": "greenland-investment-group",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ArcticToday",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3191,
+      "person_a": "Greenland Development Partners LLC",
+      "person_b": "Greenland Water Bank",
+      "relationship_type": "owns",
+      "description": "GDP consortium acquired partial ownership from Hardenberg and Johansen",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 05:14:23",
+      "profile_id": "tech-right",
+      "other_person": "Greenland Water Bank",
+      "other_person_slug": "greenland-water-bank",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ArcticToday",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Politiken",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}

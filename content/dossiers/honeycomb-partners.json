@@ -469,9 +469,63 @@
         ],
         "connection_ids": [],
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      },
+      {
+        "id": "government-contracts",
+        "title": "Government Contracts and Procurement",
+        "viz": null,
+        "finding_ids": [
+          1645,
+          1649,
+          1686
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about federal contracts, procurement vehicles, dollar amounts, agency relationships. Include specific contract IDs, BPA numbers, and dollar figures."
+      },
+      {
+        "id": "political-activity",
+        "title": "Political Activity and Donations",
+        "viz": null,
+        "finding_ids": [
+          1645,
+          1646,
+          1648,
+          1686
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about political donations, PAC contributions, lobbying activity, political appointments. Include FEC committee IDs, dollar amounts, recipient names."
+      },
+      {
+        "id": "regulatory-conflicts",
+        "title": "Regulatory Conflicts",
+        "viz": null,
+        "finding_ids": [
+          1642,
+          1655
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about regulatory oversight, enforcement actions, compliance issues, agency conflicts. Include specific agency names, case numbers, and outcomes."
       }
     ],
-    "curated_at": "2026-02-20T01:17:47.470433",
+    "evidence_quality": {
+      "strong_ids": [
+        1640,
+        1641,
+        1642,
+        1643,
+        1645,
+        1646,
+        1647,
+        1648,
+        1649,
+        1655,
+        1686
+      ],
+      "moderate_ids": [],
+      "weak_ids": [],
+      "summary": "11 primary-sourced, 0 structured-data, 0 web-only"
+    },
+    "curated_at": "2026-03-10T13:41:28.736431",
     "lead": "<p><strong>Honeycomb Partners LP</strong> was the onshore feeder fund within <strong>Honeycomb Asset Management LP</strong>, a hedge fund founded by <a href=\"/dossiers/david-fiszel\">David Fiszel</a> and headquartered at 645 Madison Avenue, 16th Floor, New York. Epstein was a founding investor, anchoring the fund at inception on June 1, 2016 with a $20 million wire from <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company</a> (Finding #1643). Over the life of the relationship, Epstein directed an estimated $60\u201370 million to Honeycomb through STC\u2014nearly double the $34 million recorded in the Dechert Exhibit B accounting\u2014making it one of the largest single external fund allocations documented in the Epstein financial corpus (Finding #1686). The fund operated a master-feeder structure with three feeders (Partners LP, Intermediate Fund LP, Offshore Fund Ltd) flowing into Honeycomb Master Fund LP, and spawned a series of co-investment vehicles (Ventures I\u2013IV) that channeled Epstein capital into pre-IPO positions in Spotify, SpaceX, Tencent Music Entertainment, and Palantir (Finding #1645).</p><p>The Epstein\u2013Fiszel relationship was brokered by <a href=\"/dossiers/eva-dubin\">Eva Dubin</a> in December 2015 and mediated throughout by <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, who referred to Epstein as \"boss\" in communications with Fiszel (Finding #1646). Fiszel visited Epstein\u2019s 9 East 71st Street townhouse in February 2016\u2014where Epstein noted approvingly that \"Peter liked you, that\u2019s rare\"\u2014and later traveled to 358 El Brillo Way in Palm Beach in November 2018 (Finding #1648). Communications continued through at least March 2019, when Fiszel praised an NYT op-ed Epstein had shared, just four months before Epstein\u2019s arrest. In December 2017, Kahn requested that Fiszel arrange introductions to \"Rothschild, Leon, Nicole,\" revealing the reciprocal nature of the arrangement: Epstein provided anchor capital, and in return received preferential deal access and the expectation that Fiszel would open doors to his own network (Finding #1686).</p><p>A comprehensive search of all local databases\u2014including unified emails, entity extractions, LMSBAND co-occurrence tables, and parsed DS10 financials\u2014found virtually no references to Honeycomb outside of a small set of EFTA wire documents and bank statements, suggesting that the fund\u2019s name was deliberately kept out of routine correspondence and that Kahn served as the primary intermediary (Finding #1655). Honeycomb\u2019s lawyer denied any relationship with Epstein despite more than twenty primary source documents to the contrary. The fund dissolved in August 2025 (Finding #1686).</p>",
     "sections": [
       {
@@ -548,36 +602,36 @@
         }
       ],
       "secondHop": {
-        "Southern Trust Company": [
+        "SpaceX": [
           {
-            "target": "VIEDC",
+            "target": "DOGE",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies"
+          },
+          {
+            "target": "DoD",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "SpaceX holds 14.6B+ in USASpending obligations from NASA and DoD with 13B pLEO IDIQ ceiling"
+          },
+          {
+            "target": "xAI",
             "type": "corporate",
             "strength": 1.0,
-            "description": "Southern Trust Company Inc registered with USVI Economic Development Commission. Registration forms submitted by Cecile de Jongh Aug 2017."
+            "description": "SpaceX-xAI merger Feb 2026 at 1.25T creates single entity holding defense contracts, AI capabilities, and satellite infrastructure"
           },
           {
-            "target": "The 2017 Caterpillar Trust",
+            "target": "1789 Capital",
             "type": "financial",
             "strength": 1.0,
-            "description": "Caterpillar Trust was opened under the Southern Financial/STC relationship at Deutsche Bank. AML review identifies it as 'a new account for the Southern Financial relationship'."
+            "description": "1789 Capital holds SpaceX position. SpaceX is bidding 2B+ Golden Dome satellite tracking constellation. Creates direct Trump family financial benefit from SpaceX government contracts via Trump Jr partnership."
           },
           {
-            "target": "The 2017 Caterpillar Trust",
-            "type": "financial",
+            "target": "Steve Davis",
+            "type": "employment",
             "strength": 1.0,
-            "description": "Caterpillar Trust was part of the Southern Financial/Southern Trust Company relationship at Deutsche Bank Private Bank (client since 2013). AML compliance explicitly identified it as a new account under this relationship. Deutsche Bank Account 42969987."
-          },
-          {
-            "target": "The 2017 Caterpillar Trust",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Caterpillar Trust was part of Southern Financial relationship at Deutsche Bank. Received M from STC/Southern Financial LLC per Dechert Exhibit B. Both under DB RM code 81851."
-          },
-          {
-            "target": "Enhanced Education",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Southern Trust Company Inc was used as intermediary for Enhanced Education disbursements. USVI STEM Fair funding came through Southern Trust, not directly from Enhanced Education. Southern Trust was an Epstein-controlled entity at the same 6100 Red Hook address."
+            "description": "DOGE operational lead, longtime SpaceX/X/Boring Company executive"
           }
         ]
       },

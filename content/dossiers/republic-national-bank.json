@@ -2,11 +2,14 @@
   "name": "Republic National Bank",
   "slug": "republic-national-bank",
   "aliases": [],
-  "generated_at": "2026-02-20T01:17:47.324411",
+  "profile_ids": [
+    "epstein"
+  ],
+  "generated_at": "2026-03-10T15:20:13.549828",
   "last_updated": "2026-02-17T20:20:03",
   "stats": {
     "total_findings": 5,
-    "total_connections": 4,
+    "total_connections": 3,
     "total_entities": 0,
     "finding_types": {
       "intelligence": 2,
@@ -14,7 +17,7 @@
     },
     "connection_types": {
       "financial": 1,
-      "employment": 2,
+      "employment": 1,
       "corporate": 1
     },
     "last_updated": "2026-02-17T20:20:03"
@@ -32,6 +35,7 @@
       "verification_status": "unverified",
       "created_at": "2026-02-17 19:52:34",
       "target_name": "Republic National Bank",
+      "profile_id": "epstein",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -54,6 +58,7 @@
       "verification_status": "unverified",
       "created_at": "2026-02-17 20:01:26",
       "target_name": "Republic National Bank",
+      "profile_id": "epstein",
       "evidence": [
         {
           "evidence_type": "efta",
@@ -111,6 +116,7 @@
       "verification_status": "unverified",
       "created_at": "2026-02-17 20:14:07",
       "target_name": "Republic National Bank",
+      "profile_id": "epstein",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -140,6 +146,7 @@
       "verification_status": "unverified",
       "created_at": "2026-02-17 20:17:49",
       "target_name": "Republic National Bank",
+      "profile_id": "epstein",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -176,6 +183,7 @@
       "verification_status": "unverified",
       "created_at": "2026-02-17 20:20:03",
       "target_name": "Republic National Bank",
+      "profile_id": "epstein",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -205,6 +213,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-02-17 20:14:57",
+      "profile_id": "epstein",
       "other_person": "Willard Zucker",
       "other_person_slug": "willard-zucker",
       "evidence": [
@@ -226,12 +235,25 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-02-17 20:14:57",
+      "profile_id": "epstein",
       "other_person": "Nan Morabia",
       "other_person_slug": "nan-morabia",
       "evidence": [
         {
           "evidence_type": "ref",
+          "evidence_ref": "LittleSis (finding 3350)",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
           "evidence_ref": "Walsh IC Final Report Vol 1, p.221 fn.20",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Walsh Iran-Contra Report Ch 14",
           "source_quote": null,
           "source_page": null
         }
@@ -247,6 +269,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-02-17 20:15:07",
+      "profile_id": "epstein",
       "other_person": "Trade Development Bank",
       "other_person_slug": "trade-development-bank",
       "evidence": [
@@ -257,186 +280,8 @@
           "source_page": null
         }
       ]
-    },
-    {
-      "id": 2038,
-      "person_a": "Nan Morabia",
-      "person_b": "Republic National Bank",
-      "relationship_type": "employment",
-      "description": "Nan Morabia was an officer at Republic National Bank of New York (Edmond Safra's bank, 452 Fifth Ave); she delivered $7,000 to Robert Owen at RNB in Aug 1985",
-      "strength": "strong",
-      "date_range": "1985-1986",
-      "verification_status": "unverified",
-      "created_at": "2026-02-17 20:15:47",
-      "other_person": "Nan Morabia",
-      "other_person_slug": "nan-morabia",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LittleSis (finding 3350)",
-          "source_quote": null,
-          "source_page": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Walsh Iran-Contra Report Ch 14",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
     }
   ],
   "entities": [],
-  "timeline": [
-    {
-      "date": "1985-1986",
-      "type": "connection",
-      "relationship_type": "employment",
-      "description": "Nan Morabia was an officer at Republic National Bank of New York (Edmond Safra's bank, 452 Fifth Ave); she delivered $7,000 to Robert Owen at RNB in Aug 1985",
-      "other_person": "Nan Morabia",
-      "id": 2038
-    }
-  ],
-  "curation": {
-    "key_finding_ids": [
-      3370,
-      3414,
-      3390,
-      3421,
-      3341
-    ],
-    "key_identifiers": {
-      "jurisdictions": [],
-      "officers": [],
-      "entities": []
-    },
-    "section_suggestions": [
-      {
-        "id": "key-relationships",
-        "title": "Key Relationships",
-        "viz": "ego_network",
-        "finding_ids": [],
-        "connection_ids": [
-          2024,
-          2020,
-          2029,
-          2038
-        ],
-        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
-      },
-      {
-        "id": "financial-activity",
-        "title": "Financial Activity",
-        "viz": null,
-        "finding_ids": [
-          3390,
-          3414,
-          3421
-        ],
-        "connection_ids": [
-          2024
-        ],
-        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
-      },
-      {
-        "id": "intelligence-activity",
-        "title": "Intelligence Activity",
-        "viz": null,
-        "finding_ids": [
-          3341,
-          3370
-        ],
-        "connection_ids": [],
-        "guidance": "Narrative about intelligence connections, surveillance, information operations."
-      }
-    ],
-    "curated_at": "2026-02-20T01:17:47.607869"
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Republic National Bank",
-      "connections": [
-        {
-          "target": "Willard Zucker",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "Walsh IC Final Report Vol 1, p.221 fn.20",
-          "description": "Enterprise wire transfers routed through RNB; Zucker managed Swiss side via CSF Geneva"
-        },
-        {
-          "target": "Nan Morabia",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "Walsh IC Final Report Vol 1, p.221 fn.20",
-          "description": "Officer at Republic National Bank of New York; conducted cash drops outside bank channels"
-        },
-        {
-          "target": "Trade Development Bank",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": "Walsh IC Final Report Vol 1, p.221",
-          "description": "Both banks controlled by Edmond Safra; RNB (NY) handled Enterprise wire transfers, TDB (Geneva) held Codelis account"
-        },
-        {
-          "target": "Nan Morabia",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis (finding 3350)",
-          "description": "Nan Morabia was an officer at Republic National Bank of New York (Edmond Safra's bank, 452 Fifth Ave); she delivered $7,000 to Robert Owen at RNB in Aug 1985"
-        }
-      ],
-      "secondHop": {
-        "Nan Morabia": [
-          {
-            "target": "Willard Zucker",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Zucker directed Morabia to make cash drops for Enterprise; she was his domestic cash distribution agent"
-          },
-          {
-            "target": "Robert Owen",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Morabia delivered $7,000 cash to Owen at Republic National Bank, Aug 1985"
-          },
-          {
-            "target": "Oliver North",
-            "type": "intelligence",
-            "strength": 1.0,
-            "description": "Morabia family conducted cash drops for Enterprise operations supervised by North"
-          },
-          {
-            "target": "Willard Zucker",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Zucker directed Morabia family cash drops from 1985-1986; Nan was primary RNB contact, coordinated 6 drops ranging K-K at Zucker's request"
-          },
-          {
-            "target": "Robert Owen",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Nan Morabia personally delivered ,000 cash to Robert W. Owen (North's courier to contras) at Republic National Bank in New York in August 1985"
-          }
-        ],
-        "Willard Zucker": [
-          {
-            "target": "Albert Hakim",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Zucker managed Enterprise Swiss accounts for Hakim since mid-1970s; ran CSF financial management"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "1985-1986",
-        "label": "employment with Nan Morabia",
-        "type": "employment",
-        "entity": "Nan Morabia",
-        "id": 2038
-      }
-    ]
-  }
+  "timeline": []
 }

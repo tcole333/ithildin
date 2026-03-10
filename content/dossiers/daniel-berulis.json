@@ -1,0 +1,275 @@
+{
+  "name": "Daniel Berulis",
+  "slug": "daniel-berulis",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.534332",
+  "last_updated": "2026-03-09T20:32:38",
+  "stats": {
+    "total_findings": 6,
+    "total_connections": 3,
+    "total_entities": 1,
+    "finding_types": {
+      "intelligence": 5,
+      "document": 1
+    },
+    "connection_types": {
+      "employment": 3
+    },
+    "last_updated": "2026-03-09T20:32:38"
+  },
+  "findings": [
+    {
+      "id": 6429,
+      "finding_type": "intelligence",
+      "summary": "Krebs on Security forensic analysis of NLRB DOGE breach: DOGE operatives created accounts (DogeSA_2d5c3e0446f9@nlrb.microsoft.com; 'Whitesox, Chicago M.'; 'Dancehall, Jamaica R.') with tenant-admin privileges exempt from logging. Three external GitHub code libraries downloaded including one designed for 'proxy pool rotation for web scraping and brute forcing.' Microsoft Azure network watcher set to 'off' March 5. April 3-4: NLRB staff instructed to halt US-CERT reporting. April 14: administrative access stripped from IT staff same day NPR published story. NLRB director Lasharn Hamilton claimed no 'official' prior DOGE contact April 16.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-03-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:32:25",
+      "target_name": "Daniel Berulis",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "krebsonsecurity.com:2025-04:whistleblower-doge-siphoned-nlrb-case-data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6415,
+      "finding_type": "document",
+      "summary": "Daniel Berulis filed original whistleblower disclosure to Congress and US Office of Special Counsel on April 14 2025 via Whistleblower Aid (attorney: Andrew Bakaj). Primary document: 2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf. Supplemental disclosure added: physical intimidation (threatening note + drone surveillance photos taped to home door), additional forensic data. DOGE visited NLRB on April 16 2025 \u2014 the day after NPR reported the disclosure.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-14",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:58",
+      "target_name": "Daniel Berulis",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "whistlebloweraid.org:2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6396,
+      "finding_type": "intelligence",
+      "summary": "DOGE operatives received unrestricted 'tenant owner' level access to NLRB IT systems in March 2025, bypassing standard security controls. Account creation was not logged. MFA was altered. Alerting and monitoring tools were disabled (March 10).",
+      "detail": null,
+      "source_datasets": [
+        "whistlebloweraid.org",
+        "newsweek.com"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:28:28",
+      "target_name": "Daniel Berulis",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "whistlebloweraid.org:2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6399,
+      "finding_type": "intelligence",
+      "summary": "NLRB whistleblower Daniel Berulis documented 10GB of data (primarily text files) exfiltrated from NLRB NxGen case management system between March 3-5, 2025. Anomalous spike in outbound data traffic observed around 3-4am EST on March 4-5. Data from NxGen included personal info on union members, witness testimony, trade secrets, and proprietary company data.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:28:37",
+      "target_name": "Daniel Berulis",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "whistlebloweraid.org:2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6400,
+      "finding_type": "intelligence",
+      "summary": "On March 11 2025, login attempts from Russian IP address 83.149.30.186 (Primorskiy Krai, Russia's Far East) targeted newly created DOGE accounts at NLRB. Over 20 login attempts, many within 15 minutes of account creation. Attempts used correct username and password. Blocked because NLRB does not allow overseas access. One account: DogeSA_2d5c3e0446f9@nlrb.microsoft.com",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:28:47",
+      "target_name": "Daniel Berulis",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "whistlebloweraid.org:2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6403,
+      "finding_type": "intelligence",
+      "summary": "While Daniel Berulis was preparing his supplemental disclosure, someone taped a threatening note to his home door, accompanied by drone photographs showing him walking in his neighborhood. Attorney Andrew Bakaj confirmed the note made direct reference to the disclosure Berulis was preparing. This constitutes witness intimidation allegations in the supplemental filing.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:28:55",
+      "target_name": "Daniel Berulis",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "whistlebloweraid.org:supplemental-disclosure-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3238,
+      "person_a": "Andrew Bakaj",
+      "person_b": "Daniel Berulis",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:30:24",
+      "profile_id": "tech-right",
+      "other_person": "Andrew Bakaj",
+      "other_person_slug": "andrew-bakaj",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "whistlebloweraid.org:2025-04-14",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3248,
+      "person_a": "Daniel Berulis",
+      "person_b": "Prem Aburvasamy",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:32:38",
+      "profile_id": "tech-right",
+      "other_person": "Prem Aburvasamy",
+      "other_person_slug": "prem-aburvasamy",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "krebsonsecurity.com:2025-04:Aburvasamy is NLRB CIO; Berulis is security architect under him",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3247,
+      "person_a": "Daniel Berulis",
+      "person_b": "Lasharn Hamilton",
+      "relationship_type": "employment",
+      "description": null,
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:32:38",
+      "profile_id": "tech-right",
+      "other_person": "Lasharn Hamilton",
+      "other_person_slug": "lasharn-hamilton",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "krebsonsecurity.com:2025-04:Hamilton is NLRB Director who claimed no 'official' prior DOGE contact day after Berulis went public",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "role": "IT Specialist / Whistleblower",
+      "date_start": null,
+      "date_end": null,
+      "source": "whistlebloweraid.org 2025-04-14",
+      "entity_id": 898,
+      "entity_name": "National Labor Relations Board",
+      "entity_type": "government",
+      "jurisdiction": "Federal",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2025-03-03",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Krebs on Security forensic analysis of NLRB DOGE breach: DOGE operatives created accounts (DogeSA_2d5c3e0446f9@nlrb.microsoft.com; 'Whitesox, Chicago M.'; 'Dancehall, Jamaica R.') with tenant-admin privileges exempt from logging. Three external GitHub code libraries downloaded including one designed for 'proxy pool rotation for web scraping and brute forcing.' Microsoft Azure network watcher set to 'off' March 5. April 3-4: NLRB staff instructed to halt US-CERT reporting. April 14: administrative access stripped from IT staff same day NPR published story. NLRB director Lasharn Hamilton claimed no 'official' prior DOGE contact April 16.",
+      "confidence": "high",
+      "id": 6429
+    },
+    {
+      "date": "2025-04-14",
+      "type": "finding",
+      "finding_type": "document",
+      "summary": "Daniel Berulis filed original whistleblower disclosure to Congress and US Office of Special Counsel on April 14 2025 via Whistleblower Aid (attorney: Andrew Bakaj). Primary document: 2025_0414_Berulis-Disclosure-with-Exhibits.s.pdf. Supplemental disclosure added: physical intimidation (threatening note + drone surveillance photos taped to home door), additional forensic data. DOGE visited NLRB on April 16 2025 \u2014 the day after NPR reported the disclosure.",
+      "confidence": "confirmed",
+      "id": 6415
+    }
+  ]
+}

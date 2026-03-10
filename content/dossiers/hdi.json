@@ -233,9 +233,34 @@
         ],
         "connection_ids": [],
         "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      },
+      {
+        "id": "government-contracts",
+        "title": "Government Contracts and Procurement",
+        "viz": null,
+        "finding_ids": [
+          426,
+          460,
+          1187
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about federal contracts, procurement vehicles, dollar amounts, agency relationships. Include specific contract IDs, BPA numbers, and dollar figures."
       }
     ],
-    "curated_at": "2026-02-20T01:17:47.462556",
+    "evidence_quality": {
+      "strong_ids": [
+        426,
+        460,
+        1150,
+        1187
+      ],
+      "moderate_ids": [],
+      "weak_ids": [
+        388
+      ],
+      "summary": "4 primary-sourced, 0 structured-data, 1 web-only"
+    },
+    "curated_at": "2026-03-10T13:41:28.725787",
     "lead": "<p>The <strong>Humpty Dumpty Institute</strong> (HDI, EIN 13-4028567) is a New York-based nonprofit that organized Congressional Delegations (CODELs) to foreign countries, providing all-expenses-paid first-class travel for members of Congress and their staff. The organization is significant to this investigation because <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a>&rsquo;s brother Mark Epstein served on its board and personally participated in CODELs to Bahrain (2013) and Azerbaijan (2014). Documents recovered from Epstein&rsquo;s files show that when delegation slots opened, Mark forwarded the opportunities directly to Jeffrey, effectively giving him access to fill Congressional delegation seats with individuals from &ldquo;media, finance, banking, education&rdquo; (Finding #1187).</p><p>HDI organized more than 52 CODELs involving 550+ members of Congress and staffers to over 30 countries, and maintained an advisory board that included 33 current or former members of Congress, among them Maxine Waters, Jim Clyburn, Debbie Wasserman Schultz, and Gregory Meeks (Finding #1150). Beginning in 2017, HDI entered a formal partnership with China&rsquo;s Taihe Institute, an organization employing 12 or more current and former members of the Chinese Communist Party and People&rsquo;s Liberation Army as senior fellows. Despite these foreign government connections, neither HDI nor Taihe registered under the Foreign Agents Registration Act, even as comparable organizations such as the China-United States Exchange Foundation maintained four separate FARA registrations for similar China-US influence activities (Finding #1150).</p><p>IRS 990 filings reveal a severe financial contraction: HDI&rsquo;s revenue peaked at .82 million in 2011 and declined more than 80% to under ,000 per year by 2018, with assets remaining minimal throughout (Finding #426, #460). The organizational contact on IRS records is Ralph Cwerman. Key unresolved questions include whether HDI&rsquo;s Taihe partnership constitutes acting as an agent of a foreign principal under 22 USC 611(c), what funding sources drove the partial revenue recovery in 2022&ndash;2023, and whether Jeffrey Epstein ever successfully placed individuals on Congressional delegations through this channel.</p>",
     "sections": [
       {
@@ -290,17 +315,8 @@
           "description": "Cwerman is the care-of contact for Humpty Dumpty Institute on IRS records (EIN 13-4028567). He is the organizational point person for the entity whose revenue collapsed 80% from .8M to under K."
         }
       ],
-      "secondHop": {
-        "Taihe Institute": [
-          {
-            "target": "Humpty Dumpty Institute",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": "Formal partnership since Aug 2017. HDI participated in Taihe forums 2017 and 2019 in Beijing. Ruby Wang bridged both orgs. Taihe employs 12+ CCP/PLA members as senior fellows."
-          }
-        ]
-      },
-      "depth": 2
+      "secondHop": {},
+      "depth": 1
     },
     "timeline_events": [
       {

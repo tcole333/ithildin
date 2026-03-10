@@ -1,0 +1,426 @@
+{
+  "name": "Erebor Bank",
+  "slug": "erebor-bank",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.520367",
+  "last_updated": "2026-03-04T20:30:20",
+  "stats": {
+    "total_findings": 8,
+    "total_connections": 7,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 4,
+      "legal": 2,
+      "location": 1,
+      "intelligence": 1
+    },
+    "connection_types": {
+      "corporate": 4,
+      "legal": 3
+    },
+    "last_updated": "2026-03-04T20:30:20"
+  },
+  "findings": [
+    {
+      "id": 4684,
+      "finding_type": "financial",
+      "summary": "Erebor Bank: Founded by Palmer Luckey (Anduril) and Joe Lonsdale (8VC/Palantir), backed by Peter Thiel (Founders Fund). Digital-first bank for AI, crypto, and defense companies. HQ in Columbus, Ohio (same city as Arsenal-1). Raised $350M at $4.35B valuation led by Lux Capital. Total capital ~$635M. Investors: a16z, Founders Fund, Lux Capital, 8VC, Elad Gil. Secured OCC charter and FDIC deposit insurance approval 'in record time.' Positioned to fill SVB gap for startups and VC-backed companies. Plans to offer stablecoin integration, crypto-collateralized loans, traditional banking via API. Led by Owen Rapaport and Jacob Hirshman (former Circle adviser).",
+      "detail": "Erebor Bank represents a vertical integration play by the Thiel defense tech network: the same people who build weapons (Anduril), invest in weapons companies (Founders Fund, 8VC, a16z), lobby for weapons contracts (Invariant LLC), and hold government positions overseeing weapons procurement (Trae Stephens on Trump transition team) are now creating the banking infrastructure to serve this ecosystem.\n\nColumbus, Ohio location is strategic: same city as Anduril's Arsenal-1 factory. Erebor can bank Arsenal-1 employees, subcontractors, and the defense ecosystem growing around it.\n\nKey investors overlap with Anduril investor base: Founders Fund, a16z, 8VC, Lux Capital. This is the same capital network investing in defense companies AND the bank that will serve those companies.\n\nSenator Warren flagged concerns about tech billionaires using wealth to 'fuel the MAGA agenda' through financial infrastructure like Erebor. The bank's rapid OCC/FDIC approvals during the Trump administration raise questions about regulatory facilitation for politically aligned entities.\n\nNamed after the dwarven kingdom in Tolkien's Lord of the Rings (like Anduril, the sword). Peter Thiel named Palantir after the seeing stones in Tolkien; Luckey named Anduril after the flame of the west.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:33:53",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC July 2025, Fortune July 2025, PYMNTS.com, Benzinga, The Block, WebProNews",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4753,
+      "finding_type": "financial",
+      "summary": "Erebor Bank raised $350M at $4.35B valuation. Founded by Palmer Luckey (Anduril) and Joe Lonsdale (8VC/Palantir). Charter approved by OCC in 4 months (conditional Oct 2025, full Feb 2026), FDIC deposit insurance Dec 2025. Investors: Lux Capital (led), Founders Fund, 8VC, Haun Ventures. Plans: digital-first bank serving AI, crypto, defense, manufacturing companies. Stablecoin integration, crypto-collateralized loans.",
+      "detail": "Erebor named after Tolkien's Lonely Mountain. Luckey conceived the bank after SVB collapse (2023). Located in Columbus OH \u2014 same city as Anduril's $1B Arsenal-1 factory. 4-month OCC charter approval timeline is extraordinarily fast for a de novo national bank charter. Comptroller Jonathan Gould publicly celebrated granting the charter as 'the first full-service national bank charter granted during my tenure \u2014 the first in four years.'",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:28:22",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Yahoo Finance, Axios (2025-10-15), OCC NR-2025-101, Banking Dive",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4754,
+      "finding_type": "legal",
+      "summary": "Erebor fundraising memo told investors 'Palmer's political network will get this done' and touted co-founder's 'unique connectivity to banking regulators' including Comptroller Gould. Adam Cohen, Skadden lawyer who worked on Erebor's OCC application, left Skadden in August 2025 and became OCC Chief Counsel under Gould \u2014 reviewing bank charter applications. Senator Warren sent letters to Gould, FDIC Chair Hill, and Luckey demanding answers about the approval process.",
+      "detail": "Sen. Elizabeth Warren (Ranking Member, Senate Banking Committee) sent letters Feb 25, 2026 alleging: (1) Erebor's fundraising memo predicted approval by end of 2025, correctly predicting the actual timeline; (2) Adam Cohen (Skadden, Arps partner) was co-head of Financial Institutions Regulatory Group, worked on Erebor's OCC application, then joined OCC as Chief Counsel Aug 11, 2025 \u2014 a textbook revolving door; (3) the 4-month approval timeline is abnormally fast for a de novo charter. Warren stated: 'it is deeply troubling that Erebor's fundraising memo may have correctly described the reason for the approval: the bank's political network and unique connectivity to banking regulators.' Cohen's prior experience includes Fed Board of Governors and CFTC.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:28:33",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate Banking Committee (Warren letter Feb 25 2026), OCC NR-2025-76 (Cohen appointment), Business Insider (fundraising memo)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4944,
+      "finding_type": "financial",
+      "summary": "Erebor Bank FDIC Registration: CERT 59378, OCC Charter 25357, chartered Feb 6, 2026 at 500 Neil Ave Ste 140, Columbus OH 43215",
+      "detail": "Erebor Bank, N.A. (FDIC CERT 59378) is a federally chartered national bank registered at 500 Neil Ave Ste 140, Columbus, OH 43215 (Franklin County). OCC Charter #25357. Bank class: N (national, OCC-supervised). Federal Reserve District: 04 (Cleveland). FDIC supervisory region: Chicago. Insured through the Deposit Insurance Fund (DIF). Established and insured as of 02/06/2026. Single office location (no branches). Federal Reserve RSSD ID: 6053129. UNINUM: 676181. No financial data reported yet (too new to have filed Call Reports). CBSA: Columbus, OH metro area (18140). CFPB supervised: No.",
+      "source_datasets": [
+        "fdic"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 20:28:47",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind API CERT:59378",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4945,
+      "finding_type": "legal",
+      "summary": "Erebor Bank regulatory timeline: OCC conditional approval Oct 15 2025, FDIC deposit insurance Dec 16 2025, full charter Feb 6 2026 -- under 4 months from conditional to operational",
+      "detail": "Complete regulatory timeline: OCC application filed mid-2025. OCC conditional approval granted Oct 15, 2025 (NR-OCC-2025-101) -- the first de novo national bank charter under Comptroller Jonathan Gould. FDIC deposit insurance application approved Dec 16, 2025 by FDIC Board. Full charter and insurance effective Feb 6, 2026. Total time from conditional approval to fully operational: 114 days (~3.8 months). Conditions: maintain minimum 12% Tier 1 leverage ratio for first 3 years (vs standard 5%), implement deposit account processing protocols for failure scenarios, exercise Capital Call Agreement rights as needed, engage independent external auditor, pass pre-opening examination. The 12% Tier 1 ratio is more than double the standard well-capitalized threshold of 5%, indicating regulators see elevated risk.",
+      "source_datasets": [
+        "fdic",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 20:29:18",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind CERT:59378",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC press release Dec 16 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC NR-2025-101 (Oct 15, 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4946,
+      "finding_type": "location",
+      "summary": "Erebor Bank registered address 500 Neil Ave Ste 140, Columbus OH 43215 -- single office, no branches, coordinates 39.9718/-83.0089",
+      "detail": "FDIC BankFind shows Erebor Bank's sole registered office at 500 Neil Ave Ste 140, Columbus, OH 43215, Franklin County. Coordinates: 39.971755/-83.008947. This is the main (and only) office -- no branch locations. Columbus was chosen as HQ despite founders being based in California (Luckey in Orange County, Lonsdale in Austin/SF). Columbus is also home to Anduril's Arsenal-1 manufacturing facility, suggesting geographic alignment between Luckey's defense company and his banking venture. The 500 Neil Ave address is in downtown Columbus near the Short North arts district.",
+      "source_datasets": [
+        "fdic"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 20:29:28",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind CERT:59378 locations endpoint",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4947,
+      "finding_type": "financial",
+      "summary": "Erebor Bank structural identifiers: OCC-regulated national bank, Fed RSSD 6053129, UNINUM 676181, FDIC Chicago region, Cleveland Fed district",
+      "detail": "Key regulatory identifiers for Erebor Bank, N.A.: FDIC CERT 59378; OCC Charter 25357; Federal Reserve RSSD ID 6053129; UNINUM 676181. Regulatory chain: chartered by OCC (Comptroller of the Currency), supervised by OCC, insured by FDIC Deposit Insurance Fund. FDIC supervisory region: Chicago (DBS 9, SUPRV_FD 09). Federal Reserve district: 04 (Cleveland). Bank class: N (national bank, commercial). CLCODE: 3 (commercial bank with assets under M). CBSA Metro: Columbus, OH (18140). CSA: Columbus-Marion-Zanesville, OH (198). Not designated as MDI (Minority Depository Institution). Not CFPB supervised. Not a member of the Savings Association Insurance Fund (SAIF) or BIF separately. The RSSD ID 6053129 can be used to query the Federal Reserve's NIC (National Information Center) for holding company data and organizational hierarchy.",
+      "source_datasets": [
+        "fdic"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 20:29:41",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind API CERT:59378 full institution record",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4948,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Erebor Bank as de novo national bank -- structural comparison with Varo Bank (only other fintech with OCC national charter, CERT 59190) and regulatory capture indicators",
+      "detail": "Erebor Bank (CERT 59378) is only the second fintech to obtain a de novo OCC national bank charter, after Varo Bank (CERT 59190, chartered Aug 2020). Key differences: (1) Timeline: Varo's charter took 3+ years; Erebor's took under 1 year from application to full charter. (2) Capital: Varo had ~376M in assets as of Dec 2025 after 5 years of operation; Erebor launched with 635M in venture capital on day one. (3) Varo has been unprofitable (net income -91.7M as of Dec 2025 Call Report); Erebor's financial model is untested. (4) Both are OCC-regulated national banks (class N). The speed of Erebor's approval is notable: Comptroller Gould publicly stated Erebor was the FIRST de novo charter he approved. Fundraising memo (Finding 4754) cited 'unique connectivity to banking regulators' as a selling point. Adam Cohen left Skadden (where he worked on Erebor's OCC application) to become OCC Chief Counsel under Gould in Aug 2025, two months before Erebor's conditional approval. The 12% Tier 1 leverage ratio requirement (vs normal 5%) suggests regulators imposed extra buffers, possibly reflecting the crypto/digital asset risk profile.",
+      "source_datasets": [
+        "fdic",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 20:30:20",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind CERT:59190 (Varo)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind CERT:59378",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #4754 (fundraising memo)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC NR-2025-101",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2792,
+      "person_a": "Erebor Bank",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "corporate",
+      "description": "Founder of Erebor Bank. Fundraising memo cited his 'political network' as key to securing regulatory approval. Also founder of Anduril Industries ($30.5B defense contractor).",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:28:43",
+      "profile_id": "tech-right",
+      "other_person": "Palmer Luckey",
+      "other_person_slug": "palmer-luckey",
+      "evidence": []
+    },
+    {
+      "id": 2793,
+      "person_a": "Erebor Bank",
+      "person_b": "Joe Lonsdale",
+      "relationship_type": "corporate",
+      "description": "Co-founder of Erebor Bank. Also founder of 8VC, co-founder of Palantir, DOGE advisor. Fundraising memo cited co-founder's 'unique connectivity to banking regulators' \u2014 likely refers to Lonsdale's connections.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:28:43",
+      "profile_id": "tech-right",
+      "other_person": "Joe Lonsdale",
+      "other_person_slug": "joe-lonsdale",
+      "evidence": []
+    },
+    {
+      "id": 2790,
+      "person_a": "Adam Cohen",
+      "person_b": "Erebor Bank",
+      "relationship_type": "legal",
+      "description": "Cohen was Skadden partner who worked on Erebor's OCC charter application, then joined OCC as Chief Counsel (Aug 11, 2025) where he oversees bank supervision and licensing. Textbook revolving door \u2014 from representing the applicant to reviewing the application.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:28:43",
+      "profile_id": "tech-right",
+      "other_person": "Adam Cohen",
+      "other_person_slug": "adam-cohen",
+      "evidence": []
+    },
+    {
+      "id": 2808,
+      "person_a": "Erebor Bank",
+      "person_b": "Jonathan Gould",
+      "relationship_type": "legal",
+      "description": "Gould as OCC Comptroller granted Erebor's national bank charter \u2014 conditional Oct 2025, full Feb 2026. Erebor's fundraising memo claimed co-founder had 'unique connectivity' to Gould. Gould publicly celebrated as 'first full-service charter in four years.' Gould has crypto background (Bitfury) aligning with Erebor's stablecoin plans.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:59:34",
+      "profile_id": "tech-right",
+      "other_person": "Jonathan Gould",
+      "other_person_slug": "jonathan-gould",
+      "evidence": []
+    },
+    {
+      "id": 2886,
+      "person_a": "Erebor Bank",
+      "person_b": "Jonathan Gould",
+      "relationship_type": "legal",
+      "description": "Gould as OCC Comptroller approved Erebor Bank's de novo national charter (NR-OCC-2025-101, Oct 15 2025) -- the first de novo charter under his leadership",
+      "strength": "strong",
+      "date_range": "2025-07 to 2026-02",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 20:29:57",
+      "profile_id": null,
+      "other_person": "Jonathan Gould",
+      "other_person_slug": "jonathan-gould",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind CERT:59378",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC NR-2025-101",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2887,
+      "person_a": "Erebor Bank",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "corporate",
+      "description": "Luckey co-founded Erebor Bank. FDIC records show Erebor Bank, N.A. (CERT 59378) chartered Feb 6, 2026 in Columbus OH -- same city as Luckey's Anduril Arsenal-1 facility",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 20:30:00",
+      "profile_id": null,
+      "other_person": "Palmer Luckey",
+      "other_person_slug": "palmer-luckey",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind CERT:59378",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2888,
+      "person_a": "Erebor Bank",
+      "person_b": "Joe Lonsdale",
+      "relationship_type": "corporate",
+      "description": "Lonsdale co-founded Erebor Bank. FDIC CERT 59378 confirmed as active national bank. Lonsdale's 8VC is also an investor in the M raise",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 20:30:02",
+      "profile_id": null,
+      "other_person": "Joe Lonsdale",
+      "other_person_slug": "joe-lonsdale",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind CERT:59378",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Luckey co-founded Erebor Bank. FDIC records show Erebor Bank, N.A. (CERT 59378) chartered Feb 6, 2026 in Columbus OH -- same city as Luckey's Anduril Arsenal-1 facility",
+      "other_person": "Palmer Luckey",
+      "id": 2887
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Lonsdale co-founded Erebor Bank. FDIC CERT 59378 confirmed as active national bank. Lonsdale's 8VC is also an investor in the M raise",
+      "other_person": "Joe Lonsdale",
+      "id": 2888
+    },
+    {
+      "date": "2025-07 to 2026-02",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "Gould as OCC Comptroller approved Erebor Bank's de novo national charter (NR-OCC-2025-101, Oct 15 2025) -- the first de novo charter under his leadership",
+      "other_person": "Jonathan Gould",
+      "id": 2886
+    }
+  ]
+}

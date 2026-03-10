@@ -1,0 +1,3256 @@
+{
+  "name": "DOGE",
+  "slug": "doge",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.230425",
+  "last_updated": "2026-03-10T00:46:53",
+  "stats": {
+    "total_findings": 95,
+    "total_connections": 26,
+    "total_entities": 0,
+    "finding_types": {
+      "legal": 37,
+      "intelligence": 52,
+      "financial": 5,
+      "relationship": 1
+    },
+    "connection_types": {
+      "political": 7,
+      "corporate": 3,
+      "financial": 2,
+      "employment": 7,
+      "intelligence": 1,
+      "advisory": 3,
+      "legal": 3
+    },
+    "last_updated": "2026-03-10T00:46:53"
+  },
+  "findings": [
+    {
+      "id": 6408,
+      "finding_type": "legal",
+      "summary": "Peters report finds DOGE operations likely violated: Privacy Act of 1974, E-Government Act of 2002, FISMA (Federal Information Security Modernization Act), Federal Records Act, and potentially Computer Fraud and Abuse Act",
+      "detail": "Lead #18292. Specific violations: Privacy Act of 1974 \u2014 restrictions on PII collection, combination, dissemination. E-Government Act of 2002 \u2014 requires public notices and impact assessments for PII programs. FISMA \u2014 monitoring requirements bypassed; Starlink at GSA may have circumvented FISMA continuous monitoring. Federal Records Act \u2014 compliance violations. CFAA \u2014 facilitating unauthorized access to protected systems. Report states DOGE 'operates outside of, and even counter to, federal law.'",
+      "source_datasets": [
+        "congress_gov",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:24",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6409,
+      "finding_type": "intelligence",
+      "summary": "Peters report identifies clear pattern across agencies: officials who questioned DOGE were sidelined or terminated; DOGE-affiliated personnel installed as CIOs to approve data access without standard oversight",
+      "detail": "Lead #18292. DOGE operatives placed in chief information officer roles \u2014 including Aram Moghaddassi at SSA and Michael Russo at SSA \u2014 enabling them to approve DOGE staffers' access to sensitive data without following standard oversight procedures. Career cybersecurity officials who raised objections were ignored or removed.",
+      "source_datasets": [
+        "congress_gov",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:24",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6411,
+      "finding_type": "intelligence",
+      "summary": "Whistleblowers described DOGE employees as mostly young men ages 18 to mid-20s functioning as quarterbacking data with ability to change or exfiltrate information without normal oversight",
+      "detail": "Lead #18292. Source: whistleblower disclosures to Peters HSGAC staff. DOGE operatives workspaces described as guarded and largely empty. Operated across multiple agencies simultaneously without required training or adherence to cybersecurity protocols and privacy protections.",
+      "source_datasets": [
+        "congress_gov",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09-26",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:39",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6419,
+      "finding_type": "intelligence",
+      "summary": "Peters HSGAC report made 4 key recommendations: (1) cease DOGE operations at SSA/GSA/OPM; (2) strip DOGE access to PII across all agencies; (3) require DOGE cybersecurity training; (4) IGs audit all sensitive data system access",
+      "detail": "Lead #18292. Full recommendations: (1) Immediately cease all DOGE operations at SSA, GSA, OPM until agencies certify DOGE personnel are subject to appropriate agency oversight and chain of command. (2) Revoke DOGE access to personally identifiable information across federal government until compliance certification. (3) Require DOGE employees complete federal cybersecurity training matching all other federal employees. (4) Inspectors general conduct audits of sensitive data system access.",
+      "source_datasets": [
+        "congress_gov",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:30:17",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6423,
+      "finding_type": "intelligence",
+      "summary": "Peters report identifies attempted creation of master database pooling data from multiple agencies including SSA, Treasury, DHS, State, DOJ \u2014 SSA data appeared in DHS and DOJ projects in atypical formats",
+      "detail": "Lead #18292. Report identifies data appearing from SSA in Department of Homeland Security and Department of Justice projects in atypical formats, suggesting cross-agency data consolidation. Also: DOGE sought access to State Department passport, visa, and diplomatic communications; Treasury Department sensitive financial datasets. Reflects broader attempt at centralized federal data aggregation.",
+      "source_datasets": [
+        "congress_gov",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-09-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:30:49",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6420,
+      "finding_type": "intelligence",
+      "summary": "Government Accountability Office (GAO) separately auditing DOGE data access at OPM, SSA, and Treasury Department as of late 2025",
+      "detail": "Lead #18292. GAO audit is separate from and parallel to the Peters HSGAC minority staff investigation. Covers DOGE access to systems at OPM, SSA, and Treasury. Scope and timeline of GAO findings not yet published as of Peters report release date.",
+      "source_datasets": [
+        "congress_gov",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-10-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:30:34",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://federalnewsnetwork.com/federal-newscast/2025/10/senate-democrats-charge-doge-is-putting-federal-data-at-risk/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4408,
+      "finding_type": "legal",
+      "summary": "DOGE faces multiple federal lawsuits challenging constitutionality: (1) Judge Theodore Chuang (D. MD) ruled DOGE dismantling of USAID likely unconstitutional, blocked further cuts. (2) Judge William Alsup ordered 16K+ fired workers reinstated, found OPM illegally directed terminations. (3) Judge Tanya Chutkan allowed lawsuit challenging DOGE power to proceed against motion to dismiss. (4) 14 states sued arguing Trump violated Appointments Clause giving Musk sweeping authority over firings, grants, contracts, and sensitive data without congressional approval. (5) 4th Circuit sided with Trump/DOGE, finding 'unconventional does not necessarily equal unconstitutional' and that cuts were approved by government officials. Mixed results but significant judicial skepticism of DOGE's legal authority.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:50:03",
+      "target_name": "DOGE",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR 2025-05-28, PBS News 2025, Courthouse News 2025, Democracy Docket 2025, NBC News 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4524,
+      "finding_type": "legal",
+      "summary": "Congressional oversight of DOGE largely failed due to Republican majority blocking subpoenas. Feb 2025: House Oversight Committee voted along party lines to block Musk subpoena (Khanna absent due to timing, later voted yes in June 2025 revote but it also failed). Multiple document request deadlines (Khanna Mar 1, Warren/Kim Mar 5) went unanswered. Instead, oversight shifted to courts: 20+ federal lawsuits filed against DOGE/Musk in DC District Court alone. Key cases: CREW v. DOGE (FOIA, won preliminary injunction), Wheeler v. Musk (constitutional challenge), States v. Musk (Chutkan denied dismissal). Musk departed DOGE May 30, 2025 after 130 days, mooting some claims.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 00:59:54",
+      "target_name": "DOGE",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "CourtListener search; NPR 5/28/2025; ABC News; CREW; Warren.senate.gov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4525,
+      "finding_type": "legal",
+      "summary": "Key DOGE court rulings: (1) CREW v. DOGE (DDC 1:25-cv-00511): Judge ruled DOGE likely subject to FOIA, issued preliminary injunction for document preservation and expedited FOIA processing (Mar 10, 2025). (2) Wheeler/States v. Musk (DDC): Judge Chutkan denied motion to dismiss constitutional challenge, found standing (May 28, 2025). (3) USAID case: 4th Circuit reversed district court, allowing DOGE cuts to continue, ruling 'unconventional does not necessarily equal unconstitutional.' (4) Treasury access: SDNY Judge Vargas barred DOGE from Treasury payment systems (Feb 2025). (5) Project on Government Oversight v. DOGE (DDC 1:25-cv-01295): transparency suit filed Apr 2025.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 01:00:04",
+      "target_name": "DOGE",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket data; NPR; PBS; AG.NY.gov; EFF",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4527,
+      "finding_type": "financial",
+      "summary": "DOGE savings claims vs reality: DOGE claimed hundreds of billions in savings. However, GAO audit found no noticeable effect on spending trajectory. Cato Institute confirmed 'DOGE had no noticeable effect on the trajectory of spending.' Government spending actually increased during DOGE's tenure. DOGE's primary measurable impact was workforce reduction -- 'the largest peacetime workforce reduction on record.' Some individual claims debunked: Khanna noted 40% of DOGE-canceled contracts resulted in no savings; one DOGE-claimed $8B savings was actually $8M.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 01:00:25",
+      "target_name": "DOGE",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Cato Institute analysis; GAO 2025 High Risk List; Yahoo Finance; Rep. Khanna statements",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4586,
+      "finding_type": "financial",
+      "summary": "DOGE defense impact: 10,700+ contracts terminated by May 2025. $71.1B in terminated contracts. $11B in claimed 'efficiencies' in FY2026 budget. O&M cuts $8.1B. DISA J6 (nuclear C4 systems) 'unexpectedly and significantly impacted' -- unable to obtain software for secure channels connecting Pentagon to nuclear capabilities. Hegseth directive May 27, 2025 requires DOGE approval for IT contracts over $10M and A&AS contracts over $1M. Pentagon civilian workforce cut by 61,600 (8%) during 2025. SpaceX contracts explicitly untouched while competitors cut. Missile defense/nuclear weapons/border exempted from 8% annual cuts.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:59:48",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Intercept Jan 2026; Breaking Defense Aug 2025; DefenseScoop; Crowell & Moring; Federal News Network Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5188,
+      "finding_type": "intelligence",
+      "summary": "DOGE accessed Treasury payment systems processing 5T+ annually. Tom Krause (Cloud Software Group CEO) delegated fiscal assistant secretary duties and granted top secret clearance. At least 4 DOGE members (Krause, Whitridge, Corcos, Newnam) granted access by federal judge. Marko Elez briefly had edit access before restriction to read-only.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:34:36",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2025/02/05/politics/doge-treasury-payments-system-access/index.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5190,
+      "finding_type": "intelligence",
+      "summary": "DOGE accessed OPM personnel databases containing PII for millions of federal employees including SSNs, dates of birth, salaries, medical histories, home addresses, disciplinary records. Brian Bjelde (SpaceX VP HR) and Amanda Scales (xAI) installed at OPM. Appeals court vacated initial block on access.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:34:38",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.washingtonpost.com/national-security/2025/02/06/elon-musk-doge-access-personnel-data-opm-security/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5191,
+      "finding_type": "intelligence",
+      "summary": "Two DOGE employees (Luke Farritor, 23, ex-SpaceX intern; Adam Ramada, 35, Miami VC) gained accounts on classified NNSA Enterprise Secure Network with nuclear weapons design data and SIPRNet. Neither had nuclear or classified experience. DOE said accounts never accessed; both departed DOE in Feb 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:34:41",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/04/28/nx-s1-5378684/doge-energy-department-nuclear-secrets-access",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5193,
+      "finding_type": "relationship",
+      "summary": "At least 38 of 109 identified DOGE staffers work or have worked for Musk companies (SpaceX, Tesla, X, Neuralink, xAI, Boring Company). At least 6 are former Palantir employees. Key Palantir-DOGE links: Gregory Barbaccia (federal CIO, 10yr Palantir vet), Clark Minor (HHS CIO). Marc Andreessen served as DOGE recruiter. Shaun Maguire (Sequoia/Founders Fund) assisted in hiring.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:34:46",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5304,
+      "finding_type": "intelligence",
+      "summary": "DOGE operatives: 6 young engineers (ages 19-24) with A-suite GSA clearance granted access to sensitive systems across multiple agencies",
+      "detail": "Core team identified: Akash Bobba (OPM, reports to Amanda Scales), Edward Coristine (CBP, DHS immigration data), Luke Farritor (grants.gov admin at HHS, blocked life-critical payments), Gavin Kliger (USAID, CFPB), Ethan Shaotran, Gautier Cole Killian. All have GSA emails with A-suite clearance allowing access to all IT systems. Farritor granted access to DOE systems over CIO objections. Coristine, Kyle Schutt, Aram Moghaddassi, and Payton Rehling accessed USCIS data at DHS. By July 2025, ProPublica tracked 100+ DOGE members; at least 23 made cuts at agencies regulating where they previously worked.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:16:39",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.washingtonpost.com/business/interactive/2025/doge-employees-list-staff-elon-musk/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5307,
+      "finding_type": "intelligence",
+      "summary": "Senior DOGE leadership all have direct Musk company ties: Shedd (Tesla), Scales (xAI), Biasini (Tesla/Boring), Krause (Treasury access)",
+      "detail": "Thomas Shedd: former Tesla software engineer, now heads Technology Transformation Services at GSA. Amanda Scales: former xAI recruiter, named OPM chief of staff controlling federal hiring. Ricardo Biasini: Tesla engineer (2011-2016, Autopilot focus) and Boring Company, now senior adviser to OPM director. Tom Krause: Cloud Software Group CEO, given special government employee status at Treasury overseeing trillions in payments. All four identified by NPR/CNN as having senior DOGE roles with direct Musk company backgrounds.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:16:51",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/02/07/nx-s1-5288988/doge-elon-musk-staff-trump",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5310,
+      "finding_type": "legal",
+      "summary": "Supreme Court ruled in favor of DOGE in two landmark cases (June 2025): SSA data access and FOIA exemption",
+      "detail": "On June 6, 2025, Supreme Court issued two DOGE-favorable rulings: (1) SSA v. AFSCME: Struck down Fourth Circuit injunction blocking DOGE access to SSA records containing PII (SSNs, DOBs, addresses, bank accounts). Reversed lower court ruling requiring DOGE meet security criteria. (2) USDS v. CREW: Exempted DOGE from FOIA request for recommendations to president. However, earlier in March 2025, a federal judge had ruled DOGE subject to FOIA and ordered expedited processing. The Supreme Court rulings effectively gave DOGE legal cover for broad data access.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:17:00",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://ogletree.com/insights-resources/blog-posts/supreme-court-rules-doge-can-access-social-security-data-and-avoid-foia-for-now/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.scotusblog.com/2025/06/supreme-court-sides-with-trump-in-two-doge-suits/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5314,
+      "finding_type": "legal",
+      "summary": "At least 20 federal lawsuits filed against DOGE as of mid-2025, spanning FOIA, privacy, data access, and contract terminations",
+      "detail": "Major DOGE litigation includes: Lentini v. DOGE (DDC, 1/20/25, FOIA); J. Does 1-26 v. Musk (4th Cir., privacy/OPM data); Ward v. Musk (DDC, Treasury access); CREW v. USDS (DDC, FOIA, went to SCOTUS); American Oversight v. DOGE (DDC, records/NARA); POGO v. Trump (DDC, transparency); AAPD v. Dudek (DDC, disability programs, multistate coalition); The Intercept v. DOGE (SDNY, FOIA); Urban Sustainability v. USDA (DDC, grant terminations); Louisiana Delta v. CNS (MDL, AmeriCorps). Key plaintiffs include ACLU, CREW, American Oversight, AFGE, AFSCME, state AGs. Federal judge in NY found DOGE violated Privacy Act at OPM.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:17:11",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fedscoop.com/judge-grants-preliminary-injunction-challenge-doge-opm-record-access/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.govexec.com/oversight/2025/03/judge-orders-doge-comply-foia-requests/403660/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5322,
+      "finding_type": "financial",
+      "summary": "DOGE terminated 10,000+ federal contracts worth $71B by May 2025; total impacted value reached $329.8B by September 2025",
+      "detail": "DOGE contract terminations: 10,000+ contracts worth approximately $71B by May 2025. By September 2025, base-and-all-options value of terminated contracts reached $329.8B. Agencies most affected by dollar: HHS, USAID, DoD, VA, DHS. In first 5 weeks (Jan 20-Feb 25), 2,425 contracts terminated for convenience plus 205 stop-work orders, totaling $150M in de-obligated funds. Uses 'termination for convenience' clause (T4C) in federal contracts. Savings claims disputed \u2014 DOGE website reports differ from independent tracking (HigherGov, GovSpend).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:17:43",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://govspend.com/blog/doge-terminations-in-fy25-what-the-numbers-say-and-whats-still-to-come/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.highergov.com/news/list-of-all-contracts-terminated-by-doge-6287413/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5333,
+      "finding_type": "intelligence",
+      "summary": "DOGE no longer centralized entity as of November 2025; embedded operatives persist across agencies under White House tech team",
+      "detail": "By November 2025, head of OPM stated DOGE no longer has 'centralized leadership.' However, DOGE personnel remain embedded across agencies under White House technology team umbrella, continuing 'technology modernization' work. In August 2025, all remaining DOGE staff moved to political positions despite 'burrowing in' concerns. Former DOGE member Joe Gebbia (Airbnb co-founder) created National Design Studio within White House to redesign government websites and physical spaces. USDS hired to 150 staff planned for 2026 from 89 in 2025. Effectively a dispersal rather than dissolution.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:18:26",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.govexec.com/management/2025/08/all-remaining-doge-staff-are-political-positions-despite-concerns-burrowing/407301/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/digital-government/2025/11/doge-no-longer-has-centralized-leadership-under-white-house-tech-team-personnel-head-says/409765/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5336,
+      "finding_type": "intelligence",
+      "summary": "DOGE operatives gained access to Treasury payment systems, OPM personnel records, SSA databases, DHS immigration data, and DOE systems",
+      "detail": "Documented DOGE system access: (1) Treasury: Tom Krause (Cloud Software Group CEO) given special government employee access to system processing trillions in payments; (2) OPM: Federal judge found DOGE violated Privacy Act sharing personnel records; Amanda Scales named chief of staff; (3) SSA: PII including SSNs, DOBs, addresses, bank accounts \u2014 Supreme Court ultimately allowed access; (4) DHS/USCIS: Coristine, Schutt, Moghaddassi, Rehling accessed immigration data; (5) DOE: Farritor granted access over CIO objections; (6) CFPB: Kliger, Rajpal, Chris Young present; (7) GSA: 6 members tried embedding DOGE teams in external units. At least 23 DOGE members made cuts at agencies regulating their previous employers.",
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:18:43",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fedscoop.com/judge-grants-preliminary-injunction-challenge-doge-opm-record-access/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.afge.org/article/judge-orders-opm-to-halt-sharing-americans-personal-data-with-doge/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5339,
+      "finding_type": "legal",
+      "summary": "Federal judge ordered preliminary injunction blocking DOGE from OPM data; found Privacy Act and APA violations (February 2025)",
+      "detail": "In February 2025, federal unions (AFGE, AFSCME) and nonprofit filed suit alleging OPM shared personnel records with DOGE affiliates in violation of Privacy Act and Administrative Procedure Act. Federal district judge in New York granted preliminary injunction ruling that: (1) Officials violated federal privacy law; (2) Flouted cybersecurity protocols; (3) OPM must halt sharing Americans' personal data with DOGE. This was one of the earliest successful legal challenges. Named defendants include DOGE personnel Peter Marocco and Jeremy Lewin. Case: J. Doe 4 v. Musk, D. Maryland (8:25-cv-00462).",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:19:01",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fedscoop.com/judge-grants-preliminary-injunction-challenge-doge-opm-record-access/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.afge.org/article/judge-orders-opm-to-halt-sharing-americans-personal-data-with-doge/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5344,
+      "finding_type": "intelligence",
+      "summary": "DOGE additional named personnel: Marko Elez (CBP), Kyle Schutt (GSA, $195K), Jeremy Lewin (GSA, $167K), Nate Cavanaugh (GSA, $120K), plus disclosure of 30+ members",
+      "detail": "GSA salary records: Jeremy Lewin ($167,000), Kyle Schutt ($195,200), Nate Cavanaugh ($120,500). Business Insider listed 30+ DOGE members in February 2025. Additional names disclosed: Kendall Lindemann, Adam Ramada, Austin Raynor (Business Insider); Jenn Balajada, Nicole Hollander, Ryan Riedel (ProPublica). Marko Elez and Edward Coristine worked at CBP. Jordan Wick identified at CFPB. Aram Moghaddassi and Payton Rehling at DHS. By July 2025, ProPublica tracked 100+ total DOGE members. Washington Post maintained running list of DOGE employees.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:19:30",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.washingtonpost.com/business/interactive/2025/doge-employees-list-staff-elon-musk/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5350,
+      "finding_type": "legal",
+      "summary": "CREW v. USDS: Federal judge ruled DOGE subject to FOIA (March 2025); Supreme Court later reversed, exempting DOGE from FOIA",
+      "detail": "Timeline of DOGE FOIA litigation: (1) CREW sued US DOGE Service to compel transparency; (2) March 10, 2025: Federal judge ruled USDS likely subject to FOIA, issued preliminary injunction ordering expedited FOIA processing and document preservation; (3) March 20, 2025: Judge denied DOGE's motion to reconsider; (4) June 6, 2025: Supreme Court reversed in USDS v. CREW, exempting DOGE from FOIA on grounds recommendations to president are exempt. DOGE had argued it was 'not an agency' to avoid FOIA obligations. Lower court rejected that argument but Supreme Court found different grounds for exemption. Case demonstrates tension between government transparency and executive privilege claims.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:20:00",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://ogletree.com/insights-resources/blog-posts/supreme-court-rules-doge-can-access-social-security-data-and-avoid-foia-for-now/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.citizensforethics.org/legal-action/lawsuits/crew-sues-us-doge-service-to-compel-transparency/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5351,
+      "finding_type": "intelligence",
+      "summary": "DOGE pushed federal agencies to adopt Grok AI for months before formal xAI contract, according to Reuters (May 2025)",
+      "detail": "Reuters reported in May 2025 that DOGE staff spent months pushing federal agencies to adopt xAI's Grok chatbot despite the system lacking standard government approval processes. This occurred before the formal $200M Pentagon contract was announced in July 2025. Pattern suggests DOGE operatives used their government access to create demand for a Musk-owned product before formal procurement. Combined with Sen. Warren's finding that the xAI contract 'came out of nowhere' when other companies were under consideration, raises questions about whether DOGE was used as a sales channel for Musk's AI products.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:20:07",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.warren.senate.gov/imo/media/doc/letter_to_pentagon_regarding_integration_of_grok_91025.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5358,
+      "finding_type": "legal",
+      "summary": "Multiple Congressional investigations launched into Musk DOGE conflicts: Lynch/Connolly (DoD), Shaheen (ethics bill), Senate HSGAC minority memo",
+      "detail": "Congressional oversight actions against DOGE/Musk conflicts: (1) Reps. Lynch and Connolly led House oversight investigation citing $9.5B in defense contracts (April 2025); (2) Sen. Shaheen introduced conflict-of-interest bill specifically aimed at Musk; (3) Senate HSGAC minority staff memo (April 27, 2025) documented Musk conflicts comprehensively; (4) Rep. Sherrill called for investigations into 'vast conflicts of interest and self-dealing at federal agencies'; (5) Democrats demanded investigation noting Musk's involvement at agencies investigating his companies and considering layoffs that impede case-winning ability; (6) Sen. Warren's September 2025 letter on xAI contract.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:20:37",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://lynch.house.gov/2025/4/reps-lynch-and-connolly-lead-oversight-investigation-into-elon-musk-s-conflicts-of-interest-at-dod-citing-whopping-9-5-billion-in-defense-contracts",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/2025-04-27-Minority-Staff-Memorandum-Elon-Musk-Conflicts.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5361,
+      "finding_type": "intelligence",
+      "summary": "Joe Gebbia (Airbnb co-founder, former DOGE member) created National Design Studio within White House to redesign government digital/physical infrastructure",
+      "detail": "Over summer 2025, former DOGE member Joe Gebbia, co-founder of Airbnb, created the National Design Studio within the White House. Purpose: improve government websites and physical spaces. Represents DOGE influence extending beyond cost-cutting into permanent institutional redesign. Gebbia's Airbnb background means a tech industry executive is now shaping federal government user experience and physical infrastructure. Part of pattern where tech executives use DOGE as entry point to reshape government systems and institutions.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:20:47",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5454,
+      "finding_type": "legal",
+      "summary": "CASE: Alliance for Retired Americans v. Bessent \u2014 D.D.C. No. 1:25-cv-00313 (filed Feb 3, 2025). Judge Kollar-Kotelly. Challenged DOGE access to Treasury Bureau of Fiscal Service payment systems containing SSNs, bank accounts, addresses of millions. Court ordered defendants cannot provide access to any payment record or payment system maintained by BFS. Initially denied preliminary injunction for failure to show irreparable harm, but restricted access to read-only for Tom Krause and Marko Elez.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:29:51",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69607077; Public Citizen case page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5455,
+      "finding_type": "intelligence",
+      "summary": "Regulatory moat \u2014 NHTSA: DOGE fired ~30 staff (4% of workforce), disproportionately targeting the Vehicle Automation Safety division (est. 2023). 3 of ~7 staff on the autonomous vehicle team were cut \u2014 a 43% reduction in the only federal team evaluating Tesla FSD safety. NHTSA has 8 active Tesla investigations including Autopilot crash probes and FSD recall reviews. Many fired staff were probationary employees in the new AV division, making them legally easier to terminate. Musk company affected: Tesla. Impact: Severe reduction in federal capacity to evaluate autonomous vehicle safety claims, directly benefiting Tesla's robotaxi deployment timeline.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:29:53",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.washingtonpost.com/business/2025/02/21/musk-doge-tesla-autonomous-vehicles-nhtsa/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5456,
+      "finding_type": "legal",
+      "summary": "CASE: AFSCME v. SSA \u2014 D. Md. No. 1:23-cv-00596 (amended Mar 7, 2025). Challenged DOGE access to SSA databases containing SSNs, birth dates, addresses, bank accounts, medical records. District court granted preliminary injunction blocking DOGE access. Fourth Circuit heard appeal en banc but denied motion to stay. SUPREME COURT reversed on June 6, 2025 (No. 24A1063), restoring DOGE access to SSA data. Dissent by three liberal justices.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:29:56",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Supreme Court opinion 24A1063; CourtListener",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5457,
+      "finding_type": "intelligence",
+      "summary": "Regulatory moat \u2014 FDA: DOGE fired ~20 employees from FDA's Office of Neurological and Physical Medicine Devices, several of whom worked directly on Neuralink clinical trial applications. Part of broader purge of 5,200 probationary workers across federal health agencies. Dismissal letters cited 'performance' despite employees having top-notch rankings weeks prior. FDA scrambled to rehire some device review teams within a week, calling terminations 'rescinded effective immediately' \u2014 but damage to institutional knowledge and review timelines already done. Musk company affected: Neuralink. Impact: Disruption of brain-computer interface safety review pipeline, benefiting Neuralink's path to market.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:02",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2025/02/18/fda-staff-reviewing-musks-neuralink-were-included-in-doge-employee-firings-reuters-reports.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5458,
+      "finding_type": "legal",
+      "summary": "CASE: CREW v. U.S. DOGE Service \u2014 D.D.C. (filed Feb 2025). Judge ruled March 10, 2025 that DOGE is likely subject to FOIA, issued preliminary injunction ordering expedited FOIA processing and document preservation. However, SUPREME COURT on June 6, 2025 exempted DOGE from FOIA disclosure requirements, blocking discovery. American Oversight's parallel FOIA suit uncovered DOGE use of Signal and Slack for official communications.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:06",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CREW case filing; Supreme Court docket; American Oversight press releases",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5459,
+      "finding_type": "legal",
+      "summary": "CASE: New Mexico et al. v. Trump \u2014 D.D.C. (filed Feb 2025). 14 Democratic state AGs challenged DOGE under Appointments Clause. Judge Tanya Chutkan denied motion to dismiss May 28, 2025, writing 'The Constitution does not permit the Executive to commandeer the entire appointments power by unilaterally creating a federal agency.' Trump dismissed as defendant but Musk required to face lawsuit. States voluntarily dismissed Dec 15, 2025 without prejudice after Musk departed government role.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:11",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Judge Chutkan 42-page order; NM DOJ press release; court docket",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5460,
+      "finding_type": "intelligence",
+      "summary": "Regulatory moat \u2014 FCC: Chairman Brendan Carr (Trump appointee) approved 7,500 additional Starlink Gen2 satellites (total 15,000), opened 20,000+ MHz of spectrum for satellite broadband ('spectrum abundance'), waived prior requirements preventing overlapping coverage, and actively promoted Starlink as preferred broadband solution. Carr advocated redirecting $42.5B in broadband infrastructure subsidies toward Starlink. Reversed Biden-era clawback of ~$1B in subsidies from Starlink. SpaceX also secured $17B EchoStar spectrum purchase (50 MHz mobile). FCC dismissed conflict-of-interest challenge as 'moot' since Musk left DOGE May 2025. Musk company affected: Starlink/SpaceX. Impact: Massively favorable regulatory environment for Starlink dominance in satellite broadband.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:12",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://spacenews.com/fcc-approves-7500-additional-starlink-satellites/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5461,
+      "finding_type": "legal",
+      "summary": "CASE: American Federation of Teachers v. Bessent \u2014 D. Md. No. 8:23-cv-00430 (filed Feb 10, 2025). Sought to block DOGE access to Treasury, Education Dept, and OPM databases. Judge Deborah Boardman initially blocked DOGE access, ruling neither DOGE nor Trump administration explained why workers need 'such comprehensive, sweeping access.' Fourth Circuit REVERSED on Aug 12, 2025 (No. 25-1282), vacating preliminary injunction, finding plaintiffs not likely to succeed on merits. This was the critical appeals court ruling that lifted blocks on DOGE access to all three agencies.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:20",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "4th Circuit opinion 25-1282; District court order",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5462,
+      "finding_type": "intelligence",
+      "summary": "Regulatory moat \u2014 FAA: FAA's Office of Commercial Space Transportation (AST) has only ~160 staff overseeing all commercial launches, despite sixfold increase in launch cadence. FAA laid off ~400 employees in Feb 2025 DOGE cuts (132 later reinstated). FAA had proposed $633,000 in fines against SpaceX for launch violations (Sept 2024). Transportation Secretary Duffy announced SpaceX engineers would help 'overhaul air traffic control' \u2014 Sen. Cantwell called this 'conflict of interest.' Brian Bjelde (longtime SpaceX engineer) installed at OPM directing 70% workforce cuts across agencies. Musk company affected: SpaceX. Impact: Already understaffed launch licensing office further weakened; SpaceX personnel embedded in FAA oversight chain.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:23",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/elon-musk-spacex-doge-faa-ast-regulation-spaceflight-trump",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5463,
+      "finding_type": "legal",
+      "summary": "CASE: EFF v. OPM \u2014 E.D. Va. No. 1:25-cv-00255 (filed Feb 10, 2025). Electronic Frontier Foundation challenged DOGE access to OPM databases. Preliminary injunction denied for failure to show irreparable harm. However, judge rejected government motion to dismiss entirely (as of late 2025), allowing the case to proceed. Parallel case: Judge Denise Cote (SDNY) found in June 2025 that OPM 'violated the law and bypassed its established cybersecurity practices' when granting DOGE broad access to its IT systems.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:25",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFF press release; Federal News Network reporting; court orders",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5466,
+      "finding_type": "legal",
+      "summary": "CASE: AFL-CIO v. Dept of Labor \u2014 D.D.C. No. 1:25-cv-00339 (filed Feb 5, 2025). Sought to block DOGE access to Department of Labor databases. Preliminary injunction denied for failure to show irreparable harm. CASE: NTEU v. Vought \u2014 D.D.C. No. 1:25-cv-00280 (filed Feb 9, 2025). Challenged DOGE access to Consumer Financial Protection Bureau databases. Briefing ongoing. Reported that DOGE obtained 'god-tier' access to all non-classified CFPB databases on Feb 7, including financial transaction data and business plans.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:33",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener; FedScoop reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5467,
+      "finding_type": "intelligence",
+      "summary": "Regulatory moat \u2014 SEC: DOGE team arrived at SEC led by Eliezer Mishory (former chief regulatory officer at Kalshi). ~500 staffers (10% of ~5,000 workforce) accepted buyout/deferred-resignation offers. Additional departures expected under new chair Paul Atkins (confirmed Apr 9, 2025), who is expected to steer away from aggressive enforcement. Robin Andrews, enforcement attorney who handled Musk cases, departed. SEC has active Biden-era suit against Musk for delayed disclosure of Twitter stake acquisition (alleging $150M+ shareholder losses). Musk also under 2018 consent decree requiring pre-approval of Tesla-related social media posts. Musk company affected: Tesla, X Corp. Impact: Enforcement capacity degraded precisely as Musk faces active SEC litigation; new leadership signals reduced enforcement appetite.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:35",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://news.bloomberglaw.com/securities-law/musks-doge-hunts-for-sec-cuts-but-savings-will-prove-elusive",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5468,
+      "finding_type": "legal",
+      "summary": "CASE: Lentini v. Department of Government Efficiency \u2014 D.D.C. No. 1:25-cv-00166 (filed Jan 20, 2025). One of the earliest DOGE lawsuits, filed on inauguration day. Writ of mandamus petition. Named defendants include DOGE, Elon Musk, Vivek Ramaswamy, Russell Vought, Scott Kupor, OPM, OMB, EOP, Charles Ezell. Government moved to consolidate cases. Case assigned to Judge Jia M. Cobb.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:38",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69559476",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5470,
+      "finding_type": "intelligence",
+      "summary": "Regulatory moat \u2014 FTC: At least a dozen probationary staffers fired in March 2025 from Bureau of Consumer Protection and Bureau of Competition. Trump FY2026 budget proposes 15% cut to FTC budget and personnel. New chair Andrew Ferguson (replaced Lina Khan) signals shift away from aggressive antitrust enforcement. SpaceX announced $1.25 trillion deal to acquire xAI (Feb 2026) \u2014 largest private company merger by valuation. Current FTC leadership considered unlikely to challenge the deal given it involves 'American company and space infrastructure central to US national defense.' Musk company affected: xAI, SpaceX. Impact: Antitrust review capacity reduced and leadership replaced with enforcement-averse appointees ahead of massive Musk company consolidation.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:45",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.androidheadlines.com/2025/03/ftc-layoffs-consumer-protection-antitrust-offices.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5472,
+      "finding_type": "intelligence",
+      "summary": "System access: Treasury Bureau of Fiscal Service (BFS) payment system \u2014 processes >T in federal payments annually. Tom Krause (software CEO, special government employee) replaced career official David Lebryk who resigned over access dispute. Marko Elez (age 25) given 'write' access for one day by mistake before Treasury discovered and revoked it. Both had read-only access. Elez resigned Feb 6, 2025 after old racist social media posts surfaced. BFS monitored Elez with cybersecurity tools blocking USB, cloud storage, and logging all commands. Legal status: Court initially restricted access; 4th Circuit later lifted restrictions.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:50",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court filings in Alliance for Retired Americans v. Bessent; WaPo reporting; Emptywheel analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5474,
+      "finding_type": "intelligence",
+      "summary": "System access: OPM personnel databases \u2014 contains employment records for entire federal workforce (current/former employees and applicants), including background investigations, SF-86 security clearance questionnaire data, medical records, bank account info, biometric data. Gavin Kliger (age 25, UC Berkeley dropout) was senior advisor at OPM and held simultaneous positions at USDA and CFPB. Akash Bobba (age 21-22, UC Berkeley student) placed at OPM with GSA access. Judge Denise Cote found in June 2025 OPM 'violated the law and bypassed established cybersecurity practices' in granting DOGE access. Legal status: Initial injunction granted then REVERSED by appeals court Aug 2025.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:56",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court filings; Federal News Network; WaPo DOGE employee list",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5475,
+      "finding_type": "intelligence",
+      "summary": "Regulatory moat \u2014 NLRB: Board lost quorum in 2025 after Trump removed members, rendering it unable to review or issue decisions for nearly a year. SpaceX challenged NLRB constitutionality in Fifth Circuit, which ruled (Aug 2025) the NLRB structure 'likely unconstitutional.' On Feb 9, 2026, NLRB formally dismissed its long-running unfair labor practice complaint against SpaceX (re: firing 8 engineers who wrote open letter critical of Musk). Dismissal based on jurisdictional transfer to National Mediation Board under Railway Labor Act. New Trump NLRB nominees (Murphy, Mayer) and General Counsel (Carey) confirmed. Musk company affected: SpaceX. Impact: Complete elimination of labor law accountability \u2014 SpaceX's firing of whistleblower engineers now faces no federal consequences.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:30:56",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.laborrelationsupdate.com/2026/02/nlrb-relinquishes-jurisdiction-over-spacex-abandoning-yearslong-legal-battle/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5477,
+      "finding_type": "intelligence",
+      "summary": "System access: SSA databases \u2014 contain SSNs, dates/places of birth, gender, addresses, marital/parental status, parents names, lifetime earnings, bank account info, immigration/work authorization status, health conditions, disability benefits, Medicare usage for hundreds of millions of Americans. Supreme Court restored DOGE access June 6, 2025. CRITICAL INCIDENT: In Jan 2026, SSA revealed DOGE employees used unapproved Cloudflare servers to share SSA data starting March 7, 2025. Two DOGE employees secretly signed 'Voter Data Agreement' with political advocacy group to match SSA data with state voter rolls. Both referred for Hatch Act violations. SSA admitted it had previously misstated extent of DOGE data access to the court.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:09",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Supreme Court opinion 24A1063; NPR Jan 2026 reporting; Democracy Forward court filing; CNN Jan 20 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5479,
+      "finding_type": "intelligence",
+      "summary": "Agency impact \u2014 USAID: Effectively shuttered. DOGE entered USAID offices late Jan/early Feb 2025, removed security leaders who refused system access. By Feb 7, nearly all 10,000 employees on forced leave. ~1,600 fired, 4,700 on leave. Secretary Rubio announced 83% of contracts cancelled. March 28 email titled 'USAID's Final Mission' \u2014 workforce reduced from 13,000 to under 900. Federal judge ruled shutdown 'likely violated the Constitution in multiple ways.'",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:14",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/03/18/nx-s1-5332274/judge-ruling-usaid-shutdown",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5480,
+      "finding_type": "intelligence",
+      "summary": "System access: IRS Integrated Data Retrieval System (IDRS) \u2014 provides access to all IRS information including criminal investigations, taxpayer returns, taxpayer accounts, every database. Contains data on 150M+ tax filers. Gavin Kliger (age 25) arrived at IRS headquarters in Feb 2025, placed 5 government-issued laptops on a table and requested a 6th for IRS access. While holding OPM, USDA, and CFPB positions simultaneously. Treasury ultimately agreed to prohibit DOGE from accessing individual tax returns \u2014 DOGE reps see anonymized data only. DOGE then orchestrated a 'hackathon' to build a 'mega API' for centralized access to all agency data, with Palantir reportedly involved.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:16",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR reporting; WaPo Feb 16 2025; Tax Policy Center analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5481,
+      "finding_type": "intelligence",
+      "summary": "Agency impact \u2014 CFPB: DOGE operatives arrived Feb 2025, shut headquarters, deleted social media accounts, accessed internal systems. Plan to fire nearly all 1,700 employees and 'wind down' agency. Initial target: 1,175 layoffs, later expanded to ~1,500, leaving ~200 people. Ultimate goal: reduce to 5 employees. Judge Amy Berman Jackson barred officials from firing without cause. USASpending shows contract obligations dropping from $188M (FY2024) to $120M (FY2025, -36%) to negative $5.6M (FY2026 \u2014 active de-obligation of contracts).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:24",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2025/02/28/cfpb-leaders-and-elon-musk-doge-planned-to-fire-nearly-all-staff.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5483,
+      "finding_type": "intelligence",
+      "summary": "System access: Education Dept student loan databases \u2014 13 databases containing data on 43M student loan borrowers and families, including SSNs, bank records, FAFSA data (addresses of relatives, property taxes, income sources). DOGE fed data to Azure AI to identify spending cuts. A 19-year-old DOGE employee (Edward Coristine, previously fired by cybersecurity firm for allegedly leaking internal data) was among 25 DOGE employees with access. Judge Boardman initially blocked access through March 10, 2025. Education Dept IG opened investigation. Legal status: Initial block lifted by 4th Circuit Aug 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:27",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Higher Ed Dive; CNBC Feb 24 2025; Sen. Warren press release; court orders",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5484,
+      "finding_type": "intelligence",
+      "summary": "System access: CFPB (Consumer Financial Protection Bureau) \u2014 DOGE obtained access to all non-classified CFPB databases on Feb 7, 2025. Access described as 'god-tier' by sources. Data includes customer acquisition data, revenues, profits, financial transaction data, and business plans. Normally only single employees have need-to-know access. NTEU sued (D.D.C. No. 1:25-cv-00280). Conflict of interest: Musk's X platform was developing a digital wallet product that would directly compete with entities CFPB regulates, creating potential for market manipulation or insider knowledge.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:32",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop reporting; The Record; Bloomberg Feb 10 2025; NTEU lawsuit",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5486,
+      "finding_type": "intelligence",
+      "summary": "Agency impact \u2014 OPM: Became DOGE's operational headquarters. 'Fork in the Road' email sent Jan 28, 2025 to all federal employees offering deferred resignation (paid through Sept 30, reply 'Resign'). ~75,000 feds accepted in February. Brian Bjelde (longtime SpaceX engineer) installed as top adviser, instructed agency leaders to draft plans for 70% workforce cuts. DOGE personnel isolated on secure floor, effectively running OPM. OPM described as 'shadow OPM' and 'ground zero' for government shrinkage. Total across all agencies: ~200,000-279,000 federal workers departed by mid-2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:34",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://edition.cnn.com/2025/03/03/politics/doge-opm-shrink-government",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5488,
+      "finding_type": "intelligence",
+      "summary": "System access: USDA Farm Service Agency (National Payment Service) \u2014 controls government payments and loans to farmers and ranchers. Jordan Wick (former Waymo software engineer, DOGE affiliate) obtained highly privileged access level that no other individual at the agency has, violating normal access protocols. Can view and modify data entries, view sensitive personal information, and outright cancel loans worth billions. Access goes against normal USDA protocols.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:41",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR Jul 10 2025; OPB reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5489,
+      "finding_type": "intelligence",
+      "summary": "Agency impact \u2014 VA: Lost ~40,000 workers over past year, ~90% health care staff. DOGE directed cancellation of 800+ contracts supporting chemotherapy, records digitization, EHR modernization. VA terminated 585 contracts March 3, 2025. ProPublica revealed DOGE software engineer built error-prone AI tool used to identify contracts for cancellation \u2014 engineer later admitted 'mistakes were made.' Career officials asked reconsideration of critical service terminations but were overruled. USASpending shows VA contract obligations still rising (FY2024: $66.9B, FY2025: $78.3B) but this masks internal disruption from cancelled support contracts.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:44",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.newsweek.com/doge-cuts-update-today-veterans-affairs-2054778",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5490,
+      "finding_type": "intelligence",
+      "summary": "System access: DHS immigration databases \u2014 DOGE built 'master database' for immigration enforcement combining data across federal agencies. DHS and DOGE overhauled SAVE (Systematic Alien Verification for Entitlements) database to create 'searchable national citizenship database' allowing election officials to check voter rolls using SSA and immigration data. For the first time, officials can query SAVE to look up US-born citizens by SSN. DHS brokered data-sharing agreements with IRS and HUD for noncitizen data. Also: CMS (Medicare/Medicaid) databases accessed, containing names, DOB, SSNs, phone numbers, addresses, race, sex, diagnosis codes, procedure codes, medical notes.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:49",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DHS.gov press release Apr 22 2025; CNN Apr 25 2025; NPR reporting; Center for Medicare Advocacy",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5491,
+      "finding_type": "intelligence",
+      "summary": "DOGE disbanded November 24, 2025, 8 months ahead of July 2026 charter expiration. OPM Director Scott Kupor (former a16z managing partner) confirmed dissolution: no longer centralized entity. However, effectively a dispersal not dissolution: operatives remain embedded at IRS, SSA, other agencies; Russell Vought (OMB) institutionalizing DOGE agenda; 2026 budget requests doubling DOGE budget to 45M; Edward Coristine and others moved to National Design Studio under Gebbia. Kupor himself resigned from 32 a16z funds but remained passive investor in 38 others; announced planned elimination of 300K federal roles by end 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:49",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://reason.com/2025/11/24/a-dirge-for-doge/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5492,
+      "finding_type": "intelligence",
+      "summary": "Agency impact \u2014 Department of Education: March 2025 RIF fired ~1,400 of 4,100+ employees (nearly 50% of staff). Cut 100+ IES research analysts and 240+ OCR civil rights attorneys. Second wave Oct 2025: 466 more RIF notices, leaving ~2,001 employees. Trump signed EO March 20 to dismantle department; $1.7T student loan portfolio transferred to SBA. USASpending contract obligations: FY2024 $2.73B, FY2025 $2.50B (-8.2%), FY2026 $665M (annualized pace ~75% below FY2024). Complete closure requires act of Congress (60-vote filibuster threshold).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:31:54",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/03/12/nx-s1-5325854/trump-education-department-layoffs-civil-rights-student-loans",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5495,
+      "finding_type": "financial",
+      "summary": "USASpending before/after analysis for DOGE-restructured agencies (contract obligations). CFPB: FY2024 $188M -> FY2025 $120M (-36%) -> FY2026 -$5.6M (net de-obligation). Dept of Education: FY2024 $2.73B -> FY2025 $2.50B (-8.2%) -> FY2026 $665M (annualized ~75% reduction). DOT (parent of NHTSA/FAA): FY2024 $8.56B -> FY2025 $9.02B (+5.3%) -> FY2026 $3.97B (partial year, on pace). VA: FY2024 $66.9B -> FY2025 $78.3B (+17%). Note: Contract obligation data lags operational cuts \u2014 staffing reductions and program cancellations precede spending changes in USASpending data. CFPB negative FY2026 obligations are strongest quantitative signal of agency shutdown.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:04",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.usaspending.gov",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5496,
+      "finding_type": "intelligence",
+      "summary": "Brookings analysis compared DOGE data consolidation to post-9/11 Total Information Awareness (TIA) program which Congress defunded in 2003 after ACLU called it closest to true Big Brother ever contemplated. DOGE engineers attempted to create specialized computers with simultaneous full access to networks across different agencies, and assembled backpacks full of laptops each with access to different agency systems to combine databases. Justice Jackson dissent: DOGE received far broader data access than SSA customarily affords. Anti-fraud tool at SSA flagged only 2 of 110000 claims as fraudulent while slowing legitimate processing by 25%.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:06",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.brookings.edu/articles/privacy-under-siege-doges-one-big-beautiful-database/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5497,
+      "finding_type": "intelligence",
+      "summary": "DOGE key personnel and multi-agency access patterns: Gavin Kliger (25) held simultaneous positions at OPM, USDA, CFPB, and sought IRS access \u2014 single person spanning 4+ agencies. Tom Krause: special government employee at Treasury BFS. Amy Gleason: DOGE administrator, also 'expert/consultant' at HHS. Riccardo Biasini: former Tesla/Boring Co, senior adviser to OPM director. Edward Coristine (19): Northeastern dropout, posted to State and DHS, previously fired from cybersecurity firm for leaking data. Akash Bobba (21-22): UC Berkeley student at OPM with GSA access. Luke Farritor (23): DOGE member. Jordan Wick: former Waymo engineer, privileged USDA access. Pattern: Young, inexperienced tech workers given access to most sensitive government databases with minimal vetting.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:11",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WaPo DOGE employee list; Rolling Stone; CNN Feb 7 2025 investigation; NPR personnel profiles",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5499,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Regulatory moat \u2014 DOGE targeted 7 of 7 identified agencies that regulate Musk companies. (1) NHTSA: 43% of AV safety team cut, 8 active Tesla probes compromised. (2) FDA: ~20 Neuralink reviewers fired, some later rehired. (3) FCC: 7,500 new Starlink satellites approved, 20,000 MHz spectrum opened, $42.5B broadband funds redirected. (4) FAA: 400 staff cut, SpaceX engineers embedded in oversight chain, $633K fines pending. (5) SEC: 10% workforce departed, DOGE team led by Kalshi executive, active Musk suit. (6) FTC: 15% budget cut proposed, staff fired, ahead of $1.25T SpaceX-xAI merger. (7) NLRB: Quorum lost for a year, SpaceX unfair labor case dismissed Feb 2026. Combined effect: Every federal agency with oversight authority over a Musk company experienced staffing reductions, leadership replacement with industry-friendly appointees, or outright incapacitation during DOGE's tenure. This constitutes a systematic regulatory moat benefiting Musk's business empire across automotive, aerospace, neural technology, telecommunications, securities, antitrust, and labor domains simultaneously.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:19",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/2025-04-27-Minority-Staff-Memorandum-Elon-Musk-Conflicts.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5500,
+      "finding_type": "intelligence",
+      "summary": "DOGE data consolidation strategy: Brookings 'One Big Beautiful Database' analysis (June 25, 2025) documents DOGE's systematic effort to create a single centralized government database linking tax, medical, financial, immigration, employment records across agencies. This is antithetical to the Privacy Act of 1974's purpose-driven requirements for data sharing, passed after Watergate and COINTELPRO. Key components: (1) IRS mega API via Palantir Foundry, (2) SAVE citizenship database linking SSA + immigration data for voter roll checks, (3) Immigration enforcement master database combining data from multiple agencies, (4) Azure AI processing of Education loan data. Congressional reporting: Senate HSGAC published comprehensive DOGE report documenting scope of access.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:23",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Brookings article June 25 2025; HSGAC DOGE report PDF; Al Jazeera Dec 31 2025 longform",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5502,
+      "finding_type": "intelligence",
+      "summary": "Agency impact \u2014 Total federal workforce reduction: ~200,000-279,000 federal workers departed by mid-2025 across 27+ agencies. Key mechanisms: (1) 'Fork in the Road' deferred resignation \u2014 ~75,000 accepted Feb 2025. (2) Probationary employee mass firing \u2014 OPM directive Feb 13, 2025. (3) Agency-specific RIFs. (4) Buyout offers ($50K). Multiple agencies later scrambled to rehire key staff (FDA device reviewers, FAA employees). Brian Bjelde (SpaceX) at OPM directed 70% workforce cut plans. GAO Comptroller General confirmed DOGE is 'increasing national risk and undermining services.' Multiple federal judges ruled various actions unconstitutional.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:30",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/2025_United_States_federal_mass_layoffs",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5503,
+      "finding_type": "intelligence",
+      "summary": "House Oversight Democrats documented DOGE feeding Americans private data into unapproved third-party AI systems (reported March 12, 2025). Also documented DOGE using private servers at OPM (cybersecurity vulnerability), and the 'What did you do last week' email sent to all federal employees via compromised systems. Commerce Secretary Howard Lutnick promoted Tesla stock on Fox News March 2025, and White House used South Lawn as temporary Tesla showroom. EEOC Commissioners Charlotte Burrows and Jocelyn Samuels unlawfully terminated. PostMaster General DeJoy resigned after back-room DOGE agreement.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:30",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://oversightdemocrats.house.gov/news/exposing-doges-dark-dealings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5504,
+      "finding_type": "legal",
+      "summary": "LEGAL PATTERN: Across 20+ DOGE lawsuits, a consistent judicial trajectory emerged. District courts initially blocked DOGE access (Feb-Mar 2025), citing Privacy Act violations and lack of justification. But higher courts systematically reversed: 4th Circuit vacated injunctions Aug 2025 saying plaintiffs unlikely to succeed; Supreme Court restored SSA access and exempted DOGE from FOIA June 6, 2025. Net result: Despite multiple lower court findings that DOGE violated privacy law and cybersecurity protocols, DOGE ultimately retained access to virtually all contested systems. The legal infrastructure designed to protect citizen data (Privacy Act, APA, FOIA) proved insufficient to constrain executive-branch data access when higher courts prioritized executive authority.",
+      "detail": null,
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:30",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Compilation of rulings across all documented cases",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5506,
+      "finding_type": "intelligence",
+      "summary": "Revolving Door Project identified 138 total individuals reportedly involved with DOGE (from transition through ongoing operations), with 52 having direct ties to Musk companies. Edward Coristine (19 years old at hire, former Neuralink intern) was reported by Bloomberg as having been fired from cybersecurity internship in 2022 for leaking proprietary information. Post-DOGE dissolution, Coristine moved to National Design Studio under Gebbia. Identified DOGE staffers expressed fear of prosecution after Musk fell out with Trump: lived with ever-present threat of backlash including prospect of criminal charges.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:46",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/doge-agent-edward-coristine/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5507,
+      "finding_type": "financial",
+      "summary": "ProPublica IRS analysis: DOGE cuts to IRS threaten to cost more than DOGE will ever save. EIA (Energy Information Administration) data collection scrapped as DOGE/Trump hobbled agency - potentially destroying energy market transparency used by all market participants. DOGE millions in funding: despite claiming to cut costs, DOGE itself received cash infusion. DOGE refused FOIA while claiming executive privilege. 100 Days of Corruption list released April 30 2025 by House Democrats identifying 100 specific DOGE conflicts of interest.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:52",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/how-doge-irs-cuts-will-cost-more-than-savings-trump-musk-deficit",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5508,
+      "finding_type": "intelligence",
+      "summary": "DOGE used Signal and other ephemeral messaging platforms plus Google Docs to circumvent Federal Records Act requirements. When American Oversight sued, Trump DOJ revealed for the first time a two-day-old records retention policy for DOGE communications including Musk's. Court found this evasive. American Oversight also documented DOGE loyalty surveillance of federal employees and record-keeping failures. Five inspectors general investigating Musk companies were fired by Trump. House Democrats filed 150+ investigations, 1000+ information requests, 3 FOIA requests, and 2 formal House Resolutions of Inquiry.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:59",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://americanoversight.org/american-oversights-lawsuit-forces-creation-of-new-records-retention-policy-for-doge/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5739,
+      "finding_type": "legal",
+      "summary": "Lentini v. DOGE (D.D.C. 1:25-cv-00164) -- first FACA challenge filed on Inauguration Day Jan 20 2025",
+      "detail": "Filed January 20, 2025 -- the same day Trump signed the executive order establishing DOGE. Plaintiffs (National Security Counselors, Public Citizen, AFGE, State Democracy Defenders Fund) challenged DOGE as an illegal advisory committee under the Federal Advisory Committee Act (FACA). Consolidated with two related cases before Judge Jia M. Cobb. Claims: DOGE violated FACA requirements for balanced membership, transparency, public meetings, charter filing, and Designated Federal Officer. Government moved to dismiss April 11, 2025 arguing DOGE is not an advisory committee. APHA plaintiffs voluntarily dismissed May 12, 2025; Lentini plaintiffs continued. Case remains pending as of early 2026. Judge Cobb denied expedited discovery March 25, 2025.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:41:23",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69559444",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69559476",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "clearinghouse.net case 45971",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5743,
+      "finding_type": "legal",
+      "summary": "Judge Chuang ruled DOGE/Musk USAID shutdown likely unconstitutional -- Appointments Clause violation (J. Does v. Musk, D. Md. 8:25-cv-00462)",
+      "detail": "U.S. District Judge Theodore Chuang (D. Maryland) ruled March 18, 2025 in a 68-page decision that DOGE and Musk likely violated the Constitution's Appointments Clause and separation of powers in shutting down USAID. Ruled in favor of 26 current and former USAID employees and contractors. Court found Musk exercised significant authority reserved for an officer while serving in a continuing government position, meaning he should have been confirmed by the Senate. Court ordered: (1) Reinstate email, payment, and electronic system access for all USAID employees and contractors; (2) Barred DOGE from taking any action relating to USAID shutdown including placing employees on admin leave, firing workers, closing buildings/bureaus/offices, deleting website/collections. This was the first federal court ruling explicitly finding DOGE actions likely unconstitutional.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:41:36",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69636722",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "J. Doe 4 v. Musk, D. Md. 8:25-cv-00462",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5747,
+      "finding_type": "legal",
+      "summary": "Judge Bredar ordered reinstatement of probationary employees across 18 agencies -- found mass firings were illegal RIFs (AFGE v. Trump, D. Md.)",
+      "detail": "Judge James Bredar (D. Maryland) ordered March 13-14, 2025 that the administration temporarily reinstate fired probationary employees and halt planned RIFs at 18 agencies: Agriculture, Commerce, Education, Energy, HHS, DHS, HUD, Interior, Labor, Transportation, Treasury, VA, USAID, CFPB, EPA, FDIC, GSA, and SBA. Deadline: March 17 at 1pm ET. Judge rejected government claim that firings were based on individualized performance reviews, stating the claim 'isn't true.' Found OPM illegally directed the terminations, calling them 'illegal RIFs.' This was the second major reinstatement order (after Judge Alsup in California).",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:41:46",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFGE v. Trump, D. Md.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5749,
+      "finding_type": "intelligence",
+      "summary": "DOGE total workforce impact: ~317,000 federal employees departed in 2025",
+      "detail": "According to OPM data reported by Bloomberg, approximately 317,000 federal employees left their jobs in 2025. In the first two months alone, 62,530 were dismissed (41,311% increase vs. same period 2024). Nearly 75,000 accepted the Fork in the Road voluntary deferred retirement program. Agencies have since been forced to rehire workers in many cases as courts blocked firings and agencies found they lacked capacity.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:41:50",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Bloomberg 12/10/2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "NPR 10/1/2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PBS 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5750,
+      "finding_type": "legal",
+      "summary": "Judge Alsup found OPM had zero legal authority to fire employees at other agencies -- ordered reinstatement (AFGE v. OPM, N.D. Cal.)",
+      "detail": "Judge William Alsup (N.D. California) granted a TRO and then preliminary injunction against OPM and Acting Director Charles Ezell, finding the termination of probationary federal employees illegal because OPM had no authority to order it. Key statement: 'The Office of Personnel Management does not have any authority whatsoever under any statute in the history of the universe to hire and fire employees at another agency.' Also stated: 'when federal agencies fire employees for no reason, that is just not right in our country' and that agencies cannot 'run with lies.' Ordered immediate reinstatement at VA, Agriculture, Interior, Energy, Defense, Treasury. In September 2025, court found OPM unlawfully directed mass firings and ordered agencies to update personnel files to remove pretextual performance-based termination notations.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:41:57",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFGE v. OPM, N.D. Cal. 3:25-cv-01780",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69655364",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5753,
+      "finding_type": "legal",
+      "summary": "Judge Amy Berman Jackson blocked CFPB dismantling -- ordered all terminated employees reinstated, records preserved (CFPB employees v. Vought, D.D.C.)",
+      "detail": "Judge Amy Berman Jackson (D.D.C.) issued a preliminary injunction on March 28, 2025 blocking the Trump administration from dismantling the CFPB. Order required: (1) Reinstate all probationary and term employees terminated between Feb 10, 2025 and the order date, including Private Student Loan Ombudsman Julia Barnard; (2) Rescind cancellation of contracts; (3) Allow workforce to access computers and return to office; (4) Resume statutorily required work; (5) Maintain all records. Judge stated the administration acted in 'complete disregard' for Congress, finding that only Congress has constitutional authority to eliminate a statutorily created agency. However, the D.C. Circuit later lifted this order, allowing CFPB dismantling to proceed.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:08",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CFPB employees v. Vought, D.D.C.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5758,
+      "finding_type": "intelligence",
+      "summary": "CFPB court filings reveal DOGE operative Gavin Kliger screaming at staff during 36-hour mass layoff, cutting 90 percent of 1700 employees",
+      "detail": "Court filings in the CFPB case revealed operational details of the DOGE-driven mass layoff. DOGE member Gavin Kliger managed the RIF, keeping the team up for 36 hours straight to ensure termination notices would go out on schedule. Anonymous CFPB staffer court declaration: 'Gavin was screaming at people he did not believe were working fast enough to ensure they could go out on this compressed timeline, calling them incompetent.' CFPB's chief operating officer dismissed compliance concerns, saying 'all that mattered was the numbers.' Jason Brown, head of the 57-person research office, testified all but three senior employees were fired with no one consulted about whether the office could fulfill its statutory duties. Approximately 90 percent of the CFPB's 1,700 employees were targeted. Additionally, Kliger was found to own stock prohibited by ethics laws while involved in CFPB cuts (ProPublica report).",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:20",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court declarations in CFPB case (Fortune)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica report on Kliger conflicts",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5761,
+      "finding_type": "intelligence",
+      "summary": "Marko Elez violated Treasury policies by emailing unencrypted PII -- court audit revealed unauthorized data sharing with GSA officials",
+      "detail": "Court filings revealed that DOGE staffer Marko Elez violated Bureau of the Fiscal Service policies by sending sensitive information unencrypted and without prior approval. An audit of his email account submitted in court found he sent a spreadsheet containing personally identifiable information (PII) to two General Services Administration officials. Judge Jeannette Vargas (S.D.N.Y.) blocked DOGE access to Treasury data on Feb 21, 2025 finding 'a real possibility exists that sensitive information has already been shared outside of the Treasury Department, in potential violation of federal law.' Despite this violation, just four days after the court block, Elez was given read-only access to three Labor Department databases. By week of March 5, he was granted access to HHS systems including Medicare and Medicaid payment databases and a national database of wage and employment information used for child support enforcement.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:31",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court filing audit of Elez email account",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Treasury Bureau of Fiscal Service policy violation report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5765,
+      "finding_type": "legal",
+      "summary": "14-state AG lawsuit (New Mexico v. Musk, D.D.C. 1:25-cv-00429): Judge Chutkan denied motion to dismiss, found Musk plausibly exercised Cabinet-level power",
+      "detail": "Fourteen state AGs (NM, AZ, MI, CA, CT, HI, MD, MA, MN, NV, OR, RI, VT, WA) filed suit Feb 13, 2025 against Musk, DOGE, and Trump arguing Musk violated the Appointments Clause by exercising principal officer authority without Senate confirmation. On May 27, 2025, Judge Tanya Chutkan denied in part the motion to dismiss, finding plaintiffs adequately alleged Musk and DOGE qualified as officers of the United States. Key language: 'States plausibly allege that Musk makes decisions about federal expenditures, contracts, government property, and the very existence of federal agencies.' Chutkan dismissed Trump from the suit based on longstanding precedent barring injunctive relief against a sitting President. However, the states voluntarily dismissed the case in December 2025, filing a joint status report with no public explanation for the withdrawal.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:42",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69638651",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "New Mexico v. Musk, D.D.C. 1:25-cv-00429",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5767,
+      "finding_type": "legal",
+      "summary": "Alliance for Retired Americans v. Bessent: Treasury agreed to limit DOGE access to 2 named employees with read-only status; court denied broader injunction",
+      "detail": "Alliance for Retired Americans, AFGE, and SEIU sued Treasury Secretary Bessent and the Bureau of the Fiscal Service on Feb 3, 2025 challenging DOGE access to Treasury payment systems. After TRO filing, Treasury agreed to maintain status quo: no access to confidential records except for Treasury employees and two named DOGE employees with read-only access. On March 7, Judge Colleen Kollar-Kotelly denied plaintiffs motion for preliminary injunction, finding the asserted injury was not irreparable since disclosure was to a small number of people 'obligated to keep the information confidential.' This created the precedent that limited, controlled DOGE access to Treasury systems could survive legal challenge, distinguishing it from broader unfettered access. Summary judgment motions remain pending.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:54",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Alliance for Retired Americans v. Bessent, D.D.C. 1:25-cv-00313",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69607077",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5770,
+      "finding_type": "legal",
+      "summary": "EPIC v. OPM: Privacy Act and FISMA challenge to DOGE data access -- Judge Alston denied TRO but case continues after amended complaint (E.D. Va.)",
+      "detail": "Electronic Privacy Information Center (EPIC) and an anonymous federal worker filed suit Feb 2025 in E.D. Virginia against Treasury, OPM, and DOGE over privacy and data security violations. Claims: Privacy Act violations, Federal Information Security Modernization Act (FISMA) violations, Internal Revenue Code violations, and Fifth Amendment right to information privacy. DOGE allegedly forced Treasury and OPM to disclose vast stores of personal information from government workers and Americans to unauthorized, untrained personnel. On Feb 21, Judge Rossie D. Alston Jr. denied the TRO, expressing skepticism about standing but warning further evidence of data disclosure could change the outcome. Government moved to dismiss April 15, 2025. Plaintiffs filed amended complaint May 6, 2025 with additional defendants and legal claims. Case ongoing.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:06",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69627950",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EPIC v. OPM, E.D. Va. 1:25-cv-00255",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5772,
+      "finding_type": "legal",
+      "summary": "Dellinger v. Bessent: Trump fired whistleblower watchdog head without cause; district court blocked, DC Circuit reversed, Dellinger dropped suit",
+      "detail": "On Feb 7, 2025, the White House fired Hampton Dellinger from his position as head of the Office of Special Counsel (the independent agency investigating retaliation against government whistleblowers). By law, the President can only dismiss the OSC head for inefficiency, neglect of duty, or malfeasance -- but the firing email cited no such reason. District Judge Rudolph Contreras issued TRO on Feb 12 blocking the firing. Supreme Court on Feb 21 held the motion to vacate in abeyance, effectively allowing the TRO to stand. However, on March 5, the D.C. Circuit lifted the injunction pending appeal, allowing the firing to take effect. Dellinger then dropped his lawsuit on March 7. This case established a critical precedent: the executive branch could fire heads of independent agencies meant to protect whistleblowers, which directly affected whistleblower protections during the DOGE restructuring period.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:17",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69624836",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Dellinger v. Bessent, D.D.C. 1:25-cv-00385",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5774,
+      "finding_type": "legal",
+      "summary": "Harris v. Bessent: DC Circuit upheld Trump firing of MSPB Chair Cathy Harris -- Congress cannot restrict presidential removal of principal officers",
+      "detail": "Trump fired MSPB Chair Cathy Harris on Feb 10, 2025 despite her term not expiring until 2028. District Judge Rudolph Contreras initially enjoined the removal, ruling it exceeded presidential authority. But the D.C. Circuit panel (2-1) paused the lower court decision, and in December 2025 ruled definitively that the firings were lawful: 'Congress may not restrict the president's ability to remove principal officers who wield substantial executive power.' Applied to both Harris (MSPB) and NLRB member Gwynne Wilcox. This had cascading effects: with MSPB unable to operate at quorum, federal employees fired by DOGE lost their primary appeals venue, trapping them in legal limbo. The MSPB is the key agency where fired federal employees can appeal terminations.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:26",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69631849",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Harris v. Bessent, D.D.C. 1:25-cv-00412",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5776,
+      "finding_type": "legal",
+      "summary": "POGO v. Trump: Judge Boasberg denied records preservation injunction -- DOGE records fall under Presidential Records Act with stronger protections",
+      "detail": "Project On Government Oversight filed Feb 21, 2025 against Trump, DOGE, USDS, and USDS Acting Administrator alleging these entities unlawfully designated records as presidential to avoid FOIA and Federal Records Act obligations. POGO sought preliminary injunction requiring record preservation. On June 17, 2025, Judge James Boasberg denied the PI, ruling POGO failed to show irreparable harm. Key reasoning: 'As long as some policy protects the records, POGO is safe from the threat of destruction. Such is the case here given that any PRA-compliant records-retention policy necessarily also obeys the strictures of the FRA.' In other words, DOGE records under the PRA are subject to MORE strenuous requirements than under the FRA. On July 21, 2025 court stayed case pending resolution of CREW v. DOGE Service which raises the same question of USDS status as a federal agency.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:39",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69661712",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO v. Trump, D.D.C. 1:25-cv-00527",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5777,
+      "finding_type": "legal",
+      "summary": "EFF/AFGE v. OPM: Judge Denise Cote denied motion to dismiss Privacy Act claims -- DOGE disclosure of federal employee data to unauthorized personnel survives challenge (S.D.N.Y.)",
+      "detail": "The EFF, representing AFGE and AALJ, sued OPM over DOGE's access to personnel records of tens of millions of federal employees, retirees, and job applicants. Judge Denise Cote (S.D.N.Y.) denied the government's motion to dismiss in early April 2025, ruling in favor of three of five claims. The court found OPM violated federal privacy law and flouted cybersecurity protocol in sharing records with DOGE affiliates. Court granted preliminary injunction against the administration. This ruling established that even within the executive branch, sharing employee data with DOGE affiliates who had 'no need to know the vast amount of sensitive personal information to which they were granted access' violated the Privacy Act.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:50",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFGE v. OPM, S.D.N.Y. 1:25-cv-01237",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69631573",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EFF press release April 3, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5779,
+      "finding_type": "legal",
+      "summary": "DC Circuit ruled CSRA precludes district court jurisdiction over probationary employee claims -- unions must go through FLRA, not federal courts (NTEU v. Vought)",
+      "detail": "In NTEU v. Vought (D.D.C. 1:25-cv-00381), the National Treasury Employees Union challenged DOGE-directed mass firings of probationary employees. Judge Cooper initially denied the TRO, finding unions must first bring claims before the Federal Labor Relations Authority (FLRA). The D.C. Circuit upheld this on appeal, finding that the Civil Service Reform Act (CSRA) 'comprehensively regulates virtually every aspect of federal employment' and that the specialized review scheme 'governs such claims and ousts the district courts of their arising-under jurisdiction.' This jurisdictional ruling had major structural implications: it forced employee challenges into administrative channels (MSPB, FLRA) rather than federal courts, precisely when the administration was simultaneously firing the heads of those administrative agencies (Harris at MSPB, Wilcox at NLRB).",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:44:01",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69624423",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "D.C. Circuit opinion 25-5091",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NTEU v. Vought, D.D.C. 1:25-cv-00381",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5780,
+      "finding_type": "legal",
+      "summary": "Fourth Circuit reversed AFT v. Bessent injunction -- DOGE can access Treasury, Education Dept, and OPM databases (Aug 12, 2025)",
+      "detail": "The Fourth Circuit Court of Appeals ruled August 12, 2025 in AFT v. Bessent (No. 25-1282) that the American Federation of Teachers, veterans unions, and other plaintiffs were not entitled to a preliminary injunction blocking DOGE access to sensitive personal records at Treasury, the Department of Education, and OPM. The district court had initially blocked access, with Judge Deborah Boardman ruling that neither DOGE nor the Trump administration explained why workers need 'such comprehensive, sweeping access.' The Fourth Circuit found procedural problems with the challengers case and ultimately held plaintiffs were unlikely to succeed on the merits of their Privacy Act claims. This was the critical appellate ruling that lifted blocks on DOGE data access across three major agencies, effectively ending the legal barriers to DOGE accessing federal employee and citizen data at these departments.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:44:13",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFT v. Bessent, 4th Cir. No. 25-1282",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69627648",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69780639",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5784,
+      "finding_type": "intelligence",
+      "summary": "Court filings revealed DOGE personnel simultaneously detailed to 5+ agencies -- Gavin Kliger at OPM, USDA, CFPB, USAID; Luke Farritor at State, USAID, DOE plus 2 others",
+      "detail": "Court filings across multiple cases revealed that DOGE operatives held simultaneous positions at multiple federal agencies, raising questions about oversight and accountability. Gavin Kliger held two job titles at OPM plus positions at USDA, CFPB, and was involved in dismantling USAID. Luke Farritor was detailed to five agencies simultaneously: State Department, USAID, DOE, and others, listed as senior advisor in multiple department employee directories. Other identified operatives: Akash Bobba, Gautier Cole Killian, Ethan Shaotran, and Edward Coristine (19-year-old known by online identity 'Big Balls'). Christopher Stanley worked on White House WiFi and served at OPM. This multi-agency deployment pattern made it difficult for any single court or oversight body to track DOGE activities comprehensively.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:44:39",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court filings in CFPB case",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Court filings in USAID case",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Detroit News investigation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5786,
+      "finding_type": "legal",
+      "summary": "ACLU v. SSA FOIA case: 40+ agencies failed to process FOIA requests about DOGE data access and AI use within required timelines",
+      "detail": "On Feb 7, 2025, the ACLU submitted FOIA requests to more than 40 agencies seeking records about what sensitive data DOGE accessed and how DOGE used artificial intelligence to analyze government data. The SSA declined expedited processing and failed to respond to the ACLU appeal. The VA failed to act on the request entirely. Lawsuit filed April 21, 2025 (D.D.C. 1:25-cv-01217). The FOIA requests specifically targeted information about DOGE's use of AI tools to analyze citizen data, a topic that received little attention in other cases. This case represents the transparency gap: even after the Supreme Court's June 2025 ruling exempting DOGE from FOIA in the CREW case, the ACLU case targets the agencies themselves (SSA, VA) which remain subject to FOIA regarding their own decisions to grant DOGE access.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:44:52",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACLU v. SSA, D.D.C. 1:25-cv-01217",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69920138",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5788,
+      "finding_type": "legal",
+      "summary": "Judge Cooper: DOGE exercised unprecedented authority with 'unusual secrecy' -- 37-page ruling found DOGE power to 'drastically reshape and eliminate agencies wholesale' (CREW v. DOGE)",
+      "detail": "In a landmark 37-page ruling on March 10, 2025, U.S. District Judge Christopher Cooper found that DOGE was operating in 'unusual secrecy' while wielding significant executive authority. Key finding: 'Based on its actions so far, USDS appears to have the power not just to evaluate federal programs, but to drastically reshape and even eliminate them wholesale.' Cooper determined DOGE was 'likely exercising substantial independent authority much greater than other EOP components held to be covered by FOIA.' He noted 'the authority exercised by DOGE across the federal government and the dramatic cuts it has apparently made with no congressional input appear to be unprecedented.' Ordered DOGE to produce documents and process CREW's FOIA request on an expedited schedule. Trump administration argued USDS records fall under the Presidential Records Act, claiming the judge misunderstood DOGE's structure.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:45:04",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CREW v. U.S. DOGE Service, D.D.C. 1:25-cv-00511",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69658871",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5791,
+      "finding_type": "legal",
+      "summary": "DOGE LITIGATION PATTERN: District courts blocked DOGE 12+ times (Feb-Apr 2025) but higher courts systematically reversed -- Supreme Court sided with DOGE in both June 2025 cases",
+      "detail": "A clear pattern emerged across 20+ DOGE cases: (1) DISTRICT COURTS consistently found DOGE violated privacy law, lacked authority, or acted unconstitutionally (Chuang on USAID, Alsup on OPM firings, Bredar on reinstatement, Jackson on CFPB, Cooper on FOIA, Boardman on data access, Vargas on Treasury). (2) APPEALS COURTS reversed or lifted most injunctions (4th Circuit reversed AFT v. Bessent Aug 2025; DC Circuit lifted Harris v. Bessent; DC Circuit lifted Dellinger v. Bessent; 4th Circuit issued mandamus blocking Musk deposition). (3) SUPREME COURT sided with DOGE in both June 6, 2025 emergency docket cases: restored SSA data access (6-3) and exempted DOGE from FOIA (6-3). Net result: the legal infrastructure designed to protect citizen data (Privacy Act, APA, FOIA) was insufficient to constrain executive-branch data access when higher courts prioritized executive authority. Only the probationary employee reinstatement orders (Alsup/Bredar) had lasting practical effect.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:45:19",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFT v. Bessent, 4th Cir. No. 25-1282",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SSA v. AFSCME, No. 24A1063 (S.Ct.)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "U.S. DOGE Service v. CREW (S.Ct.)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5793,
+      "finding_type": "intelligence",
+      "summary": "Congressional hearings on DOGE: 'Locking in the Doge Cuts' hearing June 2025 aimed to codify DOGE spending reductions into legislation",
+      "detail": "GovInfo search revealed multiple congressional hearings related to DOGE operations. Key hearing: 'Locking in the Doge Cuts: Ending Waste, Fraud, and Abuse for Good' (CHRG-119hhrg60814, June 24, 2025) -- a House hearing aimed at legislatively codifying DOGE spending reductions to make them permanent beyond executive action. Additional related hearings: 'Rightsizing Government' (Feb 5, 2025, CHRG-119hhrg58803), 'The War on Waste: Stamping Out the Scourge of Improper Payments and Fraud' (Feb 12, 2025, CHRG-119hhrg58806), 'Federal Foreclosure: Reducing the Federal Real Estate Portfolio' (Apr 8, 2025, CHRG-119hhrg60028), 'Unlocking Government Efficiency Through IT Modernization' (Apr 29, 2025, CHRG-119hhrg60197). These hearings show Congressional Republicans working to entrench DOGE-initiated cuts through legislation, while courts were simultaneously being asked to block those same actions.",
+      "source_datasets": [
+        "govinfo",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:45:32",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovInfo CHRG-119hhrg58803",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovInfo CHRG-119hhrg58806",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovInfo CHRG-119hhrg60814",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5795,
+      "finding_type": "legal",
+      "summary": "Agencies placed reinstated employees on paid administrative leave to circumvent court reinstatement orders -- judges found this violated their orders",
+      "detail": "After judges ordered reinstatement of fired probationary employees, multiple agencies placed the reinstated workers on paid administrative leave rather than returning them to actual work. Judges Alsup and Bredar found this violated the spirit and letter of their reinstatement orders. Alsup noted that reinstatement would unlikely provide much relief because terminated employees 'have moved on with their lives and found new jobs.' In September 2025, Alsup directed most agencies to update personnel files to state that probationary employees were NOT fired for performance or conduct -- correcting the pretextual performance-based termination notations that would have damaged their career records. This administrative leave pattern suggests the administration adopted a strategy of technical compliance while functionally maintaining the workforce reduction DOGE had initiated.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:45:42",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFGE v. Trump, N.D. Cal.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Government Executive report March 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5797,
+      "finding_type": "intelligence",
+      "summary": "DOGE oral directives created deliberate discovery vacuum -- defendants acknowledged key shutdown orders were given with 'no documentary record'",
+      "detail": "In the USAID litigation (J. Does v. Musk), defendants effectively acknowledged that key decisions including the decision to shut down USAID headquarters and the USAID website were given orally, with no documentary record. This absence of written records created a systematic barrier to litigation discovery and congressional oversight. When Judge Chuang ordered Musk's deposition to overcome this evidence gap, the Fourth Circuit blocked it via mandamus. The pattern suggests DOGE deliberately operated through oral channels to avoid creating discoverable records -- consistent with Judge Cooper's finding in the CREW case that DOGE operated with 'unusual secrecy.' Combined with the Trump administration's argument that any records that did exist fell under the Presidential Records Act (which restricts access for up to 12 years after a president leaves office), this created a near-impenetrable shield against transparency.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:45:56",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CREW v. DOGE Service, D.D.C.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "J. Does v. Musk, D. Md. 8:25-cv-00462",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5799,
+      "finding_type": "intelligence",
+      "summary": "American Oversight FOIA suits uncovered DOGE use of Signal and Slack for official communications (D.D.C. 1:25-cv-00409 and 1:25-cv-01251)",
+      "detail": "American Oversight filed two FOIA lawsuits against DOGE (Feb 11 and April 23, 2025) seeking records about DOGE structure, operations, and communications. The parallel FOIA suit uncovered that DOGE was using Signal (encrypted messaging) and Slack for official government communications -- platforms that may not be subject to standard federal records preservation requirements. The use of auto-deleting encrypted messaging apps for government business raises Federal Records Act and Presidential Records Act compliance questions. This is consistent with the broader pattern of DOGE evading transparency: oral orders instead of written memos, encrypted messaging instead of government email, PRA classification instead of FOIA compliance.",
+      "source_datasets": [
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:46:09",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "American Oversight v. DOGE, D.D.C.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69630062",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 69930055",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6446,
+      "finding_type": "intelligence",
+      "summary": "DOGE CIO Placement Pattern - Prior Employer Contract Matrix: (1) Clark Minor (Palantir 13yrs) -> HHS CIO. Palantir has $405M HHS portfolio. (2) Gregory Barbaccia (Palantir 10yrs) -> Federal CIO/OMB. Palantir has $1.02B FY2025 federal contracts. (3) Ryan Riedel (SpaceX, 2020-2025) -> DOE CIO. SpaceX has federal DOE contracts (Starlink, launch services). (4) Aram Moghaddassi (X/Neuralink, Musk companies) -> SSA CIO. X/Neuralink have no known SSA contracts but DOJ/other potential conflicts. (5) Sam Corcos (Levels Health, a16z-backed) -> Treasury CIO. Pattern: 4/5 DOGE-placed CIOs came from companies with significant existing federal contracts or regulatory relationships with their new agencies.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:53:34",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fedscoop:minor-hhs-cio fedscoop:barbaccia-cio meritalk:doe-riedel-cio fedscoop:ssa-doge-cio usaspending:FSY4LVSBGWB7",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6520,
+      "finding_type": "legal",
+      "summary": "SILENCE PERIOD: Nov-Dec 2025 DOGE dissolution has near-zero dated findings despite high-activity dissolution event. DOGE disbanded Nov 24, 2025 \u2014 8 months before charter expiration. Only 3 dated findings for Nov 2025 (all text-extracted), 0 findings with explicit date_of_event. The dissolution of the year's most investigated entity occurred with minimal contemporaneous documentation, despite Hatch Act referrals, embedded operative transitions, and GAO audit initiation all occurring in the same window.",
+      "detail": "The DOGE dissolution silence is investigatively significant. The documented events in Nov-Dec 2025 include: (1) DOGE disbanded Nov 24 by OPM Director Kupor (former a16z managing partner \u2014 network insider); (2) Personnel transitioned to embedded agency roles \u2014 the temporary-to-permanent pipeline was operating; (3) SSA made Hatch Act referrals in December 2025 regarding the voter data agreement; (4) Aram Moghaddassi referred for Hatch Act violations December 2025; (5) GAO audit of DOGE data access was separately initiated (found in Oct findings). The silence in contemporaneous documentation likely reflects both the deliberate 'dissolution' framing (which shifted attention) and the fact that the embedded operatives became harder to track once absorbed into agency structures. This is a known pattern: operational visibility decreases when covert structure moves from temporary-visible to permanent-embedded.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-10 00:46:53",
+      "target_name": "DOGE",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-15",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2632,
+      "person_a": "DOGE",
+      "person_b": "Elon Musk",
+      "relationship_type": "political",
+      "description": "Musk led DOGE as special government employee (Jan 20 - May 28 2025) while DOGE systematically fired or infiltrated staff at 7 agencies regulating his companies",
+      "strength": "strong",
+      "date_range": "2025-01-20 to 2025-05-28",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 21:17:44",
+      "profile_id": "epstein",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Compiled timeline Jan-May 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2690,
+      "person_a": "DOGE",
+      "person_b": "Stephen Feinberg",
+      "relationship_type": "political",
+      "description": "Feinberg as DepSecDef issued memo directing Pentagon implementation of Trump DOGE-inspired regulatory review. Cerberus portfolio companies ($15.9B+ DoD contracts) benefit from restructured procurement.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:01:39",
+      "profile_id": "tech-right",
+      "other_person": "Stephen Feinberg",
+      "other_person_slug": "stephen-feinberg",
+      "evidence": []
+    },
+    {
+      "id": 2737,
+      "person_a": "DOGE",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "corporate",
+      "description": "Multiple ex-Palantir employees hired into DOGE. Palantir helping build IRS mega-API. DOGE restructures agencies where Palantir wins contracts. Structural conflict of interest.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:08",
+      "profile_id": "tech-right",
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": []
+    },
+    {
+      "id": 2742,
+      "person_a": "DOGE",
+      "person_b": "SpaceX",
+      "relationship_type": "financial",
+      "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:37",
+      "profile_id": "tech-right",
+      "other_person": "SpaceX",
+      "other_person_slug": "spacex",
+      "evidence": []
+    },
+    {
+      "id": 2745,
+      "person_a": "DOGE",
+      "person_b": "Pete Hegseth",
+      "relationship_type": "political",
+      "description": "Hegseth May 2025 memo gives DOGE review authority over all DoD IT contracts above 10M",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:48",
+      "profile_id": "tech-right",
+      "other_person": "Pete Hegseth",
+      "other_person_slug": "pete-hegseth",
+      "evidence": []
+    },
+    {
+      "id": 2750,
+      "person_a": "DOGE",
+      "person_b": "Steve Davis",
+      "relationship_type": "employment",
+      "description": "Davis served as effective DOGE leader from GSA HQ while president of Boring Company -- continued asserting control after May 2025 departure",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:48",
+      "profile_id": "tech-right",
+      "other_person": "Steve Davis",
+      "other_person_slug": "steve-davis",
+      "evidence": []
+    },
+    {
+      "id": 2751,
+      "person_a": "DOGE",
+      "person_b": "Elon Musk",
+      "relationship_type": "political",
+      "description": "Musk led DOGE Jan-May 2025 while companies received 38B total government funding -- 11.8B additional contract potential",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:48",
+      "profile_id": "tech-right",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": []
+    },
+    {
+      "id": 2746,
+      "person_a": "DISA",
+      "person_b": "DOGE",
+      "relationship_type": "intelligence",
+      "description": "DOGE cuts to DISA J6 nuclear C4 systems created extreme risk for loss of service in Pentagon-nuclear communications",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:48",
+      "profile_id": "tech-right",
+      "other_person": "DISA",
+      "other_person_slug": "disa",
+      "evidence": []
+    },
+    {
+      "id": 2951,
+      "person_a": "DOGE",
+      "person_b": "Elon Musk",
+      "relationship_type": "corporate",
+      "description": "Musk led DOGE as special government employee while his companies held $13.5B+ in DoD contracts; no ethics disclosures filed",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:26",
+      "profile_id": "tech-right",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2025/02/06/elon-musk-conflicts-interest-doge-tesla-spacex/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2955,
+      "person_a": "DOGE",
+      "person_b": "Tom Krause",
+      "relationship_type": "advisory",
+      "description": "Cloud Software Group CEO given special government employee status at Treasury, accessing payment systems processing trillions",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:26",
+      "profile_id": "tech-right",
+      "other_person": "Tom Krause",
+      "other_person_slug": "tom-krause",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/02/07/nx-s1-5288988/doge-elon-musk-staff-trump",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2956,
+      "person_a": "Akash Bobba",
+      "person_b": "DOGE",
+      "relationship_type": "employment",
+      "description": "DOGE operative listed as 'expert' at OPM, reports to Amanda Scales, age 19-24, A-suite GSA clearance",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:41",
+      "profile_id": "tech-right",
+      "other_person": "Akash Bobba",
+      "other_person_slug": "akash-bobba",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.washingtonpost.com/business/interactive/2025/doge-employees-list-staff-elon-musk/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2957,
+      "person_a": "DOGE",
+      "person_b": "Luke Farritor",
+      "relationship_type": "employment",
+      "description": "DOGE operative; made administrator of grants.gov at HHS; granted DOE access over CIO objections; blocked life-critical payments",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:42",
+      "profile_id": "tech-right",
+      "other_person": "Luke Farritor",
+      "other_person_slug": "luke-farritor",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2958,
+      "person_a": "DOGE",
+      "person_b": "Gavin Kliger",
+      "relationship_type": "employment",
+      "description": "DOGE operative at USAID and CFPB; sent lockout email to USAID employees",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:42",
+      "profile_id": "tech-right",
+      "other_person": "Gavin Kliger",
+      "other_person_slug": "gavin-kliger",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2959,
+      "person_a": "DOGE",
+      "person_b": "Edward Coristine",
+      "relationship_type": "employment",
+      "description": "DOGE operative at CBP; accessed USCIS immigration data at DHS",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:42",
+      "profile_id": "tech-right",
+      "other_person": "Edward Coristine",
+      "other_person_slug": "edward-coristine",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2981,
+      "person_a": "DOGE",
+      "person_b": "Palantir Technologies",
+      "relationship_type": "corporate",
+      "description": "Palantir Foundry is the technical infrastructure enabling DOGE data consolidation strategy across agencies. Former Palantir employees embedded in DOGE. Contracts nearly doubled to 970.5M in 2025.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:45",
+      "profile_id": null,
+      "other_person": "Palantir Technologies",
+      "other_person_slug": "palantir-technologies",
+      "evidence": []
+    },
+    {
+      "id": 2982,
+      "person_a": "DOGE",
+      "person_b": "Elon Musk",
+      "relationship_type": "political",
+      "description": "Musk led DOGE operations Jan-mid 2025, directing young tech workers into federal agencies to access sensitive databases. Departed government role later in 2025.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:48",
+      "profile_id": null,
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": []
+    },
+    {
+      "id": 2984,
+      "person_a": "DOGE",
+      "person_b": "Tom Krause",
+      "relationship_type": "employment",
+      "description": "Special government employee at Treasury BFS who replaced career official David Lebryk. Key figure in Treasury payment system access controversy.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:51",
+      "profile_id": "tech-right",
+      "other_person": "Tom Krause",
+      "other_person_slug": "tom-krause",
+      "evidence": []
+    },
+    {
+      "id": 2988,
+      "person_a": "DOGE",
+      "person_b": "James Burnham",
+      "relationship_type": "advisory",
+      "description": "DOGE General Counsel; clerked for Justice Gorsuch 2020; first-term Trump White House counsel office under Don McGahn; founded Kingst Legal",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:33:28",
+      "profile_id": "tech-right",
+      "other_person": "James Burnham",
+      "other_person_slug": "james-burnham",
+      "evidence": []
+    },
+    {
+      "id": 2989,
+      "person_a": "DOGE",
+      "person_b": "Sam Corcos",
+      "relationship_type": "employment",
+      "description": "DOGE operative appointed Treasury CIO; directing IRS IT reorganization; administering HackerRank coding tests; trusts only 100-200 of 8500 IRS IT staff",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:33:29",
+      "profile_id": "tech-right",
+      "other_person": "Sam Corcos",
+      "other_person_slug": "sam-corcos",
+      "evidence": []
+    },
+    {
+      "id": 2992,
+      "person_a": "DOGE",
+      "person_b": "Leland Dudek",
+      "relationship_type": "political",
+      "description": "SSA anti-fraud manager elevated to acting commissioner Feb 16 2025 after cooperating with DOGE; installed after Michelle King refused DOGE data access",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:33:32",
+      "profile_id": "tech-right",
+      "other_person": "Leland Dudek",
+      "other_person_slug": "leland-dudek",
+      "evidence": []
+    },
+    {
+      "id": 2993,
+      "person_a": "DOGE",
+      "person_b": "Russell Vought",
+      "relationship_type": "political",
+      "description": "OMB Director; primary vehicle for DOGE agenda continuation; likely architect of most severe staffing cuts; drafted 2026 budget doubling DOGE to 45M; Project 2025 architect",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:33:33",
+      "profile_id": "tech-right",
+      "other_person": "Russell Vought",
+      "other_person_slug": "russell-vought",
+      "evidence": []
+    },
+    {
+      "id": 2620,
+      "person_a": "DOGE",
+      "person_b": "Elon Musk",
+      "relationship_type": "financial",
+      "description": "Musk led DOGE while his companies held B in government contracts and received new awards",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:52:00",
+      "profile_id": "epstein",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": []
+    },
+    {
+      "id": 2623,
+      "person_a": "DOGE",
+      "person_b": "NHTSA",
+      "relationship_type": "legal",
+      "description": "DOGE cut NHTSA autonomous vehicle safety team while Tesla under active FSD investigation",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:52:09",
+      "profile_id": "epstein",
+      "other_person": "NHTSA",
+      "other_person_slug": "nhtsa",
+      "evidence": []
+    },
+    {
+      "id": 2625,
+      "person_a": "DOGE",
+      "person_b": "FDA",
+      "relationship_type": "legal",
+      "description": "DOGE fired FDA neurological device reviewers overseeing Neuralink clinical trials",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:52:09",
+      "profile_id": "epstein",
+      "other_person": "FDA",
+      "other_person_slug": "fda",
+      "evidence": []
+    },
+    {
+      "id": 2624,
+      "person_a": "CFPB",
+      "person_b": "DOGE",
+      "relationship_type": "legal",
+      "description": "DOGE dismantled CFPB while X Corp launched XMoney payments platform requiring CFPB oversight",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:52:09",
+      "profile_id": "epstein",
+      "other_person": "CFPB",
+      "other_person_slug": "cfpb",
+      "evidence": []
+    },
+    {
+      "id": 2961,
+      "person_a": "DOGE",
+      "person_b": "Joe Gebbia",
+      "relationship_type": "advisory",
+      "description": "Airbnb co-founder; former DOGE member who created National Design Studio within White House",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:42",
+      "profile_id": "tech-right",
+      "other_person": "Joe Gebbia",
+      "other_person_slug": "joe-gebbia",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2025-01-20 to 2025-05-28",
+      "type": "connection",
+      "relationship_type": "political",
+      "description": "Musk led DOGE as special government employee (Jan 20 - May 28 2025) while DOGE systematically fired or infiltrated staff at 7 agencies regulating his companies",
+      "other_person": "Elon Musk",
+      "id": 2632
+    },
+    {
+      "date": "2025-09-26",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Peters report finds DOGE operations likely violated: Privacy Act of 1974, E-Government Act of 2002, FISMA (Federal Information Security Modernization Act), Federal Records Act, and potentially Computer Fraud and Abuse Act",
+      "confidence": "high",
+      "id": 6408
+    },
+    {
+      "date": "2025-09-26",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Peters report identifies clear pattern across agencies: officials who questioned DOGE were sidelined or terminated; DOGE-affiliated personnel installed as CIOs to approve data access without standard oversight",
+      "confidence": "high",
+      "id": 6409
+    },
+    {
+      "date": "2025-09-26",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Whistleblowers described DOGE employees as mostly young men ages 18 to mid-20s functioning as quarterbacking data with ability to change or exfiltrate information without normal oversight",
+      "confidence": "high",
+      "id": 6411
+    },
+    {
+      "date": "2025-09-26",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Peters HSGAC report made 4 key recommendations: (1) cease DOGE operations at SSA/GSA/OPM; (2) strip DOGE access to PII across all agencies; (3) require DOGE cybersecurity training; (4) IGs audit all sensitive data system access",
+      "confidence": "high",
+      "id": 6419
+    },
+    {
+      "date": "2025-09-26",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Peters report identifies attempted creation of master database pooling data from multiple agencies including SSA, Treasury, DHS, State, DOJ \u2014 SSA data appeared in DHS and DOJ projects in atypical formats",
+      "confidence": "high",
+      "id": 6423
+    },
+    {
+      "date": "2025-10-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Government Accountability Office (GAO) separately auditing DOGE data access at OPM, SSA, and Treasury Department as of late 2025",
+      "confidence": "high",
+      "id": 6420
+    }
+  ]
+}

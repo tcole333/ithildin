@@ -1,0 +1,816 @@
+{
+  "name": "Palantir",
+  "slug": "palantir",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.390927",
+  "last_updated": "2026-03-06T03:55:25",
+  "stats": {
+    "total_findings": 21,
+    "total_connections": 9,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 7,
+      "intelligence": 12,
+      "relationship": 2
+    },
+    "connection_types": {
+      "financial": 4,
+      "advisory": 1,
+      "employment": 3,
+      "political": 1
+    },
+    "last_updated": "2026-03-06T03:55:25"
+  },
+  "findings": [
+    {
+      "id": 424,
+      "finding_type": "financial",
+      "summary": "Palantir Technologies maintained massive lobbying presence: 516 total filings from 2006-present. Early lobbying (2006-2010) through Morgan and Cunningham LLC focused on Defense, Homeland Security, Intelligence, Law Enforcement, and SEC/Financial Securities applications. Later expanded to multiple registrants. Key lobbyist Bryan Cunningham (Morgan and Cunningham) handled defense/intel lobbying. Alexander Karp (CEO, 17 Epstein email exchanges) is NOT listed as a registered lobbyist in LDA records. Palantir lobbied to sell surveillance/analytics software to US intelligence community and DOD - the same capabilities relevant to tracking networks like Epstein's.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2006",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:44:57",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:85acc144-1daf-4f92-b19e-48bc73e052ec",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4588,
+      "finding_type": "financial",
+      "summary": "Palantir defense contracts nearly doubled in 2025, rising to $970.5M. Key awards: $10B Army enterprise software deal (consolidating 75 contracts, 10-year term, only $10M obligated); Maven Smart System AI contract boosted by $795M; $448M Navy contract; $2B+ total new defense contracts since Jan 2025. Trump publicly stated 'We buy a lot of things from Palantir.' Palantir is member of SpaceX-Anduril consortium for Golden Dome. Peter Thiel (co-founder) has 3+ administration allies: Helberg (State), Sacks (AI/Crypto), Williams (OMB/Palantir wife stock). Company also faces controversy over expansion into immigration enforcement and surveillance.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:59:57",
+      "target_name": "Palantir",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNBC Aug 2025; Axios Aug 2025; DefenseScoop May 2025; The Hill; Defense One",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4731,
+      "finding_type": "financial",
+      "summary": "Palantir positioned as Golden Dome AI/C2 backbone: Gotham platform to serve as central digital infrastructure connecting satellite, sensor, drone, and land-based data. Guetlein identified C2 as first priority for Golden Dome. Palantir is SHIELD awardee plus member of SpaceX-Anduril consortium. POGO investigation found OMB official Thomas Williams had Palantir stock and had to recuse from Golden Dome -- but recusal only confirmed AFTER POGO published. Federal CIO Barbaccia is former Palantir employee with 100-250K Anduril stake and up to 15K Palantir stock.",
+      "detail": "Multiple conflict vectors converge on Palantir and Golden Dome C2: (1) Palantir Gotham platform positioned as AI backbone for sensor fusion, digital twin, and simulation across all Golden Dome layers. (2) Guetlein stated first priority is command and control -- Palantir specialty. (3) POGO found Thomas Williams (OMB official overseeing defense programs) held Palantir stock. Richard Painter (former Bush WH ethics lawyer) told POGO Williams would have to recuse entirely from Golden Dome and any other defense contracts Palantir could be a part of. OMB only confirmed recusal AFTER publication. (4) Gregory Barbaccia (Federal CIO) is former Palantir employee with 100-250K Anduril stake and up to 15K Palantir stock. (5) Palantir defense contracts nearly doubled to 970.5M in 2025. Army 10B enterprise deal. Maven boosted 795M. (6) Three Thiel allies in admin: Helberg (State), Sacks (AI/Crypto), Williams (OMB). All have potential Golden Dome touchpoints.",
+      "source_datasets": [
+        "pogo"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 20:23:37",
+      "target_name": "Palantir",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO Gold Rush investigation; Air and Space Forces Magazine; GovDash Jan 2026; AINvest; GovConWire",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4792,
+      "finding_type": "financial",
+      "summary": "Palantir awarded $287M+ in ICE contracts including $30M sole-source ImmigrationOS surveillance platform",
+      "detail": "Palantir secured over $287M in ICE contract obligations in 2025 for AI-powered immigration enforcement tools. The $30M ImmigrationOS contract was awarded sole-source (no competition) after Noem toured Palantir's facility. ImmigrationOS provides near real-time tracking of migrants, digital maps with deportation targets, and draws together driver license scans, cell phone location records, and air travel data. At least 5 DHS/WH officials own Palantir stock. This represents a technology-driven variant of the Concurrent Authority Fusion pattern: officials with financial stakes in the surveillance company directing its adoption.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:31:48",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://immpolicytracking.org/policies/reported-palantir-awarded-30-million-to-build-immigrationos-surveillance-platform-for-ice/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://stateofsurveillance.org/articles/surveillance/palantir-immigration-machine-287-million/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4819,
+      "finding_type": "intelligence",
+      "summary": "ELITE (Enhanced Leads Identification & Targeting for Enforcement): Palantir's map-based deportation targeting app provides ICE agents with confidence scores (0-100) on targets' current addresses, drawing from HHS/Medicaid data (80M patients via CMS data-sharing agreement), DMV records, utility bills, and court records. Agents draw shapes on map to select 'target-rich areas' for raids.",
+      "detail": "ELITE is distinct from ImmigrationOS \u2014 it is a tactical field tool built on Palantir Gotham for ICE ERO. Key capabilities: (1) Map populated with deportation targets, each with dossier including name, DOB, Alien Registration Number, photograph; (2) Confidence scoring based on recency/multiplicity of address records; (3) Area selection via polygon drawing; (4) HHS/Medicaid data pipeline where healthcare address updates feed confidence scores. 404 Media published the ELITE user guide in January 2026. EFF reported the Medicaid data feed. Sworn deposition in Woodburn OR raid confirmed ELITE use for target-rich area selection. $29.9M supplemental agreement covers ELITE specifically.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:44:41",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.404media.co/elite-the-palantir-app-ice-uses-to-find-neighborhoods-to-raid/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.eff.org/deeplinks/2026/01/report-ice-using-palantir-tool-feeds-medicaid-data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4820,
+      "finding_type": "intelligence",
+      "summary": "Palantir USCIS VOWS contract: Palantir awarded new USCIS contract (Oct 2025, <$100K) for Phase 0 of 'Vetting of Wedding-Based Schemes' platform targeting marriage fraud in immigration applications. Marks first direct Palantir-USCIS relationship separate from ICE contracts.",
+      "detail": "USCIS started a contract with Palantir at the end of October 2025 to implement Phase 0 of a Vetting of Wedding-Based Schemes (VOWS) platform. The contract is small \u2014 under $100K \u2014 and was expected to complete by December 9, 2025. This represents Palantir's expansion from ICE enforcement into USCIS benefits adjudication, creating a new vector for surveillance technology in the immigration system. USCIS also rolled out stricter marriage-based green card requirements in 2025 with more evidence requirements and interview standards. Combined with ImmigrationOS at ICE and IRS mega-database work, Palantir now touches enforcement, benefits, and tax systems across the immigration pipeline.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:44:52",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2025/12/09/palantir-new-contract-uscis-ice/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4821,
+      "finding_type": "intelligence",
+      "summary": "Palantir IRS mega-database: Palantir employees installed at IRS building 'Unified API' to create single searchable database of taxpayer records. Wyden-AOC letter (June 17, 2025, 10 congressional signatories) demanded answers, alleging Privacy Act violations. Palantir called it 'Unified API' not mega-database; Democrats say it enables cross-agency data sharing beyond IRS authorized uses.",
+      "detail": "Congressional Democrats led by Sen. Wyden and Rep. AOC sent letter to Karp on June 17, 2025 about reports that Palantir employees are helping IRS create a government-wide searchable mega-database connecting sensitive tax and other data. Co-signers: Markey, Merkley, Warren, Jacobs, Lee, McGovern, Tlaib, Tonko. Key allegations: (1) Palantir employees physically installed at IRS; (2) Project expanded from IRS-only to cross-agency platform; (3) Likely violates Privacy Act notice, transparency, procedural requirements; (4) Tax privacy laws restrict sharing of taxpayer data. Palantir response: No master database, no contract for unifying databases across agencies, IRS work is 'Unified API' for authorized tax purposes only. This represents the convergence of DOGE access + Palantir technology + IRS data \u2014 the same data-integration pattern as ImmigrationOS but applied to all Americans.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:45:06",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.finance.senate.gov/imo/media/doc/wyden_aoc_palantir_letter_061725.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4823,
+      "finding_type": "relationship",
+      "summary": "Palantir revolving door with Pentagon CDAO: Tech Transparency Project identified systematic personnel pipeline. Greg Little (first CDAO head) -> Palantir senior counselor (Aug 2023); David Spirk (Pentagon CDO, CDAO co-creator) -> Palantir senior counselor (Jul 2022); Maura Thompson (CDAO/JCS logistics) -> Palantir deployment strategist; Trevor Austin (former Palantir engineer) -> CDAO acting CTO. CDAO oversees all DoD AI procurement including Maven.",
+      "detail": "Tech Transparency Project investigation revealed Palantir has built a robust revolving door specifically targeting the Chief Digital and AI Office (CDAO), the Pentagon office that oversees adoption and deployment of data, analytics, and AI programs throughout DoD \u2014 the exact office that controls Palantir procurement decisions. Named individuals: (1) Greg Little \u2014 among first officials to run CDAO, joined Palantir as senior counselor Aug 2023; (2) David Spirk \u2014 served as Pentagon CDO, contributed to CDAO creation, joined Palantir as senior counselor Jul 2022; (3) Maura Thompson \u2014 CDAO and Joint Chiefs of Staff logistics, now Palantir deployment strategist; (4) Trevor Austin \u2014 early-career Palantir engineer, now CDAO acting CTO. Pattern: Palantir hires from government to learn procurement processes, then places alumni back into government at decision points. CDAO oversees the Maven program ($1.3B+), Army enterprise agreement ($10B), and all DoD AI modernization \u2014 the exact programs driving Palantir's revenue growth.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:45:21",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.techtransparencyproject.org/articles/inside-palantirs-expanding-influence-operation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4827,
+      "finding_type": "relationship",
+      "summary": "Jacob Helberg: Palantir senior advisor to CEO Karp -> Under Secretary of State for Economic Growth, Energy, and the Environment (Trump 2, confirmed 2025). Donated $1M to Trump campaign plus $3.9M to Trump-aligned PACs/inaugural. Shifted from Democratic donor to major Trump supporter after Oct 7 attack. Launched Pax Silica (State Dept AI/supply chain security) in Dec 2025. Keeping SpaceX and OpenAI stakes in government role.",
+      "detail": "Jacob Helberg served as Senior Advisor to Alex Karp at Palantir Technologies and was also a commissioner on the U.S.-China Economic and Security Review Commission. Founded the Hill and Valley Forum connecting VC and lawmakers on China tech policy. Key timeline: (1) Previously a Democratic donor; (2) Contributed $1M to Trump 2024 campaign and $3.9M to Trump-aligned PACs and inaugural committee; (3) Nominated Dec 10, 2024 as Under Secretary of State; (4) Confirmed 2025; (5) Launched Pax Silica Dec 2025 \u2014 State Department flagship effort on AI and supply chain security. Bloomberg reported he was allowed to keep SpaceX and OpenAI investment stakes in government role. He represents the most direct Palantir-to-cabinet-level pipeline in the current administration.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:45:34",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.state.gov/biographies/jacob-helberg",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Jacob_Helberg",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4829,
+      "finding_type": "intelligence",
+      "summary": "Palantir DOGE personnel pipeline to key agencies: Clark Minor (Palantir engineer -> DOGE CIO of HHS, agency with Palantir contracts); Gregory Barbaccia (10 years at Palantir -> DOGE CIO of OMB, controls federal IT spending); Akash Bobba (Palantir intern -> DOGE team); Luke Farritor (Palantir-adjacent -> DOGE senior advisor at State/USAID/DOE). Pattern: Palantir alumni placed at agencies that control procurement and data systems Palantir sells to.",
+      "detail": "Four identified Palantir-connected DOGE agents: (1) Clark Minor \u2014 Palantir engineer, deployed as CIO of HHS. Critical conflict: HHS has major Palantir contracts AND its Medicaid data feeds into ELITE targeting tool; (2) Gregory Barbaccia \u2014 spent 10 years at Palantir, appointed CIO of OMB. OMB controls federal IT budget and procurement policy; (3) Akash Bobba \u2014 Palantir intern (also Bridgewater and Meta intern), DOGE team member; (4) Luke Farritor \u2014 listed as senior advisor at State, USAID, DOE. The HHS placement is most significant: Minor has CIO authority over HHS data systems while Palantir's ELITE tool draws from HHS/Medicaid data. The OMB placement gives Palantir-trained personnel control over the budget processes that fund Palantir contracts.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:45:47",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/clark-minor-doge-agent/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/gregory-barbaccia-doge-agent/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4832,
+      "finding_type": "financial",
+      "summary": "Palantir lobbying: $6.08M spent in 2025 (up from $5.77M in 2024). Hired Ballard Partners (Trump-tied, became highest-paid DC lobbying firm) and Miller Strategies for defense policy/appropriations after Trump's 2024 election. Also uses Invariant ($560K in 2024 \u2014 lobbies on DoD tech procurement, AI policy, border surveillance) and Brownstein Hyatt Farber Schreck. Palantir lobbyists bundled $2.9M for DCCC in January 2026 alone (38% of DCCC monthly total).",
+      "detail": "Palantir's bipartisan lobbying strategy: (1) REPUBLICAN SIDE: Hired Ballard Partners and Miller Strategies right after 2024 election \u2014 Ballard added Palantir alongside JPMorgan Chase to client list, became highest-paid DC firm; (2) DEMOCRATIC SIDE: Lobbyists from Invariant and Brownstein Hyatt bundled $2.9M for DCCC in Jan 2026 (38% of total), with Brownstein leaders bundling $1.1M alone; (3) LOBBYING ISSUES: Defense procurement, AI policy, border surveillance technology, budget/appropriations. Total lobbying spend: $5.77M (2024), $6.08M (2025). This dual strategy ensures Palantir contracts survive regardless of which party controls Congress. The DCCC bundling is especially significant: Democratic members receiving Palantir-linked funds face pressure not to scrutinize ICE contracts. Colorado Dems Crow and Hickenlooper had to donate Palantir-linked funds to immigrant rights groups after public pressure.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:46:04",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.opensecrets.org/federal-lobbying/clients/summary?id=D000055177",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://readsludge.com/2026/02/25/dccc-rakes-in-millions-from-palantir-lobbyists-as-protests-target-the-companys-ice-surveillance-tools/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://thehill.com/lobbying/5072171-bottom-line-palantir-taps-trump-tied-firm-as-it-chases-government-contracts/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4836,
+      "finding_type": "intelligence",
+      "summary": "Palantir ICE data pipeline architecture: FALCON database contains SSNs, financial records, call records, ISP records. Accesses CBP's Analytical Framework for Intelligence (AFI) system which assigns risk scores to travelers including US citizens. ICM auto-resolves identity across EID, CBP border crossings, APIS manifests, DMV files, LexisNexis, and Thomson Reuters CLEAR. Georgetown Law's American Dragnet study: ICE has scanned driver's license photos of 1 in 3 US adults, can access driver data for 3 in 4 adults, tracks vehicles in areas home to 3 in 4 adults.",
+      "detail": "Data pipeline into Palantir ICE systems confirmed through EPIC FOIA settlement and Georgetown Law research: (1) FALCON modules: FALCON-SA (Search & Analysis), FALCON-Roadrunner, FALCON-DARTTS (Data Analysis & Research for Trade Transparency); (2) Data sources: Social Security numbers, financial records, call records, ISP records, international travel records, student visa data, telecommunications metadata, GPS location data; (3) Commercial data brokers: Thomson Reuters CLEAR ($16.8M ICE contract through 2021, designed to interface with FALCON), LexisNexis (large contract replacing CLEAR from late Feb 2021 \u2014 provides access to DMV, utility, real property, professional licenses, criminal/court records, credit headers); (4) CBP interoperability: FALCON queries CBP Analytical Framework for Intelligence (AFI) which assigns risk scores to all travelers including US citizens; (5) Georgetown Law American Dragnet (2022): ICE scanned DL photos of 1/3 adults, driver data for 3/4, vehicle tracking for 3/4, utility-based address info for 74% of adults.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:46:20",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://epic.org/documents/epic-v-ice-palantir-databases/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://americandragnet.org/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://theintercept.com/2021/04/02/ice-database-surveillance-lexisnexis/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4838,
+      "finding_type": "intelligence",
+      "summary": "ICE AI deployment expansion: 25 new AI use cases added in 6 months (2025-2026). Palantir ELITE + facial recognition accessing 200M photos. OpenAI GPT-4 adopted Jan 2026 for AI-assisted resume screening. Palantir tip processing uses commercial LLMs. ICE has NOT completed required impact assessments for key AI tools; faces April 2026 deadline for risk management standards compliance.",
+      "detail": "ICE's AI inventory expansion documented: (1) Added 25 new AI use cases in 6 months, most connected to Palantir infrastructure; (2) ELITE targeting system now operational for ERO mission; (3) Facial recognition capability accesses 200 million photos; (4) OpenAI GPT-4 deployed January 2026 for resume screening (hiring automation); (5) Palantir technology used for tip processing with commercial LLMs; (6) Documented failure: US citizen detained for 2 days without charges or explanation \u2014 illustrating AI system errors; (7) Critical compliance gap: ICE has not completed required privacy impact assessments for key AI tools; (8) April 2026 deadline for meeting OMB/NIST AI risk management standards. The combination of Palantir data integration + OpenAI language models + facial recognition creates a surveillance stack that exceeds what any single vendor provides.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:46:33",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://winbuzzer.com/2026/01/30/ice-palantir-openai-immigration-enforcement-ai-tools-xcxwbn/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fedscoop.com/dhs-ai-inventory-mobile-fortify-palantir/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4842,
+      "finding_type": "intelligence",
+      "summary": "Palantir dual-use platform architecture: Gotham (defense/intelligence) and Foundry (commercial/civil) share common ontology enabling interoperability. Same Forward Deployed Engineer (FDE) model used for military (Maven, TITAN, Golden Dome) and immigration (FALCON, ImmigrationOS, ELITE). The ontology \u2014 Palantir's data model connecting entities across databases \u2014 is the bridge: targeting software that finds insurgents can find immigrants with minimal adaptation.",
+      "detail": "Palantir's product architecture makes defense-immigration dual use structurally inevitable: (1) Gotham platform: originally built for CIA/NSA counterterrorism, now used by ICE for FALCON analytics and ELITE targeting; (2) Foundry platform: commercial counterpart launched 2015, same FDE deployment model; (3) Common ontology: shared data model that connects entities (people, places, events) across databases \u2014 this is why the platforms interoperate; (4) Military contracts: Maven ($1.3B+ through 2029), Army TITAN ($10B), Golden Dome AI/C2 backbone; (5) Immigration contracts: ImmigrationOS ($30M), FALCON, ICM, ELITE; (6) The FDE model means Palantir engineers work embedded at both military commands AND ICE field offices, cross-pollinating techniques; (7) Shyam Sankar serves as both CTO and Lt. Colonel (Detachment 201) \u2014 personal embodiment of the dual-use bridge; (8) 13 former Palantir employees published Scouring of the Shire letter (May 2025) warning ethical guardrails being dismantled.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:46:49",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://liberationnews.org/mass-surveillance-palantir-ice-law-enforcement-idf/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.techtransparencyproject.org/articles/inside-palantirs-expanding-influence-operation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2025/05/05/nx-s1-5387514/palantir-workers-letter-trump",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4845,
+      "finding_type": "financial",
+      "summary": "DHS appointees Palantir stock conflicts: Beyond Miller ($100K-$250K), at least 4 other DHS officials held Palantir stock. Troy Edgar (DHS Deputy Secretary) and Robert Law (Under Secretary for Strategy, Policy, Plans) agreed to divest. Paul Ingrassia (DHS White House liaison, $1K-$15K) and Zachariah Hoag (special assistant) also held stock. Over a dozen Trump appointees across WH and DHS owned Palantir stock.",
+      "detail": "Palantir stock ownership across Trump 2 DHS appointees: (1) Stephen Miller \u2014 $100K-$250K in child's brokerage account (OGE treats identically under 18 USC 208); (2) Troy Edgar \u2014 DHS Deputy Secretary, agreed to divest (amount not disclosed); (3) Robert Law \u2014 Under Secretary for Strategy, Policy, and Plans, agreed to divest; (4) Paul Ingrassia \u2014 DHS White House liaison, $1K-$15K, no divestiture requirement reported; (5) Zachariah Hoag \u2014 special assistant, held Palantir stock. POGO investigation confirmed over a dozen Trump appointees in WH and DHS owned Palantir stock. The conflict is structural: these officials make policy and procurement decisions that directly affect Palantir's revenue. Miller architects immigration policy that drives ICE's Palantir spending; Edgar and Law oversee DHS strategy that determines technology investments; Ingrassia liaisons between WH and DHS on implementation.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:47:04",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigates/stephen-miller-conflicts-of-interest",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://thehill.com/policy/technology/5667232-palantir-trump-administration-surveillance/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4848,
+      "finding_type": "intelligence",
+      "summary": "Akash Jain profile: Palantir USG President and CTO. Stanford CS 2003. Joined Palantir Aug 2005 (employee #4-level early). USG President since Apr 2008. Drives 0-to-1 R&D portfolio including AI/ML ops across USG using Gotham and Foundry. Won 2023 Wash100 Award. Led $463M SOCOM contract. Oversees both defense AND immigration portfolios \u2014 the single executive bridging Pentagon and DHS business lines.",
+      "detail": "Akash Jain (also known as Aki Jain) is the key executive who spans Palantir's entire government business: (1) Background: Stanford CS 2003, joined Palantir Aug 2005 as lead software engineer \u2014 one of the earliest employees; (2) Promoted to USG President Apr 2008 \u2014 has held that role for 17+ years; (3) Current dual title: President of Palantir USG AND Chief Technology Officer; (4) Focus areas: AI/ML Ops across all USG business, Gotham and Foundry platforms, civilian/defense/intelligence practice areas; (5) Key wins: $463M SOCOM contract for data operationalization (Jun 2023), $10B Army Enterprise Agreement, Maven expansion; (6) As USG President, he oversees both the DoD business (Maven, TITAN, Golden Dome) and the DHS/ICE business (ImmigrationOS, FALCON, ELITE) \u2014 making him the single person who bridges defense and immigration technology; (7) Ambassador for Defense Intelligence Memorial Foundation; (8) Won Wash100 Award 2023 for contract success and partnership cultivation.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:47:19",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://defensescoop.com/bio/akash-jain/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.executivebiz.com/articles/palantir-usg-president-akash-jain-celebrated-with-1st-wash100-award",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4850,
+      "finding_type": "intelligence",
+      "summary": "Alex Karp political evolution: Raised liberal outside Philadelphia. Gave $360K to Biden-Harris 2023, then $1M to MAGA Inc 2024. Both Karp and Thiel gave hundreds of thousands to Republican congressional committees. Karp opposes open borders: 'when you have an open border the average poor American earns less' and 'I do think these trends make it hard to imagine why we should have large-scale immigration.' Palantir HQ moved Denver -> Miami (Feb 17, 2026) after year of anti-ICE protests.",
+      "detail": "Karp's political trajectory reveals how Palantir's positioning shifted: (1) Background: Raised in liberal Philadelphia-area household, PhD from Goethe University Frankfurt under Jurgen Habermas; (2) Pre-2023: Major Democratic donor, critical of Trump during first term; (3) Oct 7, 2023 inflection: Hamas attack catalyzed political shift \u2014 signed Palantir partnership with Israeli Defense Ministry Jan 2024; (4) 2023: $360K to Biden-Harris joint fundraising committee; (5) 2024: $1M to MAGA Inc; both Karp and Thiel gave hundreds of thousands to Republican congressional leadership committees; (6) Anti-immigration stance: 'You have an open border, you get the far right. And once you get them, you cant get rid of them'; (7) Palantir Denver HQ departure (Feb 17, 2026): fled to Miami after year of street theater, pickets, rallies targeting ICE/IDF work; (8) CO Dems Crow ($59.7K) and Hickenlooper ($51.5K) forced to donate Palantir-linked funds to immigrant rights groups.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:47:36",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.inquirer.com/politics/nation/palantir-ceo-alex-karp-trump-administration-20251216.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.denverpost.com/2026/02/17/palantir-moving-headquarters-miami/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4852,
+      "finding_type": "intelligence",
+      "summary": "Amnesty International Aug 2025 report: Palantir and Babel Street pose surveillance threats to both pro-Palestine student protesters and migrants. Found ImmigrationOS possesses automated capabilities for constant monitoring including real-time social media monitoring across platforms, pattern recognition and sentiment analysis, and data aggregation. NYC Comptroller Levine requested third-party human rights risk assessment of Palantir's DHS/ICE work.",
+      "detail": "Multiple civil liberties investigations into Palantir-ICE relationship: (1) Amnesty International (AMR 51/0211/2025, Aug 2025): Found Palantir's AI systems are 'an overt violation of the right to equality and non-discrimination' with visa holders and asylees explicitly targeted. ImmigrationOS capabilities include real-time social media monitoring, pattern recognition, sentiment analysis, multi-source data aggregation. Earlier 2020 Amnesty report 'Failing to Do Right' found 'high risk that Palantir is contributing to serious human rights violations'; (2) EFF (Jan 15, 2026): Report on ELITE Medicaid data feed. Palantir issued public rebuttal blog post; (3) EPIC v. ICE FOIA settlement: Forced disclosure of FALCON capabilities \u2014 revealed SSNs, financial records, call records, ISP records in database; (4) NYC Comptroller Mark Levine: Requested independent third-party human rights risk assessment; (5) Georgetown Law American Dragnet (2022): Two-year investigation with hundreds of FOIA requests documenting ICE surveillance reach; (6) No formal congressional hearings specifically on Palantir-ICE identified.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:47:52",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.amnesty.org/en/latest/news/2025/08/usa-global-tech-made-by-palantir-and-babel-street-pose-surveillance-threats-to-pro-palestine-student-protestors-migrants/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://epic.org/epic-settles-ice-lawsuit-about-palantir-and-profiling/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://comptroller.nyc.gov/reports/letter-to-palantir-technologies-requesting-third-party-human-rights-risk-assessment/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4854,
+      "finding_type": "intelligence",
+      "summary": "GEO Group/B.I. Inc SmartLINK + Palantir integration assessment: B.I. Inc holds $2.2B 5-year ICE contract as sole provider of ankle monitors and SmartLINK app (tracking ~250K immigrants via facial recognition, voice recognition, GPS). ICE directive (Jun 9, 2025) mandates ankle monitors 'whenever possible' for all ATD adults. SmartLINK collects PII, geolocation, contacts, vehicle data. DHS PIA states BI retains data 7 years (FOIA shows indefinite). AI-driven 'absconder' status triggers automatically \u2014 potential pipeline into Palantir ELITE targeting.",
+      "detail": "The GEO Group (via subsidiary B.I. Incorporated) and Palantir together form a surveillance-to-enforcement pipeline: (1) GEO/BI side: $2.2B 5-year contract, sole provider of SmartLINK app and ankle monitors; 84% of ATD participants on SmartLINK, 13% (~24K) on ankle monitors as of mid-2025; (2) SmartLINK data collected: PII, geolocation (continuous GPS), phone contacts, vehicle/driver data, facial recognition check-ins; (3) ICE June 2025 internal memo mandated ankle monitors 'whenever possible' for all adults \u2014 expansion from 24K toward 180K; (4) Absconder triggers: AI systems automatically flag missed check-ins as 'absconder' status; (5) Data retention: DHS PIA says 7 years post-program, FOIA shows indefinite BI retention; (6) Integration with Palantir: While no public documentation confirms a direct SmartLINK-to-ELITE data pipeline, the systems are designed for interoperability. ImmigrationOS is described as unifying data from immigration files, travel records, license-plate readers, and 'other sources.' SmartLINK GPS data would be a natural input; (7) The pattern: GEO monitors -> data feeds Palantir analysis -> Palantir identifies targets -> ICE arrests -> GEO detains. Two companies, one cycle.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:48:11",
+      "target_name": "Palantir",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://cyberscoop.com/ice-bi-smartlink/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.biometricupdate.com/202507/ices-expanding-use-of-ankle-monitors-ignites-surveillance-privacy-concerns",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://documentedny.com/2025/10/14/ice-surveillance-new-york-ankle-monitor/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5445,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL PATTERN: Palantir government expansion accelerated across 4 domains simultaneously in 2025: IRS mega-database (Jun), ImmigrationOS sole-source $30M (Sep), USCIS VOWS (Dec), DHS $1B BPA (Feb 2026). Expansion coincides with DOGE restructuring and Helberg appointment",
+      "detail": "Palantir's government contract expansion in 2025-2026 shows temporal coordination across multiple agencies: (1) Mar 25 2025: NATO fastest-ever Maven acquisition. (2) Jun 17 2025: Palantir employees installed at IRS building mega-database/unified API for DOGE. (3) Sep 25 2025: ImmigrationOS sole-source $30M ICE detention platform. (4) Dec 9 2025: USCIS VOWS contract. (5) Feb 19 2026: DHS $1B blanket purchase agreement. Context: Jacob Helberg (Palantir senior advisor) confirmed as Under Secretary of State Jun 2025 while retaining hundreds of investments including SpaceX and OpenAI. Tom Williams (OMB) held $2-10M Palantir stock. Rep. Cisneros made 5+ Palantir stock purchases in 2025. This expansion across DHS, IRS, USCIS, ICE, and NATO within 11 months during DOGE's government restructuring represents synchronized institutional capture.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 21:15:38",
+      "target_name": "Palantir",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5800,
+      "finding_type": "financial",
+      "summary": "Palantir federal contracts nearly doubled to .5M in 2025; built ImmigrationOS for ICE",
+      "detail": "Palantir federal contracts nearly doubled in 2025, rising to .5M (over M since Trump took office per NYT). Key contracts: M ICE contract (April 2025) to build ImmigrationOS for tracking deportations and immigrant lifecycles, prototype due Sept 2025. Treasury Dept awarded Palantir contract for 'unified API layer.' At least 3 DOGE members formerly worked at Palantir, 2 more at Thiel-funded companies. Federal CIO Gregory Barbaccia is 10-year Palantir alum. Clark Minor (Palantir, 12 years) is HHS CIO. Palantir's Gotham platform enables cross-referencing passport records, SSA files, IRS tax data, and license plate data.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:46:10",
+      "target_name": "Palantir",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Hill, 2025; Fortune, Dec 2025; immpolicytracking.org; FedScoop",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 2695,
+      "person_a": "Palantir",
+      "person_b": "Thomas Williams",
+      "relationship_type": "financial",
+      "description": "OMB defense budget director's wife held $2M-$10M Palantir stock. Recused from Palantir matters but still controls defense spending allocation.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:01:40",
+      "profile_id": "tech-right",
+      "other_person": "Thomas Williams",
+      "other_person_slug": "thomas-williams",
+      "evidence": []
+    },
+    {
+      "id": 2693,
+      "person_a": "Jacob Helberg",
+      "person_b": "Palantir",
+      "relationship_type": "advisory",
+      "description": "Helberg served as senior advisor to Palantir CEO Alex Karp. Now Under Sec State for Economic Affairs controlling AI export policy that impacts Palantir's international operations.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:01:40",
+      "profile_id": "tech-right",
+      "other_person": "Jacob Helberg",
+      "other_person_slug": "jacob-helberg",
+      "evidence": []
+    },
+    {
+      "id": 2698,
+      "person_a": "Gregory Barbaccia",
+      "person_b": "Palantir",
+      "relationship_type": "employment",
+      "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:01:40",
+      "profile_id": "tech-right",
+      "other_person": "Gregory Barbaccia",
+      "other_person_slug": "gregory-barbaccia",
+      "evidence": []
+    },
+    {
+      "id": 2761,
+      "person_a": "Emil Michael",
+      "person_b": "Palantir",
+      "relationship_type": "financial",
+      "description": "Palantir AI targeting in Iran ops runs through systems under Michael USD(R&E) authority \u2014 MDA, DARPA, defense AI",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 20:23:54",
+      "profile_id": "tech-right",
+      "other_person": "Emil Michael",
+      "other_person_slug": "emil-michael",
+      "evidence": []
+    },
+    {
+      "id": 2812,
+      "person_a": "Palantir",
+      "person_b": "Stephen Miller",
+      "relationship_type": "financial",
+      "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 01:31:14",
+      "profile_id": "epstein",
+      "other_person": "Stephen Miller",
+      "other_person_slug": "stephen-miller",
+      "evidence": []
+    },
+    {
+      "id": 2930,
+      "person_a": "CBP",
+      "person_b": "Palantir",
+      "relationship_type": "financial",
+      "description": "DHS awarded Palantir B 5-year BPA (Feb 19 2026) for Gotham/Foundry across CBP ICE FEMA CISA. Pre-approved pricing eliminates per-task competitive bidding.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 17:35:56",
+      "profile_id": "tech-right",
+      "other_person": "CBP",
+      "other_person_slug": "cbp",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://siliconangle.com/2026/02/19/dhs-awards-palantir-1b-deploy-ai-data-analytics-platforms/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3059,
+      "person_a": "Clark Minor",
+      "person_b": "Palantir",
+      "relationship_type": "employment",
+      "description": "Minor was Palantir Global Head of Cloud (2013-2024) then appointed HHS CTO/CIO overseeing 300M+ in Palantir HHS contracts",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 03:55:25",
+      "profile_id": null,
+      "other_person": "Clark Minor",
+      "other_person_slug": "clark-minor",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop; Bloomberg; ProPublica disclosure minor-clark",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2689,
+      "person_a": "David Sacks",
+      "person_b": "Palantir",
+      "relationship_type": "political",
+      "description": "Sacks (AI/Crypto Czar) and Thiel (Palantir co-founder) are PayPal Mafia members. Sacks policy influence extends to defense AI procurement where Palantir holds $10B+ contracts.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 17:01:39",
+      "profile_id": "tech-right",
+      "other_person": "David Sacks",
+      "other_person_slug": "david-sacks",
+      "evidence": []
+    },
+    {
+      "id": 3001,
+      "person_a": "Akash Bobba",
+      "person_b": "Palantir",
+      "relationship_type": "employment",
+      "description": "Palantir intern assigned to OPM, SSA, Education. Thiel ecosystem operative at 21.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:37:04",
+      "profile_id": "tech-right",
+      "other_person": "Akash Bobba",
+      "other_person_slug": "akash-bobba",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2006",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Palantir Technologies maintained massive lobbying presence: 516 total filings from 2006-present. Early lobbying (2006-2010) through Morgan and Cunningham LLC focused on Defense, Homeland Security, Intelligence, Law Enforcement, and SEC/Financial Securities applications. Later expanded to multiple registrants. Key lobbyist Bryan Cunningham (Morgan and Cunningham) handled defense/intel lobbying. Alexander Karp (CEO, 17 Epstein email exchanges) is NOT listed as a registered lobbyist in LDA records. Palantir lobbied to sell surveillance/analytics software to US intelligence community and DOD - the same capabilities relevant to tracking networks like Epstein's.",
+      "confidence": "medium",
+      "id": 424
+    }
+  ]
+}

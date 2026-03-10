@@ -1,0 +1,744 @@
+{
+  "name": "SpaceX",
+  "slug": "spacex",
+  "aliases": [],
+  "profile_ids": [
+    "epstein",
+    "tech-right"
+  ],
+  "generated_at": "2026-03-10T15:20:13.460820",
+  "last_updated": "2026-03-10T00:45:49",
+  "stats": {
+    "total_findings": 12,
+    "total_connections": 20,
+    "total_entities": 0,
+    "finding_types": {
+      "legal": 2,
+      "financial": 8,
+      "intelligence": 1,
+      "relationship": 1
+    },
+    "connection_types": {
+      "financial": 7,
+      "corporate": 4,
+      "employment": 7,
+      "political": 1,
+      "contracts_with": 1
+    },
+    "last_updated": "2026-03-10T00:45:49"
+  },
+  "findings": [
+    {
+      "id": 4393,
+      "finding_type": "legal",
+      "summary": "SpaceX filed constitutional challenge to NLRB in S.D. Texas (1:24-cv-00001) before Judge Olvera. 5th Circuit ruled Aug 2025 that NLRB structure likely unconstitutional. Meanwhile DOGE attempted to cancel NLRB Buffalo office lease and is reviewing DoD contracts where SpaceX holds nearly $2B in classified work. Pattern: Musk companies litigate against regulatory agencies in Texas federal courts while DOGE undermines those same agencies administratively.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:48:15",
+      "target_name": "SpaceX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener 1:24-cv-00001, 5th Circuit 24-40315, Rep. Sherrill press release Feb 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4422,
+      "finding_type": "legal",
+      "summary": "SpaceX v NLRB (1:24-cv-00001, S.D. TX): Filed Jan 4 2024 as literally the first case of the year in the district. Challenged NLRB's constitutional structure. Fifth Circuit ruled Aug 2025 that NLRB structure is likely unconstitutional, issuing preliminary injunctions that effectively paralyze NLRB enforcement against SpaceX. This litigation was filed while DOGE simultaneously defunded NLRB administratively \u2014 a dual-track strategy of court challenge plus budget destruction. Meanwhile, FAA approved 5x increase in SpaceX Starship launches from Boca Chica TX (5 to 25/year) in May 2025, and White House planning to eliminate environmental reviews for launch licensing and make FAA Commercial Space head a political appointee.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:52:10",
+      "target_name": "SpaceX",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener 1:24-cv-00001 SDTX, CNBC 2025-05-06, Fifth Circuit ruling Aug 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4693,
+      "finding_type": "financial",
+      "summary": "SpaceX holds 14.6B+ in confirmed USASpending obligations across NASA (7.46B) and DoD (7.18B), with 13B pLEO IDIQ ceiling and 631M in active Starlink task orders",
+      "detail": "Note: The $14.6B figure from USASpending.gov data (NASA $7.46B + DoD $7.18B) represents total 'obligations' in the USASpending database, which may differ from total contract ceilings or total funding. WashPost/Fortune reporting cites $38B total government funding (including subsidies, tax credits, loans beyond direct contracts). NASA alone has invested approximately $15B in SpaceX per NASA spokesperson. The USASpending figure is accurate for its specific metric but represents a subset of total government financial support.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 19:34:35",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://breakingdefense.com/2025/06/space-force-is-contracting-with-spacex-for-new-secretive-milnet-satcom-network/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://spacenews.com/starlink-set-to-hit-11-8-billion-revenue-in-2025-boosted-by-military-contracts/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5293,
+      "finding_type": "financial",
+      "summary": "SpaceX awarded $5.9B in NSSL Phase 3 Lane 2 contracts by Space Force on April 4, 2025",
+      "detail": "Contract covers 28 of 54 national security launch missions (60%) through 2029. Total NSSL award across 3 vendors (SpaceX, ULA, Blue Origin) was $13.5B. SpaceX received largest share. Awarded during Musk's DOGE tenure, raising conflict of interest concerns given simultaneous government advisory role.",
+      "source_datasets": [
+        "SpaceNews",
+        "Space Force SSC"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:16:00",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://spacenews.com/spacex-ula-blue-origin-win-13-5-billion-in-u-s-military-launch-contracts-through-2029/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5301,
+      "finding_type": "financial",
+      "summary": "SpaceX-xAI merger closed February 2026, creating $1.25T combined entity with consolidated military/intelligence contracts",
+      "detail": "SpaceX acquired xAI in early February 2026 in the largest merger in history at $1.25 trillion valuation. Consolidates rockets, satellites, AI infrastructure, classified systems access, and intelligence data under one corporate entity. Raises unprecedented conflict-of-interest questions: combined company holds NRO spy satellites ($1.8B), Space Force launches ($5.9B), PLEO communications ($13B ceiling), and Pentagon AI contracts ($200M) plus classified systems access. Also autonomous drone swarm competition entry.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:16:29",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2026/02/03/musk-xai-spacex-biggest-merger-ever.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.dandodiary.com/2026/03/articles/director-and-officer-liability/the-spacex-xai-merger/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5328,
+      "finding_type": "intelligence",
+      "summary": "SpaceX and xAI selected for Pentagon $100M autonomous drone swarm competition (February 2026)",
+      "detail": "SpaceX and subsidiary xAI among small group selected for Pentagon's classified $100M drone swarm competition launched January 2026. Six-month competition run by Defense Innovation Unit and Defense Autonomous Warfare Group (new entity under US Special Operations Command). Goal: software translating voice commands into coordinated multi-drone battlefield action. SpaceX/xAI expected to work across full scope (voice-to-command + drone operations). By contrast, OpenAI supporting Applied Intuition bid is limited to mission control element only. Significant: combined SpaceX-xAI entity would provide both satellite communications infrastructure AND autonomous AI for military drones.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:18:05",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://dronedj.com/2026/02/23/pentagon-drone-challenge-spacex-musk/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.bloomberg.com/news/articles/2026-02-16/spacex-to-compete-in-pentagon-contest-for-autonomous-drone-tech",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5334,
+      "finding_type": "financial",
+      "summary": "NASA awarded SpaceX ~$100M NEO Surveyor launch contract on Feb 1, 2025, 12 days after Musk began DOGE work",
+      "detail": "On February 1, 2025, NASA announced selection of SpaceX for approximately $100M contract to provide launch services for the Near-Earth Object Surveyor mission. This was just 12 days after Musk began his DOGE advisory role on January 20, 2025. Combined with the $5.9B NSSL contract awarded April 4, 2025, represents pattern of major contract awards to Musk companies during his government advisory tenure. Congressional Democrats cited both contracts in conflict-of-interest investigations.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:18:33",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/2025-04-27-Minority-Staff-Memorandum-Elon-Musk-Conflicts.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5341,
+      "finding_type": "relationship",
+      "summary": "SpaceX lobbying via Squire Patton Boggs since 2011; lobbyists include former Sen. John Breaux",
+      "detail": "SpaceX registered as lobbying client in Q4 2011 through Squire Patton Boggs (2550 M Street NW, Washington DC). Lobbyists include former US Senator John Breaux (D-LA) and Norma Krayem. Lobbying focused on issues related to commercial space transportation under Manufacturing issue code. SpaceX client description: 'Commercial Space Transportation.' Squire Patton Boggs is one of the largest lobbying firms in DC. Use of former senator as lobbyist represents classic revolving-door influence pattern.",
+      "source_datasets": [
+        "lda"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:19:08",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://lda.senate.gov/api/v1/filings/1f023c76-b682-44e2-bd26-8cd2b8aa1328/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5348,
+      "finding_type": "financial",
+      "summary": "Aggregate SpaceX military/intelligence contract portfolio exceeds $22B: NRO ($1.8B), NSSL ($5.9B), PLEO ($13B ceiling), SDA ($733.5M), plus classified programs",
+      "detail": "Consolidated SpaceX defense contract mapping: (1) NRO Starshield spy satellites: $1.8B (2021); (2) NSSL Phase 3 Lane 2 launches: $5.9B (April 2025); (3) Space Force PLEO communications: $13B contract ceiling, majority of $660M in task orders to Starshield; (4) SDA missions: $733.5M for 9 launches; (5) Space Force Starshield one-year contract: up to $70M (2023); (6) NASA NEO Surveyor: ~$100M (Feb 2025); (7) xAI Pentagon AI: $200M (July 2025); (8) Drone swarm competition: $100M potential. Total identifiable contract value exceeds $22B. Does not include classified programs with undisclosed values. Creates structural dependency: US military cannot operate key space capabilities without SpaceX.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:19:51",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://spacenews.com/spacex-ula-blue-origin-win-13-5-billion-in-u-s-military-launch-contracts-through-2029/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.satellitetoday.com/government-military/2024/11/22/spacexs-starshield-has-received-most-task-orders-for-space-force-pleo-services-so-far/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5363,
+      "finding_type": "financial",
+      "summary": "SpaceX Starlink demands exemption from BEAD performance and reporting requirements while seeking billions in subsidies",
+      "detail": "SpaceX sent formal letter requesting exemptions from BEAD performance benchmarks and reporting requirements. This while Starlink is positioned to receive $10-20B in BEAD funding under revised technology-neutral rules. Research by Institute for Local Self-Reliance shows Starlink unlikely to meet required 100/20 Mbps speed standard at scale across many geographic areas. Yet SpaceX seeks to be exempt from proving it meets those standards. Pattern: Musk companies seek maximum government funding while minimizing oversight and accountability, same pattern seen in Boring Company's deliberate avoidance of federal funding to dodge regulatory scrutiny.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:20:56",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://communitynetworks.org/content/starlink-demands-less-oversight-it-receives-hundreds-millions-new-subsidies",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://statescoop.com/spacex-starlink-bead-exemption-letter/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5374,
+      "finding_type": "financial",
+      "summary": "USASpending contract data: Top 20 SpaceX federal awards total $3.63B. NASA Commercial Crew $3.45B, SDA Tranche 0 Launch $158M, plus Starlink terminal purchases across DoD branches.",
+      "detail": "Dominated by NASA Commercial Crew Program ($3.03B NNK17MA01T + $214M NNK16MA58T + $208M NNK16MA03T = $3.45B). DoD contracts include SDA Tranche 0 Launch Service ($158M HQ085021C0005), Naval Research Lab ($3.5M), plus numerous Starlink terminal/service purchases ($170K-$248K each across Army, Navy, Marines, USCG). This represents only the top 20 of potentially hundreds of awards; the full SpaceX federal contract portfolio exceeds $22B per other reporting.",
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:30:21",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending API query: awards for SPACE EXPLORATION TECHNOLOGIES CORP., retrieved 2026-03-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5606,
+      "finding_type": "financial",
+      "summary": "SpaceX federal lobbying since 2003, both in-house and via Cornerstone Government Affairs. Agencies lobbied: DOD, NASA, FAA, DARPA, Air Force, OMB, OSTP, FTC. Issues: Aerospace, Budget/Appropriations, Defense, Science/Tech. Reported expenses $36K-$163K/half-year early period. OpenSecrets: $2.85M in 2024, $2.21M in 2025. SpaceX holds $15.4B in federal contracts (NASA $11.2B, DOD/Space Force $3.7B, IC $0.5B+).",
+      "detail": null,
+      "source_datasets": [
+        "lobbying"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:35:57",
+      "target_name": "SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filings 2003-2007; OpenSecrets D000029147; Fed-Spend analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 833,
+      "person_a": "Honeycomb Partners",
+      "person_b": "SpaceX",
+      "relationship_type": "financial",
+      "description": "Fiszel offered Epstein SpaceX co-investment in Feb 2017. Company valued at 18B. Fiszel buying 2M (60pct personal) for opt-in private side of Honeycomb. Up to additional 6M co-invest possible. Elon Musk buying 100M personally at 105/share vs investor cost of 118/share.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 05:10:45",
+      "profile_id": "epstein",
+      "other_person": "Honeycomb Asset Management LP",
+      "other_person_slug": "honeycomb-asset-management-lp",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02657742",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2654,
+      "person_a": "SpaceX",
+      "person_b": "xAI",
+      "relationship_type": "corporate",
+      "description": "SpaceX acquired xAI Feb 2 2026 via all-stock deal at 1.25T combined valuation",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 00:41:52",
+      "profile_id": "epstein",
+      "other_person": "xAI",
+      "other_person_slug": "xai",
+      "evidence": []
+    },
+    {
+      "id": 2679,
+      "person_a": "Department of Defense",
+      "person_b": "SpaceX",
+      "relationship_type": "financial",
+      "description": "SpaceX DoD obligations: 7.18B all-time. Air Force NSSL Phase 3, DISA Starlink/Starshield.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:55:35",
+      "profile_id": "epstein",
+      "other_person": "Department of Defense",
+      "other_person_slug": "department-of-defense",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2683,
+      "person_a": "NASA",
+      "person_b": "SpaceX",
+      "relationship_type": "financial",
+      "description": "SpaceX NASA obligations: 7.46B all-time. CCP contracts: 3.03B, 213.9M, 208.4M.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 16:55:35",
+      "profile_id": "epstein",
+      "other_person": "NASA",
+      "other_person_slug": "nasa",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2742,
+      "person_a": "DOGE",
+      "person_b": "SpaceX",
+      "relationship_type": "financial",
+      "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:37",
+      "profile_id": "tech-right",
+      "other_person": "DOGE",
+      "other_person_slug": "doge",
+      "evidence": []
+    },
+    {
+      "id": 2747,
+      "person_a": "SpaceX",
+      "person_b": "xAI",
+      "relationship_type": "corporate",
+      "description": "SpaceX-xAI merger Feb 2026 at 1.25T creates single entity holding defense contracts, AI capabilities, and satellite infrastructure",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:48",
+      "profile_id": "tech-right",
+      "other_person": "xAI",
+      "other_person_slug": "xai",
+      "evidence": []
+    },
+    {
+      "id": 2743,
+      "person_a": "DoD",
+      "person_b": "SpaceX",
+      "relationship_type": "financial",
+      "description": "SpaceX holds 14.6B+ in USASpending obligations from NASA and DoD with 13B pLEO IDIQ ceiling",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-03 19:36:48",
+      "profile_id": "tech-right",
+      "other_person": "DoD",
+      "other_person_slug": "dod",
+      "evidence": []
+    },
+    {
+      "id": 2801,
+      "person_a": "1789 Capital",
+      "person_b": "SpaceX",
+      "relationship_type": "financial",
+      "description": "1789 Capital holds SpaceX position. SpaceX is bidding 2B+ Golden Dome satellite tracking constellation. Creates direct Trump family financial benefit from SpaceX government contracts via Trump Jr partnership.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:53:20",
+      "profile_id": "tech-right",
+      "other_person": "1789 Capital",
+      "other_person_slug": "1789-capital",
+      "evidence": []
+    },
+    {
+      "id": 2960,
+      "person_a": "SpaceX",
+      "person_b": "xAI",
+      "relationship_type": "corporate",
+      "description": "SpaceX acquired xAI in February 2026 for combined $1.25T valuation; consolidates military/intelligence contracts under one entity",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:21:42",
+      "profile_id": null,
+      "other_person": "xAI",
+      "other_person_slug": "xai",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2026/02/03/musk-xai-spacex-biggest-merger-ever.html",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2997,
+      "person_a": "SpaceX",
+      "person_b": "Steve Davis",
+      "relationship_type": "employment",
+      "description": "DOGE operational lead, longtime SpaceX/X/Boring Company executive",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:36:55",
+      "profile_id": "tech-right",
+      "other_person": "Steve Davis",
+      "other_person_slug": "steve-davis",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 2998,
+      "person_a": "Brian Bjelde",
+      "person_b": "SpaceX",
+      "relationship_type": "employment",
+      "description": "SpaceX VP of People Operations (20+ years), assigned to OPM. FEC confirms active SpaceX PAC contributor.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:36:57",
+      "profile_id": "tech-right",
+      "other_person": "Brian Bjelde",
+      "other_person_slug": "brian-bjelde",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC:BJELDE_BRIAN_SPACEX_PAC",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3007,
+      "person_a": "Marko Elez",
+      "person_b": "SpaceX",
+      "relationship_type": "employment",
+      "description": "X/SpaceX engineer assigned to Treasury payment systems. Resigned after racist posts.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:37:28",
+      "profile_id": "tech-right",
+      "other_person": "Marko Elez",
+      "other_person_slug": "marko-elez",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3009,
+      "person_a": "Brady Glantz",
+      "person_b": "SpaceX",
+      "relationship_type": "employment",
+      "description": "SpaceX software engineer assigned to FAA which regulates SpaceX launches",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:37:28",
+      "profile_id": "tech-right",
+      "other_person": "Brady Glantz",
+      "other_person_slug": "brady-glantz",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3010,
+      "person_a": "Justin Monroe",
+      "person_b": "SpaceX",
+      "relationship_type": "employment",
+      "description": "SpaceX security director assigned as Adviser to FBI Director",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:37:28",
+      "profile_id": "tech-right",
+      "other_person": "Justin Monroe",
+      "other_person_slug": "justin-monroe",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3011,
+      "person_a": "Erica Jehling",
+      "person_b": "SpaceX",
+      "relationship_type": "employment",
+      "description": "SpaceX purchasing director assigned to EPA while SpaceX faces environmental scrutiny",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:37:28",
+      "profile_id": "tech-right",
+      "other_person": "Erica Jehling",
+      "other_person_slug": "erica-jehling",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3034,
+      "person_a": "Elon Musk",
+      "person_b": "SpaceX",
+      "relationship_type": "political",
+      "description": "Musk-owned SpaceX lobbied DOD, NASA, FAA, DARPA \u2014 agencies DOGE later entered (FAA with SpaceX employees)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 23:39:33",
+      "profile_id": "tech-right",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": []
+    },
+    {
+      "id": 3055,
+      "person_a": "Kenneth Howery",
+      "person_b": "SpaceX",
+      "relationship_type": "financial",
+      "description": "FF invested $500M+ in SpaceX. Greenland banned SpaceX Starlink in 2024 for geopolitical reasons, choosing Eutelsat. Howery as ambassador has diplomatic leverage over country that rejected FF portfolio company. SpaceX is Golden Dome frontrunner.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 01:42:14",
+      "profile_id": "tech-right",
+      "other_person": "Kenneth Howery",
+      "other_person_slug": "kenneth-howery",
+      "evidence": []
+    },
+    {
+      "id": 3082,
+      "person_a": "SpaceX",
+      "person_b": "Steve Davis",
+      "relationship_type": "employment",
+      "description": "SpaceX employee #14 became effective DOGE operational leader controlling government-wide cost-cutting operations",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:27:55",
+      "profile_id": null,
+      "other_person": "Steve Davis",
+      "other_person_slug": "steve-davis",
+      "evidence": []
+    },
+    {
+      "id": 2621,
+      "person_a": "Elon Musk",
+      "person_b": "SpaceX",
+      "relationship_type": "corporate",
+      "description": "Musk is CEO of SpaceX which holds .6B in NASA/DoD contracts while he led DOGE",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-02-27 20:52:09",
+      "profile_id": "epstein",
+      "other_person": "Elon Musk",
+      "other_person_slug": "elon-musk",
+      "evidence": []
+    },
+    {
+      "id": 3286,
+      "person_a": "Anduril Industries",
+      "person_b": "SpaceX",
+      "relationship_type": "contracts_with",
+      "description": "SpaceX and Anduril are co-members of the Golden Dome missile defense consortium along with Palantir. Both are Founders Fund portfolio companies. Musk and Luckey both participated in Trump inaugural giving ($1.89B+ combined). Both have DOGE-linked personnel in regulatory agencies overseeing their operations.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-10 00:45:49",
+      "profile_id": "tech-right",
+      "other_person": "Anduril Industries",
+      "other_person_slug": "anduril-industries",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}
