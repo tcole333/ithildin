@@ -19,7 +19,7 @@
     {
       "id": 3753,
       "finding_type": "financial",
-      "summary": "ARYAM INVESTMENT 1 \u2014 UAE ROYAL ACQUIRES 49% OF WLFI FOR 500M: Sheikh Tahnoon bin Zayed (UAE National Security Advisor) via Aryam Investment 1 (Abu Dhabi entity, managed by G42 executives) signed deal to acquire 49% of WLFI for 500M. Eric Trump signed contract Jan 16, 2025 \u2014 4 DAYS before inauguration. Half paid upfront: 187M to Trump family entities, tens of millions to Witkoff-affiliated entities. G42 executives took WLFI board seats. Deal was NOT publicly disclosed. Months later, Trump admin agreed to supply UAE with advanced AI chips (previously restricted by Biden admin over China concerns). House probe launched Feb 2026.",
+      "summary": "ARYAM INVESTMENT 1 — UAE ROYAL ACQUIRES 49% OF WLFI FOR 500M: Sheikh Tahnoon bin Zayed (UAE National Security Advisor) via Aryam Investment 1 (Abu Dhabi entity, managed by G42 executives) signed deal to acquire 49% of WLFI for 500M. Eric Trump signed contract Jan 16, 2025 — 4 DAYS before inauguration. Half paid upfront: 187M to Trump family entities, tens of millions to Witkoff-affiliated entities. G42 executives took WLFI board seats. Deal was NOT publicly disclosed. Months later, Trump admin agreed to supply UAE with advanced AI chips (previously restricted by Biden admin over China concerns). House probe launched Feb 2026.",
       "detail": "This is SEPARATE from the MGX-Binance 2B deal settled via USD1. Aryam Investment 1 directly purchased equity in WLFI, while MGX-Binance deal used USD1 as settlement vehicle. Both trace back to Tahnoon bin Zayed empire. G42 is Tahnoon-controlled AI company that took Microsoft investment after divesting Chinese ties. The Jan 16 signing date (4 days pre-inauguration) suggests deal was structured to close before Trump assumed regulatory power over crypto/tech exports. Fortune described Tahnoon as spy sheikh. WSJ broke the story. CoinDesk reported House probe Feb 5, 2026.",
       "source_datasets": null,
       "confidence": "high",
@@ -155,7 +155,7 @@
     {
       "id": 3669,
       "finding_type": "intelligence",
-      "summary": "WLFI SSL certificate issued July 6, 2024 \u2014 10 weeks before public announcement",
+      "summary": "WLFI SSL certificate issued July 6, 2024 — 10 weeks before public announcement",
       "detail": "Certificate transparency logs show worldlibertyfi.com first received SSL certificate from GoDaddy on July 6, 2024. Public announcement was September 16, 2024. First Wayback Machine capture was September 12, 2024. This shows infrastructure was being prepared at least 10 weeks before the public announcement. Only 3 certs total issued, all via GoDaddy.",
       "source_datasets": null,
       "confidence": "confirmed",
@@ -178,7 +178,7 @@
     {
       "id": 3670,
       "finding_type": "financial",
-      "summary": "WLFI took over ALT5 Sigma Corp as digital asset treasury vehicle \u2014 controls 100M+ shares",
+      "summary": "WLFI took over ALT5 Sigma Corp as digital asset treasury vehicle — controls 100M+ shares",
       "detail": "ALT5 Sigma Corp (ALTS, Nasdaq) is being repositioned as a digital asset treasury company built around WLFI holdings. Latest 8-K (Feb 23, 2026) discusses growth of USD1 stablecoin, value of WLFI token holdings, and accelerated growth in digital asset treasury operations. CEO letter references prospective growth tied directly to WLFI ecosystem. WLFI holds 1M shares plus warrants for 115M more shares including 99M pre-funded warrants at 0.001 per share.",
       "source_datasets": null,
       "confidence": "high",
@@ -201,7 +201,7 @@
     {
       "id": 3672,
       "finding_type": "legal",
-      "summary": "WLFI and principals have no FARA registrations \u2014 no foreign agent filings for any promoter",
+      "summary": "WLFI and principals have no FARA registrations — no foreign agent filings for any promoter",
       "detail": "FARA database search for Witkoff, World Liberty, Folkman, and Herro returned zero matches for foreign agent registrations. Despite reported foreign investment (including from Abu Dhabi MGX fund), no WLFI principal is registered as a foreign agent. This is notable because if any promoter is acting at the direction of a foreign principal, FARA registration would be required.",
       "source_datasets": null,
       "confidence": "medium",
@@ -271,7 +271,7 @@
       "id": 3679,
       "finding_type": "financial",
       "summary": "WLFI token is TransparentUpgradeableProxy with WorldLibertyFinancialV2 implementation. Contract includes blacklist (56 refs), pause (89 refs), mint/burn capabilities, lock functions. Token is centrally controlled by owner with ability to freeze transfers, blacklist addresses, mint new tokens, and upgrade contract logic at will.",
-      "detail": "Smart contract analysis of WLFI token at 0xda5e1988097297dcdc1f90d4dfe7909e847cbef6 reveals a TransparentUpgradeableProxy pattern (Solidity 0.8.20), with implementation at 0xef48944abefff3f668f5324c050cd406618b771d (WorldLibertyFinancialV2, Solidity 0.8.24). The implementation contract includes extensive centralized control: blacklist functionality (56 code references \u2014 can block specific addresses), pause capability (89 references \u2014 can freeze all transfers), mint/burn functions (can create or destroy supply), lock mechanisms (61 references \u2014 can lock tokens), and is owner-controlled (243 references). The proxy pattern means the entire contract logic can be upgraded without holder consent. This gives WLFI operators (Trump family and co-founders) complete unilateral control over the token that they sold to investors via Reg D 506(c).",
+      "detail": "Smart contract analysis of WLFI token at 0xda5e1988097297dcdc1f90d4dfe7909e847cbef6 reveals a TransparentUpgradeableProxy pattern (Solidity 0.8.20), with implementation at 0xef48944abefff3f668f5324c050cd406618b771d (WorldLibertyFinancialV2, Solidity 0.8.24). The implementation contract includes extensive centralized control: blacklist functionality (56 code references — can block specific addresses), pause capability (89 references — can freeze all transfers), mint/burn functions (can create or destroy supply), lock mechanisms (61 references — can lock tokens), and is owner-controlled (243 references). The proxy pattern means the entire contract logic can be upgraded without holder consent. This gives WLFI operators (Trump family and co-founders) complete unilateral control over the token that they sold to investors via Reg D 506(c).",
       "source_datasets": null,
       "confidence": "confirmed",
       "date_of_event": null,
@@ -294,7 +294,7 @@
       "id": 3680,
       "finding_type": "financial",
       "summary": "USD1 stablecoin used to settle MGX (Abu Dhabi sovereign fund) $2B investment in Binance. Announced by Zach Witkoff (WLFI co-founder, son of Steve Witkoff who is Trump Special Envoy) at Dubai crypto conference May 2025. Binance founder CZ pardoned by Trump Oct 23, 2025.",
-      "detail": "The MGX-Binance-USD1 nexus represents the most direct conflict of interest in the WLFI investigation. Timeline: (1) March 4 2025: USD1 first minted on Ethereum. (2) March 12: MGX announces $2B investment in Binance \u2014 the first institutional investment in the exchange. (3) May 1: Zach Witkoff (son of Trump Special Envoy Steve Witkoff) announces at Dubai crypto conference that USD1 will settle the MGX-Binance deal. (4) May 14: Sens. Warren and Merkley send letter to WLFI demanding records on communications with UAE/Binance regarding the deal. (5) Oct 23: Trump pardons Binance founder Changpeng Zhao (CZ), who pleaded guilty to enabling money laundering in 2023. By this point, WLFI has generated ~$4.5B since the 2024 election. The deal creates a chain: Abu Dhabi sovereign fund -> USD1 stablecoin (owned by Trump family) -> Binance (whose founder was pardoned by Trump). Steve Witkoff plays dual roles: Trump's Special Envoy to the Middle East AND investor/promoter in WLFI.",
+      "detail": "The MGX-Binance-USD1 nexus represents the most direct conflict of interest in the WLFI investigation. Timeline: (1) March 4 2025: USD1 first minted on Ethereum. (2) March 12: MGX announces $2B investment in Binance — the first institutional investment in the exchange. (3) May 1: Zach Witkoff (son of Trump Special Envoy Steve Witkoff) announces at Dubai crypto conference that USD1 will settle the MGX-Binance deal. (4) May 14: Sens. Warren and Merkley send letter to WLFI demanding records on communications with UAE/Binance regarding the deal. (5) Oct 23: Trump pardons Binance founder Changpeng Zhao (CZ), who pleaded guilty to enabling money laundering in 2023. By this point, WLFI has generated ~$4.5B since the 2024 election. The deal creates a chain: Abu Dhabi sovereign fund -> USD1 stablecoin (owned by Trump family) -> Binance (whose founder was pardoned by Trump). Steve Witkoff plays dual roles: Trump's Special Envoy to the Middle East AND investor/promoter in WLFI.",
       "source_datasets": null,
       "confidence": "high",
       "date_of_event": null,
@@ -491,7 +491,7 @@
     {
       "id": 3939,
       "finding_type": "financial",
-      "summary": "WLFI Form D/A complete promoter structure (SEC primary source): 9 related persons listed. EXECUTIVE OFFICERS + DIRECTORS + PROMOTERS: Zachary Folkman (425 Carr 693 PMB 285, Dorado PR 00646), Chase Herro (407 Ayre St PMB 1358, Wilmington DE 19805). PROMOTERS ONLY (not officers/directors): Donald J. Trump (115 Eagle Tree Terrace, Jupiter FL 33477), Donald Trump Jr (same address), Eric Trump (same address), Steven Witkoff (4400 Biscayne Blvd Suite 900, Miami FL 33137), Zachary Witkoff (same Miami address). ENTITY PROMOTERS: Axiom Management Group LLC (Dorado PR \u2014 Folkman/Herro), WC DigitalFi LLC (Miami FL), DT Marks DEFI LLC (Jupiter FL \u2014 Trump family).",
+      "summary": "WLFI Form D/A complete promoter structure (SEC primary source): 9 related persons listed. EXECUTIVE OFFICERS + DIRECTORS + PROMOTERS: Zachary Folkman (425 Carr 693 PMB 285, Dorado PR 00646), Chase Herro (407 Ayre St PMB 1358, Wilmington DE 19805). PROMOTERS ONLY (not officers/directors): Donald J. Trump (115 Eagle Tree Terrace, Jupiter FL 33477), Donald Trump Jr (same address), Eric Trump (same address), Steven Witkoff (4400 Biscayne Blvd Suite 900, Miami FL 33137), Zachary Witkoff (same Miami address). ENTITY PROMOTERS: Axiom Management Group LLC (Dorado PR — Folkman/Herro), WC DigitalFi LLC (Miami FL), DT Marks DEFI LLC (Jupiter FL — Trump family).",
       "detail": null,
       "source_datasets": null,
       "confidence": "confirmed",
@@ -514,7 +514,7 @@
     {
       "id": 3941,
       "finding_type": "financial",
-      "summary": "SYNTHESIS: Complete WLFI-Cantor-Tether-Trump Corporate Architecture. Five-layer extraction machine: (1) WLFI token sale raised $52.1M, 97.3% ($50.7M) paid to insiders via DT Marks DEFI LLC (Trump family) and Axiom Management Group LLC (Folkman/Herro). (2) WLFI controls ALT5 Sigma Corp (Nasdaq: ALTS) \u2014 public vehicle for USD1 stablecoin treasury operations. (3) Cantor Fitzgerald custodies $80B+ in Tether reserves + 5% Tether equity stake, managed by Brandon Lutnick after Howard became Commerce Secretary. (4) Twenty One Capital (NYSE: XXI) \u2014 Tether-majority-owned Bitcoin vehicle via Cantor SPAC, Bo Hines chairs all 3 board committees. (5) Bo Hines went from writing stablecoin rules at White House to Tether CEO/USAT and XXI board in 56 days. Trump family simultaneously collects WLFI token revenue, crypto regulatory power, and Commerce Department oversight of Tether custodian.",
+      "summary": "SYNTHESIS: Complete WLFI-Cantor-Tether-Trump Corporate Architecture. Five-layer extraction machine: (1) WLFI token sale raised $52.1M, 97.3% ($50.7M) paid to insiders via DT Marks DEFI LLC (Trump family) and Axiom Management Group LLC (Folkman/Herro). (2) WLFI controls ALT5 Sigma Corp (Nasdaq: ALTS) — public vehicle for USD1 stablecoin treasury operations. (3) Cantor Fitzgerald custodies $80B+ in Tether reserves + 5% Tether equity stake, managed by Brandon Lutnick after Howard became Commerce Secretary. (4) Twenty One Capital (NYSE: XXI) — Tether-majority-owned Bitcoin vehicle via Cantor SPAC, Bo Hines chairs all 3 board committees. (5) Bo Hines went from writing stablecoin rules at White House to Tether CEO/USAT and XXI board in 56 days. Trump family simultaneously collects WLFI token revenue, crypto regulatory power, and Commerce Department oversight of Tether custodian.",
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
@@ -804,7 +804,7 @@
     {
       "id": 4022,
       "finding_type": "financial",
-      "summary": "WLFI complete Delaware entity structure mapped: DT Marks DEFI LLC (Trump family, 75% of net protocol revenues), DT Marks SC LLC (Trump family), WC Digital Fi LLC (Witkoff family affiliate, receives half of AMG's revenue share), WC Digital SC LLC (Witkoff, not yet divested per Aug 2025 ethics disclosure), SC Financial Technologies LLC (Zach Witkoff CEO, Delaware, co-owns USD1 stablecoin brand with WLFI). SC Financial Technologies signed Pakistan MOU in Jan 2026 for USD1 cross-border payments \u2014 Zach Witkoff visited Pakistan personally. 30% founder allocation split: DT Marks DEFI LLC + Axiom Management Group (AMG) + WC Digital Fi LLC. AMG agreed to allocate half its revenue rights to WC Digital Fi (Witkoff affiliate). Steve Witkoff ethics disclosure (Aug 13 2025) shows he still holds crypto for WLFI plus WC Digital SC and SC Financial Technologies stakes despite May 2025 divestiture claim.",
+      "summary": "WLFI complete Delaware entity structure mapped: DT Marks DEFI LLC (Trump family, 75% of net protocol revenues), DT Marks SC LLC (Trump family), WC Digital Fi LLC (Witkoff family affiliate, receives half of AMG's revenue share), WC Digital SC LLC (Witkoff, not yet divested per Aug 2025 ethics disclosure), SC Financial Technologies LLC (Zach Witkoff CEO, Delaware, co-owns USD1 stablecoin brand with WLFI). SC Financial Technologies signed Pakistan MOU in Jan 2026 for USD1 cross-border payments — Zach Witkoff visited Pakistan personally. 30% founder allocation split: DT Marks DEFI LLC + Axiom Management Group (AMG) + WC Digital Fi LLC. AMG agreed to allocate half its revenue rights to WC Digital Fi (Witkoff affiliate). Steve Witkoff ethics disclosure (Aug 13 2025) shows he still holds crypto for WLFI plus WC Digital SC and SC Financial Technologies stakes despite May 2025 divestiture claim.",
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
@@ -1003,7 +1003,7 @@
     {
       "id": 4204,
       "finding_type": "financial",
-      "summary": "World Liberty Financial's profit structure: Trump family receives 75% of net proceeds from WLFI token sales plus a cut of stablecoin profits. Stablecoin issuers profit from interest earned on reserve funds \u2014 with $5.37B in reserves in a high-interest-rate environment, this represents substantial ongoing revenue. Key partnerships: (1) Apex Group ($3.5T AUM) piloting USD1 for tokenized fund settlements; (2) Canton Network deploying USD1 for institutional-grade onchain finance; (3) Mar-a-Lago crypto forum (Feb 2026) headlined by Goldman Sachs and Nasdaq CEOs. WLFI also plans a forex remittance platform and mobile app linking bank accounts to digital wallets.",
+      "summary": "World Liberty Financial's profit structure: Trump family receives 75% of net proceeds from WLFI token sales plus a cut of stablecoin profits. Stablecoin issuers profit from interest earned on reserve funds — with $5.37B in reserves in a high-interest-rate environment, this represents substantial ongoing revenue. Key partnerships: (1) Apex Group ($3.5T AUM) piloting USD1 for tokenized fund settlements; (2) Canton Network deploying USD1 for institutional-grade onchain finance; (3) Mar-a-Lago crypto forum (Feb 2026) headlined by Goldman Sachs and Nasdaq CEOs. WLFI also plans a forex remittance platform and mobile app linking bank accounts to digital wallets.",
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
@@ -1197,7 +1197,7 @@
     {
       "id": 4284,
       "finding_type": "financial",
-      "summary": "NEW DEVELOPMENT (Feb 18, 2026): WLFI announced tokenization of Trump International Hotel and Resort Maldives, partnering with DarGlobal PLC (LSE: DAR, Saudi real estate developer) and Securitize Inc. Tokens represent loan revenue interests in luxury resort (100 villas, completion 2030). DT Marks DEFI LLC has approximately 38 percent beneficial ownership through indirect economic interest. Offered via Reg D 506(c) for US accredited investors and Reg S for offshore. This is the first instance of WLFI tokenizing a REAL ASSET rather than just a token/stablecoin \u2014 it creates a direct pipeline from Trump Organization real estate revenue into the DeFi/token ecosystem. DarGlobal is listed on London Stock Exchange and is a Saudi-linked developer.",
+      "summary": "NEW DEVELOPMENT (Feb 18, 2026): WLFI announced tokenization of Trump International Hotel and Resort Maldives, partnering with DarGlobal PLC (LSE: DAR, Saudi real estate developer) and Securitize Inc. Tokens represent loan revenue interests in luxury resort (100 villas, completion 2030). DT Marks DEFI LLC has approximately 38 percent beneficial ownership through indirect economic interest. Offered via Reg D 506(c) for US accredited investors and Reg S for offshore. This is the first instance of WLFI tokenizing a REAL ASSET rather than just a token/stablecoin — it creates a direct pipeline from Trump Organization real estate revenue into the DeFi/token ecosystem. DarGlobal is listed on London Stock Exchange and is a Saudi-linked developer.",
       "detail": null,
       "source_datasets": null,
       "confidence": "confirmed",
@@ -1606,7 +1606,7 @@
       "person_a": "Steve Witkoff",
       "person_b": "World Liberty Financial",
       "relationship_type": "political",
-      "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy.",
+      "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East — dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy.",
       "strength": "strong",
       "date_range": null,
       "verification_status": "unverified",
@@ -2164,9 +2164,845 @@
       "date": "2025-01-16",
       "type": "finding",
       "finding_type": "financial",
-      "summary": "ARYAM INVESTMENT 1 \u2014 UAE ROYAL ACQUIRES 49% OF WLFI FOR 500M: Sheikh Tahnoon bin Zayed (UAE National Security Advisor) via Aryam Investment 1 (Abu Dhabi entity, managed by G42 executives) signed deal to acquire 49% of WLFI for 500M. Eric Trump signed contract Jan 16, 2025 \u2014 4 DAYS before inauguration. Half paid upfront: 187M to Trump family entities, tens of millions to Witkoff-affiliated entities. G42 executives took WLFI board seats. Deal was NOT publicly disclosed. Months later, Trump admin agreed to supply UAE with advanced AI chips (previously restricted by Biden admin over China concerns). House probe launched Feb 2026.",
+      "summary": "ARYAM INVESTMENT 1 — UAE ROYAL ACQUIRES 49% OF WLFI FOR 500M: Sheikh Tahnoon bin Zayed (UAE National Security Advisor) via Aryam Investment 1 (Abu Dhabi entity, managed by G42 executives) signed deal to acquire 49% of WLFI for 500M. Eric Trump signed contract Jan 16, 2025 — 4 DAYS before inauguration. Half paid upfront: 187M to Trump family entities, tens of millions to Witkoff-affiliated entities. G42 executives took WLFI board seats. Deal was NOT publicly disclosed. Months later, Trump admin agreed to supply UAE with advanced AI chips (previously restricted by Biden admin over China concerns). House probe launched Feb 2026.",
       "confidence": "high",
       "id": 3753
     }
-  ]
+  ],
+  "curation": {
+    "key_finding_ids": [
+      3941,
+      3753,
+      4184,
+      4183,
+      4186,
+      4175,
+      4177,
+      4178,
+      4208,
+      3669,
+      4136,
+      3696
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          2162,
+          2163,
+          2164,
+          2166,
+          2167,
+          2180,
+          2196,
+          2197,
+          2207,
+          2308,
+          2332,
+          2343,
+          2368,
+          2402,
+          2411
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          3753,
+          3663,
+          3664,
+          3666,
+          3670,
+          3675,
+          3677,
+          3679,
+          3680,
+          3695
+        ],
+        "connection_ids": [
+          2164,
+          2167,
+          2196,
+          2197,
+          2207,
+          2343,
+          2402,
+          2411
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          3672,
+          3692,
+          3965,
+          3967,
+          3970,
+          4184
+        ],
+        "connection_ids": [
+          2531
+        ],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          3669,
+          3759,
+          3974,
+          4208,
+          4229,
+          4174,
+          4175
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-03-11T21:07:08.223930",
+    "lead": "<p>World Liberty Financial Inc. is a Delaware-incorporated cryptocurrency and decentralized finance venture founded in 2024 by <a href=\"/dossiers/zach-folkman\">Zachary Folkman</a> and <a href=\"/dossiers/chase-herro\">Chase Herro</a>, with Donald Trump, Donald Trump Jr., Eric Trump, <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>, and <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> named as promoters on its SEC Form D filing. [Finding #3663] The Trump family entity <a href=\"/dossiers/dt-marks-defi-llc\">DT Marks DEFI LLC</a> controls approximately 60% of the company through WLF Holdco LLC and receives 75% of net protocol revenues. [Finding #3697] The project launched a governance token (WLFI) in October 2024 and a stablecoin (USD1) in March 2025, and has generated at least $1.4 billion in revenue for the Trump and Witkoff families since launch. [Finding #3990]</p><p>In January 2025, four days before the presidential inauguration, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, an Abu Dhabi entity controlled by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a> and managed by <a href=\"/dossiers/g42\">G42</a> executives, acquired a 49% stake in WLFI for $500 million. [Finding #3753] The USD1 stablecoin was subsequently used to settle <a href=\"/dossiers/mgx\">MGX</a>'s $2 billion investment in Binance, whose founder Changpeng Zhao received a presidential pardon in October 2025. [Finding #3680] As of March 2026, at least four concurrent congressional investigations are examining the venture's relationship to UAE state-backed entities, conflicts of interest arising from the president's simultaneous regulatory authority and financial stake in the cryptocurrency sector, and national security implications of the foreign ownership structure. [Finding #4184]</p><p>WLFI operates through a layered corporate structure encompassing WLF Holdco LLC, World Liberty Financial Inc., <a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a> (Nasdaq: ALTS) as a public treasury vehicle, and SC Financial Technologies LLC as the USD1 stablecoin co-owner. [Finding #3707] Trump signed the GENIUS Act (stablecoin regulatory framework) into law in July 2025 while his family continued to receive revenue from WLFI's stablecoin operations. [Finding #3692]</p>",
+    "system_role": "World Liberty Financial represents a structure in which a sitting president's immediate family operates a financial services venture that directly benefits from executive orders, legislation, regulatory forbearance, and diplomatic relationships under presidential control, while foreign state-backed capital acquires partial ownership through entities that simultaneously hold positions on the venture's board.",
+    "sections": [
+      {
+        "id": "corporate-structure-and-ownership",
+        "title": "Corporate Structure and Ownership",
+        "content": "<p>World Liberty Financial Inc. was incorporated in Delaware in 2024 and filed its initial SEC Form D on October 30, 2024, under Rule 506(c) for accredited investors. [Finding #3663] The filing listed <a href=\"/dossiers/zach-folkman\">Zachary Folkman</a> and <a href=\"/dossiers/chase-herro\">Chase Herro</a> as executive officers and directors, with Donald Trump, Donald Trump Jr., Eric Trump, <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>, and <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> as promoters. [Finding #3696] Three shell entities serve as promoter vehicles: DT Marks DEFI LLC at the Trump family address in Jupiter, Florida; WC DigitalFi LLC at the Witkoff Group office in Miami; and Axiom Management Group LLC at Folkman's address in Dorado, Puerto Rico. [Finding #3665]</p><p>In early 2025, the company restructured through WLF Holdco LLC, which became the sole member of World Liberty Financial Inc. <a href=\"/dossiers/dt-marks-defi-llc\">DT Marks DEFI LLC</a> holds approximately 60% of WLF Holdco and receives 75% of net protocol revenues. [Finding #3697] Axiom Management Group LLC receives the remaining 25%, of which half is allocated to WC Digital Fi LLC (Witkoff family affiliate), producing a net revenue split of approximately 75% Trump, 12.5% Folkman/Herro, and 12.5% Witkoff. [Finding #4183] The Board of Managers consists of <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a>, Zachary Folkman, and Chase Herro. [Finding #3707]</p><p>Analysis of the entity chain identifies a layered structure: WLF Holdco LLC controls World Liberty Financial Inc., which in turn controls <a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a> (Nasdaq: ALTS) through 1 million common shares plus warrants for up to 119 million additional shares, including 99 million pre-funded warrants exercisable at $0.001 per share. [Finding #3957] SC Financial Technologies LLC, a Delaware entity with Zachary Witkoff as CEO, co-owns the USD1 stablecoin brand with WLFI and signed a memorandum of understanding with Pakistan for USD1 cross-border payments in January 2026. [Finding #4022]</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "token-economics-and-insider-allocation",
+        "title": "Token Economics and Insider Allocation",
+        "content": "<p>On-chain records show 100 billion WLFI tokens were minted on September 29, 2024, and transferred to a Gnosis Safe multisig wallet (0x5be9a495). [Finding #3677] Five days before the public token sale on October 15, 50.5 billion tokens (50.5% of total supply) were distributed to seven insider wallets. [Finding #3677] The original SEC Form D listed a total offering of $288.5 million, with $2.7 million sold to 348 investors and stated that proceeds would be used for \"initial transaction expenses and company working capital, and NOT as compensation to any person identified in item 3.\" [Finding #3956]</p><p>The amended Form D/A, filed July 3, 2025, disclosed a total offering of $52.1 million fully sold to 1,966 investors, with $50.7 million (97.3%) directed to named executive officers, directors, and promoters. [Finding #3938] The offering size decreased 82% from the original filing while insider payments moved from zero to 97.3% of gross proceeds. [Finding #3956] Across two token sales, WLFI raised approximately $550 million total: Sale 1 (October 2024) sold 20 billion tokens at $0.015 each, and Sale 2 (January-March 2025) sold 5 billion tokens at $0.05 each. [Finding #4166] The token sale was structured with approximately 90% of the offering targeting non-U.S. investors via Regulation S, which carries no requirement to report capital-raising information, verify buyer accreditation, or disclose buyer identities. [Finding #4280]</p><p>Smart contract analysis of the WLFI token reveals a TransparentUpgradeableProxy architecture with centralized control capabilities including blacklisting (56 code references), pausing (89 references), minting and burning, and lock functions. [Finding #3679] The proxy pattern enables the contract logic to be upgraded without holder consent. WLFI exercised this blacklisting capability in September 2025 when it froze 595 million tokens belonging to Justin Sun, valued at approximately $107 million, and blacklisted 272 wallets in total. [Finding #3973] A governance staking proposal in February 2026 requires a 180-day lock-up with non-linear square root voting, while the Trump family controls approximately 22.5 billion tokens through WLF Holdco. [Finding #4174]</p>",
+        "viz": null
+      },
+      {
+        "id": "uae-investment-and-gulf-state-nexus",
+        "title": "UAE Investment and Gulf State Nexus",
+        "content": "<p>On January 16, 2025, four days before the presidential inauguration, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, an Abu Dhabi entity managed by <a href=\"/dossiers/g42\">G42</a> executives, signed a contract to acquire 49% of WLFI for $500 million. [Finding #3753] Eric Trump signed the agreement on behalf of WLFI. Of the $250 million paid upfront, $187 million was directed to Trump family entities and tens of millions to Witkoff-affiliated entities. [Finding #3753] The deal was not publicly disclosed until reporting by the Wall Street Journal. [Finding #3753] <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, the UAE National Security Advisor and brother of the UAE president, controls Aryam Investment 1, G42, and <a href=\"/dossiers/mgx\">MGX</a>. [Finding #3969]</p><p>The Aryam deal entitled G42 to two of five WLFI board seats. <a href=\"/dossiers/martin-edelman\">Martin Edelman</a> (G42 General Counsel) and Peng Xiao (G42 CEO, who renounced his U.S. citizenship for UAE citizenship) joined the board, though neither is listed on WLFI's public team page. [Finding #4263] In a separate transaction, MGX used the USD1 stablecoin to settle its $2 billion investment in Binance in May 2025, with the deal announced by Zachary Witkoff at a Dubai cryptocurrency conference. [Finding #3680] Both the Aryam equity purchase and the MGX-Binance-USD1 settlement trace back to entities controlled by Sheikh Tahnoon. [Finding #3680]</p><p><a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a> occupies a dual position as both a named WLFI Promoter on the SEC Form D and as Trump's Special Envoy to the Middle East. [Finding #4022] His August 2025 ethics disclosure shows he continued to hold cryptocurrency for WLFI plus stakes in WC Digital SC LLC and SC Financial Technologies LLC. [Finding #4022] Analysis of the temporal sequence identifies that the Trump administration rescinded Biden-era AI chip export restrictions to the Gulf states on May 12, 2025, and approved the sale of 500,000 advanced Nvidia chips annually to the UAE in November 2025, with G42 receiving 100,000 chips per year. [Finding #3759] The Biden administration had specifically restricted these exports due to concerns about G42's former ties to Chinese military technology. [Finding #3759]</p>",
+        "viz": null
+      },
+      {
+        "id": "usd1-stablecoin-and-regulatory-framework",
+        "title": "USD1 Stablecoin and Regulatory Framework",
+        "content": "<p>USD1 was first minted on Ethereum on March 4, 2025, two days after Trump announced plans for a cryptocurrency strategic reserve. [Finding #5444] The stablecoin's reserves exceeded $5.37 billion, generating substantial ongoing revenue from interest on reserve funds. [Finding #4204] BitGo Trust provides regulated custody services. [Finding #3973] In January 2026, WLFI applied for an OCC national trust bank charter through WLTC Holdings LLC to issue and custody USD1 under federal regulation. [Finding #3973]</p><p>Trump signed the GENIUS Act (Guiding and Establishing National Innovation for US Stablecoins) on July 18, 2025, creating a federal regulatory framework for stablecoins. [Finding #3692] The legislation includes a prohibition on Congress members and senior executive branch officials issuing stablecoins during service, but Senator Elizabeth Warren has stated it inadequately addresses the sitting president's financial interests. [Finding #3692] The Trump family had earned approximately $500 million from WLFI at the time of signing. [Finding #3692]</p><p>WLFI's institutional partnerships include Apex Group ($3.5 trillion AUM) piloting USD1 for tokenized fund settlements, and Canton Network deploying USD1 for institutional on-chain finance. [Finding #4204] Binance expanded USD1 for trading collateral in December 2025. [Finding #4186] In February 2026, WLFI announced the tokenization of Trump International Hotel and Resort Maldives in partnership with DarGlobal PLC (LSE: DAR), a Saudi-linked real estate developer, and Securitize Inc., representing the first instance of WLFI tokenizing a real asset rather than a digital-native product. [Finding #4284]</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "alt5-sigma-and-public-market-architecture",
+        "title": "ALT5 Sigma and Public Market Architecture",
+        "content": "<p><a href=\"/dossiers/alt5-sigma-corp\">ALT5 Sigma Corp</a> (Nasdaq: ALTS), a Nevada corporation, has been repositioned as a digital asset treasury company centered on WLFI holdings. [Finding #3670] WLFI acquired control of ALT5 in late 2025, with a Form 3 filed November 13, 2025, disclosing 1 million common shares plus warrants for 20 million additional shares and 99 million pre-funded warrants at $0.001 per share. [Finding #3666] <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> became ALT5 Chairman and Zachary Folkman was appointed to the board as a WLFI representative. [Finding #3666]</p><p>In August 2025, ALT5 received 7.3 billion WLFI tokens valued at approximately $1.5 billion through a registered direct offering. [Finding #2520] ALT5's primary asset consists of WLFI tokens, and the company's February 2026 8-K filing referenced growth in USD1 stablecoin value and WLFI token holdings as accelerating its digital asset treasury operations. [Finding #3670] The structure produces a circular valuation mechanism in which WLFI issues tokens to ALT5, ALT5 holds them as treasury assets, and both entities' stated valuations reflect the same underlying token supply. [Finding #2520]</p>",
+        "viz": null
+      },
+      {
+        "id": "congressional-investigations-and-compliance",
+        "title": "Congressional Investigations and Compliance",
+        "content": "<p>As of February 2026, at least four concurrent congressional investigations are examining WLFI. The Senate Permanent Subcommittee on Investigations opened a preliminary inquiry into conflicts of interest under Senator Richard Blumenthal in May 2025. [Finding #4184] Representative Ro Khanna, on behalf of the House Select Committee on the Chinese Communist Party, launched a formal investigation in February 2026 into the Aryam $500 million UAE deal, demanding 16 categories of documents from WLFI by March 1, 2026. [Finding #4229] Senators Elizabeth Warren and Andy Kim demanded a CFIUS review of the Aryam 49% stake by March 5, 2026. [Finding #4229] Representative Gregory Meeks and 40 House Democrats wrote to Treasury Secretary Scott Bessent requesting an investigation of conflicts of interest and national security implications. [Finding #4208]</p><p>In November 2025, Senators Warren and Reed sent a letter to Attorney General <a href=\"/dossiers/pam-bondi\">Pam Bondi</a> and Treasury Secretary Bessent demanding that DOJ and Treasury outline potential enforcement actions against WLFI by December 1, 2025, citing national security risks from token sales to entities with ties to North Korea, Iran, Russia, and Tornado Cash. [Finding #3967] An Accountable.US report in September 2025 identified that WLFI sold 600,000 tokens to a wallet (Shryder.eth) that had conducted 55+ transactions with a wallet linked to the OFAC-sanctioned Lazarus Group, and approximately 3,500 tokens to a wallet tied to Nobitex, Iran's largest exchange. [Finding #3964] Blockchain researcher Nick Bax contested the Lazarus Group link as a false positive caused by a \"Dream Cash\" memecoin dusting attack, and WLFI froze Shryder.eth's tokens based on this identification. [Finding #3965]</p><p>No WLFI principal has registered under FARA despite the scale of foreign investment. [Finding #3672] Senator Warren pressed the OCC to halt the WLTC charter review until Trump divested from WLFI, but the OCC rejected the request. [Finding #4229] WLFI dismissed all congressional inquiries as politically motivated. [Finding #3970] The SEC reduced cryptocurrency enforcement cases by approximately 60% during the period when the Trump family earned over $1 billion from WLFI token sales. [Finding #2180]</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "defi-operations-and-treasury-performance",
+        "title": "DeFi Operations and Treasury Performance",
+        "content": "<p>WLFI's DeFi treasury operations include positions in ETH, WBTC, stETH, TRX, LINK, and AAVE, with over $52 million supplied to Aave including 7,900 ETH ($21 million), 162.69 WBTC, and 5,010 stETH ($13.31 million). [Finding #4176] The portfolio recorded losses exceeding $21.78 million, driven primarily by a purchase of 56,317 ETH at $3,373 per ETH that resulted in approximately $14 million in losses. [Finding #4176] WLFI provided Aave DAO with 7% of WLFI tokens and 20% of platform fees as part of the Aave V3 integration. [Finding #4176]</p><p>In January 2026, WLFI launched WLFI Markets on the Dolomite protocol, and in February 2026 announced World Swap, a forex remittance platform. [Finding #4176] Hut 8, a publicly traded bitcoin mining company, purchased 100 million locked WLFI tokens at $0.25 per token, a 25% premium to market price at the time of purchase. [Finding #4176] Analysis indicates that while DeFi trading operations have generated losses, the stablecoin operations produce steady yield from interest on USD1 reserves. [Finding #4176]</p>",
+        "viz": null
+      },
+      {
+        "id": "temporal-sequence",
+        "title": "Temporal Sequence",
+        "content": "<p>Certificate transparency logs show that the worldlibertyfi.com SSL certificate was issued on July 6, 2024, ten weeks before the public announcement on September 16, 2024. [Finding #3669] On July 30, 2024, co-founder Chase Herro donated $747,000 to Trump-aligned PACs, seven weeks before the WLFI announcement. [Finding #5444] Herro and Folkman's prior venture, Dough Finance, was hacked for $2.1 million on July 12, 2024, during the same period of WLFI preparation. [Finding #5444]</p><p>The token sale launched October 15, 2024, with the Form D filed October 30. [Finding #3663] The Aryam 49% deal was signed January 16, 2025, four days before inauguration. [Finding #3753] The TRUMP meme coin launched January 17, 2025. [Finding #5444] USD1 was first minted March 4, 2025, two days after Trump announced a crypto strategic reserve. [Finding #5444] The Trump administration rescinded Biden AI chip export restrictions May 12, 2025. [Finding #3759] The amended Form D/A revealing 97.3% insider payment was filed July 3, 2025. [Finding #3956] Trump signed the GENIUS Act July 18, 2025. [Finding #3692] The full sequence from SSL certificate to stablecoin legislation covered twelve months. [Finding #5444]</p>",
+        "viz": "timeline"
+      }
+    ],
+    "open_questions": [
+      "What are the identities of the non-U.S. investors who acquired approximately 90% of WLFI tokens through the Regulation S offering, and do any have connections to foreign governments or sanctioned entities?",
+      "What specific terms govern the Aryam Investment 1 board representation rights, and do those rights extend to veto power over WLFI operational decisions including token issuance, USD1 reserve management, or partnership agreements?",
+      "Has Steve Witkoff completed divestment from WC Digital SC LLC and SC Financial Technologies LLC, given that his August 2025 ethics disclosure indicated continued holdings past the stated May 2025 divestiture date?",
+      "What was the basis for WLFI's decision to freeze Justin Sun's 595 million tokens in September 2025, and was it coordinated with or influenced by the SEC's pausing of Sun's fraud case in February 2025?",
+      "Did any communications occur between WLFI principals and UAE or G42 officials regarding AI chip export policy between the January 16, 2025 Aryam signing and the May 12, 2025 rescission of Biden-era export restrictions?"
+    ],
+    "applicable_models": [
+      "parallel-financial-system",
+      "jurisdictional-arbitrage",
+      "bridge-tax",
+      "complexity-as-credential",
+      "manufactured-dependency"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "World Liberty Financial",
+      "connections": [
+        {
+          "target": "Eric Trump",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Named Promoter on SEC Form D, public operational face of WLFI"
+        },
+        {
+          "target": "Donald Trump",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Named Promoter on SEC Form D. Revenue flows through DT Marks DEFI LLC at Trump Jupiter FL address"
+        },
+        {
+          "target": "Steve Witkoff",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
+        },
+        {
+          "target": "Steve Witkoff",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East — dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
+        },
+        {
+          "target": "MGX",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "Bloomberg May 2025; Fortune Crypto May 2025",
+          "description": "USD1 stablecoin used to settle MGX's $2B investment in Binance. Creates financial dependency between Trump family crypto venture and Abu Dhabi sovereign fund."
+        },
+        {
+          "target": "Trump Administration",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": "Finding #3708",
+          "description": "SEC dropped ~21 crypto enforcement cases (60% reduction) while Trump family earned >1B from WLFI token sales, creating direct conflict between regulatory power and financial interest"
+        },
+        {
+          "target": "Justin Sun",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "CoinDesk Feb 2025; Casten press release Sep 2025",
+          "description": "Sun invested 75M in WLFI tokens and took advisory role. Became top TRUMP meme coin holder. SEC fraud case paused Feb 2025 after Trump inauguration. WLFI blacklisted Sun's address Sept 2025 freezing 107M in tokens. Creates pattern: invest in Trump crypto -> SEC case dropped -> then frozen out."
+        },
+        {
+          "target": "Aryam Investment 1",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "Fortune spy sheikh article Feb 2026",
+          "description": "Aryam Investment 1 (Tahnoon bin Zayed/G42) acquired 49% of WLFI for 500M. Signed Jan 16 2025 by Eric Trump, 4 days pre-inauguration. 187M to Trump family entities. G42 executives took board seats. Deal not publicly disclosed."
+        },
+        {
+          "target": "Tahnoon bin Zayed Al Nahyan",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Tahnoon backed Aryam Investment 1 which purchased 49% of WLFI for $500M, Jan 2025"
+        },
+        {
+          "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "UAE entity Aryam Investment 1 acquired 49% WLFI stake for M; controlled by Tahnoon who is UAE national security adviser"
+        },
+        {
+          "target": "G42",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "G42 executives (Edelman, Peng Xiao) signed WLFI deal and took board seats. G42 personnel manage Aryam Investment 1."
+        },
+        {
+          "target": "MGX Fund Management Limited",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "MGX used WLF USD1 stablecoin for 2B Binance investment. Separately, Aryam Investment 1 (Tahnoon entity) bought 49% of WLF for 500M. MGX board members Martin Edelman and Peng Xiao signed Aryam-WLF deal and joined WLF board undisclosed."
+        },
+        {
+          "target": "SC Financial Technologies",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "fortune.com",
+          "description": "Co-owns USD1 stablecoin brand; Delaware affiliate"
+        },
+        {
+          "target": "G42",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "WSJ Feb 2026",
+          "description": "G42-linked Aryam Investment 1 bought 49% of WLFI for USD500M (Jan 2025). Martin Edelman and Peng Xiao signed. 2 G42 execs on WLFI board."
+        },
+        {
+          "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "WSJ Feb 2026",
+          "description": "Tahnoon-backed Aryam Investment 1 acquired 49% of WLFI for USD500M. Tahnoon controls all entities involved (G42, Aryam, MGX)."
+        },
+        {
+          "target": "Martin Edelman",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "WSJ reporting Jan 2026; WLFI website",
+          "description": "Edelman sits on WLFI 5-person board as Aryam/G42 appointee. Not listed on WLFI website team page despite board seat."
+        },
+        {
+          "target": "Peng Xiao",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "WSJ reporting Jan 2026",
+          "description": "Peng Xiao (G42 CEO) sits on WLFI 5-person board as Aryam/G42 appointee. Renounced US citizenship for UAE. Not listed on WLFI website."
+        },
+        {
+          "target": "Sheikh Tahnoon bin Zayed",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "CREW investigation; Congressional reports",
+          "description": "Abu Dhabi investment vehicle backed by Sheikh Tahnoon purchased 49% of WLFI for 500M in Jan 2025, sending ~187M to Trump family entities. Tahnoon is UAEs national security advisor and brother of UAE president."
+        },
+        {
+          "target": "ALT5 Sigma Corp",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "BusinessWire Aug 11 2025",
+          "description": "ALT5 received 7.3B WLFI tokens (valued at 1.5B) via registered direct offering Aug 2025. Zach Witkoff (WLFI co-founder) became ALT5 Chairman. Eric Trump became board observer. ALT5 primary asset is WLFI tokens. Creates circular value mechanism: WLFI issues tokens to ALT5, ALT5 holds them as treasury, inflating both valuations."
+        },
+        {
+          "target": "Howard Lutnick",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "https://www.salon.com/2025/02/06/howard-lutnick-commerce-pick-is-on-crypto-task-force-despite-conflicts/",
+          "description": "Lutnick was WLFI's earliest public supporter. As Commerce Secretary, received limited ethics waiver but has not recused from crypto task force developing stablecoin policy that directly affects USD1. His family's firm Cantor Fitzgerald manages Tether reserves and holds 5% Tether stake."
+        },
+        {
+          "target": "GENIUS Act",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-signs-genius-act-into-law/",
+          "description": "Trump signed the GENIUS Act into law July 2025, which created the regulatory framework under which USD1 operates. WLFI profits from reserve interest income legitimized by this legislation. Multiple congressional investigations have cited the conflict of a sitting president benefiting financially from legislation he signed."
+        },
+        {
+          "target": "DT Marks DEFI LLC",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "WLFI gold paper",
+          "description": "Trump entity owns 60% of WLFI, entitled to 75% of token sale revenue. Received 187M from Aryam 250M upfront"
+        },
+        {
+          "target": "Steve Witkoff",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "Schiff press release 2026",
+          "description": "Co-founder emeritus of WLFI. Witkoff-family entities received ~31M from Aryam 250M payment. Son Zach nominated as WLTC bank president. Witkoff serves as Trump special envoy to Middle East while family profits from WLFI"
+        },
+        {
+          "target": "TikTok USDS Joint Venture LLC",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "Accountable US, ABC News, web research",
+          "description": "MGX (Tahnoon entity) invested 500M in WLFI for 49% stake AND holds 15% of TikTok USDS JV. Same sovereign capital pool behind both Trump family crypto venture and TikTok restructuring. Both deals shaped by Trump executive orders."
+        },
+        {
+          "target": "Apex Group",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "https://www.businesswire.com/news/home/20260218225330/en/",
+          "description": "Apex Group ($3.5T AUM) piloting USD1 as payment rail for subscriptions, redemptions and distributions across tokenized fund ecosystem. Partnership announced at Mar-a-Lago World Liberty Forum, Feb 18, 2026."
+        },
+        {
+          "target": "Lazarus Group",
+          "type": "financial",
+          "strength": 0.2,
+          "evidence_ref": null,
+          "description": "Accountable.US alleged WLFI sold tokens to Shryder.eth who transacted with Lazarus-linked wallets; Nick Bax contested as false positive from Dream Cash dusting attack"
+        },
+        {
+          "target": "Donald Trump",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SEC Form D filing 0002043140-24-000002",
+          "description": "Promoter on SEC Form D. Trump family controls 60% via DT Marks DEFI LLC -> WLF Holdco LLC. Receives 75% of net token sale revenue (~$400M of $550M) plus 60% of protocol operations revenue. Title: Chief Crypto Advocate."
+        },
+        {
+          "target": "ALT5 Sigma Corporation",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "BusinessWire Aug 2025",
+          "description": "NASDAQ-listed shell became WLFI public treasury vehicle via $1.5B offering (Aug 2025). Creates circular value: WLFI tokens used to buy ALT5 shares, ALT5 uses cash to buy WLFI tokens. Zach Witkoff became ALT5 Chairman, Eric Trump became director. ALT5 to acquire 7.5% of WLFI total token supply. Provides public market liquidity mechanism for otherwise restricted tokens."
+        }
+      ],
+      "secondHop": {
+        "ALT5 Sigma Corp": [
+          {
+            "target": "Zach Witkoff",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Appointed to ALT5 board as WLFI representative; signed Form 3 as CEO of WLFI"
+          },
+          {
+            "target": "Jon Isaac",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Former CEO of JanOne Inc (now ALT5 Sigma). Under SEC fraud charges since 2021 for inflating earnings and secret stock sales at JanOne/Live Ventures. Left before 2024 rebrand but retains over 1M ALT5 shares. His brother Tony Isaac appointed Acting CEO of ALT5 in Nov 2025."
+          },
+          {
+            "target": "Eric Trump",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Designated board observer (downgraded from director to comply with Nasdaq rules) at ALT5 Sigma per Aug 25, 2025 SEC filing. Also WLFI co-founder. Subsequently quietly removed from board role."
+          }
+        ],
+        "Aryam Investment 1": [
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Aryam Investment 1 is an investment vehicle controlled by Sheikh Tahnoon, managed by his G42 executives"
+          },
+          {
+            "target": "G42",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Aryam managed by G42 executives Martin Edelman (general counsel) and Peng Xiao (CEO). G42 is chaired by Tahnoon."
+          },
+          {
+            "target": "Martin Edelman",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Signed the Aryam-WLFI agreement. G42 general counsel managing the Delaware entity of Aryam."
+          },
+          {
+            "target": "Peng Xiao",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-signed the Aryam-WLFI agreement. CEO of G42, manages the Aryam Delaware entity."
+          },
+          {
+            "target": "DT Marks DEFI LLC",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "187M from Aryam initial payment went to Trump family entities DT Marks DEFI LLC and DT Marks SC LLC"
+          }
+        ],
+        "Donald Trump": [
+          {
+            "target": "Tom Barrack",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
+          },
+          {
+            "target": "Jay Clayton",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
+          },
+          {
+            "target": "William Barr",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
+          },
+          {
+            "target": "Keith Davidson",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
+          },
+          {
+            "target": "Robert Kraft",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
+          }
+        ],
+        "Eric Trump": [
+          {
+            "target": "Tahnoon bin Zayed Al Nahyan",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Eric Trump signed the Aryam Investment 1 agreement giving Tahnoon's entity 49% of WLFI for $500M"
+          },
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Eric Trump signed the Aryam Investment 1 deal giving Tahnoon 49% of WLFI for M, 4 days before inauguration. Later announced MGX-Binance USD1 settlement at Token2049 Dubai."
+          },
+          {
+            "target": "WLF Holdco LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Eric Trump serves as manager on board of managers of WLF Holdco LLC. Signed the M Aryam Investment 1 deal on behalf of WLF. Address: c/o The Trump Organization, Jupiter FL 33477"
+          },
+          {
+            "target": "Chase Herro",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Eric Trump is Web3 Ambassador for WLFI. Eric finalized $500M Abu Dhabi deal before 2025 inauguration. Herro is co-founder/Executive Officer of same entity."
+          }
+        ],
+        "G42": [
+          {
+            "target": "Martin Edelman",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "General counsel of G42. Board positions across multiple Tahnoon entities: MGX, MBZUAI, GlobalFoundries, Manchester City FC."
+          },
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Chairman and controlling shareholder of G42 since its founding in 2018"
+          },
+          {
+            "target": "Nvidia",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "G42 receives 100K advanced Nvidia chips/year under BIS-approved RTE framework; initial tranche 35K Blackwell GB300 chips"
+          },
+          {
+            "target": "Microsoft",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Microsoft $1.5B investment in G42 Apr 2024; $15.2B UAE data center investment Nov 2025"
+          },
+          {
+            "target": "Peng Xiao",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Group CEO since Oct 2020, at G42 since 2018 founding. Former CEO of DarkMatter subsidiary Pegasus. Signed Aryam-WLFI deal."
+          }
+        ],
+        "Howard Lutnick": [
+          {
+            "target": "Paolo Ardoino",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Lutnick (Commerce Sec, former Cantor CEO) has multi-layered financial relationship with Ardoino (Tether CEO): Cantor custodies Tether's 127B+ in T-bills, holds 5% equity stake via convertible debt, co-launched Twenty One Capital SPAC, and serves as designated custodian for USAT stablecoin"
+          },
+          {
+            "target": "Tether Investments",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Howard Lutnick's Cantor Fitzgerald manages Tether's 80B+ Treasury reserves and holds a 5% stake in Tether. Lutnick publicly vouched for Tether before becoming Commerce Secretary. His son Brandon chaired the SPAC that merged with Tether's Twenty One Assets."
+          },
+          {
+            "target": "Twenty One Capital",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Former CEO of Cantor Fitzgerald which set up the CEP SPAC, custodies Tether reserves, and holds 5% equity in Tether. Confirmed as Commerce Secretary Feb 24, 2025. Divested Cantor stakes to children including Brandon. Commerce Dept influences crypto regulation affecting Tether, XXI, and the SPAC vehicle his firm created."
+          },
+          {
+            "target": "Roberto Velez",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "BGC whistleblower with board-level Lutnick contact per FBI FD-302"
+          },
+          {
+            "target": "Sarah Ferguson",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Cantor gave Ferguson office space above CF HQ for Children in Crisis charity"
+          }
+        ],
+        "Justin Sun": [
+          {
+            "target": "TRUMP Meme Coin",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Justin Sun is largest known TRUMP token holder. Spent 40M+ by May 2025, announced additional 100M purchase Jul 2025. Also invested 75M in WLFI. Attended May 22, 2025 dinner with Trump. SEC investigation into Sun paused under Trump administration."
+          },
+          {
+            "target": "World Liberty Financial Inc.",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Invested $75M in WLFI tokens, became largest individual investor and advisor. Wallet frozen by WLFI team (595M tokens, ~$107M) after attempting to move tokens to exchanges post-TGE. SEC reportedly backed off investigation into Sun's companies after Trump took office. Sun's involvement creates nexus between Tron ecosystem and Trump family crypto."
+          },
+          {
+            "target": "CIC Digital LLC",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Justin Sun became top TRUMP meme coin holder, attended May 22 2025 gala dinner with Trump. Sun's SEC fraud charges were simultaneously paused by SEC citing public interest. Sun invested heavily in WLFI tokens. Creates dual channel: Sun buys access via meme coin while SEC drops his case."
+          },
+          {
+            "target": "Steve Witkoff",
+            "type": "financial",
+            "strength": 0.7,
+            "description": "Sun invested 75M in WLFI, becoming largest single investor. 56M flowed directly to Trump entities via revenue split. Sun faces SEC lawsuit. WLFI later froze Sun tokens after attempted transfer."
+          }
+        ],
+        "MGX": [
+          {
+            "target": "Tahnoon bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoon chairs MGX; MGX is his AI-focused investment vehicle in Abu Dhabi"
+          },
+          {
+            "target": "OpenAI",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "MGX participated in OpenAI $6.6B round (Oct 2025); targeted for $50B Middle East expansion; Altman called Tahnoon 'dear personal friend'"
+          },
+          {
+            "target": "Mubadala Investment Co PJSC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "MGX is an Abu Dhabi tech investment vehicle backed by Mubadala sovereign wealth fund. MGX Fund Management (US) LLC is the US-registered entity."
+          },
+          {
+            "target": "Tahnoun bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoun connected to MGX through Mubadala/IHC investment vehicle structure. UAE National Security Advisor overseeing tech investment arm."
+          },
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Chairman of MGX board. MGX co-founded by G42 and Mubadala in 2024, manages up to 100B in AI assets"
+          }
+        ],
+        "MGX Fund Management Limited": [
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Tahnoon is Chairman of MGX board. Also chairs ADIA, ADQ, IHC, FAB, G42. UAE National Security Advisor and Deputy Ruler of Abu Dhabi. Controls MGX through both Mubadala chain and G42 chain per Schedule B."
+          },
+          {
+            "target": "Mubadala Investment Company PJSC",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Mubadala (330B SWF) is indirect owner of MGX via chain: Government of Abu Dhabi -> Mubadala -> Mamoura Diversified Global Holding -> MIC Industrial Investment 2 RSC LTD -> MGX Group Holding 1 LTD -> MGX Fund Management Limited. Mubadala holds 75%+ at each level."
+          },
+          {
+            "target": "Martin Edelman",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "MGX board member. Also General Counsel of G42, Of Counsel at Paul Hastings LLP. Signed the Aryam Investment 1 agreement to purchase 49% of World Liberty Financial. Joined WLF board without public disclosure. Key Tahnoon adviser since 2002."
+          },
+          {
+            "target": "Peng Xiao",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "MGX board member, Chairman of Board Executive Committee and Nomination & Remuneration Committee. CEO of G42 (co-founder of MGX). Previously CTO of MicroStrategy. Signed Aryam-WLF deal and joined WLF board."
+          },
+          {
+            "target": "OpenAI / Stargate Project",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "MGX is founding partner of Stargate Project (Jan 2025, 500B AI infrastructure JV) alongside OpenAI, SoftBank, Oracle. MGX contributed 7B. Also participant in Anthropic 30B Series G (Feb 2026). Stargate UAE 1GW data center announced May 2025."
+          }
+        ],
+        "Martin Edelman": [
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Edelman is GC of G42 (Tahnoon's AI company), MGX board member, Mubadala adviser. Led China divestiture negotiations with US government alongside Tahnoon."
+          },
+          {
+            "target": "Mohammed bin Zayed",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Edelman met MBZ during 2002 Gulf tour with Gen Tommy Franks. Became senior adviser to Mubadala the Abu Dhabi sovereign fund. Appointed Mubadala designee on AMD board 2013 and GlobalFoundries board 2017. Reportedly granted Emirati citizenship."
+          },
+          {
+            "target": "Peng Xiao",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-signatories on Aryam-WLFI agreement. Both placed on WLFI board without public disclosure. Peng Xiao is G42 CEO where Edelman is General Counsel."
+          },
+          {
+            "target": "Tommy Franks",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Gen Franks was CENTCOM commander for Afghanistan and Iraq. Edelman accompanied Franks on Gulf tours in 2002 where he first met MBZ and Tahnoon. Franks visited Arab leaders monthly. Edelman received Dept of Army Public Service Award 2007."
+          },
+          {
+            "target": "Ari Emanuel",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Edelman was longtime adviser to Fertitta brothers UFC owners. Emanuel met Edelman through UFC representation. Edelman introduced Emanuel to Khaldoon Al Mubarak leading to Tahnoon 200M USD investment in UFC."
+          }
+        ],
+        "Peng Xiao": [
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Peng Xiao is CEO of G42 (Tahnoon's AI company) and MGX board member. Former head of DarkMatter's Pegasus program. Renounced US citizenship for Emirati. G42 executives took WLFI board seats."
+          },
+          {
+            "target": "Zhang Xiaoping",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Zhang Xiaoping served as G42 CIO while simultaneously COO of Yitu Technology (US-sanctioned). Ran G42 Chinese subsidiaries."
+          },
+          {
+            "target": "DarkMatter Group",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "CEO of Pegasus LLC, DarkMatter subsidiary, 2015-2018. DarkMatter ran Project Raven surveillance for UAE."
+          },
+          {
+            "target": "MicroStrategy",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "SVP/CTO/CIO for a decade, managed 1000+ engineers"
+          },
+          {
+            "target": "Pegasus Technology Beijing",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Executive director of DarkMatter subsidiary in China"
+          }
+        ],
+        "SC Financial Technologies": [
+          {
+            "target": "Zach Witkoff",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "CEO; personally visited Pakistan Jan 2026 for USD1 MOU"
+          },
+          {
+            "target": "Pakistan",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Jan 2026 MOU for USD1 stablecoin integration with central bank"
+          }
+        ],
+        "Sheikh Tahnoon bin Zayed Al Nahyan": [
+          {
+            "target": "Steve Witkoff",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Witkoff is Trump Middle East envoy negotiating with UAE officials including Tahnoon while Witkoff family profits from Tahnoon's M WLFI investment. Son Zach is WLFI co-founder."
+          },
+          {
+            "target": "TikTok USDS Joint Venture LLC",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Tahnoon chairs MGX which holds 15% of TikTok USDS JV. Separately, Tahnoon's IHC/Lunate subsidiary inherited ByteDance stake from G42's 42XFund. Dual economic interest on both sides of the TikTok divestiture."
+          },
+          {
+            "target": "World Liberty Financial Inc.",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Through Aryam Investment 1, acquired 49% stake in WLF for $500M (Jan 2025, pre-inauguration). G42 executives got board seats. Tahnoon is UAE national security adviser, brother of UAE President, controls G42 (flagged by US intelligence for China military tech links). Subsequently, UAE approved for 500,000 Nvidia AI chips per year, with 1/5 going to G42. Potential quid pro quo under investigation."
+          },
+          {
+            "target": "Changpeng Zhao",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Tahnoon's MGX invested B in CZ's Binance via USD1 stablecoin (Mar 2025). CZ subsequently pardoned by Trump (Oct 2025). Binance also helped build USD1 technology."
+          },
+          {
+            "target": "Khaldoon Khalifa Al Mubarak",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Khaldoon is Vice Chairman of MGX (Tahnoon chairs), Board Member of Mubadala Investment Company (MGX founding partner). Parallel roles across Tahnoon's empire."
+          }
+        ],
+        "Steve Witkoff": [
+          {
+            "target": "Zach Witkoff",
+            "type": "familial",
+            "strength": 1.0,
+            "description": "Father-son. Steve is WLFI promoter; Zach is CEO of WLFI and was Trump Special Envoy to Middle East"
+          },
+          {
+            "target": "Zachary Witkoff",
+            "type": "familial",
+            "strength": 1.0,
+            "description": "Father-son; Zach is WLFI CEO, ALT5 Chairman; Steve is WLFI Promoter, Special Envoy"
+          },
+          {
+            "target": "Tahnoon bin Zayed Al Nahyan",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Witkoff as Trump Middle East Envoy has direct diplomatic access to Tahnoon; simultaneously family receives 12.5% WLFI revenue from Tahnoon's $500M investment"
+          },
+          {
+            "target": "WC Digital Fi LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Witkoff family affiliate receiving WLFI revenue share"
+          },
+          {
+            "target": "World Liberty Financial Inc.",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Listed as Promoter on SEC Form D at 4400 Biscayne Blvd Suite 900 Miami FL. Father of co-founders Zach and Alex Witkoff. Witkoff family entities (WC Digital Fi LLC, WC Digital SC LLC) received $31M+ from UAE $500M deal. Steve Witkoff simultaneously serves as Trump special envoy. Nexus of foreign policy and family crypto interests."
+          }
+        ],
+        "Sheikh Tahnoon bin Zayed": [
+          {
+            "target": "Mubadala Investment Company",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoon was Mubadala chairman; Mubadala subsidiary Aryam Investment 1 purchased 49% of WLFI for $500M"
+          },
+          {
+            "target": "Lunate",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoon controls Lunate via Royal Group -> IHC (61% owned by Royal Group) -> Chimera Investment LLC -> Lunate Holding RSC Ltd -> Lunate Capital"
+          },
+          {
+            "target": "Masayoshi Son",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Direct meeting to discuss AI infrastructure, semiconductor strategies, GPU deployment, joint collaboration. MGX (Tahnoon's fund) and SoftBank are co-investors in both Stargate US (MGX 10%) and Stargate UAE. Tahnoon's G42 is key operator in Stargate UAE. PIF (Saudi, aligned with Tahnoon network) was anchor LP in Vision Fund 1."
+          },
+          {
+            "target": "Rajeev Misra",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "OneIM () backed by Tahnoon's Royal Group and Mubadala. Misra works closely with Tahnoon inner circle: Syed Basar Shueb (IHC), Sofia Lasky, Peng Xiao (G42). Misra serves as key financial intermediary between Son and Tahnoon."
+          }
+        ],
+        "Tahnoon bin Zayed Al Nahyan": [
+          {
+            "target": "Mohammed bin Zayed Al Nahyan",
+            "type": "familial",
+            "strength": 1.0,
+            "description": "Brothers; MBZ is UAE President, Tahnoon is UAE National Security Adviser"
+          },
+          {
+            "target": "Changpeng Zhao",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Tahnoon chairs MGX which invested $2B in CZ's Binance; Binance subsequently received Abu Dhabi licenses under Tahnoon's regime"
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": [
+      {
+        "date": "2025-01-16",
+        "label": "ARYAM INVESTMENT 1 — UAE ROYAL ACQUIRES 49% OF WLFI FOR 500M: Sheikh Tahnoon bin Zayed (UAE National Security Advisor) via Aryam Investment 1 (Abu Dhabi entity, managed by G42 executives) signed deal to acquire 49% of WLFI for 500M. Eric Trump signed contract Jan 16, 2025 — 4 DAYS before inauguration. Half paid upfront: 187M to Trump family entities, tens of millions to Witkoff-affiliated entities. G42 executives took WLFI board seats. Deal was NOT publicly disclosed. Months later, Trump admin agreed to supply UAE with advanced AI chips (previously restricted by Biden admin over China concerns). House probe launched Feb 2026.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 3753
+      }
+    ]
+  }
 }
