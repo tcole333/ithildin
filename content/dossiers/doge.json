@@ -1,7 +1,11 @@
 {
   "name": "DOGE",
   "slug": "doge",
-  "aliases": [],
+  "aliases": [
+    "DOGE Operations",
+    "DOGE Personnel",
+    "Department of Government Efficiency (DOGE)"
+  ],
   "profile_ids": [
     "epstein",
     "tech-right"
@@ -9,25 +13,9 @@
   "generated_at": "2026-03-11T18:36:07.643508",
   "last_updated": "2026-03-10T00:46:53",
   "stats": {
-    "total_findings": 95,
+    "total_findings": 120,
     "total_connections": 24,
-    "total_entities": 0,
-    "finding_types": {
-      "legal": 37,
-      "intelligence": 52,
-      "financial": 5,
-      "relationship": 1
-    },
-    "connection_types": {
-      "political": 6,
-      "corporate": 2,
-      "financial": 2,
-      "employment": 7,
-      "intelligence": 1,
-      "advisory": 3,
-      "legal": 3
-    },
-    "last_updated": "2026-03-10T00:46:53"
+    "total_entities": 0
   },
   "findings": [
     {
@@ -2739,6 +2727,756 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "analysis-run-15",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5790,
+      "finding_type": "legal",
+      "summary": "American Oversight filed 40+ FOIA requests; DOGE claimed records not subject to FOIA",
+      "detail": "American Oversight filed more than 40 FOIA requests to DOGE since Jan 20 2025. DOGE told American Oversight its records are not subject to FOIA, contradicting a federal judge's April 2 2025 ruling. Court ordered DOGE, sub-entities, and OMB to preserve all responsive records. FOIA requests sought Musk's calendars and communications with right-wing policy groups, employment records, job title, and salary. American Oversight also filed requests to DHS, SSA, and DOGE regarding the voter maintenance database.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:45:14",
+      "target_name": "DOGE Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "American Oversight v. DOGE FOIA Litigation, americanoversight.org, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5792,
+      "finding_type": "intelligence",
+      "summary": "House Oversight Democrats launched 150+ investigations; DOGE cuts cost B vs claimed B savings",
+      "detail": "House Oversight Democrats launched more than 150 investigations and letters of inquiry, filed FOIA requests, and introduced two formal House Resolutions of Inquiry totaling 1,000+ requests for information. Rep. Robert Garcia released 47-page report 'Breaking Government' concluding DOGE was 'nothing short of a catastrophe.' Partnership for Public Service estimated DOGE actions cost B in FY2025 from productivity losses, paid leave, and rehiring costs vs DOGE's claimed B savings. POLITICO analysis found less than 5% of claimed savings from 10,100 contract terminations were real. Betsy Stevenson (former Labor Dept chief economist) estimated real savings at -7B when DOGE tally stood at B.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:45:25",
+      "target_name": "DOGE Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "House Oversight Democrats 'Breaking Government' report; CBS News; POLITICO analysis, 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5809,
+      "finding_type": "financial",
+      "summary": "DOGE received .5M in funding via Treasury; 3 Democratic senators demanded DOJ investigation",
+      "detail": "ProPublica reported DOGE received a cash infusion from Congress and Treasury even as it gutted government agencies. DOGE received its own funding while simultaneously claiming to save taxpayer money. Three Democratic senators called on the Justice Department and other federal authorities to investigate whether DOGE members violated conflict-of-interest laws by holding stocks in companies their agencies regulate. OPM Inspector General began assessing risks to agency IT systems after Oversight Democrats raised cybersecurity and privacy concerns about DOGE access.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:47:42",
+      "target_name": "DOGE Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica, 'DOGE's Millions,' 2025; Senate Democrats letter to DOJ, May 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5819,
+      "finding_type": "document",
+      "summary": "Kupor confirmation hearing (April 3, 2025) documented in congressional record CHRG-119shrg60000",
+      "detail": "GovInfo contains the Senate confirmation hearing for Scott Kupor (CHRG-119shrg60000, April 3, 2025, 'Nomination of Scott Kupor and Eric M. Ueland'). GovInfo also shows 239 DOGE-related court filings including PIPPENGER v. U.S. DOGE SERVICE (April 17, 2025), PERSONAL SERVICES CONTRACTOR ASSOCIATION v. TRUMP (July 25, 2025), AFGE v. TRUMP (May 9, 2025), and Citizens Against Donald Trump v. Trump (Jan 22, 2026). OPM under Kupor issued Federal Register rules on Hiring Authority for College Graduates and Reduction in Force Appeals (Feb 2026).",
+      "source_datasets": [
+        "govinfo"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:50:10",
+      "target_name": "DOGE Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GovInfo CHRG-119shrg60000; GovInfo search results for DOGE dissolution (239 total results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5997,
+      "finding_type": "intelligence",
+      "summary": "DOGE Master Personnel Roster \u2014 109+ Operatives Tracked Across Federal Government",
+      "detail": "DOGE MASTER PERSONNEL ROSTER \u2014 Compiled from ProPublica Tracker (109 confirmed), Revolving Door Project (138 reported), and ProPublica financial disclosures.\n\nKEY LEADERSHIP:\n| Name | Age | Agency | Prior Employer | Role | Disposition |\n|------|-----|--------|---------------|------|-------------|\n| Elon Musk | - | EOP/DOGE | Tesla/SpaceX/X | Co-Head | DEPARTED (June 2025) |\n| Steve Davis | 45 | EOP/GSA | SpaceX/X/Boring Co (20yr) | De facto leader | DEPARTED |\n| Amy Gleason | 53 | DOGE/HHS | Main Street Health | Acting Admin of DOGE | EMBEDDED |\n| Russell Vought | - | OMB | Project 2025 | Likely successor leader | EMBEDDED |\n\nEMBEDDED CIO NETWORK (controls federal IT):\n| Name | Age | Agency | Prior Employer | Role | Net Worth |\n|------|-----|--------|---------------|------|-----------|\n| Gregory Barbaccia | - | OMB/GSA | Palantir (10yr) | Federal CIO | $1.5M |\n| Greg Hogan | 42 | OPM | Comma.ai | CIO | $1.9M-$7.2M |\n| Ryan Riedel | 37 | Energy | SpaceX (network security) | CIO | - |\n| Ross Graber | - | Energy | Twitter/X, Google | CIO | $1.7M |\n| Thomas Shedd | - | GSA/DOL | - | Deputy Commissioner TTS | $1.6M |\n| Sam Corcos | 36 | Treasury | Levels Health CEO | CIO (DASIS) | $25M-$50M |\n| Allan Mangaser | 44 | OMB | Palantir, Theorem | Sr Adviser to US CIO | - |\n\nHIGH-NET-WORTH OPERATIVES (financial disclosures):\n| Name | Agency | Prior | Net Worth | Key Conflict |\n|------|--------|-------|-----------|-------------|\n| Scott Kupor | OPM | a16z Managing Partner | $182M-$573M | 56 board seats, defense-tech VC |\n| Jacob Helberg | State | Palantir Sr Advisor | $112M-$426M | Palantir stock + Founders Fund |\n| Michael Grimes | Commerce | Morgan Stanley MD | $18.8M-$81.7M | $56M RSU golden parachute |\n| Stephen Ehikian | GSA | Salesforce/Airkit.ai | $16.7M-$59.6M | Holds X Corp stock |\n| Antonio Gracias | SSA | Valor Equity, Tesla/SpaceX board | - | Musk board member at SSA |\n\nMUSK COMPANY ALUMNI (38+ identified):\n| Name | Age | Agency | Prior Musk Co | Role |\n|------|-----|--------|--------------|------|\n| Jennifer Balajadia | 36 | EOP | Boring Company (7yr) | Musk assistant/confidant |\n| Brian Bjelde | 44 | OPM | SpaceX (20yr) | Sr Adviser (top lieutenant) |\n| Riccardo Biasini | 39 | OPM | Tesla/Boring Co | Sr Adviser |\n| Nicole Hollander | 42 | GSA | X (real estate) | Married to Steve Davis |\n| Alexander Simonpour | 28 | GSA/USPS/NASA/NOAA | Tesla (staff PM since 2015) | Multi-agency |\n| Rajasekar Jegannathan | 41 | GSA | Tesla VP IT for AI | Data Engineer |\n| Daniel Abrahamson | 41 | DOT | Tesla (senior counsel) | Sr Adviser |\n| Erica Jehling | 40 | EPA/GSA | SpaceX (purchasing dir) | - |\n| Stephen Duarte | 32 | OPM | SpaceX (HR) | Expert |\n| Christina Hanna | 39 | OPM | SpaceX (senior HR mgr) | Expert |\n| Bryanne-Michelle Mlodzianowski | 40 | OPM | SpaceX (HR director) | Expert |\n| David Malcher | 31 | GSA/VA | SpaceX (financial analyst) | - |\n| Riley Sennott | 26 | NASA/GSA | Tesla | - |\n| Brady Glantz | 27 | FAA | SpaceX (software eng) | SGE (4 days) |\n| Thomas Kiernan | 30 | FAA | SpaceX (principal SW eng) | SGE (4 days) |\n| Ted Malaska | 47 | FAA | SpaceX (senior dir) | Ethics waiver |\n| Sam Smeal | 29 | FAA | SpaceX (software eng) | - |\n| Aram Moghaddassi | 26 | Treasury/SSA/CMS/HHS/DOL/DHS | Neuralink/X | Multi-agency |\n| Edward Coristine | 19 | OPM/CISA/State/DHS/FEMA/GSA/HHS/USAID/Education | Neuralink intern | Expert |\n| Luke Farritor | 23 | HHS/SSA/Energy/State/CDC/CMS/NIH/USAID/CFPB/NSF | SpaceX intern | Executive Engineer |\n| Marko Elez | 25 | Treasury/SSA/CMS/HHS/DOL/DHS/State | X/SpaceX | RESIGNED (racist posts), returned |\n| Justin Monroe | 36 | FBI | SpaceX (security dir) | Adviser |\n\nPALANTIR/THIEL NETWORK (10+ identified):\n| Name | Age | Agency | Connection | Role |\n|------|-----|--------|-----------|------|\n| Gregory Barbaccia | - | OMB/GSA | Palantir (10yr) | Federal CIO |\n| Allan Mangaser | 44 | OMB | Palantir | Sr Adviser to US CIO |\n| Clark Minor | 35 | HHS/NIH | Palantir | CTO |\n| Anthony Jancso | - | Recruiting | Palantir | DOGE recruiter |\n| Jacob Helberg | - | State | Palantir Sr Advisor | Under Secretary |\n| Akash Bobba | 21 | OPM/SSA/Education | Palantir intern | Sr Adviser |\n\nFINANCE/VC OPERATIVES:\n| Name | Age | Agency | Prior | Role |\n|------|-----|--------|-------|------|\n| Michael Grimes | 58 | Commerce | Morgan Stanley (Twitter advisor) | Sr Adviser |\n| Anthony Armstrong | 57 | OPM | Morgan Stanley (tech banker) | Sr Adviser |\n| Jonathan Mendelson | - | GSA/SEC | Accel, Morgan Stanley | Sr Adviser to SEC |\n| Jack Stein | 25 | GSA | Salem Partners (banking) | Targeting independent agencies |\n| Justin Fox | 27 | GSA/USIP/USADF/NEH | Jefferies, Nexus Capital | - |\n| Marshall Wood | 27 | GSA/USAGM | Jefferies | Contract cancellation |\n| Adam Hoffman | 24 | DOJ | Citadel | Cost cutting national security |\n| Brian Stube | 44 | DOT | Citadel (quant researcher) | Sr Adviser to Secretary |\n| Katrine Trampe | 29 | Interior | Sixth Street Partners | Payroll access |\n| Eliezer Mishory | 41 | SEC | Kalshi (chief regulatory) | DOGE team leader |\n| Todd Newnam | 42 | IRS | Carlyle Group, Encore Tech | Contract evaluation |\n\nNOTABLE ADDITIONAL OPERATIVES:\n| Name | Age | Agency | Prior | Role/Status |\n|------|-----|--------|-------|-------------|\n| Gavin Kliger | 25 | USAID/OPM/CFPB/NIH/IRS/FTC/USDA/VOA | Databricks | Sr Adviser, sent USAID lockout email |\n| Joe Gebbia | 43 | OPM | Airbnb co-founder, Tesla board | Volunteer |\n| Sahil Lavingia | 32 | VA | Gumroad CEO | Privileged system access |\n| Kyle Schutt | 37 | GSA/CISA/HHS/DHS | WinRed developer | Software engineer |\n| Ethan Shaotran | 22 | GSA/NOAA/SSA/USPS/USADF/IAF | Harvard student | Multi-agency |\n| Jeremy Lewin | 28 | USAID/CFPB/State/NIH/GSA | Law firm | Acting Director Foreign Assistance |\n| Chris Young | 36 | EOP/CFPB/USADF/DHS | Pharma lobbyist, Jindal staffer | $100K-$1M Musk compensation |\n| Yinon Weiss | 47 | DoD | Army SF, tech founder | DOGE Defense team leader |\n| Jim Hickey | 42 | DoD | Mitre Corp | Sr Adviser undersecretary defense |\n| Mike Slagh | 40 | DoD | Long Walk Tech, Shift | - |\n| Patrick George | 42 | DoD (Navy) | Beachwood Ventures, Hover Energy | DOGE lead US Navy |\n| Ankur Bansal | - | DOT | HomeLight president | Grant cancellation |\n| Brooks Morgan | 39 | Education/FDIC | Podium Education CEO | - |\n| Conor Fennessy | 32 | Education/HHS | - | Sr Adviser |\n| Mattieu Gamache-Asselin | 34 | HHS | Facebook, Alto co-founder | Sr Adviser |\n| Tarak Makecha | 38 | USAGM/DOJ/State/FBI | Tesla Energy, SkySafe CFO | Funding decisions |\n\nDISPOSITION SUMMARY:\n- EMBEDDED (permanent roles): ~85+ operatives remain active across agencies\n- DEPARTED: Elon Musk, Steve Davis, ~8 others\n- RESIGNED: 21 USDS holdovers (Feb 2025 mass resignation), ~40 laid off\n- FIRED/RESIGNED: Marko Elez (returned), Gavin Kliger (departed CFPB)\n- UNKNOWN: ~15 operatives with unclear current status\n\nSTATISTICS:\n- 109 confirmed by ProPublica, 138 reported by Revolving Door Project\n- 38+ from Musk companies (Tesla, SpaceX, X, Boring Company, Neuralink)\n- 10+ connected to Peter Thiel/Palantir\n- 23+ making cuts at agencies regulating their former employers\n- 12+ remain employees/advisors at their prior companies\n- 9+ continue receiving corporate benefits (health, stock vesting, retirement)\n- 83% male, 60%+ in their 20s-30s\n- 21 with prior government experience (19%)",
+      "source_datasets": [
+        "propublica_disclosures",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:27:25",
+      "target_name": "DOGE Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop CIO tracker",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR 21-staffer resignation Feb 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Nextgov/FCW agency reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica DOGE Tracker (109 operatives)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica Financial Disclosures",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Revolving Door Project (138 operatives)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia DOGE Network article",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6002,
+      "finding_type": "relationship",
+      "summary": "DOGE Personnel: Smith-Gleason pipeline \u2014 private healthcare companies to DOGE HHS leadership",
+      "detail": "Brad Smith (founder of Russell Street Ventures and Aspire Health) and Amy Gleason (DOGE Acting Administrator) share a direct professional pipeline through two companies: Main Street Health (where Gleason was CPO) and Russell Street Ventures (where Gleason also worked). Both entities were founded by Smith. This is not a coincidence of overlapping networks \u2014 it is a direct boss-employee relationship in the private sector that transferred into government. Smith directed DOGE's $67B in HHS cuts while Gleason served as DOGE's nominal head and focused on HHS technology. After DOGE dissolution (Nov 2025), Smith returned to government at State Department Bureau of Global Health, continuing the healthcare policy influence. This Smith-Gleason pipeline mirrors the Musk-company-to-OPM pipeline (Bjelde, Scales, Biasini) but in the healthcare domain rather than tech/space.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:28:19",
+      "target_name": "DOGE Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia: Amy Gleason (Main Street Health, Russell Street Ventures); STAT News: Brad Smith DOGE HHS profile; Semafor: Former DOGE official returns to Trump admin (Aug 2025)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6004,
+      "finding_type": "intelligence",
+      "summary": "DOGE Personnel: AI deregulation infrastructure \u2014 SweetREX tool chain from HUD to OMB to government-wide rollout",
+      "detail": "DOGE built an AI-powered deregulation infrastructure that represents a novel form of government restructuring. Chain of custody: (1) Christopher Sweet (UChicago undergrad, private equity background) developed SweetREX at HUD using Google Gemini models. (2) Scott Langmack (Kukun proptech COO, $1-5M Kukun stock, Y Combinator VC funds) demoed the tool to EPA, State, FDIC. (3) Tool moved from HUD to OMB after Langmack's transfer. (4) OMB tasked Langmack with creating custom AI applications for government-wide deregulation. Scale: designed to scan 200,000 federal rules and flag ~100,000 (50%) for elimination by Jan 2026. At HUD alone, reviewed 1,000+ regulatory sections in under two weeks. The tool represents the automation of the DOGE mission \u2014 replacing human regulatory review with AI analysis operated by private-sector actors (a proptech COO and a college student with PE connections). No transparency mechanism for which regulations get flagged or what criteria the AI uses.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:28:46",
+      "target_name": "DOGE Operations",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechBuzz: DOGE deploys SweetREX; eWeek: DOGE taps college student; ZeroHedge: SweetREX buzzsaw to regulations; Digital CxO: AI tool to slash regulations",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4708,
+      "finding_type": "intelligence",
+      "summary": "ProPublica identified 109 DOGE staffers -- 38 from Musk companies, 83% male, 60%+ in 20s-30s, 23 making cuts at agencies regulating their former employers, 12 still on corporate payrolls",
+      "detail": "ProPublica comprehensive tracker identified 109 DOGE staff members: 90 men, 19 women (83% male), more than 60% in their 20s or 30s, one who was 19 when joined. At least 38 currently work or have worked for Musk businesses (SpaceX, Tesla, xAI, Neuralink, X/Twitter). At least 23 DOGE officials making cuts at agencies that regulate their former employers. At least 12 remain employees or advisers of pre-DOGE companies. At least 9 continue to receive corporate benefits from private-sector employers including health insurance, stock vesting plans, or retirement savings programs. Key Pentagon team led by Yinon Weiss -- FEC records show prior employers Cardash, RallyPoint, Stress-Free Auto Care, Harvard Business School with donations to Ted Cruz and Trump-affiliated PACs. Steve Davis (Boring Company president) served as effective DOGE leader from GSA HQ with armed security detail, wife Nicole Hollander placed at GSA handling real estate. Davis departed May 2025 but reportedly continued asserting control, defying White House orders.",
+      "source_datasets": [
+        "propublica",
+        "fec"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 19:36:01",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/doge-elon-musk-trump-staffers-tracker-update",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5754,
+      "finding_type": "intelligence",
+      "summary": "Systemic pattern: OPM packed with Silicon Valley operatives -- Kupor, Scales, Kliger all at same agency",
+      "detail": "Three DOGE-linked operatives were placed at the Office of Personnel Management: Scott Kupor (Director, a16z Managing Partner with $182M-573M net worth), Amanda Scales (Chief of Staff, xAI Recruiting Leader), and Gavin Kliger (Senior Advisor for Technology, Databricks engineer). OPM controls federal hiring, firing, benefits, retirement, and workforce technology. The concentration of Musk orbit (Scales from xAI) and VC (Kupor from a16z, Kliger from Databricks) personnel at the agency responsible for the federal workforce is structurally significant -- it positions tech industry insiders to reshape government employment in ways that benefit their former and current financial interests.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:08",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosures kupor-scott-aaron, scales-amanda-d, kliger-gavin",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5756,
+      "finding_type": "relationship",
+      "summary": "Musk companies pipeline: Alm (Tesla-to-DHS), Scales (xAI-to-OPM), Shedd (Tesla-to-GSA) all entered govt Jan 2025",
+      "detail": "Three appointees from Musk companies entered federal government on or near inauguration day 1/20/2025: Thomas Shedd (Tesla 4/2022-1/2025 to GSA Director of Technology), Amanda Scales (xAI 10/2024-Present to OPM Chief of Staff), and Joseph Alm (Tesla 6/2020-12/2023 then Kraken to DHS via DOGE). This represents a coordinated placement of Musk company personnel across agencies that control federal technology (GSA), federal workforce (OPM), and economic security (DHS). Combined with Musk own role leading DOGE, these placements create structural control over government systems by individuals with ongoing financial ties to Musk enterprises.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:16",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosures shedd-thomas, scales-amanda-d, alm-joseph",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5760,
+      "finding_type": "financial",
+      "summary": "Crypto holdings cluster: Alm (Kraken stock), Mishory (Kalshi stock at SEC), Kliger (Bitcoin/Solana at OPM), Snyder (Dogecoin at DOT)",
+      "detail": "At least four DOGE-linked appointees hold cryptocurrency or crypto company equity: Elie Mishory (SEC Senior Advisor) holds $1M-5M in Kalshi stock at the agency regulating crypto/prediction markets; Joseph Alm (DHS) holds Kraken/Payward stock options from prior employment as associate general counsel; Gavin Kliger (OPM) holds $100K-250K in Bitcoin and Solana on Robinhood plus $50K-100K Robinhood Markets stock; Ryan Snyder (DOT) holds Dogecoin. This crypto-holding cluster across multiple agencies is consistent with the broader DOGE agenda to promote crypto-friendly regulation.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:42:28",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosures mishory-elie, alm-joseph, kliger-gavin, snyder-ryan",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5769,
+      "finding_type": "financial",
+      "summary": "Defense tech holdings across DOGE appointees: Barbaccia (Anduril/Palantir/LMT/BA), Snyder (Palantir), Kupor (Palantir)",
+      "detail": "At least three DOGE-linked appointees hold defense technology or defense prime contractor stock: Gregory Barbaccia (Federal CIO) holds Anduril venture position ($50K-100K), Palantir (PLTR), Lockheed Martin (LMT), Boeing (BA), BAE Systems (BAESY), and Rheinmetall (RNMBY). Ryan Snyder (DOT) holds Palantir (PLTR). Scott Kupor (OPM) holds Palantir (PLTR, though small). Combined with DOGE role in cutting oversight agencies and restructuring procurement, these holdings represent a pattern where operatives restructuring government hold equity in defense companies that benefit from reduced regulation and streamlined contracting.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:03",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosures barbaccia-gregory-j, snyder-ryan, kupor-scott-aaron",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5778,
+      "finding_type": "intelligence",
+      "summary": "Missing disclosures: No ProPublica 278 found for 8 of 14 priority DOGE operatives including Davis, Bobba, Coristine, Elez",
+      "detail": "Of 14 priority DOGE operatives searched, 8 have no financial disclosure in ProPublica database: Steve Davis (Boring Company, DOGE operations chief), Akash Bobba (ex-Palantir), Ed Coristine (19-year-old DOGE engineer), Marko Elez (fired/rehired over racist posts), Luke Farritor (AI developer), Kyle Kliger, Joe Gebbia (Airbnb co-founder), and Yinon Weiss (military veteran). The absence of disclosures for known DOGE operatives may indicate: (1) they served as informal advisors without filing requirements, (2) SGE status exempting them, (3) disclosures not yet processed, or (4) they avoided formal government appointment. Davis and Coristine are particularly notable absences given their documented access to federal systems.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:43:53",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica disclosures database search results - zero results for 8 names",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5781,
+      "finding_type": "intelligence",
+      "summary": "ProPublica identified 109 DOGE staffers across federal agencies",
+      "detail": "ProPublica compiled a tracker identifying 109 DOGE staffers spread throughout the government, from DoD to GSA to SEC. 90 men (83%) and 19 women. 60%+ in their 20s or 30s, with the youngest being 19. 80%+ had no prior government experience. 38 currently or previously worked for Musk companies. 23 are making cuts at agencies that regulated their former industries. 12 remain employees of previous companies on paper. 9 continue receiving corporate benefits.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:44:21",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "ProPublica DOGE Tracker, projects.propublica.org/elon-musk-doge-tracker/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5945,
+      "finding_type": null,
+      "summary": "SYNTHESIS: Temporary-to-Permanent Pipeline \u2014 At least 8 DOGE operatives transitioned from temporary advisory roles to permanent embedded government positions across agencies despite formal dissolution in November 2025",
+      "detail": "PATTERN: Despite DOGE formal dissolution in November 2025 (8 months early), its personnel were absorbed into permanent government positions rather than removed. OPM Director Kupor stated DOGE 'does not exist' while confirming operatives remained embedded. Documented transitions:\n\n1. Rachel Riley: DOGE HHS adviser -> Acting Chief of Naval Research (replaced Rear Adm. Rothenhaus, Oct 2025)\n2. Zachary Terrell (age 23): DOGE -> HHS CTO (permanent, overseeing Medicare data systems)\n3. Mike Russo: DOGE -> SSA CIO (installed Feb 2025, controls 1.5T benefit payment systems)\n4. Aram Moghaddassi: DOGE -> SSA CIO (succeeded Russo, listed Sept 2025 executive leadership)\n5. Edward Coristine (age 19-20): cycled GSA -> DOGE resignation -> SSA -> National Design Studio\n6. Thomas Shedd: DOGE -> GSA TTS Director (permanent)\n7. Sam Corcos: DOGE -> Treasury CIO\n8. Joe Gebbia: DOGE -> White House Chief Design Officer, created National Design Studio\n\nNo DOGE personnel formally converted to career civil service (avoiding burrowing-in designation), but all hold political appointments with equivalent authority. Fortune reported DOGE was absorbed into the bloodstream of the government. OPM vision: far more institutionalized at the actual agency level.\n\nINFERENCE: The temporary advisory framing was a legal strategy to bypass disclosure and ethics requirements during initial access phase, with permanent placement always being the intended outcome.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:23:10",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2025/12/12/doge-is-still-alive-federal-employees-irs-nih-elon-musk/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.govexec.com/management/2025/08/all-remaining-doge-staff-are-political-positions-despite-concerns-burrowing/407301/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.nextgov.com/digital-government/2025/11/doge-no-longer-has-centralized-leadership-under-white-house-tech-team-personnel-head-says/409765/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5966,
+      "finding_type": "intelligence",
+      "summary": "Systemic pattern: 8 of 12 priority embedded operatives lack ProPublica 278 financial disclosures",
+      "detail": "Of 12 priority DOGE operatives confirmed as still embedded or recently embedded in government, only 4 have public financial disclosures in ProPublica's database: Greg Hogan (OPM CIO, $1.9M-7.2M), Thomas Shedd (GSA TTS, $1.6M-3.5M), Amanda Scales (OPM CoS, $415K-1M), plus previously documented Kupor, Barbaccia, Minor. Missing disclosures: Sam Corcos (Treasury CIO -- no ProPublica result despite being CIO of major department), Zachary Terrell (HHS CTO -- no disclosure), Jeremy Lewin (Acting Under Secretary -- no disclosure despite controlling billions in foreign aid), Ryan Riedel (DOE CIO 60-day detail -- no disclosure), Edward Coristine (9+ agencies -- no disclosure), Joe Gebbia (CDO -- no disclosure despite Tesla board seat). This pattern suggests systematic circumvention of disclosure requirements through special government employee status, temporary details, or deliberate non-compliance.",
+      "source_datasets": [
+        "web_search",
+        "propublica_disclosures"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:24:53",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Existing findings database cross-reference",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica disclosure searches for all 12 targets",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5971,
+      "finding_type": "intelligence",
+      "summary": "Age-experience profile: 4 of 12 embedded operatives aged 19-28 with zero government experience placed in senior positions",
+      "detail": "Among the 12 priority embedded DOGE operatives, an unprecedented cluster of young, inexperienced individuals were placed in positions of extraordinary authority: (1) Edward Coristine, age 19-20, Neuralink intern, accessed 9+ agency systems including CISA/DHS cybersecurity; (2) Zachary Terrell, age 23, crypto startup founder with 2022 bachelor's, became HHS CTO and blocked NSF grants; (3) Jeremy Lewin, age 28, tech entrepreneur with zero government experience, became Acting Under Secretary controlling billions in foreign aid; (4) Ryan Riedel, SpaceX network engineer, 60-day detail as DOE CIO overseeing nuclear weapons lab IT. None had previous government experience. All were placed in positions that traditionally require decades of public service, security clearances, and domain expertise. The speed of their advancement (Lewin: DOGE volunteer to Under Secretary in 4 months) bypassed normal vetting processes.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:25:12",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FedScoop and Nextgov appointment reports",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "State.gov Lewin biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia and news profiles for all 4 individuals",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5973,
+      "finding_type": "relationship",
+      "summary": "Employer pipeline pattern: 5 operatives from Musk companies (Tesla/SpaceX/xAI), 3 from Palantir, 2 from a16z ecosystem",
+      "detail": "The 12 priority embedded operatives reveal three primary employer pipelines into government: MUSK COMPANIES (5): Thomas Shedd (Tesla, GSA/DOL), Amanda Scales (xAI, OPM), Ryan Riedel (SpaceX, DOE), Greg Hogan (comma.ai/a16z, OPM), Edward Coristine (Neuralink, multiple agencies). PALANTIR (3): Gregory Barbaccia (10yr Palantir, Federal CIO), Clark Minor (12yr Palantir, HHS CIO), plus overlap with OMB/GSA roles. A16Z ECOSYSTEM (2): Scott Kupor (a16z managing partner, OPM Director), Sam Corcos (Levels Health/a16z-funded, Treasury CIO). CRYPTO (1): Zachary Terrell (Spindl/Coinbase, HHS CTO). UNAFFILIATED (1): Jeremy Lewin (no clear corporate pipeline, but rapid DOGE promotion). These pipelines concentrate at agencies controlling: IT procurement (OMB), personnel management (OPM), health data (HHS), energy (DOE), contracting (GSA), tax systems (Treasury), and foreign aid (State).",
+      "source_datasets": [
+        "web_search",
+        "propublica_disclosures",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:25:21",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Existing findings database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica disclosures",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Web search employment histories",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5990,
+      "finding_type": "relationship",
+      "summary": "Return-to-employer pattern: at least 3 of 12 operatives returned to prior companies (Riedel to SpaceX, Scales to xAI, Hogan departed after 7.5 months)",
+      "detail": "Among 12 priority embedded operatives, a pattern of brief government service followed by return to private sector: (1) Ryan Riedel: SpaceX network engineer, served ~60 days as DOE CIO, returned to SpaceX; (2) Amanda Scales: xAI recruiting leader, served ~3 months as OPM Chief of Staff, returned to xAI by April 2025; (3) Greg Hogan: comma.ai VP Infrastructure, served 7.5 months as OPM CIO, departed September 2025. This pattern suggests these deployments were reconnaissance-style operations rather than genuine public service commitments. During their brief tenures, all three gained access to sensitive systems: Riedel to DOE IT (nuclear weapons labs), Scales to OPM personnel records (millions of federal employees), Hogan to OPM IT systems (mass email and data access capabilities). The 60-day detail structure used for Riedel specifically avoids disclosure requirements for temporary assignments.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:26:38",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "FedScoop/Nextgov departure reports",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MeriTalk Riedel return to SpaceX",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Revolving Door Project profiles",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5993,
+      "finding_type": "financial",
+      "summary": "Combined financial exposure: 12 embedded operatives hold estimated $250M+ in employer stock while overseeing agencies regulating those employers",
+      "detail": "Aggregate financial conflicts across 12 priority embedded operatives: (1) Scott Kupor: $182M-573M+ net worth, $250-500M Airbnb stock, Palantir/defense contractor stock, 38 a16z fund positions; (2) Thomas Shedd: $5-25M Tesla ESPP, RSUs, options, on unpaid leave from Tesla; (3) Clark Minor: $1M-5M Palantir stock plus 401(k)/IRA Palantir holdings; (4) Gregory Barbaccia: Anduril position, Palantir stock, LMT, BA, Rheinmetall defense stock; (5) Joe Gebbia: liquidated $30M+ ABNB stock, Tesla board member; (6) Amanda Scales: xAI equity, Uber stock $50K-100K; (7) Greg Hogan: comma.ai $1M-5M+ in ISOs; (8-12) Corcos, Terrell, Lewin, Riedel, Coristine: no disclosures available. Combined disclosed holdings in employer and related stock exceeds $250M conservatively. Each individual's agency oversees or regulates their former or current employer.",
+      "source_datasets": [
+        "propublica_disclosures",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:26:47",
+      "target_name": "DOGE Personnel",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 278 disclosures for all documented operatives",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form 4 Gebbia filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6426,
+      "finding_type": "intelligence",
+      "summary": "DOGE operatives remain in politically appointed positions government-wide as of August 2025. OPM confirmed no career-role conversions occurred. Dozens embedded at IRS, NIH, SSA, GSA, HHS, DOE, FAA, State, Commerce, EPA, DOT, SEC, USPS, NASA, OPM. OMB Director Vought indicated DOGE will become institutionalized at agency level. USDS expanding to 150 staff for 2026.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:31:56",
+      "target_name": "Department of Government Efficiency (DOGE)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "govexec-2025-08",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6433,
+      "finding_type": "intelligence",
+      "summary": "DOGE built cross-agency data consolidation infrastructure: (1) specialized computers giving simultaneous access to networks/databases across agencies; (2) 'backpacks full of laptops' each with access to different agency systems to combine databases maintained separately by multiple agencies. Reported by Rep. Gerald Connolly citing whistleblower. Goal: create single centralized government database combining IRS, SSA, HHS, Education, Labor data. Databases accessed include: Treasury payment systems (SSNs, tax returns, addresses, DOBs); OPM (background checks, medical/bank data, biometrics); SSA benefit records; Education/Labor/HHS benefit data. No security vetting or training for DOGE staff before access was granted (OPM litigation finding). At least 12 lawsuits allege Privacy Act violations.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:33:04",
+      "target_name": "Department of Government Efficiency (DOGE)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "brookings-doge-database nextgov-master-database brookings-privacy-under-siege",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6435,
+      "finding_type": "intelligence",
+      "summary": "ProPublica tracked 100+ DOGE members: at least 23 made cuts at agencies regulating their prior employers. Key placements: Steve Davis (Boring Company CEO) -> EOP/GSA exec; Antonio Gracias (Tesla/SpaceX investor, $1M Musk super PAC) -> SSA; Eliezer Mishory (Kalshi CRO) -> SEC lead (while SEC was suing Musk); Marko Elez (X/SpaceX) -> Treasury payment systems (resigned over social media controversy); Rajasekar Jegannathan (Tesla VP IT AI) -> GSA data engineer; Alexander Simonpour (Tesla) -> GSA/USPS/NASA; Brian Bjelde (SpaceX VP people) -> OPM senior adviser (planned 70% workforce cuts); Ryan Riedel (SpaceX) -> DOE CIO; Brady Glantz, Thomas Kiernan, Ted Malaska, Sam Smeal (SpaceX engineers) -> FAA SGEs; Justin Monroe (SpaceX security) -> FBI director's office adviser; Payton Rehling (Valor Equity) -> SSA/USCIS efficiency adviser.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:33:25",
+      "target_name": "Department of Government Efficiency (DOGE)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "propublica-doge-tracker-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6437,
+      "finding_type": "intelligence",
+      "summary": "DOGE anti-fraud tool deployed at SSA flagged only 2 of 110,000 claims while slowing claims processing by 25%. This represents a core mission failure: the stated purpose of DOGE was to eliminate fraud and waste, but the primary data tool deployed for that purpose at SSA had a 0.0018% flag rate on the test population, and materially degraded service delivery. The SSA processing slowdown has real human impact on benefits recipients.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "user_provided",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:34:48",
+      "target_name": "Department of Government Efficiency (DOGE)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "lead-18299-description",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6438,
+      "finding_type": "legal",
+      "summary": "DOJ filed Notice of Corrections to Record (January 16, 2026) in SSA litigation acknowledging DOGE misconduct: (1) SSA data was disclosed to third parties using non-government server (Cloudflare) March 7-17, 2025; (2) DOGE SSA team member entered Voter Data Agreement to analyze state voter rolls for someone outside government; (3) DOGE team member forwarded encrypted file with names/addresses of ~1000 people to DHS, copying Steve Davis (DOGE/EOP) and a DOGE DOL employee. Court ordered DOGE to delete all unlawfully accessed data and temporarily blocked further access. Senate Finance Committee demanded full accounting \u2014 SSA court filing admitted it does not know full extent of data accessed/shared by DOGE.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:34:59",
+      "target_name": "Department of Government Efficiency (DOGE)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "doj-notice-corrections-jan2026 fedscoop-ssa-doge-jan2026 afscme-press-release",
           "source_quote": null,
           "source_page": null,
           "assessment": null
