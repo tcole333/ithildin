@@ -442,14 +442,32 @@ def main():
         action = "Skipped" if skipped else "Exported"
         print(f"  {action} {canonical} ({dossier_for_index['stats']['total_findings']} findings, {dossier_for_index['stats']['total_connections']} connections){alias_info}")
 
-    # Write index
+    # Write index — merge into existing when exporting single targets
     index_path = args.output_dir / "_index.json"
+    if args.target and index_path.exists():
+        try:
+            existing_index = json.loads(index_path.read_text())
+        except (json.JSONDecodeError, TypeError):
+            existing_index = []
+        # Replace or append entries for exported targets
+        exported_slugs = {e["slug"] for e in index}
+        merged = [e for e in existing_index if e["slug"] not in exported_slugs]
+        merged.extend(index)
+        merged.sort(key=lambda e: e["name"])
+        index = merged
     with open(index_path, "w") as f:
         json.dump(index, f, indent=2)
 
-    # Write redirects
+    # Write redirects — merge into existing when exporting single targets
+    redirects_path = args.output_dir / "_redirects.json"
+    if args.target and redirects_path.exists():
+        try:
+            existing_redirects = json.loads(redirects_path.read_text())
+        except (json.JSONDecodeError, TypeError):
+            existing_redirects = {}
+        existing_redirects.update(redirects)
+        redirects = existing_redirects
     if redirects:
-        redirects_path = args.output_dir / "_redirects.json"
         with open(redirects_path, "w") as f:
             json.dump(redirects, f, indent=2)
         print(f"\n  {len(redirects)} redirects written to {redirects_path}")
