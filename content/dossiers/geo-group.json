@@ -760,5 +760,449 @@
     }
   ],
   "entities": [],
-  "timeline": []
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      4791,
+      4798,
+      4799,
+      4801,
+      4809,
+      4794,
+      4796,
+      4810,
+      4818,
+      4805,
+      4817,
+      4828
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          4796,
+          4810
+        ],
+        "connection_ids": [
+          2748,
+          2809,
+          2814,
+          2816,
+          2813,
+          2815,
+          2847,
+          2852,
+          2856,
+          2860,
+          2833,
+          2835,
+          2836,
+          2837,
+          2838
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          4778,
+          4791,
+          4798,
+          4799,
+          4801,
+          4805,
+          4812,
+          4817,
+          4828,
+          4879
+        ],
+        "connection_ids": [
+          2748,
+          2809,
+          2847,
+          2852,
+          2856,
+          2837,
+          2862,
+          2874
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          4809,
+          4818
+        ],
+        "connection_ids": [
+          2872
+        ],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-03-11T22:27:58.398572+00:00",
+    "lead": "<p>The GEO Group, Inc. (NYSE: GEO) is the largest private prison and immigration detention operator in the United States, headquartered in Boca Raton, Florida. Founded in 1984 as Wackenhut Corrections Corporation, the company operates approximately 95 facilities with roughly 75,000 beds and reported record revenue of $2.63 billion and net income of $254 million in fiscal year 2025 &mdash; a 700% earnings increase over the prior year, driven by the expansion of Immigration and Customs Enforcement contracts under the second Trump administration [Finding #4801].</p><p>GEO&rsquo;s corporate structure spans detention, electronic monitoring, skip tracing, and transportation through subsidiaries including B.I. Incorporated (the sole provider of ICE&rsquo;s Intensive Supervision Appearance Program for 21 years, with a cumulative contract value of $2.2 billion) and GEO Transport, Inc. This vertical integration means GEO profits at every stage of the enforcement pipeline: locating individuals through skip tracing, monitoring them via ankle bracelet, detaining them in GEO-operated facilities, and transporting them to removal proceedings [Finding #4794] [Finding #4654].</p><p>At least six former senior ICE officials hold executive or board positions at GEO Group, including three former ICE directors or deputy directors. Ten of thirteen GEO lobbyists in 2024 were former government officials. The company contributed approximately $2 million to the Trump 2024 campaign and inaugural fund, and its PAC was the first corporate PAC to maximize contributions to the Trump campaign [Finding #4778] [Finding #4798] [Finding #4796]. <a href=\"/dossiers/pam-bondi\">Pam Bondi</a>, now serving as Attorney General, previously lobbied for GEO at Ballard Partners [Finding #4805].</p><p>GEO has been awarded over $7.29 billion from DHS and $5.08 billion from DOJ historically. In 2025, the company was added to the Navy&rsquo;s WEXMAC TITUS contract vehicle &mdash; a military logistics instrument with a $65 billion ceiling that has been repurposed for domestic immigration detention, bypassing standard civilian procurement transparency requirements [Finding #4704]. GEO also received a $1.2 billion, 15-year no-bid contract for the Delaney Hall facility in Newark, New Jersey, awarded under the border emergency declaration just 36 days after the proclamation was issued [Finding #4791].</p>",
+    "system_role": "GEO Group is the dominant financial beneficiary of the immigration enforcement apparatus, operating as the primary node where policy decisions translate into private revenue. Its structural significance lies in three interlocking dynamics: a revolving door with ICE leadership that blurs the boundary between regulator and regulated; a vertical integration spanning surveillance, detention, monitoring, and transport that creates self-reinforcing demand for enforcement expansion; and a political spending operation that uses subsidiary structures to circumvent the federal contractor donation ban while directing millions to officials who control detention appropriations. GEO is the clearest example of how emergency declarations, no-bid contracting authority, and repurposed military procurement vehicles channel public spending to politically connected private operators.",
+    "sections": [
+      {
+        "id": "corporate-structure-and-subsidiaries",
+        "title": "Corporate Structure and Subsidiaries",
+        "viz": null,
+        "content": "<p>The GEO Group traces its origins to 1984, when it was created as a division of Wackenhut Corporation. It went public in 1994 and was renamed GEO Group in 2003 after Group 4 Falck acquired the parent Wackenhut entity. The company is headquartered at 4955 Technology Way, Boca Raton, Florida, and is publicly traded on the NYSE under the ticker GEO (SEC CIK 923796). George C. Zoley, the founder, returned as Chairman and CEO effective March 1, 2026, after four CEOs cycled through the position in five years [Finding #4794] [Finding #4810].</p><p>GEO operates through approximately 60 subsidiaries organized into four business segments. GEO Secure Services runs the core detention operations across roughly 95 facilities with approximately 75,000 beds. GEO Care handles mental health treatment, residential reentry, and community supervision. B.I. Incorporated, headquartered in Boulder, Colorado, provides electronic monitoring through ankle bracelets and the SmartLINK smartphone application; it has been the sole provider of ICE&rsquo;s Intensive Supervision Appearance Program (ISAP) for 21 years, with cumulative contract value reaching $2.2 billion. GEO&rsquo;s international division manages operations in Australia, the United Kingdom (including GEOAmey PECS Ltd, a joint venture for prisoner escort), and South Africa [Finding #4794].</p><p>Two subsidiaries &mdash; GEO Acquisition II Inc and GEO Corrections Holdings Inc &mdash; serve as political contribution vehicles, enabling the company to route donations through entities not directly named on federal contracts. This structure was tested in 2016 when the Campaign Legal Center filed an FEC complaint alleging that GEO Corrections Holdings&rsquo; $225,000 donation to a pro-Trump super PAC violated the federal contractor contribution ban; the FEC deadlocked along partisan lines and dismissed the case, establishing the precedent that GEO exploited more aggressively in the 2024 cycle [Finding #4798].</p>"
+      },
+      {
+        "id": "ice-contract-portfolio",
+        "title": "ICE Contract Portfolio and Revenue",
+        "viz": null,
+        "content": "<p>GEO Group generates approximately 62% of total revenue from federal agencies, with ICE alone accounting for roughly 40% of sales &mdash; over $1 billion annually as of 2023. In fiscal year 2025, the company reported record revenue of $2.63 billion (up from $2.42 billion in 2024) and net income of $254.4 million, representing a 695% increase in earnings driven primarily by ICE contract expansion. The company won over $800 million in ICE business in 2025 alone, with new and expanded contracts representing approximately $520 million in annualized revenues [Finding #4801] [Finding #4817].</p><p>GEO operates across all three ICE contract vehicles through its subsidiary structure. The parent entity, The GEO Group, Inc., holds detention IDIQ contracts (70CDCR25D00000007/0009/0016) with task orders exceeding $200 million for facilities at Adelanto, Aurora, Tacoma, and others. B.I. Incorporated holds the skip tracing IDIQ (70CDCR26D00000005, $121.8 million ceiling) and the ISAP monitoring contract (70CDCR25D00000062, $108.3 million task order). GEO Transport, Inc. holds the transportation IDIQ (70CDCR25D00000002, $10.4 million task order). This vertical integration means the same corporate parent locates, monitors, detains, and transports the same individuals [Finding #4654].</p><p>In February 2025, ICE awarded GEO a 15-year contract valued at $1 to $1.2 billion for a 1,000-bed facility at Delaney Hall in Newark, New Jersey &mdash; the first detention facility opened under the second Trump administration. This contract was awarded without competitive bidding, using the border emergency declaration (Proclamation 10886) to bypass normal procurement [Finding #4791]. GEO was also added in February 2026 as one of 24 new contractors on the Navy&rsquo;s WEXMAC TITUS 2.2 vehicle, a military logistics contract with a $65 billion ceiling that has been repurposed for domestic immigration detention operations. Using this DoD contract vehicle bypasses civilian agency public notice and competitive bidding requirements, reducing procurement transparency [Finding #4704] [Finding #4649].</p><p>Additional federal contract relationships include Bureau of Prisons facilities at Big Spring and Flight Line, Texas (3,532 beds, 10-year contracts worth $664 million total), Moshannon Valley, Pennsylvania, and Great Plains, Oklahoma ($76 million annualized combined), and North Lake, Michigan ($37 million annualized). ICE bed capacity at GEO facilities expanded from 20,000 to 26,000 during 2025, with the company investing $70 million in facility renovations ($47 million), GPS tracking devices ($16 million), and transport assets ($7 million) in December 2024 alone [Finding #4817].</p>"
+      },
+      {
+        "id": "revolving-door",
+        "title": "Revolving Door with ICE Leadership",
+        "viz": "ego_network",
+        "content": "<p>GEO Group has systematically hired former ICE leadership into senior executive positions, creating a revolving door that blurs the distinction between the agency awarding contracts and the company receiving them. At least six former senior ICE officials hold or have recently held executive or board positions at GEO [Finding #4778] [Finding #4796].</p><p>David Venturella, formerly the ICE Enforcement and Removal Operations (ERO) Assistant Director, was recruited by GEO in 2012 and earned over $6 million during twelve years at the company. He left in 2023 but remained a consultant through January 2025, then returned to DHS as the number two official in the ICE detention division &mdash; overseeing the same contracts he had managed from the corporate side &mdash; with an ethics waiver [Finding #4796]. Daniel Bible, ICE&rsquo;s Deputy Executive Associate Director and top career detention official, left the agency on October 31, 2024 &mdash; days before the presidential election &mdash; and is now GEO&rsquo;s Executive Vice President [Finding #4796].</p><p>Daniel Ragsdale, former ICE Deputy Director, left the agency in 2017 and became a GEO executive, now serving as Senior Vice President of Contract Administration. Matthew Albence, who led ICE as Acting Director during the first Trump administration, replaced Venturella as GEO&rsquo;s Senior Vice President of Client Relations in 2022. Julie Myers Wood, who headed ICE from 2006 to 2008, joined GEO&rsquo;s Board of Directors in 2014 and receives approximately $287,000 per year in board compensation [Finding #4796] [Finding #4810].</p><p>Tom Homan, the current Border Czar, earned at least $5,000 as a consultant for GEO&rsquo;s Care division before joining the second Trump administration. Carlos Trujillo, a former Florida congressman and Trump adviser, was hired as a GEO lobbyist ten days after Trump won the 2024 election. <a href=\"/dossiers/pam-bondi\">Pam Bondi</a>, now serving as Attorney General, previously lobbied for GEO Group at Ballard Partners [Finding #4796] [Finding #4805].</p>"
+      },
+      {
+        "id": "political-spending",
+        "title": "Political Spending and Influence",
+        "viz": null,
+        "content": "<p>GEO Group&rsquo;s political action committee (FEC ID C00382150, established 2002) has raised approximately $6.86 million in lifetime receipts across twelve election cycles. Spending patterns closely track the political environment: the PAC peaked at $966,000 in receipts during the 2016 cycle (Trump&rsquo;s first election), declined during the Biden years, and began ramping again in the 2026 cycle. Ten of thirteen GEO lobbyists in 2024 were former government officials [Finding #4812] [Finding #4805].</p><p>In the 2024 election cycle, GEO directed approximately $3.7 million in political contributions, with the majority flowing to Republican candidates and committees. The PAC was the first corporate PAC to maximize contributions to the Trump campaign. GEO Acquisition II Inc, a subsidiary, contributed $1 million to a pro-Trump MAGA super PAC ($500,000 in February, $250,000 in August, $250,000 in September). Additional disbursements included $775,000 to the Republican Congressional Leadership Fund, $500,000 to the Senate Leadership Fund, and $500,000 to the 2025 inaugural committee &mdash; double the company&rsquo;s 2017 inaugural contribution. Executives Zoley and Evans each gave $11,600 to the Trump Save America JFC [Finding #4798] [Finding #4799].</p><p>GEO&rsquo;s lobbying operation spent $1.37 million in 2025, focused on DHS appropriations and Commerce/Justice/Science appropriations. The company also lobbied to pass legislation requiring banks to continue providing financing to private prison operators, after several major banks announced they would stop lending to the industry during the Biden administration. Recent PAC disbursements have gone to the RNC ($30,000), NRSC ($30,000), and multiple Arizona state legislators at $1,500 each. Executive personal donations reveal a bipartisan component: CEO Donahue donated $2,700 to both Senator McConnell and Representative Henry Cuellar (D-TX), a Democrat on the House Homeland Security Committee representing a border district with a GEO facility [Finding #4805] [Finding #4818] [Finding #4879].</p>"
+      },
+      {
+        "id": "enforcement-ecosystem",
+        "title": "Position Within the Enforcement Ecosystem",
+        "viz": null,
+        "content": "<p>GEO Group occupies a central position within a broader immigration enforcement ecosystem that includes technology providers, contract vehicles, and policy actors. <a href=\"/dossiers/palantir-technologies\">Palantir Technologies</a> provides the ELITE application that ICE uses for targeting and analytics, while GEO&rsquo;s subsidiary B.I. Incorporated provides the SmartLINK monitoring platform. Together these systems create a surveillance-to-enforcement cycle: B.I. monitors individuals, <a href=\"/dossiers/palantir-technologies\">Palantir</a> analyzes data and assigns confidence scores for current addresses, ICE conducts arrests, and GEO detains [Finding #4654].</p><p><a href=\"/dossiers/ai-solutions-87-llc\">AI Solutions 87 LLC</a>, a skip tracing IDIQ awardee with $48.5 million in contract ceiling, lists Boulder, Colorado 80301 as its performance location on an ICE delivery order &mdash; the same zip code as B.I. Incorporated&rsquo;s headquarters at 6265 Gunbarrel Avenue, suggesting a potential subcontracting or co-location arrangement [Finding #4665].</p><p>The broader ICE detention contracting landscape includes 53 IDIQ awardees under 70CDCR25D, with actual task order obligations exceeding $2 billion. GEO&rsquo;s primary competitor, CoreCivic, received $3.66 billion from DOJ and $2.21 billion from <a href=\"/dossiers/dhs-procurement\">DHS</a> historically and saw its ICE revenue double in Q4 2025 to $244.7 million from $120.3 million the prior year. Both companies are awardees on the WEXMAC TITUS vehicle, and both doubled their inaugural donations for 2025. A hedge fund, Cooper Creek Partners, holds concentrated positions in both GEO and CoreCivic as an explicit sector bet on detention industry growth [Finding #4664] [Finding #4704].</p><p><a href=\"/dossiers/doge\">DOGE</a> operatives built a &ldquo;master database&rdquo; for immigration enforcement combining data from SSA, IRS, and DHS, while DHS re-engineered the SAVE system from a pull-based to a push-based model enabling states to upload entire voter rolls for automated citizenship checks. <a href=\"/dossiers/stephen-miller\">Stephen Miller</a>, as Deputy Chief of Staff for Policy and Homeland Security Advisor, oversees the immigration enforcement policy that directly drives GEO&rsquo;s contract pipeline, while <a href=\"/dossiers/america-first-legal-foundation\">America First Legal Foundation</a> &mdash; the organization he led before entering government &mdash; continues to litigate for expanded enforcement [Finding #5490] [Finding #5802].</p><p>The <a href=\"/dossiers/heritage-foundation\">Heritage Foundation</a>&rsquo;s Project 2025 DHS chapter, authored by Ken Cuccinelli, recommended consolidating all immigration enforcement into a single entity and eliminating sensitive zones for ICE, policy prescriptions that directly benefit operators like GEO by expanding the addressable market for detention beds [Finding #6675].</p>"
+      },
+      {
+        "id": "litigation-and-accountability",
+        "title": "Litigation and Accountability Gaps",
+        "viz": null,
+        "content": "<p>GEO Group faces systematic litigation across multiple facilities for forced labor, abuse, and safety violations &mdash; while the same administration that benefits from its donations drops enforcement actions against it. In Menocal v. GEO Group (SCOTUS 24-758), immigrants at the Aurora, Colorado facility alleged they were forced to work for $1 per day cleaning and cooking. The Tenth Circuit dismissed GEO&rsquo;s immunity appeal in October 2024, and the Supreme Court granted certiorari in June 2025, ultimately rejecting GEO&rsquo;s argument that it should enjoy the same legal immunity as a government entity [Finding #4809].</p><p>In Washington State, Nwauzor v. GEO Group (9th Cir. 21-36024, January 2025), a jury found that GEO had violated the minimum wage act at its Tacoma facility, awarding $17.3 million to over 10,000 detainees plus $5.9 million to the state for a total judgment of $23.2 million. Two deaths occurred at the Tacoma facility in the preceding year [Finding #4809].</p><p>The EPA filed an administrative complaint in June 2024 alleging that GEO used Halt disinfectant &mdash; a chemical that causes irreversible eye damage &mdash; on over 1,000 occasions without proper protections at the Adelanto, California facility. The Trump EPA dropped the case in June 2025 with no explanation; ProPublica noted that GEO was a major Trump donor with over $1 billion in government contracts at the time. RFK Human Rights filed a separate suit against ICE and GEO for assaulting a Honduran detainee and retaliating against him via solitary confinement [Finding #4809].</p><p>GEO&rsquo;s stock trajectory illustrates the gap between political expectations and operational reality. The stock surged 42% on election day (November 5, 2024, from $15.13 to $21.48) and peaked at $36.46 on January 21, 2025 &mdash; a 141% gain from pre-election levels. It then declined over 60% from peak through February 2026, falling below the pre-election close despite record profits, as investors judged the pace of contract activation insufficient relative to expectations. ICE&rsquo;s reported plans to consolidate its 200+ facility network contributed to the selloff [Finding #4828].</p>"
+      }
+    ],
+    "open_questions": [
+      "What is the full scope of David Venturella's ethics waiver that allows him to oversee ICE detention contracts after earning over $6 million at GEO Group over twelve years? What specific recusal obligations, if any, were imposed, and are they being enforced?",
+      "How does GEO's subsidiary structure (GEO Acquisition II, GEO Corrections Holdings) interact with the federal contractor contribution ban? The 2016 FEC deadlock on the Campaign Legal Center complaint effectively created a precedent -- has this been tested again or formalized since the $1 million contribution to the MAGA super PAC in 2024?",
+      "What is the relationship between AI Solutions 87 LLC and B.I. Incorporated at the Boulder, Colorado 80301 location? Is there a formal subcontracting arrangement, shared infrastructure, or personnel overlap between the $48.5 million skip tracing awardee and GEO's monitoring subsidiary?",
+      "Why did the Trump EPA drop the Halt disinfectant administrative complaint against GEO at Adelanto in June 2025 with no public explanation? Were there communications between GEO lobbyists or executives and EPA political appointees prior to the decision?",
+      "What effect does the WEXMAC TITUS vehicle have on procurement oversight for GEO's detention operations? By routing contracts through a Navy logistics instrument, are standard DHS Inspector General and Congressional oversight mechanisms bypassed, and who authorized the repurposing of this military vehicle for domestic immigration enforcement?",
+      "GEO invested $70 million in December 2024 -- before inauguration -- in facility renovations, GPS devices, and transport assets. What advance signals or assurances, if any, did GEO receive about upcoming contract awards that would justify this pre-inauguration capital expenditure?",
+      "With four CEOs in five years (Gordo 2021-2023, Evans 2024, Donahue January-February 2026, Zoley returning March 2026), what is driving the leadership instability at GEO? Each departure has been accompanied by lucrative consulting or separation agreements. Is the board using the CEO position as a patronage mechanism, or are there governance disputes related to the company's dependence on the political cycle?"
+    ],
+    "applicable_models": [
+      "manufactured-dependency",
+      "enabler-gradient",
+      "private-order",
+      "bridge-tax",
+      "complexity-as-credential"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "GEO Group",
+      "connections": [
+        {
+          "target": "CoreCivic",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Both awarded WEXMAC TITUS contracts for ICE detention expansion via DoD vehicle"
+        },
+        {
+          "target": "Tom Homan",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Consulting fees (at least $5K disclosed) 2023-2024; FBI sting recorded $50K cash acceptance Sept 2024"
+        },
+        {
+          "target": "Matthew Albence",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Acting ICE Director -> GEO Group SVP Client Relations 2022"
+        },
+        {
+          "target": "Julie Myers Wood",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Head of ICE 2006-2008 -> GEO Board of Directors 2014, ~$250K/year"
+        },
+        {
+          "target": "David Venturella",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "12 years at GEO earning $6M+, now back at ICE overseeing contracts with ethics waiver"
+        },
+        {
+          "target": "Daniel Ragsdale",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "ICE Deputy Director -> GEO Group EVP 2017, now SVP Contract Admin Jan 2025"
+        },
+        {
+          "target": "CoreCivic",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Two dominant private prison companies. Combined $4.8B revenue 2025. Both doubled inaugural donations. Both focused lobbying on DHS appropriations. Both expanding detention capacity for ICE."
+        },
+        {
+          "target": "Proclamation 10886 (Border Emergency)",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Emergency declaration enables no-bid contracting authority. GEO Delaney Hall 1.2B 15-year contract awarded Feb 25 (36 days post-declaration)"
+        },
+        {
+          "target": "One Big Beautiful Bill (H.R. 1)",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "OBBBA provides 45B detention funding through FY2029. GEO expected to receive outsized share given existing infrastructure and 14 idle facilities ready for reactivation."
+        },
+        {
+          "target": "ICE Skip Tracing Program",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "GEO Group subsidiary awarded skip tracing IDIQ contract in Dec 2025. GEO profits at every stage: detention (Delaney Hall), transport (GEO Transport/CSI sub), and now bounty hunting (skip tracing)."
+        },
+        {
+          "target": "Tom Homan",
+          "type": "employment",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Homan consulted for GEO Care division before returning to DHS as Border Czar in Trump 2nd admin with ethics waiver"
+        },
+        {
+          "target": "Daniel Bible",
+          "type": "employment",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "ICE Deputy Executive Associate Director left ICE Oct 31 2024 days before election, now GEO Executive VP"
+        },
+        {
+          "target": "Pam Bondi",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Now Trump AG, previously lobbied for GEO at Ballard Partners"
+        },
+        {
+          "target": "Donald Trump",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "PAC first corp to max out to Trump campaign; GEO Acquisition II gave 1M to MAGA super PAC; 500K to inaugural; execs Zoley and Evans each gave 11600 to Trump Save America JFC"
+        },
+        {
+          "target": "B.I. Incorporated",
+          "type": "corporate",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Wholly-owned subsidiary, sole provider of ICE ISAP electronic monitoring for 21 years, 2.2B contract value"
+        },
+        {
+          "target": "George Zoley",
+          "type": "corporate",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Founder, Chairman, and CEO (again as of Mar 1 2026). Created company 1984 as division of Wackenhut. Total comp ~7.2M. Controls via long tenure and board chairmanship"
+        },
+        {
+          "target": "BlackRock",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "BlackRock holds 16.05% of GEO Group (19.66M shares) as largest institutional shareholder. Also holds 17% of CoreCivic and 5.45% of Palantir, creating passive financial interest across entire enforcement ecosystem."
+        },
+        {
+          "target": "Palantir Technologies",
+          "type": "intelligence",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "GEO subsidiary B.I. Inc provides SmartLINK monitoring ($2.2B contract). Palantir provides targeting/analytics. Together form surveillance-to-enforcement cycle: GEO monitors -> Palantir analyzes -> ICE arrests -> GEO detains."
+        },
+        {
+          "target": "Cooper Creek Partners",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Cooper Creek Partners hedge fund holds concentrated positions in BOTH GEO Group and CoreCivic -- explicit sector bet on detention industry profiting from immigration enforcement."
+        }
+      ],
+      "secondHop": {
+        "CoreCivic": [
+          {
+            "target": "Proclamation 10886 (Border Emergency)",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Emergency declaration enables no-bid contracting. CoreCivic received three no-bid detention contracts totaling 5,753 beds"
+          },
+          {
+            "target": "One Big Beautiful Bill (H.R. 1)",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "OBBBA provides 45B detention funding through FY2029. CoreCivic positioned to capture major share with existing facilities and rapid construction capability (12-18 months vs 4-5 years public)."
+          }
+        ],
+        "Donald Trump": [
+          {
+            "target": "Tom Barrack",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
+          },
+          {
+            "target": "Jay Clayton",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
+          },
+          {
+            "target": "William Barr",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
+          },
+          {
+            "target": "Keith Davidson",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
+          },
+          {
+            "target": "Robert Kraft",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
+          }
+        ],
+        "Palantir Technologies": [
+          {
+            "target": "Stephen Miller",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
+          },
+          {
+            "target": "Peter Thiel",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
+          },
+          {
+            "target": "Department of Defense",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
+          },
+          {
+            "target": "ICE",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
+          },
+          {
+            "target": "Alex Karp",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
+          }
+        ],
+        "Pam Bondi": [
+          {
+            "target": "Stephen Miller",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Miller's office coordinates with DOJ on voter roll demands and election investigations"
+          },
+          {
+            "target": "DOJ Voting Section",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Bondi voter roll demands operationalized through DOJ Voting Section shift under Harmeet Dhillon"
+          },
+          {
+            "target": "Ed Martin",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Bondi as AG established Weaponization Working Group Feb 5 2025. Martin chaired group and served under Bondi at DOJ until Feb 2026 demotion."
+          },
+          {
+            "target": "Harmeet Dhillon",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Bondi as AG directs voter roll litigation campaign; Dhillon as AAG Civil Rights restructured Voting Section to execute it. Dhillon installed PILF and True the Vote-linked personnel as Voting Section chiefs."
+          },
+          {
+            "target": "Eric Neff",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Neff serves as acting Voting Section chief under Bondi DOJ, managing confidential MOU program and voter roll litigation. Neff has election conspiracy background including True the Vote reliance and Dominion conspiracy articles."
+          }
+        ],
+        "Proclamation 10886 (Border Emergency)": [
+          {
+            "target": "CSI Aviation",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Emergency authority justifies sole-source deportation flight contract 128-219M on Feb 28, 39 days post-declaration"
+          }
+        ],
+        "Tom Homan": [
+          {
+            "target": "Charles Sowell",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Homan consulted for Sowell's SE&M Solutions at $20K/month; Sowell used Homan connection to attract detention contract clients"
+          },
+          {
+            "target": "Mark Hall",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Hall is Homan's senior adviser in White House; previously Border911 board member; paid $50K by Sowell before entering government"
+          },
+          {
+            "target": "Michael Flynn",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Homan served as CEO of The America Project, co-founded by Flynn and Byrne"
+          },
+          {
+            "target": "Stephen Miller",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Miller (Deputy CoS/Homeland Security Advisor) sets 3,000/day arrest quota, Homan (Border Czar) executes. Miller writes EOs, Homan implements deportation operations."
+          }
+        ],
+        "ICE Skip Tracing Program": [
+          {
+            "target": "Palantir Technologies",
+            "type": "corporate",
+            "strength": 0.7,
+            "description": "Palantir ImmigrationOS provides the surveillance targeting platform that skip tracing bounty hunters then operationalize. Technology-to-enforcement pipeline: AI targeting plus privatized apprehension."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
 }
