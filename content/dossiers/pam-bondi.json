@@ -511,5 +511,365 @@
       "confidence": "confirmed",
       "id": 6524
     }
-  ]
+  ],
+  "curation": {
+    "key_finding_ids": [
+      6524,
+      6536,
+      6603,
+      6602,
+      6598,
+      6550,
+      6599,
+      6600
+    ],
+    "key_identifiers": {
+      "jurisdictions": [
+        "DC"
+      ],
+      "officers": [
+        {
+          "role": "Establishing authority (AG)",
+          "entity": "Weaponization Working Group",
+          "start": null,
+          "end": null
+        }
+      ],
+      "entities": [
+        {
+          "id": 983,
+          "name": "Weaponization Working Group",
+          "type": "government",
+          "jurisdiction": "DC",
+          "role": "Establishing authority (AG)"
+        }
+      ]
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          3288,
+          3297,
+          3319,
+          3326,
+          3327,
+          2836,
+          3298,
+          3328
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          6524,
+          6536,
+          6598,
+          6599,
+          6600,
+          6603
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      }
+    ],
+    "curated_at": "2026-03-11T22:50:26.258434+00:00",
+    "lead": "<p>Pamela Jo Bondi served as Florida Attorney General from 2011 to 2019, subsequently worked as a registered lobbyist at Ballard Partners representing clients including the GEO Group\u2014a private detention contractor\u2014before receiving a recess appointment as U.S. Attorney General in January 2025 [Finding #6550]. In that capacity, she established the Weaponization Working Group on February 5, 2025, chaired by <a href=\"/dossiers/ed-martin\">Ed Martin</a>, and directed a multi-wave litigation campaign demanding voter registration roll data from states across the country [Finding #6524].</p><p>Beginning in August 2025, the Department of Justice under Bondi's direction sent demand letters to more than 40 states and ultimately sued 29 states and the District of Columbia across six litigation waves seeking full voter rolls including Social Security and driver's license numbers [Finding #6598]. Four of those suits were dismissed by federal courts, with judges in California, Oregon, and Michigan independently ruling that HAVA, NVRA, and the Civil Rights Act of 1960 do not require states to produce personally identifiable voter data beyond what states make publicly available [Finding #6603]. DOJ appealed all four dismissals and filed for expedited briefing in the Sixth Circuit to potentially resolve the question before the November 2026 midterms [Finding #6603].</p><p>Parallel to the litigation, DOJ offered confidential memoranda of understanding to states under which states would provide full voter rolls to DOJ, which would then run the data through the DHS SAVE citizenship-verification system and require states to remove flagged voters within 45 days [Finding #6599]. The SAVE system, originally a single-query benefits-verification tool, was formally expanded to include voter list maintenance as an approved use in a DHS regulatory filing [Finding #6602]. A Texas pilot under this program flagged 2,724 voters and issued 30-day proof-of-citizenship deadlines [Finding #6599]. USCIS's own Privacy Impact Assessment acknowledges that the system produces inaccurate results from misspellings and incomplete data, and NPR reported the system flagging naturalized U.S. citizens due to outdated records [Finding #6602].</p>",
+    "system_role": "Bondi's tenure as Attorney General illustrates how the Department of Justice's civil enforcement authority over election administration can be directed toward building cross-agency voter databases \u2014 with the civil rights division restructured to execute the program and private-sector election-integrity organizations supplying personnel.",
+    "sections": [
+      {
+        "id": "voter-roll-litigation",
+        "title": "Voter Roll Litigation Campaign",
+        "content": "<p>DOJ's first demand letters went to 15 or more states in August 2025, citing federal statutes including the National Voter Registration Act and the Help America Vote Act as authority to compel production of full voter registration files including Social Security and driver's license numbers [Finding #6524]. When states declined, DOJ filed suit in six waves between September 2025 and February 2026: Wave 1 (September 2025) targeted California, Maine, Michigan, Minnesota, New Hampshire, New York, Oregon, and Pennsylvania; Wave 2 added North Carolina, Virginia, Georgia, Illinois, and Wisconsin; Wave 3 (December 2) added Delaware, Maryland, New Mexico, Rhode Island, Vermont, Washington, and DC; Wave 4 (December 12) added Colorado, Hawaii, Massachusetts, and Nevada; Wave 5 (January 2026) added Arizona and Connecticut; Wave 6 (February 26) added Utah, Oklahoma, Kentucky, West Virginia, and New Jersey [Finding #6598].</p><p>Twelve Republican-led states \u2014 Alaska, Arkansas, Indiana, Kansas, Louisiana, Mississippi, Nebraska, Ohio, South Dakota, Tennessee, Texas, and Wyoming \u2014 complied voluntarily without litigation [Finding #6598]. Senator Alex Padilla sent letters to Bondi in November 2025 and January 2026 raising legal objections to the program; Democracy Docket tracked the litigation in real time [Finding #6536]. A federal judge in the Minnesota case described a Bondi letter sent to Governor Tim Walz on January 25, 2026 \u2014 timed the same day as a fatal ICE operation in Minneapolis \u2014 as linking immigration enforcement to voter data compliance, characterizing the letter as \"blackmail\"; 18 secretaries of state condemned the letter [Finding #6600].</p><p>Courts that dismissed DOJ's suits reached consistent conclusions. The California court ruled the demands violated federal privacy law and warned against consolidation of elections authority in the executive branch. The Oregon court found DOJ had not met the statutory standard for records access. Judge Jarbou in the Michigan case issued a 23-page order finding that no applicable federal statute authorized DOJ to demand the specific personally identifiable data sought [Finding #6603]. DOJ appealed all four dismissals to the Ninth and Sixth Circuits [Finding #6603].</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "doj-dhs-data-pipeline",
+        "title": "DOJ-DHS Voter Data Pipeline",
+        "content": "<p>The confidential MOU program created a cross-agency data flow: states provide voter rolls to DOJ, DOJ transfers the data to DHS, DHS runs bulk queries through the SAVE system to flag potential noncitizens, DOJ notifies states of flagged records, and states are required to remove flagged voters within 45 days [Finding #6599]. <a href=\"/dossiers/doj-voting-section\">DOJ Voting Section</a> acting chief <a href=\"/dossiers/eric-neff\">Eric Neff</a> \u2014 who has a documented history of relying on True the Vote evidence and writing articles about Dominion Voting Systems conspiracy claims \u2014 identified 11 states willing to sign confidential MOUs: Alabama, Mississippi, Missouri, Montana, Nebraska, South Carolina, South Dakota, Texas, Tennessee, Utah, and Virginia [Finding #6599].</p><p>DHS Deputy Assistant Secretary for Election Integrity <a href=\"/dossiers/heather-honey\">Heather Honey</a>, appointed August 2025, manages the DHS side of the pipeline. Honey was a subcontractor during the Cyber Ninjas 2020 Arizona Maricopa County audit and sits on Cleta Mitchell's FAIR Elections Fund board. She publicly contradicted a DHS spokesperson about whether voter data sharing was occurring [Finding #6602]. A DHS regulatory filing formalized voter registration and voter list maintenance as official SAVE uses, expanding the system beyond its original single-query benefits-verification function [Finding #6602].</p><p>USCIS acknowledged in its own Privacy Impact Assessment that SAVE produces inaccurate results from misspellings and incomplete data. NPR reported in December 2025 that the system flags naturalized U.S. citizens because SSA citizenship records often fail to update after naturalization [Finding #6602]. The Texas pilot flagged 2,724 voters; those individuals received 30-day proof-of-citizenship deadlines [Finding #6599].</p>",
+        "viz": null
+      },
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "content": "<p><a href=\"/dossiers/stephen-miller\">Stephen Miller</a>, serving as White House Deputy Chief of Staff and Homeland Security Advisor, coordinates with DOJ on voter roll demands and election investigations, according to reporting by The Atlantic (March 2026) and the Washington Post [Connection #3288]. Miller directs weekly election enforcement meetings in which Honey participates as DHS election integrity deputy. Bondi's voter roll litigation thus sits at the intersection of DOJ legal authority and White House political direction.</p><p><a href=\"/dossiers/harmeet-dhillon\">Harmeet Dhillon</a>, confirmed as Assistant Attorney General for Civil Rights in April 2025, restructured the DOJ Voting Section to execute the voter roll litigation campaign and installed personnel with ties to the Public Interest Legal Foundation and True the Vote as Voting Section chiefs [Connection #3326]. PILF data was cited in DOJ's demand letter to Pennsylvania's Secretary of State in August 2025, and DOJ filed an amicus brief supporting PILF in the Maine case. Dhillon's prior law firm, Dhillon Law Group, received approximately $4.5 million from the Trump campaign in 2023 before she transferred ownership to her brother upon DOJ confirmation.</p><p><a href=\"/dossiers/ed-martin\">Ed Martin</a> chaired the Weaponization Working Group established by Bondi on February 5, 2025, and served at DOJ under her until a demotion in February 2026 [Connection #3319]. On a January 2026 War Room podcast appearance, Martin stated publicly that he was working with Kurt Olsen on election integrity matters. Martin's connection to Bondi represents the overlap between the voter roll litigation program and the administration's broader election investigations portfolio.</p><p>Prior to her appointment as AG, Bondi registered as a lobbyist at Ballard Partners, where she represented the <a href=\"/dossiers/geo-group\">GEO Group</a> [Connection #2836]. GEO Group is among the primary beneficiaries of expanded immigration detention under the current administration; it received a 15-year, $1.2 billion contract for the Delaney Hall facility 36 days after the January 2025 border emergency declaration. Bondi's prior lobbying relationship with GEO is a disclosed pre-government financial tie to a direct beneficiary of current DOJ and DHS policy.</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "content": "<p>FEC records show a $1,000 contribution from Pam Bondi to Tommy Tuberville for Senate dated May 27, 2020, made while she was employed at Ballard Partners in DC, and a $2,000 contribution to Huck PAC on December 19, 2014 from Tallahassee [Finding #6550]. LittleSis assigns entity ID 114097 to Bondi. These are the only federal donor records identified; the FEC match carries medium confidence given the common name and absence of additional corroborating identifiers [Finding #6550].</p><p>Bondi's Ballard Partners lobbying income, including her GEO Group work, has not been fully itemized in the present record. The financial connection to GEO Group represents the primary pre-government financial relationship with a direct beneficiary of administration policy identified to date [Connection #2836].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What is the full scope of Bondi's Ballard Partners client roster and disclosed lobbying income between 2019 and 2024, and do any clients beyond GEO Group have financial interests in current DOJ or DHS enforcement programs?",
+      "What instructions, memoranda, or communications between Bondi's office and the White House directed the initiation and wave-by-wave expansion of voter roll litigation, and who made the decision to link voter data demands to ICE enforcement in the January 25, 2026 letter to Minnesota?",
+      "What voter roll data has DOJ received from voluntarily complying states, where is it stored, what retention policies apply, and has any portion been transferred to DHS or any third party?",
+      "What is the legal authority for the confidential MOU program specifically \u2014 as distinct from the litigation \u2014 and have any MOUs been executed and, if so, by which states?",
+      "What financial relationship, if any, did Bondi have with the Trump political infrastructure between her Florida AG tenure and her AG nomination, beyond the FEC-documented contributions, including undisclosed consulting or advisory arrangements?"
+    ],
+    "applicable_models": [
+      "narrative-shield",
+      "manufactured-dependency",
+      "private-order"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Pam Bondi",
+      "connections": [
+        {
+          "target": "Stephen Miller",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": "The Atlantic March 2026",
+          "description": "Miller's office coordinates with DOJ on voter roll demands and election investigations"
+        },
+        {
+          "target": "DOJ Voting Section",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Bondi voter roll demands operationalized through DOJ Voting Section shift under Harmeet Dhillon"
+        },
+        {
+          "target": "Ed Martin",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "DOJ memorandum",
+          "description": "Bondi as AG established Weaponization Working Group Feb 5 2025. Martin chaired group and served under Bondi at DOJ until Feb 2026 demotion."
+        },
+        {
+          "target": "Harmeet Dhillon",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Bondi as AG directs voter roll litigation campaign; Dhillon as AAG Civil Rights restructured Voting Section to execute it. Dhillon installed PILF and True the Vote-linked personnel as Voting Section chiefs."
+        },
+        {
+          "target": "Eric Neff",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Neff serves as acting Voting Section chief under Bondi DOJ, managing confidential MOU program and voter roll litigation. Neff has election conspiracy background including True the Vote reliance and Dominion conspiracy articles."
+        },
+        {
+          "target": "GEO Group",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Now Trump AG, previously lobbied for GEO at Ballard Partners"
+        },
+        {
+          "target": "National Fraud Enforcement Division",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "NFED initial MN focus parallels Bondi voter roll demands to MN; both use fraud claims as lever for state election data"
+        },
+        {
+          "target": "Heather Honey",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Bondi DOJ collects voter rolls and shares with DHS where Honey serves as Deputy Asst Sec of Election Integrity. Honey manages DHS side of the DOJ-DHS-SAVE voter data pipeline. Honey contradicted DHS spokesperson about data sharing occurring."
+        }
+      ],
+      "secondHop": {
+        "DOJ Voting Section": [
+          {
+            "target": "Public Interest Legal Foundation",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "PILF data cited in DOJ letter to PA SOS Aug 2025; DOJ filed amicus for PILF in Maine case; Riordan revolving door"
+          },
+          {
+            "target": "Harmeet Dhillon",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "AAG Civil Rights Division, oversees Voting Section since April 2025"
+          },
+          {
+            "target": "Eric Neff",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Acting Chief of DOJ Voting Section, replaced Maureen Riordan Dec 2025"
+          },
+          {
+            "target": "Megan Frederick",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "DOJ Voting Section attorney, hired by Dec 2025"
+          },
+          {
+            "target": "Joseph W. Voiland",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Counsel on WI voter rolls case, appeared Feb 2026"
+          }
+        ],
+        "Eric Neff": [
+          {
+            "target": "True the Vote",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Neff relied on TTV evidence in dismissed Konnech prosecution; now DOJ Voting Section Acting Chief succeeding PILF's Riordan"
+          },
+          {
+            "target": "Maureen Riordan",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Neff succeeded Riordan as DOJ Voting Section Acting Chief. Riordan from PILF pipeline; Neff from True the Vote pipeline."
+          },
+          {
+            "target": "True the Vote",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Used True the Vote/Gregg Phillips tip to prosecute Konnech, withheld TTV involvement from supervisors"
+          },
+          {
+            "target": "Harmeet Dhillon",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Neff serves as Acting Chief under Dhillon's Civil Rights Division leadership"
+          }
+        ],
+        "GEO Group": [
+          {
+            "target": "Tom Homan",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Consulting fees (at least $5K disclosed) 2023-2024; FBI sting recorded $50K cash acceptance Sept 2024"
+          },
+          {
+            "target": "Matthew Albence",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Acting ICE Director -> GEO Group SVP Client Relations 2022"
+          },
+          {
+            "target": "Julie Myers Wood",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Head of ICE 2006-2008 -> GEO Board of Directors 2014, ~$250K/year"
+          },
+          {
+            "target": "Proclamation 10886 (Border Emergency)",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Emergency declaration enables no-bid contracting authority. GEO Delaney Hall 1.2B 15-year contract awarded Feb 25 (36 days post-declaration)"
+          },
+          {
+            "target": "One Big Beautiful Bill (H.R. 1)",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "OBBBA provides 45B detention funding through FY2029. GEO expected to receive outsized share given existing infrastructure and 14 idle facilities ready for reactivation."
+          }
+        ],
+        "Harmeet Dhillon": [
+          {
+            "target": "Judicial Watch",
+            "type": "political",
+            "strength": 1.0,
+            "description": "DOJ under Dhillon filed statement of interest supporting JW Oregon lawsuit; parallel NVRA enforcement"
+          },
+          {
+            "target": "Dhillon Law Group",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Founded firm, sold to brother Mandeep Dhillon upon DOJ confirmation. Firm was primary outside counsel to Trump campaign, received ~4.5M in 2023."
+          },
+          {
+            "target": "Center for American Liberty",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Founded 501c3 in 2018, raised over 15M for pro bono conservative legal services"
+          }
+        ],
+        "Heather Honey": [
+          {
+            "target": "Stephen Miller",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Miller directs weekly election enforcement meetings; Honey is DHS election integrity deputy"
+          },
+          {
+            "target": "Cyber Ninjas",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Honey was Cyber Ninjas subcontractor during Arizona Maricopa County 2020 audit"
+          },
+          {
+            "target": "Cleta Mitchell",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Honey is VP on Mitchell's FAIR Elections Fund board; both in election integrity network"
+          }
+        ],
+        "Stephen Miller": [
+          {
+            "target": "Steve Bannon",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Alliance originated at 2012 dinner with Sessions. Miller sent 900+ emails to Breitbart as de facto assignment editor. Bannon recruited Miller to Trump campaign Jan 2016."
+          },
+          {
+            "target": "Tom Homan",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Miller (Deputy CoS/Homeland Security Advisor) sets 3,000/day arrest quota, Homan (Border Czar) executes. Miller writes EOs, Homan implements deportation operations."
+          },
+          {
+            "target": "Palantir Technologies",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
+          },
+          {
+            "target": "Palantir",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Miller owns $100K-$250K in Palantir stock while directing immigration policy generating Palantir contracts"
+          },
+          {
+            "target": "Gene Hamilton",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Co-founders AFL. Both Sessions alumni. Miller (WH) and Hamilton (DHS/DOJ) were the two key Sessions staffers who coordinated immigration policy in Trump 1.0 largely without knowledge of other officials."
+          }
+        ],
+        "Ed Martin": [
+          {
+            "target": "Kurt Olsen",
+            "type": "political",
+            "strength": 0.7,
+            "description": "Ed Martin (Weaponization Working Group) publicly stated working with Olsen on election integrity on War Room podcast Jan 2026"
+          },
+          {
+            "target": "Colin McDonald",
+            "type": "political",
+            "strength": 0.7,
+            "description": "McDonald co-chaired Weaponization Working Group led by Ed Martin"
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": [
+      {
+        "date": "2025-08-04",
+        "label": "AG Pam Bondi sent letters demanding voter registration rolls from 15+ states. DOJ sued Georgia (Dec 2025) to force release of 2020 ballot documents. Minnesota received demand from AG Bondi to share voter rolls. DOJ voter data requests escalated Aug 2025.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 6524
+      }
+    ]
+  }
 }
