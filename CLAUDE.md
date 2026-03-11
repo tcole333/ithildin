@@ -3,20 +3,7 @@
 General-purpose agent-scale network investigation platform. Investigate any public figure or organization through publicly available data — corporate registries, court filings, financial disclosures, government records, and document corpora. Multiple Claude Code sessions pursue leads in parallel.
 
 **Design doc**: `PRD.md` | **Methodology**: `research/INVESTIGATIVE_METHODOLOGY.md`
-**Tool reference**: `docs/TOOL_REFERENCE.md` (complete CLI for all 37+ tools) | **Source modules**: `docs/sources/` (agent instructions per source)
-**OSINT resources**: `research/OSINT_RESOURCES.md`
-
-## Config Hierarchy
-
-1. `~/.claude/CLAUDE.md` — Personal preferences (all projects)
-2. `CLAUDE.md` (this file) — Platform instructions
-3. `investigations/<name>/config.yaml` — Active investigation profile (key_persons, threads, corpus_tools, etc.)
-4. `investigations/<name>/CLAUDE-ADDENDUM.md` — Investigation-specific context (if exists)
-5. `.claude/skills/<name>/SKILL.md` — On-demand skill files (loaded when invoked)
-6. `docs/sources/_preamble.md` — Shared research agent boilerplate (evidence standards, entity registration, report format)
-7. `docs/sources/*.md` — Per-source agent instruction modules (protocols, what to look for)
-8. `memory/*.md` — Shared topic files (api-notes, infrastructure)
-9. `docs/TOOL_REFERENCE.md` — Complete CLI reference for all 37+ tools
+**Tool reference**: `docs/TOOL_REFERENCE.md` (complete CLI for all 37+ tools) | **OSINT resources**: `research/OSINT_RESOURCES.md`
 
 ## Investigation Profiles
 
@@ -38,7 +25,7 @@ All skills load the active profile at startup. Entities are shared across invest
 ```bash
 /dispatch                   # Queue depths — what needs attention
 /pursue-lead                # Pick up next lead
-/deep-investigate <name>    # Adaptive multi-wave investigation (preferred)
+/deep-investigate <name>    # 4 parallel sub-agents (preferred)
 /triage-leads               # Process pending_triage leads (batch of 20)
 /build-infra                # Build next infra request (or scan for gaps)
 /search-all-sources <term>  # Fan-out search
@@ -86,37 +73,17 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 - Always use `--output FILE` for search results. **Session isolation**: `WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)`, all temp files in `$WORKDIR/`
 - Check search_log before querying: `from tools.lead_tracker import check_searched`
 
-### Entity Registration (CRITICAL)
-**Every organization and person discovered MUST be registered** in the entity system. This is what enables cross-investigation network discovery — without it, `auto_leads.py` generates nothing and graph analysis misses nodes.
-
-```bash
-# 1. Check if entity exists first
-uv run python tools/entity_tracker.py lookup --name "ENTITY_NAME"
-# 2. Register new organizations (entity types: llc, inc, ltd, trust, foundation, nonprofit, partnership, fund, association, government, unknown)
-uv run python tools/entity_tracker.py add-entity --name "ENTITY" --entity-type inc --jurisdiction "STATE" --source "SOURCE" --notes "CONTEXT"
-# 3. Assign person roles (returns entity_id from step 2)
-uv run python tools/entity_tracker.py add-role --entity-id ID --person-name "PERSON" --role "CEO" --source "SOURCE"
-# 4. Link entities to each other (relation types: owns, controls, funds, shares_officer, subsidiary_of, successor_to)
-uv run python tools/entity_tracker.py add-relation --entity-a-id ID --entity-b-id ID --relation-type "funds" --description "DESC"
-```
-
-Do this AS YOU FIND entities, not as a cleanup step. If a finding mentions an organization, register it immediately.
-
 ### Core CLI (full examples in docs/TOOL_REFERENCE.md)
 
 | Tool | Key Commands |
 |------|-------------|
 | **Leads** | `lead_tracker.py {add,list,claim,complete,search,evidence,next,stats}` |
 | **Findings** | `findings_tracker.py {add,connect,connections,search,timeline}` |
-| **Entities** | `entity_tracker.py {lookup,show,add-entity,add-role,add-address,add-relation}` |
 | **Audit** | `findings_tracker.py {unverified,provenance,verify,dispute,retract,correct,audit}` |
 | **Infra** | `infra_tracker.py {add,list,show,claim,evaluate,complete,reject,search,next,stats}` |
 | **Analysis** | `hypothesis_tracker.py`, `tag_manager.py`, `event_timeline.py`, `graph_tools.py`, `analysis_export.py`, `methodology_tracker.py` |
 | **Pillars** | `pillar_tracker.py {register,list,show,seed,arc,career,event,events,bootstrap,alumni,cohort,dispersal,overlap,timeline,score,gaps,cross-pillar,pillar-network,stats}` |
-| **Recon** | `recon_probe.py probe "TARGET" [--type person|entity]` — fast parallel count-only queries across all sources, returns heat map |
 | **Profile** | `investigation_context.py {show,list,set}` |
-
-Pillar system (`pillar_tracker.py`) tracks institutional pillars, career arcs, and alumni dynamics. Orchestrator scores measure documentation completeness (not true importance) — gaps are often the most interesting output.
 
 **39+ data source tools** covering document corpora, corporate registries (15 jurisdictions), public records, financial data, and external APIs. Run `uv run python tools/source_report.py` for live status.
 
@@ -198,8 +165,6 @@ Terminal 3: claude -> /deep-investigate "Target Name"
 - All instances share `investigation.db` (WAL mode handles concurrent writes)
 - Each skill creates unique `WORKDIR` — prevents cross-instance overwrites
 - Sub-agents write `$WORKDIR/report-*.md` — parent reads files, NOT TaskOutput
-- Never call TaskOutput on completed agents — transcript is 10-50MB, report is 2KB
-- Agents aim < 50 tool calls per session
 - Post-wave: run `uv run python tools/auto_leads.py run`
 
 ## Environment
@@ -207,7 +172,7 @@ Terminal 3: claude -> /deep-investigate "Target Name"
 - **Always use `uv run python`** to invoke tools
 - Dehashed API: credits limited (468)
 - OpenCorporates API: basic tier (500 calls/month, 200/day max)
-- Key identifiers (emails, addresses, contacts): see `investigations/<active_profile>/key-identifiers.md`
+- Key identifiers (emails, addresses, contacts): see `memory/key-identifiers.md`
 
 ## Ethical Guidelines
 

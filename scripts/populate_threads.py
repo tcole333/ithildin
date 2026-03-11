@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-One-time migration: classify findings into investigation threads.
+Classify findings into investigation threads.
 
 Assigns thread_id to all findings currently with NULL thread_id,
-based on target_name matching against known thread members and
-keyword matching in summary/detail.
+based on target_name matching against thread definitions from the
+active investigation profile.
 
 Usage:
     uv run python scripts/populate_threads.py --dry-run    # preview assignments
@@ -21,12 +21,39 @@ from pathlib import Path
 
 DB_PATH = Path(__file__).resolve().parent.parent / "investigation.db"
 
-# ── Thread Definitions ────────────────────────────────────────
-# Thread ID → (name, target patterns, keyword patterns)
-# target patterns: exact/partial match on target_name (case-insensitive)
-# keyword patterns: regex patterns to match in summary + detail text
 
-THREAD_DEFS = {
+def _load_thread_defs():
+    """Load thread definitions from the active investigation profile."""
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from tools.investigation_context import get_active_profile
+        profile = get_active_profile()
+        defs = {}
+        for thread in profile.threads:
+            tid = thread.get("id")
+            if tid is None:
+                continue
+            defs[tid] = {
+                "name": thread.get("name", f"Thread {tid}"),
+                "targets": thread.get("targets", []),
+                "keywords": thread.get("keywords", []),
+            }
+        return defs, profile.name
+    except Exception:
+        return {}, ""
+
+
+THREAD_DEFS_CACHE = None
+
+
+def get_thread_defs():
+    global THREAD_DEFS_CACHE
+    if THREAD_DEFS_CACHE is None:
+        THREAD_DEFS_CACHE = _load_thread_defs()
+    return THREAD_DEFS_CACHE
+
+
+_LEGACY_THREAD_DEFS = {
     2: {
         "name": "Mega Group",
         "targets": [
@@ -195,8 +222,13 @@ def run_classification(dry_run=False):
     ambiguous = []
     unclassified = []
 
+    # Load thread definitions from profile (with legacy fallback)
+    thread_defs, profile_name = get_thread_defs()
+    if not thread_defs:
+        thread_defs = _LEGACY_THREAD_DEFS
+
     for f in findings:
-        tid, method, confidence = classify_finding(f, THREAD_DEFS)
+        tid, method, confidence = classify_finding(f, thread_defs)
 
         if tid is None:
             # Default to Thread 1 (Core) for unclassified
@@ -208,8 +240,9 @@ def run_classification(dry_run=False):
         else:
             assignments[tid].append((f["id"], method, confidence))
 
-    # Report
-    thread_names = {1: "Epstein Core Network", **{k: v["name"] for k, v in THREAD_DEFS.items()}}
+    # Report — build thread names from profile
+    first_thread = thread_defs.get(1, {}).get("name", "Core Network")
+    thread_names = {1: first_thread, **{k: v["name"] for k, v in thread_defs.items()}}
     print("Assignment Summary:")
     print("=" * 60)
     for tid in sorted(assignments.keys()):

@@ -4,6 +4,68 @@ Complete CLI examples for all investigation tools. Referenced from CLAUDE.md.
 
 Run `python tools/source_report.py` for live data source status.
 
+## Canonical Source Names
+
+When using `--sources` on `findings_tracker.py add`, use these canonical names. Using consistent names enables provenance tracking and source coverage analysis.
+
+| Source Name | Tool(s) | Description |
+|-------------|---------|-------------|
+| `web_search` | WebSearch, WebFetch | Open web research |
+| `doj_vol11` | query_doj.py | DOJ Vol 11 document corpus |
+| `duggan` | duggan_search.py | Duggan USA corpus |
+| `lmsband` | query_lmsband.py | LMSBAND document corpus |
+| `unified_db` | query_unified.py | Unified document database |
+| `fec` | query_fec.py | FEC campaign finance |
+| `edgar` | query_edgar.py | SEC EDGAR filings |
+| `courtlistener` | query_courtlistener.py | CourtListener court records |
+| `990` | query_990.py | ProPublica 990 nonprofits |
+| `registry` | query_registry.py | Unified corporate registry |
+| `usaspending` | query_usaspending.py | USASpending federal contracts/grants |
+| `sam_gov` | query_sam.py | SAM.gov API |
+| `sam_bulk` | ingest_sam.py | SAM.gov bulk data (local SQLite) |
+| `lobbying` | query_lobbying.py | LDA lobbying disclosures |
+| `fara` | query_fara.py | FARA foreign agent registrations |
+| `littlesis` | query_littlesis.py | LittleSis relationship maps |
+| `gdelt` | query_gdelt.py | GDELT global news |
+| `aleph` | query_aleph.py | OCCRP Aleph |
+| `icij` | query_icij.py | ICIJ offshore leaks |
+| `acris` | query_acris.py | NYC ACRIS property records |
+| `gleif` | query_gleif.py | GLEIF LEI corporate hierarchy |
+| `opensanctions` | query_opensanctions.py | OpenSanctions PEP/sanctions |
+| `shodan` | query_shodan.py | Shodan internet devices |
+| `crtsh` | query_crtsh.py | crt.sh certificate transparency |
+| `wayback` | query_wayback.py | Wayback Machine |
+| `urlscan` | query_urlscan.py | URLScan.io |
+| `medicaid` | query_medicaid.py | Medicare/Medicaid spending |
+| `highergov` | query_highergov.py | HigherGov contracts/grants |
+| `documentcloud` | query_documentcloud.py | DocumentCloud |
+| `muckrock` | query_muckrock.py | MuckRock FOIA |
+| `fincen` | query_fincen.py | FinCEN filings |
+| `opencorporates` | query_delaware/hongkong/cyprus.py | OpenCorporates API |
+| `hudoc` | query_hudoc.py | ECHR case database |
+| `france_sirene` | query_france.py | French SIRENE registry |
+| `fl_sunbiz` | query_florida.py, ingest_florida.py | Florida SunBiz |
+| `ny_dos` | query_nydos.py | New York DOS |
+| `ca_sos` | query_california.py | California SOS |
+| `tx_comptroller` | query_texas.py | Texas Comptroller |
+| `mi_lara` | query_michigan.py | Michigan LARA |
+| `nj_rev` | query_newjersey.py | New Jersey Revenue |
+| `ma_corps` | query_massachusetts.py | Massachusetts Corporations |
+| `nv_sos` | query_nevada.py | Nevada SOS |
+| `nm_sos` | ingest_newmexico.py | New Mexico SOS |
+| `dc_dlcp` | ingest_dc.py | DC DLCP |
+| `usvi` | ingest_usvi.py | US Virgin Islands |
+| `ds10_financial` | parse_ds10_financials.py | DS10 financial records |
+| `ucc` | query_registry.py ucc-search | UCC filings |
+| `faa` | ingest_faa.py | FAA aircraft registry |
+| `uk_companies_house` | ingest_uk_companies_house.py | UK Companies House |
+| `investigations_db` | query_investigations.py | Ingested investigation reports |
+| `analysis_run` | (synthesis findings) | Agent analysis/synthesis |
+| `panama_rp` | query_panama.py | Panama public registry |
+| `zefix` | query_zefix.py | Swiss commercial registry |
+
+**Important**: Use these exact names. The hook validates `--sources` is present, and `findings_tracker.py` warns on unknown source names. If you need a new source name, add it to `VALID_SOURCES` in `tools/findings_tracker.py`.
+
 ## Core Investigation Tools
 
 ### Queue System (SQLite-first)
@@ -63,7 +125,7 @@ python tools/lead_tracker.py stats
 ### Infrastructure Requests
 ```bash
 python tools/infra_tracker.py add --title "Integrate FinCEN Files" --type new_source \
-  --description "200K+ transactions including Deutsche Bank SARs relevant to Epstein flows" \
+  --description "200K+ transactions including suspicious activity reports relevant to investigation" \
   --source-name "FinCEN Files" --source-url "https://..." \
   --data-type "financial transactions" --access-method bulk_download --auth none \
   --coverage "200K+ transactions" --priority high \
@@ -87,8 +149,8 @@ python tools/infra_tracker.py block-lead 42 12        # Lead #42 blocked on infr
 python tools/findings_tracker.py add --target "Rod-Larsen" --type financial \
   --summary "..." --evidence EFTA02336502 --claim-type paraphrase \
   --source-quote "EFTA02336502:craft purchase 18M through bjorn"
-python tools/findings_tracker.py connect --person-a "Epstein" --person-b "Rod-Larsen" --type financial
-python tools/findings_tracker.py connections "Epstein" --depth 2
+python tools/findings_tracker.py connect --person-a "PERSON_A" --person-b "PERSON_B" --type financial
+python tools/findings_tracker.py connections "PERSON_NAME" --depth 2
 python tools/findings_tracker.py search "gates foundation"
 python tools/findings_tracker.py timeline --target "Rod-Larsen"
 ```
@@ -137,7 +199,7 @@ python tools/tag_manager.py stats
 ### Event Timeline
 ```bash
 python tools/event_timeline.py seed                                     # populate ~100 key dates
-python tools/event_timeline.py add --date 2019-07-06 --name "Epstein arrested" --category arrest
+python tools/event_timeline.py add --date 2019-07-06 --name "EVENT_NAME" --category arrest
 python tools/event_timeline.py window --start 2019-07-01 --end 2019-07-15  # events + findings in range
 python tools/event_timeline.py near --finding-id 412 --days 14          # events near a finding
 python tools/event_timeline.py near --date 2019-03-08 --days 7          # events near a date
@@ -150,8 +212,8 @@ python tools/event_timeline.py stats
 python tools/graph_tools.py centrality [--metric degree|betweenness|closeness] [--top 30] [--cache]
 python tools/graph_tools.py components [--min-size 3]
 python tools/graph_tools.py bridges
-python tools/graph_tools.py paths "Leon Black" "Ehud Barak" [--max-hops 6]
-python tools/graph_tools.py neighbors "Leon Black" [--depth 2]
+python tools/graph_tools.py paths "PERSON_A" "PERSON_B" [--max-hops 6]
+python tools/graph_tools.py neighbors "PERSON_NAME" [--depth 2]
 python tools/graph_tools.py holes [--min-degree 5]                      # structural holes / brokerage
 python tools/graph_tools.py cliques [--min-size 4]                      # dense subgraphs
 python tools/graph_tools.py triangles [--top 50] [--min-strength medium] [--rel-type financial]  # open triads / closure gaps
@@ -204,7 +266,7 @@ python tools/query_unified.py entities "name" --output /tmp/results.json
 python tools/query_unified.py triples "subject" --output /tmp/results.json
 ```
 
-### Epstein Files 20K (25,800 House Oversight docs)
+### House Oversight Files 20K (25,800 House Oversight docs)
 ```bash
 python tools/ingest_epstein_20k.py search "query" --output /tmp/results.json
 python tools/ingest_epstein_20k.py doc HOUSE_OVERSIGHT_028601
@@ -225,9 +287,9 @@ python tools/query_investigations.py list
 Note: Delaware (DE) and Hong Kong (HK) use separate tools via OpenCorporates API.
 ```bash
 python tools/query_registry.py search "entity name"
-python tools/query_registry.py search "Epstein" --jurisdiction fl
+python tools/query_registry.py search "QUERY" --jurisdiction fl
 python tools/query_registry.py officers "Darren Indyke"
-python tools/query_registry.py address "457 Madison"
+python tools/query_registry.py address "ADDRESS"
 python tools/query_registry.py agent "CT Corporation"
 python tools/query_registry.py filings <entity_id>
 python tools/query_registry.py stats
@@ -239,13 +301,13 @@ python tools/query_registry.py stats
 python tools/ingest_florida.py download && python tools/ingest_florida.py ingest
 
 # New York (SODA API — bulk data)
-python tools/ingest_newyork.py search "Epstein"
-python tools/ingest_newyork.py search-officers "Indyke"
-python tools/ingest_newyork.py ingest-batch "Epstein" --with-filings
+python tools/ingest_newyork.py search "QUERY"
+python tools/ingest_newyork.py search-officers "PERSON_NAME"
+python tools/ingest_newyork.py ingest-batch "QUERY" --with-filings
 
 # New York DOS Public Inquiry (REST API — entity detail, filings, names)
 python tools/query_nydos.py search "HOME CARE" --status Active --output /tmp/ny-homecare.json
-python tools/query_nydos.py search "EPSTEIN" --match Contains --output /tmp/ny-epstein.json
+python tools/query_nydos.py search "QUERY" --match Contains --output /tmp/ny-results.json
 python tools/query_nydos.py search "873065" --by-id --output /tmp/ny-dosid.json
 python tools/query_nydos.py entity 873065 --filings --names --output /tmp/ny-entity.json
 python tools/query_nydos.py filings 873065 --output /tmp/ny-filings.json
@@ -281,68 +343,68 @@ python tools/ingest_newmexico.py ingest-batch "Zorro"
 # California — bizfileonline web API (no auth, up to 500 results)
 # Requires MCP Playwright Chrome running (trigger with any browser_navigate call)
 python tools/query_california.py search "PARAFI CAPITAL"
-python tools/query_california.py search "Epstein" --status active --type corp
+python tools/query_california.py search "QUERY" --status active --type corp
 python tools/query_california.py search "Apollo" --officer-last "BLACK"
 python tools/query_california.py search "726332" --by-number
 python tools/query_california.py entity 726332 --history --output /tmp/entity.json
 python tools/query_california.py entity C0726332 --output /tmp/entity.json
 python tools/query_california.py history 726332 --output /tmp/history.json
 python tools/query_california.py ingest 726332
-python tools/query_california.py ingest-search "Epstein" --limit 50
+python tools/query_california.py ingest-search "QUERY" --limit 50
 # Official API (needs CA_SOS_API_KEY — pending approval)
 # python tools/ingest_california.py search "PARAFI CAPITAL"
 
 # Texas Comptroller — franchise tax entity search (no auth)
-python tools/query_texas.py search "EPSTEIN" --output /tmp/tx-epstein.json
+python tools/query_texas.py search "QUERY" --output /tmp/tx-results.json
 python tools/query_texas.py search "APOLLO" --limit 50 --output /tmp/tx-apollo.json
 python tools/query_texas.py search --taxpayer-id 32044352170 --output /tmp/tx-tid.json
 python tools/query_texas.py search --file-number 0801432227 --output /tmp/tx-fileno.json
 python tools/query_texas.py entity 32044352170 --output /tmp/tx-entity.json
 python tools/query_texas.py entity 32044352170 --json                     # Raw JSON to stdout
 python tools/query_texas.py ingest 32044352170                            # Single entity → registry.db
-python tools/query_texas.py ingest-search "Epstein" --limit 50            # Batch ingest
+python tools/query_texas.py ingest-search "QUERY" --limit 50              # Batch ingest
 
 # Michigan LARA Business Registry (Cloudflare WAF — needs Playwright browser helper)
 # First run may require manual Cloudflare challenge solve in browser window
-python tools/query_michigan.py search "EPSTEIN" --contains --output /tmp/mi-epstein.json
+python tools/query_michigan.py search "QUERY" --contains --output /tmp/mi-results.json
 python tools/query_michigan.py search "APOLLO" --output /tmp/mi-apollo.json    # StartsWith by default
 python tools/query_michigan.py entity 85956 802112570 --output /tmp/mi-entity.json  # internal_id filing_number
 python tools/query_michigan.py ingest 85956 802112570                     # Single entity → registry.db
-python tools/query_michigan.py ingest-search "Epstein" --limit 20         # Batch (slow — 1 browser session per entity)
+python tools/query_michigan.py ingest-search "QUERY" --limit 20           # Batch (slow — 1 browser session per entity)
 
 # New Jersey Division of Revenue (HTML scraping — no detail pages)
-python tools/query_newjersey.py search "EPSTEIN" --output /tmp/nj-epstein.json
+python tools/query_newjersey.py search "QUERY" --output /tmp/nj-results.json
 python tools/query_newjersey.py search "APOLLO" --limit 50 --output /tmp/nj-apollo.json
 python tools/query_newjersey.py entity 0600092144 --output /tmp/nj-entity.json   # By 10-digit entity ID
 python tools/query_newjersey.py keywords "HOME CARE" --output /tmp/nj-homecare.json  # Keyword search
 python tools/query_newjersey.py ingest 0600092144                          # Single entity → registry.db
-python tools/query_newjersey.py ingest-search "Epstein" --limit 20         # Batch ingest
+python tools/query_newjersey.py ingest-search "QUERY" --limit 20           # Batch ingest
 
 # Massachusetts Corporations Division (Incapsula WAF — needs Playwright browser helper)
 # First run may require manual Incapsula challenge solve in browser window
-python tools/query_massachusetts.py search "EPSTEIN" --output /tmp/ma-epstein.json
+python tools/query_massachusetts.py search "QUERY" --output /tmp/ma-results.json
 python tools/query_massachusetts.py search "APOLLO" --type F --output /tmp/ma-apollo.json  # Full text search
 python tools/query_massachusetts.py entity 000487270 --output /tmp/ma-entity.json   # By MA ID number
 python tools/query_massachusetts.py ingest 000487270                       # Single entity → registry.db
-python tools/query_massachusetts.py ingest-search "Epstein" --limit 20     # Batch (slow — 1 browser session per entity)
+python tools/query_massachusetts.py ingest-search "QUERY" --limit 20       # Batch (slow — 1 browser session per entity)
 
 # Colorado (SODA API — 1.3M+ entities, no auth)
-python tools/ingest_colorado.py search "Epstein" --limit 100
+python tools/ingest_colorado.py search "QUERY" --limit 100
 python tools/ingest_colorado.py search "Zorro Ranch"
 python tools/ingest_colorado.py search-agent "Corporation Service"
 python tools/ingest_colorado.py search-address "Denver"
 python tools/ingest_colorado.py ingest-entity 19871701849
-python tools/ingest_colorado.py ingest-batch "Epstein"
+python tools/ingest_colorado.py ingest-batch "QUERY"
 
 # DC (ArcGIS FeatureServer — 492K entities, no auth + CorpOnline detail API)
 python tools/ingest_dc.py search "Capital Athletic Foundation"
-python tools/ingest_dc.py search "Epstein" --output /tmp/dc-epstein.json
+python tools/ingest_dc.py search "QUERY" --output /tmp/dc-results.json
 python tools/ingest_dc.py search "Abramoff" --type nonprofit --status active
 python tools/ingest_dc.py search-agent "Corporation Service Company" --limit 50
 python tools/ingest_dc.py search-address "Dupont Circle"
 python tools/ingest_dc.py detail <corponline-uuid>  # Enriched detail (principals, filings, NAICS)
 python tools/ingest_dc.py ingest-entity L04091
-python tools/ingest_dc.py ingest-batch "Capital Athletic" "Epstein"
+python tools/ingest_dc.py ingest-batch "ENTITY_NAME_1" "ENTITY_NAME_2"
 python tools/ingest_dc.py stats
 
 # Maryland SDAT (manual CAPTCHA required — not automated)
@@ -359,15 +421,15 @@ python tools/ingest_usvi.py detail 581737 --name "LSJE"
 python tools/ingest_usvi.py ingest-batch "LSJE" "Maple" "Nautilus"
 
 # Panama (ICIJ + Aleph hybrid)
-python tools/ingest_panama.py search "Epstein"
-python tools/ingest_panama.py ingest-batch "Epstein" --expand
+python tools/ingest_panama.py search "QUERY"
+python tools/ingest_panama.py ingest-batch "QUERY" --expand
 
 # UK Companies House (needs API key)
-python tools/ingest_uk_companies_house.py search "Epstein"
+python tools/ingest_uk_companies_house.py search "QUERY"
 python tools/ingest_uk_companies_house.py company 12345678
 python tools/ingest_uk_companies_house.py officers 12345678
 python tools/ingest_uk_companies_house.py psc 12345678
-python tools/ingest_uk_companies_house.py officer-search "Leon Black"
+python tools/ingest_uk_companies_house.py officer-search "PERSON_NAME"
 python tools/ingest_uk_companies_house.py ingest-batch "Apollo"
 
 # Israeli Corporations Authority (720K+ companies, no auth)
@@ -380,13 +442,13 @@ python tools/query_israel.py stats
 python tools/query_france.py search "Soffer Avocats" --output /tmp/france-soffer.json
 python tools/query_france.py search "Ron Soffer" --limit 10
 python tools/query_france.py company 380866657  # By SIREN number
-python tools/query_france.py search "Epstein" --naf 69.10Z  # Filter by activity code (69.10Z = legal)
+python tools/query_france.py search "QUERY" --naf 69.10Z    # Filter by activity code (69.10Z = legal)
 python tools/query_france.py address "4 Rue Quentin-Bauchart" --postal 75008
 python tools/query_france.py naf 64.20Z --postal 75008  # Activities of holding companies in 75008
 
 # HUDOC — European Court of Human Rights (20K+ judgments, no auth)
 python tools/query_hudoc.py search "Soffer, avocat" --output /tmp/hudoc-soffer.json
-python tools/query_hudoc.py search "Epstein" --limit 20
+python tools/query_hudoc.py search "QUERY" --limit 20
 python tools/query_hudoc.py case 001-99808  # Broadhurst Investments v Romania
 python tools/query_hudoc.py appno "34868/03"  # By application number
 python tools/query_hudoc.py text 001-99808  # Full text of judgment/decision
@@ -396,9 +458,9 @@ python tools/query_hudoc.py respondent ISR --limit 50  # All cases against Israe
 # Delaware (via OpenCorporates API — requires OPENCORPORATES_API_KEY)
 # Free research key: https://opencorporates.com/api_accounts/new
 # Paid plans: £2,250/year minimum
-python tools/query_delaware.py search "EPSTEIN"
+python tools/query_delaware.py search "QUERY"
 python tools/query_delaware.py search "APOLLO" --inactive
-python tools/query_delaware.py search "WEXNER" --per-page 100
+python tools/query_delaware.py search "QUERY" --per-page 100
 python tools/query_delaware.py entity 1234567  # Company number
 python tools/query_delaware.py filings 1234567
 python tools/query_delaware.py batch-entities 1234567 2345678 3456789
@@ -406,7 +468,7 @@ python tools/query_delaware.py batch-entities 1234567 2345678 3456789
 # Hong Kong (via OpenCorporates API — requires OPENCORPORATES_API_KEY)
 # Same API key as Delaware - free research key at link above
 python tools/query_hongkong.py search "Mast Industries"
-python tools/query_hongkong.py search "EPSTEIN" --inactive
+python tools/query_hongkong.py search "QUERY" --inactive
 python tools/query_hongkong.py entity 1234567  # Company number
 python tools/query_hongkong.py filings 1234567
 python tools/query_hongkong.py batch-entities 1234567 2345678
@@ -415,7 +477,7 @@ python tools/query_hongkong.py batch-entities 1234567 2345678
 # Same API key as Delaware/Hong Kong - major Russia-linked offshore hub
 # Key targets: Xitrans Finance Ltd (Rybolovlev), Deripaska entities
 python tools/query_cyprus.py search "Xitrans"
-python tools/query_cyprus.py search "EPSTEIN" --inactive
+python tools/query_cyprus.py search "QUERY" --inactive
 python tools/query_cyprus.py entity 12345  # Company registration number
 python tools/query_cyprus.py filings 12345
 python tools/query_cyprus.py batch-entities 12345 23456 34567
@@ -430,7 +492,7 @@ python tools/query_registry.py ucc-party "JPMorgan" --role secured
 
 # Florida FLR (mostly IRS tax liens, NOT commercial UCC)
 python tools/ingest_ucc_florida.py download && python tools/ingest_ucc_florida.py ingest
-python tools/ingest_ucc_florida.py search "Epstein"
+python tools/ingest_ucc_florida.py search "QUERY"
 
 # New Mexico UCC
 python tools/ingest_ucc_newmexico.py search "Zorro Ranch"
@@ -457,24 +519,65 @@ python tools/query_gleif.py cross-ref  # All investigation.db entities
 
 ### SEC EDGAR (full-text search, no auth, needs User-Agent)
 ```bash
-python tools/query_edgar.py search "jeffrey epstein" --size 20
-python tools/query_edgar.py search "leon black" "gratitude america" --forms "10-K,DEF 14A"
-python tools/query_edgar.py search "epstein" --forms "DEF 14A" --facets
+python tools/query_edgar.py search "TARGET" --size 20
+python tools/query_edgar.py search "PERSON_NAME" "ENTITY_NAME" --forms "10-K,DEF 14A"
+python tools/query_edgar.py search "QUERY" --forms "DEF 14A" --facets
 python tools/query_edgar.py lookup "apollo global"     # Name → CIK
 python tools/query_edgar.py company 0001411494         # Apollo by CIK
 python tools/query_edgar.py filings 0001411494 --form "DEF 14A"
-python tools/query_edgar.py insider 1032666 --limit 20  # Leon Black
+python tools/query_edgar.py insider CIK_NUMBER --limit 20  # By person CIK
 python tools/query_edgar.py read "https://..." --lines 200
 ```
-Key CIKs: Apollo=1411494/1858681, JPM=19617, Leon Black=1032666, Wexner=921462, Deutsche Bank=1159508, L Brands=701985
+Look up relevant CIKs for current investigation targets via `query_edgar.py lookup "entity name"`
+
+### USAspending (federal spending — contracts, grants, loans — no auth)
+```bash
+# Set OSINT_INSECURE_SSL=true if environment has SSL cert issues
+uv run python tools/query_usaspending.py search "QUERY"                      # Recipient autocomplete
+uv run python tools/query_usaspending.py awards "RECIPIENT" --limit 20       # Contract awards
+uv run python tools/query_usaspending.py awards "RECIPIENT" --grants         # Grant awards
+uv run python tools/query_usaspending.py award CONT_AWD_123_456             # Full award detail by ID
+uv run python tools/query_usaspending.py recipient "QUERY"                   # Recipient profile + agency breakdown
+uv run python tools/query_usaspending.py subawards "RECIPIENT"               # Subcontractor/subgrantee data
+uv run python tools/query_usaspending.py transactions "RECIPIENT" --date-range 2020-01-01,2024-12-31
+uv run python tools/query_usaspending.py timeline "RECIPIENT" --group fiscal_year  # Spending trend
+uv run python tools/query_usaspending.py geography "RECIPIENT" --geo-layer state   # Geographic distribution
+uv run python tools/query_usaspending.py top-recipients --agency "Department of Defense" --limit 10
+uv run python tools/query_usaspending.py agencies --limit 10                 # List top-tier federal agencies
+uv run python tools/query_usaspending.py covid "QUERY"                       # COVID-19 relief awards
+uv run python tools/query_usaspending.py loans "QUERY"                       # Loan awards (PPP, EIDL, etc.)
+```
+
+### SAM.gov (entity registrations, exclusions, contracts, opportunities — requires SAM_API_KEY)
+```bash
+# Free API key: sam.gov → Account Details → API Key. Basic tier: 10 req/day.
+uv run python tools/query_sam.py entity "QUERY"                              # Entity registration search
+uv run python tools/query_sam.py entity "QUERY" --status A --sections all    # Active entities with full detail
+uv run python tools/query_sam.py entity --uei RN99S3S7N977                   # Search by UEI
+uv run python tools/query_sam.py entity --cage 1ABC2                         # Search by CAGE code
+uv run python tools/query_sam.py exclusions "QUERY"                          # Debarments/suspensions search
+uv run python tools/query_sam.py exclusions "QUERY" --classification Firm    # Firm exclusions only
+uv run python tools/query_sam.py exclusions --npi 1234567890                 # Exclusions by NPI
+uv run python tools/query_sam.py contracts "RECIPIENT"                       # Federal contract awards (replaces FPDS)
+uv run python tools/query_sam.py contracts "RECIPIENT" --naics 541511 --min-amount 1000000
+uv run python tools/query_sam.py contracts --piid GS-35F-0119T              # Search by procurement ID
+uv run python tools/query_sam.py opportunities "surveillance" --posted-from 01/01/2025  # Solicitations
+```
+
+### Medicare (CMS spending, no auth)
+```bash
+uv run python tools/query_medicare.py search "Enkeshafi"
+uv run python tools/query_medicare.py provider 1003000126
+uv run python tools/query_medicare.py search "Health" --limit 20
+```
 
 ### CourtListener (federal courts, token in .env)
 ```bash
-python tools/query_courtlistener.py search "Jeffrey Epstein"
-python tools/query_courtlistener.py cases "Epstein" --court nysd
+python tools/query_courtlistener.py search "TARGET"
+python tools/query_courtlistener.py cases "QUERY" --court nysd
 python tools/query_courtlistener.py docket 16066603
-python tools/query_courtlistener.py party "Ghislaine Maxwell"
-python tools/query_courtlistener.py opinions "Epstein" --court ca2
+python tools/query_courtlistener.py party "PERSON_NAME"
+python tools/query_courtlistener.py opinions "QUERY" --court ca2
 ```
 
 ### ProPublica 990 (nonprofit filings)
@@ -482,7 +585,7 @@ python tools/query_courtlistener.py opinions "Epstein" --court ca2
 python tools/query_990.py search "Gratitude America"
 python tools/query_990.py ein 660789697
 python tools/query_990.py filings 660789697
-python tools/query_990.py batch "Epstein" "Indyke"
+python tools/query_990.py batch "QUERY_1" "QUERY_2"
 ```
 
 ### IRS 990 XML (Schedule I grants + Schedule R related orgs)
@@ -495,7 +598,7 @@ python tools/ingest_990_xml.py ingest --tracked           # ingest all tracked E
 python tools/ingest_990_xml.py grants --filer 660789697   # grants MADE by this org
 python tools/ingest_990_xml.py grants --recipient "Harvard"  # grants RECEIVED
 python tools/ingest_990_xml.py related 237320631          # related orgs (Schedule R)
-python tools/ingest_990_xml.py search "Epstein"           # keyword search grants+related
+python tools/ingest_990_xml.py search "QUERY"              # keyword search grants+related
 python tools/ingest_990_xml.py stats                      # summary
 ```
 
@@ -510,7 +613,7 @@ python tools/ingest_990_bulk.py resume                       # continue interrup
 python tools/ingest_990_bulk.py build-fts                    # build FTS5 after bulk load
 python tools/ingest_990_bulk.py stats                        # DB stats + process run history
 
-python tools/query_990_bulk.py search "Epstein"              # FTS5 search grants + related orgs
+python tools/query_990_bulk.py search "QUERY"                # FTS5 search grants + related orgs
 python tools/query_990_bulk.py filer 660789697               # grants MADE by EIN
 python tools/query_990_bulk.py recipient "Gratitude"         # grants RECEIVED by name (FTS5)
 python tools/query_990_bulk.py recipient-ein 030213226       # grants RECEIVED by EIN
@@ -522,7 +625,7 @@ python tools/query_990_bulk.py top --by amount --limit 20    # top grantmakers (
 
 ### NYC ACRIS (property records, SODA API)
 ```bash
-python tools/query_acris.py party "Jeffrey Epstein"
+python tools/query_acris.py party "PERSON_NAME"
 python tools/query_acris.py address --borough 1 --block 1386 --lot 10  # 9 E 71st
 python tools/query_acris.py history --property-name "71st"
 python tools/query_acris.py batch-entities
@@ -530,16 +633,16 @@ python tools/query_acris.py batch-entities
 
 ### FEC Campaign Finance (API key in .env)
 ```bash
-python tools/query_fec.py donor "Jeffrey Epstein" --limit 20
+python tools/query_fec.py donor "PERSON_NAME" --limit 20
 python tools/query_fec.py employer "Gratitude America"
-python tools/query_fec.py address "10021" --name "Epstein"
+python tools/query_fec.py address "ZIP_CODE" --name "PERSON_NAME"
 python tools/query_fec.py batch-persons
 ```
-CRITICAL: Multiple Jeffrey Epsteins — always check employer/address.
+CRITICAL: Common names return multiple people — always check employer/address to disambiguate.
 
 ### FINRA BrokerCheck (broker registrations, no auth)
 ```bash
-python tools/query_finra.py search "Leon Black" --limit 10
+python tools/query_finra.py search "PERSON_NAME" --limit 10
 python tools/query_finra.py search "Bear Stearns" --type firm --limit 5
 python tools/query_finra.py detail 1047702                     # Full individual record by CRD
 python tools/query_finra.py detail 20376 --type firm           # Full firm record
@@ -558,20 +661,20 @@ python tools/query_lobbying.py filings --client "Apollo Global" --year 2018
 ### FARA Foreign Agents (bulk CSV → investigation.db)
 ```bash
 python tools/query_fara.py download && python tools/query_fara.py ingest
-python tools/query_fara.py search "Epstein"
+python tools/query_fara.py search "QUERY"
 python tools/query_fara.py country "Norway"
 ```
 
-### LittleSis (power networks, no auth, entity 36043=Epstein)
+### LittleSis (power networks, no auth — look up entity IDs via search)
 ```bash
-python tools/query_littlesis.py search "Jeffrey Epstein"
-python tools/query_littlesis.py entity 36043
-python tools/query_littlesis.py relationships 36043 --category 5  # Donations
+python tools/query_littlesis.py search "PERSON_NAME"
+python tools/query_littlesis.py entity ENTITY_ID
+python tools/query_littlesis.py relationships ENTITY_ID --category 5  # Donations
 ```
 
 ### OCCRP Aleph (registries, leaks, no auth for public)
 ```bash
-python tools/query_aleph.py search "Jeffrey Epstein" --schema Person
+python tools/query_aleph.py search "PERSON_NAME" --schema Person
 python tools/query_aleph.py search "Financial Trust Company" --schema Company
 python tools/query_aleph.py entity <id>
 python tools/query_aleph.py expand <id>
@@ -579,17 +682,17 @@ python tools/query_aleph.py expand <id>
 
 ### ICIJ Offshore Leaks (Neo4j, needs `./scripts/start_icij_db.sh`)
 ```bash
-python tools/query_icij.py search "Epstein"
+python tools/query_icij.py search "QUERY"
 ```
 
 ## External APIs
 
 ### GDELT (global news, 3mo window, no auth, 6s rate limit)
 ```bash
-python tools/query_gdelt.py articles "Jeffrey Epstein" --limit 50 --timespan 3m
-python tools/query_gdelt.py context "Epstein arrest" --timespan 1w
-python tools/query_gdelt.py timeline "Jeffrey Epstein" --mode volume
-python tools/query_gdelt.py cooccurrence "Jeffrey Epstein" --targets "Bannon,Gates,Wexner"
+python tools/query_gdelt.py articles "TARGET" --limit 50 --timespan 3m
+python tools/query_gdelt.py context "EVENT_NAME" --timespan 1w
+python tools/query_gdelt.py timeline "TARGET" --mode volume
+python tools/query_gdelt.py cooccurrence "TARGET" --targets "PERSON_A,PERSON_B,PERSON_C"
 ```
 
 ### OpenSanctions (sanctions + PEP, bulk download)
@@ -600,12 +703,12 @@ python tools/query_opensanctions.py pep-check "Ehud Barak"
 python tools/query_opensanctions.py match-entities  # All investigation entities
 ```
 
-### EpsteinExposed (1,271 persons, 1.5M docs, REST API)
+### Investigation-Specific Corpus (1,271 persons, 1.5M docs, REST API)
 ```bash
 python tools/ingest_epstein_exposed.py download
-python tools/ingest_epstein_exposed.py search "wexner trust"
-python tools/ingest_epstein_exposed.py person "leon-black"
-python tools/ingest_epstein_exposed.py flights --passenger "clinton" --year 2002
+python tools/ingest_epstein_exposed.py search "QUERY"
+python tools/ingest_epstein_exposed.py person "person-slug"
+python tools/ingest_epstein_exposed.py flights --passenger "PERSON_NAME" --year 2002
 python tools/ingest_epstein_exposed.py match-entities
 ```
 
@@ -618,24 +721,69 @@ python tools/query_muckrock.py download 78799 --dir datasets/muckrock
 
 ### DocumentCloud (project #216915, no auth)
 ```bash
-python tools/query_documentcloud.py search "Ghislaine Maxwell"
+python tools/query_documentcloud.py search "QUERY"
 python tools/query_documentcloud.py document 24402693 --full
 python tools/query_documentcloud.py text 24402693 --page 5
+```
+
+### Shodan (internet-connected devices, DNS, SSL certs — paid plan, SHODAN_API_KEY)
+```bash
+uv run python tools/query_shodan.py host 198.202.211.1
+uv run python tools/query_shodan.py search "ssl:leadingthefuture.com"
+uv run python tools/query_shodan.py search "org:\"Webflow\" port:443" --limit 50
+uv run python tools/query_shodan.py domain leadingthefuture.com --history
+uv run python tools/query_shodan.py dns-resolve google.com,example.com
+uv run python tools/query_shodan.py reverse-dns 8.8.8.8,8.8.4.4
+uv run python tools/query_shodan.py ssl-cert leadingthefuture.com
+uv run python tools/query_shodan.py info  # check remaining credits
+```
+
+### crt.sh Certificate Transparency (CT log aggregator, no auth)
+```bash
+uv run python tools/query_crtsh.py search example.com
+uv run python tools/query_crtsh.py search example.com --subdomains
+uv run python tools/query_crtsh.py search "Goldman Sachs" --org
+uv run python tools/query_crtsh.py search example.com --exclude-expired
+uv run python tools/query_crtsh.py subdomains withpersona.com
+uv run python tools/query_crtsh.py timeline leadingthefuture.com
+uv run python tools/query_crtsh.py cert 12345678
+```
+
+### Wayback Machine CDX (historical web snapshots, no auth)
+```bash
+uv run python tools/query_wayback.py snapshots example.com
+uv run python tools/query_wayback.py snapshots example.com --from 2019 --to 2020
+uv run python tools/query_wayback.py snapshots "*.example.com" --subdomains
+uv run python tools/query_wayback.py timeline example.com --monthly
+uv run python tools/query_wayback.py first example.com
+uv run python tools/query_wayback.py diff example.com --from 20190101 --to 20200101
+uv run python tools/query_wayback.py fetch example.com --timestamp 20190715
+```
+
+### URLScan.io (passive web scan search, no auth for search)
+```bash
+uv run python tools/query_urlscan.py search "domain:example.com"
+uv run python tools/query_urlscan.py search "ip:198.202.211.1"
+uv run python tools/query_urlscan.py search "page.title:Leading The Future"
+uv run python tools/query_urlscan.py search "server:cloudflare AND domain:example.com"
+uv run python tools/query_urlscan.py result <scan-uuid>
+uv run python tools/query_urlscan.py technologies <scan-uuid>
+uv run python tools/query_urlscan.py links <scan-uuid>
 ```
 
 ### OffshoreAlert (29K+ offshore court cases, 4,500+ articles, MLATs, regulatory actions)
 ```bash
 # Search (HTML scraping — rich results with scores, excerpts, tags)
-uv run python tools/offshorealert_search.py search "deutsche bank" -v
-uv run python tools/offshorealert_search.py search "leon black" --output /tmp/oa-results.json
+uv run python tools/offshorealert_search.py search "ENTITY_NAME" -v
+uv run python tools/offshorealert_search.py search "PERSON_NAME" --output /tmp/oa-results.json
 uv run python tools/offshorealert_search.py search "liquid funding bermuda" -a  # all pages
 
 # Extract tagged entities from search results (names, companies, jurisdictions)
-uv run python tools/offshorealert_search.py entities "jeffrey epstein" -n 200
+uv run python tools/offshorealert_search.py entities "TARGET" -n 200
 uv run python tools/offshorealert_search.py entities "apollo" --output /tmp/oa-entities.json
 
 # API search (lightweight, no login needed, fewer results)
-uv run python tools/offshorealert_search.py api-search "epstein"
+uv run python tools/offshorealert_search.py api-search "QUERY"
 
 # NOTE: Individual article pages and PDF downloads are behind reCAPTCHA.
 # Use Playwright browser session for full article content.
@@ -643,7 +791,7 @@ uv run python tools/offshorealert_search.py api-search "epstein"
 
 ## Specialized
 
-### DS10 Financial (Deutsche Bank, 579 tx, $304M)
+### DS10 Financial (579 tx, $304M)
 ```bash
 python tools/parse_ds10_financials.py query --entity "Plan D"
 python tools/parse_ds10_financials.py query --amount-min 1000000
@@ -663,9 +811,9 @@ python tools/ingest_faa.py n-number N212JE
 ```bash
 python tools/query_fincen.py download          # Download and cache dataset
 python tools/query_fincen.py stats
-python tools/query_fincen.py search-tx "Deutsche Bank" --output /tmp/fincen-db.json
+python tools/query_fincen.py search-tx "ENTITY_NAME" --output /tmp/fincen-results.json
 python tools/query_fincen.py search-connections "singapore" --output /tmp/fincen-sg.json
-python tools/query_fincen.py filer "Deutsche Bank" --output /tmp/fincen-filer.json
+python tools/query_fincen.py filer "ENTITY_NAME" --output /tmp/fincen-filer.json
 python tools/query_fincen.py country USA --output /tmp/fincen-usa.json
 python tools/query_fincen.py sar 3297 --output /tmp/fincen-sar.json
 ```
@@ -674,7 +822,7 @@ python tools/query_fincen.py sar 3297 --output /tmp/fincen-sar.json
 ```bash
 python tools/ingest_bic.py download                     # Download datasets (OpenSanctions + GLEIF)
 python tools/ingest_bic.py ingest                       # Download + ingest into bic.db
-python tools/ingest_bic.py search "Deutsche Bank" --output /tmp/bic-db.json
+python tools/ingest_bic.py search "ENTITY_NAME" --output /tmp/bic-results.json
 python tools/ingest_bic.py search "Rothschild" --output /tmp/bic-rothschild.json
 python tools/ingest_bic.py bic DEUTDEFF                 # Lookup specific BIC code
 python tools/ingest_bic.py country us --output /tmp/bic-us.json   # List all US banks
@@ -693,7 +841,7 @@ python tools/auto_leads.py stats
 ### Entity Registry (investigation.db)
 ```sql
 SELECT e.name, r.person_name, r.role FROM entities e JOIN entity_roles r ON e.id = r.entity_id;
-SELECT e.name FROM entities e JOIN entity_addresses a ON e.id = a.entity_id WHERE a.address LIKE '%457 Madison%';
+SELECT e.name FROM entities e JOIN entity_addresses a ON e.id = a.entity_id WHERE a.address LIKE '%ADDRESS%';
 ```
 
 ### Entity Dedup / Name Aliases
@@ -710,7 +858,7 @@ uv run python tools/entity_dedup.py add-alias --canonical "Ehud Barak" --alias "
 # List all aliases (optionally filter)
 uv run python tools/entity_dedup.py list-aliases
 uv run python tools/entity_dedup.py list-aliases --type entity_as_person
-uv run python tools/entity_dedup.py list-aliases --canonical "Jeffrey Epstein"
+uv run python tools/entity_dedup.py list-aliases --canonical "PERSON_NAME"
 
 # Scan for unresolved duplicates
 uv run python tools/entity_dedup.py scan
@@ -836,13 +984,13 @@ uv run python tools/pillar_tracker.py show 1
 ```bash
 # Add a career arc
 uv run python tools/pillar_tracker.py arc \
-    --person "Leon Black" --pillar "Drexel Burnham Lambert" \
+    --person "PERSON_NAME" --pillar "Drexel Burnham Lambert" \
     --role "Managing Director" --seniority senior \
     --start 1977 --end 1990 --exit-type collapse \
     --source "Apollo prospectus"
 
 # View career timeline
-uv run python tools/pillar_tracker.py career "Leon Black"
+uv run python tools/pillar_tracker.py career "PERSON_NAME"
 
 # Bootstrap from existing data (employment connections + entity_roles)
 uv run python tools/pillar_tracker.py bootstrap --dry-run
@@ -878,10 +1026,10 @@ uv run python tools/pillar_tracker.py cohort "Drexel Burnham Lambert" --start 19
 uv run python tools/pillar_tracker.py dispersal "Drexel Burnham Lambert"
 
 # Shared institutional tenures between two people
-uv run python tools/pillar_tracker.py overlap --person-a "Leon Black" --person-b "Joshua Harris"
+uv run python tools/pillar_tracker.py overlap --person-a "PERSON_A" --person-b "PERSON_B"
 
 # Person timeline (career arcs + pillar events + external events interleaved)
-uv run python tools/pillar_tracker.py timeline "Leon Black"
+uv run python tools/pillar_tracker.py timeline "PERSON_NAME"
 ```
 
 ### Orchestrator Identification
@@ -889,11 +1037,11 @@ uv run python tools/pillar_tracker.py timeline "Leon Black"
 ```bash
 # Compute orchestrator scores
 uv run python tools/pillar_tracker.py score --top 30
-uv run python tools/pillar_tracker.py score --person "Leon Black"
+uv run python tools/pillar_tracker.py score --person "PERSON_NAME"
 uv run python tools/pillar_tracker.py score --top 10 --cache  # saves to pillar_scores
 
 # Find pillar type gaps in person's career
-uv run python tools/pillar_tracker.py gaps --person "Leon Black"
+uv run python tools/pillar_tracker.py gaps --person "PERSON_NAME"
 
 # People spanning 3+ pillar types
 uv run python tools/pillar_tracker.py cross-pillar --min-pillars 3

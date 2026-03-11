@@ -5,10 +5,16 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gc
 import html
+import os
 import re
+import resource
+import signal
 import sqlite3
 import subprocess
+import sys
+import time
 import zipfile
 from collections import Counter
 from email.utils import getaddresses
@@ -22,11 +28,15 @@ import openpyxl
 
 DEFAULT_DB = Path("datasets/lmsband_epstein_files.db")
 DEFAULT_DATASET = 9
-DEFAULT_MAX_MB = 128
+DEFAULT_MAX_MB = 64
 DEFAULT_BATCH_SIZE = 250
 DEFAULT_PROGRESS_EVERY = 250
 HEADER_SCAN_CHARS = 12000
 DEFAULT_EXTENSIONS = "pdf,doc,docx,xls,xlsx,csv,ppt,pptx"
+MAX_TEXT_CHARS = 2_000_000  # 2M char cap per file
+EXTRACT_TIMEOUT_SECS = 30  # per-file extraction timeout
+RSS_WARN_MB = 4096  # log warning at this RSS
+RSS_STOP_MB = 6144  # graceful stop at this RSS
 
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 HEADER_RE = re.compile(r"^(From|To|Cc|Bcc|Reply-To):\s*(.+)$", re.IGNORECASE | re.MULTILINE)
@@ -81,6 +91,22 @@ def parse_args() -> argparse.Namespace:
 
 def _clean_space(text: str) -> str:
     return SPACE_RE.sub(" ", text).strip()
+
+
+class _ExtractionTimeout(Exception):
+    pass
+
+
+def _alarm_handler(signum: int, frame: object) -> None:
+    raise _ExtractionTimeout()
+
+
+def _get_rss_mb() -> int:
+    """Current RSS in MB (macOS ru_maxrss is bytes, Linux is KB)."""
+    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    if sys.platform == "darwin":
+        return usage // (1024 * 1024)
+    return usage // 1024
 
 
 def _extract_pdf(path: Path) -> tuple[str, str]:
@@ -208,7 +234,7 @@ def _extract_html_payload(path: Path) -> tuple[str, str]:
     return "", "html_empty"
 
 
-def extract_text(path: Path, ext: str, max_bytes: int) -> tuple[str, str]:
+def _extract_text_inner(path: Path, ext: str, max_bytes: int) -> tuple[str, str]:
     try:
         size = path.stat().st_size
     except FileNotFoundError:
@@ -270,6 +296,28 @@ def extract_text(path: Path, ext: str, max_bytes: int) -> tuple[str, str]:
             return text, f"{ext}_{method}"
         return "", f"{ext}_unreadable"
     return "", "unsupported_extension"
+
+
+def extract_text(path: Path, ext: str, max_bytes: int) -> tuple[str, str]:
+    """Extract text with per-file timeout and text length cap."""
+    old_handler = signal.getsignal(signal.SIGALRM)
+    signal.signal(signal.SIGALRM, _alarm_handler)
+    signal.alarm(EXTRACT_TIMEOUT_SECS)
+    try:
+        text, method = _extract_text_inner(path, ext, max_bytes)
+    except _ExtractionTimeout:
+        return "", "timeout"
+    except Exception:
+        return "", "unexpected_error"
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, old_handler)
+
+    # Cap text length to prevent memory blowup
+    if len(text) > MAX_TEXT_CHARS:
+        text = text[:MAX_TEXT_CHARS]
+
+    return text, method
 
 
 def _normalize_name(name: str) -> str:
@@ -389,6 +437,8 @@ def main() -> int:
     entity_rows = 0
     missing_paths = 0
     method_counts: Counter[str] = Counter()
+    t_start = time.monotonic()
+    mem_stopped = False
 
     text_rows: list[tuple[int, str, int, str]] = []
     file_updates: list[tuple[int, int, int]] = []
@@ -469,10 +519,32 @@ def main() -> int:
 
         if len(text_rows) >= args.batch_size:
             flush()
+            gc.collect()
+
+            # Memory check
+            rss = _get_rss_mb()
+            if rss >= RSS_STOP_MB:
+                print(
+                    f"\n[STOP] RSS {rss:,} MB exceeds {RSS_STOP_MB} MB limit. "
+                    f"Stopping after {processed:,} files. Re-run to continue.",
+                    flush=True,
+                )
+                mem_stopped = True
+                break
+            if rss >= RSS_WARN_MB:
+                print(f"  [WARN] RSS {rss:,} MB", flush=True)
+
             if args.progress_every and processed % args.progress_every == 0:
+                elapsed = time.monotonic() - t_start
+                rate = processed / elapsed if elapsed > 0 else 0
+                remaining = (scanned - processed) if args.limit == 0 else max(0, args.limit - processed)
+                eta_secs = remaining / rate if rate > 0 else 0
+                eta_h = eta_secs / 3600
                 print(
                     f"processed={processed:,} with_text={with_text:,} empty={empty_text:,} "
-                    f"entities={entity_rows:,}",
+                    f"entities={entity_rows:,} | "
+                    f"{rate:.1f} files/s  RSS={rss:,}MB  "
+                    f"elapsed={elapsed/60:.0f}m  ETA~{eta_h:.1f}h",
                     flush=True,
                 )
 
@@ -480,6 +552,7 @@ def main() -> int:
             break
 
     flush()
+    gc.collect()
 
     fts_added = 0
     if args.sync_fts:
@@ -505,7 +578,10 @@ def main() -> int:
         (args.dataset,),
     ).fetchone()[0]
 
-    print("\nBackfill complete")
+    total_elapsed = time.monotonic() - t_start
+    status = "stopped (memory limit)" if mem_stopped else "complete"
+    print(f"\nBackfill {status}")
+    print(f"  elapsed: {total_elapsed/3600:.1f}h ({total_elapsed/60:.0f}m)")
     print(f"  scanned_candidates: {scanned:,}")
     print(f"  processed: {processed:,}")
     print(f"  with_text: {with_text:,}")
@@ -513,6 +589,7 @@ def main() -> int:
     print(f"  missing_paths: {missing_paths:,}")
     print(f"  entity_rows_written: {entity_rows:,}")
     print(f"  fts_rows_added: {fts_added:,}")
+    print(f"  final_rss_mb: {_get_rss_mb():,}")
     print(f"  dataset_{args.dataset}_files: {ds_files:,}")
     print(f"  dataset_{args.dataset}_text_rows_gt0: {ds_text:,}")
     print(f"  dataset_{args.dataset}_entity_rows: {ds_entities:,}")
