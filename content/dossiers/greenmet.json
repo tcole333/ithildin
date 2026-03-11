@@ -531,7 +531,7 @@
     {
       "id": 6372,
       "finding_type": "financial",
-      "summary": "GreenMet's three-division corporate structure maps to specific legal entities: (1) GreenMet Advisory = GreenMet Consulting LLC (DC Foreign LLC C00007696390, withdrawn). (2) GreenMet Capital = GreenMet Real Asset Management LLC (DC Foreign LLC C00007684320, withdrawn). (3) GreenMet Innovation = GreenMet Technologies LLC (entity not found in any ingested registries \u2014 DC, FL, NY, DE searches returned zero results; OpenCorporates unavailable due to API key). The absence of GreenMet Technologies LLC from public registries is investigatively significant.",
+      "summary": "GreenMet's three-division corporate structure maps to specific legal entities: (1) GreenMet Advisory = GreenMet Consulting LLC (DC Foreign LLC C00007696390, withdrawn). (2) GreenMet Capital = GreenMet Real Asset Management LLC (DC Foreign LLC C00007684320, withdrawn). (3) GreenMet Innovation = GreenMet Technologies LLC (entity not found in any ingested registries — DC, FL, NY, DE searches returned zero results; OpenCorporates unavailable due to API key). The absence of GreenMet Technologies LLC from public registries is investigatively significant.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -756,5 +756,332 @@
     }
   ],
   "entities": [],
-  "timeline": []
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      6154,
+      6168,
+      6338,
+      6373,
+      6164,
+      6206,
+      6166,
+      6208,
+      6209,
+      6170,
+      6207,
+      6331
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          6166,
+          6206,
+          6207,
+          6208
+        ],
+        "connection_ids": [
+          3157,
+          3158,
+          3171,
+          3173,
+          3170,
+          3172,
+          3182,
+          3183
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          6154,
+          6168,
+          6169,
+          6338,
+          6367,
+          6368,
+          6372,
+          6373
+        ],
+        "connection_ids": [
+          3171,
+          3170
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          6170,
+          6172,
+          6209
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-03-11T22:20:38.388866+00:00",
+    "lead": "<p>GreenMet, formally Greentech Minerals Holdings Inc., is a Delaware-incorporated critical minerals advisory and brokerage firm founded in April 2021 and headquartered at 1825 K Street NW, Suite 515, Washington, DC [Finding #6164]. The company was founded by <a href=\"/dossiers/drew-horn\">Drew Horn</a>, a former Army Special Forces officer and aide to Vice President Mike Pence who later served in national security roles at the Department of Energy and ODNI [Finding #6166]. Its beneficial owners include <a href=\"/dossiers/george-sorial\">George Sorial</a>, the Trump Organization's Executive Vice President and Chief Compliance Counsel from 2002 to 2019, and Keith Schiller, Trump's longtime personal bodyguard and Director of Oval Office Operations, both of whom resigned board and advisory roles in early 2025 but remain passive minority shareholders [Finding #6331] [Finding #6166].</p><p>GreenMet operates at the intersection of critical minerals policy, government lobbying, and international deal brokerage. Its central accomplishment is facilitating the partnership between <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> (NASDAQ: CRML) and Tanbreez Mining Greenland A/S for what is described as the only shovel-ready rare earth project in Greenland, a deal that attracted a $120 million EXIM Bank letter of interest and a 10-year offtake agreement with Ucore Rare Metals for a DoD-funded processing facility in Louisiana [Finding #6168]. Despite playing what GreenMet's own press releases describe as a \"central role in facilitating the partnership, aligning commercial objectives, and ensuring strategic coordination,\" the company appears in zero of Critical Metals Corp's 167 SEC filings, and no compensation arrangement has been publicly disclosed [Finding #6368] [Finding #6332].</p><p>The company's significance extends beyond any single deal. Sorial and Schiller went on to co-found <a href=\"/dossiers/javelin-advisors-llc\">Javelin Advisors LLC</a> in December 2024, a government relations firm that registered under FARA as a foreign agent for Pakistan on a rare earth minerals framework valued at up to $1 trillion [Finding #6374] [Finding #6202]. Meanwhile, Ned Mamula, GreenMet's former Chief Geologist and co-author with Horn, was confirmed as Director of the U.S. Geological Survey in October 2025 -- the federal agency that maintains the Critical Minerals List directly relevant to GreenMet's business [Finding #6201]. This network of personnel rotating between GreenMet, Javelin Advisors, and federal agencies overseeing the critical minerals sector constitutes a case study in revolving-door dynamics within the Trump administration's Greenland and minerals policy apparatus.</p>",
+    "system_role": "GreenMet functions as the deal-brokerage and policy-influence node within a network of Trump-aligned personnel who rotate between critical minerals advisory work, government lobbying through Javelin Advisors, and federal positions overseeing the minerals sector they previously sought to profit from. The company converts insider access and national security credentials into private commercial advantage across multiple contested mineral zones -- Greenland, Pakistan, and the domestic rare earth supply chain -- while maintaining structural opacity through undisclosed compensation arrangements and withdrawn corporate entities.",
+    "sections": [
+      {
+        "id": "corporate-identity",
+        "title": "Corporate Identity and Structure",
+        "viz": null,
+        "content": "<p>Greentech Minerals Holdings Inc. was incorporated in Delaware on April 9, 2021, and is registered in Washington, DC, at 1825 K Street NW, Suite 515 [Finding #6164]. The company is registered in SAM.gov under UEI ZD31U1MMR4J7 and CAGE code 9VEL9, with primary NAICS code 551114 (Corporate, Subsidiary, and Regional Managing Offices) and a purpose code of Z2 (federal assistance) [Finding #6164]. SAM.gov lists Andrew Horn (CEO) and Nicholas Denno (Director of Operations) as points of contact [Finding #6164].</p><p>GreenMet organized itself into three branded divisions, each mapped to a separate legal entity: GreenMet Advisory corresponded to GreenMet Consulting LLC (DC Foreign LLC C00007696390, now withdrawn); GreenMet Capital corresponded to GreenMet Real Asset Management LLC (DC Foreign LLC C00007684320, also withdrawn); and GreenMet Innovation was described as GreenMet Technologies LLC, which does not appear in any searched corporate registry across DC, Florida, New York, or Delaware [Finding #6372]. The withdrawal of the two registered subsidiaries and the absence of the third from public registries raises questions about which corporate entities currently carry the company's operational activities.</p>"
+      },
+      {
+        "id": "key-relationships",
+        "title": "Key Personnel and Ownership Network",
+        "viz": "ego_network",
+        "content": "<p>Washington, DC, corporate registry documents identify three beneficial owners of GreenMet: <a href=\"/dossiers/drew-horn\">Drew Horn</a> (CEO), <a href=\"/dossiers/george-sorial\">George Sorial</a>, and Keith Schiller [Finding #6331]. Horn is a former Army Special Forces and Marine Corps officer who served as an aide to Vice President Pence, a national security official at the Department of Energy, and a Senior Advisor at the Office of the Director of National Intelligence before founding GreenMet [Finding #6166] [Finding #6210]. Sorial served as the Trump Organization's Executive Vice President and Chief Compliance Counsel for approximately seventeen years (2002-2019), while Schiller was Donald Trump's personal bodyguard for decades before serving as Director of Oval Office Operations in the first Trump administration [Finding #6166]. Sorial has stated that he and Schiller are \"passive minority shareholders in GreenMet and have no management role in the company,\" having resigned board and advisory roles in early 2025 [Finding #6331].</p><p>Ned Mamula served as GreenMet's Chief Geologist before being confirmed as Director of the U.S. Geological Survey in October 2025 [Finding #6201]. Mamula is a former CIA geoscientist whose career spanned USGS, DOE, CIA, and the Cato Institute [Finding #6201]. Horn co-authored the foreword to Mamula's 2024 book <em>Undermining Power</em> [Finding #6187]. Mamula filed a divestiture from GreenMet in January 2026 following his confirmation, but the USGS directorship gives him authority over the Critical Minerals List -- a designation directly relevant to GreenMet's business interests [Finding #6201] [Finding #6205].</p><p>In March 2022, the Libra Group, an international business conglomerate led by CEO George Logothetis with subsidiaries spanning energy, shipping, real estate, and hospitality across 50-plus countries, made a strategic investment in GreenMet and placed four executive team members on the board [Finding #6169]. This investment provided GreenMet with capital and international business connections beyond its Washington policy network.</p>"
+      },
+      {
+        "id": "greenland-deals",
+        "title": "Greenland Rare Earth Brokerage",
+        "viz": null,
+        "content": "<p>GreenMet's most consequential deal-making centers on Greenland. In April 2025, GreenMet partnered with Tanbreez Mining Greenland A/S, which holds what it describes as the only shovel-ready rare earth project in Greenland, with a 4.7-billion-tonne deposit containing 27% heavy rare earth elements [Finding #6168] [Finding #6189]. GreenMet then brokered a partnership between <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> (NASDAQ: CRML) and Tanbreez, under which Critical Metals would acquire between 42% and 92.5% of Tanbreez from Rimbal Pty Ltd [Finding #6168]. By September 2025, Critical Metals had taken a controlling interest in Tanbreez [Finding #6154].</p><p>GreenMet also facilitated U.S. government financial backing for the deal. The EXIM Bank issued a $120 million letter of interest for a 15-year term loan under its Supply Chain Resiliency Initiative [Finding #6168]. Separately, GreenMet brokered a 10-year offtake agreement between Critical Metals and Ucore Rare Metals for up to 10,000 tonnes per year of rare earth concentrates to be processed at Ucore's DoD-funded Strategic Metals Complex in Louisiana [Finding #6168]. A preliminary economic assessment of the Tanbreez deposit projected a net present value of $3.04 billion and an internal rate of return of 180% [Finding #6168].</p><p>Despite GreenMet's self-described \"central role in facilitating the partnership, aligning commercial objectives, and ensuring strategic coordination,\" the company does not appear in any of Critical Metals Corp's 167 SEC filings [Finding #6368]. A comprehensive EDGAR search for \"GreenMet,\" \"Sorial,\" or \"Schiller\" in the context of CRML returned zero results [Finding #6271]. No fees, equity compensation, advisory agreement, or other financial arrangement between GreenMet and Critical Metals has been publicly disclosed [Finding #6368]. <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a>, led by <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a> (now U.S. Commerce Secretary), held shares in Critical Metals Corp as its SPAC underwriter, creating a further nexus between the administration and this supply chain [Finding #6168].</p>"
+      },
+      {
+        "id": "javelin-advisors-pipeline",
+        "title": "The Javelin Advisors Pipeline",
+        "viz": null,
+        "content": "<p>In December 2024, GreenMet co-owners Sorial and Schiller, along with attorney Robert W. Seiden, formed <a href=\"/dossiers/javelin-advisors-llc\">Javelin Advisors LLC</a> in Delaware, branding itself as \"Founded by Insiders. Defined by Access\" [Finding #6285] [Finding #6157]. On April 25, 2025, Javelin registered under FARA (Registration No. 7579) as a foreign agent for the Islamic Republic of Pakistan to pursue a rare earth minerals agreement with the United States [Finding #6374] [Finding #6315]. Pakistan paid Javelin $50,000 per month, routed through Seiden Law LLP as intermediary, generating $200,000 in documented payments before the FARA registration was terminated on October 8, 2025 [Finding #6286] [Finding #6319].</p><p>The Pakistan engagement produced material results. FARA filings reference a May 2025 framework for U.S.-Pakistan cooperation on rare earth minerals with an indicative value of up to $1 trillion, with Pakistan's Frontier Works Organisation (a military engineering corps) nominated as the extraction entity [Finding #6202]. Javelin used Rep. Ronny Jackson as its primary congressional contact, arranging an in-person meeting on May 1, 2025, between Jackson and Pakistani officials, followed by a series of calls that led to a draft memorandum of understanding delivered to the office of Rep. Ryan Zinke [Finding #6336]. The MoU ultimately resulted in a reported $30 million deal between US Strategic Metals and Pakistan's Frontier Works Organisation in September 2025 [Finding #6336].</p><p>Javelin's client roster extended well beyond minerals. In its first full year, the firm generated approximately $3.4 million across six clients: Logical Strategies LLC ($1.2 million for EPA asbestos regulation lobbying, owned by <a href=\"/dossiers/giorgi-rtskhiladze\">Giorgi Rtskhiladze</a>), Fred Daibes ($1 million for executive clemency lobbying -- Daibes was convicted alongside Sen. Menendez), NioCorp Developments Ltd ($400,000 for critical minerals DoD contracts), Capstone USA Advisory Group ($300,000 for Ukraine reconstruction), Greg E. Lindberg (executive pardon), and I-MEI Foods Co. Ltd. of Taiwan (DoD food, cybersecurity, and robotics contracts) [Finding #6393] [Finding #6325]. The concurrent operation of foreign agent work for Pakistan, pardon brokering for convicted felons, and defense lobbying for critical minerals companies reveals Javelin as a broad-spectrum access-monetization vehicle built on the same personnel network as GreenMet.</p>"
+      },
+      {
+        "id": "lobbying-strategy",
+        "title": "Lobbying Strategy and Political Influence",
+        "viz": null,
+        "content": "<p>GreenMet's lobbying activity evolved through four phases documented across 37 LDA filings [Finding #6209]. Phase one (Q2-Q4 2021) used Strategies 360 with lobbyist Ami Sanchez at $10,000. Phase two (Q4 2021-Q3 2023) engaged the McKeon Group Inc., headed by former House Armed Services Committee Chairman Howard \"Buck\" McKeon, generating approximately $269,500 in disclosed income [Finding #6373] [Finding #6338]. Phase three (Q2 2023-Q2 2024) expanded to an in-house team of six lobbyists covering NDAA provisions, Defense Production Act, critical mineral appropriations, IRA magnet tax credits, and national lab R&D [Finding #6209]. Phase four (Q3 2024-present) contracted to a sole lobbyist, Sabrina Katz, covering defense, energy, manufacturing, natural resources, and trade/tariff issues [Finding #6209].</p><p>GreenMet targeted an unusually broad range of government entities for a company of its size: DoD, DoE, DoS, OSTP, Commerce, DLA, NSC, EOP, Treasury, and USTDA [Finding #6373]. Cogent Strategies overlapped during phase three, adding $20,000 [Finding #6209]. The Cogent lobbyist assigned to GreenMet was Andrew Kauders, a former senior adviser to Sen. Robert Menendez (later convicted of bribery), who came to Cogent via the Podesta Group [Finding #6207].</p><p>The McKeon Group also lobbied for USA Rare Earth, connecting two critical minerals companies in the investigation through a common defense-focused lobbying firm [Finding #6206]. Nicole Rodgers, GreenMet's former Chief Government and External Affairs Officer (Q3 2023-Q2 2024), founded the Alliance for Mineral Security, a national coalition advocating for U.S. mineral independence, and later joined Squire Patton Boggs [Finding #6208]. Her congressional testimony on critical minerals further embedded GreenMet's policy positions within the legislative process [Finding #6208].</p>"
+      },
+      {
+        "id": "data-center-expansion",
+        "title": "Greenland Data Center Ambitions",
+        "viz": null,
+        "content": "<p>GreenMet's Greenland ambitions extend beyond minerals into AI infrastructure. In January 2026, AmForge Corporation (CEO Dan Whaley) signed a letter of intent with <a href=\"/dossiers/svend-hardenberg\">Svend Hardenberg</a>'s Inuit Development Company ApS for a 1.5-gigawatt AI data center at Kangerlussuaq, Greenland, with GreenMet serving as matchmaker and ongoing advisor [Finding #6198] [Finding #6354]. The project envisions 300 megawatts by mid-2027 via LNG barges, scaling to 1.5 gigawatts by end of 2028 through hydroelectric power, plus a subsea cable connection [Finding #6198]. GreenMet claims binding investor commitments for half of both the initial and final phases [Finding #6172].</p><p>Horn described the division of labor: \"He handles everything related to Greenland and Denmark, I handle everything related to the United States\" [Finding #6354]. However, the Greenland government told CNBC that it has not engaged in dialogue with Horn or GreenMet about the project, and no land or local approvals have been secured [Finding #6172]. The data center project positions Horn as a node connecting <a href=\"/dossiers/svend-hardenberg\">Hardenberg</a> (who also connects to <a href=\"/dossiers/ronald-lauder\">Ronald Lauder</a>) with American capital and government backing, replicating the GreenMet pattern of brokering between foreign resource holders and U.S. institutional interests [Finding #6204].</p>"
+      },
+      {
+        "id": "financial-opacity",
+        "title": "Financial Opacity and Abandoned Ventures",
+        "viz": null,
+        "content": "<p>GreenMet's revenue model remains structurally opaque. The company brokered partnerships involving a $120 million EXIM letter of interest, a controlling interest acquisition in Tanbreez, and a 10-year offtake agreement, yet its compensation for these services is undisclosed in any public filing [Finding #6368] [Finding #6332]. EDGAR full-text searches confirm that neither GreenMet, Sorial, nor Javelin Advisors appears in any SEC filing [Finding #6326]. Whether GreenMet was compensated through advisory fees, equity stakes, success fees, or some other mechanism remains unknown.</p><p>An earlier venture also ended without public explanation. In November 2021, GreenMet signed a Financing and Purchase Option Agreement with Texas Mineral Resources Corp. (TMRC), agreeing to fund a $6.5 million bankable feasibility study for TMRC's Black Hawk Mining District silver project in New Mexico in exchange for 20.2% equity in a proposed TMRC-Santa Fe Gold joint venture [Finding #6367]. GreenMet subsequently \"determined not to pursue the financing option\" per TMRC's SEC filing, abandoning the deal [Finding #6367]. This pattern -- entering mineral resource agreements, then withdrawing or restructuring without public disclosure of terms -- has characterized GreenMet's operating history.</p>"
+      }
+    ],
+    "open_questions": [
+      "What compensation, if any, did GreenMet receive for brokering the Critical Metals Corp-Tanbreez partnership and the EXIM Bank letter of interest, given that no advisory agreement or fee arrangement appears in any public SEC filing?",
+      "What is the relationship between Horn's prior role creating critical minerals strategy at the Department of Energy and GreenMet's subsequent lobbying to shape the same policy area, and did any ethics obligations apply to his post-government commercial activity?",
+      "Has Ned Mamula's USGS directorship influenced any Critical Minerals List designations or policy decisions that benefit GreenMet's Greenland or other mineral projects, and is his January 2026 divestiture filing complete?",
+      "What entity currently carries GreenMet's operational activities, given that both registered DC subsidiaries (GreenMet Consulting LLC and GreenMet Real Asset Management LLC) have been withdrawn and GreenMet Technologies LLC cannot be found in any searched corporate registry?",
+      "What is the precise ownership structure of GreenMet -- specifically the equity percentages held by Horn, Sorial, Schiller, and Libra Group -- and do any undisclosed investors hold stakes?",
+      "Does the Greenland government's denial of engagement with Horn or GreenMet on the 1.5GW data center project reflect a genuine lack of contact, or diplomatic distancing amid U.S. Greenland acquisition pressure?"
+    ],
+    "applicable_models": [
+      "revolving-door",
+      "bridge-tax",
+      "enabler-gradient",
+      "manufactured-dependency"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "GreenMet",
+      "connections": [
+        {
+          "target": "Critical Metals Corp",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Tanbreez offtake partnership for DoD REE supply"
+        },
+        {
+          "target": "Ucore Rare Metals",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Facilitated 10-year offtake agreement"
+        },
+        {
+          "target": "Keith Schiller",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "OCCRP",
+          "description": "Passive minority shareholder, former board member"
+        },
+        {
+          "target": "Ned Mamula",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "OCCRP",
+          "description": "Former Chief Geologist; now USGS Director (divested)"
+        },
+        {
+          "target": "George Sorial",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "OCCRP",
+          "description": "Passive minority shareholder, former board member"
+        },
+        {
+          "target": "Drew Horn",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "GreenMet website",
+          "description": "CEO and founder of GreenMet"
+        },
+        {
+          "target": "Critical Metals Corp",
+          "type": "contracts_with",
+          "strength": 1.0,
+          "evidence_ref": "GreenMet brokered Critical Metals partnership with Tanbreez; facilitated EXIM LOI",
+          "description": null
+        },
+        {
+          "target": "Ucore Rare Metals",
+          "type": "contracts_with",
+          "strength": 0.7,
+          "evidence_ref": "GreenMet facilitated 10-year offtake between Critical Metals/Tanbreez and Ucore",
+          "description": null
+        }
+      ],
+      "secondHop": {
+        "Critical Metals Corp": [
+          {
+            "target": "Matt Schnappauf",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Schnappauf registered as Cornerstone lobbyist for CRML Q1-Q3 2025, K/quarter. Lobbied DOD, State, EXIM, EOP for critical minerals policy."
+          },
+          {
+            "target": "Cantor Fitzgerald",
+            "type": "owns",
+            "strength": 1.0,
+            "description": "Cantor Fitzgerald LP is owner of CRML (LittleSis). Held 1.25M shares (deferred SPAC underwriting), divested to 190K by Q3 2025."
+          },
+          {
+            "target": "Alyeska Investment Group",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Alyeska Master Fund LP deployed ~$85M in two PIPE tranches in October 2025 to acquire 9.9% of CRML. Also bought ~5M secondary shares from European Lithium and Rimbal."
+          },
+          {
+            "target": "Greenland",
+            "type": "corporate",
+            "strength": 0.7,
+            "description": "Holds 30-year exploitation license for Tanbreez deposit (potentially world's largest REE deposit, 28.2M metric tons). $120M EXIM Bank LOI."
+          },
+          {
+            "target": "Howard Lutnick",
+            "type": "owns",
+            "strength": 0.7,
+            "description": "Howard Lutnick (US Commerce Secretary) listed as indirect owner of CRML via Cantor Fitzgerald (LittleSis). Divested in May 2025 via trust to children."
+          }
+        ],
+        "Drew Horn": [
+          {
+            "target": "George Sorial",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Keith Schiller",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Ned Mamula",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Svend Hardenberg",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Hardenberg (Inuit Development Company) partners with Horn (AmForge Corporation) on 1.5GW AI data center in Kangerlussuaq"
+          },
+          {
+            "target": "George Logothetis",
+            "type": "financial",
+            "strength": 0.7,
+            "description": ""
+          }
+        ],
+        "George Sorial": [
+          {
+            "target": "Javelin Advisors",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-founder of Javelin Advisors LLC"
+          },
+          {
+            "target": "Keith Schiller",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Robert W. Seiden",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Sen. Katie Britt",
+            "type": "political",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Robert Seiden",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-lobbyists at Javelin Advisors LLC; Seiden Law LLP served as prime contractor for Pakistan FARA engagement, subcontracting to Javelin at K/month."
+          }
+        ],
+        "Keith Schiller": [
+          {
+            "target": "Robert W. Seiden",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Rep. Ronny Jackson",
+            "type": "political",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Giorgi Rtskhiladze",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Rtskhiladze (Logical Strategies) retained Schiller (Javelin Advisors) as covered official lobbyist. Schiller's covered position: Deputy Assistant to President Trump, Director of Oval Office Operations."
+          },
+          {
+            "target": "Ronny Jackson",
+            "type": "advisory",
+            "strength": 0.7,
+            "description": "Javelin Advisors used Ronny Jackson as primary congressional contact for Pakistan rare earth lobbying. Jackson held in-person meeting May 1 2025 with Pakistani officials, documented in Javelin FARA filings."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
 }

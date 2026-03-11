@@ -553,7 +553,7 @@
     {
       "id": 3481,
       "finding_type": "intelligence",
-      "summary": "TEMPORAL PATTERN: Cross-thread coordinated action week Jan 26-29 2019 \u2014 the densest single week in the investigation. 34 findings across 3 threads (T1, T3, T4). Epstein simultaneously: (1) discusses SDNY RICO investigation with Weingarten, (2) probes Karp about Ghosn and Rajeev Misra, (3) inquires about Benedetti through Teodorani, (4) references 'the SoftBank caper.' All within 5 days. This is the clearest evidence of Epstein operating as intelligence hub connecting legal defense, corporate espionage, and financial intelligence streams.",
+      "summary": "TEMPORAL PATTERN: Cross-thread coordinated action week Jan 26-29 2019 — the densest single week in the investigation. 34 findings across 3 threads (T1, T3, T4). Epstein simultaneously: (1) discusses SDNY RICO investigation with Weingarten, (2) probes Karp about Ghosn and Rajeev Misra, (3) inquires about Benedetti through Teodorani, (4) references 'the SoftBank caper.' All within 5 days. This is the clearest evidence of Epstein operating as intelligence hub connecting legal defense, corporate espionage, and financial intelligence streams.",
       "detail": "Jan 21: Epstein references SDNY RICO, mentions 'the org', departs for Europe. Jan 22: Weingarten confirms SDNY intelligence, discusses billing. Jan 24: Epstein offers Karp briefing on 'google, ghosen, and rajeev misra.' Jan 26: Epstein asks Karp about Misra representation, calls Ghosn 'very very not good guy', Weingarten raises French/Israeli lawyer Ron Soffer for 'SoftBank caper.' Jan 28: Epstein asks Teodorani about Benedetti. The convergence of legal, intelligence, and financial threads in a single week is unprecedented.",
       "source_datasets": null,
       "confidence": "medium",
@@ -576,8 +576,8 @@
     {
       "id": 3483,
       "finding_type": "intelligence",
-      "summary": "TEMPORAL PATTERN: Late 2016 multi-thread activation coinciding with Trump election and CBP enhanced screening. 40 findings Oct-Dec 2016 across 5 threads (T1:21, T6:12, T5:5, T4:1, T3:1). Gulf state thread (T6) surges to 30% of activity \u2014 highest ratio in any period. Key actors: Kuhn Foundation, Peter Thiel, Jabor Al Thani, Kathy Ruemmler, Raafat Alsabbagh. Pattern indicates Epstein was positioning for the political transition, with Gulf state contacts becoming primary operational focus.",
-      "detail": "Oct 2016: Kuhn meetings, Thiel-Churkin-Epstein troika, Jabor Al Thani introduction to network, Kellerhals DB KYC, Landon Thomas intelligence trading, SoftBank awareness via Jabor. Nov 2016: Election cancels Doha trip, Kellerhals personal exchange, Bannon-Brock Pierce crypto financing, Rothschild recruiting. Dec 2016: Paul Weiss activity, Schantz reactivation, Qatar intelligence. CBP enhanced screening escalated Dec 1 \u2014 the temporal boundary between pre- and post-screening operational adjustments.",
+      "summary": "TEMPORAL PATTERN: Late 2016 multi-thread activation coinciding with Trump election and CBP enhanced screening. 40 findings Oct-Dec 2016 across 5 threads (T1:21, T6:12, T5:5, T4:1, T3:1). Gulf state thread (T6) surges to 30% of activity — highest ratio in any period. Key actors: Kuhn Foundation, Peter Thiel, Jabor Al Thani, Kathy Ruemmler, Raafat Alsabbagh. Pattern indicates Epstein was positioning for the political transition, with Gulf state contacts becoming primary operational focus.",
+      "detail": "Oct 2016: Kuhn meetings, Thiel-Churkin-Epstein troika, Jabor Al Thani introduction to network, Kellerhals DB KYC, Landon Thomas intelligence trading, SoftBank awareness via Jabor. Nov 2016: Election cancels Doha trip, Kellerhals personal exchange, Bannon-Brock Pierce crypto financing, Rothschild recruiting. Dec 2016: Paul Weiss activity, Schantz reactivation, Qatar intelligence. CBP enhanced screening escalated Dec 1 — the temporal boundary between pre- and post-screening operational adjustments.",
       "source_datasets": null,
       "confidence": "medium",
       "date_of_event": null,
@@ -750,5 +750,351 @@
       "confidence": "medium",
       "id": 480
     }
-  ]
+  ],
+  "curation": {
+    "key_finding_ids": [
+      609,
+      623,
+      622,
+      462,
+      1535,
+      441,
+      3480,
+      3481,
+      3483,
+      447,
+      476,
+      469
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          1756,
+          1776,
+          1880
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": "timeline",
+        "finding_ids": [
+          469,
+          471,
+          478,
+          623,
+          462,
+          476,
+          1535,
+          622,
+          447,
+          477
+        ],
+        "connection_ids": [
+          1756
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          441,
+          3480,
+          3481,
+          3483
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-03-11T22:21:41.658954+00:00",
+    "lead": "<p>The Epstein Network is the composite financial, legal, nonprofit, and intelligence infrastructure built by <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> across multiple jurisdictions over approximately three decades. At its peak, the network encompassed an estate valued at $577.7 million (EFTA00027979), more than two dozen corporate entities held through U.S. Virgin Islands shell corporations, at least 23 accounts at JPMorgan Chase alone (EFTA01340334), a constellation of nonprofit foundations controlling approximately $40&ndash;60 million in assets at their peak, and a web of professional relationships spanning finance, law, diplomacy, academia, and media. Real property was held through purpose-built USVI corporations &mdash; Maple Inc (9 East 71st Street, New York, $55.9 million), Nautilus Inc (Little St. James Island, $63.9 million), Cypress Inc (Zorro Ranch, New Mexico, $17.2 million), Laurel Inc (El Brillo Way, Palm Beach, $12.4 million), and SCI JEP (Paris apartment, $8.7 million) &mdash; each capitalized at 10,000 shares. [Finding #622]</p><p>The network&rsquo;s operational core consisted of a small group of fiduciaries who controlled virtually every entity. Attorney <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> and accountant <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> served as trustees of the 2007 Insurance Trust #3 and executors of the will, alongside Joseph Pagano and Lawrence Newman, with <a href=\"/dossiers/jeffrey-a-schantz\">Jeffrey Schantz</a> as an earlier co-trustee who was later replaced by <a href=\"/dossiers/ghislaine-maxwell\">Ghislaine Maxwell</a> and Ira Zicherman as successor co-trustees of the 2001 Trust. [Finding #609] Backup executors named in the will were Jes Staley and <a href=\"/dossiers/andrew-farkas\">Andrew Farkas</a>. In the USVI, <a href=\"/dossiers/erika-kellerhals\">Erika Kellerhals</a> served as secretary and bookkeeper across most entities, operating from Suite 101 at 9053 Estate Thomas, St. Thomas. The same trio of Kahn, Indyke, and Kellerhals appeared as officers of <a href=\"/dossiers/gratitude-america-ltd\">Gratitude America</a>, <a href=\"/dossiers/enhanced-education\">Enhanced Education</a>, <a href=\"/dossiers/financial-trust-company\">Financial Trust Company</a>, and other USVI entities. [Finding #1535]</p><p>The network&rsquo;s financial engine was driven primarily by a single client: <a href=\"/dossiers/leon-black\">Leon Black</a>, co-founder of <a href=\"/dossiers/apollo-global-management\">Apollo Global Management</a>, who paid approximately $158 million in advisory fees between 2013 and 2017 and made a $10 million donation to Gratitude America in October 2015 as part of a $35 million same-day transfer. The nonprofit apparatus served as both a disbursement mechanism and a vehicle for cultivating relationships with academics, diplomats, and journalists. Gratitude America funded the <a href=\"/dossiers/international-peace-institute\">International Peace Institute</a> ($525,000), the <a href=\"/dossiers/kuhn-foundation\">Kuhn Foundation</a> ($650,000), MIT ($150,000), and paid consulting fees to figures including <a href=\"/dossiers/noam-chomsky\">Noam Chomsky</a> and <a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a>, an active New York Times reporter. [Finding #1535] Following Epstein&rsquo;s arrest on July 6, 2019, and death on August 10, 2019, the directly controlled entities entered dormancy or sustained decline. Gratitude America froze at $8.175 million in assets with zero activity; the <a href=\"/dossiers/humpty-dumpty-institute\">Humpty Dumpty Institute</a> lost 80% of its revenue; and the Edge Foundation collapsed from $501,000 to $74,000 in assets. Entities with independent governance, such as the <a href=\"/dossiers/les-wexner\">Wexner</a> Foundation, were largely unaffected. [Finding #447]</p>",
+    "system_role": "The Epstein Network is a case study in how a single individual constructed a multi-jurisdictional infrastructure that combined legitimate financial advisory, nonprofit grant-making, political influence, and intelligence brokerage into a unified system of manufactured dependency &mdash; where each component reinforced the others, fiduciary control was concentrated in a handful of loyalists, and the deliberate use of USVI incorporation, trust layering, and disclosure avoidance created opacity that persisted well beyond the principal's death.",
+    "sections": [
+      {
+        "id": "corporate-entity-architecture",
+        "title": "Corporate Entity Architecture",
+        "content": "<p>The network's corporate structure was organized around a set of single-purpose USVI corporations, each holding a distinct real property asset. The estate inventory filed in USVI Superior Court (EFTA00027979) lists Maple Inc ($55.9 million, 9 East 71st Street, New York), Nautilus Inc ($63.9 million, Little St. James Island), Cypress Inc ($17.2 million, Zorro Ranch, New Mexico), Laurel Inc ($12.4 million, El Brillo Way, Palm Beach), and SCI JEP ($8.7 million, Paris apartment), with Great St. James Island held directly at $22.5 million. All were capitalized at 10,000 shares except SCI JEP (999 shares). Hedge fund and private equity investments totaled $195 million. Total estate property: $577.7 million. [Finding #622]</p><p>Beyond the property shells, a parallel layer of operating and financial entities included <a href=\"/dossiers/financial-trust-company\">Financial Trust Company</a>, <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company</a>, <a href=\"/dossiers/southern-financial-llc\">Southern Financial LLC</a>, <a href=\"/dossiers/southern-country-international-ltd\">Southern Country International Ltd</a>, J. Epstein and Company, New York Strategy Group LLC, EGC Capital LLC, Forums LLC, JEGE Inc, NES LLC, ASW Holdings LLC, and multiple &ldquo;Interest&rdquo; entities (Arts Interests, Health and Science Interests, Heritage Interests, Institutional Interests, International Charitable Interest II, Commun Interests). A 2006 JPMorgan data tape confirmed 23 distinct Epstein-affiliated accounts at that bank alone, covering the full spectrum from personal accounts to trust entities to foundations. [Finding #623]</p><p>The USVI structure was not incidental. Three Epstein foundations &mdash; J Epstein VI Foundation, <a href=\"/dossiers/enhanced-education\">Enhanced Education</a>, and the COUQ Foundation &mdash; are absent from federal IRS 990 filings entirely, indicating they were structured to avoid federal nonprofit transparency requirements. Enhanced Education was specifically described internally as not being &ldquo;subject to public&rdquo; disclosure, unlike Gratitude America. [Finding #447] This jurisdictional arbitrage enabled a second tier of financial activity that remains largely opaque.</p>",
+        "viz": null
+      },
+      {
+        "id": "fiduciary-control-and-trust-structure",
+        "title": "Fiduciary Control and Trust Structure",
+        "content": "<p>Control over the network was concentrated in a remarkably small circle of fiduciaries. <a href=\"/dossiers/darren-indyke\">Darren Indyke</a>, Epstein's personal attorney, served as trustee of the 2007 Jeffrey E. Epstein Insurance Trust #3, executor of the will, and officer of virtually every Epstein entity. <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, Epstein's accountant at HBRK Associates (575 Lexington Avenue, 4th Floor, New York), served as co-trustee (designated effective December 17&ndash;27, 2012), co-executor, and president of <a href=\"/dossiers/gratitude-america-ltd\">Gratitude America</a>. <a href=\"/dossiers/jeffrey-a-schantz\">Jeffrey Schantz</a> was an earlier co-trustee of the 2001 Trust One, removed by Epstein and replaced with <a href=\"/dossiers/ghislaine-maxwell\">Ghislaine Maxwell</a> and Ira Zicherman as successor co-trustees. [Finding #609]</p><p>The will directed all property to the 2001 Trust, with executors Indyke, Joseph Pagano, and Lawrence Newman. Backup executors were Jes Staley and Andrew Farkas. <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> ran KYC/AML adverse media searches on Insurance Trust #3 (analyst Mayur Rathod) and cleared it, noting that Epstein's sex offense charges had been &ldquo;cleared already.&rdquo; Some 258 documents reference this trust in the DugganUSA corpus. [Finding #609]</p><p>The operational workforce was similarly constrained. FEC employer filings confirm only four Epstein entities ever appeared as employers: J Epstein and Company (Jeffrey Epstein personal donations, 1994&ndash;2000; Indyke in 2000), New York Strategy Group LLC (Indyke 2003, <a href=\"/dossiers/lesley-groff\">Lesley Groff</a> 2007&ndash;2014, Schantz 2002), Ossa Properties Inc (Anthony Barrett 2000&ndash;2020, Mark Epstein 1999&ndash;2021), and RDK Properties LLC (Kahn 2007). The core entities &mdash; Gratitude America, Enhanced Education, DKIP, Financial Trust Company &mdash; had zero employees appearing in any FEC filing. [Finding #478] [Finding #469]</p>",
+        "viz": null
+      },
+      {
+        "id": "nonprofit-money-flows",
+        "title": "Nonprofit Money Flows",
+        "content": "<p>The nonprofit arm of the network served as both a grant-making apparatus and a mechanism for cultivating dependency relationships with institutions and individuals. Total identifiable nonprofit assets across ten entities were approximately $40.4 million at their assessed peak (circa 2010&ndash;2014), declining to approximately $16 million or less by 2022 &mdash; a roughly 60% loss. [Finding #462]</p><p>The grant flows followed hierarchical patterns. <a href=\"/dossiers/gratitude-america-ltd\">Gratitude America</a>, capitalized by <a href=\"/dossiers/leon-black\">Leon Black</a>'s $10 million in October 2015, disbursed grants to the <a href=\"/dossiers/international-peace-institute\">International Peace Institute</a> ($375,000&ndash;$525,000 across filings), the <a href=\"/dossiers/kuhn-foundation\">Kuhn Foundation</a> ($650,000), MIT ($150,000), the Edge Foundation ($35,000), O'Gorman Garden ($30,000), and Humanity Plus ($100,000). The Black Family Foundation separately funded the Clinton Foundation ($750,000), Tony Blair Foundation ($250,000), and Birthright Israel ($1.5 million). The <a href=\"/dossiers/humpty-dumpty-institute\">Humpty Dumpty Institute</a> maintained Congressional relationships with over 33 members while filing zero LDA lobbying disclosures &mdash; a pattern the investigation flagged as potential Lobbying Disclosure Act violations. [Finding #1535] [Finding #441]</p><p>Officer overlap was pervasive. Kahn, Indyke, and <a href=\"/dossiers/erika-kellerhals\">Kellerhals</a> ran Gratitude America. Brockman and Matson ran the Edge Foundation. Cwerman ran the HDI with Mark Epstein on the board. Apollo executives Hannan and Cohen sat on the Black Foundation board. None of these officers received reported compensation. [Finding #1535] The HDI was flagged by the IRS for an excess benefit transaction in 2015, and the Edge Foundation received $35,000 from Gratitude America in 2018 while itself making zero grants &mdash; suggesting it functioned as a pass-through or dormant holding entity rather than an active grant-maker.</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "political-influence-architecture",
+        "title": "Political Influence Architecture",
+        "content": "<p>The network's political footprint was structured to avoid formal disclosure. There are zero Lobbying Disclosure Act filings for Epstein personally, IPI, HDI, Gratitude America, Enhanced Education, the Leon Black Foundation, or any Epstein-named entity. <a href=\"/dossiers/ken-starr\">Ken Starr</a> was registered as a lobbyist at <a href=\"/dossiers/kirkland-ellis\">Kirkland &amp; Ellis</a>, but his advocacy work for Epstein appears to have been unregistered. Meanwhile, <a href=\"/dossiers/apollo-global-management\">Apollo Global</a> spent $1.21 million on lobbying in 2019 (a 278% increase from 2018), with Q4 2019 alone accounting for $670,000, coinciding with the period of maximum legal exposure following Epstein's arrest. <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> lobbied on anti-money-laundering regulation in 2007 while maintaining over 40 Epstein-linked accounts. [Finding #441]</p><p>FEC records reveal three coordinated donation clusters targeting officials with jurisdictional oversight of Epstein properties. The USVI cluster directed funds to Delegate Stacey Plaskett from Indyke ($8,000, 2014&ndash;2018) and Groff ($2,600, 2014). The New Mexico cluster targeted Governor Bill Richardson, with maximum contributions from Indyke, Kahn, and Ken Starr ($2,300 each, within months of each other), plus $4,000 each from <a href=\"/dossiers/ghislaine-maxwell\">Maxwell</a> and Indyke to King for Congress (NM). The Clinton cluster included contributions from Maxwell, Kahn, Barrett, and Dershowitz ($5,800 combined in 2007), plus Epstein's own $20,000 to Hillary Clinton's 1999 Senate campaign. [Finding #476]</p><p>Epstein personally made $6,000+ in political donations between 1994 and 2000, then ceased all direct giving. His 2007 Non-Prosecution Agreement and 2008 plea deal created legal exposure that would have made further donations scrutinizable. However, his inner circle &mdash; Indyke, Groff, and Kahn &mdash; continued donating through 2018 while listing Epstein entities as employers. Total network political spending from identified associates exceeded $1 million, driven primarily by Black, <a href=\"/dossiers/les-wexner\">Wexner</a>, <a href=\"/dossiers/lawrence-summers\">Summers</a>, and <a href=\"/dossiers/glenn-dubin\">Glenn Dubin</a>. Foreign nationals in the network &mdash; <a href=\"/dossiers/terje-rod-larsen\">Terje R&oslash;d-Larsen</a>, <a href=\"/dossiers/ehud-barak\">Ehud Barak</a>, and Amir Dossal &mdash; had zero FEC footprint, consistent with the foreign national prohibition. [Finding #471] [Finding #480]</p>",
+        "viz": null
+      },
+      {
+        "id": "temporal-patterns-and-operational-phases",
+        "title": "Temporal Patterns and Operational Phases",
+        "content": "<p>Temporal analysis of the investigation's 607 graph nodes and 717 edges reveals distinct operational phases. The year 2013 was the peak operational year, with 73 findings across seven threads. Key actors that year included <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a> (10 findings), <a href=\"/dossiers/bill-siegel\">Bill Siegel</a> (6), <a href=\"/dossiers/eduardo-teodorani-fabbri\">Eduardo Teodorani-Fabbri</a> (6), <a href=\"/dossiers/ariane-de-rothschild\">Ariane de Rothschild</a> (5), Leon Black (4), and IPI (4). The simultaneous activation of Apollo/Black financial flows, Deutsche Bank operations, and Gulf state connections alongside core network activity indicates 2013 was when Epstein's combined intelligence and financial operations were at maximum capacity. [Finding #3479]</p><p>Late 2016 saw a multi-thread activation coinciding with the U.S. presidential election and Customs and Border Protection enhanced screening. Gulf state contacts &mdash; including <a href=\"/dossiers/jabor-al-thani\">Jabor Al Thani</a> and <a href=\"/dossiers/raafat-alsabbagh\">Raafat Alsabbagh</a> &mdash; surged to 30% of network activity, the highest ratio in any recorded period. <a href=\"/dossiers/peter-thiel\">Peter Thiel</a> appeared alongside Churkin and Epstein in this period, and the <a href=\"/dossiers/kuhn-foundation\">Kuhn Foundation</a> meetings intensified. CBP enhanced screening escalated on December 1, 2016, marking a temporal boundary in the network's operational adjustments. [Finding #3483]</p><p>The densest single week in the investigation occurred January 26&ndash;29, 2019, with 34 findings across three threads. Epstein simultaneously discussed SDNY RICO investigation intelligence with <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a>, probed <a href=\"/dossiers/brad-karp\">Brad Karp</a> about <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> and <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>, inquired about Benedetti through Teodorani-Fabbri, and referenced &ldquo;the SoftBank caper.&rdquo; This week represents the clearest documentary evidence of Epstein operating as an intelligence hub connecting legal defense, corporate espionage, and financial intelligence streams. [Finding #3481]</p><p>In the 30 days before <a href=\"/dossiers/ghislaine-maxwell\">Maxwell</a>'s arrest on July 2, 2020, Attorney General <a href=\"/dossiers/william-barr\">William Barr</a> attempted to fire SDNY U.S. Attorney Geoffrey Berman on June 19, then reversed course when Berman refused to leave. Audrey Strauss succeeded Berman and authorized the arrest. The <a href=\"/dossiers/edmond-de-rothschild-bank\">Edmond de Rothschild Bank</a> forfeiture filing occurred on July 1. The coincidence of the Berman firing attempt 13 days before arrest raises questions about whether DOJ leadership had advance knowledge of the prosecution timeline. [Finding #3480]</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "post-mortem-network-state",
+        "title": "Post-Mortem Network State",
+        "content": "<p>Following Epstein's death on August 10, 2019, the network's entities followed three distinct trajectories. Entities under direct Epstein control froze: <a href=\"/dossiers/gratitude-america-ltd\">Gratitude America</a> sat at $8.175 million in assets with $1 in annual revenue and $0 in expenses from 2020 onward. The Edge Foundation collapsed from $501,000 to $74,000. The <a href=\"/dossiers/eva-dubin\">Dubin</a> Family Foundation entered terminal wind-down from $806,000 to $4,000. [Finding #447]</p><p>Entities with independent donor bases or governance structures survived largely intact. The <a href=\"/dossiers/les-wexner\">Wexner</a> Foundation remained stable at $13&ndash;15 million per year. The See Forever Foundation recovered to $1.8 million by 2023. The Ricardo O'Gorman Garden grew steadily. The divergence between frozen and surviving entities maps precisely to the degree of Epstein's personal control: the more dependent an entity was on Epstein's direction, the more completely it ceased to function upon his death. [Finding #447]</p><p>A PPP loan sweep across the network identified eight confirmed entity matches totaling $13.5 million in approved pandemic relief loans. These included HBRK Associates ($71,000), Kellerhals Ferguson Kroblin PLLC ($218,000), Boies Schiller Flexner LLP ($10 million), Carbyne Inc ($396,000, only partially forgiven at 91.1%), Island Global Yachting ($1.39 million), the <a href=\"/dossiers/humpty-dumpty-institute\">Humpty Dumpty Institute</a> ($82,000), and the <a href=\"/dossiers/international-peace-institute\">International Peace Institute</a> ($1.3 million). An unidentified entity, Caribbean Risk Group LLC, received $45,000 at the same suite address (9053 Estate Thomas, Suite 101) and same lender (United Fidelity Bank) as the Kellerhals firm. [Finding #4902]</p><p>Ten Epstein-created entities were included in the USVI Attorney General's $105 million settlement in November 2022. The disposition of the $8.175 million in frozen Gratitude America assets, and the fate of the three USVI foundations absent from federal 990 filings (J Epstein VI Foundation, Enhanced Education, COUQ Foundation), remain open questions.</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What are the total assets and activities of the three Epstein USVI foundations (J Epstein VI Foundation, Enhanced Education, COUQ Foundation) that are absent from federal IRS 990 filings? Their deliberate structuring to avoid federal nonprofit transparency suggests a parallel pool of financial activity that remains largely undocumented.",
+      "What was the full scope of Epstein's hedge fund and private equity portfolio ($195 million per the estate inventory), and which fund managers maintained relationships with Epstein after his 2008 conviction? The identity of these counterparties would reveal the professional network that continued to accept Epstein capital post-conviction.",
+      "What entity is Caribbean Risk Group LLC (NAICS 238140, Masonry Contractors) at 9053 Estate Thomas Suite 101, St. Thomas -- the same address as the Kellerhals law firm -- and why did it use the same out-of-state lender (United Fidelity Bank, Indiana) for its PPP loan as the Kellerhals firm?",
+      "How was Epstein's intelligence brokerage function compensated? The January 2019 convergence of SDNY RICO intelligence, Carlos Ghosn/Rajeev Misra/SoftBank inquiries, and Benedetti/Teodorani-Fabbri social intelligence in a single week demonstrates an active intelligence operation, but the revenue model for this function remains unclear beyond the advisory fees from Leon Black.",
+      "What was the nature of the relationship between IPI's Congressional engagement (33+ members) and the Humpty Dumpty Institute's Congressional delegation programs, given that both organizations had zero LDA filings despite activities that appear to constitute lobbying under federal definitions?"
+    ],
+    "applicable_models": [
+      "parallel-financial-system",
+      "jurisdictional-arbitrage",
+      "manufactured-dependency",
+      "enabler-gradient",
+      "complexity-as-credential",
+      "narrative-shield",
+      "bridge-tax"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Epstein Network",
+      "connections": [
+        {
+          "target": "Landon Thomas Jr.",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Finding #95: Thomas explicitly traded NYT coverage for access to Epstein network. On Oct 17 2016, Thomas emailed Epstein: does my story on Abraaj get me a meeting "
+        },
+        {
+          "target": "Lawrence Summers",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Finding #154: Summers wrote a recommendation letter for Nicole Junkermann at Epstein's request (Jul 2014). Epstein forwarded to Lesley Groff: 'Larry Summers Recomme"
+        },
+        {
+          "target": "Forums LLC",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Finding #553: Forums LLC made a 220,000 dollar internal funds transfer to Ghislaine Maxwell JPMorgan Private Bank checking account in January 2006 (EFTA01524286). A"
+        }
+      ],
+      "secondHop": {
+        "Forums LLC": [
+          {
+            "target": "Jeffrey Epstein",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #553: Forums LLC made a 220,000 dollar internal funds transfer to Ghislaine Maxwell JPMorgan Private Bank checking account in January 2006 (EFTA01524286). A"
+          },
+          {
+            "target": "Ghislaine Maxwell",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #553: Forums LLC made a 220,000 dollar internal funds transfer to Ghislaine Maxwell JPMorgan Private Bank checking account in January 2006 (EFTA01524286). A"
+          },
+          {
+            "target": "Investigation Network",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #553: Forums LLC made a 220,000 dollar internal funds transfer to Ghislaine Maxwell JPMorgan Private Bank checking account in January 2006 (EFTA01524286). A"
+          },
+          {
+            "target": "Mark Epstein",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #553: Forums LLC made a 220,000 dollar internal funds transfer to Ghislaine Maxwell JPMorgan Private Bank checking account in January 2006 (EFTA01524286). A"
+          },
+          {
+            "target": "NES LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #553: Forums LLC made a 220,000 dollar internal funds transfer to Ghislaine Maxwell JPMorgan Private Bank checking account in January 2006 (EFTA01524286). A"
+          }
+        ],
+        "Landon Thomas Jr.": [
+          {
+            "target": "Mark Epstein",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Finding #95: Thomas explicitly traded NYT coverage for access to Epstein network. On Oct 17 2016, Thomas emailed Epstein: does my story on Abraaj get me a meeting "
+          },
+          {
+            "target": "Norwegian Network",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Finding #95: Thomas explicitly traded NYT coverage for access to Epstein network. On Oct 17 2016, Thomas emailed Epstein: does my story on Abraaj get me a meeting "
+          },
+          {
+            "target": "SoftBank",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Finding #95: Thomas explicitly traded NYT coverage for access to Epstein network. On Oct 17 2016, Thomas emailed Epstein: does my story on Abraaj get me a meeting "
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Finding #95: Thomas explicitly traded NYT coverage for access to Epstein network. On Oct 17 2016, Thomas emailed Epstein: does my story on Abraaj get me a meeting "
+          },
+          {
+            "target": "Epstein Entity Network",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Finding #95: Thomas explicitly traded NYT coverage for access to Epstein network. On Oct 17 2016, Thomas emailed Epstein: does my story on Abraaj get me a meeting "
+          }
+        ],
+        "Lawrence Summers": [
+          {
+            "target": "Mark Epstein",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Finding #134: Summers forwarded a classified/sensitive U.S. Treasury and NSC assessment on Mongolia directly to Epstein (convicted sex offender) on Oct 4, 2015. The"
+          },
+          {
+            "target": "NSO Group",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Finding #137: Summers asked Epstein for permission and pricing on Mongolia consulting engagement (Mar 25, 2016). The thread shows Summers writing: 'Foreign min of M"
+          },
+          {
+            "target": "Lesley Groff",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #154: Summers wrote a recommendation letter for Nicole Junkermann at Epstein's request (Jul 2014). Epstein forwarded to Lesley Groff: 'Larry Summers Recomme"
+          },
+          {
+            "target": "Norwegian Network",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Finding #154: Summers wrote a recommendation letter for Nicole Junkermann at Epstein's request (Jul 2014). Epstein forwarded to Lesley Groff: 'Larry Summers Recomme"
+          },
+          {
+            "target": "Onassis Foundation",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Finding #157: Summers asked Epstein for financial advice on cryptocurrency tax avoidance (Jan 8, 2018). Summers wrote: 'This is for me in a minor way and for a pal "
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": [
+      {
+        "date": "1994",
+        "label": "FEC analysis reveals ZERO donations from employees of Gratitude America, Enhanced Education, DKIP, or Financial Trust Company. These core Epstein entities had no political footprint via employer-based donations. The ONLY Epstein entities appearing in FEC employer fields are: J Epstein and Company/Epstein and Company Inc (Jeffrey's donations 1994-2000), New York Strategy Group (Indyke, Groff, Schantz), Ossa Properties (Barrett, Mark Epstein), and RDK Properties (Kahn). The absence of donations from Gratitude America employees is notable given its M endowment from Leon Black.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 469
+      },
+      {
+        "date": "1994",
+        "label": "FEC analysis reveals Epstein's political donation cessation post-2000: Jeffrey Epstein made K+ in donations from 1994-2000, then ZERO after 2000. His 2007 NPA and 2008 plea deal created legal exposure that would make political donations scrutinizable. However, his inner circle continued donating through 2018 -- Indyke, Groff, and Kahn all made donations 2007-2018 while listing Epstein entities as employers. This suggests Epstein maintained political influence through proxy donations by associates rather than direct giving. The total network political spending from identified associates exceeds M (driven primarily by Black, Wexner, Summers, and Dubin).",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 471
+      },
+      {
+        "date": "1994",
+        "label": "FEC EMPLOYER ENTITY MAP: Political donations reveal 4 Epstein entities used as employer identifiers in FEC filings: (1) J EPSTEIN AND COMPANY/EPSTEIN AND COMPANY INC -- Jeffrey Epstein personal donations 1994-2000, also used by Indyke in 2000. (2) NEW YORK STRATEGY GROUP LLC -- used by Indyke (2003), Groff (2007-2014), and Schantz (2002). Three employees confirmed. (3) OSSA PROPERTIES INC -- used by Anthony Barrett (2000-2020) and Mark Epstein (1999-2021). Family real estate vehicle. (4) RDK PROPERTIES LLC -- used by Richard Kahn (2007). His personal entity managing Epstein property assets. These 4 entities are the only Epstein-controlled entities that appear in any FEC filing.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 478
+      },
+      {
+        "date": "2007-11-01",
+        "label": "The 2007 Jeffrey E. Epstein Insurance Trust #3 (dated Nov 1, 2007): Darren Indyke as trustee designated Richard Kahn as additional trustee effective Dec 17-27, 2012. Deutsche Bank ran KYC/AML adverse media searches on the trust (analyst Mayur Rathod) and cleared it, noting Epstein sex offense charges were cleared already. 258 documents referencing this trust in DugganUSA. The 2001 Trust One: Epstein removed Jeffrey A. Schantz as co-trustee and designated Ghislaine Maxwell and Ira Zicherman as successor co-trustees. The Will directed all property to the 2001 Trust, with executors Indyke, Joseph Pagano, and Lawrence Newman, and backup executors Jes Staley and Andrew Farkas.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 609
+      },
+      {
+        "date": "2009-09",
+        "label": "JPM 2006 data tape entity master list per September 2009 letter from VP Janet Young to Kahn and Indyke (EFTA01340334). The tape contained SSNs, tax IDs, names, and addresses for these Epstein-affiliated accounts: 116 East 65th St LLC, Arts Interests, ASW Holdings LLC, Commun Interests, EGC Capital LLC, Jeffrey E. Epstein, Financial Trustees Inc, Forums LLC, Health and Science Interests, Heritage Interests, Institutional Interests, International Charitable Interest II, J. Epstein and Company, J. Epstein Foundation, JEGE Inc, Ghislaine Maxwell, NES LLC, New York Strategy Group LLC, Palm Beach Trust, Ranch Lake II Inc, Ranch Lake III Inc, The COUQ Foundation, Zorro Trust. Data security incident: JPM confirmed no evidence of inappropriate access but offered Chase Identity Protection.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 623
+      },
+      {
+        "date": "2010",
+        "label": "Total nonprofit assets in Epstein network per 990 analysis: Gratitude America .175M (frozen), IPI .9M (declining), See Forever .57M, Wexner Foundation .69M, Leon D. Black Foundation K, Black Family Foundation K, Edge Foundation K, HDI K, Dubin Family Foundation K, Ricardo OGorman Garden K. TOTAL identifiable nonprofit assets: approximately .4M across 10 entities. Peak total assets (circa 2010-2014) would have been approximately -60M. The network has lost roughly 60% of its nonprofit asset base. Most critically, three Epstein USVI entities (J Epstein VI Foundation, Enhanced Education, COUQ Foundation) are absent from federal 990 filings, suggesting an unknown additional pool of assets outside federal reporting.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 462
+      },
+      {
+        "date": "2014",
+        "label": "COMPREHENSIVE FEC BUNDLING MAP: Three distinct bundling clusters identified: (1) USVI CLUSTER: Plaskett received coordinated donations from Indyke (8K 2014-2018) and Groff (2.6K 2014) -- the USVI delegate overseeing jurisdiction where Epstein had islands and LLCs. (2) NM CLUSTER: Richardson received max contributions from Indyke, Kahn, and K. Starr (all 2.3K, within months of each other) -- the NM governor where Zorro Ranch is located. Also King for Congress (NM) from Maxwell and Indyke (4K each). (3) CLINTON CLUSTER: Hillary received from Maxwell, Kahn, Barrett, and Dershowitz (5.8K combined 2007) plus 20K from Epstein to her Senate campaign in 1999. The jurisdictional pattern is clear: Epstein network concentrated political giving on officials with oversight of Epstein properties.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 476
+      },
+      {
+        "date": "2015-10",
+        "label": "Comprehensive nonprofit money flow network (2012-2023) from 990 deep dive across 12+ entities shows systematic patterns: (1) DORMANCY POST-ARREST: Gratitude America (frozen at $8.175M since 2020, $0 activity), Edge Foundation (collapsed from $501K to $74K), Dubin Family Foundation (terminal wind-down $806K to $4K). (2) REVENUE COLLAPSE: HDI dropped 80% from $1.8M peak to under $300K. IPI declined from $11.9M to $5M. (3) INTER-ENTITY GRANTS: Gratitude America funded IPI ($375K), Edge Foundation ($35K), O'Gorman Garden ($30K), MIT ($150K), Kuhn Foundation ($650K), Humanity Plus ($100K). Black Family Foundation funded Clinton Foundation ($750K), Tony Blair Foundation ($250K), Birthright Israel ($1.5M). (4) OFFICER OVERLAP: Kahn+Indyke+Kellerhals run Gratitude America. Brockman+Matson run Edge Foundation. Cwerman runs HDI with Mark Epstein on board. Apollo executives Hannan+Cohen on Black Foundation board. (5) KEY DATES: Black $10M to Gratitude (Oct 2015). Gratitude $1.26M grants (2017). Gratitude $891K grants (2018). HDI flagged for excess benefit transaction (2015). Edge Foundation received $35K from Gratitude (2018) while itself making zero grants.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 1535
+      },
+      {
+        "date": "2019-08",
+        "label": "Estate inventory (EFTA00027979, USVI Superior Court) valued total estate property at 577,672,654 dollars. Property entity valuations: Maple Inc (9 E 71st NYC) 55,931,000; Nautilus Inc (Little St James) 63,874,223; Great St James 22,498,600; Cypress Inc (Zorro Ranch NM) 17,246,208; Laurel Inc (El Brillo FL) 12,380,209; SCI JEP (Paris) 8,672,823. Hedge Funds and Private Equity Investments: 194,986,301. Total real property through USVI shells approximately 180.6M. All properties held through USVI corporations with 10,000 shares each (except SCI JEP with 999 shares). Values subject to appraisal update to date of death valuation.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 622
+      },
+      {
+        "date": "2019-10",
+        "label": "LOBBYING FOOTPRINT SYNTHESIS: The Epstein network shows a distinctive pattern of influence outside formal lobbying channels. Key findings: (1) ZERO LDA filings for Epstein personally, IPI, HDI, Gratitude America, Enhanced Education, Leon Black Foundation, or any Epstein-named entity. (2) Apollo Global (Leon Black) spent 1.21M on lobbying in 2019 (278% increase from 2018), with Q4 2019 alone at 670K. (3) Deutsche Bank lobbied on AML regulation in 2007 while maintaining 40+ Epstein accounts. (4) Ken Starr was registered at Kirkland Ellis but Epstein lobbying appears unregistered. (5) Carbyne (Barak) lobbied actively 2021-2025 on Next Gen 911. (6) L Brands (Wexner) had 784 filings with massive political contributions. (7) IPI and HDI zero-filing status despite 33+ Congress members is the most significant red flag - potential LDA violations. (8) See Forever Foundation (Weingarten) used Squire Patton Boggs with Clinton-era lobbyist Rodney Slater. Pattern: Epstein's influence was deliberately structured to avoid lobbying disclosure requirements, operating through nonprofits, personal relationships, and legal counsel rather than registered lobbying contacts.",
+        "type": "intelligence",
+        "evidence_ref": null,
+        "id": 441
+      },
+      {
+        "date": "2020",
+        "label": "Comparative 990 analysis of Epstein-linked nonprofits reveals three distinct patterns: (1) FROZEN POST-ARREST: Gratitude America (.175M frozen, zero activity since 2020). (2) SUSTAINED DECLINE: IPI (assets from .6M to .9M over 13 years, persistent deficits since 2015), HDI (revenue collapsed 80% from .8M to under K), Edge Foundation (assets from K to K). (3) ABSENT FROM RECORDS: J Epstein VI Foundation, Enhanced Education, COUQ Foundation - all missing from federal 990 filings, suggesting USVI entities deliberately structured to avoid federal nonprofit transparency. (4) UNAFFECTED: Wexner Foundation (stable -15M/yr), See Forever/Weingarten (recovered to .8M by 2023), Ricardo OGorman Garden (growing steadily). The pattern suggests entities more directly controlled by Epstein suffered most, while those with independent donor bases or governance survived.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 447
+      },
+      {
+        "date": "2024",
+        "label": "FEC NOTABLE ABSENCES: Terje Rod-Larsen (0 contributions), Amir Dossal (0 contributions), Karyna Shuliak (0 contributions), Ehud Barak (former PM -- 295 results but ALL appear to be different Americans, consistent with foreign national prohibition). Steve Bannon had only 61 small contributions (largest 2800 to Kobach 2019). Brad Edwards (victims attorney) had minimal donations -- 3 confirmed from Edwards Henderson FL. No donations found from Epstein after 2000. The foreign nationals in the network (Rod-Larsen, Barak, Dossal) are legally prohibited from US campaign contributions.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 477
+      },
+      {
+        "date": "2024",
+        "label": "WAVE 6 FEC POLITICAL DONATION NETWORK SUMMARY: Searched 20+ network persons across FEC records. Created 19 FEC findings, 10 connections, identified 1 new associate (Jeffrey Schantz via NYSG). KEY DISCOVERIES: (1) Three bundling clusters targeting jurisdictional officials (USVI/Plaskett, NM/Richardson+King, Clinton). (2) NYSG confirmed as operational employer in FEC filings with 3 employees (Indyke, Groff, Schantz). (3) Epstein stopped personal donations after 2000 but maintained influence through inner circle proxy donations through 2018. (4) Mark Epstein confirmed as Owner of Ossa Properties via FEC. (5) 4 Epstein entities appear in FEC employer fields (Epstein and Co, NYSG, Ossa, RDK). (6) No donations from Gratitude America, Enhanced Education, DKIP, or Financial Trust Company employees. (7) Mega-donors Black and Wexner operate independently at far greater scale. (8) Foreign nationals (Rod-Larsen, Barak, Dossal) have zero FEC footprint as expected.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 480
+      }
+    ]
+  }
 }

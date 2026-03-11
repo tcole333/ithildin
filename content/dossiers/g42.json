@@ -364,7 +364,7 @@
     {
       "id": 4106,
       "finding_type": "intelligence",
-      "summary": "SYNTHESIS: The entity holding 49% of Trump family WLFI has direct organizational lineage to a surveillance operation that illegally spied on Americans. G42 CEO Peng Xiao previously led DarkMatter subsidiary Pegasus, which was part of Project Raven (2016-2019) \u2014 using ex-NSA/CIA operatives to surveil dissidents, journalists, and Americans for UAE. Three Project Raven operatives criminally charged. G42 subsidiary Pax AI is rebranded Pegasus. G42 created ToTok surveillance app via Breej Holding (Tahnoon adopted son as director). Peng Xiao renounced US citizenship for Emirati. CIA opened investigative file on him. Both Peng Xiao and Martin Edelman (G42 GC) signed the WLFI deal giving 49% control to this surveillance-lineage entity.",
+      "summary": "SYNTHESIS: The entity holding 49% of Trump family WLFI has direct organizational lineage to a surveillance operation that illegally spied on Americans. G42 CEO Peng Xiao previously led DarkMatter subsidiary Pegasus, which was part of Project Raven (2016-2019) — using ex-NSA/CIA operatives to surveil dissidents, journalists, and Americans for UAE. Three Project Raven operatives criminally charged. G42 subsidiary Pax AI is rebranded Pegasus. G42 created ToTok surveillance app via Breej Holding (Tahnoon adopted son as director). Peng Xiao renounced US citizenship for Emirati. CIA opened investigative file on him. Both Peng Xiao and Martin Edelman (G42 GC) signed the WLFI deal giving 49% control to this surveillance-lineage entity.",
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
@@ -500,8 +500,8 @@
     {
       "id": 5440,
       "finding_type": "relationship",
-      "summary": "Abu Dhabi tech/defense cluster identified as dense non-subject clique: {Aryam Investment 1, G42, Martin Edelman, Peng Xiao, Sheikh Tahnoon bin Zayed Al Nahyan, World Liberty Financial} \u2014 largest clique (size 6) in the graph.",
-      "detail": "This 6-member clique is the largest in the network and represents the UAE technology/sovereign wealth nexus connecting to Trump family financial interests via World Liberty Financial. Sheikh Tahnoon (degree=16, betweenness=0.0178) is a structural bridge. The cluster spans defense tech (G42 AI), sovereign wealth (Aryam Investment/IHC), and Trump family crypto (World Liberty Financial). Martin Edelman serves as the legal/advisory connector. Notably, this clique operates entirely without US government nodes \u2014 a parallel power center worth tracking for its influence on defense policy.",
+      "summary": "Abu Dhabi tech/defense cluster identified as dense non-subject clique: {Aryam Investment 1, G42, Martin Edelman, Peng Xiao, Sheikh Tahnoon bin Zayed Al Nahyan, World Liberty Financial} — largest clique (size 6) in the graph.",
+      "detail": "This 6-member clique is the largest in the network and represents the UAE technology/sovereign wealth nexus connecting to Trump family financial interests via World Liberty Financial. Sheikh Tahnoon (degree=16, betweenness=0.0178) is a structural bridge. The cluster spans defense tech (G42 AI), sovereign wealth (Aryam Investment/IHC), and Trump family crypto (World Liberty Financial). Martin Edelman serves as the legal/advisory connector. Notably, this clique operates entirely without US government nodes — a parallel power center worth tracking for its influence on defense policy.",
       "source_datasets": [
         "analysis_run"
       ],
@@ -1016,5 +1016,616 @@
     }
   ],
   "entities": [],
-  "timeline": []
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      3989,
+      4149,
+      4094,
+      3848,
+      4058,
+      4059,
+      4061,
+      4288,
+      4045,
+      4047,
+      4062,
+      4148
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          5440
+        ],
+        "connection_ids": [
+          2320,
+          2322,
+          2328,
+          2332,
+          2373,
+          2374,
+          2396,
+          2402,
+          2403,
+          2398,
+          2400,
+          2401,
+          2404,
+          2405,
+          2408
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          4058,
+          4059,
+          4061,
+          4149
+        ],
+        "connection_ids": [
+          2320,
+          2373,
+          2374,
+          2402,
+          2400,
+          2410
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          3848,
+          4053,
+          4057,
+          4060,
+          4071,
+          4106,
+          4148,
+          4288
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-03-11T22:21:01.948143+00:00",
+    "lead": "<p>G42 (Group 42 Holding Ltd) is an Abu Dhabi-based artificial intelligence and cloud computing holding company founded in 2018 and chaired by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, the UAE National Security Adviser and brother of UAE President Mohammed bin Zayed. [Finding #3989] Its CEO, Peng Xiao, previously led Pegasus LLC, a subsidiary of DarkMatter Group, the UAE's offensive cyber operation whose personnel were criminally charged under US export control laws for surveilling Americans and dissidents through Project Raven (2016-2019). [Finding #4057] G42's corporate lineage runs through Royal Group, Tahnoon's private holding company, which holds 100% of Group 42 Holding Ltd; the SEC SC 13D filing (CIK 0001931913) identifies Tahnoon as beneficial owner. [Finding #4045]</p><p>Under pressure from the Biden administration and as a precondition for Microsoft's $1.5 billion investment in April 2024, G42 agreed to divest all Chinese investments and phase out Huawei hardware, with Microsoft President Brad Smith joining the G42 board. [Finding #4058] However, G42's $10 billion 42XFund, which held stakes in ByteDance and JD.com, was transferred not to an independent party but to Lunate, a unit of International Holding Company (IHC), which is also chaired by Tahnoon, with Royal Group holding 61% of IHC. [Finding #4053] In May 2025, G42 partnered on Stargate UAE, a joint AI campus with OpenAI, Oracle, Nvidia, <a href=\"/dossiers/softbank-group\">SoftBank</a>, and Cisco. [Finding #3848] In November 2025, the Trump administration approved the export of up to 35,000 Nvidia GB300 systems to G42, with total annual chip allocations of 100,000 units. [Finding #5067]</p><p>In January 2025, four days before the presidential inauguration, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, an Abu Dhabi entity managed by G42 executives, acquired a 49% stake in <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> for $500 million, with $187 million directed to Trump family entities. [Finding #4059] G42 executives <a href=\"/dossiers/martin-edelman\">Martin Edelman</a> and Peng Xiao both signed the deal and took seats on WLFI's five-person board, while a third G42 employee, Fiacc Larkin (G42 head of crypto), was deployed as WLFI's chief strategy advisor, giving G42-affiliated personnel effective operational control beyond the nominal 49% equity position. [Finding #4288] G42 is also the majority parent of <a href=\"/dossiers/mgx\">MGX</a>, the Abu Dhabi AI investment vehicle that used WLFI's USD1 stablecoin to settle its $2 billion Binance investment. [Finding #4062]</p>",
+    "system_role": "G42 is the operational technology arm of Sheikh Tahnoon bin Zayed Al Nahyan's conglomerate, functioning simultaneously as an AI company that evolved from a state surveillance apparatus, an investment vehicle whose China divestiture moved assets between entities controlled by the same individual, and the management entity behind the largest known foreign investment in a sitting US president's family business, while receiving US government approval for advanced AI chip exports during the same period.",
+    "sections": [
+      {
+        "id": "corporate-structure-and-ownership",
+        "title": "Corporate Structure and Ownership",
+        "content": "<p>G42 (Group 42 Holding Ltd) was founded in 2018 in Abu Dhabi as an AI and cloud computing holding company. The ownership chain runs from <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a> through Royal Group / RGH1 Investment SPV RSC Ltd to Group 42 Holding Ltd to G42 Investments AI Holding RSC Ltd (GLEIF LEI: 549300K0DHLK5GR6GV13), registered in the Abu Dhabi Global Market. [Finding #4045] Tahnoon simultaneously chairs IHC (International Holding Company, ADX-listed), with Royal Group holding 61% of IHC, and serves as UAE National Security Adviser. [Finding #4045]</p><p>G42's seven-member board of directors comprises Tahnoon as Chairman, Khaldoon Khalifa Al Mubarak (Mubadala MD/CEO), Jassem Mohamed Bu Ataba Al Zaabi (Abu Dhabi Finance Department Chairman and AI Council Secretary General), Brad Smith (Microsoft President), Egon Durban (Silver Lake Co-CEO), Peng Xiao (G42 CEO), and <a href=\"/dossiers/martin-edelman\">Martin Edelman</a> (G42 General Counsel). [Finding #4262] Mubadala acquired a stake in G42 in November 2020 and transferred Injazat and Khazna data center operations to the company. [Connection #2410]</p><p>The subsidiary network includes at least ten portfolio companies: Core42 (AI infrastructure and cloud, with a European HQ in Dublin from 2026), M42 (healthcare), Presight AI (analytics, ADX-listed since March 2023, IPO raising $496 million oversubscribed 136 times with IHC as 15% cornerstone investor), Khazna (data centers, over 70% UAE market share), Space42 (merger of Bayanat and Yahsat, ADX-listed October 2024), AIQ (joint venture with ADNOC for energy AI), CPX (cybersecurity), Astra Tech (fintech), and Inception (AI R&D). [Finding #4047] GLEIF records also identify G42 Asset Management Ltd (LEI: 213800R588W8CU5AB644) and G42 Assetik Master Fund Ltd (LEI: 984500NF92DF853E5812), both at Al Khatem Tower in the ADGM. [Finding #4047] G42 is the majority parent of <a href=\"/dossiers/mgx\">MGX</a>, the AI investment vehicle launched in March 2024 with Mubadala, targeting $100 billion in assets under management: G42 Holding holds 75% or more of GX Investments, which holds 50-75% of MGX Group Holding 1 LTD. [Finding #4062]</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "darkmatter-lineage-and-surveillance-operations",
+        "title": "DarkMatter Lineage and Surveillance Operations",
+        "content": "<p>G42's institutional origins are entwined with DarkMatter Group, the UAE's offensive cyber operation. CEO Peng Xiao previously served as CEO of Pegasus LLC, a DarkMatter subsidiary. [Finding #4057] DarkMatter ran Project Raven (2016-2019), a UAE surveillance program staffed by former NSA and CIA operatives that targeted dissidents, journalists, and American citizens. Three former operatives -- Marc Baier, Ryan Adams, and Daniel Gericke -- were criminally charged under US export control laws. [Finding #4057] As DarkMatter faded, its staff and assets migrated to G42. Pax AI, identified as a G42 subsidiary, is the rebranded Pegasus entity. The CIA opened an investigative file on Peng Xiao, who renounced his US citizenship for Emirati nationality. [Finding #4106]</p><p>G42 created the ToTok messaging application, originally developed as \"G42 IM\" and rebranded in July 2019. The New York Times and US intelligence identified ToTok as a mass surveillance tool for the UAE government. [Finding #4057] ToTok was developed through Breej Holding, whose sole director was Tahnoon's adopted son, and incorporated technology from the Chinese chat application YeeCall. User data was stored by Pax AI, the renamed Pegasus subsidiary. [Finding #4057]</p><p>The significance of this lineage extends beyond historical interest. G42-affiliated personnel now occupy three of five leadership positions at <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a>: Martin Edelman and Peng Xiao hold board seats, while Fiacc Larkin (G42 head of crypto) serves as chief strategy advisor overseeing the USD1 stablecoin. [Finding #4288] The entity that holds 49% of WLFI thus has direct organizational lineage to an operation that illegally surveilled Americans. [Finding #4106]</p>",
+        "viz": null
+      },
+      {
+        "id": "china-ties-and-divestiture",
+        "title": "China Ties and the Divestiture Question",
+        "content": "<p>Prior to 2024, G42 maintained extensive Chinese partnerships. In December 2019, G42 partnered with BGI Genomics to build a COVID-19 testing laboratory in Masdar City, Abu Dhabi, with capacity for tens of thousands of RT-PCR tests per day. [Finding #4060] BGI is a Chinese genomics company with military ties, and US officials raised concerns about potential genetic data transfer to China. [Connection #2401] G42 entered a Sinopharm joint venture for Phase III COVID vaccine trials in June 2020 and formed Hayat Biotech to manufacture Hayat-Vax in the UAE in March 2021. [Connection #2408] G42 used Huawei hardware infrastructure extensively. [Connection #2409] The company also launched the $10 billion 42XFund in 2022, based in Shanghai, with stakes in ByteDance and JD.com. [Finding #4060] G42 Chief Investment Officer Zhang Xiaoping simultaneously served as COO of Yitu Technology, a Chinese AI company sanctioned by the United States for its role in Uyghur surveillance. Zhang also ran two direct Chinese subsidiaries, G42 Shanghai Investment and Beijing Qingzi Future Network Technology. [Finding #4060]</p><p>In February 2024, under Biden administration pressure and as a condition for the Microsoft investment, G42 announced divestiture of all Chinese investments and agreed to phase out Huawei equipment. A secret pact with the Commerce Department's Bureau of Industry and Security preceded the Microsoft deal. [Finding #4094] However, the 42XFund and its $10 billion in Chinese tech stakes were transferred to Lunate, an investment unit of IHC. IHC is chaired by the same Tahnoon who chairs G42, and IHC's majority shareholder at 61% is Royal Group, which is also Tahnoon's private firm and G42's parent company. [Finding #4053] The Pentagon expressed skepticism that G42 would fully decouple from China. [Finding #4148] A further complication emerged when <a href=\"/dossiers/mgx\">MGX</a>, also Tahnoon-chaired and co-founded by G42, acquired a 15% stake in the TikTok US restructuring, meaning Tahnoon potentially holds ByteDance equity through Lunate and TikTok US equity through MGX simultaneously. [Finding #4071]</p>",
+        "viz": null
+      },
+      {
+        "id": "microsoft-investment-and-us-chip-access",
+        "title": "Microsoft Investment and US Chip Access",
+        "content": "<p>Microsoft invested $1.5 billion in G42 in April 2024, with Microsoft President Brad Smith joining the G42 board and G42 committing to run its AI workloads on Microsoft Azure. [Finding #4058] A $1 billion developer fund was established, and an intergovernmental assurance agreement between the US and UAE governments was developed as part of the arrangement. [Finding #4058] The deal opened the pathway for G42 to access advanced US AI technology and chips. By November 2025, Microsoft's total UAE investment had reached $15.2 billion. [Finding #5067]</p><p>The Cerebras Systems S-1 filing in September 2024 revealed that G42 was 83% of Cerebras' 2023 revenue and accounted for 97% of its hardware sales in the first half of 2024. [Finding #4058] G42 holds approximately 1% of Cerebras equity with a Class N stock option to purchase shares at a discounted price of $335 million. [Finding #4058] A CFIUS review of the Cerebras-G42 relationship contributed to Cerebras withdrawing its planned IPO in October 2025; CFIUS ultimately cleared Cerebras in March 2025, but only after G42's stake was converted to non-voting shares. [Finding #4094]</p><p>The chip export timeline accelerated under the Trump administration: in December 2024, the US cleared advanced AI chips for export to the UAE under the Microsoft arrangement. In March 2025, Tahnoon visited Washington to discuss AI-government integration. In May 2025, Trump signed an agreement with G42 for the largest AI campus outside the United States. In November 2025, the administration approved chip exports to the UAE and Saudi Arabia, with G42 cleared for up to 35,000 Nvidia GB300 systems and 100,000 chips per year overall. [Finding #5067] In February 2026, Senator Elizabeth Warren called for reversal of the UAE chip sales after reporting on Tahnoon's \"Spy Sheikh\" designation. [Finding #5067]</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "wlfi-investment-and-trump-family-nexus",
+        "title": "World Liberty Financial Investment and Trump Family Nexus",
+        "content": "<p>On January 16, 2025, four days before the presidential inauguration, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, an Abu Dhabi entity managed by G42 executives, signed a contract to acquire 49% of <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> for $500 million. [Finding #4059] Half was paid upfront, with $187 million directed to Trump family-controlled entities DT Marks DEFI LLC and DT Marks SC LLC. [Finding #4149] At the time of the deal, WLFI had no products and had raised only $82 million via token sales, making Aryam's $500 million valuation a substantial premium. [Finding #4059] <a href=\"/dossiers/martin-edelman\">Martin Edelman</a> (G42 General Counsel) and Peng Xiao (G42 CEO) signed the agreement and received two of five WLFI board seats, though neither appears on WLFI's public team page. [Finding #4288]</p><p>A third G42 employee, Fiacc Larkin (G42 head of crypto), was deployed to WLFI as chief strategy advisor in January 2025, overseeing the USD1 stablecoin. [Connection #2569] In a five-person startup structure, three G42-affiliated operatives exercised effective operational control beyond the nominal 49% equity position. [Finding #4288] Aryam was not granted rights to future WLFI token sales, but the board seats and operational personnel provided de facto influence over all strategic decisions including USD1 stablecoin operations. [Finding #4288]</p><p>The deal was not publicly disclosed until the Wall Street Journal reported it in February 2026. [Finding #4059] Congress responded with multiple investigations: Representative Ro Khanna launched a formal investigation demanding 16 categories of documents, and Senators Warren and Kim demanded a CFIUS review of the Aryam stake. [Finding #5444] Network analysis identified the cluster of Aryam Investment 1, G42, Martin Edelman, Peng Xiao, <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon</a>, and World Liberty Financial as the largest clique (size 6) in the entire investigation graph, operating entirely without US government nodes. [Finding #5440]</p>",
+        "viz": null
+      },
+      {
+        "id": "sec-edgar-footprint-and-us-investments",
+        "title": "SEC EDGAR Footprint and US Investments",
+        "content": "<p>G42 Investments AI Holdings RSC Ltd (CIK 0001931913) filed an SC 13D with the SEC in June 2022 disclosing a 13.4% stake in vTv Therapeutics (Nasdaq: VTVT), a North Carolina biotech company, with Tahnoon named as beneficial owner (CIK 0001934660). [Finding #4061] G42 Healthcare COO Fahed Al-Marzooqi was placed on the vTv board, and G42 Healthcare entered a collaboration and licensing agreement with the company. [Finding #4061] Multiple Cerebras Systems filings (CIK 0002021728) reference G42 as its dominant customer through exhibits EX-10.12 through EX-10.17. [Finding #4061] G42 also appears in SEC filings for Verses AI (VRSSF) and TeraWulf (WULF). [Finding #4061]</p><p>The Presight AI IPO on the Abu Dhabi Securities Exchange in March 2023 raised $496 million and was oversubscribed 136 times, with IHC (also chaired by Tahnoon) as a 15% cornerstone investor. [Finding #4061] The Cerebras S-1 filing revealed an extraordinary customer concentration: G42 represented 83% of Cerebras' 2023 revenue and 97% of hardware sales in the first half of 2024, creating a single-customer dependency that was a material factor in the CFIUS review and contributed to the delayed IPO. [Finding #4058]</p>",
+        "viz": null
+      },
+      {
+        "id": "stargate-and-global-ai-infrastructure",
+        "title": "Stargate and Global AI Infrastructure",
+        "content": "<p>In May 2025, G42 partnered in Stargate UAE alongside OpenAI, Oracle, Nvidia, <a href=\"/dossiers/softbank-group\">SoftBank</a>, and Cisco to construct a 1-gigawatt data center and 5-gigawatt campus in Abu Dhabi. [Finding #3848] SoftBank provides connectivity infrastructure while G42 operates the compute cluster. [Connection #2455] Separately, G42's subsidiary <a href=\"/dossiers/mgx\">MGX</a> committed $7 billion to the US-based Stargate Project, a $500 billion AI infrastructure joint venture announced by President Trump in January 2025 alongside OpenAI, SoftBank, and Oracle. [Finding #4062]</p><p>G42's data center subsidiary Khazna controls over 70% of the UAE market. [Finding #4047] Core42, the merged AI infrastructure and cloud unit, is establishing a European headquarters in Dublin in 2026. [Finding #4047] The May 2025 coordination window represents the peak of cross-thread activity in the investigation, with G42's Stargate UAE deal, the WLFI stablecoin's use in the MGX-Binance transaction, and the administration's reversal of chip export restrictions occurring simultaneously alongside <a href=\"/dossiers/doge\">DOGE</a> contract terminations, the <a href=\"/dossiers/golden-dome\">Golden Dome</a> defense proposal by <a href=\"/dossiers/spacex\">SpaceX</a>, <a href=\"/dossiers/anduril-industries\">Anduril</a>, and <a href=\"/dossiers/palantir-technologies\">Palantir</a>, and the confirmation of Emil Michael at the Pentagon. [Finding #6518]</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "What specific terms govern the two WLFI board seats allocated to G42 executives under the Aryam Investment 1 agreement, and do those seats carry veto rights over USD1 stablecoin operations, partnership agreements, or token issuance decisions?",
+      "Did G42 or Aryam Investment 1 personnel have any communications with the Trump administration regarding AI chip export policy between the January 16, 2025 signing of the WLFI deal and the May 12, 2025 rescission of Biden-era export restrictions?",
+      "Has Huawei hardware been fully removed from G42 operations as committed in the 2024 divestiture agreement, and what verification mechanisms does the Bureau of Industry and Security employ to confirm compliance?",
+      "What is the current status of the CIA investigative file on Peng Xiao, and has his renunciation of US citizenship and role at a surveillance-lineage entity been factored into any CFIUS review of G42's US investments?",
+      "Given that the 42XFund's Chinese assets were transferred to Lunate (IHC subsidiary, also chaired by Tahnoon), does CFIUS consider the divestiture effective for purposes of AI chip export authorization, or does common beneficial ownership negate the formal separation?"
+    ],
+    "applicable_models": [
+      "parallel-financial-system",
+      "jurisdictional-arbitrage",
+      "bridge-tax",
+      "complexity-as-credential",
+      "manufactured-dependency"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "G42",
+      "connections": [
+        {
+          "target": "Aryam Investment 1",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Aryam managed by G42 executives Martin Edelman (general counsel) and Peng Xiao (CEO). G42 is chaired by Tahnoon."
+        },
+        {
+          "target": "Martin Edelman",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "General counsel of G42. Board positions across multiple Tahnoon entities: MGX, MBZUAI, GlobalFoundries, Manchester City FC."
+        },
+        {
+          "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "SEC SC 13D CIK 0001931913",
+          "description": "Chairman and controlling shareholder of G42 since its founding in 2018"
+        },
+        {
+          "target": "World Liberty Financial",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "G42 executives (Edelman, Peng Xiao) signed WLFI deal and took board seats. G42 personnel manage Aryam Investment 1."
+        },
+        {
+          "target": "Nvidia",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "globenewswire.com",
+          "description": "G42 receives 100K advanced Nvidia chips/year under BIS-approved RTE framework; initial tranche 35K Blackwell GB300 chips"
+        },
+        {
+          "target": "Microsoft",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "Microsoft press release Apr 2024",
+          "description": "Microsoft $1.5B investment in G42 Apr 2024; $15.2B UAE data center investment Nov 2025"
+        },
+        {
+          "target": "Peng Xiao",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "G42 corporate records",
+          "description": "Group CEO since Oct 2020, at G42 since 2018 founding. Former CEO of DarkMatter subsidiary Pegasus. Signed Aryam-WLFI deal."
+        },
+        {
+          "target": "World Liberty Financial",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "WSJ Feb 2026",
+          "description": "G42-linked Aryam Investment 1 bought 49% of WLFI for USD500M (Jan 2025). Martin Edelman and Peng Xiao signed. 2 G42 execs on WLFI board."
+        },
+        {
+          "target": "Martin Edelman",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "WSJ Feb 2026; Finding #4003",
+          "description": "General Counsel of G42. Signed USD500M Aryam-WLFI deal. On MGX board. Key Tahnoon adviser."
+        },
+        {
+          "target": "DarkMatter Group",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "Bill Marczak investigation; CCP Committee",
+          "description": "G42 CEO Peng Xiao formerly led DarkMatter's Pegasus subsidiary. Pax AI (G42 subsidiary) is rebranded Pegasus. ToTok app created by G42 using DarkMatter infrastructure."
+        },
+        {
+          "target": "Cerebras Systems",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "Cerebras S-1 SEC filing Sep 2024",
+          "description": "G42 was 83% of Cerebras 2023 revenue, 97% of H1 2024 hardware. G42 holds 1% equity with discounted stock options. Condor Galaxy supercomputer partnership."
+        },
+        {
+          "target": "BGI Genomics",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "G42 press release; CCP Committee",
+          "description": "COVID testing lab partnership (Dec 2019), massive throughput facility in Abu Dhabi. US concerned about genetic data transfer to China."
+        },
+        {
+          "target": "MGX",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "MGX Form ADV; Finding #3999",
+          "description": "G42 is parent: G42 Holding 75%+ of GX Investments 50-75% of MGX Group Holding 1 LTD. MGX launched Mar 2024 targeting USD100B AUM."
+        },
+        {
+          "target": "Lunate",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "Bloomberg Jul 2024",
+          "description": "Lunate (IHC subsidiary) took over G42's 42XFund with USD10B Chinese tech investments. Both controlled by Tahnoon. Shell game divestiture."
+        },
+        {
+          "target": "Sinopharm",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "G42 press releases",
+          "description": "COVID vaccine JV: Phase III trial (Jun 2020), Hayat Biotech manufacturing JV (Mar 2021) for Hayat-Vax in UAE."
+        },
+        {
+          "target": "Huawei",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "CCP Committee; CNBC Apr 2024",
+          "description": "G42 used Huawei hardware infrastructure extensively pre-2024. Divested as condition of Microsoft deal and US chip access."
+        },
+        {
+          "target": "Mubadala Investment Company",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "Mubadala press release Nov 2020",
+          "description": "Mubadala took stake in G42 (Nov 2020), transferred Injazat and Khazna to G42. Co-founded MGX with G42 (Mar 2024)."
+        },
+        {
+          "target": "Sheikh Tahnoon bin Zayed",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "Bloomberg Jul 2024: Royal Group is parent company of G42",
+          "description": "Tahnoon owns G42 via Royal Group (100% owner). Royal Group is parent company of G42."
+        },
+        {
+          "target": "Zhang Xiaoping",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "Wire China Dec 2023; LinkedIn profile",
+          "description": "Zhang Xiaoping serves as G42 Chief Investment Officer. Runs G42 Shanghai Investment and Beijing Qingzi Future Network Technology (Chinese subsidiaries)."
+        },
+        {
+          "target": "Microsoft",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "Bloomberg Apr 2024: Microsoft G42 investment and China pact",
+          "description": "Microsoft invested USD 1.5B in G42 (Apr 2024). Microsoft president Brad Smith joined G42 board. Deal conditioned on G42 China divestiture promise to Commerce Dept BIS."
+        },
+        {
+          "target": "Aryam Investment 1",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "WSJ reporting Jan 2026",
+          "description": "G42 executives Edelman and Peng Xiao managed Aryam and signed WLFI deal on its behalf. Both got WLFI board seats. Source says funds did not come from G42."
+        },
+        {
+          "target": "Fiacc Larkin",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "G42 head of crypto, deployed to WLFI as chief strategy advisor Jan 2025"
+        },
+        {
+          "target": "SoftBank Group",
+          "type": "corporate",
+          "strength": 0.7,
+          "evidence_ref": "Stargate UAE announcement, G42 press release",
+          "description": "SoftBank and G42 are partners in Stargate UAE (1GW data center, 5GW campus in Abu Dhabi). SoftBank provides connectivity infrastructure, G42 operates compute cluster with OpenAI/Oracle. G42 chaired by Tahnoon. MGX (launched by Mubadala/G42) is SoftBank's co-investor in Stargate US."
+        }
+      ],
+      "secondHop": {
+        "Aryam Investment 1": [
+          {
+            "target": "World Liberty Financial",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Aryam Investment 1 (Tahnoon bin Zayed/G42) acquired 49% of WLFI for 500M. Signed Jan 16 2025 by Eric Trump, 4 days pre-inauguration. 187M to Trump family entities. G42 executives took board seats. Deal not publicly disclosed."
+          },
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Aryam Investment 1 is an investment vehicle controlled by Sheikh Tahnoon, managed by his G42 executives"
+          },
+          {
+            "target": "Martin Edelman",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Signed the Aryam-WLFI agreement. G42 general counsel managing the Delaware entity of Aryam."
+          },
+          {
+            "target": "Peng Xiao",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-signed the Aryam-WLFI agreement. CEO of G42, manages the Aryam Delaware entity."
+          },
+          {
+            "target": "DT Marks DEFI LLC",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "187M from Aryam initial payment went to Trump family entities DT Marks DEFI LLC and DT Marks SC LLC"
+          }
+        ],
+        "DarkMatter Group": [
+          {
+            "target": "Peng Xiao",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "CEO of Pegasus LLC, DarkMatter subsidiary, 2015-2018. DarkMatter ran Project Raven surveillance for UAE."
+          }
+        ],
+        "Lunate": [
+          {
+            "target": "Sheikh Tahnoon bin Zayed",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoon controls Lunate via Royal Group -> IHC (61% owned by Royal Group) -> Chimera Investment LLC -> Lunate Holding RSC Ltd -> Lunate Capital"
+          },
+          {
+            "target": "IHC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Lunate is investment arm of IHC via Chimera Investment LLC -> Lunate Holding RSC Ltd. Lunate Capital LLC formerly named Chimera Capital LLC (name changed Nov 2023). Shared director Syed Basar Shueb."
+          },
+          {
+            "target": "Alpha Wave Global",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Lunate Holding RSC Ltd joint venture with Alpha Wave Global LP through Alpha Wave Ventures GP Ltd. SEC Form 3 filings show joint beneficial ownership in LENZ Therapeutics and other US companies."
+          },
+          {
+            "target": "Blackstone",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Blackstone and Lunate announced strategic partnership (Oct 2025) to invest in GCC logistics through GLIDE platform, targeting USD 5B in warehouse assets."
+          },
+          {
+            "target": "42XFund",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Lunate assumed management of 42XFund (Jul 2024), G42 USD 10B China-focused fund with ByteDance and JD.com stakes. 42XFund originally headed by Jason Hu (former JD.com strategic investments head)."
+          }
+        ],
+        "MGX": [
+          {
+            "target": "World Liberty Financial",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "USD1 stablecoin used to settle MGX's $2B investment in Binance. Creates financial dependency between Trump family crypto venture and Abu Dhabi sovereign fund."
+          },
+          {
+            "target": "Tahnoon bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoon chairs MGX; MGX is his AI-focused investment vehicle in Abu Dhabi"
+          },
+          {
+            "target": "OpenAI",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "MGX participated in OpenAI $6.6B round (Oct 2025); targeted for $50B Middle East expansion; Altman called Tahnoon 'dear personal friend'"
+          },
+          {
+            "target": "Mubadala Investment Co PJSC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "MGX is an Abu Dhabi tech investment vehicle backed by Mubadala sovereign wealth fund. MGX Fund Management (US) LLC is the US-registered entity."
+          },
+          {
+            "target": "Tahnoun bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoun connected to MGX through Mubadala/IHC investment vehicle structure. UAE National Security Advisor overseeing tech investment arm."
+          }
+        ],
+        "Martin Edelman": [
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Edelman is GC of G42 (Tahnoon's AI company), MGX board member, Mubadala adviser. Led China divestiture negotiations with US government alongside Tahnoon."
+          },
+          {
+            "target": "Mohammed bin Zayed",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Edelman met MBZ during 2002 Gulf tour with Gen Tommy Franks. Became senior adviser to Mubadala the Abu Dhabi sovereign fund. Appointed Mubadala designee on AMD board 2013 and GlobalFoundries board 2017. Reportedly granted Emirati citizenship."
+          },
+          {
+            "target": "Peng Xiao",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-signatories on Aryam-WLFI agreement. Both placed on WLFI board without public disclosure. Peng Xiao is G42 CEO where Edelman is General Counsel."
+          },
+          {
+            "target": "Tommy Franks",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Gen Franks was CENTCOM commander for Afghanistan and Iraq. Edelman accompanied Franks on Gulf tours in 2002 where he first met MBZ and Tahnoon. Franks visited Arab leaders monthly. Edelman received Dept of Army Public Service Award 2007."
+          },
+          {
+            "target": "World Liberty Financial",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Edelman sits on WLFI 5-person board as Aryam/G42 appointee. Not listed on WLFI website team page despite board seat."
+          }
+        ],
+        "Mubadala Investment Company": [
+          {
+            "target": "Steve Witkoff",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Mubadala bought Low's forfeited Park Lane stake for $140M (2018), co-owned hotel with Witkoff, joint $615M refi (2019)"
+          },
+          {
+            "target": "Sheikh Tahnoon bin Zayed",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Tahnoon was Mubadala chairman; Mubadala subsidiary Aryam Investment 1 purchased 49% of WLFI for $500M"
+          },
+          {
+            "target": "Binance",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "MGX (Mubadala subsidiary, Tahnoon-chaired) made $2B investment in Binance, creating sovereign fund-crypto exchange link. Beydoun v. Mubadala RICO case (N.D. Cal.) separately targets Mubadala."
+          }
+        ],
+        "Peng Xiao": [
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Peng Xiao is CEO of G42 (Tahnoon's AI company) and MGX board member. Former head of DarkMatter's Pegasus program. Renounced US citizenship for Emirati. G42 executives took WLFI board seats."
+          },
+          {
+            "target": "Zhang Xiaoping",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Zhang Xiaoping served as G42 CIO while simultaneously COO of Yitu Technology (US-sanctioned). Ran G42 Chinese subsidiaries."
+          },
+          {
+            "target": "World Liberty Financial",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Peng Xiao (G42 CEO) sits on WLFI 5-person board as Aryam/G42 appointee. Renounced US citizenship for UAE. Not listed on WLFI website."
+          },
+          {
+            "target": "MGX Fund Management Limited",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "MGX board member, Chairman of Board Executive Committee and Nomination & Remuneration Committee. CEO of G42 (co-founder of MGX). Previously CTO of MicroStrategy. Signed Aryam-WLF deal and joined WLF board."
+          },
+          {
+            "target": "MicroStrategy",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "SVP/CTO/CIO for a decade, managed 1000+ engineers"
+          }
+        ],
+        "Sheikh Tahnoon bin Zayed": [
+          {
+            "target": "World Liberty Financial",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Abu Dhabi investment vehicle backed by Sheikh Tahnoon purchased 49% of WLFI for 500M in Jan 2025, sending ~187M to Trump family entities. Tahnoon is UAEs national security advisor and brother of UAE president."
+          },
+          {
+            "target": "Masayoshi Son",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Direct meeting to discuss AI infrastructure, semiconductor strategies, GPU deployment, joint collaboration. MGX (Tahnoon's fund) and SoftBank are co-investors in both Stargate US (MGX 10%) and Stargate UAE. Tahnoon's G42 is key operator in Stargate UAE. PIF (Saudi, aligned with Tahnoon network) was anchor LP in Vision Fund 1."
+          },
+          {
+            "target": "Rajeev Misra",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "OneIM () backed by Tahnoon's Royal Group and Mubadala. Misra works closely with Tahnoon inner circle: Syed Basar Shueb (IHC), Sofia Lasky, Peng Xiao (G42). Misra serves as key financial intermediary between Son and Tahnoon."
+          },
+          {
+            "target": "Akshay Naheta",
+            "type": "financial",
+            "strength": 0.2,
+            "description": "Naheta's DTR (Distributed Technologies Research) based in Abu Dhabi ADGM. DTR developing dirham-backed stablecoin DRAM. Abu Dhabi location within Tahnoon's sphere of influence though no direct personal connection confirmed."
+          }
+        ],
+        "Sheikh Tahnoon bin Zayed Al Nahyan": [
+          {
+            "target": "Steve Witkoff",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Witkoff is Trump Middle East envoy negotiating with UAE officials including Tahnoon while Witkoff family profits from Tahnoon's M WLFI investment. Son Zach is WLFI co-founder."
+          },
+          {
+            "target": "World Liberty Financial",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "UAE entity Aryam Investment 1 acquired 49% WLFI stake for M; controlled by Tahnoon who is UAE national security adviser"
+          },
+          {
+            "target": "World Liberty Financial",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Tahnoon-backed Aryam Investment 1 acquired 49% of WLFI for USD500M. Tahnoon controls all entities involved (G42, Aryam, MGX)."
+          },
+          {
+            "target": "TikTok USDS Joint Venture LLC",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Tahnoon chairs MGX which holds 15% of TikTok USDS JV. Separately, Tahnoon's IHC/Lunate subsidiary inherited ByteDance stake from G42's 42XFund. Dual economic interest on both sides of the TikTok divestiture."
+          },
+          {
+            "target": "World Liberty Financial Inc.",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Through Aryam Investment 1, acquired 49% stake in WLF for $500M (Jan 2025, pre-inauguration). G42 executives got board seats. Tahnoon is UAE national security adviser, brother of UAE President, controls G42 (flagged by US intelligence for China military tech links). Subsequently, UAE approved for 500,000 Nvidia AI chips per year, with 1/5 going to G42. Potential quid pro quo under investigation."
+          }
+        ],
+        "World Liberty Financial": [
+          {
+            "target": "Eric Trump",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Named Promoter on SEC Form D, public operational face of WLFI"
+          },
+          {
+            "target": "Donald Trump",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Named Promoter on SEC Form D. Revenue flows through DT Marks DEFI LLC at Trump Jupiter FL address"
+          },
+          {
+            "target": "Steve Witkoff",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
+          },
+          {
+            "target": "Steve Witkoff",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East — dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
+          },
+          {
+            "target": "Trump Administration",
+            "type": "political",
+            "strength": 1.0,
+            "description": "SEC dropped ~21 crypto enforcement cases (60% reduction) while Trump family earned >1B from WLFI token sales, creating direct conflict between regulatory power and financial interest"
+          }
+        ],
+        "Zhang Xiaoping": [
+          {
+            "target": "Yitu Technology",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Zhang Xiaoping simultaneously serves as COO of Yitu Technology, a US-sanctioned company (Entity List, NS-CMIC, DoD Chinese Military Companies list) involved in Uyghur surveillance technology."
+          },
+          {
+            "target": "Yitu Technology",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Zhang served simultaneously as G42 CIO and Yitu Technology COO. Yitu is on three US sanctions lists (BIS Entity List, OFAC NS-CMIC, DoD Chinese Military Companies) for Uyghur surveillance tech. Zhang also runs G42 Shanghai Investment and Beijing Qingzi Future Network Technology."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
 }
