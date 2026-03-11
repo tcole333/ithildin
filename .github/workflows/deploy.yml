@@ -32,6 +32,15 @@ jobs:
           name: financial-quality-gate
           path: financial-quality-gate.json
 
+      - run: python3 scripts/review_dossier_checks.py gate --json > dossier-review-gate.json
+        continue-on-error: true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dossier-review-gate
+          path: dossier-review-gate.json
+
       - run: npm run lint:citations
         working-directory: web
 
