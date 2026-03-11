@@ -271,5 +271,261 @@
     }
   ],
   "entities": [],
-  "timeline": []
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      4193,
+      4200,
+      4190,
+      4211,
+      4270
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          2165,
+          2520,
+          2521,
+          2529
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          4200,
+          4270
+        ],
+        "connection_ids": [
+          2520,
+          2521
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          4193,
+          4211
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      }
+    ],
+    "curated_at": "2026-03-11T22:55:54.306128",
+    "system_role": "ALT5 Sigma Corp (NASDAQ: ALTS, CIK 0000862861) is a Nevada-incorporated public company that in August 2025 reoriented itself as a treasury vehicle for World Liberty Financial (WLFI) governance tokens. Its 41-year corporate history began as Appliance Recycling Centers of America (Minnesota, 1983), transitioned to pharmaceutical company JanOne Inc (reincorporated Nevada 2018, renamed September 2019), and became ALT5 Sigma Corp on July 15, 2024. The company's primary documented function in the WLFI network is to provide SEC-regulated public-market access for WLFI token holdings: ALT5 received approximately 7.3 billion WLFI tokens \u2014 face-valued at $1.5 billion \u2014 through a registered direct offering at $7.50 per share (200 million shares). Zach Witkoff, CEO of WLFI and son of Trump special envoy Steve Witkoff, was appointed ALT5 Chairman following the offering. Eric Trump, named as a WLFI Promoter on SEC Form D, was designated board observer, then quietly removed. The offering closed in mid-August 2025; two weeks later the company disclosed that its Canadian subsidiary had been convicted of money laundering by a Rwandan court on May 7, 2025 \u2014 a conviction not disclosed before the offering closed. By November 2025 ALT5 had cycled through three CEOs and three auditors in six weeks and faced Nasdaq delisting for failure to file its 10-Q. The company's primary asset remains approximately $1.3 billion in WLFI tokens, which are illiquid governance tokens with no guaranteed secondary market.",
+    "lead": "<p>ALT5 Sigma Corp (NASDAQ: ALTS) is a publicly traded Nevada shell that became the SEC-regulated treasury vehicle for <a href='/dossiers/world-liberty-financial'>World Liberty Financial</a> governance tokens in August 2025. The company traces its corporate lineage to a 1983 Minnesota appliance recycler, was reincorporated in Nevada in 2018 and renamed JanOne Inc (a pharmaceutical concern), then rebranded as ALT5 Sigma Corp on July 15, 2024 [Finding #4190]. Its prior CEO, Jon Isaac, faces SEC fraud charges dating to 2021 for inflating earnings and conducting secret stock sales at JanOne and its affiliate Live Ventures; Isaac left before the 2024 rebrand but retained over one million ALTS shares, and his brother Tony Isaac was subsequently appointed Acting CEO in November 2025.</p><p>In August 2025 ALT5 announced a $1.5 billion registered direct offering \u2014 200 million shares at $7.50 \u2014 for the purpose of holding WLFI tokens as a treasury asset. The offering delivered approximately 7.3 billion WLFI governance tokens, face-valued at $1.5 billion but illiquid and without a guaranteed secondary market. WLFI granted itself the right to nominate two directors: <a href='/dossiers/zachary-witkoff'>Zach Witkoff</a> was appointed Chairman and <a href='/dossiers/zach-folkman'>Zachary Folkman</a> as director. <a href='/dossiers/eric-trump'>Eric Trump</a> was designated board observer \u2014 a classification required because Nasdaq rules barred him from serving as a full director \u2014 then quietly removed from that role [Finding #4200, #4270]. The practical effect is that ALT5's primary asset is a governance token issued by the same entity whose principals now control the ALT5 board, creating a circular valuation structure in which both entities' stated values depend on each other.</p><p>Two weeks after the offering closed, ALT5 disclosed via SEC 8-K that its Canadian subsidiary had been convicted of money laundering and illicit enrichment by the Intermediate Court of Nyarugenge, Rwanda, with the conviction dated May 7, 2025 \u2014 months before the offering. Former subsidiary principal Andre Beauchesne was sentenced to imprisonment and the court ordered confiscation of approximately $3.5 million and dissolution of the subsidiary [Finding #4193]. The board launched an internal review of potential misstatements in prior financial statements, and law firm Hagens Berman opened a securities fraud investigation in December 2025.</p>",
+    "sections": [
+      {
+        "id": "corporate-history",
+        "title": "Corporate History",
+        "viz": null,
+        "finding_ids": [
+          4190
+        ],
+        "connection_ids": [
+          2521
+        ],
+        "content": "<p>The corporate structure underlying ALT5 Sigma Corp spans four decades and three distinct business identities. Appliance Recycling Centers of America was incorporated in Minnesota in 1983 and operated as a household appliance retailer and recycler for more than three decades. In 2018 the company reincorporated in Nevada and the following year rebranded as JanOne Inc, repositioning as a pharmaceutical holding company focused on pain management therapies. The Nevada reincorporation and pharma pivot coincided with a period of SEC scrutiny: Jon Isaac, who served as CEO of JanOne and simultaneously ran the related public company Live Ventures Inc, faces a civil fraud action brought by the SEC in 2021 (SEC Litigation Release 25155) alleging he artificially inflated JanOne's earnings and conducted undisclosed stock sales. Isaac was not part of the July 2024 rebrand to ALT5 Sigma Corp, but the SEC litigation remained active and he retained over one million ALTS shares. His brother Tony Isaac was appointed Acting CEO in November 2025 during the governance collapse following the WLFI transaction [Finding #4190; SEC Litigation Release 25155].</p><p>The July 15, 2024 rebrand to ALT5 Sigma Corp, announced via PR Newswire, positioned the company as a blockchain-era fintech operating under SIC code 6221 (Commodity Contracts Dealers/Brokers) \u2014 later changed to 2834 \u2014 with SEC CIK 0000862861 retained through all name changes. The company's operational history across three sectors (recycling, pharmaceuticals, fintech) with overlapping SEC enforcement exposure on the pharma iteration is the baseline institutional context into which the WLFI offering was introduced in August 2025.</p>"
+      },
+      {
+        "id": "wlfi-transaction-structure",
+        "title": "WLFI Transaction Structure",
+        "viz": "ego_network",
+        "finding_ids": [
+          4200,
+          4270
+        ],
+        "connection_ids": [
+          2165,
+          2520,
+          2521,
+          2529
+        ],
+        "content": "<p>The August 2025 WLFI transaction introduced a financial structure with interlocking valuation dependencies between ALT5 and <a href='/dossiers/world-liberty-financial'>World Liberty Financial</a>. ALT5 conducted a $1.5 billion registered direct offering \u2014 200 million shares at $7.50 per share \u2014 with proceeds deployed to acquire approximately 7.3 billion WLFI governance tokens at a face value of $0.20 each. The WLFI tokens are described in disclosure documents as illiquid governance tokens with no guaranteed secondary market. ALT5's balance sheet therefore rests primarily on a $1.3 billion token holding whose stated value derives from the same token face price used to size the original offering [Finding #4200].</p><p>As a condition of the transaction, WLFI obtained the right to nominate two directors to the ALT5 board. <a href='/dossiers/zachary-witkoff'>Zach Witkoff</a> \u2014 CEO of WLFI, signatory on WLFI SEC Form 3, and son of Trump special envoy <a href='/dossiers/steve-witkoff'>Steve Witkoff</a> \u2014 was appointed Chairman [Connection #2165; BusinessWire Aug 13 2025]. <a href='/dossiers/zach-folkman'>Zachary Folkman</a>, WLFI co-founder, was appointed director. <a href='/dossiers/eric-trump'>Eric Trump</a>, listed as a WLFI Promoter on SEC Form D, was initially designated as a board director but was reclassified to board observer status to comply with Nasdaq independence rules, and was later quietly removed from that role entirely [Connection #2529; CoinTelegraph Sep 10 2025; SEC filing Aug 25 2025]. The net result of these board appointments is that the entity whose tokens constitute ALT5's primary asset controls the ALT5 board.</p><p>A January 2026 Master Loan and Security Agreement between ALT5 and WLFI added another layer to the relationship. ALT5 drew the full amount under that facility, netting $14.2 million, which it deployed into share buybacks and additional WLFI token purchases \u2014 further deepening the mutual financial dependency [Finding #4270; SEC filing https://www.sec.gov/Archives/edgar/data/862861/000164117225026082/form8-k.htm].</p>"
+      },
+      {
+        "id": "governance-collapse",
+        "title": "Governance Collapse",
+        "viz": null,
+        "finding_ids": [
+          4200
+        ],
+        "connection_ids": [],
+        "content": "<p>Between October and December 2025 ALT5 experienced rapid executive and auditor turnover that coincided with the disclosure of the Rwandan conviction and the initiation of securities fraud investigations. Three CEOs departed or were removed within six weeks: CEO Tassiopoulos was suspended in October 2025; Hugh was terminated in November 2025; Tony Isaac \u2014 brother of the former JanOne CEO facing SEC fraud charges \u2014 was appointed Acting CEO in November 2025. The company also cycled through three auditors during the same six-week period [Finding #4200; CoinDesk Nov 27 2025].</p><p>By November 12, 2025, ALT5 had filed an SEC NT 10-Q notification of late filing, indicating it could not meet its quarterly reporting deadline. Nasdaq issued a delisting notice for failure to file the 10-Q. The board simultaneously conducted an internal review of prior financial statements following the August 29 conviction disclosure, examining whether the Rwandan proceedings should have been disclosed before the August offering closed [Finding #4200; SEC NT 10-Q Nov 12 2025].</p>"
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          4193,
+          4211
+        ],
+        "connection_ids": [],
+        "content": "<p>ALT5 faces legal exposure on two separate tracks. The first is the Rwandan conviction of its Canadian subsidiary. On May 7, 2025, the Intermediate Court of Nyarugenge convicted the subsidiary of money laundering and illicit enrichment. Former subsidiary principal Andre Beauchesne was sentenced to imprisonment. The court ordered confiscation of approximately $3.5 million USD and dissolution of the subsidiary. The conviction was not disclosed publicly until August 29, 2025 \u2014 two weeks after the $1.5 billion WLFI offering closed in mid-August. The disclosure came via SEC 8-K and triggered the board's internal financial-statement review. Law firm Hagens Berman opened a securities fraud investigation in December 2025, citing the timing gap between the May conviction and the August offering as the central factual predicate [Finding #4193; SEC 8-K Aug 29 2025; TheBlock.co Nov 2025; Hagens Berman investigation notice Dec 2025].</p><p>The second track is a trade secret case filed and quickly abandoned. On November 18, 2025, ALT5 filed suit in the District of Delaware (D. Del. 1:25-cv-01407) against Wellington Peel LLC, Prime Delta Corp, Hugues Benoit, and Jean-Francois Amyot, seeking a temporary restraining order and expedited proceedings for alleged trade secret misappropriation. Eight days later, on November 26, 2025, ALT5 voluntarily dismissed the case without prejudice. The filing window \u2014 during the peak of the governance crisis \u2014 and the rapid dismissal are documented in CourtListener docket 71937263 but no public explanation for the dismissal was provided [Finding #4211].</p><p>Separately, Jon Isaac \u2014 whose tenure as JanOne CEO directly precedes ALT5's current structure \u2014 remains a defendant in an active SEC civil enforcement action (SEC Litigation Release 25155) for alleged earnings inflation and undisclosed stock sales. Isaac's continued share ownership and his brother's appointment as Acting CEO during the governance crisis create an unresolved question about the continuity of management culture across the JanOne-to-ALT5 transition [Connection #2521].</p>"
+      }
+    ],
+    "open_questions": [
+      "The Rwandan court convicted the Canadian subsidiary on May 7, 2025, and ALT5 did not disclose this in its SEC filings until August 29, 2025 \u2014 after the $1.5 billion offering closed. What did ALT5's board and counsel know about the conviction, and when did they know it? Were the offering documents reviewed by outside securities counsel aware of the pending or completed Rwandan proceedings?",
+      "The WLFI tokens held as ALT5's primary asset are illiquid governance tokens valued at face price ($0.20 each). What independent valuation methodology, if any, was applied to determine the $1.5 billion offering size, and did any of ALT5's three auditors formally opine on the fair market value of the token holding?",
+      "Jon Isaac, the former JanOne CEO facing SEC civil fraud charges for earnings inflation and secret stock sales, retained over one million ALTS shares after departing. Has he sold any shares since the August 2025 offering \u2014 and if so, do those sales constitute reportable transactions under his pending SEC enforcement action?",
+      "The November 2025 trade secret suit (D. Del. 1:25-cv-01407) named Wellington Peel LLC, Prime Delta Corp, Hugues Benoit, and Jean-Francois Amyot \u2014 and was dismissed eight days later. What was the specific trade secret at issue, and what relationship, if any, do the defendants have to the WLFI token treasury strategy or to the departed executives Tassiopoulos or Hugh?",
+      "Eric Trump was initially designated as a full board director, then reclassified as a board observer to satisfy Nasdaq independence rules, and later removed entirely. What governance process governed each of these changes, and did WLFI retain its right to nominate two directors after Trump's removal, or did that seat pass to another WLFI-affiliated person?"
+    ],
+    "applicable_models": [
+      "shell-company",
+      "circular-valuation",
+      "disclosure-timing",
+      "bridge-tax"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "ALT5 Sigma Corp",
+      "connections": [
+        {
+          "target": "Zach Witkoff",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "BusinessWire Aug 13 2025",
+          "description": "Appointed to ALT5 board as WLFI representative; signed Form 3 as CEO of WLFI"
+        },
+        {
+          "target": "World Liberty Financial",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "BusinessWire Aug 11 2025",
+          "description": "ALT5 received 7.3B WLFI tokens (valued at 1.5B) via registered direct offering Aug 2025. Zach Witkoff (WLFI co-founder) became ALT5 Chairman. Eric Trump became board observer. ALT5 primary asset is WLFI tokens. Creates circular value mechanism: WLFI issues tokens to ALT5, ALT5 holds them as treasury, inflating both valuations."
+        },
+        {
+          "target": "Jon Isaac",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SEC Litigation Release 25155",
+          "description": "Former CEO of JanOne Inc (now ALT5 Sigma). Under SEC fraud charges since 2021 for inflating earnings and secret stock sales at JanOne/Live Ventures. Left before 2024 rebrand but retains over 1M ALT5 shares. His brother Tony Isaac appointed Acting CEO of ALT5 in Nov 2025."
+        },
+        {
+          "target": "Eric Trump",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "CoinTelegraph Sep 10 2025",
+          "description": "Designated board observer (downgraded from director to comply with Nasdaq rules) at ALT5 Sigma per Aug 25, 2025 SEC filing. Also WLFI co-founder. Subsequently quietly removed from board role."
+        }
+      ],
+      "secondHop": {
+        "Eric Trump": [
+          {
+            "target": "World Liberty Financial",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Named Promoter on SEC Form D, public operational face of WLFI"
+          },
+          {
+            "target": "Tahnoon bin Zayed Al Nahyan",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Eric Trump signed the Aryam Investment 1 agreement giving Tahnoon's entity 49% of WLFI for $500M"
+          },
+          {
+            "target": "Sheikh Tahnoon bin Zayed Al Nahyan",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Eric Trump signed the Aryam Investment 1 deal giving Tahnoon 49% of WLFI for M, 4 days before inauguration. Later announced MGX-Binance USD1 settlement at Token2049 Dubai."
+          },
+          {
+            "target": "WLF Holdco LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Eric Trump serves as manager on board of managers of WLF Holdco LLC. Signed the M Aryam Investment 1 deal on behalf of WLF. Address: c/o The Trump Organization, Jupiter FL 33477"
+          },
+          {
+            "target": "Chase Herro",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Eric Trump is Web3 Ambassador for WLFI. Eric finalized $500M Abu Dhabi deal before 2025 inauguration. Herro is co-founder/Executive Officer of same entity."
+          }
+        ],
+        "World Liberty Financial": [
+          {
+            "target": "Donald Trump",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Named Promoter on SEC Form D. Revenue flows through DT Marks DEFI LLC at Trump Jupiter FL address"
+          },
+          {
+            "target": "Steve Witkoff",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
+          },
+          {
+            "target": "Steve Witkoff",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
+          },
+          {
+            "target": "MGX",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "USD1 stablecoin used to settle MGX's $2B investment in Binance. Creates financial dependency between Trump family crypto venture and Abu Dhabi sovereign fund."
+          },
+          {
+            "target": "Trump Administration",
+            "type": "political",
+            "strength": 1.0,
+            "description": "SEC dropped ~21 crypto enforcement cases (60% reduction) while Trump family earned >1B from WLFI token sales, creating direct conflict between regulatory power and financial interest"
+          }
+        ],
+        "Zach Witkoff": [
+          {
+            "target": "Steve Witkoff",
+            "type": "familial",
+            "strength": 1.0,
+            "description": "Father-son. Steve is WLFI promoter; Zach is CEO of WLFI and was Trump Special Envoy to Middle East"
+          },
+          {
+            "target": "JD Vance",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Zachary Witkoff made multiple donations to JD Vance campaigns 2023-2024 totaling approximately 20,900: Vance Victory (16,500), JD Vance for Senate (6,500), Working for Ohio (7,100)."
+          },
+          {
+            "target": "SC Financial Technologies",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "CEO; personally visited Pakistan Jan 2026 for USD1 MOU"
+          },
+          {
+            "target": "SC Financial Technologies LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Zach Witkoff is CEO of SC Financial Technologies LLC, which co-owns the USD1 stablecoin brand with WLF. SC Financial signed Pakistan MoU for USD1 integration. Zach Witkoff also nominated as president and chairman of WLTC (trust bank charter applicant), and became chairman of ALT5 Sigma board. Father Steve Witkoff serves simultaneously as Trump special envoy."
+          },
+          {
+            "target": "World Liberty Trust Company",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Proposed president/chairman/director of WLTC national trust bank"
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
 }
