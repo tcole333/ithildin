@@ -61,6 +61,9 @@ jobs:
       - run: npm run report:support-coverage:changed -- --base-ref "${{ github.event.before }}" --head-ref "${{ github.sha }}"
         working-directory: web
 
+      - run: python3 pipeline/export_search_index.py
+      - run: python3 pipeline/export_preview_index.py
+
       - run: PUBLIC_ENABLE_EVIDENCE_MODE=false npm run build
         working-directory: web
 
