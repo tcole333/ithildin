@@ -265,7 +265,7 @@ uv run python tools/findings_tracker.py add \
 uv run python tools/findings_tracker.py connect \
     --person-a "<ENTITY_A>" --person-b "<ENTITY_B>" \
     --type digital --strength medium \
-    --detail "Shared IP <IP>, same SSL cert covering both domains" \
+    --description "Shared IP <IP>, same SSL cert covering both domains" \
     --evidence "<CERT_HASH>"
 
 # Register entities for hosting companies, registrars, etc. if relevant
@@ -327,7 +327,7 @@ Create leads for:
 uv run python tools/lead_tracker.py add \
     --title "<LEAD_TITLE>" \
     --priority <PRIORITY> \
-    --lead-type digital \
+    --category digital \
     --description "<DESCRIPTION>" \
     --source "investigate-infra"
 ```

@@ -16,7 +16,9 @@ class WorkerTests(unittest.TestCase):
         import tools.lead_tracker as lead_tracker
         self.lead_tracker = lead_tracker
         self.orig_db_path = lead_tracker.DB_PATH
+        self.orig_schema_init = lead_tracker._schema_initialized
         lead_tracker.DB_PATH = self.db_path
+        lead_tracker._schema_initialized = False
         lead_tracker.get_db().close()
 
         self.orig_workdir_base = os.environ.get("OSINT_WORKDIR_BASE")
@@ -24,6 +26,7 @@ class WorkerTests(unittest.TestCase):
 
     def tearDown(self):
         self.lead_tracker.DB_PATH = self.orig_db_path
+        self.lead_tracker._schema_initialized = self.orig_schema_init
         if self.orig_workdir_base is None:
             os.environ.pop("OSINT_WORKDIR_BASE", None)
         else:
