@@ -516,5 +516,344 @@
       "confidence": "high",
       "id": 6402
     }
-  ]
+  ],
+  "curation": {
+    "key_finding_ids": [
+      5959,
+      6402,
+      5982,
+      6430,
+      6452,
+      5512,
+      6454,
+      6456,
+      6457,
+      6458,
+      5813
+    ],
+    "key_identifiers": {
+      "jurisdictions": [
+        "Federal",
+        "Unknown"
+      ],
+      "officers": [
+        {
+          "role": "DOGE Staffer / Special Government Employee",
+          "entity": "Department of Government Efficiency (DOGE)",
+          "start": null,
+          "end": null
+        },
+        {
+          "role": "Special Government Employee (joined as full-time May 2025, SSA June 2025)",
+          "entity": "Social Security Administration (SSA)",
+          "start": null,
+          "end": null
+        },
+        {
+          "role": "Founder",
+          "entity": "Tesla.Sexy LLC",
+          "start": null,
+          "end": null
+        },
+        {
+          "role": "Intern (fired 2022 for data leak to competitor)",
+          "entity": "Path Network",
+          "start": null,
+          "end": null
+        }
+      ],
+      "entities": [
+        {
+          "id": 891,
+          "name": "Department of Government Efficiency (DOGE)",
+          "type": "government",
+          "jurisdiction": "Federal",
+          "role": "DOGE Staffer / Special Government Employee"
+        },
+        {
+          "id": 892,
+          "name": "Social Security Administration (SSA)",
+          "type": "government",
+          "jurisdiction": "Federal",
+          "role": "Special Government Employee (joined as full-time May 2025, SSA June 2025)"
+        },
+        {
+          "id": 896,
+          "name": "Tesla.Sexy LLC",
+          "type": "llc",
+          "jurisdiction": "Unknown",
+          "role": "Founder"
+        },
+        {
+          "id": 897,
+          "name": "Path Network",
+          "type": "inc",
+          "jurisdiction": "Unknown",
+          "role": "Intern (fired 2022 for data leak to competitor)"
+        }
+      ]
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          2959,
+          3252,
+          3258,
+          3257,
+          3264,
+          3008
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "corporate-structure",
+        "title": "Corporate Structure",
+        "viz": null,
+        "finding_ids": [],
+        "connection_ids": [
+          3264
+        ],
+        "guidance": "Narrative about corporate entities, roles, jurisdictions. Explain the structure and its purpose, not just list entities."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          6402,
+          5813,
+          5959,
+          6430,
+          6452,
+          6454,
+          6456,
+          6457
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-03-11T22:31:00.523933",
+    "lead": "<p>Edward Coristine (born December 2005), known online as \"Big Balls\" and by the alias \"Rivage,\" is a Connecticut-based technologist who, at age 19, was appointed as a Special Government Employee within the Department of Government Efficiency (DOGE) in January 2025 and subsequently deployed with system access credentials across at least nine federal agencies: OPM, CISA, State Department, DHS, FEMA, GSA, HHS, USAID, and the Department of Education [Finding #5959]. At CISA, the federal agency responsible for protecting critical national cyber infrastructure, and at the Department of Education, he had access to databases containing Social Security numbers and bank records of an estimated 43 million student loan borrowers \u2014 data that was subsequently fed into Azure AI systems [Finding #5959]. His GSA clearance was classified at the A-suite level, granting access to all physical spaces and IT systems [Finding #5959]. He filed no financial disclosure through ProPublica's DOGE tracker and made no FEC political donations [Finding #5959].</p>\n\n<p>Prior to his government appointment, Coristine was fired at age 17 from a cybersecurity internship at Path Network in June 2022 for leaking proprietary information to competitors; an executive message confirmed \"Edward has been terminated for leaking internal information to the competitors\" [Finding #6456]. Within two months of that termination, Coristine posted in a Discord channel under his alias \"Rivage\" that he had retained unauthorized access to Path Network systems for months after his firing [Finding #6456]. Between October 2022 and June 2023, his Connecticut-registered company DiamondCDN LLC (registered August 23, 2022 at 26 Lakeview Ave, New Canaan, CT) provided CDN and DDoS-protection services to EGodly, a cybercrime group that publicly boasted about hijacking phone numbers, trafficking stolen personally identifiable information, hacking law enforcement email accounts, and cyberstalking an FBI agent in Wilmington, Delaware \u2014 distributing his home address and photographs [Finding #6452]. In November 2022, Coristine was tracked by law enforcement under the alias \"JoeyCrafter\" for soliciting DDoS-for-hire services in the Dstat Discord channel [Finding #6430].</p>\n\n<p>Coristine graduated from Rye Country Day School in 2024 and briefly attended Northeastern University before leaving in spring 2025 to join DOGE [Finding #5959]. He reported to <a href=\"/dossiers/aram-moghaddassi\">Aram Moghaddassi</a> during a subsequent assignment to the Social Security Administration beginning June 2025, where Moghaddassi as SSA CIO granted Coristine and others access to USCIS immigration databases [Connection #3257]. He resigned from DOGE in late June 2025 following <a href=\"/dossiers/elon-musk\">Elon Musk</a>'s own departure from the advisory role, then transitioned to the National Design Studio under <a href=\"/dossiers/joe-gebbia\">Joe Gebbia</a> by December 2025, where he was credited with building websites and branding for the Trump administration's \"Genesis\" AI initiative as part of a three-person team [Finding #6458]. His maternal grandfather, Valery Martynov, was a Soviet KGB officer in the Line X technical espionage division who became a CIA/FBI double agent codenamed \"Gentile\" in 1982; Martynov was betrayed by CIA officer Aldrich Ames and executed by the KGB on May 28, 1987 [Finding #6454].</p>",
+    "system_role": "Coristine's trajectory documents how DOGE's vetting process \u2014 or its absence \u2014 enabled individuals with documented histories of unauthorized data access and connections to cybercrime infrastructure to receive simultaneous, unrestricted credentials across the most sensitive federal cybersecurity and data systems, bypassing the standard background checks that exist specifically to screen for such histories.",
+    "sections": [
+      {
+        "id": "federal-access-profile",
+        "title": "Federal Access Profile",
+        "viz": null,
+        "content": "<p>Between January and June 2025, Coristine held concurrent access credentials across at least nine federal agencies as a DOGE \"Expert\" \u2014 OPM, CISA, State Department, DHS, FEMA, GSA, HHS, USAID, and the Department of Education \u2014 without undergoing the standard background check process that would have surfaced his firing from Path Network and his documented associations with cybercrime infrastructure [Finding #5959]. His GSA clearance was at the A-suite tier, granting access to all physical spaces and IT systems across that agency [Finding #5959]. At CISA \u2014 the Cybersecurity and Infrastructure Security Agency, which coordinates national cyber defense \u2014 he held a DHS email address and network access [Finding #5959].</p>\n\n<p>At the Department of Education, DOGE personnel including Coristine accessed databases containing Social Security numbers and bank account records for approximately 43 million student loan borrowers; that data was subsequently routed into Microsoft Azure AI systems [Finding #5959]. Federal court filings addressed the Education Department access specifically [Finding #5959]. The Senate HSGAC report authored by Senator Peters (September 2025) identified Coristine by name as an example of a DOGE staffer with a documented data-mishandling history who nonetheless received unrestricted access to SSA systems when he transitioned there in June 2025 [Finding #6402].</p>\n\n<p>At OPM, Coristine reported to <a href=\"/dossiers/aram-moghaddassi\">Aram Moghaddassi</a>'s chain of command through Amanda Scales, the OPM Chief of Staff and former xAI employee [Finding #6430]. At the SSA, Moghaddassi \u2014 serving as CIO \u2014 granted Coristine and other DOGE-affiliated personnel access to USCIS immigration databases [Connection #3257]. Coristine's tenure as a full-time government employee began in May 2025 and his formal SSA assignment commenced June 2025 [Finding #6402].</p>"
+      },
+      {
+        "id": "cybercrime-associations",
+        "title": "Cybercrime Associations and Prior Conduct",
+        "viz": null,
+        "content": "<p>In June 2022, Coristine \u2014 then 17 years old \u2014 was terminated from a cybersecurity internship at Path Network, an Arizona-based firm, after an executive confirmed in writing that he had been \"terminated for leaking internal information to the competitors\" [Finding #6456]. Path Network CEO Marshal Webb had internally advocated against firing him, reasoning that doing so would make Coristine \"an enemy\" [Finding #6456]. That calculation proved prescient: within two months of the termination, Coristine posted in a Discord channel under the alias \"Rivage\" that he had retained access to Path Network's game-hosting machines for months after being let go [Finding #6456]. A large collection of internal Path Network documents was subsequently leaked online [Finding #6456].</p>\n\n<p>On August 23, 2022 \u2014 approximately two months after his Path Network firing \u2014 Coristine registered DiamondCDN LLC at 26 Lakeview Ave, New Canaan, Connecticut (entity #920 in the investigation database) [Finding #6452]. From October 2022 through June 2023, DiamondCDN provided CDN hosting and DDoS-protection infrastructure to <a href=\"/dossiers/egodly\">EGodly</a>, a cybercrime group that publicly claimed responsibility for phone number hijacking, trafficking stolen PII, hacking law enforcement email accounts, and an extended harassment campaign against an FBI agent in Wilmington, Delaware that included distributing his home address, posting photographs of his residence, and conducting physical surveillance drive-bys [Finding #6452]. EGodly publicly thanked DiamondCDN on Telegram on February 15, 2023 [Finding #6452]. KrebsOnSecurity documented Coristine's EGodly associations in its \"The Com\" reporting series [Finding #6452].</p>\n\n<p>In November 2022, law enforcement tracked Coristine under the alias \"JoeyCrafter\" for soliciting DDoS-for-hire services in the Dstat Discord channel [Finding #6430]. Coristine's three Connecticut LLCs \u2014 DiamondCDN LLC, MISTDECK LLC, and Tesla.Sexy LLC \u2014 were registered during this same period [Finding #6430]. Tesla.Sexy LLC (entity #896), registered in 2021 when Coristine was approximately 16, controls dozens of web domains including at least two Russian-registered domains; one active Russian domain operates an AI-powered Discord bot called \"Helfie\" targeting the Russian market [Finding #6457]. A Discord server associated with Tesla.Sexy LLC contains audio from November 6, 2021 of members conducting doxing and harassment operations, with references to membership in hacker communities Anonymous and Verm Squad [Finding #6457]. Of the three Connecticut companies, Tesla.Sexy LLC is the only one still listed as active [Finding #6457].</p>"
+      },
+      {
+        "id": "network-and-career-trajectory",
+        "title": "Network and Career Trajectory",
+        "viz": "ego_network",
+        "content": "<p>Coristine's entry into government came through the Musk network. Before DOGE, he held an internship at Neuralink, the Musk-controlled neurotechnology company [Connection #3008]. At OPM, he reported up through Amanda Scales \u2014 a former xAI employee installed as OPM Chief of Staff \u2014 and was professionally connected to <a href=\"/dossiers/elon-musk\">Elon Musk</a> through DOGE's operational chain [Finding #6430]. The Revolving Door Project and LittleSis both document Coristine's placement as a DOGE Expert [Connection #3252]. He transitioned to SSA in June 2025 under <a href=\"/dossiers/aram-moghaddassi\">Aram Moghaddassi</a>, described in an SSA CDO whistleblower complaint as a longtime Musk ally [Connection #3257].</p>\n\n<p>After Musk's departure from DOGE in late May 2025, Coristine resigned from the organization in late June 2025 [Finding #5813]. He then moved to the National Design Studio, a White House design unit led by <a href=\"/dossiers/joe-gebbia\">Joe Gebbia</a> \u2014 the Airbnb co-founder who simultaneously held a Tesla board seat and audit committee position while working in DOGE [Connection #3258]. Reuters confirmed Coristine's presence at the National Design Studio; he was credited with building the websites and brand identity for the Trump administration's \"Genesis\" AI initiative as part of a three-person team [Finding #6458].</p>\n\n<p>On August 3, 2025, Coristine was beaten in a carjacking attempt in Washington, D.C. [Finding #6458]. The incident subsequently became a stated justification for a Trump administration law-enforcement surge in the District [Finding #6458]. No financial disclosure was filed by Coristine through ProPublica's DOGE tracker at any point during his government service [Finding #5959].</p>"
+      },
+      {
+        "id": "family-intelligence-background",
+        "title": "Family Intelligence Background",
+        "viz": null,
+        "content": "<p>Coristine's maternal grandfather, Valery Martynov, was a KGB officer assigned to Line X \u2014 the technical espionage division responsible for acquiring Western scientific and technological secrets \u2014 who was stationed in Washington, D.C. Beginning in 1982, Martynov operated as a double agent for the CIA and FBI under the codename \"Gentile\" [Finding #6454]. His identity as a Western asset was compromised by CIA officer Aldrich Ames, who sold Soviet intelligence to the KGB. Martynov was recalled to Moscow on a pretext, arrested, and executed on May 28, 1987 [Finding #6454].</p>\n\n<p>Martynov's daughter Anna \u2014 Coristine's mother \u2014 subsequently became a financial professional. She married Charles Coristine, owner of the LesserEvil snack company [Finding #6454]. Edward Coristine was raised in New Canaan, Connecticut, attended Rye Country Day School (graduating 2024), and briefly enrolled at Northeastern University before leaving in spring 2025 [Finding #5959]. This family background was specifically flagged in the security clearance context: Coristine received unrestricted federal system access across multiple agencies without the standard background investigation process that would have evaluated both his family history and his documented 2022 cybercrime associations [Finding #6454].</p>"
+      },
+      {
+        "id": "corporate-structure",
+        "title": "Connecticut Corporate Entities",
+        "viz": null,
+        "content": "<p>Coristine registered three limited liability companies in Connecticut: Tesla.Sexy LLC (entity #896), founded approximately 2021 when he was around 16 years old; DiamondCDN LLC (entity #920), registered August 23, 2022 at 26 Lakeview Ave, New Canaan, CT; and MISTDECK LLC [Finding #6457, Finding #6430]. Tesla.Sexy LLC is the only entity still listed as active and controls a portfolio of web domains, including Russian-registered domains hosting the \"Helfie\" AI Discord bot targeting the Russian market [Finding #6457]. MISTDECK LLC's operational purpose has not been established in the available record.</p>\n\n<p>DiamondCDN LLC served as the corporate vehicle through which Coristine provided CDN infrastructure and DDoS protection to the <a href=\"/dossiers/egodly\">EGodly</a> cybercrime group from October 2022 through June 2023 [Finding #6452]. The timing of DiamondCDN's registration \u2014 two months after the Path Network firing \u2014 is consistent with the period in which Coristine was also posting in Discord about maintaining unauthorized access to Path Network systems [Finding #6456]. The EGodly association documented in Reuters and KrebsOnSecurity reporting represents the most direct corporate link between Coristine's entity structure and cybercriminal infrastructure [Finding #6452].</p>"
+      }
+    ],
+    "open_questions": [
+      "What specific background check process, if any, was applied before granting Coristine simultaneous A-suite GSA clearance and CISA network access, and which officials authorized those access grants given the documented Path Network and EGodly record?",
+      "What actions did Coristine take with Education Department student loan borrower data (43 million SSNs and bank records) after it was routed to Azure AI systems, and what data governance controls, if any, were applied?",
+      "What is the current operational status of the two Russian-registered domains controlled by Tesla.Sexy LLC and the Helfie Discord bot, including the corporate registration details of those Russian domain registrants?",
+      "Did MISTDECK LLC conduct any operational activity, and does it share officers, addresses, or clients with DiamondCDN LLC or Tesla.Sexy LLC?",
+      "What is the scope of the National Design Studio's work on the 'Genesis' AI initiative, which federal agencies or data systems it interfaces with, and whether Coristine's access profile there was subject to the same vetting gaps as his DOGE deployment?"
+    ],
+    "applicable_models": [
+      "enabler-gradient",
+      "complexity-as-credential",
+      "private-order"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Edward Coristine",
+      "connections": [
+        {
+          "target": "DOGE",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "https://en.wikipedia.org/wiki/Network_of_the_Department_of_Government_Efficiency",
+          "description": "DOGE operative at CBP; accessed USCIS immigration data at DHS"
+        },
+        {
+          "target": "Elon Musk",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "littlesis-455034 revolving-door-project-coristine",
+          "description": "Coristine served as DOGE expert at OPM, reporting to Amanda Scales (ex-xAI/Musk). Professional relationship confirmed by LittleSis."
+        },
+        {
+          "target": "Joe Gebbia",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Coristine moved from DOGE/SSA to National Design Studio under Gebbia's leadership (Dec 2025)"
+        },
+        {
+          "target": "Aram Moghaddassi",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Both assigned to SSA; Moghaddassi as CIO granted Coristine and others USCIS database access"
+        },
+        {
+          "target": "EGodly",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "reuters:diamondcdn-egodly-2025-03; krebsonsecurity.com:the-com",
+          "description": "DiamondCDN LLC provided DDoS protection and caching to EGodly cybercrime group Oct 2022-Jun 2023. EGodly thanked DiamondCDN on Telegram Feb 15 2023."
+        },
+        {
+          "target": "Neuralink",
+          "type": "employment",
+          "strength": 0.7,
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "description": "Neuralink intern (age 19), assigned across 9+ agencies including CISA, DHS, FEMA"
+        }
+      ],
+      "secondHop": {
+        "Aram Moghaddassi": [
+          {
+            "target": "Neuralink",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Neuralink/X engineer assigned to Treasury, SSA, HHS, Labor, DHS (5 agencies)"
+          },
+          {
+            "target": "Charles Borges",
+            "type": "legal",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Elon Musk",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Elon Musk",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Moghaddassi described as longtime Musk ally by SSA CDO whistleblower complaint"
+          },
+          {
+            "target": "Leland Dudek",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Moghaddassi sent 6300-name list to Dudek for Death Master File entry; both operated in DOGE SSA context"
+          }
+        ],
+        "DOGE": [
+          {
+            "target": "Elon Musk",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Musk led DOGE as special government employee (Jan 20 - May 28 2025) while DOGE systematically fired or infiltrated staff at 7 agencies regulating his companies"
+          },
+          {
+            "target": "Stephen Feinberg",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Feinberg as DepSecDef issued memo directing Pentagon implementation of Trump DOGE-inspired regulatory review. Cerberus portfolio companies ($15.9B+ DoD contracts) benefit from restructured procurement."
+          },
+          {
+            "target": "Palantir Technologies",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Multiple ex-Palantir employees hired into DOGE. Palantir helping build IRS mega-API. DOGE restructures agencies where Palantir wins contracts. Structural conflict of interest."
+          },
+          {
+            "target": "SpaceX",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies"
+          },
+          {
+            "target": "Pete Hegseth",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Hegseth May 2025 memo gives DOGE review authority over all DoD IT contracts above 10M"
+          }
+        ],
+        "Elon Musk": [
+          {
+            "target": "Peter Thiel",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
+          },
+          {
+            "target": "Peter Thiel",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
+          },
+          {
+            "target": "Jared Birchall",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
+          },
+          {
+            "target": "Steve Davis",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
+          }
+        ],
+        "Joe Gebbia": [
+          {
+            "target": "Tesla",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Airbnb co-founder AND Tesla board member assigned to OPM via DOGE"
+          },
+          {
+            "target": "Department of Government Efficiency",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Gebbia held DOGE position working on OPM retirement system redesign before CDO appointment. Two DOGE position entries in LittleSis. Concurrent Tesla audit committee seat."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": [
+      {
+        "date": "2025-06-01",
+        "label": "Edward Coristine (DOGE staffer, age 19, nicknamed Big Balls) was fired from internship at Path Network in 2022 for allegedly leaking proprietary information to a competitor, yet received unrestricted SSA system access",
+        "type": "intelligence",
+        "evidence_ref": null,
+        "id": 6402
+      }
+    ]
+  }
 }

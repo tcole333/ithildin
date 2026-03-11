@@ -435,5 +435,215 @@
     }
   ],
   "entities": [],
-  "timeline": []
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      4323,
+      4340,
+      4344,
+      4355,
+      4347,
+      4358,
+      4329,
+      4330,
+      4356,
+      4357,
+      4333,
+      4345
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          2435,
+          2587,
+          2595,
+          2601,
+          2602
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          4323,
+          4333,
+          4340,
+          4344,
+          4345,
+          4355,
+          4356,
+          4357
+        ],
+        "connection_ids": [
+          2595,
+          2601,
+          2602
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          4329,
+          4347
+        ],
+        "connection_ids": [
+          2435
+        ],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      }
+    ],
+    "curated_at": "2026-03-11T22:30:56.331403",
+    "lead": "<p>Charles Kushner (born 1954) is a New Jersey real estate developer who founded Kushner Companies, a privately held firm that built and managed multifamily housing concentrated in the New York\u2013New Jersey metro area. In 2005, he was convicted on 18 counts in the U.S. District Court for the District of New Jersey (case 2:04-cr-00580), pleading guilty to tax evasion, witness tampering, and illegal campaign contributions [Finding #4329]. The witness tampering charge arose from his hiring a prostitute to entrap his brother-in-law, a cooperating government witness, and sending the recording to his own sister. He served approximately 14 months of a two-year sentence at FCI Montgomery before being pardoned by President Donald Trump on December 23, 2020 [Connection #2435].</p>\n\n<p>Parallel to his criminal prosecution, the Federal Reserve Board and FDIC issued two separate enforcement actions against Kushner on August 24, 2004 and February 10, 2005 for violations at NorCrown Bank spanning 1995\u20131997, including breaches of the Change in Bank Control Act, Bank Holding Company Act, Regulation O on loans to officers, and Sections 23A and 23B on affiliated transactions [Finding #4329]. The joint enforcement imposed civil penalties of at least $500,000 (up to $1 million), a personal fine of $750,000 (up to $1.2 million), mandatory divestiture of NorCrown Bank shares, and a permanent prohibition from any financial institution [Finding #4344]. Trump nominated Kushner as U.S. Ambassador to France in late 2024; the Senate confirmed him in early 2025. An OGE ethics agreement dated April 14, 2025 required Kushner to resign from 55 entities and divest approximately 150 public equity positions, including stock in Brookfield Asset Management \u2014 the company whose subsidiary executed the 99-year lease rescue of 666 Fifth Avenue in 2018 \u2014 and an equity interest in Millennium USA LP, Izzy Englander's hedge fund [Finding #4355].</p>\n\n<p>Kushner's political giving trajectory shifted completely over two decades: from a $1 million contribution to the DNC Non-Federal Individual account in 2002 and over $1.2 million total to Democratic candidates and committees through 2004, to $420,000 in Trump-aligned Republican contributions in 2024 alone [Finding #4333] [Finding #4323]. The 2024 donations included $155,400 to Make America Great Again Inc. and $50,000 each to RJC Victory Fund and Grow the Majority, concentrated in the same election cycle that preceded his nomination as Ambassador [Finding #4323]. In February 2026, the French government temporarily barred Kushner from meetings with all French ministers after he declined a summons from Foreign Minister Jean-No\u00ebl Barrot, sending a subordinate instead; the diplomatic rupture was partially resolved after Kushner telephoned Barrot to reaffirm non-interference commitments [Finding #4347].</p>",
+    "system_role": "Charles Kushner illustrates how criminal conviction followed by executive pardon can function as a pathway to federal appointment, and how family-linked political relationships translate accumulated wealth and partisan donor status into diplomatic placement. His trajectory documents the interplay between real estate development, banking regulation violations, political donations, and government access across two distinct party alignments.",
+    "sections": [
+      {
+        "id": "criminal-prosecution-and-regulatory-sanctions",
+        "title": "Criminal Prosecution and Regulatory Sanctions",
+        "content": "<p>In 2004, the U.S. Attorney's Office for the District of New Jersey filed charges against Charles Kushner under case 2:04-cr-00580. Kushner pleaded guilty to 18 counts: tax evasion, making illegal campaign contributions, and witness tampering [Finding #4329]. The witness tampering count was factually distinctive \u2014 he arranged for a prostitute to entrap his brother-in-law, William Schulder, who was cooperating with federal investigators, then sent the recording to Schulder's wife, his own sister. Kushner was sentenced to two years in federal prison and served approximately 14 months at FCI Montgomery before release. The prosecution was led by Christopher Christie as U.S. Attorney, a fact that would mark their relationship for subsequent decades.</p>\n\n<p>Separate from and concurrent with the criminal case, the Federal Reserve Board issued a prohibition order against Kushner on August 24, 2004, barring him from any financial institution [Finding #4329]. On February 10, 2005, a joint Federal Reserve\u2013FDIC civil money penalty order was issued covering violations at NorCrown Bank during 1995\u20131997: Change in Bank Control Act violations, Bank Holding Company Act violations, Regulation O breaches (insider loans to officers), and Sections 23A and 23B violations on affiliated transactions [Finding #4344]. The enforcement imposed a civil penalty of at least $500,000 (potentially up to $1 million) and an additional personal fine of $750,000 (potentially up to $1.2 million), plus mandatory divestiture of NorCrown Bank shares [Finding #4344]. The Federal Reserve permanent prohibition was still technically active when Kushner was nominated and confirmed as U.S. Ambassador to France in 2025, having never been vacated.</p>\n\n<p>Attorney <a href=\"/dossiers/benjamin-brafman\">Benjamin Brafman</a> secured the Trump pardon for Kushner on December 23, 2020 [Connection #2435]. Brafman had previously secured pardons for other clients including Hillel Nahmad (January 20, 2021), and served as a documented pardon-broker in Trump's first and second terms.</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "norcrown-network-and-financial-associates",
+        "title": "NorCrown Network and Financial Associates",
+        "content": "<p>The NorCrown Trust enforcement records document that Murray Huberfeld and David Bodner co-invested in The NorCrown Trust without FDIC approval under Section 19, receiving regulatory written agreements alongside Kushner [Finding #4345]. <a href=\"/dossiers/murray-huberfeld\">Murray Huberfeld</a> subsequently co-founded Platinum Partners, which prosecutors described as one of the largest hedge fund frauds in New York history [Finding #4345]. Platinum Partners borrowed over $22 million from Richard Stadtmauer \u2014 <a href=\"/dossiers/jared-kushner\">Jared Kushner</a>'s uncle and the second-in-command at Kushner Companies, who was separately sentenced to 38 months in federal prison [Finding #4345]. Huberfeld pleaded guilty to wire fraud conspiracy for bribing Norman Seabrook, president of the New York City Correction Officers' Benevolent Association, with $60,000 in cash delivered in a Ferragamo bag, in exchange for a $20 million pension fund investment into Platinum Partners [Finding #4345].</p>\n\n<p>The NorCrown co-investor network thus connects Charles Kushner to a later criminal fraud enterprise through documented shared financial activity in the mid-1990s, and links the Kushner family enterprise to that fraud through the Stadtmauer\u2013Platinum lending relationship \u2014 a connection that ran through Kushner Companies' own internal hierarchy.</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "political-donations-and-ambassadorial-appointment",
+        "title": "Political Donations and Ambassadorial Appointment",
+        "content": "<p>LittleSis and FEC records document Charles Kushner's history as a major Democratic Party donor before his 2005 conviction: $1,000,000 to DNC Non-Federal Individual (2002), $100,000 each to two DSCC Non-Federal accounts (2002), $54,000 to the Democratic Senatorial Campaign Committee (1992\u20132004), and $44,000 to the Democratic National Committee (1997\u20132003), alongside donations to Hillary Clinton, Chuck Schumer, Robert Menendez, Frank Lautenberg, Jon Corzine, Joe Lieberman, and John Kerry [Finding #4333]. Also documented in this period: a $2.5 million gift to Harvard University in 1998, the year before <a href=\"/dossiers/jared-kushner\">Jared Kushner</a> was admitted to Harvard [Finding #4333].</p>\n\n<p>Post-conviction and post-pardon, Kushner's political activity reversed entirely. FEC records show at least $420,000 in 2024 contributions to Republican and Trump-aligned entities: $155,400 to Make America Great Again Inc. (June 2024), $50,000 to RJC Victory Fund, $50,000 to Grow the Majority, $41,300 to the NRCC, $10,000 each to state Republican parties in South Dakota, Kentucky, New Mexico, South Carolina, Florida, Wisconsin, West Virginia, Utah, Arizona, Alaska, Ohio, $5,000 to Save America, and $3,300 each to Mike Johnson for Louisiana and American Revival PAC [Finding #4323]. These contributions occurred in the same election cycle that preceded his nomination as Ambassador to France. Trump nominated Kushner in late 2024; the Senate confirmed him in early 2025.</p>",
+        "viz": null
+      },
+      {
+        "id": "ethics-agreement-and-conflict-disclosures",
+        "title": "Ethics Agreement and Conflict Disclosures",
+        "content": "<p>The OGE ethics agreement submitted to State Department Acting Legal Adviser Richard C. Visek on April 14, 2025 provides the most complete public inventory of Charles Kushner's financial interests at the time of his ambassadorial appointment [Finding #4355]. Section 2 required resignation from 55 entities listed in Appendix A, including Westminster Management LLC (where he held roles as Chairman and Managing Member), Kushner Investment Manager LLC, Kushner Credit Opportunity Fund LLC, K Multi Family Partners LLC, 65 Bay LLC, K 30 Journal Square Manager Corp, K 30 Journal Square LLC, Riverchase Associates JV LP, Riverchase Birmingham GP LLC, Indiantown Development Management LLC, Indiantown KM LLC, plus over 30 property-specific corporations and LLCs covering New Jersey, New York, Florida, and Alabama [Finding #4358].</p>\n\n<p>Section 3 required divestiture of approximately 150 public company stock positions, plus the SPDR S&P Biotech ETF, an equity interest in Millennium USA LP (Izzy Englander's hedge fund) [Connection #2602], and stock in <a href=\"/dossiers/brookfield-asset-management\">Brookfield Asset Management</a> Ltd [Finding #4356]. The Brookfield divestiture is documented as a direct conflict: Brookfield Real Estate's subsidiary executed the 99-year lease of 666 Fifth Avenue in August 2018, effectively rescuing the Kushner family from the consequences of <a href=\"/dossiers/jared-kushner\">Jared Kushner</a>'s 2007 purchase of the building at $1.8 billion [Finding #4356]. Qatar Investment Authority holds a major stake in Brookfield; that QIA\u2013Brookfield\u2013666 Fifth Avenue triangle ran concurrent with Jared Kushner's role as Senior Adviser during the 2017\u20132018 Qatar blockade [Finding #4356].</p>\n\n<p>Section 4 disclosed that Kushner's spouse continues to provide advisory services to Westminster Management LLC and Westminster Pillar Management LLC, receiving guaranteed payments and management fees, and retaining an equity interest in those entities [Finding #4357]. Charles will receive only passive investment income from those arrangements. The ethics agreement also disclosed that Kushner held equity in eight French public companies at the time of nomination \u2014 Air Liquide, Dassault Syst\u00e8mes, EssilorLuxottica, L'Or\u00e9al, LVMH Mo\u00ebt Hennessy, Safran, Sanofi, and Schneider Electric \u2014 all required to be divested before assuming the ambassadorship to France [Finding #4355].</p>\n\n<p>The Charles and Seryl Kushner Foundation (EIN 22-3422337), the primary Kushner charitable vehicle, declined from $3.9 million in revenue in 2012 to $1 in assets in both 2022 and 2023, effectively dormant [Finding #4340]. A separate Kushner Family Foundation (EIN 52-1756633) held $4,644 in assets as of 2019 [Finding #4340].</p>",
+        "viz": null
+      },
+      {
+        "id": "france-ambassadorship-and-diplomatic-incident",
+        "title": "France Ambassadorship and Diplomatic Incident",
+        "content": "<p>In February 2026, Charles Kushner's tenure as U.S. Ambassador to France produced a documented diplomatic breakdown. French Foreign Minister Jean-No\u00ebl Barrot summoned Kushner to the Foreign Ministry to explain the U.S. Embassy Paris's reposting of State Department Counterterrorism Bureau comments on the killing of Quentin Deranque [Finding #4347]. Kushner declined to appear personally, citing personal commitments, and sent a senior embassy official in his place. France responded by barring Kushner from meetings with any French government minister [Finding #4330].</p>\n\n<p>Barrot publicly stated that \"France cannot accept any form of interference or manipulation of its national public debate by the authorities of a third country\" [Finding #4347]. The restriction was partially lifted on approximately February 24\u201325, 2026, after Kushner called Barrot to reaffirm the friendship between France and the United States and commit to non-interference [Finding #4347]. Axios reporting noted that Kushner was among several Trump-appointed ambassadors identified as creating diplomatic friction in their host countries during the same period [Finding #4347].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "The Federal Reserve's 2004\u20132005 permanent banking prohibition against Kushner was issued for lifetime effect and has no documented vacatur \u2014 did the State Department's confirmation process or the Senate Foreign Relations Committee review whether this active banking prohibition constituted a disqualification for an ambassadorial appointment involving financial diplomacy, and if so, what was the legal basis for proceeding?",
+      "Westminster Management LLC retains Kushner's spouse as an active adviser receiving guaranteed payments during his ambassadorship \u2014 do any Westminster-managed properties involve French nationals, French investors, or entities with French government ties that would create a conflict the OGE agreement did not address?",
+      "The Kushner Credit Opportunity Fund LLC and Kushner Investment Manager LLC disclosed in the OGE agreement were not previously publicly documented \u2014 what is their investor composition, when were they formed, and what credit instruments do they hold?",
+      "Charles Kushner donated $2.5 million to Harvard University in 1998, the year before Jared Kushner's admission \u2014 are there additional institutional donations to prep schools, universities, or research institutions in the years immediately preceding admissions decisions for Kushner family members?",
+      "Murray Huberfeld and David Bodner's NorCrown co-investment with Charles Kushner predates their Platinum Partners fraud by over a decade \u2014 are there documented financial transactions between Kushner Companies entities and Platinum Partners or its predecessor vehicles during the 2000s\u20132010s that would extend the network connection beyond the Stadtmauer loan?"
+    ],
+    "applicable_models": [
+      "bridge-tax",
+      "enabler-gradient",
+      "private-order"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Charles Kushner",
+      "connections": [
+        {
+          "target": "Benjamin Brafman",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "Village Voice Feb 2021",
+          "description": "Brafman secured Trump pardon for Charles Kushner (Dec 23 2020). Kushner is Jared Kushner's father and Trump's in-law."
+        },
+        {
+          "target": "Jared Kushner",
+          "type": "familial",
+          "strength": 1.0,
+          "evidence_ref": "FEC records 2024; NY DOS filings; DOJ case 2:04-cr-00580",
+          "description": "Father-son. Charles founded Kushner Companies; convicted 2005; Jared assumed control via Oct 2008 DE LLC restructuring. Coordinated 2024 political donations. Charles pardoned Dec 2020 now Ambassador to France."
+        },
+        {
+          "target": "Murray Huberfeld",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "Federal Reserve enforcement orders 2004-2005; Platinum Partners prosecution records",
+          "description": "Co-investors in NorCrown Trust; Huberfeld later ran Platinum Partners fraud; Kushner family member Stadtmauer lent 22M to Platinum"
+        },
+        {
+          "target": "Brookfield Asset Management",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "OGE ethics agreement April 2025 Appendix B; Brookfield 666 Fifth Ave lease 2018",
+          "description": "Held Brookfield equity while Brookfield subsidiary executed 99-year lease bailout of 666 Fifth Avenue; required to divest for ambassadorship"
+        },
+        {
+          "target": "Millennium USA LP",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "OGE ethics agreement April 2025 Section 3 and Appendix B",
+          "description": "Held equity interest in Izzy Englanders hedge fund; required to divest for ambassadorship"
+        }
+      ],
+      "secondHop": {
+        "Benjamin Brafman": [
+          {
+            "target": "Hillel Nahmad",
+            "type": "legal",
+            "strength": 1.0,
+            "description": "Brafman was Nahmad's defense attorney, negotiated plea deal, and later secured Trump pardon on Jan 20 2021."
+          },
+          {
+            "target": "Donald Trump",
+            "type": "legal",
+            "strength": 0.7,
+            "description": "Brafman served as key pardon broker, securing Trump pardons for Nahmad, Charles Kushner, D'Souza, Blagojevich."
+          }
+        ],
+        "Jared Kushner": [
+          {
+            "target": "Steve Witkoff",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Joint meetings with Kirill Dmitriev at Faena Miami Oct 2025 to negotiate Ukraine peace plan. Dmitriev publicly credited both for assistance. Co-navigators in Trump foreign policy network."
+          },
+          {
+            "target": "Rick Gerson",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Close friends for 10+ years. UAE officials consider Gerson 'Kushner's guy.' Brother Mark Gerson invested in Cadre (Josh Kushner). Mueller investigated Gerson's role as intermediary."
+          },
+          {
+            "target": "Mohammed bin Salman",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Close friends per LittleSis; MBS PIF committed 2B to Jared Affinity Partners despite advisory board opposition; 844K Trump 47 donation 2024"
+          },
+          {
+            "target": "Rosemary Vrablic",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Deutsche Bank private wealth manager with dual relationship: personal banker and direct business transactions. Approved Kushner loans other banks rejected. Resigned DB Nov 2021."
+          },
+          {
+            "target": "Rick Gerson",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Gerson is Kushner MBZ intermediary per Mueller investigation. Alpha Wave co-founder. Already in DB as F-4143 F-4223. LittleSis associates Jared with Gerson as MBZ backchannel."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
 }
