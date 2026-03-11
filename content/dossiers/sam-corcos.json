@@ -53,7 +53,7 @@
     {
       "id": 5516,
       "finding_type": "identity",
-      "summary": "DOGE operative: Sam Corcos \u2014 Levels Health co-founder/CEO (a16z-funded continuous glucose monitor startup), assigned as Special Adviser to Treasury Secretary and IRS. Conflict: a16z-backed founder advising Treasury while a16z has extensive regulatory interests in crypto, fintech, and tax policy. FEC: small donations to WinRed and Kevin Kiley for Congress.",
+      "summary": "DOGE operative: Sam Corcos — Levels Health co-founder/CEO (a16z-funded continuous glucose monitor startup), assigned as Special Adviser to Treasury Secretary and IRS. Conflict: a16z-backed founder advising Treasury while a16z has extensive regulatory interests in crypto, fintech, and tax policy. FEC: small donations to WinRed and Kevin Kiley for Congress.",
       "detail": null,
       "source_datasets": [
         "web_search,fec"
@@ -86,7 +86,7 @@
       "id": 5807,
       "finding_type": "relationship",
       "summary": "Post-DOGE: Levels Health founder became Treasury CIO, canceled .5B in IRS contracts",
-      "detail": "Sam Corcos, 36, founder of Levels Health (a16z-backed health startup) became Treasury Dept CIO. Initially DOGE special advisor at Treasury. Canceled approximately .5B in IRS modernization contracts from .7B annual budget. Directed HackerRank coding tests for IRS employees. Levels Health was co-founded with a former SpaceX lead engineer and backed by a16z (Andreessen Horowitz) \u2014 creating a16z network links between Kupor (OPM) and Corcos (Treasury). Wife has ties to sanctioned Russian oligarch per Rolling Stone investigation, though Corcos himself not directly implicated. Treasury terminated approximately 1,446 employees since Trump's second term.",
+      "detail": "Sam Corcos, 36, founder of Levels Health (a16z-backed health startup) became Treasury Dept CIO. Initially DOGE special advisor at Treasury. Canceled approximately .5B in IRS modernization contracts from .7B annual budget. Directed HackerRank coding tests for IRS employees. Levels Health was co-founded with a former SpaceX lead engineer and backed by a16z (Andreessen Horowitz) — creating a16z network links between Kupor (OPM) and Corcos (Treasury). Wife has ties to sanctioned Russian oligarch per Rolling Stone investigation, though Corcos himself not directly implicated. Treasury terminated approximately 1,446 employees since Trump's second term.",
       "source_datasets": [
         "web_search"
       ],
@@ -189,7 +189,7 @@
     {
       "id": 5953,
       "finding_type": "financial",
-      "summary": "DOGE Personnel: Sam Corcos \u2014 Treasury CIO, Levels Health CEO with $25M+ net worth",
+      "summary": "DOGE Personnel: Sam Corcos — Treasury CIO, Levels Health CEO with $25M+ net worth",
       "detail": "Samuel Corcos, age 36. Prior: Levels Health Inc co-founder/CEO (6/2019-present). Now Deputy Assistant Secretary for Information Systems (DASIS) and Chief Information Officer at Department of the Treasury. Net worth $25M-$50M per 278 disclosure. Holds $100M-$250M in Levels Health vested stock options. Entered as Special Adviser to Treasury Secretary. ProPublica tracker confirms DOGE placement at Treasury and IRS. Disposition: EMBEDDED (permanent Treasury CIO role). Key conflict: health-tech CEO overseeing Treasury IT systems including IRS payment infrastructure.",
       "source_datasets": [
         "propublica_disclosures",
@@ -301,7 +301,7 @@
     {
       "id": 6455,
       "finding_type": "relationship",
-      "summary": "Sam Corcos (DOGE) Treasury: Corcos was Levels Health co-founder (a16z-backed). Joined DOGE as special adviser to Treasury Secretary Bessent. Became Treasury CIO May 2025. At Treasury, advocated for expanding Palantir's IRS contracts rather than his prior employer Levels. However, in DOGE capacity at IRS: (1) Canceled $1.5B in IRS modernization contracts (benefiting Palantir by clearing competitors). (2) Pushed Palantir as unified API platform for IRS. (3) Levels Health and a16z are not known Treasury contractors \u2014 different pattern than Palantir-Minor case.",
+      "summary": "Sam Corcos (DOGE) Treasury: Corcos was Levels Health co-founder (a16z-backed). Joined DOGE as special adviser to Treasury Secretary Bessent. Became Treasury CIO May 2025. At Treasury, advocated for expanding Palantir's IRS contracts rather than his prior employer Levels. However, in DOGE capacity at IRS: (1) Canceled $1.5B in IRS modernization contracts (benefiting Palantir by clearing competitors). (2) Pushed Palantir as unified API platform for IRS. (3) Levels Health and a16z are not known Treasury contractors — different pattern than Palantir-Minor case.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -469,5 +469,322 @@
       "entity_status": "active"
     }
   ],
-  "timeline": []
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      5935,
+      5936,
+      5953,
+      5978,
+      5516,
+      5478,
+      5807,
+      6427,
+      6455
+    ],
+    "key_identifiers": {
+      "jurisdictions": [
+        "Federal"
+      ],
+      "officers": [
+        {
+          "role": "Chief Information Officer",
+          "entity": "Sam Corcos",
+          "start": null,
+          "end": null
+        }
+      ],
+      "entities": [
+        {
+          "id": 904,
+          "name": "Sam Corcos",
+          "type": "unknown",
+          "jurisdiction": "Federal",
+          "role": "Chief Information Officer"
+        }
+      ]
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          5807,
+          5978,
+          6455
+        ],
+        "connection_ids": [
+          2989,
+          3073,
+          3283,
+          3004,
+          3251,
+          3256
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          5935,
+          5936,
+          5953
+        ],
+        "connection_ids": [
+          3004
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      }
+    ],
+    "curated_at": "2026-03-11T22:41:27.090713",
+    "lead": "<p>Sam Corcos, co-founder and CEO of Levels Health — a continuous glucose monitor startup backed by Andreessen Horowitz — entered federal service in early 2025 as a DOGE special adviser to Treasury Secretary Scott Bessent. [Finding #5516] By May 2025 he had been formally appointed Deputy Assistant Secretary for Information Systems and Chief Information Officer of the Department of the Treasury, the agency overseeing IRS payment infrastructure and tax enforcement systems. [Finding #6427] His financial disclosure filed in February 2025 placed his net worth at $25–50 million, with $100–250 million in vested Levels Health stock options. [Finding #5953]</p><p>In his Treasury role Corcos canceled approximately $1.5 billion in IRS technology modernization contracts, which he characterized as \"30 years behind schedule and $15 billion over budget,\" and administered HackerRank coding tests to IRS technical staff as a proficiency screen. [Finding #5478] Corcos estimated he trusted only 100–200 of the IRS IT department's 8,500 employees to execute the reorganization. [Finding #5478] By February 2026 the IRS had lost 40 percent of its technology workforce; 50 IT leaders were placed on administrative leave in March 2025 and 1,000 IT staff were reassigned out of technology operations. [Finding #5936] Simultaneously, Corcos — described by reporting as \"a big fan of Palantir\" — pushed to expand Palantir's IRS contracts and co-hosted a three-day hackathon with Palantir representatives and IRS career engineers in April 2025 to build a \"Mega API\" placing Palantir Foundry as the centralized access point for all IRS databases. [Finding #6455] [Finding #6496]</p><p>Corcos's mandatory 278 new-entrant financial disclosure initially left the spouse section blank. Two weeks later he filed an amendment disclosing that his wife Varvara Russkova Corcos, managing partner of a health-technology venture capital firm, held a stake in Sana Health — a medical device company funded by the Department of Defense. [Finding #5935] Rolling Stone separately reported that Varvara Russkova Corcos has ties to a sanctioned Russian oligarch, though Corcos himself is not directly implicated in those ties. [Finding #5807] The combination of the initial omission and the amendment drew scrutiny given Corcos's authority over IRS data systems and Treasury IT procurement. [Finding #5935]</p>",
+    "system_role": "Sam Corcos is the Treasury Department's Chief Information Officer, responsible for IRS technology systems and federal tax data infrastructure, having entered that role via the DOGE advisory process in early 2025.",
+    "sections": [
+      {
+        "id": "background",
+        "title": "Background and Entry into Government",
+        "content": "Corcos, age 36, co-founded Levels Health in June 2019 alongside a former SpaceX lead engineer. Levels Health builds continuous glucose monitor software and received seed and Series A funding from <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a>. [Finding #5516] Corcos held $100–250 million in vested Levels stock options at the time of his federal appointment, with an overall net worth of $25–50 million per his 278 disclosure. [Finding #5953] His FEC donor history spans donations to Kevin Kiley for Congress ($1,000, 2022), Jeremy for Georgia ($1,000), Josh Hawley for Senate ($1,000, 2018), Romney for President ($500, 2012), and WinRed PAC through Levels employer records — 12 entries in total. [Finding #6427] He entered federal service as a DOGE special adviser to Treasury Secretary Bessent before being appointed to the permanent Treasury CIO role in May 2025. [Finding #5953]",
+        "viz": null
+      },
+      {
+        "id": "irs-reorganization",
+        "title": "IRS Technology Reorganization",
+        "content": "As Treasury CIO, Corcos directed the reorganization of the IRS's 8,500-person information technology department. He administered HackerRank coding tests to IRS technical staff, asserting that the questions were relevant proficiency screens; IRS employees reported the questions had no connection to their actual job functions. [Finding #5478] Corcos estimated he trusted only 100–200 of those 8,500 employees to carry out the reorganization. [Finding #5478] In one office, headcount fell to one-third of its prior level during the filing season. [Finding #5478] Corcos claimed $1.5 billion in savings from halting IRS modernization contracts, cutting approximately $0.5 billion from the $0.7 billion annual IRS IT contract budget. [Finding #5807] [Finding #5936] By February 2026, confirmed by Federal News Network, the IRS had lost 40 percent of its technology workforce. In March 2025, 50 IT leaders were placed on administrative leave and 1,000 IT employees were reassigned out of technology operations. [Finding #5936] The Treasury Department as a whole terminated approximately 1,446 employees since the start of Trump's second term. [Finding #5807]",
+        "viz": null
+      },
+      {
+        "id": "palantir-irs",
+        "title": "Palantir Expansion at IRS",
+        "content": "While canceling incumbent IRS modernization contracts, Corcos simultaneously advocated for expanding <a href=\"/dossiers/palantir-technologies\">Palantir Technologies</a> at the IRS. Reporting described him as \"a big fan of Palantir\" who pushed to expand its IRS work. [Finding #6455] Treasury awarded Palantir a contract — CONT_AWD_692M1525F00024 — for a \"unified API layer\" creating a single interface over all IRS databases. [Finding #6453] In April 2025, <a href=\"/dossiers/doge\">DOGE</a> and Palantir representatives conducted a three-day hackathon with IRS career engineers to build this Mega API, with Palantir Foundry designated as the centralized access point for all IRS data. [Finding #6496] Palantir had received over $180 million from the IRS since 2018 via 26 contracts per USASpending; Treasury's total Palantir contracts stand at $195,956,175 per USASpending confirmed data. [Finding #6505] [Finding #6496] In June 2025, Senators Wyden and Ocasio-Cortez demanded Palantir CEO Alex Karp explain the Mega API database plans. [Finding #6496] Unlike <a href=\"/dossiers/clark-minor\">Clark Minor</a>'s situation at HHS — where Minor came directly from Palantir — Corcos had no prior employment relationship with Palantir; Levels Health and a16z are not known Treasury contractors. [Finding #6455]",
+        "viz": null
+      },
+      {
+        "id": "financial-disclosure",
+        "title": "Financial Disclosures and Conflicts",
+        "content": "Corcos filed his mandatory 278 new-entrant financial disclosure on February 25, 2025, leaving the spouse section blank. Two weeks later he amended the filing to add his wife Varvara Russkova Corcos's holdings in Sana Health, a medical device company funded by the Department of Defense. [Finding #5935] Varvara Russkova Corcos is the managing partner of a venture capital firm investing in health technology companies — a sector adjacent to Levels Health's business and to IRS data systems that could affect healthcare tax treatment. [Finding #5935] Rolling Stone reported that she has ties to a sanctioned Russian oligarch; Corcos himself is not directly implicated. [Finding #5807] Levels Health received seed and Series A funding from <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a>, whose portfolio includes Coinbase and multiple crypto and fintech companies with direct interests in IRS enforcement and tax policy. [Finding #5978]",
+        "viz": null
+      },
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "content": "The most structurally significant relationship in Corcos's network is his connection to <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a>. a16z funded Levels Health and its managing partner <a href=\"/dossiers/scott-kupor\">Scott Kupor</a> became OPM Director in July 2025, absorbing DOGE workforce functions. [Finding #5978] [Finding #5807] This creates a two-node a16z presence in the executive branch: Corcos controlling Treasury IT and IRS data systems; Kupor controlling federal workforce policy. a16z spent $1.49 million on federal lobbying in 2025 — double its 2024 level — covering AI and digital assets through BGR Government Affairs, directly relevant to IRS technology and crypto regulation. [Finding #5978] Corcos's parallel to <a href=\"/dossiers/gregory-barbaccia\">Gregory Barbaccia</a> is the other key structural relationship: both were DOGE-placed technology CIOs in Trump's second term, with Barbaccia at OMB holding FITARA oversight over all federal IT procurement — including Treasury's Palantir contracts — while retaining up to $15,000 in Palantir stock. [Finding #3283 connection] Corcos served as a DOGE operative under <a href=\"/dossiers/elon-musk\">Elon Musk</a>'s direction before transitioning to the permanent Treasury CIO role. [Finding #5953] His peer <a href=\"/dossiers/clark-minor\">Clark Minor</a>, a 13-year Palantir veteran, was simultaneously placed as HHS CIO, creating two DOGE-originated CIO appointments at agencies with large Palantir contract footprints. [Finding #6446]",
+        "viz": "ego_network"
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "content": "Per his 278 disclosure filed February 25, 2025, Corcos held $25–50 million in net worth and $100–250 million in vested Levels Health stock options. [Finding #5953] He continued to hold the Levels CEO title throughout his federal service. The principal financial action in his government role was the cancellation of approximately $1.5 billion in IRS technology modernization contracts — described by Corcos as eliminating a program \"30 years behind schedule and $15 billion over budget\" — while simultaneously redirecting IRS IT investment toward Palantir. [Finding #5936] [Finding #6453] The IRS Palantir contract for the unified API layer carries contract ID CONT_AWD_692M1525F00024_6920_47QTCA24D004L_4732. [Finding #6453] Total confirmed Palantir Treasury contracts: $195,956,175. [Finding #6505] His wife's amended disclosure added Sana Health holdings; Sana Health is DOD-funded, creating a disclosed financial link between the Corcos household and defense department contracts. [Finding #5935] Corcos planned to remain at Treasury through at least January 2026. [Finding #5936]",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "Corcos amended his 278 disclosure to add his wife's Sana Health stake two weeks after initial filing. Was this a deliberate omission corrected under scrutiny, or an oversight? What other spousal holdings may remain undisclosed given that Varvara Russkova Corcos runs a health-tech VC firm?",
+      "Corcos canceled $1.5 billion in IRS modernization contracts while positioning Palantir as the replacement platform. Did any of the canceled contracts overlap with Palantir's competitor set? What procurement analysis, if any, preceded the cancellations?",
+      "Rolling Stone reported ties between Varvara Russkova Corcos and a sanctioned Russian oligarch. What is the nature of those ties, and were they disclosed to Treasury or reviewed as part of Corcos's clearance process?",
+      "The a16z-to-government pattern places Corcos (Treasury CIO, a16z portfolio company CEO) and <a href=\"/dossiers/scott-kupor\">Scott Kupor</a> (OPM Director, a16z managing partner) in simultaneous executive branch roles. Did a16z's federal lobbying activity change after these placements, and are there documented interactions between Corcos and a16z's BGR Government Affairs lobbyists?",
+      "What is the current status of Levels Health's business operations under Corcos's continued CEO tenure during his federal service? Has Levels Health pursued any government contracts, healthcare data partnerships, or regulatory engagements that would be affected by Corcos's IRS data access?"
+    ],
+    "applicable_models": [
+      "manufactured-dependency",
+      "enabler-gradient"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Sam Corcos",
+      "connections": [
+        {
+          "target": "DOGE",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "DOGE operative appointed Treasury CIO; directing IRS IT reorganization; administering HackerRank coding tests; trusts only 100-200 of 8500 IRS IT staff"
+        },
+        {
+          "target": "Scott Kupor",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "ProPublica disclosures",
+          "description": "a16z-to-government dual pipeline: Corcos (Levels/a16z-funded) as Treasury CIO and Kupor (a16z managing partner) as OPM Director -- a16z portfolio influence at both workforce policy and financial technology enforcement"
+        },
+        {
+          "target": "Gregory Barbaccia",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "home.treasury.gov/news/press-releases/sb0260",
+          "description": "Both DOGE-placed tech CIOs in Trump 2nd term. Corcos at Treasury (overseeing Palantir IRS contract), Barbaccia at OMB (FITARA oversight of all federal IT including Palantir). Both operate within Palantir's sphere of influence."
+        },
+        {
+          "target": "Andreessen Horowitz",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "https://projects.propublica.org/elon-musk-doge-tracker/",
+          "description": "Levels Health CEO (a16z-funded) assigned as Special Adviser to Treasury Secretary via DOGE"
+        },
+        {
+          "target": "Elon Musk",
+          "type": "employment",
+          "strength": 0.7,
+          "evidence_ref": "propublica-doge-tracker",
+          "description": "Corcos served as DOGE operative under Musk's direction, then became Treasury CIO"
+        },
+        {
+          "target": "Clark Minor",
+          "type": "employment",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Both DOGE operatives placed as CIOs at major agencies (Treasury and HHS respectively)"
+        }
+      ],
+      "secondHop": {
+        "Andreessen Horowitz": [
+          {
+            "target": "Scott Kupor",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "First hire 2009; managing partner 16 years; resigned from 32 funds but passive investor in 38 others upon becoming OPM Director July 2025; planned 300K federal role elimination"
+          },
+          {
+            "target": "Scott Kupor",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "a16z first hire and managing partner became OPM Director July 2025, absorbed DOGE workforce functions"
+          }
+        ],
+        "Clark Minor": [
+          {
+            "target": "Palantir Technologies",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Palantir engineer deployed as DOGE CIO of HHS. HHS Medicaid data feeds Palantir ELITE targeting tool — direct conflict between CIO authority and Palantir commercial interest."
+          },
+          {
+            "target": "Palantir",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Minor was Palantir Global Head of Cloud (2013-2024) then appointed HHS CTO/CIO overseeing 300M+ in Palantir HHS contracts"
+          },
+          {
+            "target": "Palantir Technologies",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "13-yr Palantir veteran became HHS CIO May 2025, oversees largest civilian agency IT budget"
+          },
+          {
+            "target": "Gregory Barbaccia",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Both are Palantir alumni now in senior federal IT roles (Minor: HHS CIO, Barbaccia: Federal CIO at OMB). Two simultaneous Palantir-to-government placements while Palantir federal contracts near doubled."
+          },
+          {
+            "target": "Elon Musk",
+            "type": "employment",
+            "strength": 0.7,
+            "description": "Clark Minor served as DOGE operative, installed as HHS CIO. DOGE led by Musk."
+          }
+        ],
+        "DOGE": [
+          {
+            "target": "Elon Musk",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Musk led DOGE as special government employee (Jan 20 - May 28 2025) while DOGE systematically fired or infiltrated staff at 7 agencies regulating his companies"
+          },
+          {
+            "target": "Stephen Feinberg",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Feinberg as DepSecDef issued memo directing Pentagon implementation of Trump DOGE-inspired regulatory review. Cerberus portfolio companies ($15.9B+ DoD contracts) benefit from restructured procurement."
+          },
+          {
+            "target": "Palantir Technologies",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Multiple ex-Palantir employees hired into DOGE. Palantir helping build IRS mega-API. DOGE restructures agencies where Palantir wins contracts. Structural conflict of interest."
+          },
+          {
+            "target": "SpaceX",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies"
+          },
+          {
+            "target": "Pete Hegseth",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Hegseth May 2025 memo gives DOGE review authority over all DoD IT contracts above 10M"
+          }
+        ],
+        "Elon Musk": [
+          {
+            "target": "Peter Thiel",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
+          },
+          {
+            "target": "Peter Thiel",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
+          },
+          {
+            "target": "Jared Birchall",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
+          },
+          {
+            "target": "Steve Davis",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
+          }
+        ],
+        "Gregory Barbaccia": [
+          {
+            "target": "Palantir",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Federal CIO Barbaccia is former Palantir employee with up to $15K retained stock. Also held $100K-$250K Anduril stake (divested Mar 2025). Controls federal IT procurement."
+          },
+          {
+            "target": "Palantir Technologies",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "10-year Palantir veteran deployed as DOGE CIO of OMB. OMB controls federal IT budget and procurement policy that funds Palantir contracts."
+          },
+          {
+            "target": "Thomas Shedd",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Federal CIO succession at GSA TTS: Barbaccia replaced Shedd as TTS director while also holding Federal CIO role -- Palantir alum took over from Tesla alum, concentrating IT procurement authority"
+          },
+          {
+            "target": "Palantir Technologies",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "13-yr Palantir veteran became Federal CIO at OMB Jan 2025, oversees government-wide IT procurement"
+          },
+          {
+            "target": "Thomas Williams",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Both OMB officials with Palantir conflicts. Barbaccia: former Palantir employee, up to $15K Palantir stock. Williams: wife held $2-10M Palantir stock. Both under POGO/OGE scrutiny."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
 }
