@@ -532,10 +532,8 @@ const supportSummary = supportMetrics.total_sentences > 0
       initSupportMode();
     </script>
   )}
-  {citedFindingIds.length > 0 && (
-    <script>
-      import { initFindingPopover } from '../../lib/findingPopover';
-      initFindingPopover();
-    </script>
-  )}
+  <script>
+    import { initFindingPopover } from '../../lib/dossierFindingPopover';
+    initFindingPopover();
+  </script>
 </BaseLayout>
