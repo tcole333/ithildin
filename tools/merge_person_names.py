@@ -128,6 +128,29 @@ def cmd_merge(args):
             "UPDATE findings SET target_name = ? WHERE target_name LIKE ?",
             (canonical, f"{canonical} / %"),
         )
+    # Delete connections that would become duplicates after rename
+    db.execute(
+        """DELETE FROM connections WHERE person_a = ? AND id IN (
+               SELECT c1.id FROM connections c1
+               INNER JOIN connections c2
+               ON c2.person_a = ? AND c1.person_b = c2.person_b
+               AND c1.relationship_type = c2.relationship_type
+               AND c1.profile_id IS NOT DISTINCT FROM c2.profile_id
+               WHERE c1.person_a = ?
+           )""",
+        (alias, canonical, alias),
+    )
+    db.execute(
+        """DELETE FROM connections WHERE person_b = ? AND id IN (
+               SELECT c1.id FROM connections c1
+               INNER JOIN connections c2
+               ON c2.person_b = ? AND c1.person_a = c2.person_a
+               AND c1.relationship_type = c2.relationship_type
+               AND c1.profile_id IS NOT DISTINCT FROM c2.profile_id
+               WHERE c1.person_b = ?
+           )""",
+        (alias, canonical, alias),
+    )
     db.execute(
         "UPDATE connections SET person_a = ? WHERE person_a = ?",
         (canonical, alias),

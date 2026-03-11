@@ -53,6 +53,12 @@ key_persons:
   # DHS / political operatives
   - "corey lewandowski"
   - "kristi noem"
+  # Election enforcement apparatus
+  - "tulsi gabbard"
+  - "heather honey"
+  - "kurt olsen"
+  - "stephen miller"
+  - "pam bondi"
   # Key senators / oversight
   - "elizabeth warren"
   - "jack reed"
@@ -253,6 +259,31 @@ threads:
       - "doge.*fired"
       - "doge.*restructur"
 
+  - id: 10
+    name: "Election Enforcement Apparatus"
+    description: "Federal agencies repurposed to retroactively investigate the 2020 election. FBI raided Fulton County (Jan 2026), ODNI/Gabbard seized Puerto Rico voting machines (May 2025), HSI now probing Arizona 2020 results (Mar 2026), DOJ demanding voter rolls from 15+ states. Heather Honey (Cyber Ninjas) appointed DHS election integrity deputy. Kurt Olsen working from White House. Stephen Miller directing weekly meetings. Track agency weaponization, personnel, legal challenges, and connections to existing DHS/DOGE threads."
+    targets:
+      - "tulsi gabbard"
+      - "odni"
+      - "hsi"
+      - "homeland security investigations"
+      - "heather honey"
+      - "kurt olsen"
+      - "stephen miller"
+      - "pam bondi"
+      - "fulton county"
+      - "fbi"
+      - "cyber ninjas"
+    keywords:
+      - "election.*fraud"
+      - "election.*integrity"
+      - "2020.*election"
+      - "voter.*roll"
+      - "voting.*machine"
+      - "election.*investigation"
+      - "ballot.*seiz"
+      - "hsi.*election"
+
   - id: 9
     name: "Tariff Collection, Refunds & Revenue Flows"
     description: "How tariff revenue flows from collection (CBP) through Treasury to congressional allocation. Supreme Court overrulings and resulting refund mechanisms. DHS/CBP fee retention and contractor payments from tariff revenue. Opportunities for fraud, grift, or diversion in the chaotic high-volume tariff regime. Who handles refund processing and routing?"
@@ -366,6 +397,34 @@ key_dates:
   - date: "2026-02-01"
     event: "Palantir awarded $1B DHS blanket purchase agreement for AI/data analytics"
     category: "financial"
+
+  - date: "2025-05-01"
+    event: "ODNI/Gabbard seizes Puerto Rico voting machines — claims Venezuela hacking, finds no evidence"
+    category: "operational"
+
+  - date: "2025-08-26"
+    event: "Heather Honey (Cyber Ninjas subcontractor) appointed DHS Deputy Asst Secretary of Election Integrity"
+    category: "political"
+
+  - date: "2025-08-04"
+    event: "DOJ sends voter registration data demands to 15+ states including Minnesota"
+    category: "legal"
+
+  - date: "2025-12-12"
+    event: "DOJ sues Fulton County to force release of 2020 ballot documents"
+    category: "legal"
+
+  - date: "2026-01-28"
+    event: "FBI raids Fulton County election office — seizes all 2020 ballots, images, tabulator tapes"
+    category: "operational"
+
+  - date: "2026-03-04"
+    event: "House Democrats publish 'Fraud as Pretext' staff report on weaponized election investigations"
+    category: "legal"
+
+  - date: "2026-03-10"
+    event: "Atlantic reports HSI (drug cartel/trafficking unit) now probing 2020 Arizona election results"
+    category: "operational"
 
   - date: "2026-03-03"
     event: "Noem congressional testimony — misled Congress about Lewandowski contract authority (ProPublica)"
