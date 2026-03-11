@@ -326,18 +326,21 @@ def check_citations(dossier: dict) -> list[dict]:
 
     coverage = (cited_sentences / total_sentences * 100) if total_sentences > 0 else 0
 
+    # Citation coverage is a rough heuristic (inline ID string detection),
+    # not a real support-coverage metric. Use npm run report:support-coverage
+    # for authoritative numbers. Keep these as advisory only.
     if coverage < 50:
         issues.append({
             "check": "citations",
-            "severity": "BLOCKING",
-            "detail": f"Citation coverage {coverage:.1f}% (< 50% threshold, {cited_sentences}/{total_sentences} sentences)",
+            "severity": "SHOULD_FIX",
+            "detail": f"Citation coverage ~{coverage:.1f}% ({cited_sentences}/{total_sentences} sentences with inline refs)",
             "fixable": False,
         })
     elif coverage < 80:
         issues.append({
             "check": "citations",
-            "severity": "SHOULD_FIX",
-            "detail": f"Citation coverage {coverage:.1f}% (< 80% target, {cited_sentences}/{total_sentences} sentences)",
+            "severity": "SUGGESTION",
+            "detail": f"Citation coverage ~{coverage:.1f}% ({cited_sentences}/{total_sentences} sentences with inline refs)",
             "fixable": False,
         })
 
