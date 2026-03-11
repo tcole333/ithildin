@@ -111,6 +111,8 @@ Each section has:
 
 8. **Don't repeat the lead** — sections go deeper on specific topics. The lead is the summary; sections are the detail.
 
+9. **Section order and length reflect importance, not evidence volume** — put the most structurally significant section first. A section with 3 high-confidence findings about a key relationship should come before (and may be longer than) a section with 20 findings about routine corporate filings. Ask: "What would a journalist, analyst, or researcher most need to understand about this subject?"
+
 #### `open_questions` (array of strings)
 
 3-5 specific, actionable investigative questions. Based on evidence gaps, not speculation.
@@ -122,6 +124,15 @@ Check `content/models/` for which analytical models apply. Use model IDs.
 ### Editorial Standards
 
 Dossiers are reference material, not investigative journalism. Apply Wikipedia's core content policies.
+
+#### Importance vs. Evidence Density (CRITICAL)
+
+Finding count does NOT equal importance. The investigation may have deeply researched a minor corporate registration (producing 30 findings) while a structurally significant relationship has only 2 findings. **Do not let research depth distort the narrative.**
+
+- **Weight sections by actual significance, not finding count.** A section about someone's role on a key board may deserve more prominence than a section about a corporate filing we happened to investigate thoroughly.
+- **Don't lead with whatever has the most evidence.** Lead with what matters most to understanding this subject's role. A reader should come away understanding why this person/entity matters, not just which aspects we documented most.
+- **Don't inflate minor details.** If we have extensive evidence about a routine corporate address change, that doesn't make it a key section. Mention it where relevant and move on.
+- **Use domain judgment.** You understand power structures, finance, and institutions. Use that understanding to assess what's genuinely significant — don't defer to the data's shape.
 
 #### Neutral Point of View (CRITICAL)
 
