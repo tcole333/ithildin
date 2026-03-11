@@ -234,7 +234,7 @@
       "id": 5308,
       "finding_type": "legal",
       "summary": "Three senior FBI officials (Driscoll, Jensen, Evans) sued Patel alleging White House-directed retaliatory firings",
-      "detail": "Three former senior FBI officials\u2014Brian Driscoll (former acting FBI director), Steven Jensen (former assistant director, Washington field office), and Spencer Evans (Las Vegas field office chief)\u2014sued FBI Director Patel and the Trump administration in September 2025. The complaint alleges Patel told Driscoll in August 2025 that 'his bosses had directed him to fire anyone who they identified as having worked on a criminal investigation against President Donald J. Trump.' The lawsuit alleges White House-directed purge driven by social media pressure from MAGA loyalists. Pattern identified: in four key instances, Patel fired FBI agents within hours or days of unflattering news about him. Example: after reports of personal FBI jet use, Patel fired 27-year veteran Steven Palmer who headed the jet fleet oversight unit.",
+      "detail": "Three former senior FBI officials—Brian Driscoll (former acting FBI director), Steven Jensen (former assistant director, Washington field office), and Spencer Evans (Las Vegas field office chief)—sued FBI Director Patel and the Trump administration in September 2025. The complaint alleges Patel told Driscoll in August 2025 that 'his bosses had directed him to fire anyone who they identified as having worked on a criminal investigation against President Donald J. Trump.' The lawsuit alleges White House-directed purge driven by social media pressure from MAGA loyalists. Pattern identified: in four key instances, Patel fired FBI agents within hours or days of unflattering news about him. Example: after reports of personal FBI jet use, Patel fired 27-year veteran Steven Palmer who headed the jet fleet oversight unit.",
       "source_datasets": [
         "cnn",
         "npr"
@@ -267,7 +267,7 @@
       "id": 5311,
       "finding_type": "intelligence",
       "summary": "Told FBI staff to ignore Elon Musk/DOGE demand for employee work justification; FBI-DOGE tension",
-      "detail": "Patel sent a message to all FBI employees asking them not to respond to the OPM/DOGE email demanding federal employees justify their work until the FBI had coordinated a response. This indicated tension between Patel's FBI and Musk's DOGE cost-cutting apparatus. However, Patel has also been associated with DOGE-aligned personnel actions \u2014 the FBI has seen significant workforce reductions under his tenure, with the National Security Division losing at least half its staff across many offices.",
+      "detail": "Patel sent a message to all FBI employees asking them not to respond to the OPM/DOGE email demanding federal employees justify their work until the FBI had coordinated a response. This indicated tension between Patel's FBI and Musk's DOGE cost-cutting apparatus. However, Patel has also been associated with DOGE-aligned personnel actions — the FBI has seen significant workforce reductions under his tenure, with the National Security Division losing at least half its staff across many offices.",
       "source_datasets": [
         "newsweek"
       ],
@@ -798,5 +798,328 @@
     }
   ],
   "entities": [],
-  "timeline": []
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      5297,
+      5318,
+      5845,
+      5292,
+      5849,
+      5308,
+      5313,
+      5316,
+      5306,
+      5329,
+      5342,
+      5326
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          5326
+        ],
+        "connection_ids": [
+          2945,
+          3060,
+          3335,
+          2946
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          5292,
+          5294,
+          5297,
+          5299,
+          5302,
+          5318,
+          5324,
+          5845,
+          5847,
+          5848
+        ],
+        "connection_ids": [
+          3060
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          5308,
+          5313,
+          5316,
+          5321,
+          5846,
+          5849
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          5306,
+          5311,
+          5329,
+          5342
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-03-11T22:14:59.237960+00:00",
+    "lead": "<p>Kashyap \"Kash\" Patel is the Director of the Federal Bureau of Investigation, confirmed on February 20, 2025, after a career that moved from public defender to national security prosecutor to congressional staffer to senior intelligence official to political media figure to law enforcement chief [Finding #5342]. His trajectory through the national security apparatus -- aide to Rep. Devin Nunes on the House Intelligence Committee, NSC Senior Director for Counterterrorism, Principal Deputy Director of National Intelligence, and Chief of Staff to Acting Secretary of Defense Christopher Miller -- was driven less by institutional seniority than by demonstrated loyalty during successive political confrontations [Finding #5326].</p><p>Between government tours, Patel built a consulting and media portfolio through Trishul LLC that generated over $2.1 million from national security clients including the Embassy of Qatar, a Czech arms conglomerate, and the Cayman Islands parent company of Chinese fast-fashion brand Shein [Finding #5292]. He authored \"Government Gangsters,\" a book whose appendix listing sixty former officials has functioned as a de facto targeting document now that Patel controls FBI investigative resources [Finding #5329].</p><p>Patel's directorship is structurally significant because it places a political operator with active financial entanglements -- retained Shein stock, unregistered Qatar consulting, and recent Trump Media board compensation -- at the helm of the agency responsible for counterintelligence, counterterrorism, and federal criminal investigation, while simultaneously conducting mass firings of career staff involved in cases that touched his political patron [Finding #5306].</p>",
+    "system_role": "Patel represents the conversion of political loyalty into law enforcement authority: a figure whose career was built on defending executive power against institutional oversight, who monetized that political capital through foreign and defense consulting, and who now controls the investigative apparatus he once sought to discredit -- with unresolved financial ties to the foreign governments and defense entities the FBI is charged with monitoring.",
+    "sections": [
+      {
+        "id": "career-arc",
+        "title": "Career Arc: Loyalty as Career Engine",
+        "content": "<p>Patel's career is best understood not as a conventional law enforcement biography but as a sequence of loyalty-driven placements. Born February 25, 1980 in Garden City, New York, he attended the University of Richmond, University College London, and Pace Law School [Finding #5342]. He began as a public defender, transitioned to DOJ as a national security prosecutor, and then made the move that defined his trajectory: joining the House Permanent Select Committee on Intelligence as an aide to Chairman Devin Nunes.</p><p>On the HPSCI staff, Patel was the principal author of what became known as the Nunes Memo, which alleged FBI surveillance abuses related to the Trump campaign. This work positioned him as a combatant against the intelligence community establishment and earned him a series of rapid promotions: NSC Senior Director for Counterterrorism, Senior Advisor at the Office of the Director of National Intelligence, Principal Deputy DNI under John Ratcliffe in 2020, and finally Chief of Staff to Acting Secretary of Defense Christopher Miller [Finding #5342]. Each role was a reward for political combat rather than institutional expertise, a pattern that continued through his fellowship at the <a href=\"/dossiers/conservative-partnership-institute\">Center for Renewing America</a> alongside Russ Vought and Jeffrey Clark [Finding #5326].</p><p>The CRA fellowship was not merely a holding pattern. The organization served as a staging ground for Trump second-term appointments: at least five CRA fellows or leaders were placed into administration positions, including Vought as OMB Director, Clark as acting OIRA Administrator, <a href=\"/dossiers/mark-paoletta\">Mark Paoletta</a> as OMB General Counsel, Adam Candeub as FCC General Counsel, and Patel as FBI Director [Finding #6626]. CRA also authored at least three Project 2025 chapters, making the fellowship a credentialing mechanism for the next administration's personnel pipeline.</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "financial-entanglements",
+        "title": "Financial Entanglements and Conflicts of Interest",
+        "content": "<p>Patel's financial disclosure reveals a net worth between $4.1 million and $14.6 million, built primarily through consulting via Trishul LLC and media ventures [Finding #5845]. The consulting client list is a catalog of conflict-of-interest concerns for the FBI Director. Trishul LLC provided services to the Embassy of Qatar until November 2024, generating income that was not accompanied by Foreign Agents Registration Act filings; Public Citizen filed a formal complaint with the DOJ FARA Unit in February 2025 [Finding #5846]. Other Trishul clients included CSGM, a branch of Czechoslovak Group, a Czech arms conglomerate that was simultaneously pursuing acquisition of Vista Outdoor, the maker of Federal and Remington ammunition [Finding #5299]. Then-Senator JD Vance accused CSG of ties to Putin's inner circle during that transaction.</p><p>The most structurally significant holding is $1 million to $5 million in unvested stock in Elite Depot Ltd, the Cayman Islands parent of Chinese fast-fashion company Shein, received as consulting compensation from April 2024 to January 2025 [Finding #5294]. Patel declined to divest, citing an Office of Government Ethics determination that his FBI duties were unlikely to involve Elite Depot directly [Finding #5847]. This reasoning is difficult to reconcile with the FBI's aggressive public posture on Chinese national security threats, its counterintelligence mandate regarding Chinese corporate espionage, and bipartisan scrutiny of Shein's forced labor supply chain.</p><p>Additional financial positions included a board seat at Trump Media &amp; Technology Group, where he received 25,946 restricted DJT shares worth approximately $779,400 in January 2025 -- weeks before his confirmation hearing [Finding #5302]. Patel stated he did not and would not accept the shares, and he resigned from the board on his confirmation day. His stock portfolio also included positions in NVIDIA (up to $250,000), Core Scientific (Bitcoin mining, up to $250,000), and VK Integrated Systems (tactical gear, up to $250,000), plus a Bitcoin ETF holding [Finding #5324]. Additional income streams included $544,000 from Trump campaign work and six-figure royalties from \"Government Gangsters\" and a children's book series [Finding #5324]. He held a <a href=\"/dossiers/palantir-technologies\">Palantir</a> stock position of $50,000-$100,000 that he sold prior to confirmation [Finding #5845].</p>",
+        "viz": null
+      },
+      {
+        "id": "qatar-nexus",
+        "title": "The Qatar Relationship",
+        "content": "<p>The Qatar consulting arrangement merits separate analysis because it illustrates the full lifecycle of a conflict of interest. Patel's firm Trishul LLC was hired by the Embassy of Qatar without FARA registration [Finding #5846]. Upon nomination, Patel pledged a one-year recusal from Qatar-related FBI matters. In March 2025, he received an ethics waiver from the FBI Designated Agency Ethics Official permitting engagement on Qatar issues [Finding #5297]. When the recusal expired in November 2025, Patel traveled to Doha in December 2025 and signed two memorandums of understanding with Qatar on security cooperation, training, information exchange, and capacity-building [Finding #5297].</p><p>The sequence is notable: paid consulting with no FARA disclosure, a brief recusal, an ethics waiver that undermined the recusal, and then direct bilateral security agreements with the former client -- all within thirteen months. Public Citizen's FARA complaint remains unresolved. The FBI Director now handles FBI files related to Qatar while maintaining relationships cultivated as a private consultant to that government.</p>",
+        "viz": null
+      },
+      {
+        "id": "kash-foundation",
+        "title": "The Kash Foundation and Brand Infrastructure",
+        "content": "<p>The Kash Foundation Inc (EIN 88-1807315), a 501(c)(3) registered at 717 King Street, Suite 200, Alexandria, Virginia, experienced a revenue surge from $182,256 in 2022 to $1,340,767 in 2023 [Finding #5318]. The foundation claims to support veterans, service members, and law enforcement, but its spending pattern raises questions. Of the funds raised, only $212,821 went to the stated mission. The foundation held $850,000 in reserve and spent $332,000 on advertising, of which $275,475 flowed to One and Oh LLC, a company founded by the foundation's own vice president [Finding #5848]. Patel separately disclosed consulting income from One and Oh LLC on his financial disclosure form.</p><p>LittleSis identifies linked aliases including 'FightWithKash,' 'Kash Patel Legal Offense Trust,' and 'Legal Offense Trust,' suggesting a broader brand infrastructure that blurs the lines between nonprofit mission, political fundraising, and personal merchandise revenue through Based Apparel, which Patel managed from July 2022 to December 2024 [Finding #5318] [Finding #5845]. Patel resigned all foundation roles prior to FBI confirmation.</p>",
+        "viz": null
+      },
+      {
+        "id": "fbi-directorship",
+        "title": "FBI Directorship: Institutional Transformation",
+        "content": "<p>Patel's tenure as FBI Director has been defined by personnel purges targeting agents involved in investigations of former President Trump. In late February and early March 2026, he fired approximately a dozen agents and staff from the CI-12 counterintelligence unit in Washington, DC -- the unit responsible for classified document cases, foreign spy tracking, and Iranian threat monitoring [Finding #5306]. All dismissed agents had been involved in the Trump Mar-a-Lago classified documents investigation. The firings came days before US military strikes on Iran, prompting a source to describe the impact as 'devastating to the FBI Iran program.' The FBI Agents Association condemned the firings as unlawful terminations violating due process rights [Finding #5306].</p><p>Three former senior FBI officials -- Brian Driscoll (former acting FBI Director), Steven Jensen (former assistant director, Washington field office), and Spencer Evans (Las Vegas field office chief) -- sued Patel and the Trump administration in September 2025, alleging that Patel told Driscoll his 'bosses had directed him to fire anyone who they identified as having worked on a criminal investigation against President Donald J. Trump' [Finding #5308]. The lawsuit identifies a pattern: in four key instances, Patel fired FBI agents within hours or days of unflattering news coverage about himself, including firing a 27-year veteran who headed the unit overseeing FBI jet fleet operations after reports about Patel's personal use of government aircraft [Finding #5308].</p><p>Patel's book \"Government Gangsters\" contained an appendix listing sixty names of former executive branch officials, widely interpreted as an enemies list. As FBI Director, people on that list have faced investigations and criminal charges, including a two-count federal criminal indictment of former FBI Director James Comey [Finding #5329]. Patel also severed the FBI's longstanding partnership with the Anti-Defamation League, stating: 'This FBI won't partner with political fronts masquerading as watchdogs' [Finding #5329]. His relationship with <a href=\"/dossiers/elon-musk\">Elon Musk</a>'s <a href=\"/dossiers/doge\">DOGE</a> has been complex: he instructed FBI employees to ignore OPM/DOGE demands for work justifications, but the FBI has nonetheless seen dramatic workforce reductions, with the National Security Division losing at least half its staff across many offices [Finding #5311].</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "legal-proceedings",
+        "title": "Legal Proceedings",
+        "content": "<p>Patel has been involved in legal proceedings on multiple sides. In October 2022, he appeared before a DC grand jury investigating Trump's retention of classified documents at Mar-a-Lago. He invoked the Fifth Amendment in his first appearance; prosecutors secured his testimony in November by granting immunity. Chief Judge Boasberg of the DC District Court harshly criticized Patel's efforts to avoid the subpoena as 'bordering on the contemptuous' and 'unacceptable' (In Re Kashyap Patel, 1:25-mc-00007, DDC) [Finding #5316].</p><p>As a litigant, Patel filed a $25 million defamation suit against Politico and reporter Natasha Bertrand in November 2019 (Patel v. Politico LLC, 3:19-cv-00879, EDVA), alleging collusion with Rep. Adam Schiff to defame him over his role in the Ukraine affair [Finding #5321]. The case was effectively dropped when Patel's attorneys moved to dismiss in 2021. In June 2025, now as FBI Director, he filed a defamation suit against former FBI Assistant Director Frank Figliuzzi over MSNBC comments (Patel v. Figliuzzi, 4:25-cv-02548, SDTX) [Finding #5321].</p><p>In his official capacity, Patel faces multiple federal lawsuits. The Driscoll-Jensen-Evans suit alleging retaliatory firings [Finding #5308] is joined by John Doe v. Kash Patel (25-2028, 4th Circuit, filed September 2025) and Tremel Rosser v. Kash Patel (25-2288, 4th Circuit), among others [Finding #5849]. The Campaign Legal Center filed a complaint with the DOJ Inspector General in March 2026 regarding at least ten personal trips on government aircraft without reimbursement, including travel to Milan during the 2026 Winter Olympics to watch the US men's hockey team [Finding #5313]. CREW filed a separate complaint on the Olympics trip.</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships and Network Position",
+        "content": "<p>Patel's network position sits at the intersection of the Trump political apparatus, the conservative policy infrastructure, and the national security establishment. His most structurally significant institutional relationship is with the Center for Renewing America, founded by Russ Vought, which served as a staging ground for at least five Trump second-term appointments [Finding #6626]. Through CRA, Patel connects to <a href=\"/dossiers/conservative-partnership-institute\">Conservative Partnership Institute</a>, which created and funded CRA with $583,000 in direct grants plus over $1 million to its c3 arm, and which shares board members and an address with CRA.</p><p>His relationship with <a href=\"/dossiers/elon-musk\">Elon Musk</a> is characterized by institutional friction rather than alignment: Patel publicly resisted DOGE's attempts to compel FBI employee compliance, even as the broader administration embraced DOGE-driven workforce reduction [Finding #5311]. LittleSis maps additional network connections to Charlie Kirk (Turning Point USA), Abraham Hamadeh, attorneys Jesse Binnall and Stanley Woodward, and media figure Stew Peters [Finding #5326]. His connection to <a href=\"/dossiers/corey-lewandowski\">Corey Lewandowski</a>, now de facto chief of staff at DHS, is mediated through shared Trump loyalty rather than direct business ties [Connection #2923].</p><p>Patel also maintained positions at Save America PAC (Trump's leadership PAC) and as a content creator at The Epoch Times, a media outlet aligned with the Falun Gong movement [Finding #5326]. The combined profile -- PAC work, partisan media, consulting for foreign governments, defense industry clients, and a personal brand infrastructure -- describes a figure who monetized political loyalty across every available channel before assuming control of federal law enforcement.</p>",
+        "viz": "ego_network"
+      }
+    ],
+    "open_questions": [
+      "What specific consulting services did Trishul LLC provide to the Embassy of Qatar, and do any of those services overlap with matters now handled by the FBI under Patel's directorship?",
+      "What is the current disposition of Patel's $1M-$5M Elite Depot/Shein stock, and has any FBI investigation or counterintelligence assessment involved Shein or its parent entities since his confirmation?",
+      "What role, if any, did Patel play in the approval or direction of the FBI's cooperation agreements with Qatar signed in December 2025, and who at the White House or State Department authorized the engagement?",
+      "What is the full accounting of personal travel on government aircraft during Patel's tenure, and has any reimbursement been made for the trips identified in the CLC complaint?",
+      "How many total FBI personnel have been terminated or resigned under Patel's directorship, and what is the aggregate impact on active counterintelligence, counterterrorism, and criminal caseloads?"
+    ],
+    "applicable_models": [
+      "enabler-gradient",
+      "narrative-shield",
+      "bridge-tax",
+      "jurisdictional-arbitrage"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Kash Patel",
+      "connections": [
+        {
+          "target": "Russ Vought",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": "LittleSis entity 357517",
+          "description": "Both connected to Center for Renewing America: Vought as founder, Patel as Senior Fellow for National Security and Intelligence"
+        },
+        {
+          "target": "Qatar",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "PBS; Public Citizen FARA complaint",
+          "description": "Patel consulted for Embassy of Qatar via Trishul LLC until Nov 2024 without FARA registration; now FBI Director with access to Qatar files"
+        },
+        {
+          "target": "Center for Renewing America",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "FBI.gov Director Patel page",
+          "description": "Patel served as CRA Senior Fellow for National Security, became FBI Director Feb 2025"
+        },
+        {
+          "target": "Elon Musk",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": "LittleSis",
+          "description": "FBI-DOGE tension: Patel told FBI staff to ignore Musk's DOGE demand. LittleSis notes generic relationship between them."
+        },
+        {
+          "target": "Corey Lewandowski",
+          "type": "political",
+          "strength": 0.4,
+          "evidence_ref": null,
+          "description": "Both serve in Trump 2nd administration: Lewandowski as DHS SGE/de facto chief of staff, Patel as FBI Director. Both face congressional scrutiny. Both are Trump loyalists placed in security/law enforcement positions. No direct business relationship found."
+        }
+      ],
+      "secondHop": {
+        "Center for Renewing America": [
+          {
+            "target": "Conservative Partnership Institute",
+            "type": "funds",
+            "strength": 1.0,
+            "description": "CPI created and funded CRA: 583K direct grant plus 1M+ to c3 arm (Center for American Restoration) in 2021. Shared address at 300 Independence Ave SE DC. Board overlap: Denton and Corrigan serve on both boards. CRA files tax docs in care of CPI."
+          },
+          {
+            "target": "Russ Vought",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Vought founded CRA in 2021, served as President with 536K compensation (from related org), left for OMB Director position Feb 2025"
+          },
+          {
+            "target": "Jeffrey Clark",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Clark served as CRA Senior Fellow and Director of Litigation with 219K compensation, left for acting OIRA Administrator March 2025, resigned March 2026"
+          },
+          {
+            "target": "Mark Paoletta",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Paoletta served as CRA Senior Fellow, became OMB General Counsel, also partner at Schaerr Jaffe, received money from Leonard Leo for Thomas defense"
+          },
+          {
+            "target": "Adam Candeub",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Candeub served as CRA Senior Fellow, became FCC General Counsel Feb 2025, authored Project 2025 FTC chapter"
+          }
+        ],
+        "Corey Lewandowski": [
+          {
+            "target": "Rudy Giuliani",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Both in J6 Committee records (WH switchboard Jan 2-3 2021). Both appointed DHS HSAC 2025. Co-appear in 93 GovInfo docs spanning Mueller Report, impeachment, J6."
+          },
+          {
+            "target": "Ed Brookover",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Brookover was lobbyist at Avenue Strategies 2017-2020. Also Trump 2016 campaign advisor/delegate coordinator."
+          },
+          {
+            "target": "Mary Coen",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Coen was lobbyist at Avenue Strategies 2018-2019. Former Director NSC, Deputy Assistant USTR for SE Asia and Congressional Affairs. Highest national security credential in the firm."
+          },
+          {
+            "target": "Jason Osborne",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Osborne was lobbyist at Avenue Strategies in 2017. Key Trump campaign insider, later involved in cryptocurrency lobbying."
+          },
+          {
+            "target": "Matt Mowers",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Lewandowski donated  to Mowers for Congress (2020-2021). Mowers was Lewandowski protege, Trump NH primary director, congressional candidate."
+          }
+        ],
+        "Elon Musk": [
+          {
+            "target": "Peter Thiel",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
+          },
+          {
+            "target": "Peter Thiel",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
+          },
+          {
+            "target": "Jared Birchall",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
+          },
+          {
+            "target": "Steve Davis",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
+          }
+        ],
+        "Russ Vought": [
+          {
+            "target": "Stephen Miller",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Vought was AFL board treasurer, now OMB Director. Both involved in Project 2025. Vought controls federal spending (including DHS/ICE budgets) while Miller controls immigration policy."
+          },
+          {
+            "target": "America First Legal Foundation",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "AFL board treasurer (unpaid). Also founded Center for Renewing America. Now OMB Director controlling federal spending while having served on AFL board."
+          },
+          {
+            "target": "Jeffrey Clark",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Both at CRA before entering govt; CRA funded Election Integrity Network"
+          },
+          {
+            "target": "Ken Cuccinelli",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Cuccinelli is Senior Fellow at Vought's Center for Renewing America; both Project 2025 authors; CRA staging ground for election enforcement personnel"
+          }
+        ],
+        "Qatar": [
+          {
+            "target": "David Stern",
+            "type": "advisory",
+            "strength": 0.7,
+            "description": ""
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
 }

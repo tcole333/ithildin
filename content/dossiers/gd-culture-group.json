@@ -482,7 +482,7 @@
       "id": 5032,
       "finding_type": "financial",
       "summary": "GDC acquired Pallas Capital Holding (BVI) with 7,500 Bitcoin (M) via all-share deal",
-      "detail": "On Sep 10, 2025, GDC entered share exchange agreement to acquire 100% of Pallas Capital Holding Ltd (BVI company) for 39,189,344 shares of GDC common stock. Pallas Capital held 7,500 Bitcoin valued at approximately .8M. This positioned GDC among top 15 publicly traded companies by Bitcoin reserves. Shares fell 28% on announcement. Pallas Capital's beneficial owners not disclosed in SEC filings \u2014 a BVI shell acquiring massive BTC reserves then merging into a near-zero-revenue Nasdaq-listed entity raises significant questions about the source and custody of these Bitcoin.",
+      "detail": "On Sep 10, 2025, GDC entered share exchange agreement to acquire 100% of Pallas Capital Holding Ltd (BVI company) for 39,189,344 shares of GDC common stock. Pallas Capital held 7,500 Bitcoin valued at approximately .8M. This positioned GDC among top 15 publicly traded companies by Bitcoin reserves. Shares fell 28% on announcement. Pallas Capital's beneficial owners not disclosed in SEC filings — a BVI shell acquiring massive BTC reserves then merging into a near-zero-revenue Nasdaq-listed entity raises significant questions about the source and custody of these Bitcoin.",
       "source_datasets": [
         "edgar"
       ],
@@ -852,5 +852,306 @@
     }
   ],
   "entities": [],
-  "timeline": []
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      4203,
+      4194,
+      4234,
+      4014,
+      4162,
+      4207,
+      4161,
+      4233,
+      4210,
+      4016,
+      5035,
+      4019
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          2362,
+          2363,
+          2364,
+          2365,
+          2470,
+          2544,
+          2523,
+          2492,
+          2493,
+          2494,
+          2496,
+          2495
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      },
+      {
+        "id": "financial-activity",
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          4014,
+          4017,
+          4021,
+          4122,
+          4203,
+          4234,
+          4159,
+          4160,
+          4162,
+          5029
+        ],
+        "connection_ids": [
+          2362,
+          2363,
+          2365,
+          2523,
+          2493,
+          2494,
+          2496,
+          2495
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          4019,
+          4210,
+          5035
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-03-11T22:10:57.835373",
+    "lead": "<p>GD Culture Group (Nasdaq: GDC) is a Nevada-incorporated, Nasdaq-listed company that has undergone four name changes since its 2015 founding as a blank-check SPAC: JM Global Holdings, TMSR Holding, Code Chain New Continent, and finally GD Culture Group in January 2023. [Finding #4194] As of fiscal year 2024, the company had eight employees, zero revenue, a net loss of $14.1 million, and stockholders' equity of $2,643, and had received a Nasdaq non-compliance notification for failing minimum equity requirements. [Finding #4021] Its board and officers are entirely Chinese nationals, its CEO Xiaojian Wang owns no shares, and its Chinese subsidiary Shanghai Xianzhui Technology acknowledged in SEC filings that its operations could be influenced by the Chinese government. [Finding #4207]</p><p>In May 2025, GDC announced a $300 million Common Stock Purchase Agreement with Vista Frontier Investments Limited, a British Virgin Islands LLC whose beneficial owners remain undisclosed, to fund purchases of Bitcoin and the OFFICIAL TRUMP meme coin. [Finding #4203] The company simultaneously increased its authorized shares from 200 million to 10 billion, a fifty-fold expansion. [Finding #5055] Four months later, GDC acquired Pallas Capital Holding Ltd, another BVI entity, obtaining 7,500 Bitcoin (then valued at approximately $877 million) in exchange for 39.2 million newly issued shares, a transaction in which both Pallas directors were pre-existing GDC shareholders. [Finding #4159] By February 2026, the Bitcoin holdings had declined in value to approximately $497 million, an unrealized loss of $344 million. [Finding #4017]</p><p>GDC represents a near-empty public shell through which over $1.2 billion in value transfers were executed in under five months, all routed through opaque BVI entities with undisclosed beneficial ownership, and explicitly directed toward acquisition of cryptocurrency assets linked to the sitting U.S. president. [Finding #4203] The systematic use of offshore opacity across every major counterparty -- the funding source, the Bitcoin acquisition vehicle, and the majority of Pallas Capital sellers -- obscures who ultimately controls the capital flowing through GDC into Trump-family crypto assets. [Finding #4019]</p>",
+    "system_role": "GD Culture Group functions as a near-empty Nasdaq-listed shell company, controlled by Chinese nationals through opaque offshore structures, that pivoted to serving as a vehicle for channeling undisclosed capital into Bitcoin and Trump-linked cryptocurrency tokens while evading beneficial ownership disclosure requirements through systematic use of BVI intermediaries.",
+    "sections": [
+      {
+        "id": "corporate-history-and-shell-structure",
+        "title": "Corporate History and Shell Structure",
+        "content": "<p>GDC began as JM Global Holding Company, a blank-check SPAC incorporated in Delaware in April 2015 with an IPO target of $50 million. [Finding #4194] It subsequently underwent three name changes: to TMSR Holding Company Limited (after a reverse merger with a Chinese recycling company), then to Code Chain New Continent Limited in May 2020, and finally to GD Culture Group Limited in January 2023. [Finding #4016] The company's SEC filings retain SIC code 5050 (Wholesale Metals/Minerals), a vestige of its TMSR-era iron ore processing operations that bears no relation to its current stated business in AI, livestreaming, and cryptocurrency. [Finding #4122]</p><p>As of its FY2024 10-K filing, GDC reported net losses of $26.97 million (2021), $30.82 million (2022), $12.52 million (2023), and $13.84 million (2024), with revenue effectively at zero across the entire period. [Finding #4021] Stockholders' equity collapsed to $2,643 by December 31, 2024. [Finding #4021] The company received a Nasdaq non-compliance notification on March 20, 2025, for failing Rule 5550(b)(1)'s minimum $2.5 million equity requirement. [Finding #4021] Despite these fundamentals, the company proceeded to execute over $1.2 billion in value transfers in under five months in 2025, all through BVI entities and related parties. [Finding #4203]</p><p>CEO Xiaojian Wang (age 36), who was appointed in April 2023 and formerly worked as an interbank trader at China Minsheng Bank, owns zero shares. [Finding #4161] CFO Zihao Zhao (age 30), formerly a PwC Shanghai auditor, likewise owns no equity. [Finding #4207] All independent directors are Chinese nationals with China-based careers, and none hold shares. [Finding #4207] The company operates a Chinese subsidiary, Shanghai Xianzhui Technology Co. Ltd., which disclosed in SEC filings that its business \"could be influenced by the Chinese government.\" [Finding #4016]</p>",
+        "viz": null
+      },
+      {
+        "id": "bvi-funding-and-crypto-treasury",
+        "title": "BVI Funding Architecture and Crypto Treasury",
+        "content": "<p>On May 11, 2025, GDC entered a $300 million Common Stock Purchase Agreement with an entity initially identified only as \"an accredited investor, a British Virgin Islands limited liability company,\" with the investor's name redacted as \"[_____]\" in the SEC filing. [Finding #4014] A subsequent DEF 14C filing identified this entity as Vista Frontier Investments Limited. [Finding #5053] The purchase price was set at 90% of the lowest five-day volume-weighted average price, with a floor of $0.44 per share. [Finding #4203] The stated purpose of the proceeds was to invest in Bitcoin and the OFFICIAL TRUMP meme coin. [Finding #4014]</p><p>To accommodate the deal, GDC's board and majority stockholders authorized an increase in common shares from 200 million to 10 billion and preferred shares from 20 million to 1 billion, a combined fifty-fold expansion of authorized capital. [Finding #5055] Pre-deal outstanding shares stood at only 16,795,433. [Finding #5055] This was followed in September 2025 by the acquisition of Pallas Capital Holding Ltd, a BVI company incorporated on June 30, 2025, with no operations other than holding Bitcoin. [Finding #4159] GDC issued 39,189,344 new shares (a 233% dilution of prior outstanding stock) to acquire Pallas's 7,500 BTC, then valued at approximately $877 million. [Finding #5032] The share count exploded from roughly 10 million at FY2024 to 57.3 million by December 2025, representing 473% dilution in under one year. [Finding #4021]</p><p>The Pallas transaction was a related-party deal: directors Yan Wang (who owned 4.12% of GDC pre-transaction) and Qing Wang (7.28%) held voting and dispositive power over Pallas. [Finding #4159] Each received 9,542,605 GDC shares (approximately 16.6% of post-deal shares), yet neither filed the required SC 13D beneficial ownership disclosure. [Finding #4233] Eight of the ten Pallas Capital sellers were anonymous BVI shells -- WEALTHY CONCORD, East Valley Technology, Ocean Harbor Technology, WIN SUPERB INTERNATIONAL, DIVINE SKY INTERNATIONAL, FORTUNE LIGHT ENTERPRISES, PERFECT LINKAGE, and PRIMAL CRYSTAL -- none of which have any identifiable digital footprint. [Finding #4019] By February 2026, the 7,500 BTC were worth approximately $497 million, an unrealized loss of approximately $344 million (41% decline), and the board authorized BTC sales to fund a $100 million share repurchase program. [Finding #4017] The company also changed auditors from HTL International to GGF CPA LTD on January 29, 2026, with a going concern opinion noted. [Finding #4017]</p>",
+        "viz": null
+      },
+      {
+        "id": "beneficial-ownership-opacity",
+        "title": "Beneficial Ownership and Disclosure Gaps",
+        "content": "<p>The 5% beneficial ownership table in the September 2025 DEF 14C filing reveals a concentrated ownership structure dominated by Chinese nationals and opaque offshore vehicles: Jiang Liu (9.29%), Gongzheng Xu (7.28%), Qing Wang (7.28%), ABOUT INVESTMENT PTE LTD (6.92%, a Singapore entity with sole director Li Jiaming at 1 Shenton Way), and VINER TOTAL INVESTMENTS FUND (6.64%, a Hong Kong fund whose general partner is Apollo Asset Management Ltd at 141 Des Voeux Road Central, Hong Kong). [Finding #4162] All of these holdings were acquired in 2025; the December 2024 10-K showed zero 5% holders. [Finding #4162]</p><p>The pattern of disclosure avoidance is systematic. The December 2025 proxy (DEF 14A) reports \"None\" for 5% holders despite the September filing showing multiple holders above that threshold and the Pallas share issuance creating several more. [Finding #4233] Gongzheng Xu and Qing Wang sold unspecified software called \"NexusChat\" to GDC for $5.77 million payable in 2.44 million shares at $2.36 per share on April 28-29, 2025, thirteen days before the $300 million Vista Frontier agreement. [Finding #4160] Despite being described as \"sellers unaffiliated with the Company\" in the 8-K, both subsequently appeared as Pallas-related shareholders, and the NexusChat purchase conveniently established their beneficial ownership positions just ahead of the major capital raise. [Finding #4160]</p><p>GDC's sole placement agent for all capital raises from 2023 through 2025 was Univest Securities LLC (CRD 36105), a firm previously sanctioned by FINRA for anti-money laundering failures involving millions of shares of low-priced securities. [Finding #4210] Univest served as placement agent for the $2.8 million private placement in October 2025. [Finding #4210] The combination of a FINRA-sanctioned placement agent, serially renamed shell company, anonymous BVI counterparties, and systematic avoidance of beneficial ownership disclosure requirements creates layered opacity around the question of who ultimately benefits from capital flowing through GDC. [Finding #4210]</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "trump-crypto-nexus",
+        "title": "Connection to Trump Cryptocurrency Ecosystem",
+        "content": "<p>GDC's May 2025 pivot to cryptocurrency treasury operations occurred within the broader context of the Trump family's expanding crypto ventures. The company's stated business purpose of purchasing the OFFICIAL TRUMP meme coin directly links it to the president's personal financial interests. [Finding #4014] The TRUMP meme coin launched on January 17, 2025, three days before the inauguration, and became one of the most politically consequential cryptocurrency tokens, with holders invited to dine with the president at a May 22, 2025 gala. [Finding #5444]</p><p>GDC's crypto pivot also coincided with a period of dramatic SEC regulatory retreat. Between January 20 and March 27, 2025, the SEC dropped or paused ten cryptocurrency enforcement cases in seventy days, including the case against Justin Sun, the largest known TRUMP token holder, who had spent over $40 million on the meme coin and invested $75 million in <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a>. [Finding #6515] The SEC Crypto Task Force was announced January 23, 2025, and new Chairman Paul Atkins, who held $6 million in crypto assets, was sworn in April 21. [Finding #6515] This regulatory environment created conditions in which a shell company with no revenue could announce a $300 million cryptocurrency acquisition plan without attracting enforcement scrutiny. [Finding #4210]</p><p>Despite the announced intent to purchase TRUMP tokens, no on-chain wallet addresses have been publicly disclosed or identified for GDC's cryptocurrency holdings. [Finding #5035] SEC filings do not contain wallet addresses, and GDC did not appear among the TRUMP dinner top-220 holder leaderboard. [Finding #5035] The Pallas Capital BTC custody arrangements and proof-of-reserves have not been independently verified. [Finding #5035] Whether GDC actually purchased TRUMP tokens or merely announced the intent remains unconfirmed. [Finding #5035]</p>",
+        "viz": null
+      },
+      {
+        "id": "analytical-red-flags",
+        "title": "Analytical Assessment",
+        "content": "<p>Investigators have identified at least ten distinct red flags in GDC's structure and operations: four name changes in ten years; a CEO who owns zero shares; officers and directors who are entirely Chinese nationals with a median age of 35; a FINRA-sanctioned placement agent; a related-party structure in which Pallas Capital sellers already held GDC shares before the acquisition; the NexusChat software purchase that established beneficial ownership positions days before the Vista Frontier deal; a fifty-fold increase in authorized shares to 10 billion; eight of ten Pallas sellers being anonymous BVI entities; the stated business purpose of investing in a presidential meme coin; and a stock price decline of 70% from the September 2025 peak. [Finding #4210]</p><p>The systematic use of BVI opacity across every major counterparty -- Vista Frontier as funding source, Pallas Capital as the Bitcoin acquisition vehicle, and the eight anonymous BVI shells as Pallas sellers -- creates a structure in which beneficial ownership of capital ultimately flowing into Trump-family cryptocurrency assets is obscured at every step. [Finding #4019] The sequential timing of the NexusChat acquisition (April 28, establishing ownership stakes), the Vista Frontier agreement (May 11, raising $300 million), and the Pallas acquisition (September 10, adding $877 million in Bitcoin) suggests coordinated offshore structuring rather than opportunistic dealmaking. [Finding #4019] The absence of SC 13D filings from shareholders who clearly exceeded the 5% threshold, and the contradictory December 2025 proxy listing \"None\" for 5% holders, represents a pattern of disclosure avoidance that warrants regulatory attention. [Finding #4233]</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "Who are the ultimate beneficial owners of Vista Frontier Investments Limited (BVI) and the eight anonymous BVI shell companies that sold their Pallas Capital stakes, and do any have connections to Chinese state-owned enterprises, sovereign wealth funds, or politically exposed persons?",
+      "Why did the December 2025 DEF 14A proxy report 'None' for 5% beneficial owners when both the September 2025 DEF 14C and the Pallas share issuance created multiple holders above that threshold, and has the SEC opened any inquiry into the missing SC 13D filings?",
+      "Did GDC actually purchase OFFICIAL TRUMP tokens as announced, and if so, what on-chain wallet addresses hold those tokens, what custody arrangements govern them, and has any independent proof-of-reserves audit been conducted for either the Bitcoin or TRUMP token holdings?",
+      "What is the relationship, if any, between GDC's Chinese ownership network (Jiang Liu, Gongzheng Xu, Qing Wang, ABOUT INVESTMENT PTE LTD, VINER TOTAL INVESTMENTS FUND) and the Chinese state entities acknowledged as potentially influencing GDC subsidiary Shanghai Xianzhui Technology?",
+      "What due diligence did Nasdaq perform on GDC's $300 million Vista Frontier deal and $877 million Pallas Capital acquisition given the company's zero revenue, eight employees, and active non-compliance status at the time these transactions were announced?"
+    ],
+    "applicable_models": [
+      "jurisdictional-arbitrage",
+      "complexity-as-credential",
+      "parallel-financial-system",
+      "bridge-tax"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "GD Culture Group",
+      "connections": [
+        {
+          "target": "TRUMP Meme Coin",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SEC 8-K filing CIK 1641398; GlobeNewswire May 2025",
+          "description": "GDC announced 300M commitment to purchase Bitcoin and OFFICIAL TRUMP meme coin via Common Stock Purchase Agreement with unnamed BVI investor, May 11, 2025"
+        },
+        {
+          "target": "Pallas Capital Holding Ltd",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "GDC acquired 100% of BVI-registered Pallas Capital for 39.2M shares in related party transaction. Pallas held 7,500 BTC. Directors Yan Wang and Qing Wang had voting control and pre-existing GDC ownership."
+        },
+        {
+          "target": "Xiaojian Wang",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "SEC DEF 14C 0001213900-25-093119",
+          "description": "CEO, President, Chairman since Apr 2023. Former China Minsheng Bank trader. Signs all material 8-K filings. Controls company crypto treasury strategy."
+        },
+        {
+          "target": "Shanghai Xianzhui Technology",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Chinese subsidiary; company admitted in SEC filings that Shanghai Xianzhui business could be influenced by the Chinese government"
+        },
+        {
+          "target": "Pallas Capital Holding Ltd",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "SEC 8-K; GlobeNewswire Sep 16, 2025",
+          "description": "GDC acquired 100% of Pallas Capital (BVI) in Sep 2025 share exchange for 39.2M shares. Pallas held 7,500 BTC. Pallas is the second BVI entity in GDCs crypto pivot. Beneficial ownership of Pallas prior to acquisition undisclosed."
+        },
+        {
+          "target": "Pallas Capital Holding",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "EDGAR 8-K Sep 16 2025",
+          "description": "Share exchange acquisition closed Sep 29 2025: 39.19M shares for 7500 BTC. Sellers Yan Wang and Qing Wang became major shareholders but no 13D filings made"
+        },
+        {
+          "target": "Univest Securities",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "SEC 8-K 0001213900-25-103498",
+          "description": "Univest Securities LLC acted as placement agent for GDC 2.8M private placement Oct 2025. Univest previously sanctioned by FINRA for AML failures involving millions of shares of low-priced securities."
+        },
+        {
+          "target": "Yan Wang",
+          "type": "corporate",
+          "strength": 1.0,
+          "evidence_ref": "SEC DEF 14C 2025-09-29; 8-K 2025-09-16",
+          "description": "Pre-existing 4.12% shareholder who became director of Pallas Capital to facilitate M Bitcoin acquisition; no disclosed role at GDC"
+        },
+        {
+          "target": "Vista Frontier Investments Limited",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SEC 8-K 2025-05-13 Exhibit 10.1; DEF 14C 2025-09-29",
+          "description": "BVI LLC committed to purchase up to M of GDC common stock at 90% of lowest 5-day VWAP; funds for Bitcoin and TRUMP token purchases"
+        },
+        {
+          "target": "Univest Securities LLC",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "SEC Form D 2025-05-14; 8-K filings",
+          "description": "Sole placement agent for all GDC capital raises 2023-2025; FINRA-sanctioned for AML failures in low-priced stocks"
+        },
+        {
+          "target": "VINER TOTAL INVESTMENTS FUND",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "SEC DEF 14C 2025-09-29",
+          "description": "Hong Kong-based fund (GP: Apollo Asset Management Ltd HK at 141 Des Voeux Road Central) holding 6.64% of GDC pre-Pallas deal"
+        },
+        {
+          "target": "ABOUT INVESTMENT PTE LTD",
+          "type": "financial",
+          "strength": 0.7,
+          "evidence_ref": "SEC DEF 14C 2025-09-29",
+          "description": "Singapore entity (sole director Li Jiaming at 1 Shenton Way) holding 6.92% of GDC pre-Pallas deal"
+        }
+      ],
+      "secondHop": {
+        "Pallas Capital Holding Ltd": [
+          {
+            "target": "Yan Wang",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Director of Pallas Capital with voting and dispositive power. Owned 4.12% of GDC pre-deal. Related party seller in 7,500 BTC transaction."
+          },
+          {
+            "target": "Qing Wang",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Director of Pallas Capital with voting and dispositive power. Owned 7.28% of GDC pre-deal. Related party seller in 7,500 BTC transaction."
+          },
+          {
+            "target": "Yan Wang",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Director of Pallas Capital with voting and dispositive power; received 9,542,605 GDC shares (16.6%) for Pallas shares"
+          },
+          {
+            "target": "Qing Wang",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Director of Pallas Capital signed Share Exchange Agreement; received 9,542,605 GDC shares (16.6%); also 7.28% pre-existing GDC holder"
+          }
+        ],
+        "TRUMP Meme Coin": [
+          {
+            "target": "Justin Sun",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Justin Sun is largest known TRUMP token holder. Spent 40M+ by May 2025, announced additional 100M purchase Jul 2025. Also invested 75M in WLFI. Attended May 22, 2025 dinner with Trump. SEC investigation into Sun paused under Trump administration."
+          }
+        ],
+        "Univest Securities LLC": [
+          {
+            "target": "GD Culture Group (GDC)",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Sole placement agent for all GDC capital raises 2023-2025; FINRA-sanctioned for AML failures in low-priced stocks"
+          }
+        ],
+        "Vista Frontier Investments Limited": [
+          {
+            "target": "GD Culture Group (GDC)",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "BVI LLC committed to purchase up to M of GDC common stock at 90% of lowest 5-day VWAP; funds for Bitcoin and TRUMP token purchases"
+          }
+        ],
+        "Yan Wang": [
+          {
+            "target": "GD Culture Group (GDC)",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Pre-existing 4.12% shareholder who became director of Pallas Capital to facilitate M Bitcoin acquisition; no disclosed role at GDC"
+          }
+        ],
+        "ABOUT INVESTMENT PTE LTD": [
+          {
+            "target": "GD Culture Group (GDC)",
+            "type": "financial",
+            "strength": 0.7,
+            "description": "Singapore entity (sole director Li Jiaming at 1 Shenton Way) holding 6.92% of GDC pre-Pallas deal"
+          }
+        ],
+        "VINER TOTAL INVESTMENTS FUND": [
+          {
+            "target": "GD Culture Group (GDC)",
+            "type": "financial",
+            "strength": 0.7,
+            "description": "Hong Kong-based fund (GP: Apollo Asset Management Ltd HK at 141 Des Voeux Road Central) holding 6.64% of GDC pre-Pallas deal"
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
 }
