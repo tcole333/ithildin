@@ -6,26 +6,52 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-10T15:20:13.552076",
-  "last_updated": "2026-03-06T18:29:41",
+  "generated_at": "2026-03-11T18:27:09.516994",
+  "last_updated": "2026-03-11T05:00:08",
   "stats": {
-    "total_findings": 5,
-    "total_connections": 12,
-    "total_entities": 0,
+    "total_findings": 7,
+    "total_connections": 15,
+    "total_entities": 3,
     "finding_types": {
+      "intelligence": 4,
       "financial": 2,
-      "intelligence": 3
+      "identity": 1
     },
     "connection_types": {
       "financial": 3,
-      "political": 5,
+      "political": 8,
       "employment": 2,
       "corporate": 1,
       "familial": 1
     },
-    "last_updated": "2026-03-06T18:29:41"
+    "last_updated": "2026-03-11T05:00:08"
   },
   "findings": [
+    {
+      "id": 6527,
+      "finding_type": "intelligence",
+      "summary": "White House deputy chief of staff Stephen Miller is the driving force behind HSI election investigations, with his office holding weekly meetings with both DHS and DOJ leadership on election enforcement plans.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 03:27:49",
+      "target_name": "Stephen Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Multiple outlets including The Atlantic",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4627,
       "finding_type": "financial",
@@ -165,6 +191,48 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://www.splcenter.org/resources/extremist-files/stephen-miller/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6529,
+      "finding_type": "identity",
+      "summary": "Miller serves as Deputy Chief of Staff for Policy and Homeland Security Advisor since Jan 20, 2025. Co-founded America First Legal Foundation in Feb 2021. Described as calling the shots at DHS. Drafted plan giving White House more influence over investigations via DHS/FBI/DOJ.",
+      "detail": null,
+      "source_datasets": [
+        "LegiStorm",
+        "ProPublica",
+        "Axios",
+        "The Hill"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 03:35:24",
+      "target_name": "Stephen Miller",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Axios reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LegiStorm biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica reporting",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -333,7 +401,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-06 18:29:41",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Katie Miller",
       "other_person_slug": "katie-miller",
       "evidence": [
@@ -346,6 +414,84 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Wikipedia Katie Miller",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3287,
+      "person_a": "Heather Honey",
+      "person_b": "Stephen Miller",
+      "relationship_type": "political",
+      "description": "Miller directs weekly election enforcement meetings; Honey is DHS election integrity deputy",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 03:28:47",
+      "profile_id": "tech-right",
+      "other_person": "Heather Honey",
+      "other_person_slug": "heather-honey",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Atlantic March 2026",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Votebeat August 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3288,
+      "person_a": "Pam Bondi",
+      "person_b": "Stephen Miller",
+      "relationship_type": "political",
+      "description": "Miller's office coordinates with DOJ on voter roll demands and election investigations",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 03:28:49",
+      "profile_id": "tech-right",
+      "other_person": "Pam Bondi",
+      "other_person_slug": "pam-bondi",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Atlantic March 2026",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Washington Post",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3358,
+      "person_a": "Building America's Future",
+      "person_b": "Stephen Miller",
+      "relationship_type": "political",
+      "description": "Stephen Miller's wife Katie Miller served as BAF Senior Advisor Sept 2024 before joining DOGE. P2 Pathway Public Affairs (run by Generra Peck, Phil Cox, Katie Miller) received $210K from BAF.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 05:00:08",
+      "profile_id": "tech-right",
+      "other_person": "Building America's Future",
+      "other_person_slug": "building-americas-future",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ReadSludge Dec 2025, Siegelman analysis",
           "source_quote": null,
           "source_page": null
         }
@@ -367,6 +513,49 @@
       "evidence": []
     }
   ],
-  "entities": [],
-  "timeline": []
+  "entities": [
+    {
+      "role": "Co-Founder",
+      "date_start": null,
+      "date_end": null,
+      "source": "InfluenceWatch; Wikipedia",
+      "entity_id": 967,
+      "entity_name": "America First Legal Foundation",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "Founder, President",
+      "date_start": null,
+      "date_end": null,
+      "source": "AFL website, Wikipedia",
+      "entity_id": 967,
+      "entity_name": "America First Legal Foundation",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    },
+    {
+      "role": "President/Executive Director",
+      "date_start": null,
+      "date_end": null,
+      "source": "AFL 990 filings",
+      "entity_id": 967,
+      "entity_name": "America First Legal Foundation",
+      "entity_type": "nonprofit",
+      "jurisdiction": "DC",
+      "entity_status": "active"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2026-03-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "White House deputy chief of staff Stephen Miller is the driving force behind HSI election investigations, with his office holding weekly meetings with both DHS and DOJ leadership on election enforcement plans.",
+      "confidence": "high",
+      "id": 6527
+    }
+  ]
 }

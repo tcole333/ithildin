@@ -6,11 +6,11 @@
     "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-10T15:20:13.271332",
-  "last_updated": "2026-03-09T20:57:29",
+  "generated_at": "2026-03-11T18:27:09.286064",
+  "last_updated": "2026-03-11T16:36:26",
   "stats": {
     "total_findings": 77,
-    "total_connections": 74,
+    "total_connections": 75,
     "total_entities": 86,
     "finding_types": {
       "relationship": 3,
@@ -28,9 +28,10 @@
       "financial": 13,
       "political": 18,
       "familial": 1,
-      "advisory": 4
+      "advisory": 4,
+      "funds": 1
     },
-    "last_updated": "2026-03-09T20:57:29"
+    "last_updated": "2026-03-11T16:36:26"
   },
   "findings": [
     {
@@ -2671,21 +2672,6 @@
       ]
     },
     {
-      "id": 2982,
-      "person_a": "DOGE",
-      "person_b": "Elon Musk",
-      "relationship_type": "political",
-      "description": "Musk led DOGE operations Jan-mid 2025, directing young tech workers into federal agencies to access sensitive databases. Departed government role later in 2025.",
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-03-05 22:32:48",
-      "profile_id": null,
-      "other_person": "DOGE",
-      "other_person_slug": "doge",
-      "evidence": []
-    },
-    {
       "id": 2985,
       "person_a": "Eliezer Mishory",
       "person_b": "Elon Musk",
@@ -2998,7 +2984,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-06 03:57:43",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Gwynne Shotwell",
       "other_person_slug": "gwynne-shotwell",
       "evidence": []
@@ -3013,7 +2999,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-06 03:57:45",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "JB Straubel",
       "other_person_slug": "jb-straubel",
       "evidence": []
@@ -3028,7 +3014,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-06 03:57:49",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Jared Birchall",
       "other_person_slug": "jared-birchall",
       "evidence": []
@@ -3043,7 +3029,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-06 17:38:38",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Red Planet Ventures",
       "other_person_slug": "red-planet-ventures",
       "evidence": []
@@ -3058,7 +3044,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-06 17:38:40",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Thriving Capital Ventures",
       "other_person_slug": "thriving-capital-ventures",
       "evidence": []
@@ -3165,6 +3151,28 @@
       "other_person": "Aram Moghaddassi",
       "other_person_slug": "aram-moghaddassi",
       "evidence": []
+    },
+    {
+      "id": 3356,
+      "person_a": "Building America's Future",
+      "person_b": "Elon Musk",
+      "relationship_type": "funds",
+      "description": "Musk provided $50M+ to BAF in 2022, likely $74.5M+ in 2024, est $100M+ total",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:59:42",
+      "profile_id": "tech-right",
+      "other_person": "Building America's Future",
+      "other_person_slug": "building-americas-future",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WSJ Oct 2024 reporting, ReadSludge Dec 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     },
     {
       "id": 2620,
@@ -3299,7 +3307,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-06 03:57:47",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Brad Buss",
       "other_person_slug": "brad-buss",
       "evidence": []
@@ -3377,6 +3385,34 @@
       "other_person": "Michael Russo",
       "other_person_slug": "michael-russo",
       "evidence": []
+    },
+    {
+      "id": 3388,
+      "person_a": "Elon Musk",
+      "person_b": "Mark Paoletta",
+      "relationship_type": "political",
+      "description": "Paoletta appointed OMB GC specifically to work with Musk's DOGE team; former firm Schaerr Jaffe represents Musk/X in litigation; Paoletta provides legal architecture enabling DOGE spending cuts at OMB",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 16:36:26",
+      "profile_id": "tech-right",
+      "other_person": "Mark Paoletta",
+      "other_person_slug": "mark-paoletta",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DeSmog Feb 2025",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Trump appointment statement Dec 2024",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     },
     {
       "id": 2926,

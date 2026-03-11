@@ -413,6 +413,14 @@ def main():
                     skipped = True
 
         if not skipped:
+            # Preserve curation content from existing file on disk
+            if out_path.exists():
+                try:
+                    existing = json.loads(out_path.read_text())
+                    if existing.get("curation"):
+                        dossier["curation"] = existing["curation"]
+                except (json.JSONDecodeError, KeyError):
+                    pass
             with open(out_path, "w") as f:
                 json.dump(dossier, f, indent=2, default=str)
 

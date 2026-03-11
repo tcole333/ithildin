@@ -5,11 +5,11 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-10T15:20:13.388673",
-  "last_updated": "2026-03-06T03:55:27",
+  "generated_at": "2026-03-11T18:27:09.402510",
+  "last_updated": "2026-03-11T04:37:10",
   "stats": {
     "total_findings": 21,
-    "total_connections": 4,
+    "total_connections": 5,
     "total_entities": 0,
     "finding_types": {
       "financial": 10,
@@ -19,9 +19,10 @@
     },
     "connection_types": {
       "political": 3,
-      "financial": 1
+      "financial": 1,
+      "employment": 1
     },
-    "last_updated": "2026-03-06T03:55:27"
+    "last_updated": "2026-03-11T04:37:10"
   },
   "findings": [
     {
@@ -379,7 +380,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "ProPublica 990: EIN 881807315",
+          "evidence_ref": "990: EIN 881807315",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -725,6 +726,28 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "PBS; Public Citizen FARA complaint",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3335,
+      "person_a": "Center for Renewing America",
+      "person_b": "Kash Patel",
+      "relationship_type": "employment",
+      "description": "Patel served as CRA Senior Fellow for National Security, became FBI Director Feb 2025",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:37:10",
+      "profile_id": "tech-right",
+      "other_person": "Center for Renewing America",
+      "other_person_slug": "center-for-renewing-america",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FBI.gov Director Patel page",
           "source_quote": null,
           "source_page": null
         }

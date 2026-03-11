@@ -5,11 +5,11 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-10T15:20:13.334014",
+  "generated_at": "2026-03-11T18:27:09.347751",
   "last_updated": "2026-03-09T19:26:24",
   "stats": {
     "total_findings": 35,
-    "total_connections": 9,
+    "total_connections": 8,
     "total_entities": 0,
     "finding_types": {
       "financial": 16,
@@ -22,7 +22,7 @@
       "corporate": 2,
       "contracts_with": 1,
       "owns": 2,
-      "financial": 3,
+      "financial": 2,
       "employment": 1
     },
     "last_updated": "2026-03-09T19:26:24"
@@ -921,7 +921,7 @@
       "verification_status": "unverified",
       "created_at": "2026-03-09 19:26:24",
       "target_name": "Critical Metals Corp",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -1016,28 +1016,6 @@
       ]
     },
     {
-      "id": 3228,
-      "person_a": "Alyeska Investment Group",
-      "person_b": "Critical Metals Corp",
-      "relationship_type": "financial",
-      "description": null,
-      "strength": "strong",
-      "date_range": null,
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 18:24:50",
-      "profile_id": null,
-      "other_person": "Alyeska Investment Group",
-      "other_person_slug": "alyeska-investment-group",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR 0001172661-26-001159",
-          "source_quote": null,
-          "source_page": null
-        }
-      ]
-    },
-    {
       "id": 3232,
       "person_a": "Critical Metals Corp",
       "person_b": "Matt Schnappauf",
@@ -1062,7 +1040,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-09 04:41:01",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "Greenland",
       "other_person_slug": "greenland",
       "evidence": []
@@ -1099,7 +1077,7 @@
       "date_range": null,
       "verification_status": "unverified",
       "created_at": "2026-03-09 04:47:07",
-      "profile_id": null,
+      "profile_id": "tech-right",
       "other_person": "JPMorgan Chase",
       "other_person_slug": "jpmorgan-chase",
       "evidence": []
@@ -1117,201 +1095,6 @@
     }
   ],
   "curation": {
-    "key_finding_ids": [
-      6246,
-      6199,
-      6261,
-      6262,
-      6263,
-      6240,
-      6241,
-      6256,
-      6260,
-      6269,
-      6271,
-      6275
-    ],
-    "key_identifiers": {
-      "jurisdictions": [],
-      "officers": [],
-      "entities": []
-    },
-    "section_suggestions": [
-      {
-        "id": "key-relationships",
-        "title": "Key Relationships",
-        "viz": "ego_network",
-        "finding_ids": [
-          6240,
-          6241,
-          6248
-        ],
-        "connection_ids": [
-          3157,
-          3182,
-          3202,
-          3206,
-          3228,
-          3232,
-          3145,
-          3203
-        ],
-        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
-      },
-      {
-        "id": "financial-activity",
-        "title": "Financial Activity",
-        "viz": null,
-        "finding_ids": [
-          6246,
-          6106,
-          6259,
-          6261,
-          6262,
-          6263,
-          6264,
-          6265,
-          6266,
-          6267
-        ],
-        "connection_ids": [
-          3206,
-          3228,
-          3156
-        ],
-        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
-      },
-      {
-        "id": "intelligence-activity",
-        "title": "Intelligence Activity",
-        "viz": null,
-        "finding_ids": [
-          6255,
-          6256,
-          6282,
-          6394
-        ],
-        "connection_ids": [],
-        "guidance": "Narrative about intelligence connections, surveillance, information operations."
-      },
-      {
-        "id": "government-contracts",
-        "title": "Government Contracts and Procurement",
-        "viz": null,
-        "finding_ids": [
-          6246,
-          6106,
-          6240,
-          6245,
-          6248,
-          6251,
-          6255,
-          6259,
-          6261,
-          6265
-        ],
-        "connection_ids": [
-          3182
-        ],
-        "guidance": "Narrative about federal contracts, procurement vehicles, dollar amounts, agency relationships. Include specific contract IDs, BPA numbers, and dollar figures."
-      },
-      {
-        "id": "political-activity",
-        "title": "Political Activity and Donations",
-        "viz": null,
-        "finding_ids": [
-          6240,
-          6241,
-          6248,
-          6251,
-          6256,
-          6266,
-          6269,
-          6282,
-          6394
-        ],
-        "connection_ids": [],
-        "guidance": "Narrative about political donations, PAC contributions, lobbying activity, political appointments. Include FEC committee IDs, dollar amounts, recipient names."
-      },
-      {
-        "id": "personnel-placements",
-        "title": "Personnel Placements and Conflicts of Interest",
-        "viz": null,
-        "finding_ids": [
-          6199,
-          6245,
-          6248,
-          6251,
-          6263,
-          6264,
-          6268,
-          6269,
-          6270,
-          6276
-        ],
-        "connection_ids": [
-          3232
-        ],
-        "guidance": "Narrative about government appointments, agency placements, ethics conflicts, recusal status, prior employer relationships. Name specific people, agencies, and dates."
-      },
-      {
-        "id": "regulatory-conflicts",
-        "title": "Regulatory Conflicts",
-        "viz": null,
-        "finding_ids": [
-          6271,
-          6275,
-          6282
-        ],
-        "connection_ids": [],
-        "guidance": "Narrative about regulatory oversight, enforcement actions, compliance issues, agency conflicts. Include specific agency names, case numbers, and outcomes."
-      }
-    ],
-    "evidence_quality": {
-      "strong_ids": [
-        6240,
-        6241,
-        6248,
-        6259,
-        6261,
-        6264,
-        6266,
-        6270,
-        6272,
-        6274
-      ],
-      "moderate_ids": [
-        6246,
-        6199,
-        6245,
-        6251,
-        6256,
-        6260,
-        6262,
-        6263,
-        6265,
-        6269,
-        6271,
-        6275,
-        6276,
-        6278,
-        6279,
-        6280,
-        6281
-      ],
-      "weak_ids": [
-        6106,
-        6255,
-        6267,
-        6268,
-        6273,
-        6277,
-        6282,
-        6394
-      ],
-      "summary": "10 primary-sourced, 17 structured-data, 8 web-only"
-    },
-    "curated_at": "2026-03-10T15:24:22.396983",
     "lead": "<p>Critical Metals Corp (NASDAQ: CRML) is a British Virgin Islands-incorporated, pre-revenue mining company that has become the primary vehicle for US government-backed rare earth extraction in Greenland [Finding #6260]. The company holds the Tanbreez rare earth deposit in southern Greenland under a 30-year exploitation license valid to 2050, with an estimated 28.2 million metric tons of mineralized material containing 27% heavy rare earths [Finding #6106]. On June 16, 2025, the US Export-Import Bank issued a Letter of Interest for up to $120 million in financing under the Supply Chain Resiliency Initiative [Finding #6246]. CRML was formed through the February 2024 merger of Sizzle Acquisition Corp, a SPAC underwritten by <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a>, with Australian-listed European Lithium Ltd (ASX: EUR) [Finding #6251].</p><p>The company reported losses of $51.9 million in fiscal year 2025, held only $7.3 million in cash as of June 30, 2025, and its auditors identified substantial doubt about its ability to continue as a going concern [Finding #6262]. Its largest institutional investor is Alyeska Master Fund LP, which deployed approximately $85 million across two PIPE tranches in October 2025 to acquire a 9.9% stake [Finding #6261]. European Lithium, controlled by CEO <a href=\"/dossiers/tony-sage\">Tony Sage</a>, reduced its ownership from 58.9% to 37.3% between June 2025 and February 2026, extracting at minimum $54.75 million in secondary sales [Finding #6273]. <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a>, the US Commerce Secretary and former Cantor Fitzgerald CEO, was listed as an indirect owner of CRML through Cantor's SPAC underwriting shares until divesting to his children in May 2025 [Finding #6249].</p><p>CRML retained Cornerstone Government Affairs for lobbying from February through September 2025, spending $210,000 on advocacy for critical minerals policy across defense, trade, and foreign affairs issue areas [Finding #6240]. The company registered on SAM.gov on October 13, 2025, six days after its lobbying engagement terminated, with former Deputy Assistant Secretary of Defense Michael Ryan listed as the government point of contact [Finding #6245][Finding #6248]. <a href=\"/dossiers/greenmet\">GreenMet</a>, which brokered the Tanbreez partnership, does not appear in any of CRML's 167 SEC filings [Finding #6271].</p>",
     "system_role": "Critical Metals Corp is the principal vehicle through which US government financing flows to Greenland rare earth extraction, structured through a multi-jurisdictional corporate architecture (BVI holding company, Australian parent, Greenland asset, US listing) that intersects Trump administration personnel and defense-sector lobbying networks.",
     "sections": [
@@ -1370,146 +1153,6 @@
       "bridge-tax",
       "complexity-as-credential",
       "manufactured-dependency"
-    ]
-  },
-  "viz_data": {
-    "ego_network": {
-      "center": "Critical Metals Corp",
-      "connections": [
-        {
-          "target": "GreenMet",
-          "type": "corporate",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Tanbreez offtake partnership for DoD REE supply"
-        },
-        {
-          "target": "GreenMet",
-          "type": "contracts_with",
-          "strength": 1.0,
-          "evidence_ref": "GreenMet brokered Critical Metals partnership with Tanbreez; facilitated EXIM LOI",
-          "description": null
-        },
-        {
-          "target": "Cantor Fitzgerald",
-          "type": "owns",
-          "strength": 1.0,
-          "evidence_ref": "LittleSis:rel/2043850",
-          "description": "Cantor Fitzgerald LP is owner of CRML (LittleSis). Held 1.25M shares (deferred SPAC underwriting), divested to 190K by Q3 2025."
-        },
-        {
-          "target": "Alyeska Investment Group",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "EDGAR:0001172661-26-001159",
-          "description": "Alyeska Master Fund LP deployed ~$85M in two PIPE tranches in October 2025 to acquire 9.9% of CRML. Also bought ~5M secondary shares from European Lithium and Rimbal."
-        },
-        {
-          "target": "Alyeska Investment Group",
-          "type": "financial",
-          "strength": 1.0,
-          "evidence_ref": "SEC EDGAR 0001172661-26-001159",
-          "description": null
-        },
-        {
-          "target": "Matt Schnappauf",
-          "type": "employment",
-          "strength": 1.0,
-          "evidence_ref": null,
-          "description": "Schnappauf registered as Cornerstone lobbyist for CRML Q1-Q3 2025, K/quarter. Lobbied DOD, State, EXIM, EOP for critical minerals policy."
-        },
-        {
-          "target": "Greenland",
-          "type": "corporate",
-          "strength": 0.7,
-          "evidence_ref": null,
-          "description": "Holds 30-year exploitation license for Tanbreez deposit (potentially world's largest REE deposit, 28.2M metric tons). $120M EXIM Bank LOI."
-        },
-        {
-          "target": "Howard Lutnick",
-          "type": "owns",
-          "strength": 0.7,
-          "evidence_ref": "LittleSis:rel/2043852",
-          "description": "Howard Lutnick (US Commerce Secretary) listed as indirect owner of CRML via Cantor Fitzgerald (LittleSis). Divested in May 2025 via trust to children."
-        },
-        {
-          "target": "JPMorgan Chase",
-          "type": "financial",
-          "strength": 0.2,
-          "evidence_ref": null,
-          "description": "JPMorgan 10B national security investment pledge + Goldman Sachs MP Materials deal creates financial ecosystem that benefits Greenland rare earth projects like CRML Tanbreez"
-        }
-      ],
-      "secondHop": {
-        "GreenMet": [
-          {
-            "target": "Ucore Rare Metals",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Facilitated 10-year offtake agreement"
-          },
-          {
-            "target": "Ucore Rare Metals",
-            "type": "contracts_with",
-            "strength": 0.7,
-            "description": ""
-          }
-        ],
-        "Cantor Fitzgerald": [
-          {
-            "target": "USA Rare Earth",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "1.5B PIPE led by Cantor Fitzgerald"
-          },
-          {
-            "target": "Howard Lutnick",
-            "type": "corporate",
-            "strength": 1.0,
-            "description": "Lutnick was CEO/Chairman of Cantor Fitzgerald until becoming US Commerce Secretary. Divested ownership to sons Brandon (Chairman) and Kyle (Exec Vice Chairman) via trusts May 2025."
-          }
-        ],
-        "Alyeska Investment Group": [
-          {
-            "target": "European Lithium Limited",
-            "type": "financial",
-            "strength": 1.0,
-            "description": "Alyeska purchased 3M secondary CRML shares from European Lithium in Oct 2025 PIPE at $7/share = $21M"
-          }
-        ],
-        "Matt Schnappauf": [
-          {
-            "target": "Silicon Valley Defense Group",
-            "type": "employment",
-            "strength": 1.0,
-            "description": "Schnappauf is SVDG Policy Fellow per SVDG website."
-          }
-        ],
-        "Greenland": [
-          {
-            "target": "Tulsi Gabbard",
-            "type": "intelligence",
-            "strength": 0.7,
-            "description": "DNI collection tasking on Greenland"
-          },
-          {
-            "target": "Erik Prince",
-            "type": "political",
-            "strength": 0.7,
-            "description": "Public advocacy for Greenland acquisition"
-          }
-        ]
-      },
-      "depth": 2
-    },
-    "timeline_events": [
-      {
-        "date": "2025-06-16",
-        "label": "EXIM Bank issued Letter of Interest (LOI) to Critical Metals Corp on June 16, 2025, for up to $120 million in financing for the Tanbreez Rare Earth Project in Greenland. Loan term: 15 years. Program: Supply Chain Resiliency Initiative (SCRI) under The China and Transformational Exports Program (CTEP). Status as of announcement: LOI only -- \"EXIM will consider financing\" -- not a formal loan commitment. CRML expects to invest $10M in 2025 to acquire additional 50.5% of Tanbreez, bringing total ownership to 92.5%. Feasibility study expected by end of 2025. No government officials named in press release.",
-        "type": "financial",
-        "evidence_ref": null,
-        "id": 6246
-      }
     ]
   }
 }
