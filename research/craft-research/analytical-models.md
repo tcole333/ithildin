@@ -373,6 +373,64 @@ Epstein's financial operation bears structural resemblance to a Ponzi scheme —
 
 ---
 
+## Tech-Right Investigation Models (Tier 2 Lenses)
+
+The eight models above were developed from the Epstein investigation. The following six models address the structurally different phenomenon documented in the tech-right investigation: systematic democratic institutional capture by an aligned tech/defense/finance network. They currently operate as Tier 2 domain lenses — working analytical tools for agents — and will be promoted to Tier 1 (full JSON specs, web pages) as they accumulate grounding findings with specific evidence chains.
+
+Full definitions, detection markers, and limitations are in the lens files at `research/craft-research/frameworks/`.
+
+### 9. Sovereign Exception
+
+**Definition:** The use of declared or manufactured emergency to bypass normal procedural constraints and concentrate decision-making authority. The Schmittian core mechanism: sovereign is he who decides on the exception.
+
+**The Case:** DOGE declares the federal government "broken" to justify suspending normal procurement, hiring, and oversight processes. Trump invokes national emergencies for tariffs, bypassing congressional trade authority. The draft election executive order uses the assertion of fraud as the mechanism for federal intervention in state election processes. In each case, the declaration creates legal and institutional facts through the act of declaration itself. The question is not whether the crisis is real — it's who defines the crisis, and what powers does the definition unlock?
+
+**Key Distinction:** Different from Narrative Shield (which controls perception) — Sovereign Exception creates legal/institutional facts through the declaration itself. Different from Oversight Architecture Demolition (Tier 2, which removes guardrails) — SE vaults over guardrails by claiming exemption.
+
+**Paired with:** Depoliticization (inverse complement). SE politicizes to seize authority; DP de-politicizes to exercise it. They work as a sequential pair.
+
+### 10. Personnel Pipeline
+
+**Definition:** The systematic placement of ideologically aligned individuals into institutional positions to reshape the institution from within. The goal is to *become* the institution.
+
+**The Case:** Rockbridge Network's explicit function as a "government-in-waiting." The full lifecycle: ideological formation (Stanford Review, Claremont Institute), professional incubation (PayPal, Palantir, Anduril), political grooming (Rockbridge, Heritage Project 2025), placement (appointments, detailing, hiring), and persistence (8+ DOGE personnel transitioning to permanent embedded positions after dissolution).
+
+**Key Distinction:** Different from Institutional Capture Lifecycle (Tier 2, which describes how industry gradually captures regulators — the mission persists while being redirected). Personnel Pipeline aims at institutional *transformation* — the goal is to change the institution's mission itself.
+
+### 11. Infrastructure Lock-in
+
+**Definition:** Embedding proprietary technology so deeply into state operations that removal becomes prohibitively costly regardless of political change. The dependency is engineered through genuine technical capability.
+
+**The Case:** Palantir running analytics across CIA, NSA, FBI, Army, and ICE. SpaceX as the dominant launch provider. Anduril building autonomous defense systems. The DOGE master database consolidation. Each delivers genuine capability — and each becomes impossible to replace within one election cycle.
+
+**Key Distinction:** Different from Manufactured Dependency (where the problem is fabricated). Infrastructure Lock-in works with *genuine* problems and *genuine* solutions — the dependency is a structural consequence of the architecture, not a deliberately manufactured crisis. The analytical marker: can this vendor be replaced within one presidential term?
+
+### 12. Temporal Arbitrage
+
+**Definition:** Exploiting the speed differential between executive action and institutional response. Act fast, establish facts on the ground, let challenges work through slow institutional channels.
+
+**The Case:** Voter roll purges before elections — purge, let the court case take months, the election happens in the interim, the default path favors the purger. DOGE data access — access databases, courts issue injunctions, appellate courts consider appeals, but data already viewed cannot be un-viewed. Mass personnel actions — fire employees, even if courts order reinstatement months later, the institutional knowledge is lost and the organizational structure has changed.
+
+**Key Distinction:** The temporal analog of Jurisdictional Arbitrage (Tier 1, which exploits spatial gaps). TA exploits temporal gaps between action and response. The two compound: act fast AND across jurisdictions, and the response surface becomes impossibly complex.
+
+### 13. Depoliticization
+
+**Definition:** Framing political action as technical, neutral, or apolitical to remove it from democratic contestation.
+
+**The Case:** "We're just making government more efficient" (DOGE). "This is a technical procurement decision" (Golden Dome C2 contract). "We're just applying merit-based hiring" (while purging ideological opponents). "This is about national security" (while enriching portfolio companies). Each frames a distributional political choice as though it has no political valence.
+
+**Key Distinction:** The inverse of Sovereign Exception. Where SE *politicizes* (declares emergency to seize power), DP *de-politicizes* (frames power exercise as technical to avoid scrutiny). Different from Compliance Theater (which is about institutional processes that approve rather than investigate) — DP prevents the question from reaching oversight processes in the first place.
+
+### 14. Dual Mandate
+
+**Definition:** Individuals simultaneously occupying positions in private capital and public authority such that the distinction between private interest and public function dissolves.
+
+**The Case:** Trae Stephens as both Founders Fund managing partner and Anduril Executive Chairman. Clark Minor as HHS CIO overseeing Palantir contracts while coming from Palantir. Kenneth Howery as Ambassador to Denmark while retaining Founders Fund carried interest, with Anduril excluded from his recusal obligations. The dual mandate is not a conflict of interest — it's a structural feature by design.
+
+**Key Distinction:** Different from Bridge Tax (which extracts rent from a network position). Dual Mandate dissolves the public/private boundary rather than taxing the crossing. The recusal gap analysis is the key detection tool: what does the recusal NOT cover?
+
+---
+
 ## How the Models Interact: A System View
 
 These eight models are not independent — they form an interlocking system:

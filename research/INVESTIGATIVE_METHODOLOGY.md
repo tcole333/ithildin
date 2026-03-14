@@ -427,7 +427,7 @@ When an agent claims a threaded lead, it should:
 
 ## Analytical Framework Awareness
 
-This investigation uses 8 core analytical models (Bridge Tax, Manufactured Dependency, Private Order, Narrative Shield, Jurisdictional Arbitrage, Parallel Financial System, Enabler Gradient, Complexity as Credential) plus a growing set of domain lenses. See `research/craft-research/analytical-models.md` for the core models and `research/craft-research/frameworks/` for domain lenses.
+This investigation uses 8 core analytical models (Bridge Tax, Manufactured Dependency, Private Order, Narrative Shield, Jurisdictional Arbitrage, Parallel Financial System, Enabler Gradient, Complexity as Credential) plus a growing set of domain lenses including 6 tech-right institutional capture models (Sovereign Exception, Personnel Pipeline, Infrastructure Lock-in, Temporal Arbitrage, Depoliticization, Dual Mandate). See `research/craft-research/analytical-models.md` for the core models and `research/craft-research/frameworks/` for all domain lenses.
 
 **During investigation, if you encounter a recurring pattern that none of the 8 core analytical models explain well, record it as a framework candidate:**
 
@@ -472,6 +472,20 @@ Frameworks are **pattern detectors**, not interpretive lenses. They help you rec
 **Bad**: "Applying the Crisis Front-Running framework, we find that the 36-day timeline is an instance of pre-positioned capture activated by a self-manufactured crisis."
 
 The first version states facts, provides context, and identifies what additional evidence would resolve the ambiguity. The second version applies a label that forecloses alternative explanations.
+
+### Epistemic Closure Self-Check
+
+A belief system achieves epistemic closure when it becomes self-sealing — no external evidence can challenge it. This is a risk for any sustained investigation. When every new piece of evidence confirms the existing model, that's either because the model is correct or because you've stopped being able to see disconfirming evidence.
+
+**Apply this check when:**
+- Every new finding seems to confirm the existing framework. Ask: am I pattern-matching or discovering?
+- Counter-evidence is consistently dismissed as "noise" or "cover story." Ask: what would genuine counter-evidence look like? If I can't describe it, the model is unfalsifiable.
+- The investigation has not produced a significant surprise in the last 50+ findings. Surprise is a sign of genuine discovery; its absence may signal closure.
+- You find yourself explaining away evidence that doesn't fit rather than updating the model.
+
+**The Normal Accidents check (Perrow):** For any pattern that appears coordinated, ask: could this emerge from a tightly-coupled system of aligned actors without explicit coordination? Complex systems produce "normal accidents" that look intentional. Some of what appears orchestrated may be emergent behavior from actors with aligned incentives operating in overlapping domains. The question is not "does this look coordinated?" but "does this *require* coordination to explain, or could it emerge from complexity alone?"
+
+**Practical discipline:** Periodically run `/discover-frameworks` with the explicit instruction to find patterns that *contradict* existing models, not just patterns that extend them. If the investigation's analytical vocabulary is only growing and never being pruned, epistemic closure may be setting in.
 
 ## Two-Layer Agent Architecture
 

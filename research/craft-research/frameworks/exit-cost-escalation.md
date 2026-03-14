@@ -6,7 +6,7 @@ source: "Hirschman, 'Exit, Voice, and Loyalty' (1970); Vaughan, 'The Challenger 
 status: adopted
 created: 2026-02-20
 grounding_findings: [3259, 3187, 3241, 3255, 3257, 6, 2910, 3237]
-related_models: [enabler-gradient, compliance-theater, manufactured-dependency]
+related_models: [enabler-gradient, compliance-theater, manufactured-dependency, infrastructure-lock-in]
 detection_keywords:
   - ["continued the relationship", "maintained the account", "renewed the engagement", "extended the retainer"]
   - ["after conviction", "after arrest", "after indictment", "despite known", "post-plea"]

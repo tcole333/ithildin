@@ -6,7 +6,7 @@ source: "Patrick McKenzie, 'Fraud investigation is believing your lying eyes' (B
 status: adopted
 created: 2026-02-20
 grounding_findings: [2822, 2858, 2839, 321, 327, 604, 2226]
-related_models: [enabler-gradient, complexity-as-credential, private-order]
+related_models: [enabler-gradient, complexity-as-credential, private-order, infrastructure-lock-in]
 detection_keywords:
   - ["same registered agent", "same formation agent", "same address"]
   - ["shared agent", "shared address", "shared counsel", "shared accountant"]

@@ -6,7 +6,7 @@ source: "Investigation synthesis of RTX pre-strike positioning, Polymarket forek
 status: candidate
 created: 2026-03-03
 grounding_findings: [4725, 4730, 4943]
-related_models: [adversarial-simultaneity, intelligence-brokerage, convergent-policy-channeling]
+related_models: [adversarial-simultaneity, intelligence-brokerage, convergent-policy-channeling, temporal-arbitrage]
 detection_keywords:
   - ["framework agreement", "pre-positioned", "signed before", "days before"]
   - ["Polymarket", "prediction market", "betting", "foreknowledge", "front-running"]

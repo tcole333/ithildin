@@ -6,7 +6,7 @@ source: "Compliance oversight theory; derived from Deutsche Bank ARRC 'BAU' and 
 status: draft
 created: 2026-02-20
 grounding_findings: [3259, 3187, 3241, 3255, 3257]
-related_models: [compliance-theater, exit-cost-escalation, enabler-gradient]
+related_models: [compliance-theater, exit-cost-escalation, enabler-gradient, agnotology]
 detection_keywords:
   - ["noted the risk", "reviewed the file", "determined to continue", "business as usual"]
   - ["BAU", "no evidence of current", "comfortable with things continuing"]

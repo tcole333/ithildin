@@ -6,7 +6,7 @@ source: "Stigler, 'The Theory of Economic Regulation' (1971); Kwak, 'Cultural Ca
 status: adopted
 created: 2026-02-20
 grounding_findings: [3161, 3025, 2987, 3205, 3187, 3259]
-related_models: [private-order, enabler-gradient, bridge-tax]
+related_models: [private-order, enabler-gradient, bridge-tax, personnel-pipeline]
 detection_keywords:
   - ["revolving door", "former prosecutor", "former regulator", "joined the firm"]
   - ["wrote the rules", "drafted the guidelines", "authored the policy"]

@@ -6,7 +6,7 @@ source: "Investigation synthesis of ethics EO rescission, OGE staffing, IG vacan
 status: candidate
 created: 2026-03-03
 grounding_findings: [4686, 4739, 4579, 4608, 4735, 4696]
-related_models: [compliance-theater, institutional-capture-lifecycle, defensible-ignorance]
+related_models: [compliance-theater, institutional-capture-lifecycle, defensible-ignorance, sovereign-exception]
 detection_keywords:
   - ["rescinded", "revoked", "eliminated", "dismantled", "defunded"]
   - ["ethics EO", "ethics pledge", "ethics waiver", "OGE", "Office of Government Ethics"]
