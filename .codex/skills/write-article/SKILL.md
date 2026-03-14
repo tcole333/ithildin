@@ -299,7 +299,9 @@ When evidence exemplifies an analytical model, insert a callout block:
 > Evidence: [CITATION_ID] — [Specific evidence from corpus supporting this model application]
 ```
 
-Available models: manufactured-dependency, bridge-tax, private-order, narrative-shield, jurisdictional-arbitrage, parallel-financial-system, enabler-gradient, complexity-as-credential.
+Available Tier 1 models: manufactured-dependency, bridge-tax, private-order, narrative-shield, jurisdictional-arbitrage, parallel-financial-system, enabler-gradient, complexity-as-credential.
+
+Available Tier 2 lenses (use for analysis/framing, reference in prose rather than callout blocks until promoted to Tier 1): sovereign-exception, personnel-pipeline, infrastructure-lock-in, temporal-arbitrage, depoliticization, dual-mandate, dual-state, agnotology, capital-conversion, regulatory-replacement. Full definitions in `research/craft-research/frameworks/`.
 
 ### Save and build
 
