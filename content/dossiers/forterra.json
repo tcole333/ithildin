@@ -5,23 +5,25 @@
   "profile_ids": [
     "tech-right"
   ],
-  "generated_at": "2026-03-18T01:43:44.330247",
-  "last_updated": "2026-03-18T00:52:26",
+  "generated_at": "2026-03-18T11:49:12.736776",
+  "last_updated": "2026-03-18T03:22:34",
   "stats": {
-    "total_findings": 20,
-    "total_connections": 14,
+    "total_findings": 26,
+    "total_connections": 15,
     "total_entities": 0,
     "finding_types": {
-      "financial": 7,
+      "financial": 9,
       "identity": 1,
-      "intelligence": 12
+      "intelligence": 14,
+      "relationship": 2
     },
     "connection_types": {
       "contracts_with": 2,
       "funds": 7,
-      "corporate": 5
+      "corporate": 5,
+      "subsidiary_of": 1
     },
-    "last_updated": "2026-03-18T00:52:26"
+    "last_updated": "2026-03-18T03:22:34"
   },
   "findings": [
     {
@@ -230,7 +232,7 @@
     {
       "id": 6800,
       "finding_type": "intelligence",
-      "summary": "FORTERRA ACQUISITION OF GOTENNA (Oct 2025): Forterra acquired goTenna, a tactical mesh networking company, for undisclosed price (Barclays advised goTenna). goTenna's decentralized communications technology adds comms capability to Forterra's autonomous platforms in GPS-denied and comms-contested environments. This is a vertical integration play — autonomous vehicles need reliable C2 links, and goTenna provides mesh networking independent of traditional infrastructure. Combined with AutoDrive autonomy and the Arlington VA office (opened Feb 2026), Forterra is assembling a full-stack autonomous military ground vehicle company: perception + autonomy + communications + government affairs.",
+      "summary": "FORTERRA ACQUISITION OF GOTENNA (Oct 2025): Forterra acquired goTenna, a tactical mesh networking company, for undisclosed price (Barclays advised goTenna). goTenna's decentralized communications technology adds comms capability to Forterra's autonomous platforms in GPS-denied and comms-contested environments. This is a vertical integration play \u2014 autonomous vehicles need reliable C2 links, and goTenna provides mesh networking independent of traditional infrastructure. Combined with AutoDrive autonomy and the Arlington VA office (opened Feb 2026), Forterra is assembling a full-stack autonomous military ground vehicle company: perception + autonomy + communications + government affairs.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -262,7 +264,7 @@
     {
       "id": 6801,
       "finding_type": "financial",
-      "summary": "FORTERRA TOTAL CONTRACT VALUE ~$380M+: Far exceeds USASpending figure of $67.5M because OTAs and subcontracts not captured there. Major contracts: (1) $114M Autonomous Breaching Systems prime for Army — FIELDED AND IN COMBAT USE by 27th Engineer Battalion. (2) $50M AUSTC counter-WMD 5yr contract (Sep 2018). (3) $49.7M ExLF autonomous convoy kits (Jun 2018) — PROGRAM CLOSED 2023 WITHOUT FIELDING. (4) ROGUE-Fires: $29.9M Forterra share + Oshkosh primes of $40M + $39.6M LRIP + $16.9M (Feb 2026). (5) $4.8M UxS autonomy OTA. (6) $14.8M ATV-S/GEARS Phase I. Plus 77 SBIR/STTR awards totaling $27.4M. goTenna acquisition brought additional $15M USAF STRATFI + $99M CBP IDIQ.",
+      "summary": "FORTERRA TOTAL CONTRACT VALUE ~$380M+: Far exceeds USASpending figure of $67.5M because OTAs and subcontracts not captured there. Major contracts: (1) $114M Autonomous Breaching Systems prime for Army \u2014 FIELDED AND IN COMBAT USE by 27th Engineer Battalion. (2) $50M AUSTC counter-WMD 5yr contract (Sep 2018). (3) $49.7M ExLF autonomous convoy kits (Jun 2018) \u2014 PROGRAM CLOSED 2023 WITHOUT FIELDING. (4) ROGUE-Fires: $29.9M Forterra share + Oshkosh primes of $40M + $39.6M LRIP + $16.9M (Feb 2026). (5) $4.8M UxS autonomy OTA. (6) $14.8M ATV-S/GEARS Phase I. Plus 77 SBIR/STTR awards totaling $27.4M. goTenna acquisition brought additional $15M USAF STRATFI + $99M CBP IDIQ.",
       "detail": null,
       "source_datasets": [
         "usaspending",
@@ -316,7 +318,7 @@
     {
       "id": 6802,
       "finding_type": "intelligence",
-      "summary": "FORTERRA DEFENSE PROGRAM PENETRATION — 8 ACTIVE PROGRAMS ACROSS 3 SERVICES: (1) ROGUE-Fires/NMESIS — Marine Corps, production, first DoD ground autonomy production contract. (2) DeepFires/CAML — Army long-range precision fires, prototype, with RTX/Oshkosh. (3) FMAV family — Army/Marines, Oshkosh product family (L/M/X-MAV). (4) Autonomous AMPV — Army armored formations, BAE partnership, prototype 2026. (5) ATV-S/GEARS — Army logistics trucks, winner-take-all vs Carnegie Robotics mid-FY2026. (6) UxS autonomy — Army unmanned tactical, 1 of 3 vendors. (7) Autonomous Breaching — Army engineers, $114M prime, FIELDED IN COMBAT. (8) Voice-commanded autonomy SBIR — adjacent to XM30 program. Claims to be ONLY company competing on all 4 DoD ground autonomy programs. CRITICAL: Kodiak AI won parallel ROGUE-Fires contract (Jan 2026), Marines hedging.",
+      "summary": "FORTERRA DEFENSE PROGRAM PENETRATION \u2014 8 ACTIVE PROGRAMS ACROSS 3 SERVICES: (1) ROGUE-Fires/NMESIS \u2014 Marine Corps, production, first DoD ground autonomy production contract. (2) DeepFires/CAML \u2014 Army long-range precision fires, prototype, with RTX/Oshkosh. (3) FMAV family \u2014 Army/Marines, Oshkosh product family (L/M/X-MAV). (4) Autonomous AMPV \u2014 Army armored formations, BAE partnership, prototype 2026. (5) ATV-S/GEARS \u2014 Army logistics trucks, winner-take-all vs Carnegie Robotics mid-FY2026. (6) UxS autonomy \u2014 Army unmanned tactical, 1 of 3 vendors. (7) Autonomous Breaching \u2014 Army engineers, $114M prime, FIELDED IN COMBAT. (8) Voice-commanded autonomy SBIR \u2014 adjacent to XM30 program. Claims to be ONLY company competing on all 4 DoD ground autonomy programs. CRITICAL: Kodiak AI won parallel ROGUE-Fires contract (Jan 2026), Marines hedging.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -369,7 +371,7 @@
     {
       "id": 6803,
       "finding_type": "intelligence",
-      "summary": "FORTERRA 'TOO EMBEDDED TO REPLACE' ASSESSMENT: HIGH and accelerating but NOT YET IRREPLACEABLE. Positive indicators: (1) crossed production threshold on ROGUE-Fires (DoD first). (2) Multi-service penetration (Marines, Army fires/logistics/maneuver/engineers). (3) Preferred autonomy integrator for Oshkosh (primary DoD tactical vehicle maker) AND BAE Systems (tracked vehicle prime). (4) FMAV family strategy captures multiple programs with single architecture. (5) $114M breaching systems in operational combat use. (6) goTenna acquisition integrates comms + autonomy layer. VULNERABILITIES: (1) Kodiak AI competing on ROGUE-Fires — not sole-source. (2) Army autonomy restructuring (Dec 2025) creating budget risk. (3) ATV-S downselect is winner-take-all vs Carnegie mid-FY2026. (4) CAML pre-award with Lockheed competing. (5) Software-only — depends on primes for vehicles. Next 12-18 months decisive.",
+      "summary": "FORTERRA 'TOO EMBEDDED TO REPLACE' ASSESSMENT: HIGH and accelerating but NOT YET IRREPLACEABLE. Positive indicators: (1) crossed production threshold on ROGUE-Fires (DoD first). (2) Multi-service penetration (Marines, Army fires/logistics/maneuver/engineers). (3) Preferred autonomy integrator for Oshkosh (primary DoD tactical vehicle maker) AND BAE Systems (tracked vehicle prime). (4) FMAV family strategy captures multiple programs with single architecture. (5) $114M breaching systems in operational combat use. (6) goTenna acquisition integrates comms + autonomy layer. VULNERABILITIES: (1) Kodiak AI competing on ROGUE-Fires \u2014 not sole-source. (2) Army autonomy restructuring (Dec 2025) creating budget risk. (3) ATV-S downselect is winner-take-all vs Carnegie mid-FY2026. (4) CAML pre-award with Lockheed competing. (5) Software-only \u2014 depends on primes for vehicles. Next 12-18 months decisive.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -408,7 +410,7 @@
     {
       "id": 6804,
       "finding_type": "financial",
-      "summary": "CONGRESSIONAL EARMARK FOR FORTERRA: Congress added $59M for ROGUE-Fires autonomy kits in FY2026 budget — $30M ABOVE Pentagon's own request. This indicates congressional champions actively steering additional money toward the program. Key question: which members/committees pushed the $30M addition? Cross-reference with Forterra lobbyist Stephen Rubright (Head of Government Affairs, West Point grad, registered lobbyist) and any PAC/FEC donations by Forterra leadership. The earmark exceeds what DoD asked for, suggesting lobbying or champion dynamic.",
+      "summary": "CONGRESSIONAL EARMARK FOR FORTERRA: Congress added $59M for ROGUE-Fires autonomy kits in FY2026 budget \u2014 $30M ABOVE Pentagon's own request. This indicates congressional champions actively steering additional money toward the program. Key question: which members/committees pushed the $30M addition? Cross-reference with Forterra lobbyist Stephen Rubright (Head of Government Affairs, West Point grad, registered lobbyist) and any PAC/FEC donations by Forterra leadership. The earmark exceeds what DoD asked for, suggesting lobbying or champion dynamic.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -438,56 +440,9 @@
       ]
     },
     {
-      "id": 6805,
-      "finding_type": "intelligence",
-      "summary": "CRITICAL REVOLVING DOOR — ARI SCHULER (Forterra/goTenna President): While serving as a DHS official, Schuler CREATED Customs and Border Protection's innovation program. He then became CEO of goTenna, which won a $99M IDIQ contract with CBP — the very program he had created. Forterra then acquired goTenna (Oct 2025), and Schuler now leads the goTenna division within Forterra. He literally built the government demand signal at DHS, walked to the supply side at goTenna, won a $99M contract from his former program, and now runs that business unit inside a $1B defense contractor. This is a textbook case of the revolving door creating the customer then serving it. Donated $2,950 to Forterra PAC.",
-      "detail": null,
-      "source_datasets": [
-        "web_search",
-        "fec"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-18 00:42:13",
-      "target_name": "Ari Schuler",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "CBP IDIQ award records",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "FEC filings Forterra PAC",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Forterra goTenna acquisition press release",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LinkedIn Ari Schuler profile",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6806,
       "finding_type": "intelligence",
-      "summary": "FORTERRA REVOLVING DOOR NETWORK — 6 SENIOR OFFICIALS WITH DIRECT GOVERNMENT-TO-CONTRACTOR PIPELINES: (1) ARI SCHULER — created CBP innovation program at DHS, then CEO of goTenna winning $99M CBP IDIQ, now Forterra/goTenna President. (2) STEPHEN RUBRIGHT — West Point, Army combat vet, Army legislative liaison (lobbied Congress FOR Army), now lobbies Congress FOR Forterra which sells TO Army. CNAS affiliated. (3) SARAH FLAIM — House Appropriations Committee staff (controls DoD funding), DCI Group lobbyist, now Forterra Congressional Affairs. (4) KEVIN TURNER (CLO) — General Counsel at 3 federal agencies (DFC, OPIC, Ex-Im Bank), Chief of Staff to Sen. Luther Strange (R-AL), Chief Deputy AG Alabama. (5) SCOTT SANDERS (CGO) — MARSOC operator, built $1B SOCOM program at Anduril, then Vannevar Labs, now Forterra. (6) ALBERTO LACAZE & KARL MURPHY — both worked at NIST on government autonomous vehicle programs (Demo I-III), then founded company commercializing that research for DoD.",
+      "summary": "FORTERRA REVOLVING DOOR NETWORK \u2014 6 SENIOR OFFICIALS WITH DIRECT GOVERNMENT-TO-CONTRACTOR PIPELINES: (1) ARI SCHULER \u2014 created CBP innovation program at DHS, then CEO of goTenna winning $99M CBP IDIQ, now Forterra/goTenna President. (2) STEPHEN RUBRIGHT \u2014 West Point, Army combat vet, Army legislative liaison (lobbied Congress FOR Army), now lobbies Congress FOR Forterra which sells TO Army. CNAS affiliated. (3) SARAH FLAIM \u2014 House Appropriations Committee staff (controls DoD funding), DCI Group lobbyist, now Forterra Congressional Affairs. (4) KEVIN TURNER (CLO) \u2014 General Counsel at 3 federal agencies (DFC, OPIC, Ex-Im Bank), Chief of Staff to Sen. Luther Strange (R-AL), Chief Deputy AG Alabama. (5) SCOTT SANDERS (CGO) \u2014 MARSOC operator, built $1B SOCOM program at Anduril, then Vannevar Labs, now Forterra. (6) ALBERTO LACAZE & KARL MURPHY \u2014 both worked at NIST on government autonomous vehicle programs (Demo I-III), then founded company commercializing that research for DoD.",
       "detail": null,
       "source_datasets": [
         "web_search",
@@ -573,7 +528,7 @@
     {
       "id": 6808,
       "finding_type": "intelligence",
-      "summary": "FORTERRA INVESTOR STRATEGIC PROFILES: (1) ROSS FUBINI (XYZ Venture Capital) holds FORTERRA BOARD SEAT — defense tech VC. (2) DAVE DEWALT (NightDragon) — NSTAC for 4 presidential administrations, Army Cyber Institute advisor, FBI IT Advisory Council, former FireEye/McAfee CEO. (3) HANWHA ASSET MANAGEMENT — South Korean defense conglomerate ($70.5B AUM), makes K9 howitzer, rocket systems, armored vehicles. Strategic interest in US autonomous defense tech. (4) ENLIGHTENMENT CAPITAL (Devin Talbott) — dedicated A&D PE, $825M Fund V (2024), team includes former CFR/State Dept staff. (5) SCOTT PHILIPS — early Palantir Forward Deployed Engineer -> MIT Lincoln Lab -> Vannevar Labs CTO -> Forterra CIO. Palantir alumni network active in defense tech circulation.",
+      "summary": "FORTERRA INVESTOR STRATEGIC PROFILES: (1) ROSS FUBINI (XYZ Venture Capital) holds FORTERRA BOARD SEAT \u2014 defense tech VC. (2) DAVE DEWALT (NightDragon) \u2014 NSTAC for 4 presidential administrations, Army Cyber Institute advisor, FBI IT Advisory Council, former FireEye/McAfee CEO. (3) HANWHA ASSET MANAGEMENT \u2014 South Korean defense conglomerate ($70.5B AUM), makes K9 howitzer, rocket systems, armored vehicles. Strategic interest in US autonomous defense tech. (4) ENLIGHTENMENT CAPITAL (Devin Talbott) \u2014 dedicated A&D PE, $825M Fund V (2024), team includes former CFR/State Dept staff. (5) SCOTT PHILIPS \u2014 early Palantir Forward Deployed Engineer -> MIT Lincoln Lab -> Vannevar Labs CTO -> Forterra CIO. Palantir alumni network active in defense tech circulation.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -617,55 +572,9 @@
       ]
     },
     {
-      "id": 6809,
-      "finding_type": "intelligence",
-      "summary": "ENLIGHTENMENT CAPITAL — DC DEFENSE PE WITH PENTAGON REVOLVING DOOR ADVISORY BOARD: Founded 2012 by Devin Talbott (Lazard -> Carlyle -> TCG Financial Partners of FORMER SECDEF WILLIAM COHEN -> D.E. Shaw -> founded EC). HQ Chevy Chase, MD. $825M Fund V (2024). 42 portfolio companies, $1.9B+ revenue. ADVISORY BOARD: (1) BOB WORK — Deputy SecDef 2014-2017, ARCHITECT OF THIRD OFFSET STRATEGY which prioritized autonomous systems — now advises fund invested in Forterra, the autonomous vehicle company that benefits from the strategy he championed. (2) GEN. JAMES CARTWRIGHT — Vice Chairman JCS (4-star Marine). (3) DEBORAH LEE JAMES — Secretary of the Air Force. (4) KEN KRIEG — USD(AT&L), controlled Pentagon procurement. (5) ALAN THOMAS — Commissioner GSA Federal Acquisition Service. (6) JOHN HILLEN — Asst SecState Political-Military Affairs. (7) BRETT LAMBERT — former DoD official. This is the traditional DC defense-industrial revolving door, distinct from Silicon Valley tech-right network.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-18 00:44:03",
-      "target_name": "Enlightenment Capital",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Enlightenment Capital firm and people pages",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "ExecutiveBiz advisory board announcements",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "GovConWire Fund V coverage",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "WashingtonExec Talbott profile",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6810,
       "finding_type": "intelligence",
-      "summary": "FORTERRA STRUCTURAL ANALYSIS — TWO DISTINCT POWER NETWORKS CONVERGING: Forterra sits at the intersection of two different influence networks funding autonomous military vehicles: (1) DC DEFENSE ESTABLISHMENT — Enlightenment Capital (fmr DepSecDef Work, VCJCS Cartwright, SecAF James on advisory board), NightDragon (DeWalt, NSTAC/FBI/Army Cyber), Kevin Turner (GC at 3 agencies), Rubright/Flaim (Army/Appropriations revolving door). This is the traditional Pentagon-industrial complex. (2) DEFENSE TECH STARTUP ECOSYSTEM — Palantir alumni (Philips), Anduril alumni (Sanders), Vannevar Labs alumni (Sanders + Philips), SoftBank Vision Fund, Hedosophia, RTX Ventures. These two networks rarely overlap. Forterra bridges them through its SBIR-to-production trajectory: built credibility in the traditional system (20 years of Army SBIR contracts) then attracted Silicon Valley capital (SoftBank Series A). The company's leadership hiring pattern shows deliberate construction of both networks simultaneously.",
+      "summary": "FORTERRA STRUCTURAL ANALYSIS \u2014 TWO DISTINCT POWER NETWORKS CONVERGING: Forterra sits at the intersection of two different influence networks funding autonomous military vehicles: (1) DC DEFENSE ESTABLISHMENT \u2014 Enlightenment Capital (fmr DepSecDef Work, VCJCS Cartwright, SecAF James on advisory board), NightDragon (DeWalt, NSTAC/FBI/Army Cyber), Kevin Turner (GC at 3 agencies), Rubright/Flaim (Army/Appropriations revolving door). This is the traditional Pentagon-industrial complex. (2) DEFENSE TECH STARTUP ECOSYSTEM \u2014 Palantir alumni (Philips), Anduril alumni (Sanders), Vannevar Labs alumni (Sanders + Philips), SoftBank Vision Fund, Hedosophia, RTX Ventures. These two networks rarely overlap. Forterra bridges them through its SBIR-to-production trajectory: built credibility in the traditional system (20 years of Army SBIR contracts) then attracted Silicon Valley capital (SoftBank Series A). The company's leadership hiring pattern shows deliberate construction of both networks simultaneously.",
       "detail": null,
       "source_datasets": [
         "analysis_run"
@@ -688,69 +597,9 @@
       ]
     },
     {
-      "id": 6811,
-      "finding_type": "intelligence",
-      "summary": "MOORE STRATEGIC VENTURES — LOUIS BACON'S PERSONAL DEFENSE TECH VEHICLE: MSV is NOT a traditional VC — it is the direct investment arm of LOUIS MOORE BACON, founder of Moore Capital Management (formerly $40B+ global macro hedge fund). In Nov 2019, Bacon returned $8.9B to outside investors, converting to proprietary fund (70% return in 2020). MSV deploys Bacon's personal capital with no LP constraints — effectively unlimited capacity. 127+ investments, 20+ exits. DEFENSE CLUSTER: Forterra ($300M+ across B+C rounds), Second Front Systems (defense DevSecOps, $32M Series A lead, founded by former Marines), Adarga (UK defense AI, GBP 12M MoD contract), Paramify (FedRAMP/CMMC compliance), Black Kite (cyber risk). Bacon is center-right donor ($250K RGA, $1M No Labels, $1M GOP, max to Sen. Sinema, GBP 500K UK Conservatives) — NOT MAGA-aligned. No direct military/government revolving door at MSV team level.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": null,
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-03-18 00:45:11",
-      "target_name": "Moore Strategic Ventures",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Crunchbase MSV profile",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Forterra funding announcements",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Institutional Investor Moore Capital article",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Louis Bacon Wikipedia",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "PitchBook MSV",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Second Front Systems press releases",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
       "id": 6812,
       "finding_type": "financial",
-      "summary": "FORTERRA LOBBYING ACTIVITY: Lobbying spend escalating rapidly — $305K (2025), $130K (2024), $10K (2021). LD-2 filings disclose lobbying on H.R. 8070/S.4638 (NDAA: autonomous driving acquisition, commercial autonomy policy) AND H.R. 8774/S.4921 (DEFENSE APPROPRIATIONS: funding for Army and Marine Corps autonomous ground vehicles). These are the EXACT bills that produced the $30M add above DoD request for ROGUE-Fires autonomy kits. PAC registered May 2025 as 'Lobbyist/Registrant PAC' (designation B). $33K raised, $2K disbursed. PAC Treasurer: Steve Rubright (Head of Govt Affairs). Industry coalition: founding member of AUVSI Partnership for Robotics Competitiveness (launched Capitol Hill Feb 2026).",
+      "summary": "FORTERRA LOBBYING ACTIVITY: Lobbying spend escalating rapidly \u2014 $305K (2025), $130K (2024), $10K (2021). LD-2 filings disclose lobbying on H.R. 8070/S.4638 (NDAA: autonomous driving acquisition, commercial autonomy policy) AND H.R. 8774/S.4921 (DEFENSE APPROPRIATIONS: funding for Army and Marine Corps autonomous ground vehicles). These are the EXACT bills that produced the $30M add above DoD request for ROGUE-Fires autonomy kits. PAC registered May 2025 as 'Lobbyist/Registrant PAC' (designation B). $33K raised, $2K disbursed. PAC Treasurer: Steve Rubright (Head of Govt Affairs). Industry coalition: founding member of AUVSI Partnership for Robotics Competitiveness (launched Capitol Hill Feb 2026).",
       "detail": null,
       "source_datasets": [
         "fec",
@@ -797,7 +646,7 @@
     {
       "id": 6813,
       "finding_type": "intelligence",
-      "summary": "FORTERRA COORDINATED POLITICAL TARGETING STRATEGY: PAC and personal donations reveal dual-track approach — Rubright (Govt Affairs) targets AUTHORIZERS while Araujo (CEO) targets APPROPRIATORS. HASC TRACK (Rubright personal): Rep. Rich McCormick R-GA $500 (HASC Cyber/IT/Innovation + Tactical Air/Land Forces — DIRECT JURISDICTION over ground autonomy), Rep. Pat Harrigan R-NC $500 (HASC, West Point like Rubright), Rep. John McGuire R-VA $500 (HASC, ex-SEAL). APPROPRIATIONS TRACK (Araujo personal): Rep. John Carter R-TX $3,500 (Approps Defense Sub, Army Caucus co-chair, Fort Cavazos in district), Rep. Tom Cole R-OK $600 (CHAIRMAN OF HOUSE APPROPRIATIONS — most powerful spending figure). PAC DISBURSEMENTS: Rep. Andrew Garbarino R-NY $1,000 (CHAIRMAN House Homeland Security), Sen. Mark Warner D-VA $500 (CHAIRMAN Senate Intelligence + Approps), Rep. Johnny Olszewski D-MD $500 (local MD member).",
+      "summary": "FORTERRA COORDINATED POLITICAL TARGETING STRATEGY: PAC and personal donations reveal dual-track approach \u2014 Rubright (Govt Affairs) targets AUTHORIZERS while Araujo (CEO) targets APPROPRIATORS. HASC TRACK (Rubright personal): Rep. Rich McCormick R-GA $500 (HASC Cyber/IT/Innovation + Tactical Air/Land Forces \u2014 DIRECT JURISDICTION over ground autonomy), Rep. Pat Harrigan R-NC $500 (HASC, West Point like Rubright), Rep. John McGuire R-VA $500 (HASC, ex-SEAL). APPROPRIATIONS TRACK (Araujo personal): Rep. John Carter R-TX $3,500 (Approps Defense Sub, Army Caucus co-chair, Fort Cavazos in district), Rep. Tom Cole R-OK $600 (CHAIRMAN OF HOUSE APPROPRIATIONS \u2014 most powerful spending figure). PAC DISBURSEMENTS: Rep. Andrew Garbarino R-NY $1,000 (CHAIRMAN House Homeland Security), Sen. Mark Warner D-VA $500 (CHAIRMAN Senate Intelligence + Approps), Rep. Johnny Olszewski D-MD $500 (local MD member).",
       "detail": null,
       "source_datasets": [
         "fec"
@@ -834,46 +683,512 @@
       ]
     },
     {
-      "id": 6814,
+      "id": 6820,
       "finding_type": "intelligence",
-      "summary": "STEPHEN RUBRIGHT REVOLVING DOOR DETAIL: Forterra Head of Govt Affairs, PAC Treasurer, registered lobbyist. FULL CAREER: West Point graduate -> Army XVIII Airborne Corps, OIF 2005-06 (combat vet) -> Military Legislative Assistant to SEN. KAY BAILEY HUTCHISON (R-TX, senior defense) AND REP. JEFF MILLER (R-FL, HASC Chairman 2015-16) -> Army legislative liaison (Senior Legislative Strategist for Army appropriations) -> lobbyist at Astellas Pharma -> Forterra Head of Govt Affairs (May 2025). OpenSecrets industry: Pharma/Health 68%, Defense Aerospace 18%, Misc Defense 2%. Also affiliated with CNAS (Center for a New American Security). His personal donations target HASC members with military backgrounds (McCormick ex-Marine, Harrigan West Point/Green Beret, McGuire ex-SEAL) plus APPROPRIATIONS CHAIRMAN Tom Cole ($600). He is simultaneously PAC Treasurer and registered lobbyist, triggering Lobbyist/Registrant PAC designation.",
+      "summary": "FORTERRA EXPANDED PERSONNEL ROSTER \u2014 3 PALANTIR ALUMNI, IN-Q-TEL VETERAN, ARMY RAS STRATEGY AUTHOR: Key personnel beyond C-suite: (1) GABE SGANGA \u2014 VP Commercial Growth. USMC Field Artillery Officer (2007-2012), then MARFORCYBER Cyberspace Operations Officer (2013-2018) at Fort Meade in NSA/USCYBERCOM complex. Palantir Deployment Strategist 4.5 years. Joined Forterra Nov 2022. (2) MIKE MCGHAN \u2014 Head of Commercial Logistics. Naval Academy grad, Navy pilot and operational test pilot 11 years (2006-2017). Palantir BD 5.5 years (led Navy business). Joined Nov 2022. (3) ANDREA GARRITY \u2014 CGO of goTenna division. Former VP of INTELLIGENCE COMMUNITY SUPPORT AT IN-Q-TEL (CIA's strategic venture capital arm). Two decades working with government agencies. (4) MATT DOOLEY (LTC Ret) \u2014 Defense Strategy Initiatives Lead. West Point 1994, 21.5yr Army armor. Final assignment: CHIEF OF LETHALITY AND ROBOTICS BRANCH, Army Capabilities Integration Center. PRINCIPAL COORDINATING AUTHOR of the Army's Robotics and Autonomous Systems Strategy (2017) \u2014 he wrote the strategy document that created demand for Forterra's products, now works for the company implementing it.",
       "detail": null,
       "source_datasets": [
-        "fec",
         "web_search"
       ],
-      "confidence": "confirmed",
+      "confidence": "high",
       "date_of_event": null,
-      "claim_type": "direct_quote",
+      "claim_type": "synthesis",
       "verification_status": "unverified",
-      "created_at": "2026-03-18 00:52:39",
-      "target_name": "Stephen Rubright",
+      "created_at": "2026-03-18 02:44:43",
+      "target_name": "Forterra",
       "profile_id": "tech-right",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "CNAS profile",
+          "evidence_ref": "AUVSI Defense Advocacy Committee Dooley",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "FEC individual donor records",
+          "evidence_ref": "Autonocast #332 Sganga interview",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "LegiStorm bio",
+          "evidence_ref": "BreakLine Education Sganga post",
           "source_quote": null,
           "source_page": null,
           "assessment": null
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSecrets revolving door profile Stephen Rubright",
+          "evidence_ref": "FAV Summit McGhan bio",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Org Forterra chart",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "goTenna press release Garrity appointment",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6821,
+      "finding_type": "intelligence",
+      "summary": "FORTERRA ADDITIONAL KEY PERSONNEL: (5) PAUL BENFIELD \u2014 Head of Strategy. 20+ year Army veteran (Airborne, Special Ops, Infantry). 82nd Airborne Baghdad surge, Fallujah advisory ops. Final assignment: MILITARY ASSISTANT TO THE DEPUTY SECRETARY OF DEFENSE (innovation and modernization portfolio). Douglas MacArthur Leadership Award. CNAS Adjunct Senior Fellow (Defense). Director Emerging Technologies at Pallas Advisors. (6) JAMIE GEWIRTZ \u2014 VP Platform Integration. From Ghost Robotics (VP Engineering, Jun 2022-Aug 2024). MS Engineering Robotics UPenn. (7) ZACH LACELLE \u2014 Head of Product. From MITRE Corporation (Principal and Group Leader, Autonomous Systems/Robotics and Unmanned Systems, 2017-2022). Previously at Robotic Research 2009-2017. (8) CHRISTI COX \u2014 General Counsel. From Epirus (directed energy defense tech, named 2022 Startup Solo GC of the Year). Microsoft, Oracle. (9) CHANNING FOSTER \u2014 Head of Public Affairs (may have departed to HavocAI). White House Office of Scheduling and Advance (defense/national security). Registered lobbyist. (10) IN SUNG CHO \u2014 Chief of Staff. From Intellian Technologies.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 02:44:57",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNAS Paul Benfield profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forterra website",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LinkedIn profiles",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Org Forterra chart",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ZoomInfo",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6822,
+      "finding_type": "intelligence",
+      "summary": "FORTERRA DEMAND-SIGNAL-TO-SUPPLY-SIDE PIPELINE \u2014 THREE CASES: Forterra has hired three people who shaped the government demand signals that its products now fulfill: (1) MATT DOOLEY \u2014 authored the Army's Robotics and Autonomous Systems Strategy (2017) as Chief of Lethality and Robotics Branch at Army Capabilities Integration Center. The strategy document that created programmatic demand for autonomous ground vehicles. Now Defense Strategy Initiatives Lead at Forterra. (2) ARI SCHULER \u2014 created CBP's Innovation Team (INVNT) which procured goTenna mesh radios. Now President of Forterra's goTenna division. (3) Via investor: BOB WORK (Enlightenment Capital advisor) \u2014 as Deputy SecDef championed the Third Offset Strategy that prioritized autonomous systems. EC invested in Forterra across all three rounds. This pattern parallels the Schuler case: government officials who define requirements, create programs, or set strategy subsequently join (or advise investors in) the companies that fulfill those requirements.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 02:45:14",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AUVSI Dooley bio",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Army RAS Strategy 2017 publication",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CBP INVNT creation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Enlightenment Capital advisory board",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6823,
+      "finding_type": "financial",
+      "summary": "ExLF PROGRAM FAILURE: $152M+ SPENT, ZERO OPERATIONAL CAPABILITY. The Expedient Leader Follower program consumed at least $152M across three contractors: Robotic Research/Forterra $49.7M (autonomy kits, Jun 2018), Oshkosh Defense $49M (vehicle integration), plus Forterra received an ADDITIONAL $53.1M for a 60-month wind-down. Lockheed Martin served as systems integrator. Program fielded 60 kitted PLS trucks to 41st Transportation Company at Fort Polk (Sep 2020), logged 281,551 miles total but only 2,115 fully autonomous miles. At Native Fury 2024 in Saudi Arabia, LiDAR/radar MISIDENTIFIED speed bumps, bridges, and road signs as obstacles \u2014 safety operator required at all times. Software never achieved unsupervised operation certification. Program closed 2023 without transitioning from demonstration to program of record. The Army's government-developed Robotic Technology Kernel (RTK) common autonomy software was also cancelled after 12+ years of development. NO GAO investigation, NO IG report, NO congressional hearing on the $152M+ expenditure.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:03:12",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense Aug 2018 Army wants 70 self-driving trucks",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense Jun 2023 Army closing leader-follower",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DVIDS Native Fury 2024 autonomous vehicles",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Oshkosh Defense Jun 2018 contract announcement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PRNewswire Jun 2018 Robotic Research contract",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6824,
+      "finding_type": "intelligence",
+      "summary": "ExLF-TO-GEARS CONTINUITY PATTERN: The Army closed ExLF in 2023 after spending $152M+, awarded Forterra $53.1M for a 60-month wind-down, then selected Forterra for GEARS/ATV-S \u2014 the successor program pursuing the SAME MISSION (autonomous logistics convoys) on the SAME PLATFORM (Oshkosh PLS). Key differences: GEARS uses OTA/DIU acquisition (not traditional), competitive prototyping (Carnegie Robotics competing), single-vendor autonomy kits (eliminating ExLF's 4-contractor fragmentation), and commercial solutions rather than government-developed RTK software. However, Forterra's core AutoDrive technology descends from the ExLF codebase. The Army's December 2025 autonomy restructuring introduced further budget uncertainty \u2014 Army CTO Alex Miller signaled possible cuts: 'Maybe we don't see some of these through because they no longer match the direction.' Winner-take-all downselect vs Carnegie Robotics at mid-FY2026. If Forterra wins, it will have captured both the failed program AND its successor on the same vehicle.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:03:28",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense Dec 2025 autonomy restructuring",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense Feb 2025 GEARS Phase 2",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense Jun 2023 ExLF closure",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Contrary Research Forterra breakdown",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DIU GEARS page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6825,
+      "finding_type": "relationship",
+      "summary": "FORTERRA-SECOND FRONT SYSTEMS MARINE NETWORK VIA MOORE STRATEGIC: Moore Strategic Ventures (Louis Bacon) invested in BOTH Forterra (led B+C, $313M) and Second Front Systems (Series C, $70M). Both companies are Marine-founded defense tech. Second Front co-founder Mark Butler (Col, Ret., 26yr USMC, FIRST Deputy Commander of MARFORCYBER) likely OVERLAPPED at MARFORCYBER with Forterra's Gabe Sganga (MARFORCYBER 2013-2018). Scott Sanders (Forterra CGO) appeared on Second Front's podcast (Ep 85). Pipeline: USMC MARSOC/MARFORCYBER -> Palantir/Anduril -> Vannevar Labs -> Forterra, with BreakLine Education as a confirmed transition facilitator (Sganga used BreakLine to get to Palantir; Araujo appeared on BreakLine platform). Vannevar Labs is the key feeder \u2014 Sanders (CGO) and Philips (CIO) both came from Vannevar.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:04:13",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BreakLine Education Sganga Facebook post",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Butler memorial",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Moore Strategic Ventures portfolio",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Sanders on Second Front podcast Ep 85",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Second Front Systems about page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6826,
+      "finding_type": "intelligence",
+      "summary": "FORTERRA USMC PIPELINE ANALYSIS: Career archetype is USMC (especially MARSOC/MARFORCYBER) -> Palantir or Anduril -> Vannevar Labs -> Forterra. No confirmed unit overlaps among the 5 Forterra Marines, but Sganga (MARFORCYBER 2013-2018) and Second Front co-founder Butler (MARFORCYBER Deputy Commander ~2010-2013) likely overlapped in 2013. NMESIS program office (PM Nick Pierce, PgM Joe McPherson at MCSC Quantico) shows NO confirmed revolving door to Forterra/Oshkosh. Patrick Acox chairs AUVSI Ground Advocacy Committee \u2014 lobbying Congress on autonomous ground vehicle policy while serving as Forterra VP Defense BD. Josh Araujo's military record has inconsistencies (described as both Infantry Officer and achieving rank of Corporal) suggesting mustang career. His specific Marine units remain undisclosed \u2014 a notable gap for the CEO of a major Marine Corps contractor.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:04:14",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AUVSI Ground Advocacy Committee announcement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BreakLine Josh Araujo",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Defense News NMESIS fielding Nick Pierce",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forterra website",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Org Forterra chart",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6827,
+      "finding_type": "intelligence",
+      "summary": "FORTERRA-OSHKOSH ASYMMETRIC DEPENDENCY: Oshkosh ($23.7B cumulative DoD spending, dominant tactical vehicle maker) is Forterra's most critical partner but treats Forterra as a VENDOR, NOT strategic ally. Evidence: (1) Oshkosh did NOT invest in any Forterra round despite RTX Ventures investing \u2014 purely operational relationship. (2) FMAV product line press release at AUSA 2025 deliberately OMITS Forterra's name \u2014 positioning autonomy as swappable. (3) Oshkosh has legacy internal autonomy via TerraMax (DARPA Grand Challenge 2004-2007). (4) Marines dual-sourced Kodiak AI on ROGUE-Fires Jan 2026, with Oshkosh accepting the alternative provider. (5) Forterra cannot serve as prime on most vehicle programs \u2014 restricted to integration role. JLTV context: Army cancelled future JLTV procurement (Apr 2025, SecDef Hegseth 'obsolete'), Marines continuing \u2014 shifts autonomous JLTV (ROGUE-Fires) from mass-production variant to potentially the platform's primary growth trajectory.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "usaspending"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:04:54",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense Kodiak ROGUE-Fires",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Contrary Research Forterra analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forterra Series C investor list (no Oshkosh)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Oshkosh FMAV AUSA 2025 press release",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending Oshkosh Defense LLC $21.15B DoD",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6828,
+      "finding_type": "financial",
+      "summary": "OSHKOSH-FORTERRA COORDINATED LOBBYING SPIKE FY2025: Both companies sharply increased lobbying spending in 2025. Oshkosh: $1,040,000 (2.6x increase from $400K in 2024). Forterra: $305,000 (2.3x increase from $130K in 2024). Both lobby on defense appropriations and authorization bills. The spike coincides with FY2026 budget cycle where Congress allocated $59M for ROGUE-Fires autonomy kits \u2014 $30M above DoD request \u2014 a program where both companies benefit (Oshkosh as prime, Forterra as autonomy sub). Oshkosh operates OCEPAC ($167K in 2024 cycle contributions). Whether the lobbying was coordinated or merely aligned could not be confirmed from available public data.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:05:00",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FY2026 defense appropriations",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSecrets Oshkosh Corp lobbying profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSecrets Robotic Research OpCo lobbying",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6833,
+      "finding_type": "relationship",
+      "summary": "FORTERRA INSTITUTIONAL WAYSTATION NETWORK \u2014 CNAS AND PALLAS ADVISORS: Three CNAS-affiliated individuals now at Forterra: (1) Paul Benfield \u2014 CNAS Adjunct Senior Fellow (Defense, Jul 2020), now VP Strategy. (2) Stephen Rubright \u2014 CNAS Next Generation Fellow (2009-2010), now Head of Govt Affairs. (3) LTG Tony Ierardi \u2014 joined CNAS alongside Benfield (Jul 2020), came from Rebellion Defense (Pallas Ventures portfolio company). CNAS functions as credentializing waystation between government service and defense industry. PALLAS ADVISORS connection via Benfield: Pallas Ventures portfolio includes Second Front Systems (also in Moore Strategic Ventures portfolio with Forterra, also Marine-founded). Pallas aggregates 2 former service secretaries, 1 former DNI, 1 former SOCOM commander, 1 former AF acquisition chief, 1 former NEC director. POGO flagged in 2021 revolving door review. Whether Forterra was ever a Pallas client is unknown \u2014 consulting relationships are not disclosed.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:22:34",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNAS Jul 2020 announcement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNAS bios for Benfield and Rubright",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "POGO 2021 review",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Pallas Advisors website",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1061,6 +1376,34 @@
       ]
     },
     {
+      "id": 3485,
+      "person_a": "Forterra",
+      "person_b": "goTenna",
+      "relationship_type": "subsidiary_of",
+      "description": "Forterra acquired goTenna Oct 9, 2025 for undisclosed price (Barclays advised). goTenna had $72.8M in federal contracts, $41.5M+ VC funding, $99M CBP IDIQ with remaining capacity. Now operates as Forterra division under Ari Schuler as President.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:21:02",
+      "profile_id": null,
+      "other_person": "goTenna",
+      "other_person_slug": "gotenna",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forterra press release Oct 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 3461,
       "person_a": "BAE Systems",
       "person_b": "Forterra",
@@ -1165,7 +1508,7 @@
       "person_a": "Forterra",
       "person_b": "SoftBank Vision Fund",
       "relationship_type": "funds",
-      "description": "SoftBank Vision Fund 2 led $228M Series A (Dec 2021) — Forterra's first-ever outside investment after 19 years bootstrapping. Absent from Series B and C rounds, suggesting possible exit or dilution.",
+      "description": "SoftBank Vision Fund 2 led $228M Series A (Dec 2021) \u2014 Forterra's first-ever outside investment after 19 years bootstrapping. Absent from Series B and C rounds, suggesting possible exit or dilution.",
       "strength": "medium",
       "date_range": null,
       "verification_status": "unverified",
@@ -1239,16 +1582,16 @@
     "key_finding_ids": [
       6812,
       6801,
+      6823,
       6799,
       6802,
       6806,
-      6813,
-      6797,
-      6798,
+      6820,
+      6821,
+      6825,
       6796,
-      6808,
-      6804,
-      6807
+      6833,
+      6827
     ],
     "key_identifiers": {
       "jurisdictions": [],
@@ -1260,7 +1603,10 @@
         "id": "key-relationships",
         "title": "Key Relationships",
         "viz": "ego_network",
-        "finding_ids": [],
+        "finding_ids": [
+          6825,
+          6833
+        ],
         "connection_ids": [
           3460,
           3462,
@@ -1269,6 +1615,7 @@
           3469,
           3473,
           3474,
+          3485,
           3461,
           3463,
           3465,
@@ -1290,7 +1637,9 @@
           6801,
           6804,
           6807,
-          6812
+          6812,
+          6823,
+          6828
         ],
         "connection_ids": [],
         "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
@@ -1313,53 +1662,53 @@
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
       }
     ],
-    "curated_at": "2026-03-18T01:43:44.372044",
-    "lead": "<p>Forterra, legally registered as Robotic Research Opco, LLC, is an autonomous military ground vehicle company headquartered in Clarksburg, Maryland [Finding #6796]. Founded in 2002 by Alberto Lacaze and Karl Murphy — both former researchers at the National Institute of Standards and Technology — the company operated for nineteen years as a bootstrapped SBIR/STTR contractor before raising $228 million in a Series A round led by <a href=\"/dossiers/softbank-group\">SoftBank</a> Vision Fund 2 in December 2021 [Finding #6799]. The company rebranded from Robotic Research to Forterra in February 2024 and reached a valuation exceeding $1 billion after closing a $238 million Series C round led by Moore Strategic Ventures in November 2025 [Finding #6799]. Total venture funding stands at approximately $541 million.</p>\n\n<p>Forterra develops the AutoDrive autonomous navigation system, which has been integrated across twelve or more military vehicle platforms. The company holds an estimated $380 million in identified federal contract value [Finding #6801], including a $114 million prime contract for autonomous breaching systems fielded with the Army's 27th Engineer Battalion, production contracts for the Marine Corps' ROGUE-Fires autonomous missile launcher under the NMESIS program (with Oshkosh Defense as prime contractor), and prototype work on autonomous armored vehicles with BAE Systems and autonomous precision fires launchers with RTX [Finding #6802]. Forterra claims to be the only company competing across all four Department of Defense ground autonomy programs. In October 2025, Forterra acquired goTenna, a tactical mesh networking company that holds a $99 million IDIQ contract with U.S. Customs and Border Protection [Finding #6800].</p>\n\n<p>The company's investor base spans two distinct networks: the traditional Washington defense establishment, represented by Enlightenment Capital (whose advisory board includes former Deputy Secretary of Defense Bob Work, former Vice Chairman of the Joint Chiefs General James Cartwright, and former Secretary of the Air Force Deborah Lee James) [Finding #6809], and Silicon Valley defense technology capital, including <a href=\"/dossiers/softbank-group\">SoftBank</a>, RTX Ventures, Hanwha Asset Management, and NightDragon [Finding #6808]. Forterra's senior leadership includes six officials with direct government-to-contractor career paths [Finding #6806], and the company operates a political action committee that has directed donations to members of the House Appropriations Defense Subcommittee and the House Armed Services Committee [Finding #6813]. Congress added $30 million above the Pentagon's own request for ROGUE-Fires autonomy kits in the FY2026 defense budget, a line item that aligns with Forterra's disclosed lobbying on the relevant appropriations bills [Finding #6812].</p>",
-    "system_role": "A twenty-year SBIR-incubated robotics company that transitioned to venture-backed defense contractor status, bridging the traditional Pentagon procurement establishment and the Silicon Valley defense technology ecosystem through parallel investor networks and systematic personnel recruitment from government, military, and competitor organizations.",
+    "curated_at": "2026-03-18T11:49:12.783120",
+    "lead": "<p>Forterra, legally registered as Robotic Research Opco, LLC, is an autonomous military ground vehicle company headquartered in Clarksburg, Maryland [Finding #6796]. Founded in 2002 by Alberto Lacaze and Karl Murphy \u2014 both former researchers at the National Institute of Standards and Technology \u2014 the company operated for nineteen years as a bootstrapped SBIR/STTR contractor before raising $228 million in a Series A round led by <a href=\"/dossiers/softbank-group\">SoftBank</a> Vision Fund 2 in December 2021 [Finding #6799]. The company rebranded from Robotic Research to Forterra in February 2024 and reached a valuation exceeding $1 billion after closing a $238 million Series C round led by Moore Strategic Ventures in November 2025 [Finding #6799]. Total venture funding stands at approximately $541 million.</p>\n\n<p>Forterra develops the AutoDrive autonomous navigation system, integrated across twelve or more military vehicle platforms. The company holds an estimated $380 million in identified federal contract value [Finding #6801], including a $114 million prime contract for autonomous breaching systems fielded with the Army's 27th Engineer Battalion, production contracts for the Marine Corps' ROGUE-Fires autonomous missile launcher under the NMESIS program, and prototype work with BAE Systems and RTX [Finding #6802]. A prior $49.7 million contract for Expedient Leader Follower autonomous convoy kits closed in 2023 without fielding operational systems after the Army spent at least $152 million across all contractors; Forterra received an additional $53.1 million for a sixty-month wind-down, and was subsequently selected for GEARS/ATV-S \u2014 the successor program pursuing the same mission on the same Oshkosh PLS platform [Finding #6823][Finding #6824]. In October 2025, Forterra acquired <a href=\"/dossiers/gotenna\">goTenna</a>, a tactical mesh networking company whose federal contract history includes $72.8 million across eighty awards [Finding #6830].</p>\n\n<p>The company's personnel network draws from three distinct pipelines: the traditional Washington defense establishment, the Silicon Valley defense technology ecosystem, and the Marine Corps [Finding #6810]. Forterra has assembled officials who shaped the government demand signals its products now fulfill: <a href=\"/dossiers/matt-dooley\">Matt Dooley</a> authored the Army's Robotics and Autonomous Systems Strategy (2017) that created programmatic demand for autonomous ground vehicles [Finding #6831]; <a href=\"/dossiers/ari-schuler\">Ari Schuler</a> created CBP's Innovation Team that procured goTenna mesh radios while he led the program, then became goTenna's CEO [Finding #6817]; and <a href=\"/dossiers/paul-benfield\">Paul Benfield</a> served as Military Assistant to the Deputy Secretary of Defense before transitioning through Pallas Advisors to Forterra [Finding #6832]. Three Palantir alumni, an In-Q-Tel veteran, and five Marine Corps veterans occupy senior roles [Finding #6820]. The company operates a political action committee that has directed donations to the Chairman of the House Appropriations Committee and members of the House Armed Services Committee, while its LD-2 lobbying filings target the same defense appropriations bills that produced a $30 million congressional add above the Pentagon's request for ROGUE-Fires [Finding #6812][Finding #6813].</p>",
     "sections": [
       {
         "id": "corporate-identity-and-evolution",
         "title": "Corporate Identity and Evolution",
         "viz": "timeline",
-        "content": "<p>The entity now known as Forterra was incorporated in Delaware on September 13, 2002, as Robotic Research LLC [Finding #6796]. Its founders, Alberto Lacaze and Karl Murphy, had both served as technical leads at the National Institute of Standards and Technology, where they worked on the Demo I through Demo III autonomous vehicle programs — federally funded research initiatives that laid the groundwork for military ground autonomy [Finding #6806]. The company registered with SAM.gov under UEI VNUQN3KJKPV4 and CAGE code 3BZU0, with primary NAICS codes in search, detection, and navigation systems (334511), motor vehicle electronic equipment (336320), and physical sciences R&D (541715) [Finding #6796].</p>\n\n<p>For its first nineteen years, Robotic Research operated without outside investment, building its technology base through Army SBIR and STTR contracts. USASpending records show $67.5 million in direct federal obligations from FY2008 through FY2026, with $64 million from the Department of Defense, $3.3 million from the Department of Homeland Security, and $296,000 from the Department of the Interior [Finding #6797]. The company's SBIR portfolio on SBIR.gov lists 77 awards (53 Phase I, 24 Phase II) totaling $27.4 million [Finding #6801]. This R&D work produced the AutoDrive autonomous navigation platform, which became the company's core commercial product.</p>\n\n<p>The company rebranded as Robotic Research Autonomous Industries (RRAI) before adopting the name Forterra in February 2024, combining \"for\" and the Latin \"terra\" while retaining the double-R of Robotic Research [Finding #6796]. The February 2026 opening of an Arlington, Virginia office near the Pentagon marked the company's transition toward a Washington-facing posture [Finding #6796]. As of late 2025, Forterra employed between 450 and 600 people across offices in Clarksburg, Arlington, Winter Park (Florida), Ketchum (Idaho), and Palo Alto (California) [Finding #6796].</p>"
+        "content": "<p>The entity now known as Forterra was incorporated in Delaware on September 13, 2002, as Robotic Research LLC [Finding #6796]. Its founders, Alberto Lacaze and Karl Murphy, had both served as technical leads at the National Institute of Standards and Technology, where they worked on the Demo I through Demo III autonomous vehicle programs [Finding #6806]. The company registered with SAM.gov under UEI VNUQN3KJKPV4 and CAGE code 3BZU0, with primary NAICS codes in search, detection, and navigation systems (334511), motor vehicle electronic equipment (336320), and physical sciences R&D (541715) [Finding #6796].</p>\n\n<p>For its first nineteen years, Robotic Research operated without outside investment, building its technology base through Army SBIR and STTR contracts. USASpending records show $67.5 million in direct federal obligations from FY2008 through FY2026, with $64 million from the Department of Defense, $3.3 million from the Department of Homeland Security, and $296,000 from the Department of the Interior [Finding #6797]. The company's SBIR portfolio lists 77 awards (53 Phase I, 24 Phase II) totaling $27.4 million [Finding #6801]. The company rebranded as Robotic Research Autonomous Industries before adopting the name Forterra in February 2024 [Finding #6796]. The February 2026 opening of an Arlington, Virginia office near the Pentagon marked the company's transition toward a Washington-facing posture [Finding #6796].</p>"
       },
       {
         "id": "defense-program-integration",
         "title": "Defense Program Integration",
         "viz": null,
-        "content": "<p>Forterra maintains active positions across eight Department of Defense programs spanning three military services [Finding #6802]. The company's $114 million prime contract for autonomous breaching systems, deployed with the Army's 27th Engineer Battalion at the Joint Readiness Training Center, represents both the largest single identified contract and the deepest operational integration — these systems are reported to be in active combat use for mine-clearing operations [Finding #6801][Finding #6802].</p>\n\n<p>The Marine Corps' ROGUE-Fires program — the Remotely Operated Ground Unit for Expeditionary Fires — constitutes the Department of Defense's first production contract for ground vehicle autonomy [Finding #6802]. Under this program, Forterra provides the AutoDrive autonomous navigation system as a subcontractor to Oshkosh Defense, which builds the JLTV-based launcher that carries Naval Strike Missiles as part of the Navy Marine Expeditionary Ship Interdiction System (NMESIS). Production began in mid-2025, with 48 vehicles planned for delivery. Congress appropriated $59 million for ROGUE-Fires autonomy kits in FY2026, $30 million above the Pentagon's own request [Finding #6804]. However, the Marine Corps awarded Kodiak AI a parallel autonomy contract for ROGUE-Fires in January 2026, indicating deliberate maintenance of competitive alternatives [Finding #6802].</p>\n\n<p>In partnership with RTX (Raytheon) and Oshkosh Defense, Forterra demonstrated the DeepFires autonomous launcher prototypes at Project Convergence 2025 — a live-fire exercise validating autonomous Tomahawk and PAC-3 launcher concepts feeding into the Army's Common Autonomous Multi-Domain Launcher (CAML) program [Finding #6802]. The BAE Systems partnership announced in April 2025 targets autonomous operation of the Armored Multi-Purpose Vehicle, a platform with an estimated $20 billion total program value already fielding to Armored Brigade Combat Teams [Finding #6802]. Additional programs include the ATV-S/GEARS autonomous logistics truck effort (a winner-take-all downselect against Carnegie Robotics expected mid-FY2026), the UxS Autonomy program for unmanned tactical squad vehicles, and a voice-commanded autonomy SBIR adjacent to the Army's XM30 infantry fighting vehicle [Finding #6802].</p>\n\n<p>Cross-referencing the company's contract history reveals a pattern: a $49.7 million Expedient Leader Follower contract awarded in June 2018 for autonomous convoy kits on Oshkosh PLS trucks was closed in 2023 without fielding operational systems [Finding #6801]. The GEARS/ATV-S program addresses the same PLS platform and mission set, representing a second attempt at autonomous logistics convoys after the first program's termination.</p>"
+        "content": "<p>Forterra maintains active positions across eight Department of Defense programs spanning three military services [Finding #6802]. The company's $114 million prime contract for autonomous breaching systems, deployed with the Army's 27th Engineer Battalion, represents both the largest single identified contract and the deepest operational integration \u2014 these systems are reported to be in active combat use [Finding #6801][Finding #6802].</p>\n\n<p>The Marine Corps' ROGUE-Fires program constitutes the Department of Defense's first production contract for ground vehicle autonomy [Finding #6802]. Forterra provides the AutoDrive system as a subcontractor to Oshkosh Defense, which builds the JLTV-based launcher carrying Naval Strike Missiles under the NMESIS program. Congress appropriated $59 million for ROGUE-Fires autonomy kits in FY2026, $30 million above the Pentagon's request [Finding #6804]. The Marine Corps awarded Kodiak AI a parallel autonomy contract in January 2026, maintaining competitive alternatives [Finding #6802].</p>\n\n<p>In partnership with RTX (Raytheon) and Oshkosh Defense, Forterra demonstrated the DeepFires autonomous launcher prototypes at Project Convergence 2025 [Finding #6802]. Additional programs include the autonomous AMPV prototype with BAE Systems, the ATV-S/GEARS autonomous logistics truck effort (winner-take-all downselect against Carnegie Robotics at mid-FY2026), the UxS Autonomy program, and a voice-commanded autonomy SBIR adjacent to the Army's XM30 [Finding #6802].</p>\n\n<p>A prior effort on the same Oshkosh PLS platform \u2014 the $49.7 million Expedient Leader Follower (ExLF) program awarded in June 2018 \u2014 closed in 2023 without fielding operational capability [Finding #6823]. The program consumed at least $152 million across Forterra ($49.7 million for autonomy kits plus $53.1 million for wind-down), Oshkosh ($49 million for vehicle integration), and Lockheed Martin (systems integration). During testing at Native Fury 2024 in Saudi Arabia, LiDAR and radar misidentified speed bumps, bridges, and road signs as obstacles, requiring a safety operator at all times [Finding #6823]. The Army's separately developed Robotic Technology Kernel common autonomy software was also cancelled after twelve years of development [Finding #6823]. GEARS/ATV-S addresses the same autonomous logistics convoy mission using OTA acquisition, competitive prototyping, and commercial solutions rather than government-developed software [Finding #6824]. No GAO investigation, Inspector General report, or congressional hearing examined the $152 million expenditure [Finding #6823].</p>"
       },
       {
         "id": "investor-network-architecture",
         "title": "Investor Network Architecture",
         "viz": "ego_network",
-        "content": "<p>Forterra's capital structure reflects investment from two distinct networks that rarely overlap in defense procurement [Finding #6810]. The first is the traditional Washington defense establishment. Enlightenment Capital, a Chevy Chase, Maryland-based private equity firm founded by Devin Talbott (whose career path ran through Lazard, the Carlyle Group, and TCG Financial Partners — the merchant bank of former Secretary of Defense William Cohen), has invested across the Series A, B, and C rounds [Finding #6809]. Enlightenment Capital's advisory board includes former Deputy Secretary of Defense Bob Work (2014–2017), who architected the Third Offset Strategy that established autonomous systems as a Pentagon priority; former Vice Chairman of the Joint Chiefs of Staff General James Cartwright; former Secretary of the Air Force Deborah Lee James; and former Under Secretary of Defense for Acquisition, Technology, and Logistics Ken Krieg [Finding #6809]. The fund manages $825 million in its fifth fund and oversees 42 portfolio companies generating $1.9 billion in combined revenue [Finding #6809].</p>\n\n<p>The second network centers on Moore Strategic Ventures, the personal investment vehicle of Louis Moore Bacon, founder of Moore Capital Management [Finding #6811]. Moore Capital, formerly a $40 billion-plus global macro hedge fund, returned $8.9 billion to outside investors in November 2019 and converted to a proprietary fund. Moore Strategic Ventures led both Forterra's Series B ($75 million, September 2024) and Series C ($238 million, November 2025), committing over $300 million of Bacon's personal capital [Finding #6811]. As a single-LP family office vehicle operating without fund lifecycle constraints, Moore Strategic can sustain concentrated positions that traditional venture funds cannot. The fund has built a deliberate defense technology cluster including Second Front Systems (defense DevSecOps, founded by former Marines), Adarga (UK defense AI), and Paramify (FedRAMP compliance) [Finding #6811].</p>\n\n<p>RTX Ventures, the corporate venture arm of RTX (Raytheon), invested in the Series C while simultaneously serving as Forterra's partner on the DeepFires autonomous launcher program [Finding #6808][Finding #6799]. Hanwha Asset Management, representing South Korea's largest defense conglomerate (manufacturer of the K9 howitzer, rocket systems, and armored vehicles), also entered at the Series C [Finding #6808]. NightDragon, the cybersecurity and defense fund of Dave DeWalt — who served on the National Security Telecommunications Advisory Committee across four presidential administrations and advises the Army Cyber Institute — participated in the same round [Finding #6808]. Ross Fubini of XYZ Venture Capital, a defense technology-focused fund, holds a Forterra board seat [Finding #6808]. <a href=\"/dossiers/softbank-group\">SoftBank</a> Vision Fund 2 led the $228 million Series A in December 2021 but did not participate in subsequent rounds [Finding #6799].</p>"
+        "content": "<p>Forterra's capital structure draws from two distinct networks [Finding #6810]. The first is the Washington defense establishment. Enlightenment Capital, founded by Devin Talbott (whose career path ran through Lazard, the Carlyle Group, and TCG Financial Partners \u2014 the merchant bank of former Secretary of Defense William Cohen), has invested across the Series A, B, and C [Finding #6809]. Enlightenment Capital's advisory board includes former Deputy Secretary of Defense Bob Work (2014\u20132017), who architected the Third Offset Strategy that established autonomous systems as a Pentagon priority; former Vice Chairman of the Joint Chiefs General James Cartwright; former Secretary of the Air Force Deborah Lee James; and former Under Secretary of Defense for Acquisition Ken Krieg [Finding #6809].</p>\n\n<p>Moore Strategic Ventures, the personal investment vehicle of Louis Moore Bacon (founder of Moore Capital Management, formerly a $40 billion-plus global macro hedge fund), led both the Series B ($75 million, September 2024) and Series C ($238 million, November 2025), committing over $300 million of Bacon's proprietary capital [Finding #6811]. Moore Strategic has built a deliberate defense technology cluster including Second Front Systems (defense DevSecOps, founded by former Marines), Adarga (UK defense AI), and Paramify (FedRAMP compliance) [Finding #6811]. Second Front Systems also received investment from Pallas Ventures, the investment arm of Pallas Advisors \u2014 the defense consulting firm through which Forterra's <a href=\"/dossiers/paul-benfield\">Paul Benfield</a> transitioned from the Pentagon [Finding #6833].</p>\n\n<p>RTX Ventures invested in the Series C while simultaneously serving as Forterra's partner on the DeepFires autonomous launcher program [Finding #6815]. RTX has two portfolio companies on the same DeepFires team: Forterra (autonomy) and Ursa Major (rocket motors, Series D November 2023) [Finding #6815]. Current FAR Subpart 9.5 and DFARS organizational conflict of interest rules do not clearly cover minority CVC investments in subcontractors, as the regulations focus on control relationships and SETA conflicts [Finding #6816]. RTX Ventures explicitly describes its model as creating \"supply and licensing agreements\" and \"joint go-to-market initiatives\" with portfolio companies [Finding #6815]. Hanwha Asset Management, representing South Korea's largest defense conglomerate, and NightDragon (Dave DeWalt, NSTAC for four presidential administrations) also participated in the Series C [Finding #6808]. Ross Fubini of XYZ Venture Capital holds a Forterra board seat [Finding #6808]. <a href=\"/dossiers/softbank-group\">SoftBank</a> Vision Fund 2 led the Series A but did not participate in subsequent rounds [Finding #6799].</p>"
       },
       {
-        "id": "personnel-transitions",
-        "title": "Personnel Transitions",
+        "id": "demand-signal-pipeline",
+        "title": "Government Demand-Signal Pipeline",
         "viz": null,
-        "content": "<p>Six Forterra senior officials followed direct government-to-contractor career paths [Finding #6806]. Ari Schuler, who serves as president of Forterra's goTenna division, created Customs and Border Protection's innovation program while serving as a DHS official. He subsequently became CEO of goTenna, which won a $99 million IDIQ contract with CBP — the agency whose innovation capabilities he had developed. Forterra acquired goTenna in October 2025, and Schuler now leads that business unit [Finding #6805].</p>\n\n<p>Stephen Rubright, Forterra's Head of Government Affairs and PAC treasurer, graduated from West Point, served in combat with the XVIII Airborne Corps during Operation Iraqi Freedom (2005–2006), then served as a Military Legislative Assistant to Senator Kay Bailey Hutchison and Representative Jeff Miller — the latter of whom chaired the House Armed Services Committee from 2015 to 2016 [Finding #6814]. Rubright subsequently worked as the Army's Senior Legislative Strategist on its appropriations liaison team before entering the private sector as a lobbyist at Astellas Pharma and then joining Forterra in May 2025 [Finding #6814]. He is affiliated with the Center for a New American Security [Finding #6814].</p>\n\n<p>Sarah Flaim, Head of Congressional Affairs, previously served on the staff of the House Appropriations Committee and the House Financial Services Committee before becoming a Managing Director at DCI Group, a lobbying and public relations firm [Finding #6806]. Kevin Turner, the Chief Legal Officer who joined in October 2025, served as General Counsel at three federal agencies — the Development Finance Corporation, the Overseas Private Investment Corporation, and the Export-Import Bank — and as Chief of Staff to U.S. Senator Luther Strange of Alabama [Finding #6806].</p>\n\n<p>The company's operational leadership draws from a connected network of defense technology startups. Chief Growth Officer Scott Sanders served as a MARSOC special operations team leader, then held senior business development roles at <a href=\"/dossiers/anduril-industries\">Anduril Industries</a> (where he built a $1 billion SOCOM acquisition strategy) and Vannevar Labs before joining Forterra [Finding #6798]. Chief Innovation Officer Scott Philips worked as an early forward-deployed engineer at <a href=\"/dossiers/palantir-technologies\">Palantir Technologies</a>, then served as CTO of Vannevar Labs before joining Forterra in October 2025 [Finding #6808]. CEO Josh Araujo is a retired Marine officer who worked in defense investment banking at Jefferies before joining as COO in 2021 [Finding #6798]. COO Colin Chisholm served fifteen years in the Marine Corps; VP of Defense Business Development Patrick Acox is a Marine Corps reservist [Finding #6798].</p>"
+        "content": "<p>Forterra has recruited personnel who shaped the government demand signals its products now fulfill [Finding #6822]. <a href=\"/dossiers/matt-dooley\">Matt Dooley</a>, a retired Army Lieutenant Colonel, served as Chief of the Lethality and Robotics Branch at the Army Capabilities Integration Center, where he was Principal Coordinating Author of the Army's Robotics and Autonomous Systems Strategy published in 2017 [Finding #6831]. The strategy's five capability objectives and near-to-far-term priorities map directly to Forterra's current program portfolio: automated ground resupply convoys correspond to GEARS/ATV-S, leader-follower tactical vehicles to AutoDrive, route clearance and breaching to the $114 million autonomous breaching contract, and unmanned combat vehicles to the RCV program [Finding #6831]. Dooley now serves as Forterra's Defense Strategy Initiatives Lead while simultaneously holding the positions of Vice Chair of the AUVSI Defense Advocacy Committee and Chairman of the NDIA Robotics Division, where he stated the committee's purpose is \"finding ways to assist DoD in accelerating the procurement of autonomy for ground combat platform applications\" [Finding #6831].</p>\n\n<p><a href=\"/dossiers/ari-schuler\">Ari Schuler</a> created and led CBP's Innovation Team (INVNT) while serving as Advisor in the Office of the Commissioner at Customs and Border Protection [Finding #6817]. USASpending records confirm that <a href=\"/dossiers/gotenna\">goTenna</a> received $4 million in CBP contracts for \"mesh trackers\" and \"radio trackers\" during Schuler's tenure running INVNT between 2016 and 2019, with a 2024 task order explicitly naming \"INVNT AND AMO\" as the procuring office [Finding #6817]. Schuler departed CBP in late 2019, worked at Daon (a biometrics firm) for thirteen months, then joined goTenna as COO in March 2021 and was promoted to CEO in June 2021 [Finding #6817]. goTenna subsequently received a $22.3 million SBIR Phase III contract (June 2022) and a $99 million sole-source IDIQ that received only one offer (August 2023) [Finding #6817]. His successor as INVNT Director, Chris Pietrzak (twenty-five years at CBP), joined goTenna in June 2024 \u2014 ten months after the $99 million IDIQ was awarded while he still ran INVNT [Finding #6819]. Federal spending on goTenna increased by a factor of 137 between FY2021 ($179,000) and FY2022 ($24.5 million) \u2014 Schuler's first full fiscal year as CEO [Finding #6830].</p>\n\n<p><a href=\"/dossiers/paul-benfield\">Paul Benfield</a> served as Military Assistant to the Deputy Secretary of Defense, a role covering the innovation and modernization portfolio that includes autonomous vehicle programs [Finding #6832]. He transitioned through Pallas Advisors \u2014 a defense consulting firm co-founded by Sally Donnelly (senior advisor to Secretary of Defense Mattis) whose team includes former Secretary of the Army Ryan McCarthy, former Secretary of the Navy Richard Spencer, former Director of National Intelligence Admiral Dennis Blair, and former USSOCOM Commander General Tony Thomas [Finding #6832]. The Project on Government Oversight flagged Pallas Advisors in its 2021 Pentagon Revolving Door review [Finding #6832]. Benfield subsequently joined Forterra as VP of Strategy. Both Benfield and Forterra's Head of Government Affairs Stephen Rubright held fellowships at the Center for a New American Security [Finding #6833].</p>"
+      },
+      {
+        "id": "personnel-network",
+        "title": "Personnel Network",
+        "viz": null,
+        "content": "<p>Beyond the demand-signal pipeline, Forterra's personnel draw from interconnected defense technology and military networks [Finding #6820]. Three executives previously worked at <a href=\"/dossiers/palantir-technologies\">Palantir Technologies</a>: Gabe Sganga (VP Commercial Growth, formerly a Deployment Strategist for four and a half years after serving as a USMC Cyberspace Operations Officer at MARFORCYBER, Fort Meade), Mike McGhan (Head of Commercial Logistics, formerly in business development where he led the Navy account after eleven years as a Navy pilot and operational test pilot), and Scott Philips (Chief Innovation Officer, an early forward-deployed engineer who also served as CTO of Vannevar Labs) [Finding #6820]. Chief Growth Officer Scott Sanders, a former MARSOC Special Operations Team Leader with five combat tours, was an early employee at <a href=\"/dossiers/anduril-industries\">Anduril Industries</a> before moving to Vannevar Labs and then Forterra [Finding #6798]. Andrea Garrity, Chief Growth Officer of the goTenna division, previously served as VP of Intelligence Community Support at In-Q-Tel, the CIA's strategic venture capital arm [Finding #6820].</p>\n\n<p>Five of approximately fifteen senior executives are Marine Corps veterans: CEO Josh Araujo, COO Colin Chisholm, CGO Scott Sanders, VP Commercial Growth Gabe Sganga, and VP Defense Business Development Patrick Acox [Finding #6826]. The Marine Corps is Forterra's largest customer through the ROGUE-Fires/NMESIS program. Sganga's service at MARFORCYBER (2013\u20132018) overlapped with the tenure of Colonel Mark Butler, first Deputy Commander of MARFORCYBER and co-founder of Second Front Systems \u2014 another Marine-founded defense technology company in the Moore Strategic Ventures portfolio [Finding #6825]. The career archetype follows a pattern: USMC service (particularly MARSOC or MARFORCYBER) to Palantir or Anduril, then to Vannevar Labs, then to Forterra, with BreakLine Education serving as a confirmed transition facilitator [Finding #6826].</p>\n\n<p>Forterra's relationship with Oshkosh Defense \u2014 the prime contractor on most of its highest-value programs \u2014 is an asymmetric dependency [Finding #6827]. Oshkosh ($23.7 billion in cumulative DoD spending) did not invest in any Forterra funding round and deliberately omitted Forterra's name from its FMAV product line marketing, positioning the autonomy layer as swappable [Finding #6827]. Oshkosh's acceptance of Kodiak AI as an alternative ROGUE-Fires autonomy provider and its legacy internal TerraMax autonomy capability (dating to the 2004 DARPA Grand Challenge) underscore that Forterra is treated as a vendor rather than a strategic ally [Finding #6827].</p>"
       },
       {
         "id": "political-activity-and-lobbying",
         "title": "Political Activity and Lobbying",
         "viz": null,
-        "content": "<p>Forterra registered a political action committee — the Robotic Research OpCo LLC - Forterra Political Action Committee [FEC:C00905505] — on May 16, 2025, designated as a Lobbyist/Registrant PAC [Finding #6812]. Through December 31, 2025, the PAC raised $33,082 from company executives, with Alberto Lacaze (founder, $5,000), Joseph Putney (CTO, $5,000), Stephen Rubright ($4,900), and Ari Schuler ($2,950) as the largest contributors [Finding #6807].</p>\n\n<p>PAC disbursements targeted three officeholders: $1,000 to Representative Andrew Garbarino (R-NY), Chairman of the House Homeland Security Committee; $500 to Senator Mark Warner (D-VA), Chairman of the Senate Select Committee on Intelligence and a member of the Senate Appropriations Committee; and $500 to Representative Johnny Olszewski (D-MD), a Maryland member adjacent to Forterra's headquarters district [Finding #6813]. Personal donations from executives followed a dual-track pattern: Rubright directed contributions to House Armed Services Committee members — Representative Rich McCormick (R-GA, $500; serves on the Cyber, IT, and Innovation subcommittee with direct jurisdiction over ground autonomy programs), Representative Pat Harrigan (R-NC, $500; West Point graduate), and Representative John McGuire (R-VA, $500) [Finding #6813]. CEO Araujo directed contributions to Appropriations Committee members — Representative John Carter (R-TX, $3,500; Defense Subcommittee, Army Caucus co-chair) and Representative Tom Cole (R-OK, $600; Chairman of the House Appropriations Committee) [Finding #6813].</p>\n\n<p>Forterra's lobbying expenditures rose from $10,000 in 2021 to $130,000 in 2024 and $305,000 in 2025 [Finding #6812]. LD-2 disclosure filings identify lobbying on H.R. 8070 and S.4638 (National Defense Authorization Act: autonomous driving systems acquisition and commercial autonomy policy) and H.R. 8774 and S.4921 (Defense Appropriations: funding for Army and Marine Corps autonomous ground vehicles) [Finding #6812]. The FY2026 defense appropriations bill ultimately included $59 million for ROGUE-Fires autonomy kits — $30 million above the Department of Defense's own budget request — in a program where Forterra serves as the primary autonomy provider [Finding #6804].</p>"
-      },
-      {
-        "id": "competitive-position",
-        "title": "Competitive Position",
-        "viz": null,
-        "content": "<p>Analysis of Forterra's defense program portfolio indicates high and accelerating institutional integration that has not yet reached irreplaceability [Finding #6803]. The company has crossed the critical threshold from R&D into production on ROGUE-Fires, operates across three military service branches, and serves as the preferred autonomy integrator for both Oshkosh Defense (the Department of Defense's primary tactical vehicle manufacturer) and BAE Systems (the Army's tracked vehicle prime). The goTenna acquisition added organic communications capability, integrating mesh networking with the autonomy layer [Finding #6800].</p>\n\n<p>Competitive pressure persists across multiple programs. Kodiak AI (NASDAQ: KDK) won a parallel Marine Corps contract for ROGUE-Fires autonomy in January 2026, demonstrating that Forterra does not hold sole-source status on its flagship program [Finding #6802]. The ATV-S/GEARS program is structured as a winner-take-all downselect against Carnegie Robotics at mid-FY2026 [Finding #6803]. Overland AI, backed by <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>, competes on the UxS autonomy and breaching programs. Applied Intuition, valued at $15 billion, represents a potential future competitor in defense autonomy software [Finding #6803]. An Army restructuring of ground vehicle autonomy programs in December 2025 introduced additional budget uncertainty [Finding #6803].</p>\n\n<p>Forterra's structural position as a software and integration layer — rather than a vehicle manufacturer — creates both opportunity and vulnerability. The company can partner with multiple prime contractors simultaneously (Oshkosh, BAE, RTX), but it depends on those primes for hardware platforms. If a prime contractor chose to develop or acquire its own autonomy capability, Forterra's position on that platform would be at risk [Finding #6803].</p>"
+        "content": "<p>Forterra registered a political action committee [FEC:C00905505] on May 16, 2025, designated as a Lobbyist/Registrant PAC [Finding #6812]. Through December 31, 2025, the PAC raised $33,082 from company executives [Finding #6807]. PAC disbursements targeted Representative Andrew Garbarino (R-NY, Chairman of the House Homeland Security Committee, $1,000), Senator Mark Warner (D-VA, Chairman of the Senate Intelligence Committee, $500), and Representative Johnny Olszewski (D-MD, $500) [Finding #6813]. Personal donations followed a dual-track pattern: Head of Government Affairs Rubright directed contributions to House Armed Services Committee members including Representative Rich McCormick (R-GA, Cyber/IT/Innovation subcommittee with jurisdiction over ground autonomy), while CEO Araujo contributed to Appropriations Committee members including Representative Tom Cole (R-OK, Chairman of the House Appropriations Committee) and Representative John Carter (R-TX, Defense Subcommittee) [Finding #6813].</p>\n\n<p>Lobbying expenditures rose from $10,000 in 2021 to $305,000 in 2025 [Finding #6812]. LD-2 filings identify lobbying on the National Defense Authorization Act (autonomous driving systems acquisition) and Defense Appropriations (funding for Army and Marine Corps autonomous ground vehicles) [Finding #6812]. Oshkosh Defense's lobbying spending increased in parallel, from $400,000 in 2024 to $1.04 million in 2025, during the same FY2026 budget cycle that produced the $30 million congressional add for ROGUE-Fires autonomy kits [Finding #6828]. Patrick Acox chairs the AUVSI Ground Advocacy Committee, lobbying Congress on autonomous ground vehicle policy while serving as Forterra's VP of Defense Business Development [Finding #6826].</p>"
       }
     ],
+    "system_role": "A twenty-year SBIR-incubated robotics company that transitioned to venture-backed defense contractor status, systematically recruiting personnel who authored the government strategy documents, created the procurement programs, and shaped the acquisition decisions that generate demand for its autonomous ground vehicle products.",
     "open_questions": [
-      "What specific timeline governs Ari Schuler's departure from DHS and goTenna's first CBP contract award, and was Section 207 cooling-off compliance reviewed?",
-      "Which specific members of Congress or committee staff championed the $30 million add above DoD's request for ROGUE-Fires autonomy kits in FY2026 defense appropriations?",
-      "Does Moore Strategic Ventures or Enlightenment Capital hold formal board seats at Forterra, and what governance rights accompany their combined $500 million-plus investment?",
-      "What caused the $49.7 million Expedient Leader Follower program to close in 2023 without fielding, and how does GEARS/ATV-S differ technically from that failed predecessor?",
-      "Are there non-compete or intellectual property restrictions governing the movement of personnel between Anduril, Vannevar Labs, Palantir, and Forterra?"
+      "Did Ari Schuler personally approve, review, or champion goTenna procurement decisions while heading CBP INVNT? An OGE 278 financial disclosure from his final year at CBP would reveal recusals or conflicts relevant to 18 USC Section 207(a)(1).",
+      "Was Forterra ever a client of Pallas Advisors during Paul Benfield's tenure there? Consulting relationships are not subject to disclosure requirements.",
+      "Which specific members of Congress or committee staff championed the $30 million add above DoD's request for ROGUE-Fires autonomy kits, and did Forterra's and Oshkosh's parallel lobbying spending increases target the same line items?",
+      "Does Moore Strategic Ventures or Enlightenment Capital hold formal board seats at Forterra, and what governance rights accompany their combined investment exceeding $500 million?",
+      "Did In-Q-Tel invest directly in goTenna, given Andrea Garrity's transition from In-Q-Tel VP to goTenna CGO and the company's pivot from consumer to government products?"
     ],
     "applicable_models": [
       "manufactured-dependency",
@@ -1373,51 +1722,58 @@
         {
           "target": "Oshkosh Defense",
           "type": "contracts_with",
-          "strength": 1,
+          "strength": 1.0,
           "evidence_ref": "Breaking Defense",
           "description": "Oshkosh is prime on ROGUE-Fires (NMESIS), GEARS, FMAV; Forterra provides AutoDrive autonomy as sub"
         },
         {
           "target": "RTX",
           "type": "funds",
-          "strength": 1,
+          "strength": 1.0,
           "evidence_ref": "Forterra Series C press release Nov 2025",
           "description": "RTX Ventures invested in Series C (Nov 2025); RTX also provides payloads for FMAV program"
         },
         {
           "target": "Moore Strategic Ventures",
           "type": "funds",
-          "strength": 1,
+          "strength": 1.0,
           "evidence_ref": "Forterra press releases",
           "description": "Led both Series B ($75M, Sep 2024) and Series C ($238M, Nov 2025). Largest investor across rounds."
         },
         {
           "target": "Kodiak AI",
           "type": "corporate",
-          "strength": 1,
+          "strength": 1.0,
           "evidence_ref": "Breaking Defense Feb 2026",
           "description": "Direct competitors on ROGUE-Fires/NMESIS autonomous vehicle integration. Marines awarded Kodiak parallel contract Jan 2026 to hedge against Forterra sole-source."
         },
         {
           "target": "goTenna",
           "type": "corporate",
-          "strength": 1,
+          "strength": 1.0,
           "evidence_ref": "Breaking Defense",
           "description": "Forterra acquired goTenna Oct 2025 for undisclosed price. goTenna brought $15M USAF STRATFI contract + $99M CBP IDIQ. Vertical integration of mesh networking into autonomous platforms."
         },
         {
           "target": "XYZ Venture Capital",
           "type": "funds",
-          "strength": 1,
+          "strength": 1.0,
           "evidence_ref": "Forterra press releases",
           "description": "Ross Fubini (XYZ VC) holds Forterra BOARD SEAT. XYZ invested in Series B and C. Defense tech focused VC."
         },
         {
           "target": "Enlightenment Capital",
           "type": "funds",
-          "strength": 1,
+          "strength": 1.0,
           "evidence_ref": "EC firm page",
           "description": "Invested in Series A, B, and C. EC is DC defense PE with advisory board including fmr DepSecDef Bob Work (Third Offset architect), Gen. Cartwright (VCJCS), SecAF James. Talbott founded EC after working at merchant bank of fmr SecDef Cohen."
+        },
+        {
+          "target": "goTenna",
+          "type": "subsidiary_of",
+          "strength": 1.0,
+          "evidence_ref": "Breaking Defense",
+          "description": "Forterra acquired goTenna Oct 9, 2025 for undisclosed price (Barclays advised). goTenna had $72.8M in federal contracts, $41.5M+ VC funding, $99M CBP IDIQ with remaining capacity. Now operates as Forterra division under Ari Schuler as President."
         },
         {
           "target": "BAE Systems",
@@ -1452,7 +1808,7 @@
           "type": "funds",
           "strength": 0.7,
           "evidence_ref": "TechCrunch Dec 2021 Series A announcement",
-          "description": "SoftBank Vision Fund 2 led $228M Series A (Dec 2021) — Forterra's first-ever outside investment after 19 years bootstrapping. Absent from Series B and C rounds, suggesting possible exit or dilution."
+          "description": "SoftBank Vision Fund 2 led $228M Series A (Dec 2021) \u2014 Forterra's first-ever outside investment after 19 years bootstrapping. Absent from Series B and C rounds, suggesting possible exit or dilution."
         },
         {
           "target": "NightDragon",
@@ -1474,31 +1830,31 @@
           {
             "target": "Department of Defense",
             "type": "financial",
-            "strength": 1,
+            "strength": 1.0,
             "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
           },
           {
             "target": "Department of Homeland Security",
             "type": "financial",
-            "strength": 1,
+            "strength": 1.0,
             "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
           },
           {
             "target": "Operation Epic Fury",
             "type": "intelligence",
-            "strength": 1,
+            "strength": 1.0,
             "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
           },
           {
             "target": "Corey Lewandowski",
             "type": "financial",
-            "strength": 1,
+            "strength": 1.0,
             "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
           },
           {
             "target": "Ryan Wunderly",
             "type": "employment",
-            "strength": 1,
+            "strength": 1.0,
             "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
           }
         ],
@@ -1506,13 +1862,13 @@
           {
             "target": "Second Front Systems",
             "type": "funds",
-            "strength": 1,
+            "strength": 1.0,
             "description": "MSV led Second Front Systems Series A ($32M, Dec 2022), participated in B+C. SFS is defense DevSecOps platform founded by former Marines. Same defense-tech investment thesis as Forterra."
           },
           {
             "target": "Louis Bacon",
             "type": "owns",
-            "strength": 1,
+            "strength": 1.0,
             "description": "MSV is Louis Bacon's personal investment vehicle. Bacon founded Moore Capital Management (fmr $40B+ hedge fund, now proprietary). MSV deploys Bacon's capital. $300M+ invested in Forterra alone."
           }
         ],
@@ -1520,40 +1876,62 @@
           {
             "target": "Stephen Miller",
             "type": "financial",
-            "strength": 1,
+            "strength": 1.0,
             "description": "Miller holds K-K in Palantir stock while directing immigration enforcement policy that drives Palantir contracts"
           },
           {
             "target": "Peter Thiel",
             "type": "corporate",
-            "strength": 1,
+            "strength": 1.0,
             "description": "Co-founder of Palantir; key political donor and backer of JD Vance"
           },
           {
             "target": "Department of Defense",
             "type": "financial",
-            "strength": 1,
+            "strength": 1.0,
             "description": "Palantir DoD obligations: 2.31B all-time. Army dominant. FY2025: 1.02B. IDIQ W519TC25D0039."
           },
           {
             "target": "ICE",
             "type": "corporate",
-            "strength": 1,
+            "strength": 1.0,
             "description": "Palantir provides FALCON, ICM, ELITE, and ImmigrationOS systems to ICE for immigration enforcement and deportation operations; total contracts at least .3M"
           },
           {
             "target": "Alex Karp",
             "type": "corporate",
-            "strength": 1,
+            "strength": 1.0,
             "description": "CEO of Palantir Technologies; leads company strategy including government contracting"
+          }
+        ],
+        "RTX": [
+          {
+            "target": "Ursa Major",
+            "type": "funds",
+            "strength": 1.0,
+            "description": "RTX Ventures invested in Ursa Major Series D (Nov 2023, ~$138M). Ursa Major supplies rocket motors for RTX/Raytheon's DeepStrike autonomous launcher \u2014 same program where RTX also invested in Forterra (autonomy). Two portfolio companies on one program team."
           }
         ],
         "Enlightenment Capital": [
           {
             "target": "Bob Work",
             "type": "advisory",
-            "strength": 1,
-            "description": "Work (DepSecDef 2014-2017, Third Offset architect) serves on EC advisory board. The Third Offset Strategy prioritized autonomous systems — EC invests in Forterra (autonomous ground vehicles). Work's policy advocacy created demand that EC's portfolio captures."
+            "strength": 1.0,
+            "description": "Work (DepSecDef 2014-2017, Third Offset architect) serves on EC advisory board. The Third Offset Strategy prioritized autonomous systems \u2014 EC invests in Forterra (autonomous ground vehicles). Work's policy advocacy created demand that EC's portfolio captures."
+          }
+        ],
+        "goTenna": [
+          {
+            "target": "Chris Pietrzak",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Former Director of CBP INVNT (Schuler's successor, 25yr CBP veteran) joined goTenna Jun 2024 as VP Solutions Architecture. Second INVNT leader to move to goTenna. IDIQ awarded Aug 2023 while Pietrzak still at CBP."
+          },
+          {
+            "target": "Founders Fund",
+            "type": "funds",
+            "strength": 0.7,
+            "description": "Founders Fund listed as early goTenna investor (pre-government pivot). Peter Thiel connection. USV led Series B. Consumer mesh networking company that pivoted fully to government/military under ex-DHS/CBP CEO Schuler."
           }
         ]
       },

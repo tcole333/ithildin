@@ -1,0 +1,232 @@
+{
+  "name": "goTenna",
+  "slug": "gotenna",
+  "aliases": [],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-18T11:49:25.166911",
+  "last_updated": "2026-03-18T03:21:02",
+  "stats": {
+    "total_findings": 2,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "identity": 1,
+      "financial": 1
+    },
+    "connection_types": {
+      "corporate": 1,
+      "employment": 1,
+      "subsidiary_of": 1,
+      "funds": 1
+    },
+    "last_updated": "2026-03-18T03:21:02"
+  },
+  "findings": [
+    {
+      "id": 6829,
+      "finding_type": "identity",
+      "summary": "GOTENNA CORPORATE PROFILE: Founded Apr 2013 by Daniela Perdomo (now Perlein) after Hurricane Sandy destroyed one-third of NYC cell towers. Originally a CONSUMER mesh networking product sold at REI for $179/pair. DE corp, UEI CWLDWJHLQ3T5, CAGE 73NG1. VC funding: Seed $2.08M (Sep 2013), Series A $7.04M (Jun 2015, Union Square Ventures), Series B $7.5M (Mar 2017, USV led, Albert Wenger on board), Series C $24M (2019 \u2014 explicitly funded government pivot). Total VC ~$41.5M. EARLY INVESTORS INCLUDE FOUNDERS FUND (Peter Thiel connection \u2014 relevant to tech-right network), Union Square Ventures, Comcast Ventures, Collaborative Fund, Bloomberg Beta. Consumer products now COMPLETELY DISCONTINUED \u2014 full pivot to government/military. Non-ITAR controlled (major international advantage). Products: Pro X2/X2m mesh radios, EdgeRelay infrastructure nodes, Aspen Grove mesh protocol, native ATAK integration.",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "sam_gov",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:20:31",
+      "target_name": "goTenna",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov entity CWLDWJHLQ3T5",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D filings CIK 0001592963",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "TechCrunch Series C coverage",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USV portfolio page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "goTenna press releases",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6830,
+      "finding_type": "financial",
+      "summary": "GOTENNA FULL FEDERAL CONTRACT INVENTORY: 80 awards, $72.83M total. By agency: CBP $48.18M (18 awards), Air Force $21.55M (28 awards), IRS $814K, Navy $636K, Army $548K, SOCOM $468K, DHS other $250K, FAA $91K, DCMA $91K, BOP $49K, DEA $43K, Marshals $40K, ICE $36K, State $26K. CRITICAL INFLECTION: FY2022 spending exploded 137x over FY2021 ($179K to $24.5M) \u2014 Schuler's first full fiscal year as CEO. Driven by $22.7M CBP SBIR Phase III and Air Force contracts. Air Force STRATFI confirmed as $15M SBIR Phase 2B Strategic Funding Increase (FA220424CB001, Jul 2024) through AFWERX. CBP IDIQ $99M ceiling with only $21.4M obligated through FY2026 \u2014 significant remaining capacity. First federal award was FY2015 ($2,250); SOCOM Phase 1 mesh network Jan 2017 ($444K) was earliest significant military adoption.",
+      "detail": null,
+      "source_datasets": [
+        "usaspending"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:20:39",
+      "target_name": "goTenna",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending 80 awards for goTenna Inc",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending Air Force STRATFI FA220424CB001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "USASpending timeline FY2015-FY2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3469,
+      "person_a": "Forterra",
+      "person_b": "goTenna",
+      "relationship_type": "corporate",
+      "description": "Forterra acquired goTenna Oct 2025 for undisclosed price. goTenna brought $15M USAF STRATFI contract + $99M CBP IDIQ. Vertical integration of mesh networking into autonomous platforms.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 00:39:20",
+      "profile_id": null,
+      "other_person": "Forterra",
+      "other_person_slug": "forterra",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forterra press release Oct 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3479,
+      "person_a": "Chris Pietrzak",
+      "person_b": "goTenna",
+      "relationship_type": "employment",
+      "description": "Former Director of CBP INVNT (Schuler's successor, 25yr CBP veteran) joined goTenna Jun 2024 as VP Solutions Architecture. Second INVNT leader to move to goTenna. IDIQ awarded Aug 2023 while Pietrzak still at CBP.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 02:16:22",
+      "profile_id": null,
+      "other_person": "Chris Pietrzak",
+      "other_person_slug": "chris-pietrzak",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "goTenna press release Jun 2024",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3485,
+      "person_a": "Forterra",
+      "person_b": "goTenna",
+      "relationship_type": "subsidiary_of",
+      "description": "Forterra acquired goTenna Oct 9, 2025 for undisclosed price (Barclays advised). goTenna had $72.8M in federal contracts, $41.5M+ VC funding, $99M CBP IDIQ with remaining capacity. Now operates as Forterra division under Ari Schuler as President.",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:21:02",
+      "profile_id": null,
+      "other_person": "Forterra",
+      "other_person_slug": "forterra",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Breaking Defense",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Forterra press release Oct 2025",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3484,
+      "person_a": "Founders Fund",
+      "person_b": "goTenna",
+      "relationship_type": "funds",
+      "description": "Founders Fund listed as early goTenna investor (pre-government pivot). Peter Thiel connection. USV led Series B. Consumer mesh networking company that pivoted fully to government/military under ex-DHS/CBP CEO Schuler.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-18 03:21:02",
+      "profile_id": null,
+      "other_person": "Founders Fund",
+      "other_person_slug": "founders-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LinkedIn investor listings",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC Form D filings",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": []
+}
