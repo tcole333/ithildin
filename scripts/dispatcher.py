@@ -136,6 +136,16 @@ def get_queue_depths(db):
     ).fetchone()
     depths["high_critical_open"] = row["n"]
 
+    # Depth tier distribution (from triage scheduler)
+    try:
+        for tier_row in db.execute(
+            "SELECT COALESCE(depth_tier, 'untiered') as tier, COUNT(*) as n "
+            "FROM leads WHERE status='open' GROUP BY tier"
+        ).fetchall():
+            depths[f"tier_{tier_row['tier']}"] = tier_row["n"]
+    except Exception:
+        pass
+
     row = db.execute(
         "SELECT COUNT(*) as n FROM infra_requests WHERE status IN ('open','evaluating')"
     ).fetchone()
@@ -198,8 +208,13 @@ def count_running(db, run_type):
     return row["n"]
 
 
-def get_next_lead_id(db):
-    """Get highest-priority open lead not already being dispatched."""
+def get_next_lead_id(db, for_skill=None):
+    """Get highest-priority open lead not already being dispatched.
+
+    Args:
+        for_skill: If set, prefer leads whose recommended_skill matches.
+                   Falls back to any high/critical lead if no match found.
+    """
     running_targets = [
         r["target"] for r in db.execute(
             "SELECT target FROM dispatch_runs WHERE status='running' AND run_type IN ('pursue_lead','deep_investigate')"
@@ -207,6 +222,25 @@ def get_next_lead_id(db):
     ]
     placeholders = ",".join("?" for _ in running_targets) if running_targets else "''"
 
+    # Try recommended_skill match first (from triage scheduler)
+    if for_skill:
+        skill_map = {"pursue_lead": "/pursue-lead", "deep_investigate": "/deep-investigate"}
+        skill_value = skill_map.get(for_skill, for_skill)
+        query = f"""
+            SELECT id FROM leads
+            WHERE status = 'open' AND recommended_skill = ?
+            AND CAST(id AS TEXT) NOT IN ({placeholders})
+            ORDER BY
+                CASE priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1
+                              WHEN 'medium' THEN 2 WHEN 'low' THEN 3 END,
+                created_at ASC
+            LIMIT 1
+        """
+        row = db.execute(query, [skill_value] + running_targets).fetchone()
+        if row:
+            return str(row["id"])
+
+    # Fallback: any high/critical open lead
     query = f"""
         SELECT id FROM leads
         WHERE status = 'open' AND priority IN ('critical','high')
@@ -467,20 +501,27 @@ def dispatch_cycle(config, dry_run=False):
             launches.append(("build_infra", next_infra))
 
     # Rule 3: High-priority leads (core research)
+    # Use triage scheduler's recommended_skill when available
     trig = triggers.get("pursue_lead", {})
     max_research = config.get("max_research_agents", 2)
     research_running = count_running(db, "pursue_lead") + count_running(db, "deep_investigate")
     if queues["high_critical_open"] >= trig.get("min_high_critical", 1) and research_running < max_research:
-        next_lead = get_next_lead_id(db)
-        if next_lead:
-            launches.append(("pursue_lead", next_lead))
-            # Fill remaining research slots
-            while research_running + sum(1 for t, _ in launches if t in ("pursue_lead", "deep_investigate")) < max_research:
-                another = get_next_lead_id(db)
-                if another and another != next_lead and not any(t == another for _, t in launches):
-                    launches.append(("pursue_lead", another))
-                else:
-                    break
+        # Check for deep_dive leads first (triage recommended /deep-investigate)
+        deep_lead = get_next_lead_id(db, for_skill="deep_investigate")
+        if deep_lead and not any_running(db, "deep_investigate"):
+            launches.append(("deep_investigate", deep_lead))
+        else:
+            next_lead = get_next_lead_id(db, for_skill="pursue_lead") or get_next_lead_id(db)
+            if next_lead:
+                launches.append(("pursue_lead", next_lead))
+        # Fill remaining research slots with pursue_lead
+        while research_running + sum(1 for t, _ in launches if t in ("pursue_lead", "deep_investigate")) < max_research:
+            another = get_next_lead_id(db)
+            used = {t for _, t in launches}
+            if another and another not in used:
+                launches.append(("pursue_lead", another))
+            else:
+                break
 
     # Rule 4: Auto-leads after completions
     trig = triggers.get("auto_leads", {})
