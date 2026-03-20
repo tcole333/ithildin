@@ -32,6 +32,7 @@ DB_PATH = Path(__file__).parent.parent / "investigation.db"
 VALID_FINDING_TYPES = [
     "communication", "financial", "relationship", "identity",
     "location", "document", "legal", "intelligence",
+    "negative_result", "background",
 ]
 VALID_CONFIDENCE = ["confirmed", "high", "medium", "low", "unverified"]
 VALID_RELATIONSHIP_TYPES = [
@@ -105,6 +106,31 @@ VALID_SOURCES = [
 ]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
+
+# Confidence caps by claim type — enforced at write time
+CONFIDENCE_CAPS = {
+    "direct_quote": "confirmed",    # verbatim from primary source
+    "paraphrase": "high",           # agent summary of source
+    "inference": "medium",          # agent conclusion from evidence
+    "synthesis": "medium",          # combined multiple sources
+    "user_provided": "confirmed",   # human-supplied
+}
+_CONFIDENCE_ORDER = ["unverified", "low", "medium", "high", "confirmed"]
+
+
+def _enforce_confidence_cap(claim_type, confidence):
+    """Clamp confidence to the maximum allowed for this claim type.
+
+    Returns (clamped_confidence, was_clamped).
+    """
+    cap = CONFIDENCE_CAPS.get(claim_type)
+    if not cap:
+        return confidence, False
+    cap_idx = _CONFIDENCE_ORDER.index(cap)
+    conf_idx = _CONFIDENCE_ORDER.index(confidence) if confidence in _CONFIDENCE_ORDER else 2
+    if conf_idx > cap_idx:
+        return cap, True
+    return confidence, False
 VALID_CORRECTION_TYPES = [
     "factual_error", "source_mismatch", "hallucination",
     "outdated", "refinement", "merge", "retraction",
@@ -138,6 +164,12 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
             "source_datasets is required. Provide the data source(s) that produced this finding "
             "(e.g., ['web_search'], ['fec'], ['edgar', 'registry'])."
         )
+
+    # Enforce confidence caps by claim type
+    confidence, was_clamped = _enforce_confidence_cap(claim_type, confidence)
+    if was_clamped:
+        print(f"WARNING: Confidence clamped to '{confidence}' (max for claim_type='{claim_type}'). "
+              f"See CONFIDENCE_CAPS in findings_tracker.py.", file=sys.stderr)
 
     # Warn on unknown source names (don't block — allows new sources without code changes)
     if source_datasets:

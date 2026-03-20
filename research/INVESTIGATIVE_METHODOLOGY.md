@@ -492,12 +492,23 @@ A belief system achieves epistemic closure when it becomes self-sealing — no e
 Investigation agents operate in two layers with distinct mandates:
 
 ### Layer 1: Research Agents (Fact-Gathering)
-**Skills**: `/deep-investigate`, `/pursue-lead`, `/search-all-sources`, `/investigate-person`, `/trace-entity`, `/investigate-infra`
+**Skills**: `/deep-investigate`, `/pursue-lead`, `/search-all-sources`, `/investigate-person`, `/trace-entity`, `/investigate-infra`, `/landscape-scan`
 
 - **Gather, verify, document.** No theorizing, no framework application.
 - Record everything found — including mundane facts, negative results, and baseline comparisons.
 - Follow the source checklist for the target type. Do not skip sources because you "found enough."
 - Findings use `claim_type` of `direct_quote`, `paraphrase`, or (sparingly) `inference` with appropriate confidence caps.
+
+**Layer 1 MUST NOT:**
+- Assess narrative potential, article-worthiness, or editorial framing
+- Apply analytical frameworks (Manufactured Dependency, Bridge Tax, etc.)
+- Use language like "counterintuitive finding," "character entry point," "narrative hook," or "most article-worthy"
+- Interpret what patterns mean — record the raw data and let Layer 2 handle interpretation
+
+**Layer 1 MAY:**
+- Form hypotheses about where to search ("If X is true, I'd expect to find Y in source Z")
+- Record factual observations about corroboration, contradictions, gaps, and temporal clusters
+- Note what's missing or absent from expected sources
 
 ### Layer 2: Analysis Agents (Theory-Building)
 **Skills**: `/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`, `/discover-frameworks`
@@ -509,6 +520,23 @@ Investigation agents operate in two layers with distinct mandates:
 - Findings use `claim_type=synthesis` with `confidence=medium` maximum.
 - Reference `research/craft-research/frameworks/` as pattern detectors, not interpretive lenses.
 - See Framework Discipline section above.
+
+### Editorial Skills (Narrative Production)
+**Skills**: `/write-article`, `/review-article`, `/curate-dossier`, `/review-dossiers`
+
+- Consume findings but do not produce them
+- Narrative-quality assessment (article-worthiness, character entry points, reader engagement) belongs exclusively here
+- Operate outside the Layer 1/2 research stack
+
+### Plane Boundary Quick Reference
+
+| Concept | Layer 1 (Research) | Layer 2 (Analysis) | Editorial |
+|---------|-------------------|-------------------|-----------|
+| **Purpose** | Gather facts, record evidence | Identify patterns, generate hypotheses | Frame narratives, assess article potential |
+| **Output** | Findings (direct_quote, paraphrase) | Findings (synthesis, inference) + hypotheses | Articles, dossiers |
+| **Max confidence** | confirmed (direct_quote), high (paraphrase) | medium (synthesis) | N/A |
+| **Forbidden** | Framework application, narrative assessment | Creating primary findings from raw sources | Producing findings without evidence |
+| **Allowed** | Hypothesis-driven search, factual observation | Speculating with falsification criteria | Narrative framing, audience consideration |
 
 ### The Feedback Loop
 ```

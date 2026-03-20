@@ -177,13 +177,7 @@ python tools/findings_tracker.py add \
 - `inference` — agent conclusion from evidence (max `medium`)
 - `synthesis` — combined multiple sources (max `medium`)
 
-**For each finding, note its narrative potential:**
-- Is this an **infrastructure reveal**? (Shows an invisible mechanism — the SAR waterfall, the liability chain, the compliance cascade)
-- Is this a **counterintuitive fact**? (Contradicts what most people would assume — "the compliance committee approved continuing")
-- Is this a **missing document**? (What should exist but doesn't — absent SARs, email gaps, missing filings)
-- Is this a **concrete-first anchor**? (A specific, vivid instance that would make a good entry point for explaining a broader pattern)
-
-**When completing a lead**, identify the single most article-worthy finding — the one that would make a reader stop and think. Note it in the lead completion summary. This seeds future `/write-article` work.
+**When completing a lead**, summarize: (1) what factual questions the lead asked, (2) what the evidence showed, (3) what was NOT found despite checking (negative results), (4) what new factual questions were raised.
 
 If the finding reveals a relationship:
 ```bash
@@ -246,7 +240,18 @@ python tools/lead_tracker.py add \
 
 Agents should freely create follow-up leads at whatever priority they judge appropriate.
 
-### 7. Complete the Lead
+### 7. Check Stop Conditions
+
+Stop investigating and move to completion when ANY of these is true:
+
+- **Mandatory sources exhausted with corroboration**: You've checked all mandatory sources for this target type and found corroborating evidence across 2+ independent sources.
+- **Mandatory sources exhausted with consistent negatives**: You've checked all mandatory sources and found nothing. Record negative results and complete.
+- **Diminishing returns**: Recent searches are yielding no new entities, connections, or documents. You've exhausted productive search variations.
+- **Hard access barrier**: The next useful step requires infrastructure we don't have (e.g., a registry tool, a paid database, FOIA). Create an infra request and block the lead.
+
+Do NOT stop because you "found enough" — stop because sources are exhausted or returns are diminishing. But also do NOT rabbit-hole into speculative searches when mandatory sources are done.
+
+### 8. Complete the Lead
 ```bash
 python tools/lead_tracker.py complete <ID> --findings "Summary of what was found and what remains unknown"
 ```

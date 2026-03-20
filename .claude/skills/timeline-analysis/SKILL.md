@@ -147,16 +147,32 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2 \
 
 ### 8. Generate Hypotheses
 
-For unexplained timing correlations:
+For unexplained timing correlations. Every hypothesis MUST include:
+1. A **falsification criterion** — what evidence would disprove this?
+2. The **best innocent explanation** — what's the most plausible non-coordination reason?
+3. A **search plan** that would test the hypothesis via Layer 1 research
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "TEMPORAL HYPOTHESIS" \
     --pattern-type temporal \
-    --description "PATTERN observed in WINDOW. Involves: TARGETS. Correlation with: EVENT." \
+    --description "PATTERN observed in WINDOW. Involves: TARGETS. Correlation with: EVENT. INNOCENT EXPLANATION: [best alternative]. FALSIFICATION: [what would disprove this]." \
     --predicted-evidence "If coordinated, expect shared communication or intermediary" \
     --search-plan "1. Check email corpus for TARGETS in WINDOW  2. Check entity formations  3. Cross-ref financial records" \
     --originated-from "analysis:timeline-analysis"
+```
+
+### 8b. Create Research Leads from Hypotheses
+
+Each hypothesis should spawn at least one Layer 1 research lead to test it:
+
+```bash
+uv run python tools/lead_tracker.py add \
+    --title "Test temporal hypothesis: [BRIEF DESCRIPTION]" \
+    --category connection \
+    --priority medium \
+    --source "agent:timeline-analysis" \
+    --description "Hypothesis: [DESCRIPTION]. Search plan: [PLAN]. Falsification: [CRITERION]."
 ```
 
 ### 9. Add Missing Events

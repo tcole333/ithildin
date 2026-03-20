@@ -149,13 +149,16 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
 
 ### 8. Generate Hypotheses
 
-For system-level coordination patterns:
+For system-level coordination patterns. Every hypothesis MUST include:
+1. A **falsification criterion** — what evidence would disprove this?
+2. The **best innocent explanation** — what's the most plausible non-coordination reason?
+3. A **search plan** that would test the hypothesis via Layer 1 research
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "SYSTEMIC HYPOTHESIS" \
     --pattern-type operational \
-    --description "SYSTEM PATTERN: N actors share X, suggesting Y" \
+    --description "SYSTEM PATTERN: N actors share X, suggesting Y. INNOCENT EXPLANATION: [best alternative]. FALSIFICATION: [what would disprove this]." \
     --predicted-evidence "If coordinated, expect shared Z" \
     --search-plan "1. Check registry for shared agents  2. Search emails for inter-member communication  3. Cross-ref financial flows" \
     --originated-from "analysis:systemic-analysis"

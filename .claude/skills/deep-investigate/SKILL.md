@@ -6,7 +6,7 @@ user_invocable: true
 
 # /deep-investigate
 
-**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Sub-agents document what they find. They do not theorize, speculate, or apply analytical frameworks. If a pattern is noticed, record the raw data and move on — pattern recognition is for Layer 2 analysis agents (`/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`, `/discover-frameworks`).
+**CONTROL PLANE ORCHESTRATOR** — You are a planner, dispatcher, and coverage checker. You do NOT investigate directly. You assign source categories to 4 parallel sub-agents, monitor their progress, synthesize their reports for corroboration/contradiction/gaps, and spawn follow-up leads. Sub-agents are Layer 1 research agents — they document facts, not theories.
 
 Launch an orchestrated investigation of a person, entity, or topic using parallel sub-agents that each cover a dedicated source category. This ensures comprehensive coverage — no source gets skipped because the agent "found enough" in the corpus.
 
@@ -629,7 +629,7 @@ Each report is ~2KB (vs 25MB transcript). If you need deeper detail on a specifi
 
 ### 4. Synthesize Results
 
-**Note: The orchestrator's synthesis step is the ONE place in this skill where limited Layer 2 thinking is appropriate.** Sub-agents (Layer 1) gathered facts. The orchestrator now identifies what the combined facts suggest — but keeps interpretation clearly labeled as `claim_type=synthesis` with `confidence=medium`.
+**Note: The orchestrator's synthesis step identifies corroboration, contradictions, and gaps across agents. It does NOT assess narrative potential, article-worthiness, or character entry points — those are editorial concerns. Label any cross-agent inference as `claim_type=synthesis` with `confidence=medium`.**
 
 After reading all 4 report files:
 
@@ -640,9 +640,7 @@ After reading all 4 report files:
 5. **Map the network**: Who does this target connect to? Draw the relationship map.
 6. **Collect infrastructure recommendations**: What new data sources, tools, or tool improvements did agents identify? Consolidate into actionable items.
 7. **Drill down selectively**: If a report mentions a critical finding, read the specific `--output` JSON for details. Do NOT read all JSON files — only the ones relevant to synthesis.
-8. **Identify the Character Entry Point**: What aspect of this target's role illuminates the network's design? Every person is a lens onto a different part of the machine — what does THIS person make visible that would otherwise remain hidden? (e.g., a trust administrator reveals the USVI trust architecture; a compliance officer reveals the SAR waterfall)
-9. **Note the Narrative Potential**: What's the most counterintuitive finding? What single fact would most surprise an intelligent person in finance/law/compliance? This is the seed for a future article hook. Record it in the synthesis finding.
-10. **Flag Missing Documents**: What records should exist but don't? Missing SARs, absent emails in a timeline, corporate filings that should be present but aren't. Absence of expected records is itself evidence — record it as a finding.
+8. **Flag gaps and anomalies**: What records should exist but don't? What contradictions appeared between agents' results? What factual questions remain unanswered? Record these as findings with `claim_type=synthesis` and `confidence=medium`, and spawn research leads for unresolved questions.
 11. **Check tool coverage**: Did agents actually use the full source list, or did they skip tools? Flag any sources that should have been checked but weren't, and note it in the summary.
 
 ### 4b. Ingest Agent Learnings

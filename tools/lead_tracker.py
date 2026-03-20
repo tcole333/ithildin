@@ -185,6 +185,16 @@ def _ensure_schema(db):
             UNIQUE(query_text, source)
         );
 
+        -- Immutable search history — preserves audit trail across re-runs
+        CREATE TABLE IF NOT EXISTS search_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            query_text TEXT NOT NULL,
+            source TEXT NOT NULL,
+            result_count INTEGER,
+            session_id INTEGER REFERENCES sessions(id),
+            searched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
         -- ══════════════════════════════════════════════════════════
         -- ENTITIES: Corporate/financial entity registry
         -- ══════════════════════════════════════════════════════════
@@ -664,6 +674,11 @@ def _ensure_schema(db):
         # Bi-temporal: when the relationship existed in the real world
         ("connections", "valid_from DATE"),
         ("connections", "valid_until DATE"),
+        # Triage scheduler fields (Phase 1 refactor)
+        ("leads", "depth_tier TEXT"),
+        ("leads", "recommended_skill TEXT"),
+        ("leads", "triage_rationale TEXT"),
+        ("leads", "stop_reason TEXT"),
     ]
     for table, column_def in _migrations:
         try:
@@ -1125,7 +1140,8 @@ def _ensure_schema(db):
 
 def add_lead(title, description=None, category=None, priority="medium",
              source=None, target_name=None, evidence=None, related_leads=None,
-             thread_id=None, profile_id=None):
+             thread_id=None, profile_id=None, depth_tier=None,
+             recommended_skill=None):
     """Add a new lead. Returns the lead ID."""
     if target_name:
         try:
@@ -1136,9 +1152,9 @@ def add_lead(title, description=None, category=None, priority="medium",
 
     db = get_db()
     cursor = db.execute("""
-        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (title, description, category, priority, source, target_name, thread_id, profile_id))
+        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill))
     lead_id = cursor.lastrowid
 
     if evidence:
@@ -1261,7 +1277,8 @@ def claim_lead(lead_id, session_id=None, claimed_by=None, lease_hours=2):
 
 
 def claim_next_lead(category=None, thread_id=None, session_id=None,
-                    claimed_by=None, lease_hours=2, profile_id=None):
+                    claimed_by=None, lease_hours=2, profile_id=None,
+                    depth_tier=None):
     """Atomically select and claim the next open lead.
 
     Uses BEGIN IMMEDIATE to acquire a write lock, preventing TOCTOU races
@@ -1293,6 +1310,9 @@ def claim_next_lead(category=None, thread_id=None, session_id=None,
     if thread_id:
         conditions.append("thread_id = ?")
         params.append(thread_id)
+    if depth_tier:
+        conditions.append("depth_tier = ?")
+        params.append(depth_tier)
 
     where = " AND ".join(conditions)
     row = db.execute(f"""
@@ -1525,12 +1545,25 @@ def find_by_evidence(evidence_ref):
 
 
 def log_search(query_text, source, result_count, session_id=None):
-    """Log a search to prevent redundant queries."""
+    """Log a search to prevent redundant queries.
+
+    Updates the dedup row (search_log) AND appends to immutable history
+    (search_history) so audit trails are preserved even when the same
+    query is re-run with different result counts.
+    """
     db = get_db()
     db.execute("""
         INSERT OR REPLACE INTO search_log (query_text, source, result_count, session_id)
         VALUES (?, ?, ?, ?)
     """, (query_text, source, result_count, session_id))
+    # Append to immutable history (table created by migration below)
+    try:
+        db.execute("""
+            INSERT INTO search_history (query_text, source, result_count, session_id)
+            VALUES (?, ?, ?, ?)
+        """, (query_text, source, result_count, session_id))
+    except Exception:
+        pass  # table may not exist yet on first run
     db.commit()
     db.close()
 
@@ -1703,6 +1736,8 @@ def main():
     add_p.add_argument("--evidence", "-e", nargs="+")
     add_p.add_argument("--related", "-r", nargs="+", type=int)
     add_p.add_argument("--thread-id", type=int, help="Investigation thread ID")
+    add_p.add_argument("--depth-tier", choices=["scan", "standard", "deep_dive"], help="Investigation depth tier")
+    add_p.add_argument("--recommended-skill", help="Recommended skill for this lead")
 
     # list
     list_p = subparsers.add_parser("list", help="List leads")
@@ -1728,6 +1763,7 @@ def main():
     claim_next_p = subparsers.add_parser("claim-next", help="Atomically select and claim the next open lead")
     claim_next_p.add_argument("--category", choices=VALID_CATEGORIES)
     claim_next_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
+    claim_next_p.add_argument("--depth-tier", choices=["scan", "standard", "deep_dive"], help="Filter by depth tier")
     add_output_args(claim_next_p)
 
     # note
@@ -1815,6 +1851,8 @@ def main():
             priority=args.priority, source=args.source, target_name=args.target,
             evidence=args.evidence, related_leads=args.related,
             thread_id=getattr(args, "thread_id", None),
+            depth_tier=getattr(args, "depth_tier", None),
+            recommended_skill=getattr(args, "recommended_skill", None),
         )
         print(f"Created lead #{lead_id}: {args.title}")
 
@@ -1849,6 +1887,7 @@ def main():
         lead = claim_next_lead(
             category=getattr(args, "category", None),
             thread_id=getattr(args, "thread_id", None),
+            depth_tier=getattr(args, "depth_tier", None),
         )
         if lead:
             lead_full = get_lead(lead["id"])

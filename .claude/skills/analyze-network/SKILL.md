@@ -142,13 +142,16 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
 
 ### 7. Generate Hypotheses
 
-For structural observations that suggest deeper investigation:
+For structural observations that suggest deeper investigation. Every hypothesis MUST include:
+1. A **falsification criterion** — what evidence would disprove this?
+2. The **best innocent explanation** — what's the most plausible non-coordination reason?
+3. A **search plan** that would test the hypothesis via Layer 1 research
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "HYPOTHESIS" \
     --pattern-type structural \
-    --description "EVIDENCE AND REASONING" \
+    --description "EVIDENCE AND REASONING. INNOCENT EXPLANATION: [best alternative]. FALSIFICATION: [what would disprove this]." \
     --predicted-evidence "What we'd find if true" \
     --search-plan "Specific searches to test" \
     --originated-from "analysis:analyze-network"
