@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 """
-Automated pipeline dispatcher — launches headless Claude Code instances
+Investigation-aware pipeline dispatcher — launches headless Claude Code instances
 to process investigation queues (triage, pursue-lead, build-infra, auto-leads).
+
+This is the primary dispatcher for investigation work. It reads lead priorities,
+triage scheduler fields (depth_tier, recommended_skill), and analysis cooldowns
+to decide WHAT to run. Uses the dispatch_runs table to track execution.
+
+See also: queue_dispatcher.py (generic job queue worker manager) and
+queue_system/ (job queue infrastructure with heartbeat tracking). Those systems
+use separate tables (job_queue, agent_instances) and operate independently.
 
 Usage:
     uv run python scripts/dispatcher.py run          # One-shot: check queues, launch needed agents

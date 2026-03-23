@@ -890,9 +890,11 @@ SELECT * FROM human_actions WHERE status='pending' ORDER BY priority;
 
 ---
 
-## Queue Dispatcher (Ithildin queue system)
+## Queue Dispatcher (generic job queue)
 
-Launches queue agent workers based on pending job types. Config: `scripts/queue_dispatch_config.json`.
+Generic worker pool manager — spawns agent workers based on pending job types. Uses `job_queue` and `agent_instances` tables. Config: `scripts/queue_dispatch_config.json`.
+
+> **Note**: This is the generic execution plane (HOW workers run). For investigation-aware dispatch (WHAT to run based on lead priorities, triage scheduler, analysis cooldowns), use `dispatcher.py` below.
 
 ```bash
 # One-shot: check queue, spawn needed agents
@@ -909,9 +911,9 @@ uv run python scripts/queue_dispatcher.py daemon
 uv run python scripts/queue_dispatcher.py daemon --poll-interval 60
 ```
 
-## Legacy Dispatcher (manual pipeline)
+## Investigation Dispatcher (primary)
 
-Launches headless Claude Code instances to process queues. Config: `scripts/dispatch_config.json`.
+Investigation-aware dispatcher — launches headless Claude Code instances based on lead priorities, triage scheduler fields (depth_tier, recommended_skill), and analysis cooldowns. Uses `dispatch_runs` table. Config: `scripts/dispatch_config.json`.
 
 ```bash
 # One-shot: check queues, launch needed agents

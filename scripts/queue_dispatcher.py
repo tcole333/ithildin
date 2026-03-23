@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """
-Queue dispatcher for Ithildin agent workers.
+Generic queue dispatcher for Ithildin agent workers.
+
+Manages worker pools via job_queue and agent_instances tables with heartbeat
+tracking. This is the generic execution plane — it manages HOW workers run.
+
+See also: dispatcher.py (investigation-aware dispatcher) which decides WHAT
+to run based on lead priorities, triage scheduler fields, and analysis
+cooldowns. The two systems use separate tables and operate independently.
 """
 
 import argparse
