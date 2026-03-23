@@ -344,6 +344,7 @@ All instances write to shared `investigation.db` (WAL mode handles concurrent wr
 - **Use `--output $WORKDIR/...` on ALL search commands** to keep context lean
 - **Do NOT `cat` or `Read` full document text** — extract relevant quotes only
 - **Record findings as you go**, not in a batch at the end
+- **DB-first, report-second**: Every factual discovery must be recorded to `findings_tracker.py add` and every entity to `entity_tracker.py` as you find them. The report file (if writing one for a parent orchestrator) is a summary of what you already persisted. The database is permanent; tmp files are ephemeral.
 
 ### Tool Bug Reporting
 If you encounter bugs in CLI tools (crashes, incorrect output, missing features), submit them to the infra queue:

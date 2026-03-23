@@ -204,6 +204,8 @@ As you search, be curious. If documents reference data sources we don't have too
 At the end of your investigation, list any SOURCE GAPS you identified and create infrastructure requests for valuable ones:
 uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] investigation. [Details]. URL: [URL]. Access: [METHOD]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
+BEFORE WRITING YOUR REPORT: Verify that EVERY factual discovery has been recorded via findings_tracker.py add and every new entity via entity_tracker.py. The report file is a SUMMARY of what you already persisted to the database. Do not put new information only in the report — the report file is temporary and will be deleted.
+
 FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-a.md using this format:
 ---
 agent: agent-a
@@ -334,6 +336,8 @@ uv run python tools/infra_tracker.py add --title "Add [JURISDICTION] registry" -
 
 If you find a data source that would immediately help AND it has a free, accessible API — you may build the tool yourself. Probe the endpoint first, confirm it works, then write the integration. Update CLAUDE.md and /search-all-sources after.
 
+BEFORE WRITING YOUR REPORT: Verify that EVERY factual discovery has been recorded via findings_tracker.py add and every new entity via entity_tracker.py. The report file is a SUMMARY of what you already persisted to the database. Do not put new information only in the report — the report file is temporary and will be deleted.
+
 FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-b.md using this format:
 ---
 agent: agent-b
@@ -435,6 +439,8 @@ As you search court records, look for:
 - Government investigation reports or hearing transcripts not yet in our investigations.db
 If you find a new court system or legal database with a public API, create an infrastructure request. If it's simple enough, build the tool:
 uv run python tools/infra_tracker.py add --title "Integrate [COURT/DATABASE]" --type new_source --description "Discovered during [TARGET] investigation. [Details, URL, access method]." --source-name "[SOURCE]" --priority medium --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
+
+BEFORE WRITING YOUR REPORT: Verify that EVERY factual discovery has been recorded via findings_tracker.py add and every new entity via entity_tracker.py. The report file is a SUMMARY of what you already persisted to the database. Do not put new information only in the report — the report file is temporary and will be deleted.
 
 FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-c.md using this format:
 ---
@@ -558,6 +564,8 @@ For each new source discovered:
 
 uv run python tools/infra_tracker.py add --title "Integrate [SOURCE]" --type new_source --description "Found during [TARGET] web research. URL: [URL]. Data: [WHAT]. Access: [HOW]. Value: [WHY]." --source-name "[SOURCE]" --source-url "[URL]" --priority [high/medium] --discovered-by "agent:deep-investigate" --discovered-during "[TARGET] investigation"
 
+BEFORE WRITING YOUR REPORT: Verify that EVERY factual discovery has been recorded via findings_tracker.py add and every new entity via entity_tracker.py. The report file is a SUMMARY of what you already persisted to the database. Do not put new information only in the report — the report file is temporary and will be deleted.
+
 FINAL STEP — MANDATORY: When done, write your report to [WORKDIR]/report-agent-d.md using this format:
 ---
 agent: agent-d
@@ -600,7 +608,9 @@ Use .venv/bin/python3 for all commands.
 
 **DO NOT use TaskOutput to retrieve agent results.** Agent transcripts are 10-50MB and will bloat context.
 
-Instead, agents write structured reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`. Poll for completion, then read the reports:
+Instead, agents write structured reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`. Poll for completion, then read the reports.
+
+**CRITICAL: DB-first, report-second.** Sub-agents MUST write every factual discovery to `findings_tracker.py add` and every entity to `entity_tracker.py` BEFORE writing the report file. The report is a summary of what was already persisted to the database, NOT the primary record. If an agent discovers something and only writes it to the report file without recording it via the CLI tools, that information is lost when the tmp directory is cleaned up. The database is permanent; the report is ephemeral.
 
 ```
 # Launch all 4 agents with run_in_background=true

@@ -184,6 +184,8 @@ Read the parsed XML data. Map:
 
 ### 6. Record Findings
 
+**DB-first principle**: Record every discovery to `findings_tracker.py add` and every entity to `entity_tracker.py` as you extract them from the filing text. Do not accumulate observations and batch them at the end — if you run out of context, unrecorded observations are lost. The filing text in `$WORKDIR/` is ephemeral; the database is permanent.
+
 One finding per discrete factual discovery. **Do not batch into one mega-finding.**
 
 ```bash

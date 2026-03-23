@@ -40,9 +40,12 @@ def get_db():
     db.execute("PRAGMA foreign_keys=ON")
 
     # Reuse canonical schema creation from lead tracker.
-    from tools.lead_tracker import _ensure_schema
+    try:
+        from tools.lead_tracker import _ensure_schema
+    except ModuleNotFoundError:
+        from lead_tracker import _ensure_schema
 
-    _ensure_schema(db)
+    db = _ensure_schema(db)
     return db
 
 
