@@ -18,9 +18,12 @@ except ImportError:
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
 
 VALID_ENTITY_TYPES = [
+    "person",
     "llc",
     "inc",
     "ltd",
+    "corporation",
+    "pllc",
     "trust",
     "foundation",
     "nonprofit",
@@ -28,6 +31,10 @@ VALID_ENTITY_TYPES = [
     "fund",
     "association",
     "government",
+    "pac",
+    "agency",
+    "joint_venture",
+    "shell",
     "unknown",
 ]
 

@@ -221,7 +221,7 @@ uv run python tools/entity_tracker.py add-relation   --entity-a-id <PARENT_ID>  
 uv run python tools/entity_tracker.py show <ENTITY_ID>
 ```
 
-Use allowed entity types: `llc, inc, ltd, trust, foundation, nonprofit, partnership, fund, association, government, unknown`.
+Use allowed entity types: `person, llc, inc, ltd, corporation, pllc, trust, foundation, nonprofit, partnership, fund, association, government, pac, agency, joint_venture, shell, unknown`.
 
 ### 8. Create Entity Research File
 Create `research/entities/<entity-slug>.md`:

@@ -750,6 +750,34 @@ def _ensure_schema(db):
     except Exception:
         pass
 
+    # Relax entity_type CHECK constraint on entities (Python VALID_ENTITY_TYPES handles validation)
+    try:
+        import re as _re3
+        schema = db.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='entities'"
+        ).fetchone()
+        if schema and "CHECK(entity_type IN" in (schema[0] or ""):
+            new_sql = _re3.sub(
+                r"CHECK\(entity_type\s+IN\s*\([^)]+\)\)",
+                "",
+                schema[0]
+            )
+            if new_sql != schema[0]:
+                db.execute("PRAGMA writable_schema=ON")
+                db.execute(
+                    "UPDATE sqlite_master SET sql=? WHERE type='table' AND name='entities'",
+                    (new_sql,)
+                )
+                db.execute("PRAGMA writable_schema=OFF")
+                db.commit()
+                db.close()
+                db = sqlite3.connect(str(DB_PATH))
+                db.row_factory = sqlite3.Row
+                db.execute("PRAGMA journal_mode=WAL")
+                db.execute("PRAGMA busy_timeout=5000")
+    except Exception:
+        pass
+
     # Fix stale FK: lead_id REFERENCES leads_old_backup -> leads
     try:
         import re as _re
