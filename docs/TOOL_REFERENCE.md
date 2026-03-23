@@ -18,7 +18,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `fec` | query_fec.py | FEC campaign finance |
 | `edgar` | query_edgar.py | SEC EDGAR filings |
 | `courtlistener` | query_courtlistener.py | CourtListener court records |
-| `990` | query_990.py | ProPublica 990 nonprofits |
+| `990` | query_990.py | IRS 990 nonprofit database (grants, officers, financials) |
 | `registry` | query_registry.py | Unified corporate registry |
 | `usaspending` | query_usaspending.py | USASpending federal contracts/grants |
 | `sam_gov` | query_sam.py | SAM.gov API |
@@ -580,15 +580,44 @@ python tools/query_courtlistener.py party "PERSON_NAME"
 python tools/query_courtlistener.py opinions "QUERY" --court ca2
 ```
 
-### ProPublica 990 (nonprofit filings)
+### IRS 990 Nonprofit Database (unified tool)
+
+The unified `query_990.py` combines bulk grant data (2009-2024, all US nonprofits), ProPublica metadata/filings, and officer/financial analysis. The old `query_990_propublica.py` still exists as an internal module but agents should use `query_990.py` for all 990 queries.
+
+**Search & discovery:**
 ```bash
-python tools/query_990.py search "Gratitude America"
-python tools/query_990.py ein 660789697
-python tools/query_990.py filings 660789697
-python tools/query_990.py batch "QUERY_1" "QUERY_2"
+python tools/query_990.py search "Gratitude America"              # FTS5 search grants + related orgs
+python tools/query_990.py lookup 660789697                        # comprehensive EIN view (metadata + financials + officers + grants)
+python tools/query_990.py filings 660789697                       # filing list with PDF links (via ProPublica)
+```
+
+**Grant analysis:**
+```bash
+python tools/query_990.py filer 660789697                         # grants MADE by EIN
+python tools/query_990.py recipient "Gratitude"                   # grants RECEIVED by name (FTS5)
+python tools/query_990.py recipient-ein 030213226                 # grants RECEIVED by EIN
+python tools/query_990.py network 660789697 --depth 2             # BFS grant graph from seed EIN
+python tools/query_990.py co-grantors "MELANOMA RESEARCH ALLIANCE"  # shared funders
+python tools/query_990.py cross-ref                               # match investigation.db entities
+python tools/query_990.py top --by amount --limit 20              # top grantmakers (also: count, recipients, single)
+```
+
+**Officers & compensation:**
+```bash
+python tools/query_990.py officers 660789697                      # officers/directors for a nonprofit by EIN
+python tools/query_990.py officer-search "John Smith"             # find a person across ALL nonprofits (board overlap detection)
+python tools/query_990.py top-compensated                         # highest-compensated nonprofit officers
+```
+
+**Financial analysis & red flags:**
+```bash
+python tools/query_990.py financials 660789697                    # financial summary over time (revenue, expenses, assets)
+python tools/query_990.py red-flags 660789697                     # red-flag analysis (ratios + checklist + insiders)
 ```
 
 ### IRS 990 XML (Schedule I grants + Schedule R related orgs)
+
+Separate ingestion tool for XML-level parsing. Use `query_990.py` for queries; use `ingest_990_xml.py` only for ingestion/reprocessing.
 ```bash
 python tools/ingest_990_xml.py download-index            # cache IRS index CSVs (2017-2025)
 python tools/ingest_990_xml.py lookup 660789697           # show filings for an EIN
@@ -602,7 +631,9 @@ python tools/ingest_990_xml.py search "QUERY"              # keyword search gran
 python tools/ingest_990_xml.py stats                      # summary
 ```
 
-### IRS 990 Bulk Grant Database (all US nonprofits, 2009-2024)
+### IRS 990 Bulk Ingestion (data pipeline only)
+
+Use `ingest_990_bulk.py` only for downloading/processing bulk data. All queries go through `query_990.py` above.
 ```bash
 python tools/ingest_990_bulk.py download-index               # 1.3GB parquet from Giving Tuesday S3
 python tools/ingest_990_bulk.py explore-index                # show schema, form types, year range
@@ -612,15 +643,6 @@ python tools/ingest_990_bulk.py process --form-type 990PF --year-start 2018 --ye
 python tools/ingest_990_bulk.py resume                       # continue interrupted run
 python tools/ingest_990_bulk.py build-fts                    # build FTS5 after bulk load
 python tools/ingest_990_bulk.py stats                        # DB stats + process run history
-
-python tools/query_990_bulk.py search "QUERY"                # FTS5 search grants + related orgs
-python tools/query_990_bulk.py filer 660789697               # grants MADE by EIN
-python tools/query_990_bulk.py recipient "Gratitude"         # grants RECEIVED by name (FTS5)
-python tools/query_990_bulk.py recipient-ein 030213226       # grants RECEIVED by EIN
-python tools/query_990_bulk.py network 660789697 --depth 2   # BFS grant graph from seed EIN
-python tools/query_990_bulk.py co-grantors "MELANOMA RESEARCH ALLIANCE"  # shared funders
-python tools/query_990_bulk.py cross-ref                     # match investigation.db entities
-python tools/query_990_bulk.py top --by amount --limit 20    # top grantmakers (also: count, recipients, single)
 ```
 
 ### NYC ACRIS (property records, SODA API)

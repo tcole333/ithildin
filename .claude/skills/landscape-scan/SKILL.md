@@ -96,6 +96,7 @@ For each target, run **2-3 type-appropriate structured sources** plus WebSearch.
 **Nonprofit targets — pick 2-3:**
 - WebSearch (always)
 - 990s: `uv run python tools/query_990.py search "<ENTITY>" --output $WORKDIR/scan-<N>-990.json`
+- 990 lookup: `uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/scan-<N>-990-lookup.json`  (if EIN known)
 - EDGAR (if large): `uv run python tools/query_edgar.py search "<ENTITY>" --size 5 --output $WORKDIR/scan-<N>-edgar.json`
 - FEC (PAC affiliates): `uv run python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/scan-<N>-fec.json`
 

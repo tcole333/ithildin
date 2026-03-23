@@ -118,6 +118,8 @@ Track B: Financial/corporate/property
 ```
 uv run python tools/query_edgar.py search "<TARGET>" --size 20 --output "$WORKDIR/fin-edgar.json"
 uv run python tools/query_990.py search "<TARGET>" --output "$WORKDIR/fin-990.json"
+uv run python tools/query_990.py lookup <EIN> --output "$WORKDIR/fin-990-lookup.json"  # if EIN known
+uv run python tools/query_990.py financials <EIN> --output "$WORKDIR/fin-990-financials.json"  # revenue/expense trends
 uv run python tools/query_acris.py party "<TARGET>" --output "$WORKDIR/fin-acris.json"
 uv run python tools/parse_ds10_financials.py query --entity "<TARGET>" > "$WORKDIR/fin-ds10.txt"
 uv run python tools/query_fec.py donor "<TARGET>" --limit 20 --output "$WORKDIR/fin-fec-donor.json"

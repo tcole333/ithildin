@@ -116,8 +116,11 @@ python tools/query_aleph.py search "<ENTITY>" --schema Organization --output $WO
 python tools/query_courtlistener.py search "<ENTITY>" --output $WORKDIR/trace-cl.json
 python tools/query_courtlistener.py party "<ENTITY>" --output $WORKDIR/trace-cl-party.json
 
-# ProPublica 990 (if nonprofit)
-python tools/query_990.py search "<ENTITY>" --output $WORKDIR/trace-990.json
+# IRS 990 (if nonprofit — comprehensive view with officers, financials, grants)
+python tools/query_990.py lookup <EIN> --output $WORKDIR/trace-990-lookup.json   # if EIN known
+python tools/query_990.py search "<ENTITY>" --output $WORKDIR/trace-990.json     # if searching by name
+python tools/query_990.py officers <EIN> --output $WORKDIR/trace-990-officers.json
+python tools/query_990.py financials <EIN> --output $WORKDIR/trace-990-financials.json
 ```
 
 ### 6b. External APIs & Web Research

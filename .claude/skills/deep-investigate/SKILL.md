@@ -62,7 +62,7 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 |-------------|-------------------------------|
 | **Person** | CourtListener, FEC, 990s, EDGAR, LittleSis, registries (as officer), FARA, lobbying, OpenSanctions, GDELT |
 | **Corporation** | State registries (DE/NY/FL/CA/TX + incorporation state), EDGAR (10-K, proxy), USASpending, SAM.gov, CourtListener, lobbying, FARA, GLEIF |
-| **Nonprofit** | ProPublica 990 (grants, officers, compensation), EDGAR, state registries, CourtListener, FEC (PAC affiliates) |
+| **Nonprofit** | IRS 990 (lookup, grants, officers, financials, red-flags), EDGAR, state registries, CourtListener, FEC (PAC affiliates) |
 | **Government actor** | FEC, lobbying (post-government), FARA, CourtListener, LittleSis, EDGAR (financial disclosures) |
 | **Financial entity** | EDGAR, GLEIF, DS10, ACRIS, UCC, registries, CourtListener, USASpending |
 
@@ -246,7 +246,7 @@ Use .venv/bin/python3 for all commands.
 
 #### Agent B: Corporate, Financial & Property Records
 
-**Sources**: Corporate Registry (FL/NY/NM/PA/UK/USVI), SEC EDGAR, NYC ACRIS, FEC, ProPublica 990, UCC, FAA, LDA Lobbying, FARA, GLEIF, OpenSanctions, DS10 Financial
+**Sources**: Corporate Registry (FL/NY/NM/PA/UK/USVI), SEC EDGAR, NYC ACRIS, FEC, IRS 990, UCC, FAA, LDA Lobbying, FARA, GLEIF, OpenSanctions, DS10 Financial
 
 **Prompt template**:
 ```
@@ -286,6 +286,9 @@ CAMPAIGN FINANCE:
 
 NONPROFITS:
 10. .venv/bin/python3 tools/query_990.py search "[TARGET]" --output [WORKDIR]/b-990.json
+10a. .venv/bin/python3 tools/query_990.py lookup <EIN> --output [WORKDIR]/b-990-lookup.json  (if EIN known — comprehensive view)
+10b. .venv/bin/python3 tools/query_990.py officers <EIN> --output [WORKDIR]/b-990-officers.json  (board + staff)
+10c. .venv/bin/python3 tools/query_990.py financials <EIN> --output [WORKDIR]/b-990-financials.json  (revenue/expense trends)
 
 LOBBYING:
 11. .venv/bin/python3 tools/query_lobbying.py client "[TARGET]" --output [WORKDIR]/b-lda-client.json

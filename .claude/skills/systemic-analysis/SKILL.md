@@ -84,9 +84,10 @@ uv run python tools/query_edgar.py search "MEMBER_NAME" --output $WORKDIR/edgar-
 uv run python tools/query_edgar.py company CIK_NUMBER --output $WORKDIR/edgar-co-MEMBER.json
 ```
 
-**c) ProPublica 990 — Nonprofit board overlap**
+**c) IRS 990 — Nonprofit board overlap**
 ```bash
 uv run python tools/query_990.py search "MEMBER_NAME" --output $WORKDIR/990-MEMBER.json
+uv run python tools/query_990.py officer-search "MEMBER_NAME" --output $WORKDIR/990-officer-MEMBER.json
 ```
 
 **d) FEC — Political donation patterns**

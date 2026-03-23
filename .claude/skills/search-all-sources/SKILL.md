@@ -76,8 +76,10 @@ python tools/query_aleph.py search "<QUERY>" --schema Company --output $WORKDIR/
 # CourtListener (federal courts)
 python tools/query_courtlistener.py search "<QUERY>" --output $WORKDIR/search-cl.json
 
-# ProPublica 990 (nonprofit filings)
+# IRS 990 Nonprofit Database (grants, officers, financials)
 python tools/query_990.py search "<QUERY>" --output $WORKDIR/search-990.json
+python tools/query_990.py officer-search "<QUERY>" --output $WORKDIR/search-990-officers.json
+python tools/query_990.py financials <EIN> --output $WORKDIR/search-990-financials.json  # if EIN known
 
 # GDELT (global news media — 3-month rolling window)
 python tools/query_gdelt.py articles "<QUERY>" --limit 20 --output $WORKDIR/search-gdelt-art.json

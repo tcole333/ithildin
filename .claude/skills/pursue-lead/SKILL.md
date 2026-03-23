@@ -88,7 +88,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 - [ ] Investigation corpus (all corpus_tools from profile)
 - [ ] CourtListener (federal litigation: `query_courtlistener.py search/party/cases`)
 - [ ] FEC donations (`query_fec.py donor`)
-- [ ] ProPublica 990 (`query_990.py search` — check if person is officer/director of any nonprofit)
+- [ ] IRS 990 (`query_990.py search` — grants; `officer-search` — check if person is officer/director; `red-flags` — if EIN known)
 - [ ] SEC EDGAR (`query_edgar.py search/lookup` — insider filings, mentions in proxy statements)
 - [ ] LittleSis (`query_littlesis.py search` — pre-mapped relationships)
 - [ ] Corporate registries (`query_registry.py officers` — what entities are they officer of?)
@@ -101,7 +101,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 - [ ] Investigation corpus
 - [ ] Corporate registries (`query_registry.py search` — all jurisdictions)
 - [ ] SEC EDGAR (`query_edgar.py search` — filings mentioning entity)
-- [ ] ProPublica 990 (`query_990.py search` — if nonprofit)
+- [ ] IRS 990 (`query_990.py lookup <EIN>` — comprehensive view; `officers` — board/staff; `financials` — revenue trends)
 - [ ] USASpending (`query_usaspending.py awards` — federal contracts/grants)
 - [ ] SAM.gov (`query_sam.py entity/exclusions` — registration, debarments)
 - [ ] CourtListener (`query_courtlistener.py search` — litigation involving entity)
@@ -114,7 +114,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 **Financial leads:**
 - [ ] Investigation corpus
 - [ ] SEC EDGAR (10-K, 10-Q, proxy, insider transactions)
-- [ ] ProPublica 990 (grant flows, officer compensation)
+- [ ] IRS 990 (grant flows via `filer`/`recipient`; `officers` for compensation; `red-flags` for ratio analysis)
 - [ ] FEC (political spending by entity + executives)
 - [ ] USASpending (contract/grant awards)
 - [ ] DS10 financial records (`parse_ds10_financials.py query`)
