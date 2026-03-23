@@ -50,14 +50,46 @@ Prioritize cases that are: (a) filed in the investigation's time window, (b) inv
 
 ### 2. Read Full Opinion Text
 
-CourtListener search results include URLs to opinion pages. Use WebFetch to read the full text.
+Use the `opinion` command to fetch full opinion text directly from the API:
 
 ```bash
-# For each relevant opinion URL from search results:
-WebFetch <OPINION_URL> "Extract the complete text of this court opinion. Include: all factual findings, legal holdings, party names with their roles, all monetary amounts, all dates mentioned, and any references to other cases, regulatory proceedings, or government investigations. Preserve the structure (sections, headings) of the opinion."
+# Fetch by opinion/cluster ID (from search results or docket clusters field)
+uv run python tools/query_courtlistener.py opinion <OPINION_ID> --lines 1000
 ```
 
-**This is the core LLM advantage.** A court opinion may be 20-50 pages. Read it fully and extract:
+If no opinion ID is available, search for opinions by case name:
+```bash
+uv run python tools/query_courtlistener.py search "<CASE_NAME>" --type o --limit 5
+```
+
+**This is the core LLM advantage.** A court opinion may be 20-50 pages (100K+ chars). Read it fully and extract:
+
+### 2b. Search and Download RECAP Documents
+
+RECAP documents contain filed court documents (memoranda, transcripts, exhibits, motions) — often richer than the opinion alone. Search for them:
+
+```bash
+# Search for RECAP documents related to this case
+uv run python tools/query_courtlistener.py recap-search "<CASE_NAME> <KEY_TERMS>" --court <COURT> --limit 20
+```
+
+For each valuable document found (memoranda, government proffers, exhibit lists, sentencing memos):
+
+```bash
+# Download the PDF and extract text
+uv run python tools/query_courtlistener.py download "<DOWNLOAD_URL>" $WORKDIR/doc-<NUM>.pdf --extract-text
+```
+
+Then read the extracted text file (`$WORKDIR/doc-<NUM>.txt`) for analysis. **RECAP documents are free to download** — the PDFs are hosted on storage.courtlistener.com.
+
+Priority documents to look for:
+- Government memoranda (legal theories, enterprise descriptions, money laundering mechanics)
+- Superseding indictments (full defendant list, charge details)
+- Sentencing memoranda (financial details, cooperation agreements)
+- Pretrial hearing transcripts (factual proffers)
+- Exhibit lists (names every document and entity the government will introduce)
+
+**DB-first principle**: Record findings from each document as you read it, not after reading all documents. If you run out of context mid-analysis, unrecorded observations are lost.
 
 ### 3. Extract Structured Information
 
