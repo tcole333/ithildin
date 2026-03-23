@@ -92,46 +92,23 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 | **Pillars** | `pillar_tracker.py {register,list,show,seed,arc,career,event,events,bootstrap,alumni,cohort,dispersal,overlap,timeline,score,gaps,cross-pillar,pillar-network,stats}` |
 | **Profile** | `investigation_context.py {show,list,set}` |
 
-**39+ data source tools** covering document corpora, corporate registries (15 jurisdictions), public records, financial data, and external APIs. Run `uv run python tools/source_report.py` for live status.
+**90+ data source tools** organized by category. Read the relevant module when you need tool-specific commands:
+
+| Module | Tools | Reference |
+|--------|-------|-----------|
+| **Financial** | EDGAR, ratios, market data, SEC enforcement, 990 nonprofits, FDIC, FINRA | `docs/modules/financial.md` |
+| **Registries** | Unified registry + 20+ state/international corporate registries | `docs/modules/registries.md` |
+| **Government** | USASpending, HigherGov, SAM, Medicare/Medicaid, PPP | `docs/modules/government.md` |
+| **Legal** | CourtListener, HUDOC | `docs/modules/legal.md` |
+| **Political** | FEC, lobbying, FARA, Congress, GovInfo | `docs/modules/political.md` |
+| **OSINT/Infra** | crt.sh, Wayback, Shodan, URLScan, Maigret, FAA | `docs/modules/osint-infra.md` |
+| **Corpora** | DOJ, LMSBAND, Unified, DugganUSA, DocumentCloud, MuckRock | `docs/modules/corpora.md` |
+| **Blockchain** | Etherscan, Solscan, Dune | `docs/modules/blockchain.md` |
+| **Network/Sanctions** | LittleSis, ICIJ, OpenCorporates, OpenSanctions, GLEIF, FinCEN | `docs/modules/network-sanctions.md` |
+
+Run `uv run python tools/source_report.py` for live tool health status.
 
 **Citation types** for new data sources: add one entry to `CITATION_REGISTRY` in `web/src/lib/citations.ts`. See `docs/CITATION_SYSTEM.md` for the registry pattern and example. For one-off URLs without a structured pattern, add the citation key → URL mapping to `web/src/data/source-urls.json`.
-
-**Government spending & contracts:**
-- `query_usaspending.py`: Federal spending — `search`, `awards`, `award`, `recipient`, `subawards`, `transactions`, `geography`, `timeline`, `top-recipients`, `agencies` — free, no auth
-- `query_sam.py`: SAM.gov API — `entity`, `exclusions`, `contracts`, `opportunities` — free API key (SAM_API_KEY)
-- `ingest_sam.py`: SAM.gov Bulk (874K entities, 167K exclusions) — `search`, `entity`, `exclusion`, `entity-by-uei`, `entity-by-cage`, `naics`, `address`, `stats` — local SQLite, no auth
-- `query_medicare.py`: Medicare provider spending — `search`, `provider` — free, no auth
-
-**International tools:**
-- `query_france.py`: French company registry (SIRENE) — `search`, `company <SIREN>`, `naf <CODE>`, `address` — free, no auth
-- `query_hudoc.py`: ECHR case database (HUDOC) — `search`, `case <ID>`, `appno <NUM>`, `text <ID>`, `respondent <STATE>` — free, no auth
-
-**Infrastructure recon tools:**
-- `query_crtsh.py`: Certificate Transparency via crt.sh — `search`, `subdomains`, `timeline`, `cert` — free, no auth
-- `query_wayback.py`: Wayback Machine CDX — `snapshots`, `timeline`, `first`, `diff`, `fetch` — free, no auth
-- `query_urlscan.py`: URLScan.io passive scans — `search`, `result`, `technologies`, `links` — free (search), API key for submit
-
-**Corporate registries** (15 jurisdictions): FL, NY, CA, TX, MI, MA, NJ, NM, CO, DC, USVI, Panama, UK, France, OpenCorporates (DE/HK/CY). See `docs/TOOL_REFERENCE.md` for per-registry CLI. Common patterns:
-- `search "QUERY"` | `entity <ID>` | `ingest <ID>` | `ingest-search "QUERY"`
-- Unified query: `query_registry.py search "QUERY"` | `officers "NAME"` | `address "ADDR"`
-
-**HigherGov** (`query_highergov.py`): Federal contract, grant, awardee, IDV, subcontract, vehicle, and partnership intelligence. Richer than USASpending with nested relationships, named vehicle tracking, and teaming data.
-- `contract --parent-award N0002325D0075` | `contract --awardee-uei ZE2JVFS8ML75` | `contract --vehicle-key 8751 --all-pages`
-- `idv --vehicle-key 8751 --all-pages` | `idv --naics 561611` | `idv --award-id N0002325D0075`
-- `awardee --uei ZE2JVFS8ML75` | `awardee --cage 9MFB2` | `subcontract --awardee-uei ZE2JVFS8ML75`
-- `partnership --awardee-key 509623647` | `vehicle --vehicle-key 8751` | `agency --agency-key 904`
-- `opportunity --source-id "26-SOL-DCR01"` | `grant --awardee-uei ZE2JVFS8ML75` | `people --email "name@dhs.gov"`
-- Key vehicle IDs: WEXMAC 2.0 = 8751. 2-week trial. Auth: HIGHERGOV_API_KEY in .env. Rate: 10 req/sec, 10K records/month.
-
-**Shodan** (`query_shodan.py`): Internet-connected device search, DNS enumeration, SSL cert discovery. Paid plan (99 query credits). Auth: SHODAN_API_KEY in .env.
-
-**Market data & financial forensics:**
-- `query_market.py`: Stock prices, company profiles, insider transactions, event correlation — `price`, `history`, `profile`, `insider`, `correlate` — yfinance, free, no auth
-- `financial_ratios.py`: Ratio analysis from SEC financial statements — `analyze` (single company), `compare` (peer group) — computes profitability, liquidity, solvency, efficiency, earnings quality metrics with anomaly detection
-
-**Medicaid Provider Analysis** (T-MSIS 2018-2024, 227M rows, $1.09T):
-- `query_medicaid.py`: DuckDB-backed spending analysis — `stats`, `top-billers`, `top-codes`, `provider <NPI>`, `code <HCPCS>`, `network <NPI>`, `anomalies`, `sql`
-- `trace_provider.py`: Corporate trace pipeline — NPI → NPPES → state registry → officer network
 
 ## Evidence Standards
 
