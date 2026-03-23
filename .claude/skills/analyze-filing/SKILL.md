@@ -96,6 +96,33 @@ Read the filing text and systematically extract information. **Do not skim — r
 - [ ] **Subsequent events** (final footnote)
   - Material events after the filing period
 
+- [ ] **Financial statements** (structured extraction via edgartools)
+  - Pull structured data for ratio analysis:
+    ```bash
+    uv run python tools/query_edgar.py sections <TICKER_OR_CIK> --section income_statement --output $WORKDIR/income.json
+    uv run python tools/query_edgar.py sections <TICKER_OR_CIK> --section balance_sheet --output $WORKDIR/balance.json
+    uv run python tools/query_edgar.py sections <TICKER_OR_CIK> --section cashflow_statement --output $WORKDIR/cashflow.json
+    ```
+  - Run ratio analysis:
+    ```bash
+    uv run python tools/financial_ratios.py analyze $WORKDIR/income.json $WORKDIR/balance.json --cashflow $WORKDIR/cashflow.json --output $WORKDIR/ratios.json
+    ```
+  - Review ratios for anomalies: margin compression, earnings/cash divergence, high accruals, pass-through indicators
+  - Record each anomaly as a separate finding with `--type financial`
+  - Key red flags: gross margin <5% (pass-through), operating CF negative while net income positive, accruals ratio >10%, receivables growing faster than revenue
+
+- [ ] **Accounting policy changes** (footnotes, typically Note 1-2)
+  - Revenue recognition methodology
+  - Depreciation/amortization methods and useful life assumptions
+  - Changes in estimates or policies (and when they occurred)
+  - Compare to prior year filing if available — policy changes coinciding with earnings pressure are significant
+
+- [ ] **Auditor information** (filing signature page / Exhibit 99)
+  - Which firm? How long have they been auditor?
+  - Any going concern qualifications?
+  - Any audit disagreements or scope limitations?
+  - Auditor change during investigation-relevant period is a red flag
+
 #### DEF 14A (Proxy Statement) Extraction Checklist
 
 - [ ] **Board of directors** — full list with employer affiliations, committee memberships

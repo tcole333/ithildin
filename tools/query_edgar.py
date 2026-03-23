@@ -740,6 +740,82 @@ def cmd_read(args):
         print(f"\n... ({total_lines - args.lines} more lines, use --lines {total_lines} to see all)")
 
 
+def _get_financial_statement(obj, stmt_type):
+    """Get a financial statement from a parsed filing object.
+
+    balance_sheet and income_statement are direct attributes.
+    cashflow_statement requires going through financials.xb.statements.
+    """
+    # Try direct attribute first
+    stmt = getattr(obj, stmt_type, None)
+    if stmt and not callable(stmt):
+        return stmt
+
+    # Cash flow often needs the financials.xb.statements path
+    try:
+        stmts = obj.financials.xb.statements
+        accessor = getattr(stmts, stmt_type, None)
+        if accessor:
+            return accessor() if callable(accessor) else accessor
+    except Exception:
+        pass
+    return None
+
+
+def _statement_to_json(stmt, stmt_type, filing):
+    """Convert an edgartools Statement to structured JSON for analysis.
+
+    Returns dict with metadata + line_items list. Each line item has:
+    label, concept (XBRL tag), values (period->amount), and hierarchy info.
+    """
+    import math
+    df = stmt.to_dataframe()
+    period_cols = sorted([c for c in df.columns if c.startswith("20")])
+
+    line_items = []
+    for _, row in df.iterrows():
+        if row.get("abstract", False):
+            continue
+        if row.get("dimension", False):
+            continue
+
+        values = {}
+        for col in period_cols:
+            v = row.get(col)
+            if v is not None and not (isinstance(v, float) and math.isnan(v)):
+                values[col] = v
+
+        if not values:
+            continue
+
+        item = {
+            "label": row.get("label", ""),
+            "concept": row.get("concept", ""),
+            "values": values,
+        }
+        if row.get("balance"):
+            item["balance"] = row["balance"]
+        line_items.append(item)
+
+    # Try to get clean company name
+    company_name = None
+    for attr in ("company_name", "company"):
+        val = getattr(filing, attr, None)
+        if val and isinstance(val, str):
+            company_name = val
+            break
+
+    return {
+        "statement_type": stmt_type,
+        "company": company_name or str(filing),
+        "form": filing.form,
+        "filing_date": str(filing.filing_date),
+        "accession": filing.accession_no,
+        "periods": period_cols,
+        "line_items": line_items,
+    }
+
+
 def cmd_sections(args):
     """Extract specific sections from a 10-K or 10-Q filing using edgartools."""
     try:
@@ -768,6 +844,17 @@ def cmd_sections(args):
             print(line)
         return
 
+    # Financial statement section names
+    financial_sections = {
+        "balance_sheet", "income_statement", "cashflow_statement",
+        "cash_flow", "income", "balance",
+    }
+    financial_aliases = {
+        "balance": "balance_sheet",
+        "income": "income_statement",
+        "cash_flow": "cashflow_statement",
+    }
+
     # If a specific section requested, show just that
     if args.section:
         section_map = {
@@ -782,6 +869,21 @@ def cmd_sections(args):
             "item3": ("legal_proceedings", "Item 3"),
         }
         key = args.section.lower().replace(" ", "_").replace("-", "_")
+
+        # Handle financial statement sections
+        if key in financial_sections:
+            resolved = financial_aliases.get(key, key)
+            stmt = _get_financial_statement(obj, resolved)
+            if stmt:
+                result = _statement_to_json(stmt, resolved, filing)
+                if hasattr(args, "output") and args.output:
+                    write_output(result, args)
+                else:
+                    print(json.dumps(result, indent=2, default=str))
+            else:
+                print(f"Financial statement '{key}' not available in this filing.")
+            return
+
         if key in section_map:
             attr, label = section_map[key]
             section = getattr(obj, attr, None)
@@ -815,7 +917,7 @@ def cmd_sections(args):
                 for line in text.split("\n")[:args.lines]:
                     print(line)
             except Exception:
-                print(f"Section '{args.section}' not found. Try: business, risk, mda, legal")
+                print(f"Section '{args.section}' not found. Try: business, risk, mda, legal, balance_sheet, income_statement, cashflow_statement")
         return
 
     # No specific section — show overview of all available sections
@@ -835,19 +937,22 @@ def cmd_sections(args):
             print(f"  {label}: not available")
 
     # Also try financial statements
-    for attr, label in [
+    for stmt_type, label in [
         ("balance_sheet", "Balance Sheet"),
         ("income_statement", "Income Statement"),
         ("cashflow_statement", "Cash Flow Statement"),
     ]:
-        stmt = getattr(obj, attr, None)
+        stmt = _get_financial_statement(obj, stmt_type)
         if stmt:
-            print(f"  {label}: available")
+            df = stmt.to_dataframe()
+            periods = [c for c in df.columns if c.startswith("20")]
+            print(f"  {label}: available ({len(periods)} periods: {', '.join(periods)})")
         else:
             print(f"  {label}: not available")
 
-    print(f"\nUse --section <name> to extract a specific section (e.g., --section risk)")
-    print(f"Available: business, risk, mda, legal, item1, item1a, item7, item3")
+    print(f"\nUse --section <name> to extract a specific section")
+    print(f"  Text:       business, risk, mda, legal")
+    print(f"  Financial:  balance_sheet, income_statement, cashflow_statement")
 
 
 # ─── Main ────────────────────────────────────────────────────────────────────
@@ -898,13 +1003,14 @@ def main():
     p.add_argument("--form-type", default="10-K", help="Form type when using --ticker (default: 10-K)")
     p.add_argument("--lines", type=int, default=500, help="Number of lines to show (default: 500)")
 
-    # sections (NEW: structured section extraction via edgartools)
-    p = sub.add_parser("sections", help="Extract specific sections from 10-K/10-Q (clean text)")
+    # sections (structured section extraction via edgartools)
+    p = sub.add_parser("sections", help="Extract specific sections from 10-K/10-Q (clean text or structured financials)")
     p.add_argument("ticker", help="Ticker symbol or CIK")
-    p.add_argument("--section", help="Section to extract: business, risk, mda, legal, item1, item1a, item7")
+    p.add_argument("--section", help="Section: business, risk, mda, legal | balance_sheet, income_statement, cashflow_statement")
     p.add_argument("--form", default="10-K", help="Form type (default: 10-K)")
     p.add_argument("--index", type=int, default=0, help="Filing index (0=most recent)")
     p.add_argument("--lines", type=int, default=1000, help="Max lines to show")
+    add_output_args(p)
 
     args = parser.parse_args()
     # Set default json_out for subparsers that don't have output args

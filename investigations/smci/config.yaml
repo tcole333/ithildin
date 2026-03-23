@@ -1,0 +1,141 @@
+# Super Micro Computer (SMCI) — Financial Forensics Prototype
+# Reconstructing Hindenburg Research's SMCI investigation to validate
+# Ithildin's financial forensics capabilities.
+
+name: "smci"
+
+primary_subject: "Super Micro Computer, Inc."
+
+description: >
+  Financial forensics investigation of Super Micro Computer (SMCI).
+  Prototype case to validate Hindenburg-style investigation capabilities:
+  related-party transactions, accounting manipulation, corporate structure
+  tracing, officer network analysis, and regulatory history.
+  CIK: 0001375365. Ticker: SMCI. Incorporated in Delaware, HQ in San Jose, CA.
+
+key_persons:
+  - "charles liang"       # CEO, founder
+  - "chiu-chu liu liang"  # Charles Liang's wife, former SVP Operations
+  - "wally liaw"          # Former SVP, implicated in prior SEC case
+  - "steve zhang"         # Charles Liang's brother-in-law (Aterra/Ablecom)
+
+known_addresses:
+  "980 rock avenue": "Super Micro HQ, San Jose, CA"
+  "san jose": "SMCI operational base"
+
+threads:
+  - id: 1
+    name: "Financial Forensics"
+    description: "Financial statement analysis, ratio trends, accounting anomalies, revenue quality"
+    targets:
+      - "super micro"
+      - "smci"
+    keywords:
+      - "margin"
+      - "revenue"
+      - "accounting"
+      - "restatement"
+
+  - id: 2
+    name: "Corporate Structure"
+    description: "Subsidiaries, related entities, ownership chains, shell companies"
+    targets:
+      - "aterra"
+      - "ablecom"
+      - "compuware"
+    keywords:
+      - "subsidiary"
+      - "related.party"
+      - "entity"
+
+  - id: 3
+    name: "Regulatory History"
+    description: "SEC investigation, NASDAQ delisting, settlement, DOJ export controls"
+    targets: []
+    keywords:
+      - "sec"
+      - "enforcement"
+      - "delisting"
+      - "settlement"
+      - "export.control"
+
+  - id: 4
+    name: "Officer Network"
+    description: "Board members, executives, departures/returns, external affiliations"
+    targets: []
+    keywords:
+      - "officer"
+      - "director"
+      - "board"
+      - "compensation"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2018-08-24"
+    event: "SEC charges Super Micro with accounting violations"
+    category: "legal"
+  - date: "2018-08-19"
+    event: "NASDAQ delists Super Micro for late financial filings"
+    category: "financial"
+  - date: "2020-01-31"
+    event: "Super Micro re-lists on NASDAQ after settling with SEC"
+    category: "financial"
+  - date: "2020-08-21"
+    event: "SEC settlement: $17.5M penalty, Liang $2.1M, CFO $50K"
+    category: "legal"
+  - date: "2024-01-24"
+    event: "Hindenburg Research publishes short report on SMCI"
+    category: "media"
+  - date: "2024-08-28"
+    event: "Ernst & Young resigns as auditor"
+    category: "financial"
+  - date: "2024-10-30"
+    event: "BDO appointed as new auditor"
+    category: "financial"
+  - date: "2024-11-15"
+    event: "NASDAQ delisting warning for late 10-K filing"
+    category: "legal"
+  - date: "2025-02-25"
+    event: "Super Micro files delayed 10-K, avoids delisting"
+    category: "financial"
+
+seed_pillars:
+  - name: "Aterra Technology"
+    pillar_type: "operations"
+    sub_type: "supplier"
+    status: "active"
+    jurisdiction: "CA"
+    significance: "Run by Steve Zhang (Charles Liang's brother-in-law). Major related-party supplier."
+
+  - name: "Ablecom Technology"
+    pillar_type: "operations"
+    sub_type: "supplier"
+    status: "active"
+    jurisdiction: "Taiwan"
+    significance: "Related-party supplier. Shares leadership with Aterra. Publicly traded in Taiwan."
+
+  - name: "Compuware Technology"
+    pillar_type: "operations"
+    sub_type: "related_entity"
+    status: "unknown"
+    jurisdiction: "CA"
+    significance: "Previously run by Liang's ex-wife. Related-party transaction entity."
+
+  - name: "Ernst & Young LLP"
+    pillar_type: "accounting"
+    sub_type: "auditor"
+    status: "dissolved"
+    significance: "Resigned as SMCI auditor Aug 2024. Resignation during investigation is a major red flag."
+
+  - name: "BDO USA LLP"
+    pillar_type: "accounting"
+    sub_type: "auditor"
+    status: "active"
+    significance: "Replacement auditor appointed Oct 2024."
+
+evidence_id_prefix: "SEC"
+
+exclude_from_graph: "super micro computer"
+
+source_overrides: {}
