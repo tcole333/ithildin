@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Query interface for the IRS 990 Bulk Grant Database.
+Query interface for the IRS 990 Bulk Database.
 
-Searches grants and related organizations across all US nonprofit e-filings
-(2009-2024) stored in datasets/irs990_grants.db.
+Searches grants, officers, financials, and related organizations across all
+US nonprofit e-filings (2009-2024) stored in datasets/irs990_grants.db.
 
 Usage:
     python tools/query_990_bulk.py search "Epstein"
@@ -14,6 +14,11 @@ Usage:
     python tools/query_990_bulk.py co-grantors "MELANOMA RESEARCH ALLIANCE"
     python tools/query_990_bulk.py cross-ref
     python tools/query_990_bulk.py top --by amount --limit 20
+    python tools/query_990_bulk.py officers 660789697
+    python tools/query_990_bulk.py officer-search "John Smith"
+    python tools/query_990_bulk.py financials 660789697
+    python tools/query_990_bulk.py red-flags 660789697
+    python tools/query_990_bulk.py top-compensated --min-comp 500000
 """
 
 import argparse
@@ -580,8 +585,290 @@ def cmd_top(args):
 
 # ── main ────────────────────────────────────────────────────────
 
+# ── officers ────────────────────────────────────────────────────
+
+def cmd_officers(args):
+    """List officers/directors for a nonprofit by EIN."""
+    db = get_db()
+    ein = args.ein.replace("-", "")
+
+    rows = db.execute("""
+        SELECT o.*, f.filer_name FROM officers o
+        JOIN filings f ON o.object_id = f.object_id
+        WHERE o.ein = ?
+        ORDER BY o.tax_year DESC, o.total_comp DESC
+    """, (ein,)).fetchall()
+    results = [dict(r) for r in rows]
+
+    if not results:
+        print(f"No officers found for EIN {ein}")
+        db.close()
+        return
+
+    org_name = results[0].get("filer_name", ein)
+    years = sorted(set(r["tax_year"] for r in results if r["tax_year"]))
+    print(f"\nOfficers of {org_name} (EIN {ein}) — {len(results)} records across {len(years)} years")
+
+    # Show most recent year
+    latest_year = max(years) if years else None
+    if latest_year:
+        latest = [r for r in results if r["tax_year"] == latest_year]
+        print(f"\n  {latest_year} ({len(latest)} officers):")
+        for o in latest:
+            roles = []
+            if o["is_director"]: roles.append("DIR")
+            if o["is_officer"]: roles.append("OFF")
+            if o["is_key_employee"]: roles.append("KEY")
+            if o["is_highest_comp"]: roles.append("HCE")
+            if o["is_former"]: roles.append("FMR")
+            role_str = ",".join(roles) if roles else ""
+            print(f"    {o['person_name']:35s} {o['title']:25s} "
+                  f"comp: {_fmt_amount(o['total_comp']):>12s}  [{role_str}]")
+
+    write_output(results, args, summary=f"990 officers for EIN {ein}")
+    db.close()
+
+
+# ── officer-search ─────────────────────────────────────────────
+
+def cmd_officer_search(args):
+    """Find a person across all nonprofits."""
+    db = get_db()
+    name = args.name
+    limit = args.limit
+
+    pattern = f"%{name}%"
+    rows = db.execute("""
+        SELECT o.ein, o.person_name, o.title, o.total_comp, o.tax_year,
+               o.is_director, o.is_officer, o.is_key_employee,
+               f.filer_name
+        FROM officers o
+        JOIN filings f ON o.object_id = f.object_id
+        WHERE o.person_name LIKE ?
+        ORDER BY o.total_comp DESC, o.tax_year DESC
+        LIMIT ?
+    """, (pattern, limit)).fetchall()
+    results = [dict(r) for r in rows]
+
+    print(f"\nOfficer search '{name}': {len(results)} results")
+    # Group by EIN for cleaner display
+    by_ein = defaultdict(list)
+    for r in results:
+        by_ein[r["ein"]].append(r)
+
+    for ein, officers in list(by_ein.items())[:30]:
+        org = officers[0]["filer_name"]
+        latest = max(officers, key=lambda o: o["tax_year"] or 0)
+        years = sorted(set(o["tax_year"] for o in officers if o["tax_year"]))
+        max_comp = max(o["total_comp"] for o in officers)
+        print(f"  {org[:45]:45s} EIN {ein}  comp: {_fmt_amount(max_comp):>12s}  "
+              f"title: {latest['title'][:25]}  years: {years[0] if years else '?'}-{years[-1] if years else '?'}")
+
+    write_output(results, args, summary=f"990 officer search '{name}'")
+    db.close()
+
+
+# ── financials ─────────────────────────────────────────────────
+
+def cmd_financials(args):
+    """Financial summary over time for a nonprofit."""
+    db = get_db()
+    ein = args.ein.replace("-", "")
+
+    rows = db.execute("""
+        SELECT * FROM financials
+        WHERE ein = ?
+        ORDER BY tax_year DESC
+    """, (ein,)).fetchall()
+    results = [dict(r) for r in rows]
+
+    if not results:
+        print(f"No financials found for EIN {ein}")
+        db.close()
+        return
+
+    org_name = results[0].get("filer_name", ein)
+    print(f"\nFinancials for {org_name} (EIN {ein})")
+    print(f"  {'Year':>5}  {'Revenue':>14}  {'Expenses':>14}  {'Program':>14}  "
+          f"{'Prog%':>6}  {'Fund%':>6}  {'Assets':>14}")
+    print(f"  {'─'*5}  {'─'*14}  {'─'*14}  {'─'*14}  {'─'*6}  {'─'*6}  {'─'*14}")
+
+    for f in results:
+        prog_pct = f"{f['program_expense_ratio']:.0%}" if f.get("program_expense_ratio") is not None else "N/A"
+        fund_pct = f"{f['fundraising_ratio']:.0%}" if f.get("fundraising_ratio") is not None else "N/A"
+        print(f"  {f.get('tax_year', '?'):>5}  {_fmt_amount(f.get('total_revenue')):>14}  "
+              f"{_fmt_amount(f.get('total_expenses')):>14}  "
+              f"{_fmt_amount(f.get('program_expenses')):>14}  "
+              f"{prog_pct:>6}  {fund_pct:>6}  "
+              f"{_fmt_amount(f.get('total_assets_eoy')):>14}")
+
+    write_output(results, args, summary=f"990 financials for EIN {ein}")
+    db.close()
+
+
+# ── red-flags ──────────────────────────────────────────────────
+
+def cmd_red_flags(args):
+    """Red-flag analysis for a nonprofit — ratio screening + checklist."""
+    db = get_db()
+    ein = args.ein.replace("-", "")
+
+    # Financials
+    fin = db.execute("""
+        SELECT * FROM financials WHERE ein = ? ORDER BY tax_year DESC LIMIT 1
+    """, (ein,)).fetchone()
+
+    # Officers + compensation
+    officers = db.execute("""
+        SELECT person_name, title, total_comp FROM officers
+        WHERE ein = ? ORDER BY tax_year DESC, total_comp DESC LIMIT 20
+    """, (ein,)).fetchall()
+
+    # Checklist flags
+    flags = db.execute("""
+        SELECT * FROM checklist_flags WHERE ein = ? ORDER BY tax_year DESC LIMIT 1
+    """, (ein,)).fetchone()
+
+    # Insider transactions
+    insiders = db.execute("""
+        SELECT * FROM insider_transactions WHERE ein = ? ORDER BY amount DESC
+    """, (ein,)).fetchall()
+
+    # Schedule J (high comp detail)
+    comp_detail = db.execute("""
+        SELECT * FROM compensation_detail WHERE ein = ? ORDER BY total_comp_from_org DESC LIMIT 10
+    """, (ein,)).fetchall()
+
+    org_name = fin["filer_name"] if fin else ein
+    print(f"\nRed-flag analysis: {org_name} (EIN {ein})")
+
+    alerts = []
+
+    if fin:
+        print(f"\n  FINANCIAL RATIOS ({fin['tax_year']}):")
+        f = dict(fin)
+
+        # Program expense ratio
+        if f.get("program_expense_ratio") is not None:
+            pct = f["program_expense_ratio"]
+            flag = " ⚠ LOW" if pct < 0.33 else ""
+            print(f"    Program expense ratio:  {pct:.1%}{flag}")
+            if pct < 0.33:
+                alerts.append(f"Low program expense ratio: {pct:.1%} (threshold: 33%)")
+
+        # Fundraising ratio
+        if f.get("fundraising_ratio") is not None:
+            pct = f["fundraising_ratio"]
+            flag = " ⚠ HIGH" if pct > 0.65 else ""
+            print(f"    Fundraising ratio:      {pct:.1%}{flag}")
+            if pct > 0.65:
+                alerts.append(f"High fundraising ratio: {pct:.1%} (threshold: 65%)")
+
+        # Admin ratio
+        if f.get("admin_expense_ratio") is not None:
+            pct = f["admin_expense_ratio"]
+            flag = " ⚠ HIGH" if pct > 0.50 else ""
+            print(f"    Admin expense ratio:    {pct:.1%}{flag}")
+            if pct > 0.50:
+                alerts.append(f"High admin ratio: {pct:.1%}")
+
+        # Revenue vs expenses
+        if f.get("total_revenue") and f.get("total_expenses"):
+            if f["total_expenses"] > 0 and f["total_revenue"] / f["total_expenses"] > 3:
+                alerts.append(f"Revenue {_fmt_amount(f['total_revenue'])} is 3x+ expenses {_fmt_amount(f['total_expenses'])} — hoarding?")
+
+        print(f"    Revenue:                {_fmt_amount(f.get('total_revenue'))}")
+        print(f"    Expenses:               {_fmt_amount(f.get('total_expenses'))}")
+        print(f"    Assets EOY:             {_fmt_amount(f.get('total_assets_eoy'))}")
+
+    if officers:
+        print(f"\n  TOP COMPENSATED OFFICERS:")
+        total_exp = fin["total_expenses"] if fin and fin["total_expenses"] else 0
+        for o in [dict(r) for r in officers[:10]]:
+            comp = o["total_comp"]
+            pct_of_exp = f" ({comp/total_exp:.1%} of expenses)" if total_exp and comp else ""
+            print(f"    {o['person_name']:35s} {_fmt_amount(comp):>12s}{pct_of_exp}")
+            if total_exp and comp > total_exp * 0.25:
+                alerts.append(f"Officer {o['person_name']} comp ({_fmt_amount(comp)}) > 25% of total expenses")
+
+    if flags:
+        print(f"\n  CHECKLIST FLAGS ({dict(flags).get('tax_year', '?')}):")
+        f = dict(flags)
+        items = [
+            ("excess_benefit_transaction", "Excess benefit transaction"),
+            ("schedule_j_required", "Schedule J required (high comp)"),
+            ("whistleblower_policy", "Whistleblower policy"),
+            ("document_retention_policy", "Document retention policy"),
+            ("compensation_process_ceo", "CEO compensation process"),
+            ("conflict_of_interest_policy", "Conflict of interest policy"),
+        ]
+        for key, label in items:
+            val = f.get(key, 0)
+            indicator = "YES" if val else "NO"
+            flag = ""
+            if key == "excess_benefit_transaction" and val:
+                flag = " ⚠"
+                alerts.append("Reported excess benefit transaction")
+            if key in ("whistleblower_policy", "conflict_of_interest_policy") and not val:
+                flag = " ⚠ MISSING"
+                alerts.append(f"Missing {label.lower()}")
+            print(f"    {label:40s} {indicator}{flag}")
+
+    if insiders:
+        print(f"\n  INSIDER TRANSACTIONS ({len(insiders)}):")
+        for t in [dict(r) for r in insiders[:10]]:
+            print(f"    [{t['transaction_type']:20s}] {t.get('person_name', '?'):30s} "
+                  f"{_fmt_amount(t.get('amount')):>12s}  {(t.get('description') or '')[:40]}")
+            alerts.append(f"Insider transaction: {t['transaction_type']} — {t.get('person_name', '?')} ({_fmt_amount(t.get('amount'))})")
+
+    if alerts:
+        print(f"\n  ⚠ ALERTS ({len(alerts)}):")
+        for a in alerts:
+            print(f"    • {a}")
+    else:
+        print(f"\n  No red flags detected.")
+
+    result = {"ein": ein, "org_name": org_name, "alerts": alerts}
+    write_output(result, args, summary=f"990 red-flags for EIN {ein}")
+    db.close()
+
+
+# ── top-compensated ────────────────────────────────────────────
+
+def cmd_top_compensated(args):
+    """Highest-compensated nonprofit officers."""
+    db = get_db()
+    min_comp = args.min_comp
+    limit = args.limit
+
+    rows = db.execute("""
+        SELECT o.ein, o.person_name, o.title, o.total_comp, o.tax_year,
+               o.comp_from_org, o.comp_from_related, o.other_comp,
+               f.filer_name
+        FROM officers o
+        JOIN filings f ON o.object_id = f.object_id
+        WHERE o.total_comp >= ?
+        ORDER BY o.total_comp DESC
+        LIMIT ?
+    """, (min_comp, limit)).fetchall()
+    results = [dict(r) for r in rows]
+
+    print(f"\nTop compensated officers (min ${min_comp:,}): {len(results)} results")
+    print(f"  {'Name':35s} {'Title':25s} {'Total Comp':>12s}  {'Year':>5}  Organization")
+    print(f"  {'─'*35} {'─'*25} {'─'*12}  {'─'*5}  {'─'*40}")
+    for r in results:
+        print(f"  {r['person_name']:35s} {r['title'][:25]:25s} "
+              f"{_fmt_amount(r['total_comp']):>12s}  {r.get('tax_year', '?'):>5}  "
+              f"{r['filer_name'][:40]}")
+
+    write_output(results, args, summary=f"990 top compensated (min ${min_comp:,})")
+    db.close()
+
+
+# ── main ────────────────────────────────────────────────────────
+
 def main():
-    parser = argparse.ArgumentParser(description="Query IRS 990 Bulk Grant Database")
+    parser = argparse.ArgumentParser(description="Query IRS 990 Bulk Database")
     sub = parser.add_subparsers(dest="command")
 
     p_sr = sub.add_parser("search", help="Full-text search grants + related orgs")
@@ -621,6 +908,28 @@ def main():
     p_top.add_argument("-n", "--limit", type=int, default=20, help="Number of results")
     add_output_args(p_top)
 
+    p_off = sub.add_parser("officers", help="Officers/directors for a nonprofit by EIN")
+    p_off.add_argument("ein", help="Nonprofit EIN")
+    add_output_args(p_off)
+
+    p_os = sub.add_parser("officer-search", help="Find a person across all nonprofits")
+    p_os.add_argument("name", help="Person name (partial match)")
+    p_os.add_argument("-n", "--limit", type=int, default=100, help="Max results")
+    add_output_args(p_os)
+
+    p_fin = sub.add_parser("financials", help="Financial summary over time")
+    p_fin.add_argument("ein", help="Nonprofit EIN")
+    add_output_args(p_fin)
+
+    p_rf = sub.add_parser("red-flags", help="Red-flag analysis (ratios + checklist + insiders)")
+    p_rf.add_argument("ein", help="Nonprofit EIN")
+    add_output_args(p_rf)
+
+    p_tc = sub.add_parser("top-compensated", help="Highest-compensated nonprofit officers")
+    p_tc.add_argument("--min-comp", type=int, default=500000, help="Min compensation (default: 500000)")
+    p_tc.add_argument("-n", "--limit", type=int, default=50, help="Max results")
+    add_output_args(p_tc)
+
     args = parser.parse_args()
 
     if args.command == "search":
@@ -639,6 +948,16 @@ def main():
         cmd_cross_ref(args)
     elif args.command == "top":
         cmd_top(args)
+    elif args.command == "officers":
+        cmd_officers(args)
+    elif args.command == "officer-search":
+        cmd_officer_search(args)
+    elif args.command == "financials":
+        cmd_financials(args)
+    elif args.command == "red-flags":
+        cmd_red_flags(args)
+    elif args.command == "top-compensated":
+        cmd_top_compensated(args)
     else:
         parser.print_help()
 
