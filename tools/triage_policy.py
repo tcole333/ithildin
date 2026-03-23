@@ -43,6 +43,13 @@ SKILL_RECOMMENDATION = {
     ("scan", "filing"): "/analyze-filing",
     ("scan", "contract"): "/analyze-contract",
     ("scan", "case"): "/analyze-case",
+    # Nonprofit/grant routing
+    ("deep_dive", "nonprofit"): "/trace-grants",
+    ("standard", "nonprofit"): "/trace-grants",
+    ("scan", "nonprofit"): "/trace-grants",
+    ("deep_dive", "grant"): "/trace-grants",
+    ("standard", "grant"): "/trace-grants",
+    ("scan", "grant"): "/trace-grants",
 }
 
 DEAD_END_THRESHOLDS = {

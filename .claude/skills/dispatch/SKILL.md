@@ -152,6 +152,7 @@ SCHEDULER RECOMMENDATIONS:
    /deep-investigate:    <N> leads (e.g. ...)
    /investigate-person:  <N> leads (e.g. ...)
    /trace-entity:        <N> leads (e.g. ...)
+   /trace-grants:        <N> leads (nonprofit funders/recipients)
    /pursue-lead:         <N> leads (e.g. ...)
 
 SOURCE COVERAGE (search_log):

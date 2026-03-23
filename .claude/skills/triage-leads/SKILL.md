@@ -149,6 +149,7 @@ If category is missing, infer from title/description:
 - "registry" / "entity" / "LLC" / "trust" keywords → `entity`
 - "address" / "property" keywords → `entity`
 - "financial" / "payment" / "transfer" → `financial`
+- "nonprofit" / "foundation" / "501(c)" / "grant" / "donor" / "grantee" / "dark money" / "donor-advised" → `nonprofit`
 - "connection" keywords → `connection`
 
 If target_name is obvious from the title but missing, fill it in.
@@ -184,6 +185,7 @@ Assign a `depth_tier` based on the target's structural position and information 
 | Target is a key_person from the investigation profile | `deep_dive` |
 | Target has 3+ entity_roles or 3+ connections already | `standard` (may escalate to `deep_dive`) |
 | Entity at a known_address from the profile | `standard` |
+| Nonprofit target appearing as filer/recipient in 990 grants to/from 3+ investigation entities | `standard` (may escalate to `deep_dive`) |
 | Generic cross-ref with no special signals | `scan` |
 | New person with 0 findings, not a key_person | `scan` |
 
@@ -211,6 +213,8 @@ Based on depth_tier and category, set `recommended_skill`:
 | `standard` + person | `/investigate-person` |
 | `standard` + entity | `/trace-entity` |
 | `standard` + financial | `/pursue-lead` |
+| `*` + nonprofit | `/trace-grants` |
+| `*` + grant | `/trace-grants` |
 | `standard` + other | `/pursue-lead` |
 | `scan` + any | `/pursue-lead` |
 
