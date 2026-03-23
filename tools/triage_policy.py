@@ -33,6 +33,16 @@ SKILL_RECOMMENDATION = {
     ("scan", "entity"): "/pursue-lead",
     ("scan", "financial"): "/pursue-lead",
     ("scan", "connection"): "/pursue-lead",
+    # Depth-analysis skills: route specific source types to focused analyzers
+    ("standard", "filing"): "/analyze-filing",
+    ("standard", "contract"): "/analyze-contract",
+    ("standard", "case"): "/analyze-case",
+    ("deep_dive", "filing"): "/analyze-filing",
+    ("deep_dive", "contract"): "/analyze-contract",
+    ("deep_dive", "case"): "/analyze-case",
+    ("scan", "filing"): "/analyze-filing",
+    ("scan", "contract"): "/analyze-contract",
+    ("scan", "case"): "/analyze-case",
 }
 
 DEAD_END_THRESHOLDS = {

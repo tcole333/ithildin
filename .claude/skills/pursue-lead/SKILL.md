@@ -240,6 +240,24 @@ python tools/lead_tracker.py add \
 
 Agents should freely create follow-up leads at whatever priority they judge appropriate.
 
+**Depth-analysis leads**: When you find a specific SEC filing, federal contract, or court case worth detailed analysis, spawn a lead with the appropriate category so depth-analysis skills can pick it up:
+
+```bash
+# SEC filing worth reading in full
+python tools/lead_tracker.py add --title "Analyze <COMPANY> 10-K — related-party transactions" \
+  --category filing --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
+
+# Government contract worth tracing
+python tools/lead_tracker.py add --title "Analyze $<AMT> <AGENCY> contract to <COMPANY>" \
+  --category contract --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
+
+# Court case worth deep reading
+python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TYPE>" \
+  --category case --priority medium --target "<PARTY>" --source "agent:pursue-lead"
+```
+
+These route to `/analyze-filing`, `/analyze-contract`, and `/analyze-case` which read the full source documents — something discovery agents shouldn't spend time on.
+
 ### 7. Check Stop Conditions
 
 Stop investigating and move to completion when ANY of these is true:

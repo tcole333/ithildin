@@ -36,6 +36,9 @@ All skills load the active profile at startup. Entities are shared across invest
 /investigate-person <name>  # Single-agent deep-dive
 /trace-entity <entity>      # Corporate entity trace
 /investigate-infra <target> # Passive digital infrastructure recon
+/analyze-filing <CIK>      # Deep SEC filing analysis (10-K, proxy, 13D)
+/analyze-contract <award>   # Government contract forensics (subawards, payments, vehicles)
+/analyze-case <docket>      # Court case deep analysis (opinions, parties, allegations)
 /status-report              # Investigation status
 /discover-frameworks        # Evolve analytical framework inventory
 /review-methodology         # Operational learning review

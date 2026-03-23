@@ -30,7 +30,7 @@ except ImportError:
 
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
 
-VALID_CATEGORIES = ["person", "entity", "financial", "document", "digital", "connection", "legal", "intelligence"]
+VALID_CATEGORIES = ["person", "entity", "financial", "document", "digital", "connection", "legal", "intelligence", "filing", "contract", "case"]
 VALID_PRIORITIES = ["critical", "high", "medium", "low"]
 VALID_STATUSES = ["open", "pending_triage", "in_progress", "completed", "blocked", "dead_end"]
 
