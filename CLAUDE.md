@@ -39,6 +39,8 @@ All skills load the active profile at startup. Entities are shared across invest
 /analyze-filing <CIK>      # Deep SEC filing analysis (10-K, proxy, 13D)
 /analyze-contract <award>   # Government contract forensics (subawards, payments, vehicles)
 /analyze-case <docket>      # Court case deep analysis (opinions, parties, allegations)
+/screen-targets <tickers>   # Financial red flag screening (Tier 0, 5-20 companies)
+/compare-peers <company>    # Industry peer benchmarking (Tier 2, outlier detection)
 /status-report              # Investigation status
 /discover-frameworks        # Evolve analytical framework inventory
 /review-methodology         # Operational learning review
@@ -120,6 +122,10 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 - Key vehicle IDs: WEXMAC 2.0 = 8751. 2-week trial. Auth: HIGHERGOV_API_KEY in .env. Rate: 10 req/sec, 10K records/month.
 
 **Shodan** (`query_shodan.py`): Internet-connected device search, DNS enumeration, SSL cert discovery. Paid plan (99 query credits). Auth: SHODAN_API_KEY in .env.
+
+**Market data & financial forensics:**
+- `query_market.py`: Stock prices, company profiles, insider transactions, event correlation — `price`, `history`, `profile`, `insider`, `correlate` — yfinance, free, no auth
+- `financial_ratios.py`: Ratio analysis from SEC financial statements — `analyze` (single company), `compare` (peer group) — computes profitability, liquidity, solvency, efficiency, earnings quality metrics with anomaly detection
 
 **Medicaid Provider Analysis** (T-MSIS 2018-2024, 227M rows, $1.09T):
 - `query_medicaid.py`: DuckDB-backed spending analysis — `stats`, `top-billers`, `top-codes`, `provider <NPI>`, `code <HCPCS>`, `network <NPI>`, `anomalies`, `sql`
