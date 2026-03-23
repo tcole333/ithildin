@@ -268,7 +268,7 @@ When investigating ANY entity or person, agents MUST search these sources in add
 **Financial & Legal:**
 - CourtListener: `tools/query_courtlistener.py search "name"` (federal litigation)
 - FEC: `tools/query_fec.py donor "name"` (campaign finance)
-- ProPublica 990: `tools/query_990.py search "name"` (nonprofit filings)
+- IRS 990 (Nonprofits): `tools/query_990.py search "name"` (grants, officers, financials), `tools/query_990.py officer-search "name"` (board positions), `tools/query_990.py flow <EIN> --depth 2` (grant networks, circular flows)
 - Lobbying LDA: `tools/query_lobbying.py client "name"` (lobbying disclosures)
 - FARA: `tools/query_fara.py search "name"` (foreign agent registrations)
 
@@ -285,6 +285,14 @@ When investigating ANY entity or person, agents MUST search these sources in add
 - WebSearch: For news reporting, business records, LinkedIn profiles, import/export records
 - WebFetch: For company websites, archived pages, public filings
 - GDELT: `tools/query_gdelt.py articles "name"` (global news media, 3-month window)
+
+**Nonprofit & Grant Networks:**
+- Grant flow tracing: `tools/query_990.py flow <EIN> --depth 2` — follow money through 501(c)(3)/(c)(4) chains via Schedule I grants
+- Circular flow detection: When A funds B and B funds A, the net direction reveals control (use `/trace-grants` for full analysis)
+- Shared officer analysis: `tools/query_990.py shared-officers <EIN1> <EIN2>` — officers serving on multiple nonprofits = structural coordination
+- Co-grantor clustering: `tools/query_990.py co-grantors "RECIPIENT"` — when 5 funders all support the same 3 recipients, that's a funding constellation
+- 501(c)(4) opacity: (c)(4) organizations don't file public 990s — they appear only as *recipients* in other orgs' Schedule I. Note the gap when you hit one.
+- Dark money chains: Donor → Donor-Advised Fund (Donors Trust) → 501(c)(4) → PAC = money laundering through nonprofit layers. Each hop adds anonymity.
 
 ### Pivot Investigation Protocol
 
