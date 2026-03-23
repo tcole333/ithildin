@@ -262,7 +262,7 @@ When investigating ANY entity or person, agents MUST search these sources in add
 - NY SoS: `tools/ingest_newyork.py search "name"`
 - FL SunBiz: `tools/query_registry.py search "name" --jurisdiction fl`
 - NM SoS: `tools/ingest_newmexico.py search "name"`
-- OCCRP Aleph: `tools/query_aleph.py search "name"` (global corporate registries)
+- ~~OCCRP Aleph~~: DEPRECATED (March 2026) — free tier removed. Use OpenCorporates, ICIJ, and OpenSanctions instead
 - SEC EDGAR: `tools/query_edgar.py search "name"` (filings, insider transactions, CIK lookup)
 
 **Financial & Legal:**
@@ -284,7 +284,7 @@ When investigating ANY entity or person, agents MUST search these sources in add
 **External / Open Web:**
 - WebSearch: For news reporting, business records, LinkedIn profiles, import/export records
 - WebFetch: For company websites, archived pages, public filings
-- GDELT: `tools/query_gdelt.py articles "name"` (global news media, 3-month window)
+- ~~GDELT~~: DEPRECATED (March 2026) — 3-month window + unreliable API. Use WebSearch for news coverage
 
 **Nonprofit & Grant Networks:**
 - Grant flow tracing: `tools/query_990.py flow <EIN> --depth 2` — follow money through 501(c)(3)/(c)(4) chains via Schedule I grants
@@ -318,7 +318,7 @@ When an entity is discovered through a data pivot (phone number, address, office
 | **A: Corpus** | DOJ Vol 11, DugganUSA, LMSBAND, Unified DB | Document references, exact quotes, email threads, timeline |
 | **B: Corporate/Financial** | Registry, EDGAR, ACRIS, FEC, 990, UCC, FAA, LDA, FARA | Entities, officers, filings, property, donations, regulatory records |
 | **C: Legal/Court** | CourtListener, FARA (detailed), LDA (detailed), Investigation reports | Litigation, opinions, enforcement actions, regulatory status |
-| **D: Network/OSINT** | LittleSis, ICIJ, Aleph, WebSearch, WebFetch, GDELT | Relationships, offshore structures, public reporting, biographical context |
+| **D: Network/OSINT** | LittleSis, ICIJ, OpenSanctions, WebSearch, WebFetch | Relationships, offshore structures, public reporting, biographical context |
 
 **Key rules**:
 1. **Every sub-agent MUST search every source in its mandate** — no skipping

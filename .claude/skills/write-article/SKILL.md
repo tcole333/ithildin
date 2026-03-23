@@ -136,10 +136,12 @@ uv run python tools/query_fara.py search "<TARGET>" --limit 20 --output "$WORKDI
 uv run python tools/query_lobbying.py client "<TARGET>" --limit 20 --output "$WORKDIR/legal-lda-client.json"
 uv run python tools/query_lobbying.py registrant "<TARGET>" --limit 20 --output "$WORKDIR/legal-lda-registrant.json"
 uv run python tools/query_littlesis.py search "<TARGET>" --output "$WORKDIR/legal-littlesis.json"
+# DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 uv run python tools/query_aleph.py search "<TARGET>" --schema Person --output "$WORKDIR/legal-aleph-person.json"
 uv run python tools/query_aleph.py search "<TARGET>" --schema Company --output "$WORKDIR/legal-aleph-company.json"
 uv run python tools/query_icij.py search "<TARGET>" --output "$WORKDIR/legal-icij.json"  # optional; requires Neo4j
 uv run python tools/query_opensanctions.py search "<TARGET>" --limit 20 --output "$WORKDIR/legal-sanctions.json"
+# DEPRECATED (March 2026): 3-month rolling window + unreliable API (frequent timeouts). Use WebSearch for news coverage instead.
 uv run python tools/query_gdelt.py articles "<TARGET>" --limit 20 --timespan 3m --output "$WORKDIR/legal-gdelt.json"
 
 # Also perform web search for recent legal/news outcomes when contextual claims depend on it.

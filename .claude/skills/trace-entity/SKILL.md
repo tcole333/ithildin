@@ -108,6 +108,7 @@ python tools/query_registry.py ucc-party "<ENTITY>" --role debtor --output $WORK
 python tools/query_registry.py ucc-party "<ENTITY>" --role secured --output $WORKDIR/trace-ucc-secured.json
 python tools/query_registry.py ucc-collateral "aircraft" --output $WORKDIR/trace-ucc-collateral.json
 
+# DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 # OCCRP Aleph (global corporate registries, leaks)
 python tools/query_aleph.py search "<ENTITY>" --schema Company --output $WORKDIR/trace-aleph-company.json
 python tools/query_aleph.py search "<ENTITY>" --schema Organization --output $WORKDIR/trace-aleph-org.json

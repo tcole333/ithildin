@@ -265,14 +265,14 @@ def probe_sam_bulk(target):
 
 
 def probe_990_bulk(target):
-    """Probe local IRS 990 grants database (22M+ grants)."""
+    """Probe local IRS 990 grants database (22M+ grants, 5M+ officers)."""
     db_path = PROJECT_ROOT / "datasets" / "irs990_grants.db"
     if not db_path.exists():
         return ("990_bulk", 0, "no_db", "irs990_grants.db missing")
     try:
         db = sqlite3.connect(str(db_path), timeout=5)
-        # Search grants FTS and related_orgs FTS
         total = 0
+        # Search grants FTS and related_orgs FTS (org names, grant purposes)
         for table in ["grants_fts", "related_orgs_fts"]:
             try:
                 count = db.execute(
@@ -282,6 +282,15 @@ def probe_990_bulk(target):
                 total += count
             except sqlite3.OperationalError:
                 pass
+        # Also search officers table by name (catches person searches like "Jeffrey Epstein")
+        try:
+            count = db.execute(
+                "SELECT COUNT(*) FROM (SELECT id FROM officers WHERE person_name LIKE ? LIMIT 500)",
+                [f"%{target}%"],
+            ).fetchone()[0]
+            total += count
+        except sqlite3.OperationalError:
+            pass
         db.close()
         return ("990_bulk", total, "ok", None)
     except Exception as e:
@@ -396,8 +405,8 @@ def build_probe_list(target, target_type="person"):
         ("lobbying_lobbyist", lambda: probe_lobbying_lobbyist(target)),
         ("fara", lambda: probe_fara(target)),
         ("littlesis", lambda: probe_littlesis(target)),
-        ("aleph", lambda: probe_aleph(target)),
-        ("gdelt", lambda: probe_gdelt(target)),
+        # aleph: deprecated — OCCRP removed free tier (March 2026)
+        # gdelt: deprecated — 3-month window + unreliable API; use WebSearch for news
         ("usaspending", lambda: probe_usaspending(target)),
         ("registry", lambda: probe_registry(target)),
         ("opensanctions", lambda: probe_opensanctions(target)),

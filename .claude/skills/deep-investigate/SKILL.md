@@ -496,7 +496,9 @@ Use .venv/bin/python3 for all commands.
 
 #### Agent D: Network, OSINT & Open Web
 
-**Sources**: LittleSis, ICIJ/Aleph, Shodan, crt.sh, Wayback Machine, URLScan.io, WebSearch, WebFetch, GDELT, plus any investigation-specific OSINT tools from the profile
+**Sources**: LittleSis, ICIJ/~~Aleph~~, Shodan, crt.sh, Wayback Machine, URLScan.io, WebSearch, WebFetch, ~~GDELT~~, plus any investigation-specific OSINT tools from the profile
+> DEPRECATED (March 2026): Aleph — OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
+> DEPRECATED (March 2026): GDELT — 3-month rolling window + unreliable API (frequent timeouts). Use WebSearch for news coverage instead.
 
 **Prompt template**:
 ```
@@ -523,6 +525,7 @@ LITTLESIS (relationship mapping):
 3. If found: .venv/bin/python3 tools/query_littlesis.py relationships <ID> --limit 50 --output [WORKDIR]/d-ls-rels.json
 
 OCCRP ALEPH (corporate registries, leaks, sanctions):
+# DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 4. .venv/bin/python3 tools/query_aleph.py search "[TARGET]" --schema Person --output [WORKDIR]/d-aleph-person.json
 5. .venv/bin/python3 tools/query_aleph.py search "[TARGET]" --schema Company --output [WORKDIR]/d-aleph-company.json
 6. If found: .venv/bin/python3 tools/query_aleph.py expand <ENTITY_ID> --output [WORKDIR]/d-aleph-expand.json

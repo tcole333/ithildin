@@ -32,6 +32,11 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
+try:
+    from tools.output_util import add_output_args, write_output
+except ImportError:
+    from output_util import add_output_args, write_output
+
 DATA_DIR = Path(__file__).parent.parent / "datasets" / "faa_registry"
 DB_PATH = Path(__file__).parent.parent / "datasets" / "faa_registry.db"
 ZIP_URL = "https://registry.faa.gov/database/ReleasableAircraft.zip"
@@ -450,6 +455,11 @@ def cmd_search(args):
             LIMIT ?
         """, [f"%{args.query}%"] * 3 + [args.limit]).fetchall()
 
+    results = [dict(r) for r in rows]
+
+    if write_output(results, args, summary=f"FAA search '{args.query}' ({len(results)} results)"):
+        return
+
     print(f"FAA Registry search: '{args.query}' — {len(rows)} results")
     print()
 
@@ -458,7 +468,7 @@ def cmd_search(args):
         print()
 
     if args.json_out:
-        print(json.dumps([dict(r) for r in rows], indent=2, default=str))
+        print(json.dumps(results, indent=2, default=str))
 
 
 def cmd_n_number(args):
@@ -542,6 +552,7 @@ def main():
     p = sub.add_parser("search", help="Search by owner name")
     p.add_argument("query")
     p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
 
     # n-number
     p = sub.add_parser("n-number", help="Lookup by N-number")
@@ -558,6 +569,8 @@ def main():
     args = parser.parse_args()
     if not hasattr(args, "json_out"):
         args.json_out = False
+    if not hasattr(args, "output"):
+        args.output = None
 
     handlers = {
         "download": cmd_download,

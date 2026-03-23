@@ -69,6 +69,7 @@ python tools/query_registry.py officers "<QUERY>" --output $WORKDIR/search-offic
 # UCC Filings (secured transactions, liens)
 python tools/query_registry.py ucc-search "<QUERY>" --output $WORKDIR/search-ucc.json
 
+# DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 # OCCRP Aleph (corporate registries, leaks, sanctions)
 python tools/query_aleph.py search "<QUERY>" --schema Person --output $WORKDIR/search-aleph-person.json
 python tools/query_aleph.py search "<QUERY>" --schema Company --output $WORKDIR/search-aleph-company.json
@@ -82,6 +83,7 @@ python tools/query_990.py search "<QUERY>" --output $WORKDIR/search-990.json
 python tools/query_990.py officer-search "<QUERY>" --output $WORKDIR/search-990-officers.json
 python tools/query_990.py financials <EIN> --output $WORKDIR/search-990-financials.json  # if EIN known
 
+# DEPRECATED (March 2026): 3-month rolling window + unreliable API (frequent timeouts). Use WebSearch for news coverage instead.
 # GDELT (global news media — 3-month rolling window)
 python tools/query_gdelt.py articles "<QUERY>" --limit 20 --output $WORKDIR/search-gdelt-art.json
 python tools/query_gdelt.py context "<QUERY>" --timespan 1w --limit 20 --output $WORKDIR/search-gdelt-ctx.json
