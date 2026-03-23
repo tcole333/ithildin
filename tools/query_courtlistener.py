@@ -92,15 +92,15 @@ def cmd_search(args):
         **kwargs,
     )
 
-    _log(args.query, "courtlistener", len(results))
+    _log(query, "courtlistener", len(results))
 
-    if write_output(results, args, summary=f"CourtListener search '{args.query}'"):
+    if write_output(results, args, summary=f"CourtListener search '{query}'"):
         return
     if getattr(args, "json_out", False):
         print(json.dumps(results, indent=2, default=str))
         return
 
-    print(f"Found {len(results)} results for '{args.query}' (type={args.type})")
+    print(f"Found {len(results)} results for '{query}' (type={args.type})")
     print()
     for r in results:
         court = r.get("court", r.get("court_id", "?"))
