@@ -1405,8 +1405,10 @@ def dead_end_lead(lead_id, reason):
     db = get_db()
     now = _utcnow().isoformat()
     db.execute(
-        "UPDATE leads SET status = 'dead_end', findings = ?, updated_at = ?, completed_at = ? WHERE id = ?",
-        (reason, now, now, lead_id)
+        """UPDATE leads SET status = 'dead_end', findings = ?, stop_reason = ?,
+           triage_rationale = COALESCE(triage_rationale, ?),
+           updated_at = ?, completed_at = ? WHERE id = ?""",
+        (reason, reason, reason, now, now, lead_id)
     )
     db.commit()
     db.close()
@@ -1818,6 +1820,15 @@ def main():
     # recover-stale — reset stale leads to open
     recover_p = subparsers.add_parser("recover-stale", help="Reset stale leads to open")
 
+    # triage-log — review triage decisions
+    tlog_p = subparsers.add_parser("triage-log", help="Review triage decisions (dead-ends and promotions)")
+    tlog_p.add_argument("--status", choices=["dead_end", "open", "all"], default="all",
+                        help="Filter by post-triage status")
+    tlog_p.add_argument("--limit", type=int, default=30)
+    tlog_p.add_argument("--missing-rationale", action="store_true",
+                        help="Show only dead-ended leads with no rationale")
+    add_output_args(tlog_p)
+
     # tier — tag a lead with investigation depth
     tier_p = subparsers.add_parser("tier", help="Tag a lead with investigation depth tier")
     tier_p.add_argument("id", type=int, help="Lead ID")
@@ -2024,6 +2035,57 @@ def main():
             print(f"Recovered {len(recovered)} stale leads:")
             for r in recovered:
                 print(f"  #{r['id']:>4} → open: {r['title']}")
+
+    elif args.command == "triage-log":
+        db = get_db()
+        if args.missing_rationale:
+            rows = db.execute("""
+                SELECT id, title, target_name, status, stop_reason, triage_rationale,
+                       triaged_by, triaged_at, completed_at
+                FROM leads WHERE status='dead_end'
+                    AND (triage_rationale IS NULL OR triage_rationale = '')
+                ORDER BY completed_at DESC NULLS LAST
+                LIMIT ?
+            """, (args.limit,)).fetchall()
+        else:
+            status_clause = ""
+            if args.status == "dead_end":
+                status_clause = "AND status='dead_end'"
+            elif args.status == "open":
+                status_clause = "AND status='open'"
+            rows = db.execute(f"""
+                SELECT id, title, target_name, status, stop_reason, triage_rationale,
+                       triaged_by, triaged_at, depth_tier, recommended_skill
+                FROM leads WHERE triaged_at IS NOT NULL {status_clause}
+                ORDER BY triaged_at DESC
+                LIMIT ?
+            """, (args.limit,)).fetchall()
+        results = [dict(r) for r in rows]
+        db.close()
+        if not write_output(results, args, summary=f"triage log: {len(results)} entries"):
+            if not results:
+                if args.missing_rationale:
+                    print("All dead-ended leads have rationales.")
+                else:
+                    print("No triage log entries found.")
+            else:
+                for r in results:
+                    status_tag = f"[{r['status']}]"
+                    tier = r.get('depth_tier') or ''
+                    skill = r.get('recommended_skill') or ''
+                    print(f"#{r['id']:>5} {status_tag:<12} {r['title']}")
+                    if r.get('target_name'):
+                        print(f"        target: {r['target_name']}")
+                    if tier or skill:
+                        print(f"        tier={tier}  skill={skill}")
+                    if r.get('stop_reason'):
+                        print(f"        stop_reason: {r['stop_reason']}")
+                    if r.get('triage_rationale'):
+                        print(f"        rationale: {r['triage_rationale']}")
+                    else:
+                        print(f"        rationale: (MISSING)")
+                    print(f"        triaged_by={r.get('triaged_by') or '?'}  at={r.get('triaged_at') or '?'}")
+                    print()
 
     elif args.command == "tier":
         try:
