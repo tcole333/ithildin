@@ -722,6 +722,34 @@ def _ensure_schema(db):
     except Exception:
         pass  # Non-critical — Python validation still protects writes
 
+    # Relax category CHECK constraint on leads (Python VALID_CATEGORIES handles validation)
+    try:
+        import re as _re2
+        schema = db.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='leads'"
+        ).fetchone()
+        if schema and "CHECK(category IN" in (schema[0] or ""):
+            new_sql = _re2.sub(
+                r"CHECK\(category\s+IN\s*\([^)]+\)\)",
+                "",
+                schema[0]
+            )
+            if new_sql != schema[0]:
+                db.execute("PRAGMA writable_schema=ON")
+                db.execute(
+                    "UPDATE sqlite_master SET sql=? WHERE type='table' AND name='leads'",
+                    (new_sql,)
+                )
+                db.execute("PRAGMA writable_schema=OFF")
+                db.commit()
+                db.close()
+                db = sqlite3.connect(str(DB_PATH))
+                db.row_factory = sqlite3.Row
+                db.execute("PRAGMA journal_mode=WAL")
+                db.execute("PRAGMA busy_timeout=5000")
+    except Exception:
+        pass
+
     # Fix stale FK: lead_id REFERENCES leads_old_backup -> leads
     try:
         import re as _re
