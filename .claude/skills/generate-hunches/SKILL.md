@@ -104,7 +104,15 @@ Run these scans on the exported data. For each, read the relevant JSON files and
 - Look for unexpected names in orchestrator rankings — people who span banking + legal + government
 - Flag anyone with revolving_door score > 0
 
-**j) Missing pillar analysis**
+**j) Nonprofit funding network concentration**
+- Identify nonprofits mentioned in 3+ investigation threads via findings search
+- For each, run `uv run python tools/query_990.py flow <EIN> --depth 1 --output $WORKDIR/hunch-990-flow-<EIN>.json` to see their funding constellation
+- Look for: same set of funders backing recipients across multiple threads (coordinated funding network)
+- Look for: circular flows between investigation-linked nonprofits (A funds B which funds A back)
+- Look for: shared officers across investigation-linked nonprofits via `uv run python tools/query_990.py shared-officers <EIN1> <EIN2> ... --output $WORKDIR/hunch-990-shared.json`
+- Example: "Donors Trust, Bradley Foundation, and Koch Foundation all fund 4 investigation-linked orgs across threads 2, 4, and 7 — coordinated funding constellation"
+
+**k) Missing pillar analysis**
 - Run `uv run python tools/pillar_tracker.py gaps --person "NAME"` for key actors
 - If a known operator has no legal connections, that's suspicious — lawyers leave fewer traces
 - Example: "A key actor has banking, operations, philanthropy arcs but no legal firm arcs (despite using many firms)"

@@ -1,12 +1,12 @@
 ---
 name: trace-grants
-description: Tier 1 grant flow network tracing — map nonprofit funding chains, detect circular flows, identify shared officers across dark money networks
+description: Tier 2 grant flow network analysis — map nonprofit funding chains, detect circular flows, identify shared officers, generate coordination hypotheses
 user_invocable: true
 ---
 
 # /trace-grants
 
-**TIER 1: DEPTH ANALYSIS** — This skill traces grant flows through nonprofit networks using the IRS 990 bulk database (22.7M grants, 5M filings). It maps directed funding chains, detects circular flows (A funds B which funds A back), identifies shared officers across organizations, and flags financial red flags. Record every discovery immediately — the grant network is the evidence.
+**TIER 2: ANALYSIS AGENT** — This skill performs grant flow network analysis using the IRS 990 bulk database (22.7M grants, 5M filings). The data extraction (grant amounts, officer lists) is Tier 1 factual work, but the network analysis (circular flow detection, shared officer mapping, co-grantor clustering) is Tier 2 pattern recognition. Every hypothesis about coordination or dark money routing MUST include falsification criteria. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
 
 ## Arguments
 
