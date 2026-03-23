@@ -248,6 +248,144 @@ def cmd_disclosures(args):
         print()
 
 
+def cmd_opinion(args):
+    """Fetch full opinion text by opinion ID or cluster ID."""
+    client = _client()
+    try:
+        opinion = client.get_opinion(args.opinion_id)
+    except Exception:
+        # Try as cluster ID
+        try:
+            import requests
+            token = os.environ.get("COURTLISTENER_TOKEN", "")
+            headers = {"Authorization": f"Token {token}"} if token else {}
+            r = requests.get(
+                f"https://www.courtlistener.com/api/rest/v4/clusters/{args.opinion_id}/",
+                headers=headers,
+            )
+            r.raise_for_status()
+            cluster = r.json()
+            # Get the first opinion from the cluster
+            opinion_urls = cluster.get("sub_opinions", [])
+            if opinion_urls:
+                oid = opinion_urls[0].rstrip("/").split("/")[-1]
+                opinion = client.get_opinion(int(oid))
+            else:
+                print("No opinions found in this cluster.", file=sys.stderr)
+                return
+        except Exception as e:
+            print(f"ERROR: Could not fetch opinion: {e}", file=sys.stderr)
+            return
+
+    if write_output(opinion, args, summary=f"CourtListener opinion #{args.opinion_id}"):
+        return
+
+    # Extract text from available fields (priority order)
+    text = ""
+    for field in ["html_lawbox", "html_columbia", "html_with_citations", "html", "plain_text", "xml_harvard"]:
+        content = opinion.get(field, "")
+        if content and len(content) > 100:
+            text = content
+            print(f"─── Opinion (source: {field}, {len(text):,} chars) ───")
+            break
+
+    if not text:
+        print("No opinion text available.", file=sys.stderr)
+        return
+
+    # Strip HTML if needed
+    if text.startswith("<"):
+        import re, html as html_mod
+        text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', text, flags=re.DOTALL | re.IGNORECASE)
+        text = re.sub(r'<(?:br|p|div|tr|li|h[1-6])[^>]*/?>', '\n', text, flags=re.IGNORECASE)
+        text = re.sub(r'<[^>]+>', '', text)
+        text = html_mod.unescape(text)
+        text = re.sub(r'[ \t]+', ' ', text)
+        text = re.sub(r'\n\s*\n', '\n\n', text)
+
+    lines = text.split("\n")
+    for line in lines[:args.lines]:
+        print(line)
+    if len(lines) > args.lines:
+        print(f"\n... ({len(lines) - args.lines} more lines)")
+
+    _log(str(args.opinion_id), "courtlistener_opinion", 1)
+
+
+def cmd_recap_search(args):
+    """Search RECAP documents for a case. Uses the search API (type=rd)."""
+    client = _client()
+    results = client.search(
+        args.query,
+        search_type="rd",
+        court=args.court,
+        max_results=args.limit,
+    )
+
+    if write_output(results, args, summary=f"RECAP doc search '{args.query}': {len(results)} results"):
+        return
+
+    print(f"Found {len(results)} RECAP documents for '{args.query}'")
+    print()
+    for r in results:
+        desc = r.get("short_description") or r.get("description") or "?"
+        entry_num = r.get("entry_number", "?")
+        date = r.get("entry_date_filed", "?")
+        pages = r.get("page_count", "?")
+        filepath = r.get("filepath_local", "")
+        is_available = r.get("is_available", False)
+        docket_url = r.get("docket_absolute_url", "")
+
+        print(f"  [{entry_num}] {date} | {desc[:80]}")
+        print(f"       Pages: {pages} | Available: {is_available}")
+        if filepath:
+            print(f"       Download: https://storage.courtlistener.com/{filepath}")
+        if docket_url:
+            print(f"       Docket: https://www.courtlistener.com{docket_url}")
+        print()
+
+    _log(args.query, "courtlistener_recap", len(results))
+
+
+def cmd_download(args):
+    """Download a RECAP document PDF from CourtListener storage."""
+    import requests
+
+    url = args.url
+    if not url.startswith("http"):
+        # Assume it's a filepath_local — prepend storage URL
+        url = f"https://storage.courtlistener.com/{url}"
+
+    print(f"Downloading: {url}", file=sys.stderr)
+    r = requests.get(url, stream=True)
+    if r.status_code != 200:
+        print(f"ERROR: HTTP {r.status_code}", file=sys.stderr)
+        return
+
+    outpath = args.output_file
+    with open(outpath, "wb") as f:
+        for chunk in r.iter_content(chunk_size=8192):
+            f.write(chunk)
+
+    size_kb = os.path.getsize(outpath) / 1024
+    print(f"Downloaded {size_kb:.0f}KB to {outpath}")
+
+    # If it's a PDF and the user wants text extraction, try pymupdf
+    if outpath.endswith(".pdf") and args.extract_text:
+        try:
+            import fitz  # pymupdf
+            doc = fitz.open(outpath)
+            text_path = outpath.replace(".pdf", ".txt")
+            with open(text_path, "w") as f:
+                for page in doc:
+                    f.write(page.get_text())
+                    f.write("\n--- PAGE BREAK ---\n")
+            print(f"Extracted text ({doc.page_count} pages) to {text_path}")
+            doc.close()
+        except ImportError:
+            print("WARNING: pymupdf not installed, cannot extract text. Install with: uv add pymupdf", file=sys.stderr)
+
+
 def main():
     parser = argparse.ArgumentParser(description="CourtListener API for OSINT investigation")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -296,6 +434,25 @@ def main():
     p.add_argument("--limit", type=int, default=20)
     add_output_args(p)
 
+    # opinion — full text by ID
+    p = sub.add_parser("opinion", help="Fetch full opinion text by ID")
+    p.add_argument("opinion_id", type=int, help="Opinion ID or cluster ID")
+    p.add_argument("--lines", type=int, default=500, help="Max lines to show")
+    add_output_args(p)
+
+    # recap-search — find RECAP documents
+    p = sub.add_parser("recap-search", help="Search RECAP documents (type=rd)")
+    p.add_argument("query", help="Search query")
+    p.add_argument("--court", help="Court filter")
+    p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
+
+    # download — fetch RECAP PDF
+    p = sub.add_parser("download", help="Download a RECAP document PDF")
+    p.add_argument("url", help="Full URL or filepath_local from RECAP")
+    p.add_argument("output_file", help="Local path to save the PDF")
+    p.add_argument("--extract-text", action="store_true", help="Extract text from PDF via pymupdf")
+
     args = parser.parse_args()
     # Propagate json_out to all subcommands (fallback if not present)
     if not hasattr(args, "json_out"):
@@ -309,6 +466,9 @@ def main():
         "opinions": cmd_opinions,
         "judge": cmd_judge,
         "disclosures": cmd_disclosures,
+        "opinion": cmd_opinion,
+        "recap-search": cmd_recap_search,
+        "download": cmd_download,
     }
     handlers[args.command](args)
 
