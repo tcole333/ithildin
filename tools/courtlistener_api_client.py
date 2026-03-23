@@ -472,16 +472,16 @@ class CourtListenerClient:
     # Citation Graph API
     # =========================================================================
 
-    def get_citing_opinions(self, cluster_id: int, max_results: int = 100) -> list[dict]:
-        """Get opinions that cite a given opinion cluster."""
+    def get_citing_opinions(self, opinion_id: int, max_results: int = 100) -> list[dict]:
+        """Get opinions that cite a given opinion (by opinion ID)."""
         return list(self._paginate(
-            "opinions-cited/", {"cited_opinion__cluster_id": cluster_id}, max_results
+            "opinions-cited/", {"cited_opinion": opinion_id}, max_results
         ))
 
-    def get_cited_by_opinion(self, cluster_id: int, max_results: int = 100) -> list[dict]:
-        """Get opinions cited by a given opinion cluster."""
+    def get_cited_by_opinion(self, opinion_id: int, max_results: int = 100) -> list[dict]:
+        """Get opinions cited by a given opinion (by opinion ID)."""
         return list(self._paginate(
-            "opinions-cited/", {"citing_opinion__cluster_id": cluster_id}, max_results
+            "opinions-cited/", {"citing_opinion": opinion_id}, max_results
         ))
 
     def resolve_citations(self, text: str) -> dict:
@@ -604,20 +604,26 @@ class CourtListenerClient:
         nature_of_suit: Optional[str] = None,
         date_filed_after: Optional[str] = None,
         date_filed_before: Optional[str] = None,
+        district: Optional[str] = None,
+        class_action: Optional[bool] = None,
         max_results: int = 100,
     ) -> list[dict]:
-        """Search the FJC Integrated Database (federal case metadata)."""
+        """Search FJC Integrated Database. Plaintiff/defendant use startswith (no contains)."""
         params = {}
         if plaintiff:
-            params["plaintiff__icontains"] = plaintiff
+            params["plaintiff__istartswith"] = plaintiff
         if defendant:
-            params["defendant__icontains"] = defendant
+            params["defendant__istartswith"] = defendant
         if nature_of_suit:
             params["nature_of_suit"] = nature_of_suit
         if date_filed_after:
             params["date_filed__gte"] = date_filed_after
         if date_filed_before:
             params["date_filed__lte"] = date_filed_before
+        if district:
+            params["district"] = district
+        if class_action is not None:
+            params["class_action"] = str(class_action).lower()
         return list(self._paginate("fjc-integrated-database/", params, max_results))
 
     # =========================================================================
