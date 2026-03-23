@@ -404,19 +404,23 @@ For EVERY document found, read the full text to extract: dates, names, financial
 
 REQUIRED SEARCHES (use --output on all):
 
-COURTLISTENER (federal courts):
-1. .venv/bin/python3 tools/query_courtlistener.py search "[TARGET]" --output [WORKDIR]/c-cl-search.json
-2. .venv/bin/python3 tools/query_courtlistener.py party "[TARGET]"
-3. .venv/bin/python3 tools/query_courtlistener.py cases "[TARGET]"
-4. .venv/bin/python3 tools/query_courtlistener.py opinions "[TARGET]" --limit 10
-5. If any dockets found: .venv/bin/python3 tools/query_courtlistener.py docket <DOCKET_ID> --output [WORKDIR]/c-cl-docket.json
+COURTLISTENER (federal courts — use --output on ALL):
+1. .venv/bin/python3 tools/query_courtlistener.py search --party "[TARGET]" --output [WORKDIR]/c-cl-party.json
+2. .venv/bin/python3 tools/query_courtlistener.py cases "[TARGET]" --output [WORKDIR]/c-cl-cases.json
+3. .venv/bin/python3 tools/query_courtlistener.py search "[TARGET]" --type o --output [WORKDIR]/c-cl-opinions.json
+4. If any dockets found: .venv/bin/python3 tools/query_courtlistener.py docket <DOCKET_ID> --output [WORKDIR]/c-cl-docket.json
+5. For important opinions: .venv/bin/python3 tools/query_courtlistener.py opinion <OPINION_ID> --lines 500
+6. For citation graph: .venv/bin/python3 tools/query_courtlistener.py citations <OPINION_ID> --output [WORKDIR]/c-cl-citations.json
+7. RECAP documents: .venv/bin/python3 tools/query_courtlistener.py recap-search "[TARGET]" --output [WORKDIR]/c-cl-recap.json
+8. FJC database: .venv/bin/python3 tools/query_courtlistener.py fjc --defendant "[TARGET]" --output [WORKDIR]/c-cl-fjc.json
 
 For each case found:
 - What is the nature of the case?
-- Who are the other parties?
+- Who are the other parties? (embedded in search results as party/attorney/firm arrays)
 - What is the timeline?
 - Are any investigation-associated persons or entities involved?
-- What do the opinions/rulings reveal?
+- What do the opinions/rulings reveal? (read full text with `opinion` command)
+- What RECAP documents are available? (download key filings with `download` command)
 
 FARA (deep check):
 6. .venv/bin/python3 tools/query_fara.py search "[TARGET]" --output [WORKDIR]/c-fara.json

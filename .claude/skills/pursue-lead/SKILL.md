@@ -86,7 +86,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 
 **Person leads:**
 - [ ] Investigation corpus (all corpus_tools from profile)
-- [ ] CourtListener (federal litigation: `query_courtlistener.py search/party/cases`)
+- [ ] CourtListener (federal litigation: `query_courtlistener.py search --party "NAME"`, `cases`, `opinions`)
 - [ ] FEC donations (`query_fec.py donor`)
 - [ ] IRS 990 (`query_990.py search` — grants; `officer-search` — check if person is officer/director; `red-flags` — if EIN known)
 - [ ] SEC EDGAR (`query_edgar.py search/lookup` — insider filings, mentions in proxy statements)
@@ -104,7 +104,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 - [ ] IRS 990 (`query_990.py lookup <EIN>` — comprehensive view; `officers` — board/staff; `financials` — revenue trends)
 - [ ] USASpending (`query_usaspending.py awards` — federal contracts/grants)
 - [ ] SAM.gov (`query_sam.py entity/exclusions` — registration, debarments)
-- [ ] CourtListener (`query_courtlistener.py search` — litigation involving entity)
+- [ ] CourtListener (`query_courtlistener.py search --party "ENTITY"` — litigation involving entity)
 - [ ] GLEIF (`query_gleif.py search` — LEI records, corporate hierarchy)
 - [ ] Lobbying (`query_lobbying.py client` — lobbying by entity)
 - [ ] FARA (`query_fara.py search` — foreign principal registrations)

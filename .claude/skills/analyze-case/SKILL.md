@@ -30,14 +30,23 @@ echo "Session workdir: $WORKDIR"
 ### 1. Find the Case(s)
 
 ```bash
-# Search by party name — RECAP dockets
-uv run python tools/query_courtlistener.py cases "<PARTY_NAME>" --output $WORKDIR/cl-cases.json
+# Search by party name (uses search API field operators — no 403)
+uv run python tools/query_courtlistener.py party "<PARTY_NAME>" --court <COURT> --output $WORKDIR/cl-party.json
 
-# Or get specific docket
+# Search RECAP dockets
+uv run python tools/query_courtlistener.py cases "<PARTY_NAME>" --court <COURT> --output $WORKDIR/cl-cases.json
+
+# Or get specific docket by ID
 uv run python tools/query_courtlistener.py docket <DOCKET_ID> --output $WORKDIR/cl-docket.json
 
-# Search opinions (full-text searchable)
-uv run python tools/query_courtlistener.py search "<PARTY_NAME>" --type opinions --output $WORKDIR/cl-opinions.json
+# Search with field operators (combine multiple)
+uv run python tools/query_courtlistener.py search --party "<PARTY>" --court <COURT> --output $WORKDIR/cl-search.json
+uv run python tools/query_courtlistener.py search --attorney "<ATTORNEY>" --output $WORKDIR/cl-attorney.json
+uv run python tools/query_courtlistener.py search --firm "<FIRM>" --output $WORKDIR/cl-firm.json
+
+# Search opinions
+uv run python tools/query_courtlistener.py search "<QUERY>" --type o --output $WORKDIR/cl-opinions.json
+uv run python tools/query_courtlistener.py search "<QUERY>" --type o --semantic --output $WORKDIR/cl-semantic.json
 ```
 
 Review results. For each case:
@@ -137,17 +146,29 @@ uv run python tools/findings_tracker.py search "<NAME>" --output $WORKDIR/xref-<
 
 ### 4. Search for Related Cases
 
-Once you know the parties, search for their other litigation:
+Once you know the parties, search for their other litigation and trace the citation graph:
 
 ```bash
-# Other cases involving the same defendant
-uv run python tools/query_courtlistener.py cases "<DEFENDANT>" --output $WORKDIR/cl-related-def.json
+# Other cases by same defendant (field operator)
+uv run python tools/query_courtlistener.py party "<DEFENDANT>" --output $WORKDIR/cl-related-def.json
 
-# Other cases involving the same plaintiff
-uv run python tools/query_courtlistener.py cases "<PLAINTIFF>" --output $WORKDIR/cl-related-plt.json
+# Other cases by same plaintiff
+uv run python tools/query_courtlistener.py party "<PLAINTIFF>" --output $WORKDIR/cl-related-plt.json
 
-# Opinions mentioning this case
-uv run python tools/query_courtlistener.py search "<CASE_CITATION>" --type opinions --output $WORKDIR/cl-citing.json
+# Citation graph — what does this opinion cite and what cites it?
+uv run python tools/query_courtlistener.py citations <OPINION_ID> --output $WORKDIR/cl-citations.json
+
+# Resolve a specific citation to a cluster ID
+uv run python tools/query_courtlistener.py resolve-cite "<CITATION_TEXT>" --output $WORKDIR/cl-resolve.json
+
+# Get opinion cluster detail (panel composition, citation count)
+uv run python tools/query_courtlistener.py cluster <CLUSTER_ID> --output $WORKDIR/cl-cluster.json
+
+# Semantic search for conceptually related opinions
+uv run python tools/query_courtlistener.py search "<LEGAL_THEORY>" --type o --semantic --output $WORKDIR/cl-related-opinions.json
+
+# FJC database — search federal case metadata by defendant
+uv run python tools/query_courtlistener.py fjc --defendant "<DEFENDANT>" --output $WORKDIR/cl-fjc.json
 ```
 
 Look for patterns:
@@ -161,14 +182,23 @@ Look for patterns:
 If the case involves a judge whose impartiality matters:
 
 ```bash
-# Judge info
-uv run python tools/query_courtlistener.py judge "<JUDGE_NAME>" --output $WORKDIR/cl-judge.json
+# Full career timeline (positions, education, political affiliations, appointer)
+uv run python tools/query_courtlistener.py career "<JUDGE_NAME>" --output $WORKDIR/cl-career.json
 
-# Financial disclosures (check for conflicts)
-uv run python tools/query_courtlistener.py disclosures <JUDGE_ID> <YEAR> --output $WORKDIR/cl-disclosures.json
+# Check investments for conflicts with case parties (1.9M records searchable)
+uv run python tools/query_courtlistener.py investments "<COMPANY_NAME>" --output $WORKDIR/cl-investments.json
+
+# Check travel reimbursements (who paid for judge's travel?)
+uv run python tools/query_courtlistener.py reimbursements "<SOURCE>" --output $WORKDIR/cl-reimb.json
+
+# Financial disclosures by person ID
+uv run python tools/query_courtlistener.py disclosures --person-id <JUDGE_ID> --output $WORKDIR/cl-disclosures.json
 ```
 
-Cross-reference the judge's disclosed investments/positions against the parties in the case.
+**Investment conflict check**: For each party in the case, search judge investments:
+- `investments "<PARTY_COMPANY>"` — does the judge hold stock in a party?
+- `reimbursements "<PARTY>"` — did a party pay for judge travel/speaking?
+- Check career positions for prior employment at firms representing parties
 
 ### 6. Cross-Reference Against Investigation
 

@@ -571,13 +571,45 @@ uv run python tools/query_medicare.py provider 1003000126
 uv run python tools/query_medicare.py search "Health" --limit 20
 ```
 
-### CourtListener (federal courts, token in .env)
+### CourtListener (federal courts — COURTLISTENER_TOKEN in .env, 17 commands)
 ```bash
-python tools/query_courtlistener.py search "TARGET"
-python tools/query_courtlistener.py cases "QUERY" --court nysd
-python tools/query_courtlistener.py docket 16066603
-python tools/query_courtlistener.py party "PERSON_NAME"
-python tools/query_courtlistener.py opinions "QUERY" --court ca2
+# Search with field operators (party, firm, attorney, judge, docket number)
+uv run python tools/query_courtlistener.py search "QUERY" --output FILE
+uv run python tools/query_courtlistener.py search --party "NAME" --court nysd --output FILE
+uv run python tools/query_courtlistener.py search --firm "FIRM" --attorney "ATTORNEY" --output FILE
+uv run python tools/query_courtlistener.py search --assigned-to "JUDGE" --after 2020-01-01 --output FILE
+uv run python tools/query_courtlistener.py search "QUERY" --type o --semantic --output FILE
+
+# Cases and dockets
+uv run python tools/query_courtlistener.py cases "QUERY" --court nysd --after 2015-01-01 --output FILE
+uv run python tools/query_courtlistener.py docket 16066603 --output FILE
+uv run python tools/query_courtlistener.py party "PERSON_NAME" --court flsd --output FILE
+
+# Opinions and full text
+uv run python tools/query_courtlistener.py opinions "QUERY" --court ca2 --semantic --output FILE
+uv run python tools/query_courtlistener.py opinion 12345 --lines 1000
+
+# Citation graph
+uv run python tools/query_courtlistener.py citations <OPINION_ID> --output FILE
+uv run python tools/query_courtlistener.py resolve-cite "473 F.Supp.2d 1185" --output FILE
+uv run python tools/query_courtlistener.py cluster <CLUSTER_ID> --output FILE
+
+# RECAP documents (download PDFs from storage.courtlistener.com)
+uv run python tools/query_courtlistener.py recap-search "QUERY" --court flsd --output FILE
+uv run python tools/query_courtlistener.py download "URL" output.pdf --extract-text
+
+# Judge financial disclosures (1.9M investment records)
+uv run python tools/query_courtlistener.py investments "COMPANY" --output FILE
+uv run python tools/query_courtlistener.py reimbursements "SOURCE" --output FILE
+uv run python tools/query_courtlistener.py disclosures --person-id 1234 --output FILE
+
+# Judge career and info
+uv run python tools/query_courtlistener.py career "JUDGE_NAME" --output FILE
+uv run python tools/query_courtlistener.py judge "NAME" --output FILE
+
+# FJC Integrated Database (federal case metadata)
+uv run python tools/query_courtlistener.py fjc --defendant "NAME" --output FILE
+uv run python tools/query_courtlistener.py fjc --plaintiff "NAME" --after 2010-01-01 --output FILE
 ```
 
 ### IRS 990 Nonprofit Database (unified tool)
