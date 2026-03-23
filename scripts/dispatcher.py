@@ -231,7 +231,13 @@ def get_next_lead_id(db, for_skill=None):
     placeholders = ",".join("?" for _ in running_targets) if running_targets else "''"
 
     # Try recommended_skill match first (from triage scheduler)
+    # Use shared policy constants for skill name resolution
     if for_skill:
+        try:
+            from tools.triage_policy import SKILL_RECOMMENDATION
+            valid_skills = set(SKILL_RECOMMENDATION.values())
+        except ImportError:
+            valid_skills = set()
         skill_map = {"pursue_lead": "/pursue-lead", "deep_investigate": "/deep-investigate"}
         skill_value = skill_map.get(for_skill, for_skill)
         query = f"""
