@@ -2,15 +2,24 @@
 """
 FinCEN Files integration for OSINT investigations.
 
-Dataset: 200K+ suspicious activity reports (SARs) from FinCEN leaked to BuzzFeed/ICIJ.
+Dataset: ICIJ's public release of FinCEN Files metadata — bank-level transaction
+and correspondent-banking data extracted from ~2,100 Suspicious Activity Reports.
 Covers 2000-2017 transactions ($35B+) flagged by financial institutions.
 
+IMPORTANT: This dataset contains only INSTITUTIONAL names (banks, financial
+institutions). The ICIJ did NOT publish the underlying SAR narrative text, so
+individual person names (e.g. account holders, subjects of suspicion) are NOT
+searchable here. To investigate whether a person appears in FinCEN Files, use
+the ICIJ's online search at https://www.icij.org/investigations/fincen-files/
+or cross-reference SAR IDs from this tool against published ICIJ reporting.
+
 Two datasets:
-- Transactions: 4,508 rows - originator/beneficiary banks, amounts, date ranges
+- Transactions: 4,508 rows - filer, originator/beneficiary banks, amounts, date ranges
 - Bank Connections: 5,498 rows - correspondent banking relationships
 
 Usage:
-    python tools/query_fincen.py download        # Download and cache dataset
+    python tools/query_fincen.py download              # Download and cache dataset
+    python tools/query_fincen.py search "query"        # Search across ALL data
     python tools/query_fincen.py search-tx "bank name"
     python tools/query_fincen.py search-connections "entity"
     python tools/query_fincen.py stats
@@ -72,27 +81,94 @@ def ensure_downloaded():
         print("Dataset not found. Downloading...", file=sys.stderr)
         download_dataset()
 
-def search_transactions(query, output=None, limit=None):
-    """Search transaction data for query term."""
+def search_all(query, output=None, limit=None):
+    """Search across both transactions and connections for query term.
+
+    This is the recommended entry point for name-based searching. It searches
+    all text fields in both datasets. Note: the ICIJ public release contains
+    only institutional names (banks, financial firms). Individual person names
+    are NOT in this dataset — use ICIJ's online tools or cross-reference SARs
+    against published reporting for person-level searches.
+    """
+    ensure_downloaded()
+
+    tx_results = search_transactions(query, limit=limit, quiet=True)
+    conn_results = search_connections(query, limit=limit, quiet=True)
+
+    combined = {
+        'query': query,
+        'transactions': tx_results,
+        'connections': conn_results,
+        'total': len(tx_results) + len(conn_results)
+    }
+
+    if output:
+        with open(output, 'w') as f:
+            json.dump(combined, f, indent=2)
+        print(f"{combined['total']} total results saved to {output}")
+    else:
+        if combined['total'] == 0:
+            print(f"No results for '{query}' in either transactions or connections.")
+            print()
+            print("NOTE: The FinCEN Files public dataset contains only bank/institution")
+            print("names. Individual person names are NOT in this release. If searching")
+            print("for a person, try:")
+            print("  - ICIJ online search: https://www.icij.org/investigations/fincen-files/")
+            print("  - Search for banks associated with the person instead")
+            print("  - Cross-reference SAR IDs from ICIJ reporting")
+        else:
+            print(f"Found {len(tx_results)} transactions and {len(conn_results)} connections matching '{query}'")
+            if tx_results:
+                print(f"\n--- Transactions ---")
+                for i, tx in enumerate(tx_results[:10], 1):
+                    amount = tx['amount_transactions']
+                    if amount:
+                        try:
+                            amount_str = f"${float(amount):,.0f}"
+                        except ValueError:
+                            amount_str = amount
+                    else:
+                        amount_str = "N/A"
+                    print(f"{i}. SAR {tx['icij_sar_id']} - {tx['filer_org_name']}")
+                    print(f"   {tx['originator_bank']} ({tx['originator_iso']}) -> {tx['beneficiary_bank']} ({tx['beneficiary_iso']})")
+                    print(f"   {tx['begin_date']} to {tx['end_date']} | {tx['number_transactions']} txns | {amount_str}")
+                if len(tx_results) > 10:
+                    print(f"   ... and {len(tx_results) - 10} more transactions")
+
+            if conn_results:
+                print(f"\n--- Connections ---")
+                for i, conn in enumerate(conn_results[:10], 1):
+                    print(f"{i}. SAR {conn['icij_sar_id']}: {conn['filer_org_name']} <-> {conn['entity_b']} ({conn['entity_b_iso_code']})")
+                if len(conn_results) > 10:
+                    print(f"   ... and {len(conn_results) - 10} more connections")
+
+    return combined
+
+
+def search_transactions(query, output=None, limit=None, quiet=False):
+    """Search transaction data for query term.
+
+    Searches all text fields: filer name, originator/beneficiary bank names,
+    country names, and ISO codes. Note: this dataset contains only institutional
+    names (banks) — individual person names are not in the ICIJ public release.
+    """
     ensure_downloaded()
 
     results = []
+    query_lower = query.lower()
     with open(TX_FILE, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            # Search across key fields
-            searchable = ' '.join([
-                row['filer_org_name'],
-                row['originator_bank'],
-                row['originator_bank_country'],
-                row['beneficiary_bank'],
-                row['beneficiary_bank_country']
-            ]).lower()
+            # Search across ALL text fields in the row
+            searchable = ' '.join(row.values()).lower()
 
-            if query.lower() in searchable:
+            if query_lower in searchable:
                 results.append(row)
                 if limit and len(results) >= limit:
                     break
+
+    if quiet:
+        return results
 
     if output:
         with open(output, 'w') as f:
@@ -119,24 +195,30 @@ def search_transactions(query, output=None, limit=None):
 
     return results
 
-def search_connections(query, output=None, limit=None):
-    """Search bank connection data for query term."""
+def search_connections(query, output=None, limit=None, quiet=False):
+    """Search bank connection data for query term.
+
+    Searches all text fields: filer name, entity names, country names,
+    and ISO codes. Note: entity_b values are banks/institutions — individual
+    person names are not in the ICIJ public release.
+    """
     ensure_downloaded()
 
     results = []
+    query_lower = query.lower()
     with open(CONN_FILE, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            searchable = ' '.join([
-                row['filer_org_name'],
-                row['entity_b'],
-                row['entity_b_country']
-            ]).lower()
+            # Search across ALL text fields in the row
+            searchable = ' '.join(row.values()).lower()
 
-            if query.lower() in searchable:
+            if query_lower in searchable:
                 results.append(row)
                 if limit and len(results) >= limit:
                     break
+
+    if quiet:
+        return results
 
     if output:
         with open(output, 'w') as f:
@@ -318,6 +400,12 @@ def main():
     dl = sub.add_parser("download", help="Download and cache dataset")
     dl.add_argument("--force", action="store_true", help="Re-download even if cached")
 
+    # Unified search (both datasets)
+    s = sub.add_parser("search", help="Search across all data (transactions + connections)")
+    s.add_argument("query", help="Search term (bank/institution name, country, ISO code)")
+    s.add_argument("--limit", type=int, help="Limit results per dataset")
+    add_output_args(s)
+
     # Search transactions
     stx = sub.add_parser("search-tx", help="Search transaction data")
     stx.add_argument("query", help="Search term")
@@ -361,6 +449,8 @@ def main():
 
     if args.command == "download":
         download_dataset(force=args.force)
+    elif args.command == "search":
+        search_all(args.query, output=args.output, limit=getattr(args, 'limit', None))
     elif args.command == "search-tx":
         search_transactions(args.query, output=args.output, limit=args.limit)
     elif args.command == "search-connections":
