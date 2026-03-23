@@ -423,5 +423,5 @@ Primary checkpoints: Evidence Budget applied? Structure from evidence or templat
 ### DossierWriter (wiki_dossier_update jobs)
 Primary principles: Character as System Entry Point, Evidence Budget for key findings selection, Missing Documents noted, Model references where applicable
 
-### Deep-Investigate / Pursue-Lead (investigation agents)
-Primary principles: Concrete First, Missing Document as Evidence, Negative Results as Findings, Counterintuitive Hook identification for narrative potential
+### Deep-Investigate / Pursue-Lead (investigation agents — Layer 1)
+Primary principles: Concrete First, Missing Document as Evidence, Negative Results as Findings, Source Checklist Completion, Ambient Documentation. These are Layer 1 research agents — they do NOT assess narrative potential, article-worthiness, or editorial framing. See `research/INVESTIGATIVE_METHODOLOGY.md` § Two-Layer Agent Architecture.

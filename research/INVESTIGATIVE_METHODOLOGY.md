@@ -538,6 +538,60 @@ Investigation agents operate in two layers with distinct mandates:
 | **Forbidden** | Framework application, narrative assessment | Creating primary findings from raw sources | Producing findings without evidence |
 | **Allowed** | Hypothesis-driven search, factual observation | Speculating with falsification criteria | Narrative framing, audience consideration |
 
+### Enforcement Mechanisms
+
+The Two-Layer Architecture is enforced through code, not just convention:
+
+1. **Confidence caps at write time**: `findings_tracker.py` clamps confidence to the maximum allowed for each `claim_type`. An agent that attempts `--claim-type inference --confidence confirmed` will have confidence clamped to `medium` with a WARNING. Additionally, a pre-execution hook blocks the command before it runs. Caps:
+
+   | claim_type | Max confidence |
+   |-----------|---------------|
+   | `direct_quote` | `confirmed` |
+   | `paraphrase` | `high` |
+   | `inference` | `medium` |
+   | `synthesis` | `medium` |
+   | `user_provided` | `confirmed` |
+
+2. **Triage scheduler**: When `/triage-leads` processes a pending lead, it sets `depth_tier` (scan/standard/deep_dive), `recommended_skill`, and `triage_rationale`. The dispatcher reads these fields to route leads to the appropriate skill type.
+
+3. **Stop conditions in /pursue-lead**: Agents check explicit stop conditions (mandatory sources exhausted, diminishing returns, hard access barrier) rather than subjective "enough findings" judgment.
+
+4. **Triage audit trail**: `lead_tracker.py triage-log` reviews all triage decisions with rationale, depth tier, and skill recommendation. `--missing-rationale` flags dead-ended leads that lack justification.
+
+5. **Falsification criteria**: All Layer 2 skills (`/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`) require every hypothesis to include a falsification criterion and the best innocent explanation.
+
+### Recognizing Plane Boundary Violations
+
+**Layer 1 violations (research agent editorializing):**
+- "This counterintuitive finding suggests a pattern of deliberate concealment" — interpretive framing belongs in Layer 2
+- "This is the most article-worthy discovery" — narrative assessment belongs in Editorial
+- "Applying the Bridge Tax framework, this represents..." — framework application belongs in Layer 2
+- Setting `--claim-type inference --confidence confirmed` — enforcement catches this, but agents should not attempt it
+
+**Layer 2 violations (analysis agent overstepping):**
+- Creating findings with `claim_type=direct_quote` from raw source material — primary finding creation belongs in Layer 1
+- Setting confidence above `medium` on synthesis findings — caps enforce this, but agents should understand why
+
+**How to spot violations in output:**
+- **Language signals**: "narrative potential," "article-worthy," "character entry point," "most compelling" in Layer 1 output
+- **Confidence signals**: any Layer 2 finding with confidence above `medium`
+- **Structure signals**: a Layer 1 agent producing hypotheses without leads, or a Layer 2 agent running source queries directly
+
+### Claim Ladder
+
+Findings make claims at different levels of abstraction. Higher rungs require more evidence and carry lower confidence caps. The ladder maps onto the existing `claim_type` and `confidence` fields — it is a conceptual framework, not a separate system.
+
+| Rung | What it claims | claim_type | Max confidence | Layer | Example |
+|------|---------------|-----------|---------------|-------|---------|
+| **Fact** | An observable event happened | direct_quote, paraphrase | confirmed, high | 1 | "Entity X was incorporated in Delaware on 2019-03-15" |
+| **Pattern** | Multiple facts form a recurring structure | inference | medium | 1 or 2 | "3 of 5 portfolio companies share the same registered agent" |
+| **Mechanism** | How the pattern operates | synthesis | medium | 2 | "The shared agent enables rapid entity creation without public-facing officer changes" |
+| **Coordination** | Multiple actors acting in concert | synthesis | medium | 2 | "Entity formations cluster within 48 hours of contract announcements" |
+| **Intent** | Actors have a specific goal | synthesis | low | 2 | "The entity structure appears designed to obscure beneficial ownership" |
+| **Motive** | Why actors have that goal | synthesis | low | 2 | "Obscuring ownership may serve to avoid conflict-of-interest disclosure" |
+
+Higher rungs are not "better" — they are riskier. Most findings should be facts and patterns. Mechanism and coordination claims require multiple independent sources. Intent and motive claims are inherently speculative and should always include the best innocent explanation.
+
 ### The Feedback Loop
 ```
 Layer 2 generates hypotheses → hypotheses queue research leads →
