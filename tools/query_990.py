@@ -1,24 +1,28 @@
 #!/usr/bin/env python3
 """
-Query interface for the IRS 990 Bulk Database.
+Unified IRS 990 query tool — local bulk DB + ProPublica API enrichment.
 
-Searches grants, officers, financials, and related organizations across all
-US nonprofit e-filings (2009-2024) stored in datasets/irs990_grants.db.
+Primary data: local SQLite (datasets/irs990_grants.db) with 22M+ grants,
+5M+ officers, 600K+ financials, Schedule J/L, checklist flags.
+Enrichment: ProPublica Nonprofit Explorer API for org metadata, NTEE codes,
+filing PDFs, and EIN discovery.
 
 Usage:
-    python tools/query_990_bulk.py search "Epstein"
-    python tools/query_990_bulk.py filer 660789697
-    python tools/query_990_bulk.py recipient "Gratitude"
-    python tools/query_990_bulk.py recipient-ein 030213226
-    python tools/query_990_bulk.py network 660789697 --depth 2
-    python tools/query_990_bulk.py co-grantors "MELANOMA RESEARCH ALLIANCE"
-    python tools/query_990_bulk.py cross-ref
-    python tools/query_990_bulk.py top --by amount --limit 20
-    python tools/query_990_bulk.py officers 660789697
-    python tools/query_990_bulk.py officer-search "John Smith"
-    python tools/query_990_bulk.py financials 660789697
-    python tools/query_990_bulk.py red-flags 660789697
-    python tools/query_990_bulk.py top-compensated --min-comp 500000
+    python tools/query_990.py search "Epstein"
+    python tools/query_990.py lookup 660789697           # comprehensive EIN view
+    python tools/query_990.py filer 660789697
+    python tools/query_990.py recipient "Gratitude"
+    python tools/query_990.py recipient-ein 030213226
+    python tools/query_990.py network 660789697 --depth 2
+    python tools/query_990.py co-grantors "MELANOMA RESEARCH ALLIANCE"
+    python tools/query_990.py cross-ref
+    python tools/query_990.py top --by amount --limit 20
+    python tools/query_990.py officers 660789697
+    python tools/query_990.py officer-search "John Smith"
+    python tools/query_990.py financials 660789697
+    python tools/query_990.py filings 660789697          # filing list + PDF links
+    python tools/query_990.py red-flags 660789697
+    python tools/query_990.py top-compensated --min-comp 500000
 """
 
 import argparse
@@ -32,6 +36,17 @@ try:
     from tools.output_util import add_output_args, write_output
 except ImportError:
     from output_util import add_output_args, write_output
+
+# ProPublica enrichment module (optional — degrades gracefully if unavailable)
+try:
+    from tools.query_990_propublica import search_orgs as _pp_search, get_org as _pp_get_org, get_filings as _pp_get_filings
+except ImportError:
+    try:
+        from query_990_propublica import search_orgs as _pp_search, get_org as _pp_get_org, get_filings as _pp_get_filings
+    except ImportError:
+        _pp_search = None
+        _pp_get_org = None
+        _pp_get_filings = None
 
 DB_PATH = Path(__file__).parent.parent / "datasets" / "irs990_grants.db"
 INVESTIGATION_DB = Path(__file__).parent.parent / "investigation.db"
@@ -585,6 +600,167 @@ def cmd_top(args):
 
 # ── main ────────────────────────────────────────────────────────
 
+# ── lookup (comprehensive EIN view) ────────────────────────────
+
+def cmd_lookup(args):
+    """Comprehensive view of a nonprofit: metadata + financials + officers + grants."""
+    db = get_db()
+    ein = args.ein.replace("-", "")
+
+    result = {"ein": ein}
+
+    # ProPublica org metadata (NTEE, subsection, ruling date, address)
+    pp_data = None
+    if _pp_get_org:
+        print("Fetching org metadata from ProPublica...")
+        pp_data = _pp_get_org(ein)
+        if pp_data:
+            org = pp_data.get("organization", {})
+            result["metadata"] = {
+                "name": org.get("name"),
+                "address": org.get("address"),
+                "city": org.get("city"),
+                "state": org.get("state"),
+                "zipcode": org.get("zipcode"),
+                "ntee_code": org.get("ntee_code"),
+                "subsection_code": org.get("subsection_code"),
+                "ruling_date": org.get("ruling_date"),
+                "foundation_code": org.get("foundation_code"),
+            }
+
+    # Latest financials from bulk DB
+    fin = db.execute("""
+        SELECT * FROM financials WHERE ein = ? ORDER BY tax_year DESC LIMIT 1
+    """, (ein,)).fetchone()
+    if fin:
+        f = dict(fin)
+        org_name = f.get("filer_name", result.get("metadata", {}).get("name", ein))
+        result["org_name"] = org_name
+        print(f"\n{'='*60}")
+        print(f"{org_name} (EIN {ein})")
+        print(f"{'='*60}")
+
+        if result.get("metadata"):
+            m = result["metadata"]
+            if m.get("ntee_code"):
+                print(f"  NTEE: {m['ntee_code']}  |  Type: 501(c)({m.get('subsection_code', '?')})  |  Ruling: {m.get('ruling_date', '?')}")
+
+        print(f"\n  FINANCIALS ({f.get('tax_year', '?')}):")
+        prog_pct = f"{f['program_expense_ratio']:.0%}" if f.get("program_expense_ratio") is not None else "N/A"
+        print(f"    Revenue:  {_fmt_amount(f.get('total_revenue')):>14}  |  Expenses:  {_fmt_amount(f.get('total_expenses')):>14}")
+        print(f"    Program:  {_fmt_amount(f.get('program_expenses')):>14}  ({prog_pct})")
+        print(f"    Assets:   {_fmt_amount(f.get('total_assets_eoy')):>14}")
+        result["financials"] = f
+    else:
+        org_name = result.get("metadata", {}).get("name", ein)
+        result["org_name"] = org_name
+        print(f"\n{org_name} (EIN {ein})")
+        print("  No financials in bulk DB")
+
+    # Officers
+    officers = db.execute("""
+        SELECT person_name, title, total_comp, is_director, is_officer
+        FROM officers WHERE ein = ?
+        ORDER BY tax_year DESC, total_comp DESC LIMIT 15
+    """, (ein,)).fetchall()
+    if officers:
+        print(f"\n  OFFICERS ({len(officers)}):")
+        for o in [dict(r) for r in officers[:10]]:
+            print(f"    {o['person_name']:35s} {o['title'][:25]:25s} {_fmt_amount(o['total_comp']):>12s}")
+        result["officers"] = [dict(r) for r in officers]
+
+    # Top grants made
+    grants_made = db.execute("""
+        SELECT recipient_name, cash_amount, tax_year FROM grants
+        WHERE filer_ein = ? ORDER BY cash_amount DESC LIMIT 10
+    """, (ein,)).fetchall()
+    if grants_made:
+        total = db.execute("SELECT SUM(cash_amount) FROM grants WHERE filer_ein = ?", (ein,)).fetchone()[0] or 0
+        count = db.execute("SELECT COUNT(*) FROM grants WHERE filer_ein = ?", (ein,)).fetchone()[0]
+        print(f"\n  GRANTS MADE ({count} total, {_fmt_amount(total)}):")
+        for g in [dict(r) for r in grants_made[:5]]:
+            print(f"    {g.get('tax_year', '?'):>5}  {_fmt_amount(g.get('cash_amount')):>14}  → {g['recipient_name'][:45]}")
+        result["grants_made_total"] = total
+        result["grants_made_count"] = count
+
+    # Grants received
+    grants_rcvd = db.execute("""
+        SELECT filer_name, cash_amount, tax_year FROM grants
+        WHERE recipient_ein = ? ORDER BY cash_amount DESC LIMIT 10
+    """, (ein,)).fetchall()
+    if grants_rcvd:
+        total_r = db.execute("SELECT SUM(cash_amount) FROM grants WHERE recipient_ein = ?", (ein,)).fetchone()[0] or 0
+        count_r = db.execute("SELECT COUNT(*) FROM grants WHERE recipient_ein = ?", (ein,)).fetchone()[0]
+        print(f"\n  GRANTS RECEIVED ({count_r} total, {_fmt_amount(total_r)}):")
+        for g in [dict(r) for r in grants_rcvd[:5]]:
+            print(f"    {g.get('tax_year', '?'):>5}  {_fmt_amount(g.get('cash_amount')):>14}  ← {g['filer_name'][:45]}")
+        result["grants_received_total"] = total_r
+        result["grants_received_count"] = count_r
+
+    # Checklist flags
+    flags = db.execute("SELECT * FROM checklist_flags WHERE ein = ? ORDER BY tax_year DESC LIMIT 1", (ein,)).fetchone()
+    if flags:
+        f = dict(flags)
+        alerts = []
+        if f.get("excess_benefit_transaction"): alerts.append("Excess benefit transaction reported")
+        if not f.get("conflict_of_interest_policy"): alerts.append("No conflict of interest policy")
+        if not f.get("whistleblower_policy"): alerts.append("No whistleblower policy")
+        if alerts:
+            print(f"\n  ALERTS:")
+            for a in alerts:
+                print(f"    - {a}")
+
+    write_output(result, args, summary=f"990 lookup EIN {ein}")
+    db.close()
+
+
+# ── filings (from ProPublica) ─────────────────────────────────
+
+def cmd_filings(args):
+    """List filings for an EIN, with PDF links (via ProPublica API)."""
+    ein = args.ein.replace("-", "")
+
+    if not _pp_get_org:
+        print("ProPublica module not available — cannot fetch filing list", file=sys.stderr)
+        return
+
+    data = _pp_get_org(ein)
+    if not data:
+        print(f"No data found for EIN {ein}")
+        return
+
+    filings_data = data.get("filings_with_data", [])
+    filings_no_data = data.get("filings_without_data", [])
+
+    all_filings = []
+    if filings_data:
+        print(f"\n  Filings with data ({len(filings_data)}):")
+        for f in filings_data:
+            yr = f.get("tax_prd_yr", "?")
+            form = f.get("formtype", "?")
+            rev = f.get("totrevenue", 0)
+            exp = f.get("totfuncexpns", 0)
+            pdf = f.get("pdf_url", "")
+            print(f"    {yr} ({form:6s})  Rev: {_fmt_amount(rev):>14}  Exp: {_fmt_amount(exp):>14}")
+            if pdf:
+                print(f"      PDF: {pdf}")
+            all_filings.append(dict(f))
+
+    if filings_no_data:
+        print(f"\n  Additional filings ({len(filings_no_data)}):")
+        for f in filings_no_data[:10]:
+            yr = f.get("tax_prd_yr", "?")
+            form = f.get("formtype", "?")
+            pdf = f.get("pdf_url", "")
+            line = f"    {yr} ({form})"
+            if pdf:
+                line += f"  PDF: {pdf}"
+            print(line)
+            all_filings.append(dict(f))
+
+    write_output(all_filings, args, summary=f"990 filings for EIN {ein}")
+
+
 # ── officers ────────────────────────────────────────────────────
 
 def cmd_officers(args):
@@ -903,6 +1079,14 @@ def main():
     p_xr = sub.add_parser("cross-ref", help="Match investigation.db entities against bulk grants")
     add_output_args(p_xr)
 
+    p_lu = sub.add_parser("lookup", help="Comprehensive EIN view (metadata + financials + officers + grants)")
+    p_lu.add_argument("ein", help="Nonprofit EIN")
+    add_output_args(p_lu)
+
+    p_fil = sub.add_parser("filings", help="Filing list with PDF links (via ProPublica)")
+    p_fil.add_argument("ein", help="Nonprofit EIN")
+    add_output_args(p_fil)
+
     p_top = sub.add_parser("top", help="Top grantmakers/recipients")
     p_top.add_argument("--by", default="amount", help="Rank by: amount, count, recipients, single")
     p_top.add_argument("-n", "--limit", type=int, default=20, help="Number of results")
@@ -946,6 +1130,10 @@ def main():
         cmd_co_grantors(args)
     elif args.command == "cross-ref":
         cmd_cross_ref(args)
+    elif args.command == "lookup":
+        cmd_lookup(args)
+    elif args.command == "filings":
+        cmd_filings(args)
     elif args.command == "top":
         cmd_top(args)
     elif args.command == "officers":
