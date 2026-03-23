@@ -6,6 +6,8 @@ user_invocable: true
 
 # /triage-leads
 
+**CONTROL PLANE** — This is a scheduling skill. Evaluate leads, assign depth tiers and recommended skills using rules from `tools/triage_policy.py`, and route work to the appropriate research agents. Do not investigate targets directly.
+
 Process a batch of `pending_triage` leads created by `auto_leads.py`. Deduplicates, reprioritizes, links related leads, and promotes to `open`.
 
 ## Arguments

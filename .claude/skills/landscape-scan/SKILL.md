@@ -6,7 +6,7 @@ user_invocable: true
 
 # /landscape-scan
 
-**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. You are mapping a landscape, not investigating deeply. Record what you find, create leads for targets that warrant deeper investigation. Don't theorize or apply analytical frameworks — map the terrain and move on.
+**TIER 0: LANDSCAPE SCAN** — This is a terrain-mapping skill on the Research Plane. You are mapping a landscape quickly (2-3 sources per target), not investigating deeply. Record what you find, create leads for targets that warrant Tier 1 investigation. Don't theorize or apply analytical frameworks — map the terrain and move on.
 
 Quickly scan 10-30 targets in a new investigation area using 2-3 structured sources per target. The primary output is **leads** and a **relationship map**, not exhaustive findings. But don't suppress findings that are significant — the constraint is source breadth (fewer sources per target), not finding count.
 

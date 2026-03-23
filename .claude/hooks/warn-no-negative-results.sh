@@ -18,7 +18,7 @@ if [ -z "$LEAD_ID" ]; then
 fi
 
 # Check for negative_result findings on this lead
-NEG_COUNT=$(sqlite3 "$(dirname "$0")/../../investigation.db" \
+NEG_COUNT=$(sqlite3 "$CLAUDE_PROJECT_DIR/investigation.db" \
   "SELECT COUNT(*) FROM findings WHERE lead_id=$LEAD_ID AND finding_type='negative_result'" 2>/dev/null)
 
 if [ "$NEG_COUNT" = "0" ] || [ -z "$NEG_COUNT" ]; then

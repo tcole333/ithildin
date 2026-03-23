@@ -487,60 +487,78 @@ A belief system achieves epistemic closure when it becomes self-sealing — no e
 
 **Practical discipline:** Periodically run `/discover-frameworks` with the explicit instruction to find patterns that *contradict* existing models, not just patterns that extend them. If the investigation's analytical vocabulary is only growing and never being pruned, epistemic closure may be setting in.
 
-## Two-Layer Agent Architecture
+## Four-Plane Agent Architecture
 
-Investigation agents operate in two layers with distinct mandates:
+Investigation agents operate across four planes with distinct mandates. The key distinction from a simple Layer 1/Layer 2 model is the explicit **Control Plane** — skills that route and orchestrate work but do not investigate directly.
 
-### Layer 1: Research Agents (Fact-Gathering)
-**Skills**: `/deep-investigate`, `/pursue-lead`, `/search-all-sources`, `/investigate-person`, `/trace-entity`, `/investigate-infra`, `/landscape-scan`
+### Control Plane (Scheduling & Orchestration)
+**Skills**: `/dispatch`, `/triage-leads`, `/deep-investigate`
+
+- **Route work, assign depth, orchestrate agents.** Do NOT investigate directly.
+- `/triage-leads` evaluates pending leads and assigns `depth_tier`, `recommended_skill`, and `triage_rationale` using rules from `tools/triage_policy.py`.
+- `/dispatch` reads queue state and scheduler fields to suggest which skills to launch.
+- `/deep-investigate` is an **orchestrator**: it plans source assignments and dispatches 4 parallel sub-agents, then synthesizes their reports. It does not query sources itself.
+- Control plane skills may produce synthesis findings when combining sub-agent results, but these must be labeled `claim_type=synthesis` with `confidence=medium`.
+
+### Research Plane
+
+#### Tier 0: Landscape Scan
+**Skills**: `/landscape-scan`
+
+- **Quick terrain mapping.** 2-3 sources per target, 10-30 targets per scan.
+- Purpose is breadth, not depth — identify who's involved and what warrants deeper investigation.
+- Output: leads for targets warranting Tier 1 investigation, plus a relationship map.
+
+#### Tier 1: Evidence Collection
+**Skills**: `/pursue-lead`, `/investigate-person`, `/trace-entity`, `/search-all-sources`, `/investigate-infra`
 
 - **Gather, verify, document.** No theorizing, no framework application.
 - Record everything found — including mundane facts, negative results, and baseline comparisons.
 - Follow the source checklist for the target type. Do not skip sources because you "found enough."
 - Findings use `claim_type` of `direct_quote`, `paraphrase`, or (sparingly) `inference` with appropriate confidence caps.
 
-**Layer 1 MUST NOT:**
+**Research Plane MUST NOT:**
 - Assess narrative potential, article-worthiness, or editorial framing
 - Apply analytical frameworks (Manufactured Dependency, Bridge Tax, etc.)
 - Use language like "counterintuitive finding," "character entry point," "narrative hook," or "most article-worthy"
-- Interpret what patterns mean — record the raw data and let Layer 2 handle interpretation
+- Interpret what patterns mean — record the raw data and let Analysis handle interpretation
 
-**Layer 1 MAY:**
+**Research Plane MAY:**
 - Form hypotheses about where to search ("If X is true, I'd expect to find Y in source Z")
 - Record factual observations about corroboration, contradictions, gaps, and temporal clusters
 - Note what's missing or absent from expected sources
 
-### Layer 2: Analysis Agents (Theory-Building)
+### Analysis Plane (Tier 2: Theory-Building)
 **Skills**: `/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`, `/discover-frameworks`
 
 - **Speculate, hypothesize, identify patterns** — but every theory MUST:
   1. Produce a falsification criterion (what would disprove it?)
   2. Include the best innocent explanation for the observed pattern
-  3. Generate at least one research lead with a concrete search plan for Layer 1 agents
+  3. Generate at least one research lead with a concrete search plan for Research agents
 - Findings use `claim_type=synthesis` with `confidence=medium` maximum.
 - Reference `research/craft-research/frameworks/` as pattern detectors, not interpretive lenses.
 - See Framework Discipline section above.
 
-### Editorial Skills (Narrative Production)
+### Editorial Plane (Narrative Production)
 **Skills**: `/write-article`, `/review-article`, `/curate-dossier`, `/review-dossiers`
 
 - Consume findings but do not produce them
 - Narrative-quality assessment (article-worthiness, character entry points, reader engagement) belongs exclusively here
-- Operate outside the Layer 1/2 research stack
+- Operate outside the research and analysis stack
 
 ### Plane Boundary Quick Reference
 
-| Concept | Layer 1 (Research) | Layer 2 (Analysis) | Editorial |
-|---------|-------------------|-------------------|-----------|
-| **Purpose** | Gather facts, record evidence | Identify patterns, generate hypotheses | Frame narratives, assess article potential |
-| **Output** | Findings (direct_quote, paraphrase) | Findings (synthesis, inference) + hypotheses | Articles, dossiers |
-| **Max confidence** | confirmed (direct_quote), high (paraphrase) | medium (synthesis) | N/A |
-| **Forbidden** | Framework application, narrative assessment | Creating primary findings from raw sources | Producing findings without evidence |
-| **Allowed** | Hypothesis-driven search, factual observation | Speculating with falsification criteria | Narrative framing, audience consideration |
+| Concept | Control | Research (Tier 0-1) | Analysis (Tier 2) | Editorial |
+|---------|---------|--------------------|--------------------|-----------|
+| **Purpose** | Route work, orchestrate | Gather facts, record evidence | Identify patterns, hypothesize | Frame narratives |
+| **Output** | Scheduling decisions, synthesis | Findings (direct_quote, paraphrase) | Findings (synthesis, inference) + hypotheses | Articles, dossiers |
+| **Max confidence** | medium (synthesis only) | confirmed (direct_quote), high (paraphrase) | medium (synthesis) | N/A |
+| **Forbidden** | Direct source queries | Framework application, narrative assessment | Creating primary findings from raw sources | Producing findings |
+| **Allowed** | Dispatching, planning, combining | Hypothesis-driven search, factual observation | Speculating with falsification criteria | Narrative framing |
 
 ### Enforcement Mechanisms
 
-The Two-Layer Architecture is enforced through code, not just convention:
+The Four-Plane Architecture is enforced through code and hooks, not just convention:
 
 1. **Confidence caps at write time**: `findings_tracker.py` clamps confidence to the maximum allowed for each `claim_type`. An agent that attempts `--claim-type inference --confidence confirmed` will have confidence clamped to `medium` with a WARNING. Additionally, a pre-execution hook blocks the command before it runs. Caps:
 
@@ -558,24 +576,32 @@ The Two-Layer Architecture is enforced through code, not just convention:
 
 4. **Triage audit trail**: `lead_tracker.py triage-log` reviews all triage decisions with rationale, depth tier, and skill recommendation. `--missing-rationale` flags dead-ended leads that lack justification.
 
-5. **Falsification criteria**: All Layer 2 skills (`/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`) require every hypothesis to include a falsification criterion and the best innocent explanation.
+5. **Falsification criteria**: All Analysis Plane skills (`/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`) require every hypothesis to include a falsification criterion and the best innocent explanation.
+
+6. **Triage policy in code**: `tools/triage_policy.py` encodes depth_tier assessment, skill recommendation, and dead-end thresholds as testable Python functions. Both the triage skill and dispatcher reference these shared rules.
+
+7. **Editorial language hook**: `validate-findings.sh` blocks findings containing editorial patterns ("narrative potential", "article-worthy", "character entry point", etc.) before they reach the database.
 
 ### Recognizing Plane Boundary Violations
 
-**Layer 1 violations (research agent editorializing):**
-- "This counterintuitive finding suggests a pattern of deliberate concealment" — interpretive framing belongs in Layer 2
+**Research Plane violations (research agent editorializing):**
+- "This counterintuitive finding suggests a pattern of deliberate concealment" — interpretive framing belongs in Analysis
 - "This is the most article-worthy discovery" — narrative assessment belongs in Editorial
-- "Applying the Bridge Tax framework, this represents..." — framework application belongs in Layer 2
+- "Applying the Bridge Tax framework, this represents..." — framework application belongs in Analysis
 - Setting `--claim-type inference --confidence confirmed` — enforcement catches this, but agents should not attempt it
 
-**Layer 2 violations (analysis agent overstepping):**
-- Creating findings with `claim_type=direct_quote` from raw source material — primary finding creation belongs in Layer 1
+**Analysis Plane violations (analysis agent overstepping):**
+- Creating findings with `claim_type=direct_quote` from raw source material — primary finding creation belongs in Research
 - Setting confidence above `medium` on synthesis findings — caps enforce this, but agents should understand why
 
+**Control Plane violations (orchestrator doing research):**
+- `/deep-investigate` orchestrator querying sources directly instead of dispatching to sub-agents
+- `/triage-leads` creating findings instead of routing decisions
+
 **How to spot violations in output:**
-- **Language signals**: "narrative potential," "article-worthy," "character entry point," "most compelling" in Layer 1 output
-- **Confidence signals**: any Layer 2 finding with confidence above `medium`
-- **Structure signals**: a Layer 1 agent producing hypotheses without leads, or a Layer 2 agent running source queries directly
+- **Language signals**: "narrative potential," "article-worthy," "character entry point," "most compelling" in Research output
+- **Confidence signals**: any Analysis finding with confidence above `medium`
+- **Structure signals**: a Research agent producing hypotheses without leads, an Analysis agent running source queries, or a Control Plane skill creating primary findings
 
 ### Claim Ladder
 

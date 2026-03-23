@@ -6,7 +6,7 @@ user_invocable: true
 
 # /dispatch
 
-Read-only queue depth reporter. Shows what needs attention and suggests which skills to run.
+**CONTROL PLANE** — Read-only queue depth reporter. Shows what needs attention and suggests which skills to run based on triage scheduler fields.
 
 ## Process
 
