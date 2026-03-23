@@ -419,6 +419,224 @@ def cmd_analyze(args):
         print("\n  No anomalies detected.")
 
 
+FORENSIC_NOTES = {
+    "gross_margin_pct": {
+        "above": "Software-heavy model or cost misclassification (expenses in opex not COGS)",
+        "below": "Pass-through entity, commoditized product, or heavy hardware mix",
+    },
+    "operating_margin_pct": {
+        "above": "Operational efficiency, underinvestment, or one-time gains inflating margin",
+        "below": "Heavy investment phase, inefficiency, or SBC-heavy compensation structure",
+    },
+    "net_margin_pct": {
+        "above": "Tax efficiency (NOLs, jurisdictional arbitrage) or one-time gains",
+        "below": "Structural losses, debt burden, or impairment charges",
+    },
+    "days_sales_outstanding": {
+        "above": "Collection issues, aggressive revenue recognition, or channel stuffing",
+        "below": "Cash-intensive business model or prepaid customer base",
+    },
+    "accruals_ratio_pct": {
+        "above": "Earnings quality concern — income not converting to cash",
+        "below": "Strong cash conversion — operating cash exceeds reported earnings",
+    },
+    "debt_to_equity": {
+        "above": "Leverage risk, potential covenant pressure, or acquisition-funded growth",
+        "below": "Underleveraged — may indicate inefficient capital structure or cash hoarding",
+    },
+    "current_ratio": {
+        "above": "Excess liquidity — inefficient asset deployment or defensive cash position",
+        "below": "Liquidity risk — may struggle to meet short-term obligations",
+    },
+    "cash_conversion": {
+        "above": "Cash generation exceeds reported earnings — strong quality",
+        "below": "Earnings not converting to cash — working capital consumption or manipulation",
+    },
+    "goodwill_to_assets_pct": {
+        "above": "Acquisition-heavy strategy with impairment risk",
+        "below": "Organic growth — minimal acquisition premium on balance sheet",
+    },
+    "roe_pct": {
+        "above": "High returns may indicate leverage effect, small equity base, or unsustainable profitability",
+        "below": "Low returns on equity — value destruction or heavy reinvestment phase",
+    },
+    "revenue_growth_pct": {
+        "above": "Rapid growth may mask underlying quality issues or unsustainable acquisition-driven expansion",
+        "below": "Stagnation or market share loss",
+    },
+}
+
+
+def compare_multiple(ratio_files):
+    """Compare financial ratios across multiple companies.
+
+    Takes a list of paths to ratio JSON files (output of compute_ratios/cmd_analyze).
+    Returns comparison matrix, medians, and statistical outliers with forensic notes.
+    """
+    companies = []
+    latest_periods = {}
+    all_ratios = {}
+
+    # Key ratios to compare
+    compare_keys = [
+        "gross_margin_pct", "operating_margin_pct", "net_margin_pct",
+        "roe_pct", "revenue_growth_pct",
+        "current_ratio", "debt_to_equity",
+        "days_sales_outstanding", "receivables_turnover",
+        "inventory_turnover", "days_inventory",
+        "cash_conversion", "accruals_ratio_pct",
+        "goodwill_to_assets_pct",
+    ]
+
+    for path in ratio_files:
+        data = _load_statement(path)
+        company = data.get("company", path)
+        ratios_list = data.get("ratios", [])
+        if not ratios_list:
+            continue
+
+        # Use most recent period
+        latest = ratios_list[-1]
+        companies.append(company)
+        latest_periods[company] = latest.get("period", "unknown")
+        all_ratios[company] = latest
+
+    if len(companies) < 2:
+        return {"error": "Need at least 2 companies to compare"}
+
+    # Build comparison matrix
+    matrix = {}
+    for key in compare_keys:
+        values = {}
+        for company in companies:
+            v = all_ratios[company].get(key)
+            if v is not None:
+                values[company] = v
+        if values:
+            matrix[key] = values
+
+    # Compute medians
+    medians = {}
+    for key, values in matrix.items():
+        vals = sorted(values.values())
+        n = len(vals)
+        if n == 0:
+            continue
+        if n % 2 == 0:
+            medians[key] = round((vals[n // 2 - 1] + vals[n // 2]) / 2, 4)
+        else:
+            medians[key] = vals[n // 2]
+
+    # Detect outliers
+    outliers = []
+    for key, values in matrix.items():
+        vals = list(values.values())
+        n = len(vals)
+        if n < 2:
+            continue
+
+        median = medians.get(key)
+        if median is None:
+            continue
+
+        if n >= 5:
+            # Use standard deviation for larger groups
+            mean = sum(vals) / n
+            variance = sum((v - mean) ** 2 for v in vals) / n
+            stdev = variance ** 0.5
+            threshold = 2.0
+        else:
+            # Range-based for small groups
+            val_range = max(vals) - min(vals)
+            stdev = val_range / 2 if val_range > 0 else 1
+            threshold = 1.5
+
+        if stdev == 0:
+            continue
+
+        for company, value in values.items():
+            z = (value - median) / stdev
+            if abs(z) >= threshold:
+                direction = "above" if value > median else "below"
+                note = FORENSIC_NOTES.get(key, {}).get(direction, "")
+                outliers.append({
+                    "company": company,
+                    "ratio": key,
+                    "value": round(value, 2),
+                    "median": round(median, 2),
+                    "z_score": round(z, 2),
+                    "direction": direction,
+                    "forensic_note": note,
+                })
+
+    # Count anomalies per company
+    anomaly_counts = {c: 0 for c in companies}
+    for o in outliers:
+        anomaly_counts[o["company"]] = anomaly_counts.get(o["company"], 0) + 1
+
+    return {
+        "companies": companies,
+        "latest_periods": latest_periods,
+        "matrix": matrix,
+        "medians": medians,
+        "outliers": outliers,
+        "anomaly_counts": anomaly_counts,
+    }
+
+
+def cmd_compare(args):
+    """Compare ratios across multiple companies."""
+    result = compare_multiple(args.files)
+
+    if "error" in result:
+        print(f"ERROR: {result['error']}", file=sys.stderr)
+        return
+
+    if write_output(result, args, summary=f"comparison of {len(result['companies'])} companies"):
+        outliers = result.get("outliers", [])
+        if outliers:
+            print(f"\n{len(outliers)} outliers detected:")
+            for o in outliers:
+                print(f"  {o['company']:20s} {o['ratio']:25s} {o['value']:>8.1f} vs median {o['median']:>8.1f} ({o['direction']})")
+        return
+
+    # Pretty-print comparison matrix
+    companies = result["companies"]
+    print(f"─── Peer Comparison ({len(companies)} companies) ───")
+    print()
+
+    # Header
+    header = f"  {'Ratio':28s}"
+    for c in companies:
+        header += f" {c[:12]:>12s}"
+    header += f" {'Median':>12s}"
+    print(header)
+    print(f"  {'─' * (28 + 13 * (len(companies) + 1))}")
+
+    for key, values in result["matrix"].items():
+        label = key.replace("_", " ").replace("pct", "%").title()
+        row = f"  {label:28s}"
+        for c in companies:
+            v = values.get(c)
+            if v is not None:
+                row += f" {v:>12.1f}"
+            else:
+                row += f" {'N/A':>12s}"
+        med = result["medians"].get(key)
+        row += f" {med:>12.1f}" if med is not None else f" {'N/A':>12s}"
+        print(row)
+
+    outliers = result.get("outliers", [])
+    if outliers:
+        print(f"\n  {len(outliers)} OUTLIERS:")
+        for o in outliers:
+            print(f"    {o['company']:20s} {o['ratio']:25s} {o['value']:>8.1f} vs median {o['median']:>8.1f} (z={o['z_score']:+.1f})")
+            if o.get("forensic_note"):
+                print(f"    {'':20s} → {o['forensic_note']}")
+    else:
+        print("\n  No statistical outliers detected.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Financial ratio calculator for SEC filings")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -429,9 +647,16 @@ def main():
     p.add_argument("--cashflow", help="Path to cash flow statement JSON")
     add_output_args(p)
 
+    p = sub.add_parser("compare", help="Compare ratios across multiple companies")
+    p.add_argument("files", nargs="+", help="Ratio JSON files (from analyze command)")
+    add_output_args(p)
+
     args = parser.parse_args()
-    if args.command == "analyze":
-        cmd_analyze(args)
+    handlers = {
+        "analyze": cmd_analyze,
+        "compare": cmd_compare,
+    }
+    handlers[args.command](args)
 
 
 if __name__ == "__main__":
