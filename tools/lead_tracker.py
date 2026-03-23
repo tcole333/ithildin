@@ -51,7 +51,7 @@ def get_db():
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
     if not _schema_initialized:
-        _ensure_schema(db)
+        db = _ensure_schema(db)
         _schema_initialized = True
     return db
 
@@ -119,10 +119,7 @@ def _ensure_schema(db):
         CREATE TABLE IF NOT EXISTS findings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             target_name TEXT NOT NULL,
-            finding_type TEXT CHECK(finding_type IN (
-                'communication','financial','relationship','identity',
-                'location','document','legal','intelligence'
-            )),
+            finding_type TEXT,
             summary TEXT NOT NULL,
             detail TEXT,
             source_datasets TEXT,
@@ -695,6 +692,36 @@ def _ensure_schema(db):
     except sqlite3.OperationalError:
         pass  # epstein_connection column doesn't exist (fresh DB)
 
+    # Relax finding_type CHECK constraint to allow negative_result, background
+    # (Python-side VALID_FINDING_TYPES in findings_tracker.py handles validation)
+    try:
+        import re
+        schema = db.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='findings'"
+        ).fetchone()
+        if schema and "CHECK(finding_type IN" in (schema[0] or ""):
+            new_sql = re.sub(
+                r"finding_type\s+TEXT\s+CHECK\(finding_type\s+IN\s*\([^)]+\)\)",
+                "finding_type TEXT",
+                schema[0]
+            )
+            if new_sql != schema[0]:
+                db.execute("PRAGMA writable_schema=ON")
+                db.execute(
+                    "UPDATE sqlite_master SET sql=? WHERE type='table' AND name='findings'",
+                    (new_sql,)
+                )
+                db.execute("PRAGMA writable_schema=OFF")
+                db.commit()
+                # Reconnect so SQLite reloads the compiled schema
+                db.close()
+                db = sqlite3.connect(str(DB_PATH))
+                db.row_factory = sqlite3.Row
+                db.execute("PRAGMA journal_mode=WAL")
+                db.execute("PRAGMA busy_timeout=5000")
+    except Exception:
+        pass  # Non-critical — Python validation still protects writes
+
     # Thread and profile indexes
     for idx_sql in [
         "CREATE INDEX IF NOT EXISTS idx_leads_thread ON leads(thread_id)",
@@ -1133,6 +1160,7 @@ def _ensure_schema(db):
         """)
 
     db.commit()
+    return db
 
 
 # ── Lead CRUD ────────────────────────────────────────────────
