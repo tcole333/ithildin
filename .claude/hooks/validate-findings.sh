@@ -67,13 +67,24 @@ if echo "$COMMAND" | grep -qE "\-\-confidence +confirmed"; then
   fi
 fi
 
-# 5. Require --sources (tool/dataset attribution)
+# 5. Editorial language detection (Layer 1 plane boundary enforcement)
+# Layer 1 agents record facts, not narrative assessments. Block findings that
+# contain editorial framing language. See INVESTIGATIVE_METHODOLOGY.md § Plane Boundaries.
+SUMMARY_AND_DETAIL=$(echo "$COMMAND" | sed "s/--/\n--/g")
+EDITORIAL_PATTERNS="narrative potential|article.worthy|character entry point|most compelling|what this reveals|what this suggests|most significant finding"
+EDITORIAL_MATCH=$(echo "$SUMMARY_AND_DETAIL" | grep -iE "(--summary|--detail)" | grep -ioE "$EDITORIAL_PATTERNS" | head -1)
+if [ -n "$EDITORIAL_MATCH" ]; then
+  echo "BLOCKED: Finding text contains editorial language ('$EDITORIAL_MATCH'). Layer 1 agents record facts, not narrative assessments. Remove editorial framing and resubmit. See INVESTIGATIVE_METHODOLOGY.md § Recognizing Plane Boundary Violations." >&2
+  exit 2
+fi
+
+# 6. Require --sources (tool/dataset attribution)
 if ! echo "$COMMAND" | grep -q -- "--sources"; then
   echo "BLOCKED: findings_tracker add requires --sources flag. Every finding must attribute the data source(s) that produced it. Use --sources <source_name> (e.g., web_search, fec, edgar, courtlistener, registry, usaspending, 990, analysis_run)." >&2
   exit 2
 fi
 
-# 6. Reject header-only source_quote for direct_quote claims
+# 7. Reject header-only source_quote for direct_quote claims
 if echo "$COMMAND" | grep -q -- "--claim-type direct_quote"; then
   # Extract the source-quote value (text after --source-quote up to next --)
   SQ=$(echo "$COMMAND" | sed -n "s/.*--source-quote[= ]*'\([^']*\)'.*/\1/p")
