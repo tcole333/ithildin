@@ -29,6 +29,10 @@ status: candidate | evaluated | adopted
 created: YYYY-MM-DD
 grounding_findings: [finding_id, finding_id, ...]
 related_models: [model-slug, model-slug, ...]
+# Governance fields (optional, added incrementally)
+minimum_trigger: "Minimum evidence threshold before applying this framework"
+anti_pattern: "What looks like this pattern but isn't — common false positives"
+canonical_example: "Finding ID or brief description of the clearest known instance"
 ---
 
 ## Definition

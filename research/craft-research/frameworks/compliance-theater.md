@@ -14,6 +14,9 @@ detection_keywords:
   - ["approved without formal", "informal email", "phone approval", "verbal approval"]
   - ["normal for this client", "not deemed suspicious", "no further follow-up"]
   - ["due diligence not run", "withdrawn before", "report not actually"]
+minimum_trigger: "2+ instances where formal compliance process produced approval despite documented red flags — one clearance is a judgment call, a pattern is theater"
+anti_pattern: "Genuine compliance failure (understaffed team, missed alert) — theater requires the apparatus to exist and function procedurally while producing systematic approvals"
+canonical_example: "Deutsche Bank ARRC review of Epstein relationship: committee met, imposed conditions, but never communicated conditions to the relationship team or transaction monitors (findings #3205, #3208)"
 ---
 
 ## Definition

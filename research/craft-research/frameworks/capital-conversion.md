@@ -14,6 +14,9 @@ detection_keywords:
   - ["fellowship", "foundation", "philanthropy", "endowment"]
   - ["credibility", "legitimacy", "reputation", "prestige"]
   - ["convert", "leverage", "translate", "parlayed"]
+minimum_trigger: "2+ documented conversion events for the same actor or network — a single donation-to-appointment is suggestive, a chain of economic→social→political→economic is the pattern"
+anti_pattern: "Normal philanthropy or political participation without evidence of conversion intent — giving money to causes is not capital conversion unless the giving demonstrably produces access, appointments, or contracts"
+canonical_example: "Thiel network: VC funding (economic) → PayPal alumni network (social) → Rockbridge/campaign roles (political) → defense contracts to portfolio companies (economic) — a full conversion cycle"
 ---
 
 ## Definition

@@ -14,6 +14,9 @@ detection_keywords:
   - ["embedded", "detailed", "appointed", "installed", "placed"]
   - ["palantir", "anduril", "founders fund", "scale ai"]
   - ["transition", "permanent position", "doge to", "transitioned to"]
+minimum_trigger: "3+ individuals from the same formation/incubation ecosystem placed in related government roles within 12 months"
+anti_pattern: "Normal political appointments from a winning campaign's supporter base — pipeline requires shared formation institution + incubation + clustering, not just ideological alignment"
+canonical_example: "DOGE personnel transitioning from temporary Palantir/Anduril advisory roles to permanent embedded agency positions (2025)"
 ---
 
 ## Definition

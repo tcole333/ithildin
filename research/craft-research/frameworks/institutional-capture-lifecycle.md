@@ -14,6 +14,9 @@ detection_keywords:
   - ["DPA", "deferred prosecution", "non-prosecution", "consent order"]
   - ["pro bono", "formalized alignment", "institutional partnership"]
   - ["compliance answered to", "reported to revenue", "front office controlled"]
+minimum_trigger: "Career path mapping showing 3+ individuals rotating between the same private entity and the same regulator over 10+ years, with at least one instance of policy authorship followed by deployment"
+anti_pattern: "Generic revolving door (people leave government for industry) — capture lifecycle requires the same firm-regulator pair, multi-phase progression, and evidence of policy/culture import"
+canonical_example: "Kirkland & Ellis / DOJ thread: Filip writes DPA guidelines as Deputy AG (2008), deploys them at K&E defending BP (2012), 10 K&E alumni hold top DOJ posts simultaneously under Barr (2019), K&E pledges $125M pro bono to Trump admin (2025) — four phases of the lifecycle in one case (findings #3161, #3025)"
 ---
 
 ## Definition
