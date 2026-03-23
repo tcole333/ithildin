@@ -97,8 +97,11 @@ For each target, run **2-3 type-appropriate structured sources** plus WebSearch.
 - WebSearch (always)
 - 990s: `uv run python tools/query_990.py search "<ENTITY>" --output $WORKDIR/scan-<N>-990.json`
 - 990 lookup: `uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/scan-<N>-990-lookup.json`  (if EIN known)
+- 990 flow: `uv run python tools/query_990.py flow <EIN> --depth 1 --min-amount 100000 --output $WORKDIR/scan-<N>-990-flow.json`  (quick grant flow — depth 1 only)
 - EDGAR (if large): `uv run python tools/query_edgar.py search "<ENTITY>" --size 5 --output $WORKDIR/scan-<N>-edgar.json`
 - FEC (PAC affiliates): `uv run python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/scan-<N>-fec.json`
+
+**Note:** For landscape scans, use `flow --depth 1` for quick funding insight. Don't run full `/trace-grants` (too deep for Tier 0). Escalate targets with circular flows or 10+ grant recipients to `/trace-grants`.
 
 **Government actor targets — pick 2-3:**
 - WebSearch (always)

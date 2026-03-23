@@ -66,6 +66,13 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 | **Government actor** | FEC, lobbying (post-government), FARA, CourtListener, LittleSis, EDGAR (financial disclosures) |
 | **Financial entity** | EDGAR, GLEIF, DS10, ACRIS, UCC, registries, CourtListener, USASpending |
 
+**Nonprofit network analysis:** For nonprofit targets, Agent B should also run:
+- `uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/990-lookup.json`
+- `uv run python tools/query_990.py flow <EIN> --depth 1 --output $WORKDIR/990-flow.json`
+- `uv run python tools/query_990.py officer-search "<NAME>" --output $WORKDIR/990-officers.json`
+
+If the flow output shows circular flows or 10+ network nodes, recommend `/trace-grants` for full network analysis as a parallel process.
+
 **Step 2: Assign sources to agents.** The default 4-agent split (corpus, corporate/financial, legal, network/OSINT) works well for single targets. For custom multi-target plans, ensure each source appears in at least one agent's mandate. Create a table:
 
 ```

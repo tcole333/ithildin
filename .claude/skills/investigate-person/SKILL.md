@@ -156,6 +156,21 @@ python tools/query_sam.py exclusions "<NAME>" --output $WORKDIR/inv-sam-exclusio
 python tools/ingest_sam.py search "<NAME>" --output $WORKDIR/inv-sam-bulk.json
 ```
 
+### Nonprofit Board Positions (990)
+
+Check if the person serves on nonprofit boards — this reveals institutional affiliations not visible in corporate registries:
+
+```bash
+uv run python tools/query_990.py officer-search "<NAME>" --output $WORKDIR/inv-990-officers.json
+```
+
+If found on 2+ nonprofits, run a quick grant flow check for each:
+```bash
+uv run python tools/query_990.py flow <EIN> --depth 1 --min-amount 100000 --output $WORKDIR/inv-990-flow-<EIN>.json
+```
+
+Record each nonprofit board position as a finding with `--type relationship --sources 990`.
+
 ### 4. ICIJ Offshore Cross-Reference
 If Neo4j is running:
 ```bash
