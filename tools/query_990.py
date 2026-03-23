@@ -1041,6 +1041,280 @@ def cmd_top_compensated(args):
     db.close()
 
 
+# ── flow (directed grant network with circular detection) ──────
+
+def cmd_flow(args):
+    """Directed grant flow graph with node aggregation and circular flow detection."""
+    db = get_db()
+    seed_ein = args.ein.replace("-", "")
+    max_depth = args.depth
+    limit = args.limit
+    min_amount = args.min_amount
+
+    # Get seed name
+    seed_row = db.execute("SELECT filer_name FROM grants WHERE filer_ein = ? LIMIT 1", (seed_ein,)).fetchone()
+    seed_name = seed_row["filer_name"] if seed_row else seed_ein
+
+    visited = set()
+    raw_edges = []  # (from_ein, from_name, to_ein, to_name, total, count, years)
+    frontier = {seed_ein}
+
+    for depth in range(1, max_depth + 1):
+        if not frontier:
+            break
+        new_frontier = set()
+
+        for ein in frontier:
+            if ein in visited:
+                continue
+            visited.add(ein)
+
+            if depth % 2 == 1:
+                # Odd depth: outgoing grants (filer → recipients)
+                rows = db.execute("""
+                    SELECT recipient_ein, recipient_name,
+                           SUM(cash_amount) as total, COUNT(*) as cnt,
+                           GROUP_CONCAT(DISTINCT tax_year) as years
+                    FROM grants
+                    WHERE filer_ein = ? AND recipient_ein != '' AND cash_amount >= ?
+                    GROUP BY recipient_ein
+                    ORDER BY total DESC LIMIT ?
+                """, (ein, min_amount, limit)).fetchall()
+
+                filer_name_row = db.execute("SELECT filer_name FROM grants WHERE filer_ein = ? LIMIT 1", (ein,)).fetchone()
+                filer_name = filer_name_row["filer_name"] if filer_name_row else ein
+
+                for r in rows:
+                    raw_edges.append({
+                        "from_ein": ein, "from_name": filer_name,
+                        "to_ein": r["recipient_ein"], "to_name": r["recipient_name"],
+                        "amount": r["total"], "grant_count": r["cnt"],
+                        "years": sorted(set(int(y) for y in (r["years"] or "").split(",") if y)),
+                    })
+                    if r["recipient_ein"] not in visited:
+                        new_frontier.add(r["recipient_ein"])
+            else:
+                # Even depth: incoming grants (funders → this recipient)
+                rows = db.execute("""
+                    SELECT filer_ein, filer_name,
+                           SUM(cash_amount) as total, COUNT(*) as cnt,
+                           GROUP_CONCAT(DISTINCT tax_year) as years
+                    FROM grants
+                    WHERE recipient_ein = ? AND filer_ein != '' AND cash_amount >= ?
+                    GROUP BY filer_ein
+                    ORDER BY total DESC LIMIT ?
+                """, (ein, min_amount, limit)).fetchall()
+
+                recip_name_row = db.execute("SELECT recipient_name FROM grants WHERE recipient_ein = ? LIMIT 1", (ein,)).fetchone()
+                recip_name = recip_name_row["recipient_name"] if recip_name_row else ein
+
+                for r in rows:
+                    raw_edges.append({
+                        "from_ein": r["filer_ein"], "from_name": r["filer_name"],
+                        "to_ein": ein, "to_name": recip_name,
+                        "amount": r["total"], "grant_count": r["cnt"],
+                        "years": sorted(set(int(y) for y in (r["years"] or "").split(",") if y)),
+                    })
+                    if r["filer_ein"] not in visited:
+                        new_frontier.add(r["filer_ein"])
+
+        frontier = new_frontier
+
+    # Check for reverse flows (circular detection): for each A→B edge, check if B→A exists
+    existing_pairs = {(e["from_ein"], e["to_ein"]) for e in raw_edges}
+    reverse_check_pairs = [(e["to_ein"], e["from_ein"]) for e in raw_edges if (e["to_ein"], e["from_ein"]) not in existing_pairs]
+
+    for from_ein, to_ein in set(reverse_check_pairs):
+        row = db.execute("""
+            SELECT SUM(cash_amount) as total, COUNT(*) as cnt,
+                   GROUP_CONCAT(DISTINCT tax_year) as years
+            FROM grants
+            WHERE filer_ein = ? AND recipient_ein = ? AND cash_amount >= ?
+        """, (from_ein, to_ein, min_amount)).fetchone()
+        if row and row["total"] and row["total"] > 0:
+            from_name_row = db.execute("SELECT filer_name FROM grants WHERE filer_ein = ? LIMIT 1", (from_ein,)).fetchone()
+            to_name_row = db.execute("SELECT filer_name FROM grants WHERE filer_ein = ? LIMIT 1", (to_ein,)).fetchone()
+            raw_edges.append({
+                "from_ein": from_ein,
+                "from_name": from_name_row["filer_name"] if from_name_row else from_ein,
+                "to_ein": to_ein,
+                "to_name": to_name_row["filer_name"] if to_name_row else to_ein,
+                "amount": row["total"], "grant_count": row["cnt"],
+                "years": sorted(set(int(y) for y in (row["years"] or "").split(",") if y)),
+            })
+
+    db.close()
+
+    # Build node aggregations
+    node_map = {}
+    for e in raw_edges:
+        for role, ein, name in [("filer", e["from_ein"], e["from_name"]), ("recipient", e["to_ein"], e["to_name"])]:
+            if ein not in node_map:
+                node_map[ein] = {"ein": ein, "name": name, "total_granted": 0, "total_received": 0}
+        node_map[e["from_ein"]]["total_granted"] += e["amount"]
+        node_map[e["to_ein"]]["total_received"] += e["amount"]
+
+    for n in node_map.values():
+        if n["total_granted"] > 0 and n["total_received"] > 0:
+            n["type"] = "both"
+        elif n["total_granted"] > 0:
+            n["type"] = "filer"
+        else:
+            n["type"] = "recipient"
+
+    # Detect circular flows (A→B and B→A both exist)
+    edge_pairs = {}
+    for e in raw_edges:
+        key = tuple(sorted([e["from_ein"], e["to_ein"]]))
+        if key not in edge_pairs:
+            edge_pairs[key] = {}
+        direction = f"{e['from_ein']}->{e['to_ein']}"
+        edge_pairs[key][direction] = e["amount"]
+
+    circular_flows = []
+    for (ein_a, ein_b), flows in edge_pairs.items():
+        if len(flows) == 2:
+            a_to_b = flows.get(f"{ein_a}->{ein_b}", 0)
+            b_to_a = flows.get(f"{ein_b}->{ein_a}", 0)
+            net = abs(a_to_b - b_to_a)
+            name_a = node_map.get(ein_a, {}).get("name", ein_a)
+            name_b = node_map.get(ein_b, {}).get("name", ein_b)
+            if a_to_b > b_to_a:
+                direction = f"{name_a} → {name_b}"
+            else:
+                direction = f"{name_b} → {name_a}"
+            circular_flows.append({
+                "entities": [ein_a, ein_b],
+                "names": [name_a, name_b],
+                "flow_a_to_b": a_to_b,
+                "flow_b_to_a": b_to_a,
+                "net_flow": net,
+                "direction": direction,
+            })
+
+    # Deduplicate edges (same pair may appear at different depths)
+    seen = set()
+    edges = []
+    for e in raw_edges:
+        key = (e["from_ein"], e["to_ein"])
+        if key not in seen:
+            seen.add(key)
+            edges.append(e)
+
+    result = {
+        "root_ein": seed_ein,
+        "root_name": seed_name,
+        "depth": max_depth,
+        "min_amount": min_amount,
+        "nodes": list(node_map.values()),
+        "edges": edges,
+        "circular_flows": circular_flows,
+        "stats": {
+            "node_count": len(node_map),
+            "edge_count": len(edges),
+            "circular_count": len(circular_flows),
+            "total_flow": sum(e["amount"] for e in edges),
+        },
+    }
+
+    if write_output(result, args, summary=f"grant flow from {seed_name} ({len(edges)} edges, {len(circular_flows)} circular)"):
+        if circular_flows:
+            print(f"\n{len(circular_flows)} circular flows detected:")
+            for c in circular_flows:
+                print(f"  {c['names'][0][:30]} <-> {c['names'][1][:30]}: net {_fmt_amount(c['net_flow'])} ({c['direction']})")
+        return
+
+    print(f"─── Grant Flow: {seed_name} (depth {max_depth}, min {_fmt_amount(min_amount)}) ───")
+    print(f"    {len(node_map)} nodes, {len(edges)} edges, {_fmt_amount(sum(e['amount'] for e in edges))} total flow")
+    print()
+
+    for e in edges[:30]:
+        print(f"  {e['from_name'][:25]:25s} → {_fmt_amount(e['amount']):>14s} ({e['grant_count']}x) → {e['to_name'][:30]}")
+    if len(edges) > 30:
+        print(f"  ... ({len(edges) - 30} more edges)")
+
+    if circular_flows:
+        print(f"\n  {len(circular_flows)} CIRCULAR FLOWS:")
+        for c in circular_flows:
+            print(f"    {c['names'][0][:30]} ↔ {c['names'][1][:30]}")
+            print(f"      A→B: {_fmt_amount(c['flow_a_to_b'])}  B→A: {_fmt_amount(c['flow_b_to_a'])}  Net: {_fmt_amount(c['net_flow'])} ({c['direction']})")
+
+
+# ── shared-officers ────────────────────────────────────────────
+
+def cmd_shared_officers(args):
+    """Find officers/directors serving across multiple specified EINs."""
+    db = get_db()
+    eins = [e.replace("-", "") for e in args.eins]
+
+    try:
+        from tools.entity_resolution import normalize_person_name
+    except ImportError:
+        try:
+            from entity_resolution import normalize_person_name
+        except ImportError:
+            def normalize_person_name(n):
+                return n.lower().strip()
+
+    # Pull all officers for the specified EINs
+    placeholders = ",".join("?" for _ in eins)
+    rows = db.execute(f"""
+        SELECT ein, filer_name, person_name, title, total_comp, tax_year,
+               is_director, is_officer, is_key_employee
+        FROM officers
+        WHERE ein IN ({placeholders})
+        ORDER BY person_name, tax_year
+    """, eins).fetchall()
+
+    db.close()
+
+    # Group by normalized name
+    by_person = defaultdict(list)
+    for r in rows:
+        key = normalize_person_name(r["person_name"])
+        by_person[key].append(dict(r))
+
+    # Filter to people appearing in 2+ of the specified EINs
+    shared = []
+    for norm_name, records in by_person.items():
+        unique_eins = set(r["ein"] for r in records)
+        if len(unique_eins) >= 2:
+            orgs = []
+            for ein in unique_eins:
+                ein_records = [r for r in records if r["ein"] == ein]
+                latest = max(ein_records, key=lambda r: r["tax_year"])
+                orgs.append({
+                    "ein": ein,
+                    "org_name": latest["filer_name"],
+                    "title": latest["title"],
+                    "compensation": latest["total_comp"],
+                    "years_active": sorted(set(r["tax_year"] for r in ein_records)),
+                })
+            shared.append({
+                "name": records[0]["person_name"],
+                "normalized": norm_name,
+                "org_count": len(unique_eins),
+                "organizations": orgs,
+            })
+
+    shared.sort(key=lambda s: s["org_count"], reverse=True)
+
+    result = {"eins_checked": eins, "shared_officers": shared, "total_shared": len(shared)}
+
+    if write_output(result, args, summary=f"{len(shared)} shared officers across {len(eins)} EINs"):
+        return
+
+    print(f"─── Shared Officers across {len(eins)} Organizations ───")
+    if not shared:
+        print("  No shared officers/directors found.")
+    else:
+        for s in shared:
+            print(f"\n  {s['name']} ({s['org_count']} orgs):")
+            for o in s["organizations"]:
+                comp = _fmt_amount(o["compensation"]) if o["compensation"] else "N/A"
+                print(f"    {o['org_name'][:40]:40s}  {o['title'] or '':20s}  {comp:>12s}  {o['years_active']}")
+
+
 # ── main ────────────────────────────────────────────────────────
 
 def main():
@@ -1114,6 +1388,17 @@ def main():
     p_tc.add_argument("-n", "--limit", type=int, default=50, help="Max results")
     add_output_args(p_tc)
 
+    p_fw = sub.add_parser("flow", help="Directed grant flow graph with circular detection")
+    p_fw.add_argument("ein", help="Seed EIN")
+    p_fw.add_argument("--depth", type=int, default=2, help="BFS depth (default: 2)")
+    p_fw.add_argument("--min-amount", type=int, default=0, help="Min grant amount to include")
+    p_fw.add_argument("-n", "--limit", type=int, default=50, help="Max edges per hop")
+    add_output_args(p_fw)
+
+    p_so = sub.add_parser("shared-officers", help="Officers serving across multiple EINs")
+    p_so.add_argument("eins", nargs="+", help="Two or more EINs to check")
+    add_output_args(p_so)
+
     args = parser.parse_args()
 
     if args.command == "search":
@@ -1146,6 +1431,10 @@ def main():
         cmd_red_flags(args)
     elif args.command == "top-compensated":
         cmd_top_compensated(args)
+    elif args.command == "flow":
+        cmd_flow(args)
+    elif args.command == "shared-officers":
+        cmd_shared_officers(args)
     else:
         parser.print_help()
 

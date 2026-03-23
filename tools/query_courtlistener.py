@@ -58,13 +58,38 @@ def _client():
 
 
 def cmd_search(args):
-    """Generic search (defaults to RECAP/dockets)."""
+    """Generic search with field operator support."""
+    # Build query from positional + field operator flags
+    parts = [args.query] if args.query else []
+    if getattr(args, "party", None):
+        parts.append(f'party:"{args.party}"')
+    if getattr(args, "firm", None):
+        parts.append(f'firm:"{args.firm}"')
+    if getattr(args, "attorney", None):
+        parts.append(f'attorney:"{args.attorney}"')
+    if getattr(args, "assigned_to", None):
+        parts.append(f'assignedTo:"{args.assigned_to}"')
+    if getattr(args, "docket_number", None):
+        parts.append(f'docketNumber:"{args.docket_number}"')
+    query = " ".join(parts) if parts else "*"
+
+    kwargs = {}
+    if getattr(args, "semantic", False):
+        kwargs["semantic"] = "true"
+    if getattr(args, "highlight", False):
+        kwargs["highlight"] = "on"
+    if getattr(args, "after", None):
+        kwargs["filed_after"] = args.after
+    if getattr(args, "before", None):
+        kwargs["filed_before"] = args.before
+
     client = _client()
     results = client.search(
-        args.query,
+        query,
         search_type=args.type,
         court=args.court,
         max_results=args.limit,
+        **kwargs,
     )
 
     _log(args.query, "courtlistener", len(results))
@@ -106,6 +131,10 @@ def cmd_cases(args):
         max_results=args.limit,
     )
     _log(args.query, "courtlistener", len(results))
+
+    if write_output(results, args, summary=f"CourtListener cases '{args.query}': {len(results)} results"):
+        return
+
     print(f"Found {len(results)} cases for '{args.query}'")
     print()
     for r in results:
@@ -154,37 +183,59 @@ def cmd_docket(args):
 
 
 def cmd_party(args):
-    """Search parties across all cases."""
+    """Search for cases by party name (uses search API field operators)."""
     client = _client()
-    parties = client.search_party_by_name(args.name, max_results=args.limit)
-    _log(args.name, "courtlistener", len(parties))
-    print(f"Found {len(parties)} party records for '{args.name}'")
+    results = client.search_by_party(args.name, court=args.court, max_results=args.limit)
+    _log(args.name, "courtlistener_party", len(results))
+
+    if write_output(results, args, summary=f"CourtListener party search '{args.name}': {len(results)} results"):
+        return
+
+    print(f"Found {len(results)} cases involving party '{args.name}'")
     print()
-    for p in parties:
-        name = p.get("name", "?")
-        docket_url = p.get("docket", "")
-        party_types = [pt.get("name", "?") for pt in p.get("party_types", [])]
-        attorneys = p.get("attorneys", [])
-        print(f"  {name} ({', '.join(party_types) if party_types else '?'})")
-        if docket_url:
-            print(f"    Docket: {docket_url}")
+    for r in results:
+        case_name = r.get("caseName", r.get("case_name", "?"))
+        court = r.get("court", "?")
+        date = r.get("dateFiled", "")
+        docket_num = r.get("docketNumber", "")
+        url = r.get("docket_absolute_url", "")
+        parties = r.get("party", [])
+        attorneys = r.get("attorney", [])
+        firms = r.get("firm", [])
+        print(f"  [{court}] {case_name}")
+        if docket_num:
+            print(f"    Docket #: {docket_num}")
+        if date:
+            print(f"    Filed: {date}")
+        if parties:
+            print(f"    Parties: {', '.join(str(p) for p in parties[:5])}")
         if attorneys:
-            for att in attorneys[:3]:
-                att_name = att.get("name", "?")
-                att_firm = att.get("firm_name", "")
-                print(f"    Attorney: {att_name}" + (f" ({att_firm})" if att_firm else ""))
+            print(f"    Attorneys: {', '.join(str(a) for a in attorneys[:3])}")
+        if firms:
+            print(f"    Firms: {', '.join(str(f) for f in firms[:3])}")
+        if url:
+            print(f"    URL: https://www.courtlistener.com{url}")
         print()
 
 
 def cmd_opinions(args):
     """Search opinions."""
     client = _client()
+    kwargs = {}
+    if getattr(args, "semantic", False):
+        kwargs["semantic"] = "true"
     results = client.search(
         args.query,
         search_type="o",
         court=args.court,
         max_results=args.limit,
+        **kwargs,
     )
+    _log(args.query, "courtlistener_opinions", len(results))
+
+    if write_output(results, args, summary=f"CourtListener opinions '{args.query}': {len(results)} results"):
+        return
+
     print(f"Found {len(results)} opinions for '{args.query}'")
     print()
     for r in results:
@@ -211,6 +262,11 @@ def cmd_judge(args):
     """Search judges."""
     client = _client()
     judges = client.search_judges(name=args.name, max_results=args.limit)
+    _log(args.name, "courtlistener_judge", len(judges))
+
+    if write_output(judges, args, summary=f"CourtListener judges '{args.name}': {len(judges)} results"):
+        return
+
     print(f"Found {len(judges)} judges matching '{args.name}'")
     for j in judges:
         name = j.get("name_full", "?")
@@ -386,15 +442,212 @@ def cmd_download(args):
             print("WARNING: pymupdf not installed, cannot extract text. Install with: uv add pymupdf", file=sys.stderr)
 
 
+def cmd_citations(args):
+    """Show citation graph for an opinion cluster."""
+    client = _client()
+    citing = client.get_citing_opinions(args.cluster_id, max_results=args.limit)
+    cited_by = client.get_cited_by_opinion(args.cluster_id, max_results=args.limit)
+    result = {"cluster_id": args.cluster_id, "cites": citing, "cited_by": cited_by}
+    _log(str(args.cluster_id), "courtlistener_citations", len(citing) + len(cited_by))
+    if write_output(result, args, summary=f"Citations for cluster #{args.cluster_id}: cites={len(citing)} cited_by={len(cited_by)}"):
+        return
+    print(f"=== Citation Graph for Cluster #{args.cluster_id} ===")
+    print(f"\nThis opinion cites {len(citing)} opinions:")
+    for c in citing[:20]:
+        print(f"  -> {c.get('cited_opinion', '?')}")
+    print(f"\nCited by {len(cited_by)} opinions:")
+    for c in cited_by[:20]:
+        print(f"  <- {c.get('citing_opinion', '?')}")
+
+
+def cmd_resolve_cite(args):
+    """Resolve citation text to CourtListener cluster IDs."""
+    client = _client()
+    result = client.resolve_citations(args.text)
+    _log(args.text[:80], "courtlistener_cite_resolve", 1)
+    if write_output(result, args, summary=f"Citation resolution"):
+        return
+    print(json.dumps(result, indent=2, default=str))
+
+
+def cmd_cluster(args):
+    """Get opinion cluster details."""
+    client = _client()
+    cluster = client.get_cluster(args.cluster_id)
+    _log(str(args.cluster_id), "courtlistener_cluster", 1)
+    if write_output(cluster, args, summary=f"Cluster #{args.cluster_id}"):
+        return
+    print(f"=== Cluster #{args.cluster_id} ===")
+    print(f"Case: {cluster.get('case_name', '?')}")
+    print(f"Date Filed: {cluster.get('date_filed', '?')}")
+    print(f"Citation Count: {cluster.get('citation_count', 0)}")
+    print(f"Precedential Status: {cluster.get('precedential_status', '?')}")
+    sub_opinions = cluster.get("sub_opinions", [])
+    if sub_opinions:
+        print(f"Sub-opinions: {len(sub_opinions)}")
+        for op in sub_opinions[:5]:
+            print(f"  {op}")
+
+
+def cmd_investments(args):
+    """Search judge investment holdings by company/description."""
+    client = _client()
+    results = client.get_investments(
+        person_id=getattr(args, "person_id", None),
+        description=args.query,
+        max_results=args.limit,
+    )
+    _log(args.query, "courtlistener_investments", len(results))
+    if write_output(results, args, summary=f"Investment search '{args.query}': {len(results)} results"):
+        return
+    print(f"Found {len(results)} investment records matching '{args.query}'")
+    for inv in results:
+        desc = inv.get("description", "?")
+        value = inv.get("gross_value_code", "?")
+        income = inv.get("income_during_reporting_period_code", "?")
+        print(f"  {desc}")
+        print(f"    Value code: {value} | Income code: {income}")
+        print(f"    Disclosure: {inv.get('financial_disclosure', '?')}")
+        print()
+
+
+def cmd_reimbursements(args):
+    """Search judge travel reimbursements by source."""
+    client = _client()
+    results = client.get_reimbursements(
+        person_id=getattr(args, "person_id", None),
+        source=args.query,
+        max_results=args.limit,
+    )
+    _log(args.query, "courtlistener_reimbursements", len(results))
+    if write_output(results, args, summary=f"Reimbursement search '{args.query}': {len(results)} results"):
+        return
+    print(f"Found {len(results)} reimbursement records matching '{args.query}'")
+    for r in results:
+        source = r.get("source", "?")
+        location = r.get("location", "?")
+        purpose = r.get("purpose", "?")
+        dates = r.get("dates_reimbursed", "?")
+        print(f"  {source}")
+        print(f"    Location: {location} | Purpose: {purpose} | Dates: {dates}")
+        print()
+
+
+def cmd_fjc(args):
+    """Search the FJC Integrated Database (federal case metadata)."""
+    client = _client()
+    results = client.search_fjc(
+        plaintiff=args.plaintiff,
+        defendant=args.defendant,
+        nature_of_suit=args.nos,
+        date_filed_after=args.after,
+        date_filed_before=args.before,
+        max_results=args.limit,
+    )
+    query_desc = args.plaintiff or args.defendant or "all"
+    _log(query_desc, "courtlistener_fjc", len(results))
+    if write_output(results, args, summary=f"FJC search: {len(results)} results"):
+        return
+    print(f"Found {len(results)} FJC records")
+    for r in results:
+        plaintiff = r.get("plaintiff", "?")
+        defendant = r.get("defendant", "?")
+        nos = r.get("nature_of_suit", "?")
+        disposition = r.get("disposition", "?")
+        print(f"  {plaintiff} v. {defendant}")
+        print(f"    NOS: {nos} | Disposition: {disposition}")
+        print()
+
+
+def cmd_career(args):
+    """Show full career timeline for a judge."""
+    client = _client()
+    judges = client.search_judges(name=args.name, max_results=5)
+    if not judges:
+        print(f"No judges found matching '{args.name}'")
+        return
+
+    # Use first result — search API returns different format than REST
+    judge = judges[0]
+    person_id = judge.get("id")
+    if not person_id:
+        print(f"Could not determine person ID for '{args.name}'")
+        return
+
+    person = client.get_person(person_id)
+    positions = client.get_positions(person_id)
+    educations = client.get_educations(person_id)
+    affiliations = client.get_political_affiliations(person_id)
+
+    result = {
+        "person": person,
+        "positions": positions,
+        "education": educations,
+        "political_affiliations": affiliations,
+    }
+
+    _log(args.name, "courtlistener_career", len(positions))
+    if write_output(result, args, summary=f"Career for {args.name}: {len(positions)} positions"):
+        return
+
+    name = person.get("name_full", args.name)
+    print(f"=== Career: {name} (ID: {person_id}) ===")
+    dob = person.get("date_dob", "")
+    if dob:
+        print(f"Born: {dob}")
+
+    if educations:
+        print(f"\nEducation ({len(educations)}):")
+        for e in educations:
+            school = e.get("school", {})
+            school_name = school.get("name", "?") if isinstance(school, dict) else str(school)
+            degree = e.get("degree_level", "?")
+            year = e.get("degree_year", "?")
+            print(f"  {school_name} — {degree} ({year})")
+
+    if positions:
+        print(f"\nPositions ({len(positions)}):")
+        for p in positions:
+            court = p.get("court", {})
+            court_name = court.get("short_name", "?") if isinstance(court, dict) else str(court)
+            pos_type = p.get("position_type", "?")
+            start = p.get("date_start", "?")
+            end = p.get("date_termination", "present")
+            appointer = p.get("appointer", "")
+            appointer_str = ""
+            if appointer:
+                if isinstance(appointer, dict):
+                    appointer_str = f" (appointed by {appointer.get('name_full', '?')})"
+                else:
+                    appointer_str = f" (appointer: {appointer})"
+            print(f"  {pos_type} at {court_name}, {start} - {end}{appointer_str}")
+
+    if affiliations:
+        print(f"\nPolitical Affiliations ({len(affiliations)}):")
+        for a in affiliations:
+            party = a.get("political_party", "?")
+            source = a.get("source", "?")
+            print(f"  {party} (source: {source})")
+
+
 def main():
     parser = argparse.ArgumentParser(description="CourtListener API for OSINT investigation")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    # search
-    p = sub.add_parser("search", help="Search (generic)")
-    p.add_argument("query")
-    p.add_argument("--type", default="r", help="o=opinions, r=recap/dockets, p=people")
-    p.add_argument("--court", help="Court filter (e.g., nysd, ca2, scotus)")
+    # search — enhanced with field operators
+    p = sub.add_parser("search", help="Search (supports field operators: --party, --firm, --attorney)")
+    p.add_argument("query", nargs="?", default="", help="Search query (optional if using field operators)")
+    p.add_argument("--type", default="r", help="o=opinions, r=recap/dockets, rd=recap docs, p=people, oa=oral args")
+    p.add_argument("--court", help="Court filter (e.g., nysd, ca2, scotus, flsd)")
+    p.add_argument("--party", help="Party name field operator")
+    p.add_argument("--firm", help="Law firm field operator")
+    p.add_argument("--attorney", help="Attorney name field operator")
+    p.add_argument("--assigned-to", help="Assigned judge field operator")
+    p.add_argument("--docket-number", help="Docket number field operator")
+    p.add_argument("--semantic", action="store_true", help="Enable semantic search (opinions)")
+    p.add_argument("--highlight", action="store_true", help="Enable result highlighting")
+    p.add_argument("--after", help="Filed after (YYYY-MM-DD)")
+    p.add_argument("--before", help="Filed before (YYYY-MM-DD)")
     p.add_argument("--limit", type=int, default=20)
     add_output_args(p)
 
@@ -405,27 +658,33 @@ def main():
     p.add_argument("--after", help="Filed after (YYYY-MM-DD)")
     p.add_argument("--before", help="Filed before (YYYY-MM-DD)")
     p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
 
     # docket
     p = sub.add_parser("docket", help="Get docket by ID")
     p.add_argument("docket_id", type=int)
     add_output_args(p)
 
-    # party
-    p = sub.add_parser("party", help="Search parties")
+    # party — uses search API with party:"Name" (not blocked /parties/ endpoint)
+    p = sub.add_parser("party", help="Search cases by party name (via search API)")
     p.add_argument("name")
+    p.add_argument("--court")
     p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
 
     # opinions
     p = sub.add_parser("opinions", help="Search opinions")
     p.add_argument("query")
     p.add_argument("--court")
+    p.add_argument("--semantic", action="store_true", help="Semantic search")
     p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
 
     # judge
     p = sub.add_parser("judge", help="Search judges")
     p.add_argument("name")
     p.add_argument("--limit", type=int, default=10)
+    add_output_args(p)
 
     # disclosures
     p = sub.add_parser("disclosures", help="Financial disclosures")
@@ -440,21 +699,65 @@ def main():
     p.add_argument("--lines", type=int, default=500, help="Max lines to show")
     add_output_args(p)
 
-    # recap-search — find RECAP documents
+    # recap-search
     p = sub.add_parser("recap-search", help="Search RECAP documents (type=rd)")
     p.add_argument("query", help="Search query")
     p.add_argument("--court", help="Court filter")
     p.add_argument("--limit", type=int, default=20)
     add_output_args(p)
 
-    # download — fetch RECAP PDF
+    # download
     p = sub.add_parser("download", help="Download a RECAP document PDF")
     p.add_argument("url", help="Full URL or filepath_local from RECAP")
     p.add_argument("output_file", help="Local path to save the PDF")
-    p.add_argument("--extract-text", action="store_true", help="Extract text from PDF via pymupdf")
+    p.add_argument("--extract-text", action="store_true", help="Extract text via pymupdf")
+
+    # citations — citation graph
+    p = sub.add_parser("citations", help="Citation graph for an opinion cluster")
+    p.add_argument("cluster_id", type=int)
+    p.add_argument("--limit", type=int, default=50)
+    add_output_args(p)
+
+    # resolve-cite — resolve citation text
+    p = sub.add_parser("resolve-cite", help="Resolve citation text to cluster IDs")
+    p.add_argument("text", help="Citation text (e.g., '410 U.S. 113')")
+    add_output_args(p)
+
+    # cluster — opinion cluster detail
+    p = sub.add_parser("cluster", help="Get opinion cluster details")
+    p.add_argument("cluster_id", type=int)
+    add_output_args(p)
+
+    # investments — judge investment search
+    p = sub.add_parser("investments", help="Search judge investment holdings by company")
+    p.add_argument("query", help="Company/description to search")
+    p.add_argument("--person-id", type=int, help="Filter to specific judge")
+    p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
+
+    # reimbursements — judge travel reimbursements
+    p = sub.add_parser("reimbursements", help="Search judge travel reimbursements by source")
+    p.add_argument("query", help="Source to search (e.g., 'Federalist Society')")
+    p.add_argument("--person-id", type=int, help="Filter to specific judge")
+    p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
+
+    # fjc — FJC Integrated Database
+    p = sub.add_parser("fjc", help="Search FJC Integrated Database (federal case metadata)")
+    p.add_argument("--plaintiff", help="Plaintiff name")
+    p.add_argument("--defendant", help="Defendant name")
+    p.add_argument("--nos", help="Nature of suit code")
+    p.add_argument("--after", help="Filed after (YYYY-MM-DD)")
+    p.add_argument("--before", help="Filed before (YYYY-MM-DD)")
+    p.add_argument("--limit", type=int, default=20)
+    add_output_args(p)
+
+    # career — judge career timeline
+    p = sub.add_parser("career", help="Full career timeline for a judge")
+    p.add_argument("name", help="Judge name")
+    add_output_args(p)
 
     args = parser.parse_args()
-    # Propagate json_out to all subcommands (fallback if not present)
     if not hasattr(args, "json_out"):
         args.json_out = False
 
@@ -469,6 +772,13 @@ def main():
         "opinion": cmd_opinion,
         "recap-search": cmd_recap_search,
         "download": cmd_download,
+        "citations": cmd_citations,
+        "resolve-cite": cmd_resolve_cite,
+        "cluster": cmd_cluster,
+        "investments": cmd_investments,
+        "reimbursements": cmd_reimbursements,
+        "fjc": cmd_fjc,
+        "career": cmd_career,
     }
     handlers[args.command](args)
 
