@@ -646,44 +646,208 @@ def _fetch_insider_detail(cik, accession, doc_name):
         print("      (Could not parse XML)")
 
 
+def _get_edgartools_filing(ticker_or_cik, form="10-K", index=0):
+    """Get a filing via edgartools. Returns (filing, company) or (None, None)."""
+    import os
+    os.environ.setdefault("EDGAR_IDENTITY", "Ithildin Research research@example.com")
+    from edgar import Company
+    company = Company(str(ticker_or_cik))
+    filings = company.get_filings(form=form)
+    if not filings or index >= len(filings):
+        return None, company
+    return filings[index], company
+
+
 def cmd_read(args):
-    """Fetch and display the text content of a SEC filing."""
-    url = args.url
-    if not url.startswith("http"):
-        print("ERROR: URL must start with http:// or https://", file=sys.stderr)
+    """Fetch and display clean, readable text from a SEC filing.
+
+    Uses edgartools for iXBRL-aware text extraction. Falls back to raw HTML
+    stripping for non-standard URLs.
+    """
+    # If given a ticker/CIK + form, use edgartools directly
+    if hasattr(args, "ticker") and args.ticker:
+        try:
+            filing, company = _get_edgartools_filing(
+                args.ticker, form=getattr(args, "form_type", "10-K") or "10-K"
+            )
+            if not filing:
+                print(f"ERROR: No {args.form_type or '10-K'} filings found for {args.ticker}", file=sys.stderr)
+                return
+            text = filing.text()
+            print(f"─── {filing.form} filed {filing.filing_date} | {company.name} ({len(text):,} chars) ───")
+            print()
+            lines = text.split("\n")
+            for line in lines[:args.lines]:
+                print(line)
+            if len(lines) > args.lines:
+                print(f"\n... ({len(lines) - args.lines} more lines, use --lines {len(lines)} to see all)")
+            return
+        except Exception as e:
+            print(f"WARNING: edgartools failed ({e}), falling back to raw fetch", file=sys.stderr)
+
+    # URL-based read: try edgartools first for accession-based URLs, then fall back
+    url = args.url if hasattr(args, "url") and args.url else None
+    if not url:
+        print("ERROR: Provide a URL or use --ticker", file=sys.stderr)
         return
 
+    # Try edgartools accession number extraction from URL
+    try:
+        import os
+        os.environ.setdefault("EDGAR_IDENTITY", "Ithildin Research research@example.com")
+        # Extract accession from URL pattern: /data/<CIK>/<ACCESSION>/
+        m = re.search(r"/data/(\d+)/([\d-]+)/", url)
+        if m:
+            cik, accession_raw = m.group(1), m.group(2)
+            from edgar import find
+            company = find(int(cik))
+            if company:
+                filings = company.get_filings()
+                for f in filings[:50]:  # check recent filings
+                    if accession_raw in (f.accession_no or "").replace("-", ""):
+                        text = f.text()
+                        print(f"─── {f.form} filed {f.filing_date} | {company.name} ({len(text):,} chars) ───")
+                        print()
+                        lines = text.split("\n")
+                        for line in lines[:args.lines]:
+                            print(line)
+                        if len(lines) > args.lines:
+                            print(f"\n... ({len(lines) - args.lines} more lines)")
+                        return
+    except Exception as e:
+        print(f"WARNING: edgartools URL parse failed ({e}), falling back to raw fetch", file=sys.stderr)
+
+    # Raw HTML fallback (original implementation)
     data = _request(url, accept="text/html")
     if not data:
         return
-
     text = data.decode("utf-8", errors="replace") if isinstance(data, bytes) else str(data)
-
-    # Detect content type and extract text
     if text.strip().startswith("<?xml") or text.strip().startswith("<XML>"):
-        # XML filing — try to extract meaningful text
         text = re.sub(r'<[^>]+>', ' ', text)
         text = html.unescape(text)
     elif "<html" in text.lower()[:500] or "<body" in text.lower()[:500]:
         text = _strip_html(text)
-    # else: plain text, use as-is
-
-    # Clean up
     lines = text.split('\n')
-    # Remove empty leading lines
     while lines and not lines[0].strip():
         lines.pop(0)
-
     total_lines = len(lines)
     show_lines = lines[:args.lines]
-
     print(f"─── Filing Content ({total_lines} lines, showing {len(show_lines)}) ───")
     print()
     for line in show_lines:
         print(line)
-
     if total_lines > args.lines:
         print(f"\n... ({total_lines - args.lines} more lines, use --lines {total_lines} to see all)")
+
+
+def cmd_sections(args):
+    """Extract specific sections from a 10-K or 10-Q filing using edgartools."""
+    try:
+        filing, company = _get_edgartools_filing(
+            args.ticker, form=args.form or "10-K", index=args.index
+        )
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return
+
+    if not filing:
+        print(f"ERROR: No {args.form or '10-K'} filings found for {args.ticker}", file=sys.stderr)
+        return
+
+    print(f"─── {filing.form} filed {filing.filing_date} | {company.name} ───")
+    print(f"    Accession: {filing.accession_no}")
+    print()
+
+    try:
+        obj = filing.obj()
+    except Exception as e:
+        print(f"WARNING: Could not parse filing structure ({e}). Falling back to full text.", file=sys.stderr)
+        text = filing.text()
+        lines = text.split("\n")[:args.lines]
+        for line in lines:
+            print(line)
+        return
+
+    # If a specific section requested, show just that
+    if args.section:
+        section_map = {
+            "business": ("business", "Item 1"),
+            "item1": ("business", "Item 1"),
+            "risk": ("risk_factors", "Item 1A"),
+            "risk_factors": ("risk_factors", "Item 1A"),
+            "item1a": ("risk_factors", "Item 1A"),
+            "mda": ("management_discussion", "Item 7"),
+            "item7": ("management_discussion", "Item 7"),
+            "legal": ("legal_proceedings", "Item 3"),
+            "item3": ("legal_proceedings", "Item 3"),
+        }
+        key = args.section.lower().replace(" ", "_").replace("-", "_")
+        if key in section_map:
+            attr, label = section_map[key]
+            section = getattr(obj, attr, None)
+            if section:
+                text = str(section)
+                print(f"─── {label} ({len(text):,} chars) ───")
+                print()
+                lines = text.split("\n")[:args.lines]
+                for line in lines:
+                    print(line)
+                if len(text.split("\n")) > args.lines:
+                    print(f"\n... (truncated, use --lines to see more)")
+            else:
+                # Try bracket access
+                try:
+                    section = obj[args.section]
+                    text = str(section)
+                    print(f"─── {args.section} ({len(text):,} chars) ───")
+                    print()
+                    for line in text.split("\n")[:args.lines]:
+                        print(line)
+                except Exception:
+                    print(f"Section '{args.section}' not found in this filing.")
+        else:
+            # Try direct bracket access
+            try:
+                section = obj[args.section]
+                text = str(section)
+                print(f"─── {args.section} ({len(text):,} chars) ───")
+                print()
+                for line in text.split("\n")[:args.lines]:
+                    print(line)
+            except Exception:
+                print(f"Section '{args.section}' not found. Try: business, risk, mda, legal")
+        return
+
+    # No specific section — show overview of all available sections
+    sections_found = []
+    for attr, label in [
+        ("business", "Item 1 - Business"),
+        ("risk_factors", "Item 1A - Risk Factors"),
+        ("legal_proceedings", "Item 3 - Legal Proceedings"),
+        ("management_discussion", "Item 7 - MD&A"),
+    ]:
+        section = getattr(obj, attr, None)
+        if section:
+            text = str(section)
+            sections_found.append((label, len(text)))
+            print(f"  {label}: {len(text):,} chars")
+        else:
+            print(f"  {label}: not available")
+
+    # Also try financial statements
+    for attr, label in [
+        ("balance_sheet", "Balance Sheet"),
+        ("income_statement", "Income Statement"),
+        ("cashflow_statement", "Cash Flow Statement"),
+    ]:
+        stmt = getattr(obj, attr, None)
+        if stmt:
+            print(f"  {label}: available")
+        else:
+            print(f"  {label}: not available")
+
+    print(f"\nUse --section <name> to extract a specific section (e.g., --section risk)")
+    print(f"Available: business, risk, mda, legal, item1, item1a, item7, item3")
 
 
 # ─── Main ────────────────────────────────────────────────────────────────────
@@ -728,9 +892,19 @@ def main():
     p.add_argument("--detail", action="store_true", help="Fetch and parse XML for transaction details")
 
     # read
-    p = sub.add_parser("read", help="Fetch and display filing content")
-    p.add_argument("url", help="Full URL to a SEC filing document")
-    p.add_argument("--lines", type=int, default=100, help="Number of lines to show")
+    p = sub.add_parser("read", help="Fetch and display clean filing text (iXBRL-aware)")
+    p.add_argument("url", nargs="?", help="Full URL to a SEC filing document")
+    p.add_argument("--ticker", help="Ticker or CIK (uses edgartools for clean extraction)")
+    p.add_argument("--form-type", default="10-K", help="Form type when using --ticker (default: 10-K)")
+    p.add_argument("--lines", type=int, default=500, help="Number of lines to show (default: 500)")
+
+    # sections (NEW: structured section extraction via edgartools)
+    p = sub.add_parser("sections", help="Extract specific sections from 10-K/10-Q (clean text)")
+    p.add_argument("ticker", help="Ticker symbol or CIK")
+    p.add_argument("--section", help="Section to extract: business, risk, mda, legal, item1, item1a, item7")
+    p.add_argument("--form", default="10-K", help="Form type (default: 10-K)")
+    p.add_argument("--index", type=int, default=0, help="Filing index (0=most recent)")
+    p.add_argument("--lines", type=int, default=1000, help="Max lines to show")
 
     args = parser.parse_args()
     # Set default json_out for subparsers that don't have output args
@@ -746,6 +920,7 @@ def main():
         "filings": cmd_filings,
         "insider": cmd_insider,
         "read": cmd_read,
+        "sections": cmd_sections,
     }
     handlers[args.command](args)
 
