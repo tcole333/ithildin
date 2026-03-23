@@ -119,6 +119,7 @@ class CourtListenerClient:
         method: str,
         endpoint: str,
         params: Optional[dict] = None,
+        json_body: Optional[dict] = None,
         retries: int = 3,
     ) -> dict:
         """
@@ -128,6 +129,7 @@ class CourtListenerClient:
             method: HTTP method
             endpoint: API endpoint (without base URL)
             params: Query parameters
+            json_body: JSON body for POST requests (e.g., citation-lookup)
             retries: Number of retries for transient failures
 
         Returns:
@@ -139,10 +141,11 @@ class CourtListenerClient:
 
         for attempt in range(retries):
             try:
-                response = self.session.request(method, url, params=params)
+                response = self.session.request(
+                    method, url, params=params, json=json_body
+                )
 
                 if response.status_code == 429:
-                    # Rate limited, wait and retry
                     retry_after = int(response.headers.get("Retry-After", 60))
                     logger.warning(f"Rate limited, waiting {retry_after}s")
                     time.sleep(retry_after)
@@ -153,10 +156,17 @@ class CourtListenerClient:
                         "Authentication failed. Check your COURTLISTENER_TOKEN."
                     )
 
+                if response.status_code == 403:
+                    raise PermissionError(
+                        f"Access denied for {endpoint}. This endpoint requires "
+                        "'select user' access (contact mike@free.law). "
+                        "Use the search API with field operators as a workaround."
+                    )
+
                 response.raise_for_status()
                 return response.json()
 
-            except requests.exceptions.RequestException as e:
+            except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
                 if attempt < retries - 1:
                     wait = 2 ** attempt
                     logger.warning(f"Request failed, retrying in {wait}s: {e}")
@@ -325,56 +335,41 @@ class CourtListenerClient:
         return list(self._paginate("dockets/", params, max_results))
 
     # =========================================================================
-    # Parties API
+    # Party / Attorney / Firm Search (via Search API field operators)
+    # The /parties/ and /attorneys/ REST endpoints require "select user"
+    # access. These methods use the search API instead, which returns party,
+    # attorney, and firm data embedded in RECAP search results.
     # =========================================================================
 
-    def get_parties(
+    def search_by_party(
         self,
-        docket_id: Optional[int] = None,
-        name: Optional[str] = None,
+        party_name: str,
+        court: Optional[str] = None,
         max_results: int = 100,
     ) -> list[dict]:
-        """
-        Get parties, optionally filtered by docket or name.
+        """Search for cases involving a specific party."""
+        query = f'party:"{party_name}"'
+        return self.search(query, search_type="r", court=court, max_results=max_results)
 
-        Args:
-            docket_id: Filter to specific docket
-            name: Filter by party name (partial match)
-            max_results: Maximum results
-
-        Returns:
-            List of parties with their attorneys
-        """
-        params = {"filter_nested_results": "True"}
-        if docket_id:
-            params["docket"] = docket_id
-        if name:
-            params["name__icontains"] = name
-
-        return list(self._paginate("parties/", params, max_results))
-
-    def search_party_by_name(
+    def search_by_attorney(
         self,
-        name: str,
-        party_type: Optional[str] = None,  # e.g., "Plaintiff", "Defendant"
-        max_results: int = 50,
+        attorney_name: str,
+        court: Optional[str] = None,
+        max_results: int = 100,
     ) -> list[dict]:
-        """
-        Search for parties by name across all cases.
+        """Search for cases involving a specific attorney."""
+        query = f'attorney:"{attorney_name}"'
+        return self.search(query, search_type="r", court=court, max_results=max_results)
 
-        Args:
-            name: Party name to search
-            party_type: Filter by party type
-            max_results: Maximum results
-
-        Returns:
-            List of parties matching the name
-        """
-        params = {"name__icontains": name}
-        if party_type:
-            params["party_types__name__icontains"] = party_type
-
-        return list(self._paginate("parties/", params, max_results))
+    def search_by_firm(
+        self,
+        firm_name: str,
+        court: Optional[str] = None,
+        max_results: int = 100,
+    ) -> list[dict]:
+        """Search for cases involving a specific law firm."""
+        query = f'firm:"{firm_name}"'
+        return self.search(query, search_type="r", court=court, max_results=max_results)
 
     # =========================================================================
     # Opinions API
@@ -403,7 +398,7 @@ class CourtListenerClient:
         return list(self._paginate("opinions/", params, max_results))
 
     # =========================================================================
-    # People/Judges API
+    # People / Judges API
     # =========================================================================
 
     def get_person(self, person_id: int) -> dict:
@@ -412,31 +407,89 @@ class CourtListenerClient:
 
     def search_judges(
         self,
-        name: Optional[str] = None,
+        name: str,
         court: Optional[str] = None,
         max_results: int = 50,
     ) -> list[dict]:
-        """
-        Search for judges.
+        """Search judges via the search API (type=p). Most reliable for name search."""
+        return self.search(name, search_type="p", court=court, max_results=max_results)
 
-        Args:
-            name: Judge name to search
-            court: Court filter
-            max_results: Maximum results
-
-        Returns:
-            List of judges with their positions
-        """
+    def list_people(
+        self,
+        name_last: Optional[str] = None,
+        court: Optional[str] = None,
+        max_results: int = 50,
+    ) -> list[dict]:
+        """List people from /people/ REST endpoint with filters."""
         params = {}
-        if name:
-            params["name_full__icontains"] = name
+        if name_last:
+            params["name_last__istartswith"] = name_last
         if court:
-            params["positions__court__id"] = court
-
+            params["positions__court"] = court
         return list(self._paginate("people/", params, max_results))
 
+    def get_positions(self, person_id: int, max_results: int = 100) -> list[dict]:
+        """Get career positions for a judge (court, role, appointer, dates)."""
+        return list(self._paginate("positions/", {"person": person_id}, max_results))
+
+    def get_political_affiliations(self, person_id: int) -> list[dict]:
+        """Get political affiliations for a judge."""
+        return list(self._paginate("political-affiliations/", {"person": person_id}, 100))
+
+    def get_educations(self, person_id: int) -> list[dict]:
+        """Get education history for a judge."""
+        return list(self._paginate("educations/", {"person": person_id}, 100))
+
     # =========================================================================
-    # Financial Disclosures API
+    # Opinion Clusters API
+    # =========================================================================
+
+    def get_cluster(self, cluster_id: int) -> dict:
+        """Get an opinion cluster (groups all opinions for one ruling)."""
+        return self._request("GET", f"clusters/{cluster_id}/")
+
+    def get_clusters(
+        self,
+        docket_id: Optional[int] = None,
+        court: Optional[str] = None,
+        date_filed_after: Optional[str] = None,
+        date_filed_before: Optional[str] = None,
+        max_results: int = 100,
+    ) -> list[dict]:
+        """List opinion clusters with filters."""
+        params = {}
+        if docket_id:
+            params["docket"] = docket_id
+        if court:
+            params["docket__court__id"] = court
+        if date_filed_after:
+            params["date_filed__gte"] = date_filed_after
+        if date_filed_before:
+            params["date_filed__lte"] = date_filed_before
+        return list(self._paginate("clusters/", params, max_results))
+
+    # =========================================================================
+    # Citation Graph API
+    # =========================================================================
+
+    def get_citing_opinions(self, cluster_id: int, max_results: int = 100) -> list[dict]:
+        """Get opinions that cite a given opinion cluster."""
+        return list(self._paginate(
+            "opinions-cited/", {"cited_opinion__cluster_id": cluster_id}, max_results
+        ))
+
+    def get_cited_by_opinion(self, cluster_id: int, max_results: int = 100) -> list[dict]:
+        """Get opinions cited by a given opinion cluster."""
+        return list(self._paginate(
+            "opinions-cited/", {"citing_opinion__cluster_id": cluster_id}, max_results
+        ))
+
+    def resolve_citations(self, text: str) -> dict:
+        """POST citation text to resolve to cluster IDs. Prevents citation hallucinations."""
+        return self._request("POST", "citation-lookup/", json_body={"text": text})
+
+    # =========================================================================
+    # Financial Disclosures API (1.9M investment records)
     # =========================================================================
 
     def get_financial_disclosures(
@@ -445,44 +498,22 @@ class CourtListenerClient:
         year: Optional[int] = None,
         max_results: int = 100,
     ) -> list[dict]:
-        """
-        Get financial disclosure documents.
-
-        Args:
-            person_id: Filter to specific judge
-            year: Filter by disclosure year
-            max_results: Maximum results
-
-        Returns:
-            List of financial disclosure records
-        """
+        """Get financial disclosure documents."""
         params = {}
         if person_id:
             params["person"] = person_id
         if year:
             params["year"] = year
-
         return list(self._paginate("financial-disclosures/", params, max_results))
 
     def get_investments(
         self,
         person_id: Optional[int] = None,
         description: Optional[str] = None,
-        min_value: Optional[str] = None,  # e.g., "P4" for >$50M
+        min_value: Optional[str] = None,
         max_results: int = 100,
     ) -> list[dict]:
-        """
-        Get investment disclosures.
-
-        Args:
-            person_id: Filter to specific judge
-            description: Filter by investment description (e.g., stock name)
-            min_value: Minimum gross value code (J=<$1K, P4=>$50M)
-            max_results: Maximum results
-
-        Returns:
-            List of investment records
-        """
+        """Search judge investment holdings. description__icontains searches by company name."""
         params = {}
         if person_id:
             params["financial_disclosure__person"] = person_id
@@ -490,7 +521,6 @@ class CourtListenerClient:
             params["description__icontains"] = description
         if min_value:
             params["gross_value_code__gte"] = min_value
-
         return list(self._paginate("investments/", params, max_results))
 
     def get_gifts(
@@ -499,39 +529,131 @@ class CourtListenerClient:
         source: Optional[str] = None,
         max_results: int = 100,
     ) -> list[dict]:
-        """
-        Get gift disclosures.
-
-        Args:
-            person_id: Filter to specific judge
-            source: Filter by gift source
-            max_results: Maximum results
-
-        Returns:
-            List of gift records
-        """
+        """Get gift disclosures. source__icontains searches by gift source."""
         params = {}
         if person_id:
             params["financial_disclosure__person"] = person_id
         if source:
             params["source__icontains"] = source
-
         return list(self._paginate("gifts/", params, max_results))
+
+    def get_debts(self, person_id: Optional[int] = None, max_results: int = 100) -> list[dict]:
+        """Get judge debt disclosures."""
+        params = {}
+        if person_id:
+            params["financial_disclosure__person"] = person_id
+        return list(self._paginate("debts/", params, max_results))
+
+    def get_non_investment_incomes(
+        self,
+        person_id: Optional[int] = None,
+        source: Optional[str] = None,
+        max_results: int = 100,
+    ) -> list[dict]:
+        """Get non-investment income >$200 (speeches, teaching, consulting)."""
+        params = {}
+        if person_id:
+            params["financial_disclosure__person"] = person_id
+        if source:
+            params["source_type__icontains"] = source
+        return list(self._paginate("non-investment-incomes/", params, max_results))
+
+    def get_spouse_incomes(self, person_id: Optional[int] = None, max_results: int = 100) -> list[dict]:
+        """Get spouse income disclosures."""
+        params = {}
+        if person_id:
+            params["financial_disclosure__person"] = person_id
+        return list(self._paginate("spouse-incomes/", params, max_results))
+
+    def get_reimbursements(
+        self,
+        person_id: Optional[int] = None,
+        source: Optional[str] = None,
+        max_results: int = 100,
+    ) -> list[dict]:
+        """Get travel reimbursement disclosures. source__icontains searches by who paid."""
+        params = {}
+        if person_id:
+            params["financial_disclosure__person"] = person_id
+        if source:
+            params["source__icontains"] = source
+        return list(self._paginate("reimbursements/", params, max_results))
+
+    def get_disclosure_positions(self, person_id: Optional[int] = None, max_results: int = 100) -> list[dict]:
+        """Get officer/director/trustee positions disclosed by judges."""
+        params = {}
+        if person_id:
+            params["financial_disclosure__person"] = person_id
+        return list(self._paginate("disclosure-positions/", params, max_results))
+
+    def get_agreements(self, person_id: Optional[int] = None, max_results: int = 100) -> list[dict]:
+        """Get agreements disclosed during reporting period."""
+        params = {}
+        if person_id:
+            params["financial_disclosure__person"] = person_id
+        return list(self._paginate("agreements/", params, max_results))
+
+    # =========================================================================
+    # FJC Integrated Database
+    # =========================================================================
+
+    def search_fjc(
+        self,
+        plaintiff: Optional[str] = None,
+        defendant: Optional[str] = None,
+        nature_of_suit: Optional[str] = None,
+        date_filed_after: Optional[str] = None,
+        date_filed_before: Optional[str] = None,
+        max_results: int = 100,
+    ) -> list[dict]:
+        """Search the FJC Integrated Database (federal case metadata)."""
+        params = {}
+        if plaintiff:
+            params["plaintiff__icontains"] = plaintiff
+        if defendant:
+            params["defendant__icontains"] = defendant
+        if nature_of_suit:
+            params["nature_of_suit"] = nature_of_suit
+        if date_filed_after:
+            params["date_filed__gte"] = date_filed_after
+        if date_filed_before:
+            params["date_filed__lte"] = date_filed_before
+        return list(self._paginate("fjc-integrated-database/", params, max_results))
+
+    # =========================================================================
+    # Audio / Oral Arguments
+    # =========================================================================
+
+    def search_audio(self, query: str, court: Optional[str] = None, max_results: int = 100) -> list[dict]:
+        """Search oral argument recordings."""
+        return self.search(query, search_type="oa", court=court, max_results=max_results)
+
+    def get_audio(self, audio_id: int) -> dict:
+        """Get a specific oral argument recording."""
+        return self._request("GET", f"audio/{audio_id}/")
+
+    # =========================================================================
+    # Bankruptcy
+    # =========================================================================
+
+    def search_bankruptcy(self, max_results: int = 100, **kwargs) -> list[dict]:
+        """Search bankruptcy information (35M records)."""
+        return list(self._paginate("bankruptcy-information/", kwargs, max_results))
+
+    # =========================================================================
+    # Originating Court Info
+    # =========================================================================
+
+    def get_originating_court_info(self, docket_id: int) -> list[dict]:
+        """Get lower court information for an appellate docket."""
+        return list(self._paginate("originating-court-information/", {"docket": docket_id}, 10))
 
     # =========================================================================
     # Utility Methods
     # =========================================================================
 
     def get_endpoint_options(self, endpoint: str) -> dict:
-        """
-        Get available filters and options for an endpoint.
-
-        Args:
-            endpoint: API endpoint name
-
-        Returns:
-            OPTIONS response with available filters
-        """
+        """Get available filters and options for an endpoint (OPTIONS request)."""
         return self._request("OPTIONS", endpoint)
 
     def get_rate_limit_status(self) -> dict:
@@ -543,81 +665,63 @@ class CourtListenerClient:
 
 
 def main():
-    """CLI for testing the API client."""
+    """CLI for testing the API client directly."""
     import argparse
     import json
 
-    parser = argparse.ArgumentParser(description="CourtListener API client")
+    parser = argparse.ArgumentParser(description="CourtListener API client (testing)")
     parser.add_argument("--token", help="API token (or set COURTLISTENER_TOKEN)")
+    sub = parser.add_subparsers(dest="command")
 
-    subparsers = parser.add_subparsers(dest="command")
+    p = sub.add_parser("search", help="Search CourtListener")
+    p.add_argument("query", help="Search query")
+    p.add_argument("--type", default="r", help="Search type (o/r/p/rd/oa)")
+    p.add_argument("--court", help="Court filter")
+    p.add_argument("--limit", type=int, default=10)
 
-    # Search command
-    search_parser = subparsers.add_parser("search", help="Search CourtListener")
-    search_parser.add_argument("query", help="Search query")
-    search_parser.add_argument("--type", default="r", help="Search type (o/r/p/rd)")
-    search_parser.add_argument("--court", help="Court filter")
-    search_parser.add_argument("--limit", type=int, default=10, help="Max results")
+    p = sub.add_parser("docket", help="Get docket details")
+    p.add_argument("docket_id", type=int)
 
-    # Docket command
-    docket_parser = subparsers.add_parser("docket", help="Get docket details")
-    docket_parser.add_argument("docket_id", type=int, help="Docket ID")
+    p = sub.add_parser("party", help="Search by party name (via search API)")
+    p.add_argument("name")
+    p.add_argument("--court", help="Court filter")
+    p.add_argument("--limit", type=int, default=10)
 
-    # Party search command
-    party_parser = subparsers.add_parser("party", help="Search parties")
-    party_parser.add_argument("name", help="Party name")
-    party_parser.add_argument("--limit", type=int, default=10, help="Max results")
+    p = sub.add_parser("judge", help="Search judges")
+    p.add_argument("name")
+    p.add_argument("--limit", type=int, default=10)
 
-    # Judge command
-    judge_parser = subparsers.add_parser("judge", help="Search judges")
-    judge_parser.add_argument("name", help="Judge name")
-    judge_parser.add_argument("--limit", type=int, default=10, help="Max results")
+    p = sub.add_parser("investments", help="Search judge investments")
+    p.add_argument("query", help="Company/description to search")
+    p.add_argument("--limit", type=int, default=10)
 
-    # Financial disclosures command
-    fd_parser = subparsers.add_parser("disclosures", help="Get financial disclosures")
-    fd_parser.add_argument("--person-id", type=int, help="Judge person ID")
-    fd_parser.add_argument("--year", type=int, help="Disclosure year")
-    fd_parser.add_argument("--limit", type=int, default=10, help="Max results")
+    p = sub.add_parser("citations", help="Citation graph for a cluster")
+    p.add_argument("cluster_id", type=int)
+    p.add_argument("--limit", type=int, default=20)
 
     args = parser.parse_args()
-
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-
     client = CourtListenerClient(token=args.token)
 
     if args.command == "search":
-        results = client.search(
-            args.query,
-            search_type=args.type,
-            court=args.court,
-            max_results=args.limit,
-        )
-        for r in results:
+        for r in client.search(args.query, search_type=args.type, court=args.court, max_results=args.limit):
             print(json.dumps(r, indent=2, default=str))
-
     elif args.command == "docket":
-        docket = client.get_docket(args.docket_id)
-        print(json.dumps(docket, indent=2, default=str))
-
+        print(json.dumps(client.get_docket(args.docket_id), indent=2, default=str))
     elif args.command == "party":
-        parties = client.search_party_by_name(args.name, max_results=args.limit)
-        for p in parties:
-            print(json.dumps(p, indent=2, default=str))
-
+        for r in client.search_by_party(args.name, court=args.court, max_results=args.limit):
+            print(json.dumps(r, indent=2, default=str))
     elif args.command == "judge":
-        judges = client.search_judges(name=args.name, max_results=args.limit)
-        for j in judges:
+        for j in client.search_judges(name=args.name, max_results=args.limit):
             print(json.dumps(j, indent=2, default=str))
-
-    elif args.command == "disclosures":
-        disclosures = client.get_financial_disclosures(
-            person_id=args.person_id,
-            year=args.year,
-            max_results=args.limit,
-        )
-        for d in disclosures:
-            print(json.dumps(d, indent=2, default=str))
-
+    elif args.command == "investments":
+        for inv in client.get_investments(description=args.query, max_results=args.limit):
+            print(json.dumps(inv, indent=2, default=str))
+    elif args.command == "citations":
+        citing = client.get_citing_opinions(args.cluster_id, max_results=args.limit)
+        cited = client.get_cited_by_opinion(args.cluster_id, max_results=args.limit)
+        print(f"Cites {len(cited)} opinions, cited by {len(citing)} opinions")
+        print(json.dumps({"citing": citing, "cited_by": cited}, indent=2, default=str))
     else:
         parser.print_help()
 
