@@ -41,7 +41,8 @@ All skills load the active profile at startup. Entities are shared across invest
 /analyze-case <docket>      # Court case deep analysis (opinions, parties, allegations)
 /screen-targets <tickers>   # Financial red flag screening (Tier 0, 5-20 companies)
 /compare-peers <company>    # Industry peer benchmarking (Tier 2, outlier detection)
-/trace-grants <org>         # Dark money grant flow network tracing (Tier 1)
+/trace-grants <org>         # Dark money grant flow network tracing (Tier 2)
+/audit-contracts <companies> # Comparative procurement analysis (Tier 2)
 /status-report              # Investigation status
 /discover-frameworks        # Evolve analytical framework inventory
 /review-methodology         # Operational learning review

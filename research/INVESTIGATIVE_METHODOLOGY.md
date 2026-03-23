@@ -294,6 +294,14 @@ When investigating ANY entity or person, agents MUST search these sources in add
 - 501(c)(4) opacity: (c)(4) organizations don't file public 990s — they appear only as *recipients* in other orgs' Schedule I. Note the gap when you hit one.
 - Dark money chains: Donor → Donor-Advised Fund (Donors Trust) → 501(c)(4) → PAC = money laundering through nonprofit layers. Each hop adds anonymity.
 
+**Procurement Audit (Comparative):**
+- USASpending timeline: `tools/query_usaspending.py timeline "<COMPANY>"` — FY spending trends, growth rate calculation
+- Agency breakdown: `tools/query_usaspending.py recipient "<COMPANY>"` — spending by department
+- Lobbying correlation: `tools/query_lobbying.py client "<COMPANY>"` — lobbying spend timing vs. contract acceleration
+- Partnership analysis: `tools/query_highergov.py partnership --awardee-key <KEY>` — teaming patterns across contract vehicles
+- Revolving door: cross-reference investigation.db findings with USASpending contracting data
+- Subaward chains: `tools/query_usaspending.py subawards --uei <UEI>` — follow money through subcontractors
+
 ### Pivot Investigation Protocol
 
 When an entity is discovered through a data pivot (phone number, address, officer name, BvD record):

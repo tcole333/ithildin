@@ -216,6 +216,8 @@ Based on depth_tier and category, set `recommended_skill`:
 | `*` + nonprofit | `/trace-grants` |
 | `*` + grant | `/trace-grants` |
 | `standard` + other | `/pursue-lead` |
+
+**Cohort escalation:** When 3+ contract-category leads exist for different companies in the same investigation thread, suggest `/audit-contracts` for comparative procurement analysis instead of individual `/analyze-contract` runs.
 | `scan` + any | `/pursue-lead` |
 
 #### 3h. Thread Coverage Balancing

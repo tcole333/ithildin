@@ -153,6 +153,7 @@ SCHEDULER RECOMMENDATIONS:
    /investigate-person:  <N> leads (e.g. ...)
    /trace-entity:        <N> leads (e.g. ...)
    /trace-grants:        <N> leads (nonprofit funders/recipients)
+   /audit-contracts:     <N> leads (procurement cohort analysis)
    /pursue-lead:         <N> leads (e.g. ...)
 
 SOURCE COVERAGE (search_log):

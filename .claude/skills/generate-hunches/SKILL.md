@@ -117,6 +117,14 @@ Run these scans on the exported data. For each, read the relevant JSON files and
 - If a known operator has no legal connections, that's suspicious — lawyers leave fewer traces
 - Example: "A key actor has banking, operations, philanthropy arcs but no legal firm arcs (despite using many firms)"
 
+**l) Procurement acceleration clustering**
+- Query USASpending timeline for companies with 3+ contract-related findings in the investigation
+- Run `uv run python tools/query_usaspending.py timeline "<COMPANY>" --output $WORKDIR/hunch-usa-<slug>.json` for each
+- Flag companies with >50% YoY contract growth in the most recent fiscal year
+- Cross-reference with lobbying data: `uv run python tools/query_lobbying.py client "<COMPANY>" --output $WORKDIR/hunch-lobby-<slug>.json`
+- Check for partnership overlaps: do accelerating companies team together on the same contract vehicles?
+- Example: "Palantir and Anduril both show >50% contract growth and both lobby on DEF/HOM issues — coordinated defense tech acceleration"
+
 ### 5. Novelty Filter (Critical)
 
 For each potential pattern found, apply these filters:
