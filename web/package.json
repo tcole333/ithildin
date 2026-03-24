@@ -8,8 +8,10 @@
     "test:e2e": "playwright test",
     "test:citations": "node scripts/test-citations.mjs",
     "test:citations:snapshots": "node scripts/test-citation-snapshots.mjs",
+    "test:citations:build": "node scripts/test-citation-build.mjs",
     "test:support-spans": "node scripts/test-support-spans.mjs",
     "lint:citations": "node scripts/lint-citations.mjs",
+    "lint:citations:report": "node scripts/lint-citations.mjs --report-file citation-lint-report.json",
     "lint:citations:changed": "node scripts/lint-citations.mjs --changed-files",
     "lint:citations:changed:strict": "node scripts/lint-citations.mjs --changed-files --strict-changed-files",
     "report:support-coverage": "node scripts/report-support-coverage.mjs",
@@ -18,8 +20,8 @@
     "fix:citation-health": "node scripts/check-citation-health.mjs --fix",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=main --commit-dirty=true",
-    "deploy:preview": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=preview --commit-dirty=true"
+    "deploy": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npm run test:citations:build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=main --commit-dirty=true",
+    "deploy:preview": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npm run test:citations:build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=preview --commit-dirty=true"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

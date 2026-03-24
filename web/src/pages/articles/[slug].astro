@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, basename } from 'path';
-import { loadFindingEvidenceMap } from '../../lib/findingEvidence';
+import { loadArticleFindingCatalog, loadGlobalFindingCatalog, mergeFindingCatalogs } from '../../lib/findingCatalog';
 import { processArticleEvidenceContent, safeJsonForScript } from '../../lib/contentEvidencePipeline';
 import { extractCitedFindingIds, loadFindingDetails } from '../../lib/findingDetail';
 
@@ -48,7 +48,11 @@ if (frontmatterMatch) {
 
 const rawContent = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
 const wordCount = rawContent.split(/\s+/).length;
-const findingEvidenceMap = loadFindingEvidenceMap();
+const findingCatalog = mergeFindingCatalogs(
+  loadGlobalFindingCatalog(),
+  loadArticleFindingCatalog(slug!),
+);
+const findingEvidenceMap = findingCatalog.evidenceMap;
 const evidenceModeEnabled = import.meta.env.PUBLIC_ENABLE_EVIDENCE_MODE === 'true';
 const {
   pageHtml: content,
@@ -149,16 +153,10 @@ const supportSummary = supportMetrics.total_sentences > 0
     import { hydrateArticleViz } from '../../lib/vizHydrator';
     hydrateArticleViz();
   </script>
-  {evidenceModeEnabled && (
+  {(evidenceModeEnabled || citedFindingIds.length > 0) && (
     <script>
-      import { initSupportMode } from '../../lib/supportMode';
-      initSupportMode();
-    </script>
-  )}
-  {citedFindingIds.length > 0 && (
-    <script>
-      import { initFindingPopover } from '../../lib/findingPopover';
-      initFindingPopover();
+      import { initEvidencePage } from '../../lib/evidencePageBootstrap';
+      initEvidencePage();
     </script>
   )}
 </BaseLayout>

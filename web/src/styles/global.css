@@ -476,6 +476,24 @@ a:hover {
   color: #cfeaf1;
 }
 
+.inline-reference-group {
+  display: inline;
+}
+
+.inline-reference {
+  font-style: normal;
+  color: var(--color-mithril);
+}
+
+.inline-reference--finding {
+  color: var(--color-icy);
+  text-decoration: none;
+}
+
+.inline-reference--finding:hover {
+  color: #cfeaf1;
+}
+
 .citation-block {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
@@ -521,6 +539,28 @@ a:hover {
 .citation-sources {
   margin-top: 0.25rem;
   font-size: 0.75rem;
+  color: var(--color-mithril);
+}
+
+.citation-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-left: 0.5rem;
+}
+
+.citation-action {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-icy);
+  text-decoration: none;
+}
+
+.citation-action:hover {
+  color: #cfeaf1;
+}
+
+.citation-source-separator {
   color: var(--color-mithril);
 }
 
@@ -776,8 +816,37 @@ a:hover {
   color: #cfeaf1;
 }
 
+.finding-popover__source {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.3rem;
+}
+
 .finding-popover__evidence-ref {
   font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-mithril);
+}
+
+.finding-popover__actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.finding-popover__action {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-icy);
+  text-decoration: none;
+}
+
+.finding-popover__action:hover {
+  color: #cfeaf1;
+}
+
+.finding-popover__evidence-meta {
   font-size: 0.7rem;
   color: var(--color-mithril);
 }
@@ -803,6 +872,10 @@ a:hover {
 .finding-popover__assessment::before {
   content: "\2192 ";
   color: var(--color-ash);
+}
+
+.finding-popover__nav {
+  padding: 0 0.85rem 0.65rem;
 }
 
 .finding-popover__evidence-expand {

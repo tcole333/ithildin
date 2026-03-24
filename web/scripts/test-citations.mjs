@@ -215,7 +215,7 @@ run("USVI: resolves entity ID to USVI URL", () => {
 run("REG: resolves jurisdiction:id to registry URL", () => {
   const result = applyCitations("See [REG:VI:582530].");
   assert.equal(result.entries.length, 1);
-  assert.equal(result.entries[0].label, "VI 582530");
+  assert.equal(result.entries[0].label, "USVI 582530");
   assert.ok(result.entries[0].url);
 });
 
@@ -285,20 +285,22 @@ run("DS10: extractEvidenceLinks resolves DS10 ref", () => {
 });
 
 // ---------------------------------------------------------------------------
-// KPMG (label-only, no URL)
+// KPMG (record-only source record)
 // ---------------------------------------------------------------------------
 
-run("KPMG: resolves to label-only citation (no URL)", () => {
+run("KPMG: resolves to source-record citation", () => {
   const result = applyCitations("Per [KPMG:IPI] review.");
   assert.equal(result.entries.length, 1);
   assert.match(result.entries[0].label, /KPMG.*IPI/);
-  assert.equal(result.entries[0].url, undefined);
+  assert.match(result.entries[0].url ?? "", /^\/sources\//);
+  assert.equal(result.entries[0].targetKind, "source_record");
 });
 
-run("KPMG: extractEvidenceLinks returns label without URL", () => {
+run("KPMG: extractEvidenceLinks returns source-record link", () => {
   const links = extractEvidenceLinks("KPMG:IPI");
   assert.equal(links.length, 1);
-  assert.equal(links[0].url, undefined);
+  assert.match(links[0].url ?? "", /^\/sources\//);
+  assert.match(links[0].sourceRecordUrl ?? "", /^\/sources\//);
 });
 
 // ---------------------------------------------------------------------------
@@ -451,12 +453,14 @@ run("ICIJ: extractEvidenceLinks resolves ICIJ ref", () => {
 // Finding references
 // ---------------------------------------------------------------------------
 
-run("Finding: resolves with evidence map to primary source URL", () => {
+run("Finding: resolves with evidence map to popover citation plus sources", () => {
   const findingEvidenceMap = { "2108": ["EFTA01296686"] };
   const result = applyCitations("See [Finding #2108].", { findingEvidenceMap });
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "Finding #2108");
-  assert.ok(result.entries[0].url, "expected a URL for the finding");
+  assert.equal(result.entries[0].kind, "finding");
+  assert.equal(result.entries[0].targetKind, "finding_popover");
+  assert.equal(result.entries[0].url, undefined);
   assert.ok(result.entries[0].sources?.length);
 });
 
@@ -474,6 +478,50 @@ run("Finding: dedupes co-cited evidence refs", () => {
   );
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "Finding #2108");
+});
+
+run("Finding evidence: recursively resolves finding-backed sources", () => {
+  const findingEvidenceMap = {
+    "42": ["Finding #7"],
+    "7": ["EFTA01296686"],
+  };
+  const links = extractEvidenceLinks("Finding #42", { findingEvidenceMap });
+  assert.equal(links.length, 1);
+  assert.ok((links[0].url ?? "").includes("EFTA01296686"));
+});
+
+run("Internal refs: finding groups expand into finding citations", () => {
+  const result = applyCitations("See [Finding #5115, #4755].");
+  assert.equal(result.entries.length, 2);
+  assert.ok(!result.markdown.includes("[Finding #5115, #4755]"));
+  assert.ok(result.markdown.includes('data-citation-key="finding:5115"'));
+  assert.ok(result.markdown.includes('data-citation-key="finding:4755"'));
+});
+
+run("Internal refs: plural finding groups expand into finding citations", () => {
+  const result = applyCitations("See [Findings #1728, #1744].");
+  assert.equal(result.entries.length, 2);
+  assert.ok(!result.markdown.includes("[Findings #1728, #1744]"));
+  assert.ok(result.markdown.includes('data-citation-key="finding:1728"'));
+  assert.ok(result.markdown.includes('data-citation-key="finding:1744"'));
+});
+
+run("Internal refs: mixed connection and source groups keep the source citation", () => {
+  const result = applyCitations("See [Connection #783, EFTA01896707].");
+  assert.equal(result.entries.length, 1);
+  assert.ok(!result.markdown.includes("[Connection #783, EFTA01896707]"));
+  assert.ok(result.markdown.includes("Connection #783"));
+  assert.match(result.markdown, /<sup class="citation">/);
+});
+
+run("Internal refs: mixed finding and loose source labels render cleanly", () => {
+  const result = applyCitations("See [Finding #4190; SEC Litigation Release 25155].", {
+    findingEvidenceMap: { "4190": ["EFTA01896707"] },
+  });
+  assert.equal(result.entries.length, 2);
+  assert.ok(!result.markdown.includes("[Finding #4190; SEC Litigation Release 25155]"));
+  assert.equal(result.entries[0].kind, "finding");
+  assert.equal(result.entries[1].kind, "source");
 });
 
 // ---------------------------------------------------------------------------

@@ -2,6 +2,21 @@ type CitationLink = {
   key: string;
   label: string;
   url?: string;
+  openUrl?: string;
+  sourceRecordUrl?: string;
+  sourceId?: string;
+};
+
+type SourceRecord = {
+  id: string;
+  label: string;
+  title: string;
+  kind: "external" | "hosted_copy" | "record_only" | "private_internal";
+  recordUrl: string;
+  externalUrl?: string;
+  hostedAssetUrl?: string;
+  pageOrLocator?: string;
+  accessNote: string;
 };
 
 type FindingEvidenceDetail = {
@@ -11,6 +26,7 @@ type FindingEvidenceDetail = {
   source_page?: string;
   assessment?: string;
   resolved_links: CitationLink[];
+  resolved_sources: SourceRecord[];
 };
 
 type FindingDetail = {
@@ -60,17 +76,40 @@ function renderBadge(text: string, color: string): string {
   return `<span class="finding-popover__badge" style="border-color: ${color}; color: ${color};">${escapeHtml(text)}</span>`;
 }
 
+function renderActionLink(href: string, text: string, className: string): string {
+  const attrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : "";
+  return `<a href="${escapeHtml(href)}"${attrs} class="${className}">${escapeHtml(text)}</a>`;
+}
+
+function renderSourceRecord(source: SourceRecord): string {
+  const primaryHref = source.kind === "external"
+    ? source.externalUrl
+    : source.kind === "hosted_copy"
+      ? source.hostedAssetUrl
+      : source.recordUrl;
+
+  const primary = primaryHref
+    ? renderActionLink(primaryHref, source.label, "finding-popover__evidence-link")
+    : `<span class="finding-popover__evidence-ref">${escapeHtml(source.label)}</span>`;
+
+  const actions: string[] = [];
+  if (source.externalUrl || source.hostedAssetUrl) {
+    actions.push(renderActionLink(source.externalUrl || source.hostedAssetUrl || "", "Open source", "finding-popover__action"));
+  }
+  actions.push(renderActionLink(source.recordUrl, "View source record", "finding-popover__action"));
+
+  const metaBits = [source.pageOrLocator, source.accessNote].filter(Boolean).map((value) => escapeHtml(value || ""));
+  const meta = metaBits.length ? `<div class="finding-popover__evidence-meta">${metaBits.join(" · ")}</div>` : "";
+  return `<div class="finding-popover__source">${primary}<span class="finding-popover__actions">${actions.join("")}</span>${meta}</div>`;
+}
+
 function renderEvidenceItem(ev: FindingEvidenceDetail): string {
-  const links = ev.resolved_links
-    .map((link) => {
-      if (link.url) {
-        return `<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer" class="finding-popover__evidence-link">${escapeHtml(link.label)}</a>`;
-      }
-      return `<span class="finding-popover__evidence-ref">${escapeHtml(link.label)}</span>`;
-    })
-    .join(" ");
+  const links = (ev.resolved_sources || [])
+    .map((source) => renderSourceRecord(source))
+    .join("");
 
   const typeTag = `<span class="finding-popover__evidence-type">[${escapeHtml(ev.evidence_type)}]</span>`;
+  const locator = ev.source_page ? `<div class="finding-popover__evidence-meta">${escapeHtml(ev.source_page)}</div>` : "";
 
   let quote = "";
   if (ev.source_quote) {
@@ -86,10 +125,10 @@ function renderEvidenceItem(ev: FindingEvidenceDetail): string {
     assessment = `<div class="finding-popover__assessment">${escapeHtml(ev.assessment)}</div>`;
   }
 
-  return `<div class="finding-popover__evidence-item">${typeTag} ${links}${quote}${assessment}</div>`;
+  return `<div class="finding-popover__evidence-item">${typeTag}${links}${locator}${quote}${assessment}</div>`;
 }
 
-function renderPopoverContent(detail: FindingDetail): string {
+function renderPopoverContent(detail: FindingDetail, citationNumber: string): string {
   const typeColors: Record<string, string> = {
     financial: "#d1b36a",
     communication: "#8fd3e8",
@@ -135,6 +174,9 @@ function renderPopoverContent(detail: FindingDetail): string {
 
   // Summary
   const summary = `<div class="finding-popover__summary">${escapeHtml(detail.summary)}</div>`;
+  const navigation = citationNumber
+    ? `<div class="finding-popover__nav">${renderActionLink(`#fn-${citationNumber}`, "See source list entry", "finding-popover__action")}</div>`
+    : "";
 
   // Evidence
   let evidenceSection = "";
@@ -156,7 +198,7 @@ function renderPopoverContent(detail: FindingDetail): string {
     </div>`;
   }
 
-  return `${header}${badgeRow}${summary}${evidenceSection}`;
+  return `${header}${badgeRow}${summary}${navigation}${evidenceSection}`;
 }
 
 function positionPopover(popover: HTMLElement, anchor: HTMLElement): void {
@@ -201,10 +243,11 @@ function positionPopover(popover: HTMLElement, anchor: HTMLElement): void {
 
 function showPopover(detail: FindingDetail, anchor: HTMLElement): void {
   dismissPopover();
+  const citationNumber = anchor.dataset.citationNumber || "";
 
   const popover = document.createElement("div");
   popover.className = POPOVER_CLASS;
-  popover.innerHTML = renderPopoverContent(detail);
+  popover.innerHTML = renderPopoverContent(detail, citationNumber);
   document.body.appendChild(popover);
 
   positionPopover(popover, anchor);

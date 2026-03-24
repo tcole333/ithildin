@@ -24,6 +24,8 @@ function normalizeText(value) {
 
 function normalizeCitationNumbering(value) {
   return normalizeText(value)
+    .replace(/href="#fn-\d+"/g, 'href="#fn-N"')
+    .replace(/\/sources\/[a-z0-9-]+/gi, "/sources/source-record")
     .replace(/data-support-span-id="[^"]+"/g, 'data-support-span-id="support-N"')
     .replace(/data-citation-number="\d+"/g, 'data-citation-number="N"')
     .replace(/id="fn-\d+"/g, 'id="fn-N"')
@@ -91,7 +93,7 @@ function buildDossierSnapshot() {
   });
   const footnotesHtml = dossierEvidence.footnotesHtml;
   const findingFootnote = extractFootnoteEntry(footnotesHtml, "Finding #");
-  const urls = Array.from(findingFootnote.matchAll(/href="([^"]+)"/g), (match) => match[1]);
+  const urls = Array.from(findingFootnote.matchAll(/href="([^"]+)"/g), (match) => normalizeCitationNumbering(match[1]));
   const supportLine = extractFirstMatch(
     `${dossierEvidence.leadHtml}\n${dossierEvidence.processedSections.map((section) => section.processedContent).join("\n")}\n${dossierEvidence.legacyOverviewHtml}\n${dossierEvidence.legacyFinancialSummaryHtml}`,
     /<span class="support-span support-span--supported"[^>]*>[\s\S]*?<\/span>/,

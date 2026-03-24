@@ -5,20 +5,62 @@ import remarkStringify from "remark-stringify";
 import jmailOverridesData from "../data/jmail-overrides.json";
 import clOverridesData from "../data/cl-overrides.json";
 import sourceUrlOverridesData from "../data/source-urls.json";
+import manualSourceRecordsData from "../data/source-records.json";
+import { loadFindingEvidenceMap } from "./findingEvidence";
 
 export type CitationLink = {
   key: string;
   label: string;
   url?: string;
+  openUrl?: string;
+  sourceRecordUrl?: string;
+  sourceId?: string;
+  sourceKind?: SourceKind;
+  publishValid?: boolean;
 };
 
 export type CitationEntry = CitationLink & {
   number: number;
+  kind: "source" | "finding";
+  targetKind: "artifact" | "source_record" | "finding_popover";
+  sourceId?: string;
   sources?: CitationLink[];
+};
+
+export type SourceKind = "external" | "hosted_copy" | "record_only" | "private_internal";
+
+export type SourceIntegrity = {
+  sha256?: string;
+  fileSize?: number;
+  internalArtifactId?: string;
+};
+
+export type SourceRecord = {
+  id: string;
+  label: string;
+  title: string;
+  kind: SourceKind;
+  canonicalRef: string;
+  externalUrl?: string;
+  hostedAssetUrl?: string;
+  recordUrl: string;
+  sourceType: string;
+  publisherOrOrigin?: string;
+  publicationOrCaptureDate?: string;
+  pageOrLocator?: string;
+  excerptOrQuote?: string;
+  accessNote: string;
+  integrity?: SourceIntegrity;
+  publishValid: boolean;
 };
 
 type CitationOptions = {
   findingEvidenceMap?: Record<string, string[]>;
+};
+
+type EvidenceExtractionOptions = {
+  findingEvidenceMap?: Record<string, string[]>;
+  seenFindingIds?: Set<string>;
 };
 
 export type CitationState = {
@@ -28,13 +70,33 @@ export type CitationState = {
 
 export type HealthTier = "tier1" | "tier2" | "tier3" | "tier4" | "label-only";
 
+type RawCitationResolution = Omit<CitationEntry, "number" | "kind" | "targetKind"> & {
+  kind?: CitationEntry["kind"];
+  targetKind?: CitationEntry["targetKind"];
+};
+
 type CitationTypeDef = {
   id: string;
   tokenPattern: string;
   healthTier: HealthTier;
-  resolve(token: string, options: CitationOptions): Omit<CitationEntry, "number"> | null;
+  resolve(token: string, options: CitationOptions): RawCitationResolution | null;
   extract(raw: string): CitationLink[];
   stripPattern?: RegExp | false;
+};
+
+type ManualSourceRecord = {
+  title?: string;
+  kind?: SourceKind;
+  source_type?: string;
+  publisher_or_origin?: string;
+  publication_or_capture_date?: string;
+  page_or_locator?: string;
+  excerpt_or_quote?: string;
+  access_note?: string;
+  integrity?: SourceIntegrity;
+  publish_valid?: boolean;
+  external_url?: string;
+  hosted_asset_url?: string;
 };
 
 const URL_RE = /https?:\/\/[^\s\]]+/gi;
@@ -56,6 +118,7 @@ function buildAcrisUrl(docId: string): string {
 
 const clOverrides: Record<string, string> = clOverridesData;
 const sourceUrlOverrides: Record<string, string> = sourceUrlOverridesData;
+const manualSourceRecords: Record<string, ManualSourceRecord> = manualSourceRecordsData;
 
 function buildCourtListenerUrl(docketId: string): string {
   if (clOverrides[docketId]) return clOverrides[docketId];
@@ -130,7 +193,8 @@ function buildRegistryUrl(jurisdiction: string, entityId: string): string {
     USVI: () => "https://www.ltg.gov.vi/division-of-corporations/",
     UK: (id) => `https://find-and-update.company-information.service.gov.uk/company/${id}`,
   };
-  const builder = builders[jurisdiction];
+  const normalizedJurisdiction = normalizeRegistryJurisdiction(jurisdiction);
+  const builder = builders[normalizedJurisdiction];
   return builder ? builder(entityId) : `#registry-${jurisdiction}-${entityId}`;
 }
 
@@ -178,6 +242,185 @@ function uniqueInOrder(values: string[]): string[] {
   return out;
 }
 
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
+function hashString(value: string): string {
+  let hash = 0;
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash << 5) - hash + value.charCodeAt(index);
+    hash |= 0;
+  }
+  return Math.abs(hash).toString(36);
+}
+
+function normalizeRegistryJurisdiction(jurisdiction: string): string {
+  const normalized = jurisdiction.toUpperCase();
+  return normalized === "VI" ? "USVI" : normalized;
+}
+
+function buildSourceRecordPath(sourceId: string): string {
+  return `/sources/${encodeURIComponent(sourceId)}`;
+}
+
+function createSourceId(canonicalRef: string, label: string): string {
+  const base = slugify(label || canonicalRef) || "source";
+  return `${base.slice(0, 56)}-${hashString(canonicalRef).slice(0, 8)}`;
+}
+
+function guessSourceType(value: string): string {
+  const token = cleanToken(value);
+  if (!token) return "source_record";
+  if (/^https?:\/\//i.test(token)) return "web_page";
+  if (/^EFTA\d+/i.test(token)) return "released_correspondence";
+  if (/^HOUSE_OVERSIGHT_/i.test(token)) return "government_document";
+  if (/^(SEC|EDGAR):/i.test(token)) return "securities_filing";
+  if (/^990:/i.test(token)) return "tax_filing";
+  if (/^ACRIS:/i.test(token)) return "property_record";
+  if (/^(CL|CourtListener)/i.test(token)) return "court_record";
+  if (/^FEC:/i.test(token)) return "campaign_finance_record";
+  if (/^FARA:/i.test(token)) return "lobbying_record";
+  if (/^(USVI:|REG:|FL-SunBiz|NM-SoS|NY-SoS)/i.test(token)) return "corporate_registry";
+  if (/^DOCUMENTCLOUD:/i.test(token)) return "document_cloud_record";
+  if (/^MUCKROCK:/i.test(token)) return "foia_record";
+  if (/^OffshoreAlert:/i.test(token)) return "news_archive";
+  if (/^LittleSis/i.test(token)) return "entity_database";
+  if (/^ICIJ/i.test(token)) return "leaks_database";
+  if (/^KPMG:/i.test(token)) return "forensic_report";
+  if (/^DS10/i.test(token)) return "dataset";
+  if (/^(DFS|SAR|DECHERT|DOJ|F\d+)/i.test(token)) return "local_document";
+  return "source_record";
+}
+
+function parsePageLocator(token: string): string | undefined {
+  const match = token.match(/(?:^|[-_:])p(?:age)?[-_:]?(\d+)$/i);
+  if (!match) return undefined;
+  return `p. ${match[1]}`;
+}
+
+function prettifySourceTitle(value: string): string {
+  const cleaned = cleanToken(value);
+  if (!cleaned) return "Source Record";
+  return cleaned
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .replace(/\b([a-z])/g, (_, char: string) => char.toUpperCase());
+}
+
+type InternalReferenceKind = "finding" | "connection" | "entity" | "lead" | "thread";
+
+type InternalReference = {
+  kind: InternalReferenceKind;
+  id: string;
+};
+
+const INTERNAL_REFERENCE_LABELS: Record<InternalReferenceKind, string> = {
+  finding: "Finding",
+  connection: "Connection",
+  entity: "Entity",
+  lead: "Lead",
+  thread: "Thread",
+};
+
+const LOOSE_SOURCE_LABEL_ALLOWLIST = new Set(["bisbase"]);
+
+function isPrivateInternalReference(token: string): boolean {
+  return /^(?:Connection|Entity|Lead|Hypothesis|Thread)\s*#\s*\d+$/i.test(token)
+    || /^Finding\s*#\s*\d+$/i.test(token)
+    || /^unified:/i.test(token);
+}
+
+function isInternalReferenceKind(value: string): value is InternalReferenceKind {
+  return ["finding", "connection", "entity", "lead", "thread"].includes(value.toLowerCase());
+}
+
+function normalizeInternalReferenceKindToken(value: string): InternalReferenceKind | null {
+  const normalized = String(value || "").trim().toLowerCase().replace(/s$/, "");
+  return isInternalReferenceKind(normalized) ? normalized : null;
+}
+
+function parseInternalReferenceGroup(group: string): InternalReference[] | null {
+  const normalized = cleanToken(group);
+  if (!normalized) return null;
+
+  const parts = normalized
+    .split(";")
+    .flatMap(part => part.split(","))
+    .flatMap(part => part.split(/\s+and\s+/i))
+    .map(cleanToken)
+    .filter(Boolean);
+
+  if (!parts.length) return null;
+
+  const refs: InternalReference[] = [];
+  let currentKind: InternalReferenceKind | null = null;
+
+  for (const part of parts) {
+    const typedMatch = part.match(/^([A-Za-z]+)\s*#\s*(\d+)$/);
+    if (typedMatch) {
+      const kind = normalizeInternalReferenceKindToken(typedMatch[1]);
+      if (!kind) return null;
+      currentKind = kind;
+      refs.push({ kind, id: typedMatch[2] });
+      continue;
+    }
+
+    const shorthandMatch = part.match(/^#\s*(\d+)$/);
+    if (shorthandMatch && currentKind) {
+      refs.push({ kind: currentKind, id: shorthandMatch[1] });
+      continue;
+    }
+
+    return null;
+  }
+
+  return refs.length ? refs : null;
+}
+
+function extractReferencedFindingIds(raw: string): string[] {
+  const refs = parseInternalReferenceGroup(raw);
+  if (refs) {
+    return uniqueInOrder(refs.filter((ref) => ref.kind === "finding").map((ref) => ref.id));
+  }
+
+  const findingMatches = raw.matchAll(/Finding\s*#\s*(\d+)/gi);
+  const shorthandMatches = raw.matchAll(/\bF(\d+)\b/g);
+  const colonMatches = raw.matchAll(/\bfindings?\s*:\s*(\d+)\b/gi);
+  const bareMatches = raw.matchAll(/\bfindings?\s+(\d+)\b/gi);
+  return uniqueInOrder([
+    ...Array.from(findingMatches, (match) => String(match[1] || "").trim()).filter(Boolean),
+    ...Array.from(shorthandMatches, (match) => String(match[1] || "").trim()).filter(Boolean),
+    ...Array.from(colonMatches, (match) => String(match[1] || "").trim()).filter(Boolean),
+    ...Array.from(bareMatches, (match) => String(match[1] || "").trim()).filter(Boolean),
+  ]);
+}
+
+function isInlineCitationToken(token: string): boolean {
+  const cleaned = cleanToken(token);
+  if (!cleaned) return false;
+  if (CITE_TOKEN_RE.test(cleaned)) return true;
+  if (isPrivateInternalReference(cleaned)) return false;
+  return /^[-A-Za-z0-9_:.\/]+$/.test(cleaned) && (/\d/.test(cleaned) || /[-_:]/.test(cleaned));
+}
+
+function isMeaningfulFallbackSourceToken(token: string, hasStructuredCandidates: boolean): boolean {
+  const cleaned = cleanToken(token);
+  if (!cleaned || isPrivateInternalReference(cleaned)) return false;
+  if (/^\d{4}$/.test(cleaned)) return false;
+  if (/^(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{1,2}(?:,\s*\d{4})?$/i.test(cleaned)) {
+    return false;
+  }
+  if (isInlineCitationToken(cleaned)) return true;
+  if (!hasStructuredCandidates) return cleaned.length >= 3;
+  return cleaned.length >= 12 && cleaned.split(/\s+/).length >= 2;
+}
+
 function sourceFingerprint(value?: string): string {
   if (!value) return "";
   return value
@@ -186,7 +429,141 @@ function sourceFingerprint(value?: string): string {
     .replace(/[^a-z0-9]+/g, "");
 }
 
-function resolveFecToken(token: string): Omit<CitationEntry, "number"> | null {
+function canonicalizeCandidateRef(candidate: CitationLink): string {
+  const preferred = [
+    candidate.label,
+    candidate.key,
+    candidate.url,
+    candidate.openUrl,
+  ].map((value) => cleanToken(String(value || ""))).filter(Boolean);
+
+  for (const value of preferred) {
+    if (/^https?:\/\//i.test(value)) {
+      return cleanUrl(value);
+    }
+    if (value.startsWith("reg:")) {
+      return value.replace(/^reg:([a-z]{2,4}):/i, (_, jurisdiction: string) => `reg:${normalizeRegistryJurisdiction(jurisdiction)}:`);
+    }
+    if (/^[a-z]+:/i.test(value)) {
+      return value;
+    }
+    if (isInlineCitationToken(value)) {
+      return value;
+    }
+  }
+
+  return preferred[0] || "unknown";
+}
+
+function mergeManualSourceRecord(canonicalRef: string, rawToken: string): ManualSourceRecord | null {
+  return manualSourceRecords[canonicalRef] || manualSourceRecords[rawToken] || null;
+}
+
+function buildSourceRecord(candidate: CitationLink, rawToken: string, hint?: Partial<SourceRecord>): SourceRecord {
+  const canonicalRef = hint?.canonicalRef || canonicalizeCandidateRef(candidate);
+  const manual = mergeManualSourceRecord(canonicalRef, cleanToken(rawToken));
+  const label = candidate.label || cleanToken(rawToken) || hint?.label || canonicalRef;
+  const sourceId = hint?.id || createSourceId(canonicalRef, label);
+  const recordUrl = hint?.recordUrl || buildSourceRecordPath(sourceId);
+  const externalUrl = manual?.external_url || hint?.externalUrl || (isExternalUrl(candidate.openUrl || candidate.url) ? cleanUrl(candidate.openUrl || candidate.url || "") : undefined);
+  const hostedAssetUrl = manual?.hosted_asset_url || hint?.hostedAssetUrl || ((candidate.url || "").startsWith("/") ? candidate.url : undefined);
+
+  let kind: SourceKind = hint?.kind || manual?.kind || "record_only";
+  if (!manual?.kind && !hint?.kind) {
+    if (hostedAssetUrl) {
+      kind = "hosted_copy";
+    } else if (externalUrl) {
+      kind = "external";
+    } else if (isPrivateInternalReference(rawToken)) {
+      kind = "private_internal";
+    } else {
+      kind = "record_only";
+    }
+  }
+
+  const publishValid = manual?.publish_valid ?? hint?.publishValid ?? kind !== "private_internal";
+  return {
+    id: sourceId,
+    label,
+    title: manual?.title || hint?.title || prettifySourceTitle(label),
+    kind,
+    canonicalRef,
+    externalUrl,
+    hostedAssetUrl,
+    recordUrl,
+    sourceType: manual?.source_type || hint?.sourceType || guessSourceType(rawToken || canonicalRef),
+    publisherOrOrigin: manual?.publisher_or_origin || hint?.publisherOrOrigin,
+    publicationOrCaptureDate: manual?.publication_or_capture_date || hint?.publicationOrCaptureDate,
+    pageOrLocator: manual?.page_or_locator || hint?.pageOrLocator || parsePageLocator(rawToken || canonicalRef),
+    excerptOrQuote: manual?.excerpt_or_quote || hint?.excerptOrQuote,
+    accessNote: manual?.access_note
+      || hint?.accessNote
+      || (kind === "record_only"
+        ? "Held locally by Ithildin. No public artifact URL is currently available."
+        : kind === "private_internal"
+          ? "Internal reference. This item does not meet the public source-disclosure bar."
+          : "Public source artifact available."),
+    integrity: manual?.integrity || hint?.integrity,
+    publishValid,
+  };
+}
+
+export function getSourcePrimaryUrl(record: SourceRecord): string {
+  if (record.kind === "external" && record.externalUrl) return record.externalUrl;
+  if (record.kind === "hosted_copy" && record.hostedAssetUrl) return record.hostedAssetUrl;
+  return record.recordUrl;
+}
+
+export function resolveSourceRecord(rawToken: string): SourceRecord | null {
+  const token = cleanToken(rawToken);
+  if (!token || isPrivateInternalReference(token)) return null;
+
+  const known = resolveKnownSourceToken(token);
+  if (known) {
+    return buildSourceRecord(known, token, {
+      label: known.label,
+    });
+  }
+
+  const overrideUrl = sourceUrlOverrides[token];
+  if (overrideUrl) {
+    return buildSourceRecord({ key: token, label: token, url: overrideUrl }, token);
+  }
+
+  return buildSourceRecord({ key: token, label: token }, token);
+}
+
+function getCitationKey(candidate: CitationLink, rawToken: string, record: SourceRecord): string {
+  const known = resolveKnownSourceToken(rawToken);
+  if (known?.key && !/^https?:\/\//i.test(known.key)) return known.key;
+  if (candidate.key && !/^https?:\/\//i.test(candidate.key)) return candidate.key;
+  return record.canonicalRef;
+}
+
+function sourceRecordToCitationLink(record: SourceRecord, labelOverride?: string, keyOverride?: string): CitationLink {
+  const primaryUrl = getSourcePrimaryUrl(record);
+  return {
+    key: keyOverride || record.canonicalRef,
+    label: labelOverride || record.label,
+    url: primaryUrl,
+    openUrl: record.externalUrl || record.hostedAssetUrl,
+    sourceRecordUrl: record.recordUrl,
+    sourceId: record.id,
+    sourceKind: record.kind,
+    publishValid: record.publishValid,
+  };
+}
+
+function createSourceCitationEntry(record: SourceRecord, labelOverride?: string): RawCitationResolution {
+  const link = sourceRecordToCitationLink(record, labelOverride, record.canonicalRef);
+  return {
+    ...link,
+    kind: "source",
+    targetKind: record.kind === "record_only" ? "source_record" : "artifact",
+  };
+}
+
+function resolveFecToken(token: string): RawCitationResolution | null {
   const match = cleanToken(token).match(/FEC:([A-Za-z0-9_/-]+)/i);
   if (!match) return null;
 
@@ -230,7 +607,7 @@ function resolveFecToken(token: string): Omit<CitationEntry, "number"> | null {
   };
 }
 
-function resolveFlSunBizToken(token: string): Omit<CitationEntry, "number"> | null {
+function resolveFlSunBizToken(token: string): RawCitationResolution | null {
   const match = cleanToken(token).match(/FL[-_]?SunBiz[:\s]+([A-Za-z0-9]+)/i);
   if (!match) return null;
 
@@ -242,7 +619,7 @@ function resolveFlSunBizToken(token: string): Omit<CitationEntry, "number"> | nu
   };
 }
 
-function resolveNmSosToken(token: string): Omit<CitationEntry, "number"> | null {
+function resolveNmSosToken(token: string): RawCitationResolution | null {
   const match = cleanToken(token).match(/NM[-_]?SoS[:\s]+([A-Za-z0-9]+)/i);
   if (!match) return null;
 
@@ -254,7 +631,7 @@ function resolveNmSosToken(token: string): Omit<CitationEntry, "number"> | null 
   };
 }
 
-function resolveNySosToken(token: string): Omit<CitationEntry, "number"> | null {
+function resolveNySosToken(token: string): RawCitationResolution | null {
   const match = cleanToken(token).match(/NY[-_]?SoS[:\s]+([A-Za-z0-9]+)/i);
   if (!match) return null;
 
@@ -285,18 +662,18 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       const seen = new Set<string>();
 
       for (const ref of rawRefs) {
-        for (const link of extractEvidenceLinks(ref)) {
+        for (const link of extractEvidenceLinks(ref, { findingEvidenceMap: options.findingEvidenceMap })) {
           if (seen.has(link.key)) continue;
           seen.add(link.key);
           sources.push(link);
         }
       }
 
-      const url = sources.find(s => s.url)?.url;
       return {
         key: `finding:${findingId}`,
         label: `Finding #${findingId}`,
-        url,
+        kind: "finding",
+        targetKind: "finding_popover",
         sources: sources.length ? sources : undefined,
       };
     },
@@ -533,27 +910,27 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
     id: "reg",
     tokenPattern: "REG:[A-Z]{2}:[A-Za-z0-9]+",
     healthTier: "tier1",
-    resolve(token) {
-      const match = token.match(/REG:([A-Z]{2}):([A-Za-z0-9]+)/i);
-      if (!match) return null;
-      const jurisdiction = match[1].toUpperCase();
-      const entityId = match[2];
-      return {
-        key: `reg:${jurisdiction}:${entityId}`,
-        label: `${jurisdiction} ${entityId}`,
-        url: buildRegistryUrl(jurisdiction, entityId),
+	    resolve(token) {
+	      const match = token.match(/REG:([A-Z]{2}):([A-Za-z0-9]+)/i);
+	      if (!match) return null;
+	      const jurisdiction = normalizeRegistryJurisdiction(match[1]);
+	      const entityId = match[2];
+	      return {
+	        key: `reg:${jurisdiction}:${entityId}`,
+	        label: `${jurisdiction} ${entityId}`,
+	        url: buildRegistryUrl(jurisdiction, entityId),
       };
     },
-    extract(raw) {
-      return (raw.match(/REG:[A-Z]{2}:[A-Za-z0-9]+/gi) || []).flatMap(ref => {
-        const regMatch = ref.match(/REG:([A-Z]{2}):([A-Za-z0-9]+)/i);
-        if (!regMatch) return [];
-        const jurisdiction = regMatch[1].toUpperCase();
-        const entityId = regMatch[2];
-        const url = buildRegistryUrl(jurisdiction, entityId);
-        return [{ key: url, label: `REG:${jurisdiction}:${entityId}`, url }];
-      });
-    },
+	    extract(raw) {
+	      return (raw.match(/REG:[A-Z]{2}:[A-Za-z0-9]+/gi) || []).flatMap(ref => {
+	        const regMatch = ref.match(/REG:([A-Z]{2}):([A-Za-z0-9]+)/i);
+	        if (!regMatch) return [];
+	        const jurisdiction = normalizeRegistryJurisdiction(regMatch[1]);
+	        const entityId = regMatch[2];
+	        const url = buildRegistryUrl(jurisdiction, entityId);
+	        return [{ key: url, label: `REG:${jurisdiction}:${entityId}`, url }];
+	      });
+	    },
   },
   {
     id: "ds10",
@@ -823,12 +1200,40 @@ export function splitCitationGroup(group: string): string[] {
   );
 }
 
+function resolveKnownSourceToken(token: string): RawCitationResolution | null {
+  const trimmed = cleanToken(token);
+  if (!trimmed || /^Finding\s*#\s*\d+$/i.test(trimmed)) return null;
+
+  const urlMatch = trimmed.match(/https?:\/\/[^\s\]]+/i);
+  if (urlMatch && urlMatch[0]) {
+    const url = cleanUrl(urlMatch[0]);
+    return { key: url, label: url, url };
+  }
+
+  for (const type of CITATION_REGISTRY) {
+    if (type.id === "finding") continue;
+    const result = type.resolve(trimmed, {});
+    if (result) return result;
+  }
+
+  return null;
+}
+
+function getFindingEvidenceRefs(
+  findingId: string,
+  options: EvidenceExtractionOptions,
+): string[] {
+  const map = options.findingEvidenceMap || loadFindingEvidenceMap();
+  return Array.isArray(map?.[findingId]) ? map[findingId] : [];
+}
+
 // ---------------------------------------------------------------------------
 // extractEvidenceLinks — registry-driven
 // ---------------------------------------------------------------------------
 
-export function extractEvidenceLinks(raw: string): CitationLink[] {
+export function extractEvidenceLinks(raw: string, options: EvidenceExtractionOptions = {}): CitationLink[] {
   const links: CitationLink[] = [];
+  const candidates: CitationLink[] = [];
   const seen = new Set<string>();
   const add = (link: CitationLink) => {
     if (!link.key || seen.has(link.key)) return;
@@ -838,19 +1243,27 @@ export function extractEvidenceLinks(raw: string): CitationLink[] {
 
   if (!raw) return links;
 
-  // URLs first (not in registry)
+  const addSourceCandidate = (candidate: CitationLink, rawToken: string): void => {
+    const record = buildSourceRecord(candidate, rawToken);
+    if (!record.publishValid || record.kind === "private_internal") return;
+    add(sourceRecordToCitationLink(record, candidate.label));
+  };
+
   const urls = raw.match(URL_RE) || [];
   for (const url of urls) {
     const cleaned = cleanUrl(url);
-    add({ key: cleaned, label: cleaned, url: cleaned });
+    candidates.push({ key: cleaned, label: cleaned, url: cleaned });
   }
 
-  // Each registered type
   for (const type of CITATION_REGISTRY) {
-    for (const link of type.extract(raw)) add(link);
+    if (type.id === "finding") continue;
+    for (const link of type.extract(raw)) candidates.push(link);
   }
 
-  // Remainder: strip all known patterns, add leftover as label
+  for (const link of candidates) {
+    addSourceCandidate(link, link.label || link.key || raw);
+  }
+
   let remainder = raw.replace(URL_RE, "");
   for (const type of CITATION_REGISTRY) {
     if (type.stripPattern === false) continue;
@@ -861,22 +1274,35 @@ export function extractEvidenceLinks(raw: string): CitationLink[] {
 
   if (remainder) {
     const cleanedRemainder = cleanToken(remainder);
-    const remainderOverride = sourceUrlOverrides[cleanedRemainder];
-    if (remainderOverride) {
-      add({ key: cleanedRemainder, label: cleanedRemainder, url: remainderOverride });
-    } else {
-      add({ key: cleanedRemainder, label: cleanedRemainder });
+    if (isMeaningfulFallbackSourceToken(cleanedRemainder, candidates.length > 0)) {
+      const known = resolveKnownSourceToken(cleanedRemainder);
+      if (known) {
+        addSourceCandidate(known, cleanedRemainder);
+      } else {
+        addSourceCandidate({ key: cleanedRemainder, label: cleanedRemainder }, cleanedRemainder);
+      }
     }
   }
 
   if (links.length === 0) {
     const fallback = cleanToken(raw);
-    if (fallback) {
-      const fallbackOverride = sourceUrlOverrides[fallback];
-      if (fallbackOverride) {
-        add({ key: fallback, label: fallback, url: fallbackOverride });
+    if (isMeaningfulFallbackSourceToken(fallback, false)) {
+      const known = resolveKnownSourceToken(fallback);
+      if (known) {
+        addSourceCandidate(known, fallback);
       } else {
-        add({ key: fallback, label: fallback });
+        addSourceCandidate({ key: fallback, label: fallback }, fallback);
+      }
+    }
+  }
+
+  const nextSeen = options.seenFindingIds || new Set<string>();
+  for (const findingId of extractReferencedFindingIds(raw)) {
+    if (nextSeen.has(findingId)) continue;
+    nextSeen.add(findingId);
+    for (const ref of getFindingEvidenceRefs(findingId, options)) {
+      for (const link of extractEvidenceLinks(ref, { ...options, seenFindingIds: nextSeen })) {
+        add(link);
       }
     }
   }
@@ -884,36 +1310,173 @@ export function extractEvidenceLinks(raw: string): CitationLink[] {
   return links;
 }
 
+export function extractEvidenceSourceRecords(raw: string, options: EvidenceExtractionOptions = {}): SourceRecord[] {
+  const records: SourceRecord[] = [];
+  const seen = new Set<string>();
+  const add = (record: SourceRecord) => {
+    if (seen.has(record.id) || !record.publishValid || record.kind === "private_internal") return;
+    seen.add(record.id);
+    records.push(record);
+  };
+
+  if (!raw) return records;
+
+  const candidates: Array<{ candidate: CitationLink; rawToken: string }> = [];
+  const urls = raw.match(URL_RE) || [];
+  for (const url of urls) {
+    const cleaned = cleanUrl(url);
+    candidates.push({ candidate: { key: cleaned, label: cleaned, url: cleaned }, rawToken: cleaned });
+  }
+
+  for (const type of CITATION_REGISTRY) {
+    if (type.id === "finding") continue;
+    for (const link of type.extract(raw)) {
+      candidates.push({ candidate: link, rawToken: link.label || link.key || raw });
+    }
+  }
+
+  for (const { candidate, rawToken } of candidates) {
+    add(buildSourceRecord(candidate, rawToken));
+  }
+
+  let remainder = raw.replace(URL_RE, "");
+  for (const type of CITATION_REGISTRY) {
+    if (type.stripPattern === false) continue;
+    const strip = type.stripPattern ?? new RegExp(type.tokenPattern, "gi");
+    remainder = remainder.replace(strip, "");
+  }
+  remainder = remainder.replace(/[;:,]+/g, " ").replace(/\s+/g, " ").trim();
+
+  if (remainder) {
+    const cleanedRemainder = cleanToken(remainder);
+    if (isMeaningfulFallbackSourceToken(cleanedRemainder, candidates.length > 0)) {
+      const known = resolveKnownSourceToken(cleanedRemainder);
+      add(buildSourceRecord(known || { key: cleanedRemainder, label: cleanedRemainder }, cleanedRemainder));
+    }
+  }
+
+  if (records.length === 0) {
+    const fallback = cleanToken(raw);
+    if (isMeaningfulFallbackSourceToken(fallback, false)) {
+      const known = resolveKnownSourceToken(fallback);
+      add(buildSourceRecord(known || { key: fallback, label: fallback }, fallback));
+    }
+  }
+
+  const nextSeen = options.seenFindingIds || new Set<string>();
+  for (const findingId of extractReferencedFindingIds(raw)) {
+    if (nextSeen.has(findingId)) continue;
+    nextSeen.add(findingId);
+    for (const ref of getFindingEvidenceRefs(findingId, options)) {
+      for (const record of extractEvidenceSourceRecords(ref, { ...options, seenFindingIds: nextSeen })) {
+        add(record);
+      }
+    }
+  }
+
+  return records;
+}
+
 // ---------------------------------------------------------------------------
 // resolveCitationToken — registry-driven
 // ---------------------------------------------------------------------------
 
-function resolveCitationToken(token: string, options: CitationOptions): Omit<CitationEntry, "number"> {
+function resolveCitationToken(token: string, options: CitationOptions): RawCitationResolution {
   const trimmed = cleanToken(token);
   if (!trimmed) {
-    return { key: "unknown", label: "Unknown" };
+    return { key: "unknown", label: "Unknown", kind: "source", targetKind: "source_record" };
   }
 
-  // URL citations (not in registry)
-  const urlMatch = trimmed.match(/https?:\/\/[^\s\]]+/i);
-  if (urlMatch && urlMatch[0]) {
-    const url = cleanUrl(urlMatch[0]);
-    return { key: url, label: url, url };
-  }
-
-  // Walk the registry
   for (const type of CITATION_REGISTRY) {
     const result = type.resolve(trimmed, options);
-    if (result) return result;
+    if (!result) continue;
+    if (type.id === "finding" || result.kind === "finding") {
+      return {
+        ...result,
+        kind: "finding",
+        targetKind: "finding_popover",
+      };
+    }
+
+    const record = buildSourceRecord(result, trimmed);
+    return {
+      ...sourceRecordToCitationLink(record, result.label, result.key),
+      kind: "source",
+      targetKind: record.kind === "record_only" ? "source_record" : "artifact",
+    };
   }
 
-  // Check source-urls.json override as last resort
-  const overrideUrl = sourceUrlOverrides[trimmed];
-  if (overrideUrl) {
-    return { key: trimmed, label: trimmed, url: overrideUrl };
+  const record = resolveSourceRecord(trimmed);
+  if (record) {
+    return {
+      ...sourceRecordToCitationLink(record, trimmed, record.canonicalRef),
+      kind: "source",
+      targetKind: record.kind === "record_only" ? "source_record" : "artifact",
+    };
   }
 
-  return { key: trimmed, label: trimmed };
+  return {
+    key: trimmed,
+    label: trimmed,
+    kind: "source",
+    targetKind: "source_record",
+  };
+}
+
+function citationEntryToSuperscript(entry: CitationEntry): string {
+  const href = entry.targetKind === "finding_popover" ? `#fn-${entry.number}` : (entry.url || `#fn-${entry.number}`);
+  const external = entry.targetKind !== "finding_popover" && isExternalUrl(entry.url);
+  const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
+  return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs} data-citation-number="${entry.number}" data-citation-key="${escapeHtml(entry.key)}" aria-label="Source ${entry.number}: ${escapeHtml(entry.label)}">${entry.number}</a></sup>`;
+}
+
+function registerCitationEntry(citationState: CitationState, resolved: RawCitationResolution): CitationEntry {
+  const key = resolved.key;
+  let number = citationState.index.get(key);
+  const normalizedResolved: CitationEntry = {
+    ...resolved,
+    number: 0,
+    kind: resolved.kind || (key.startsWith("finding:") ? "finding" : "source"),
+    targetKind: resolved.targetKind || (key.startsWith("finding:") ? "finding_popover" : "artifact"),
+  };
+
+  if (!number) {
+    number = citationState.entries.length + 1;
+    citationState.entries.push({ ...normalizedResolved, number });
+    citationState.index.set(key, number);
+  }
+
+  return citationState.entries[number - 1];
+}
+
+function isLooseSourceLabelToken(value: string): boolean {
+  const cleaned = cleanToken(value);
+  if (!cleaned || isPrivateInternalReference(cleaned)) return false;
+  if (/^claim type:/i.test(cleaned) || /^confidence:/i.test(cleaned)) return false;
+  if (/^EFTA confirmed direct quote$/i.test(cleaned)) return false;
+  if (/^(?:synthesis|graph analysis|analysis-run)\s*#?\s*\d+/i.test(cleaned)) return false;
+  if (/^secondHop data$/i.test(cleaned)) return false;
+  if (/^\d{4}$/.test(cleaned)) return false;
+  if (/^(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{1,2}(?:,\s*\d{4})?$/i.test(cleaned)) return false;
+  if (cleaned.length > 120) return false;
+  if (!/[0-9:./_-]/.test(cleaned) && cleaned === cleaned.toLowerCase() && !LOOSE_SOURCE_LABEL_ALLOWLIST.has(cleaned)) {
+    return false;
+  }
+  return cleaned.split(/\s+/).length <= 10;
+}
+
+function renderLooseSourceCitation(part: string, citationState: CitationState): string | null {
+  const token = cleanToken(part);
+  if (!isLooseSourceLabelToken(token)) return null;
+  const record = resolveSourceRecord(token);
+  if (!record || !record.publishValid || record.kind === "private_internal") return null;
+
+  const entry = registerCitationEntry(citationState, {
+    ...sourceRecordToCitationLink(record, token, record.canonicalRef),
+    kind: "source",
+    targetKind: record.kind === "record_only" ? "source_record" : "artifact",
+  });
+  return citationEntryToSuperscript(entry);
 }
 
 // ---------------------------------------------------------------------------
@@ -973,12 +1536,8 @@ function normalizeCitationPatterns(text: string): string {
 }
 
 function renderCitationSuperscripts(inner: string, options: CitationOptions, citationState: CitationState, fallback: string): string {
-  if (!CITE_TOKEN_RE.test(inner)) {
-    return fallback;
-  }
-
   const tokens = splitCitationGroup(inner);
-  if (!tokens.length) {
+  if (!tokens.length || !tokens.every(isInlineCitationToken)) {
     return fallback;
   }
 
@@ -997,7 +1556,7 @@ function renderCitationSuperscripts(inner: string, options: CitationOptions, cit
     }
   }
 
-  const filteredResolved: Array<Omit<CitationEntry, "number">> = [];
+  const filteredResolved: RawCitationResolution[] = [];
   const seenResolvedKeys = new Set<string>();
 
   for (const resolved of resolvedTokens) {
@@ -1018,39 +1577,129 @@ function renderCitationSuperscripts(inner: string, options: CitationOptions, cit
     return fallback;
   }
 
-  const rendered = filteredResolved.map(resolved => {
-    const key = resolved.key;
-    let number = citationState.index.get(key);
-
-    if (!number) {
-      number = citationState.entries.length + 1;
-      citationState.entries.push({ ...resolved, number });
-      citationState.index.set(key, number);
-    }
-
-    const href = resolved.url || `#fn-${number}`;
-    const external = isExternalUrl(resolved.url);
-    const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs} data-citation-number="${number}" data-citation-key="${escapeHtml(resolved.key)}" aria-label="Source ${number}: ${escapeHtml(resolved.label)}">${number}</a></sup>`;
-  });
+  const rendered = filteredResolved
+    .map(resolved => citationEntryToSuperscript(registerCitationEntry(citationState, resolved)));
 
   return rendered.join("");
 }
 
+function renderInternalReference(ref: InternalReference): string {
+  const label = `${INTERNAL_REFERENCE_LABELS[ref.kind]} #${ref.id}`;
+  if (ref.kind === "finding") {
+    return `<a href="#finding-${escapeHtml(ref.id)}" class="inline-reference inline-reference--finding" data-citation-key="finding:${escapeHtml(ref.id)}">${escapeHtml(label)}</a>`;
+  }
+  return `<em class="inline-reference inline-reference--${escapeHtml(ref.kind)}">${escapeHtml(label)}</em>`;
+}
+
+function renderInternalReferenceGroup(inner: string, options: CitationOptions, citationState: CitationState): string | null {
+  const trimmed = cleanToken(inner);
+  if (!trimmed) return null;
+
+  if (/^<a\b[\s\S]*<\/a>$/i.test(trimmed)) {
+    return `<span class="inline-reference-group">${trimmed}</span>`;
+  }
+
+  const parts = trimmed
+    .split(";")
+    .flatMap(part => part.split(","))
+    .flatMap(part => part.split(/\s+and\s+/i))
+    .map(cleanToken)
+    .filter(Boolean);
+
+  if (!parts.length) return null;
+
+  const renderedParts: string[] = [];
+  let currentKind: InternalReferenceKind | null = null;
+  let sawStructuredReference = false;
+
+  for (const part of parts) {
+    if (/^<a\b[\s\S]*<\/a>$/i.test(part)) {
+      renderedParts.push(part);
+      currentKind = null;
+      sawStructuredReference = true;
+      continue;
+    }
+
+    if (/^viz_data\b/i.test(part)) {
+      renderedParts.push(escapeHtml(part));
+      currentKind = null;
+      sawStructuredReference = true;
+      continue;
+    }
+
+    const typedMatch = part.match(/^([A-Za-z]+)\s*#\s*(\d+)$/);
+    if (typedMatch) {
+      const kind = normalizeInternalReferenceKindToken(typedMatch[1]);
+      if (!kind) return null;
+      currentKind = kind;
+      sawStructuredReference = true;
+
+      if (kind === "finding") {
+        const renderedCitation = renderCitationSuperscripts(`Finding #${typedMatch[2]}`, options, citationState, part);
+        if (renderedCitation === part) return null;
+        renderedParts.push(renderedCitation);
+      } else {
+        renderedParts.push(renderInternalReference({ kind, id: typedMatch[2] }));
+      }
+      continue;
+    }
+
+    const shorthandMatch = part.match(/^#\s*(\d+)$/);
+    if (shorthandMatch && currentKind) {
+      sawStructuredReference = true;
+      if (currentKind === "finding") {
+        const renderedCitation = renderCitationSuperscripts(`Finding #${shorthandMatch[1]}`, options, citationState, part);
+        if (renderedCitation === part) return null;
+        renderedParts.push(renderedCitation);
+      } else {
+        renderedParts.push(renderInternalReference({ kind: currentKind, id: shorthandMatch[1] }));
+      }
+      continue;
+    }
+
+    const renderedCitation = renderCitationSuperscripts(part, options, citationState, part);
+    if (renderedCitation !== part) {
+      renderedParts.push(renderedCitation);
+      currentKind = null;
+      sawStructuredReference = true;
+      continue;
+    }
+
+    const looseSourceCitation = renderLooseSourceCitation(part, citationState);
+    if (looseSourceCitation) {
+      renderedParts.push(looseSourceCitation);
+      currentKind = null;
+      sawStructuredReference = true;
+      continue;
+    }
+
+    return null;
+  }
+
+  if (!sawStructuredReference || !renderedParts.length) return null;
+  return `<span class="inline-reference-group">${renderedParts.join(", ")}</span>`;
+}
+
 function applyCitationReplacementsToText(text: string, options: CitationOptions, citationState: CitationState): string {
   const normalized = normalizeCitationPatterns(text);
-  return normalized.replace(/\[([^\]]+)\]/g, (match, inner) =>
-    renderCitationSuperscripts(inner, options, citationState, match),
-  );
+  return normalized.replace(/\[([^\]]+)\]/g, (match, inner) => {
+    const citations = renderCitationSuperscripts(inner, options, citationState, match);
+    if (citations !== match) return citations;
+
+    const internalRefs = renderInternalReferenceGroup(inner, options, citationState);
+    if (internalRefs) return internalRefs;
+
+    return match;
+  });
 }
 
 function splitInlineCitationNodes(value: string): Array<{ type: "text" | "html"; value: string }> {
-  const chunkRe = /(<sup class="citation">[\s\S]*?<\/sup>)/g;
+  const chunkRe = /(<sup class="citation">[\s\S]*?<\/sup>|<span class="inline-reference-group">[\s\S]*?<\/span>)/g;
   const chunks = value.split(chunkRe);
   const out: Array<{ type: "text" | "html"; value: string }> = [];
   for (const chunk of chunks) {
     if (!chunk) continue;
-    if (/^<sup class="citation">[\s\S]*<\/sup>$/.test(chunk)) {
+    if (/^<sup class="citation">[\s\S]*<\/sup>$/.test(chunk) || /^<span class="inline-reference-group">[\s\S]*<\/span>$/.test(chunk)) {
       out.push({ type: "html", value: chunk });
     } else {
       out.push({ type: "text", value: chunk });
@@ -1115,31 +1764,64 @@ export function applyCitations(markdown: string, options: CitationOptions = {}, 
 export function renderFootnotes(entries: CitationEntry[]): string {
   if (!entries.length) return "";
 
-  const items = entries.map(entry => {
+  const renderActionLink = (href: string, text: string, dataAttr: string): string => {
+    const attrs = isExternalUrl(href) ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `<a href="${escapeHtml(href)}"${attrs} class="citation-action" ${dataAttr}>${escapeHtml(text)}</a>`;
+  };
+
+  const renderPrimaryLink = (entry: CitationEntry): string => {
     const label = escapeHtml(entry.label);
     const number = entry.number;
-    const external = isExternalUrl(entry.url);
-    const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    const link = entry.url
-      ? `<a href="${escapeHtml(entry.url)}"${attrs} data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</a>`
-      : `<span data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</span>`;
+    const href = entry.targetKind === "finding_popover" ? `#fn-${number}` : entry.url;
+    if (!href) {
+      return `<span data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</span>`;
+    }
+    const attrs = entry.targetKind !== "finding_popover" && isExternalUrl(href) ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `<a href="${escapeHtml(href)}"${attrs} data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</a>`;
+  };
+
+  const renderSourceLink = (source: CitationLink, parentKey: string): string => {
+    const label = escapeHtml(source.label);
+    const primaryHref = source.url;
+    const sourceAttrs = primaryHref && isExternalUrl(primaryHref) ? ' target="_blank" rel="noopener noreferrer"' : "";
+    const primary = primaryHref
+      ? `<a href="${escapeHtml(primaryHref)}"${sourceAttrs} data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(parentKey)}">${label}</a>`
+      : `<span data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(parentKey)}">${label}</span>`;
+
+    const actions: string[] = [];
+    if (source.openUrl) {
+      actions.push(renderActionLink(source.openUrl, "Open source", `data-source-open="${escapeHtml(source.key)}"`));
+    }
+    if (source.sourceRecordUrl) {
+      actions.push(renderActionLink(source.sourceRecordUrl, "View source record", `data-source-record="${escapeHtml(source.key)}"`));
+    }
+
+    if (!actions.length) return primary;
+    return `${primary}<span class="citation-actions">${actions.join("")}</span>`;
+  };
+
+  const items = entries.map(entry => {
+    const number = entry.number;
+    const link = renderPrimaryLink(entry);
+
+    const actions: string[] = [];
+    if (entry.kind === "source" && entry.openUrl) {
+      actions.push(renderActionLink(entry.openUrl, "Open source", `data-citation-open="${escapeHtml(entry.key)}"`));
+    }
+    if (entry.kind === "source" && entry.sourceRecordUrl) {
+      actions.push(renderActionLink(entry.sourceRecordUrl, "View source record", `data-citation-record="${escapeHtml(entry.key)}"`));
+    }
+    const actionHtml = actions.length ? `<div class="citation-actions">${actions.join("")}</div>` : "";
 
     let sources = "";
     if (entry.sources && entry.sources.length) {
       const sourceLinks = entry.sources
-        .map(source => {
-          const sourceLabel = escapeHtml(source.label);
-          if (source.url) {
-            const sourceAttrs = isExternalUrl(source.url) ? ' target="_blank" rel="noopener noreferrer"' : "";
-            return `<a href="${escapeHtml(source.url)}"${sourceAttrs} data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(entry.key)}">${sourceLabel}</a>`;
-          }
-          return `<span data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(entry.key)}">${sourceLabel}</span>`;
-        })
-        .join(", ");
+        .map(source => renderSourceLink(source, entry.key))
+        .join('<span class="citation-source-separator">, </span>');
       sources = `<div class="citation-sources">Sources: ${sourceLinks}</div>`;
     }
 
-    return `<li id="fn-${number}"><span class="citation-index">${number}.</span><span class="citation-entry">${link}${sources}</span></li>`;
+    return `<li id="fn-${number}"><span class="citation-index">${number}.</span><span class="citation-entry">${link}${actionHtml}${sources}</span></li>`;
   });
 
   return `

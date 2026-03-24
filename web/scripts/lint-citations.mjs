@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { execFileSync } from "node:child_process";
 import { createJiti } from "jiti";
@@ -24,6 +24,8 @@ const changedFilesMode = args.has("--changed-files");
 const strictChangedFiles = args.has("--strict-changed-files");
 const baseRef = readArgValue("--base-ref") || process.env.CITATION_LINT_BASE_REF || "";
 const headRef = readArgValue("--head-ref") || process.env.CITATION_LINT_HEAD_REF || "HEAD";
+const reportFile = readArgValue("--report-file") || process.env.CITATION_LINT_REPORT || "";
+const exceptionFile = resolve(cwd, "src", "data", "citation-exceptions.json");
 
 if (args.has("--update-baseline")) {
   process.stderr.write("The citation lint baseline has been removed. Fix the cited refs instead of updating an ignore list.\n");
@@ -31,14 +33,25 @@ if (args.has("--update-baseline")) {
 }
 
 const jiti = createJiti(import.meta.url);
-const { applyCitations, createCitationState } = jiti(resolve(cwd, "src", "lib", "citations.ts"));
-const { loadFindingEvidenceMap } = jiti(resolve(cwd, "src", "lib", "findingEvidence.ts"));
+const { applyCitations, createCitationState, extractEvidenceLinks } = jiti(resolve(cwd, "src", "lib", "citations.ts"));
+const {
+  loadGlobalFindingCatalog,
+  loadArticleFindingCatalog,
+  loadDossierFindingCatalog,
+  mergeFindingCatalogs,
+} = jiti(resolve(cwd, "src", "lib", "findingCatalog.ts"));
 
 /** @typedef {{severity: 'error'|'warning', code: string, file: string, location: string, subject: string, message: string}} LintIssue */
+/** @typedef {{code: string, file: string, location: string, subject: string, reason: string, expires_on: string}} CitationException */
 
 /** @type {LintIssue[]} */
 const issues = [];
 const seenIssueKeys = new Set();
+
+/** @type {CitationException[]} */
+const citationExceptions = existsSync(exceptionFile)
+  ? JSON.parse(readFileSync(exceptionFile, "utf-8"))
+  : [];
 
 function issueKey(issue) {
   return `${issue.code}|${issue.file}|${issue.location}|${issue.subject}`;
@@ -60,6 +73,8 @@ function lintCitationEntries(file, location, entries) {
   for (const entry of entries || []) {
     const label = String(entry.label || "");
     const url = typeof entry.url === "string" ? entry.url : "";
+    const sourceRecordUrl = typeof entry.sourceRecordUrl === "string" ? entry.sourceRecordUrl : "";
+    const sources = Array.isArray(entry.sources) ? entry.sources : [];
 
     if (/^https?:$/i.test(label)) {
       addIssue(
@@ -91,6 +106,61 @@ function lintCitationEntries(file, location, entries) {
         location,
         label,
         "Citation label looks like a bare domain without an attached URL.",
+      );
+    }
+
+    if (entry.kind === "source" && !url) {
+      addIssue(
+        "error",
+        "CITE_MISSING_TARGET",
+        file,
+        location,
+        label,
+        "Public source citation is missing a navigable target.",
+      );
+    }
+
+    if (entry.kind === "source" && !sourceRecordUrl) {
+      addIssue(
+        "error",
+        "CITE_MISSING_SOURCE_RECORD",
+        file,
+        location,
+        label,
+        "Public source citation is missing its source-record URL.",
+      );
+    }
+
+    if (entry.kind === "source" && url.startsWith("#registry-")) {
+      addIssue(
+        "error",
+        "CITE_DEAD_REGISTRY_HASH",
+        file,
+        location,
+        label,
+        "Public source citation resolved to a dead in-page registry hash instead of a source target.",
+      );
+    }
+
+    if (entry.kind === "finding" && sources.length === 0) {
+      addIssue(
+        "error",
+        "FINDING_NO_SOURCES",
+        file,
+        location,
+        label,
+        "Finding citation does not resolve to any publish-valid sources.",
+      );
+    }
+
+    if (entry.kind === "finding" && sources.length > 0 && !sources.some((source) => source.publishValid !== false && source.url)) {
+      addIssue(
+        "error",
+        "FINDING_NO_NAVIGABLE_SOURCE",
+        file,
+        location,
+        label,
+        "Finding citation has sources, but none expose a navigable public endpoint.",
       );
     }
   }
@@ -213,6 +283,54 @@ function lintEvidenceRef(file, findingId, ref) {
   }
 }
 
+function lintResolvedEvidenceLinks(file, findingId, ref, findingEvidenceMap = undefined) {
+  const value = normalizeRef(ref);
+  if (!value) return;
+  const links = extractEvidenceLinks(value, findingEvidenceMap ? { findingEvidenceMap } : undefined);
+  if (links.length === 0) {
+    addIssue(
+      "error",
+      "EVIDENCE_NO_PUBLIC_SOURCE",
+      file,
+      `finding:${findingId}`,
+      value,
+      "Evidence reference does not resolve to any publish-valid public source or source record.",
+    );
+    return;
+  }
+
+  if (links.some((link) => String(link.url || "").startsWith("#registry-"))) {
+    addIssue(
+      "error",
+      "EVIDENCE_DEAD_REGISTRY_HASH",
+      file,
+      `finding:${findingId}`,
+      value,
+      "Evidence reference resolved to a dead registry hash instead of a source target.",
+    );
+  }
+}
+
+function lintResidualCitationTokens(file, location, markdown) {
+  const rendered = String(markdown || "");
+  const matches = rendered.matchAll(/\[([^\]]+)\]/g);
+  for (const match of matches) {
+    const inner = String(match[1] || "").trim();
+    if (!inner) continue;
+    if (typeof match.index === "number" && rendered[match.index + match[0].length] === "(") continue;
+    if (/^\//.test(inner)) continue;
+    if (!(/[-_:]/.test(inner) || /\d/.test(inner))) continue;
+    addIssue(
+      "error",
+      "RAW_CITATION_TOKEN",
+      file,
+      location,
+      inner,
+      "Citation-like bracket token remained in rendered markdown instead of becoming a public citation.",
+    );
+  }
+}
+
 function runGit(args) {
   try {
     return execFileSync("git", args, { cwd: projectRoot, encoding: "utf-8" }).trim();
@@ -277,7 +395,7 @@ function getChangedContentFiles() {
 function lintArticles(fileScope = null) {
   if (!existsSync(articlesDir)) return;
 
-  const findingEvidenceMap = loadFindingEvidenceMap();
+  const globalFindingCatalog = loadGlobalFindingCatalog({ includeDbFallback: true });
   const files = readdirSync(articlesDir).filter((f) => f.endsWith(".mdx"));
   for (const fileName of files) {
     const abs = resolve(articlesDir, fileName);
@@ -285,24 +403,37 @@ function lintArticles(fileScope = null) {
     if (fileScope && !fileScope.has(rel)) continue;
     const raw = readFileSync(abs, "utf-8");
     const body = raw.replace(/^---\n[\s\S]*?\n---\n*/, "");
+    const slug = fileName.replace(/\.mdx$/, "");
+    const findingEvidenceMap = mergeFindingCatalogs(
+      globalFindingCatalog,
+      loadArticleFindingCatalog(slug),
+    ).evidenceMap;
     const state = createCitationState();
-    applyCitations(body, { findingEvidenceMap }, state);
-    lintCitationEntries(rel, "article:body", state.entries);
+
+    const findingsPath = resolve(articlesDir, `${fileName.replace(/\.mdx$/, "")}-findings.json`);
+    if (existsSync(findingsPath)) {
+      const findings = JSON.parse(readFileSync(findingsPath, "utf-8"));
+      const rendered = applyCitations(body, { findingEvidenceMap }, state);
+      lintCitationEntries(rel, "article:body", state.entries);
+      lintResidualCitationTokens(rel, "article:body", rendered.markdown);
+      for (const [findingId, detail] of Object.entries(findings)) {
+        for (const ev of detail?.evidence || []) {
+          lintResolvedEvidenceLinks(rel, String(findingId), ev.evidence_ref, findingEvidenceMap);
+        }
+      }
+    } else {
+      const rendered = applyCitations(body, { findingEvidenceMap }, state);
+      lintCitationEntries(rel, "article:body", state.entries);
+      lintResidualCitationTokens(rel, "article:body", rendered.markdown);
+    }
   }
 }
 
 function buildDossierFindingEvidenceMap(dossier) {
-  const map = {};
-  for (const finding of dossier.findings || []) {
-    const id = String(finding.id);
-    map[id] = [];
-    for (const ev of finding.evidence || []) {
-      if (typeof ev.evidence_ref === "string" && ev.evidence_ref.trim()) {
-        map[id].push(ev.evidence_ref.trim());
-      }
-    }
-  }
-  return map;
+  return mergeFindingCatalogs(
+    loadGlobalFindingCatalog({ includeDbFallback: true }),
+    loadDossierFindingCatalog(dossier),
+  ).evidenceMap;
 }
 
 function lintDossiers(fileScope = null) {
@@ -314,37 +445,42 @@ function lintDossiers(fileScope = null) {
     const rel = abs.replace(`${projectRoot}/`, "");
     if (fileScope && !fileScope.has(rel)) continue;
     const dossier = JSON.parse(readFileSync(abs, "utf-8"));
+    const findingEvidenceMap = buildDossierFindingEvidenceMap(dossier);
 
     for (const finding of dossier.findings || []) {
       for (const ev of finding.evidence || []) {
         lintEvidenceRef(rel, String(finding.id), ev.evidence_ref);
+        lintResolvedEvidenceLinks(rel, String(finding.id), ev.evidence_ref, findingEvidenceMap);
       }
     }
 
-    const findingEvidenceMap = buildDossierFindingEvidenceMap(dossier);
     const state = createCitationState();
 
     const lead = dossier.curation?.lead;
     if (typeof lead === "string" && lead.trim()) {
-      applyCitations(lead, { findingEvidenceMap }, state);
+      const rendered = applyCitations(lead, { findingEvidenceMap }, state);
+      lintResidualCitationTokens(rel, "dossier:lead", rendered.markdown);
     }
 
     const sections = Array.isArray(dossier.curation?.sections) ? dossier.curation.sections : [];
     for (const [index, section] of sections.entries()) {
       const content = typeof section?.content === "string" ? section.content : "";
       if (!content.trim()) continue;
-      applyCitations(content, { findingEvidenceMap }, state);
+      const rendered = applyCitations(content, { findingEvidenceMap }, state);
       lintCitationEntries(rel, `section:${index}:${section?.title || "untitled"}`, state.entries);
+      lintResidualCitationTokens(rel, `section:${index}:${section?.title || "untitled"}`, rendered.markdown);
     }
 
     const overview = dossier.curation?.overview;
     if (typeof overview === "string" && overview.trim()) {
-      applyCitations(overview, { findingEvidenceMap }, state);
+      const rendered = applyCitations(overview, { findingEvidenceMap }, state);
+      lintResidualCitationTokens(rel, "dossier:overview", rendered.markdown);
     }
 
     const finSummary = dossier.curation?.financial_summary;
     if (typeof finSummary === "string" && finSummary.trim()) {
-      applyCitations(finSummary, { findingEvidenceMap }, state);
+      const rendered = applyCitations(finSummary, { findingEvidenceMap }, state);
+      lintResidualCitationTokens(rel, "dossier:financial_summary", rendered.markdown);
     }
 
     lintCitationEntries(rel, "dossier:curation", state.entries);
@@ -359,15 +495,64 @@ if (changedContentFiles && changedContentFiles.size === 0) {
 lintArticles(changedContentFiles);
 lintDossiers(changedContentFiles);
 
-const errors = issues.filter((i) => i.severity === "error");
-const warnings = issues.filter((i) => i.severity === "warning");
+const today = new Date().toISOString().slice(0, 10);
+const matchedExceptionIndexes = new Set();
+
+function matchesException(issue, exception) {
+  return issue.code === exception.code
+    && issue.file === exception.file
+    && issue.location === exception.location
+    && issue.subject === exception.subject;
+}
+
+const filteredIssues = issues.filter((issue) => {
+  const matchIndex = citationExceptions.findIndex((exception) => {
+    if (!matchesException(issue, exception)) return false;
+    return exception.expires_on >= today;
+  });
+
+  if (matchIndex === -1) return true;
+  matchedExceptionIndexes.add(matchIndex);
+  return false;
+});
+
+/** @type {LintIssue[]} */
+const exceptionDiagnostics = [];
+for (const [index, exception] of citationExceptions.entries()) {
+  if (exception.expires_on < today) {
+    exceptionDiagnostics.push({
+      severity: "error",
+      code: "CITATION_EXCEPTION_EXPIRED",
+      file: exception.file,
+      location: exception.location,
+      subject: exception.subject,
+      message: `Citation exception expired on ${exception.expires_on}: ${exception.reason}`,
+    });
+    continue;
+  }
+
+  if (!matchedExceptionIndexes.has(index)) {
+    exceptionDiagnostics.push({
+      severity: "error",
+      code: "CITATION_EXCEPTION_STALE",
+      file: exception.file,
+      location: exception.location,
+      subject: exception.subject,
+      message: `Citation exception no longer matches an active issue: ${exception.reason}`,
+    });
+  }
+}
+
+const finalIssues = [...filteredIssues, ...exceptionDiagnostics];
+const errors = finalIssues.filter((i) => i.severity === "error");
+const warnings = finalIssues.filter((i) => i.severity === "warning");
 
 const scopeLabel = changedContentFiles
   ? `changed scope (${changedContentFiles.size} file(s))`
   : "full scope";
 
 process.stdout.write(
-  `Citation lint scanned ${issues.length} unique issue(s) in ${scopeLabel}: ${errors.length} error(s), ${warnings.length} warning(s).\n`,
+  `Citation lint scanned ${finalIssues.length} unique issue(s) in ${scopeLabel}: ${errors.length} error(s), ${warnings.length} warning(s).\n`,
 );
 
 function printIssueBucket(label, bucket, headingPrefix = "Current") {
@@ -381,12 +566,24 @@ function printIssueBucket(label, bucket, headingPrefix = "Current") {
   }
 }
 
-if (issues.length > 0) {
+if (finalIssues.length > 0) {
   printIssueBucket("error", errors);
   printIssueBucket("warning", warnings);
 }
 
-if (strictChangedFiles && issues.length > 0) {
+if (reportFile) {
+  writeFileSync(reportFile, JSON.stringify({
+    generated_at: new Date().toISOString(),
+    scope: scopeLabel,
+    errors: errors.length,
+    warnings: warnings.length,
+    issues: finalIssues,
+    exceptions: citationExceptions,
+    matched_exceptions: Array.from(matchedExceptionIndexes),
+  }, null, 2));
+}
+
+if (strictChangedFiles && finalIssues.length > 0) {
   process.stdout.write(
     "\nStrict changed-file mode failed: citation issues are not allowed in modified article/dossier files.\n",
   );
