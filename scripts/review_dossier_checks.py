@@ -626,7 +626,7 @@ def get_curated_slugs(top_n: int | None = None) -> list[str]:
 
 
 def ensure_review_schema(db: sqlite3.Connection) -> None:
-    """Create dossier_reviews table if it doesn't exist."""
+    """Create dossier_reviews and dossier_llm_reviews tables if they don't exist."""
     db.executescript("""
         CREATE TABLE IF NOT EXISTS dossier_reviews (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -648,6 +648,19 @@ def ensure_review_schema(db: sqlite3.Connection) -> None:
             ON dossier_reviews(slug, reviewed_at DESC);
         CREATE INDEX IF NOT EXISTS idx_dossier_reviews_verdict
             ON dossier_reviews(verdict);
+
+        CREATE TABLE IF NOT EXISTS dossier_llm_reviews (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            slug TEXT NOT NULL,
+            blocking_count INTEGER NOT NULL DEFAULT 0,
+            should_fix_count INTEGER NOT NULL DEFAULT 0,
+            suggestion_count INTEGER NOT NULL DEFAULT 0,
+            issues_json TEXT NOT NULL,
+            reviewed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_dossier_llm_reviews_slug
+            ON dossier_llm_reviews(slug, reviewed_at DESC);
     """)
 
 
@@ -892,6 +905,135 @@ def cmd_status(args):
     print(f"\n{reviewed}/{len(slugs)} curated dossiers have been reviewed")
 
 
+def extract_llm_issues(review: dict) -> list[dict]:
+    """Extract issues from various LLM review JSON formats."""
+    # Format 1: llm_issues array (canonical)
+    if review.get("llm_issues"):
+        return review["llm_issues"]
+
+    # Format 2: issues array
+    if review.get("issues") and isinstance(review["issues"], list):
+        return review["issues"]
+
+    # Format 3: checklist dict with nested issues arrays
+    all_issues = []
+    checklist = review.get("checklist", {})
+    for category, data in checklist.items():
+        if isinstance(data, dict) and "issues" in data:
+            for issue in data["issues"]:
+                if isinstance(issue, dict):
+                    # Normalize severity
+                    sev = issue.get("severity", "SUGGESTION").upper()
+                    if sev in ("MINOR", "NOTE", "POSITIVE"):
+                        sev = "SUGGESTION"
+                    all_issues.append({
+                        "severity": sev,
+                        "category": category,
+                        "detail": issue.get("detail", ""),
+                        "location": issue.get("location", ""),
+                    })
+
+    # Also grab additional_findings, automated_issues_confirmed
+    for key in ("additional_findings", "automated_issues_confirmed"):
+        items = review.get(key, [])
+        if isinstance(items, list):
+            for item in items:
+                if isinstance(item, dict):
+                    sev = item.get("severity", "SHOULD_FIX").upper()
+                    if sev in ("MINOR", "NOTE", "POSITIVE"):
+                        sev = "SUGGESTION"
+                    all_issues.append({
+                        "severity": sev,
+                        "category": item.get("category", key),
+                        "detail": item.get("detail", str(item)),
+                        "location": item.get("location", ""),
+                    })
+                elif isinstance(item, str):
+                    all_issues.append({
+                        "severity": "SHOULD_FIX",
+                        "category": key,
+                        "detail": item,
+                        "location": "",
+                    })
+
+    return all_issues
+
+
+def record_llm_review(review: dict) -> None:
+    """Write an LLM review result to the dossier_llm_reviews table."""
+    db = get_review_db()
+    issues = extract_llm_issues(review)
+    blocking = sum(1 for i in issues if i.get("severity") == "BLOCKING")
+    should_fix = sum(1 for i in issues if i.get("severity") == "SHOULD_FIX")
+    suggestion = sum(1 for i in issues if i.get("severity") == "SUGGESTION")
+
+    db.execute(
+        """INSERT INTO dossier_llm_reviews
+           (slug, blocking_count, should_fix_count, suggestion_count, issues_json)
+           VALUES (?, ?, ?, ?, ?)""",
+        (review["slug"], blocking, should_fix, suggestion, json.dumps(issues)),
+    )
+    db.commit()
+    db.close()
+
+
+def cmd_ingest_llm(args):
+    """Ingest LLM review JSON files into dossier_llm_reviews table."""
+    import glob as globmod
+
+    pattern = args.pattern or f"{args.dir}/review-*.json"
+    files = sorted(globmod.glob(pattern))
+    if not files:
+        print(f"No files matching {pattern}", file=sys.stderr)
+        sys.exit(1)
+
+    ingested = 0
+    for f in files:
+        try:
+            review = json.loads(Path(f).read_text())
+            if "slug" not in review:
+                print(f"  Skipping {f} — no slug field", file=sys.stderr)
+                continue
+            record_llm_review(review)
+            issues = extract_llm_issues(review)
+            b = sum(1 for i in issues if i.get("severity") == "BLOCKING")
+            s = sum(1 for i in issues if i.get("severity") == "SHOULD_FIX")
+            print(f"  {review['slug']}: {b} blocking, {s} should_fix, {len(issues)-b-s} suggestions")
+            ingested += 1
+        except (json.JSONDecodeError, KeyError) as e:
+            print(f"  Error in {f}: {e}", file=sys.stderr)
+
+    print(f"\nIngested {ingested} LLM reviews")
+
+
+def cmd_llm_status(args):
+    """Show LLM review status of all curated dossiers."""
+    db = get_review_db()
+    slugs = get_curated_slugs()
+
+    reviewed = 0
+    blocking_total = 0
+
+    print(f"\n{'Slug':<40} {'Block':>5} {'Fix':>5} {'Suggest':>7} {'Reviewed At':<20}")
+    print(f"{'-'*40} {'-'*5} {'-'*5} {'-'*7} {'-'*20}")
+
+    for slug in slugs:
+        row = db.execute(
+            "SELECT slug, blocking_count, should_fix_count, suggestion_count, reviewed_at "
+            "FROM dossier_llm_reviews WHERE slug = ? ORDER BY reviewed_at DESC LIMIT 1",
+            (slug,),
+        ).fetchone()
+        if row:
+            reviewed += 1
+            blocking_total += row["blocking_count"]
+            print(f"{row['slug']:<40} {row['blocking_count']:>5} {row['should_fix_count']:>5} {row['suggestion_count']:>7} {row['reviewed_at']:<20}")
+
+    db.close()
+    print(f"\n{reviewed}/{len(slugs)} curated dossiers have LLM reviews")
+    if blocking_total:
+        print(f"Total blocking issues: {blocking_total}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Automated dossier quality checks")
     sub = parser.add_subparsers(dest="command")
@@ -916,6 +1058,12 @@ def main():
 
     sub.add_parser("status", help="Show review status from DB")
 
+    p_ingest = sub.add_parser("ingest-llm", help="Ingest LLM review JSON files into DB")
+    p_ingest.add_argument("--dir", default="/tmp", help="Directory containing review-*.json files")
+    p_ingest.add_argument("--pattern", help="Glob pattern override (default: <dir>/review-*.json)")
+
+    sub.add_parser("llm-status", help="Show LLM review status from DB")
+
     args = parser.parse_args()
 
     if args.command == "check":
@@ -930,6 +1078,10 @@ def main():
         cmd_gate(args)
     elif args.command == "status":
         cmd_status(args)
+    elif args.command == "ingest-llm":
+        cmd_ingest_llm(args)
+    elif args.command == "llm-status":
+        cmd_llm_status(args)
     else:
         parser.print_help()
 

@@ -41,6 +41,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `documentcloud` | query_documentcloud.py | DocumentCloud |
 | `muckrock` | query_muckrock.py | MuckRock FOIA |
 | `fincen` | query_fincen.py | FinCEN filings |
+| `sec_enforcement` | query_sec_enforcement.py | SEC enforcement actions (litigation, admin, AAER) |
 | `opencorporates` | query_delaware/hongkong/cyprus.py | OpenCorporates API |
 | `hudoc` | query_hudoc.py | ECHR case database |
 | `france_sirene` | query_france.py | French SIRENE registry |
@@ -859,6 +860,30 @@ python tools/parse_ds10_financials.py flows
 python tools/ingest_faa.py download && python tools/ingest_faa.py ingest
 python tools/ingest_faa.py search "JEGE"
 python tools/ingest_faa.py n-number N212JE
+```
+
+### SEC Enforcement Actions (~33K actions, litigation + admin + AAER, 1995-present)
+```bash
+# Ingest
+python tools/ingest_sec_enforcement.py ingest                           # All sources, all pages
+python tools/ingest_sec_enforcement.py ingest --source litigation       # One source type
+python tools/ingest_sec_enforcement.py ingest --pages 3                 # First 3 pages only
+python tools/ingest_sec_enforcement.py ingest --incremental             # Stop at existing entries
+python tools/ingest_sec_enforcement.py stats                            # Summary counts
+python tools/ingest_sec_enforcement.py reparse                          # Re-run defendant parsing
+
+# Query
+python tools/query_sec_enforcement.py search "insider trading" --output $WORKDIR/sec-search.json
+python tools/query_sec_enforcement.py search "Epstein" --source litigation --output $WORKDIR/sec-epstein.json
+python tools/query_sec_enforcement.py defendant "Leon Black" --output $WORKDIR/sec-defendant.json
+python tools/query_sec_enforcement.py defendant "JPMorgan" --fuzzy --threshold 80 --output $WORKDIR/sec-fuzzy.json
+python tools/query_sec_enforcement.py action LR-26503 --output $WORKDIR/sec-action.json
+python tools/query_sec_enforcement.py co-defendants LR-26489 --output $WORKDIR/sec-codefs.json
+python tools/query_sec_enforcement.py network "Joseph Lewis" --depth 2 --output $WORKDIR/sec-network.json
+python tools/query_sec_enforcement.py repeat-offenders --min-actions 2 --output $WORKDIR/sec-repeats.json
+python tools/query_sec_enforcement.py stats --by-year --output $WORKDIR/sec-stats.json
+python tools/query_sec_enforcement.py cross-ref --dry-run --output $WORKDIR/sec-crossref.json
+python tools/query_sec_enforcement.py cross-ref --auto-leads            # Generate investigation leads
 ```
 
 ### FinCEN Files (4.5K tx, 5.5K connections, 2000-2017 SARs)

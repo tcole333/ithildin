@@ -1343,6 +1343,180 @@ def process_person_crossref(db, dry_run=False):
     return created, len(rows)
 
 
+def process_enforcement_check(db, dry_run=False):
+    """Check new entities and connections against SEC enforcement defendants.
+
+    Looks up newly added entities and connection persons in the SEC enforcement
+    database (datasets/sec_enforcement.db). Creates leads for matches.
+    """
+    ENFORCEMENT_DB = PROJECT_ROOT / "datasets" / "sec_enforcement.db"
+    if not ENFORCEMENT_DB.exists():
+        return 0, 0
+
+    try:
+        from tools.entity_resolution import normalize_entity_name, normalize_person_name
+    except ImportError:
+        try:
+            from entity_resolution import normalize_entity_name, normalize_person_name
+        except ImportError:
+            return 0, 0
+
+    enf_db = sqlite3.connect(str(ENFORCEMENT_DB))
+    enf_db.row_factory = sqlite3.Row
+
+    # Build a set of all normalized enforcement defendant names for fast lookup
+    enf_names = set()
+    enf_rows = enf_db.execute(
+        "SELECT DISTINCT name_normalized FROM enforcement_defendants"
+    ).fetchall()
+    for r in enf_rows:
+        enf_names.add(r["name_normalized"])
+
+    # --- Check new entities ---
+    entity_rows = db.execute("""
+        SELECT e.id, e.name, e.entity_type
+        FROM entities e
+        WHERE e.id NOT IN (
+            SELECT record_id FROM auto_crossref_log
+            WHERE table_name='entities' AND crossref_type='enforcement_check'
+        )
+    """).fetchall()
+
+    # --- Check new connections (unique person names) ---
+    conn_rows = db.execute("""
+        SELECT c.id, c.person_a, c.person_b
+        FROM connections c
+        WHERE c.id NOT IN (
+            SELECT record_id FROM auto_crossref_log
+            WHERE table_name='connections' AND crossref_type='enforcement_check'
+        )
+    """).fetchall()
+
+    created = 0
+    total_checked = 0
+    seen_names = set()
+
+    # Check entities
+    for row in entity_rows:
+        name = row["name"]
+        if not name or len(name.strip()) < 3:
+            log_processed(db, "entities", row["id"], "enforcement_check")
+            continue
+
+        total_checked += 1
+        norm_e = normalize_entity_name(name)
+        norm_p = normalize_person_name(name)
+
+        matched_norm = None
+        if norm_e in enf_names:
+            matched_norm = norm_e
+        elif norm_p in enf_names:
+            matched_norm = norm_p
+
+        if matched_norm and matched_norm not in seen_names:
+            seen_names.add(matched_norm)
+
+            # Get enforcement details
+            enf_details = enf_db.execute("""
+                SELECT ea.release_number, ea.source_type, ea.date_published, ea.respondent_text,
+                       ed.name_raw, ed.defendant_type
+                FROM enforcement_defendants ed
+                JOIN enforcement_actions ea ON ed.action_id = ea.id
+                WHERE ed.name_normalized = ?
+                ORDER BY ea.date_published DESC LIMIT 5
+            """, (matched_norm,)).fetchall()
+
+            action_count = enf_db.execute(
+                "SELECT COUNT(DISTINCT action_id) FROM enforcement_defendants WHERE name_normalized = ?",
+                (matched_norm,)
+            ).fetchone()[0]
+
+            title = f"SEC enforcement history: {name.strip()[:40]} ({action_count} actions)"
+            existing = lead_exists(db, f"SEC enforcement history: {name.strip()[:30]}")
+            if existing:
+                log_processed(db, "entities", row["id"], "enforcement_check", existing)
+                continue
+
+            details_text = "\n".join(
+                f"  {d['release_number']} ({d['source_type']}, {d['date_published']}): {d['respondent_text'][:120]}"
+                for d in enf_details
+            )
+            notes = (
+                f"Entity '{name}' matches SEC enforcement defendant '{enf_details[0]['name_raw']}' "
+                f"({enf_details[0]['defendant_type']})\n"
+                f"{action_count} enforcement action(s):\n{details_text}"
+            )
+
+            priority = "high" if action_count >= 3 else "medium"
+
+            if dry_run:
+                print(f"  [DRY] Enforcement match ({priority}): {title}")
+            else:
+                lead_id = create_lead(db, title, "enforcement", priority,
+                                      "agent:auto_leads:enforcement_check",
+                                      target=name.strip(), notes=notes)
+                log_processed(db, "entities", row["id"], "enforcement_check", lead_id)
+                created += 1
+        else:
+            log_processed(db, "entities", row["id"], "enforcement_check")
+
+    # Check connections (both person_a and person_b)
+    for row in conn_rows:
+        for person in [row["person_a"], row["person_b"]]:
+            if not person or len(person.strip()) < 4:
+                continue
+
+            total_checked += 1
+            norm_p = normalize_person_name(person)
+
+            if norm_p in enf_names and norm_p not in seen_names:
+                seen_names.add(norm_p)
+
+                enf_details = enf_db.execute("""
+                    SELECT ea.release_number, ea.source_type, ea.date_published, ea.respondent_text,
+                           ed.name_raw, ed.defendant_type
+                    FROM enforcement_defendants ed
+                    JOIN enforcement_actions ea ON ed.action_id = ea.id
+                    WHERE ed.name_normalized = ?
+                    ORDER BY ea.date_published DESC LIMIT 5
+                """, (norm_p,)).fetchall()
+
+                action_count = enf_db.execute(
+                    "SELECT COUNT(DISTINCT action_id) FROM enforcement_defendants WHERE name_normalized = ?",
+                    (norm_p,)
+                ).fetchone()[0]
+
+                title = f"SEC enforcement history: {person.strip()[:40]} ({action_count} actions)"
+                existing = lead_exists(db, f"SEC enforcement history: {person.strip()[:30]}")
+                if existing:
+                    continue
+
+                details_text = "\n".join(
+                    f"  {d['release_number']} ({d['source_type']}, {d['date_published']}): {d['respondent_text'][:120]}"
+                    for d in enf_details
+                )
+                notes = (
+                    f"Connection person '{person}' matches SEC enforcement defendant "
+                    f"'{enf_details[0]['name_raw']}' ({enf_details[0]['defendant_type']})\n"
+                    f"{action_count} enforcement action(s):\n{details_text}"
+                )
+
+                priority = "high" if action_count >= 3 else "medium"
+
+                if dry_run:
+                    print(f"  [DRY] Enforcement match ({priority}): {title}")
+                else:
+                    lead_id = create_lead(db, title, "enforcement", priority,
+                                          "agent:auto_leads:enforcement_check",
+                                          target=person.strip(), notes=notes)
+                    created += 1
+
+        log_processed(db, "connections", row["id"], "enforcement_check")
+
+    enf_db.close()
+    return created, total_checked
+
+
 def cmd_run(args):
     global _max_leads_per_run, _leads_created_this_run
     _max_leads_per_run = getattr(args, 'max_leads', 100)
@@ -1427,6 +1601,11 @@ def cmd_run(args):
         c, t = process_person_crossref(db, args.dry_run)
         results["person_crossref"] = (c, t)
         print(f"  {t} person names cross-referenced, {c} leads created")
+
+        print("\n--- SEC Enforcement Check ---")
+        c, t = process_enforcement_check(db, args.dry_run)
+        results["enforcement_check"] = (c, t)
+        print(f"  {t} names checked against SEC enforcement DB, {c} leads created")
 
         # --- Findings-based generators (scoped to active profile's threads) ---
 

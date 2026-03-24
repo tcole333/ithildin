@@ -29,6 +29,29 @@ except ImportError:
 # Shared database with lead_tracker.py
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
 
+
+def _detect_active_profile():
+    """Detect active profile with fallback to direct DB read."""
+    try:
+        from tools.investigation_context import get_active_profile_id
+        pid = get_active_profile_id()
+        if pid:
+            return pid
+    except Exception:
+        pass
+    # Fallback: read directly from DB (works even if import fails in subagents)
+    try:
+        _db = sqlite3.connect(str(DB_PATH))
+        row = _db.execute(
+            "SELECT value FROM investigation_config WHERE key='active_profile'"
+        ).fetchone()
+        _db.close()
+        if row:
+            return row[0] or None
+    except Exception:
+        pass
+    return None
+
 VALID_FINDING_TYPES = [
     "communication", "financial", "relationship", "identity",
     "location", "document", "legal", "intelligence",
@@ -102,7 +125,7 @@ VALID_SOURCES = [
     "opencorporates", "zefix", "hudoc", "france_sirene",
     "panama_rp", "investigations_db", "fdic",
     "propublica_disclosures", "propublica_congress", "ppp",
-    "govinfo", "congress_gov",
+    "govinfo", "congress_gov", "sec_enforcement", "bisbase",
 ]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
@@ -181,11 +204,7 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
 
     # Auto-detect profile_id from active investigation if not provided
     if profile_id is None:
-        try:
-            from tools.investigation_context import get_active_profile_id
-            profile_id = get_active_profile_id() or None
-        except Exception:
-            pass
+        profile_id = _detect_active_profile()
 
     # Resolve aliases to prevent future duplicates
     try:
@@ -533,11 +552,7 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
     """Add a connection between two persons/entities."""
     # Auto-detect profile_id from active investigation if not provided
     if profile_id is None:
-        try:
-            from tools.investigation_context import get_active_profile_id
-            profile_id = get_active_profile_id() or None
-        except Exception:
-            pass
+        profile_id = _detect_active_profile()
 
     # Resolve aliases to prevent future duplicates
     try:

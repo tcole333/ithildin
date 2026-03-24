@@ -30,6 +30,29 @@ except ImportError:
 
 DB_PATH = Path(__file__).parent.parent / "investigation.db"
 
+
+def _detect_active_profile():
+    """Detect active profile with fallback to direct DB read."""
+    try:
+        from tools.investigation_context import get_active_profile_id
+        pid = get_active_profile_id()
+        if pid:
+            return pid
+    except Exception:
+        pass
+    try:
+        _db = sqlite3.connect(str(DB_PATH))
+        row = _db.execute(
+            "SELECT value FROM investigation_config WHERE key='active_profile'"
+        ).fetchone()
+        _db.close()
+        if row:
+            return row[0] or None
+    except Exception:
+        pass
+    return None
+
+
 VALID_CATEGORIES = ["person", "entity", "financial", "document", "digital", "connection", "legal", "intelligence", "filing", "contract", "case"]
 VALID_PRIORITIES = ["critical", "high", "medium", "low"]
 VALID_STATUSES = ["open", "pending_triage", "in_progress", "completed", "blocked", "dead_end"]
@@ -1251,6 +1274,8 @@ def add_lead(title, description=None, category=None, priority="medium",
              thread_id=None, profile_id=None, depth_tier=None,
              recommended_skill=None):
     """Add a new lead. Returns the lead ID."""
+    if profile_id is None:
+        profile_id = _detect_active_profile()
     if target_name:
         try:
             from tools.name_resolver import resolve_canonical
@@ -1396,11 +1421,7 @@ def claim_next_lead(category=None, thread_id=None, session_id=None,
     Auto-filters by active investigation profile unless overridden.
     """
     if profile_id is None:
-        try:
-            from tools.investigation_context import get_active_profile
-            profile_id = get_active_profile().name
-        except Exception:
-            pass
+        profile_id = _detect_active_profile()
     db = get_db()
     db.execute("BEGIN IMMEDIATE")
 
@@ -1522,6 +1543,30 @@ def dead_end_lead(lead_id, reason):
     db.close()
 
 
+def batch_dead_end_leads(lead_ids, reason):
+    """Mark multiple leads as dead ends in a single transaction.
+
+    Returns count of leads actually updated.
+    """
+    if not lead_ids:
+        return 0
+    db = get_db()
+    now = _utcnow().isoformat()
+    count = 0
+    for lid in lead_ids:
+        cur = db.execute(
+            """UPDATE leads SET status = 'dead_end', findings = ?, stop_reason = ?,
+               triage_rationale = COALESCE(triage_rationale, ?),
+               updated_at = ?, completed_at = ?
+            WHERE id = ? AND status IN ('open', 'pending_triage')""",
+            (reason, reason, reason, now, now, lid)
+        )
+        count += cur.rowcount
+    db.commit()
+    db.close()
+    return count
+
+
 def reopen_lead(lead_id):
     """Reopen a closed lead."""
     db = get_db()
@@ -1604,11 +1649,7 @@ def search_leads(query):
 def get_next_lead(category=None, thread_id=None, profile_id=None):
     """Get the highest priority open lead, filtered by active profile."""
     if profile_id is None:
-        try:
-            from tools.investigation_context import get_active_profile
-            profile_id = get_active_profile().name
-        except Exception:
-            pass
+        profile_id = _detect_active_profile()
     db = get_db()
     conditions = ["status = 'open'"]
     params = []
@@ -1896,6 +1937,11 @@ def main():
     dead_p.add_argument("id", type=int)
     dead_p.add_argument("reason")
 
+    # batch-dead-end
+    batch_dead_p = subparsers.add_parser("batch-dead-end", help="Batch mark leads as dead end")
+    batch_dead_p.add_argument("--ids-file", required=True, help="File with one lead ID per line")
+    batch_dead_p.add_argument("--reason", required=True, help="Stop reason for all leads")
+
     # reopen
     reopen_p = subparsers.add_parser("reopen", help="Reopen a lead")
     reopen_p.add_argument("id", type=int)
@@ -2032,6 +2078,18 @@ def main():
     elif args.command == "dead-end":
         dead_end_lead(args.id, args.reason)
         print(f"Marked lead #{args.id} as dead end")
+
+    elif args.command == "batch-dead-end":
+        ids_path = Path(args.ids_file)
+        if not ids_path.exists():
+            print(f"File not found: {args.ids_file}")
+            sys.exit(1)
+        lead_ids = [int(line.strip()) for line in ids_path.read_text().splitlines() if line.strip().isdigit()]
+        if not lead_ids:
+            print("No valid lead IDs found in file.")
+            sys.exit(1)
+        count = batch_dead_end_leads(lead_ids, args.reason)
+        print(f"Dead-ended {count}/{len(lead_ids)} leads with reason: {args.reason}")
 
     elif args.command == "reopen":
         reopen_lead(args.id)

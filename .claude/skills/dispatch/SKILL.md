@@ -136,10 +136,10 @@ HEALTH:
    <N> unverified findings (aging >24h)
 
 ANALYSIS:
-   /analyze-network    +<N> findings since last run (threshold=50, cooldown=48h) [READY/wait]
-   /generate-hunches   +<N> findings since last run (threshold=50, cooldown=72h) [READY/wait]
-   /timeline-analysis  +<N> findings since last run (threshold=30, cooldown=72h) [READY/wait]
-   /systemic-analysis  +<N> findings since last run (threshold=50, cooldown=168h) [READY/wait]
+   /analyze-network    +<N> findings since last run (trigger: 50 new findings) [READY/wait]
+   /generate-hunches   +<N> findings since last run (trigger: 75 new findings) [READY/wait]
+   /timeline-analysis  +<N> findings since last run (trigger: 50 new findings) [READY/wait]
+   /systemic-analysis  +<N> findings since last run (trigger: 100 new findings) [READY/wait]
    Hypotheses: <N> proposed, <M> investigating
 
 INVESTIGATION DEPTH:
@@ -180,7 +180,7 @@ Based on queue depths, suggest which skills to run:
 | leads_open > 50 and pending_triage == 0 | "Run 2-3 `/pursue-lead` instances in parallel" |
 | recent_findings == 0 | "Investigation stalled — no findings in 7 days" |
 | blocked_by_infra > 3 | "Infra bottleneck — <N> leads blocked. Prioritize `/build-infra`" |
-| analysis skill READY | "Run `/analyze-network` (or other ready skill) — <N> new findings to analyze" |
+| analysis skill has enough new findings | "Run `/analyze-network` (or other ready skill) — <N> new findings to analyze" |
 | proposed hypotheses > 5 | "Hypotheses accumulating — run `/pursue-lead` on hypothesis-linked leads" |
 
 ### 4. Optional: Show Top Leads
@@ -213,6 +213,6 @@ uv run python tools/hypothesis_tracker.py list --status proposed --limit 5
 - This skill is **read-only** — it does not modify any data
 - It's designed to be run at the start of a session to decide what to work on
 - Automated dispatch: `uv run python scripts/dispatcher.py status` for running agents
-- Analysis skills have cooldown periods (48-168h) to prevent running too frequently
+- Analysis skills trigger based on new findings count, not time elapsed (analyze-network: 50, generate-hunches: 75, timeline-analysis: 50, systemic-analysis: 100)
 - Priority: data gathering > triage > analysis > post-processing
 - Multiple CC instances can each run `/dispatch` to see the same queue state

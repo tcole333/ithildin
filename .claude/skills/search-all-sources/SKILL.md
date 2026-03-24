@@ -135,6 +135,9 @@ python tools/ingest_uk_companies_house.py search "<QUERY>" --limit 10
 # OpenSanctions (PEP/sanctions check — if ingested)
 python tools/query_opensanctions.py search "<QUERY>" --limit 10
 
+# SEC Enforcement Actions (litigation releases, admin proceedings, AAERs)
+python tools/query_sec_enforcement.py search "<QUERY>" --limit 10
+
 # DS10 Deutsche Bank financial records (entity/counterparty search)
 python tools/parse_ds10_financials.py query --entity "<QUERY>"
 
@@ -210,6 +213,7 @@ log_search("<QUERY>", "lmsband", result_count)
 log_search("<QUERY>", "gleif", result_count)
 log_search("<QUERY>", "uk_companies_house", result_count)
 log_search("<QUERY>", "opensanctions", result_count)
+log_search("<QUERY>", "sec_enforcement", result_count)
 log_search("<QUERY>", "ds10_financial", result_count)
 log_search("<QUERY>", "usvi", result_count)
 log_search("<QUERY>", "dc_corp_registry", result_count)

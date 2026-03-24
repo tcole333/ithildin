@@ -1,0 +1,368 @@
+#!/usr/bin/env python3
+"""
+Curate dossier: Orchids of Asia Investigation
+Writes the `curation` block into content/dossiers/orchids-of-asia-investigation.json
+"""
+import json
+import datetime
+from pathlib import Path
+
+DOSSIER_PATH = Path(__file__).parent.parent / "content/dossiers/orchids-of-asia-investigation.json"
+
+CURATION = {
+    "lead": (
+        "<p>The Orchids of Asia Investigation was a multi-county law enforcement operation "
+        "in Florida that ran from July 2018 through February 2019, culminating in raids on "
+        "at least ten massage spas across Palm Beach, Martin, Indian River, and Orange counties. "
+        "A multi-agency task force—Jupiter PD, Martin County Sheriff, Indian River County SO, "
+        "Vero Beach PD, Sebastian PD, and the Metropolitan Bureau of Investigation in Orlando, "
+        "with DHS participation—charged more than 300 men with solicitation. The most prominent "
+        "defendant was <a href=\"/dossiers/robert-kraft\">Robert Kraft</a>, billionaire owner of the "
+        "New England Patriots and, from 2014 to 2021, an independent director of "
+        "<a href=\"/dossiers/apollo-global-management\">Apollo Global Management</a>. The case reached "
+        "national prominence in February 2019 when Kraft was charged with two counts of soliciting "
+        "prostitution at the Orchids of Asia Day Spa in Jupiter.</p>"
+        "\n\n"
+        "<p>Authorities framed the investigation as a human trafficking interdiction. That framing "
+        "did not survive legal scrutiny. Palm Beach County State Attorney Dave Aronberg stated on "
+        "the record: <em>\"There&#x27;s no allegation that any defendant engaged in human "
+        "trafficking.\"</em> No human trafficking charges were ever filed. In Indian River County, "
+        "one person out of more than 150 charged faced a trafficking-adjacent count. The prosecution's "
+        "primary evidence—hidden cameras installed in four massage rooms and a lobby at the Jupiter "
+        "spa, and a separate set of cameras that recorded continuously for 60 days at an Indian River "
+        "County spa—was suppressed entirely on Fourth Amendment grounds. Judge Donald Hafele "
+        "(Palm Beach Circuit) suppressed the Jupiter footage in May 2019; the Florida Fourth "
+        "District Court of Appeal upheld the suppression in August 2020. All male defendants, "
+        "including Kraft, had their charges dropped. The women who worked at the spas did not "
+        "share that outcome.</p>"
+        "\n\n"
+        "<p><a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> tracked the Kraft prosecution "
+        "intensively from the day of arrest in February 2019 through May 2019—two months before his "
+        "own arrest. He forwarded Kraft-related news to "
+        "<a href=\"/dossiers/ehud-barak\">Ehud Barak</a>, "
+        "<a href=\"/dossiers/michael-wolff\">Michael Wolff</a>, "
+        "<a href=\"/dossiers/brad-karp\">Brad Karp</a> (Chairman, "
+        "<a href=\"/dossiers/paul-weiss\">Paul Weiss</a>), and "
+        "<a href=\"/dossiers/steve-bannon\">Steve Bannon</a>. In response to Bannon's article about "
+        "Kraft&#x27;s legal team, Epstein replied: <em>\"90 percent inaccurate wow. hes ok\"</em>—"
+        "language implying personal knowledge of Kraft&#x27;s condition following arrest. A March 2019 "
+        "iMessage found in the DOJ corpus shows Epstein studying Kraft's massage-as-defense strategy "
+        "to inform his own legal posture. Epstein and Kraft shared a structural nexus at Apollo, where "
+        "both Black (Epstein&#x27;s primary financial client) and Kraft served as board members from "
+        "2014 through the 2021 governance overhaul that followed Black&#x27;s departure over the "
+        "Epstein scandal—at which point Kraft also departed, without re-nomination.</p>"
+    ),
+
+    "system_role": (
+        "The Orchids of Asia Investigation is a case study in the gap between how law enforcement "
+        "publicly frames an operation and what the evidence record actually supports. Surveillance "
+        "methods were authorized under a trafficking justification that investigators themselves "
+        "never translated into trafficking charges; the Fourth Amendment suppression that followed "
+        "collapsed prosecutions of wealthier defendants entirely while spa workers, most of them "
+        "Chinese immigrants, absorbed years of probation, five-figure fines, ICE detention risk, "
+        "and permanent license revocation. The case also functions as a secondary node in the "
+        "Epstein investigation: Kraft&#x27;s arrest triggered documented intelligence-sharing "
+        "among Epstein, his lawyer, a journalist, a former head of state, and a political "
+        "advisor—evidence that Epstein was actively studying the case as a template."
+    ),
+
+    "sections": [
+        {
+            "id": "operational-scope",
+            "title": "Operational Scope and Task Force Structure",
+            "content": (
+                "<p>The investigation spanned at least five Florida counties across two discrete "
+                "operations. The primary operation covered Palm Beach County (Jupiter), Martin County "
+                "(Stuart, Hobe Sound), and Indian River County (Vero Beach, Sebastian). A separate "
+                "Polk County operation was conducted concurrently. The Orange County arm targeted spas "
+                "in Orlando and Winter Park through the Metropolitan Bureau of Investigation. In total, "
+                "more than ten spas were raided and more than 300 men were charged with solicitation "
+                "across all jurisdictions.</p>"
+                "\n\n"
+                "<p>The task force was constructed from six separate agencies: Jupiter Police "
+                "Department, Martin County Sheriff's Office, Indian River County Sheriff's Office, "
+                "Vero Beach Police Department, Sebastian Police Department, and MBI. DHS involvement "
+                "was confirmed, providing federal infrastructure to what was nominally a state "
+                "solicitation case. The July 2018-to-February 2019 timeline means the covert phase—"
+                "including installation of hidden cameras—ran for months before any arrests. Martin "
+                "County Sheriff William Snyder held a public news conference framing the operation as "
+                "a human trafficking interdiction, describing women sleeping at spas, cooking on back "
+                "steps, having passports seized, and averaging eight clients per day as the indicators "
+                "of trafficking. No human trafficking charges followed from these indicators.</p>"
+                "\n\n"
+                "<p>Financial seizures reflected genuine cash-intensive operations. Martin County "
+                "seized $2–3 million in assets including vehicles and real property. Jupiter officers "
+                "recovered $183,000 from bank safety-deposit boxes belonging to spa operators. Liyan "
+                "Zhang had $22,000 in her purse at arrest. More than $70,000 was seized from safes "
+                "in Lixia Zhu&#x27;s Stuart home. One spa manager reported income of $18,000 while "
+                "having paid $399,000 cash for her residence. Indian River County authorities estimated "
+                "$1–1.5 million in local proceeds. JP Morgan Chase accounts held by Lei Wang and Hua "
+                "Zhang were frozen. A Jupiter condo valued at $201,000 owned by Hua Zhang was targeted "
+                "for civil forfeiture. Law enforcement described the broader network as "
+                "<em>\"a large international operation stretching from China to New York to Florida&#x27;s "
+                "Atlantic Coast\"</em> with a reported $20 million money trail.</p>"
+            ),
+            "viz": None
+        },
+        {
+            "id": "fourth-amendment-suppression",
+            "title": "Fourth Amendment Suppression and Prosecutorial Collapse",
+            "content": (
+                "<p>The evidentiary foundation of the case was hidden video surveillance installed "
+                "in the massage rooms themselves. Jupiter PD obtained a sneak-and-peek warrant on "
+                "January 15, 2019, fabricating a bomb scare to evacuate the Orchids of Asia spa and "
+                "install cameras in four massage rooms and the lobby. Cameras ran continuously for "
+                "more than five days, recording every client and worker without differentiation. The "
+                "Indian River County operation was more extensive: cameras at the East Spa in Vero "
+                "Beach recorded continuously for 60 days—a duration courts subsequently described as "
+                "the <em>\"most egregious\"</em> violation in the case.</p>"
+                "\n\n"
+                "<p>Judge Leonard Hanser suppressed all video evidence from the Jupiter operation in "
+                "May 2019. His ruling identified three distinct constitutional failures: the warrants "
+                "contained no minimization standards governing how footage of non-suspect persons "
+                "would be handled; the cameras recorded innocent clients in states of undress; and, "
+                "critically, the Florida legislature had removed prostitution from the list of crimes "
+                "eligible for this class of surreptitious surveillance in 2000—meaning the warrants "
+                "were facially invalid under Florida statute. The Florida Fourth District Court of "
+                "Appeal upheld the suppression on August 19, 2020, in State v. William Graham Marcellus "
+                "Hayes II (Case No. 19-1764, Fla. 4th DCA)—a companion case arising from the same "
+                "investigation whose ruling applied to all male defendants including Kraft. Judge Ruiz "
+                "ordered the videos destroyed in August 2021.</p>"
+                "\n\n"
+                "<p>Federal civil litigation followed. Doe v. Town of Jupiter Police Department "
+                "(9:19-cv-80513, S.D. Fla., filed April 15, 2019, terminated January 24, 2020) "
+                "challenged the Jupiter surveillance methods under 42 U.S.C. § 1983. Cash v. Snyder "
+                "(2:20-cv-14305, S.D. Fla., filed September 1, 2020) added civil rights claims against "
+                "the Martin County Sheriff. TAIG v. City of Vero Beach "
+                "(9:21-cv-80391, S.D. Fla., filed February 23, 2021) extended the § 1983 challenge to "
+                "Indian River County operations. A February 2021 federal lawsuit sought damages for "
+                "men recorded at the spas and publicly identified as participants in the operation "
+                "despite charges being dropped—a class of plaintiffs the ACLU and civil liberties "
+                "organizations described as having been falsely labeled as sex traffickers by law "
+                "enforcement press releases.</p>"
+            ),
+            "viz": "timeline"
+        },
+        {
+            "id": "trafficking-claims-versus-evidence",
+            "title": "Trafficking Claims Versus the Charge Record",
+            "content": (
+                "<p>The trafficking framing was the stated justification for the surveillance "
+                "methods used, the DHS participation, and the multi-county task force structure. "
+                "That framing was not supported by the charges ultimately filed. Palm Beach County "
+                "State Attorney Dave Aronberg stated explicitly: "
+                "<em>\"There&#x27;s no allegation that any defendant engaged in human trafficking.\"</em> "
+                "Across all five counties, zero human trafficking charges were filed under Florida "
+                "Statute § 787.06 or federal 18 U.S.C. § 1591. In Indian River County, one person "
+                "among more than 150 charged faced a trafficking-adjacent count—a single instance in "
+                "the largest single county component of the operation.</p>"
+                "\n\n"
+                "<p>The indicators Sheriff Snyder cited at his public news conference—women sleeping "
+                "at the spa, cooking on the premises, having their passports taken, and seeing eight "
+                "clients daily—are consistent with labor exploitation and debt bondage. They are also "
+                "consistent with Chinese immigrant workers living at their workplace to reduce costs "
+                "and maximize earnings in cash-intensive service businesses. The absence of any "
+                "forced labor or trafficking charge means investigators either concluded the evidence "
+                "did not support those elements, or the charging decision was constrained by the "
+                "suppression that had already compromised the evidentiary record. Critics including "
+                "the ACLU, Reason magazine, and Deadspin documented the gap between the trafficking "
+                "narrative and the charge sheet as the case progressed.</p>"
+                "\n\n"
+                "<p>Sex worker advocacy organizations noted that the conflation of consensual adult "
+                "sex work with trafficking served a rhetorical function: it permitted surveillance "
+                "measures—including continuous hidden video recording in private rooms—that "
+                "solicitation investigations alone would not have authorized. Once the trafficking "
+                "label collapsed under prosecutorial scrutiny, the surveillance lost its "
+                "justification, and so did the prosecutions of clients. The workers who had been "
+                "described as trafficking victims in press conferences became defendants in their "
+                "own right, stripped of the protection that victim status might have provided.</p>"
+            ),
+            "viz": None
+        },
+        {
+            "id": "disparate-outcomes",
+            "title": "Disparate Outcomes by Class and Immigration Status",
+            "content": (
+                "<p>The most concrete measure of how the investigation resolved is the comparison "
+                "between outcomes for male clients and female spa workers. All male defendants had "
+                "charges dropped after the video suppression rulings. Robert Kraft—charged with two "
+                "counts of soliciting prostitution in State of Florida v. Robert Kraft (Palm Beach "
+                "County Circuit Court, Case No. 19-1764)—paid zero financial penalty and received "
+                "no criminal record. The suppression operated as a complete shield for clients.</p>"
+                "\n\n"
+                "<p>The workers did not benefit from suppression. Their exposure was independent of "
+                "the video evidence—they were present at arrest, and their operator status was "
+                "established through the raids themselves. Documented dispositions: Shen Mingbi "
+                "pleaded guilty to one count of soliciting, received one year of probation, and was "
+                "ordered to forfeit $20,000 to Jupiter PD plus a $5,000 bond plus $6,573 in fines, "
+                "for a total financial penalty of $31,573. Lei Wang pleaded guilty to one count, "
+                "received one year of probation, a $5,000 fine, and 100 hours of community service; "
+                "a felony charge was dropped. Hua Zhang pleaded guilty to two misdemeanors, received "
+                "one year of probation, a $5,000 fine, and 100 hours of community service; 27 of 29 "
+                "charges against her were dropped. Lei Chen pleaded guilty to eight misdemeanor "
+                "counts and faced ICE detention proceedings and deportation risk—an outcome with no "
+                "parallel among the client defendants. Ruimei Li in Martin County received five "
+                "years of probation, was ordered to pay $150,000 in investigative costs, and had "
+                "her massage license permanently revoked. Lixia Zhu pleaded no contest to "
+                "racketeering, which carries a statutory maximum of 30 years, and entered cooperation "
+                "with investigators.</p>"
+                "\n\n"
+                "<p>The structural asymmetry is legally unsurprising—suppression of evidence benefits "
+                "those against whom the evidence was collected, which in this case was clients, not "
+                "operators. But the downstream consequence was that the workers—largely Chinese "
+                "immigrant women—absorbed criminal records, five-figure penalties, deportation "
+                "exposure, and permanent professional disqualification, while the men who patronized "
+                "the spas walked away without consequence. The 2021 federal lawsuit described the "
+                "workers as having been publicly branded as trafficking victims in law enforcement "
+                "press releases, then prosecuted as criminals when that framing could not be "
+                "sustained.</p>"
+            ),
+            "viz": None
+        },
+        {
+            "id": "epstein-kraft-nexus",
+            "title": "The Epstein–Kraft Nexus",
+            "content": (
+                "<p>No direct communication between Jeffrey Epstein and Robert Kraft has been "
+                "found in any document corpus—no emails, no phone records, no financial instruments. "
+                "What is documented is Epstein&#x27;s sustained interest in the Kraft prosecution from "
+                "the day of arrest through two months before his own.</p>"
+                "\n\n"
+                "<p>On February 22, 2019—the same day Kraft&#x27;s arrest was announced—"
+                "<a href=\"/dossiers/richard-kahn\">Richard Kahn</a> of HBRK Associates (575 Lexington "
+                "Avenue, 4th Floor, New York) forwarded a New York Post article about Kraft&#x27;s "
+                "arrest directly to Epstein. Three days later, on February 25, Epstein forwarded a "
+                "Philly.com article linking the Kraft prosecution to his own sex slavery allegations "
+                "simultaneously to <a href=\"/dossiers/ehud-barak\">Ehud Barak</a> (EFTA02633592) and "
+                "<a href=\"/dossiers/michael-wolff\">Michael Wolff</a> (EFTA02633595). That same day, "
+                "Epstein emailed <a href=\"/dossiers/brad-karp\">Brad Karp</a>, chairman of "
+                "<a href=\"/dossiers/paul-weiss\">Paul Weiss</a>, a link to Kraft&#x27;s probable cause "
+                "affidavit with the subject line <em>\"oy\"</em>; Karp replied <em>\"yuck.\"</em> On "
+                "March 10, <a href=\"/dossiers/steve-bannon\">Steve Bannon</a> forwarded an article "
+                "about Kraft&#x27;s legal team to Epstein, who responded: "
+                "<em>\"90 percent inaccurate wow. hes ok\"</em>—language that implies either personal "
+                "contact with Kraft or access to information about his condition that was not in the "
+                "article. On May 8, 2019—two months before his own arrest—Epstein shared a Daily Mail "
+                "article about prosecutors seeking to hold Kraft&#x27;s lawyer in contempt.</p>"
+                "\n\n"
+                "<p>A March 5, 2019 iMessage (HOUSE_OVERSIGHT_027585) documents Epstein discussing "
+                "his own crisis management with an unidentified contact. After being told his crisis "
+                "communications advisor believed the strategy should be <em>\"stick to legal legal "
+                "legal,\"</em> Epstein immediately shared a New York Times article about Kraft&#x27;s "
+                "massage-based defense, adding: <em>\"now I&#x27;m focused.\"</em> This sequence "
+                "establishes that Epstein was studying Kraft&#x27;s legal strategy as a template for "
+                "his own. Epstein had also been tracking Kraft&#x27;s offshore financial arrangements "
+                "earlier: in November 2017 he forwarded a Guardian article about Trump and Kraft&#x27;s "
+                "Paradise Papers offshore entities to his assistant Melanie Spinella.</p>"
+                "\n\n"
+                "<p>The structural connection is the Apollo Global Management board. "
+                "<a href=\"/dossiers/leon-black\">Leon Black</a>—Epstein&#x27;s largest documented "
+                "financial client, paying approximately $158 million between 2013 and 2017—co-founded "
+                "Apollo. Kraft served as an independent director from 2014, appearing on the "
+                "Apollo 2020 DEF 14A proxy alongside Black, Joshua Harris, Marc Rowan, Michael Ducey, "
+                "A.B. Krongard, and Pauline Richards. Kraft received $226,816 in annual compensation "
+                "(2019: $125,000 cash plus $101,816 in RSU awards) and held 352,120 Apollo shares. "
+                "He served on no committees—neither audit nor conflicts—while Krongard and Ducey "
+                "held committee seats. When Apollo conducted its post-Epstein governance overhaul "
+                "following the January 2021 Dechert report, the board expanded from seven to twelve "
+                "directors: both Black and Kraft departed simultaneously, and neither was "
+                "re-nominated. Kraft served on the Apollo board for the entirety of the period in "
+                "which Black was paying Epstein.</p>"
+            ),
+            "viz": None
+        }
+    ],
+
+    "open_questions": [
+        (
+            "What was the basis for Epstein&#x27;s statement to Bannon that reporting on Kraft&#x27;s "
+            "legal team was \"90 percent inaccurate\" and that Kraft was \"ok\"—did Epstein have "
+            "direct contact with Kraft following the arrest, and if so through what channel?"
+        ),
+        (
+            "Were any of the spa operators or network figures identified by Martin County Sheriff "
+            "as part of a China-to-New-York-to-Florida operation ever charged under federal labor "
+            "trafficking statutes, and if not, did federal prosecutors decline to charge or was the "
+            "case never referred?"
+        ),
+        (
+            "The Florida legislature removed prostitution from the crimes eligible for surreptitious "
+            "video surveillance in 2000—did Jupiter PD&#x27;s warrant application cite a trafficking "
+            "justification specifically to circumvent this limitation, and what did the warrant "
+            "affidavit state as the predicate offense?"
+        ),
+        (
+            "Robert Kraft and Leon Black departed the Apollo board simultaneously in the 2021 "
+            "governance overhaul; what, if any, board deliberations preceded Kraft&#x27;s "
+            "non-renomination, and was his 2019 arrest a factor in that decision?"
+        ),
+        (
+            "The investigation identified a $20 million money trail and described a network "
+            "stretching from China through New York to the Florida coast—what became of asset "
+            "forfeiture proceedings against the properties and accounts that were not tied to "
+            "convicted defendants, and are any forfeiture cases still open?"
+        )
+    ],
+
+    "applicable_models": [
+        "accountability-gap",
+        "legal-shield",
+        "narrative-shield",
+        "access-capitalism",
+        "enabler-gradient"
+    ],
+
+    "key_finding_ids": [3643, 3646, 3640, 3641, 3644],
+    "key_identifiers": {
+        "jurisdictions": [
+            "Palm Beach County, FL",
+            "Martin County, FL",
+            "Indian River County, FL",
+            "Orange County, FL",
+            "Polk County, FL"
+        ],
+        "officers": [
+            "Jupiter PD",
+            "Martin County Sheriff William Snyder",
+            "Indian River County SO",
+            "Metropolitan Bureau of Investigation (Orlando)",
+            "DHS"
+        ],
+        "entities": [
+            "Orchids of Asia Day Spa (Jupiter, FL)",
+            "East Spa (Vero Beach, FL)",
+            "Apollo Global Management"
+        ]
+    },
+    "section_suggestions": [
+        {
+            "id": "legal-proceedings",
+            "title": "Legal Proceedings",
+            "viz": "timeline",
+            "finding_ids": [3640, 3643, 3644, 3646],
+            "connection_ids": [],
+            "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+        }
+    ],
+    "curated_at": datetime.datetime.utcnow().isoformat()
+}
+
+
+def main():
+    with open(DOSSIER_PATH) as f:
+        dossier = json.load(f)
+
+    dossier["curation"] = CURATION
+
+    with open(DOSSIER_PATH, "w") as f:
+        json.dump(dossier, f, indent=2, ensure_ascii=False)
+
+    print(f"Wrote curation to {DOSSIER_PATH}")
+    print(f"  lead length: {len(CURATION['lead'])} chars")
+    print(f"  sections: {[s['id'] for s in CURATION['sections']]}")
+    print(f"  open_questions: {len(CURATION['open_questions'])}")
+    print(f"  applicable_models: {CURATION['applicable_models']}")
+
+
+if __name__ == "__main__":
+    main()
