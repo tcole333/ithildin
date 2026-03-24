@@ -8,13 +8,14 @@
   "generated_at": "2026-03-11T18:36:08.014355",
   "last_updated": "2026-03-09T19:15:44",
   "stats": {
-    "total_findings": 5,
+    "total_findings": 8,
     "total_connections": 2,
     "total_entities": 6,
     "finding_types": {
+      "relationship": 3,
       "intelligence": 2,
+      "identity": 1,
       "legal": 1,
-      "relationship": 1,
       "financial": 1
     },
     "connection_types": {
@@ -25,9 +26,59 @@
   },
   "findings": [
     {
+      "id": 6247,
+      "finding_type": "relationship",
+      "summary": "Cantor Fitzgerald LP is an equity owner of Critical Metals Corp (LittleSis). Howard Lutnick (US Commerce Secretary) listed as indirect owner. Cantor received 1,247,250 CRML shares as deferred SPAC underwriting fee from Sizzle Acquisition Corp IPO. Cantor held peak M position Q1 2024, divested to ~190K shares by Q3 2025. LittleSis ownership relation confirmed current as of Feb 2025.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis,stockzoa"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:55:43",
+      "target_name": "Critical Metals Corp / Cantor Fitzgerald",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "LittleSis:rel/2043850",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6249,
+      "finding_type": "relationship",
+      "summary": "Howard Lutnick (US Commerce Secretary since Jan 2025, former Cantor Fitzgerald CEO) is an indirect owner of Critical Metals Corp per LittleSis. Senators Warren, Van Hollen, Wyden pressed Lutnick in Feb 2026 re Cantor Fitzgerald serving as lead placement agent for USA Rare Earth .5B private raise while Commerce Dept simultaneously announced .6B deal with same company. Lutnick divested Cantor stake to children (Brandon/Kyle) via trusts in May 2025.",
+      "detail": null,
+      "source_datasets": [
+        "littlesis,web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:55:50",
+      "target_name": "Howard Lutnick / Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "LittleSis:rel/2043852,CNBC:2026-02-26-lutnick-rare-earth",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6253,
       "finding_type": "intelligence",
-      "summary": "Tony Sage background: Australian mining entrepreneur, born ~1958, Perth WA. Founding director of International Goldfields/Hamill Resources (merged as Cape Lambert Resources, ASX: CFE). Executive Chairman Cape Lambert Resources Ltd — ATO investigated 2012-2014 on fraud/evasion claims, M assessment, share value dropped 75%, settled for .4M. Sage fought to access criminal investigation reports per Jan 2023 West Australian report. Also sued Metallurgical Corporation of China for AM iron-ore asset sale. Filed suit vs Timis Mining (Sierra Leone) for M loan + royalties. CAPE LAMBERT CORPORATION (separate entity) appears in Panama Papers via Mossack Fonseca, incorporated Panama Feb 2007, intermediary Consulco International Ltd (Ras Al Khaimah Free Trade Zone UAE). Sage owns Perth Glory FC (A-League). Current roles: CEO/Exec Chairman CRML; Exec Chairman CuFe Ltd (ASX: CUF); Exec Chairman European Lithium (ASX: EUR); Exec Director Cyclone Metals (ASX).",
+      "summary": "Tony Sage background: Australian mining entrepreneur, born ~1958, Perth WA. Founding director of International Goldfields/Hamill Resources (merged as Cape Lambert Resources, ASX: CFE). Executive Chairman Cape Lambert Resources Ltd \u2014 ATO investigated 2012-2014 on fraud/evasion claims, M assessment, share value dropped 75%, settled for .4M. Sage fought to access criminal investigation reports per Jan 2023 West Australian report. Also sued Metallurgical Corporation of China for AM iron-ore asset sale. Filed suit vs Timis Mining (Sierra Leone) for M loan + royalties. CAPE LAMBERT CORPORATION (separate entity) appears in Panama Papers via Mossack Fonseca, incorporated Panama Feb 2007, intermediary Consulco International Ltd (Ras Al Khaimah Free Trade Zone UAE). Sage owns Perth Glory FC (A-League). Current roles: CEO/Exec Chairman CRML; Exec Chairman CuFe Ltd (ASX: CUF); Exec Chairman European Lithium (ASX: EUR); Exec Director Cyclone Metals (ASX).",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -50,9 +101,34 @@
       ]
     },
     {
+      "id": 6258,
+      "finding_type": "identity",
+      "summary": "Tanbreez team structure: Greg Barnes (Founder/Principal Geologist, Perth WA); Bolette Nielsen (Chairperson, Greenland office manager, 20+ years Greenland mining experience); Tony Sage (Director, 35+ years resources); Anna Wingell (Perth office manager, with Tanbreez since 2011). Technical consultants: Hans Kristian Schonwandt (former Greenland Deputy Minister and Chief Geologist, Professor emeritus, drafted Greenland Mines Act, 60 years Greenland geology); Rasmus Chr. Rasmussen (35 years Greenland mining services, local contractor near Qaqortoq with 50+ employees).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:57:09",
+      "target_name": "Tanbreez Mining Greenland A/S",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Tanbreez.com/about/team",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6353,
       "finding_type": "intelligence",
-      "summary": "CAPE LAMBERT CORPORATION (ICIJ node 10048336) is a Panama entity incorporated Feb 6, 2007 via Mossack Fonseca, with Consulco International Limited (RAK FTZ, UAE) as intermediary. NO officers or beneficial owners are named in the ICIJ database. Connection to Tony Sage / ASX:CFE Cape Lambert Resources Ltd is UNVERIFIED — the name match is suggestive but no public evidence confirms Sage as an officer or beneficiary of this Panamanian entity. The ATO investigation of Sage's Cape Lambert Resources resulted in a M assessment settled for .4M, with Sage seeking access to ATO criminal investigation reports in Jan 2023 — implying criminal fraud/evasion referrals were made.",
+      "summary": "CAPE LAMBERT CORPORATION (ICIJ node 10048336) is a Panama entity incorporated Feb 6, 2007 via Mossack Fonseca, with Consulco International Limited (RAK FTZ, UAE) as intermediary. NO officers or beneficial owners are named in the ICIJ database. Connection to Tony Sage / ASX:CFE Cape Lambert Resources Ltd is UNVERIFIED \u2014 the name match is suggestive but no public evidence confirms Sage as an officer or beneficiary of this Panamanian entity. The ATO investigation of Sage's Cape Lambert Resources resulted in a M assessment settled for .4M, with Sage seeking access to ATO criminal investigation reports in Jan 2023 \u2014 implying criminal fraud/evasion referrals were made.",
       "detail": null,
       "source_datasets": [
         "ICIJ_Panama_Papers,WebSearch,Ground_News"
@@ -67,7 +143,7 @@
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "6253",
+          "evidence_ref": "Finding #6253",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -102,7 +178,7 @@
     {
       "id": 6382,
       "finding_type": "relationship",
-      "summary": "Tony Sage corporate network (partial list): Executive Chairman/CEO of Critical Metals Corp (NASDAQ:CRML, BVI incorporated); Executive Chairman of European Lithium Ltd (ASX:EUR, 32 Harrogate St, West Leederville, WA — holds 39.5% of CRML worth A$1.2B Jan 2026); Executive Chairman of CuFe Ltd (ASX:CUF); Managing Director Okewood Pty Ltd (consulting, founded 1997); director of Cape Lambert Resources (ASX:CFE); former Cape Lambert chairman; former Perth Glory FC owner (stepped down 2023, club went into receivership); non-exec director Kupang Resources, Caeneus Minerals, International Petroleum. Additional private entities: Marampa Iron Ore Ltd, Metal Exploration Mauritius Ltd, Metals Exploration Pty Ltd, Millennium Minerals (Operations) Pty Ltd, Mineral Securities Investments Australia Pty Ltd, Mooloogool Pty Ltd, Eastern Petroleum Australia Pty Ltd.",
+      "summary": "Tony Sage corporate network (partial list): Executive Chairman/CEO of Critical Metals Corp (NASDAQ:CRML, BVI incorporated); Executive Chairman of European Lithium Ltd (ASX:EUR, 32 Harrogate St, West Leederville, WA \u2014 holds 39.5% of CRML worth A$1.2B Jan 2026); Executive Chairman of CuFe Ltd (ASX:CUF); Managing Director Okewood Pty Ltd (consulting, founded 1997); director of Cape Lambert Resources (ASX:CFE); former Cape Lambert chairman; former Perth Glory FC owner (stepped down 2023, club went into receivership); non-exec director Kupang Resources, Caeneus Minerals, International Petroleum. Additional private entities: Marampa Iron Ore Ltd, Metal Exploration Mauritius Ltd, Metals Exploration Pty Ltd, Millennium Minerals (Operations) Pty Ltd, Mineral Securities Investments Australia Pty Ltd, Mooloogool Pty Ltd, Eastern Petroleum Australia Pty Ltd.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -127,7 +203,7 @@
     {
       "id": 6383,
       "finding_type": "financial",
-      "summary": "Tony Sage Cyclone Metals boardroom battle 2025: removed as chairman October 2025. Launched spill motion against new MD while selling down shareholdings. Submitted application to Takeovers Panel (December 19, 2025) alleging undisclosed association among Cyclone shareholders who voted for his removal — Panel declined to conduct proceedings. Sage was founding director of Cyclone (24 years). Perth Glory FC went into receivership in 2023 after Sage stepped down, unable to play home games during COVID proving costly.",
+      "summary": "Tony Sage Cyclone Metals boardroom battle 2025: removed as chairman October 2025. Launched spill motion against new MD while selling down shareholdings. Submitted application to Takeovers Panel (December 19, 2025) alleging undisclosed association among Cyclone shareholders who voted for his removal \u2014 Panel declined to conduct proceedings. Sage was founding director of Cyclone (24 years). Perth Glory FC went into receivership in 2023 after Sage stepped down, unable to play home games during COVID proving costly.",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -267,8 +343,11 @@
   "timeline": [],
   "curation": {
     "key_finding_ids": [
+      6247,
       6383,
       6253,
+      6249,
+      6258,
       6382,
       6381,
       6353
@@ -361,6 +440,8 @@
         "title": "Key Relationships",
         "viz": "ego_network",
         "finding_ids": [
+          6247,
+          6249,
           6382
         ],
         "connection_ids": [
@@ -391,44 +472,86 @@
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
       }
     ],
-    "curated_at": "2026-03-11T23:13:00.148579",
-    "lead": "<p>Tony Sage (born c. 1958, Perth, Western Australia) is an Australian mining entrepreneur who built his career across West African iron ore, European lithium, and Greenland rare earths. He is CEO and Executive Chairman of <a href='/dossiers/critical-metals-corp'>Critical Metals Corp</a> (Nasdaq: CRML), a British Virgin Islands-incorporated vehicle that holds an agreement to acquire up to 92.5% of Tanbreez Mining Greenland A/S—a 4.7-billion-tonne rare earth deposit with a 30-year exploitation license—and that in June 2025 received a $120 million Letter of Interest from the US Export-Import Bank under the Supply Chain Resiliency Initiative.<sup>[Finding #6260, #6246]</sup> Sage controls CRML through European Lithium Ltd (ASX: EUR), his Perth-based holding company, which owned 58.9% of CRML at the June 2025 reporting date and has since reduced that stake to 37.3% via secondary sales to Alyeska Master Fund, realizing at minimum A$54.75 million in proceeds.<sup>[Finding #6263, #6273]</sup></p><p>Sage’s earlier vehicle, Cape Lambert Resources Ltd (ASX: CFE), was the subject of an Australian Taxation Office investigation (2012–2014) that produced a $96 million assessment, settled for $2.4 million. The Australian Federal Police launched Operation Lemans in 2012; untested court allegations include bribery of a Sierra Leone official, insider trading, and disguising $19.8 million as loans through offshore structures. No charges had been filed as of January 2023.<sup>[Finding #6381]</sup> A Panamanian entity named Cape Lambert Corporation appears in the Panama Papers (ICIJ node 10048336), incorporated February 2007 via Mossack Fonseca; no officers or beneficial owners are named in the ICIJ database, and examination of available records has not established any connection to Sage’s ASX-listed company.<sup>[Finding #6353]</sup></p>",
-    "system_role": "Sage is the controlling principal of a multi-jurisdictional resource structure centered on 32 Harrogate Street, West Leederville, Western Australia, the shared registered address of both CRML and European Lithium. He holds the CEO/Executive Chairman role at CRML while also serving as Executive Chairman of European Lithium—the entity that controls CRML’s equity—placing him on both sides of the parent-subsidiary relationship. European Lithium has progressively reduced its CRML stake through secondary sales while CRML remains pre-revenue with going concern doubt. Sage provides the mining-operator background and project relationships, while US-facing functions (defense board representation, EXIM engagement, SAM registration) are handled by Michael C. Ryan and the Cornerstone Government Affairs lobbying engagement.",
+    "curated_at": "2026-03-23T22:00:00.000000",
+    "lead": "<p>Tony Sage (born c. 1958, Perth, Western Australia) is an Australian mining entrepreneur who has operated across West African iron ore, European lithium, and Greenland rare earths over a 35-year career. He is CEO and Executive Chairman of <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> (Nasdaq: CRML), a British Virgin Islands-incorporated vehicle that holds an agreement to acquire up to 92.5% of Tanbreez Mining Greenland A/S\u2014a 4.7-billion-tonne rare earth deposit with a 30-year exploitation license\u2014and that in June 2025 received a $120 million Letter of Interest from the US Export-Import Bank under the Supply Chain Resiliency Initiative.[Finding #6260] Sage controls CRML through European Lithium Ltd (ASX: EUR), which owned 58.9% of CRML at the June 2025 reporting date and has since reduced that stake to 37.3% via secondary sales to Alyeska Master Fund, realizing at minimum A$54.75 million in proceeds.[Finding #6273] EUR\u2019s investor rights agreement allows it to nominate four of five CRML directors while holding more than 50%, giving Sage effective board control through his chairmanship of EUR.[Finding #6277]</p><p>Sage\u2019s earlier vehicle, Cape Lambert Resources Ltd (ASX: CFE), produced his signature transaction: the purchase of the Mt Anketell magnetite iron ore project for A$20 million and its sale to the state-owned Metallurgical Corporation of China for A$400 million in 2008.[Finding #7472] Cape Lambert was subsequently the subject of AFP Operation Lemans (launched 2012), which investigated foreign bribery related to the Marampa iron ore project in Sierra Leone. The AFP Criminal Assets Confiscation Taskforce obtained consent orders in the Supreme Court of Victoria in May 2023 for $9.36 million in confiscation under the Proceeds of Crime Act 2002\u2014the first concluded matter under Australia\u2019s Best Practice Guideline for self-reporting of foreign bribery.[Finding #7463] The Commonwealth Director of Public Prosecutions declined to initiate criminal proceedings, citing public interest factors. Separately, the Australian Taxation Office issued a $96 million assessment against Cape Lambert Resources (2012\u20132014), which was settled for $2.4 million\u2014a 97.5% discount.[Finding #6381]</p><p>A review of all CRML SEC filings\u2014including 20-F annual reports, the F-4/A registration statement, and SEC correspondence\u2014found no disclosure of Sage\u2019s AFP foreign bribery confiscation, the $96 million ATO assessment, the Perth Glory salary cap fraud finding, or any prior Cape Lambert history. Sage\u2019s biography in all filings describes him identically as having \"35 years experience in corporate advisory services, funds management and capital raising.\"[Finding #7543] This omission of the chairman\u2019s regulatory and enforcement history from a US-listed company\u2019s filings is documented in analysis of SEC Regulation S-K Item 401(f) requirements.[Finding #7543]</p>",
     "sections": [
       {
         "id": "career-and-cape-lambert",
         "title": "Career and Cape Lambert Resources",
-        "viz": null,
-        "content": "<p>Sage co-founded International Goldfields (later renamed Hamill Resources), which merged with Cape Lambert Resources to create Cape Lambert Resources Ltd (ASX: CFE). He served as Executive Chairman of Cape Lambert from its formation through the company's most active deal period, which included the A$400 million sale of an iron ore asset to the Metallurgical Corporation of China—a transaction that subsequently produced litigation when Sage sued MCC for alleged breach. He also sued Timis Mining (Sierra Leone) for a $10 million loan plus royalties in connection with the Marampa iron ore project.<sup>[Finding #6253]</sup></p><p>The Marampa project became the focal point of regulatory and law enforcement attention. The ATO issued a $96 million assessment to Cape Lambert Resources covering the 2012–2014 period on fraud and evasion grounds; the company settled for $2.4 million and Cape Lambert's share price fell 75% during the investigation. In January 2023, West Australian media reported that Sage was applying to court for access to the AFP's criminal investigation reports from Operation Lemans—a proceeding that confirms the existence of a criminal referral even though no charges were ultimately filed.<sup>[Finding #6381]</sup> The untested allegations include bribery of a Sierra Leone government official, insider trading, and the reclassification of $19.8 million as loans routed through offshore structures.<sup>[Finding #6381]</sup></p><p>A separate Panamanian entity, Cape Lambert Corporation (ICIJ node 10048336), was incorporated on February 6, 2007 through Mossack Fonseca, using Consulco International Ltd (Ras Al Khaimah Free Trade Zone, UAE) as intermediary. The ICIJ database contains no officer or shareholder names for this entity. No public record links Sage to the Panamanian entity. The name correspondence with his ASX-listed company is suggestive but remains unverified, and analysis of available records has not established any beneficial ownership connection.<sup>[Finding #6353]</sup></p>",
+        "viz": "timeline",
+        "content": "<p>Sage co-founded International Goldfields (later renamed Hamill Resources), which merged with Cape Lambert Resources to create Cape Lambert Resources Ltd (ASX: CFE). He served as Executive Chairman through the company\u2019s peak deal period in the mid-2000s commodities boom. Cape Lambert\u2019s defining transaction was the purchase of the Mt Anketell magnetite iron ore project for A$20 million and its sale 18 months later to the state-owned Metallurgical Corporation of China (MCC) for A$400 million in 2008\u2014a 20x return.[Finding #7472] MCC agreed to pay US$290 million in two installments with US$70 million conditional on mining approval. When MCC failed to make the final payment, Cape Lambert commenced Supreme Court of Western Australia proceedings in September 2010; the court ordered Singapore International Arbitration Centre proceedings in March 2013 and MCC placed A$80 million in escrow with National Australia Bank in November 2013 before the parties settled.[Finding #7472] Sage also pursued Timis Mining in Sierra Leone for a $10 million loan plus royalties related to the Marampa iron ore project.[Finding #6253]</p><p>Cape Lambert\u2019s African operations produced another template transaction: the Kasombo Copper-Cobalt Project in the Democratic Republic of Congo was vended into Fe Limited (ASX: FEL, now CuFe, ASX: CUF) for 25 million FEL shares at volume-weighted average price plus A$125,000 in cash. An additional 10 million shares were issued to \"the facilitator of the transaction\" at the same deemed price\u2014an arrangement where the facilitator\u2019s identity and role remained opaque in public filings.[Finding #7466] This share-for-asset swap structure\u2014acquire a resource asset, vend it into a listed vehicle for share consideration, with facilitator shares to intermediaries\u2014recurs across Sage\u2019s career and is documented in analysis of subsequent CRML transactions.[Finding #7467]</p><p>CopperCo Ltd, an ASX-listed copper miner, was acquired by Cape Lambert from receivership via debt-to-equity conversion. Cape Lambert subsequently sold CopperCo\u2019s assets for approximately A$300 million.[Finding #7467] This established the broader pattern: distressed acquisition followed by value extraction, often involving assets in jurisdictions with limited regulatory oversight.</p>",
         "finding_ids": [
-          6253,
-          6381,
-          6353
+          7472,
+          7466,
+          7467,
+          6253
         ],
         "connection_ids": []
       },
       {
-        "id": "critical-metals-corp-and-crml-structure",
+        "id": "regulatory-and-enforcement-history",
+        "title": "Regulatory and Enforcement History",
+        "viz": null,
+        "content": "<p>Sage\u2019s Cape Lambert operations generated enforcement action across multiple Australian agencies. AFP Operation Lemans, launched in 2012, investigated foreign bribery related to the acquisition of mining rights through a foreign subsidiary subsequently sold\u2014a description that aligns with Cape Lambert\u2019s Marampa Iron Ore Ltd in Sierra Leone.[Finding #7463] The AFP criminal investigation was finalised in September 2021. The AFP Criminal Assets Confiscation Taskforce obtained consent orders in the Supreme Court of Victoria on May 30, 2023, under the Proceeds of Crime Act 2002. The orders included forfeiture of $5.71 million received from a sale agreement and an immediate total of $9.36 million, plus forfeiture of all future entitlement to ongoing payments under that agreement.[Finding #7463] The CDPP declined to prosecute, citing public interest factors. This was the first concluded matter under Australia\u2019s Best Practice Guideline for self-reporting of foreign bribery. The AFP press release referred to \"an Australian mining company\" without naming Cape Lambert or Sage.[Finding #7463]</p><p>Separately, the Australian Taxation Office issued a $96 million assessment against Cape Lambert Resources covering 2012\u20132014 on fraud and evasion grounds. Untested court allegations included disguising $19.8 million as loans via offshore entities.[Finding #6381] The assessment was settled for $2.4 million. Cape Lambert\u2019s share price fell 75% during the investigation period. In January 2023, West Australian media reported that Sage was applying to court for access to the AFP\u2019s criminal investigation reports\u2014a proceeding that confirmed the existence of a criminal referral.[Finding #6381]</p><p>The Australian Securities Exchange used its absolute discretion to block two Sage companies\u2014Global Iron Ltd and International Petroleum Ltd\u2014from completing transactions that would give controversial businessman Frank Timis control. ASX stated it was \"not satisfied the two Companies would comply with the ASX listing rules including the discharge of their obligations with respect to continuous disclosure on an ongoing basis.\" Timis had a 1990s drug conviction and was executive chairman of Regal Petroleum, which was fined for AIM rules continuous disclosure breaches. Sage responded by listing both African Petroleum and International Petroleum on the NSX (National Stock Exchange), a less restrictive venue.[Finding #7464]</p><p>Football Federation Australia found Perth Glory guilty of breaching the A-League salary cap for three consecutive seasons under Sage\u2019s ownership. Player payments were concealed through family member bank accounts\u2014Irish international Andy Keogh was paid A$150,000 through a family member\u2019s account while his actual salary was A$300,000\u2013350,000, with the club reporting A$150,000 to the FFA. Other concealed benefits included accommodation expenses, motor vehicle provisions, and player agent fees. The FFA excluded Perth Glory from the finals series and fined the club A$269,000. FFA CEO David Gallop stated the situation \"points to a complete breakdown in proper corporate governance\" and called Sage\u2019s claimed lack of knowledge \"obviously unacceptable for a chairman.\"[Finding #7465]</p>",
+        "finding_ids": [
+          7463,
+          6381,
+          7464,
+          7465
+        ],
+        "connection_ids": []
+      },
+      {
+        "id": "critical-metals-corp-structure",
         "title": "Critical Metals Corp and the CRML Structure",
         "viz": null,
-        "content": "<p><a href='/dossiers/critical-metals-corp'>Critical Metals Corp</a> (Nasdaq: CRML, CIK 0001951089) was incorporated in the British Virgin Islands in 2022 and listed on February 28, 2024, following a SPAC merger between Sizzle Acquisition Corp (underwritten by <a href='/dossiers/cantor-fitzgerald'>Cantor Fitzgerald</a>) and Sage's European Lithium Ltd. Cantor received 1,247,250 CRML shares as deferred underwriting compensation; <a href='/dossiers/howard-lutnick'>Howard Lutnick</a>, then Cantor CEO and now US Commerce Secretary, held indirect ownership of those shares until divesting to his sons' trusts in May 2025.<sup>[Finding #6251, #6247, #6249]</sup></p><p>CRML's business address is Sage's own office at 32 Harrogate Street, West Leederville, Australia. The company files as a foreign private issuer on Form 20-F, eliminating most individual officer compensation disclosure requirements. In FY2025, CRML reported aggregate compensation to directors and officers of $26.9 million while disclosing zero direct beneficial ownership by any named director or officer—Sage's exposure is held entirely through European Lithium.<sup>[Finding #6270, #6276]</sup></p><p>The company's financial position is precarious: losses of $51.9 million (FY2025) and $139.4 million (FY2024), working capital deficit of $15.6 million, and cash of $7.3 million as of June 30, 2025. CRML is pre-revenue and carries going concern doubt.<sup>[Finding #6262]</sup> European Lithium's systematic divestment of CRML shares to Alyeska Master Fund (9.9% holder, $70 million+ total invested) has realized at minimum A$54.75 million through CRML share sales while CRML continues to depend on external financing for Tanbreez development.<sup>[Finding #6273]</sup></p><p>CRML registered on SAM.gov on October 13, 2025 (UEI XW4PVY32Q7K1, CAGE KD8P2), with Michael C. Ryan listed as government POC, primary NAICS 212290 (Other Metal Ore Mining), and registration purpose Z2 (federal contracts and grants)—six days after its lobbying firm, Cornerstone Government Affairs, filed a termination notice following nine months of advocacy that coincided with the EXIM LOI.<sup>[Finding #6245, #6248]</sup></p>",
+        "content": "<p><a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> (Nasdaq: CRML, CIK 0001951089) was incorporated in the British Virgin Islands in 2022 and listed on February 28, 2024, following a SPAC merger between Sizzle Acquisition Corp (underwritten by <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a>) and Sage\u2019s European Lithium Ltd. <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a> received 1,247,250 CRML shares as deferred underwriting compensation; <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a>, then Cantor CEO and now US Commerce Secretary, held indirect ownership of those shares until divesting to his sons\u2019 trusts in May 2025.[Finding #6247][Finding #6249]</p><p>CRML\u2019s business address is Sage\u2019s office at 32 Harrogate Street, West Leederville, Australia\u2014a building marketed as \"Sage House\" that also houses CuFe Ltd and ESG Minerals.[Finding #7482] The company files as a foreign private issuer on Form 20-F, eliminating most individual officer compensation disclosure requirements. In FY2025, CRML reported aggregate compensation to directors and officers of $26.9 million while disclosing zero direct beneficial ownership by any named director or officer\u2014Sage\u2019s exposure is held entirely through European Lithium.[Finding #6270][Finding #6276]</p><p>CRML\u2019s financial position is precarious: losses of $51.9 million (FY2025) and $139.4 million (FY2024), working capital deficit of $15.6 million, and cash of $7.3 million as of June 30, 2025. CRML is pre-revenue and carries going concern doubt.[Finding #6262] European Lithium\u2019s systematic divestment of CRML shares to Alyeska Master Fund (9.9% holder, over $70 million total invested) has realized at minimum A$54.75 million through CRML share sales while CRML continues to depend on external financing for Tanbreez development.[Finding #6273]</p><p>CRML registered on SAM.gov on October 13, 2025 (UEI XW4PVY32Q7K1, CAGE KD8P2), with Michael C. Ryan listed as government point of contact, primary NAICS 212290 (Other Metal Ore Mining), and registration purpose Z2 (federal contracts and grants)\u2014six days after its lobbying firm, Cornerstone Government Affairs, filed a termination notice following nine months of advocacy that coincided with the EXIM Letter of Interest.[Finding #6245][Finding #6248]</p>",
         "finding_ids": [
-          6260,
-          6263,
-          6273,
+          6247,
+          6249,
+          7482,
+          6270,
+          6276,
           6262,
+          6273,
           6245,
           6248
         ],
         "connection_ids": []
       },
       {
-        "id": "corporate-network",
-        "title": "Corporate Network",
+        "id": "sec-disclosure-gaps",
+        "title": "SEC Filing Disclosure Record",
         "viz": null,
-        "content": "<p>Sage operates across at least six active corporate roles plus a set of private entities. The disclosed public-company positions are: CEO and Executive Chairman of <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> (NASDAQ: CRML, BVI); Executive Chairman of European Lithium Ltd (ASX: EUR, West Leederville—holds 37.3% of CRML as of February 2026); Executive Chairman of Cape Lambert Resources Ltd (ASX: CFE, Australia); Executive Chairman of CuFe Ltd (ASX: CUF, Australia); and Managing Director of Okewood Pty Ltd (Perth consulting entity, founded 1997).<sup>[Finding #6382]</sup> Non-executive directorships include Kupang Resources, Caeneus Minerals, and International Petroleum. Sage was a founding director of Cyclone Metals (ASX) for 24 years before being removed as chairman in October 2025 following a contested boardroom vote; his December 2025 application to the Australian Takeovers Panel alleging undisclosed associations among Cyclone shareholders was declined.<sup>[Finding #6383]</sup></p><p>Private entities in the documented network include: Marampa Iron Ore Ltd, Metal Exploration Mauritius Ltd, Metals Exploration Pty Ltd, Millennium Minerals (Operations) Pty Ltd, Mineral Securities Investments Australia Pty Ltd, Mooloogool Pty Ltd, and Eastern Petroleum Australia Pty Ltd.<sup>[Finding #6382]</sup></p><p>Sage's ownership of Perth Glory FC (A-League football club) ended when he stepped down as owner in 2023; the club subsequently entered receivership, partly attributed to the financial impact of COVID-era home game restrictions.<sup>[Finding #6383]</sup></p>",
+        "content": "<p>Cross-reference of all CRML SEC filings\u2014including 20-F annual reports for FY2024 and FY2025, both 20-F/A amendments, the F-4/A registration statement, the F-1/A registration statement, and 12 SEC correspondence filings\u2014identified no disclosure of Sage\u2019s AFP Operation Lemans foreign bribery investigation, the $9.36 million confiscation via consent orders (Supreme Court of Victoria, May 2023), or the $96 million ATO assessment against Cape Lambert Resources. Full-text search of all filings returned zero results for \"Cape Lambert,\" \"Operation Lemans,\" \"AFP,\" \"confiscation,\" \"foreign bribery,\" \"Perth Glory,\" or ATO enforcement action.[Finding #7543]</p><p>Sage\u2019s biography in all CRML filings describes him as having \"35 years experience in corporate advisory services, funds management and capital raising\" and lists only current ASX roles at CuFe Ltd and Cyclone Metals. No prior company history is disclosed. The 20-F Risk Factors section (Item 3.D) includes a detailed anti-bribery risk factor warning that operations may implicate \"the U.S. Foreign Corrupt Practices Act and the UK Bribery Act 2010\" and that failure to comply could result in \"criminal fines, imprisonment, civil penalties, disgorgement of profits\"\u2014language that treats anti-bribery risk as hypothetical while the Executive Chairman had already been subject to a $9.36 million confiscation for foreign bribery.[Finding #7549]</p><p>SEC Regulation S-K Item 401(f) requires disclosure of director involvement in specified legal proceedings within the past ten years, including certain orders or judgments in civil proceedings. The consent orders were entered in May 2023, within the ten-year window for the FY2024 and FY2025 20-F filings. The Legal Proceedings section states CRML is \"not currently a party to any legal proceedings\" adverse to it but does not address the chairman\u2019s personal legal history.[Finding #7543]</p><p>The FY2025 20-F, filed October 6, 2025, states that Sage \"holds the position of Non-Executive Chairman of ASX listed Cyclone Metals Limited.\" Sage was removed from the Cyclone Metals board in October 2025\u2014the same month as the filing. The 20-F/A amendment filed October 15, 2025 does not correct this representation despite being filed after the removal.[Finding #7547]</p>",
+        "finding_ids": [
+          7543,
+          7549,
+          7547
+        ],
+        "connection_ids": []
+      },
+      {
+        "id": "corporate-network",
+        "title": "Corporate Network and Cross-Holdings",
+        "viz": null,
+        "content": "<p>Sage operates across at least six simultaneous public company roles. The disclosed positions are: CEO and Executive Chairman of <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> (NASDAQ: CRML, BVI); Executive Chairman and CEO of European Lithium Ltd (ASX: EUR, which holds 37.3% of CRML as of February 2026 plus 1.9% held by Sage directly); Executive Chairman of CuFe Ltd (ASX: CUF); Executive Chairman of Cape Lambert Resources Ltd (ASX: CFE); and Managing Director of Okewood Pty Ltd (Perth consulting entity, founded 1997).[Finding #6382] Non-executive directorships have included Kupang Resources, Caeneus Minerals, and International Petroleum.[Finding #6382]</p><p>EUR and CRML share overlapping boards. Malcolm Day has been an EUR director since July 2012 and simultaneously serves as MD of Moab Minerals (ASX: MOM) since 1999; he also sits on the CRML board. Mykhailo Zhernov, managing partner of Millstone and Co (Ukraine, formerly ALTERA FINANCE founder), has been an EUR director since December 2021, holds 3.6% of EUR, and also serves on the CRML board.[Finding #7481] EUR\u2019s investor rights agreement entitles it to nominate four of five CRML directors while holding more than 50%\u2014an arrangement that gave Sage effective board control of CRML through EUR during the period of EUR\u2019s majority ownership.[Finding #6277]</p><p>When iron ore tenements near Rio Tinto\u2019s Cape Lambert port area expired in March 2019, European Lithium applied for and won approximately 90% of the available Pilbara exploration landholdings in a September 2019 ballot. The geographic area associated with Cape Lambert Resources\u2019 original iron ore operations is now being explored by EUR\u2014an instance of asset cycling through corporate succession.[Finding #7481]</p><p>All entities share the address at 32 Harrogate Street, West Leederville WA 6007\u2014a building referred to as \"Sage House\" in commercial real estate listings. CuFe Ltd and ESG Minerals are co-located at Unit 3, while the building also leases space to third parties through a coworking provider.[Finding #7482] Okewood Pty Ltd, Sage\u2019s private consulting company, provides management services to multiple listed entities in the network.[Finding #6382]</p><p>Private entities in the documented network include: Marampa Iron Ore Ltd, Metal Exploration Mauritius Ltd, Metals Exploration Pty Ltd, Millennium Minerals (Operations) Pty Ltd, Mineral Securities Investments Australia Pty Ltd, Mooloogool Pty Ltd, and Eastern Petroleum Australia Pty Ltd.[Finding #6382]</p>",
         "finding_ids": [
           6382,
+          7481,
+          6277,
+          7482
+        ],
+        "connection_ids": []
+      },
+      {
+        "id": "cyclone-metals-perth-glory",
+        "title": "Cyclone Metals and Perth Glory",
+        "viz": null,
+        "content": "<p>Sage was a founding director of Cyclone Metals (ASX: CLE, formerly Cape Lambert Resources) for 24 years before being removed as chairman on October 21, 2025, pursuant to a resolution passed at a requisitioned general meeting under section 249D of the Corporations Act. Sage responded by launching a spill motion against the newly appointed managing director, filing a Takeovers Panel application on December 19, 2025, alleging undisclosed association among Cyclone shareholders who voted for his removal, and simultaneously selling down his own Cyclone shareholdings. The Takeovers Panel declined to conduct proceedings (decision TP26/002), finding that Sage had \"not demonstrated a sufficient body of material to warrant the Panel making further enquiries on the allegation of an association.\"[Finding #7470] The Assay reported on the episode with a focus on the disconnect between Sage\u2019s contested position at Cyclone and his primary role at CRML.[Finding #7470]</p><p>Perth Glory FC, the A-League football club Sage owned for 15 years, was placed into receivership in July 2023. The Australian Professional Leagues issued a breach notice and stripped Sage of the A-League license after the club required loans from central APL administration to pay staff and player wages. KordaMentha was appointed to oversee the transition. Sage had invested approximately A$50 million during his tenure, including A$14 million in losses over the final three years. Financial difficulties were exacerbated by COVID-19 and forced relocation from Perth Oval for Women\u2019s World Cup upgrades.[Finding #7469] The club was subsequently placed in liquidation before being acquired by Melbourne property developer Robert Brij.[Finding #7469] The Perth Glory receivership occurred during the same period that Cape Lambert was settling with the AFP on the foreign bribery confiscation ($9.36 million, April\u2013May 2023) and while European Lithium and CRML were positioning for the NASDAQ listing via SPAC merger.[Finding #7469]</p>",
+        "finding_ids": [
+          7470,
+          7469,
           6383
         ],
         "connection_ids": []
@@ -437,12 +560,14 @@
         "id": "key-relationships",
         "title": "Key Relationships",
         "viz": "ego_network",
-        "content": "<p><strong>Greg Barnes</strong> is Sage's primary counterpart in the Tanbreez transaction. Barnes, a Perth-based geologist, founded Tanbreez in 2001 through Rimbal Pty Ltd (controlled via the Barnes Family Trust). Rimbal held 100% of Tanbreez Mining Greenland A/S prior to the CRML acquisition. Under the Heads of Agreement and the final deal structure, CRML acquires up to 92.5% of Tanbreez; Rimbal retains a minority stake and Barnes continues as principal geologist and director of Tanbreez. As of June 30, 2025, Rimbal held 11,728,174 CRML shares (11% of outstanding). Sage and Barnes co-signed the October 2025 PIPE agreement with Alyeska.<sup>[Connection #3208, Finding #6263, #6258]</sup></p><p><strong>Michael C. Ryan</strong> was appointed to the CRML board under Sage's chairmanship in March 2025 (GlobeNewswire, February 26, 2025). Ryan is a former US Air Force Colonel and graduate of the French War College and National Intelligence University who served as Deputy Assistant Secretary of Defense for European and NATO Policy from October 2019 to October 2020. He is listed as government POC on CRML's SAM.gov registration and his former DASD-Europe title gives CRML's SAM registration a direct defense-policy credential.<sup>[Connection #3205, Finding #6277]</sup></p><p><strong><a href='/dossiers/greenmet'>GreenMet</a></strong> (Greentech Minerals Holdings Inc.) brokered the Tanbreez partnership and facilitated the 10-year offtake agreement between CRML and Ucore Rare Metals for the DoD-funded Strategic Metals Complex in Louisiana. GreenMet CEO <a href='/dossiers/drew-horn'>Drew Horn</a> is a former Deputy Policy Director to Vice President Pence. GreenMet, Horn, and co-principals <a href=\"/dossiers/george-sorial\">George Sorial</a> and Keith Schiller do not appear in any of CRML's 167 publicly filed SEC documents; their compensation structure—if any—is held entirely in private agreements.<sup>[Finding #6271, #6282]</sup></p><p><strong><a href='/dossiers/howard-lutnick'>Howard Lutnick</a></strong> held indirect CRML ownership through <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a>'s SPAC underwriting shares until divesting to his sons in May 2025, shortly before becoming US Commerce Secretary. Commerce oversees EXIM Bank and the critical minerals supply chain program through which CRML's $120 million LOI was issued. Senators Warren, Van Hollen, and Wyden raised the conflict of interest in February 2026 in connection with a separate Cantor transaction with USA Rare Earth.<sup>[Finding #6249]</sup></p>",
+        "content": "<p><strong>Greg Barnes</strong> is Sage\u2019s primary counterpart in the Tanbreez transaction. Barnes, a Perth-based geologist, founded Tanbreez Mining Greenland A/S in 2001 through Rimbal Pty Ltd (controlled via the Barnes Family Trust). Under the Heads of Agreement, CRML acquires up to 92.5% of Tanbreez; Rimbal retains a minority stake and Barnes continues as principal geologist and director. As of June 30, 2025, Rimbal held 11,728,174 CRML shares (11% of outstanding). Sage and Barnes co-signed the October 2025 PIPE agreement with Alyeska.[Connection #3208][Finding #6258]</p><p><strong>Michael C. Ryan</strong> was appointed to the CRML board under Sage\u2019s chairmanship in March 2025. Ryan is a former US Air Force Colonel and graduate of the French War College and National Intelligence University who served as Deputy Assistant Secretary of Defense for European and NATO Policy from October 2019 to October 2020. He is listed as government point of contact on CRML\u2019s SAM.gov registration, giving the BVI-incorporated entity a direct defense-policy credential.[Connection #3205][Finding #6277]</p><p><strong><a href=\"/dossiers/greenmet\">GreenMet</a></strong> (Greentech Minerals Holdings Inc.) brokered the Tanbreez partnership and facilitated the 10-year offtake agreement between CRML and Ucore Rare Metals for the DoD-funded Strategic Metals Complex in Louisiana. GreenMet CEO <a href=\"/dossiers/drew-horn\">Drew Horn</a> is a former Deputy Policy Director to Vice President Pence. GreenMet, Horn, and co-principals <a href=\"/dossiers/george-sorial\">George Sorial</a> and Keith Schiller do not appear in any of CRML\u2019s 167 publicly filed SEC documents; their compensation structure\u2014if any\u2014is held entirely in private agreements.[Finding #6271][Finding #6282]</p><p><strong><a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a></strong> held indirect CRML ownership through <a href=\"/dossiers/cantor-fitzgerald\">Cantor Fitzgerald</a>\u2019s SPAC underwriting shares until divesting to his sons\u2019 trusts in May 2025, before becoming US Commerce Secretary. Commerce oversees EXIM Bank and the critical minerals supply chain program through which CRML\u2019s $120 million LOI was issued. Senators Warren, Van Hollen, and Wyden raised the conflict of interest in February 2026 in connection with a separate Cantor transaction with USA Rare Earth.[Finding #6249]</p><p><strong>Malcolm Day and Mykhailo Zhernov</strong> serve on both the EUR and CRML boards. Day has been an EUR director since July 2012 and is also MD of Moab Minerals (ASX: MOM). Zhernov, formerly founder of ALTERA FINANCE and currently managing partner of Millstone and Co (Ukraine), joined EUR in December 2021 and holds 3.6% of EUR. Their dual board seats are the structural mechanism through which Sage maintains network continuity between the parent and subsidiary.[Finding #7481]</p>",
         "finding_ids": [
+          6258,
           6277,
           6271,
+          6282,
           6249,
-          6282
+          7481
         ],
         "connection_ids": [
           3205,
@@ -450,21 +575,17 @@
         ]
       }
     ],
+    "system_role": "Sage operates a multi-jurisdictional resource structure centered on 32 Harrogate Street, West Leederville, Western Australia, serving as the controlling principal of both CRML (the US-listed subsidiary) and European Lithium (the ASX-listed parent that controls CRML's equity). His career demonstrates a consistent operational template: acquire mineral assets cheaply, vend them into listed vehicles for share consideration, and extract value through secondary sales while maintaining board control across multiple simultaneous public company chairmanships. When regulators or exchanges have blocked specific transactions, he has moved to alternative venues.",
     "open_questions": [
-      "Cape Lambert Corporation (ICIJ node 10048336) was incorporated in Panama on February 6, 2007 via Mossack Fonseca, using Consulco International (RAK FTZ, UAE) as intermediary—a timeline that coincides with Cape Lambert Resources' active deal period in Africa and Asia. The ICIJ database contains no named officers or beneficial owners. What is the beneficial ownership of this entity, and is there any public-record connection to Sage, Cape Lambert Resources, or the Marampa project?",
-      "Operation Lemans (AFP, launched 2012) produced untested allegations—bribery, insider trading, offshore loan reclassification—that remained unresolved as of January 2023 when Sage was still seeking court access to the AFP's criminal investigation reports. What is the current status of that proceeding and the AFP's referral to the Commonwealth Director of Public Prosecutions?",
-      "European Lithium has extracted at minimum A$54.75 million from CRML via secondary sales to Alyeska between October 2025 and February 2026, reducing its stake from 58.9% to 37.3%, while CRML operates with $7.3 million cash and substantial going concern doubt. What is Sage's personal economic benefit from European Lithium's CRML divestment, and does European Lithium disclose his individual equity position in its ASX filings?",
+      "The AFP's Operation Lemans consent orders ($9.36M confiscation, May 2023) and the $96M ATO assessment (settled for $2.4M) are absent from all CRML SEC filings. SEC Regulation S-K Item 401(f) requires disclosure of director involvement in specified legal proceedings within the past ten years. Has the SEC reviewed CRML's director biography disclosures, and does the consent order qualify as a disclosable proceeding under Item 401(f)?",
+      "Cape Lambert Corporation (ICIJ node 10048336) was incorporated in Panama on February 6, 2007 via Mossack Fonseca, using Consulco International (RAK FTZ, UAE) as intermediary\u2014a timeline that coincides with Cape Lambert Resources' active deal period in Africa and Asia. The ICIJ database contains no named officers or beneficial owners. What is the beneficial ownership of this entity, and is there any public-record connection to Sage, Cape Lambert Resources, or the Marampa project?",
+      "European Lithium has extracted at minimum A$54.75 million from CRML via secondary sales to Alyeska between October 2025 and February 2026, reducing its stake from 58.9% to 37.3%, while CRML operates with $7.3 million cash and going concern doubt. What is Sage's personal economic benefit from European Lithium's CRML divestment, and does European Lithium disclose his individual equity position in its ASX filings?",
       "GreenMet's role in brokering the Tanbreez transaction and EXIM LOI is entirely absent from CRML's 167 SEC filings. Did GreenMet receive equity compensation in CRML, European Lithium, or Tanbreez for introducing the parties, and does that compensation trigger any SEC related-party transaction disclosure obligation?",
-      "CRML registered in SAM.gov six days after its lobbying engagement with Cornerstone Government Affairs terminated. What federal contracts or grants has CRML pursued or received since SAM registration, and does the Z2 registration purpose (federal contracts/grants) reflect a planned direct procurement relationship with DoD, EXIM, or another agency?",
-      "The Cyclone Metals boardroom removal (October 2025) and subsequent Takeovers Panel application (declined, December 2025) coincided with Sage selling down his Cyclone shareholdings. What was the nature of the board dispute and who are the Cyclone shareholders alleged to have acted in undisclosed association?",
-      "Metal Exploration Mauritius Ltd and the Sierra Leone-adjacent private entities (Marampa Iron Ore Ltd, Metals Exploration Pty Ltd) remain undocumented in public registries. What is the current status of these entities, and do any remain active or hold residual assets from the Marampa transaction?"
+      "The CRML copper powder transaction ($20 million in shares at 40% premium for 40kg of 99.96% pure copper powder from Swiss Commodity Re) follows the structural template of Sage's prior share-for-asset swaps (including the Kasombo vend-in to Fe Limited). Swiss Commodity Re's director Kenneth Deayton has two BVI entities in ICIJ databases. What is the relationship, if any, between Deayton and the Sage corporate network?"
     ],
     "applicable_models": [
-      "dual-role-principal-agent: Sage holds CEO/Chairman of both CRML (subsidiary) and European Lithium (controlling parent), placing him on both sides of every significant related-party transaction between the two entities.",
-      "parent-divestment-while-subsidiary-distressed: European Lithium systematically extracts capital from the US-listed vehicle via secondary sales while CRML operates at a loss with going concern doubt—a pattern where the controlling shareholder monetizes before the underlying project generates revenue.",
-      "foreign-private-issuer-opacity: CRML's FPI status under SEC rules eliminates individual officer compensation disclosure, proxy statement requirements, and Section 16 real-time reporting—structural features that reduce individual disclosure requirements relative to domestic issuers, including officer compensation, proxy statements, and real-time insider reporting.",
-      "defense-credential positioning: The appointment of Michael C. Ryan (former DASD-Europe, National Intelligence University) to the CRML board and as SAM.gov POC gives a BVI-incorporated entity a defense-policy credential positioned to engage EXIM Bank and DoD.",
-      "offshore-investigation-unresolved: The Cape Lambert/Operation Lemans cluster illustrates a pattern where law enforcement investigations (ATO $96M assessment, AFP criminal referral) are settled or remain open without prosecution while the principal continues to build new vehicles and access government financing programs."
+      "jurisdictional-arbitrage",
+      "complexity-as-credential"
     ]
   },
   "viz_data": {
