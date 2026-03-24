@@ -6,10 +6,10 @@ import TimelineChart from '../../components/TimelineChart';
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, basename } from 'path';
 import {
-  buildDossierFindingEvidenceMap,
   processDossierCurationEvidence,
   safeJsonForScript,
 } from '../../lib/contentEvidencePipeline';
+import { loadDossierFindingCatalog, loadGlobalFindingCatalog, mergeFindingCatalogs } from '../../lib/findingCatalog';
 import { extractCitedFindingIds, buildDossierFindingDetailMap } from '../../lib/findingDetail';
 
 export function getStaticPaths() {
@@ -119,7 +119,10 @@ if (curation?.applicable_models) {
   }
 }
 
-const findingEvidenceMap = buildDossierFindingEvidenceMap(dossier);
+const findingEvidenceMap = mergeFindingCatalogs(
+  loadGlobalFindingCatalog(),
+  loadDossierFindingCatalog(dossier),
+).evidenceMap;
 const evidenceModeEnabled = import.meta.env.PUBLIC_ENABLE_EVIDENCE_MODE === 'true';
 const {
   leadHtml,
@@ -404,29 +407,33 @@ const supportSummary = supportMetrics.total_sentences > 0
         )}
 
         {/* CONNECTIONS — collapsed reference */}
-        {dossier.connections.length > 0 && (
+        {dossier.connections?.length > 0 && (
           <section>
             <details>
               <summary class="flex items-center justify-between cursor-pointer py-2 group">
                 <div class="flex items-center gap-4">
                   <h2 class="text-xl font-semibold text-moon group-hover:text-ember">All Connections</h2>
-                  <span class="text-xs text-mithril font-mono">{dossier.connections.length} total</span>
+                  <span class="text-xs text-mithril font-mono">{dossier.connections?.length} total</span>
                 </div>
                 <div class="rune-divider flex-1 ml-6"></div>
               </summary>
               <div class="space-y-2 mt-4">
-                {dossier.connections.map((c: any) => (
+                {dossier.connections.map((c: any) => {
+                  const displayName = c.other_person || (c.person_a === dossier.name ? c.person_b : c.person_a) || 'Unknown';
+                  const displaySlug = c.other_person_slug || displayName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                  return (
                   <div class="surface-muted px-4 py-3">
                     <div class="flex items-center gap-3 text-sm">
-                      <a href={`/dossiers/${c.other_person_slug}`} class="text-icy">
-                        {c.other_person}
+                      <a href={`/dossiers/${displaySlug}`} class="text-icy">
+                        {displayName}
                       </a>
                       <span class="text-mithril">{c.relationship_type}</span>
                       <span class="text-xs text-ember uppercase tracking-[0.2em]">{c.strength}</span>
                     </div>
-                    <p class="text-xs text-mithril mt-1">{c.description}</p>
+                    {c.description && <p class="text-xs text-mithril mt-1">{c.description}</p>}
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </details>
           </section>
@@ -488,13 +495,13 @@ const supportSummary = supportMetrics.total_sentences > 0
         </section>
 
         {/* FULL TIMELINE — collapsed raw data */}
-        {dossier.timeline.length > 0 && (
+        {dossier.timeline?.length > 0 && (
           <section>
             <details>
               <summary class="flex items-center justify-between cursor-pointer py-2 group">
                 <div class="flex items-center gap-4">
                   <h2 class="text-xl font-semibold text-moon group-hover:text-ember">Full Timeline</h2>
-                  <span class="text-xs text-mithril font-mono">{dossier.timeline.length} events</span>
+                  <span class="text-xs text-mithril font-mono">{dossier.timeline?.length ?? 0} events</span>
                 </div>
                 <div class="rune-divider flex-1 ml-6"></div>
               </summary>
@@ -526,14 +533,10 @@ const supportSummary = supportMetrics.total_sentences > 0
   {citedFindingIds.length > 0 && (
     <script type="application/json" id="finding-detail-data" set:html={findingDetailJson}></script>
   )}
-  {evidenceModeEnabled && (
+  {(evidenceModeEnabled || citedFindingIds.length > 0) && (
     <script>
-      import { initSupportMode } from '../../lib/supportMode';
-      initSupportMode();
+      import { initEvidencePage } from '../../lib/evidencePageBootstrap';
+      initEvidencePage();
     </script>
   )}
-  <script>
-    import { initFindingPopover } from '../../lib/dossierFindingPopover';
-    initFindingPopover();
-  </script>
 </BaseLayout>
