@@ -9,19 +9,129 @@
   "generated_at": "2026-03-11T18:36:07.985268",
   "last_updated": "2026-03-10T00:46:40",
   "stats": {
-    "total_findings": 7,
+    "total_findings": 11,
     "total_connections": 0,
     "total_entities": 0,
     "finding_types": {
+      "financial": 7,
       "intelligence": 2,
       "relationship": 1,
-      "financial": 3,
       "legal": 1
     },
     "connection_types": {},
     "last_updated": "2026-03-10T00:46:40"
   },
   "findings": [
+    {
+      "id": 4715,
+      "finding_type": "financial",
+      "summary": "RTX/Raytheon signed five 7-year framework agreements with Department of War on Feb 4, 2026 — 24 days before Iran strikes began. Agreements cover Tomahawk (60/yr to 1000+/yr), AMRAAM (to 1900+/yr), SM-6 (to 500+/yr), SM-3 IIA (accelerated), SM-3 IB (accelerated). Production increases of 2-4x across all systems. Manufacturing at Tucson AZ, Huntsville AL, Andover MA. RTX stock hit all-time high on Mar 2 after strikes began. RTX executives sold ~$18.15M in stock in 3 months prior to conflict, including EVP Williams (12,713 shares Feb 23) and EVP Mitchill (35,755 shares Feb 19).",
+      "detail": "The timing is structurally significant: (1) Framework agreements signed Feb 4 create the production capacity that the war beginning Feb 28 will demand; (2) The agreements use a 'collaborative funding approach designed to preserve upfront free cash flow' — meaning the government subsidizes RTX's capacity expansion; (3) RTX stock rose 4.7% on first trading day after strikes (Mar 2), hitting all-time high; (4) Executive stock sales in the week before strikes (.15M aggregate over 3 months) — no public explanation provided. The Feb 4 agreements were positioned as responding to the existing Houthi/China deterrence depletion, but the Iran war now creates urgent operational demand that far exceeds those scenarios.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 20:21:30",
+      "target_name": "RTX/Raytheon",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "RTX press release 2026-02-04, USNI News 2026-02-04, Breaking Defense 2026-02-05, Benzinga 2026-03-02, CNBC 2026-03-02",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4767,
+      "finding_type": "financial",
+      "summary": "DOGE conflict of interest: $71.1B in contracts terminated, zero SpaceX dollars cut; SpaceX competitors specifically targeted",
+      "detail": "Congressional investigations documented that DOGE terminated 27,245+ contracts totaling $71.1B while zero dollars were lost by any Musk company. SpaceX competitors were specifically cut. Simultaneously, SpaceX received: $5.9B Space Force launch contract (Apr 2025), $2B expected Golden Dome satellite constellation contract, continued $1.8B NRO Starshield work. Musk's companies collected $38B total government funding over 20 years per Fortune analysis. White House confirmed Musk is Special Government Employee but said he 'will excuse himself' from conflicts — self-policing with no independent enforcement. Multiple legislative responses: Rep. Pocan 'ELON MUSK' bill to cancel SGE-held contracts, Sen. Shaheen bill to prohibit contracts to SGE-owned companies. Lynch/Connolly demanded DoD documents on how ethics rules enforced.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-04 00:54:19",
+      "target_name": "DOGE/SpaceX",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Lynch/Connolly House letter Apr 2025; Fortune Feb 2025; Rolling Stone; NationofChange; Newsweek; EPI analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4824,
+      "finding_type": "financial",
+      "summary": "GEO Group awarded 15-year, 1.2B no-bid contract for 1,000-bed Delaney Hall NJ detention facility on Feb 25 2025, just 36 days after inauguration. Justified by border emergency declaration.",
+      "detail": "ICE signed 15-year contract with GEO Group for Delaney Hall in Newark NJ. 1,000 beds, largest ICE facility in NY metro area. Facility opened May 1 2025. Contract value approximately 1.2B over 15 years. GEO Group and CoreCivic together donated 2.8M to Trump 2024 campaign and inaugural. Both made 500K inaugural donations (double their 2017 amounts). No competitive bidding due to emergency authority.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:45:21",
+      "target_name": "GEO Group Delaney Hall Contract",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://investors.geogroup.com/news-releases/news-release-details/geo-group-awarded-15-year-contract-us-immigration-and-customs",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://thehill.com/homenews/administration/5168266-ice-new-jersey-detention-center/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4826,
+      "finding_type": "financial",
+      "summary": "CSI Aviation awarded no-bid deportation flight contract (128-219M) on Feb 28 2025, 39 days from inauguration. CEO Allen Weh donated 840K to Trump PACs. ICE cited inability to compete due to high priority.",
+      "detail": "ICE posted sole-source notice Feb 28 for interim contract to CSI Aviation effective March 1 2025. Initial value 128M for 6 months, extendable to 219M over 1 year. Now worth over 321M. CSI has received 1.6B in ICE contracts across administrations. CEO Allen Weh, daughter, wife collectively donated 840K to Trump-aligned PACs. Company hosted Trump campaign rally. In 2024, CSI won separate 3.6B contract (challenged in court by Classic Air Charter). Subcontractors include GlobalX (80% of ICE removal flights in 2024) and GEO Transport (GEO Group subsidiary, 25M annual).",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-04 01:45:33",
+      "target_name": "CSI Aviation Deportation Flight Contract",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.pogo.org/investigates/meet-the-ice-contractor-running-deportation-flights",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.usaspending.gov/award/CONT_AWD_70CDCR25FR0000022_7012_GS33F0025V_4730",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4863,
       "finding_type": "intelligence",

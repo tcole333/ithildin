@@ -9,12 +9,14 @@
   "generated_at": "2026-03-11T18:36:07.998333",
   "last_updated": "2026-03-05T23:36:58",
   "stats": {
-    "total_findings": 6,
+    "total_findings": 13,
     "total_connections": 5,
     "total_entities": 0,
     "finding_types": {
-      "intelligence": 1,
-      "financial": 5
+      "intelligence": 2,
+      "financial": 9,
+      "identity": 1,
+      "unknown": 1
     },
     "connection_types": {
       "corporate": 3,
@@ -71,10 +73,35 @@
       ]
     },
     {
+      "id": 4707,
+      "finding_type": "financial",
+      "summary": "xAI awarded 200M Pentagon contract Jul 2025 for Grok integration into military systems -- contract came out of nowhere per former defense contracting official, now expanding to classified systems",
+      "detail": "Context correction: The $200M contract was not unique to xAI. CNBC reported Jul 14 2025 that Anthropic, Google, OpenAI, AND xAI were each granted up to $200M for AI work from DoD. Finding accurately describes xAI's contract but implies it was a sole-source award. The 'came out of nowhere' quote attributed to 'former defense contracting official' was reported by NBC News. Core claim of $200M xAI contract is accurate.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "verified",
+      "created_at": "2026-03-03 19:35:48",
+      "target_name": "xAI Pentagon Contract",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.axios.com/2025/07/14/xai-pentagon-grok-contract; https://www.cnbc.com/2025/07/14/anthropic-google-openai-xai-granted-up-to-200-million-from-dod.html; https://www.warren.senate.gov/newsroom/press-releases/warren-questions-pentagon-awarding-200-million-contract; https://www.axios.com/2026/02/23/ai-defense-department-deal-musk-xai-grok",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 5298,
       "finding_type": "financial",
       "summary": "xAI awarded $200M Pentagon contract for Grok AI in military systems, including classified access",
-      "detail": "In July 2025, Pentagon awarded xAI $200M contract to provide Grok AI to 3 million military personnel. In February 2026, xAI signed agreement for Grok access to classified Pentagon systems \u2014 previously only Anthropic Claude had classified access. xAI agreed to 'all lawful purposes' standard that Anthropic refused (Anthropic blocked mass surveillance and autonomous weapons use). DOGE staff reportedly spent months pushing agencies to adopt Grok before contract. Sen. Warren demanded investigation in September 2025.",
+      "detail": "In July 2025, Pentagon awarded xAI $200M contract to provide Grok AI to 3 million military personnel. In February 2026, xAI signed agreement for Grok access to classified Pentagon systems — previously only Anthropic Claude had classified access. xAI agreed to 'all lawful purposes' standard that Anthropic refused (Anthropic blocked mass surveillance and autonomous weapons use). DOGE staff reportedly spent months pushing agencies to adopt Grok before contract. Sen. Warren demanded investigation in September 2025.",
       "source_datasets": [
         "web_search"
       ],
@@ -135,6 +162,31 @@
       ]
     },
     {
+      "id": 5498,
+      "finding_type": "intelligence",
+      "summary": "Amanda Scales, former xAI employee, appointed OPM Chief of Staff. As CoS she served as point of contact for Trump federal worker purge, coordinating all OPM guidance on employee terminations. At least 23 employees hired at OPM between Jan 20 - Feb 20 worked for DOGE. ProPublica found 12 DOGE members remained officially employed by previous employers and 9 continued receiving corporate benefits (health insurance, stock vesting, retirement) while serving in government. DOGE personnel demographics: 83% male, 80%+ had no prior government experience, 28 were aged 29 or younger.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 22:32:13",
+      "target_name": "Amanda Scales",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://therevolvingdoorproject.org/scales-amanda-doge-agent/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 5615,
       "finding_type": "financial",
       "summary": "xAI has multiple SEC Form D filings through fund vehicles managed by Sydecar LLC (a fund administration platform). Identified entities: xAI 2 May 2024 (CIK 2026824, filed Jun 2024), xAi a Series of OORI LLC (CIK 2054050, filed Jan 2025), xAI 2025(1) (CIK 2080444, filed Aug 2025), xAI 2025(2) (CIK 2102114, filed Dec 2025, .5K offering, 3 investors), xAI Grain Ventures Jan 2026 (CIK 2109943, filed Feb 2026, .5K offering, 11 investors). All registered at 2093 Philadelphia Pike, Claymont DE 19703 (registered agent address). These are small SPV fund vehicles, not xAI's primary fundraising. xAI Corp itself is not a registered SEC entity.",
@@ -178,6 +230,196 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "FEC Schedule A employer search xAI",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5720,
+      "finding_type": "financial",
+      "summary": "OPM Chief of Staff came directly from xAI with $100M-250M in xAI stock and active employment agreement",
+      "detail": "Amanda D. Scales, Chief of Staff at Office of Personnel Management, disclosed xAI (Software) valued at $100M-250M with salary income of $59,392, plus xAI unvested equity. She was Recruiting Leader at xAI from 10/2024-Present and lists an active xAI Employment Agreement and xAI Defined Contribution Plan. She came to OPM on 1/20/2025. Her prior role was Sr Principal at Human Capital VC firm (7/2022-10/2024) with salary/bonus of $427,227 and $50K-100K equity. She also holds Uber stock options and RSUs. Scales moved from Musk xAI directly to overseeing federal personnel.",
+      "source_datasets": [
+        "propublica_disclosures"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 02:40:10",
+      "target_name": "Amanda Scales",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica OGE 278 disclosure scales-amanda-d doc_id 3267",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5921,
+      "finding_type": "identity",
+      "summary": "xAI Memphis data center operating entities for Colossus supercomputer",
+      "detail": "CTC Property LLC and CTC Holding LLC are xAI's local operating entities for its Colossus supercomputer data center in Memphis, TN. CTC Property LLC leases the former Electrolux factory at 3231 Paul R. Lowry Rd, Memphis, TN 38109 and operates the 100,000+ GPU cluster. Signed 21-year lease for 522 acres in Frank C. Pidgeon Industrial Park via EDGE (Oct 2024). Purchased parcels at 5400 Tulane Rd, Whitehaven for ~80M. Both share address 2110 Ranch Road 620 S, Unit 341886, Lakeway, TX 78734 (Musk/Excession PO Box). Named defendants in 2025 NAACP Clean Air Act lawsuit alongside X.AI Corp. TVA board approved >100MW power.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 17:47:33",
+      "target_name": "CTC Property LLC / CTC Holding LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DataCenterDynamics",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SELC Clean Air Act notice June 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WREG Memphis reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5934,
+      "finding_type": "financial",
+      "summary": "AIQ Phase LLC SAM.gov registration confirms xAI government contracting subsidiary: UEI KY8TXYKMJU95, CAGE 13TH1, Wyoming incorporation, registered July 1 2025 — two weeks before M Pentagon CDAO contract award",
+      "detail": "SAM.gov bulk data confirms AIQ Phase LLC (UEI: KY8TXYKMJU95, CAGE: 13TH1) registered at 1530 Page Mill Rd Ste 250, Palo Alto CA 94304 — an xAI office address. Wyoming incorporation (vs xAI Corp in Nevada). Entity start date May 17 2024, SAM registration July 1 2025, activated November 6 2025. Government POC: Arnaud Scheer (Contracts Manager). Primary NAICS 541715 (R&D). EVS validation by Ernst and Young. The SAM registration came exactly 13 days before the July 14 2025 CDAO contract award. Per NBC News, xAI was a late addition to the M program — former Pentagon AI lead Glenn Parham said there had not been a single discussion with xAI before March 2025. The contract is not yet in USASpending, suggesting OTA or delayed FPDS reporting. No public reporting has connected AIQ Phase LLC to xAI by name, making the SAM registration the key link.",
+      "source_datasets": [
+        "sam_gov",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 17:58:29",
+      "target_name": "AIQ Phase LLC",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "DefenseScoop 7/14/2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News rcna219488",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SAM.gov bulk entity data (UEI KY8TXYKMJU95)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5947,
+      "finding_type": "financial",
+      "summary": "xAI employee served as OPM CoS managing federal layoffs; disclosed only $415K-1M net worth despite xAI equity; returned to xAI by April 2025",
+      "detail": "Amanda Scales, xAI Recruiting Leader (Oct 2024-present per disclosure), appointed OPM Chief of Staff January 2025. ProPublica 278 disclosure shows net worth $415,005-$1,050,000. Holdings: xAI equity (reported as $100M-250M category but actual value likely $0-1,000 for unvested equity), Human Capital VC equity $50K-100K, Uber stock $50K-100K (from prior role), Morgan Stanley brokerage $50K-100K. Income: $427,227 salary/bonus from Human Capital, $59,392 from xAI. As CoS she was point of contact for all OPM layoff guidance and had authority to approve exemptions for federal worker terminations. Returned to xAI by April 2025 after approximately 3 months in government. No formal recusal from Musk-related matters documented.",
+      "source_datasets": [
+        "web_search",
+        "propublica_disclosures"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:23:32",
+      "target_name": "Amanda Scales",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Nextgov OPM reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica 278 disclosure (scales-amanda-d)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Revolving Door Project DOGE Agent profile",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Web search results on Scales departure",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5998,
+      "finding_type": null,
+      "summary": "SYNTHESIS: Workforce Decimation Scale — 352,000 federal employees exited in 2025 including 123,000 deferred resignations, the largest reduction in federal workforce history, executed by personnel with no government experience",
+      "detail": "PATTERN: The unprecedented federal workforce reduction was executed by DOGE operatives with minimal government experience, controlled through OPM personnel placed from Musk companies and a16z.\n\nWORKFORCE IMPACT BY THE NUMBERS:\n- 352,000 employees exited federal roles in 2025 (OPM data)\n- 123,000+ took deferred resignation offer\n- 10,000+ federal contracts terminated worth 71B by May 2025\n- Total impacted contract value reached 329B (per our finding F5322)\n- Largest reduction of federal workforce in history (per OPM)\n\nKEY PERSONNEL CONTROLLING THE REDUCTION:\n- Amanda Scales (xAI HR): OPM Chief of Staff, initial contact for agency leaders compiling fired probationary worker lists, authority to grant exemptions\n- Brian Bjelde (SpaceX 20+ years): OPM top DOGE lieutenant for headcount slashing\n- Hanna (SpaceX HR manager): OPM expert designation\n- Scott Kupor (a16z): OPM Director from July 2025, plans to eliminate nearly 300,000 more federal jobs\n\nAGENCY-SPECIFIC IMPACTS:\n- FDA: 1,000+ staffers fired including neurological device reviewers overseeing Neuralink (F5320)\n- SSA: CIO positions cycled through 3+ DOGE operatives (Russo, Moghaddassi, Coristine)\n- IRS: DOGE cuts threaten to cost more than DOGE will save per ProPublica (F5507)\n- NOAA: Data collection scrapped, energy market transparency destroyed\n\nFACT: 352,000 federal employee exits in 2025 per OPM, including 123,000 deferred resignations.\nFACT: OPM Chief of Staff Amanda Scales came directly from xAI HR with no government experience.\nINFERENCE: The workforce reduction was not primarily about efficiency but about replacing institutional knowledge and career civil servants with a smaller workforce loyal to the new political leadership and amenable to corporate influence.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-06 18:27:29",
+      "target_name": "DOGE Federal Workforce",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://fortune.com/2025/09/19/scott-kupor-a16z-talks-new-role-director-opm-trump-doge-job-cuts/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnbc.com/2026/02/12/after-doge-cuts-federal-workers-new-roles.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.govexec.com/transition/2025/04/project-2025-wanted-hobble-federal-workforce-doge-has-hastily-done-and-more/404390/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -311,13 +553,13 @@
       }
     ],
     "curated_at": "2026-03-11T22:55:54.265033",
-    "lead": "<p>xAI Corp, incorporated in Nevada and headquartered at 1450 Page Mill Road, Palo Alto, California, was founded by <a href=\"/dossiers/elon-musk\">Elon Musk</a> in 2023 to compete directly with OpenAI and Anthropic. Within thirty months of incorporation it had raised $12 billion across two rounds \u2014 a $6 billion Series B in May 2024 and a $6 billion Series C in December 2024 \u2014 from investors including a16z, Sequoia, Fidelity, BlackRock, Lightspeed, Qatar Investment Authority, Nvidia, AMD, and Saudi Prince Alwaleed's Kingdom Holding [Finding #5349]. A parallel network of small SPV fund vehicles managed by Sydecar LLC filed five additional Form D offerings between June 2024 and February 2026, all registered to a Claymont, Delaware registered-agent address, none identifying xAI Corp itself as a registered SEC entity [Finding #5615].</p><p>In July 2025, the Pentagon awarded a contract worth up to $200 million to AIQ Phase LLC \u2014 a Wyoming entity registered at xAI's Palo Alto office address, incorporated May 2024 and activated in SAM.gov on November 6, 2025, two weeks before the award announcement \u2014 for integration of xAI's Grok model across approximately three million military and civilian DoD personnel [Finding #5934] [Finding #5298]. By February 2026 xAI had secured access to classified Pentagon systems, replacing Anthropic's Claude, which had held that position but lost it after refusing a Pentagon demand to make its model available for 'all lawful purposes,' a standard that specifically covers mass surveillance of Americans and development of fully autonomous weapons [Finding #5346].</p><p><a href=\"/dossiers/spacex\">SpaceX</a> acquired xAI on February 2, 2026 in an all-stock transaction that set the combined valuation at $1.25 trillion, using X.AI Holdings Corp \u2014 a Nevada merger vehicle with <a href=\"/dossiers/jared-birchall\">Jared Birchall</a> as Corporate Secretary \u2014 as the structural vehicle [Finding #5301] [Finding #5560]. According to industry reporting, the Colossus supercomputer facility in Memphis, Tennessee, began Phase 1 with 100,000 Nvidia H100 GPUs in 122 days and is expanding toward 555,000 GPUs at 2 gigawatts of power capacity, operates through CTC Property LLC, a Nevada entity managed by Birchall's Excession LLC family office under a 21-year lease on the former Electrolux factory at 3231 Paul R Lowry Road [Finding #4395] [Finding #5921] [Finding #6218].</p>",
-    "system_role": "xAI is Elon Musk's artificial intelligence operating company \u2014 the entity that develops the Grok model, operates the Colossus supercomputer facility, holds the Pentagon's classified AI contract, and served as the AI business being absorbed into SpaceX through the February 2026 all-stock merger. It is the node that connects the DOGE-era federal data access episode, the government contracting pathway, the Musk private entity infrastructure managed by Jared Birchall, and the regulatory landscape preceding the merger. Amanda Scales, who managed xAI recruiting, carried xAI equity into her role as OPM Chief of Staff where she coordinated federal workforce terminations before returning to xAI \u2014 making xAI the employer on both sides of that revolving door transaction.",
+    "lead": "<p>xAI Corp, incorporated in Nevada and headquartered at 1450 Page Mill Road, Palo Alto, California, was founded by <a href=\"/dossiers/elon-musk\">Elon Musk</a> in 2023 to compete directly with OpenAI and Anthropic. Within thirty months of incorporation it had raised $12 billion across two rounds — a $6 billion Series B in May 2024 and a $6 billion Series C in December 2024 — from investors including a16z, Sequoia, Fidelity, BlackRock, Lightspeed, Qatar Investment Authority, Nvidia, AMD, and Saudi Prince Alwaleed's Kingdom Holding [Finding #5349]. A parallel network of small SPV fund vehicles managed by Sydecar LLC filed five additional Form D offerings between June 2024 and February 2026, all registered to a Claymont, Delaware registered-agent address, none identifying xAI Corp itself as a registered SEC entity [Finding #5615].</p><p>In July 2025, the Pentagon awarded a contract worth up to $200 million to AIQ Phase LLC — a Wyoming entity registered at xAI's Palo Alto office address, incorporated May 2024 and activated in SAM.gov on November 6, 2025, two weeks before the award announcement — for integration of xAI's Grok model across approximately three million military and civilian DoD personnel [Finding #5934] [Finding #5298]. By February 2026 xAI had secured access to classified Pentagon systems, replacing Anthropic's Claude, which had held that position but lost it after refusing a Pentagon demand to make its model available for 'all lawful purposes,' a standard that specifically covers mass surveillance of Americans and development of fully autonomous weapons [Finding #5346].</p><p><a href=\"/dossiers/spacex\">SpaceX</a> acquired xAI on February 2, 2026 in an all-stock transaction that set the combined valuation at $1.25 trillion, using X.AI Holdings Corp — a Nevada merger vehicle with <a href=\"/dossiers/jared-birchall\">Jared Birchall</a> as Corporate Secretary — as the structural vehicle [Finding #5301] [Finding #5560]. According to industry reporting, the Colossus supercomputer facility in Memphis, Tennessee, began Phase 1 with 100,000 Nvidia H100 GPUs in 122 days and is expanding toward 555,000 GPUs at 2 gigawatts of power capacity, operates through CTC Property LLC, a Nevada entity managed by Birchall's Excession LLC family office under a 21-year lease on the former Electrolux factory at 3231 Paul R Lowry Road [Finding #4395] [Finding #5921] [Finding #6218].</p>",
+    "system_role": "xAI is Elon Musk's artificial intelligence operating company — the entity that develops the Grok model, operates the Colossus supercomputer facility, holds the Pentagon's classified AI contract, and served as the AI business being absorbed into SpaceX through the February 2026 all-stock merger. It is the node that connects the DOGE-era federal data access episode, the government contracting pathway, the Musk private entity infrastructure managed by Jared Birchall, and the regulatory landscape preceding the merger. Amanda Scales, who managed xAI recruiting, carried xAI equity into her role as OPM Chief of Staff where she coordinated federal workforce terminations before returning to xAI — making xAI the employer on both sides of that revolving door transaction.",
     "sections": [
       {
         "id": "corporate-structure",
         "title": "Corporate Structure and Capitalization",
-        "content": "xAI Corp is incorporated in Nevada and maintains its operational headquarters at 1450 Page Mill Road, Palo Alto, California. It is not itself a registered SEC entity; the primary Form D filers in the xAI ecosystem are X.AI Corp (CIK 0002002695, four filings 2023\u20132025) and X.AI Holdings Corp (CIK 0002079267, two filings 2025\u20132026), both with Jared Birchall listed as executive officer [Finding #5615] [Finding #6213]. A separate cluster of five small SPV vehicles \u2014 xAI 2 May 2024 (CIK 2026824), xAi a Series of OORI LLC (CIK 2054050), xAI 2025(1) (CIK 2080444), xAI 2025(2) (CIK 2102114, three investors), and xAI Grain Ventures Jan 2026 (CIK 2109943, eleven investors) \u2014 were administered by Sydecar LLC and registered to 2093 Philadelphia Pike, Claymont, Delaware 19703 (a registered-agent address) [Finding #5615]. These SPVs represent secondary-market and co-investment vehicles distinct from xAI's primary fundraising rounds. FEC employer-field records identify Marc Tessier-Lavigne, former Stanford president who resigned in 2023 under allegations of research misconduct, as CEO at xAI \u2014 a personnel datum that does not appear in xAI's own public disclosures [Finding #5619]. No LDA lobbying registration appears in the Senate database for xAI or X.AI despite regulatory exposure at the FTC and Commerce Department [Finding #5622]. See also: <a href='/dossiers/elon-musk'>Elon Musk</a>, <a href='/dossiers/jared-birchall'>Jared Birchall</a>, <a href='/dossiers/musk-entities'>Musk Entities</a>.",
+        "content": "xAI Corp is incorporated in Nevada and maintains its operational headquarters at 1450 Page Mill Road, Palo Alto, California. It is not itself a registered SEC entity; the primary Form D filers in the xAI ecosystem are X.AI Corp (CIK 0002002695, four filings 2023–2025) and X.AI Holdings Corp (CIK 0002079267, two filings 2025–2026), both with Jared Birchall listed as executive officer [Finding #5615] [Finding #6213]. A separate cluster of five small SPV vehicles — xAI 2 May 2024 (CIK 2026824), xAi a Series of OORI LLC (CIK 2054050), xAI 2025(1) (CIK 2080444), xAI 2025(2) (CIK 2102114, three investors), and xAI Grain Ventures Jan 2026 (CIK 2109943, eleven investors) — were administered by Sydecar LLC and registered to 2093 Philadelphia Pike, Claymont, Delaware 19703 (a registered-agent address) [Finding #5615]. These SPVs represent secondary-market and co-investment vehicles distinct from xAI's primary fundraising rounds. FEC employer-field records identify Marc Tessier-Lavigne, former Stanford president who resigned in 2023 under allegations of research misconduct, as CEO at xAI — a personnel datum that does not appear in xAI's own public disclosures [Finding #5619]. No LDA lobbying registration appears in the Senate database for xAI or X.AI despite regulatory exposure at the FTC and Commerce Department [Finding #5622]. See also: <a href='/dossiers/elon-musk'>Elon Musk</a>, <a href='/dossiers/jared-birchall'>Jared Birchall</a>, <a href='/dossiers/musk-entities'>Musk Entities</a>.",
         "viz": null
       },
       {
@@ -329,36 +571,36 @@
       {
         "id": "government-contracting",
         "title": "Pentagon Contract and GSA Procurement",
-        "content": "The primary vehicle for xAI's federal contracting is AIQ Phase LLC (UEI: KY8TXYKMJU95, CAGE: 13TH1), a Wyoming entity with its registered address at 1530 Page Mill Road, Suite 250, Palo Alto \u2014 an xAI office address. AIQ Phase was incorporated May 17, 2024, registered in SAM.gov on July 1, 2025, and activated November 6, 2025 \u2014 placing its SAM registration two weeks before the announced Pentagon contract [Finding #5934]. In July 2025, the Chief Digital and Artificial Intelligence Office (CDAO) awarded the contract, worth up to $200 million, for Grok integration across approximately three million military and civilian DoD personnel. A former defense contracting official told media that xAI had not appeared in prior contract discussions before the award [Finding #4707]. Senator Warren wrote to Defense Secretary Hegseth on September 10, 2025 requesting answers on five specific questions: whether Musk discussed the contract during his DOGE tenure; whether the contract received standard government approval processes; and whether any waiver of competitive bidding requirements was obtained [Finding #5331]. According to reporting, the GSA separately entered a deal allowing federal agencies to purchase Grok 4 at 42 cents per query through March 2027 [Finding #4389]. Reuters reported in May 2025 that DOGE staff had spent months pushing federal agencies to adopt Grok before the formal contract was in place [Finding #5351]. See also: <a href='/dossiers/doge'>DOGE</a>, <a href='/dossiers/elon-musk'>Elon Musk</a>.",
+        "content": "The primary vehicle for xAI's federal contracting is AIQ Phase LLC (UEI: KY8TXYKMJU95, CAGE: 13TH1), a Wyoming entity with its registered address at 1530 Page Mill Road, Suite 250, Palo Alto — an xAI office address. AIQ Phase was incorporated May 17, 2024, registered in SAM.gov on July 1, 2025, and activated November 6, 2025 — placing its SAM registration two weeks before the announced Pentagon contract [Finding #5934]. In July 2025, the Chief Digital and Artificial Intelligence Office (CDAO) awarded the contract, worth up to $200 million, for Grok integration across approximately three million military and civilian DoD personnel. A former defense contracting official told media that xAI had not appeared in prior contract discussions before the award [Finding #4707]. Senator Warren wrote to Defense Secretary Hegseth on September 10, 2025 requesting answers on five specific questions: whether Musk discussed the contract during his DOGE tenure; whether the contract received standard government approval processes; and whether any waiver of competitive bidding requirements was obtained [Finding #5331]. According to reporting, the GSA separately entered a deal allowing federal agencies to purchase Grok 4 at 42 cents per query through March 2027 [Finding #4389]. Reuters reported in May 2025 that DOGE staff had spent months pushing federal agencies to adopt Grok before the formal contract was in place [Finding #5351]. See also: <a href='/dossiers/doge'>DOGE</a>, <a href='/dossiers/elon-musk'>Elon Musk</a>.",
         "viz": null
       },
       {
         "id": "classified-access",
         "title": "Classified Systems Access and the Anthropic Displacement",
-        "content": "As of February 2026, Grok holds access to classified Pentagon systems that previously belonged exclusively to Anthropic's Claude. Anthropic lost that position after refusing the Pentagon's demand to make its model available for 'all lawful purposes' \u2014 a contractual standard that Anthropic's counsel identified as covering mass surveillance of Americans and development of fully autonomous lethal weapons systems. xAI accepted the standard [Finding #5346]. The Pentagon AI chief publicly confirmed Grok's authorization for classified networks; six of xAI's twelve co-founders had departed the company before the deal closed, with safety concerns cited in contemporaneous reporting [Finding #5298]. OpenAI and Google were separately reported to be in discussions for classified access of their own [Finding #5346]. In February 2026, <a href=\"/dossiers/spacex\">SpaceX</a> and the newly merged xAI were selected as one of a small group of competitors for the Pentagon's $100 million autonomous drone swarm competition, run by the Defense Innovation Unit and Defense Autonomous Warfare Group under US Special Operations Command [Finding #5328]. The combination of classified Grok authorization with the Colossus compute facility, the X social media platform data, and the Starshield classified satellite communications network \u2014 all consolidated under a single owner through the SpaceX merger \u2014 created a corporate configuration in which intelligence-grade satellite operations and AI inference on classified data share the same ownership chain [Finding #4702]. See also: <a href='/dossiers/spacex-xai-merger'>SpaceX-xAI Merger</a>, <a href='/dossiers/spacexstarshield'>SpaceX/Starshield</a>.",
+        "content": "As of February 2026, Grok holds access to classified Pentagon systems that previously belonged exclusively to Anthropic's Claude. Anthropic lost that position after refusing the Pentagon's demand to make its model available for 'all lawful purposes' — a contractual standard that Anthropic's counsel identified as covering mass surveillance of Americans and development of fully autonomous lethal weapons systems. xAI accepted the standard [Finding #5346]. The Pentagon AI chief publicly confirmed Grok's authorization for classified networks; six of xAI's twelve co-founders had departed the company before the deal closed, with safety concerns cited in contemporaneous reporting [Finding #5298]. OpenAI and Google were separately reported to be in discussions for classified access of their own [Finding #5346]. In February 2026, <a href=\"/dossiers/spacex\">SpaceX</a> and the newly merged xAI were selected as one of a small group of competitors for the Pentagon's $100 million autonomous drone swarm competition, run by the Defense Innovation Unit and Defense Autonomous Warfare Group under US Special Operations Command [Finding #5328]. The combination of classified Grok authorization with the Colossus compute facility, the X social media platform data, and the Starshield classified satellite communications network — all consolidated under a single owner through the SpaceX merger — created a corporate configuration in which intelligence-grade satellite operations and AI inference on classified data share the same ownership chain [Finding #4702]. See also: <a href='/dossiers/spacex-xai-merger'>SpaceX-xAI Merger</a>, <a href='/dossiers/spacexstarshield'>SpaceX/Starshield</a>.",
         "viz": null
       },
       {
         "id": "doge-pipeline",
         "title": "DOGE Personnel and the Amanda Scales Revolving Door",
-        "content": "Amanda Scales joined xAI as Recruiting Leader in October 2024 and was appointed OPM Chief of Staff on January 20, 2025. Her OGE 278 financial disclosure lists xAI equity valued at $100 million to $250 million, an active xAI Employment Agreement, and an unvested xAI equity tranche, alongside a salary of $59,392 from OPM [Finding #5720]. As OPM Chief of Staff, Scales served as the designated point of contact coordinating all agency guidance on federal employee terminations during the 2025 workforce reduction, which resulted in approximately 352,000 federal employees departing \u2014 including 123,000 deferred resignations \u2014 the largest federal workforce reduction on record [Finding #5498] [Finding #5998]. Brian Bjelde (<a href=\"/dossiers/spacex\">SpaceX</a> VP of Human Resources) was concurrently installed at OPM, giving Musk-company employees supervisory access to OPM personnel databases containing personally identifiable information on millions of federal workers, including Social Security numbers, medical histories, and home addresses [Finding #5190]. Scales departed OPM and returned to xAI by April 2025 [Finding #5947]. Her disclosed net worth of $415,005 to $1,050,000 reflected the unvested status of her xAI equity at time of disclosure; the actual future value of that equity, contingent on vesting and the SpaceX-xAI merger, was not disclosed [Finding #5947]. The xAI and Tesla employees who entered government agencies \u2014 Scales to OPM, <a href=\"/dossiers/thomas-shedd\">Thomas Shedd</a> (Tesla) to GSA and DOL, Nicholas Alm (Tesla) to DHS \u2014 all entered government on January 20, 2025 and all returned to their prior employers within the year [Finding #5756] [Finding #5990]. See also: <a href='/dossiers/doge'>DOGE</a>, <a href='/dossiers/elon-musk'>Elon Musk</a>.",
+        "content": "Amanda Scales joined xAI as Recruiting Leader in October 2024 and was appointed OPM Chief of Staff on January 20, 2025. Her OGE 278 financial disclosure lists xAI equity valued at $100 million to $250 million, an active xAI Employment Agreement, and an unvested xAI equity tranche, alongside a salary of $59,392 from OPM [Finding #5720]. As OPM Chief of Staff, Scales served as the designated point of contact coordinating all agency guidance on federal employee terminations during the 2025 workforce reduction, which resulted in approximately 352,000 federal employees departing — including 123,000 deferred resignations — the largest federal workforce reduction on record [Finding #5498] [Finding #5998]. Brian Bjelde (<a href=\"/dossiers/spacex\">SpaceX</a> VP of Human Resources) was concurrently installed at OPM, giving Musk-company employees supervisory access to OPM personnel databases containing personally identifiable information on millions of federal workers, including Social Security numbers, medical histories, and home addresses [Finding #5190]. Scales departed OPM and returned to xAI by April 2025 [Finding #5947]. Her disclosed net worth of $415,005 to $1,050,000 reflected the unvested status of her xAI equity at time of disclosure; the actual future value of that equity, contingent on vesting and the SpaceX-xAI merger, was not disclosed [Finding #5947]. The xAI and Tesla employees who entered government agencies — Scales to OPM, <a href=\"/dossiers/thomas-shedd\">Thomas Shedd</a> (Tesla) to GSA and DOL, Nicholas Alm (Tesla) to DHS — all entered government on January 20, 2025 and all returned to their prior employers within the year [Finding #5756] [Finding #5990]. See also: <a href='/dossiers/doge'>DOGE</a>, <a href='/dossiers/elon-musk'>Elon Musk</a>.",
         "viz": "ego_network"
       },
       {
         "id": "merger-and-consolidation",
         "title": "SpaceX Acquisition and Post-Merger Structure",
-        "content": "SpaceX completed its acquisition of xAI on February 2, 2026 through an all-stock exchange at a ratio of 0.1433 xAI shares per SpaceX share, implying a $250 billion xAI valuation and a $1 trillion SpaceX valuation, for a combined $1.25 trillion. The merger vehicle was X.AI Holdings Corp (CIK 0002079267), a Nevada entity incorporated in 2025 with Birchall as Corporate Secretary, which had raised $1.6 billion across two Form D offerings by January 2026 [Finding #5301] [Finding #5560]. Two shell corporations \u2014 X12 Inc. and X42 Inc., both Nevada, both incorporated March 27, 2025 and both dissolved the same day \u2014 appear to have served as structural transaction vehicles alongside X.AI Holdings Corp [Finding #5560]. The combined entity post-merger controls the Grok classified Pentagon contract, the Starshield NRO and military satellite infrastructure, the X social media platform, and the Colossus compute campus, alongside $14.6 billion in all-time NASA and DoD contract obligations [Finding #4702]. The FTC entered the post-merger period with a 15 percent budget cut proposed, staff dismissed from its antitrust division, and a new chair who signaled departure from aggressive antitrust enforcement \u2014 conditions that took shape during <a href=\"/dossiers/doge\">DOGE</a>'s operational period [Finding #5499]. No challenge to the transaction has been publicly reported from FTC, CFIUS, or any other regulatory body. See also: <a href='/dossiers/spacex-xai-merger'>SpaceX-xAI Merger</a>, <a href='/dossiers/spacex'>SpaceX</a>, <a href='/dossiers/jared-birchall'>Jared Birchall</a>.",
+        "content": "SpaceX completed its acquisition of xAI on February 2, 2026 through an all-stock exchange at a ratio of 0.1433 xAI shares per SpaceX share, implying a $250 billion xAI valuation and a $1 trillion SpaceX valuation, for a combined $1.25 trillion. The merger vehicle was X.AI Holdings Corp (CIK 0002079267), a Nevada entity incorporated in 2025 with Birchall as Corporate Secretary, which had raised $1.6 billion across two Form D offerings by January 2026 [Finding #5301] [Finding #5560]. Two shell corporations — X12 Inc. and X42 Inc., both Nevada, both incorporated March 27, 2025 and both dissolved the same day — appear to have served as structural transaction vehicles alongside X.AI Holdings Corp [Finding #5560]. The combined entity post-merger controls the Grok classified Pentagon contract, the Starshield NRO and military satellite infrastructure, the X social media platform, and the Colossus compute campus, alongside $14.6 billion in all-time NASA and DoD contract obligations [Finding #4702]. The FTC entered the post-merger period with a 15 percent budget cut proposed, staff dismissed from its antitrust division, and a new chair who signaled departure from aggressive antitrust enforcement — conditions that took shape during <a href=\"/dossiers/doge\">DOGE</a>'s operational period [Finding #5499]. No challenge to the transaction has been publicly reported from FTC, CFIUS, or any other regulatory body. See also: <a href='/dossiers/spacex-xai-merger'>SpaceX-xAI Merger</a>, <a href='/dossiers/spacex'>SpaceX</a>, <a href='/dossiers/jared-birchall'>Jared Birchall</a>.",
         "viz": null
       }
     ],
     "open_questions": [
-      "AIQ Phase LLC was registered in SAM.gov two weeks before the Pentagon contract award \u2014 was a sole-source justification filed, and if so on what grounds?",
+      "AIQ Phase LLC was registered in SAM.gov two weeks before the Pentagon contract award — was a sole-source justification filed, and if so on what grounds?",
       "Marc Tessier-Lavigne appears in FEC records as CEO of xAI; what is his actual role and when did he join relative to his Stanford resignation in 2023?",
       "The six xAI co-founders who departed before the SpaceX merger closed: who are they, when exactly did they leave relative to the classified Grok authorization, and what have they disclosed about their reasons?",
       "Amanda Scales returned to xAI in April 2025 with unvested equity that would vest under the merger's terms; what was the ultimate realized value of that equity and was any OGE ethics review conducted before her departure?",
       "CTC Property LLC operates under a 21-year Memphis lease; who are the named lessors, what are the lease payment terms, and does the Southern Environmental Law Center Clean Air Act notice remain open?",
       "The Stateline Power LLC joint venture provides 900 MW of primary power to Colossus; who is the undisclosed counterparty in the Solaris 10-Q (the 49.9 percent JV partner with redacted address), and is that entity Musk-connected?",
-      "xAI filed no LDA lobbying registrations despite the Pentagon contract and GSA procurement deal \u2014 did xAI use any intermediary lobbyists or consulting firms to advance these government relationships?",
+      "xAI filed no LDA lobbying registrations despite the Pentagon contract and GSA procurement deal — did xAI use any intermediary lobbyists or consulting firms to advance these government relationships?",
       "What security clearance determinations were made for xAI personnel who administer the classified Pentagon Grok deployment, and on what timeline relative to the July 2025 contract award?",
       "Senator Warren's September 2025 letter demanded answers on five specific questions; what, if any, response did the Pentagon provide, and did any congressional committee open a formal inquiry?",
       "The xAI drone swarm competition (February 2026) was run by a newly formed Defense Autonomous Warfare Group; what is that group's authorizing directive and what are the terms of the $100M competition?"
@@ -366,11 +608,11 @@
     "applicable_models": [
       {
         "name": "Government Data Access Preceding Commercial Deployment",
-        "description": "DOGE operatives with xAI affiliations gained access to federal personnel databases, Treasury payment systems, and IRS data in February through April 2025. DOGE staff then spent months pushing agencies to adopt Grok before a formal contract existed. The Pentagon contract followed in July 2025, and classified access followed in February 2026. The sequence \u2014 data access, informal adoption pressure, formal contract, classified authorization \u2014 describes a funnel in which government relationships established through the DOGE role preceded and may have enabled the commercial contract awards."
+        "description": "DOGE operatives with xAI affiliations gained access to federal personnel databases, Treasury payment systems, and IRS data in February through April 2025. DOGE staff then spent months pushing agencies to adopt Grok before a formal contract existed. The Pentagon contract followed in July 2025, and classified access followed in February 2026. The sequence — data access, informal adoption pressure, formal contract, classified authorization — describes a funnel in which government relationships established through the DOGE role preceded and may have enabled the commercial contract awards."
       },
       {
         "name": "Revolving Door With Equity Retention",
-        "description": "Amanda Scales entered OPM with active xAI equity, an active xAI Employment Agreement, and a pending unvested equity tranche. She coordinated the largest federal workforce reduction in recorded history and returned to xAI within three months. The structure \u2014 in which a government official retains financial interest in and contractual ties to a private employer while executing government policy that affects that employer's competitive environment \u2014 is the pattern repeated across multiple DOGE placements, but is most clearly documented in Scales's OGE 278 disclosure."
+        "description": "Amanda Scales entered OPM with active xAI equity, an active xAI Employment Agreement, and a pending unvested equity tranche. She coordinated the largest federal workforce reduction in recorded history and returned to xAI within three months. The structure — in which a government official retains financial interest in and contractual ties to a private employer while executing government policy that affects that employer's competitive environment — is the pattern repeated across multiple DOGE placements, but is most clearly documented in Scales's OGE 278 disclosure."
       },
       {
         "name": "SPV Fragmentation of a Single Operating Business",
@@ -378,7 +620,7 @@
       },
       {
         "name": "Ethics Guardrail Removal as Competitive Differentiator",
-        "description": "Anthropic's Claude held classified Pentagon AI access and lost it specifically because Anthropic refused to permit use cases covering mass surveillance and autonomous weapons. xAI accepted those terms and displaced Anthropic. This is a documented instance in which the removal of internal policy constraints became the differentiating factor in a government contract competition \u2014 a dynamic with implications for how AI safety policies interact with federal procurement incentives."
+        "description": "Anthropic's Claude held classified Pentagon AI access and lost it specifically because Anthropic refused to permit use cases covering mass surveillance and autonomous weapons. xAI accepted those terms and displaced Anthropic. This is a documented instance in which the removal of internal policy constraints became the differentiating factor in a government contract competition — a dynamic with implications for how AI safety policies interact with federal procurement incentives."
       }
     ]
   },
@@ -389,28 +631,28 @@
         {
           "target": "SpaceX",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "SpaceX acquired xAI Feb 2 2026 via all-stock deal at 1.25T combined valuation"
         },
         {
           "target": "SpaceX",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "SpaceX-xAI merger Feb 2026 at 1.25T creates single entity holding defense contracts, AI capabilities, and satellite infrastructure"
         },
         {
           "target": "DoD",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "xAI awarded 200M Pentagon Grok AI contract Jul 2025, expanding to classified systems Feb 2026"
         },
         {
           "target": "Amanda Scales",
           "type": "employment",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Former xAI employee; appointed OPM Chief of Staff; point of contact for federal worker purge coordinating termination guidance"
         },
@@ -427,13 +669,13 @@
           {
             "target": "Elon Musk",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Former xAI recruiter, named OPM chief of staff controlling federal hiring as DOGE operative"
           },
           {
             "target": "Thomas Shedd",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Musk company employees at separate agencies: Shedd (Tesla) at GSA/DOL controlling contracting/OSHA data, Scales (xAI) at OPM managing federal layoffs -- parallel Musk company-to-government pipeline at agencies regulating Musk businesses"
           }
         ],
@@ -441,7 +683,7 @@
           {
             "target": "SpaceX",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "SpaceX holds 14.6B+ in USASpending obligations from NASA and DoD with 13B pLEO IDIQ ceiling"
           }
         ],
@@ -449,31 +691,31 @@
           {
             "target": "Peter Thiel",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
           },
           {
             "target": "Peter Thiel",
             "type": "social",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
           },
           {
             "target": "Jeffrey Epstein",
             "type": "social",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
           },
           {
             "target": "Jared Birchall",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
           },
           {
             "target": "Steve Davis",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
           }
         ],
@@ -481,31 +723,31 @@
           {
             "target": "Steve Davis",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "DOGE operational lead, longtime SpaceX/X/Boring Company executive"
           },
           {
             "target": "Honeycomb Partners",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Fiszel offered Epstein SpaceX co-investment in Feb 2017. Company valued at 18B. Fiszel buying 2M (60pct personal) for opt-in private side of Honeycomb. Up to additional 6M co-invest possible. Elon Musk buying 100M personally at 105/share vs investor cost of 118/share."
           },
           {
             "target": "Department of Defense",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "SpaceX DoD obligations: 7.18B all-time. Air Force NSSL Phase 3, DISA Starlink/Starshield."
           },
           {
             "target": "NASA",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "SpaceX NASA obligations: 7.46B all-time. CCP contracts: 3.03B, 213.9M, 208.4M."
           },
           {
             "target": "DOGE",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "DOGE terminated 27,245 contracts but zero SpaceX contracts -- selective enforcement created competitive advantage for Musk companies"
           }
         ]

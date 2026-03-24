@@ -8,17 +8,67 @@
   "generated_at": "2026-03-11T18:36:08.003467",
   "last_updated": "2026-03-11T04:08:03",
   "stats": {
-    "total_findings": 5,
+    "total_findings": 9,
     "total_connections": 0,
     "total_entities": 0,
     "finding_types": {
+      "intelligence": 6,
       "legal": 2,
-      "intelligence": 3
+      "identity": 1
     },
     "connection_types": {},
     "last_updated": "2026-03-11T04:08:03"
   },
   "findings": [
+    {
+      "id": 6532,
+      "finding_type": "intelligence",
+      "summary": "As DNI, ODNI obtained and tested Puerto Rico voting machines (May 2025) probing for Venezuelan hacking -- found no clear evidence. ODNI claimed concerning cybersecurity practices without detailed evidence. Gabbard personally present at FBI raid on Fulton County GA election warehouse Jan 2026. Former intel officials say ODNI overstepping authority. Unprecedented hands-on ODNI role in domestic election infrastructure.",
+      "detail": null,
+      "source_datasets": [
+        "CNN",
+        "NBC News",
+        "Yahoo News",
+        "Nextgov/FCW"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 03:35:32",
+      "target_name": "Tulsi Gabbard",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CNN Feb 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Nextgov/FCW",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Sen Padilla letter Feb 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6568,
       "finding_type": "legal",
@@ -70,6 +120,31 @@
       ]
     },
     {
+      "id": 6570,
+      "finding_type": "intelligence",
+      "summary": "ODNI authority claim for domestic election operation: Gabbard cited broad statutory authority to coordinate, integrate, and analyze intelligence related to election security, including counterintelligence (CI), foreign and other malign influences and cybersecurity. Claims she oversees FBI Intelligence and Counterintelligence divisions as DNI. However, federal law restricts DNI to FOREIGN intelligence coordination. 50 USC 3024 defines DNI role as designating National Counterintelligence Officer for election security related to risks by FOREIGN entities. Former senior intel officials say ODNI involvement is well beyond what ODNI has the authority or expertise to do. Sen. Warner demanded testimony asking why official with oversight of foreign intelligence operations was present for execution of a domestic search warrant. Gabbard also running separate ODNI investigation of electronic voting machine vulnerabilities (announced April 2025), including Puerto Rico voting machine testing (May 2025).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:07:03",
+      "target_name": "Tulsi Gabbard",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Fox News exclusive letter, TheHill, NBC News, CNBC, PBS",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6572,
       "finding_type": "legal",
       "summary": "Fulton County legal challenge and current status: County filed lawsuit Feb 4, 2026 seeking return of 650+ boxes of seized materials. Fulton County Commission Chairman Robb Pitts and board of commissioners, elections board, and court clerk are plaintiffs. Court Clerk Che Alexander joined lawsuit to resolve standing issue after DOJ argued county lacked standing. Fulton County argues: (1) Fourth Amendment violation - no probable cause, only possible cause; (2) FBI agent Evans deliberately misled Magistrate Judge Salinas by omitting material facts discrediting witnesses; (3) affidavit relied on unsubstantiated hypotheticals and debunked fraud claims from conspiracy theorists; (4) Key Witness 7 (likely Kevin Moncla) was previously referred to FBI in 2023 for threatening state officials - omitted from affidavit. Expert Ryan Macias (former EAC official) declared witness statements reflect gross mischaracterizations of how elections work. NAACP and civil rights groups filed motion to protect seized voter data from misuse. Judge Boulee ordered mediation Feb 26, 2026. Former GA Supreme Court Chief Justice Harold Melton appointed mediator Mar 5. Mediation outcome due to court by Mar 18, 2026.",
@@ -88,6 +163,31 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Democracy Docket, AJC, Atlanta News First, PBS, Courthouse News, Law and Crime",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6574,
+      "finding_type": "intelligence",
+      "summary": "Ed Martin DOJ roles and Weaponization Working Group: Appointed interim US Attorney for DC Jan 2025 - first in 50+ years without prosecutor or judge experience. Led Weaponization Working Group established by AG Bondi memorandum Feb 5 2025. Group composed of personnel from Office of AG, Civil Rights Division, US Attorneys Office DC and others. Tasked with reviewing Jack Smith prosecutions of Trump, J6 prosecutions, anti-abortion protester prosecutions, FBI targeting of Catholics. DOJ reports to WH quarterly on progress. Martin pursued unsuccessful prosecutions of Letitia James, James Comey, Adam Schiff. Trump pulled Martins DC US Attorney nomination May 2025. Martin reassigned to pardon attorney. Demoted from Weaponization Working Group chair Feb 2026. DC Bar initiated disciplinary proceedings against Martin. Currently expected to depart DOJ entirely.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 04:07:40",
+      "target_name": "Ed Martin",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NBC News, CNN Oct 2025, ProPublica, STL Public Radio, Wikipedia",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -138,6 +238,52 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Democracy Docket, Sen. Whitehouse press release",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6682,
+      "finding_type": "identity",
+      "summary": "Christopher Gardner — GA fake electors participant with Eastman/Chesebro/Mitchell, now DOJ Trial Attorney signing cases against GA voter rolls and Fulton County 2020 ballots",
+      "detail": "Christopher J. Gardner, GA-based GOP attorney, worked at Hilbert Law Firm in Roswell GA. In Dec 2020, represented Trump and GA GOP Chair David Shafer in lawsuit to prevent election certification. Provided 'collective' legal advice to Republican fake electors alongside Chesebro, Eastman, and Mitchell. Instructed electors to 'act and vote in the exact manner' as if GA certified Trump. Signed 2022 amicus brief for Tea Party Patriots accusing Biden admin of 'political enemies list.' Represented Fulton County Republican Party in 2024 challenging primary certification. Now DOJ Trial Attorney — his name misspelled twice in filings (CHRISTPOHER and GARNDER). Signed brief demanding GA statewide voter rolls and separate case seeking 2020 Fulton County voting records.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-11 16:34:19",
+      "target_name": "Christopher J. Gardner",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AJC Jan 2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Democracy Docket Dec 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Fulton County DA Willis investigation records",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "J6 Committee records",
           "source_quote": null,
           "source_page": null,
           "assessment": null

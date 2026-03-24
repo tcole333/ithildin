@@ -8,13 +8,13 @@
   "generated_at": "2026-03-11T18:36:07.897007",
   "last_updated": "2026-03-06T03:52:02",
   "stats": {
-    "total_findings": 13,
+    "total_findings": 19,
     "total_connections": 6,
     "total_entities": 0,
     "finding_types": {
-      "financial": 7,
+      "financial": 12,
       "intelligence": 4,
-      "relationship": 2
+      "relationship": 3
     },
     "connection_types": {
       "corporate": 2,
@@ -77,6 +77,31 @@
       ]
     },
     {
+      "id": 5303,
+      "finding_type": "financial",
+      "summary": "Ben Horowitz FEC analysis (2025-2026 cycle): $12.66M across 23 contributions. Dominated by $12.5M to Leading the Future (AI Super PAC, Aug 2025). Also $50K DSCC, $30.9K DNC, $12K each to Smith Victory and Team Jordan, $5.8K Sinema for Arizona, $5.4K Josh Gottheimer. Unlike Andreessen who is overwhelmingly Republican, Horowitz gives to both parties: DNC, DSCC, ActBlue, Dave Min, George Whitesides, Adam Smith (Democrats) alongside Republican recipients. CRITICAL: Both Andreessen and Horowitz gave exactly $12.5M each to Leading the Future on 2025-08-22 -- coordinated $25M contribution making a16z the anchor funder of the AI regulation Super PAC.",
+      "detail": null,
+      "source_datasets": [
+        "fec"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:16:31",
+      "target_name": "Benjamin Horowitz",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FEC API: 23 contributions for donor Benjamin Horowitz employer Andreessen Horowitz, retrieved 2026-03-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 5309,
       "finding_type": "intelligence",
       "summary": "DOGE RECRUITER ROLE: Marc Andreessen served as unpaid recruiter for DOGE, interviewing and placing candidates for Trump administration positions. In Dec 2024 told Fortune he was spending 'half his time' at Mar-a-Lago advising Trump on tech and economic policy. LittleSis database formally lists him as holding 'Recruiter' position at Department of Government Efficiency. Washington Post reported he was 'quietly and successfully recruiting candidates for positions across Trump's Washington' with no formal role. This recruitment pipeline directly placed a16z personnel including Scott Kupor (OPM Director) and James Sullivan (OPM Senior Advisor) into government positions overseeing agencies that regulate or contract with a16z portfolio companies.",
@@ -106,7 +131,7 @@
     {
       "id": 5312,
       "finding_type": "intelligence",
-      "summary": "ANDREESSEN WHATSAPP INFLUENCE: Leaked WhatsApp messages (May-June 2025) from group chat including White House officials and tech leaders show Andreessen attacking DEI policies, calling Stanford and MIT 'mainly political lobbying operations fighting American innovation.' Urged National Science Foundation receive 'the bureaucratic death penalty.' Said universities would 'pay the price' for DEI. Trump subsequently issued executive orders targeting DEI in higher education. Pattern: private back-channel communication between tech billionaire and White House officials \u2192 policy outcomes aligned with a16z commercial interests (AI talent pipeline, university research funding redirected away from institutions with DEI programs).",
+      "summary": "ANDREESSEN WHATSAPP INFLUENCE: Leaked WhatsApp messages (May-June 2025) from group chat including White House officials and tech leaders show Andreessen attacking DEI policies, calling Stanford and MIT 'mainly political lobbying operations fighting American innovation.' Urged National Science Foundation receive 'the bureaucratic death penalty.' Said universities would 'pay the price' for DEI. Trump subsequently issued executive orders targeting DEI in higher education. Pattern: private back-channel communication between tech billionaire and White House officials → policy outcomes aligned with a16z commercial interests (AI talent pipeline, university research funding redirected away from institutions with DEI programs).",
       "detail": null,
       "source_datasets": [
         "web_search"
@@ -122,6 +147,32 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Washington Post 2025-07-12 leaked WhatsApp screenshots; Fortune 2025-07-16 Andreessen DEI messages; TechCrunch 2025-07-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5327,
+      "finding_type": "relationship",
+      "summary": "KUPOR REVOLVING DOOR DETAILS: Scott Kupor, a16z Managing Partner since inception (2009), appointed OPM Director, sworn in July 14, 2025. Resigned as managing partner and gave up managing member seat in 32 a16z funds. However: RETAINED passive investor status in 38 other a16z funds and forfeited only UNVESTED carried interest. ProPublica disclosure shows net worth $182M-$573M+, salary/bonus $2.5M from AH Capital Management, Airbnb stock $250-500M, plus holdings in Palantir (PLTR), L3Harris, Northrop Grumman, Lockheed Martin, RTX/Raytheon. As OPM Director, controls federal hiring policies, workforce rules, and pay scales that directly affect a16z portfolio company ability to hire from federal workforce (revolving door) and compete for government contracts. Kupor claims no conflict: 'I specifically wanted to take a role that was focused on very different things.' But OPM oversees Schedule F, which enables political appointments that bypass civil service protections -- directly relevant to defense tech staffing of agencies.",
+      "detail": null,
+      "source_datasets": [
+        "propublica",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:17:59",
+      "target_name": "Scott Aaron Kupor",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Fortune 2025-04-03 Kupor resignation from funds; Fortune 2025-09-19 Kupor OPM profile; ProPublica financial disclosure; opm.gov bio",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -147,6 +198,106 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Revolving Door Project 2025 Marc Andreessen profile; CFPB enforcement action against LendUp 2021",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5335,
+      "finding_type": "financial",
+      "summary": "FORTERRA (a16z PORTFOLIO): Autonomous military vehicle company. Raised $275M Series F led by a16z. Develops AutoDrive autonomous ground vehicle systems. KEY CONTRACTS: (1) Two Low-Rate Initial Production (LRIP) orders for ROGUE-Fires in FY2025 for Marine Corps NMESIS program (Navy Marine Expeditionary Ship Interdiction System) -- autonomous launchers for Naval Strike Missiles. (2) Partnership with Oshkosh Defense for ROGUE unmanned launcher vehicle. (3) BAE Systems partnership (Sep 2025) for autonomous AMPV (Armored Multi-Purpose Vehicle) prototype. (4) Defense News reports additional autonomous armored vehicle development with BAE (Sep 2025). HQ: Clarksburg, MD. This represents a16z portfolio company moving from startup to production-stage defense contractor with Marine Corps program of record.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:18:43",
+      "target_name": "Forterra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Capitaly 2025 a16z defense tech profile; Forterra press release ROGUE-Fires LRIP; Breaking Defense 2025-09-30 BAE-Forterra; Defense News 2025-09-30",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5337,
+      "finding_type": "financial",
+      "summary": "CASTELION (a16z PORTFOLIO): Hypersonic weapons startup. a16z investor in both Series A ($70M led by Lightspeed, +$30M venture debt) and Series B ($350M, Dec 2025, led by Altimeter/Lightspeed). Develops 'Blackbeard' hypersonic weapon. KEY CONTRACTS: (1) US Navy awarded ~$50M (Feb 2026) for Blackbeard development and prototype production. (2) US Army included FY2026 budget funding for HIMARS-compatible Blackbeard variant. (3) Multiple Army and Navy integration contracts for Blackbeard on operational platforms. Manufacturing: 'Project Ranger' 1,000-acre solid rocket motor campus in Sandoval County, NM -- capable of producing thousands of missiles/year. CEO Bryon Hargis spoke at a16z American Dynamism Summit 2026. Castelion represents a16z portfolio company positioned on hypersonics -- one of Emil Michael's 6 priority technology areas as USD(R&E).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:18:52",
+      "target_name": "Castelion",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "The Defense Post 2026-02-26; Castelion press releases; TechCrunch 2025-07-03; GovCon Wire Series B",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5345,
+      "finding_type": "financial",
+      "summary": "SARONIC (a16z PORTFOLIO): Autonomous naval vessel company. a16z investor via Series C. US Navy awarded $392M production contract (Dec 2025) for Corsair autonomous surface vessel -- announced at Reagan National Defense Forum by SecNav John Phelan. ~$200M obligated at award. Corsair: 24-foot modular ASV, 1000-lb payload, 1000nm range, 35+ knots. Designed for Pentagon Replicator program (expendable unmanned platform swarms to deter China/Taiwan invasion). Production timeline: prototype to production in <12 months -- far shorter than normal shipbuilding. Also raised $600M in private funding. This is the largest single government contract awarded to an a16z portfolio company outside of Anduril, and directly serves the 'commercial first' procurement doctrine that a16z lobbies for.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:19:38",
+      "target_name": "Saronic",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WorkBoat 2025-12; The Defense Post 2025-12-15; Maritime Executive; gCaptain; Naval News 2025-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5347,
+      "finding_type": "financial",
+      "summary": "UMBRA (a16z PORTFOLIO): SAR satellite imaging company. Space Development Agency awarded $2M initial contract for feasibility study on integrating Umbra satellites into Proliferated Warfighter Space Architecture (PWSA). Additional STRATFI (Strategic Funding Increase) program funding of up to $60M for custom space-based intelligence capabilities. Partnership with Italy's E-GEOS (Dec 2025) for geospatial intelligence solutions. Umbra's integration into PWSA would allow theater observations to be downlinked directly to tactical nodes, eliminating need for ground terminals. This positions an a16z portfolio company as embedded sensor layer in the Pentagon's next-generation satellite constellation -- a foundational military infrastructure investment.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 20:19:47",
+      "target_name": "Umbra",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SpaceNews SDA-Umbra; Umbra press release Oct 2024; PR Newswire; Military Aerospace",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -261,7 +412,7 @@
       "id": 5833,
       "finding_type": "financial",
       "summary": "a16z American Dynamism: $1.176B defense-focused fund, part of $15B 2025 fundraise",
-      "detail": "Andreessen Horowitz raised $1.176 billion for its American Dynamism practice as part of a $15 billion total fundraise in 2025 \u2014 the firm's largest ever. American Dynamism backs defense, security, aerospace, public safety startups supporting US national interest. Over $1.5 billion already invested under the umbrella. a16z launched the Dynamic Tech Defense Reform Initiative to reform defense acquisition. Key defense investments include Chariot Defense (autonomous vehicle defense), Anduril, and numerous dual-use technology companies. The practice was initiated around 2020 by Marc Andreessen and Ben Horowitz to fund companies that support national interest.",
+      "detail": "Andreessen Horowitz raised $1.176 billion for its American Dynamism practice as part of a $15 billion total fundraise in 2025 — the firm's largest ever. American Dynamism backs defense, security, aerospace, public safety startups supporting US national interest. Over $1.5 billion already invested under the umbrella. a16z launched the Dynamic Tech Defense Reform Initiative to reform defense acquisition. Key defense investments include Chariot Defense (autonomous vehicle defense), Anduril, and numerous dual-use technology companies. The practice was initiated around 2020 by Marc Andreessen and Ben Horowitz to fund companies that support national interest.",
       "source_datasets": [
         "web_search"
       ],
@@ -339,7 +490,7 @@
       "id": 5841,
       "finding_type": "relationship",
       "summary": "HSAC appointment (June 2025): a16z founder on DHS advisory council alongside Lewandowski, Giuliani",
-      "detail": "Marc Andreessen was appointed to the reconstituted Homeland Security Advisory Council (HSAC) in June 2025, alongside Corey Lewandowski and Rudy Giuliani. HSAC convened July 2, 2025 at DHS HQ, chaired by SC Gov. Henry McMaster. Andreessen is described as focusing on 'technology-driven security solutions.' The appointment gives Andreessen \u2014 whose firm has a $1.176B defense fund and multiple personnel in administration roles \u2014 direct advisory access to DHS procurement and security policy. This creates a loop: a16z invests in defense/security startups, its founder advises DHS on security priorities, and a16z personnel (Kupor at OPM, Krishnan at White House) shape government hiring and policy.",
+      "detail": "Marc Andreessen was appointed to the reconstituted Homeland Security Advisory Council (HSAC) in June 2025, alongside Corey Lewandowski and Rudy Giuliani. HSAC convened July 2, 2025 at DHS HQ, chaired by SC Gov. Henry McMaster. Andreessen is described as focusing on 'technology-driven security solutions.' The appointment gives Andreessen — whose firm has a $1.176B defense fund and multiple personnel in administration roles — direct advisory access to DHS procurement and security policy. This creates a loop: a16z invests in defense/security startups, its founder advises DHS on security priorities, and a16z personnel (Kupor at OPM, Krishnan at White House) shape government hiring and policy.",
       "source_datasets": [
         "web_search"
       ],
@@ -656,35 +807,35 @@
         {
           "target": "Andreessen Horowitz (a16z)",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "a16z.com",
           "description": "Andreessen co-founded a16z"
         },
         {
           "target": "Scott Aaron Kupor",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "propublica:kupor-scott-aaron",
           "description": "a16z Managing Partner relationship. Kupor is Managing Partner of AH Capital Management LLC (a16z) since 6/2009, Andreessen is co-founder. Kupor holds GP positions in 30+ a16z funds."
         },
         {
           "target": "Benjamin Horowitz",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Coordinated $25M giving to Leading the Future PAC (Aug 2025) -- $12.5M each on same date. Combined a16z Super PAC funding exceeds $37M"
         },
         {
           "target": "Scott Aaron Kupor",
           "type": "employment",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Andreessen recruited Kupor (a16z Managing Partner) for OPM Director via DOGE pipeline. Kupor retains passive a16z fund interests"
         },
         {
           "target": "Elon Musk",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "a16z invested in xAI (Series B $6B + Series C $6B), SpaceX, and Twitter $44B acquisition. Andreessen recruits for Musk-led DOGE"
         },
@@ -701,31 +852,31 @@
           {
             "target": "Rudy Giuliani",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Both in J6 Committee records (WH switchboard Jan 2-3 2021). Both appointed DHS HSAC 2025. Co-appear in 93 GovInfo docs spanning Mueller Report, impeachment, J6."
           },
           {
             "target": "Ed Brookover",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Brookover was lobbyist at Avenue Strategies 2017-2020. Also Trump 2016 campaign advisor/delegate coordinator."
           },
           {
             "target": "Mary Coen",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Coen was lobbyist at Avenue Strategies 2018-2019. Former Director NSC, Deputy Assistant USTR for SE Asia and Congressional Affairs. Highest national security credential in the firm."
           },
           {
             "target": "Jason Osborne",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Osborne was lobbyist at Avenue Strategies in 2017. Key Trump campaign insider, later involved in cryptocurrency lobbying."
           },
           {
             "target": "Matt Mowers",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Lewandowski donated  to Mowers for Congress (2020-2021). Mowers was Lewandowski protege, Trump NH primary director, congressional candidate."
           }
         ],
@@ -733,31 +884,31 @@
           {
             "target": "Peter Thiel",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
           },
           {
             "target": "Peter Thiel",
             "type": "social",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
           },
           {
             "target": "Jeffrey Epstein",
             "type": "social",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
           },
           {
             "target": "Jared Birchall",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
           },
           {
             "target": "Steve Davis",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
           }
         ]

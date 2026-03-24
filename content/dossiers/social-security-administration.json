@@ -8,37 +8,38 @@
   "generated_at": "2026-03-11T18:36:07.995608",
   "last_updated": "2026-03-09T20:35:19",
   "stats": {
-    "total_findings": 6,
+    "total_findings": 10,
     "total_connections": 0,
     "total_entities": 0,
     "finding_types": {
-      "intelligence": 3,
-      "legal": 3
+      "intelligence": 5,
+      "legal": 4,
+      "document": 1
     },
     "connection_types": {},
     "last_updated": "2026-03-09T20:35:19"
   },
   "findings": [
     {
-      "id": 6432,
+      "id": 6397,
       "finding_type": "intelligence",
-      "summary": "March 3 2025: DOGE SSA member sent encrypted password-protected file containing names and addresses of ~1,000 people to DHS, copying DOGE adviser Steve Davis and a DOGE Department of Labor employee. SSA's CIO has been unable to access the file to determine its contents. Revealed in DOJ Notice of Corrections to Record (AFSCME v. SSA, D.Md.) filed January 16 2026.",
-      "detail": null,
+      "summary": "DOGE personnel uploaded a live production copy of NUMIDENT (SSA master database, 300M+ Americans) to unsecured Amazon Web Services test cloud environment without verified security controls on June 25 2025",
+      "detail": "Lead #18292. NUMIDENT contains: names, phone numbers, addresses, birth dates/places, citizenship, race/ethnicity, parents names and SSNs for all Americans. Authorization for John Solly to upload was obtained from Michael Russo on June 25 2025. Data placed in DOGE test cloud environment outside mandated security protocols and without standard SSA visibility.",
       "source_datasets": [
-        "web_search",
-        "courtlistener"
+        "congress_gov",
+        "web_search"
       ],
-      "confidence": "confirmed",
-      "date_of_event": "2025-03-03",
-      "claim_type": "direct_quote",
+      "confidence": "high",
+      "date_of_event": "2025-06-25",
+      "claim_type": "paraphrase",
       "verification_status": "unverified",
-      "created_at": "2026-03-09 20:33:01",
-      "target_name": "Social Security Administration",
+      "created_at": "2026-03-09 20:28:35",
+      "target_name": "DOGE / Social Security Administration",
       "profile_id": "tech-right",
       "evidence": [
         {
-          "evidence_type": "ref",
-          "evidence_ref": "DOJ-Notice-of-Corrections-AFSCME-v-SSA-2026-01-16",
+          "evidence_type": "file",
+          "evidence_ref": "https://www.hsgac.senate.gov/wp-content/uploads/DOGE_REPORT_FINAL_7.pdf",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -72,6 +73,31 @@
       ]
     },
     {
+      "id": 6407,
+      "finding_type": "intelligence",
+      "summary": "After Supreme Court lifted DOGE access ban (June 6 2025), DOGE employees transferred a live copy of the Social Security NUMIDENT database to a cloud server without independent security controls. NUMIDENT contains: SSNs for 300M+ Americans, names, addresses, dates/places of birth, parents' names. Aram Moghaddassi authorized the operation via July 15 2025 memo accepting security risks. SSA CDO Charles Borges filed whistleblower complaint August 26 2025 and resigned August 29 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-06-06",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:29:18",
+      "target_name": "Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "nbcnews.com/fedscoop.com/npr.org:whistleblower-complaint-borges-2025-08-26",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6410,
       "finding_type": "legal",
       "summary": "On March 24 2025, a DOGE SSA team member signed a 'Voter Data Agreement' in his capacity as an SSA employee with an unnamed political advocacy group. The group's stated aim: find evidence of voter fraud and overturn election results in certain states. The group had acquired state voter rolls and sought to match them to SSA data to find noncitizens. SSA first discovered this agreement in November 2025 during an unrelated review. Two Hatch Act referrals made to Office of Special Counsel in December 2025. True the Vote published an 'Appeal to DOGE' in March 2025 and is suspected but denies involvement. No evidence SSA data was actually transferred to the advocacy group.",
@@ -91,31 +117,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "AFSCME-v-SSA-D.Md.-DOJ-Notice-of-Corrections-2026-01-16",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 6407,
-      "finding_type": "intelligence",
-      "summary": "After Supreme Court lifted DOGE access ban (June 6 2025), DOGE employees transferred a live copy of the Social Security NUMIDENT database to a cloud server without independent security controls. NUMIDENT contains: SSNs for 300M+ Americans, names, addresses, dates/places of birth, parents' names. Aram Moghaddassi authorized the operation via July 15 2025 memo accepting security risks. SSA CDO Charles Borges filed whistleblower complaint August 26 2025 and resigned August 29 2025.",
-      "detail": null,
-      "source_datasets": [
-        "web_search"
-      ],
-      "confidence": "high",
-      "date_of_event": "2025-06-06",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-03-09 20:29:18",
-      "target_name": "Social Security Administration",
-      "profile_id": "tech-right",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "nbcnews.com/fedscoop.com/npr.org:whistleblower-complaint-borges-2025-08-26",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -149,6 +150,57 @@
       ]
     },
     {
+      "id": 6431,
+      "finding_type": "document",
+      "summary": "DOGE engineered copy of NUMIDENT database (300M+ Americans) to unsecured AWS virtual private cloud (June 2025). CIO Aram Moghaddassi (DOGE-aligned, Musk ally) authorized Provisional ATO on July 15 memo overriding high-risk security assessment: 'I have determined the business need is higher than the security risk.' Requested by John Solly (ex-DOGE at SSA) on June 10, shortly after Supreme Court ruling. No audit process or oversight external to DOGE staff. SSA CDO Charles Borges filed OSC whistleblower complaint Aug 26, 2025. DOJ filed Notice of Corrections Jan 16, 2026 acknowledging data was shared to third parties via non-government server (Cloudflare, March 7-17 2025). Also: DOGE member entered Voter Data Agreement to analyze state voter rolls for outside party.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:32:49",
+      "target_name": "Social Security Administration (SSA)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fedscoop-ssa-numident whistleblower-org-borges-2025-08-26 fedscoop-ssa-doge-jan2026 npr-2026-01-23",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6432,
+      "finding_type": "intelligence",
+      "summary": "March 3 2025: DOGE SSA member sent encrypted password-protected file containing names and addresses of ~1,000 people to DHS, copying DOGE adviser Steve Davis and a DOGE Department of Labor employee. SSA's CIO has been unable to access the file to determine its contents. Revealed in DOJ Notice of Corrections to Record (AFSCME v. SSA, D.Md.) filed January 16 2026.",
+      "detail": null,
+      "source_datasets": [
+        "web_search",
+        "courtlistener"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-03-03",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 20:33:01",
+      "target_name": "Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "DOJ-Notice-of-Corrections-AFSCME-v-SSA-2026-01-16",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6440,
       "finding_type": "legal",
       "summary": "SpaceX v. NLRB constitutional conflict: Elon Musk's DOGE accessed NLRB case management data (NxGen) in March 2025 while SpaceX has pending NLRB cases (19-CA-309274) and Musk is pursuing constitutional challenge to NLRB structure. The NLRB NxGen data exfiltrated includes trade secrets, witness testimony, and ongoing case data. Fifth Circuit dismissed SpaceX's appeal for lack of jurisdiction March 2025; constitutional challenge continues. Over a dozen federal court cases involve DOGE data access questions per NPR.",
@@ -167,6 +219,56 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "npr.org:2025-04-16:doge-nlrb-whistleblower-musk-data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6475,
+      "finding_type": "intelligence",
+      "summary": "Aram Moghaddassi emailed the deputy chief of staff for Florida Governor Ron DeSantis from a DHS email account requesting Florida voter registration and voting data. The email stated: 'On our end, Florida voter registration and voting data would be helpful immediately to check for voter fraud.' This was discovered via public records obtained by American Oversight. The identity of the DeSantis deputy chief of staff is not publicly disclosed in available reporting. As of March 2026, no evidence Florida voter rolls were actually shared.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-10 00:09:40",
+      "target_name": "DOGE SSA",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NPR:2026-01-23:doge-data-social-security-privacy; american-oversight:public-records-moghaddassi",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6516,
+      "finding_type": "legal",
+      "summary": "TEMPORAL CHAIN: NUMIDENT Authorization — 49-day sequence from Supreme Court ruling to live database upload. Jun 6: SCOTUS lifts DOGE SSA access ban. Jun 10-11: DOGE staffer Solly formally requests NUMIDENT cloud copy. Jun 16: Internal SSA Risk Assessment finds 35-65% probability of data breach. Jun 25: Live NUMIDENT (300M+ Americans) uploaded to unsecured Amazon Web Services. Jul 25: Provisional Authorization to Operate issued. The Supreme Court ruling was used within 4 days to request the database; within 19 days the full production copy was in cloud storage despite SSA's own risk assessment flagging catastrophic potential for breach.",
+      "detail": "The NUMIDENT chain reveals operational pre-planning, not reactive response to the SCOTUS ruling. Specific timing: Solly (DOGE-aligned SSA CIO hire, joined March 2025) submitted the formal cloud upload request on June 10-11 — 4 calendar days after SCOTUS cleared access. The rapid submission suggests the request was prepared in advance, waiting for legal clearance. The SSA internal risk assessment (Jun 16) explicitly found 35-65% breach probability with catastrophic adverse effects — yet Michael Russo (former SSA CIO, former Starlink payment processor executive) authorized the upload on June 25 anyway. By July 25, Aram Moghaddassi (Musk ally, DOGE SSA CIO) had issued the Provisional Authorization to Operate, normalizing what the risk assessment called catastrophic. This is a documented 49-day decision chain from court order to live database in unsecured cloud, with each step authored by identified individuals.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-10 00:45:51",
+      "target_name": "DOGE / Social Security Administration",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-15",
           "source_quote": null,
           "source_page": null,
           "assessment": null

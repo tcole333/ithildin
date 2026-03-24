@@ -8,14 +8,14 @@
   "generated_at": "2026-03-11T18:36:08.008365",
   "last_updated": "2026-02-17T15:31:02",
   "stats": {
-    "total_findings": 5,
+    "total_findings": 8,
     "total_connections": 7,
     "total_entities": 0,
     "finding_types": {
-      "location": 1,
-      "financial": 1,
+      "location": 4,
       "document": 1,
       "legal": 1,
+      "financial": 1,
       "identity": 1
     },
     "connection_types": {
@@ -25,6 +25,131 @@
     "last_updated": "2026-02-17T15:31:02"
   },
   "findings": [
+    {
+      "id": 383,
+      "finding_type": "location",
+      "summary": "575 Lexington Ave 4th Floor served as Richard Kahn's HBRK Associates Inc office and operations center for Epstein estate/trust administration. Entities at this address: HBRK Associates Inc (Kahn process server), Gratitude America Ltd (nonprofit), Nine East 71st Street Corporation, SLK Designs LLC, Darren K. Indyke PLLC. Also at 4th floor: Patura Gardens LLC (appears in JPMorgan bank records/FedEx invoices), Michael Charles New York Inc, Staircase Capital Advisors LLC. DOJ documents show Kahn used HBRK letterhead at this address for Butterfly Trust/Deutsche Bank correspondence and estate property management.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:04:01",
+      "target_name": "575 Lexington Avenue",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01268446",
+          "source_quote": "Richard Kahn HBRK Associates Inc. 575 Lexington Avenue 4th Floor; EFTA01385247:575 Lexington Avenue 4th Floor...Butterfly Trust...Richard Kahn; EFTA01513772:HBRK ASSOCIATES INC Primary Account 000000799789169",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01385247",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01513772",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 481,
+      "finding_type": "location",
+      "summary": "Complete ACRIS deed chain for 9 E 71st St (BBL 1/1386/10): Birch Wathen School -> Nine East 71st St Corp (41 South High St Columbus OH = Wexner address) Sep 1989 -> Maple Inc (USVI) Dec 2011 -> Back To NYC 71 LLC for 51M Mar 2021 -> Bolt 1 LP for 65.6M Jun 2023. Correct BBL is 1/1386/10 not 1/1390/29.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "1989-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 22:59:14",
+      "target_name": "9 E 71st St",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2011122700736001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2021031500304001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS:2023073100715001",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS FT_1690000317169",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 489,
+      "finding_type": "location",
+      "summary": "Xandra Corporation N.V. (Netherlands Antilles offshore entity) held 11 E 71st St (BBL 1/1386/12) from Sep 1983 to Jul 1988. Acquired from 11 E 71 St Realty Asc Inc via deed. Held multiple mortgages with Chemical Bank (468K and others at 11 E 71 St address). Had mortgage assignment chain: East NY Savings Bank -> Chemical Bank -> Parkview Financial Inc (41 South High St Columbus OH = Wexner). Sold to SAM Conversion Corp (same Wexner address) in 1988. This offshore-to-Wexner chain precedes Epstein's involvement.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "1983-09",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-12 23:00:41",
+      "target_name": "Xandra Corporation NV",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS FT_1090000264109",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS FT_1100000264110",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS FT_1190000041819",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ACRIS FT_1760000166276",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 492,
       "finding_type": "location",
@@ -49,29 +174,6 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "ACRIS:1690000317169",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 3202,
-      "finding_type": "financial",
-      "summary": "Nine East 71st Street Corp owned Epstein Manhattan mansion 1989-2011, then deeded to Maple Inc",
-      "detail": "Nine East 71st Street Corporation (domestic business corp, principal place of business at 575 Lexington Ave 4th Floor, NY 10022) owned 9 East 71st Street from 1989 until December 23, 2011 when it was deeded to Maple Inc (USVI corp). Valued at .9M assessed/M per SDNY estimate.",
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2011-12-23",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-17 15:26:32",
-      "target_name": "Nine East 71st Street Corporation",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OffshoreAlert:Priscilla-Doe-v-Epstein",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -118,6 +220,29 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "OffshoreAlert:Katlyn-Doe-v-Epstein",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3202,
+      "finding_type": "financial",
+      "summary": "Nine East 71st Street Corp owned Epstein Manhattan mansion 1989-2011, then deeded to Maple Inc",
+      "detail": "Nine East 71st Street Corporation (domestic business corp, principal place of business at 575 Lexington Ave 4th Floor, NY 10022) owned 9 East 71st Street from 1989 until December 23, 2011 when it was deeded to Maple Inc (USVI corp). Valued at .9M assessed/M per SDNY estimate.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2011-12-23",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-17 15:26:32",
+      "target_name": "Nine East 71st Street Corporation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OffshoreAlert:Priscilla-Doe-v-Epstein",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -334,20 +459,20 @@
       }
     ],
     "curated_at": "2026-03-11T23:12:57.875909+00:00",
-    "lead": "<p>Nine East 71st Street Corporation was the domestic business corporation that held title to 9 East 71st Street, Manhattan \u2014 the seven-story townhouse central to federal sex-trafficking charges against <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> \u2014 from September 1989 until December 2011. It was incorporated with a registered address at 41 South High Street, Columbus, Ohio, the headquarters of <a href=\"/dossiers/les-wexner\">Leslie Wexner</a>'s L Brands (then The Limited) [Finding #492, ACRIS:1690000317169]. The corporation acquired the property from Birch Wathen School in September 1989 for no recorded consideration [ACRIS:2011122700736001, ACRIS:FT_1690000317169].</p><p>In late 1998, Wexner transferred the corporation itself \u2014 not just the property \u2014 to NES LLC, an Epstein entity, via a documented sale that included a Nominee Agreement, Stock Power, Stock Certificate, and Wexner's personal resignation as director. GRM document EFTA00300480 indexes the transaction binder under \"Leslie H. Wexner Sale of Nine East 71st Street Corporation to NES, LLC\" with a General Ledger dated September 30, 1998 [Finding #2468]. By December 2011 the corporation's address of record had shifted from Columbus to 301 East 66th Street, 10th Floor \u2014 the office address of <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>'s HBRK Associates \u2014 when it transferred the property to Maple Inc, a USVI corporation, for no recorded consideration [Finding #1514, ACRIS:2011122700736001].</p><p>Federal civil plaintiffs named Nine East 71st Street Corporation as a defendant alongside the Epstein estate in at least three SDNY lawsuits filed in August 2019: Katlyn Doe v. Indyke (1:19-cv-07771), Priscilla Doe v. Indyke (1:19-cv-07772), and Lisa Doe v. Indyke (1:19-cv-07773). The Katlyn Doe complaint named the corporation specifically on a negligent-security count (Count III) for its ownership of the premises where abuse occurred [Finding #3189]. The principal place of business was separately documented in court filings as 575 Lexington Avenue, Fourth Floor, New York, NY 10022 \u2014 the same floor as <a href=\"/dossiers/darren-indyke\">Darren Indyke</a>'s DKIP PLLC and HBRK Associates [Finding #3263].</p>",
-    "system_role": "Nine East 71st Street Corporation was the legal title-holder for Epstein's primary operational premises for approximately 22 years, spanning the Wexner patronage period, Epstein's independent years, his 2007\u20132008 Florida plea, and his work-release period. Its corporate life tracks the three-phase Wexner-to-Epstein transfer: (1) initial acquisition by a Wexner-addressed entity in 1989; (2) stock transfer to Epstein's NES LLC in 1998 via a nominee agreement that preserved the existing corporate shell rather than a direct deed conveyance; (3) a final title transfer to Maple Inc, a USVI entity in Epstein's four-property tree-named holding structure, in December 2011. At each stage the corporation served as the transactional intermediary \u2014 insulating the property from direct individual ownership and from the scrutiny that a personal deed chain would attract.",
+    "lead": "<p>Nine East 71st Street Corporation was the domestic business corporation that held title to 9 East 71st Street, Manhattan — the seven-story townhouse central to federal sex-trafficking charges against <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a> — from September 1989 until December 2011. It was incorporated with a registered address at 41 South High Street, Columbus, Ohio, the headquarters of <a href=\"/dossiers/les-wexner\">Leslie Wexner</a>'s L Brands (then The Limited) [Finding #492, ACRIS:1690000317169]. The corporation acquired the property from Birch Wathen School in September 1989 for no recorded consideration [ACRIS:2011122700736001, ACRIS:FT_1690000317169].</p><p>In late 1998, Wexner transferred the corporation itself — not just the property — to NES LLC, an Epstein entity, via a documented sale that included a Nominee Agreement, Stock Power, Stock Certificate, and Wexner's personal resignation as director. GRM document EFTA00300480 indexes the transaction binder under \"Leslie H. Wexner Sale of Nine East 71st Street Corporation to NES, LLC\" with a General Ledger dated September 30, 1998 [Finding #2468]. By December 2011 the corporation's address of record had shifted from Columbus to 301 East 66th Street, 10th Floor — the office address of <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>'s HBRK Associates — when it transferred the property to Maple Inc, a USVI corporation, for no recorded consideration [Finding #1514, ACRIS:2011122700736001].</p><p>Federal civil plaintiffs named Nine East 71st Street Corporation as a defendant alongside the Epstein estate in at least three SDNY lawsuits filed in August 2019: Katlyn Doe v. Indyke (1:19-cv-07771), Priscilla Doe v. Indyke (1:19-cv-07772), and Lisa Doe v. Indyke (1:19-cv-07773). The Katlyn Doe complaint named the corporation specifically on a negligent-security count (Count III) for its ownership of the premises where abuse occurred [Finding #3189]. The principal place of business was separately documented in court filings as 575 Lexington Avenue, Fourth Floor, New York, NY 10022 — the same floor as <a href=\"/dossiers/darren-indyke\">Darren Indyke</a>'s DKIP PLLC and HBRK Associates [Finding #3263].</p>",
+    "system_role": "Nine East 71st Street Corporation was the legal title-holder for Epstein's primary operational premises for approximately 22 years, spanning the Wexner patronage period, Epstein's independent years, his 2007–2008 Florida plea, and his work-release period. Its corporate life tracks the three-phase Wexner-to-Epstein transfer: (1) initial acquisition by a Wexner-addressed entity in 1989; (2) stock transfer to Epstein's NES LLC in 1998 via a nominee agreement that preserved the existing corporate shell rather than a direct deed conveyance; (3) a final title transfer to Maple Inc, a USVI entity in Epstein's four-property tree-named holding structure, in December 2011. At each stage the corporation served as the transactional intermediary — insulating the property from direct individual ownership and from the scrutiny that a personal deed chain would attract.",
     "sections": [
       {
         "id": "origin-and-wexner-acquisition",
         "title": "Origin and the Wexner Acquisition",
         "viz": null,
-        "content": "<p>Nine East 71st Street Corporation was formed as a New York domestic business corporation with its principal registered address at 41 South High Street, Columbus, Ohio \u2014 the L Brands corporate headquarters where <a href=\"/dossiers/les-wexner\">Leslie Wexner</a> operated his retail empire [Finding #492]. On September 6, 1989, the corporation acquired the property at 9 East 71st Street (Block 1386, Lot 10) from Birch Wathen School for no recorded consideration [ACRIS:2011122700736001, ACRIS:FT_1690000317169]. This was not an isolated transaction: ACRIS records confirm that Wexner-addressed entities also controlled the adjacent property at 11 East 71st Street (BBL 1/1386/12), acquired through SAM Conversion Corp \u2014 also registered at 41 South High Street \u2014 from Xandra Corporation N.V., a Netherlands Antilles offshore entity, in 1988 [Finding #483, Finding #489]. Parkview Financial Inc, another entity at the same Columbus address, appears in ACRIS as a mortgage-assignment intermediary on the adjacent property [ACRIS:FT_1100000264110, ACRIS:FT_1410000274041]. The three entities \u2014 Nine East 71st St Corp, SAM Conversion Corp, and Parkview Financial Inc \u2014 formed a coherent Wexner real-estate infrastructure for the 71st Street block [ACRIS:FT_1090000264109, ACRIS:FT_1690000317169].</p><p>Epstein's entry into the 11 East 71st Street chain preceded the Nine East transaction: ACRIS shows SAM Conversion transferred the adjacent property to \"Epstein Jeffrey E Trustee / 11 East 71st St Trust\" at the same Columbus address in December 1992 for no recorded consideration [ACRIS:FT_1250005138325, ACRIS:FT_1850000419485]. Epstein then moved that property through two more entities before it reached <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a> in January 1998 via the Comet Trust, trusteed by Guido Goldman [ACRIS:FT_1170005201917, ACRIS:FT_1250005138325]. This establishes that Epstein had been operating inside Wexner's NYC property structure for at least six years before he acquired Nine East 71st Street Corporation itself.</p>"
+        "content": "<p>Nine East 71st Street Corporation was formed as a New York domestic business corporation with its principal registered address at 41 South High Street, Columbus, Ohio — the L Brands corporate headquarters where <a href=\"/dossiers/les-wexner\">Leslie Wexner</a> operated his retail empire [Finding #492]. On September 6, 1989, the corporation acquired the property at 9 East 71st Street (Block 1386, Lot 10) from Birch Wathen School for no recorded consideration [ACRIS:2011122700736001, ACRIS:FT_1690000317169]. This was not an isolated transaction: ACRIS records confirm that Wexner-addressed entities also controlled the adjacent property at 11 East 71st Street (BBL 1/1386/12), acquired through SAM Conversion Corp — also registered at 41 South High Street — from Xandra Corporation N.V., a Netherlands Antilles offshore entity, in 1988 [Finding #483, Finding #489]. Parkview Financial Inc, another entity at the same Columbus address, appears in ACRIS as a mortgage-assignment intermediary on the adjacent property [ACRIS:FT_1100000264110, ACRIS:FT_1410000274041]. The three entities — Nine East 71st St Corp, SAM Conversion Corp, and Parkview Financial Inc — formed a coherent Wexner real-estate infrastructure for the 71st Street block [ACRIS:FT_1090000264109, ACRIS:FT_1690000317169].</p><p>Epstein's entry into the 11 East 71st Street chain preceded the Nine East transaction: ACRIS shows SAM Conversion transferred the adjacent property to \"Epstein Jeffrey E Trustee / 11 East 71st St Trust\" at the same Columbus address in December 1992 for no recorded consideration [ACRIS:FT_1250005138325, ACRIS:FT_1850000419485]. Epstein then moved that property through two more entities before it reached <a href=\"/dossiers/howard-lutnick\">Howard Lutnick</a> in January 1998 via the Comet Trust, trusteed by Guido Goldman [ACRIS:FT_1170005201917, ACRIS:FT_1250005138325]. This establishes that Epstein had been operating inside Wexner's NYC property structure for at least six years before he acquired Nine East 71st Street Corporation itself.</p>"
       },
       {
         "id": "the-1998-stock-transfer",
         "title": "The 1998 Stock Transfer to NES LLC",
         "viz": null,
-        "content": "<p>The mechanism for transferring Nine East 71st Street Corporation from Wexner to Epstein was a stock sale rather than a property deed \u2014 a structure that preserved the existing corporate shell and avoided recording a new deed in ACRIS. GRM filing index EFTA00300480 documents the complete transaction binder titled \"Leslie H. Wexner Sale of Nine East 71st Street Corporation to NES, LLC.\" The binder contains: a General Ledger dated September 30, 1998; Vorys legal reviews; a Draft Contract of Sale; a Nominee Agreement; NES LLC Articles of Organization; a Lease Agreement; a Biennial Statement; a Purchase &amp; Sale Agreement; a Promissory Note; a Guaranty; an Assignment &amp; Assumption Agreement; a Stock Power; a Stock Certificate; Wexner's resignation letter as director; a Settlement Statement; and Closing Documents [Finding #2468]. The General Ledger date places the transaction in the fall of 1998.</p><p>NES LLC \u2014 the acquiring entity \u2014 was an Epstein USVI entity that appeared across JPMorgan bank records as a payroll and operational vehicle. JPMorgan records show regular ADP payroll processing debits from NES LLC's account (JPM account 739121472), and the entity appears in the 2006 JPM data-tape entity master list alongside 22 other Epstein-affiliated accounts [EFTA01384921]. <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> later conducted AML due diligence on NES LLC, and the entity maintained a Deutsche Bank account balance of approximately $504K as of August 2014 [EFTA02711200]. In the December 2019 estate liquidation, the NES LLC balance transferred to Southern Trust Company was $1,345,169 [EFTA00130818]. The Nominee Agreement included in the 1998 binder is significant: its presence confirms that the stock transfer included a formal understanding about Epstein's status as the beneficial owner while the Wexner-era corporate form was preserved.</p>"
+        "content": "<p>The mechanism for transferring Nine East 71st Street Corporation from Wexner to Epstein was a stock sale rather than a property deed — a structure that preserved the existing corporate shell and avoided recording a new deed in ACRIS. GRM filing index EFTA00300480 documents the complete transaction binder titled \"Leslie H. Wexner Sale of Nine East 71st Street Corporation to NES, LLC.\" The binder contains: a General Ledger dated September 30, 1998; Vorys legal reviews; a Draft Contract of Sale; a Nominee Agreement; NES LLC Articles of Organization; a Lease Agreement; a Biennial Statement; a Purchase &amp; Sale Agreement; a Promissory Note; a Guaranty; an Assignment &amp; Assumption Agreement; a Stock Power; a Stock Certificate; Wexner's resignation letter as director; a Settlement Statement; and Closing Documents [Finding #2468]. The General Ledger date places the transaction in the fall of 1998.</p><p>NES LLC — the acquiring entity — was an Epstein USVI entity that appeared across JPMorgan bank records as a payroll and operational vehicle. JPMorgan records show regular ADP payroll processing debits from NES LLC's account (JPM account 739121472), and the entity appears in the 2006 JPM data-tape entity master list alongside 22 other Epstein-affiliated accounts [EFTA01384921]. <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> later conducted AML due diligence on NES LLC, and the entity maintained a Deutsche Bank account balance of approximately $504K as of August 2014 [EFTA02711200]. In the December 2019 estate liquidation, the NES LLC balance transferred to Southern Trust Company was $1,345,169 [EFTA00130818]. The Nominee Agreement included in the 1998 binder is significant: its presence confirms that the stock transfer included a formal understanding about Epstein's status as the beneficial owner while the Wexner-era corporate form was preserved.</p>"
       },
       {
         "id": "operational-period-and-litigation-function",
@@ -359,21 +484,21 @@
         "id": "2011-transfer-to-maple-inc-and-post-death-sale",
         "title": "The 2011 Transfer to Maple Inc and Post-Death Sale",
         "viz": "ego_network",
-        "content": "<p>On December 23, 2011 \u2014 roughly three years after Epstein's Florida plea and during the period when he was reconstituting his operational structure \u2014 Nine East 71st Street Corporation transferred 9 East 71st Street to Maple Inc, a USVI corporation, for no recorded consideration. The deed records the grantor address as 301 East 66th Street, 10th Floor \u2014 the Ossa Properties address associated with Kahn and Epstein's operational office \u2014 rather than the original Columbus, Ohio address, reflecting the completed shift in administrative control [Finding #1514, Finding #492]. The Katlyn Doe complaint gives the transfer date as December 11, 2011; ACRIS gives December 23, 2011 \u2014 a minor inconsistency within the same complaint's paragraphs [Finding #3189].</p><p>Maple Inc was one of four tree-named USVI entities Epstein used to hold real property: Maple Inc (9 E 71st St, NYC), Nautilus Inc (Little Saint James island, USVI), Laurel Inc (Palm Beach, FL), and Cypress (Zorro Ranch, NM). <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>'s HBRK Associates at 301 East 66th Street, Suite 10F coordinated JPMorgan Chase bank accounts for all four entities [EFTA02393310]. Maple Inc was registered as USVI entity 581976 on November 22, 2011 \u2014 just one month before the Nine East deed transfer \u2014 and managed through <a href=\"/dossiers/business-basics-vi-llc\">Business Basics VI LLC</a>, <a href=\"/dossiers/erika-kellerhals\">Erika Kellerhals</a>'s registered agent hub [ACRIS:2011122700736001, ACRIS:2021031500304001]. The Epstein estate inventory valued the property at $55,931,000 [EFTA00027979].</p><p>Following Epstein's death in August 2019, Maple Inc held the property through the estate administration. On March 8, 2021, Maple Inc transferred 9 East 71st Street to Back To NYC 71 LLC \u2014 registered at 24 Lansdowne Road, London W11 3LL \u2014 for $51 million, with a $30.6 million MERS mortgage taken simultaneously. That entity subsequently sold to Bolt 1 LP for $65.6 million on June 22, 2023 [Finding #481, Finding #1514]. The full recorded title history thus spans four parties over 34 years: Birch Wathen School (1989) to Nine East 71st Street Corporation (1989\u20132011) to Maple Inc (2011\u20132021) to Back To NYC 71 LLC (2021\u20132023) to Bolt 1 LP (2023\u2013present).</p>"
+        "content": "<p>On December 23, 2011 — roughly three years after Epstein's Florida plea and during the period when he was reconstituting his operational structure — Nine East 71st Street Corporation transferred 9 East 71st Street to Maple Inc, a USVI corporation, for no recorded consideration. The deed records the grantor address as 301 East 66th Street, 10th Floor — the Ossa Properties address associated with Kahn and Epstein's operational office — rather than the original Columbus, Ohio address, reflecting the completed shift in administrative control [Finding #1514, Finding #492]. The Katlyn Doe complaint gives the transfer date as December 11, 2011; ACRIS gives December 23, 2011 — a minor inconsistency within the same complaint's paragraphs [Finding #3189].</p><p>Maple Inc was one of four tree-named USVI entities Epstein used to hold real property: Maple Inc (9 E 71st St, NYC), Nautilus Inc (Little Saint James island, USVI), Laurel Inc (Palm Beach, FL), and Cypress (Zorro Ranch, NM). <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>'s HBRK Associates at 301 East 66th Street, Suite 10F coordinated JPMorgan Chase bank accounts for all four entities [EFTA02393310]. Maple Inc was registered as USVI entity 581976 on November 22, 2011 — just one month before the Nine East deed transfer — and managed through <a href=\"/dossiers/business-basics-vi-llc\">Business Basics VI LLC</a>, <a href=\"/dossiers/erika-kellerhals\">Erika Kellerhals</a>'s registered agent hub [ACRIS:2011122700736001, ACRIS:2021031500304001]. The Epstein estate inventory valued the property at $55,931,000 [EFTA00027979].</p><p>Following Epstein's death in August 2019, Maple Inc held the property through the estate administration. On March 8, 2021, Maple Inc transferred 9 East 71st Street to Back To NYC 71 LLC — registered at 24 Lansdowne Road, London W11 3LL — for $51 million, with a $30.6 million MERS mortgage taken simultaneously. That entity subsequently sold to Bolt 1 LP for $65.6 million on June 22, 2023 [Finding #481, Finding #1514]. The full recorded title history thus spans four parties over 34 years: Birch Wathen School (1989) to Nine East 71st Street Corporation (1989–2011) to Maple Inc (2011–2021) to Back To NYC 71 LLC (2021–2023) to Bolt 1 LP (2023–present).</p>"
       },
       {
         "id": "address-network-and-control-indicators",
         "title": "Address Network and Control Indicators",
         "viz": null,
-        "content": "<p>The addresses attached to Nine East 71st Street Corporation across its corporate life function as control indicators. The 1989 acquisition deed lists 41 South High Street, Columbus, Ohio \u2014 Wexner's L Brands headquarters [Finding #492]. The 1998 Wexner-to-NES transfer binder includes the Articles of Organization for NES LLC, placing the transaction firmly within Epstein's corporate formation process [Finding #2468]. The 2011 deed transfer lists 301 East 66th Street, 10th Floor \u2014 Kahn's HBRK Associates office \u2014 as the grantor address. Federal court complaints document the principal place of business as 575 Lexington Avenue, Fourth Floor, where Indyke's DKIP PLLC and HBRK Associates both operated [Finding #3263, Finding #383].</p><p>ACRIS document 2008012900966001 records a power of attorney from Abigail S. Wexner \u2014 at 15 Central Park West \u2014 to <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> dated January 23, 2008, on a separate NYC property parcel (BBL 1/1114/1507). This instrument establishes a direct Wexner-Indyke property-law nexus outside the Nine East chain itself, running through the same attorney who later served as Epstein's primary lawyer and co-executor of the estate [ACRIS:2008012900966001]. The OCCRP Aleph dataset separately confirms Indyke as Secretary of the Wexner Foundation at 8000 Walton Parkway, New Albany, Ohio [EFTA01297934], reinforcing the administrative overlap between the Wexner and Epstein organizations at the individual-officer level.</p>"
+        "content": "<p>The addresses attached to Nine East 71st Street Corporation across its corporate life function as control indicators. The 1989 acquisition deed lists 41 South High Street, Columbus, Ohio — Wexner's L Brands headquarters [Finding #492]. The 1998 Wexner-to-NES transfer binder includes the Articles of Organization for NES LLC, placing the transaction firmly within Epstein's corporate formation process [Finding #2468]. The 2011 deed transfer lists 301 East 66th Street, 10th Floor — Kahn's HBRK Associates office — as the grantor address. Federal court complaints document the principal place of business as 575 Lexington Avenue, Fourth Floor, where Indyke's DKIP PLLC and HBRK Associates both operated [Finding #3263, Finding #383].</p><p>ACRIS document 2008012900966001 records a power of attorney from Abigail S. Wexner — at 15 Central Park West — to <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> dated January 23, 2008, on a separate NYC property parcel (BBL 1/1114/1507). This instrument establishes a direct Wexner-Indyke property-law nexus outside the Nine East chain itself, running through the same attorney who later served as Epstein's primary lawyer and co-executor of the estate [ACRIS:2008012900966001]. The OCCRP Aleph dataset separately confirms Indyke as Secretary of the Wexner Foundation at 8000 Walton Parkway, New Albany, Ohio [EFTA01297934], reinforcing the administrative overlap between the Wexner and Epstein organizations at the individual-officer level.</p>"
       }
     ],
     "open_questions": [
-      "The 1998 transaction binder (EFTA00300480) includes a Nominee Agreement and a Promissory Note. The face value of the promissory note \u2014 i.e., whether there was any recorded purchase price for the stock transfer \u2014 has not been retrieved. What did Epstein or NES LLC pay for the corporation, and who received that payment?",
-      "Maple Inc was registered on November 22, 2011 \u2014 approximately one month before the Nine East deed transfer on December 23, 2011. What precipitated the reorganization at that specific moment? Epstein had been operating from the property for over a decade, and the timing does not align with any known legal event. Were there any JPMorgan account restructurings, insurance policy changes, or tax planning events in late 2011 that drove the timing of the USVI re-titling?",
+      "The 1998 transaction binder (EFTA00300480) includes a Nominee Agreement and a Promissory Note. The face value of the promissory note — i.e., whether there was any recorded purchase price for the stock transfer — has not been retrieved. What did Epstein or NES LLC pay for the corporation, and who received that payment?",
+      "Maple Inc was registered on November 22, 2011 — approximately one month before the Nine East deed transfer on December 23, 2011. What precipitated the reorganization at that specific moment? Epstein had been operating from the property for over a decade, and the timing does not align with any known legal event. Were there any JPMorgan account restructurings, insurance policy changes, or tax planning events in late 2011 that drove the timing of the USVI re-titling?",
       "The Katlyn Doe complaint (Count III) frames Nine East 71st Street Corporation as the negligent-security defendant for the ownership period ending December 2011. The Lisa Doe case (1:19-cv-07773) was terminated January 5, 2021 and the Priscilla Doe case terminated March 9, 2022. Neither disposition is documented as a contested adjudication. What were the settlement terms, if any, as to Nine East 71st Street Corporation specifically, and was the corporation dissolved as part of the estate wind-down?",
-      "The 1998 transfer binder includes \"LHW Resignation as Director\" \u2014 confirming Wexner held a director position in the corporation. Were there other directors or shareholders at the time of transfer? The Biennial Statement in the binder would contain officer and address information as of its filing date. That document has not been separately reviewed.",
-      "Back To NYC 71 LLC, which purchased the property for $51 million in March 2021, is registered at 24 Lansdowne Road, London W11 3LL \u2014 a Notting Hill residential address. Bolt 1 LP subsequently acquired it for $65.6 million in June 2023. The identities of the beneficial owners of Back To NYC 71 LLC and Bolt 1 LP have not been established. Were any of these buyers connected to the Epstein network, or were they arms-length purchasers with no prior Epstein exposure?"
+      "The 1998 transfer binder includes \"LHW Resignation as Director\" — confirming Wexner held a director position in the corporation. Were there other directors or shareholders at the time of transfer? The Biennial Statement in the binder would contain officer and address information as of its filing date. That document has not been separately reviewed.",
+      "Back To NYC 71 LLC, which purchased the property for $51 million in March 2021, is registered at 24 Lansdowne Road, London W11 3LL — a Notting Hill residential address. Bolt 1 LP subsequently acquired it for $65.6 million in June 2023. The identities of the beneficial owners of Back To NYC 71 LLC and Bolt 1 LP have not been established. Were any of these buyers connected to the Epstein network, or were they arms-length purchasers with no prior Epstein exposure?"
     ],
     "applicable_models": [
       "corporate-layering",
@@ -389,35 +514,35 @@
         {
           "target": "CDE Inc",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Finding #555: CDE Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein (JEE Owner). Listed in Richard Kahn Open Items memo (March 2012) as one of 8 potenti"
         },
         {
           "target": "Mort Inc",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Finding #556: Mort Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein. Listed in Kahn Open Items memo (March 2012) as potential investment vehicle for 50"
         },
         {
           "target": "FT Real Estate Inc",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Finding #557: FT Real Estate Inc. confirmed as USVI C Corporation owned by Jeffrey Epstein. Listed in Kahn Open Items memo (March 2012) as potential investment vehi"
         },
         {
           "target": "Maple, Inc.",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "OffshoreAlert:Katlyn-Doe-v-Epstein",
           "description": "Nine East transferred 9 E 71st St mansion to Maple Inc on Dec 23, 2011 per Katlyn Doe complaint"
         },
         {
           "target": "Jeffrey Epstein",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "OffshoreAlert:Priscilla-Doe-v-Epstein",
           "description": "Owned Manhattan mansion at 9 East 71st St (1989-2011) where commercial sex trafficking occurred; principal place of business 575 Lexington Ave 4th Fl"
         },
@@ -441,31 +566,31 @@
           {
             "target": "Darren Indyke",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #555: CDE Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein (JEE Owner). Listed in Richard Kahn Open Items memo (March 2012) as one of 8 potenti"
           },
           {
             "target": "Jeffrey Epstein",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #555: CDE Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein (JEE Owner). Listed in Richard Kahn Open Items memo (March 2012) as one of 8 potenti"
           },
           {
             "target": "Flight Options",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #555: CDE Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein (JEE Owner). Listed in Richard Kahn Open Items memo (March 2012) as one of 8 potenti"
           },
           {
             "target": "Mark Epstein",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #555: CDE Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein (JEE Owner). Listed in Richard Kahn Open Items memo (March 2012) as one of 8 potenti"
           },
           {
             "target": "Richard Kahn",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #555: CDE Inc. confirmed as USVI S Corporation owned by Jeffrey Epstein (JEE Owner). Listed in Richard Kahn Open Items memo (March 2012) as one of 8 potenti"
           }
         ],
@@ -473,31 +598,31 @@
           {
             "target": "Jeffrey Epstein",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #557: FT Real Estate Inc. confirmed as USVI C Corporation owned by Jeffrey Epstein. Listed in Kahn Open Items memo (March 2012) as potential investment vehi"
           },
           {
             "target": "Financial Ballistics Trust",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #557: FT Real Estate Inc. confirmed as USVI C Corporation owned by Jeffrey Epstein. Listed in Kahn Open Items memo (March 2012) as potential investment vehi"
           },
           {
             "target": "Financial Trust Company",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #557: FT Real Estate Inc. confirmed as USVI C Corporation owned by Jeffrey Epstein. Listed in Kahn Open Items memo (March 2012) as potential investment vehi"
           },
           {
             "target": "Haze Trust",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #557: FT Real Estate Inc. confirmed as USVI C Corporation owned by Jeffrey Epstein. Listed in Kahn Open Items memo (March 2012) as potential investment vehi"
           },
           {
             "target": "Mark Epstein",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Finding #557: FT Real Estate Inc. confirmed as USVI C Corporation owned by Jeffrey Epstein. Listed in Kahn Open Items memo (March 2012) as potential investment vehi"
           }
         ],
@@ -505,31 +630,31 @@
           {
             "target": "Leon Black",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "$158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019."
           },
           {
             "target": "Kathy Ruemmler",
             "type": "legal",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will."
           },
           {
             "target": "Reid Weingarten",
             "type": "legal",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Defense counsel 19 Cr. 490 (SDNY 2019). Personal advisor 2011-2019, 245+ emails. ~450K paid in Steptoe fees, 300K owed. Paris travel Sept 2011. Regular breakfast meetings at 71st St."
           },
           {
             "target": "Landon Thomas Jr",
             "type": "intelligence",
-            "strength": 1.0,
+            "strength": 1,
             "description": "185-email correspondence 2007-2019. Thomas served as Epstein media asset: advance warning of investigations, brokered intros to Masa Son and Tom Barrack, received 40K+ payments to charity, wrote defining 2002 profile and 2008 NYT piece. Classified as compromised source."
           },
           {
             "target": "Landon Thomas Jr",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Epstein directed 40K+ to Thomas charity (Ricardo O Gorman Garden): 10K from foundation in Mar 2015 plus 30K from Gratitude America in Aug 2017. Thomas provided wire instructions for TD Bank account."
           }
         ],
@@ -537,13 +662,13 @@
           {
             "target": "NYSG LLC",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "NYSG LLC at 457 Madison sent FedEx to Wexner family and corporate addresses in New Albany OH 2001-2002"
           },
           {
             "target": "New Albany Property Inc",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "NYSG LLC shipped documents to Peg Ugland and Paul Burkhardt at New Albany Property Inc 6525 West Campus Oval in Wexner territory"
           }
         ]

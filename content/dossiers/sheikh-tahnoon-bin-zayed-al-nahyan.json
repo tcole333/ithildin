@@ -8,13 +8,15 @@
   "generated_at": "2026-03-11T18:36:07.995070",
   "last_updated": "2026-02-26T17:38:14",
   "stats": {
-    "total_findings": 6,
+    "total_findings": 19,
     "total_connections": 18,
     "total_entities": 0,
     "finding_types": {
+      "financial": 5,
+      "identity": 6,
+      "legal": 1,
       "relationship": 1,
-      "intelligence": 3,
-      "identity": 2
+      "intelligence": 6
     },
     "connection_types": {
       "financial": 7,
@@ -26,6 +28,89 @@
     "last_updated": "2026-02-26T17:38:14"
   },
   "findings": [
+    {
+      "id": 3745,
+      "finding_type": "financial",
+      "summary": "David Stern brokered Leon Black meeting with Abu Dhabi Global Market chairman; MBZ delegated digital currency to Khaldoon",
+      "detail": "EFTA02586299: David Stern emailed Epstein on Oct 5, 2017 with two items: (1) 'Digital currency: MBZ handed to Khaldoon, speaking to him' - MBZ (Sheikh Mohammed bin Zayed) delegated digital currency/crypto matters to Khaldoon Al Mubarak (Mubadala CEO), (2) 'Can Leon Black meet with HE Ahmed Ali Al Sayegh in NYC October 16/17/18 - Very close to the boss and Chairman of Abu Dhabi Global Markets.' This document directly connects: (a) Epstein network to MBZ/Mubadala on crypto/digital currency in 2017, (b) Leon Black (Apollo) to Abu Dhabi through Epstein's brokering, (c) The 'boss' referenced is likely Sheikh Tahnoon or MBZ. CRITICAL: The same Abu Dhabi sovereign apparatus (MBZ/Khaldoon/Mubadala) that Epstein's network interfaced with on digital currency in 2017 is the same apparatus behind MGX's 2025 crypto investment via USD1.",
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2017-10-05",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:56:37",
+      "target_name": "Abu Dhabi Global Market / Ahmed Ali Al Sayegh",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA02586299",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3756,
+      "finding_type": "identity",
+      "summary": "Sheikh Tahnoon bin Zayed Al Nahyan (b. Dec 4, 1968, Abu Dhabi) is UAE National Security Adviser, brother of UAE President MBZ, known in intelligence circles as 'Spy Sheikh.' Flagged as PEP in OpenSanctions (Q85804913). Controls constellation of Abu Dhabi tech/AI entities: MGX (AI investment), G42 (AI company whose executives took WLFI board seats), and backed Aryam Investment 1 (vehicle for $500M WLFI acquisition). Met multiple times with Trump and senior US officials post-2024 election. UK Companies House shows officer appointments.",
+      "detail": "Full name: Sheikh Tahnoon bin Zayed Al Nahyan. DOB: Dec 4, 1968 (some sources say 1971). Born Abu Dhabi, UAE citizen, male. Aliases include 'Spy Sheikh.' Role: UAE National Security Adviser. Brother of UAE President Mohammed bin Zayed Al Nahyan (MBZ). OpenSanctions ID: Q85804913 (Wikidata). PEP classification. Datasets: wd_categories, wikidata. First seen 2023-07-18 in OpenSanctions. UK Companies House officer appointments on file. Source URLs include FT stream and UK Companies House. Chairs MGX. Connected to G42 (Abu Dhabi AI company). Backs Aryam Investment 1 (WLFI investment vehicle). Central figure in Abu Dhabi AI leadership initiative.",
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 22:58:04",
+      "target_name": "Tahnoon bin Zayed Al Nahyan",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "OpenSanctions record Q85804913; GDELT articles re 'spy sheikh'; UK Companies House officer record; ZeroHedge/WSJ Feb 2026 reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3807,
+      "finding_type": "legal",
+      "summary": "Tom Barrack prosecuted for illegal UAE lobbying (E.D.N.Y. 1:21-cr-00371 Alshahhi co-defendant); acquitted Oct 2022. UAE agent Alshahhi convicted separately.",
+      "detail": "Tom Barrack, Trump inaugural committee chair, was charged with acting as UAE foreign agent without FARA registration. Co-defendant Rashid Al Malik Alshahhi (UAE national) was charged in E.D.N.Y. (1:21-cr-00371, filed 2021-07-16, still open). Barrack was acquitted in Oct 2022 (separate docket). Barrack also filed FOIA suit against DOJ (D. Colo. 1:22-cv-01800, terminated Oct 2022). The Alshahhi case references 'Tahnoon' in CourtListener search results, suggesting UAE national security advisor Tahnoon bin Zayed's involvement in the lobbying operation. This case establishes the precedent pattern: UAE influence operations flowing through Trump-connected individuals, with FARA as the enforcement mechanism. The MGX-WLFI channel represents a potential evolution of this pattern -- using commercial crypto infrastructure rather than traditional lobbying.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-25 23:01:59",
+      "target_name": "UAE-Trump nexus / Tom Barrack FARA precedent",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 60074952: USA v. Al Malik Alshahhi, 1:21-cr-00371, E.D.N.Y., filed 2021-07-16",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener docket 63889745: Barrack v. DOJ, 1:22-cv-01800, D. Colo., FOIA",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CourtListener search 'Tahnoon': returned Barrack and Alshahhi cases",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 3833,
       "finding_type": "relationship",
@@ -89,7 +174,7 @@
     {
       "id": 3862,
       "finding_type": "intelligence",
-      "summary": "SYNTHESIS: TAHNOON EMPIRE MAPPING \u2014 Sheikh Tahnoon controls over 1.5 trillion dollars across ADIA, MGX, G42, IHC, ADQ, and First Abu Dhabi Bank. IHC alone has 240B market cap with 42,000 percent share price growth 2019-2024. G42 evolved from DarkMatter (UAE offensive cyber/Pegasus surveillance), CEO Peng Xiao renounced US citizenship for Emirati. MGX has embedded in virtually every major Trump-era tech deal: Stargate 500B JV, 2B Binance via USD1, 40B Aligned Data Centers, TikTok US restructuring, Databricks 10B round, xAI 6B Series A, Anthropic investment, France 31-52B data centers. Three active Congressional investigations: Warren-Merkley (Senate Banking), Ro Khanna (House CCP Committee, deadline Mar 1 2026), Rep Kamlager-Dove (Commerce IG review).",
+      "summary": "SYNTHESIS: TAHNOON EMPIRE MAPPING — Sheikh Tahnoon controls over 1.5 trillion dollars across ADIA, MGX, G42, IHC, ADQ, and First Abu Dhabi Bank. IHC alone has 240B market cap with 42,000 percent share price growth 2019-2024. G42 evolved from DarkMatter (UAE offensive cyber/Pegasus surveillance), CEO Peng Xiao renounced US citizenship for Emirati. MGX has embedded in virtually every major Trump-era tech deal: Stargate 500B JV, 2B Binance via USD1, 40B Aligned Data Centers, TikTok US restructuring, Databricks 10B round, xAI 6B Series A, Anthropic investment, France 31-52B data centers. Three active Congressional investigations: Warren-Merkley (Senate Banking), Ro Khanna (House CCP Committee, deadline Mar 1 2026), Rep Kamlager-Dove (Commerce IG review).",
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
@@ -154,9 +239,85 @@
       ]
     },
     {
+      "id": 4050,
+      "finding_type": "identity",
+      "summary": "Peng Xiao background: Group CEO of G42 since Oct 2020 (previously at G42 since 2018 founding). Former CEO of Pegasus LLC, a subsidiary of DarkMatter Group (UAE cybersecurity/surveillance firm, 2015-2018). Before that, SVP/CTO/CIO of MicroStrategy for ~15 years (enterprise software). Educated at George Washington University. Renounced US citizenship for Emirati citizenship. Founding board member of MBZUAI (Mohamed bin Zayed University of AI). Council member of Abu Dhabi AI and Advanced Technology Council (AIATC). CIA opened investigative file on Xiao per NYT reporting. Exiled Chinese businessman Miles Guo claimed (Aug 2021, unverified) Xiao is illegitimate son of Han Zheng, now VP of China. Pegasus opened subsidiary in China: Pegasus Technology Beijing, with Xiao as executive director.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 06:00:52",
+      "target_name": "Peng Xiao",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MBZUAI leadership page; House CCP Select Committee letter Jan 2024; Wire China Dec 2023; Asia Times Nov 2023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4065,
+      "finding_type": "identity",
+      "summary": "Peng Xiao, G42 Group CEO profile: (1) Former head of DarkMatter Group (UAE cybersecurity/spyware firm that hired ex-CIA/NSA/Israeli staffers). (2) Led Pegasus subsidiary of DarkMatter; Pegasus opened subsidiary Pegasus Technology Beijing where Xiao serves as executive director. (3) Previously SVP/CTO/CIO at MicroStrategy for a decade, managing 1000+ engineers. (4) Renounced US citizenship to become UAE citizen. (5) CIA issued classified report on him. (6) G42 under him created ToTok messaging app (rebranded Jul 2019), identified by US intelligence as UAE mass surveillance tool — G42 was sole registered shareholder. (7) House Select Committee on CCP (Gallagher, Jan 2024) documented Xiao operates expansive network of UAE and PRC-based companies developing dual-use technologies supporting PRC military-civil fusion and human rights abuses. (8) Co-signed Aryam-WLFI $500M agreement alongside Martin Edelman for 49% of Trump family crypto venture. G42 claims no connection to DarkMatter despite overlapping personnel including Xiao himself.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 06:04:01",
+      "target_name": "Peng Xiao",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "fortune.com/asia/2023/11/29/g42,chinaselectcommittee.house.gov,washingtoninstitute.org",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4082,
+      "finding_type": "financial",
+      "summary": "G42 42XFund (USD 10B Shanghai-based fund with ByteDance and JD.com stakes) transferred to Lunate in Jul 2024. Lunate plans to hire small team to manage fund. Both G42 and Lunate controlled by Sheikh Tahnoon bin Zayed via Royal Group -> IHC -> Chimera Investment -> Lunate chain. Transfer is lateral movement within same ownership structure, not genuine divestiture.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 15:43:13",
+      "target_name": "G42/Lunate",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BNN Bloomberg: IHC majority owned by Sheikh Tahnoon private firm Royal Group, parent company of G42",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg Jul 8, 2024: Abu Dhabi Investment Firm Lunate Takes On AI Firm G42 China Fund",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 4097,
       "finding_type": "intelligence",
-      "summary": "SYNTHESIS: Tahnoon Portfolio Map \u2014 Complete accounting of Tahnoon-controlled investments in Trump-adjacent ventures. Total identified capital deployed: USD 9.5B+ across 5 deals. (1) Aryam/WLFI 49% stake: USD 500M (Jan 2025), followed by AI chip export approval May 2025. (2) MGX-Binance: USD 2B via USD1 stablecoin (Mar 2025), followed by CZ pardon Oct 2025. (3) MGX-Stargate AI JV: USD 7B MGX contribution (Jan 2025), announced at White House. (4) MGX-TikTok USDS 15% stake: portion of USD 14B deal (Jan 2026), shaped by Trump EOs. (5) MGX-OpenAI: undisclosed amount in USD 6.6B round (Oct 2025) and co-led USD 30B round (Feb 2026). All 5 deals required or benefited from Trump executive/regulatory actions. USD 187M flowed directly to Trump family entities from WLFI deal alone.",
+      "summary": "SYNTHESIS: Tahnoon Portfolio Map — Complete accounting of Tahnoon-controlled investments in Trump-adjacent ventures. Total identified capital deployed: USD 9.5B+ across 5 deals. (1) Aryam/WLFI 49% stake: USD 500M (Jan 2025), followed by AI chip export approval May 2025. (2) MGX-Binance: USD 2B via USD1 stablecoin (Mar 2025), followed by CZ pardon Oct 2025. (3) MGX-Stargate AI JV: USD 7B MGX contribution (Jan 2025), announced at White House. (4) MGX-TikTok USDS 15% stake: portion of USD 14B deal (Jan 2026), shaped by Trump EOs. (5) MGX-OpenAI: undisclosed amount in USD 6.6B round (Oct 2025) and co-led USD 30B round (Feb 2026). All 5 deals required or benefited from Trump executive/regulatory actions. USD 187M flowed directly to Trump family entities from WLFI deal alone.",
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
@@ -170,6 +331,29 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "F#3757,F## 3759,F#3980,F#4002,F#4009,F#4059,F#4068,F#4069,F#4071,F#4090,F#3862",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4102,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Institutional continuity from Epstein-era Abu Dhabi channels to current MGX/WLFI apparatus. Same principals, same institutions, different decade. (1) Epstein era: David Stern brokered Leon Black-ADGM meeting (Oct 2017); Ian Osborne (Mubadala board) coordinated tech investments with Epstein; MBZ delegated crypto/digital currency to Khaldoon at Mubadala. (2) Current era: Mubadala co-founded MGX; Khaldoon is MGX Vice Chairman; Edelman (Epstein calendar Dec 2016) signed WLFI deal; Epstein 'list for bannon steve' included 'edelman.' (3) G42 CIO Zhang Xiaoping maintains dual role with triple-sanctioned Yitu Technology while Microsoft-backed G42 holds WLFI stake. (4) Peng Xiao (DarkMatter/Project Raven surveillance) signed same WLFI deal. The Abu Dhabi sovereign infrastructure that Epstein sought to penetrate is now the primary foreign capital source for Trump family ventures.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 15:53:43",
+      "target_name": "Epstein-Abu Dhabi Pipeline",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "F#3743,F#3745,F#3739,F#3747,F#4030,F#4031,F#4032,F#4054,F#3863,F#4088",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -207,6 +391,179 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Wikipedia Tahnoon",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4140,
+      "finding_type": "identity",
+      "summary": "Alpha Wave Partners, LLC is a Delaware LLC formed in 2025 as a purpose-built investment vehicle for the TikTok USDS JV deal. SEC Form D (Feb 4, 2026) shows: Private Equity Pooled Investment Fund, Rule 506(b)/Sec 3(c)(7), first sale Jan 16, 2026 (6 days before TikTok deal closed Jan 22), 9 investors, USD 40M sold. Rick Gerson is Managing Member via Alpha Wave Manager, LLC (Miami Beach FL). Alpha Wave Global, LP is listed as Investment Manager. GLEIF LEI 254900VZ1X3HQVQ13E67 confirms Delaware registration.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:09:41",
+      "target_name": "Alpha Wave Partners, LLC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF LEI 254900VZ1X3HQVQ13E67",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR Form D 0000902664-26-000696",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4141,
+      "finding_type": "financial",
+      "summary": "Alpha Wave Global is controlled by Tahnoon bin Zayed through multiple channels: (1) Alpha Wave Ventures II is a USD 10B fund co-managed by Alpha Wave Global, Lunate, and Chimera Capital, with Alpha Dhabi Holding (a subsidiary of IHC, chaired by Tahnoon) as sole limited partner. (2) Alpha Wave Global launched a USD 2B credit fund with Chimera in Nov 2022. (3) IHC West Investments LLC is a strategic investment vehicle partnered with Alpha Wave Ventures for technology deals. (4) Alpha Wave Incubation is a USD 300M fund anchored by ADQ (another Tahnoon-linked sovereign entity). While Alpha Wave Global is nominally independent (founded by Rick Gerson and Navroz Udwadia as Falcon Edge Capital in 2012), its primary capital comes from Tahnoon's network of sovereign vehicles.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 17:09:54",
+      "target_name": "Alpha Wave Global",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ADQ press release re Alpha Wave Incubation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Bloomberg Jan 2022 re Chimera-Alpha Wave Ventures II",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Chimera Capital website - Alpha Wave Ventures II page",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "PitchBook - Alpha Dhabi sole LP",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4267,
+      "finding_type": "financial",
+      "summary": "Tahnoon entity network update 2025-2026. CONFIRMED entities: ADIA (chairman), G42 (chairman), MGX (chairman), IHC (chairman), ADQ (chairman), Royal Group, 2PointZero (via IHC), Chimera Investment (via 2PointZero), Lunate Capital (via 2PointZero), FAB (chairman). NEW 2025-2026 entities: ADI Foundation (blockchain/stablecoin, via IHC), Judan Financial Holding (Feb 2026, chairman, 237B AUM, consolidates Chimera+Lunate+International Securities across banking/insurance/asset mgmt in 13 countries), Aryam Investment 1 (WLFI vehicle). MGX also acquired 15% of TikTok US, invested in OpenAI 300B round, and did 40B Aligned Data Centers deal with BlackRock.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:41:01",
+      "target_name": "Tahnoon bin Zayed Al Nahyan",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.thenationalnews.com/business/markets/2026/02/13/ihc-to-launch-judan-financial-with-dh870bn-in-assets-under-management/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4271,
+      "finding_type": "intelligence",
+      "summary": "OpenSanctions confirms Tahnoon bin Zayed Al Nahyan (DOB: 1968-12-04, Abu Dhabi) is classified as PEP (politically exposed person) under datasets: wd_categories, wikidata. Known aliases: Tahnoun bin Zayed Al Nahyan, Sheikh Tahnoon, Spy Sheikh. UAE national security advisor. Referenced in UK Companies House records. Distinct from Tahnoon bin Mohammed Al Nahyan (b.1942, d.2024) who was his uncle.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:41:33",
+      "target_name": "Tahnoon bin Zayed Al Nahyan",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions ID Q85804913",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4272,
+      "finding_type": "intelligence",
+      "summary": "LittleSis profile (ID 447280) documents Tahnoon as Business Person and Public Official. Summary: son of UAE founder, brother of current ruler. Known as UAE spymaster, central to country's cyberwarfare on other nations including spying on UK citizens critical of UAE human rights. Appeared in Pandora Papers. Listed as FAB director in England and Wales. Named in 2025 press as the AI worlds trillion-dollar money man. Updated 2026-02-02 (likely in response to WSJ WLFI story).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 18:41:40",
+      "target_name": "Tahnoon bin Zayed Al Nahyan",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://littlesis.org/entities/447280-Sheikh_Tahnoon_bin_Zayed_Al_Nahyan",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 4307,
+      "finding_type": "financial",
+      "summary": "Stargate LLC is a Delaware JV: SoftBank/OpenAI each 40%, Oracle/MGX split remainder; disputes delayed construction",
+      "detail": "Stargate LLC, incorporated in Delaware, is a joint venture between SoftBank, OpenAI, Oracle, and MGX (Abu Dhabi). SoftBank and OpenAI each committed USD 19B and hold 40% ownership each; Oracle and MGX committed USD 7B combined. Masayoshi Son is chairman. SoftBank has financial responsibility; OpenAI has operational responsibility. Announced at White House Jan 21, 2025, targeting USD 500B in AI infrastructure by 2029. As of Feb 2026, the JV has been stalled by disputes between OpenAI and SoftBank over who owns the data centers, funding percentages, and construction control. Resolution reportedly reached in Feb 2026 after marathon negotiations in Tokyo: SoftBank owns/develops the land, OpenAI manages design and leases long-term. No CEO hired, no staff, no active data center development as of filing date.",
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-26 20:45:29",
+      "target_name": "Stargate LLC",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Multiple media reports (The Information, Tom's Hardware, S&P Global)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenAI announcement Jan 2025",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -632,8 +989,8 @@
       4271,
       4272
     ],
-    "lead": "<p>Sheikh Tahnoon bin Zayed Al Nahyan (born December 4, 1968, Abu Dhabi) is the UAE National Security Adviser and a full brother of UAE President Mohammed bin Zayed Al Nahyan (MBZ). He chairs Abu Dhabi Investment Authority (ADIA), <a href=\"/dossiers/mgx\">MGX</a>, <a href=\"/dossiers/g42\">G42</a>, International Holding Company (IHC), ADQ, First Abu Dhabi Bank (FAB), and in February 2026 assumed the chairmanship of Judan Financial Holding, a newly consolidated entity managing $237 billion across banking, insurance, and asset management in 13 countries [Finding #4267]. His private vehicle, Royal Group Holding, is the parent of G42 and controls 61% of IHC. According to press reporting, total assets under his direct or indirect control exceed $1.5 trillion [Finding #3862]. OpenSanctions classifies him as a Politically Exposed Person (ID: Q85804913) and flags him under the <code>reg.action</code> tag from the US federal enforcements dataset [Finding #4271] [Finding #5065]. He is colloquially known as the \u201cSpy Sheikh\u201d for his oversight of UAE offensive cyber capabilities, including the DarkMatter operation [Finding #3833], and appeared in the ICIJ Pandora Papers [Finding #5065]. UK Companies House holds officer appointment records for him, and LittleSis documents his role as a public official and businessman (profile ID 447280) [Finding #4272].</p><p>Analysis of public filings and reporting indicates that between January 2025 and February 2026, Tahnoon-controlled entities deployed at least $9.5 billion into five deals whose execution required or benefited from Trump administration regulatory and executive actions: the 49% <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> acquisition via <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a> ($500M), the $2 billion MGX investment in Binance settled via the Trump family\u2019s USD1 stablecoin, the $7 billion MGX commitment to the Stargate AI joint venture announced at the White House, MGX\u2019s 15% stake in the TikTok US restructuring, and MGX\u2019s participation in two OpenAI funding rounds [Finding #4097]. According to Congressional records, three separate inquiries were active as of March 2026: a Warren-Merkley Senate Banking Committee investigation, a Ro Khanna House Select Committee on CCP inquiry, and a Commerce Department Inspector General review requested by Representative Kamlager-Dove [Finding #3862].</p>",
-    "system_role": "Tahnoon holds a dual structural position that has no direct Western equivalent: he is simultaneously the UAE state\u2019s principal intelligence authority and the controlling principal of a sovereign commercial empire spanning AI, crypto, banking, and infrastructure. That combination means commercial transactions from his entities carry potential policy implications, and intelligence equities he holds are supported by the capital allocation capacity of a multi-trillion-dollar portfolio. In the US context he is the primary Abu Dhabi counterpart on the Trump administration\u2019s AI chip export policy, crypto regulatory posture, and TikTok restructuring \u2014 with commercial investment vehicles providing the financial mechanism through which those relationships materialize.",
+    "lead": "<p>Sheikh Tahnoon bin Zayed Al Nahyan (born December 4, 1968, Abu Dhabi) is the UAE National Security Adviser and a full brother of UAE President Mohammed bin Zayed Al Nahyan (MBZ). He chairs Abu Dhabi Investment Authority (ADIA), <a href=\"/dossiers/mgx\">MGX</a>, <a href=\"/dossiers/g42\">G42</a>, International Holding Company (IHC), ADQ, First Abu Dhabi Bank (FAB), and in February 2026 assumed the chairmanship of Judan Financial Holding, a newly consolidated entity managing $237 billion across banking, insurance, and asset management in 13 countries [Finding #4267]. His private vehicle, Royal Group Holding, is the parent of G42 and controls 61% of IHC. According to press reporting, total assets under his direct or indirect control exceed $1.5 trillion [Finding #3862]. OpenSanctions classifies him as a Politically Exposed Person (ID: Q85804913) and flags him under the <code>reg.action</code> tag from the US federal enforcements dataset [Finding #4271] [Finding #5065]. He is colloquially known as the “Spy Sheikh” for his oversight of UAE offensive cyber capabilities, including the DarkMatter operation [Finding #3833], and appeared in the ICIJ Pandora Papers [Finding #5065]. UK Companies House holds officer appointment records for him, and LittleSis documents his role as a public official and businessman (profile ID 447280) [Finding #4272].</p><p>Analysis of public filings and reporting indicates that between January 2025 and February 2026, Tahnoon-controlled entities deployed at least $9.5 billion into five deals whose execution required or benefited from Trump administration regulatory and executive actions: the 49% <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> acquisition via <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a> ($500M), the $2 billion MGX investment in Binance settled via the Trump family’s USD1 stablecoin, the $7 billion MGX commitment to the Stargate AI joint venture announced at the White House, MGX’s 15% stake in the TikTok US restructuring, and MGX’s participation in two OpenAI funding rounds [Finding #4097]. According to Congressional records, three separate inquiries were active as of March 2026: a Warren-Merkley Senate Banking Committee investigation, a Ro Khanna House Select Committee on CCP inquiry, and a Commerce Department Inspector General review requested by Representative Kamlager-Dove [Finding #3862].</p>",
+    "system_role": "Tahnoon holds a dual structural position that has no direct Western equivalent: he is simultaneously the UAE state’s principal intelligence authority and the controlling principal of a sovereign commercial empire spanning AI, crypto, banking, and infrastructure. That combination means commercial transactions from his entities carry potential policy implications, and intelligence equities he holds are supported by the capital allocation capacity of a multi-trillion-dollar portfolio. In the US context he is the primary Abu Dhabi counterpart on the Trump administration’s AI chip export policy, crypto regulatory posture, and TikTok restructuring — with commercial investment vehicles providing the financial mechanism through which those relationships materialize.",
     "sections": [
       {
         "id": "identity-and-formal-roles",
@@ -686,12 +1043,12 @@
     ],
     "open_questions": [
       "What specific policy commitments, if any, were made by Trump administration officials to UAE counterparts during Tahnoon's meetings with Trump and senior US officials between November 2024 and inauguration, and do those discussions overlap with the January 2025 WLFI signing date? [Finding #3756]",
-      "The OpenSanctions <code>reg.action</code> flag from the US federal enforcements dataset indicates Tahnoon is connected to a US federal enforcement matter \u2014 what is that matter, and does it relate to the WLFI transaction, the chip export sequence, or an earlier action? [Finding #5065]",
-      "The 42XFund transfer from G42 to Lunate in July 2024 was described as a China divestiture to the Commerce Department \u2014 did BIS or CFIUS review whether the transfer constituted a genuine arm's-length divestiture given that both entities are controlled by the same beneficial owner? [Finding #4053] [Finding #4082]",
-      "Rick Gerson's Alpha Wave entities participated in the TikTok USDS restructuring through Alpha Wave Partners LLC while Gerson simultaneously served as an Abu Dhabi-Kushner intermediary under Mueller scrutiny \u2014 was any FARA or national security review triggered by Alpha Wave's TikTok role? [Finding #4143] [Finding #4140]",
-      "Aryam Investment 1 has unnamed co-investors alongside Tahnoon as ultimate beneficial owner \u2014 who are those co-investors, and do they include other UAE or Gulf sovereign entities? [Finding #3979]",
+      "The OpenSanctions <code>reg.action</code> flag from the US federal enforcements dataset indicates Tahnoon is connected to a US federal enforcement matter — what is that matter, and does it relate to the WLFI transaction, the chip export sequence, or an earlier action? [Finding #5065]",
+      "The 42XFund transfer from G42 to Lunate in July 2024 was described as a China divestiture to the Commerce Department — did BIS or CFIUS review whether the transfer constituted a genuine arm's-length divestiture given that both entities are controlled by the same beneficial owner? [Finding #4053] [Finding #4082]",
+      "Rick Gerson's Alpha Wave entities participated in the TikTok USDS restructuring through Alpha Wave Partners LLC while Gerson simultaneously served as an Abu Dhabi-Kushner intermediary under Mueller scrutiny — was any FARA or national security review triggered by Alpha Wave's TikTok role? [Finding #4143] [Finding #4140]",
+      "Aryam Investment 1 has unnamed co-investors alongside Tahnoon as ultimate beneficial owner — who are those co-investors, and do they include other UAE or Gulf sovereign entities? [Finding #3979]",
       "What, if any, conflict-of-interest review was conducted within the Commerce Department before the May 2025 decision to approve 500,000 Nvidia chips for UAE, given the prior WLFI investment and the active Congressional inquiries into the sequence? [Finding #3840] [Finding #3862]",
-      "Judan Financial Holding, announced February 2026, consolidates Chimera, Lunate, and International Securities into a 13-country $237 billion AUM structure under Tahnoon's chairmanship \u2014 what jurisdictions are included, and does the structure create new opacity for tracing the 42XFund&#8217;s ByteDance holdings? [Finding #4267]"
+      "Judan Financial Holding, announced February 2026, consolidates Chimera, Lunate, and International Securities into a 13-country $237 billion AUM structure under Tahnoon's chairmanship — what jurisdictions are included, and does the structure create new opacity for tracing the 42XFund&#8217;s ByteDance holdings? [Finding #4267]"
     ],
     "applicable_models": [
       "sovereign-commercial-fusion",
@@ -708,126 +1065,126 @@
         {
           "target": "Donald Trump",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "https://cointelegraph.com/news/uae-backed-firm-buys-49-percent-trump-linked-world-liberty-wsj",
           "description": "Tahnoon's Aryam Investment 1 purchased 49% of Trump's WLFI for M (Jan 2025). M went to Trump family entities. G42 executives got WLFI board seats. MGX (B Binance via USD1) and Stargate/TikTok deals followed. AI chip exports to UAE approved May 2025."
         },
         {
           "target": "Steve Witkoff",
           "type": "political",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "https://accountable.us/what-to-know-about-trumps-billionaire-middle-east-special-envoy-steve-witkoff/",
           "description": "Witkoff is Trump Middle East envoy negotiating with UAE officials including Tahnoon while Witkoff family profits from Tahnoon's M WLFI investment. Son Zach is WLFI co-founder."
         },
         {
           "target": "Changpeng Zhao",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "https://cointelegraph.com/news/eric-trump-usd1-used-2-b-mgx-investment-binance",
           "description": "Tahnoon's MGX invested B in CZ's Binance via USD1 stablecoin (Mar 2025). CZ subsequently pardoned by Trump (Oct 2025). Binance also helped build USD1 technology."
         },
         {
           "target": "Martin Edelman",
           "type": "advisory",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "Paul Hastings profile; GlobalFoundries bio; Chambers profile",
           "description": "Edelman is GC of G42 (Tahnoon's AI company), MGX board member, Mubadala adviser. Led China divestiture negotiations with US government alongside Tahnoon."
         },
         {
           "target": "Peng Xiao",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "https://en.wikipedia.org/wiki/G42_(company",
           "description": "Peng Xiao is CEO of G42 (Tahnoon's AI company) and MGX board member. Former head of DarkMatter's Pegasus program. Renounced US citizenship for Emirati. G42 executives took WLFI board seats."
         },
         {
           "target": "Eric Trump",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "https://cointelegraph.com/news/uae-backed-firm-buys-49-percent-trump-linked-world-liberty-wsj",
           "description": "Eric Trump signed the Aryam Investment 1 deal giving Tahnoon 49% of WLFI for M, 4 days before inauguration. Later announced MGX-Binance USD1 settlement at Token2049 Dubai."
         },
         {
           "target": "Khaldoon Khalifa Al Mubarak",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "https://littlesis.org/entities/355678-Mubadala_Investment_Company_PJSC",
           "description": "Khaldoon is Vice Chairman of MGX (Tahnoon chairs), Board Member of Mubadala Investment Company (MGX founding partner). Parallel roles across Tahnoon's empire."
         },
         {
           "target": "World Liberty Financial",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "UAE entity Aryam Investment 1 acquired 49% WLFI stake for M; controlled by Tahnoon who is UAE national security adviser"
         },
         {
           "target": "Aryam Investment 1",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "WSJ Jan 2026",
           "description": "Aryam Investment 1 is an investment vehicle controlled by Sheikh Tahnoon, managed by his G42 executives"
         },
         {
           "target": "G42",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "SEC SC 13D CIK 0001931913",
           "description": "Chairman and controlling shareholder of G42 since its founding in 2018"
         },
         {
           "target": "MGX",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Chairman of MGX board. MGX co-founded by G42 and Mubadala in 2024, manages up to 100B in AI assets"
         },
         {
           "target": "International Holding Company",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "IHC corporate governance; Wikipedia",
           "description": "Chairman of IHC since April 2020. IHC listed on ADX. Launched 2PointZero (27B) as subsidiary."
         },
         {
           "target": "Royal Group Holding",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Royal Group is Tahnoons main private investment vehicle covering real estate, contracting, food, healthcare, capital investments"
         },
         {
           "target": "MGX Fund Management Limited",
           "type": "employment",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": null,
           "description": "Tahnoon is Chairman of MGX board. Also chairs ADIA, ADQ, IHC, FAB, G42. UAE National Security Advisor and Deputy Ruler of Abu Dhabi. Controls MGX through both Mubadala chain and G42 chain per Schedule B."
         },
         {
           "target": "World Liberty Financial",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "WSJ Feb 2026",
           "description": "Tahnoon-backed Aryam Investment 1 acquired 49% of WLFI for USD500M. Tahnoon controls all entities involved (G42, Aryam, MGX)."
         },
         {
           "target": "TikTok USDS Joint Venture LLC",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "Bloomberg Jul 2024, TikTok Newsroom, web research",
           "description": "Tahnoon chairs MGX which holds 15% of TikTok USDS JV. Separately, Tahnoon's IHC/Lunate subsidiary inherited ByteDance stake from G42's 42XFund. Dual economic interest on both sides of the TikTok divestiture."
         },
         {
           "target": "Aryam Investment 1",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "WSJ reporting Jan 2026",
           "description": "Tahnoon is ultimate beneficial owner of Aryam Investment 1, personal investment vehicle with unnamed co-investors for 49% WLFI acquisition"
         },
         {
           "target": "World Liberty Financial Inc.",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "WSJ Feb 2026 exclusive",
           "description": "Through Aryam Investment 1, acquired 49% stake in WLF for $500M (Jan 2025, pre-inauguration). G42 executives got board seats. Tahnoon is UAE national security adviser, brother of UAE President, controls G42 (flagged by US intelligence for China military tech links). Subsequently, UAE approved for 500,000 Nvidia AI chips per year, with 1/5 going to G42. Potential quid pro quo under investigation."
         }
@@ -837,31 +1194,31 @@
           {
             "target": "World Liberty Financial",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Aryam Investment 1 (Tahnoon bin Zayed/G42) acquired 49% of WLFI for 500M. Signed Jan 16 2025 by Eric Trump, 4 days pre-inauguration. 187M to Trump family entities. G42 executives took board seats. Deal not publicly disclosed."
           },
           {
             "target": "G42",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Aryam managed by G42 executives Martin Edelman (general counsel) and Peng Xiao (CEO). G42 is chaired by Tahnoon."
           },
           {
             "target": "Martin Edelman",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Signed the Aryam-WLFI agreement. G42 general counsel managing the Delaware entity of Aryam."
           },
           {
             "target": "Peng Xiao",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Co-signed the Aryam-WLFI agreement. CEO of G42, manages the Aryam Delaware entity."
           },
           {
             "target": "DT Marks DEFI LLC",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "187M from Aryam initial payment went to Trump family entities DT Marks DEFI LLC and DT Marks SC LLC"
           }
         ],
@@ -869,25 +1226,25 @@
           {
             "target": "Donald Trump",
             "type": "legal",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Trump pardoned CZ Oct 23, 2025 after CZ pled guilty to AML violations Nov 2023; CZ served 4 months; pardon came after MGX $2B Binance investment via WLFI's USD1"
           },
           {
             "target": "Tahnoon bin Zayed Al Nahyan",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Tahnoon chairs MGX which invested $2B in CZ's Binance; Binance subsequently received Abu Dhabi licenses under Tahnoon's regime"
           },
           {
             "target": "Donald Trump Jr.",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "CZ pardon lobbied by Charles McDowell (Checkmate Gov Relations), identified as friend of Don Jr"
           },
           {
             "target": "MGX",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "MGX invested $2B in Binance using USD1 stablecoin; CZ pardoned 7 months later"
           }
         ],
@@ -895,31 +1252,31 @@
           {
             "target": "Tom Barrack",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Close friend. Chaired 58th Presidential Inaugural Committee raising 107M. Adviser to Trump Economic Advisory Council. Co-defendant claim re UAE influence. FEC: major GOP donor."
           },
           {
             "target": "Jay Clayton",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Trump nominated Clayton SEC Chair 2017. Tried to install as SDNY USA June 2020 replacing Berman. Golf partners per LittleSis. Installed as SDNY USA April 2025."
           },
           {
             "target": "William Barr",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Trump nominated Barr as 85th Attorney General (Feb 14, 2019 - Dec 23, 2020). Barr oversaw Mueller Report characterization, Epstein SDNY prosecution, fired Geoffrey Berman from SDNY, intervened in Roger Stone and Michael Flynn cases. Epstein reacted to nomination: 'Barr a disaster for t[rump]' (Dec 7, 2018)."
           },
           {
             "target": "Keith Davidson",
             "type": "legal",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Davidson brokered Stormy Daniels 130K hush payment and Karen McDougal 150K AMI catch-and-kill, payments coordinated with Michael Cohen"
           },
           {
             "target": "Robert Kraft",
             "type": "social",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Friends since 1990s. Kraft attended Trump's 2005 wedding, donated $1M to 2017 inauguration. Both Palm Beach residents. Trump called weekly after Myra Kraft's 2011 death. Philly.com article linking Kraft-Epstein-Trump forwarded by Epstein to Barak and Wolff."
           }
         ],
@@ -927,31 +1284,31 @@
           {
             "target": "World Liberty Financial",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Named Promoter on SEC Form D, public operational face of WLFI"
           },
           {
             "target": "Tahnoon bin Zayed Al Nahyan",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Eric Trump signed the Aryam Investment 1 agreement giving Tahnoon's entity 49% of WLFI for $500M"
           },
           {
             "target": "WLF Holdco LLC",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Eric Trump serves as manager on board of managers of WLF Holdco LLC. Signed the M Aryam Investment 1 deal on behalf of WLF. Address: c/o The Trump Organization, Jupiter FL 33477"
           },
           {
             "target": "Chase Herro",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Eric Trump is Web3 Ambassador for WLFI. Eric finalized $500M Abu Dhabi deal before 2025 inauguration. Herro is co-founder/Executive Officer of same entity."
           },
           {
             "target": "ALT5 Sigma Corp",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Designated board observer (downgraded from director to comply with Nasdaq rules) at ALT5 Sigma per Aug 25, 2025 SEC filing. Also WLFI co-founder. Subsequently quietly removed from board role."
           }
         ],
@@ -959,31 +1316,31 @@
           {
             "target": "Martin Edelman",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "General counsel of G42. Board positions across multiple Tahnoon entities: MGX, MBZUAI, GlobalFoundries, Manchester City FC."
           },
           {
             "target": "World Liberty Financial",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "G42 executives (Edelman, Peng Xiao) signed WLFI deal and took board seats. G42 personnel manage Aryam Investment 1."
           },
           {
             "target": "Nvidia",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "G42 receives 100K advanced Nvidia chips/year under BIS-approved RTE framework; initial tranche 35K Blackwell GB300 chips"
           },
           {
             "target": "Microsoft",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Microsoft $1.5B investment in G42 Apr 2024; $15.2B UAE data center investment Nov 2025"
           },
           {
             "target": "Peng Xiao",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Group CEO since Oct 2020, at G42 since 2018 founding. Former CEO of DarkMatter subsidiary Pegasus. Signed Aryam-WLFI deal."
           }
         ],
@@ -991,31 +1348,31 @@
           {
             "target": "World Liberty Financial",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "USD1 stablecoin used to settle MGX's $2B investment in Binance. Creates financial dependency between Trump family crypto venture and Abu Dhabi sovereign fund."
           },
           {
             "target": "Tahnoon bin Zayed Al Nahyan",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Tahnoon chairs MGX; MGX is his AI-focused investment vehicle in Abu Dhabi"
           },
           {
             "target": "OpenAI",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "MGX participated in OpenAI $6.6B round (Oct 2025); targeted for $50B Middle East expansion; Altman called Tahnoon 'dear personal friend'"
           },
           {
             "target": "Mubadala Investment Co PJSC",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "MGX is an Abu Dhabi tech investment vehicle backed by Mubadala sovereign wealth fund. MGX Fund Management (US) LLC is the US-registered entity."
           },
           {
             "target": "Tahnoun bin Zayed Al Nahyan",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Tahnoun connected to MGX through Mubadala/IHC investment vehicle structure. UAE National Security Advisor overseeing tech investment arm."
           }
         ],
@@ -1023,31 +1380,31 @@
           {
             "target": "Mubadala Investment Company PJSC",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Mubadala (330B SWF) is indirect owner of MGX via chain: Government of Abu Dhabi -> Mubadala -> Mamoura Diversified Global Holding -> MIC Industrial Investment 2 RSC LTD -> MGX Group Holding 1 LTD -> MGX Fund Management Limited. Mubadala holds 75%+ at each level."
           },
           {
             "target": "World Liberty Financial",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "MGX used WLF USD1 stablecoin for 2B Binance investment. Separately, Aryam Investment 1 (Tahnoon entity) bought 49% of WLF for 500M. MGX board members Martin Edelman and Peng Xiao signed Aryam-WLF deal and joined WLF board undisclosed."
           },
           {
             "target": "Martin Edelman",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "MGX board member. Also General Counsel of G42, Of Counsel at Paul Hastings LLP. Signed the Aryam Investment 1 agreement to purchase 49% of World Liberty Financial. Joined WLF board without public disclosure. Key Tahnoon adviser since 2002."
           },
           {
             "target": "Peng Xiao",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "MGX board member, Chairman of Board Executive Committee and Nomination & Remuneration Committee. CEO of G42 (co-founder of MGX). Previously CTO of MicroStrategy. Signed Aryam-WLF deal and joined WLF board."
           },
           {
             "target": "OpenAI / Stargate Project",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "MGX is founding partner of Stargate Project (Jan 2025, 500B AI infrastructure JV) alongside OpenAI, SoftBank, Oracle. MGX contributed 7B. Also participant in Anthropic 30B Series G (Feb 2026). Stargate UAE 1GW data center announced May 2025."
           }
         ],
@@ -1055,31 +1412,31 @@
           {
             "target": "Mohammed bin Zayed",
             "type": "advisory",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Edelman met MBZ during 2002 Gulf tour with Gen Tommy Franks. Became senior adviser to Mubadala the Abu Dhabi sovereign fund. Appointed Mubadala designee on AMD board 2013 and GlobalFoundries board 2017. Reportedly granted Emirati citizenship."
           },
           {
             "target": "Peng Xiao",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Co-signatories on Aryam-WLFI agreement. Both placed on WLFI board without public disclosure. Peng Xiao is G42 CEO where Edelman is General Counsel."
           },
           {
             "target": "Tommy Franks",
             "type": "social",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Gen Franks was CENTCOM commander for Afghanistan and Iraq. Edelman accompanied Franks on Gulf tours in 2002 where he first met MBZ and Tahnoon. Franks visited Arab leaders monthly. Edelman received Dept of Army Public Service Award 2007."
           },
           {
             "target": "World Liberty Financial",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Edelman sits on WLFI 5-person board as Aryam/G42 appointee. Not listed on WLFI website team page despite board seat."
           },
           {
             "target": "Ari Emanuel",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Edelman was longtime adviser to Fertitta brothers UFC owners. Emanuel met Edelman through UFC representation. Edelman introduced Emanuel to Khaldoon Al Mubarak leading to Tahnoon 200M USD investment in UFC."
           }
         ],
@@ -1087,31 +1444,31 @@
           {
             "target": "Zhang Xiaoping",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Zhang Xiaoping served as G42 CIO while simultaneously COO of Yitu Technology (US-sanctioned). Ran G42 Chinese subsidiaries."
           },
           {
             "target": "World Liberty Financial",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Peng Xiao (G42 CEO) sits on WLFI 5-person board as Aryam/G42 appointee. Renounced US citizenship for UAE. Not listed on WLFI website."
           },
           {
             "target": "DarkMatter Group",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "CEO of Pegasus LLC, DarkMatter subsidiary, 2015-2018. DarkMatter ran Project Raven surveillance for UAE."
           },
           {
             "target": "MicroStrategy",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "SVP/CTO/CIO for a decade, managed 1000+ engineers"
           },
           {
             "target": "Pegasus Technology Beijing",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Executive director of DarkMatter subsidiary in China"
           }
         ],
@@ -1119,31 +1476,31 @@
           {
             "target": "Zach Witkoff",
             "type": "familial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Father-son. Steve is WLFI promoter; Zach is CEO of WLFI and was Trump Special Envoy to Middle East"
           },
           {
             "target": "World Liberty Financial",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Named Promoter. Revenue flows through WC DigitalFi LLC at Witkoff Miami office"
           },
           {
             "target": "World Liberty Financial",
             "type": "political",
-            "strength": 1.0,
-            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
+            "strength": 1,
+            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East — dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
           },
           {
             "target": "Zachary Witkoff",
             "type": "familial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Father-son; Zach is WLFI CEO, ALT5 Chairman; Steve is WLFI Promoter, Special Envoy"
           },
           {
             "target": "Tahnoon bin Zayed Al Nahyan",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Witkoff as Trump Middle East Envoy has direct diplomatic access to Tahnoon; simultaneously family receives 12.5% WLFI revenue from Tahnoon's $500M investment"
           }
         ],
@@ -1151,13 +1508,13 @@
           {
             "target": "Jeff Yass",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Yass holds 7% personal stake in ByteDance (15% via SIG). SIG affiliate Vastmere Strategic Investments is investor in TikTok USDS JV with board seat. Yass donated 16M to Trump super PAC MAGA Inc in H1 2025."
           },
           {
             "target": "Larry Ellison",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Oracle (Ellison is chairman/CTO) holds 15% managing investor stake and serves as trusted security partner for TikTok USDS JV. Ellison is longtime Trump ally/donor. Trump publicly advocated for Ellison to buy TikTok."
           },
           {
@@ -1177,31 +1534,31 @@
           {
             "target": "Trump Administration",
             "type": "political",
-            "strength": 1.0,
+            "strength": 1,
             "description": "SEC dropped ~21 crypto enforcement cases (60% reduction) while Trump family earned >1B from WLFI token sales, creating direct conflict between regulatory power and financial interest"
           },
           {
             "target": "Justin Sun",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Sun invested 75M in WLFI tokens and took advisory role. Became top TRUMP meme coin holder. SEC fraud case paused Feb 2025 after Trump inauguration. WLFI blacklisted Sun's address Sept 2025 freezing 107M in tokens. Creates pattern: invest in Trump crypto -> SEC case dropped -> then frozen out."
           },
           {
             "target": "Tahnoon bin Zayed Al Nahyan",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Tahnoon backed Aryam Investment 1 which purchased 49% of WLFI for $500M, Jan 2025"
           },
           {
             "target": "SC Financial Technologies",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Co-owns USD1 stablecoin brand; Delaware affiliate"
           },
           {
             "target": "Sheikh Tahnoon bin Zayed",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Abu Dhabi investment vehicle backed by Sheikh Tahnoon purchased 49% of WLFI for 500M in Jan 2025, sending ~187M to Trump family entities. Tahnoon is UAEs national security advisor and brother of UAE president."
           }
         ],
@@ -1209,13 +1566,13 @@
           {
             "target": "Justin Sun",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Invested $75M in WLFI tokens, became largest individual investor and advisor. Wallet frozen by WLFI team (595M tokens, ~$107M) after attempting to move tokens to exchanges post-TGE. SEC reportedly backed off investigation into Sun's companies after Trump took office. Sun's involvement creates nexus between Tron ecosystem and Trump family crypto."
           },
           {
             "target": "ALT5 Sigma Corporation",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "NASDAQ-listed shell became WLFI public treasury vehicle via $1.5B offering (Aug 2025). Creates circular value: WLFI tokens used to buy ALT5 shares, ALT5 uses cash to buy WLFI tokens. Zach Witkoff became ALT5 Chairman, Eric Trump became director. ALT5 to acquire 7.5% of WLFI total token supply. Provides public market liquidity mechanism for otherwise restricted tokens."
           }
         ]

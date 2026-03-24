@@ -9,12 +9,13 @@
   "generated_at": "2026-03-11T18:36:07.939579",
   "last_updated": "2026-03-10T00:45:42",
   "stats": {
-    "total_findings": 10,
+    "total_findings": 12,
     "total_connections": 4,
     "total_entities": 0,
     "finding_types": {
       "unknown": 1,
       "financial": 5,
+      "relationship": 2,
       "legal": 4
     },
     "connection_types": {
@@ -103,8 +104,8 @@
     {
       "id": 4694,
       "finding_type": "financial",
-      "summary": "Founders Fund defense portfolio deep dive: ~$17B AUM. Co-incubated Palantir Technologies (first institutional investor, $18.2B position from SpaceX alone), SpaceX (first institutional investor), Anduril Industries ($1B Series G \u2014 largest FF check ever). Also incubated/co-founded: Varda Space Industries (in-space manufacturing + DoD hypersonic/heat shield materials), General Matter, Valinor. Trae Stephens is the key node: FF partner since 2014, Anduril co-founder/chairman, led DoD transition team for Trump 2016, was considered for Deputy SecDef 2024. The fund's strategy: incubate defense companies through its partner network, invest at every round, then ensure government adoption through political access.",
-      "detail": "Founders Fund defense ecosystem:\n\nPALANTIR (PLTR): First institutional investor. 18.5x realized return ($2.1B). Peter Thiel is chairman. Joe Lonsdale (8VC) was co-founder. Now $80B+ market cap. $10B+ Army contract (Maven AI, distributed data).\n\nSPACEX: First institutional investor. Position valued at $18.2B. Crown jewel of portfolio. Starlink military contracts, Golden Dome satellite constellation ($2B+).\n\nANDURIL: Cornerstone investor since inception. Participated in every round. $1B in Series G (June 2025) \u2014 largest single FF investment ever. $30.5B valuation. $2.3B total DoD contracts.\n\nVARDA SPACE INDUSTRIES: In-space pharmaceutical manufacturing. Also provides DoD with materials for heat shields, navigation systems, and flight computers. Hypersonic technology testbed.\n\nKey structural feature: FF doesn't just invest in defense companies \u2014 it creates them. The Anduril idea originated at a Founders Fund retreat in 2014. Stephens, a FF partner, then recruited Luckey to co-found it. FF invested at every stage. Stephens serves as Anduril chairman while remaining FF partner. This is not arm's-length investing; it's an integrated company-creation pipeline.\n\nPolitical pipeline: Thiel $1.5M to America PAC (2024), $20M+ total political spending. Stephens led DoD transition 2016. Considered for DepSecDef 2024. FF partners have direct White House/Pentagon access.\n\nComparison to traditional defense: Lockheed/Raytheon/Northrop have lobbyists and PACs but don't have their board members serving on presidential transition teams or being considered for the #2 Pentagon job while simultaneously running the fund that profits from defense contracts.",
+      "summary": "Founders Fund defense portfolio deep dive: ~$17B AUM. Co-incubated Palantir Technologies (first institutional investor, $18.2B position from SpaceX alone), SpaceX (first institutional investor), Anduril Industries ($1B Series G — largest FF check ever). Also incubated/co-founded: Varda Space Industries (in-space manufacturing + DoD hypersonic/heat shield materials), General Matter, Valinor. Trae Stephens is the key node: FF partner since 2014, Anduril co-founder/chairman, led DoD transition team for Trump 2016, was considered for Deputy SecDef 2024. The fund's strategy: incubate defense companies through its partner network, invest at every round, then ensure government adoption through political access.",
+      "detail": "Founders Fund defense ecosystem:\n\nPALANTIR (PLTR): First institutional investor. 18.5x realized return ($2.1B). Peter Thiel is chairman. Joe Lonsdale (8VC) was co-founder. Now $80B+ market cap. $10B+ Army contract (Maven AI, distributed data).\n\nSPACEX: First institutional investor. Position valued at $18.2B. Crown jewel of portfolio. Starlink military contracts, Golden Dome satellite constellation ($2B+).\n\nANDURIL: Cornerstone investor since inception. Participated in every round. $1B in Series G (June 2025) — largest single FF investment ever. $30.5B valuation. $2.3B total DoD contracts.\n\nVARDA SPACE INDUSTRIES: In-space pharmaceutical manufacturing. Also provides DoD with materials for heat shields, navigation systems, and flight computers. Hypersonic technology testbed.\n\nKey structural feature: FF doesn't just invest in defense companies — it creates them. The Anduril idea originated at a Founders Fund retreat in 2014. Stephens, a FF partner, then recruited Luckey to co-found it. FF invested at every stage. Stephens serves as Anduril chairman while remaining FF partner. This is not arm's-length investing; it's an integrated company-creation pipeline.\n\nPolitical pipeline: Thiel $1.5M to America PAC (2024), $20M+ total political spending. Stephens led DoD transition 2016. Considered for DepSecDef 2024. FF partners have direct White House/Pentagon access.\n\nComparison to traditional defense: Lockheed/Raytheon/Northrop have lobbyists and PACs but don't have their board members serving on presidential transition teams or being considered for the #2 Pentagon job while simultaneously running the fund that profits from defense contracts.",
       "source_datasets": [
         "web_search"
       ],
@@ -119,6 +120,56 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Wikipedia (Founders Fund), CNBC June 2025 (Anduril round), Responsible Statecraft (Stephens DepSecDef), TechCrunch (Anduril Series G), SparkCo analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5216,
+      "finding_type": "relationship",
+      "summary": "ProPublica Financial Disclosure: Joseph Popolo (Ambassador to Netherlands) holds Founders Fund V and VI (-250M each), plus Palantir (-15K). LP investor in Thiel's venture funds with combined -500M exposure to Founders Fund. Also invested in Haydn Inc AI automation startup (-250M band).",
+      "detail": "Popolo is an LP investor in Founders Fund V and VI, each valued at -250M. Combined with Palantir stock (-15K), this represents a significant financial interest in Thiel's investment ecosystem. Serving as Ambassador to the Netherlands — a key NATO ally and host to the International Court of Justice — while financially tied to the Thiel defense-tech network.",
+      "source_datasets": [
+        "propublica"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 19:33:01",
+      "target_name": "Joseph Popolo",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica Financial Disclosure",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 5223,
+      "finding_type": "relationship",
+      "summary": "ProPublica Financial Disclosure: Clayton Cromer (OPM Deputy General Counsel) holds The Founders Fund asset. Came from Latham & Watkins LLP (Associate, Jan 2022-Jan 2025). Now at OPM — the agency managing federal workforce that DOGE is restructuring, with multiple Palantir-linked personnel already embedded.",
+      "detail": "Cromer's disclosure lists The Founders Fund as an asset (value band /bin/zsh, likely LP interest or advisory). Prior position at Latham & Watkins, a major corporate law firm. OPM has 3 Thiel network members: Kupor (Director, a16z), Cromer (Deputy GC, Founders Fund), and Bonarrigo Villamil (Deputy Chief of Staff, Palantir holder). OPM is the personnel management agency being restructured by DOGE — Thiel network presence here is strategically significant.",
+      "source_datasets": [
+        "propublica"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-05 19:33:22",
+      "target_name": "Clayton Cromer",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica Financial Disclosure",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -178,7 +229,7 @@
     {
       "id": 5634,
       "finding_type": "legal",
-      "summary": "Banzai Advisory Group LLC v. The Founders Fund VII LP (1:24-cv-00599, D. Delaware) \u2014 Active RICO lawsuit filed 2024-05-17. Nature of suit: 470 Racketeer/Corrupt Organization. Cause: 18 USC 1962 Racketeering (RICO) Act. Assigned to Judge Colm F. Connolly. Case still pending as of 2025-09-09 (last filing date). Filed by Banzai Advisory Group against the Founders Fund VII LP entity specifically. Related proceeding: Seidel Trustee v. Banzai Advisory Group LLC (25-03009, N.D. Texas Bankruptcy Court, filed 2025-02-07) \u2014 adversary proceeding for recovery of money/property via preference (547) and fraudulent transfer (548). This suggests Banzai may be in financial distress and the FF case may be part of a broader dispute involving insolvency.",
+      "summary": "Banzai Advisory Group LLC v. The Founders Fund VII LP (1:24-cv-00599, D. Delaware) — Active RICO lawsuit filed 2024-05-17. Nature of suit: 470 Racketeer/Corrupt Organization. Cause: 18 USC 1962 Racketeering (RICO) Act. Assigned to Judge Colm F. Connolly. Case still pending as of 2025-09-09 (last filing date). Filed by Banzai Advisory Group against the Founders Fund VII LP entity specifically. Related proceeding: Seidel Trustee v. Banzai Advisory Group LLC (25-03009, N.D. Texas Bankruptcy Court, filed 2025-02-07) — adversary proceeding for recovery of money/property via preference (547) and fraudulent transfer (548). This suggests Banzai may be in financial distress and the FF case may be part of a broader dispute involving insolvency.",
       "detail": null,
       "source_datasets": [
         "courtlistener"
@@ -203,7 +254,7 @@
     {
       "id": 5635,
       "finding_type": "legal",
-      "summary": "Chang v. Cashman (3:22-cv-02010, N.D. California) \u2014 Contract dispute involving Founders Fund, filed 2022-03-29, terminated 2025-04-18. Cause: 28:1332 Diversity-Breach of Contract. Assigned to Judge Araceli Martinez-Olguin, referred to Donna M. Ryu. This was a breach of contract case resolved after approximately 3 years of litigation.",
+      "summary": "Chang v. Cashman (3:22-cv-02010, N.D. California) — Contract dispute involving Founders Fund, filed 2022-03-29, terminated 2025-04-18. Cause: 28:1332 Diversity-Breach of Contract. Assigned to Judge Araceli Martinez-Olguin, referred to Donna M. Ryu. This was a breach of contract case resolved after approximately 3 years of litigation.",
       "detail": null,
       "source_datasets": [
         "courtlistener"
@@ -476,14 +527,14 @@
         {
           "target": "Peter Thiel",
           "type": "financial",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "CNBC 2025",
           "description": "Thiel founded Founders Fund; controls B AUM; FF invested in Palantir (.1B return), Anduril (B), SpaceX (.5B gain)"
         },
         {
           "target": "Trae Stephens",
           "type": "employment",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "Founders Fund website",
           "description": "Stephens is FF partner since 2014; co-founded Anduril at FF retreat; FF led Anduril .5B round"
         },
@@ -507,31 +558,31 @@
           {
             "target": "Department of Defense",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Anduril DoD obligations: 1.43B all-time. Navy 245M, SOCOM 115M, DARPA 5.3M."
           },
           {
             "target": "Department of Homeland Security",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Anduril DHS obligations: 862M all-time, second-largest customer."
           },
           {
             "target": "Operation Epic Fury",
             "type": "intelligence",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Anduril Lattice software coordinated autonomous drone swarms in Iran; Fury/Roadrunner/Barracuda validated as combat-ready systems"
           },
           {
             "target": "Corey Lewandowski",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "DHS contract approval authority over Anduril 511M in CBP border tower contracts since Jan 2025"
           },
           {
             "target": "Ryan Wunderly",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Anduril employee assigned to Treasury as Special Adviser for IT/Modernization"
           }
         ],
@@ -539,31 +590,31 @@
           {
             "target": "Sargon Capital Pty Ltd",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
           },
           {
             "target": "Trae Stephens",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
           },
           {
             "target": "Polymarket",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
           },
           {
             "target": "Praxis",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
           },
           {
             "target": "Ian Osborne",
             "type": "social",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Osborne served as Epstein-Thiel intermediary 2012-2013. Arranged meetings forwarded Thiel emails about Airbnb. 15+ emails confirm this channel."
           }
         ],
@@ -571,19 +622,19 @@
           {
             "target": "Anduril Industries LLC",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Co-founder and Executive Chairman of Anduril. Also partner at Founders Fund (Peter Thiel). Led DOD transition for Trump 2016. Considered for Deputy SecDef 2024."
           },
           {
             "target": "Palmer Luckey",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Co-founded Anduril Industries 2017. Stephens (FF partner) recruited Luckey (Oculus founder) after idea at FF retreat 2014. Stephens as exec chairman, Luckey as CEO. Both hold significant equity in $30.5B company."
           },
           {
             "target": "Kenneth Howery",
             "type": "corporate",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
           },
           {

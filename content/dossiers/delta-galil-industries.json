@@ -8,15 +8,15 @@
   "generated_at": "2026-03-11T18:36:07.792907",
   "last_updated": "2026-02-15T05:23:04",
   "stats": {
-    "total_findings": 29,
+    "total_findings": 32,
     "total_connections": 8,
     "total_entities": 0,
     "finding_types": {
+      "intelligence": 12,
       "identity": 5,
-      "legal": 4,
-      "intelligence": 10,
       "financial": 4,
-      "relationship": 3,
+      "relationship": 4,
+      "legal": 4,
       "location": 2,
       "document": 1
     },
@@ -28,173 +28,23 @@
   },
   "findings": [
     {
-      "id": 2414,
-      "finding_type": "identity",
-      "summary": "Delta Galil USA Inc confirmed in NY SoS as foreign business corporation (DOS ID 998313), filed 1985-05-20, incorporated in Delaware. Process server address: 1601 Sycamore Road, Montoursville PA 17754 (matches the 350K sqft warehouse from SEC filing). CEO listed as Itzhak Weinstock of Secaucus NJ. The 1985 filing date predates Delta Galil's 1999 Nasdaq listing, confirming decades-long US presence.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "1985-05-20",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:18:40",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "NY-SoS:998313",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 1081022 20-F",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2399,
-      "finding_type": "identity",
-      "summary": "Dov Lautman (1936-2020) controlled Delta Galil with 24.8% ownership through Nichsei Adinoam Ltd and NDRL Investments (1998) Ltd. Was Chairman since 1975, founder, CEO intermittently. Israel's PM Special Emissary for Economic Development 1993-1995. President of Manufacturers Association of Israel 1986-1993. Chairman of Tel Aviv University executive council from 2001. GMM Capital LLC (the Dabah family, 28.4% ownership) held a shareholders agreement with Lautman Group giving them joint control.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "1998",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:17:53",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 1081022 20-F 2007-03-30",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2412,
-      "finding_type": "legal",
-      "summary": "Limited Brands Inc v. FC (Flying Cargo) Int'l Transportation Ltd (S.D. Ohio 2:04-cv-00632, 2004-2008) directly documents the Mast Industries-Delta Galil-Victoria's Secret supply chain. In 2003, Mast Industries (LB subsidiary) purchased goods from Delta Galil Industries Ltd in Tel Aviv, Israel, which were then sold to Victoria's Secret. A lost shipment of 596 cartons containing 106,000 bras was valued at $2,356,000.04 retail ($582,947.62 wholesale). Case cited as 545 F. Supp. 2d 692.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2004",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:18:35",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.courtlistener.com/opinion/2445689/limited-brands-inc-v-fc-flying-cargo-intl-transportation-ltd/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2428,
+      "id": 2384,
       "finding_type": "intelligence",
-      "summary": "NETWORK NEXUS ANALYSIS: Delta Galil sits at the intersection of three Epstein-adjacent networks: (1) WEXNER COMMERCIAL: Supplier/franchise partner of Victoria's Secret/Bath & Body Works, Wexner's core brands. Both Karmiel-based during overlap period. (2) BARAK POLITICAL: Founder Dov Lautman was a close associate of Ehud Barak, donating to his 1999 campaign. Barak received .3M from Wexner Foundation (2004-2006) while Epstein managed the foundation's finances. Barak had 444 emails with Epstein and was Carbyne business partner. (3) ISRAELI ESTABLISHMENT: Lautman was President of Manufacturers Association, Rabin's economic emissary, Peres Center chairman \u2014 the same Labor/security elite that intersected with Wexner Foundation's 650-member Israeli alumni network. No direct Delta Galil-Epstein evidence found in any document corpus.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": "2004",
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:19:57",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Finding #2394",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Finding #2398",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Finding #2400",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Finding #2403",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "Finding #2419",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2395,
-      "finding_type": "identity",
-      "summary": "Delta Galil Industries Ltd (CIK 1081022, SIC 2340) was Nasdaq-listed (DELT) Israeli foreign private issuer filing 20-F reports 2002-2008. Had 34 subsidiaries including 4 US entities: Delta Galil USA Inc (DE), Burlen Corp (GA, acquired Dec 2004 for $48.2M), Auburn Hosiery Mills Inc (KY), Delta Textile New York Ltd (NY). US facilities: 350K sqft warehouse in PA, 37K offices in NJ and NY. Principal production facility 534K sqft in Karmiel, Israel.",
+      "summary": "Limited Brands 2007 annual report lists Karmiel Israel as overseas office location. Karmiel is a small development town in the Galilee with approximately 50K population. Unusual choice for a US apparel company unless connected to Israeli textile manufacturing (Delta Galil Industries is a major Victoria Secret supplier based in the Galilee region). Office list: Bangalore, Colombo, Hanoi, Ho Chi Minh City, Hong Kong, Jakarta, Karmiel, Lima, London, Manila, Milan, Seoul, Shanghai, Taipei. Abigail Wexner listed as board member (Attorney at Law, Columbus Ohio). Founded 1963, 125500 associates, NYSE LTD",
       "detail": null,
       "source_datasets": null,
       "confidence": "high",
-      "date_of_event": "2004-12",
+      "date_of_event": null,
       "claim_type": "direct_quote",
       "verification_status": "unverified",
-      "created_at": "2026-02-15 05:17:33",
-      "target_name": "Delta Galil Industries",
+      "created_at": "2026-02-15 04:50:22",
+      "target_name": "Limited Brands",
       "profile_id": "epstein",
       "evidence": [
         {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC EDGAR CIK 1081022 20-F 2007-03-30",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2404,
-      "finding_type": "financial",
-      "summary": "Delta Galil Industries SEC 20-F filing (FY2006, CIK 0001081022) confirms Victoria's Secret as one of its top-5 North American customers. Revenue from VS was growing: 'The increase in 2006 sales in North American is mainly due to the increase in sales of ladies fashionable intimate apparel products to Victoria's Secret.' Total 2006 North American sales were M (59% of .7M total), with VS among the five customers representing ~79% of that figure.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": "2006",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:18:12",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "SEC:0001188112-07-000882",
-          "source_quote": null,
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00190141",
+          "source_quote": "Overseas Offices Bangalore Hong Kong Colombo Jakarta Hanoi Karmiel Ho Chi Minh City Lima London Manila Milan Seoul Shanghai Taipei",
           "source_page": null,
           "assessment": null
         }
@@ -224,225 +74,22 @@
       ]
     },
     {
-      "id": 2409,
-      "finding_type": "legal",
-      "summary": "Delta Galil USA Inc. is defendant/party in 20+ US federal cases (2008-2026) spanning ADA accessibility, race discrimination, employment, trademark infringement, patent, commercial disputes, and customs/tariff classification. Key cases include: Delta Galil USA v. United States (CIT 1:08-cv-00357, customs tariff dispute 2008-2010); Simmons v. Delta Galil (race discrimination N.D. Georgia); Levi Strauss v. Delta Galil (trademark 2025); Delta Galil v. VF Corp (commercial SDNY 2020).",
+      "id": 2395,
+      "finding_type": "identity",
+      "summary": "Delta Galil Industries Ltd (CIK 1081022, SIC 2340) was Nasdaq-listed (DELT) Israeli foreign private issuer filing 20-F reports 2002-2008. Had 34 subsidiaries including 4 US entities: Delta Galil USA Inc (DE), Burlen Corp (GA, acquired Dec 2004 for $48.2M), Auburn Hosiery Mills Inc (KY), Delta Textile New York Ltd (NY). US facilities: 350K sqft warehouse in PA, 37K offices in NJ and NY. Principal production facility 534K sqft in Karmiel, Israel.",
       "detail": null,
       "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": "2008",
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:18:26",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.courtlistener.com/docket/19647393/delta-galil-usa-inc-v-united-states/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2422,
-      "finding_type": "financial",
-      "summary": "Delta Galil Industries ownership structure (SEC 20-F FY2006): GMM Capital owned 28.4% (5,323,793 shares) and founder Dov Lautman owned 24.8% (4,644,993 shares), together controlling >50% with a shareholders agreement governing board composition and CEO appointment. Isaac Dabah served as Director and Vice Chairman. Lautman was 71 years old, served as Chairman. Delta Galil was listed on TASE and had ADRs on Nasdaq Global Market (CIK 0001081022) before delisting from US exchanges in 2008.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "confirmed",
-      "date_of_event": "2008",
+      "confidence": "high",
+      "date_of_event": "2004-12",
       "claim_type": "direct_quote",
       "verification_status": "unverified",
-      "created_at": "2026-02-15 05:19:10",
+      "created_at": "2026-02-15 05:17:33",
       "target_name": "Delta Galil Industries",
       "profile_id": "epstein",
       "evidence": [
         {
           "evidence_type": "ref",
-          "evidence_ref": "SEC:0001188112-07-000882",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2432,
-      "finding_type": "intelligence",
-      "summary": "SYNTHESIS: Delta Galil sits at the intersection of three Epstein-adjacent networks but with ZERO direct Epstein evidence across 700K+ pages. (1) Wexner Commercial: DG manufactured VS intimate apparel, was top-5 customer (79% of $418M NA revenue from 5 clients), court-documented supply chain via Mast Industries (545 F.Supp.2d 692). Both companies co-located in Karmiel Israel (pop ~45K). (2) Barak Political: Founder Dov Lautman donated to Barak's 1999 campaign via 'Generation of Peace' (Barak Affair scandal). Barak had 444 emails with Epstein + received $2.3M from Wexner Foundation (2004-06). (3) Israeli Establishment: Lautman was President of Manufacturers Association of Israel, PM Rabin's special emissary, TAU chairman \u2014 overlapping with Wexner Foundation's 650-member Israeli alumni network. The complete corpus absence suggests the DG relationship was handled through Wexner's corporate infrastructure (Mast Industries) not Epstein's personal network. Separately, current CEO Isaac Dabah (since 2008) has a 1994 SDNY criminal conviction for import fraud (garment country-of-origin mislabeling) and is a major AIPAC donor ($100K to United Democracy Project 2024).",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": "2008",
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:23:04",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA00190170",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA00190233",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2424,
-      "finding_type": "intelligence",
-      "summary": "Delta Galil Industries Ltd is listed in the UN OHCHR Business and Human Rights Database (debarment list) for operations in Israeli settlements. LittleSis notes branches in settlement neighborhoods of Pisgat Zeev and Ramot in occupied East Jerusalem and in Maale Adumim in the occupied West Bank. OpenSanctions dataset ps_ohchr_settlement, activity code (g). Company also previously listed on NASDAQ (SEC CIK 0001081022, SIC 2340) but delisted in March 2008 (Form 25, 15-12G deregistration). Created 1961, headquartered at 45 Ha'Eshel St, Caesarea, Israel.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2008-03",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:19:25",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LittleSis:374537",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions:ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2408,
-      "finding_type": "intelligence",
-      "summary": "Delta Galil Industries listed in UN OHCHR database (BHR) of companies involved in Israeli settlement activities (category g). Company operates facilities in occupied territories: branches in settlement neighborhoods Pisgat Zeev and Ramot in East Jerusalem, location in Ma'ale Adumim settlement (West Bank), and 1,680 sqm warehouse in Barkan industrial zone (West Bank, documented May 2011). OpenSanctions ID: ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb. Topics: debarment. This is the same company that is a major Victoria's Secret supplier \u2014 creating reputational risk for the Wexner supply chain.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2011-05",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:18:25",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions dataset ps_ohchr_settlement",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.whoprofits.org/companies/company/3655",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2421,
-      "finding_type": "financial",
-      "summary": "Delta Galil Industries Ltd retained lobbying firm Sandler, Travis & Rosenberg P.A. (Washington DC) in Q1 2017 to oppose the proposed border adjustment tax and support miscellaneous tariff bills. Lobbyists included Nicole Bivens Collinson (former Assistant Textile Negotiator at USTR) and Edward Steiner (former Legislative Director, Rep L. Sanchez). Engagement terminated Q3 2017. Total reported income: $10,000. Client listed as 'Global Apparel Manufacturer and Marketer' in New York.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2017-01",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:19:04",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://lda.senate.gov/filings/public/filing/927acf3b-e6ad-4465-8846-9e724f2adb65/print/",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2405,
-      "finding_type": "legal",
-      "summary": "Delta Galil lobbied US Congress through Sandler Travis & Rosenberg PA (1300 Pennsylvania Ave NW, Washington DC) in 2017 Q1-Q2, paying $10K for Q1. Issues: (1) opposition to border adjustment tax, (2) support for miscellaneous tariff bill. Engagement terminated July 2017 (Q3 filing shows termination). Short-lived engagement focused on trade policy directly affecting Israeli manufacturing imports to US.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2017-07",
-      "claim_type": "direct_quote",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:18:13",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA filing 839b3abd-655b-4bb0-a794-cda0b7a8fbcb",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LDA filing 927acf3b-e6ad-4465-8846-9e724f2adb65",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2429,
-      "finding_type": "intelligence",
-      "summary": "Delta Galil global corporate footprint per OCCRP Aleph and LittleSis: Subsidiaries include Delta Galil USA Inc (NY, est 1985, PA addresses), Delta Galil Switzerland GmbH, Delta Galil Germany GmbH (Radolfzell, currently registered + earlier Frankfurt entity removed), Delta Galil Textile Germany GmbH & Co. KG (Radolfzell, registered + Frankfurt removed), Delta Galil Holland BV (Swiss branch, dissolved 3 days after registration 2013), Delta Galil Romania SRL (Arad, status: accounts not filed 2008), Delta Textile Egypt SAE (subsidiary), 7 For All Mankind (acquired 2016), Thai Progress Garments Co Ltd (subsidiary). Current revenue + billion (2024). Institutional investor GMM Capital LLC (Dabah family vehicle). Former Karmiel underwear factory closed ~2005, but socks and seamless factories remain in Israel.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "medium",
-      "date_of_event": "2024",
-      "claim_type": "synthesis",
-      "verification_status": "unverified",
-      "created_at": "2026-02-15 05:20:09",
-      "target_name": "Delta Galil Industries",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "LittleSis entity 374537 relationships",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "ref",
-          "evidence_ref": "OCCRP Aleph search",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        },
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.whoprofits.org/companies/company/3655",
+          "evidence_ref": "SEC EDGAR CIK 1081022 20-F 2007-03-30",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -510,6 +157,59 @@
       ]
     },
     {
+      "id": 2399,
+      "finding_type": "identity",
+      "summary": "Dov Lautman (1936-2020) controlled Delta Galil with 24.8% ownership through Nichsei Adinoam Ltd and NDRL Investments (1998) Ltd. Was Chairman since 1975, founder, CEO intermittently. Israel's PM Special Emissary for Economic Development 1993-1995. President of Manufacturers Association of Israel 1986-1993. Chairman of Tel Aviv University executive council from 2001. GMM Capital LLC (the Dabah family, 28.4% ownership) held a shareholders agreement with Lautman Group giving them joint control.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "1998",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:17:53",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CIK 1081022 20-F 2007-03-30",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2400,
+      "finding_type": "relationship",
+      "summary": "Dov Lautman was a 'close associate' of Ehud Barak and donated indirectly to Barak's 1999 election campaign through the 'Generation of Peace' organization, which became entangled in the 'Barak Affair' — an illegal campaign finance scandal. The Barak Affair involved funneling large foreign contributions through nonprofits to circumvent Israeli campaign finance limits. One Israel party was fined >M. Lautman also made substantial contributions to the Israeli Labor Party in the 1990s. After Rabin's assassination, Lautman co-founded Generation of Peace movement. This establishes a direct Lautman-Barak political-financial relationship.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:18:01",
+      "target_name": "Dov Lautman",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://abcnews.go.com/International/story?id=81545",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://moreshet.com/en/dov-lautman-a-legacy-of-business-and-philanthropy",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 2401,
       "finding_type": "legal",
       "summary": "Delta Galil Industries listed in OHCHR Business and Human Rights Database (OpenSanctions ID ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb) with 'debarment' topic for listed activity (g) relating to Israeli settlement business operations. LittleSis describes company as 'Israeli textile firm in the occupied West Bank.' Company's Karmiel factory (534K sqft) is in northern Israel proper but company has been flagged for West Bank-related business activities.",
@@ -556,6 +256,59 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "unified:C.%20Contact%20Book%20(Redacted)(1).pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2404,
+      "finding_type": "financial",
+      "summary": "Delta Galil Industries SEC 20-F filing (FY2006, CIK 0001081022) confirms Victoria's Secret as one of its top-5 North American customers. Revenue from VS was growing: 'The increase in 2006 sales in North American is mainly due to the increase in sales of ladies fashionable intimate apparel products to Victoria's Secret.' Total 2006 North American sales were M (59% of .7M total), with VS among the five customers representing ~79% of that figure.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2006",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:18:12",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001188112-07-000882",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2405,
+      "finding_type": "legal",
+      "summary": "Delta Galil lobbied US Congress through Sandler Travis & Rosenberg PA (1300 Pennsylvania Ave NW, Washington DC) in 2017 Q1-Q2, paying $10K for Q1. Issues: (1) opposition to border adjustment tax, (2) support for miscellaneous tariff bill. Engagement terminated July 2017 (Q3 filing shows termination). Short-lived engagement focused on trade policy directly affecting Israeli manufacturing imports to US.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2017-07",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:18:13",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA filing 839b3abd-655b-4bb0-a794-cda0b7a8fbcb",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA filing 927acf3b-e6ad-4465-8846-9e724f2adb65",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -623,6 +376,59 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "SEC EDGAR CIK 1315159",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2408,
+      "finding_type": "intelligence",
+      "summary": "Delta Galil Industries listed in UN OHCHR database (BHR) of companies involved in Israeli settlement activities (category g). Company operates facilities in occupied territories: branches in settlement neighborhoods Pisgat Zeev and Ramot in East Jerusalem, location in Ma'ale Adumim settlement (West Bank), and 1,680 sqm warehouse in Barkan industrial zone (West Bank, documented May 2011). OpenSanctions ID: ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb. Topics: debarment. This is the same company that is a major Victoria's Secret supplier — creating reputational risk for the Wexner supply chain.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2011-05",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:18:25",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions dataset ps_ohchr_settlement",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.whoprofits.org/companies/company/3655",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2409,
+      "finding_type": "legal",
+      "summary": "Delta Galil USA Inc. is defendant/party in 20+ US federal cases (2008-2026) spanning ADA accessibility, race discrimination, employment, trademark infringement, patent, commercial disputes, and customs/tariff classification. Key cases include: Delta Galil USA v. United States (CIT 1:08-cv-00357, customs tariff dispute 2008-2010); Simmons v. Delta Galil (race discrimination N.D. Georgia); Levi Strauss v. Delta Galil (trademark 2025); Delta Galil v. VF Corp (commercial SDNY 2020).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2008",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:18:26",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/docket/19647393/delta-galil-usa-inc-v-united-states/",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -704,9 +510,62 @@
       ]
     },
     {
+      "id": 2412,
+      "finding_type": "legal",
+      "summary": "Limited Brands Inc v. FC (Flying Cargo) Int'l Transportation Ltd (S.D. Ohio 2:04-cv-00632, 2004-2008) directly documents the Mast Industries-Delta Galil-Victoria's Secret supply chain. In 2003, Mast Industries (LB subsidiary) purchased goods from Delta Galil Industries Ltd in Tel Aviv, Israel, which were then sold to Victoria's Secret. A lost shipment of 596 cartons containing 106,000 bras was valued at $2,356,000.04 retail ($582,947.62 wholesale). Case cited as 545 F. Supp. 2d 692.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2004",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:18:35",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.courtlistener.com/opinion/2445689/limited-brands-inc-v-fc-flying-cargo-intl-transportation-ltd/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2414,
+      "finding_type": "identity",
+      "summary": "Delta Galil USA Inc confirmed in NY SoS as foreign business corporation (DOS ID 998313), filed 1985-05-20, incorporated in Delaware. Process server address: 1601 Sycamore Road, Montoursville PA 17754 (matches the 350K sqft warehouse from SEC filing). CEO listed as Itzhak Weinstock of Secaucus NJ. The 1985 filing date predates Delta Galil's 1999 Nasdaq listing, confirming decades-long US presence.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "1985-05-20",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:18:40",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "NY-SoS:998313",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CIK 1081022 20-F",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 2415,
       "finding_type": "intelligence",
-      "summary": "Delta Galil's Karmiel factory closed ~2005 (last Israeli underwear plant), with 150 workers let go. However, Limited Brands 2007 annual report still listed a Karmiel Israel office. This suggests the Karmiel office was NOT part of Delta Galil's factory but was a separate Mast Industries/Limited Brands sourcing or quality control operation co-located in the same town as Delta Galil's facilities. Delta Galil still operates 3 socks factories in Israel plus 2 seamless activewear factories in Israel and Jordan. Company also has subsidiaries in Germany (Radolfzell, Frankfurt \u2014 registered and removed), Switzerland, Romania, Egypt, Thailand, and Holland.",
+      "summary": "Delta Galil's Karmiel factory closed ~2005 (last Israeli underwear plant), with 150 workers let go. However, Limited Brands 2007 annual report still listed a Karmiel Israel office. This suggests the Karmiel office was NOT part of Delta Galil's factory but was a separate Mast Industries/Limited Brands sourcing or quality control operation co-located in the same town as Delta Galil's facilities. Delta Galil still operates 3 socks factories in Israel plus 2 seamless activewear factories in Israel and Jordan. Company also has subsidiaries in Germany (Radolfzell, Frankfurt — registered and removed), Switzerland, Romania, Egypt, Thailand, and Holland.",
       "detail": null,
       "source_datasets": null,
       "confidence": "medium",
@@ -822,6 +681,43 @@
       ]
     },
     {
+      "id": 2419,
+      "finding_type": "intelligence",
+      "summary": "Wexner Foundation Israel programs create a dense network connecting Israeli public sector leaders, military officers, and business figures. The Wexner Israel Fellowship sent ~10 Israeli officials per year to Harvard Kennedy School for MPA degrees for 35 years, creating a 650-member alumni network of senior civil servants, IDF officers, judges, hospital administrators, and NGO leaders. Foundation has specific Galilee programs including a scientific excellence center near Shibly, educational agricultural farm, and school development based on KIPP model. Between 2003-2018, Wexners donated ~.4M to Israeli and Jewish causes. Epstein approved specific grants during 2004-2006 period, acting as de facto CFO of Wexner family office.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2003",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:18:57",
+      "target_name": "Wexner Foundation",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.dropsitenews.com/p/jeffrey-epstein-leslie-abigail-wexner-pro-israel-philanthropic-foundation",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.lavi.org.il/wp-content/uploads/2018/08/wexner-foundation-report.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.wexnerfoundation.org/programs/wexner-israel-fellowship/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 2420,
       "finding_type": "intelligence",
       "summary": "Delta Galil Industries is listed in the UN OHCHR Business and Human Rights database (OpenSanctions ID ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb) for settlement activities, with branches in Pisgat Zeev, Ramot (occupied East Jerusalem) and Maale Adumim (occupied West Bank). This designation creates reputational and regulatory exposure for the company and its business partners including Victoria's Secret/L Brands.",
@@ -832,6 +728,82 @@
       "claim_type": "paraphrase",
       "verification_status": "unverified",
       "created_at": "2026-02-15 05:19:00",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:374537",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2421,
+      "finding_type": "financial",
+      "summary": "Delta Galil Industries Ltd retained lobbying firm Sandler, Travis & Rosenberg P.A. (Washington DC) in Q1 2017 to oppose the proposed border adjustment tax and support miscellaneous tariff bills. Lobbyists included Nicole Bivens Collinson (former Assistant Textile Negotiator at USTR) and Edward Steiner (former Legislative Director, Rep L. Sanchez). Engagement terminated Q3 2017. Total reported income: $10,000. Client listed as 'Global Apparel Manufacturer and Marketer' in New York.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2017-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:19:04",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://lda.senate.gov/filings/public/filing/927acf3b-e6ad-4465-8846-9e724f2adb65/print/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2422,
+      "finding_type": "financial",
+      "summary": "Delta Galil Industries ownership structure (SEC 20-F FY2006): GMM Capital owned 28.4% (5,323,793 shares) and founder Dov Lautman owned 24.8% (4,644,993 shares), together controlling >50% with a shareholders agreement governing board composition and CEO appointment. Isaac Dabah served as Director and Vice Chairman. Lautman was 71 years old, served as Chairman. Delta Galil was listed on TASE and had ADRs on Nasdaq Global Market (CIK 0001081022) before delisting from US exchanges in 2008.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "confirmed",
+      "date_of_event": "2008",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:19:10",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001188112-07-000882",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2424,
+      "finding_type": "intelligence",
+      "summary": "Delta Galil Industries Ltd is listed in the UN OHCHR Business and Human Rights Database (debarment list) for operations in Israeli settlements. LittleSis notes branches in settlement neighborhoods of Pisgat Zeev and Ramot in occupied East Jerusalem and in Maale Adumim in the occupied West Bank. OpenSanctions dataset ps_ohchr_settlement, activity code (g). Company also previously listed on NASDAQ (SEC CIK 0001081022, SIC 2340) but delisted in March 2008 (Form 25, 15-12G deregistration). Created 1961, headquartered at 45 Ha'Eshel St, Caesarea, Israel.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2008-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:19:25",
       "target_name": "Delta Galil Industries",
       "profile_id": "epstein",
       "evidence": [
@@ -954,6 +926,124 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "Unified DB:0 results",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2428,
+      "finding_type": "intelligence",
+      "summary": "NETWORK NEXUS ANALYSIS: Delta Galil sits at the intersection of three Epstein-adjacent networks: (1) WEXNER COMMERCIAL: Supplier/franchise partner of Victoria's Secret/Bath & Body Works, Wexner's core brands. Both Karmiel-based during overlap period. (2) BARAK POLITICAL: Founder Dov Lautman was a close associate of Ehud Barak, donating to his 1999 campaign. Barak received .3M from Wexner Foundation (2004-2006) while Epstein managed the foundation's finances. Barak had 444 emails with Epstein and was Carbyne business partner. (3) ISRAELI ESTABLISHMENT: Lautman was President of Manufacturers Association, Rabin's economic emissary, Peres Center chairman — the same Labor/security elite that intersected with Wexner Foundation's 650-member Israeli alumni network. No direct Delta Galil-Epstein evidence found in any document corpus.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2004",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:19:57",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #2394",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #2398",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #2400",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #2403",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #2419",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2429,
+      "finding_type": "intelligence",
+      "summary": "Delta Galil global corporate footprint per OCCRP Aleph and LittleSis: Subsidiaries include Delta Galil USA Inc (NY, est 1985, PA addresses), Delta Galil Switzerland GmbH, Delta Galil Germany GmbH (Radolfzell, currently registered + earlier Frankfurt entity removed), Delta Galil Textile Germany GmbH & Co. KG (Radolfzell, registered + Frankfurt removed), Delta Galil Holland BV (Swiss branch, dissolved 3 days after registration 2013), Delta Galil Romania SRL (Arad, status: accounts not filed 2008), Delta Textile Egypt SAE (subsidiary), 7 For All Mankind (acquired 2016), Thai Progress Garments Co Ltd (subsidiary). Current revenue + billion (2024). Institutional investor GMM Capital LLC (Dabah family vehicle). Former Karmiel underwear factory closed ~2005, but socks and seamless factories remain in Israel.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2024",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:20:09",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis entity 374537 relationships",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCCRP Aleph search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.whoprofits.org/companies/company/3655",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2432,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Delta Galil sits at the intersection of three Epstein-adjacent networks but with ZERO direct Epstein evidence across 700K+ pages. (1) Wexner Commercial: DG manufactured VS intimate apparel, was top-5 customer (79% of $418M NA revenue from 5 clients), court-documented supply chain via Mast Industries (545 F.Supp.2d 692). Both companies co-located in Karmiel Israel (pop ~45K). (2) Barak Political: Founder Dov Lautman donated to Barak's 1999 campaign via 'Generation of Peace' (Barak Affair scandal). Barak had 444 emails with Epstein + received $2.3M from Wexner Foundation (2004-06). (3) Israeli Establishment: Lautman was President of Manufacturers Association of Israel, PM Rabin's special emissary, TAU chairman — overlapping with Wexner Foundation's 650-member Israeli alumni network. The complete corpus absence suggests the DG relationship was handled through Wexner's corporate infrastructure (Mast Industries) not Epstein's personal network. Separately, current CEO Isaac Dabah (since 2008) has a 1994 SDNY criminal conviction for import fraud (garment country-of-origin mislabeling) and is a major AIPAC donor ($100K to United Democracy Project 2024).",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": "2008",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-02-15 05:23:04",
+      "target_name": "Delta Galil Industries",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00190170",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA00190233",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1217,7 +1307,7 @@
       "date": "2004",
       "type": "finding",
       "finding_type": "intelligence",
-      "summary": "NETWORK NEXUS ANALYSIS: Delta Galil sits at the intersection of three Epstein-adjacent networks: (1) WEXNER COMMERCIAL: Supplier/franchise partner of Victoria's Secret/Bath & Body Works, Wexner's core brands. Both Karmiel-based during overlap period. (2) BARAK POLITICAL: Founder Dov Lautman was a close associate of Ehud Barak, donating to his 1999 campaign. Barak received .3M from Wexner Foundation (2004-2006) while Epstein managed the foundation's finances. Barak had 444 emails with Epstein and was Carbyne business partner. (3) ISRAELI ESTABLISHMENT: Lautman was President of Manufacturers Association, Rabin's economic emissary, Peres Center chairman \u2014 the same Labor/security elite that intersected with Wexner Foundation's 650-member Israeli alumni network. No direct Delta Galil-Epstein evidence found in any document corpus.",
+      "summary": "NETWORK NEXUS ANALYSIS: Delta Galil sits at the intersection of three Epstein-adjacent networks: (1) WEXNER COMMERCIAL: Supplier/franchise partner of Victoria's Secret/Bath & Body Works, Wexner's core brands. Both Karmiel-based during overlap period. (2) BARAK POLITICAL: Founder Dov Lautman was a close associate of Ehud Barak, donating to his 1999 campaign. Barak received .3M from Wexner Foundation (2004-2006) while Epstein managed the foundation's finances. Barak had 444 emails with Epstein and was Carbyne business partner. (3) ISRAELI ESTABLISHMENT: Lautman was President of Manufacturers Association, Rabin's economic emissary, Peres Center chairman — the same Labor/security elite that intersected with Wexner Foundation's 650-member Israeli alumni network. No direct Delta Galil-Epstein evidence found in any document corpus.",
       "confidence": "medium",
       "id": 2428
     },
@@ -1265,7 +1355,7 @@
       "date": "2008",
       "type": "finding",
       "finding_type": "intelligence",
-      "summary": "SYNTHESIS: Delta Galil sits at the intersection of three Epstein-adjacent networks but with ZERO direct Epstein evidence across 700K+ pages. (1) Wexner Commercial: DG manufactured VS intimate apparel, was top-5 customer (79% of $418M NA revenue from 5 clients), court-documented supply chain via Mast Industries (545 F.Supp.2d 692). Both companies co-located in Karmiel Israel (pop ~45K). (2) Barak Political: Founder Dov Lautman donated to Barak's 1999 campaign via 'Generation of Peace' (Barak Affair scandal). Barak had 444 emails with Epstein + received $2.3M from Wexner Foundation (2004-06). (3) Israeli Establishment: Lautman was President of Manufacturers Association of Israel, PM Rabin's special emissary, TAU chairman \u2014 overlapping with Wexner Foundation's 650-member Israeli alumni network. The complete corpus absence suggests the DG relationship was handled through Wexner's corporate infrastructure (Mast Industries) not Epstein's personal network. Separately, current CEO Isaac Dabah (since 2008) has a 1994 SDNY criminal conviction for import fraud (garment country-of-origin mislabeling) and is a major AIPAC donor ($100K to United Democracy Project 2024).",
+      "summary": "SYNTHESIS: Delta Galil sits at the intersection of three Epstein-adjacent networks but with ZERO direct Epstein evidence across 700K+ pages. (1) Wexner Commercial: DG manufactured VS intimate apparel, was top-5 customer (79% of $418M NA revenue from 5 clients), court-documented supply chain via Mast Industries (545 F.Supp.2d 692). Both companies co-located in Karmiel Israel (pop ~45K). (2) Barak Political: Founder Dov Lautman donated to Barak's 1999 campaign via 'Generation of Peace' (Barak Affair scandal). Barak had 444 emails with Epstein + received $2.3M from Wexner Foundation (2004-06). (3) Israeli Establishment: Lautman was President of Manufacturers Association of Israel, PM Rabin's special emissary, TAU chairman — overlapping with Wexner Foundation's 650-member Israeli alumni network. The complete corpus absence suggests the DG relationship was handled through Wexner's corporate infrastructure (Mast Industries) not Epstein's personal network. Separately, current CEO Isaac Dabah (since 2008) has a 1994 SDNY criminal conviction for import fraud (garment country-of-origin mislabeling) and is a major AIPAC donor ($100K to United Democracy Project 2024).",
       "confidence": "medium",
       "id": 2432
     },
@@ -1281,7 +1371,7 @@
       "date": "2011-05",
       "type": "finding",
       "finding_type": "intelligence",
-      "summary": "Delta Galil Industries listed in UN OHCHR database (BHR) of companies involved in Israeli settlement activities (category g). Company operates facilities in occupied territories: branches in settlement neighborhoods Pisgat Zeev and Ramot in East Jerusalem, location in Ma'ale Adumim settlement (West Bank), and 1,680 sqm warehouse in Barkan industrial zone (West Bank, documented May 2011). OpenSanctions ID: ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb. Topics: debarment. This is the same company that is a major Victoria's Secret supplier \u2014 creating reputational risk for the Wexner supply chain.",
+      "summary": "Delta Galil Industries listed in UN OHCHR database (BHR) of companies involved in Israeli settlement activities (category g). Company operates facilities in occupied territories: branches in settlement neighborhoods Pisgat Zeev and Ramot in East Jerusalem, location in Ma'ale Adumim settlement (West Bank), and 1,680 sqm warehouse in Barkan industrial zone (West Bank, documented May 2011). OpenSanctions ID: ohchr-e23c9d0fa04724b6c4108ec8e42db7b83eb9ffcb. Topics: debarment. This is the same company that is a major Victoria's Secret supplier — creating reputational risk for the Wexner supply chain.",
       "confidence": "high",
       "id": 2408
     },

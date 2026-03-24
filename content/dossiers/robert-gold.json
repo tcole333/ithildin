@@ -8,13 +8,13 @@
   "generated_at": "2026-03-11T18:36:08.010786",
   "last_updated": "2026-02-14T20:16:53",
   "stats": {
-    "total_findings": 5,
+    "total_findings": 6,
     "total_connections": 5,
     "total_entities": 0,
     "finding_types": {
       "identity": 2,
-      "legal": 1,
       "relationship": 1,
+      "legal": 2,
       "intelligence": 1
     },
     "connection_types": {
@@ -26,29 +26,6 @@
     "last_updated": "2026-02-14T20:16:53"
   },
   "findings": [
-    {
-      "id": 2096,
-      "finding_type": "identity",
-      "summary": "Robert Gold (b. Sept 16 1945): co-founding partner of Gold and Wachtel. Columbia BA Economics 1967, Cornell JD and MBA 1971. AUSA SDNY Criminal Division 1973-1977 (Official Corruption Unit, Securities Fraud Unit). Career: Shea and Gould (1971, 1980), Gold and Wachtel (co-managing partner, 1984-late 1990s), McDermott Will and Emery, Ranieri and Co (1998-2000), Sullivan and Worcester, DLA Piper (2006), Wilson Sonsini (2008), Mishcon de Reya (2014). Represented George Steinbrenner. Defeated Ronald Perelman hostile takeover of Hudson News. Involved in Watergate, Iran-Contra, Marcos prosecution cases.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "1945-09-16",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:15:40",
-      "target_name": "Robert Gold",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "efta",
-          "evidence_ref": "EFTA01332942",
-          "source_quote": null,
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
     {
       "id": 2075,
       "finding_type": "identity",
@@ -109,29 +86,6 @@
           "evidence_type": "efta",
           "evidence_ref": "EFTA02549608",
           "source_quote": "From: \nGold, Robert < \nSent: \nWednesday, February 15, 2012 1:22 PM \nTo: \njeevacation@gmail.com' \nSubject: \nBack home \nJeff: \nSurgery went well: gallbladder is gone; abdominal tumor also gone; bladder =umor also gone. I'm full of percocet and \nloopy...",
-          "source_page": null,
-          "assessment": null
-        }
-      ]
-    },
-    {
-      "id": 2083,
-      "finding_type": "legal",
-      "summary": "Robert Gold was co-managing partner of Gold & Wachtel. Career: Shea & Gould (1971), AUSA criminal division SDNY (1973-1977), returned to practice (1978), formed Gold & Wachtel with William Wachtel. Later Of Counsel at Sullivan & Worcester, then joined DLA Piper Rudnick as partner in Litigation (July 2006). Education: Columbia BA 1967, Cornell JD and MBA 1971. Appeared as counsel in Walters v. Fullwood (1987, SDNY) representing World Sports and Entertainment.",
-      "detail": null,
-      "source_datasets": null,
-      "confidence": "high",
-      "date_of_event": "2006-07",
-      "claim_type": "paraphrase",
-      "verification_status": "unverified",
-      "created_at": "2026-02-14 20:12:45",
-      "target_name": "Robert Gold",
-      "profile_id": "epstein",
-      "evidence": [
-        {
-          "evidence_type": "file",
-          "evidence_ref": "https://www.lawfuel.com/new-york-july-11-2006-lawfuel-press-release-service-dla-p/",
-          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -203,6 +157,52 @@
       ]
     },
     {
+      "id": 2082,
+      "finding_type": "legal",
+      "summary": "Gold & Wachtel was a boutique NYC law firm at 10 East 53rd Street, New York, NY 10022. Co-founded by Robert Gold and William B. Wachtel. Represented Jeffrey Epstein from at least November 1988, serving as process agent for J. Epstein & Company Inc (NY DOS ID 1307306). Both Jeffrey A. Schantz (from 1995) and Darren K. Indyke originated from this firm.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "1988-11",
+      "claim_type": "paraphrase",
+      "verification_status": "retracted",
+      "created_at": "2026-02-14 20:12:34",
+      "target_name": "Gold & Wachtel",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01332942",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2083,
+      "finding_type": "legal",
+      "summary": "Robert Gold was co-managing partner of Gold & Wachtel. Career: Shea & Gould (1971), AUSA criminal division SDNY (1973-1977), returned to practice (1978), formed Gold & Wachtel with William Wachtel. Later Of Counsel at Sullivan & Worcester, then joined DLA Piper Rudnick as partner in Litigation (July 2006). Education: Columbia BA 1967, Cornell JD and MBA 1971. Appeared as counsel in Walters v. Fullwood (1987, SDNY) representing World Sports and Entertainment.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2006-07",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:12:45",
+      "target_name": "Robert Gold",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.lawfuel.com/new-york-july-11-2006-lawfuel-press-release-service-dla-p/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 2085,
       "finding_type": "intelligence",
       "summary": "Robert Gold shielded Epstein from Towers Financial prosecution. Per James Patterson narrative (House Oversight docs): When asked why Epstein was not implicated in the Hoffenberg/Towers Financial Ponzi scheme case, Hoffenberg says 'Ask Robert Gold.' Sources indicate Gold 'the former federal prosecutor who had helped Epstein recover Ana Obregon money, kept the US attorney away from Epstein until there were only a few weeks left before the statute of limitations ran out.' Gold's AUSA SDNY background (1973-1977, corruption and securities fraud units) gave him the connections to accomplish this.",
@@ -233,6 +233,29 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "HOUSE_OVERSIGHT_022082",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 2096,
+      "finding_type": "identity",
+      "summary": "Robert Gold (b. Sept 16 1945): co-founding partner of Gold and Wachtel. Columbia BA Economics 1967, Cornell JD and MBA 1971. AUSA SDNY Criminal Division 1973-1977 (Official Corruption Unit, Securities Fraud Unit). Career: Shea and Gould (1971, 1980), Gold and Wachtel (co-managing partner, 1984-late 1990s), McDermott Will and Emery, Ranieri and Co (1998-2000), Sullivan and Worcester, DLA Piper (2006), Wilson Sonsini (2008), Mishcon de Reya (2014). Represented George Steinbrenner. Defeated Ronald Perelman hostile takeover of Hudson News. Involved in Watergate, Iran-Contra, Marcos prosecution cases.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "1945-09-16",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-02-14 20:15:40",
+      "target_name": "Robert Gold",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "efta",
+          "evidence_ref": "EFTA01332942",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -486,28 +509,28 @@
         {
           "target": "Jeffrey Epstein",
           "type": "social",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "EFTA01266298",
           "description": "Former G&W co-managing partner maintained warm personal relationship with Epstein 2011-2014. Named in 2001 Trust as friend with debt forgiveness. 13 DOJ documents. Paris meetings, birthday exchanges, health updates."
         },
         {
           "target": "Steven Hoffenberg",
           "type": "legal",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "HOUSE_OVERSIGHT_022081",
           "description": "Gold used former AUSA connections to shield Epstein from Towers Financial prosecution, running out statute of limitations. Hoffenberg served 19 years; Epstein was never charged."
         },
         {
           "target": "Gold and Wachtel",
           "type": "employment",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "https://www.lawfuel.com/new-york-july-11-2006-lawfuel-press-release-service-dla-p/",
           "description": "Co-managing partner and name partner. Former AUSA SDNY criminal division 1973-1977. Formed firm with William Wachtel."
         },
         {
           "target": "Harry Wachtel",
           "type": "corporate",
-          "strength": 1.0,
+          "strength": 1,
           "evidence_ref": "https://www.lawfuel.com/new-york-july-11-2006-lawfuel-press-release-service-dla-p/",
           "description": "Co-founders of Gold and Wachtel law firm (1984). Gold served as co-managing partner."
         },
@@ -524,19 +547,19 @@
           {
             "target": "Jeffrey Epstein",
             "type": "legal",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Gold & Wachtel served as process agent for Jeffrey E. Epstein Inc./J. Epstein & Company Inc. from ~1988. Successor firm Wachtel & Masyr LLP continued representing Epstein through at least 1998 in federal court (SDNY 96 CIV 8307)."
           },
           {
             "target": "Jeffrey Schantz",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Schantz served as Epstein's transaction counsel from at least 1996 while at Wachtel & Masyr LLP (successor to Gold & Wachtel). Conducted OFM negotiations for 34 E 69th St sublease April 1996."
           },
           {
             "target": "Darren Indyke",
             "type": "employment",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Indyke was an attorney at Gold & Wachtel. Father Bernard Indyke managed Jackie Fine Arts, a Gold & Wachtel client, suggesting a family recruitment pipeline into Epstein service."
           }
         ],
@@ -544,13 +567,13 @@
           {
             "target": "Jeffrey Epstein",
             "type": "legal",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Harry Wachtel co-founding partner of Gold and Wachtel which served as process agent for J. Epstein and Company Inc from 1988. Harry was alive and active at the firm when Epstein became a client."
           },
           {
             "target": "William B Wachtel",
             "type": "familial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "William B Wachtel is the son of Harry H Wachtel. Both were partners at Gold and Wachtel. William became founding partner of successor firm Wachtel Missry LLP after Harry died Feb 1997."
           }
         ],
@@ -558,31 +581,31 @@
           {
             "target": "Leon Black",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "$158M consulting fees 2012-2017 via Rothschild trust structures. Epstein VP/Secretary of Black Foundation 2010-2012. Art advisory, estate/tax planning, charitable giving advisory. Meetings multiple times monthly 2010-2019."
           },
           {
             "target": "Kathy Ruemmler",
             "type": "legal",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Lawyer-client, trustee, executor. 201 emails. Latham and Watkins 2014-2019. Named trustee of trust and successor executor of will."
           },
           {
             "target": "Reid Weingarten",
             "type": "legal",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Defense counsel 19 Cr. 490 (SDNY 2019). Personal advisor 2011-2019, 245+ emails. ~450K paid in Steptoe fees, 300K owed. Paris travel Sept 2011. Regular breakfast meetings at 71st St."
           },
           {
             "target": "Landon Thomas Jr",
             "type": "intelligence",
-            "strength": 1.0,
+            "strength": 1,
             "description": "185-email correspondence 2007-2019. Thomas served as Epstein media asset: advance warning of investigations, brokered intros to Masa Son and Tom Barrack, received 40K+ payments to charity, wrote defining 2002 profile and 2008 NYT piece. Classified as compromised source."
           },
           {
             "target": "Landon Thomas Jr",
             "type": "financial",
-            "strength": 1.0,
+            "strength": 1,
             "description": "Epstein directed 40K+ to Thomas charity (Ricardo O Gorman Garden): 10K from foundation in Mar 2015 plus 30K from Gratitude America in Aug 2017. Thomas provided wire instructions for TD Bank account."
           }
         ]
