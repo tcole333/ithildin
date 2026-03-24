@@ -1,0 +1,1196 @@
+{
+  "name": "Swiss Commodity Re Limited",
+  "slug": "swiss-commodity-re-limited",
+  "aliases": [
+    "Swiss Commodity RE Limited"
+  ],
+  "profile_ids": [
+    "tech-right"
+  ],
+  "generated_at": "2026-03-24T00:45:14.739874+00:00",
+  "last_updated": "2026-03-24T00:45:14.739874+00:00",
+  "stats": {
+    "total_findings": 30,
+    "total_connections": 5,
+    "total_entities": 2,
+    "finding_types": {
+      "financial": 15,
+      "relationship": 1,
+      "document": 4,
+      "identity": 5,
+      "intelligence": 5
+    },
+    "connection_types": {
+      "corporate": 2,
+      "financial": 3
+    },
+    "last_updated": "2026-03-24T00:45:14.739874+00:00"
+  },
+  "findings": [
+    {
+      "id": 7473,
+      "finding_type": "financial",
+      "summary": "Swiss Commodity Re holds 1.8M CRML shares from copper powder ASA - no 13D/G filing requirement (only 1.5pct ownership)",
+      "detail": "Per 424B3 prospectus (March 4, 2026), Swiss Commodity RE Limited holds 1,800,000 CRML ordinary shares (1.5pct of 122,074,807 outstanding). Malcolm Scott Macintyre holds 200,000 shares separately. Kenneth Raymond Deayton has voting and investment control over Swiss Commodity Re shares (per footnote 3). Shares were received under Asset Sale Agreement dated November 21, 2025, closed December 16, 2025. Since Swiss Commodity Re holds only 1.5pct, it is below the 5pct threshold requiring Schedule 13D or 13G filings. This means there is NO SEC ownership reporting mechanism that would reveal if they have sold any shares since the F-3 became effective March 4, 2026.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:56:31",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "424B3 prospectus Reg 333-293656 filed 2026-03-04",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "6-K filed 2025-11-25 announcing ASA with Swiss Commodity Re",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6346,
+      "finding_type": "relationship",
+      "summary": "Malcolm Scott Macintyre (22 Faraday Avenue, Rose Bay NSW 2029, Australia) received 200,000 CRML shares under the same Nov 21, 2025 Asset Sale Agreement as Swiss Commodity Re Limited. Macintyre and Swiss Commodity Re appear to be co-sellers in the copper powder deal, suggesting Macintyre either co-owns the powder stockpile or is an associated person. Macintyre may be the same person as Malcolm Macintyre, Managing Director of Capella Capital (infrastructure finance, Sydney), though this is unconfirmed. No direct link to Tony Sage, Greg Barnes, or European Lithium was identified.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:23:33",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7396,
+      "finding_type": "document",
+      "summary": "CRML did not disclose the copper powder transaction as a related-party transaction in any SEC filing. Swiss Commodity Re Limited does not appear by name in the half-year financial statements (Dec 31, 2025). The transaction is described only as 'Issue of shares - Acquisition of copper' in the equity statement. The original 6-K described Swiss Commodity Re as 'the Seller' but made no related-party determination. Given CRML's acknowledged 'significant deficiency' in related-party transaction controls (from 20-F June 30, 2025), the absence of related-party analysis for this transaction is notable.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-31",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:43",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-027768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7471,
+      "finding_type": "financial",
+      "summary": "No Form 144 filings by Swiss Commodity Re or Macintyre for CRML shares since F-3 became effective March 4, 2026",
+      "detail": "Searched all CRML (CIK 1951089) Form 144 filings on EDGAR. Three Form 144s exist: (1) Oct 31, 2025 - Zhernov Mykhailo (Director), 50K shares via Oppenheimer; (2) Jan 14, 2026 - European Lithium Ltd (10pct shareholder), 5M shares via BMO Capital Markets; (3) Mar 23, 2026 - Zhernov Mykhailo (Director), 50K shares via Oppenheimer. NONE from Swiss Commodity Re or Macintyre. Critical caveat: since shares are registered under effective F-3 (Reg No. 333-293656), they can sell via prospectus WITHOUT filing Form 144. Absence of Form 144 does NOT mean no sales occurred.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:56:13",
+      "target_name": "Swiss Commodity Re Limited / Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR CIK 1951089 Form 144 filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR full-text search macintyre forms:144 (0 CRML results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR full-text search swiss commodity re forms:144 (0 results)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6340,
+      "finding_type": "identity",
+      "summary": "Swiss Commodity Re Limited is controlled by Kenneth Raymond Deayton, who is co-founder and Managing Director/CEO of Hong Kong Corporate Services Group. The company's business address is the HK Corporate Services Group office: 6th Floor, Wyndham Place, 40-44 Wyndham Street, Central, Hong Kong. Despite the name 'Swiss', the entity is Hong Kong-based and uses a registered agent address, not an operational business address.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:22:53",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6281,
+      "finding_type": "document",
+      "summary": "CRML Nov 25 2025: Entered Asset Sale Agreement with Swiss Commodity Re Limited (unknown entity). CRML purchased 40kg of ultra-high-purity copper powder from this Swiss company in exchange for 2,000,000 ordinary shares (valued by both parties at $20,000,000 = $10/share). Issuer explanation is that this gives CRML tangible commodity assets. Swiss Commodity Re Limited is unidentified - no prior appearance in CRML filings. Related party or arm's-length transaction unclear.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 17:59:46",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC_EDGAR:0001951089:6K-20251125",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7567,
+      "finding_type": "intelligence",
+      "summary": "MANUFACTURER ANALYSIS: No plausible supply chain for Swiss Commodity Re. The major global UHP copper powder manufacturers are: Mitsui Mining & Smelting (Japan), GGP Metalpowder AG (Germany, est. 1890), Kymera International (US), Fukuda Metal Foil & Powder (Japan), Gripm Advanced Materials (China), BASF SE, American Elements, Materion Corp. These companies sell to electronics, aerospace, and defense customers through established industrial supply chains. None have any known relationship with Swiss Commodity Re Limited, a Hong Kong-registered company run by a corporate services provider (Kenneth Deayton) with zero commodities trading history. The press release claim that the copper powder market is 'historically dominated by Russia and China' is partially accurate for raw copper but misleading for copper powder -- the largest copper powder producer is Malaysia (53% global share), followed by the US (21%). The claim appears designed to invoke supply-chain security narratives to justify the acquisition.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:21:10",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Hong Kong Corporate Services Group about page - Kenneth Deayton background",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IndexBox 2024 copper powder production data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Market Research Future manufacturer analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenPR market report: Mitsui, GGP, BASF as key players",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6344,
+      "finding_type": "identity",
+      "summary": "Swiss Commodity Re Limited has NO registration found in: Swiss commercial register (Zefix), UK Companies House, OpenCorporates, OpenSanctions database, US corporate registries (FL/NY/CA/TX). The entity's name suggests Swiss incorporation but its only disclosed address is a Hong Kong corporate services firm. The 'Swiss' branding may be a jurisdictional misdirection. CRML described it as a 'long-only multi-generational European based single family office' but no registry confirms this characterization. The entity is not registered as a filer with the SEC and holds CRML shares through a private placement exemption.",
+      "detail": null,
+      "source_datasets": [
+        "web_search edgar opensanctions registry"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:23:25",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-023653 zefix.admin.ch companieshouse.gov.uk opensanctions query_registry",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7474,
+      "finding_type": "identity",
+      "summary": "Kenneth Deayton controls Swiss Commodity Re CRML shares and appears in ICIJ Panama Papers database",
+      "detail": "Kenneth Raymond Deayton is identified in the CRML 424B3 prospectus (footnote 3) as having voting and investment control over Swiss Commodity RE Limited's 1,800,000 CRML shares. Deayton appears in the ICIJ Offshore Leaks Database (Panama Papers) as shareholder of NEWBURY INVESTMENT LIMITED (BVI, incorporated Sep 4, 1991) via Mossack Fonseca. Address listed as Unit F3, Goodview Garden, 24 Stubbs Road, Hong Kong. He is associated with Hong Kong Corporate Services Group (HKCS Group) as Managing Director. Also appears as corporate insider for HK-listed 0186.HK.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:56:42",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "424B3 prospectus footnote 3 re: Swiss Commodity RE Limited",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Offshore Leaks Database node 12220983",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Macroaxis corporate insider data for 0186.HK",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7399,
+      "finding_type": "financial",
+      "summary": "All 2,000,000 CRML shares from the copper powder deal were immediately registered for resale via F-3 registration statement (filed Feb 23, 2026, effective Mar 4, 2026) with NO lock-up period. Swiss Commodity Re holds 1,800,000 shares; Malcolm Macintyre holds 200,000 shares. Both can sell immediately. At the Feb 20, 2026 closing price of $9.06/share, the 2M shares were worth $18.12M. The immediate resale registration with no lock-up, combined with the inflated asset valuation, is consistent with a share-for-asset swap designed to issue liquid equity to a counterparty in exchange for a non-cash asset of questionable value.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-03-04",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:21:12",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-019356",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6341,
+      "finding_type": "financial",
+      "summary": "Swiss Commodity Re Limited sold 40kg of ultra-high-purity copper powder (99.96% purity) to Critical Metals Corp (CRML) on Nov 21, 2025, in exchange for 2,000,000 CRML ordinary shares valued at $20,000,000 ($10/share). The transaction closed Dec 16, 2025. Shares were issued via private placement under Section 4(a)(2) exemption. As of the Feb 2026 prospectus, the company held 1,800,000 shares (1.5% of CRML), with 200,000 shares separately allocated to Malcolm Scott Macintyre, totaling 2M shares from the same Asset Sale Agreement. CRML registered all 2M shares for resale in a Feb 23, 2026 F-3 registration statement, with the prospectus effective March 4, 2026. No lock-up was required.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-04",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:23:03",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-25-114760 SEC:0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7572,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: The CRML copper powder valuation is mathematically fraudulent by every available metric. SUMMARY TABLE of 40kg valuations: (1) CRML claimed value: ,000,000 (/g). (2) CRML press release implied value at ,500-2,500/g: M-M. (3) Institut Seltene Erden pricing IF true ultrafine (which this is NOT): .2M-M at EUR 300-2500/g. (4) Sigma-Aldrich 99.999% lab retail: ,000. (5) Goodfellow 99.99% 4N retail: ,520,000. (6) MSE Supplies 99.9% nanopowder retail: ,000-,000. (7) Alibaba 99.999% bulk: -. (8) EU wholesale 99.9999% 6N: ,800-,600. (9) HS 7406 customs declared value: . (10) PM grade wholesale: . The transaction recorded .8M in equity issuance for material worth between  and ,000 at the most extreme stretch. This creates shareholder value destruction of .9M-.8M -- or equivalently, a transfer of that value from CRML shareholders to Swiss Commodity Re / Kenneth Deayton via dilutive share issuance.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:24:23",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "All 9 pricing sources documented in finding 7560",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML balance sheet recording .8M Dec 31 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "CRML press release ,500-2,500/g claim",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HS 7406 trade data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Institut Seltene Erden ultrafine specification and pricing",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7317,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Deayton is a veteran HK-based corporate services professional (CPA, Deloitte partner 15 years, HSBC 7 years, HK Inland Revenue 4 years) who controls Swiss Commodity Re Limited \u2014 the entity that sold 40kg of purportedly UHP copper powder to CRML for 2M shares (USD 20M). Key profile elements: (1) OFFSHORE HISTORY: Two BVI entities in ICIJ databases \u2014 Newbury Investment Limited (Panama Papers, shareholder from 1997, Mossack Fonseca) and Richmond Holdings BVI Ltd (Offshore Leaks, director 2001-2003, Portcullis Trustnet). (2) GRANDE HOLDINGS: Appointed INED and audit committee chairman of Grande Holdings (0186.HK, now Nimble Holdings) in May 2016 when it resumed trading after provisional liquidation. Grande owns 72.4% of Emerson Radio Corp. Replaced when board reconstituted Dec 2017. (3) CORPORATE SERVICES: Runs HK Corporate Services Group from 6F Wyndham Place, Central HK \u2014 same address used by Swiss Commodity Re. Founded Asian Financial Services Ltd (sold to TMF Group). Co-founded HK Trust Company Group. (4) NO DIRECT SAGE CONNECTION: No overlapping boards, companies, or professional networks between Deayton and Tony Sage found in any source. The CRML copper deal appears to be introduced through an unidentified intermediary. (5) COPPER PRICING ANOMALY: Market sources dispute the USD 1500-2500/g pricing for 99.96% purity; typical pricing is 2-3 orders of magnitude lower. (6) NEGATIVE RESULTS: No FEC donations, no US litigation, no lobbying disclosures, no FARA registrations, no OpenSanctions hits, no IRS 990 roles, no US corporate registry presence, no GLEIF LEI for Swiss Commodity Re.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:07:58",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-023653 ICIJ:12220983",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7478,
+      "finding_type": "financial",
+      "summary": "CRML is a foreign private issuer exempt from Section 16 - insider sales not reported on Form 4",
+      "detail": "Critical Metals Corp is incorporated in the British Virgin Islands and qualifies as a foreign private issuer under the Exchange Act. Per the 424B3 prospectus: 'our officers, directors and principal shareholders will be exempt from the reporting and short-swing profit recovery provisions under Section 16 of the Exchange Act.' This means: (1) Officers/directors are NOT required to file Form 4 when buying or selling CRML shares; (2) The only insider reporting mechanism is the initial Form 3 filings; (3) Form 144 is only required for sales of restricted/control securities under Rule 144, NOT for sales of shares registered under an effective F-3; (4) Swiss Commodity Re (1.5pct holder, not an affiliate) has NO reporting obligation when selling registered shares. The practical implication is that sales by Swiss Commodity Re, Macintyre, or any non-affiliate selling securityholder through the registered prospectus are essentially invisible to SEC public filings until the next periodic report.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:57:14",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "424B3 prospectus filed 2026-03-04 section on foreign private issuer status",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7384,
+      "finding_type": "financial",
+      "summary": "CRML booked 40kg UHP copper powder at $15.8M on Dec 31, 2025 balance sheet (non-current inventory), not the $20M announced transaction price. The equity statement shows 'Issue of shares - Acquisition of copper: 2,000 shares, $15,798,000 premium.' This implies shares were valued at ~$7.90/share at closing (Dec 16, 2025), not the $10/share claimed in the Nov 21 press release. The $4.2M gap between announced and booked values went undisclosed.",
+      "detail": null,
+      "source_datasets": [
+        "SEC EDGAR"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-12-31",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:46",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-027768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7393,
+      "finding_type": "document",
+      "summary": "No custody or storage location disclosed for 40kg UHP copper powder. Neither the 6-K filing (Nov 25, 2025), the F-3 prospectus (Feb 23, 2026), nor the half-year financial statements (Dec 31, 2025) disclose where the copper powder is physically stored, who has custody, or whether any verification of physical existence was performed. The copper is classified as non-current inventory (not expected to be consumed within 12 months), suggesting it is being held indefinitely with no operational use plan.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-31",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:33",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-26-027768",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7386,
+      "finding_type": "financial",
+      "summary": "No independent valuation or appraisal was obtained for the 40kg UHP copper powder acquisition. The 6-K filing (Nov 25, 2025) describing the Asset Sale Agreement contains no mention of any valuation methodology, independent appraisal, fairness opinion, or third-party assessment. The F-3 prospectus (Feb 23, 2026) similarly lacks any valuation disclosure. The half-year financial statements (Dec 31, 2025) report the copper as non-current inventory at $15.8M but provide no accounting policy note explaining how this value was determined.",
+      "detail": null,
+      "source_datasets": [
+        "sec_edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-11-25",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:19:58",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-25-114760",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7479,
+      "finding_type": "financial",
+      "summary": "Oppenheimer is the broker for CRML insider sales - confirmed via Form 144 filings by Director Zhernov",
+      "detail": "Both Form 144 filings by Director Zhernov Mykhailo (Oct 31, 2025 and Mar 23, 2026) identify Oppenheimer and Co Inc as the broker. The Jan 14, 2026 Form 144 by European Lithium Ltd (10pct holder) used BMO Capital Markets Corp. The prospectus Plan of Distribution allows selling securityholders to use any of: ordinary brokerage transactions, block trades, broker-dealer as principal, exchange distribution, private transactions, short sales, etc. No specific broker is named for Swiss Commodity Re or Macintyre in the prospectus.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:57:26",
+      "target_name": "Critical Metals Corp",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Form 144 filed 2025-10-31 by Zhernov via Oppenheimer",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Form 144 filed 2026-01-14 by European Lithium via BMO Capital Markets",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Form 144 filed 2026-03-23 by Zhernov via Oppenheimer",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7387,
+      "finding_type": "document",
+      "summary": "GreenMet's CRML/Tanbreez compensation vector analysis: Four F-3 registration statements and three Schedule 13D/G filings for CRML were reviewed. Selling shareholders in F-3 filings are: European Lithium, Rimbal, Alyeska Master Fund, Swiss Commodity Re, Malcolm Scott Macintyre, GEM Global Yield, Jett Capital, J.V.B. Financial Group. Schedule 13D/G filers are: European Lithium (74.3%), Empery Asset Management (9.23%). GreenMet, Drew Horn, George Sorial, and Keith Schiller appear in NONE of these filings. Combined with the prior zero-result EDGAR full-text search across 167 filings, this confirms GreenMet has no SEC-disclosed equity position, warrant holding, or advisory arrangement in any CRML regulatory filing.",
+      "detail": null,
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-03-18",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:08",
+      "target_name": "GreenMet (Greentech Minerals Holdings Inc.)",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR:CIK1951089:F3:20260223,EDGAR:CIK1951089:F3:20260318,EDGAR:CIK1951089:SC13D:20240305,EDGAR:CIK1951089:SC13G:20241016",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7563,
+      "finding_type": "financial",
+      "summary": "GLOBAL COPPER POWDER MARKET CONTEXT: 40kg is trivial, not 'one of the largest strategic stockpiles.' Global copper powder market: 587,000 tons consumed in 2024, valued at .8B. Production: 600,000 tons in 2024. Top producers: Malaysia (321,000 tons, 53%), United States (127,000 tons), Singapore (25,000 tons). Even the high-purity segment measured in thousands of tons annually. China alone consumes 55,000+ metric tons of copper powder per year. 40kg = 0.00000007% of annual global production. Major manufacturers (Mitsui Mining & Smelting, GGP Metalpowder AG, Kymera International, Fukuda Metal) routinely produce 99.99%+ copper powder in multi-ton quantities. The idea that 40kg represents a strategically significant stockpile is commercially absurd.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:20:14",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Business Research Insights market size forecast",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "IndexBox World Copper Powder Market Report 2024",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Market Research Future ultra-fine copper powder market report",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Straits Research copper powder market analysis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7570,
+      "finding_type": "financial",
+      "summary": "IMPORT/EXPORT PRICING vs CRML CLAIM: HS Code 7406 (copper powders and flakes) trade data shows average import prices of .35-.58/kg. Germany is the largest exporter (30.62-86.67% depending on subcategory). 734 global exporters and 577 importers operate under this code. At customs-declared import prices of ~.50/kg, 40kg of copper powder would be valued at  in international trade. Even if customs declarations understate specialty material values, the gap between  (trade-declared) and ,000,000 (CRML-claimed) is a factor of 47,619x. No customs declaration anywhere in the world would value 40kg of copper powder at M -- it would trigger immediate scrutiny as a suspected money laundering transaction.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:21:48",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Flexport HS 7406 trade data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Tariffnumber.com HS 74061000 classification",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Zauba.com HS 7406 copper powder import data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7390,
+      "finding_type": "financial",
+      "summary": "CRML's copper powder acquisition valuation appears dramatically inflated relative to wholesale market pricing. Industry sources indicate realistic bulk pricing for 99.96% purity copper powder is $200-400/kg wholesale, making 40kg worth $8,000-$16,000. Even at generous lab-scale retail of $2-5/gram, 40kg would be worth $80,000-$200,000. CRML paid the equivalent of $500/gram ($500,000/kg), which is 1,250x to 62,500x the wholesale market rate. CRML's press release cited a $1,500-$2,500/gram market price, but market analysts note these figures apply only to tiny research quantities (single grams), not 40kg bulk purchases where quantity discounts dramatically reduce per-unit cost.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-11-21",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:20:22",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-25-114760",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7316,
+      "finding_type": "identity",
+      "summary": "Malcolm Scott Macintyre (22 Faraday Avenue, Rose Bay NSW 2029, Australia) who received 200,000 CRML shares under the same Nov 21 2025 Asset Sale Agreement as Swiss Commodity Re is likely Malcolm Macintyre, Managing Director of Capella Capital (Sydney), an Australian infrastructure developer and financier. Capella Capital has financed over AUD 32 billion in infrastructure projects. Macintyre previously headed Babcock and Brown's North American Transport and Social Infrastructure Group (New York) and served as Local Managing Director at ABN AMRO's Infrastructure Capital Group (12-year tenure). No direct connection to Tony Sage, Kenneth Deayton, or mining/commodities was found in public sources. His infrastructure finance background has no obvious nexus to ultra-high-purity copper powder.",
+      "detail": null,
+      "source_datasets": [
+        "web"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:05:02",
+      "target_name": "Malcolm Scott Macintyre",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "web:capellacapital.com.au",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 6342,
+      "finding_type": "identity",
+      "summary": "Kenneth Raymond Deayton is a CPA qualified in Australia and Hong Kong, practicing in HK since 1975. Career: 4 years HK Inland Revenue; 7 years HSBC head office tax consultant; 15 years Deloitte Touche Tohmatsu partner (corporate services). Founded Asian Financial Services Limited (sold to TMF Group). Co-founded The Hong Kong Trust Company Group. Currently Managing Director/CEO of Hong Kong Corporate Services Group (6F Wyndham Place, 40-44 Wyndham Street, Central HK). Listed as Corporate Insider for Nimble Holdings (0186.HK). Appeared in Panama Papers as shareholder of Newbury Investment Limited (BVI, inc. Sep 4, 1991) via Mossack Fonseca. Controls Swiss Commodity RE Limited which received 1.8M CRML shares worth $18M in Nov 2025 copper powder deal.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-09 18:23:14",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hkcsgroup.com ICIJ:12220983 SEC:0001213900-26-023653",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7402,
+      "finding_type": "financial",
+      "summary": "CRML stock price analysis reveals misleading premium claim in copper powder press release. CRML claimed shares were issued at '$10/share, a 40% premium to previous day's closing price.' Nov 20, 2025 closing was $8.05 -- a $10 price would be only a 24% premium. Nov 21 (announcement day) closed at $7.13 (11.4% drop), suggesting the '40% premium' was calculated against the intraday falling price, not the prior close. By Dec 16 (transaction closing date), CRML traded at $8.17, explaining the $15.8M balance sheet value (2M shares x ~$7.90). The shares were issued at market value, not at a premium -- the $10/share valuation was a fiction used only to justify the $20M copper valuation.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-11-21",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:22:34",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001213900-25-114760",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7562,
+      "finding_type": "financial",
+      "summary": "PURITY MISREPRESENTATION: CRML's press release claims 99.96% purity copper powder while simultaneously calling it 'ultra-high-purity' and separately claiming '99.9999% or higher' in the same release. In industry terminology, 99.96% is sub-4N grade (4N = 99.99%), which is standard electrolytic copper, NOT ultra-high-purity. True UHP copper begins at 5N (99.999%) or 6N (99.9999%). CRML's copper at 99.96% contains 400 ppm impurities, vs 10 ppm for true 4N and 1 ppm for 5N. The purity level is inconsistent between claims in the same press release. Standard electrolytic copper cathode (LME grade A) is already 99.99% -- meaning CRML's 99.96% powder is LOWER purity than standard exchange-grade copper. This undermines the entire premium pricing thesis.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:20:02",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML GlobeNewswire press release Nov 21 2025 - dual purity claims of 99.96% and 99.9999%+",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Industry purity standards: 3N=99.9%, 4N=99.99%, 5N=99.999%, 6N=99.9999%",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LME Grade A copper cathode specification: min 99.99% Cu",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7566,
+      "finding_type": "financial",
+      "summary": "MAXIMUM FAIR VALUE CALCULATION: Even granting every favorable assumption, the 40kg copper powder is worth a tiny fraction of M. BEST CASE (lab-scale retail, 99.999% pricing applied to 99.96% material): Sigma-Aldrich 99.999% at .50/g x 40,000g = ,000. REALISTIC BULK (99.99% at bulk pricing): Goodfellow 4N at ~/g is retail for 10g; at 40kg bulk, pricing would be -15/g maximum = ,000-,000. ACTUAL WHOLESALE (99.96% grade at industrial bulk): Based on Alibaba and EU wholesale data for 99.999%, -23/kg; CRML's 99.96% (lower purity) at bulk would be -20/kg = - for 40kg. INDUSTRY BENCHMARK: Powder metallurgy copper at .51/kg =  for 40kg. The M valuation exceeds even the most generous lab-retail calculation by 21x, and exceeds realistic wholesale by 25,000-50,000x.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:20:57",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "Alibaba 99.999% copper powder -23/kg bulk",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "EU wholesale 6N copper powder EUR 250-385/kg",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Goodfellow 4N copper powder 10g from ",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Sigma-Aldrich 203122-10G .10 for 10g 99.999%",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "powdermetallurgy.com PM grade ,513/ton",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7569,
+      "finding_type": "intelligence",
+      "summary": "DEAYTON SUPPLY CHAIN IMPLAUSIBILITY: Kenneth Deayton's professional background is corporate services -- company formation, tax compliance, bookkeeping, payroll, and virtual offices. His firm (Hong Kong Corporate Services Group) specializes in forming Hong Kong companies and WFOEs in China. There is no indication in his 50-year career of involvement in commodities trading, metals, mining, materials science, defense supply chains, or any activity that would plausibly result in possession of 40kg of ultra-high-purity copper powder. The description of Swiss Commodity Re as 'a long-only multi-generational European based single family office' is contradicted by: (a) the company is Hong Kong-registered, not European; (b) it is controlled by Deayton, an Australian CPA running a corporate services firm; (c) 'single family office' implies wealth management, not commodity storage; (d) no evidence of any commodities trading operations.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:21:36",
+      "target_name": "Kenneth Raymond Deayton",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "CRML press release: Swiss Commodity Re described as long-only multi-generational European family office",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Hong Kong Corporate Services Group about page: services list and Deayton biography",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ZoomInfo: Kenneth Deayton Managing Director HKCSG",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7560,
+      "finding_type": "financial",
+      "summary": "COMPREHENSIVE PRICING LADDER: Published catalog prices for copper powder establish that 99.96% purity (CRML's claimed grade) falls BELOW the 4N (99.99%) threshold. Verified pricing from 9 sources: (1) Chemical Store: 99.81% 1lb/ = ~/kg retail. (2) MSE Supplies: 99.9% nanopowder 70nm 100g/ = .07/g retail. (3) MSE Supplies: 99.9% nanopowder 30nm 100g/ = .80/g retail. (4) Sigma-Aldrich 203122: 99.999% 10g/ = .50/g lab-scale retail. (5) Goodfellow: 99.99% (4N) 10g from  = ~/g retail. (6) Alibaba bulk: 99.999% .50-/kg. (7) Alibaba 99.999% typical: -23/kg bulk. (8) EU wholesale 99.9999% (6N): EUR 250-385/kg. (9) Powder metallurgy grade 99.5%: .51/kg. At CRML's /g (,000/kg), the 40kg is priced 1,200x-50,000x above verified rates for equivalent or HIGHER purity grades.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 00:19:51",
+      "target_name": "Swiss Commodity Re Limited",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Alibaba showroom listings for 99.999% copper powder",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Chemical Store catalog",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Goodfellow copper powder group",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Institut fuer Seltene Erden pricing",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "MSE Supplies product listings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Sigma-Aldrich catalog 203122-10G",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "powdermetallurgy.com industry data",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7467,
+      "finding_type": "intelligence",
+      "summary": "PATTERN ANALYSIS: Tony Sage corporate conduct exhibits recurring pattern across 20+ years \u2014 (1) share-for-asset swaps between controlled entities, (2) regulatory arbitrage when exchanges block deals, (3) payments through obscured channels, (4) offshore entity structures, (5) simultaneous control of multiple listed vehicles creating cross-holding networks",
+      "detail": "COMPREHENSIVE PATTERN ANALYSIS of Tony Sage's corporate conduct across Cape Lambert, CuFe, European Lithium, CRML, Perth Glory, Cyclone Metals, Global Iron, International Petroleum:\n\nPATTERN 1 \u2014 SHARE-FOR-ASSET SWAPS: Sage repeatedly acquires assets cheaply and vends them into listed vehicles for share consideration. Examples: (a) CopperCo acquired from receivership via debt-to-equity conversion, assets sold for ~A$300M; (b) Cape Lambert magnetite project bought for A$20M, sold to MCC for A$400M; (c) Kasombo project vended into Fe Limited for 25M shares + facilitator shares; (d) CRML copper powder: 40kg acquired for 2M shares at $10/share ($20M). The CRML deal is the outlier \u2014 it involves a physical commodity with disputed pricing (claimed $1,500-2,500/g vs market sources saying 2-3 orders of magnitude lower) rather than a mining tenement.\n\nPATTERN 2 \u2014 REGULATORY ARBITRAGE: When ASX blocked Sage-Timis deals (Global Iron, International Petroleum) due to concerns about Timis' influence and continuous disclosure compliance, Sage listed both on the less-regulated NSX. When Sage needed a US listing for CRML's Greenland rare earth play, he used a BVI incorporation and SPAC merger rather than direct ASX listing.\n\nPATTERN 3 \u2014 OBSCURED PAYMENT CHANNELS: Perth Glory salary cap: player payments routed through family member bank accounts. ATO investigation: $19.8M allegedly disguised as loans via offshore entities. In both cases, Sage claimed lack of knowledge of the specific arrangements.\n\nPATTERN 4 \u2014 OFFSHORE STRUCTURES: Cape Lambert Corporation (Panama, Mossack Fonseca, 2007, intermediary Consulco International in RAK FTZ UAE) \u2014 name matches Sage's company but ICIJ database lists no officers. Metal Exploration Mauritius Ltd \u2014 Cape Lambert subsidiary. CRML \u2014 incorporated in BVI. Swiss Commodity Re \u2014 HK-based entity, Deayton has two BVI entities in ICIJ databases.\n\nPATTERN 5 \u2014 CROSS-HOLDING NETWORK: Sage simultaneously chairs/controls CRML, European Lithium (holds 37.3% of CRML), CuFe, and (until Oct 2025) Cyclone Metals. All entities share the same registered address: 32 Harrogate Street, West Leederville WA. Okewood Pty Ltd provides consulting services to multiple entities. This creates a web where assets and value can flow between entities under Sage's control.\n\nRELEVANCE TO CRML COPPER POWDER DEAL: The copper powder transaction ($20M in shares at 40% premium for 40kg of 99.96% pure copper powder from Swiss Commodity Re) resembles prior Sage transactions in form (share-for-asset swap) but differs in important ways: (a) the asset is a physical commodity, not a mining tenement; (b) the seller (Swiss Commodity Re / Kenneth Deayton) has no established connection to Sage, unlike prior related-party swaps; (c) the pricing is disputed by market sources; (d) there is no independent valuation disclosed; (e) 200K additional shares went to Malcolm Macintyre (Capella Capital), whose role as 'co-seller' is unexplained.",
+      "source_datasets": [
+        "web_search",
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 20:55:17",
+      "target_name": "Tony Sage",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "AFP media release (May 2023)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BusinessNews.com.au Sage-Timis ASX block",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FTBL Perth Glory salary cap",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ICIJ Panama Papers database",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Proactive Investors Cape Lambert-FEL deal",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC EDGAR CRML filings",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Wikipedia Tony Sage",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 3716,
+      "person_a": "Kenneth Raymond Deayton",
+      "person_b": "Nimble Holdings",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "strong",
+      "created_at": "2026-03-23 19:05:17"
+    },
+    {
+      "id": 3717,
+      "person_a": "Emerson Radio Corp",
+      "person_b": "Kenneth Raymond Deayton",
+      "relationship_type": "corporate",
+      "description": null,
+      "strength": "medium",
+      "created_at": "2026-03-23 19:05:17"
+    },
+    {
+      "id": 3718,
+      "person_a": "Critical Metals Corp",
+      "person_b": "Kenneth Raymond Deayton",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "created_at": "2026-03-23 19:05:18"
+    },
+    {
+      "id": 3766,
+      "person_a": "Kenneth Raymond Deayton",
+      "person_b": "Malcolm Scott Macintyre",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "medium",
+      "created_at": "2026-03-23 19:21:50"
+    },
+    {
+      "id": 3767,
+      "person_a": "Critical Metals Corp",
+      "person_b": "Swiss Commodity Re Limited",
+      "relationship_type": "financial",
+      "description": null,
+      "strength": "strong",
+      "created_at": "2026-03-23 19:21:51"
+    }
+  ],
+  "entities": [
+    {
+      "id": 843,
+      "name": "Swiss Commodity Re Limited",
+      "entity_type": "ltd",
+      "jurisdiction": "Switzerland",
+      "created_at": "2026-03-09 17:59:53"
+    },
+    {
+      "id": 1257,
+      "name": "Kenneth Raymond Deayton",
+      "entity_type": "person",
+      "jurisdiction": "hk",
+      "created_at": "2026-03-23 19:01:25"
+    }
+  ],
+  "curation": {
+    "lead": "<p>Swiss Commodity Re Limited is a corporate entity controlled by Kenneth Raymond Deayton, a Hong Kong-based Australian CPA who serves as Managing Director of Hong Kong Corporate Services Group [Finding #6340]. Despite its name, the entity has no Swiss commercial registration (Zefix search negative), no GLEIF Legal Entity Identifier, and no corporate registry presence in any jurisdiction searched, including the UK, US, and international databases [Finding #6344]. Its sole disclosed address is Deayton's corporate services office at 6th Floor, Wyndham Place, 40-44 Wyndham Street, Central, Hong Kong [Finding #6340]. <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> described the entity as \"a long-only multi-generational European based single family office,\" a characterization contradicted by every available record [Finding #7569].</p>\n\n<p>On November 21, 2025, Swiss Commodity Re entered an Asset Sale Agreement with <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> (CRML), selling 40 kilograms of purportedly ultra-high-purity copper powder in exchange for 2,000,000 CRML ordinary shares valued at $20,000,000 ($10/share) [Finding #6281]. The transaction closed December 16, 2025 [Finding #6341]. Of these shares, 1,800,000 were allocated to Swiss Commodity Re and 200,000 to Malcolm Scott Macintyre, an Australian infrastructure financier with no known connection to commodities trading [Finding #6346]. Verified pricing from nine independent sources places the market value of 40 kilograms of 99.96% purity copper powder between $200 and $200,000 at the most generous interpretation, making the $20,000,000 valuation between 100 and 100,000 times the market rate [Finding #7560][Finding #7566]. No independent valuation or appraisal was obtained [Finding #7386].</p>\n\n<p>All 2,000,000 shares were registered for resale via an F-3 registration statement effective March 4, 2026, with no lock-up period [Finding #7399]. As a BVI-incorporated foreign private issuer, CRML is exempt from Section 16 insider reporting requirements, and Swiss Commodity Re's 1.5% stake falls below the 5% threshold for Schedule 13D/G filings [Finding #7473][Finding #7478]. This means the shares can be sold with no public disclosure obligation. Kenneth Deayton appears in the ICIJ Panama Papers database as shareholder of Newbury Investment Limited (BVI, incorporated 1991, via Mossack Fonseca) and in the Offshore Leaks as director of Richmond Holdings BVI Ltd [Finding #7474][Finding #7317]. No custody or storage location for the copper powder has been disclosed in any filing [Finding #7393].</p>",
+    "system_role": "Illustrates how opaque corporate vehicles with no verifiable registry presence can be used to exchange assets of questionable value for liquid equity in publicly traded companies, exploiting foreign private issuer disclosure exemptions.",
+    "sections": [
+      {
+        "id": "corporate-identity",
+        "title": "Corporate Identity and Registration",
+        "content": "<p>Swiss Commodity Re Limited is controlled by Kenneth Raymond Deayton, who has voting and investment control over its CRML shares [Finding #6340]. Deayton is an Australian CPA who has practiced in Hong Kong since 1975, with a career spanning four years at HK Inland Revenue, seven years as an HSBC head office tax consultant, and fifteen years as a Deloitte Touche Tohmatsu partner in corporate services [Finding #6342]. He founded Asian Financial Services Limited (later sold to TMF Group) and co-founded The Hong Kong Trust Company Group [Finding #6342]. He currently serves as Managing Director and CEO of Hong Kong Corporate Services Group, which specializes in company formation, tax compliance, bookkeeping, and virtual offices [Finding #7569].</p>\n\n<p>Swiss Commodity Re Limited's address is the same as Deayton's corporate services firm: 6th Floor, Wyndham Place, 40-44 Wyndham Street, Central, Hong Kong [Finding #6340]. The entity has no registration in the Swiss commercial register (Zefix), UK Companies House, OpenCorporates, OpenSanctions, or any US state corporate registry [Finding #6344]. It holds no GLEIF Legal Entity Identifier [Finding #6344]. The \"Swiss\" branding has no evident basis in any corporate filing or registry record. <a href=\"/dossiers/critical-metals-corp\">CRML</a> described the entity as \"a long-only multi-generational European based single family office,\" but this characterization is contradicted by the entity's Hong Kong address, its control by an Australian CPA who runs a corporate services firm, and the absence of any evidence of wealth management or commodities operations [Finding #7569].</p>\n\n<p>Deayton appears in two ICIJ offshore databases. He is listed as a shareholder of Newbury Investment Limited, a BVI entity incorporated September 4, 1991, via Mossack Fonseca (Panama Papers) [Finding #7474]. He also appears as a director of Richmond Holdings BVI Ltd from 2001 to 2003 via Portcullis Trustnet (Offshore Leaks) [Finding #7317]. He was appointed Independent Non-Executive Director and Audit Committee Chairman of Grande Holdings (0186.HK, now Nimble Holdings) in May 2016 when it resumed trading after provisional liquidation; he was replaced when the board was reconstituted in December 2017 [Finding #7317].</p>",
+        "viz": null
+      },
+      {
+        "id": "copper-powder-transaction",
+        "title": "Copper Powder Transaction",
+        "content": "<p>On November 21, 2025, Swiss Commodity Re Limited entered an Asset Sale Agreement with <a href=\"/dossiers/critical-metals-corp\">Critical Metals Corp</a> to sell 40 kilograms of copper powder described as \"ultra-high-purity\" (99.96% purity) in exchange for 2,000,000 CRML ordinary shares [Finding #6281]. The parties valued the transaction at $20,000,000, or $10 per share. CRML's press release stated this represented \"a 40% premium to previous day's closing price\" [Finding #7402]. Analysis of trading data shows the November 20, 2025, closing price was $8.05, making the actual premium 24%, not 40% [Finding #7402]. On November 21 (the announcement day), CRML shares closed at $7.13, an 11.4% decline [Finding #7402]. The transaction closed December 16, 2025, when CRML traded at $8.17 [Finding #7402].</p>\n\n<p>CRML booked the copper powder at $15.8 million on its December 31, 2025, balance sheet as non-current inventory, not the $20 million announced transaction price [Finding #7384]. The equity statement records \"Issue of shares - Acquisition of copper: 2,000 shares, $15,798,000 premium,\" implying the shares were valued at approximately $7.90 per share at closing, not the $10 per share stated in the press release [Finding #7384]. The $4.2 million gap between announced and booked values went undisclosed [Finding #7384]. No independent valuation, appraisal, fairness opinion, or third-party assessment was obtained for the copper powder [Finding #7386]. The half-year financial statements provide no accounting policy note explaining how the $15.8 million value was determined [Finding #7386].</p>\n\n<p>Malcolm Scott Macintyre of Rose Bay, NSW, Australia, received 200,000 shares under the same Asset Sale Agreement [Finding #6346]. Macintyre is identified as the Managing Director of Capella Capital, an Australian infrastructure finance firm that has financed over AUD 32 billion in infrastructure projects [Finding #7398]. His career spans 30 years in infrastructure finance at Babcock and Brown, ABN AMRO, and Infrastructure Capital Partners [Finding #7398]. No connection between Macintyre and <a href=\"/dossiers/tony-sage\">Tony Sage</a>, Deayton, or the mining and commodities sector has been identified [Finding #7316].</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "valuation-analysis",
+        "title": "Valuation Analysis",
+        "content": "<p>Verified pricing from nine independent sources establishes that the $20,000,000 valuation for 40 kilograms of 99.96% purity copper powder is between two and five orders of magnitude above market rates [Finding #7560]. At wholesale prices for 99.96% purity material ($200-400 per kilogram), 40 kilograms would cost $8,000 to $16,000 [Finding #7390]. At the most generous lab-scale retail pricing for higher-purity 99.999% material (Sigma-Aldrich at $9.50 per gram), 40 kilograms would cost $380,000 [Finding #7566]. At customs-declared import prices under HS Code 7406 (copper powders and flakes), the average is $4.35-$6.58 per kilogram, making 40 kilograms worth approximately $200 in international trade [Finding #7570]. CRML paid the equivalent of $500 per gram ($500,000 per kilogram), which is 1,250 to 62,500 times the wholesale market rate [Finding #7390].</p>\n\n<p>CRML's press release cited a market price of \"$1,500-$2,500/gram\" for the copper powder, but market analysis indicates these figures apply only to single-gram research quantities, not 40-kilogram bulk purchases where quantity discounts reduce per-unit cost by orders of magnitude [Finding #7390]. Cross-reference of pricing across Sigma-Aldrich, Goodfellow, MSE Supplies, Alibaba, and EU wholesale sources confirms the $20 million valuation exceeds even the most extreme lab-retail calculation by a factor of 21 [Finding #7566].</p>\n\n<p>CRML's press release also described the copper powder as \"ultra-high-purity\" while separately claiming \"99.9999% or higher\" in the same release, though the actual stated purity is 99.96% [Finding #7562]. In industry terminology, 99.96% is sub-4N grade (4N = 99.99%), which is standard electrolytic copper, not ultra-high-purity [Finding #7562]. True UHP copper begins at 5N (99.999%) or 6N (99.9999%). Standard LME Grade A copper cathode is already 99.99%, meaning CRML's 99.96% powder is lower purity than standard exchange-grade copper [Finding #7562]. CRML's press release claim that the copper powder market is \"historically dominated by Russia and China\" is partially accurate for raw copper but misleading for copper powder, where the largest producer is Malaysia (53% of global share), followed by the United States (21%) [Finding #7567].</p>\n\n<p>Global copper powder market context: 587,000 tons were consumed in 2024, valued at $1.8 billion [Finding #7563]. Production reached 600,000 tons in 2024. The 40 kilograms acquired by CRML represents 0.00000007% of annual global production [Finding #7563]. Major manufacturers including Mitsui Mining and Smelting, GGP Metalpowder AG, Kymera International, and Fukuda Metal routinely produce 99.99%+ copper powder in multi-ton quantities [Finding #7563]. None of these manufacturers have any known relationship with Swiss Commodity Re Limited [Finding #7567].</p>",
+        "viz": null
+      },
+      {
+        "id": "share-disposition",
+        "title": "Share Registration and Disposition",
+        "content": "<p>All 2,000,000 CRML shares from the copper powder transaction were registered for resale via an F-3 registration statement filed February 23, 2026, and effective March 4, 2026, with no lock-up period [Finding #7399]. Swiss Commodity Re holds 1,800,000 shares (1.5% of 122,074,807 outstanding shares) and Macintyre holds 200,000 shares [Finding #7473]. At the February 20, 2026, closing price of $9.06 per share, the 2,000,000 shares had a market value of $18.12 million [Finding #7399].</p>\n\n<p>Several structural features of the transaction limit public visibility into share disposition. <a href=\"/dossiers/critical-metals-corp\">CRML</a> is a BVI-incorporated foreign private issuer exempt from Section 16, meaning insider sales are not reported on Form 4 [Finding #7478]. Swiss Commodity Re's 1.5% stake falls below the 5% threshold for Schedule 13D or 13G filings, meaning there is no SEC ownership reporting mechanism that would reveal share sales [Finding #7473]. Since shares are registered under an effective F-3, they can be sold via prospectus without filing Form 144 [Finding #7471]. As of March 23, 2026, no Form 144 filings by Swiss Commodity Re or Macintyre appear on EDGAR, though their absence does not indicate no sales have occurred [Finding #7471].</p>\n\n<p>Analysis of the combined structure \u2014 an inflated asset valuation, immediate resale registration with no lock-up, and multiple exemptions from ownership reporting \u2014 is consistent with a share-for-asset swap designed to issue liquid equity to a counterparty in exchange for a non-cash asset of questionable value [Finding #7399].</p>",
+        "viz": null
+      },
+      {
+        "id": "disclosure-gaps",
+        "title": "Disclosure and Reporting Gaps",
+        "content": "<p><a href=\"/dossiers/critical-metals-corp\">CRML</a> did not disclose the copper powder transaction as a related-party transaction in any SEC filing [Finding #7396]. Swiss Commodity Re Limited does not appear by name in the half-year financial statements for the period ending December 31, 2025; the transaction is described only as \"Issue of shares - Acquisition of copper\" in the equity statement [Finding #7396]. The original 6-K described Swiss Commodity Re as \"the Seller\" but made no related-party determination [Finding #7396]. CRML's 20-F for the fiscal year ending June 30, 2025, disclosed a \"significant deficiency\" in related-party transaction controls [Finding #7396].</p>\n\n<p>No custody or storage location for the 40 kilograms of copper powder has been disclosed in any filing [Finding #7393]. Neither the 6-K (November 25, 2025), the F-3 prospectus (February 23, 2026), nor the half-year financial statements (December 31, 2025) identify where the material is stored, who has custody, or whether any verification of physical existence was performed [Finding #7393]. The copper is classified as non-current inventory, not expected to be consumed within 12 months, with no disclosed operational use plan [Finding #7393].</p>\n\n<p>Analysis of this transaction in the context of <a href=\"/dossiers/tony-sage\">Tony Sage</a>'s corporate history identifies a recurring pattern: share-for-asset swaps between entities where the asset valuation is not independently verified, regulatory arbitrage by moving between exchanges with different scrutiny levels, and offshore entity structures [Finding #7467][Finding #7477]. The copper powder deal follows the same share-for-asset template as Sage's prior Cape Lambert-FEL Kasombo transaction, but without the independent valuation, established seller relationship, or lock-up provisions that constrained the earlier deal [Finding #7477].</p>",
+        "viz": "ego_network"
+      }
+    ],
+    "open_questions": [
+      "What is Swiss Commodity Re Limited's actual jurisdiction of incorporation? The entity has no registry presence in Switzerland, Hong Kong, the UK, or any US state, and SEC filings do not disclose its domicile.",
+      "Where is the 40 kilograms of copper powder physically stored, and has its existence been independently verified by any auditor or third party?",
+      "What is the relationship between Kenneth Deayton and Tony Sage or other CRML insiders? No direct connection has been identified, but the transaction structure mirrors Sage's established corporate patterns.",
+      "Has Swiss Commodity Re Limited sold any of its 1,800,000 CRML shares since the F-3 registration became effective on March 4, 2026? No disclosure mechanism would capture such sales.",
+      "What is Malcolm Scott Macintyre's role in the copper powder transaction? His infrastructure finance background has no nexus to copper powder, and his receipt of 200,000 shares under the same agreement is unexplained."
+    ],
+    "applicable_models": [
+      "jurisdictional-arbitrage",
+      "complexity-as-credential",
+      "narrative-shield"
+    ],
+    "key_finding_ids": [
+      6340,
+      6281,
+      6341,
+      6344,
+      7399,
+      7572,
+      7390,
+      7560,
+      7566,
+      7569,
+      7393,
+      7386,
+      7384,
+      7402,
+      7562,
+      7474
+    ],
+    "key_identifiers": {
+      "controller": "Kenneth Raymond Deayton",
+      "address": "6th Floor, Wyndham Place, 40-44 Wyndham Street, Central, Hong Kong",
+      "co_seller": "Malcolm Scott Macintyre, 22 Faraday Avenue, Rose Bay NSW 2029, Australia",
+      "crml_shares": "1,800,000 (1.5% of outstanding)",
+      "f3_registration": "333-293656, effective March 4, 2026",
+      "icij_entities": [
+        "Newbury Investment Limited (BVI)",
+        "Richmond Holdings BVI Ltd"
+      ]
+    }
+  }
+}
