@@ -46,24 +46,32 @@ BANNED_BODY_PATTERNS = [
 # Valid viz values
 VALID_VIZ = {None, "ego_network", "timeline"}
 
-# Citation token patterns — match both bracket [EFTA...] and inline EFTA... formats
+# Citation token patterns — mirror `normalizeCitationPatterns` in web/src/lib/citations.ts.
+# Matches bare tokens; renderer accepts [Token], (Token), and bare forms all equivalently.
+# `Finding` allows an optional `#` since many legacy dossiers use `(Finding 2866)` without it.
 CITATION_RE = re.compile(
     r"(?:"
     r"EFTA\d{5,11}"
-    r"|Finding\s*#\d+"
+    r"|Finding\s*#?\s*\d+"
     r"|SEC[:\-]\S+"
     r"|EDGAR[:\-]\S+"
     r"|990[:\-]\d+"
     r"|ACRIS[:\-]\S+"
     r"|CL[:\-]\d+"
+    r"|NYSCEF_CASE[:\-]\S+"
     r"|FEC[:\-]\S+"
     r"|FARA[:\-]\d+"
     r"|REG[:\-]\w{2}[:\-]\S+"
+    r"|USVI[:\-]\S+"
     r"|HOUSE_OVERSIGHT_\d+"
     r"|LMSBAND[:\-]\S+"
     r"|DOJ[:\-]\S+"
     r")"
 )
+
+# Loose match for Finding references (bracket, paren, or bare) — used by claim-type
+# compliance and orphan detection. Keep separate so we don't conflate with other tokens.
+FINDING_REF_RE = re.compile(r"Finding\s*#?\s*(\d+)", re.IGNORECASE)
 
 # Attribution language patterns (for inference/synthesis)
 ATTRIBUTION_RE = re.compile(
@@ -318,8 +326,8 @@ def check_citations(dossier: dict) -> list[dict]:
             if CITATION_RE.search(sent):
                 cited_sentences += 1
 
-        # Check for orphan Finding citations (bracket or inline)
-        for m in re.finditer(r"Finding\s*#(\d+)", html):
+        # Check for orphan Finding citations (bracket, paren, or bare form)
+        for m in FINDING_REF_RE.finditer(html):
             fid = int(m.group(1))
             if fid not in finding_ids:
                 orphan_citations.append(f"Finding #{fid} in {label}")
@@ -378,10 +386,9 @@ def check_claim_compliance(dossier: dict) -> list[dict]:
         sentences = extract_sentences(text)
 
         for sent in sentences:
-            # Find Finding references in this sentence (bracket or inline)
-            finding_refs = re.findall(r"Finding\s*#(\d+)", sent)
-            for ref in finding_refs:
-                fid = int(ref)
+            # Find Finding references in this sentence (bracket, paren, or bare form)
+            for m in FINDING_REF_RE.finditer(sent):
+                fid = int(m.group(1))
                 claim_type = claim_map.get(fid, "")
                 if claim_type in ("inference", "synthesis"):
                     # Check if sentence has attribution language
