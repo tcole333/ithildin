@@ -38,11 +38,31 @@ ROOT = Path(__file__).resolve().parent.parent
 DOSSIER_DIR = ROOT / "content" / "dossiers"
 INDEX_PATH = DOSSIER_DIR / "_index.json"
 
+# Internal reference kinds mirror `InternalReferenceKind` in web/src/lib/citations.ts.
+# The renderer's `renderInternalReferenceGroup` requires `[Kind #N]` to resolve;
+# `(Kind N)` renders as plain text. Normalize both to the canonical bracket-with-hash form.
+INTERNAL_REF_KINDS = ("Finding", "Connection", "Entity", "Hypothesis", "Thread", "Lead")
+
+# Plural forms the legacy dossiers occasionally use in multi-id paren groups.
+# The TS renderer's kind check only accepts the singular forms, so we singularize.
+_PLURAL_TO_SINGULAR = {
+    "findings": "Finding",
+    "connections": "Connection",
+    "entities": "Entity",
+    "hypotheses": "Hypothesis",
+    "threads": "Thread",
+    "leads": "Lead",
+}
+_SINGULAR_KIND_FORMS = {k.lower(): k for k in INTERNAL_REF_KINDS}
+_ALL_KIND_FORMS = INTERNAL_REF_KINDS + tuple(_PLURAL_TO_SINGULAR)
+
 # Canonical single-token patterns mirror the registry in web/src/lib/citations.ts.
 # Intentionally looser on `Finding` (hash optional) so legacy paren-form gets
 # normalized. The normalizer re-emits with `#` so renderer output is canonical.
 TOKEN_PATTERNS = [
-    r"Finding\s*#?\s*\d+",
+    # Match singular and plural kinds so `(Findings 3196, 3210)` converts.
+    r"(?:" + "|".join(_ALL_KIND_FORMS) + r")\s*#?\s*\d+",
+    r"#\s*\d+",  # Shorthand like `Connections #102, #117` for multi-id groups.
     r"EFTA\d{6,}",
     r"HOUSE_OVERSIGHT_\d+",
     r"SEC:\d{10}-\d{2}-\d{6}",
@@ -72,16 +92,50 @@ TOKEN_PATTERNS = [
 ]
 TOKEN_GROUP_RE = re.compile("(?i:" + "|".join(f"(?:{p})" for p in TOKEN_PATTERNS) + ")")
 
-FINDING_REF_RE = re.compile(r"Finding\s*#?\s*(\d+)", re.IGNORECASE)
+INTERNAL_REF_RE = re.compile(
+    r"\b(" + "|".join(_ALL_KIND_FORMS) + r")\s*#?\s*(\d+)",
+    re.IGNORECASE,
+)
 
 
-def canonicalize_finding(token: str) -> str:
-    """Rewrite `Finding 2866` → `Finding #2866`. No-op if already canonical."""
+def canonicalize_internal_refs(token: str) -> str:
+    """Rewrite `Finding 2866` / `Connection 353` → canonical singular `#N` form.
+
+    Plurals get singularized because the TS renderer's kind check only accepts
+    `finding | connection | entity | lead | thread` (no plural forms).
+    """
 
     def _sub(match: re.Match[str]) -> str:
-        return f"Finding #{match.group(1)}"
+        raw_kind = match.group(1).lower()
+        kind = _PLURAL_TO_SINGULAR.get(raw_kind) or _SINGULAR_KIND_FORMS[raw_kind]
+        return f"{kind} #{match.group(2)}"
 
-    return FINDING_REF_RE.sub(_sub, token)
+    return INTERNAL_REF_RE.sub(_sub, token)
+
+
+def _expand_multi_id_shorthand(inner: str) -> str:
+    """Expand `Findings 3196, 3210` → `Finding #3196, Finding #3210`.
+
+    Legacy prose sometimes uses plural+multi-id shorthand in paren groups that
+    the renderer cannot resolve (its typedMatch requires explicit `Kind #N`).
+    Expanding repeats the kind in singular form for each id.
+    """
+
+    def _sub(match: re.Match[str]) -> str:
+        raw_kind = match.group(1).lower()
+        kind = _PLURAL_TO_SINGULAR.get(raw_kind) or _SINGULAR_KIND_FORMS[raw_kind]
+        ids_part = match.group(2)
+        ids = [i.strip() for i in re.split(r"[,\s]+(?:and\s+)?", ids_part) if i.strip().lstrip("#").isdigit()]
+        if len(ids) <= 1:
+            # Single-id path: let canonicalize_internal_refs handle it normally.
+            return match.group(0)
+        return ", ".join(f"{kind} #{i.lstrip('#')}" for i in ids)
+
+    pattern = re.compile(
+        r"\b(" + "|".join(_ALL_KIND_FORMS) + r")\s+((?:#?\s*\d+(?:\s*(?:,|and)\s*#?\s*\d+)+))",
+        re.IGNORECASE,
+    )
+    return pattern.sub(_sub, inner)
 
 
 def is_pure_citation_group(inner: str) -> bool:
@@ -100,7 +154,7 @@ def normalize_group_content(inner: str) -> str:
     out: list[str] = []
     last_end = 0
     for m in TOKEN_GROUP_RE.finditer(inner):
-        token = canonicalize_finding(m.group(0).strip())
+        token = canonicalize_internal_refs(m.group(0).strip())
         out.append(token)
         last_end = m.end()
     return ", ".join(out) if out else inner.strip()
@@ -129,20 +183,27 @@ def normalize_text(text: str) -> tuple[str, int]:
         stripped = inner.strip()
         if stripped.startswith("http"):
             return match.group(0)
-        if not is_pure_citation_group(inner):
+
+        # Expand plural multi-id shorthand before the pure-citation check so
+        # `(Findings 3196, 3210)` is recognized as a citation group.
+        expanded = _expand_multi_id_shorthand(inner)
+
+        if not is_pure_citation_group(expanded):
             return match.group(0)
 
-        normalized = normalize_group_content(inner)
+        normalized = normalize_group_content(expanded)
         changes += 1
         return f"[{normalized}]"
 
     text = re.sub(r"\(([^()]+)\)", paren_sub, text)
 
-    # Step 2: add `#` to hashless `Finding N` inside existing brackets.
+    # Step 2: inside existing brackets, expand plural multi-id shorthand and add
+    # `#` to hashless singular references.
     def bracket_sub(match: re.Match[str]) -> str:
         nonlocal changes
         inner = match.group(1)
-        new_inner = canonicalize_finding(inner)
+        expanded = _expand_multi_id_shorthand(inner)
+        new_inner = canonicalize_internal_refs(expanded)
         if new_inner != inner:
             changes += 1
             return f"[{new_inner}]"
