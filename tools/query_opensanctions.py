@@ -46,6 +46,7 @@ DATASET_URLS = {
     "default": "https://data.opensanctions.org/datasets/latest/default/entities.ftm.json",
     "sanctions": "https://data.opensanctions.org/datasets/latest/sanctions/entities.ftm.json",
     "peps": "https://data.opensanctions.org/datasets/latest/peps/entities.ftm.json",
+    "ru_egrul": "https://data.opensanctions.org/datasets/latest/ru_egrul/entities.ftm.json",
 }
 
 SCHEMAS = [

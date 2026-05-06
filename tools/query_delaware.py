@@ -24,15 +24,19 @@ from pathlib import Path
 import requests
 
 try:
+    from tools.env_loader import load_env_file
     from tools.output_util import add_output_args, write_output
     from tools.lead_tracker import log_search
 except ImportError:
+    from env_loader import load_env_file
     from output_util import add_output_args, write_output
     from lead_tracker import log_search
 
 API_BASE = "https://api.opencorporates.com/v0.4"
 JURISDICTION = "us_de"  # Delaware
 RATE_LIMIT_DELAY = 0.5  # 500ms between requests to avoid rate limits
+
+load_env_file()
 
 
 def get_api_key():

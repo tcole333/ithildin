@@ -53,6 +53,24 @@ def _safe_float(v):
         return None
 
 
+def _safe_int(v):
+    """Convert scalar-like value to int, handling None/NaN/Series."""
+    if hasattr(v, "iloc"):
+        if len(v) == 0:
+            return None
+        v = v.iloc[0]
+    f = _safe_float(v)
+    return int(f) if f is not None else None
+
+
+def _normalize_history_columns(hist):
+    """Flatten yfinance multi-level columns for single-ticker queries."""
+    if hist is not None and hasattr(hist.columns, "levels") and len(hist.columns.levels) > 1:
+        hist = hist.copy()
+        hist.columns = hist.columns.get_level_values(0)
+    return hist
+
+
 def cmd_price(args):
     """Current and recent price data for a ticker."""
     ticker = yf.Ticker(args.ticker)
@@ -67,6 +85,8 @@ def cmd_price(args):
     except Exception as e:
         print(f"WARNING: Could not fetch history for {args.ticker}: {e}", file=sys.stderr)
         hist = None
+
+    hist = _normalize_history_columns(hist)
 
     result = {
         "ticker": args.ticker.upper(),
@@ -88,7 +108,7 @@ def cmd_price(args):
             result["history"].append({
                 "date": str(date.date()) if hasattr(date, "date") else str(date),
                 "close": _safe_float(row.get("Close")),
-                "volume": int(row.get("Volume", 0)) if row.get("Volume") else None,
+                "volume": _safe_int(row.get("Volume")),
             })
 
     _log(args.ticker, "yfinance-price", len(result["history"]))
@@ -123,6 +143,8 @@ def cmd_history(args):
         print(f"ERROR: Could not fetch history for {args.ticker}: {e}", file=sys.stderr)
         return
 
+    hist = _normalize_history_columns(hist)
+
     data = []
     if hist is not None and not hist.empty:
         for date, row in hist.iterrows():
@@ -132,7 +154,7 @@ def cmd_history(args):
                 "high": _safe_float(row.get("High")),
                 "low": _safe_float(row.get("Low")),
                 "close": _safe_float(row.get("Close")),
-                "volume": int(row.get("Volume", 0)) if row.get("Volume") else None,
+                "volume": _safe_int(row.get("Volume")),
             })
 
     result = {
@@ -272,9 +294,7 @@ def cmd_correlate(args):
         print(f"ERROR: No price data for {args.ticker} in range {start} to {end}", file=sys.stderr)
         return
 
-    # Flatten multi-level columns from yf.download
-    if hasattr(hist.columns, "levels") and len(hist.columns.levels) > 1:
-        hist.columns = hist.columns.get_level_values(0)
+    hist = _normalize_history_columns(hist)
 
     # Build date->price lookup
     prices = {}
@@ -284,7 +304,7 @@ def cmd_correlate(args):
         vol_val = row.get("Volume")
         prices[d] = {
             "close": _safe_float(close_val),
-            "volume": int(float(vol_val)) if vol_val is not None and not (isinstance(vol_val, float) and math.isnan(vol_val)) else None,
+            "volume": _safe_int(vol_val),
         }
 
     def _nearest_price(target_date, direction=0):

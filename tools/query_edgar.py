@@ -477,12 +477,8 @@ def cmd_filings(args):
     if args.form:
         form_filters = [f.strip() for f in args.form.split(",")]
 
-    print(f"Filings for {name} (CIK: {args.cik})")
-    if form_filters:
-        print(f"Filter: {', '.join(form_filters)}")
-    print()
-
-    count = 0
+    records = []
+    total_recent = len(forms)
     for i in range(len(forms)):
         form = forms[i] if i < len(forms) else "?"
         if form_filters:
@@ -490,22 +486,62 @@ def cmd_filings(args):
             if not any(form == f or form.startswith(f) for f in form_filters):
                 continue
 
-        date = dates[i] if i < len(dates) else "?"
+        filing_date = dates[i] if i < len(dates) else "?"
+        if args.start and filing_date < args.start:
+            continue
+        if args.end and filing_date > args.end:
+            continue
+
         acc = accessions[i] if i < len(accessions) else ""
         doc = primary_docs[i] if i < len(primary_docs) else ""
         desc = descriptions[i] if i < len(descriptions) else ""
         doc_url = _filing_url(cik_display, acc, doc)
+        records.append({
+            "date": filing_date,
+            "form": form,
+            "accession": acc,
+            "primary_document": doc,
+            "description": desc,
+            "url": doc_url,
+        })
 
-        desc_str = f" — {desc}" if desc and desc != form else ""
-        print(f"  {date} | {form}{desc_str}")
-        if doc_url:
-            print(f"    {doc_url}")
+    data_out = {
+        "company_name": name,
+        "cik": cik_display,
+        "filters": {
+            "form": form_filters,
+            "start": args.start,
+            "end": args.end,
+            "limit": args.limit,
+        },
+        "total_recent_filings": total_recent,
+        "matched_filings": len(records),
+        "filings": records[:args.limit],
+    }
+    if write_output(data_out, args, summary=f"EDGAR filings CIK {args.cik}"):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(data_out, indent=2, default=str))
+        return
 
+    print(f"Filings for {name} (CIK: {args.cik})")
+    if form_filters:
+        print(f"Filter: {', '.join(form_filters)}")
+    if args.start or args.end:
+        start = args.start or "..."
+        end = args.end or "..."
+        print(f"Date range: {start} to {end}")
+    print()
+
+    count = 0
+    for filing in records[:args.limit]:
+        desc_str = f" — {filing['description']}" if filing["description"] and filing["description"] != filing["form"] else ""
+        print(f"  {filing['date']} | {filing['form']}{desc_str}")
+        if filing["url"]:
+            print(f"    {filing['url']}")
         count += 1
-        if count >= args.limit:
-            break
 
-    print(f"\nShowing {count} filings" + (f" (of {len(forms)} total)" if not form_filters else ""))
+    print(f"\nShowing {count} filings" + (f" (of {len(records)} matched / {len(forms)} recent)" if not form_filters else f" (of {len(records)} matched)"))
 
 
 def cmd_insider(args):
@@ -530,15 +566,43 @@ def cmd_insider(args):
     insider_filings = []
     for i in range(len(forms)):
         if forms[i] in insider_forms:
+            filing_date = dates[i] if i < len(dates) else "?"
+            if args.start and filing_date < args.start:
+                continue
+            if args.end and filing_date > args.end:
+                continue
             insider_filings.append({
                 "form": forms[i],
-                "date": dates[i] if i < len(dates) else "?",
+                "date": filing_date,
                 "accession": accessions[i] if i < len(accessions) else "",
                 "doc": primary_docs[i] if i < len(primary_docs) else "",
+                "url": _filing_url(cik_display, accessions[i] if i < len(accessions) else "", primary_docs[i] if i < len(primary_docs) else ""),
             })
+
+    data_out = {
+        "company_name": name,
+        "cik": cik_display,
+        "filters": {
+            "start": args.start,
+            "end": args.end,
+            "limit": args.limit,
+            "detail": args.detail,
+        },
+        "matched_filings": len(insider_filings),
+        "filings": insider_filings[:args.limit],
+    }
+    if write_output(data_out, args, summary=f"EDGAR insider filings CIK {args.cik}"):
+        return
+    if getattr(args, "json_out", False):
+        print(json.dumps(data_out, indent=2, default=str))
+        return
 
     print(f"Insider Transactions for {name} (CIK: {cik_display})")
     print(f"Total insider filings: {len(insider_filings)}")
+    if args.start or args.end:
+        start = args.start or "..."
+        end = args.end or "..."
+        print(f"Date range: {start} to {end}")
     print()
 
     if not insider_filings:
@@ -548,13 +612,12 @@ def cmd_insider(args):
     # Show filings, optionally fetch XML details for first N
     show = min(len(insider_filings), args.limit)
     for idx, filing in enumerate(insider_filings[:show]):
-        url = _filing_url(cik_display, filing["accession"], filing["doc"])
         print(f"  [{idx+1}] {filing['date']} | Form {filing['form']}")
 
         if args.detail and filing["doc"].endswith(".xml"):
             _fetch_insider_detail(cik_display, filing["accession"], filing["doc"])
-        elif url:
-            print(f"      {url}")
+        elif filing["url"]:
+            print(f"      {filing['url']}")
         print()
 
     if len(insider_filings) > show:
@@ -989,12 +1052,18 @@ def main():
     p.add_argument("cik", help="CIK number")
     p.add_argument("--form", help="Filter by form type(s), comma-separated (e.g., 10-K,DEF)")
     p.add_argument("--limit", type=int, default=30)
+    p.add_argument("--start", help="Start date (YYYY-MM-DD)")
+    p.add_argument("--end", help="End date (YYYY-MM-DD)")
+    add_output_args(p)
 
     # insider
     p = sub.add_parser("insider", help="Show insider transactions (Forms 3/4/5)")
     p.add_argument("cik", help="CIK number")
     p.add_argument("--limit", type=int, default=20)
+    p.add_argument("--start", help="Start date (YYYY-MM-DD)")
+    p.add_argument("--end", help="End date (YYYY-MM-DD)")
     p.add_argument("--detail", action="store_true", help="Fetch and parse XML for transaction details")
+    add_output_args(p)
 
     # read
     p = sub.add_parser("read", help="Fetch and display clean filing text (iXBRL-aware)")
