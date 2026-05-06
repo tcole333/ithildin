@@ -18,9 +18,12 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `fec` | query_fec.py | FEC campaign finance |
 | `edgar` | query_edgar.py | SEC EDGAR filings |
 | `courtlistener` | query_courtlistener.py | CourtListener court records |
+| `nyscef` | query_nyscef.py | NYSCEF New York state court records |
+| `military_justice` | query_military_justice.py | CAAF + ACCA + NMCCA + AFCCA + CGCCA appellate dockets/opinions |
 | `990` | query_990.py | IRS 990 nonprofit database (grants, officers, financials) |
 | `registry` | query_registry.py | Unified corporate registry |
 | `usaspending` | query_usaspending.py | USASpending federal contracts/grants |
+| `federal_register` | query_federal_register.py | Federal Register documents (rules, notices, presidential docs) |
 | `sam_gov` | query_sam.py | SAM.gov API |
 | `sam_bulk` | ingest_sam.py | SAM.gov bulk data (local SQLite) |
 | `lobbying` | query_lobbying.py | LDA lobbying disclosures |
@@ -30,6 +33,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `aleph` | query_aleph.py | OCCRP Aleph |
 | `icij` | query_icij.py | ICIJ offshore leaks |
 | `acris` | query_acris.py | NYC ACRIS property records |
+| `la_property` | query_la_property.py | Louisiana property records (EBR via SODA) |
 | `gleif` | query_gleif.py | GLEIF LEI corporate hierarchy |
 | `opensanctions` | query_opensanctions.py | OpenSanctions PEP/sanctions |
 | `shodan` | query_shodan.py | Shodan internet devices |
@@ -58,12 +62,15 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `usvi` | ingest_usvi.py | US Virgin Islands |
 | `ds10_financial` | parse_ds10_financials.py | DS10 financial records |
 | `ucc` | query_registry.py ucc-search | UCC filings |
+| `florida_ucc` | query_florida_ucc.py | Florida Secured Transaction Registry (commercial UCC) |
 | `faa` | ingest_faa.py | FAA aircraft registry |
 | `uk_companies_house` | ingest_uk_companies_house.py | UK Companies House |
 | `investigations_db` | query_investigations.py | Ingested investigation reports |
 | `analysis_run` | (synthesis findings) | Agent analysis/synthesis |
 | `panama_rp` | query_panama.py | Panama public registry |
 | `zefix` | query_zefix.py | Swiss commercial registry |
+| `patents` | query_patents.py | USPTO patent search & ownership tracing |
+| `military_corrections` | query_military_corrections.py | DoD BCMR/BCNR Reading Room (boards.law.af.mil) — redacted decisions of all four service correction boards |
 
 **Important**: Use these exact names. The hook validates `--sources` is present, and `findings_tracker.py` warns on unknown source names. If you need a new source name, add it to `VALID_SOURCES` in `tools/findings_tracker.py`.
 
@@ -491,6 +498,14 @@ python tools/query_registry.py ucc-filing <filing_id>
 python tools/query_registry.py ucc-collateral "aircraft"
 python tools/query_registry.py ucc-party "JPMorgan" --role secured
 
+# Florida UCC (commercial — floridaucc.com REST API, no auth)
+uv run python tools/query_florida_ucc.py search-org "COMPANY NAME"           # Standard search logic (exact compact name)
+uv run python tools/query_florida_ucc.py search-org "COMPANY NAME" --proximity --paginate  # Proximity search, all pages
+uv run python tools/query_florida_ucc.py search-org "COMPANY NAME" --lapsed  # Lapsed filings only
+uv run python tools/query_florida_ucc.py search-org "COMPANY NAME" --all     # Filed + lapsed
+uv run python tools/query_florida_ucc.py search-individual "LAST FIRST"      # Individual debtor
+uv run python tools/query_florida_ucc.py filing 202501545298                 # Full filing detail by UCC number
+
 # Florida FLR (mostly IRS tax liens, NOT commercial UCC)
 python tools/ingest_ucc_florida.py download && python tools/ingest_ucc_florida.py ingest
 python tools/ingest_ucc_florida.py search "QUERY"
@@ -515,6 +530,23 @@ python tools/query_gleif.py search "Apollo Global"
 python tools/query_gleif.py hierarchy 54930054P2G7ZJB0KM79  # Apollo full tree
 python tools/query_gleif.py cross-ref  # All investigation.db entities
 ```
+
+### USPTO Patents (patent search & ownership tracing, API key required)
+```bash
+uv run python tools/query_patents.py search "machine learning fraud" --limit 10
+uv run python tools/query_patents.py inventor "Tim Draper" --limit 50
+uv run python tools/query_patents.py assignee "Apollo Global" --limit 50
+uv run python tools/query_patents.py patent 11234567
+uv run python tools/query_patents.py assignments 11234567        # Ownership chain
+uv run python tools/query_patents.py assignments 11234567 --since 2020-01-01
+uv run python tools/query_patents.py portfolio "L Brands" --limit 200
+uv run python tools/query_patents.py portfolio "L Brands" --skip-assignments  # Faster
+uv run python tools/query_patents.py citations 11234567           # Parent/child continuity
+uv run python tools/query_patents.py enrich --dry-run            # Match entities against patents
+uv run python tools/query_patents.py enrich --threshold 85       # Auto-enrich
+```
+Requires `USPTO_API_KEY` in `.env` (register at https://data.uspto.gov/myodp, requires ID.me).
+Uses the USPTO Open Data Portal API (60 req/min). Results cached in `datasets/patents.db`.
 
 ## Public Records
 
@@ -548,6 +580,29 @@ uv run python tools/query_usaspending.py agencies --limit 10                 # L
 uv run python tools/query_usaspending.py covid "QUERY"                       # COVID-19 relief awards
 uv run python tools/query_usaspending.py loans "QUERY"                       # Loan awards (PPP, EIDL, etc.)
 ```
+
+### Federal Register (rules, notices, presidential documents — no auth)
+```bash
+# Full-text search (uses the `term` condition under the hood)
+uv run python tools/query_federal_register.py search "QUERY" --start-date 2025-01-01 --output FILE
+uv run python tools/query_federal_register.py search "QUERY" --agency navy-department --doc-type NOTICE --output FILE
+
+# Term/keyword search (often a person/organization name)
+uv run python tools/query_federal_register.py term "NAME" --limit 50 --output FILE
+
+# Documents from a specific agency (use slug — list-agencies to discover)
+uv run python tools/query_federal_register.py agency navy-department --start-date 2025-01-01 --output FILE
+uv run python tools/query_federal_register.py list-agencies | grep -i defense
+
+# Presidential documents (proclamations, EOs, memoranda, determinations)
+uv run python tools/query_federal_register.py presidential --start-date 2025-03-01 --end-date 2025-04-15 --output FILE
+uv run python tools/query_federal_register.py presidential --type executive_order --start-date 2025-01-20 --output FILE
+
+# Single document fetch (with optional full text)
+uv run python tools/query_federal_register.py document 2025-06461
+uv run python tools/query_federal_register.py document 2025-06461 --full-text --output FILE
+```
+Citation token: `[FR:2025-06461]` -> Federal Register document URL.
 
 ### SAM.gov (entity registrations, exclusions, contracts, opportunities — requires SAM_API_KEY)
 ```bash
@@ -611,6 +666,64 @@ uv run python tools/query_courtlistener.py judge "NAME" --output FILE
 # FJC Integrated Database (federal case metadata)
 uv run python tools/query_courtlistener.py fjc --defendant "NAME" --output FILE
 uv run python tools/query_courtlistener.py fjc --plaintiff "NAME" --after 2010-01-01 --output FILE
+```
+
+### Military Justice — CAAF + service CCAs (no auth, polite scraping)
+
+Unified scraper for the U.S. Court of Appeals for the Armed Forces (CAAF) and
+the four service Courts of Criminal Appeals (ACCA, NMCCA, AFCCA, CGCCA).
+These courts publish dockets and opinions on disparate static sites and are
+NOT in CourtListener — military court-martial appeals (e.g. Eddie Gallagher 2019)
+do not appear in CourtListener.
+
+**Killer feature**: `attorney <NAME>` cross-searches every reachable opinion PDF
+for a civilian counsel name and returns each case where that name appears.
+
+```bash
+# Cross-court keyword search (uses cached indices)
+uv run python tools/query_military_justice.py search "Bergdahl" --output FILE
+uv run python tools/query_military_justice.py search "Edward Gallagher" --refresh --output FILE
+
+# CAAF October Term opinion index (year or 'current')
+uv run python tools/query_military_justice.py caaf-dockets 2024 --output FILE
+uv run python tools/query_military_justice.py caaf-dockets current --output FILE
+
+# Fetch a CAAF opinion PDF and extract counsel/disposition/panel
+uv run python tools/query_military_justice.py caaf-opinion 24-0156/AR --output FILE
+uv run python tools/query_military_justice.py caaf-opinion 24-0156/AR --full-text --output FILE
+
+# Service-court searches
+uv run python tools/query_military_justice.py acca-search "Burke" --output FILE
+uv run python tools/query_military_justice.py afcca-search "Smith" --output FILE
+uv run python tools/query_military_justice.py nmcca-search "Gallagher" --output FILE   # form-POST limitation
+uv run python tools/query_military_justice.py cgcca-search "Mieres" --output FILE      # 403 from CDN
+
+# Killer feature: find every opinion where <NAME> appears as counsel
+uv run python tools/query_military_justice.py attorney "Conway" --pdf-limit 200 --output FILE
+uv run python tools/query_military_justice.py attorney "Parlatore" --skip-refresh --output FILE
+
+# One-docket detail (counsel, panel, disposition, decision date)
+uv run python tools/query_military_justice.py case-detail "24-0156/AR" --output FILE
+```
+
+**Coverage and limitations**:
+- **CAAF** (`armfor.uscourts.gov`): full coverage — term-page index + PDF opinions + Daily Journal docket actions parsed.
+- **AFCCA** (`afcca.law.af.mil`): full coverage of the public opinion index; docket page has no attorney info.
+- **ACCA** (`jagcnet.army.mil/ACCALibrary`): full coverage of OC/MO/SFA/SD opinion lists; URLs return PDFs even though they don't end in `.pdf`.
+- **NMCCA** (`jag.navy.mil/.../nmcca/opinions/`): server-rendered POST search form (Sitecore). Tool fetches the index page only — full party/docket search requires browser-backed automation. Counsel names are still discoverable via the cross-court `attorney` command (which scans CAAF opinions that originated from NMCCA).
+- **CGCCA** (`uscg.mil/.../CGCCA-Opinions/`): returns 403 to non-browser User-Agents (Akamai/CDN). Use `--user-agent` override with a real browser UA, or query the FindLaw mirror at `caselaw.findlaw.com/court/u-s-coa-gua-crt-cri-app`.
+- All HTTP and PDF responses are cached in `datasets/military_justice_cache.db` (SQLite WAL). Default rate limit is 1 req/sec per host (`--rate-limit` to override).
+
+### NYSCEF (New York state courts — browser-backed guest search, low-volume use)
+```bash
+uv run python tools/query_nyscef.py search "Jeffrey Epstein" --output FILE
+uv run python tools/query_nyscef.py search "Bennet Moskowitz" --attorney --output FILE
+uv run python tools/query_nyscef.py search "Golden Nugget Atlantic City LLC" --business --limit 10 --output FILE
+uv run python tools/query_nyscef.py case 156728/2019 --output FILE
+uv run python tools/query_nyscef.py new-cases --court "New York County Supreme Court" --date 2019-07-10 --output FILE
+uv run python tools/query_nyscef.py detail <DOCKET_ID> --output FILE
+uv run python tools/query_nyscef.py documents <DOCKET_ID> --limit 20 --output FILE
+uv run python tools/query_nyscef.py download <DOC_INDEX> /tmp/nyscef-doc.pdf
 ```
 
 ### IRS 990 Nonprofit Database (unified tool)
@@ -685,6 +798,18 @@ python tools/query_acris.py address --borough 1 --block 1386 --lot 10  # 9 E 71s
 python tools/query_acris.py history --property-name "71st"
 python tools/query_acris.py batch-entities
 ```
+
+### Louisiana Property Records (SODA API, East Baton Rouge)
+```bash
+python tools/query_la_property.py owner "LANDRY" --parish ebr
+python tools/query_la_property.py address "HIGHLAND" --parish ebr
+python tools/query_la_property.py parcel "030-7623-7" --parish ebr        # formatted
+python tools/query_la_property.py parcel "3076237" --parish ebr           # numeric
+python tools/query_la_property.py details "3076237" --parish ebr          # cross-dataset
+python tools/query_la_property.py adjudicated "WILLIAMS" --parish ebr     # tax-defaulted
+python tools/query_la_property.py parishes                                # list supported
+```
+Datasets: Tax Roll (owner names, values, legal), Tax Parcel (owner, address, values, GeoJSON), Property Info (address, zoning, land use), Adjudicated (tax-defaulted). Accepts assessment numbers with or without dashes.
 
 ### FEC Campaign Finance (API key in .env)
 ```bash
