@@ -48,9 +48,22 @@ const {
 const issues = [];
 const seenIssueKeys = new Set();
 
-/** @type {CitationException[]} */
-const citationExceptions = existsSync(exceptionFile)
+/** @type {unknown[]} */
+const rawCitationExceptions = existsSync(exceptionFile)
   ? JSON.parse(readFileSync(exceptionFile, "utf-8"))
+  : [];
+
+/** @type {CitationException[]} */
+const citationExceptions = Array.isArray(rawCitationExceptions)
+  ? rawCitationExceptions.filter((item) =>
+    item
+    && typeof item === "object"
+    && typeof item.code === "string"
+    && typeof item.file === "string"
+    && typeof item.location === "string"
+    && typeof item.subject === "string"
+    && typeof item.expires_on === "string"
+  )
   : [];
 
 function issueKey(issue) {
@@ -69,11 +82,21 @@ function normalizeRef(ref) {
   return String(ref || "").trim();
 }
 
+function hasResolvedEvidenceArtifact(value) {
+  return extractEvidenceLinks(value).some((link) => {
+    const url = String(link.url || "");
+    return url && !url.startsWith("/sources/");
+  });
+}
+
 function lintCitationEntries(file, location, entries) {
   for (const entry of entries || []) {
     const label = String(entry.label || "");
     const url = typeof entry.url === "string" ? entry.url : "";
     const sourceRecordUrl = typeof entry.sourceRecordUrl === "string" ? entry.sourceRecordUrl : "";
+    const sourceKind = typeof entry.sourceKind === "string" ? entry.sourceKind : "";
+    const openUrl = typeof entry.openUrl === "string" ? entry.openUrl : "";
+    const archiveUrl = typeof entry.archiveUrl === "string" ? entry.archiveUrl : "";
     const sources = Array.isArray(entry.sources) ? entry.sources : [];
 
     if (/^https?:$/i.test(label)) {
@@ -128,6 +151,28 @@ function lintCitationEntries(file, location, entries) {
         location,
         label,
         "Public source citation is missing its source-record URL.",
+      );
+    }
+
+    if (entry.kind === "source" && sourceKind === "record_only" && entry.publishValid !== false) {
+      addIssue(
+        "warning",
+        "SOURCE_RECORD_ONLY_NO_ARTIFACT",
+        file,
+        location,
+        label,
+        "Source resolves only to a metadata record. Add a hosted_asset_url, archive_url, or external_url when the source can be publicly viewed.",
+      );
+    }
+
+    if (entry.kind === "source" && ["external", "hosted_copy", "archived_copy"].includes(sourceKind) && !openUrl && !archiveUrl) {
+      addIssue(
+        "error",
+        "SOURCE_ARTIFACT_MISSING",
+        file,
+        location,
+        label,
+        "Source kind says an artifact is available, but no artifact URL is exposed.",
       );
     }
 
@@ -195,12 +240,12 @@ function lintEvidenceRef(file, findingId, ref) {
     return;
   }
 
-  if (/^SEC:/i.test(value) && !/^SEC:\d{10}-\d{2}-\d{6}$/i.test(value)) {
+  if (/^SEC:/i.test(value) && !/^SEC:\d{10}-\d{2}-\d{6}$/i.test(value) && !hasResolvedEvidenceArtifact(value)) {
     addIssue("error", "EVIDENCE_BAD_SEC", file, loc, value, "SEC reference must be SEC:##########-##-######.");
     return;
   }
 
-  if (/^EDGAR:/i.test(value) && !/^EDGAR:\d{10}-\d{2}-\d{6}$/i.test(value)) {
+  if (/^EDGAR:/i.test(value) && !/^EDGAR:\d{10}-\d{2}-\d{6}$/i.test(value) && !hasResolvedEvidenceArtifact(value)) {
     addIssue("error", "EVIDENCE_BAD_EDGAR", file, loc, value, "EDGAR reference must be EDGAR:##########-##-######.");
     return;
   }
@@ -217,6 +262,11 @@ function lintEvidenceRef(file, findingId, ref) {
 
   if (/^CL:/i.test(value) && !/^CL:\d+$/i.test(value)) {
     addIssue("error", "EVIDENCE_BAD_CL", file, loc, value, "CourtListener reference must be CL:<docket id>.");
+    return;
+  }
+
+  if (/^NYSCEF_CASE:/i.test(value) && !/^NYSCEF_CASE:[A-Za-z0-9%+/_=.-]+$/i.test(value)) {
+    addIssue("error", "EVIDENCE_BAD_NYSCEF_CASE", file, loc, value, "NYSCEF case reference must be NYSCEF_CASE:<encoded docket id>.");
     return;
   }
 

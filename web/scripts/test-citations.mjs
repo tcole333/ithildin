@@ -69,13 +69,35 @@ run("SEC: resolves accession number to EDGAR URL", () => {
   const result = applyCitations("Filed [SEC:0001193125-21-123456].");
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "SEC 0001193125-21-123456");
-  assert.match(result.entries[0].url ?? "", /sec\.gov\/Archives\/edgar/);
+  assert.equal(
+    result.entries[0].url,
+    "https://www.sec.gov/Archives/edgar/data/1193125/000119312521123456/0001193125-21-123456-index.html",
+  );
 });
 
 run("EDGAR: resolves same as SEC variant", () => {
   const result = applyCitations("See [EDGAR:0001193125-21-123456].");
   assert.equal(result.entries.length, 1);
   assert.match(result.entries[0].url ?? "", /sec\.gov\/Archives\/edgar/);
+});
+
+run("SEC ADSH: resolves prose accession notation", () => {
+  const result = applyCitations("Filed (SEC EDGAR ADSH 0001193125-23-045802).");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "SEC 0001193125-23-045802");
+  assert.equal(
+    result.entries[0].url,
+    "https://www.sec.gov/Archives/edgar/data/1193125/000119312523045802/0001193125-23-045802-index.html",
+  );
+  assert.match(result.markdown, /href="\/sources\//);
+});
+
+run("SEC CIK: resolves prose CIK notation", () => {
+  const result = applyCitations("Issuer (CIK 0001823896).");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "CIK 1823896");
+  assert.equal(result.entries[0].url, "https://www.sec.gov/edgar/browse/?CIK=1823896");
+  assert.match(result.markdown, /href="\/sources\//);
 });
 
 run("SEC: extractEvidenceLinks resolves accession", () => {
@@ -133,6 +155,13 @@ run("CL: extractEvidenceLinks resolves docket", () => {
   const links = extractEvidenceLinks("CL:69737684");
   assert.equal(links.length, 1);
   assert.match(links[0].url ?? "", /courtlistener\.com\/docket\/69737684/);
+});
+
+run("NYSCEF_CASE: resolves encoded docket ID to NYSCEF URL", () => {
+  const result = applyCitations("See [NYSCEF_CASE:abc%2F123].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "NYSCEF abc%2F123");
+  assert.match(result.entries[0].url ?? "", /iapps\.courts\.state\.ny\.us\/nyscef\/CaseDetails/);
 });
 
 // ---------------------------------------------------------------------------
@@ -196,6 +225,23 @@ run("FARA: extractEvidenceLinks resolves FARA number", () => {
   const links = extractEvidenceLinks("FARA:6458");
   assert.equal(links.length, 1);
   assert.match(links[0].url ?? "", /fara\.gov/);
+});
+
+// ---------------------------------------------------------------------------
+// Federal Register
+// ---------------------------------------------------------------------------
+
+run("FR: resolves document number to Federal Register URL", () => {
+  const result = applyCitations("See [FR:2025-06461].");
+  assert.equal(result.entries.length, 1);
+  assert.equal(result.entries[0].label, "Federal Register 2025-06461");
+  assert.match(result.entries[0].url ?? "", /federalregister\.gov\/d\/2025-06461/);
+});
+
+run("FR: extractEvidenceLinks resolves Federal Register document", () => {
+  const links = extractEvidenceLinks("FR:2025-06461");
+  assert.equal(links.length, 1);
+  assert.match(links[0].url ?? "", /federalregister\.gov\/d\/2025-06461/);
 });
 
 // ---------------------------------------------------------------------------
@@ -292,14 +338,15 @@ run("KPMG: resolves to source-record citation", () => {
   const result = applyCitations("Per [KPMG:IPI] review.");
   assert.equal(result.entries.length, 1);
   assert.match(result.entries[0].label, /KPMG.*IPI/);
-  assert.match(result.entries[0].url ?? "", /^\/sources\//);
-  assert.equal(result.entries[0].targetKind, "source_record");
+  assert.equal(result.entries[0].sourceKind, "hosted_copy");
+  assert.equal(result.entries[0].url, "/source-artifacts/ipi-kpmg-forensic-review-2020.pdf");
+  assert.match(result.entries[0].sourceRecordUrl ?? "", /^\/sources\//);
 });
 
 run("KPMG: extractEvidenceLinks returns source-record link", () => {
   const links = extractEvidenceLinks("KPMG:IPI");
   assert.equal(links.length, 1);
-  assert.match(links[0].url ?? "", /^\/sources\//);
+  assert.equal(links[0].url, "/source-artifacts/ipi-kpmg-forensic-review-2020.pdf");
   assert.match(links[0].sourceRecordUrl ?? "", /^\/sources\//);
 });
 
@@ -330,6 +377,13 @@ run("OpenSanctions: resolves entity ID to opensanctions.org URL", () => {
   assert.equal(result.entries.length, 1);
   assert.match(result.entries[0].label, /OpenSanctions.*Q125731/);
   assert.equal(result.entries[0].url, "https://www.opensanctions.org/entities/Q125731/");
+});
+
+run("OpenSanctions: resolves space-separated entity notation", () => {
+  const result = applyCitations("See (OpenSanctions Q28591).");
+  assert.equal(result.entries.length, 1);
+  assert.match(result.entries[0].label, /OpenSanctions.*Q28591/);
+  assert.equal(result.entries[0].url, "https://www.opensanctions.org/entities/Q28591/");
 });
 
 run("OpenSanctions: extractEvidenceLinks resolves entity", () => {
@@ -363,7 +417,8 @@ run("OffshoreAlert: resolves slug to OffshoreAlert URL", () => {
   const result = applyCitations("See [OffshoreAlert:DB-Consent-Order-NYDFS].");
   assert.equal(result.entries.length, 1);
   assert.equal(result.entries[0].label, "OffshoreAlert:DB-Consent-Order-NYDFS");
-  assert.match(result.entries[0].url ?? "", /offshorealert\.com\/DB-Consent-Order-NYDFS/);
+  assert.equal(result.entries[0].sourceKind, "hosted_copy");
+  assert.equal(result.entries[0].url, "/source-artifacts/nydfs-deutsche-bank-epstein-consent-order-2020.pdf");
 });
 
 run("OffshoreAlert: extractEvidenceLinks resolves slug", () => {
@@ -535,6 +590,14 @@ run("URL: extractEvidenceLinks resolves raw URL", () => {
   assert.equal(links[0].label, "https://example.com/doc");
 });
 
+run("Rendered source citations link to platform source records", () => {
+  const result = applyCitations("See [EFTA02504960].");
+  assert.equal(result.entries.length, 1);
+  assert.match(result.entries[0].url ?? "", /jmail\.world/);
+  assert.match(result.entries[0].sourceRecordUrl ?? "", /^\/sources\//);
+  assert.match(result.markdown, /href="\/sources\//);
+});
+
 // ---------------------------------------------------------------------------
 // Statute citations (should pass through as unknown/label-only)
 // ---------------------------------------------------------------------------
@@ -609,18 +672,22 @@ run("getCitationHealthTier: returns skip for unknown prefixes", () => {
 // Registry: all 19 types resolve through applyCitations
 // ---------------------------------------------------------------------------
 
-run("Registry: all 24 types produce citation entries", () => {
+run("Registry: all 28 types produce citation entries", () => {
   const tokens = [
     "Finding #1",
     "EFTA02504960",
     "HOUSE_OVERSIGHT_12345",
     "SEC:0001193125-21-123456",
     "EDGAR:0001193125-21-123456",
+    "CIK 0001823896",
+    "SEC EDGAR ADSH 0001193125-23-045802",
     "990:660789697",
     "ACRIS:2017021700466001",
     "CL:69737684",
+    "NYSCEF_CASE:abc%2F123",
     "FEC:C00352732",
     "FARA:6458",
+    "FR:2025-06461",
     "USVI:582530",
     "FL-SunBiz:F08000003048",
     "NM-SoS:1615137",
@@ -657,11 +724,15 @@ run("Registry: all extractable types produce evidence links", () => {
     { input: "HOUSE_OVERSIGHT_12345", expectMin: 1 },
     { input: "SEC:0001193125-21-123456", expectMin: 1 },
     { input: "EDGAR:0001193125-21-123456", expectMin: 1 },
+    { input: "CIK 0001823896", expectMin: 1 },
+    { input: "SEC EDGAR ADSH 0001193125-23-045802", expectMin: 1 },
     { input: "990:660789697", expectMin: 1 },
     { input: "ACRIS:2017021700466001", expectMin: 1 },
     { input: "CL:69737684", expectMin: 1 },
+    { input: "NYSCEF_CASE:abc%2F123", expectMin: 1 },
     { input: "FEC:C00352732", expectMin: 1 },
     { input: "FARA:6458", expectMin: 1 },
+    { input: "FR:2025-06461", expectMin: 1 },
     { input: "USVI:582530", expectMin: 1 },
     { input: "FL-SunBiz:F08000003048", expectMin: 1 },
     { input: "NM-SoS:1615137", expectMin: 1 },
@@ -671,6 +742,7 @@ run("Registry: all extractable types produce evidence links", () => {
     { input: "KPMG:IPI", expectMin: 1 },
     { input: "LDA:Broidy Capital", expectMin: 1 },
     { input: "OpenSanctions:Q125731", expectMin: 1 },
+    { input: "OpenSanctions Q28591", expectMin: 1 },
     { input: "DOCUMENTCLOUD:24402693", expectMin: 1 },
     { input: "OffshoreAlert:DB-Consent-Order", expectMin: 1 },
     { input: "MUCKROCK:78799", expectMin: 1 },
