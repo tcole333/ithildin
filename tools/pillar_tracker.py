@@ -964,7 +964,10 @@ def rebootstrap():
 def _load_seed_pillars():
     """Load seed pillars from the active investigation profile."""
     try:
-        from tools.investigation_context import get_active_profile
+        try:
+            from tools.investigation_context import get_active_profile
+        except ImportError:
+            from investigation_context import get_active_profile
         profile = get_active_profile()
         return profile.seed_pillars or []
     except Exception:

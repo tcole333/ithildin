@@ -41,6 +41,40 @@ VALID_CATEGORIES = [
 
 # ── Schema ────────────────────────────────────────────────────
 
+
+def _detect_active_profile():
+    try:
+        from tools.investigation_context import get_active_profile_id
+        return get_active_profile_id() or None
+    except ImportError:
+        try:
+            from investigation_context import get_active_profile_id
+            return get_active_profile_id() or None
+        except ImportError:
+            return None
+
+
+def _resolve_profile(profile_id=None, all_profiles=False):
+    if all_profiles:
+        return None
+    if profile_id is not None:
+        return profile_id
+    return _detect_active_profile()
+
+
+def _normalize_profile_category(category):
+    if category in VALID_CATEGORIES:
+        return category
+    if category in {"milestone", "operational"}:
+        return "other"
+    return "other"
+
+
+def _ensure_column(db, table, name, ddl):
+    cols = {row[1] for row in db.execute(f"PRAGMA table_info({table})")}
+    if name not in cols:
+        db.execute(f"ALTER TABLE {table} ADD COLUMN {name} {ddl}")
+
 def _ensure_timeline_schema(db):
     """Create event_timeline table if it doesn't exist."""
     db.executescript("""
@@ -62,6 +96,8 @@ def _ensure_timeline_schema(db):
         CREATE INDEX IF NOT EXISTS idx_events_date ON event_timeline(event_date);
         CREATE INDEX IF NOT EXISTS idx_events_category ON event_timeline(category);
     """)
+    _ensure_column(db, "event_timeline", "profile_id", "TEXT")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_events_profile ON event_timeline(profile_id)")
 
 
 def get_timeline_db():
@@ -313,15 +349,20 @@ def seed_events():
 
     # Try loading from active investigation profile first
     profile_events = []
+    profile_id = None
     try:
-        from tools.investigation_context import get_active_profile
+        try:
+            from tools.investigation_context import get_active_profile
+        except ImportError:
+            from investigation_context import get_active_profile
         profile = get_active_profile()
         if profile and profile.key_dates:
+            profile_id = profile.name
             for kd in profile.key_dates:
                 profile_events.append((
                     kd.get("date", ""),
                     kd.get("event", ""),
-                    kd.get("category", "other"),
+                    _normalize_profile_category(kd.get("category", "other")),
                     kd.get("event", ""),  # description = event text
                     None,  # relevance
                 ))
@@ -335,9 +376,9 @@ def seed_events():
     for event_date, event_name, category, description, relevance in events_to_seed:
         try:
             db.execute("""
-                INSERT INTO event_timeline (event_date, event_name, category, description, relevance, source)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (event_date, event_name, category, description, relevance, source_label))
+                INSERT INTO event_timeline (event_date, event_name, category, description, relevance, source, profile_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (event_date, event_name, category, description, relevance, source_label, profile_id))
             added += 1
         except sqlite3.IntegrityError:
             skipped += 1
@@ -346,18 +387,21 @@ def seed_events():
     return added, skipped
 
 
-def add_event(event_date, event_name, category, description=None, relevance=None, source=None):
+def add_event(event_date, event_name, category, description=None, relevance=None, source=None,
+              profile_id=None, all_profiles=False):
     """Add a single event."""
     if category not in VALID_CATEGORIES:
         print(f"ERROR: Invalid category '{category}'. Valid: {VALID_CATEGORIES}")
         return None
 
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+    normalized_category = _normalize_profile_category(category)
     db = get_timeline_db()
     try:
         cursor = db.execute("""
-            INSERT INTO event_timeline (event_date, event_name, category, description, relevance, source)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (event_date, event_name, category, description, relevance, source))
+            INSERT INTO event_timeline (event_date, event_name, category, description, relevance, source, profile_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (event_date, event_name, normalized_category, description, relevance, source, resolved_profile))
         event_id = cursor.lastrowid
         db.commit()
         db.close()
@@ -368,15 +412,19 @@ def add_event(event_date, event_name, category, description=None, relevance=None
         return None
 
 
-def list_events(category=None, year=None, limit=100):
+def list_events(category=None, year=None, limit=100, profile_id=None, all_profiles=False):
     """List events with optional filters."""
     db = get_timeline_db()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
     conditions = []
     params = []
 
+    if resolved_profile:
+        conditions.append("profile_id = ?")
+        params.append(resolved_profile)
     if category:
         conditions.append("category = ?")
-        params.append(category)
+        params.append(_normalize_profile_category(category))
     if year:
         conditions.append("event_date LIKE ?")
         params.append(f"{year}%")
@@ -389,48 +437,67 @@ def list_events(category=None, year=None, limit=100):
     return [dict(r) for r in rows]
 
 
-def window_events(start_date, end_date):
+def window_events(start_date, end_date, profile_id=None, all_profiles=False):
     """Get events and findings in a date range."""
     db = get_timeline_db()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
 
-    events = [dict(r) for r in db.execute("""
+    event_conditions = ["event_date BETWEEN ? AND ?"]
+    event_params = [start_date, end_date]
+    if resolved_profile:
+        event_conditions.append("profile_id = ?")
+        event_params.append(resolved_profile)
+    events = [dict(r) for r in db.execute(f"""
         SELECT * FROM event_timeline
-        WHERE event_date BETWEEN ? AND ?
+        WHERE {' AND '.join(event_conditions)}
         ORDER BY event_date
-    """, (start_date, end_date)).fetchall()]
+    """, event_params).fetchall()]
 
     # Also find findings with dates in this range
-    findings = [dict(r) for r in db.execute("""
+    finding_conditions = ["date_of_event BETWEEN ? AND ?"]
+    finding_params = [start_date, end_date]
+    if resolved_profile:
+        finding_conditions.append("profile_id = ?")
+        finding_params.append(resolved_profile)
+    findings = [dict(r) for r in db.execute(f"""
         SELECT id, target_name, summary, confidence, date_of_event, created_at
         FROM findings
-        WHERE date_of_event BETWEEN ? AND ?
+        WHERE {' AND '.join(finding_conditions)}
         ORDER BY date_of_event
-    """, (start_date, end_date)).fetchall()]
+    """, finding_params).fetchall()]
 
     db.close()
     return {"events": events, "findings": findings,
             "start": start_date, "end": end_date}
 
 
-def near_finding(finding_id, days=14):
+def near_finding(finding_id, days=14, profile_id=None, all_profiles=False):
     """Find events within N days of a finding's date_of_event or created_at."""
     db = get_timeline_db()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
 
-    finding = db.execute(
-        "SELECT id, target_name, summary, date_of_event, created_at FROM findings WHERE id = ?",
-        (finding_id,)
-    ).fetchone()
+    finding_query = "SELECT id, target_name, summary, date_of_event, created_at FROM findings WHERE id = ?"
+    finding_params = [finding_id]
+    if resolved_profile:
+        finding_query += " AND profile_id = ?"
+        finding_params.append(resolved_profile)
+    finding = db.execute(finding_query, finding_params).fetchone()
     if not finding:
         db.close()
         return None
 
     ref_date = finding["date_of_event"] or finding["created_at"][:10]
 
-    events = [dict(r) for r in db.execute("""
+    event_query = """
         SELECT * FROM event_timeline
         WHERE event_date BETWEEN date(?, ?) AND date(?, ?)
-        ORDER BY event_date
-    """, (ref_date, f"-{days} days", ref_date, f"+{days} days")).fetchall()]
+    """
+    event_params = [ref_date, f"-{days} days", ref_date, f"+{days} days"]
+    if resolved_profile:
+        event_query += " AND profile_id = ?"
+        event_params.append(resolved_profile)
+    event_query += " ORDER BY event_date"
+    events = [dict(r) for r in db.execute(event_query, event_params).fetchall()]
 
     db.close()
     return {
@@ -441,50 +508,67 @@ def near_finding(finding_id, days=14):
     }
 
 
-def near_date(date_str, days=7):
+def near_date(date_str, days=7, profile_id=None, all_profiles=False):
     """Find events within N days of a given date."""
     db = get_timeline_db()
-    events = [dict(r) for r in db.execute("""
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
+    event_query = """
         SELECT * FROM event_timeline
         WHERE event_date BETWEEN date(?, ?) AND date(?, ?)
-        ORDER BY event_date
-    """, (date_str, f"-{days} days", date_str, f"+{days} days")).fetchall()]
+    """
+    params = [date_str, f"-{days} days", date_str, f"+{days} days"]
+    if resolved_profile:
+        event_query += " AND profile_id = ?"
+        params.append(resolved_profile)
+    event_query += " ORDER BY event_date"
+    events = [dict(r) for r in db.execute(event_query, params).fetchall()]
     db.close()
     return {"reference_date": date_str, "days": days, "events": events}
 
 
-def timeline_stats():
+def timeline_stats(profile_id=None, all_profiles=False):
     """Get timeline statistics."""
     db = get_timeline_db()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
     stats = {}
 
-    stats["total"] = db.execute("SELECT COUNT(*) as n FROM event_timeline").fetchone()["n"]
+    where = " WHERE profile_id = ?" if resolved_profile else ""
+    params = [resolved_profile] if resolved_profile else []
+
+    stats["total"] = db.execute(
+        f"SELECT COUNT(*) as n FROM event_timeline{where}",
+        params,
+    ).fetchone()["n"]
 
     # By category
     by_cat = {}
     for row in db.execute(
-        "SELECT category, COUNT(*) as n FROM event_timeline GROUP BY category ORDER BY n DESC"
+        f"SELECT category, COUNT(*) as n FROM event_timeline{where} GROUP BY category ORDER BY n DESC",
+        params,
     ):
         by_cat[row["category"]] = row["n"]
     stats["by_category"] = by_cat
 
     # Date range
     row = db.execute(
-        "SELECT MIN(event_date) as earliest, MAX(event_date) as latest FROM event_timeline"
+        f"SELECT MIN(event_date) as earliest, MAX(event_date) as latest FROM event_timeline{where}",
+        params,
     ).fetchone()
     stats["earliest"] = row["earliest"]
     stats["latest"] = row["latest"]
 
     # By decade
     by_decade = {}
-    for row in db.execute("""
+    for row in db.execute(f"""
         SELECT (CAST(substr(event_date, 1, 3) AS INTEGER) * 10) as decade,
                COUNT(*) as n
-        FROM event_timeline GROUP BY decade ORDER BY decade
-    """):
+        FROM event_timeline{where} GROUP BY decade ORDER BY decade
+    """, params):
         by_decade[f"{row['decade']}s"] = row["n"]
     stats["by_decade"] = by_decade
 
+    if resolved_profile:
+        stats["profile_id"] = resolved_profile
     db.close()
     return stats
 
@@ -522,6 +606,8 @@ def main():
     p_win = sub.add_parser("window", help="Events and findings in a date range")
     p_win.add_argument("--start", required=True, help="YYYY-MM-DD")
     p_win.add_argument("--end", required=True, help="YYYY-MM-DD")
+    p_win.add_argument("--profile", help="Override active investigation profile")
+    p_win.add_argument("--all-profiles", action="store_true", help="Disable active-profile filtering")
     add_output_args(p_win)
 
     # near
@@ -529,6 +615,8 @@ def main():
     p_near.add_argument("--finding-id", type=int)
     p_near.add_argument("--date")
     p_near.add_argument("--days", type=int, default=14)
+    p_near.add_argument("--profile", help="Override active investigation profile")
+    p_near.add_argument("--all-profiles", action="store_true", help="Disable active-profile filtering")
     add_output_args(p_near)
 
     # list
@@ -536,11 +624,15 @@ def main():
     p_list.add_argument("--category", choices=VALID_CATEGORIES)
     p_list.add_argument("--year", type=int)
     p_list.add_argument("--limit", type=int, default=100)
+    p_list.add_argument("--profile", help="Override active investigation profile")
+    p_list.add_argument("--all-profiles", action="store_true", help="Disable active-profile filtering")
     p_list.add_argument("-v", "--verbose", action="store_true")
     add_output_args(p_list)
 
     # stats
-    sub.add_parser("stats", help="Timeline statistics")
+    p_stats = sub.add_parser("stats", help="Timeline statistics")
+    p_stats.add_argument("--profile", help="Override active investigation profile")
+    p_stats.add_argument("--all-profiles", action="store_true", help="Disable active-profile filtering")
 
     args = parser.parse_args()
 
@@ -555,7 +647,11 @@ def main():
             print(f"Event #{event_id} created: {args.date} {args.name}")
 
     elif args.command == "window":
-        result = window_events(args.start, args.end)
+        result = window_events(
+            args.start, args.end,
+            profile_id=getattr(args, "profile", None),
+            all_profiles=getattr(args, "all_profiles", False),
+        )
         if write_output(result, args, summary=f"window {args.start} to {args.end}"):
             return
         events = result["events"]
@@ -573,7 +669,11 @@ def main():
 
     elif args.command == "near":
         if args.finding_id:
-            result = near_finding(args.finding_id, args.days)
+            result = near_finding(
+                args.finding_id, args.days,
+                profile_id=getattr(args, "profile", None),
+                all_profiles=getattr(args, "all_profiles", False),
+            )
             if not result:
                 print(f"Finding #{args.finding_id} not found")
                 sys.exit(1)
@@ -587,7 +687,11 @@ def main():
             for e in result["events"]:
                 print(_format_event(e, verbose=True))
         elif args.date:
-            result = near_date(args.date, args.days)
+            result = near_date(
+                args.date, args.days,
+                profile_id=getattr(args, "profile", None),
+                all_profiles=getattr(args, "all_profiles", False),
+            )
             if write_output(result, args, summary=f"near {args.date}"):
                 return
             print(f"Events within {args.days} days of {args.date}:")
@@ -599,7 +703,11 @@ def main():
             print("ERROR: Provide --finding-id or --date")
 
     elif args.command == "list":
-        results = list_events(category=args.category, year=args.year, limit=args.limit)
+        results = list_events(
+            category=args.category, year=args.year, limit=args.limit,
+            profile_id=getattr(args, "profile", None),
+            all_profiles=getattr(args, "all_profiles", False),
+        )
         if write_output(results, args, summary=f"events ({len(results)})"):
             return
         if not results:
@@ -610,7 +718,10 @@ def main():
             print(_format_event(e, verbose=args.verbose))
 
     elif args.command == "stats":
-        s = timeline_stats()
+        s = timeline_stats(
+            profile_id=getattr(args, "profile", None),
+            all_profiles=getattr(args, "all_profiles", False),
+        )
         print("Event Timeline Statistics")
         print("=" * 40)
         print(f"  Total events:  {s['total']}")

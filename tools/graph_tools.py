@@ -154,6 +154,21 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
 
     adj = defaultdict(lambda: defaultdict(list))
     nodes = set()
+    scoped_names = set()
+
+    if resolved:
+        try:
+            target_rows = db.execute(
+                "SELECT DISTINCT target_name FROM findings WHERE profile_id = ? AND target_name IS NOT NULL",
+                (resolved,),
+            ).fetchall()
+            scoped_names = {
+                _canonicalize(r["target_name"], alias_map)
+                for r in target_rows
+                if r["target_name"]
+            }
+        except sqlite3.OperationalError:
+            scoped_names = set()
 
     for r in rows:
         a = _canonicalize(r["person_a"], alias_map)
@@ -185,6 +200,8 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
             a = _canonicalize(r["entity_a"], alias_map)
             b = _canonicalize(r["entity_b"], alias_map)
             if not a or not b or a == b:
+                continue
+            if resolved and not ({a, b} & (nodes | scoped_names)):
                 continue
             edge_data = {
                 "id": f"er:{r['id']}",
