@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """
-OCCRP Aleph API wrapper for OSINT investigations.
+Aleph API wrapper for OSINT investigations (OCCRP Aleph + OpenAleph fork).
 
-Searches the OCCRP Aleph platform — corporate registries, court records,
-sanctions lists, leaks, and investigative datasets from around the world.
+Searches an Aleph platform — corporate registries, court records, sanctions
+lists, leaks, and investigative datasets. The OCCRP cloud free tier was
+deprecated in March 2026, so by default this tool now points at the LOCAL
+OpenAleph stack (Docker compose, see scripts/start_aleph_db.sh).
 
-Public datasets accessible without authentication. For private/restricted
-datasets, set ALEPH_API_KEY in .env.
+Configuration (in .env):
+    ALEPH_BASE_URL   API root, defaults to http://localhost:8080/api/2
+                     (set to https://aleph.occrp.org/api/2 to use cloud)
+    ALEPH_UI_URL     Web UI root for entity links (auto-derived if unset)
+    ALEPH_API_KEY    Required for write ops (createcollection, ingest) and
+                     for any private/restricted datasets
 
 Usage:
     python tools/query_aleph.py search "Jeffrey Epstein"
@@ -43,8 +49,6 @@ def _log(query, source, count):
         pass
 
 
-BASE_URL = "https://aleph.occrp.org/api/2"
-
 # Load .env
 env_path = Path(__file__).parent.parent / ".env"
 if env_path.exists():
@@ -53,6 +57,19 @@ if env_path.exists():
         if line and not line.startswith("#") and "=" in line:
             key, val = line.split("=", 1)
             os.environ.setdefault(key.strip(), val.strip().strip('"'))
+
+# BASE_URL resolution order:
+#   1. ALEPH_BASE_URL env var (typical: http://localhost:8080/api/2 for local OpenAleph)
+#   2. Cloud fallback https://aleph.occrp.org/api/2 (deprecated free tier as of Mar 2026)
+# The local OpenAleph fork is API-compatible with OCCRP Aleph 3.x.
+BASE_URL = os.environ.get("ALEPH_BASE_URL", "https://aleph.occrp.org/api/2").rstrip("/")
+# Public web UI URL for entity links (auto-derive from BASE_URL when local)
+ALEPH_UI_URL = os.environ.get("ALEPH_UI_URL")
+if not ALEPH_UI_URL:
+    if BASE_URL.startswith("http://localhost"):
+        ALEPH_UI_URL = BASE_URL.rsplit("/api/2", 1)[0]
+    else:
+        ALEPH_UI_URL = "https://aleph.occrp.org"
 
 # FTM schema types useful for investigation
 SCHEMAS = {
@@ -87,7 +104,8 @@ def _request(path, params=None):
     }
     token = os.environ.get("ALEPH_API_KEY")
     if token:
-        headers["Authorization"] = f"Token {token}"
+        # OpenAleph (local) uses "ApiKey <key>"; OCCRP cloud accepts "Token <key>" too
+        headers["Authorization"] = f"ApiKey {token}"
 
     req = Request(url, headers=headers)
     try:
@@ -180,7 +198,7 @@ def format_entity(entity, verbose=False):
     entity_id = entity.get("id", "")
     if entity_id:
         lines.append(f"    ID: {entity_id}")
-        lines.append(f"    URL: https://aleph.occrp.org/entities/{entity_id}")
+        lines.append(f"    URL: {ALEPH_UI_URL}/entities/{entity_id}")
 
     if verbose:
         # Show all properties
@@ -196,16 +214,28 @@ def format_entity(entity, verbose=False):
 
 
 def cmd_search(args):
-    """Search entities across all Aleph datasets."""
+    """Search entities across all Aleph datasets.
+
+    Note: OpenAleph requires a schema filter on /entities. When not specified,
+    we sweep across the standard investigative schemata (Person, Company,
+    Organization, LegalEntity) and merge results.
+    """
     params = {"q": args.query}
-    if args.schema:
-        params["filter:schemata"] = args.schema
     if args.countries:
         params["filter:countries"] = args.countries
     if args.collection:
         params["filter:collection_id"] = args.collection
 
-    results, total = _paginate("/entities", params, max_results=args.limit)
+    if args.schema:
+        params["filter:schemata"] = args.schema
+        results, total = _paginate("/entities", params, max_results=args.limit)
+    else:
+        # Sweep over the most common schemata. LegalEntity is the parent of
+        # Person/Company/Organization in FtM, but OpenAleph indexes them
+        # separately so we pass the list explicitly.
+        sweep_schemata = ["Person", "Company", "Organization", "LegalEntity"]
+        params["filter:schemata"] = sweep_schemata
+        results, total = _paginate("/entities", params, max_results=args.limit)
 
     _log(args.query, "aleph", total)
 
@@ -322,7 +352,7 @@ def cmd_collections(args):
             print(f"    Publisher: {publisher}")
         if summary:
             print(f"    Summary: {summary[:200]}")
-        print(f"    URL: https://aleph.occrp.org/datasets/{cid}")
+        print(f"    URL: {ALEPH_UI_URL}/datasets/{cid}")
         print()
 
     if write_output(data, args, summary=f"Aleph collections{' ' + args.query if args.query else ''}"):
