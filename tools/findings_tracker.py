@@ -129,6 +129,13 @@ VALID_SOURCES = [
     "govinfo", "congress_gov", "sec_enforcement", "bisbase",
     "nyscef", "federal_register", "military_corrections",
     "military_justice",
+    "sunat", "sunarp", "infogob", "oefa",
+    # Peru-specific primary sources
+    "elperuano", "mindef", "seace", "contraloria",
+    # US foreign-military-sales / lobbying primary sources
+    "dsca", "lda", "fara_local",
+    # Internal investigation cross-references
+    "investigations",
 ]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
