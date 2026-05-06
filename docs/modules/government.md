@@ -15,6 +15,7 @@ Tools for federal spending analysis, contract intelligence, SAM.gov entity regis
 | `query_medicare.py` | CMS Data API | None | No | ~10 req/sec |
 | `query_medicaid.py` | Local DuckDB over Parquet | None | 227M rows, $1.09T (T-MSIS 2018-2024) | N/A (local) |
 | `query_ppp.py` | Local DuckDB over Parquet | None | ~11M PPP loan records | N/A (local) |
+| `query_federal_register.py` | Federal Register API | None | 7-day local response cache (`datasets/fr_cache.db`) | ~1 req/sec self-imposed |
 | `trace_provider.py` | Composite (DuckDB + NPPES + state registries) | None | Uses `data/` parquets + `registry.db` | N/A |
 
 ## query_usaspending.py — Federal Spending
@@ -160,6 +161,44 @@ uv run python tools/query_ppp.py sql "SELECT * FROM ppp WHERE currentapprovalamo
 ```
 
 **Data source:** Download CSV from https://data.sba.gov/dataset/ppp-foia, then convert: `python scripts/convert_ppp_csv.py data/public_*.csv`.
+
+## query_federal_register.py — Federal Register
+
+Searches Federal Register documents from 1994 onward via the free public API. No auth required. Useful for verifying claims about Senate-confirmed appointments, military commissions/promotion lists (O-6+ requiring confirmation), executive orders, proclamations, and DoD/agency notices against the primary published source rather than secondary news reporting.
+
+```bash
+# Full-text search with filters
+uv run python tools/query_federal_register.py search "Navy Reserve commission" \
+    --start-date 2025-01-01 --end-date 2025-06-30 --output /tmp/fr.json
+uv run python tools/query_federal_register.py search "officer appointment" \
+    --agency defense-department --doc-type NOTICE --output /tmp/fr.json
+
+# Term search (matches the FR `term` condition — phrase/keyword search)
+uv run python tools/query_federal_register.py term "Parlatore" --limit 50 --output /tmp/fr.json
+
+# All documents from a specific agency (slug, not name)
+uv run python tools/query_federal_register.py agency navy-department \
+    --start-date 2025-01-01 --output /tmp/fr.json
+uv run python tools/query_federal_register.py list-agencies | grep -i navy
+
+# Presidential documents only (proclamations, EOs, memoranda, determinations)
+uv run python tools/query_federal_register.py presidential \
+    --start-date 2025-03-01 --end-date 2025-04-15 --output /tmp/fr.json
+uv run python tools/query_federal_register.py presidential --type executive_order \
+    --start-date 2025-01-20
+
+# Fetch a single document (and optionally its full text)
+uv run python tools/query_federal_register.py document 2025-06461
+uv run python tools/query_federal_register.py document 2025-06461 --full-text --output /tmp/fr.json
+```
+
+**Known quirks:**
+- `--agency` requires the exact slug (`navy-department`, not `NAVY` or `DOD`). Use `list-agencies` to discover slugs.
+- The `/articles` and `/documents` endpoints are aliases — the tool uses `/documents`.
+- The Federal Register does NOT publish O-5 (and below) reserve military commissions issued under 10 USC 12203 (President-alone authority). Only O-6+ promotions (Senate-confirmed) appear as published promotion lists. Senior Executive Service career-reserve lists do appear (e.g., document 2025-08853).
+- Cached responses live in `datasets/fr_cache.db` for 7 days. Set `FR_NO_CACHE=1` to bypass.
+
+**Citation token:** `[FR:2025-06461]` -> linked Federal Register document URL.
 
 ## trace_provider.py — Healthcare Provider Tracing
 

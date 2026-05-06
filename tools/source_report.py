@@ -290,6 +290,13 @@ def generate_report():
         sources["CourtListener / RECAP"]["status"] = "no_api_key"
         sources["CourtListener / RECAP"]["start_cmd"] = "export COURTLISTENER_TOKEN=<token>"
 
+    sources["NYSCEF"] = {
+        "description": "New York State state-court guest search, case details, document lists, and PDF filings",
+        "query_tool": "tools/query_nyscef.py",
+        "status": "configured",
+        "note": "No public JSON API discovered. Browser-backed guest search only; use low-volume searches and respect NYSCEF Terms of Use.",
+    }
+
     # UK Companies House
     companies_house_key = os.environ.get("COMPANIES_HOUSE_API_KEY")
     ch_headers = None
@@ -544,6 +551,16 @@ def generate_report():
         "description": "Cross-chain blockchain analytics via SQL queries",
         "query_tool": "tools/query_dune.py",
         "status": "configured",
+    }
+
+    # Federal Register
+    sources["Federal Register"] = {
+        "description": "All Federal Register documents since 1994 — rules, notices, presidential documents (proclamations, EOs, memoranda); no auth",
+        "query_tool": "tools/query_federal_register.py",
+        **check_api(
+            "FederalRegister",
+            "https://www.federalregister.gov/api/v1/documents?per_page=1",
+        ),
     }
 
     # GovInfo (congressional)
