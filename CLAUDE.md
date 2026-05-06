@@ -106,6 +106,12 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 | **Blockchain** | Etherscan, Solscan, Dune | `docs/modules/blockchain.md` |
 | **Network/Sanctions** | LittleSis, ICIJ, OpenCorporates, OpenSanctions, GLEIF, FinCEN | `docs/modules/network-sanctions.md` |
 | **Patents/IP** | USPTO PatentsView, Assignment API | `docs/modules/patents.md` |
+| **Peru-specific** | El Peruano gazette, SUNARP, SUNAT, Infogob, OEFA, SEACE, Contraloría | (see below) |
+
+**Peru-specific tools**
+
+- `query_elperuano.py {search,document,daily}` — Diario Oficial El Peruano gazette (https://busquedas.elperuano.pe/). Search normative documents (Decretos Supremos, Resoluciones Supremas/Ministeriales) by full-text, date range, type, or fetch a specific dispositivo id (e.g., `2493140-1`). Pulls full text via `/api/visor_html/{op}` and the PDF via metadata `urlPDF`. Uses GraphQL endpoint `POST /api/graphql?op=Generic` (the `?op=Generic` query string is required — bare `/api/graphql` returns 404).
+- `ingest_elperuano.py` — Persists fetched gazette documents to `datasets/elperuano/<TIPO>-<NUMERO>.json` and optionally creates a finding via `findings_tracker.py` with `--sources elperuano --claim-type direct_quote --confidence confirmed` (the sumilla is verbatim from the primary source).
 
 Run `uv run python tools/source_report.py` for live tool health status.
 

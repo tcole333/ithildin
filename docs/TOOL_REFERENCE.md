@@ -71,6 +71,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `zefix` | query_zefix.py | Swiss commercial registry |
 | `patents` | query_patents.py | USPTO patent search & ownership tracing |
 | `military_corrections` | query_military_corrections.py | DoD BCMR/BCNR Reading Room (boards.law.af.mil) — redacted decisions of all four service correction boards |
+| `elperuano` | query_elperuano.py, ingest_elperuano.py | Diario Oficial El Peruano (Peru) — gazette search, document fetch, daily bulletin |
 
 **Important**: Use these exact names. The hook validates `--sources` is present, and `findings_tracker.py` warns on unknown source names. If you need a new source name, add it to `VALID_SOURCES` in `tools/findings_tracker.py`.
 
@@ -618,6 +619,29 @@ uv run python tools/query_sam.py contracts "RECIPIENT"                       # F
 uv run python tools/query_sam.py contracts "RECIPIENT" --naics 541511 --min-amount 1000000
 uv run python tools/query_sam.py contracts --piid GS-35F-0119T              # Search by procurement ID
 uv run python tools/query_sam.py opportunities "surveillance" --posted-from 01/01/2025  # Solicitations
+```
+
+### El Peruano (Peru official gazette — Diario Oficial, no auth)
+```bash
+# Search normative documents (Decretos Supremos, Resoluciones Supremas/Ministeriales).
+# Endpoint: POST https://busquedas.elperuano.pe/api/graphql?op=Generic
+uv run python tools/query_elperuano.py search "QUERY" --output FILE          # Full-text search across all NL
+uv run python tools/query_elperuano.py search "F-16" --year 2026 --type DS --output FILE
+uv run python tools/query_elperuano.py search "Comandante FAP" --date-from 20251101 --date-to 20251130 --output FILE
+uv run python tools/query_elperuano.py search "QUERY" --paginate --max-pages 5 --output FILE
+
+# Fetch a specific dispositivo by op id (from URL: /dispositivo/NL/<op>) or full URL.
+uv run python tools/query_elperuano.py document 2493140-1 --full-text --output doc.json
+uv run python tools/query_elperuano.py document 2493140-1 --pdf --output doc.pdf
+
+# All dispositivos published on a single date.
+uv run python tools/query_elperuano.py daily 2026-03-05 --output day.json
+
+# Persist to datasets/elperuano/ AND register a finding (use direct_quote/confirmed since
+# the sumilla is verbatim from the primary source).
+uv run python tools/ingest_elperuano.py 2493140-1 \
+    --finding "Lockheed Martin Peru sale" \
+    --claim-type direct_quote --confidence confirmed
 ```
 
 ### Medicare (CMS spending, no auth)
