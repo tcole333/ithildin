@@ -19,6 +19,7 @@ Usage:
 
 import argparse
 import json
+import os
 import sqlite3
 import sys
 from datetime import datetime, timedelta, timezone
@@ -51,6 +52,15 @@ def _detect_active_profile():
     except Exception:
         pass
     return None
+
+
+def _resolve_profile(profile_id=None, all_profiles=False):
+    """Resolve profile scope for read operations."""
+    if all_profiles:
+        return None
+    if profile_id is not None:
+        return profile_id
+    return _detect_active_profile()
 
 
 VALID_CATEGORIES = ["person", "entity", "financial", "document", "digital", "connection", "legal", "intelligence", "filing", "contract", "case"]
@@ -699,12 +709,29 @@ def _ensure_schema(db):
         ("leads", "recommended_skill TEXT"),
         ("leads", "triage_rationale TEXT"),
         ("leads", "stop_reason TEXT"),
+        # Workbench agent provenance tracking
+        ("leads", "agent_run_id TEXT"),
+        ("findings", "agent_run_id TEXT"),
+        ("connections", "agent_run_id TEXT"),
+        ("entities", "agent_run_id TEXT"),
     ]
     for table, column_def in _migrations:
         try:
             db.execute(f"ALTER TABLE {table} ADD COLUMN {column_def}")
         except sqlite3.OperationalError:
             pass  # column already exists
+
+    # Indexes for agent_run_id reverse-lookup
+    for idx_sql in [
+        "CREATE INDEX IF NOT EXISTS idx_leads_agent_run ON leads(agent_run_id)",
+        "CREATE INDEX IF NOT EXISTS idx_findings_agent_run ON findings(agent_run_id)",
+        "CREATE INDEX IF NOT EXISTS idx_connections_agent_run ON connections(agent_run_id)",
+        "CREATE INDEX IF NOT EXISTS idx_entities_agent_run ON entities(agent_run_id)",
+    ]:
+        try:
+            db.execute(idx_sql)
+        except sqlite3.OperationalError:
+            pass
 
     # Migrate epstein_connection data to subject_connection (one-time)
     try:
@@ -1272,8 +1299,10 @@ def _ensure_schema(db):
 def add_lead(title, description=None, category=None, priority="medium",
              source=None, target_name=None, evidence=None, related_leads=None,
              thread_id=None, profile_id=None, depth_tier=None,
-             recommended_skill=None):
+             recommended_skill=None, agent_run_id=None):
     """Add a new lead. Returns the lead ID."""
+    if agent_run_id is None:
+        agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
     if profile_id is None:
         profile_id = _detect_active_profile()
     if target_name:
@@ -1285,9 +1314,9 @@ def add_lead(title, description=None, category=None, priority="medium",
 
     db = get_db()
     cursor = db.execute("""
-        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill))
+        INSERT INTO leads (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (title, description, category, priority, source, target_name, thread_id, profile_id, depth_tier, recommended_skill, agent_run_id))
     lead_id = cursor.lastrowid
 
     if evidence:
@@ -1311,12 +1340,16 @@ def add_lead(title, description=None, category=None, priority="medium",
 
 
 def list_leads(status=None, priority=None, category=None, target=None, limit=50,
-               thread_id=None):
+               thread_id=None, profile_id=None, all_profiles=False):
     """List leads with optional filters."""
     db = get_db()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
     conditions = []
     params = []
 
+    if resolved_profile:
+        conditions.append("profile_id = ?")
+        params.append(resolved_profile)
     if status:
         conditions.append("status = ?")
         params.append(status)
@@ -1629,19 +1662,26 @@ def list_stale_leads():
     return [dict(r) for r in rows]
 
 
-def search_leads(query):
+def search_leads(query, profile_id=None, all_profiles=False):
     """Full-text search across lead content. Wraps terms in quotes for safety."""
     db = get_db()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
     # Quote the query to handle special FTS5 characters (hyphens, etc.)
     safe_query = '"' + query.replace('"', '""') + '"'
-    rows = db.execute("""
+    params = [safe_query]
+    profile_clause = ""
+    if resolved_profile:
+        profile_clause = " AND leads.profile_id = ?"
+        params.append(resolved_profile)
+    rows = db.execute(f"""
         SELECT leads.*, leads_fts.rank
         FROM leads_fts
         JOIN leads ON leads.id = leads_fts.rowid
         WHERE leads_fts MATCH ?
+        {profile_clause}
         ORDER BY leads_fts.rank
         LIMIT 30
-    """, (safe_query,)).fetchall()
+    """, params).fetchall()
     db.close()
     return [dict(r) for r in rows]
 
@@ -1771,32 +1811,61 @@ def get_session_stats(limit=20):
     return [dict(r) for r in rows]
 
 
-def get_stats():
+def get_stats(profile_id=None, all_profiles=False):
     """Get summary statistics across the investigation."""
     db = get_db()
+    resolved_profile = _resolve_profile(profile_id, all_profiles)
     stats = {}
 
+    lead_where = " WHERE profile_id = ?" if resolved_profile else ""
+    finding_where = " WHERE profile_id = ?" if resolved_profile else ""
+    conn_where = " WHERE profile_id = ?" if resolved_profile else ""
+    lead_params = [resolved_profile] if resolved_profile else []
+    finding_params = [resolved_profile] if resolved_profile else []
+    conn_params = [resolved_profile] if resolved_profile else []
+
     # Leads
-    rows = db.execute("SELECT status, COUNT(*) as cnt FROM leads GROUP BY status").fetchall()
+    rows = db.execute(
+        f"SELECT status, COUNT(*) as cnt FROM leads{lead_where} GROUP BY status",
+        lead_params,
+    ).fetchall()
     stats["leads_by_status"] = {r["status"]: r["cnt"] for r in rows}
     rows = db.execute(
-        "SELECT priority, COUNT(*) as cnt FROM leads WHERE status IN ('open','in_progress') GROUP BY priority"
+        f"SELECT priority, COUNT(*) as cnt FROM leads"
+        f"{' WHERE profile_id = ? AND' if resolved_profile else ' WHERE'} status IN ('open','in_progress') GROUP BY priority",
+        lead_params,
     ).fetchall()
     stats["open_by_priority"] = {r["priority"]: r["cnt"] for r in rows}
-    rows = db.execute("SELECT category, COUNT(*) as cnt FROM leads GROUP BY category").fetchall()
+    rows = db.execute(
+        f"SELECT category, COUNT(*) as cnt FROM leads{lead_where} GROUP BY category",
+        lead_params,
+    ).fetchall()
     stats["leads_by_category"] = {r["category"]: r["cnt"] for r in rows}
 
     # Findings
-    stats["total_findings"] = db.execute("SELECT COUNT(*) FROM findings").fetchone()[0]
-    stats["total_connections"] = db.execute("SELECT COUNT(*) FROM connections").fetchone()[0]
-    stats["total_leads"] = db.execute("SELECT COUNT(*) FROM leads").fetchone()[0]
+    stats["total_findings"] = db.execute(
+        f"SELECT COUNT(*) FROM findings{finding_where}",
+        finding_params,
+    ).fetchone()[0]
+    stats["total_connections"] = db.execute(
+        f"SELECT COUNT(*) FROM connections{conn_where}",
+        conn_params,
+    ).fetchone()[0]
+    stats["total_leads"] = db.execute(
+        f"SELECT COUNT(*) FROM leads{lead_where}",
+        lead_params,
+    ).fetchone()[0]
 
     # Recent activity
     stats["recently_completed"] = db.execute(
-        "SELECT COUNT(*) FROM leads WHERE completed_at > datetime('now', '-7 days')"
+        f"SELECT COUNT(*) FROM leads"
+        f"{' WHERE profile_id = ? AND' if resolved_profile else ' WHERE'} completed_at > datetime('now', '-7 days')",
+        lead_params,
     ).fetchone()[0]
     stats["recent_findings"] = db.execute(
-        "SELECT COUNT(*) FROM findings WHERE created_at > datetime('now', '-7 days')"
+        f"SELECT COUNT(*) FROM findings"
+        f"{' WHERE profile_id = ? AND' if resolved_profile else ' WHERE'} created_at > datetime('now', '-7 days')",
+        finding_params,
     ).fetchone()[0]
 
     # Searches performed
@@ -1809,7 +1878,9 @@ def get_stats():
 
     # Leads in triage queue
     stats["pending_triage"] = db.execute(
-        "SELECT COUNT(*) FROM leads WHERE status = 'pending_triage'"
+        f"SELECT COUNT(*) FROM leads"
+        f"{' WHERE profile_id = ? AND' if resolved_profile else ' WHERE'} status = 'pending_triage'",
+        lead_params,
     ).fetchone()[0]
 
     # Leads blocked by infra
@@ -1828,10 +1899,14 @@ def get_stats():
     # Stale leads (lease expired)
     now = _utcnow().isoformat()
     stats["stale_leads"] = db.execute(
-        "SELECT COUNT(*) FROM leads WHERE status = 'in_progress' AND lease_until IS NOT NULL AND lease_until < ?",
-        (now,)
+        f"SELECT COUNT(*) FROM leads"
+        f"{' WHERE profile_id = ? AND' if resolved_profile else ' WHERE'} status = 'in_progress' "
+        "AND lease_until IS NOT NULL AND lease_until < ?",
+        lead_params + [now],
     ).fetchone()[0]
 
+    if resolved_profile:
+        stats["profile_id"] = resolved_profile
     db.close()
     return stats
 
@@ -1898,6 +1973,8 @@ def main():
     list_p.add_argument("--target")
     list_p.add_argument("--thread-id", type=int, help="Filter by investigation thread")
     list_p.add_argument("--limit", type=int, default=50)
+    list_p.add_argument("--profile", help="Override active investigation profile")
+    list_p.add_argument("--all-profiles", action="store_true", help="Disable active-profile filtering")
     list_p.add_argument("-v", "--verbose", action="store_true")
     add_output_args(list_p)
 
@@ -1949,6 +2026,8 @@ def main():
     # search
     search_p = subparsers.add_parser("search", help="Full-text search")
     search_p.add_argument("query")
+    search_p.add_argument("--profile", help="Override active investigation profile")
+    search_p.add_argument("--all-profiles", action="store_true", help="Disable active-profile filtering")
     add_output_args(search_p)
 
     # next
@@ -1965,6 +2044,8 @@ def main():
     # stats
     stats_p = subparsers.add_parser("stats", help="Show statistics")
     stats_p.add_argument("--session-stats", action="store_true", help="Include per-session performance metrics")
+    stats_p.add_argument("--profile", help="Override active investigation profile")
+    stats_p.add_argument("--all-profiles", action="store_true", help="Disable active-profile filtering")
     add_output_args(stats_p)
 
     # stale — list stale leads
@@ -2026,6 +2107,8 @@ def main():
             status=args.status, priority=args.priority,
             category=args.category, target=args.target, limit=args.limit,
             thread_id=getattr(args, "thread_id", None),
+            profile_id=getattr(args, "profile", None),
+            all_profiles=getattr(args, "all_profiles", False),
         )
         if not write_output(leads, args, summary=f"leads list: {len(leads)} results"):
             if not leads:
@@ -2096,7 +2179,11 @@ def main():
         print(f"Reopened lead #{args.id}")
 
     elif args.command == "search":
-        results = search_leads(args.query)
+        results = search_leads(
+            args.query,
+            profile_id=getattr(args, "profile", None),
+            all_profiles=getattr(args, "all_profiles", False),
+        )
         if not write_output(results, args, summary=f"lead search '{args.query}': {len(results)} results"):
             if not results:
                 print(f"No leads matching '{args.query}'")
@@ -2131,7 +2218,10 @@ def main():
                 print(f"No leads or findings reference '{args.ref}'")
 
     elif args.command == "stats":
-        stats = get_stats()
+        stats = get_stats(
+            profile_id=getattr(args, "profile", None),
+            all_profiles=getattr(args, "all_profiles", False),
+        )
         if not write_output(stats, args, summary=f"stats: {stats['total_leads']} leads, {stats['total_findings']} findings"):
             print(f"Total leads: {stats['total_leads']}")
             print(f"Total findings: {stats['total_findings']}")
@@ -2344,7 +2434,10 @@ def main():
             print(f"Created thread #{cursor.lastrowid}: {args.title}")
 
         elif args.thread_command == "seed":
-            from tools.investigation_context import get_active_profile
+            try:
+                from tools.investigation_context import get_active_profile
+            except ImportError:
+                from investigation_context import get_active_profile
             profile = get_active_profile()
             if not profile.threads:
                 print("No threads defined in active investigation profile.")

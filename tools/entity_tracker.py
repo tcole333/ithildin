@@ -6,6 +6,7 @@ do not need inline SQL snippets.
 """
 
 import argparse
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -190,11 +191,12 @@ def cmd_show(args):
 
 def cmd_add_entity(args):
     db = get_db()
+    agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
     try:
         cursor = db.execute(
             """
-            INSERT INTO entities (name, entity_type, jurisdiction, ein, status, source, notes)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO entities (name, entity_type, jurisdiction, ein, status, source, notes, agent_run_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 args.name.strip(),
@@ -204,6 +206,7 @@ def cmd_add_entity(args):
                 args.status,
                 args.source,
                 args.notes,
+                agent_run_id,
             ),
         )
         entity_id = cursor.lastrowid

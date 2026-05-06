@@ -17,6 +17,7 @@ Usage:
 
 import argparse
 import json
+import os
 import sqlite3
 import sys
 from datetime import datetime, timezone
@@ -120,12 +121,14 @@ VALID_SOURCES = [
     "analysis_run", "offshorealert", "uk_companies_house",
     "ca_sos", "tx_comptroller", "mi_lara", "nj_rev", "ma_corps",
     "ny_dos", "nv_sos", "fl_sunbiz", "nm_sos", "dc_dlcp",
-    "usvi", "ds10_financial", "ucc", "faa", "sam_bulk",
+    "usvi", "ds10_financial", "ucc", "florida_ucc", "faa", "sam_bulk",
     "highergov", "documentcloud", "muckrock", "fincen",
     "opencorporates", "zefix", "hudoc", "france_sirene",
-    "panama_rp", "investigations_db", "fdic",
+    "panama_rp", "patents", "investigations_db", "fdic",
     "propublica_disclosures", "propublica_congress", "ppp",
     "govinfo", "congress_gov", "sec_enforcement", "bisbase",
+    "nyscef", "federal_register", "military_corrections",
+    "military_justice",
 ]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
@@ -171,7 +174,7 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
                 evidence_ids=None, source_datasets=None, confidence="medium",
                 date_of_event=None, lead_id=None, claim_type="inference",
                 source_quotes=None, thread_id=None, email_sender=None,
-                profile_id=None):
+                profile_id=None, agent_run_id=None):
     """Add a new finding with evidence references and provenance.
 
     Args:
@@ -180,8 +183,11 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
         thread_id: Investigation thread ID to assign this finding to.
         email_sender: Email sender name to store on EFTA evidence rows.
         profile_id: Investigation profile. Auto-detected from active profile if None.
+        agent_run_id: Workbench agent run ID. Auto-detected from ITHILDIN_AGENT_RUN_ID env var.
     Returns: finding ID.
     """
+    if agent_run_id is None:
+        agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
     if not source_datasets:
         raise ValueError(
             "source_datasets is required. Provide the data source(s) that produced this finding "
@@ -220,11 +226,12 @@ def add_finding(target_name, summary, finding_type=None, detail=None,
         INSERT INTO findings (target_name, finding_type, summary, detail,
                              source_datasets, confidence, date_of_event, lead_id,
                              claim_type, verification_status, thread_id,
-                             quality_state, confidence_requested, profile_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?)
+                             quality_state, confidence_requested, profile_id,
+                             agent_run_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?, ?)
     """, (target_name, finding_type, summary, detail,
           sources_json, confidence, date_of_event, lead_id, claim_type, thread_id, confidence,
-          profile_id))
+          profile_id, agent_run_id))
     finding_id = cursor.lastrowid
 
     if evidence_ids:
@@ -548,8 +555,10 @@ def search_findings(query, thread_id=None, profile_id=None, all_profiles=False):
 
 def add_connection(person_a, person_b, relationship_type=None, description=None,
                    evidence_ids=None, strength="medium", date_range=None, finding_id=None,
-                   profile_id=None):
+                   profile_id=None, agent_run_id=None):
     """Add a connection between two persons/entities."""
+    if agent_run_id is None:
+        agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
     # Auto-detect profile_id from active investigation if not provided
     if profile_id is None:
         profile_id = _detect_active_profile()
@@ -570,10 +579,10 @@ def add_connection(person_a, person_b, relationship_type=None, description=None,
 
     cursor = db.execute("""
         INSERT OR IGNORE INTO connections (person_a, person_b, relationship_type, description,
-                                strength, date_range, finding_id, profile_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                                strength, date_range, finding_id, profile_id, agent_run_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (person_a, person_b, relationship_type, description, strength, date_range, finding_id,
-          profile_id))
+          profile_id, agent_run_id))
     conn_id = cursor.lastrowid
     if conn_id == 0:
         # Duplicate — find the existing connection id
