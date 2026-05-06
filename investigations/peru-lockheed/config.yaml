@@ -1,0 +1,325 @@
+# Peru — Lockheed Martin Defense Sale & Political Upheaval
+# Investigation into the recent Lockheed Martin aircraft/defense sale to Peru
+# and the political upheaval surrounding the procurement decision.
+
+name: "peru-lockheed"
+
+primary_subject: "Lockheed Martin Peru Defense Sale"
+
+description: >
+  Investigation of the recent Lockheed Martin defense sale to Peru and the
+  surrounding political upheaval — including the Castillo impeachment (2022),
+  the Boluarte presidency and her removal, the José Jerí caretaker government,
+  and the procurement decision-making chain. Focus areas: who decided, who
+  benefited, what intermediaries/lobbyists were involved, FCPA exposure,
+  competing bids (Saab Gripen, Dassault Rafale), and financial/political
+  beneficiaries. Treat all named procurement officials, intermediaries, and
+  Peruvian political figures as unverified until corroborated against
+  primary sources.
+
+key_persons:
+  # Peru — recent presidents
+  - "pedro castillo"          # President 2021-2022, impeached after self-coup attempt
+  - "dina boluarte"           # President 2022-2025 (removed), former VP under Castillo
+  - "josé jerí"               # Successor president — verify exact role and date
+  - "jose jeri"               # ASCII variant
+  - "manuel merino"           # Brief 2020 president — context for instability
+  - "francisco sagasti"       # 2020-2021 transitional president
+  - "martín vizcarra"         # Former president, impeached 2020
+
+  # Peru — defense / procurement chain (verify against primary sources)
+  - "walter astudillo"        # Defense Minister under Boluarte (period to verify)
+  - "jorge chávez calderón"   # Defense Minister (period to verify)
+  - "víctor torres falcón"    # Interior Minister (period to verify)
+  - "óscar arriola"           # National Police chief (period to verify)
+
+  # Peru — Air Force (FAP) leadership — agents to populate verified names
+  - "comandante general fap"
+
+  # Lockheed Martin — corporate
+  - "james taiclet"           # Chairman, President & CEO
+  - "frank st. john"          # COO
+  - "jay malave"              # CFO
+  - "greg ulmer"              # EVP Aeronautics (F-16 program)
+
+  # Competing bidders / counterparties (context)
+  - "saab"                    # Gripen E/F bidder
+  - "dassault"                # Rafale bidder
+  - "embraer"                 # Brazilian counterparty
+  - "korea aerospace industries"  # FA-50 bidder
+
+  # Peruvian political figures of interest
+  - "vladimir cerrón"         # Perú Libre — Castillo network
+  - "betssy chávez"           # Castillo PM — context
+  - "nicanor boluarte"        # Dina Boluarte's brother — under investigation in Peru
+  - "patricia benavides"      # Suspended Attorney General — judicial politicization
+
+known_addresses:
+  "av. de la peruanidad": "Pentagonito — Peruvian Ministry of Defense, San Borja, Lima"
+  "jirón junín 319": "Government Palace (Palacio de Gobierno), Lima"
+  "av. arequipa": "Lima political/business corridor"
+  "6801 rockledge drive": "Lockheed Martin HQ, Bethesda, MD"
+  "1 lockheed boulevard": "Lockheed Martin Aeronautics, Fort Worth, TX"
+
+threads:
+  - id: 1
+    name: "Procurement Decision"
+    description: "The actual sale — aircraft type, contract value, terms, financing, offsets, signing officials, decision timeline"
+    targets:
+      - "lockheed martin"
+      - "f-16"
+      - "fighting falcon"
+      - "block 70"
+      - "block 72"
+      - "fuerza aérea del perú"
+      - "fap"
+    keywords:
+      - "procurement"
+      - "contract"
+      - "tender"
+      - "licitación"
+      - "rfp"
+      - "award"
+      - "letter of offer"
+      - "loa"
+      - "fms"
+      - "foreign military sale"
+
+  - id: 2
+    name: "Political Upheaval"
+    description: "Castillo impeachment, Boluarte presidency and removal, Jerí government, mass protests, deaths in custody, Rolexgate"
+    targets:
+      - "castillo"
+      - "boluarte"
+      - "jerí"
+      - "jeri"
+      - "vacancia"
+      - "rolexgate"
+    keywords:
+      - "impeach"
+      - "vacancia"
+      - "self.coup"
+      - "autogolpe"
+      - "protest"
+      - "manifestaci"
+      - "puno"
+      - "ayacucho"
+      - "rolex"
+
+  - id: 3
+    name: "Lockheed Martin Corporate"
+    description: "LM corporate structure, Latin America operations, FCPA history, lobbying, SEC filings, executive comp tied to international sales"
+    targets:
+      - "lockheed martin"
+      - "lockheed martin international"
+      - "sikorsky"
+    keywords:
+      - "fcpa"
+      - "doj"
+      - "sec"
+      - "lobby"
+      - "10-k"
+      - "earnings"
+      - "international sales"
+
+  - id: 4
+    name: "Intermediaries & Lobbyists"
+    description: "Agents, brokers, consultants, lobbying firms, foreign agents involved in the sale — both US and Peruvian sides"
+    targets: []
+    keywords:
+      - "agent"
+      - "intermediary"
+      - "broker"
+      - "consultant"
+      - "lobby"
+      - "fara"
+      - "registered"
+      - "commission"
+      - "facilitation"
+
+  - id: 5
+    name: "Financial Flows"
+    description: "Payments, financing, offset agreements, related-party transactions, beneficial ownership of intermediary entities"
+    targets: []
+    keywords:
+      - "payment"
+      - "wire"
+      - "offset"
+      - "financing"
+      - "loan"
+      - "credit"
+      - "ex.im"
+      - "exim"
+      - "beneficial owner"
+
+  - id: 6
+    name: "US Government Role"
+    description: "State Department, DSCA, Pentagon, Congressional notifications, Embassy Lima, USTR, sanctions context"
+    targets:
+      - "dsca"
+      - "state department"
+      - "embassy lima"
+      - "southcom"
+    keywords:
+      - "state department"
+      - "dsca"
+      - "fms notification"
+      - "congressional"
+      - "embassy"
+      - "ambassador"
+      - "southcom"
+
+  - id: 7
+    name: "Peru Corruption Networks"
+    description: "Background corruption ecosystem — Lava Jato/Odebrecht legacy, prosecutor disputes, judicial network, organized crime intersections"
+    targets:
+      - "odebrecht"
+      - "lava jato"
+      - "fiscalía"
+      - "los cuellos blancos"
+    keywords:
+      - "odebrecht"
+      - "lava jato"
+      - "corruption"
+      - "fiscal"
+      - "prosecutor"
+      - "judicial"
+      - "patricia benavides"
+
+corpus_tools: []
+
+key_dates:
+  # Recent political instability anchors
+  - date: "2020-11-09"
+    event: "Martín Vizcarra impeached by Congress"
+    category: "political"
+  - date: "2020-11-15"
+    event: "Manuel Merino resigns after 5 days amid mass protests"
+    category: "political"
+  - date: "2021-07-28"
+    event: "Pedro Castillo inaugurated as president"
+    category: "political"
+  - date: "2022-12-07"
+    event: "Castillo attempts to dissolve Congress (self-coup); arrested same day"
+    category: "political"
+  - date: "2022-12-07"
+    event: "Dina Boluarte sworn in as president"
+    category: "political"
+  - date: "2022-12-15"
+    event: "Mass protests erupt — deaths in Ayacucho"
+    category: "political"
+  - date: "2023-01-09"
+    event: "Juliaca massacre — at least 17 killed during protests"
+    category: "political"
+  - date: "2024-03-15"
+    event: "Rolexgate scandal — Boluarte Rolex watches investigation breaks (verify exact date)"
+    category: "media"
+  # Procurement-related anchors — verify all dates against primary sources
+  - date: "2024-01-01"
+    event: "Peru defense ministry signals new fighter aircraft selection process (verify date)"
+    category: "operational"
+  - date: "2025-10-01"
+    event: "Boluarte removed from office (verify exact date and mechanism)"
+    category: "political"
+  - date: "2025-10-01"
+    event: "José Jerí assumes presidency (verify exact date and constitutional basis)"
+    category: "political"
+  - date: "2026-01-01"
+    event: "Lockheed Martin selection announced (verify date, aircraft variant, contract value)"
+    category: "operational"
+
+seed_pillars:
+  - name: "Ministerio de Defensa del Perú (MINDEF)"
+    pillar_type: "government"
+    sub_type: "defense_ministry"
+    status: "active"
+    jurisdiction: "PE"
+    significance: "Contracting authority for the Lockheed Martin sale. Decision-makers, signing officials, and procurement chain trace through here."
+
+  - name: "Fuerza Aérea del Perú (FAP)"
+    pillar_type: "government"
+    sub_type: "air_force"
+    status: "active"
+    jurisdiction: "PE"
+    significance: "End user of the Lockheed Martin aircraft. Specifies requirements; commanding general(s) influenced selection."
+
+  - name: "Comisión de Defensa Nacional — Congreso de la República"
+    pillar_type: "government"
+    sub_type: "legislature_committee"
+    status: "active"
+    jurisdiction: "PE"
+    significance: "Congressional oversight. Hearings/votes on procurement; political alignment with Boluarte/Jerí governments matters."
+
+  - name: "Fiscalía de la Nación"
+    pillar_type: "government"
+    sub_type: "prosecutor"
+    status: "active"
+    jurisdiction: "PE"
+    significance: "Lead investigator on Boluarte/Castillo/Rolexgate matters. Politicization of the office is itself a factor."
+
+  - name: "Defense Security Cooperation Agency (DSCA)"
+    pillar_type: "government"
+    sub_type: "fms"
+    status: "active"
+    jurisdiction: "US"
+    significance: "If sale is FMS, DSCA manages it. Congressional notifications under AECA are public records."
+
+  - name: "US Embassy Lima"
+    pillar_type: "government"
+    sub_type: "embassy"
+    status: "active"
+    jurisdiction: "US-PE"
+    significance: "Country-team advocacy for Lockheed; ambassador's role in pushing US bid."
+
+  - name: "US Department of State — Bureau of Political-Military Affairs"
+    pillar_type: "government"
+    sub_type: "state_dept"
+    status: "active"
+    jurisdiction: "US"
+    significance: "Approves arms transfers; PM/RSAT and DDTC controls."
+
+  - name: "Lockheed Martin Corporation"
+    pillar_type: "operations"
+    sub_type: "prime_contractor"
+    status: "active"
+    jurisdiction: "US"
+    significance: "Selling party. Public company (NYSE: LMT). FCPA history, lobbying disclosures, 10-K segment data all available."
+
+  - name: "Lockheed Martin Aeronautics"
+    pillar_type: "operations"
+    sub_type: "business_unit"
+    status: "active"
+    jurisdiction: "US"
+    significance: "F-16 program is here. Fort Worth, TX assembly. Greenville, SC also involved with F-16 Block 70/72 line."
+
+  - name: "Saab AB"
+    pillar_type: "operations"
+    sub_type: "competitor"
+    status: "active"
+    jurisdiction: "SE"
+    significance: "Gripen E/F competing offer to Peru. Brazilian production line gives regional industrial argument."
+
+  - name: "Dassault Aviation"
+    pillar_type: "operations"
+    sub_type: "competitor"
+    status: "active"
+    jurisdiction: "FR"
+    significance: "Rafale competing offer. France-Peru bilateral and financing matter."
+
+  - name: "Odebrecht / Novonor"
+    pillar_type: "operations"
+    sub_type: "background"
+    status: "active"
+    jurisdiction: "BR"
+    significance: "Lava Jato anchor — defines the Peruvian corruption playbook. Boluarte/Castillo administrations operate inside this legacy."
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "lockheed martin"
+
+source_overrides:
+  "ojo-publico.com": "investigative — generally reliable but verify against primary"
+  "idl-reporteros.pe": "investigative — generally reliable but verify against primary"
+  "expreso.com.pe": "right-leaning — verify"
+  "larepublica.pe": "left-leaning — verify"
+  "elcomercio.pe": "establishment — verify"
