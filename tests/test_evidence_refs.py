@@ -65,6 +65,19 @@ class EvidenceRefCanonicalizationTests(unittest.TestCase):
             ["https://www.sec.gov/edgar/search/#/q=CIK+901359+Form4+2021-07-20"],
         )
 
+    def test_normalizes_sec_adsh_and_cik_prose_refs(self):
+        value = "SEC EDGAR ADSH 0001193125-23-045802; CIK 0001823896"
+        self.assertEqual(
+            canonicalize_evidence_ref(value),
+            [
+                "SEC:0001193125-23-045802",
+                "https://www.sec.gov/edgar/browse/?CIK=1823896",
+            ],
+        )
+
+    def test_normalizes_opensanctions_space_variant(self):
+        self.assertEqual(canonicalize_evidence_ref("OpenSanctions Q28591"), ["OpenSanctions:Q28591"])
+
     def test_normalizes_hyphenated_990_refs_with_suffixes(self):
         value = "990:46-1868892:2021:PartVII"
         self.assertEqual(

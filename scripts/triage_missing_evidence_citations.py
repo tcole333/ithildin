@@ -54,6 +54,7 @@ CANONICAL_PATTERNS = [
     re.compile(r"^990:\d{9}$", re.IGNORECASE),
     re.compile(r"^ACRIS:\d{13,16}$", re.IGNORECASE),
     re.compile(r"^CL:\d+$", re.IGNORECASE),
+    re.compile(r"^NYSCEF_CASE:[A-Za-z0-9%+/_=.-]+$", re.IGNORECASE),
     re.compile(r"^FEC:[A-Za-z0-9_/-]+$", re.IGNORECASE),
     re.compile(r"^FARA:\d+$", re.IGNORECASE),
     re.compile(r"^USVI:[A-Za-z0-9]+$", re.IGNORECASE),

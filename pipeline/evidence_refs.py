@@ -67,6 +67,13 @@ def _normalize_sec_cik_to_url(token: str) -> str:
     return f"https://www.sec.gov/edgar/browse/?CIK={match.group(1)}"
 
 
+def _normalize_sec_adsh(token: str) -> str:
+    match = re.search(r"(\d{10}-\d{2}-\d{6})", token, re.IGNORECASE)
+    if not match:
+        return token
+    return f"SEC:{match.group(1)}"
+
+
 def _normalize_sec_fallback_to_url(token: str) -> str:
     body = token.split(":", 1)[1].strip()
     if not body:
@@ -185,6 +192,9 @@ TOKEN_PATTERNS: list[tuple[re.Pattern[str], callable]] = [
     (re.compile(r"SEC:[^,;\n]*\d{10}-\d{2}-\d{6}[^,;\n]*", re.IGNORECASE), lambda m: _normalize_sec_from_composite(m.group(0))),
     (re.compile(r"SEC:[^,;\n]*\d{18}[^,;\n]*", re.IGNORECASE), lambda m: _normalize_sec_from_composite(m.group(0))),
     (re.compile(r"SEC:CIK[-\s]?\d+", re.IGNORECASE), lambda m: _normalize_sec_cik_to_url(m.group(0))),
+    (re.compile(r"SEC\s+(?:EDGAR\s+)?ADSH\s+\d{10}-\d{2}-\d{6}", re.IGNORECASE), lambda m: _normalize_sec_adsh(m.group(0))),
+    (re.compile(r"ADSH\s+\d{10}-\d{2}-\d{6}", re.IGNORECASE), lambda m: _normalize_sec_adsh(m.group(0))),
+    (re.compile(r"(?:SEC\s+)?CIK\s+0*\d{1,10}", re.IGNORECASE), lambda m: _normalize_sec_cik_to_url(m.group(0))),
     (re.compile(r"SEC:\d{10}-\d{2}-\d{6}", re.IGNORECASE), lambda m: _normalize_prefixed(m.group(0), "SEC")),
     (re.compile(r"SEC:EDGAR:\d{10}-\d{2}-\d{6}", re.IGNORECASE), lambda m: _normalize_sec_from_composite(m.group(0))),
     (re.compile(r"SEC:[^,;\n]+", re.IGNORECASE), lambda m: _normalize_sec_fallback_to_url(m.group(0))),
@@ -198,11 +208,19 @@ TOKEN_PATTERNS: list[tuple[re.Pattern[str], callable]] = [
     (re.compile(r"ACRIS:(?:batch|search|bulk)[^,;\n]*", re.IGNORECASE), lambda m: _normalize_acris_search_url(m.group(0))),
     (re.compile(r"CL:\d+", re.IGNORECASE), lambda m: _normalize_prefixed(m.group(0), "CL")),
     (re.compile(r"CL:[^,;\n]+", re.IGNORECASE), lambda m: _normalize_cl_token(m.group(0))),
+    (
+        re.compile(r"NYSCEF_CASE:[A-Za-z0-9%+/_=.-]+", re.IGNORECASE),
+        lambda m: _normalize_prefixed(m.group(0), "NYSCEF_CASE"),
+    ),
     (re.compile(r"FEC:C\d{8}(?:-\d{4}|/schedule_a)?", re.IGNORECASE), lambda m: _normalize_fec(m.group(0))),
     (re.compile(r"FEC:[A-Za-z0-9_]+", re.IGNORECASE), lambda m: _normalize_fec(m.group(0))),
     (re.compile(r"FEC:[^,;\n]+", re.IGNORECASE), lambda m: _normalize_fec_search_url(m.group(0))),
     (re.compile(r"FARA:\d+", re.IGNORECASE), lambda m: _normalize_prefixed(m.group(0), "FARA")),
     (re.compile(r"FARA:[^,;\n]+", re.IGNORECASE), lambda m: _normalize_fara_search_url(m.group(0))),
+    (
+        re.compile(r"OpenSanctions[:\s]+[A-Za-z0-9]+", re.IGNORECASE),
+        lambda m: re.sub(r"^OpenSanctions[:\s]+", "OpenSanctions:", m.group(0), flags=re.IGNORECASE),
+    ),
     (re.compile(r"USVI:[A-Za-z0-9]+", re.IGNORECASE), lambda m: _normalize_prefixed(m.group(0), "USVI")),
     (re.compile(r"USVI:(?:search|query)[^,;\n]*", re.IGNORECASE), lambda m: _normalize_usvi_search_url(m.group(0))),
     (
