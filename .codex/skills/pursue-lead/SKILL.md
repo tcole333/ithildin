@@ -86,9 +86,9 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 
 **Person leads:**
 - [ ] Investigation corpus (all corpus_tools from profile)
-- [ ] CourtListener (federal litigation: `query_courtlistener.py search/party/cases`)
+- [ ] CourtListener (federal litigation: `query_courtlistener.py search --party "NAME"`, `cases`, `opinions`)
 - [ ] FEC donations (`query_fec.py donor`)
-- [ ] ProPublica 990 (`query_990.py search` — check if person is officer/director of any nonprofit)
+- [ ] IRS 990 (`query_990.py search` — grants; `officer-search` — check if person is officer/director; `red-flags` — if EIN known)
 - [ ] SEC EDGAR (`query_edgar.py search/lookup` — insider filings, mentions in proxy statements)
 - [ ] LittleSis (`query_littlesis.py search` — pre-mapped relationships)
 - [ ] Corporate registries (`query_registry.py officers` — what entities are they officer of?)
@@ -101,10 +101,10 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 - [ ] Investigation corpus
 - [ ] Corporate registries (`query_registry.py search` — all jurisdictions)
 - [ ] SEC EDGAR (`query_edgar.py search` — filings mentioning entity)
-- [ ] ProPublica 990 (`query_990.py search` — if nonprofit)
+- [ ] IRS 990 (`query_990.py lookup <EIN>` — comprehensive view; `officers` — board/staff; `financials` — revenue trends)
 - [ ] USASpending (`query_usaspending.py awards` — federal contracts/grants)
 - [ ] SAM.gov (`query_sam.py entity/exclusions` — registration, debarments)
-- [ ] CourtListener (`query_courtlistener.py search` — litigation involving entity)
+- [ ] CourtListener (`query_courtlistener.py search --party "ENTITY"` — litigation involving entity)
 - [ ] GLEIF (`query_gleif.py search` — LEI records, corporate hierarchy)
 - [ ] Lobbying (`query_lobbying.py client` — lobbying by entity)
 - [ ] FARA (`query_fara.py search` — foreign principal registrations)
@@ -114,7 +114,7 @@ Before searching, identify which sources are mandatory for this lead type. **Do 
 **Financial leads:**
 - [ ] Investigation corpus
 - [ ] SEC EDGAR (10-K, 10-Q, proxy, insider transactions)
-- [ ] ProPublica 990 (grant flows, officer compensation)
+- [ ] IRS 990 (grant flows via `filer`/`recipient`; `officers` for compensation; `red-flags` for ratio analysis)
 - [ ] FEC (political spending by entity + executives)
 - [ ] USASpending (contract/grant awards)
 - [ ] DS10 financial records (`parse_ds10_financials.py query`)
@@ -177,13 +177,7 @@ python tools/findings_tracker.py add \
 - `inference` — agent conclusion from evidence (max `medium`)
 - `synthesis` — combined multiple sources (max `medium`)
 
-**For each finding, note its narrative potential:**
-- Is this an **infrastructure reveal**? (Shows an invisible mechanism — the SAR waterfall, the liability chain, the compliance cascade)
-- Is this a **counterintuitive fact**? (Contradicts what most people would assume — "the compliance committee approved continuing")
-- Is this a **missing document**? (What should exist but doesn't — absent SARs, email gaps, missing filings)
-- Is this a **concrete-first anchor**? (A specific, vivid instance that would make a good entry point for explaining a broader pattern)
-
-**When completing a lead**, identify the single most article-worthy finding — the one that would make a reader stop and think. Note it in the lead completion summary. This seeds future `/write-article` work.
+**When completing a lead**, summarize: (1) what factual questions the lead asked, (2) what the evidence showed, (3) what was NOT found despite checking (negative results), (4) what new factual questions were raised.
 
 If the finding reveals a relationship:
 ```bash
@@ -215,7 +209,7 @@ uv run python tools/entity_tracker.py add-address   --entity-id <ENTITY_ID>   --
 uv run python tools/entity_tracker.py add-relation   --entity-a-id <ENTITY_A_ID>   --entity-b-id <ENTITY_B_ID>   --relation-type funds   --description "Enhanced Education donated $150K to IPI"   --source "EFTA02XXXXXX"
 ```
 
-Use allowed entity types: `llc, inc, ltd, trust, foundation, nonprofit, partnership, fund, association, government, unknown`.
+Use allowed entity types: `person, llc, inc, ltd, corporation, pllc, trust, foundation, nonprofit, partnership, fund, association, government, pac, agency, joint_venture, shell, unknown`.
 
 ### 5c. Record Career Arcs
 
@@ -246,7 +240,36 @@ python tools/lead_tracker.py add \
 
 Agents should freely create follow-up leads at whatever priority they judge appropriate.
 
-### 7. Complete the Lead
+**Depth-analysis leads**: When you find a specific SEC filing, federal contract, or court case worth detailed analysis, spawn a lead with the appropriate category so depth-analysis skills can pick it up:
+
+```bash
+# SEC filing worth reading in full
+python tools/lead_tracker.py add --title "Analyze <COMPANY> 10-K — related-party transactions" \
+  --category filing --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
+
+# Government contract worth tracing
+python tools/lead_tracker.py add --title "Analyze $<AMT> <AGENCY> contract to <COMPANY>" \
+  --category contract --priority medium --target "<COMPANY>" --source "agent:pursue-lead"
+
+# Court case worth deep reading
+python tools/lead_tracker.py add --title "Analyze <CASE_NAME> — <ALLEGATION_TYPE>" \
+  --category case --priority medium --target "<PARTY>" --source "agent:pursue-lead"
+```
+
+These route to `/analyze-filing`, `/analyze-contract`, and `/analyze-case` which read the full source documents — something discovery agents shouldn't spend time on.
+
+### 7. Check Stop Conditions
+
+Stop investigating and move to completion when ANY of these is true:
+
+- **Mandatory sources exhausted with corroboration**: You've checked all mandatory sources for this target type and found corroborating evidence across 2+ independent sources.
+- **Mandatory sources exhausted with consistent negatives**: You've checked all mandatory sources and found nothing. Record negative results and complete.
+- **Diminishing returns**: Recent searches are yielding no new entities, connections, or documents. You've exhausted productive search variations.
+- **Hard access barrier**: The next useful step requires infrastructure we don't have (e.g., a registry tool, a paid database, FOIA). Create an infra request and block the lead.
+
+Do NOT stop because you "found enough" — stop because sources are exhausted or returns are diminishing. But also do NOT rabbit-hole into speculative searches when mandatory sources are done.
+
+### 8. Complete the Lead
 ```bash
 python tools/lead_tracker.py complete <ID> --findings "Summary of what was found and what remains unknown"
 ```
@@ -307,20 +330,13 @@ python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-refe
 
 ## Context Management
 
-This skill is designed to work as a **standalone command in its own CC instance**. For wave execution, run multiple CC instances each running `/pursue-lead`:
-
-```
-Terminal 1: claude → /pursue-lead
-Terminal 2: claude → /pursue-lead
-Terminal 3: claude → /pursue-lead
-```
-
-All instances write to shared `investigation.db` (WAL mode handles concurrent writes).
+This skill can be run directly or dispatched as a subagent from an orchestrating session. Multiple `/pursue-lead` subagents can run in parallel — the DB claim mechanism (`claim-next`) prevents double-claiming. All subagents write to shared `investigation.db` (WAL mode handles concurrent writes).
 
 ### Output Discipline
 - **Use `--output $WORKDIR/...` on ALL search commands** to keep context lean
 - **Do NOT `cat` or `Read` full document text** — extract relevant quotes only
 - **Record findings as you go**, not in a batch at the end
+- **DB-first, report-second**: Every factual discovery must be recorded to `findings_tracker.py add` and every entity to `entity_tracker.py` as you find them. The report file (if writing one for a parent orchestrator) is a summary of what you already persisted. The database is permanent; tmp files are ephemeral.
 
 ### Tool Bug Reporting
 If you encounter bugs in CLI tools (crashes, incorrect output, missing features), submit them to the infra queue:

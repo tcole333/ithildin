@@ -8,6 +8,8 @@ user_invocable: true
 
 Read-only queue depth reporter. Shows what needs attention and suggests which skills to run.
 
+Use `$orchestrate-investigation` for active control-plane work such as launching workers, reviewing staged artifacts, and importing approved outputs.
+
 ## Process
 
 ### 1. Query All Queue Depths
@@ -199,6 +201,7 @@ uv run python tools/hypothesis_tracker.py list --status proposed --limit 5
 
 - This skill is **read-only** — it does not modify any data
 - It's designed to be run at the start of a session to decide what to work on
+- For launch/review/import lifecycle work, use `$orchestrate-investigation`
 - Automated dispatch: `uv run python scripts/dispatcher.py status` for running agents
 - Analysis skills have cooldown periods (48-168h) to prevent running too frequently
 - Priority: data gathering > triage > analysis > post-processing

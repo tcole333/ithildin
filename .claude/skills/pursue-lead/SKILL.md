@@ -330,15 +330,7 @@ python tools/lead_tracker.py block <ID> "Neo4j not available for ICIJ cross-refe
 
 ## Context Management
 
-This skill is designed to work as a **standalone command in its own CC instance**. For wave execution, run multiple CC instances each running `/pursue-lead`:
-
-```
-Terminal 1: claude → /pursue-lead
-Terminal 2: claude → /pursue-lead
-Terminal 3: claude → /pursue-lead
-```
-
-All instances write to shared `investigation.db` (WAL mode handles concurrent writes).
+This skill can be run directly or dispatched as a subagent from an orchestrating session. Multiple `/pursue-lead` subagents can run in parallel — the DB claim mechanism (`claim-next`) prevents double-claiming. All subagents write to shared `investigation.db` (WAL mode handles concurrent writes).
 
 ### Output Discipline
 - **Use `--output $WORKDIR/...` on ALL search commands** to keep context lean

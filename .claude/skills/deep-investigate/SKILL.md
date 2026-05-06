@@ -6,9 +6,9 @@ user_invocable: true
 
 # /deep-investigate
 
-**CONTROL PLANE ORCHESTRATOR** — You are a planner, dispatcher, and coverage checker. You do NOT investigate directly. You assign source categories to 4 parallel sub-agents, monitor their progress, synthesize their reports for corroboration/contradiction/gaps, and spawn follow-up leads. Sub-agents are Layer 1 research agents — they document facts, not theories.
+**CONTROL PLANE ORCHESTRATOR** — You are a planner, dispatcher, and coverage checker. You do NOT investigate directly. You assign source categories to parallel sub-agents, monitor their progress, synthesize their reports for corroboration/contradiction/gaps, and spawn follow-up leads. Sub-agents are Layer 1 research agents — they document facts, not theories.
 
-Launch an orchestrated investigation of a person, entity, or topic using parallel sub-agents that each cover a dedicated source category. This ensures comprehensive coverage — no source gets skipped because the agent "found enough" in the corpus.
+Launch an orchestrated investigation of a person, entity, or topic using parallel sub-agents that each cover a dedicated source category. This ensures comprehensive coverage — no source gets skipped because the agent "found enough" in the corpus. Default to ~6 sub-agents — scale up or down based on source availability and target complexity. This is soft guidance, not a hard cap.
 
 ## Arguments
 
@@ -46,8 +46,8 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 
 1. Assess the target and determine what's already known
 2. **Build a research plan** — identify which sources are relevant and assign them to agents
-3. Write focused prompts for 4 parallel sub-agents with explicit source mandates
-4. Launch all 4 sub-agents simultaneously using the Task tool
+3. Write focused prompts for parallel sub-agents (default ~6) with explicit source mandates
+4. Launch all sub-agents simultaneously using the Agent tool
 5. Wait for all to complete
 6. Synthesize their results — identify corroboration, contradictions, and gaps
 7. Record final findings and spawn follow-up leads
@@ -156,9 +156,9 @@ Determine:
 
 Write a **target briefing** — a 2-3 sentence summary of who/what this is and why it matters. Every sub-agent gets this briefing.
 
-### 2. Launch 4 Parallel Sub-Agents
+### 2. Launch Parallel Sub-Agents
 
-Use the Task tool to launch ALL FOUR agents simultaneously in a single message. Each agent gets:
+Use the Agent tool to launch all sub-agents simultaneously in a single message. Default to ~6 agents — adjust based on how many distinct source categories the target warrants. Each agent gets:
 - The target briefing
 - Its specific source mandate
 - Instructions to record findings via the CLI tools
@@ -757,11 +757,11 @@ If you encounter bugs in CLI tools (crashes, incorrect output, missing features)
 
 ## Notes
 
-- Launch all 4 agents in a SINGLE message with 4 Task tool calls — this maximizes parallelism
+- Launch all agents in a SINGLE message with multiple Agent tool calls — this maximizes parallelism
 - Each agent should be `subagent_type: "general-purpose"` with `run_in_background: true`
 - The orchestrator does NOT search sources directly — that's the agents' job
-- If the target is clearly only a person OR only an entity, you can still run all 4 agents — some will just return fewer results
-- For very simple targets where you're confident only 1-2 source categories are relevant, you can skip agents that clearly won't help (e.g., FAA for a French lawyer). But err on the side of launching all 4.
+- Default to ~6 agents. Scale up or down based on source availability — this is soft guidance, not a hard cap.
+- For simple targets where only a few source categories are relevant, use fewer agents. For complex targets with many source categories, use more.
 - Agents MUST record their findings via the CLI tools, not just report them as text
 - **Agents write reports to `[WORKDIR]/report-agent-{a,b,c,d}.md`** — orchestrator reads these, NOT TaskOutput
 - **Agents should be curious and proactive.** Don't just execute the search checklist mechanically — follow unexpected threads, investigate surprises, and identify infrastructure improvements. If a search reveals a data source we don't have, note it. If a tool could be extended to answer a question better, say so. The investigation platform should get stronger with every wave.

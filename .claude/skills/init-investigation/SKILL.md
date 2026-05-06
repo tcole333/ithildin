@@ -135,15 +135,15 @@ Good seed leads:
 - Check OFAC/sanctions lists
 - Search news/GDELT for media coverage patterns
 
-### 8. Create CLAUDE-ADDENDUM (optional)
+### 8. Create nested CLAUDE.md (optional)
 
 If there's case-specific context that agents need (source reliability notes, corpus-specific search tips, known data quality issues), create:
 
 ```
-investigations/<slug>/CLAUDE-ADDENDUM.md
+investigations/<slug>/CLAUDE.md
 ```
 
-This file is referenced in CLAUDE.md and provides investigation-specific agent instructions.
+This file is automatically loaded by the Claude Code harness when working in or below the investigation directory, providing investigation-specific agent instructions without requiring explicit reads.
 
 ### 9. Verify
 

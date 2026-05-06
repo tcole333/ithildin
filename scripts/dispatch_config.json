@@ -1,8 +1,10 @@
 {
     "poll_interval_seconds": 300,
-    "max_concurrent": 3,
-    "max_research_agents": 2,
+    "max_concurrent": 6,
+    "max_research_agents": 6,
     "max_analysis_agents": 1,
+    "staging_root": ".dispatch_staging",
+    "permission_mode": "bypassPermissions",
     "triggers": {
         "triage": { "min_pending": 1 },
         "build_infra": { "min_open": 1 },
@@ -15,6 +17,82 @@
     },
     "allowed_tools": "Bash,Read,Write,Edit,Glob,Grep,Task,WebFetch,WebSearch",
     "cooldown_seconds": 60,
-    "timeout_seconds": 1800,
+    "stall_seconds": 1800,
+    "timeout_seconds": 3600,
+    "daily_budget_usd": 50.0,
+    "job_defaults": {
+        "triage": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "medium",
+            "review_required": true
+        },
+        "pursue_lead": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "high",
+            "review_required": true
+        },
+        "deep_investigate": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "high",
+            "review_required": true
+        },
+        "build_infra": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "medium",
+            "review_required": false
+        },
+        "auto_leads": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "medium",
+            "review_required": false
+        },
+        "analyze_network": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "medium",
+            "review_required": true
+        },
+        "generate_hunches": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "medium",
+            "review_required": true
+        },
+        "timeline_analysis": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "medium",
+            "review_required": true
+        },
+        "systemic_analysis": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "medium",
+            "review_required": true
+        },
+        "investigate_infra": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "high",
+            "review_required": true
+        },
+        "trace_entity": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "high",
+            "review_required": true
+        },
+        "investigate_person": {
+            "timeout_seconds": 1800,
+            "expected_artifacts": ["report.md", "run.json", "candidate_findings.jsonl", "candidate_leads.jsonl", "candidate_entities.jsonl"],
+            "priority": "high",
+            "review_required": true
+        }
+    },
     "model": "sonnet"
 }

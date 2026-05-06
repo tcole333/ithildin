@@ -16,7 +16,7 @@ uv run python tools/investigation_context.py set <name>    # Switch active profi
 ```
 
 Template for new investigations: `investigations/_template/config.yaml`
-Case-specific context: `investigations/<name>/CLAUDE-ADDENDUM.md` (if exists)
+Case-specific context: `investigations/<name>/CLAUDE.md` (if exists)
 
 All skills load the active profile at startup. Entities are shared across investigations; leads/findings/connections are profile-scoped via `profile_id`.
 
@@ -25,7 +25,7 @@ All skills load the active profile at startup. Entities are shared across invest
 ```bash
 /dispatch                   # Queue depths — what needs attention
 /pursue-lead                # Pick up next lead
-/deep-investigate <name>    # 4 parallel sub-agents (preferred)
+/deep-investigate <name>    # Parallel sub-agents (preferred)
 /triage-leads               # Process pending_triage leads (batch of 20)
 /build-infra                # Build next infra request (or scan for gaps)
 /search-all-sources <term>  # Fan-out search
@@ -99,12 +99,13 @@ Auto-leads: `pending_triage -> open` (via `/triage-leads`) or `-> dead_end`
 | **Financial** | EDGAR, ratios, market data, SEC enforcement, 990 nonprofits, FDIC, FINRA | `docs/modules/financial.md` |
 | **Registries** | Unified registry + 20+ state/international corporate registries | `docs/modules/registries.md` |
 | **Government** | USASpending, HigherGov, SAM, Medicare/Medicaid, PPP | `docs/modules/government.md` |
-| **Legal** | CourtListener, HUDOC | `docs/modules/legal.md` |
+| **Legal** | CourtListener, NYSCEF, HUDOC, BCMR/BCNR Reading Room, MilJustice (CAAF + service CCAs) | `docs/modules/legal.md` |
 | **Political** | FEC, lobbying, FARA, Congress, GovInfo | `docs/modules/political.md` |
 | **OSINT/Infra** | crt.sh, Wayback, Shodan, URLScan, Maigret, FAA | `docs/modules/osint-infra.md` |
 | **Corpora** | DOJ, LMSBAND, Unified, DugganUSA, DocumentCloud, MuckRock | `docs/modules/corpora.md` |
 | **Blockchain** | Etherscan, Solscan, Dune | `docs/modules/blockchain.md` |
 | **Network/Sanctions** | LittleSis, ICIJ, OpenCorporates, OpenSanctions, GLEIF, FinCEN | `docs/modules/network-sanctions.md` |
+| **Patents/IP** | USPTO PatentsView, Assignment API | `docs/modules/patents.md` |
 
 Run `uv run python tools/source_report.py` for live tool health status.
 
@@ -126,7 +127,7 @@ Run `uv run python tools/source_report.py` for live tool health status.
 | **Secondary** | Investigative journalism (verify against primary); opinion media (**extreme caution**) |
 | **Tertiary** | Wikipedia, social media | Starting point only — never cite as evidence |
 
-For investigation-specific source reliability overrides, see `investigations/<active_profile>/CLAUDE-ADDENDUM.md`.
+For investigation-specific source reliability overrides, see `investigations/<active_profile>/CLAUDE.md`.
 
 ### Audit Sourcing (CRITICAL)
 
@@ -140,19 +141,14 @@ Every finding MUST provide: `--evidence`, `--claim-type`, `--source-quote`
 
 **Agents MUST NOT set confidence to `confirmed` for inferences or syntheses.**
 
-## Multi-Instance Workflow
+## Parallel Execution
 
-Run **separate CC instances** — NOT one orchestrator spawning all agents:
+Orchestrate work from a single chat session using subagents. Skills like `/deep-investigate` and `/pursue-lead` use the Agent tool to dispatch parallel subagents — no need for separate terminals or CC instances.
 
-```
-Terminal 1: claude -> /pursue-lead    # Claims next high-priority lead
-Terminal 2: claude -> /pursue-lead    # Claims different lead (DB prevents double-claim)
-Terminal 3: claude -> /deep-investigate "Target Name"
-```
-
-- All instances share `investigation.db` (WAL mode handles concurrent writes)
-- Each skill creates unique `WORKDIR` — prevents cross-instance overwrites
+- `investigation.db` uses WAL mode for safe concurrent subagent writes
+- Each skill creates a unique `WORKDIR` — prevents cross-agent file collisions
 - Sub-agents write `$WORKDIR/report-*.md` — parent reads files, NOT TaskOutput
+- Default parallelism: ~6 subagents. Scale up or down based on task complexity and API rate limits — this is soft guidance, not a hard cap.
 - Post-wave: run `uv run python tools/auto_leads.py run`
 
 ## Environment

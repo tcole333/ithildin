@@ -24,6 +24,25 @@ uv run python tools/investigation_context.py show
 This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
 Use these values instead of hardcoded names throughout this skill.
 
+### Jurisdiction Trigger: United Kingdom
+
+If the entity is UK-incorporated, has a UK company number, uses a UK registered office, or the search surface indicates a UK corporate footprint, **Companies House is mandatory**. Do not treat a UK trace as complete without checking:
+
+```bash
+python tools/ingest_uk_companies_house.py search "<ENTITY>" --output $WORKDIR/trace-uk-search.json
+python tools/ingest_uk_companies_house.py company <COMPANY_NUMBER> --output $WORKDIR/trace-uk-company.json
+python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER> --output $WORKDIR/trace-uk-officers.json
+python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER> --output $WORKDIR/trace-uk-psc.json
+python tools/ingest_uk_companies_house.py filings <COMPANY_NUMBER> --output $WORKDIR/trace-uk-filings.json
+```
+
+If officers or PSC names are ambiguous, run:
+```bash
+python tools/ingest_uk_companies_house.py officer-search "<PERSON_NAME>" --output $WORKDIR/trace-uk-officer-search.json
+```
+
+Record negative results explicitly if the API returns no match.
+
 ## Investigative Context
 
 Corporate entities within an investigation network are rarely random bureaucratic structures. Every layer of corporate complexity is a layer of obfuscation. When tracing an entity, always ask:
@@ -118,6 +137,10 @@ python tools/query_courtlistener.py party "<ENTITY>" --output $WORKDIR/trace-cl-
 
 # ProPublica 990 (if nonprofit)
 python tools/query_990.py search "<ENTITY>" --output $WORKDIR/trace-990.json
+
+# UK Companies House (mandatory for UK entities/officers/addresses)
+python tools/ingest_uk_companies_house.py search "<ENTITY>" --output $WORKDIR/trace-uk-search.json
+python tools/ingest_uk_companies_house.py officer-search "<ENTITY>" --output $WORKDIR/trace-uk-officer-search.json
 ```
 
 ### 6b. External APIs & Web Research

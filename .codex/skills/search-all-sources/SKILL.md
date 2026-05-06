@@ -76,6 +76,10 @@ python tools/query_aleph.py search "<QUERY>" --schema Company --output $WORKDIR/
 # CourtListener (federal courts)
 python tools/query_courtlistener.py search "<QUERY>" --output $WORKDIR/search-cl.json
 
+# NYSCEF (manual opt-in only — guest search via real browser; do not include in unattended bulk fan-out)
+# NYSCEF Terms of Use prohibit mining and bot extraction. Use only for targeted state-court lookups.
+# python tools/query_nyscef.py search "<QUERY>" --limit 10 --output $WORKDIR/search-nyscef.json
+
 # ProPublica 990 (nonprofit filings)
 python tools/query_990.py search "<QUERY>" --output $WORKDIR/search-990.json
 
@@ -126,6 +130,7 @@ python tools/query_gleif.py search "<QUERY>" --limit 10
 
 # UK Companies House (if API key configured)
 python tools/ingest_uk_companies_house.py search "<QUERY>" --limit 10
+python tools/ingest_uk_companies_house.py officer-search "<QUERY>" --limit 10
 
 # OpenSanctions (PEP/sanctions check — if ingested)
 python tools/query_opensanctions.py search "<QUERY>" --limit 10
@@ -205,6 +210,7 @@ log_search("<QUERY>", "lmsband", result_count)
 log_search("<QUERY>", "gleif", result_count)
 log_search("<QUERY>", "uk_companies_house", result_count)
 log_search("<QUERY>", "opensanctions", result_count)
+log_search("<QUERY>", "nyscef", result_count)  # manual opt-in only
 log_search("<QUERY>", "ds10_financial", result_count)
 log_search("<QUERY>", "usvi", result_count)
 log_search("<QUERY>", "dc_corp_registry", result_count)

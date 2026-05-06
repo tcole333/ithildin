@@ -8,6 +8,8 @@ user_invocable: true
 
 **CONTROL PLANE** — Read-only queue depth reporter. Shows what needs attention and suggests which skills to run based on triage scheduler fields.
 
+Use `/orchestrate-investigation` for active control-plane work such as launching workers, reviewing staged artifacts, and importing approved outputs.
+
 ## Process
 
 ### 1. Query All Queue Depths
@@ -212,6 +214,7 @@ uv run python tools/hypothesis_tracker.py list --status proposed --limit 5
 
 - This skill is **read-only** — it does not modify any data
 - It's designed to be run at the start of a session to decide what to work on
+- For launch/review/import lifecycle work, use `/orchestrate-investigation`
 - Automated dispatch: `uv run python scripts/dispatcher.py status` for running agents
 - Analysis skills trigger based on new findings count, not time elapsed (analyze-network: 50, generate-hunches: 75, timeline-analysis: 50, systemic-analysis: 100)
 - Priority: data gathering > triage > analysis > post-processing
