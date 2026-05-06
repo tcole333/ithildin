@@ -120,7 +120,7 @@ VALID_SOURCES = [
     "shodan", "crtsh", "wayback", "urlscan", "medicaid",
     "analysis_run", "offshorealert", "uk_companies_house",
     "ca_sos", "tx_comptroller", "mi_lara", "nj_rev", "ma_corps",
-    "ny_dos", "nv_sos", "fl_sunbiz", "nm_sos", "dc_dlcp",
+    "wy_sos", "ny_dos", "nv_sos", "fl_sunbiz", "nm_sos", "dc_dlcp",
     "usvi", "ds10_financial", "ucc", "florida_ucc", "faa", "sam_bulk",
     "highergov", "documentcloud", "muckrock", "fincen",
     "opencorporates", "zefix", "hudoc", "france_sirene",

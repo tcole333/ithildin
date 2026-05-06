@@ -56,6 +56,7 @@ When using `--sources` on `findings_tracker.py add`, use these canonical names. 
 | `mi_lara` | query_michigan.py | Michigan LARA |
 | `nj_rev` | query_newjersey.py | New Jersey Revenue |
 | `ma_corps` | query_massachusetts.py | Massachusetts Corporations |
+| `wy_sos` | query_wyoming.py | Wyoming Secretary of State (WyoBiz) |
 | `nv_sos` | query_nevada.py | Nevada SOS |
 | `nm_sos` | ingest_newmexico.py | New Mexico SOS |
 | `dc_dlcp` | ingest_dc.py | DC DLCP |
@@ -396,6 +397,16 @@ python tools/query_massachusetts.py search "APOLLO" --type F --output /tmp/ma-ap
 python tools/query_massachusetts.py entity 000487270 --output /tmp/ma-entity.json   # By MA ID number
 python tools/query_massachusetts.py ingest 000487270                       # Single entity → registry.db
 python tools/query_massachusetts.py ingest-search "QUERY" --limit 20       # Batch (slow — 1 browser session per entity)
+
+# Wyoming Secretary of State / WyoBiz (F5 WAF — needs Playwright browser helper)
+# First run may require manual F5 CAPTCHA solve: `warmup` command opens browser window
+python tools/query_wyoming.py warmup                                       # Solve F5 CAPTCHA, cache cookies
+python tools/query_wyoming.py search "TRUMP" --output /tmp/wy-trump.json   # Starts-with search (default)
+python tools/query_wyoming.py search "WORLD LIBERTY" --mode contains --output /tmp/wy-wlfi.json  # Contains search
+python tools/query_wyoming.py entity 2021-001032098 --output /tmp/wy-entity.json  # By WY filing ID
+python tools/query_wyoming.py detail <eFNum> --output /tmp/wy-detail.json  # By encrypted eFNum from search
+python tools/query_wyoming.py ingest 2021-001032098                        # Single entity → registry.db
+python tools/query_wyoming.py ingest-search "TRUMP" --limit 20            # Batch (slow — 1 browser session per entity)
 
 # Colorado (SODA API — 1.3M+ entities, no auth)
 python tools/ingest_colorado.py search "QUERY" --limit 100
