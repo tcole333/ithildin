@@ -1,0 +1,578 @@
+# Investigation Profile: Epstein-Aetna
+# Migrated from exploratory memo at /Users/travcole/Downloads/epstein-aetna-helicopter-memo.md
+# See investigations/epstein-aetna/CLAUDE.md for case-specific guidance and
+# investigations/epstein-aetna/memo-source.md for the pre-verification exploratory notes.
+
+name: "epstein-aetna"
+
+primary_subject: "Aetna-Epstein-Apollo corporate network (N722JE helicopter transaction)"
+
+description: >
+  Investigation of the July 2011 sale of Sikorsky S-76C++ N722JE from Jeffrey
+  Epstein's shell company Freedom Air International, Inc. to Aetna's wholly-
+  owned aviation subsidiary ASI Wings, LLC for $11,900,000 (with $11,800,000
+  wired to JPMorgan Chase in Panama), the June 2019 no-consideration transfer
+  of the same helicopter back to Epstein's USVI entity Hyperion Air, LLC
+  twenty-three days before Epstein's arrest, and the broader Aetna-Epstein-
+  Apollo corporate network surfaced by that transaction — including Jeffrey
+  D. Benjamin's simultaneous roles as Apollo Global Management Senior Advisor
+  and Chiquita Brands Board Audit Committee member (2002-2007) during and
+  after Fernando Aguirre's Chiquita CEO tenure, and Aguirre's appointment to
+  Aetna's Board and Audit Committee on 2011-07-29 (three days after the
+  Panama wire).
+
+# Key persons for priority escalation in auto-lead generation
+# Lowercase names.
+key_persons:
+  # Epstein core (may overlap with /investigations/epstein profile)
+  - "jeffrey epstein"
+  - "darren indyke"
+  - "darren k indyke"
+  - "lawrence visoski"
+  - "larry visoski"
+  - "richard kahn"
+  - "harry beller"
+  - "ghislaine maxwell"
+
+  # Aetna executives and directors
+  - "mark bertolini"
+  - "mark t bertolini"
+  - "fernando aguirre"
+  - "joseph c black"
+  - "joseph black"
+  - "judith jones"
+  - "judith h jones"
+  - "melinda westbrook"
+  - "anthony dennis"
+  - "anthony j dennis"
+  - "coreen marcroft"
+  - "joseph zubretsky"
+  - "joseph m zubretsky"
+  - "william casazza"
+  - "rajan parmeswar"
+  - "margaret mccarthy"
+  - "lonny reisman"
+  - "barbara franklin"
+  - "barbara hackman franklin"
+  - "jeffrey garten"
+  - "jeffrey e garten"
+  - "joseph newhouse"
+  - "joseph p newhouse"
+  - "gerald greenwald"
+  - "edward ludwig"
+  - "richard harrington"
+  - "denise cote"
+
+  # Apollo / Black family / Chiquita network
+  - "leon black"
+  - "eli black"
+  - "eli m black"
+  - "jeffrey benjamin"
+  - "jeffrey d benjamin"
+
+  # Escrow and broker network
+  - "joan roberts"
+  - "joan f roberts"
+  - "judy hunteman"
+  - "kim thompson"
+  - "tonya butler"
+  - "george reenstra"
+  - "ted osgood"
+  - "jap blankenship"
+  - "jap w blankenship"
+  - "irena damnjanoska"
+
+  # Failed/actual post-death buyers
+  - "harry macklowe"
+  - "marty black"
+  - "michael kolich"
+
+  # Chiquita 2007 plea defense and prosecution
+  - "eric holder"
+  - "eric h holder"
+  - "james garland"
+  - "james m garland"
+  - "kenneth wainstein"
+  - "kenneth l wainstein"
+  - "jonathan malis"
+  - "jonathan m malis"
+  - "denise cheung"
+  - "roderick hills"
+  - "rocky hills"
+  - "robert olson"
+  - "cyrus freidheim"
+
+  # JPMorgan Private Bank personnel relevant to account management
+  - "jes staley"
+  - "stephen cutler"
+  - "john duffy"
+  - "paul morris"
+  - "paul v morris"
+  - "mary casey"
+  - "mary c casey"
+  - "catherine keating"
+
+# Known addresses for priority escalation
+known_addresses:
+  "151 farmington ave": "Aetna Inc. corporate HQ and ASI Wings LLC registered office, Hartford CT"
+  "103 faulk rd": "Freedom Air International Inc. registered office, Wilmington DE"
+  "4848 sw 36th st": "Insured Aircraft Title Service (IATS) escrow office, Oklahoma City OK"
+  "6100 red hook": "Hyperion Air LLC and Little St. James adjacent USVI address"
+  "301 east 66th st": "Darren K. Indyke PLLC and HBRK Associates, NYC"
+  "301 e 66": "Darren K. Indyke PLLC and HBRK Associates, NYC"
+  "1201 pennsylvania ave": "Covington & Burling LLP, Washington DC (Chiquita plea defense counsel)"
+  "767 fifth avenue": "Macklowe Properties / Helicopter 1029 LLC, NYC (failed 2019 buyer)"
+  "berkeley square house": "Black Air 777 Group PLC, London (failed 2020 buyer)"
+  "1445 boston post road": "Guardian Jet LLC, Guilford CT (buyer's broker)"
+  "212 route 94": "Aircraft Services Group Inc., Vernon NJ (seller's broker 2011)"
+  "401 industrial avenue": "Aircraft Services Group Inc., Teterboro NJ (post-2019 broker address)"
+  "100 n broadway": "Fellers Snider Blankenship Bailey & Tippens, OKC"
+  "1445 boston post rd": "Guardian Jet LLC, Guilford CT"
+
+# Investigation threads for classifying leads and findings
+threads:
+  - id: 1
+    name: "2011 Purchase Transaction"
+    description: "The July 2011 Freedom Air International → ASI Wings LLC sale: IATS escrow, wire instructions, purchase agreements, closing documents, fund flows into escrow"
+    targets:
+      - "joan roberts"
+      - "joan f roberts"
+      - "george reenstra"
+      - "ted osgood"
+      - "jap blankenship"
+      - "jap w blankenship"
+      - "melinda westbrook"
+      - "darren indyke"
+      - "lawrence visoski"
+      - "irena damnjanoska"
+      - "aircraft services group"
+      - "guardian jet"
+      - "insured aircraft title service"
+      - "iats"
+    keywords:
+      - "n722je"
+      - "n162ae"
+      - "760750"
+      - "760472"
+      - "iats"
+      - "insured\\s+aircraft\\s+title"
+      - "wire.*panama"
+      - "1603473416"
+      - "escrow"
+      - "purchase\\s+agreement"
+      - "closing\\s+statement"
+      - "turbomeca"
+      - "keystone\\s+helicopter"
+
+  - id: 2
+    name: "2019 Return Transfer"
+    description: "The June 2019 bill of sale ASI Wings → Hyperion Air LLC with no documented consideration, 23 days before Epstein's arrest, and the subsequent failed sales (Macklowe, Black Air 777) and final 2021 sale to Industrial Integrity Solutions"
+    targets:
+      - "lawrence visoski"
+      - "darren indyke"
+      - "richard kahn"
+      - "harry macklowe"
+      - "marty black"
+      - "michael kolich"
+      - "hyperion air"
+      - "helicopter 1029"
+      - "black air 777"
+      - "industrial integrity solutions"
+    keywords:
+      - "hyperion\\s+air"
+      - "jd020475"
+      - "2019-06-13"
+      - "bill\\s+of\\s+sale.*2019"
+      - "helicopter\\s+1029"
+      - "black\\s+air\\s+777"
+      - "industrial\\s+integrity"
+      - "macklowe"
+      - "kellerhals"
+
+  - id: 3
+    name: "Aetna Corporate Governance"
+    description: "Aetna Inc. board, audit committee, executive officers, risk management, external auditor (KPMG), and the governance path by which an $11.9M helicopter purchase from an Epstein shell was approved and executed"
+    targets:
+      - "mark bertolini"
+      - "fernando aguirre"
+      - "joseph c black"
+      - "joseph black"
+      - "judith jones"
+      - "judith h jones"
+      - "joseph zubretsky"
+      - "jeffrey garten"
+      - "barbara franklin"
+      - "joseph newhouse"
+      - "gerald greenwald"
+      - "edward ludwig"
+      - "richard harrington"
+      - "melinda westbrook"
+      - "coreen marcroft"
+      - "anthony dennis"
+      - "denise cote"
+      - "aetna"
+      - "asi wings"
+      - "cvs health"
+    keywords:
+      - "asi\\s+wings"
+      - "\\baetna\\b"
+      - "cvs\\s+health"
+      - "audit\\s+committee"
+      - "proxy\\s+statement"
+      - "def\\s+14a"
+      - "\\bkpmg\\b"
+      - "personal\\s+aircraft\\s+use"
+      - "151\\s+farmington"
+      - "bertolini"
+      - "aguirre"
+
+  - id: 4
+    name: "Apollo / Black / Chiquita Network"
+    description: "Jeffrey D. Benjamin's simultaneous Apollo Senior Advisor and Chiquita Board Audit Committee roles (2002-2008); Leon Black's $158-170M Epstein payments (Wyden Finance Committee); Eli Black's 1975 United Brands Honduran bribery/suicide; Chiquita 2007 plea for AUC/FARC payments; Covington & Burling plea defense (Holder, Garland, Wainstein)"
+    targets:
+      - "jeffrey benjamin"
+      - "jeffrey d benjamin"
+      - "leon black"
+      - "eli black"
+      - "fernando aguirre"
+      - "eric holder"
+      - "james garland"
+      - "kenneth wainstein"
+      - "roderick hills"
+      - "rocky hills"
+      - "robert olson"
+      - "cyrus freidheim"
+      - "apollo"
+      - "apollo global"
+      - "chiquita"
+      - "united brands"
+      - "united fruit"
+    keywords:
+      - "\\bapollo\\b"
+      - "apollo\\s+global"
+      - "chiquita"
+      - "united\\s+brands"
+      - "united\\s+fruit"
+      - "\\bcovington\\b"
+      - "\\bfcpa\\b"
+      - "\\bauc\\b"
+      - "\\bfarc\\b"
+      - "banadex"
+      - "convivir"
+      - "bananagate"
+      - "dechert\\s+report"
+      - "wyden"
+      - "finance\\s+committee"
+
+  - id: 5
+    name: "Panama / Offshore Fund Flow"
+    description: "The $11.8M Panama wire destination, JPMorgan Chase account #4324 (Freedom Air International), the FSF LLC ownership chain, the 1031 exchange structure via TVPX, and the Hong Kong Freedom Air International Limited coincidence (likely unrelated but to be verified)"
+    targets:
+      - "darren indyke"
+      - "richard kahn"
+      - "harry beller"
+      - "tobias kleitman"
+      - "fsf llc"
+      - "freedom air international"
+      - "jpmorgan"
+      - "jpmorgan chase"
+    keywords:
+      - "\\bpanama\\b"
+      - "jpmorgan.*panama"
+      - "account.*4324"
+      - "#4324"
+      - "fsf\\s+llc"
+      - "hong\\s+kong"
+      - "freedom\\s+air"
+      - "offshore"
+      - "wire\\s+transfer"
+      - "\\btvpx\\b"
+      - "1031\\s+exchange"
+      - "like[- ]kind\\s+exchange"
+      - "tobias\\s+kleitman"
+
+  - id: 6
+    name: "Flight Operations & Usage Patterns"
+    description: "Helicopter operational data during nominal ASI Wings ownership (2011-2019): landing-to-hour ratio of 2.07 suggesting short-hop shuttle use, tail number retention of 'JE' initials, absence of ASI Wings livery photography, ADS-B tracking suppression, and potential ongoing Epstein/Visoski operational control during the Aetna period"
+    targets:
+      - "lawrence visoski"
+      - "richard kahn"
+    keywords:
+      - "n722je"
+      - "n162ae"
+      - "n152ae"
+      - "\\bbdl\\b"
+      - "bradley\\s+international"
+      - "little\\s+st\\s+james"
+      - "st\\s+thomas"
+      - "sikorsky"
+      - "s-76c"
+      - "landings\\s+per\\s+hour"
+      - "flight\\s+hours"
+      - "cuddle\\s+couch"
+      - "jet\\s+asg"
+      - "heli-?resales"
+
+# Document corpus tools specific to this investigation.
+# Generic tools (EDGAR, FEC, CourtListener, OpenCorporates registries) are always available.
+# These overlap heavily with the /investigations/epstein profile since most Epstein-adjacent
+# evidence lives in the same document corpora.
+corpus_tools:
+  - tool: "tools/query_doj.py"
+    name: "DOJ Epstein Files (Volume 11)"
+    description: "331K OCR'd pages from DOJ Epstein file releases; canonical EFTA IDs; primary source for IATS escrow file EFTA01339374"
+    commands: ["search", "fetch", "names", "count"]
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND"
+    description: "60K+ files with 851K entities, cooccurrence analysis"
+    commands: ["search", "entity"]
+  - tool: "tools/query_unified.py"
+    name: "Unified Epstein DB"
+    description: "70K documents + 56K entities + 107K triples, integrated emails and documents"
+    commands: ["emails", "docs", "entities", "triples"]
+  - tool: "tools/query_investigations.py"
+    name: "Ingested Court Exhibits (case-specific)"
+    description: "PDF-ingested court exhibits including EFTA01339374 (IATS escrow file), Axia Advisors Ex 56 (USVI v JPM), JPM Ex 86 (Hyperion Air DDR)"
+    commands: ["search", "list", "show"]
+  - tool: "tools/ingest_faa.py"
+    name: "FAA Aircraft Registry"
+    description: "Full US aircraft registry for N-number lookup, owner search, address search"
+    commands: ["search", "n-number", "address"]
+  - tool: "tools/query_documentcloud.py"
+    name: "DocumentCloud"
+    description: "Public DOJ/Epstein archive; project 216915"
+    commands: ["search", "document"]
+  - tool: "tools/query_muckrock.py"
+    name: "MuckRock FOIA"
+    description: "FOIA requests; project 507 (Epstein)"
+    commands: ["search", "request"]
+
+# Key dates in the investigation timeline
+key_dates:
+  - date: "1975-02-03"
+    event: "Eli M. Black (CEO of United Brands / Chiquita predecessor) jumps from 44th floor of Pan Am Building amid Bananagate scandal; father of Leon Black"
+    category: "legal"
+  - date: "1977-12-19"
+    event: "Foreign Corrupt Practices Act (FCPA) enacted, directly motivated in part by Bananagate"
+    category: "political"
+  - date: "2002-03-19"
+    event: "Jeffrey D. Benjamin joins Chiquita Brands Board (Audit & Executive Committees); simultaneously Apollo Global Management Senior Advisor (2002-2008)"
+    category: "operational"
+  - date: "2004-01-01"
+    event: "Fernando Aguirre becomes Chairman and CEO of Chiquita Brands International (through 2012)"
+    category: "operational"
+  - date: "2007-02-06"
+    event: "Jeffrey D. Benjamin resigns from Chiquita Board, five weeks before the plea agreement"
+    category: "operational"
+  - date: "2007-03-14"
+    event: "Chiquita Brands pleads guilty to engaging in transactions with AUC/FARC (Specially-Designated Global Terrorists); $25M fine; 5-year probation; Fernando Aguirre signs plea as CEO"
+    category: "legal"
+  - date: "2008-12-08"
+    event: "N722JE Sikorsky S-76C++ airworthiness date (manufactured)"
+    category: "operational"
+  - date: "2009-01-23"
+    event: "JPMorgan Private Bank opens Due Diligence Report for Hyperion Air, Inc. (account #4332) while Jeffrey Epstein is serving 18-month sentence; Jes Staley and Stephen Cutler personally decide to retain Epstein as client"
+    category: "financial"
+  - date: "2010-02-11"
+    event: "Air Ghislaine, Inc. renamed to Shmitka Air, Inc. (Delaware); tail number N750A changed to N722JE (March 2010)"
+    category: "operational"
+  - date: "2010-07-06"
+    event: "Shmitka Air, Inc. renamed to Freedom Air International, Inc. (Delaware)"
+    category: "operational"
+  - date: "2010-08-01"
+    event: "Epstein's attempted $12.5M sale of the same helicopter (then N750A) to the Argentine government under Kirchner administration collapses"
+    category: "financial"
+  - date: "2011-07-18"
+    event: "Aircraft Purchase Agreements for N722JE and N162AE signed between Freedom Air International Inc. (Darren Indyke, VP) and ASI Wings LLC (Judith H. Jones, VP/Corporate Secretary of Aetna Inc.)"
+    category: "financial"
+  - date: "2011-07-25"
+    event: "International Registry records rename of Entity 293884 from Air Ghislaine, Inc. to Freedom Air International, Inc.; $1,404,945 wire received from Jeffrey Epstein personally; Darren Indyke discloses FSF LLC / Freedom Air ownership chain to IATS"
+    category: "financial"
+  - date: "2011-07-26"
+    event: "Closing day: $11,800,000 wired from IATS escrow (International Bank of Commerce, OKC) to Freedom Air International Inc. at JPMorgan Chase, Panama, for sale of N722JE; $1,373,957.50 wired to Aetna for N162AE trade-in"
+    category: "financial"
+  - date: "2011-07-29"
+    event: "Fernando Aguirre appointed to Aetna Board AND Audit Committee, three days after the Panama wire (disclosed in 8-K filed 2011-08-02)"
+    category: "operational"
+  - date: "2011-08-05"
+    event: "$25,000 Turbomeca engine holdback released from IATS escrow to Aetna Inc."
+    category: "financial"
+  - date: "2012-03-28"
+    event: "John Duffy (CEO of JPM US Private Bank) email re: Hyperion Air cash withdrawals: 'better fact pattern than I thought … I did ask him to withdraw this cash from his aviation account for these payments'"
+    category: "financial"
+  - date: "2012-12-07"
+    event: "Freedom Air International, Inc. dissolved (Delaware); 17 months after receiving $11.8M Panama wire"
+    category: "operational"
+  - date: "2017-12-31"
+    event: "End of period during which Leon Black paid Jeffrey Epstein $158-170M (Wyden Senate Finance Committee findings); USVI settlement acknowledges funds 'used to partially fund his operations in the Virgin Islands'"
+    category: "financial"
+  - date: "2018-11-28"
+    event: "CVS Health completes acquisition of Aetna Inc.; ASI Wings LLC becomes CVS subsidiary"
+    category: "operational"
+  - date: "2019-06-13"
+    event: "Bill of Sale (FAA Doc JD020475) transfers N722JE from ASI Wings LLC back to Hyperion Air LLC (Jeffrey Epstein sole member, USVI); no purchase price or payment documentation found in any accessible record"
+    category: "legal"
+  - date: "2019-07-06"
+    event: "Jeffrey Epstein arrested on federal sex-trafficking charges (23 days after helicopter transfer)"
+    category: "legal"
+  - date: "2019-07-17"
+    event: "FAA certificate of registration issued to Hyperion Air LLC for N722JE"
+    category: "operational"
+  - date: "2019-08-02"
+    event: "NY Post article: 'Jeffrey Epstein selling creepy helicopter built for cuddling' — listed at deep discount for bail funds"
+    category: "media"
+  - date: "2019-08-10"
+    event: "Jeffrey Epstein dies in federal custody (MCC NYC)"
+    category: "legal"
+  - date: "2019-10-31"
+    event: "Estate of Jeffrey E. Epstein (via Co-Executors Indyke and Kahn) executes written consent to sell N722JE to Helicopter 1029 LLC (Harry Macklowe) for $3,500,000; deal collapses ~Dec 2019 / Jan 2020"
+    category: "financial"
+  - date: "2020-02-26"
+    event: "Letter of Intent signed by Marty Black (Black Air 777 Group PLC, London) to purchase N722JE for $3,300,000; deal stalls through 2020-21"
+    category: "financial"
+  - date: "2021-05-13"
+    event: "Hyperion Air LLC (Lawrence Visoski signing as Manager) sells N722JE to Industrial Integrity Solutions LLC (Ontario CA); FAA certificate issued 2021-07-30"
+    category: "operational"
+
+# Institutional pillars — the structural backbone of this network
+seed_pillars:
+  - name: "Aetna Inc."
+    pillar_type: "operations"
+    sub_type: "health_insurance"
+    status: "active"
+    founded: "1853"
+    jurisdiction: "Connecticut"
+    significance: "Fortune 50 health insurer; parent of ASI Wings LLC which purchased N722JE from Freedom Air International in 2011 for $11.9M; acquired by CVS Health November 2018"
+
+  - name: "ASI Wings, LLC"
+    pillar_type: "operations"
+    sub_type: "aviation_subsidiary"
+    status: "active_under_cvs"
+    founded: "1998-10-30"
+    jurisdiction: "Delaware"
+    significance: "Aetna's wholly-owned aviation subsidiary, direct buyer of N722JE in 2011 and direct seller back to Hyperion Air in 2019; still listed as CVS Health subsidiary in 2025 10-K despite no longer holding the helicopter"
+
+  - name: "CVS Health Corporation"
+    pillar_type: "operations"
+    sub_type: "retail_pharmacy"
+    status: "active"
+    founded: "1963"
+    jurisdiction: "Rhode Island"
+    significance: "Acquired Aetna November 2018; held ASI Wings LLC and N722JE during the June 2019 transfer back to Epstein's Hyperion Air; post-merger aviation fleet rationalization is one plausible explanation for the 2019 transfer"
+
+  - name: "Freedom Air International, Inc."
+    pillar_type: "operations"
+    sub_type: "shell_aviation"
+    status: "dissolved"
+    founded: "2008"
+    dissolved: "2012-12-07"
+    jurisdiction: "Delaware"
+    significance: "Epstein-controlled seller of N722JE in 2011; originally incorporated as Air Ghislaine Inc., renamed to Shmitka Air Inc. (2010-02-11) then Freedom Air International (2010-07-06); sole stockholder was FSF LLC, sole member Jeffrey Epstein; dissolved 17 months after receiving $11.8M Panama wire"
+
+  - name: "Hyperion Air, LLC"
+    pillar_type: "operations"
+    sub_type: "shell_aviation"
+    status: "active"
+    founded: "2012-10"
+    jurisdiction: "US Virgin Islands"
+    significance: "USVI entity, sole member Jeffrey Epstein, manager Lawrence Visoski; acquired N722JE from ASI Wings LLC in June 2019 (23 days before Epstein's arrest) with no documented purchase consideration; registered agent Erika Kellerhals / Business Basics VI"
+
+  - name: "Apollo Global Management"
+    pillar_type: "banking"
+    sub_type: "private_equity"
+    status: "active"
+    founded: "1990"
+    jurisdiction: "Delaware"
+    significance: "Co-founded by Leon Black (son of Eli Black, former United Brands/Chiquita CEO); Jeffrey D. Benjamin was Senior Advisor 2002-2008 while simultaneously on Chiquita Board Audit Committee; Leon Black paid Jeffrey Epstein $158-170M for 'tax planning' 2012-2017"
+
+  - name: "Chiquita Brands International, Inc."
+    pillar_type: "operations"
+    sub_type: "agribusiness"
+    status: "active"
+    founded: "1990"
+    jurisdiction: "Delaware"
+    significance: "Successor to United Brands (formerly United Fruit); pleaded guilty 2007-03 to paying $1.7M to AUC/FARC (designated terrorists); $25M fine; Fernando Aguirre CEO 2004-2012 signed the plea; Jeffrey D. Benjamin resigned from Chiquita Board 5 weeks before plea"
+
+  - name: "United Brands Company"
+    pillar_type: "operations"
+    sub_type: "agribusiness_historical"
+    status: "dissolved"
+    founded: "1970"
+    dissolved: "1990"
+    jurisdiction: "United States"
+    significance: "Created 1970 by merger of AMK Corporation with United Fruit Company; Eli M. Black was Chairman/CEO when the 1975 Bananagate Honduran bribery scandal broke via Swiss bank accounts; renamed Chiquita Brands International 1990; predecessor of the company Aguirre later ran"
+
+  - name: "JPMorgan Private Bank"
+    pillar_type: "banking"
+    sub_type: "private_bank"
+    status: "active"
+    founded: "1871"
+    jurisdiction: "New York"
+    significance: "Bank for both sides of the transaction — Freedom Air International #4324 (Panama destination of $11.8M wire) and Hyperion Air accounts (#0806, #4332, #2820); Paul V. Morris assigned banker for entire Epstein entity constellation; Jes Staley / Stephen Cutler personally retained Epstein post-2008 conviction; John Duffy 'better fact pattern' email (2012-03-28) directly addresses Hyperion Air cash withdrawals"
+
+  - name: "Insured Aircraft Title Service, Inc."
+    pillar_type: "operations"
+    sub_type: "aviation_escrow"
+    status: "active"
+    founded: "1952"
+    jurisdiction: "Oklahoma"
+    significance: "Escrow agent for 2011 N722JE transaction; generated 921-page escrow file EFTA01339374; Joan F. Roberts VP signed all wire authorizations; flagged $1.4M Epstein personal wire and demanded passport / explanation of involvement"
+
+  - name: "Covington & Burling LLP"
+    pillar_type: "legal"
+    sub_type: "law_firm"
+    status: "active"
+    founded: "1919"
+    jurisdiction: "Washington DC"
+    significance: "Chiquita Brands' 2007 plea defense counsel; Eric Holder personally authorized by Chiquita board resolution to execute plea (then became Obama AG); James Garland on Chiquita defense, later Deputy Chief of Staff to AG Holder, then back to Covington; revolving-door nexus spanning the Epstein-relevant period"
+
+  - name: "Aircraft Services Group, Inc."
+    pillar_type: "operations"
+    sub_type: "aviation_broker"
+    status: "active"
+    founded: "1995"
+    jurisdiction: "New Jersey"
+    significance: "George Reenstra's broker firm; seller-side broker in 2011 ($100K commission routed through Fox Rothschild LLP attorney trust account); continued to broker failed/subsequent sales post-Epstein death (Macklowe, Black Air 777, Industrial Integrity Solutions)"
+
+  - name: "Guardian Jet, LLC"
+    pillar_type: "operations"
+    sub_type: "aviation_broker"
+    status: "active"
+    jurisdiction: "Connecticut"
+    significance: "Ted Osgood's broker firm; buyer-side broker for Aetna/ASI Wings in 2011 ($100K commission)"
+
+# Evidence ID prefix — DOJ Epstein files use EFTA bates numbers
+evidence_id_prefix: "EFTA"
+
+# Primary subject to optionally exclude from graph (reveals network structure)
+exclude_from_graph: ""
+
+# Source reliability overrides specific to this investigation.
+source_overrides:
+  "NY Post":
+    trust: "tertiary"
+    note: "Used Aug 2019 'creepy cuddle helicopter' article as lead starter; verify all claims against primary sources before citing"
+  "MEAWW":
+    trust: "tertiary"
+    note: "Aggregation site; not acceptable as evidence source"
+  "Simple Flying":
+    trust: "tertiary"
+    note: "Aviation enthusiast site; useful for technical context but not evidence"
+  "helis.com":
+    trust: "secondary"
+    note: "Aviation database; cross-reference against FAA primary data"
+  "jetphotos.com":
+    trust: "secondary"
+    note: "Photo evidence; archive individual photos cited before relying on them"
+  "Grokipedia":
+    trust: "tertiary"
+    note: "AI-generated content; starting point only, never evidence"
+  "BEHR Group Holdings (issuu.com)":
+    trust: "untrusted"
+    note: "Debunked SEO/scam shell with fabricated executive associations including Fernando Aguirre and Rakesh Sarna; issuu account deleted; one of its blog posts promoted an Iraqi dinar scam — do not cite"
+
+# Bridge threads — global DB IDs from investigation_threads table for other-profile
+# threads to include in this profile's scoped queries.
+# Thread #5  = epstein profile "Apollo / Leon Black Financial" (88 leads, 362 findings)
+# Thread #3  = epstein profile "Deutsche Bank Pipeline" (for cross-bank Epstein flow context)
+bridge_threads: [5, 3]

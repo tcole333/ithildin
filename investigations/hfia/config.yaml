@@ -1,0 +1,204 @@
+# Holding Foreign Insiders Accountable Act / foreign private issuer insider sweep
+
+name: "hfia"
+
+primary_subject: "Foreign private issuer insider filing sweep"
+
+description: >
+  Investigation of the first-wave Section 16 reporting now required from
+  directors and officers of foreign private issuers after the Holding Foreign
+  Insiders Accountable Act took effect on March 18, 2026. Focus on building a
+  triaged issuer universe from new Forms 3, 4, and 5; prioritizing small- and
+  mid-cap issuers with resale pressure, offshore opacity, hype-sector
+  promotion, or governance anomalies; and turning the filing wave into
+  accountability reporting leads.
+
+key_persons: []
+
+known_addresses: {}
+
+threads:
+  - id: 1
+    name: "HFIA Filing Wave and Baseline Universe"
+    description: "First-wave Form 3, 4, and 5 activity, filing compliance, issuer universe construction, and baseline screening metrics."
+    targets:
+      - "holding foreign insiders accountable act"
+      - "section 16"
+      - "form 3"
+      - "form 4"
+      - "form 5"
+    keywords:
+      - "holding\\s+foreign\\s+insiders\\s+accountable"
+      - "section\\s+16"
+      - "beneficial\\s+ownership"
+      - "statement\\s+of\\s+changes\\s+in\\s+beneficial\\s+ownership"
+      - "initial\\s+statement\\s+of\\s+beneficial\\s+ownership"
+
+  - id: 2
+    name: "Recent Listings and Resale Pressure"
+    description: "Fresh U.S. listings, uplists, resale registrations, shelf registrations, financing windows, and post-effective insider trading."
+    targets: []
+    keywords:
+      - "\\bf-1\\b"
+      - "\\bf-3\\b"
+      - "424b3"
+      - "resale"
+      - "registration\\s+statement"
+      - "selling\\s+shareholder"
+      - "prospectus"
+      - "private\\s+placement"
+
+  - id: 3
+    name: "Mining Energy and Hard-Asset Promotions"
+    description: "Critical minerals, mining, battery materials, energy-transition, and commodity-promotion issuers where insider visibility may intersect with promotional disclosure risk."
+    targets: []
+    keywords:
+      - "critical\\s+minerals"
+      - "rare\\s+earth"
+      - "lithium"
+      - "graphite"
+      - "copper"
+      - "uranium"
+      - "mining"
+      - "metals"
+
+  - id: 4
+    name: "Biotech Medtech and Science Promotion"
+    description: "Biotech, medtech, therapeutics, and clinical-stage issuers where insider reporting may sharpen scrutiny of governance, promotion, and capital raising."
+    targets: []
+    keywords:
+      - "biotech"
+      - "therapeutic"
+      - "pharma"
+      - "medical"
+      - "clinical"
+      - "phase\\s+[123]"
+      - "diagnostic"
+      - "genetic"
+
+  - id: 5
+    name: "Fintech Crypto and Offshore Payments"
+    description: "Fintech, payments, crypto-adjacent, trading-platform, and offshore finance issuers with high opacity or compliance risk."
+    targets: []
+    keywords:
+      - "fintech"
+      - "payment"
+      - "payments"
+      - "crypto"
+      - "digital\\s+asset"
+      - "blockchain"
+      - "wallet"
+      - "exchange"
+
+  - id: 6
+    name: "Governance Control and Related-Party Risk"
+    description: "Control blocks, dual-class structures, related-party issues, concentrated insider holdings, nominee patterns, and unusually complex governance."
+    targets: []
+    keywords:
+      - "related\\s+party"
+      - "beneficial\\s+owner"
+      - "voting\\s+control"
+      - "director"
+      - "officer"
+      - "insider"
+      - "control\\s+person"
+      - "supervoting"
+
+  - id: 7
+    name: "Offshore Structure and Registry Opacity"
+    description: "Cayman, BVI, Hong Kong, Bermuda, Singapore, and other offshore or low-transparency structures surrounding HFIA issuers and insiders."
+    targets: []
+    keywords:
+      - "cayman"
+      - "british\\s+virgin\\s+islands"
+      - "\\bbvi\\b"
+      - "hong\\s+kong"
+      - "bermuda"
+      - "singapore"
+      - "registered\\s+office"
+      - "nominee"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2025-12-18"
+    event: "Holding Foreign Insiders Accountable Act enacted."
+    category: "legal"
+  - date: "2026-01-13"
+    event: "SEC publishes implementation announcement for new Section 16 reporting requirements for foreign private issuer directors and officers."
+    category: "legal"
+  - date: "2026-03-09"
+    event: "SEC Division of Corporation Finance publishes HFIA implementation FAQs."
+    category: "legal"
+  - date: "2026-03-12"
+    event: "SEC adds no-action relief for late HFIA Section 16 filings caused by delayed EDGAR access, with an outside filing date of April 1, 2026."
+    category: "legal"
+  - date: "2026-03-18"
+    event: "HFIA Section 16 reporting becomes effective; first-wave Form 3 filings due."
+    category: "milestone"
+  - date: "2026-04-01"
+    event: "Outside date for no-action relief window on delayed HFIA filings."
+    category: "milestone"
+
+seed_pillars:
+  - name: "U.S. Securities and Exchange Commission"
+    pillar_type: "government"
+    sub_type: "securities_regulator"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Primary regulator for Section 16 reporting, issuer disclosure, insider trading, and enforcement."
+
+  - name: "Division of Corporation Finance"
+    pillar_type: "government"
+    sub_type: "issuer_disclosure"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "SEC division that issued HFIA implementation guidance and controls much of the reporting workflow relevant to the sweep."
+
+  - name: "EDGAR"
+    pillar_type: "operations"
+    sub_type: "filing_system"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "The filing system where first-wave HFIA Forms 3, 4, and 5 become visible and where EDGAR access bottlenecks may explain timing anomalies."
+
+  - name: "Nasdaq Stock Market"
+    pillar_type: "operations"
+    sub_type: "exchange"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Major U.S. listing venue for foreign private issuers in growth, biotech, fintech, and critical-minerals sectors."
+
+  - name: "New York Stock Exchange"
+    pillar_type: "operations"
+    sub_type: "exchange"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Major listing venue for foreign private issuers and a source of larger-cap comparison names in the HFIA universe."
+
+  - name: "Hong Kong Companies Registry"
+    pillar_type: "government"
+    sub_type: "corporate_registry"
+    status: "active"
+    jurisdiction: "Hong Kong"
+    significance: "High-value registry for tracing offshore service-provider and holding-company layers around foreign private issuers."
+
+  - name: "Cayman Islands General Registry"
+    pillar_type: "government"
+    sub_type: "corporate_registry"
+    status: "active"
+    jurisdiction: "Cayman Islands"
+    significance: "Core incorporation venue for many foreign private issuers raising capital in U.S. markets."
+
+  - name: "British Virgin Islands Financial Services Commission"
+    pillar_type: "government"
+    sub_type: "corporate_registry"
+    status: "active"
+    jurisdiction: "British Virgin Islands"
+    significance: "Important offshore jurisdiction for opaque holding vehicles, nominee structures, and ownership layering."
+
+evidence_id_prefix: "SEC"
+
+exclude_from_graph: "foreign private issuer insider filing sweep"
+
+source_overrides: {}

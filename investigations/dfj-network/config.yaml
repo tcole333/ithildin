@@ -1,0 +1,249 @@
+# DFJ Network / Silicon Valley–Russia Nexus Investigation
+# Originated from Epstein investigation — FBI ARMS Reach memo (EFTA00129096)
+# connecting Draper/DFJ to Foresight Institute, Drokova/Putin, QWave/Runa,
+# Sanctum blackmail operation, and OCDETF Eurasian Organizations case.
+
+name: dfj-network
+primary_subject: "Tim Draper"
+
+description: >
+  Investigation of the Silicon Valley VC / Russian tech / quantum computing nexus
+  centered on DFJ and Draper Associates. Originated from FBI ARMS Reach vetting memo
+  filed under OPERATION TRIP KNOT (OCDETF Eurasian Organizations, Case 243H-WF-2182018).
+  Key vectors: Masha Drokova bridge between Putin/Nashi, Epstein, and SV tech;
+  Frank Creer parallel blackmail operation via Sanctum club; QWave/Runa Capital
+  Russian oligarch connections; Ukraine sanctions lobbying with Caputo.
+
+key_persons:
+  - "tim draper"
+  - "timothy draper"
+  - "timothy cook draper"
+  - "steve jurvetson"
+  - "steven jurvetson"
+  - "masha drokova"
+  - "maria drokova"
+  - "masha bucher"
+  - "mariya bucher"
+  - "frank creer"
+  - "frank moyle creer"
+  - "haydar haba"
+  - "serguei beloussov"
+  - "serg bell"
+  - "serguei kouzmine"
+  - "oleg boyko"
+  - "michael caputo"
+  - "ted waitt"
+  - "charles lieber"
+  - "brock pierce"
+  - "adam draper"
+  - "john fisher"
+  - "paul tuan"
+  - "roman glukhovsky"
+  - "eugenia goryacheva"
+  - "alex klokus"
+
+known_addresses:
+  "55 e 3rd ave": "Draper Hero Institute / Draper University, San Mateo CA"
+  "2882 sand hill": "DFJ office, Menlo Park CA"
+
+threads:
+  - id: 1
+    name: "DFJ Core Network"
+    description: "Draper, Jurvetson, Fisher, Creer — DFJ/Draper Associates corporate structure and personnel"
+    targets:
+      - "tim draper"
+      - "steve jurvetson"
+      - "john fisher"
+      - "frank creer"
+      - "adam draper"
+    keywords:
+      - "draper fisher"
+      - "dfj"
+      - "draper associates"
+      - "draper hero"
+      - "draper university"
+
+  - id: 2
+    name: "Drokova / Russian Tech Bridge"
+    description: "Masha Drokova as connector between Putin/Nashi, Epstein network, and Silicon Valley. Day One Ventures. QWave/Runa Capital."
+    targets:
+      - "masha drokova"
+      - "masha bucher"
+      - "serguei beloussov"
+      - "serguei kouzmine"
+      - "oleg boyko"
+      - "eugenia goryacheva"
+    keywords:
+      - "drokova"
+      - "bucher"
+      - "day one ventures"
+      - "qwave"
+      - "quantum wave"
+      - "runa capital"
+      - "acronis"
+      - "nashi"
+
+  - id: 3
+    name: "Sanctum / Blackmail Operation"
+    description: "Frank Creer alleged parallel blackmail operation through Sanctum club. Jurvetson as alleged victim."
+    targets:
+      - "frank creer"
+      - "steve jurvetson"
+    keywords:
+      - "sanctum"
+      - "snctm"
+      - "blackmail"
+
+  - id: 4
+    name: "Ukraine / Russia Sanctions"
+    description: "Draper-Yushchenko-Caputo Ukraine meeting re opposing Russia sanctions. OCDETF Eurasian Organizations."
+    targets:
+      - "michael caputo"
+      - "ted waitt"
+    keywords:
+      - "yushchenko"
+      - "ukraine"
+      - "sanctions"
+      - "ocdetf"
+      - "trip knot"
+
+  - id: 5
+    name: "Foresight Institute / Science Network"
+    description: "Transhumanist/nanotech network connecting Draper, Waitt, Lieber. Thiel connections. Edge Foundation overlap."
+    targets:
+      - "charles lieber"
+      - "ted waitt"
+    keywords:
+      - "foresight institute"
+      - "transhumanist"
+      - "nanotechnology"
+
+  - id: 6
+    name: "Fund Operations"
+    description: "Andra Capital, Draper Global, Draper Oakwood SPAC — fund structures, LP relationships, offshore entities"
+    targets:
+      - "haydar haba"
+      - "paul tuan"
+      - "roman glukhovsky"
+    keywords:
+      - "andra capital"
+      - "draper global"
+      - "draper oakwood"
+
+corpus_tools:
+  - tool: "tools/query_lmsband.py"
+    name: "LMSBAND"
+    description: "Primary Epstein document corpus — source of FBI memo and Drokova/Haba emails"
+    commands: ["search", "file", "cooccurrence", "entities"]
+  - tool: "tools/query_doj.py"
+    name: "DOJ Vol 11"
+    description: "DOJ Epstein releases"
+    commands: ["search"]
+
+key_dates:
+  - date: "2017-11-01"
+    event: "Steve Jurvetson forced out of DFJ amid sexual misconduct allegations"
+    category: "operational"
+  - date: "2018-01-12"
+    event: "Drokova introduces Beloussov to Epstein via email"
+    category: "operational"
+  - date: "2018-01-18"
+    event: "Day One Ventures founded by Drokova"
+    category: "financial"
+  - date: "2018-03-23"
+    event: "Draper Hero Institute incorporated (CA nonprofit)"
+    category: "financial"
+  - date: "2018-08-09"
+    event: "Haydar Haba first contact with Epstein via Lesley Groff"
+    category: "financial"
+  - date: "2018-11-02"
+    event: "Draper Global / Andra Capital pitch to Epstein (declined)"
+    category: "financial"
+  - date: "2019-07-06"
+    event: "Epstein arrested"
+    category: "legal"
+  - date: "2021-04-01"
+    event: "Frank Creer becomes CEO of Draper Hero Institute"
+    category: "operational"
+  - date: "2024-07-15"
+    event: "Draper Hero Institute terminated"
+    category: "financial"
+  - date: "2025-04-03"
+    event: "FBI ARMS Reach memo on Tim Draper filed (OPERATION TRIP KNOT)"
+    category: "legal"
+
+seed_pillars:
+  - name: "Draper Fisher Jurvetson"
+    pillar_type: "operations"
+    sub_type: "venture_capital"
+    status: "dissolved"
+    founded: "1985"
+    dissolved: "2018"
+    jurisdiction: "us_ca"
+    significance: "Core VC firm. Co-founders Draper/Jurvetson/Fisher. FBI memo connects to Creer blackmail and QWave investments."
+
+  - name: "Draper Associates"
+    pillar_type: "operations"
+    sub_type: "venture_capital"
+    status: "active"
+    founded: "1985"
+    jurisdiction: "us_ca"
+    significance: "Tim Draper's current primary fund. Early-stage tech investing."
+
+  - name: "Day One Ventures"
+    pillar_type: "operations"
+    sub_type: "venture_capital"
+    status: "active"
+    founded: "2018"
+    jurisdiction: "us_ca"
+    significance: "Drokova's fund. $450M in sensitive tech (quantum, nuclear, BCI, AI security). Bridge from Russian networks to SV."
+
+  - name: "QWave Capital"
+    pillar_type: "operations"
+    sub_type: "venture_capital"
+    status: "unknown"
+    jurisdiction: "unknown"
+    significance: "Quantum computing fund. Beloussov/Kouzmine. FBI says Creer funneled money through for political access."
+
+  - name: "Runa Capital"
+    pillar_type: "operations"
+    sub_type: "venture_capital"
+    status: "active"
+    jurisdiction: "unknown"
+    significance: "Beloussov tech VC. Creer/Jurvetson invested via DFJ. Drokova was publicist."
+
+  - name: "Foresight Institute"
+    pillar_type: "academia"
+    sub_type: "research_institute"
+    status: "active"
+    founded: "1986"
+    jurisdiction: "us_ca"
+    significance: "Nanotech/transhumanist org. FBI memo connects Draper, Ted Waitt (Epstein-Gates broker), Charles Lieber (convicted spy)."
+
+  - name: "Acronis"
+    pillar_type: "operations"
+    sub_type: "technology"
+    status: "active"
+    jurisdiction: "sg"
+    significance: "Beloussov's data protection company. Singapore-based. Gateway to understanding Beloussov's business empire."
+
+  - name: "Draper Hero Institute"
+    pillar_type: "philanthropy"
+    sub_type: "nonprofit"
+    status: "dissolved"
+    founded: "2018"
+    dissolved: "2024"
+    jurisdiction: "us_ca"
+    significance: "Creer was CEO. Received $805K from Draper Foundation. Terminated 2024. Purpose unclear."
+
+  - name: "Sanctum (SNCTM)"
+    pillar_type: "operations"
+    sub_type: "social_club"
+    status: "unknown"
+    jurisdiction: "us_ca"
+    significance: "High-end sex/swingers club. FBI alleges Creer collected blackmail info on members similar to Epstein model."
+
+evidence_id_prefix: "EFTA"
+exclude_from_graph: "Tim Draper"
+
+source_overrides: {}

@@ -1,0 +1,190 @@
+# Investigation Profile: Sam Altman
+name: "altman"
+
+primary_subject: "Sam Altman"
+
+description: "Investigation of Sam Altman — OpenAI CEO, venture capital networks, personal financial vehicles, and related entities including Structure Fund I GP, LLC."
+
+key_persons:
+  - "sam altman"
+  - "samuel altman"
+  - "samuel h altman"
+  - "oliver mulherin"
+  - "oliver mulherin altman"
+
+known_addresses: {}
+
+threads:
+  - id: 1
+    name: "OpenAI Governance"
+    description: "OpenAI board dynamics, nonprofit-to-profit conversion, governance disputes"
+    targets:
+      - "sam altman"
+      - "openai"
+      - "greg brockman"
+      - "ilya sutskever"
+      - "mira murati"
+    keywords:
+      - "openai"
+      - "board.*removal"
+      - "nonprofit.*conversion"
+
+  - id: 2
+    name: "Personal Financial Vehicles"
+    description: "Personal investment entities, fund structures, family financial architecture"
+    targets:
+      - "sam altman"
+      - "oliver mulherin"
+      - "structure fund"
+    keywords:
+      - "structure fund"
+      - "fund.*gp"
+      - "investment.*vehicle"
+      - "limited partner"
+
+  - id: 3
+    name: "Venture Capital Network"
+    description: "Y Combinator tenure, startup investments, VC relationships"
+    targets:
+      - "sam altman"
+      - "y combinator"
+    keywords:
+      - "y combinator"
+      - "yc"
+      - "venture"
+      - "startup"
+      - "seed.*fund"
+
+  - id: 4
+    name: "AI Policy & Government"
+    description: "Government lobbying, AI policy influence, regulatory positioning"
+    targets:
+      - "sam altman"
+      - "openai"
+    keywords:
+      - "lobbying"
+      - "congress"
+      - "regulation"
+      - "ai.*safety"
+      - "ai.*policy"
+
+  - id: 5
+    name: "Energy & Infrastructure Bets"
+    description: "Helion Energy, nuclear, Oklo, Worldcoin/World, real estate, prepper assets"
+    targets:
+      - "sam altman"
+      - "helion"
+      - "oklo"
+      - "worldcoin"
+      - "world"
+    keywords:
+      - "helion"
+      - "fusion"
+      - "oklo"
+      - "nuclear"
+      - "worldcoin"
+      - "world.*network"
+      - "real estate"
+
+  - id: 6
+    name: "Mulherin & Family"
+    description: "Oliver Mulherin's professional network, joint ventures, family entities"
+    targets:
+      - "oliver mulherin"
+      - "structure fund"
+    keywords:
+      - "mulherin"
+      - "spouse"
+      - "family.*office"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2014-02-21"
+    event: "Sam Altman becomes president of Y Combinator"
+    category: "milestone"
+  - date: "2015-12-11"
+    event: "OpenAI founded as nonprofit"
+    category: "milestone"
+  - date: "2019-03-01"
+    event: "OpenAI LP (capped-profit) entity created"
+    category: "financial"
+  - date: "2019-03-08"
+    event: "Altman steps down as Y Combinator president"
+    category: "milestone"
+  - date: "2023-01-10"
+    event: "Microsoft invests $10B in OpenAI"
+    category: "financial"
+  - date: "2023-11-17"
+    event: "Altman fired by OpenAI board"
+    category: "operational"
+  - date: "2023-11-22"
+    event: "Altman reinstated as CEO with new board"
+    category: "operational"
+  - date: "2024-01-13"
+    event: "Altman marries Oliver Mulherin"
+    category: "milestone"
+  - date: "2024-12-26"
+    event: "OpenAI announces for-profit conversion plan"
+    category: "financial"
+
+seed_pillars:
+  - name: "OpenAI"
+    pillar_type: "operations"
+    sub_type: "ai_lab"
+    status: "active"
+    founded: "2015"
+    jurisdiction: "Delaware"
+    significance: "Primary organization — nonprofit-to-profit conversion is central governance question"
+
+  - name: "Y Combinator"
+    pillar_type: "operations"
+    sub_type: "venture_accelerator"
+    status: "active"
+    founded: "2005"
+    jurisdiction: "California"
+    significance: "Altman's power base 2014-2019, extensive network of portfolio company relationships"
+
+  - name: "Structure Fund I GP, LLC"
+    pillar_type: "operations"
+    sub_type: "investment_fund"
+    status: "active"
+    jurisdiction: null
+    significance: "Newly created entity listing Altman as officer — personal investment vehicle, scope and purpose TBD"
+
+  - name: "Helion Energy"
+    pillar_type: "operations"
+    sub_type: "energy"
+    status: "active"
+    founded: "2013"
+    jurisdiction: "Washington"
+    significance: "Altman is largest investor and chairman — fusion energy play"
+
+  - name: "Oklo Inc."
+    pillar_type: "operations"
+    sub_type: "energy"
+    status: "active"
+    founded: "2013"
+    jurisdiction: "California"
+    significance: "Altman chaired the board — fission microreactor company, went public via SPAC"
+
+  - name: "Tools for Humanity"
+    pillar_type: "operations"
+    sub_type: "technology"
+    status: "active"
+    founded: "2019"
+    jurisdiction: "California"
+    significance: "Worldcoin/World parent entity — biometric identity project co-founded by Altman"
+
+  - name: "Microsoft Corporation"
+    pillar_type: "banking"
+    sub_type: "strategic_partner"
+    status: "active"
+    jurisdiction: "Washington"
+    significance: "Largest OpenAI investor ($13B+), key commercial partner, governance influence"
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "Sam Altman"
+
+source_overrides: {}

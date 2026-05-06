@@ -1,0 +1,191 @@
+# Epstein Document Taxonomy
+# 3-axis classification for cataloging local Epstein corpora.
+# See plan: ~/.claude/plans/cosmic-toasting-moore.md
+
+version: 1
+updated: 2026-04-15
+
+# Axis 1 — Investigative origin (what proceeding / investigation produced the doc)
+axis1_origin:
+  federal_criminal_sdny:
+    notes: US v. Epstein (2019, SDNY 1:19-cr-490), US v. Maxwell (2020, SDNY 1:20-cr-330)
+  federal_civil_sdny:
+    notes: Civil federal filings in SDNY outside the criminal docket
+  state_criminal_fl_2006:
+    notes: Palm Beach County 2005-2007 investigation, grand jury 2006
+  state_criminal_fl_2008_npa:
+    notes: 2008 non-prosecution agreement and related federal proceedings in SDFL
+  state_civil_usvi:
+    notes: USVI Attorney General v. Epstein Estate and related USVI proceedings
+  civil_victim_litigation:
+    notes: Giuffre v. Maxwell (15-cv-7433), Giuffre v. Prince Andrew, Jane Doe suits
+  civil_bank_litigation:
+    notes: USVI v. JPMorgan (1:22-cv-10904), Jane Doe v. JPM, Jane Doe v. Deutsche Bank
+  congressional_house_oversight:
+    notes: House Oversight Committee Epstein document releases (20K+ tranche)
+  congressional_senate:
+    notes: Senate Finance / Judiciary / Banking committee material
+  fbi_investigation:
+    notes: FBI field files, 302s, investigative memos
+  doj_prosecutorial:
+    notes: Main Justice memos, charging decisions, declinations
+  grand_jury:
+    notes: Grand jury testimony and exhibits (state and federal)
+  regulatory:
+    notes: SEC, FinCEN, OCC, state regulator proceedings
+  estate_probate:
+    notes: Epstein estate probate (USVI), trust administration
+  journalism:
+    notes: Investigative reporting archives (Miami Herald, NYT, etc.)
+  personal_records:
+    notes: Epstein's own calendars, contact lists, message pads, flight logs
+  corporate_internal:
+    notes: Internal bank/firm records (JPM KYC memos, DB reviews) outside litigation
+  unknown:
+    notes: Origin cannot be determined from available signals
+
+# Axis 2 — Document form / functional type
+axis2_form:
+  indictment:
+    notes: Formal criminal indictment or superseding indictment
+  complaint:
+    notes: Civil complaint or state criminal complaint
+  motion:
+    notes: Motions (to dismiss, compel, seal, etc.) and supporting papers
+  brief:
+    notes: Briefs, memoranda of law
+  opinion_order:
+    notes: Judicial opinions, orders, rulings
+  deposition_transcript:
+    notes: Deposition transcripts (sworn civil testimony)
+  trial_hearing_transcript:
+    notes: Trial and hearing transcripts
+  grand_jury_testimony:
+    notes: Grand jury testimony transcripts
+  fbi_302:
+    notes: FBI Form 302 — record of witness interview
+  fbi_memo:
+    notes: FBI internal memoranda, EC (electronic communication) records
+  doj_memo:
+    notes: DOJ internal memoranda, prosecutorial recommendations
+  subpoena:
+    notes: Subpoenas (document, testimony, grand jury)
+  search_warrant:
+    notes: Search warrants and returns
+  affidavit:
+    notes: Sworn affidavits (witness, agent, expert)
+  exhibit:
+    notes: Documents filed as exhibits to pleadings (type unclear without context)
+  email:
+    notes: Email messages, including chains and attachments as separate docs
+  letter_correspondence:
+    notes: Formal letters, written correspondence
+  contact_list:
+    notes: Address books, "black book" style contact compilations
+  flight_log:
+    notes: Aircraft flight logs, manifests, pilot records
+  calendar_schedule:
+    notes: Calendars, schedules, appointment books
+  message_pad:
+    notes: Phone message pads (pink slips, handwritten "while you were out" notes)
+  bank_statement:
+    notes: Bank account statements
+  brokerage_statement:
+    notes: Brokerage/investment account statements, position reports
+  transaction_wire_record:
+    notes: Individual wire transfers, transaction records, bank memos
+  tax_return_990:
+    notes: Tax returns, IRS 990s, K-1s
+  trust_estate_document:
+    notes: Trust instruments, wills, probate filings, beneficiary records
+  contract_agreement:
+    notes: Contracts, agreements, NDAs, employment contracts
+  corporate_record:
+    notes: Articles of incorporation, bylaws, resolutions, officer lists, registry filings
+  photograph_video:
+    notes: Photographs, videos, audio recordings
+  handwritten_note:
+    notes: Handwritten notes, diary entries
+  media_article:
+    notes: News articles, opinion columns, media clippings
+  forensic_kyc_report:
+    notes: KYC reviews, AML reports, forensic accountant reports
+  interview_proffer_transcript:
+    notes: Interview transcripts (non-FBI), proffer sessions
+  cover_sheet_separator:
+    notes: Bates cover sheets, document separator pages, blank pages
+  other:
+    notes: Valid document type not fitting the above
+  unknown:
+    notes: Form cannot be determined from signals
+
+# Axis 3 — Source agency / custodian (who produced / held the doc)
+axis3_custodian:
+  sdny_usao:
+    notes: US Attorney's Office, Southern District of New York
+  fbi:
+    notes: Federal Bureau of Investigation
+  doj_main:
+    notes: DOJ Main Justice (Criminal Division, OPA, etc.)
+  usvi_ag:
+    notes: US Virgin Islands Attorney General
+  pb_sheriff:
+    notes: Palm Beach County Sheriff's Office
+  pb_state_attorney:
+    notes: Palm Beach County State Attorney (Krischer's office era)
+  house_oversight:
+    notes: US House Committee on Oversight and Accountability
+  senate_finance:
+    notes: US Senate Finance Committee
+  senate_judiciary:
+    notes: US Senate Judiciary Committee
+  jpmorgan:
+    notes: JPMorgan Chase internal records
+  deutsche_bank:
+    notes: Deutsche Bank internal records
+  epstein_estate:
+    notes: Epstein estate / co-executors (Indyke, Kahn)
+  ncd:
+    notes: Nine Corporation Drive / Epstein office / Financial Trust Co.
+  maxwell_defense:
+    notes: Ghislaine Maxwell's defense counsel
+  victim_counsel:
+    notes: Victim-side counsel (Boies Schiller, Edwards, Cassell, etc.)
+  private_counsel:
+    notes: Epstein / Maxwell private counsel not otherwise specified
+  journalist:
+    notes: Journalist/publisher custody (Miami Herald FOIA releases, etc.)
+  regulator:
+    notes: SEC, FinCEN, OCC, state financial regulators
+  unknown:
+    notes: Custodian cannot be determined
+
+# Mapping from existing Unified DB / Doc Explorer categories to this taxonomy
+# (weak priors; rule-based classifier will refine)
+legacy_category_map:
+  court_filing: { axis2: exhibit }  # too generic — treat as weak signal
+  legal_filing: { axis2: motion }
+  legal_document: { axis2: exhibit }
+  legal_memorandum: { axis2: brief }
+  legal_notice: { axis2: letter_correspondence }
+  legal_correspondence: { axis2: letter_correspondence }
+  legal_disclaimer: { axis2: other }
+  email: { axis2: email }
+  letter: { axis2: letter_correspondence }
+  memo: { axis2: doj_memo }  # weak — could be FBI or private
+  memorandum: { axis2: doj_memo }
+  media_article: { axis2: media_article, axis3: journalist }
+  opinion_column: { axis2: media_article, axis3: journalist }
+  blog_excerpt: { axis2: media_article, axis3: journalist }
+  book_excerpt: { axis2: media_article, axis3: journalist }
+  social_media_post: { axis2: media_article, axis3: journalist }
+  financial_document: { axis2: bank_statement }  # weak — could be any of several
+  business_proposal: { axis2: contract_agreement }
+  business_document: { axis2: contract_agreement }
+  transcript: { axis2: interview_proffer_transcript }
+  report: { axis2: forensic_kyc_report }
+  police_report: { axis2: fbi_memo, axis3: pb_sheriff }
+  interview_transcript: { axis2: interview_proffer_transcript }
+  public_record: { axis2: corporate_record }
+  mixed_document: { axis2: unknown }
+  other: { axis2: other }

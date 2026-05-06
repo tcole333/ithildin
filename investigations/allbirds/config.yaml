@@ -1,0 +1,305 @@
+# Allbirds / NewBird AI — GPU Pivot Forensics
+# Investigating the April 15, 2026 rebrand of Allbirds (BIRD) from a failing
+# sustainable footwear company to "NewBird AI," a purported GPU-as-a-Service
+# provider, following a $50M convertible financing. Pattern-matches classic
+# distressed-company-to-hot-sector pump (compare: Long Blockchain 2017).
+
+name: "allbirds"
+
+primary_subject: "Allbirds, Inc. (NASDAQ: BIRD) / NewBird AI"
+
+description: >
+  Financial forensics investigation of Allbirds, Inc. (NASDAQ: BIRD) and its
+  April 15, 2026 rebrand to "NewBird AI" — a pivot from struggling sustainable
+  footwear retailer to purported "GPU-as-a-Service" AI compute provider.
+  The announcement triggered a ~600% one-day stock surge (from ~$3 to ~$16.99)
+  on a $50M convertible financing from an undisclosed institutional investor.
+  Investigation focuses on: (1) who is the undisclosed convertible counterparty
+  and what are the conversion terms; (2) insider trading around the March 30
+  shoe-asset-sale and April 15 AI-pivot announcements; (3) the role of placement
+  agent Chardan Capital Markets (SEC-sanctioned 2018 for penny-stock SAR
+  failures) and whether this exhibits toxic/death-spiral financing hallmarks;
+  (4) how the pattern compares to Long Island Iced Tea -> Long Blockchain Corp
+  (2017), which resulted in SEC insider-trading charges against three
+  individuals and delisting in 2021. CIK: 0001785450. Ticker: BIRD.
+  Delaware incorporation; HQ San Francisco, CA.
+
+# Key persons - officers, directors, founders, placement agent principals.
+# Lowercase for auto-classification. Priority escalation triggers.
+key_persons:
+  # Current executives (2026)
+  - "joe vernachio"            # CEO since March 2024 (elevated from COO); 2 stock sales in last 6 months
+  - "joseph vernachio"         # Alt name form
+  - "kimberly mitchell"        # CFO since April 2023
+  - "kelly olmstead"           # Head of Marketing
+  - "christos yatrakis"        # General Counsel / People & Legal
+  # Co-founders and board
+  - "tim brown"                # Co-founder (May 2015); board member
+  - "timothy brown"            # Alt form
+  - "joey zwillinger"          # Co-founder; former CEO; board member + special advisor
+  - "joseph zwillinger"        # Alt form (given name)
+  - "john boyce"               # Lead Independent Director since July 2020; board since December 2016
+  - "hari thanawala"           # Board member since September 2024
+  # Long Blockchain comparison pattern (historical insider-trading defendants)
+  - "eric watson"              # Long Blockchain: tipped off broker; New Zealand citizen; SEC charged
+  - "oliver barret-lindsay"    # Long Blockchain: broker; Cayman Islands firm
+  - "gannon giguiere"          # Long Blockchain: stock promoter; SEC charged
+
+# Known addresses - tied to Allbirds HQ, prior offices, founders.
+# Use partial lowercase patterns.
+known_addresses:
+  "730 montgomery": "Allbirds HQ (730 Montgomery Street, San Francisco, CA 94111) - verify current"
+  "500 treat avenue": "Prior Allbirds office, San Francisco"
+  "san francisco": "Allbirds operational base"
+  "wellington": "Tim Brown's origin - New Zealand"
+
+# Investigation threads - six thematic pillars for organizing leads.
+threads:
+  - id: 1
+    name: "AI Pivot Transaction"
+    description: "The April 15 2026 $50M convertible facility, NewBird AI rebrand, stated GPU-as-a-Service plan. Deal terms, conversion triggers, stockholder vote."
+    targets:
+      - "newbird ai"
+      - "newbird"
+      - "gpu-as-a-service"
+      - "gpuaas"
+      - "ai compute"
+    keywords:
+      - "convertible"
+      - "pivot"
+      - "rebrand"
+      - "gpu"
+      - "ai.compute"
+      - "placement.agent"
+      - "special.meeting"
+
+  - id: 2
+    name: "Shoe Business Divestiture"
+    description: "March 30 2026 definitive agreement selling Allbirds footwear IP to American Exchange Group for $39M. Special committee, winding-down mechanics, stockholder distributions."
+    targets:
+      - "american exchange group"
+      - "axny"
+      - "aerosoles"          # AXNY portfolio brand
+      - "white mountain"      # AXNY portfolio brand
+      - "ed hardy"            # AXNY portfolio brand
+      - "jonathan adler"      # AXNY portfolio brand
+    keywords:
+      - "asset.purchase"
+      - "definitive.agreement"
+      - "wind.down"
+      - "distribution"
+      - "special.committee"
+
+  - id: 3
+    name: "Insider Trading & Market Activity"
+    description: "Form 4 filings, insider sales and purchases, short interest, options activity, unusual volume, Reg FD compliance around pivot announcement."
+    targets: []
+    keywords:
+      - "form.4"
+      - "insider"
+      - "short.interest"
+      - "options"
+      - "short.squeeze"
+      - "material.non.public"
+      - "regulation.fd"
+
+  - id: 4
+    name: "Financing Counterparties"
+    description: "Identify undisclosed institutional investor behind $50M convertible. Background on Chardan Capital Markets (2018 SEC action), Holland & Hart, and any prior investor relationships."
+    targets:
+      - "chardan"
+      - "chardan capital markets"
+      - "holland & hart"
+      - "holland and hart"
+    keywords:
+      - "convertible.note"
+      - "placement.agent"
+      - "institutional.investor"
+      - "death.spiral"
+      - "toxic.financing"
+      - "suspicious.activity.report"
+
+  - id: 5
+    name: "Corporate History & Governance"
+    description: "IPO (Nov 2021), reverse stock split (2024), Nasdaq compliance issues, CEO transitions, going-concern disclosures, historical financings, founder relationships."
+    targets: []
+    keywords:
+      - "ipo"
+      - "reverse.stock.split"
+      - "nasdaq.compliance"
+      - "going.concern"
+      - "minimum.bid.price"
+      - "shelf.registration"
+      - "atm.equity"
+      - "s-1"
+      - "s-3"
+      - "10-k"
+      - "proxy"
+
+  - id: 6
+    name: "Comparable Pump-Dump Patterns"
+    description: "Benchmark against Long Island Iced Tea -> Long Blockchain (2017; SEC charges 2021; delisted 2021) and other sector-pivot meme-stock patterns (crypto, AI, GPU, EV). Identify common enablers."
+    targets:
+      - "long blockchain"
+      - "long island iced tea"
+      - "lbcc"
+    keywords:
+      - "pump.and.dump"
+      - "name.change"
+      - "rebrand"
+      - "sector.pivot"
+      - "meme.stock"
+
+# Document corpus tools - none specific to this case yet. Generic tools
+# (EDGAR, FINRA, OpenCorporates, CourtListener) are always available.
+corpus_tools: []
+
+# Key dates for timeline analysis
+key_dates:
+  - date: "2015-05-01"
+    event: "Allbirds founded by Tim Brown and Joey Zwillinger"
+    category: "milestone"
+  - date: "2021-11-03"
+    event: "Allbirds IPO on NASDAQ (BIRD); first-day valuation ~$4 billion"
+    category: "financial"
+  - date: "2022-03-15"
+    event: "First major post-IPO earnings miss; stock begins long decline"
+    category: "financial"
+  - date: "2024-03-14"
+    event: "Joe Vernachio elevated from COO to CEO; Joey Zwillinger steps down as CEO, remains on board as special advisor"
+    category: "operational"
+  - date: "2024-04-02"
+    event: "Nasdaq notice: BIRD non-compliant with minimum bid price ($1.00) requirement"
+    category: "financial"
+  - date: "2024-08-13"
+    event: "Stockholders approve 1-for-20 reverse stock split"
+    category: "financial"
+  - date: "2024-09-04"
+    event: "1-for-20 reverse stock split effective"
+    category: "financial"
+  - date: "2024-09-30"
+    event: "Compliance period deadline for Nasdaq minimum bid"
+    category: "financial"
+  - date: "2025-01-15"
+    event: "SEC approves new Nasdaq rules accelerating delisting after failed reverse splits"
+    category: "political"
+  - date: "2025-03-11"
+    event: "Q4 2024 / Full year 2024 results: Revenue -25.3% to $189.8M; Net loss $93.3M; $66.7M cash"
+    category: "financial"
+  - date: "2026-03-30"
+    event: "Definitive agreement to sell Allbirds footwear assets to American Exchange Group (AXNY) for $39M; 10-K filed with going-concern language"
+    category: "financial"
+  - date: "2026-04-15"
+    event: "$50M convertible financing announced with undisclosed institutional investor; rebrand to NewBird AI / GPU-as-a-Service pivot; BIRD stock +582% close at $16.99"
+    category: "financial"
+  - date: "2026-04-24"
+    event: "Proxy statement deadline for shoe-asset-sale vote"
+    category: "milestone"
+  - date: "2026-05-18"
+    event: "Special stockholder meeting anticipated for pivot/financing approval"
+    category: "milestone"
+  # Long Blockchain comparison timeline
+  - date: "2017-12-21"
+    event: "COMPARABLE: Long Island Iced Tea announces rebrand to Long Blockchain Corp; stock +380%, volume +1,000%"
+    category: "financial"
+  - date: "2021-02-22"
+    event: "COMPARABLE: SEC delists Long Blockchain Corp for failure to file financial reports since Sept 2018"
+    category: "legal"
+  - date: "2021-07-09"
+    event: "COMPARABLE: SEC charges Eric Watson, Oliver Barret-Lindsay, Gannon Giguiere with insider trading on Long Blockchain pivot announcement"
+    category: "legal"
+
+# Institutional pillars - the structural backbone of the investigation
+seed_pillars:
+  - name: "Allbirds, Inc."
+    pillar_type: "operations"
+    sub_type: "public_company"
+    status: "active"
+    founded: "2015"
+    dissolved: null
+    jurisdiction: "Delaware"
+    significance: "Primary subject. Publicly traded on NASDAQ as BIRD since Nov 2021. Planning to rename to NewBird AI."
+
+  - name: "NewBird AI"
+    pillar_type: "operations"
+    sub_type: "planned_entity"
+    status: "active"
+    founded: "2026"
+    dissolved: null
+    jurisdiction: "Delaware"
+    significance: "Planned new corporate identity following April 2026 pivot. Announced target business: GPU-as-a-Service and AI-native cloud solutions."
+
+  - name: "American Exchange Group"
+    pillar_type: "operations"
+    sub_type: "brand_management"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Acquirer of Allbirds footwear IP for $39M (March 30 2026). Brand management holding company with portfolio including Aerosoles, White Mountain, Ed Hardy, Rampage, Alexis Bendel, Born, Jonathan Adler. Uses AXNY identifier."
+
+  - name: "Chardan Capital Markets, LLC"
+    pillar_type: "banking"
+    sub_type: "investment_bank"
+    status: "active"
+    founded: null
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Placement agent for the $50M convertible financing. SEC-sanctioned in 2018 (Release 34-83251) for failing to file Suspicious Activity Reports on penny-stock transactions; withdrew from penny-stock business in June 2014 after ICBC (clearing firm) raised concerns."
+
+  - name: "Holland & Hart LLP"
+    pillar_type: "legal"
+    sub_type: "law_firm"
+    status: "active"
+    founded: "1947"
+    dissolved: null
+    jurisdiction: "United States (Denver-based)"
+    significance: "Legal counsel on the $50M convertible financing."
+
+  - name: "NASDAQ Stock Market"
+    pillar_type: "government"
+    sub_type: "exchange"
+    status: "active"
+    founded: "1971"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "BIRD listing venue. Issued non-compliance notice April 2024; accelerated-delisting rules active from January 2025. Jurisdiction over reverse-split and continued-listing analysis."
+
+  - name: "U.S. Securities and Exchange Commission"
+    pillar_type: "government"
+    sub_type: "regulator"
+    status: "active"
+    founded: "1934"
+    dissolved: null
+    jurisdiction: "United States federal"
+    significance: "Primary securities regulator. Historical precedent: SEC v. Watson/Barret-Lindsay/Giguiere (2021, Long Blockchain insider trading). Relevant filings: S-3, 8-K, PREM14A, Form 4, 10-K."
+
+  - name: "Long Blockchain Corp (f/k/a Long Island Iced Tea Corp)"
+    pillar_type: "operations"
+    sub_type: "comparable_pump_dump"
+    status: "dissolved"
+    founded: "2015"
+    dissolved: "2021"
+    jurisdiction: "Delaware"
+    significance: "Historical comparable: December 2017 rebrand from iced tea to blockchain company; stock +380%; SEC insider-trading charges 2021; delisted 2021. Primary reference for pivot-rebrand pump-dump pattern analysis."
+
+  - name: "FINRA"
+    pillar_type: "government"
+    sub_type: "self_regulatory_organization"
+    status: "active"
+    founded: "2007"
+    dissolved: null
+    jurisdiction: "United States"
+    significance: "Broker-dealer oversight; short-interest reporting; relevant for market-making and trading-halt analysis on BIRD."
+
+# SEC is the primary document corpus for this investigation
+evidence_id_prefix: "SEC"
+
+# Exclude the primary subject from network graph visualizations to see
+# the structure of the rest of the network.
+exclude_from_graph: "Allbirds, Inc."
+
+# Source reliability overrides - none required at initialization.
+# Note: retail-investor forums (Reddit WSB, StockTwits) should be treated as
+# tertiary; use for sentiment signal only, not as evidence.
+source_overrides: {}

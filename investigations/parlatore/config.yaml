@@ -1,0 +1,161 @@
+name: "parlatore"
+primary_subject: "Timothy C. Parlatore"
+description: "Investigation of Timothy C. Parlatore, founder of Parlatore Law Group. Focus: Naval Reserve commissioning loophole allowing him to work for the Pentagon under SecDef Pete Hegseth while maintaining private practice; conflicts of interest representing clients suing the Pentagon while serving inside it; alleged payments from officers seeking promotion; prior Trump legal team role in the classified documents case; representation of high-profile military and political clients (Eddie Gallagher, Bernard Kerik)."
+
+key_persons:
+  - "tim parlatore"
+  - "timothy parlatore"
+  - "timothy c parlatore"
+  - "pete hegseth"
+  - "peter hegseth"
+  - "donald trump"
+  - "eddie gallagher"
+  - "edward gallagher"
+  - "bernard kerik"
+  - "boris epshteyn"
+  - "evan corcoran"
+  - "jim trusty"
+  - "john irving"
+  - "robert o'neill"
+  - "clint lorance"
+  - "matthew golsteyn"
+  - "marc mukasey"
+  - "alina habba"
+  - "todd blanche"
+  - "dan caldwell"
+  - "darin selnick"
+  - "joe kasper"
+
+known_addresses:
+  "1140 broadway": "Parlatore Law Group HQ, New York, NY"
+  "the pentagon": "Department of Defense, Arlington VA — Parlatore reserve duty location"
+
+threads:
+  - id: 1
+    name: "Pentagon Reserve Loophole"
+    description: "Naval Reserve commissioning that lets Parlatore work inside DoD under Hegseth without leaving private practice. Reservist status, JAG Corps assignment, ethics waivers, conflict-of-interest screening, security clearance, billet and chain of command."
+    targets: ["pete hegseth", "peter hegseth", "joe kasper"]
+    keywords: ["naval reserve", "reservist", "jag corps", "direct commission", "secdef", "secretary of defense", "ethics waiver", "office of general counsel", "ogc"]
+  - id: 2
+    name: "Pentagon Litigation Conflicts"
+    description: "Cases where Parlatore Law Group represents clients suing or in disputes with DoD, the services, or military officials while Parlatore simultaneously holds a Pentagon role. Court records, BCNR/BCMR cases, military justice appeals, FOIA litigation."
+    targets: []
+    keywords: ["board for correction", "bcnr", "bcmr", "court of federal claims", "uniform code of military justice", "ucmj", "general court-martial", "tucker act", "feres", "mandamus"]
+  - id: 3
+    name: "Officer Promotion Pay-to-Play"
+    description: "Allegations that officers seeking promotion or favorable Pentagon outcomes have retained Parlatore. Promotion board interventions, flag officer reviews, Senate-confirmation holds, fitness reports."
+    targets: []
+    keywords: ["promotion board", "flag officer", "fitness report", "fitrep", "oer", "selection board", "senate confirmation", "nomination"]
+  - id: 4
+    name: "Trump Legal Network"
+    description: "Parlatore's tenure on Trump's legal team for the Mar-a-Lago classified documents matter (2023), interactions with Boris Epshteyn, reasons for departure, ongoing relationships with Trump-orbit lawyers and clients."
+    targets: ["donald trump", "boris epshteyn", "evan corcoran", "jim trusty", "alina habba", "todd blanche"]
+    keywords: ["mar-a-lago", "classified documents", "espionage act", "save america pac"]
+  - id: 5
+    name: "High-Profile Military Defense"
+    description: "Representation of Eddie Gallagher (Navy SEAL war crimes), Clint Lorance, Matthew Golsteyn, Robert O'Neill, and other military clients. Patterns in client selection, fee arrangements, public-facing media strategy."
+    targets: ["eddie gallagher", "edward gallagher", "clint lorance", "matthew golsteyn", "robert o'neill"]
+    keywords: ["seal team", "war crimes", "trident review", "court-martial", "pardon", "navy seal"]
+  - id: 6
+    name: "Parlatore Law Group Operations"
+    description: "Firm structure, partners, associates, of-counsel relationships, jurisdictional registrations, billing practices, marketing, media appearances on CNN/MSNBC/Fox."
+    targets: []
+    keywords: ["parlatore law group", "pllg", "parlatore pllc", "of counsel", "law partner", "associate"]
+  - id: 7
+    name: "Hegseth Pentagon Inner Circle"
+    description: "Hegseth's appointees, advisors, and personal staff at DoD; the broader 'Concerned Veterans for America' / Fox News alumni network now placed across the Pentagon. Parlatore's relationships with these figures."
+    targets: ["pete hegseth", "joe kasper", "dan caldwell", "darin selnick"]
+    keywords: ["concerned veterans for america", "cva", "fox and friends weekend", "secdef chief of staff", "senior advisor", "deputy chief of staff"]
+
+corpus_tools: []
+
+key_dates:
+  - date: "2018-09-11"
+    event: "Eddie Gallagher arrested by NCIS on war-crimes charges (Parlatore later joins defense team with Marc Mukasey)"
+    category: "legal"
+  - date: "2019-07-02"
+    event: "Gallagher acquitted of premeditated murder; convicted only of posing with corpse — Parlatore prominent in defense"
+    category: "legal"
+  - date: "2019-11-15"
+    event: "Trump intervenes to halt Gallagher's Trident review board — Parlatore publicly lobbies"
+    category: "political"
+  - date: "2022-08-08"
+    event: "FBI executes search warrant at Mar-a-Lago for classified documents"
+    category: "legal"
+  - date: "2022-10-01"
+    event: "Parlatore publicly disclosed as joining Trump's classified documents legal team"
+    category: "legal"
+  - date: "2023-05-19"
+    event: "Parlatore announces resignation from Trump legal team, citing Boris Epshteyn 'obstruction'"
+    category: "legal"
+  - date: "2024-11-12"
+    event: "Trump nominates Pete Hegseth as Secretary of Defense"
+    category: "political"
+  - date: "2025-01-24"
+    event: "Hegseth confirmed as Secretary of Defense (50-50 Senate, VP Vance tiebreaker)"
+    category: "political"
+  # NOTE: Date Parlatore began serving inside the Pentagon as a Navy Reserve officer is UNVERIFIED.
+  # Do NOT add to timeline until confirmed via primary source (DD Form 214, commission appointment,
+  # Federal Register, or DoD press release). Ryan Grim tweet (2026-04-29) is the only public claim.
+
+seed_pillars:
+  - name: "Parlatore Law Group PLLC"
+    pillar_type: "legal"
+    sub_type: "boutique_litigation_firm"
+    status: "active"
+    founded: "2014"
+    dissolved: null
+    jurisdiction: "New York"
+    significance: "Parlatore's private practice — vehicle for representation of military, Trump-orbit, and high-profile criminal defense clients while simultaneously holding Pentagon role"
+  - name: "U.S. Department of Defense"
+    pillar_type: "government"
+    sub_type: "executive_department"
+    status: "active"
+    founded: "1947"
+    dissolved: null
+    jurisdiction: "United States Federal"
+    significance: "Parlatore's secondary employer via Naval Reserve. Subject of suits brought by Parlatore's private clients."
+  - name: "U.S. Navy Reserve"
+    pillar_type: "government"
+    sub_type: "military_reserve_component"
+    status: "active"
+    founded: "1915"
+    dissolved: null
+    jurisdiction: "United States Federal"
+    significance: "Reserve component providing the commissioning pathway that allegedly enabled the Pentagon-private-practice loophole"
+  - name: "Office of the Secretary of Defense"
+    pillar_type: "government"
+    sub_type: "cabinet_office"
+    status: "active"
+    founded: "1947"
+    dissolved: null
+    jurisdiction: "United States Federal"
+    significance: "Hegseth's office — locus of decision-making affecting promotions, war-crimes appeals, and military justice that Parlatore's private clients are interested in"
+  - name: "DoD Office of General Counsel"
+    pillar_type: "legal"
+    sub_type: "executive_branch_legal"
+    status: "active"
+    founded: "1947"
+    dissolved: null
+    jurisdiction: "United States Federal"
+    significance: "Ethics oversight body that would screen any Parlatore conflicts; relevant for FOIA and ethics-waiver requests"
+  - name: "Concerned Veterans for America"
+    pillar_type: "operations"
+    sub_type: "advocacy_nonprofit"
+    status: "active"
+    founded: "2012"
+    dissolved: null
+    jurisdiction: "Virginia"
+    significance: "Hegseth-led advocacy group whose alumni populate his Pentagon team — the network within which Parlatore now operates"
+  - name: "Mukasey Frenchman LLP"
+    pillar_type: "legal"
+    sub_type: "boutique_litigation_firm"
+    status: "active"
+    founded: "2014"
+    dissolved: null
+    jurisdiction: "New York"
+    significance: "Marc Mukasey (Trump-aligned) co-counseled with Parlatore on Eddie Gallagher case — recurring partner in Parlatore matters"
+
+evidence_id_prefix: "PLT"
+exclude_from_graph: "Timothy C. Parlatore"
+source_overrides: {}

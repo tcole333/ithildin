@@ -1,0 +1,243 @@
+# Manosphere / red-pill monetization ecosystem
+
+name: "manosphere"
+
+primary_subject: "Manosphere monetization ecosystem"
+
+description: >
+  Investigation of the online manosphere / red-pill commercial ecosystem:
+  creators, paid communities, coaching offers, supplements, crypto or trading
+  products, affiliate networks, and the corporate/payment infrastructure that
+  supports them. Focus on mapping the ecosystem, testing public commercial
+  claims against records, and surfacing leads around deceptive practices,
+  hidden ownership, platform migration, and regulatory risk.
+
+key_persons:
+  - "andrew tate"
+  - "tristan tate"
+  - "myron gaines"
+  - "walter weekes"
+  - "brian atlas"
+  - "hannah pearl davis"
+  - "rollo tomassi"
+  - "richard cooper"
+  - "michael sartain"
+  - "justin waller"
+  - "jack murphy"
+  - "sneako"
+  - "sterling cooper"
+
+known_addresses: {}
+
+threads:
+  - id: 1
+    name: "Creator Network and Flagship Brands"
+    description: "Core personalities, podcast brands, public-facing companies, and cross-promotion patterns."
+    targets:
+      - "andrew tate"
+      - "tristan tate"
+      - "fresh and fit"
+      - "myron gaines"
+      - "brian atlas"
+      - "whatever podcast"
+      - "hannah pearl davis"
+    keywords:
+      - "manosphere"
+      - "red pill"
+      - "podcast"
+      - "creator"
+      - "influencer"
+      - "brand"
+
+  - id: 2
+    name: "Paid Communities Courses and Coaching Funnels"
+    description: "Subscription products, masterminds, academies, coaching offers, upsells, and community platforms."
+    targets:
+      - "hustlers university"
+      - "the real world"
+      - "the war room"
+    keywords:
+      - "mastermind"
+      - "coaching"
+      - "academy"
+      - "membership"
+      - "subscription"
+      - "course"
+      - "consulting"
+      - "discord"
+      - "telegram"
+
+  - id: 3
+    name: "Ecommerce Supplements and Merch"
+    description: "Physical products, supplements, merch stores, checkout flows, refunds, and fulfillment vendors."
+    targets: []
+    keywords:
+      - "supplement"
+      - "shop"
+      - "merch"
+      - "checkout"
+      - "fulfillment"
+      - "autoship"
+      - "refund"
+      - "chargeback"
+
+  - id: 4
+    name: "Crypto Trading Gambling and Wealth Offers"
+    description: "Crypto, forex, investing, gambling, betting, and other high-risk monetization products."
+    targets: []
+    keywords:
+      - "crypto"
+      - "forex"
+      - "signals"
+      - "trading"
+      - "casino"
+      - "betting"
+      - "sportsbook"
+      - "investment education"
+
+  - id: 5
+    name: "Corporate Infrastructure Domains and Payment Rails"
+    description: "LLCs, DBAs, registered agents, domains, platform migration, merchant services, and payment processors."
+    targets:
+      - "stripe"
+      - "shopify"
+      - "telegram"
+      - "discord"
+      - "rumble"
+      - "locals"
+    keywords:
+      - "llc"
+      - "dba"
+      - "registered agent"
+      - "merchant"
+      - "payment processor"
+      - "domain"
+      - "wayback"
+      - "certificate"
+
+  - id: 6
+    name: "Litigation Enforcement and Consumer Harm"
+    description: "Court cases, regulatory actions, refunds, chargebacks, complaints, and consumer-protection exposure."
+    targets:
+      - "federal trade commission"
+      - "state attorney general"
+    keywords:
+      - "lawsuit"
+      - "class action"
+      - "arbitration"
+      - "complaint"
+      - "consent order"
+      - "ftc"
+      - "attorney general"
+      - "refund policy"
+
+  - id: 7
+    name: "Affiliate Agency and Cross Promotion Network"
+    description: "Affiliate programs, promo-code networks, agencies, event circuits, and recurring intermediaries."
+    targets: []
+    keywords:
+      - "affiliate"
+      - "promo code"
+      - "joint venture"
+      - "event"
+      - "conference"
+      - "agency"
+      - "referral"
+      - "revshare"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2020-03-13"
+    event: "Pandemic conditions accelerate online course, subscription, and coaching businesses across influencer ecosystems."
+    category: "milestone"
+  - date: "2022-08-19"
+    event: "Meta removes Andrew Tate from Facebook and Instagram, increasing scrutiny of affiliate amplification and platform migration in the manosphere economy."
+    category: "media"
+  - date: "2022-12-29"
+    event: "Romanian authorities detain Andrew and Tristan Tate, sharply increasing scrutiny of associated businesses, memberships, and public claims."
+    category: "legal"
+
+seed_pillars:
+  - name: "Federal Trade Commission"
+    pillar_type: "government"
+    sub_type: "consumer_protection_regulator"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Primary U.S. regulator for deceptive marketing, negative-option billing, business opportunity claims, and unfair or deceptive acts."
+
+  - name: "Securities and Exchange Commission"
+    pillar_type: "government"
+    sub_type: "securities_regulator"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Relevant where creators or affiliated brands make investment, securities, or fundraising claims."
+
+  - name: "Commodity Futures Trading Commission"
+    pillar_type: "government"
+    sub_type: "commodities_regulator"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Relevant for forex, commodities, derivatives, and some leveraged trading or signal products."
+
+  - name: "State Attorneys General"
+    pillar_type: "government"
+    sub_type: "state_consumer_protection"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Important for consumer-protection actions, refund disputes, and deceptive trade-practice enforcement."
+
+  - name: "YouTube"
+    pillar_type: "media"
+    sub_type: "video_platform"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Core discovery and distribution layer for creator brands, archived claims, and funnel traffic."
+
+  - name: "Meta Platforms"
+    pillar_type: "media"
+    sub_type: "social_platform"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Key distribution surface for paid traffic, creator branding, and deplatforming/platform-migration signals."
+
+  - name: "Stripe"
+    pillar_type: "operations"
+    sub_type: "payment_processor"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Common merchant processor whose presence or removal can reveal product category, risk status, and platform migration."
+
+  - name: "Shopify"
+    pillar_type: "operations"
+    sub_type: "ecommerce_platform"
+    status: "active"
+    jurisdiction: "Canada"
+    significance: "Frequent ecommerce stack for supplements, merch, and direct-response product storefronts."
+
+  - name: "Telegram"
+    pillar_type: "operations"
+    sub_type: "messaging_platform"
+    status: "active"
+    jurisdiction: "Global"
+    significance: "Common platform for paid communities, alerts, migration after bans, and gated funnel communication."
+
+  - name: "Discord"
+    pillar_type: "operations"
+    sub_type: "community_platform"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Common platform for subscription communities, course access, and monetized community management."
+
+  - name: "Rumble / Locals"
+    pillar_type: "media"
+    sub_type: "alternative_platform"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Important fallback ecosystem for creators who shift off mainstream platforms while preserving subscriptions and distribution."
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "manosphere monetization ecosystem"
+
+source_overrides: {}

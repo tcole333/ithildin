@@ -1,0 +1,171 @@
+# Feeding Our Future / Minnesota Pandemic Meal Fraud
+
+name: "feeding-our-future"
+
+primary_subject: "Feeding Our Future fraud scheme"
+
+description: >
+  Investigation of Feeding Our Future and the broader Minnesota federal child
+  nutrition fraud scheme. Focus on sponsor-site networks, shell entities,
+  money laundering, state oversight failures, and criminal case progression.
+  As of September 4, 2025, DOJ had charged 75 defendants in a scheme alleging
+  roughly 91 million fake meals and nearly $250 million stolen from
+  pandemic-era federal nutrition programs.
+
+key_persons:
+  - "aimee bock"
+  - "salim ahmed said"
+  - "abdiaziz shafii farah"
+  - "abdikerm abdelahi eidleh"
+  - "mohamed jama ismail"
+  - "liban yasin alishire"
+  - "khadar jigre adan"
+  - "abdimajid mohamed nur"
+  - "asad abshir"
+  - "guhaad hashi said"
+  - "abdulkarim saleh"
+  - "abdihamid mohamed nur"
+
+known_addresses: {}
+
+threads:
+  - id: 1
+    name: "Core Sponsor Organization"
+    description: "Feeding Our Future leadership, staff, sponsor relationships, nonprofit governance, and internal controls."
+    targets:
+      - "feeding our future"
+      - "aimee bock"
+    keywords:
+      - "feeding our future"
+      - "sponsor"
+      - "nonprofit"
+      - "aimee bock"
+
+  - id: 2
+    name: "Site Operators and Shell Entities"
+    description: "Meal sites, affiliated entities, vendor chains, shell companies, and fabricated operational records."
+    targets:
+      - "community enhancement services"
+      - "safari restaurant"
+      - "new vision foundation"
+      - "youth inventors lab"
+    keywords:
+      - "site"
+      - "vendor"
+      - "invoice"
+      - "shell"
+      - "attendance"
+
+  - id: 3
+    name: "Money Laundering and Asset Purchases"
+    description: "Laundering flows, nominee entities, real estate, vehicles, luxury assets, and forfeiture targets."
+    targets: []
+    keywords:
+      - "money laundering"
+      - "forfeiture"
+      - "real estate"
+      - "shell company"
+      - "wire transfer"
+
+  - id: 4
+    name: "Oversight, Audits, and Litigation"
+    description: "Minnesota Department of Education oversight, USDA program controls, audits, and related civil litigation."
+    targets:
+      - "minnesota department of education"
+      - "usda"
+    keywords:
+      - "mde"
+      - "minnesota department of education"
+      - "usda"
+      - "audit"
+      - "civil suit"
+
+  - id: 5
+    name: "Criminal Cases and Sentencing"
+    description: "Indictments, pleas, trial evidence, convictions, sentencing, restitution, and cooperation patterns."
+    targets: []
+    keywords:
+      - "indictment"
+      - "guilty plea"
+      - "trial"
+      - "conviction"
+      - "sentencing"
+
+  - id: 6
+    name: "Minnesota Fraud Ecosystem"
+    description: "Spillover into other state-funded fraud schemes, oversight reform, political fallout, and shared intermediaries."
+    targets: []
+    keywords:
+      - "fraud ecosystem"
+      - "state-funded"
+      - "oversight reform"
+      - "legislature"
+      - "public corruption"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2022-09-20"
+    event: "DOJ announces charges against 47 defendants in the Feeding Our Future fraud scheme."
+    category: "legal"
+  - date: "2024-02-05"
+    event: "DOJ announces charges against 10 additional defendants in the Feeding Our Future fraud scheme."
+    category: "legal"
+  - date: "2024-06-13"
+    event: "Minnesota Office of the Legislative Auditor releases special review of MDE oversight of Feeding Our Future."
+    category: "media"
+  - date: "2025-03-19"
+    event: "Federal jury convicts Aimee Bock and Salim Said in the Feeding Our Future trial."
+    category: "legal"
+  - date: "2025-09-04"
+    event: "DOJ announces the 75th defendant charged in the Feeding Our Future scheme."
+    category: "legal"
+
+seed_pillars:
+  - name: "Feeding Our Future"
+    pillar_type: "operations"
+    sub_type: "program_sponsor"
+    status: "active"
+    jurisdiction: "Minnesota"
+    significance: "The central nonprofit sponsor alleged to have enabled and coordinated a large share of the fraudulent reimbursement claims."
+
+  - name: "Minnesota Department of Education"
+    pillar_type: "government"
+    sub_type: "state_agency"
+    status: "active"
+    jurisdiction: "Minnesota"
+    significance: "The state agency responsible for administering and overseeing the child nutrition reimbursements at issue."
+
+  - name: "USDA Food and Nutrition Service"
+    pillar_type: "government"
+    sub_type: "federal_program_admin"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Federal program authority behind the nutrition reimbursements that were allegedly exploited during the pandemic."
+
+  - name: "U.S. Attorney's Office, District of Minnesota"
+    pillar_type: "government"
+    sub_type: "prosecutor"
+    status: "active"
+    jurisdiction: "Minnesota"
+    significance: "Lead federal prosecutor on the Feeding Our Future indictments, trials, pleas, and sentencing actions."
+
+  - name: "Federal Bureau of Investigation"
+    pillar_type: "government"
+    sub_type: "investigator"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Primary federal investigative agency behind raids, indictments, and ongoing fraud network tracing."
+
+  - name: "IRS Criminal Investigation"
+    pillar_type: "government"
+    sub_type: "financial_investigator"
+    status: "active"
+    jurisdiction: "United States"
+    significance: "Key agency for money laundering, shell company, asset purchase, and financial tracing angles in the case."
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "feeding our future"
+
+source_overrides: {}

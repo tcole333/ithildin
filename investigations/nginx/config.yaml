@@ -1,0 +1,296 @@
+name: nginx
+primary_subject: "NGINX / NGINX Inc"
+description: >
+  Investigate Russian influence over NGINX through corporate control,
+  developer governance, and potential code-level backdoors or vulnerabilities.
+  Covers NGINX Inc (Delaware), Runa Capital investment, F5 acquisition,
+  Rambler raid, and open source contributor network.
+
+key_persons:
+  # NGINX core team
+  - "igor sysoev"
+  - "maxim dounin"
+  - "maxim konovalov"
+  - "valentin bartenev"
+  - "roman arutyunyan"
+  - "sergey kandaurov"
+  - "vladimir homutov"
+  - "konstantin pavlov"
+  - "ruslan ermilov"
+  - "andrey zelenkov"
+  # NGINX Inc leadership
+  - "gus robertson"
+  - "owen garrett"
+  - "liam crilly"
+  - "rob whiteley"
+  # Runa Capital / Beloussov network
+  - "serguei beloussov"
+  - "dmitri loguinov"
+  - "andre elizarov"
+  # F5 Networks
+  - "francois locoh-donou"
+  - "kara sprague"
+  # Rambler / Sberbank
+  - "alexander mamut"
+  - "herman gref"
+
+known_addresses: {}
+
+threads:
+  - id: 1
+    name: "People & Governance"
+    description: "Corporate control, board composition, commit access, hiring patterns"
+    targets:
+      - "igor sysoev"
+      - "maxim dounin"
+      - "maxim konovalov"
+      - "gus robertson"
+      - "serguei beloussov"
+      - "dmitri loguinov"
+      - "owen garrett"
+      - "liam crilly"
+      - "francois locoh-donou"
+      - "kara sprague"
+      - "nginx inc"
+      - "runa capital"
+      - "f5 networks"
+    keywords:
+      - "board.*composition"
+      - "commit.*access"
+      - "maintainer"
+      - "hiring.*pattern"
+      - "advisory.*role"
+      - "corporate.*governance"
+
+  - id: 2
+    name: "Timeline Correlation"
+    description: "Overlay git commit history against corporate and geopolitical events"
+    targets: []
+    keywords:
+      - "commit.*history"
+      - "commit.*pattern"
+      - "activity.*cluster"
+      - "code.*surge"
+      - "timeline.*anomal"
+      - "burst.*commit"
+      - "temporal.*correlation"
+
+  - id: 3
+    name: "Code Audit"
+    description: "Security-sensitive code review: TLS, auth, entropy, module loading, connection handling"
+    targets: []
+    keywords:
+      - "tls"
+      - "ssl"
+      - "entropy"
+      - "prng"
+      - "certificate.*valid"
+      - "session.*resum"
+      - "key.*exchange"
+      - "module.*load"
+      - "cipher"
+      - "random.*number"
+      - "openssl"
+
+  - id: 4
+    name: "Fork Analysis"
+    description: "Compare Angie and freenginx forks — what Moscow developers changed first"
+    targets:
+      - "angie"
+      - "freenginx"
+      - "web server llc"
+    keywords:
+      - "fork"
+      - "code.*divergence"
+      - "angie"
+      - "freenginx"
+
+  - id: 5
+    name: "NGINX Plus Boundary"
+    description: "Open source to proprietary boundary — module API, extension points, covert channel potential"
+    targets: []
+    keywords:
+      - "nginx.*plus"
+      - "proprietary.*module"
+      - "module.*api"
+      - "extension.*point"
+      - "health.*check"
+      - "session.*persist"
+      - "live.*activity"
+
+  - id: 6
+    name: "Rambler Raid & Russian State"
+    description: "December 2019 raid, Sberbank/Rambler connection, seizure details, legal resolution"
+    targets:
+      - "rambler"
+      - "sberbank"
+      - "alexander mamut"
+      - "herman gref"
+    keywords:
+      - "rambler"
+      - "sberbank"
+      - "raid"
+      - "seizure"
+      - "criminal.*case"
+      - "ip.*ownership"
+      - "moscow.*office"
+      - "state.*control"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2002-01-01"
+    event: "Igor Sysoev begins writing nginx"
+    category: "milestone"
+
+  - date: "2004-10-04"
+    event: "nginx 0.1.0 public release"
+    category: "milestone"
+
+  - date: "2011-01-01"
+    event: "NGINX Inc founded (Delaware) to commercialize nginx"
+    category: "corporate"
+
+  - date: "2013-01-01"
+    event: "Runa Capital leads Series A investment in NGINX Inc"
+    category: "financial"
+
+  - date: "2013-10-01"
+    event: "New Enterprise Associates leads Series B"
+    category: "financial"
+
+  - date: "2017-06-01"
+    event: "Goldman Sachs leads Series C"
+    category: "financial"
+
+  - date: "2019-03-11"
+    event: "F5 Networks announces acquisition of NGINX Inc for $670M"
+    category: "corporate"
+
+  - date: "2019-05-08"
+    event: "F5 acquisition of NGINX Inc closes"
+    category: "corporate"
+
+  - date: "2019-12-12"
+    event: "Russian police raid Rambler office, question Igor Sysoev about nginx IP"
+    category: "legal"
+
+  - date: "2019-12-15"
+    event: "Rambler Group publicly claims IP ownership of nginx source code"
+    category: "legal"
+
+  - date: "2020-01-15"
+    event: "Rambler drops criminal charges against Sysoev"
+    category: "legal"
+
+  - date: "2022-02-24"
+    event: "Russia invades Ukraine"
+    category: "intelligence"
+
+  - date: "2022-03-15"
+    event: "F5 Networks closes Moscow R&D office"
+    category: "corporate"
+
+  - date: "2023-05-01"
+    event: "Angie fork created by Web Server LLC (former Moscow nginx team)"
+    category: "milestone"
+
+  - date: "2024-02-14"
+    event: "Maxim Dounin creates freenginx fork after F5 security disclosure dispute"
+    category: "milestone"
+
+seed_pillars:
+  - name: "NGINX Inc"
+    pillar_type: "operations"
+    sub_type: "software"
+    status: "acquired"
+    founded: "2011"
+    jurisdiction: "US-DE"
+    significance: "Subject entity — commercialized open source nginx, Delaware corporation"
+
+  - name: "F5 Networks"
+    pillar_type: "operations"
+    sub_type: "software"
+    status: "active"
+    founded: "1996"
+    jurisdiction: "US-WA"
+    significance: "Acquirer of NGINX Inc for $670M (2019). NASDAQ: FFIV. Closed Moscow office post-Ukraine invasion."
+
+  - name: "Runa Capital"
+    pillar_type: "banking"
+    sub_type: "venture_capital"
+    status: "active"
+    founded: "2010"
+    jurisdiction: "LU"
+    significance: "Russian-connected VC, led Series A. Co-founded by Serguei Beloussov (Acronis/Parallels). Key vector for Russian influence hypothesis."
+
+  - name: "Rambler Group"
+    pillar_type: "operations"
+    sub_type: "media"
+    status: "active"
+    jurisdiction: "RU"
+    significance: "Claimed nginx IP ownership, triggered December 2019 police raid on Sysoev. Employer during nginx development."
+
+  - name: "Sberbank"
+    pillar_type: "banking"
+    sub_type: "state_bank"
+    status: "active"
+    founded: "1841"
+    jurisdiction: "RU"
+    significance: "Russian state-controlled bank. Acquired 46.5% of Rambler Group shortly before the nginx raid. Sanctioned post-2022."
+
+  - name: "Acronis International"
+    pillar_type: "operations"
+    sub_type: "software"
+    status: "active"
+    founded: "2003"
+    jurisdiction: "CH"
+    significance: "Founded by Serguei Beloussov (Runa Capital co-founder). Potential personnel overlap with NGINX."
+
+  - name: "Parallels"
+    pillar_type: "operations"
+    sub_type: "software"
+    status: "acquired"
+    founded: "1999"
+    dissolved: "2018"
+    jurisdiction: "US"
+    significance: "Founded by Beloussov, acquired by Corel. Another Beloussov network node for cross-referencing personnel."
+
+  - name: "VK / Mail.ru Group"
+    pillar_type: "operations"
+    sub_type: "tech"
+    status: "active"
+    jurisdiction: "RU"
+    significance: "Russian tech conglomerate connected to Rambler ecosystem. Government-aligned."
+
+  - name: "New Enterprise Associates"
+    pillar_type: "banking"
+    sub_type: "venture_capital"
+    status: "active"
+    founded: "1977"
+    jurisdiction: "US-MD"
+    significance: "Led NGINX Inc Series B. US VC providing Western legitimacy."
+
+  - name: "Goldman Sachs"
+    pillar_type: "banking"
+    sub_type: "investment_bank"
+    status: "active"
+    founded: "1869"
+    jurisdiction: "US-NY"
+    significance: "Led NGINX Inc Series C. Institutional investor in pre-acquisition round."
+
+  - name: "Web Server LLC"
+    pillar_type: "operations"
+    sub_type: "software"
+    status: "active"
+    founded: "2022"
+    jurisdiction: "RU"
+    significance: "Russian company behind Angie fork. Staffed by former F5/NGINX Moscow R&D team."
+
+evidence_id_prefix: ""
+exclude_from_graph: ""
+
+source_overrides:
+  russian_state_media:
+    trust: "very_low"
+    note: "Russian state-controlled outlets (RT, TASS, RIA). Treat as propaganda unless corroborated by primary sources."
