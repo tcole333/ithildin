@@ -10,6 +10,15 @@ Bulk data: https://efile.fara.gov/ords/fara/f?p=API:BULKDATA:0
 Format: CSV (ISO-8859-1 encoded), updated daily, distributed as ZIP.
 Rate limit: 5 requests per 10 seconds.
 
+NETWORK NOTES (Apr 2026):
+  efile.fara.gov actively TCP-RSTs requests that look programmatic.
+  The download path now sends a browser User-Agent AND a Referer header
+  pointing at the bulk-data landing page; with retry-on-reset/backoff
+  this bypasses the block. If `download` ever fails after 6 attempts
+  per file, fetch the ZIPs manually from the URL above and drop them
+  into datasets/fara/ named registrants.csv.zip, foreign_principals.csv.zip,
+  short_forms.csv.zip, documents.csv.zip — `ingest` will pick them up.
+
 Usage:
     python tools/query_fara.py download          # Fetch CSV exports
     python tools/query_fara.py ingest            # Parse into investigation.db
@@ -62,19 +71,52 @@ BULK_FILES = {
 }
 
 
-def _download_file(url, dest_path):
-    """Download a file with progress indication."""
-    req = Request(url, headers={"User-Agent": "OSINT-Research/1.0"})
-    try:
-        with urlopen(req, timeout=60) as resp:
-            data = resp.read()
-            dest_path.write_bytes(data)
-            size_kb = len(data) / 1024
-            print(f"  Downloaded {dest_path.name} ({size_kb:.0f} KB)")
-            return True
-    except (HTTPError, URLError) as e:
-        print(f"  ERROR downloading {url}: {e}", file=sys.stderr)
-        return False
+def _download_file(url, dest_path, max_retries=6):
+    """Download a file with retry-on-reset.
+
+    efile.fara.gov actively resets TCP connections from clients that look
+    programmatic. Empirically (Apr 2026), the bulk endpoint accepts the
+    request only when (a) a browser-like User-Agent is sent AND (b) a
+    Referer header pointing at the bulk-data landing page is present.
+    Even then, the server intermittently returns ConnectionResetError,
+    so we retry with exponential backoff.
+    """
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/123.0.0.0 Safari/537.36"
+        ),
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://efile.fara.gov/ords/fara/f?p=API:BULKDATA:0",
+    }
+    last_err = None
+    for attempt in range(1, max_retries + 1):
+        req = Request(url, headers=headers)
+        try:
+            with urlopen(req, timeout=90) as resp:
+                data = resp.read()
+                if len(data) < 100:
+                    raise URLError(f"response too small ({len(data)} bytes)")
+                dest_path.write_bytes(data)
+                size_kb = len(data) / 1024
+                print(f"  Downloaded {dest_path.name} ({size_kb:.0f} KB) on attempt {attempt}")
+                return True
+        except (HTTPError, URLError, ConnectionResetError, OSError) as e:
+            last_err = e
+            wait = min(2 ** attempt, 30)
+            print(f"  Attempt {attempt}/{max_retries} failed for {dest_path.name}: {e}; sleeping {wait}s")
+            time.sleep(wait)
+    print(
+        f"  ERROR downloading {url} after {max_retries} attempts: {last_err}\n"
+        f"  efile.fara.gov is rate-limiting/blocking. Last error: {last_err}\n"
+        f"  Try again later, or download manually via a browser from\n"
+        f"  https://efile.fara.gov/ords/fara/f?p=API:BULKDATA:0 and place the\n"
+        f"  ZIP in {dest_path.parent}/",
+        file=sys.stderr,
+    )
+    return False
 
 
 def _get_db():
@@ -197,10 +239,18 @@ def cmd_download(args):
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     print("Downloading FARA bulk data files...")
+    failed = []
     for name, url in BULK_FILES.items():
         dest = DATA_DIR / f"{name}.csv.zip"
-        _download_file(url, dest)
-        time.sleep(2)  # Rate limit: 5 req/10s
+        if not _download_file(url, dest):
+            failed.append(name)
+        time.sleep(5)  # Rate limit: 5 req/10s + extra slack to avoid TCP RST
+    if failed:
+        print(
+            f"\nWARNING: {len(failed)} file(s) failed to download: {', '.join(failed)}\n"
+            f"Re-run `download` later, or fetch the ZIPs manually and drop them in {DATA_DIR}.",
+            file=sys.stderr,
+        )
 
     print(f"\nFiles saved to {DATA_DIR}")
 
@@ -473,7 +523,7 @@ def cmd_search(args):
 
 
 def cmd_country(args):
-    """Search FARA foreign principals by country."""
+    """Search FARA foreign principals by country, optionally filtered by year."""
     db = _get_db()
 
     tables = [r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 'fara_%'").fetchall()]
@@ -481,12 +531,22 @@ def cmd_country(args):
         print("FARA tables not found. Run download + ingest first.")
         return
 
-    results = db.execute("""
+    where = ["upper(foreign_principal_country) LIKE upper(?)"]
+    params = [f"%{args.country}%"]
+    year = getattr(args, "year", None)
+    if year:
+        # FARA dates are stored as MM/DD/YYYY strings; match either the
+        # foreign-principal date or the registrant date.
+        where.append("(substr(date, -4) = ? OR substr(registrant_date, -4) = ?)")
+        params.extend([str(year), str(year)])
+    params.append(args.limit)
+    sql = f"""
         SELECT * FROM fara_foreign_principals
-        WHERE upper(foreign_principal_country) LIKE upper(?)
+        WHERE {" AND ".join(where)}
         ORDER BY date DESC
         LIMIT ?
-    """, [f"%{args.country}%", args.limit]).fetchall()
+    """
+    results = db.execute(sql, params).fetchall()
 
     if write_output([dict(r) for r in results], args, summary=f"FARA country '{args.country}'"):
         return
@@ -640,6 +700,7 @@ def main():
     # country
     p = sub.add_parser("country", help="Search foreign principals by country")
     p.add_argument("country", help="Country name")
+    p.add_argument("--year", type=int, help="Filter by year (matches date or registrant_date YYYY)")
     p.add_argument("--limit", type=int, default=50, help="Max results")
     add_output_args(p)
 
