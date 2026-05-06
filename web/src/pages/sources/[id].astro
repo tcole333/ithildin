@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getPublicSourceRecord, listPublicSourceRecords } from '../../lib/sourceCatalog';
+import { getSourceArtifactUrl } from '../../lib/citations';
 
 export function getStaticPaths() {
   return listPublicSourceRecords().map((record) => ({
@@ -15,7 +16,19 @@ if (!source) {
   return Astro.redirect('/about');
 }
 
-const openSourceUrl = source.externalUrl || source.hostedAssetUrl || '';
+const artifactUrl = getSourceArtifactUrl(source);
+const artifactPath = artifactUrl.split('#')[0].split('?')[0].toLowerCase();
+const artifactLabel = source.hostedAssetUrl
+  ? 'Hosted Copy'
+  : source.archiveUrl
+    ? 'Archived Copy'
+    : source.externalUrl
+      ? 'Live Source'
+      : '';
+const canEmbedPdf = Boolean(artifactUrl && artifactPath.endsWith('.pdf'));
+const canEmbedImage = Boolean(artifactUrl && /\.(png|jpe?g|gif|webp|svg)$/i.test(artifactPath));
+const canEmbedText = Boolean(artifactUrl && /\.(txt|csv|json|md|html?)$/i.test(artifactPath));
+const canEmbedFrame = Boolean(artifactUrl && (canEmbedPdf || canEmbedImage || canEmbedText || source.archiveUrl || source.hostedAssetUrl));
 ---
 <BaseLayout title={source.title} description={`Source record for ${source.title}`}>
   <div class="space-y-8">
@@ -30,17 +43,53 @@ const openSourceUrl = source.externalUrl || source.hostedAssetUrl || '';
         </div>
         <p class="text-sm text-mithril font-body max-w-3xl">{source.accessNote}</p>
         <div class="flex flex-wrap gap-3">
-          {openSourceUrl && (
-            <a href={openSourceUrl} target="_blank" rel="noopener noreferrer" class="chip">
-              Open Source
+          {artifactUrl && (
+            <a href={artifactUrl} target="_blank" rel="noopener noreferrer" class="chip">
+              {artifactLabel || 'Open Artifact'}
             </a>
           )}
-          <a href={source.recordUrl} class="chip">
-            Canonical Record
-          </a>
+          {source.archiveUrl && source.archiveUrl !== artifactUrl && (
+            <a href={source.archiveUrl} target="_blank" rel="noopener noreferrer" class="chip">
+              Archived Copy
+            </a>
+          )}
+          {source.externalUrl && source.externalUrl !== artifactUrl && (
+            <a href={source.externalUrl} target="_blank" rel="noopener noreferrer" class="chip">
+              Live Source
+            </a>
+          )}
+          {source.archiveLookupUrl && (
+            <a href={source.archiveLookupUrl} target="_blank" rel="noopener noreferrer" class="chip">
+              Wayback Lookup
+            </a>
+          )}
         </div>
       </div>
     </section>
+
+    {artifactUrl && (
+      <section class="surface p-6">
+        <div class="section-label">{artifactLabel || 'Artifact'}</div>
+        <div class="mt-4 overflow-hidden rounded border border-[color:var(--color-ash)] bg-black/20">
+          {canEmbedPdf && (
+            <object data={artifactUrl} type="application/pdf" class="h-[75vh] w-full">
+              <iframe src={artifactUrl} class="h-[75vh] w-full" title={source.title}></iframe>
+            </object>
+          )}
+          {!canEmbedPdf && canEmbedImage && (
+            <img src={artifactUrl} alt={source.title} class="max-h-[75vh] w-full object-contain" />
+          )}
+          {!canEmbedPdf && !canEmbedImage && canEmbedFrame && (
+            <iframe src={artifactUrl} class="h-[75vh] w-full" title={source.title} sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+          )}
+          {!canEmbedPdf && !canEmbedImage && !canEmbedFrame && (
+            <div class="p-6 text-sm text-mithril">
+              This artifact may need to open in its native viewer.
+            </div>
+          )}
+        </div>
+      </section>
+    )}
 
     <section class="surface p-6">
       <div class="section-label">Metadata</div>

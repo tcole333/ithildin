@@ -209,6 +209,7 @@ function queryFindingRowsFromDb(dbPath: string, findingIds?: string[]): any[] {
   try {
     const output = execFileSync("sqlite3", [dbPath, ".mode json", sql], {
       encoding: "utf-8",
+      maxBuffer: 128 * 1024 * 1024,
     }).trim();
     if (!output) return [];
     return JSON.parse(output) as any[];

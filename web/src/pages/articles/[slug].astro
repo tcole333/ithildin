@@ -49,7 +49,7 @@ if (frontmatterMatch) {
 const rawContent = raw.replace(/^---\n[\s\S]*?\n---\n*/, '');
 const wordCount = rawContent.split(/\s+/).length;
 const findingCatalog = mergeFindingCatalogs(
-  loadGlobalFindingCatalog(),
+  loadGlobalFindingCatalog({ includeDbFallback: true }),
   loadArticleFindingCatalog(slug!),
 );
 const findingEvidenceMap = findingCatalog.evidenceMap;

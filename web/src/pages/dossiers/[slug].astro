@@ -120,7 +120,7 @@ if (curation?.applicable_models) {
 }
 
 const findingEvidenceMap = mergeFindingCatalogs(
-  loadGlobalFindingCatalog(),
+  loadGlobalFindingCatalog({ includeDbFallback: true }),
   loadDossierFindingCatalog(dossier),
 ).evidenceMap;
 const evidenceModeEnabled = import.meta.env.PUBLIC_ENABLE_EVIDENCE_MODE === 'true';

@@ -13,6 +13,7 @@ export type CitationLink = {
   label: string;
   url?: string;
   openUrl?: string;
+  archiveUrl?: string;
   sourceRecordUrl?: string;
   sourceId?: string;
   sourceKind?: SourceKind;
@@ -27,7 +28,7 @@ export type CitationEntry = CitationLink & {
   sources?: CitationLink[];
 };
 
-export type SourceKind = "external" | "hosted_copy" | "record_only" | "private_internal";
+export type SourceKind = "external" | "hosted_copy" | "archived_copy" | "record_only" | "private_internal";
 
 export type SourceIntegrity = {
   sha256?: string;
@@ -43,6 +44,8 @@ export type SourceRecord = {
   canonicalRef: string;
   externalUrl?: string;
   hostedAssetUrl?: string;
+  archiveUrl?: string;
+  archiveLookupUrl?: string;
   recordUrl: string;
   sourceType: string;
   publisherOrOrigin?: string;
@@ -97,6 +100,7 @@ type ManualSourceRecord = {
   publish_valid?: boolean;
   external_url?: string;
   hosted_asset_url?: string;
+  archive_url?: string;
 };
 
 const URL_RE = /https?:\/\/[^\s\]]+/gi;
@@ -105,7 +109,22 @@ const JMAIL_BASE = "https://jmail.world/thread";
 
 function buildSecEdgarUrl(accession: string): string {
   const dashless = accession.replace(/-/g, "");
-  return `https://www.sec.gov/Archives/edgar/data/${dashless.slice(0, 10)}/${accession}-index.htm`;
+  const cik = String(Number.parseInt(dashless.slice(0, 10), 10));
+  return `https://www.sec.gov/Archives/edgar/data/${cik}/${dashless}/${accession}-index.html`;
+}
+
+function buildSecCompanyUrl(cik: string): string {
+  return `https://www.sec.gov/edgar/browse/?CIK=${String(Number.parseInt(cik, 10))}`;
+}
+
+function extractSecAccession(value: string): string | null {
+  const match = cleanToken(value).match(/\b(\d{10}-\d{2}-\d{6})\b/);
+  return match ? match[1] : null;
+}
+
+function extractSecCik(value: string): string | null {
+  const match = cleanToken(value).match(/\bCIK[:\s-]*0*(\d{1,10})\b/i);
+  return match ? match[1] : null;
 }
 
 function build990Url(ein: string): string {
@@ -116,6 +135,40 @@ function buildAcrisUrl(docId: string): string {
   return `https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentDetail?doc_id=${docId}`;
 }
 
+// DoD Boards of Review Reading Room — link to the service's BCMR/BCNR sub-index.
+// We can't deep-link into a specific PDF without knowing the year/category bucket,
+// so the citation lands on the relevant board's main folder; the agent CLI is the
+// source of truth for the exact PDF path.
+const MILITARY_BOARD_INDEX: Record<string, string> = {
+  AFBCMR: "https://boards.law.af.mil/AF_BCMR.htm",
+  ABCMR:  "https://boards.law.af.mil/ARMY_BCMR.htm",
+  BCNR:   "https://boards.law.af.mil/NAVY_BCNR.htm",
+  CGBCMR: "https://boards.law.af.mil/CG_BCMR.htm",
+};
+
+function buildMilitaryCorrectionsUrl(service: string): string {
+  const key = service.toUpperCase();
+  return MILITARY_BOARD_INDEX[key] ?? "https://boards.law.af.mil/";
+}
+
+// Military justice appellate dockets: CAAF docket format is "YY-NNNN/SS"
+// (e.g. 24-0156/AR). PDFs live at /opinions/<YEAR>OctTerm/<YYNNNN>.pdf.
+// Service codes: AR=Army, AF=Air Force, NA=Navy, MC=Marine Corps, CG=Coast Guard.
+function buildMilitaryJusticeUrl(docket: string): string {
+  const m = docket.match(/^(\d{2})-(\d{4})\/?([A-Z]{2})?$/);
+  if (!m) return "https://www.armfor.uscourts.gov/opinions.htm";
+  const yy = m[1];
+  const num = m[2];
+  // Term year for "YY-NNNN" is "20YY" October Term
+  const termYear = `20${yy}`;
+  return `https://www.armfor.uscourts.gov/opinions/${termYear}OctTerm/${yy}${num}.pdf`;
+}
+
+function buildWaybackLookupUrl(url?: string): string | undefined {
+  if (!isExternalUrl(url)) return undefined;
+  return `https://web.archive.org/web/*/${url}`;
+}
+
 const clOverrides: Record<string, string> = clOverridesData;
 const sourceUrlOverrides: Record<string, string> = sourceUrlOverridesData;
 const manualSourceRecords: Record<string, ManualSourceRecord> = manualSourceRecordsData;
@@ -123,6 +176,10 @@ const manualSourceRecords: Record<string, ManualSourceRecord> = manualSourceReco
 function buildCourtListenerUrl(docketId: string): string {
   if (clOverrides[docketId]) return clOverrides[docketId];
   return `https://www.courtlistener.com/docket/${docketId}/`;
+}
+
+function buildNyscefCaseUrl(docketId: string): string {
+  return `https://iapps.courts.state.ny.us/nyscef/CaseDetails?docketId=${encodeURIComponent(docketId)}`;
 }
 
 function buildDs10Url(): string {
@@ -281,9 +338,12 @@ function guessSourceType(value: string): string {
   if (/^EFTA\d+/i.test(token)) return "released_correspondence";
   if (/^HOUSE_OVERSIGHT_/i.test(token)) return "government_document";
   if (/^(SEC|EDGAR):/i.test(token)) return "securities_filing";
+  if (/^(?:SEC\s+)?CIK\b/i.test(token)) return "securities_filing";
+  if (/^(?:SEC\s+)?(?:EDGAR\s+)?ADSH\b/i.test(token)) return "securities_filing";
   if (/^990:/i.test(token)) return "tax_filing";
   if (/^ACRIS:/i.test(token)) return "property_record";
   if (/^(CL|CourtListener)/i.test(token)) return "court_record";
+  if (/^NYSCEF_CASE:/i.test(token)) return "court_record";
   if (/^FEC:/i.test(token)) return "campaign_finance_record";
   if (/^FARA:/i.test(token)) return "lobbying_record";
   if (/^(USVI:|REG:|FL-SunBiz|NM-SoS|NY-SoS)/i.test(token)) return "corporate_registry";
@@ -292,6 +352,7 @@ function guessSourceType(value: string): string {
   if (/^OffshoreAlert:/i.test(token)) return "news_archive";
   if (/^LittleSis/i.test(token)) return "entity_database";
   if (/^ICIJ/i.test(token)) return "leaks_database";
+  if (/^OpenSanctions[:\s]+/i.test(token)) return "sanctions_record";
   if (/^KPMG:/i.test(token)) return "forensic_report";
   if (/^DS10/i.test(token)) return "dataset";
   if (/^(DFS|SAR|DECHERT|DOJ|F\d+)/i.test(token)) return "local_document";
@@ -455,8 +516,24 @@ function canonicalizeCandidateRef(candidate: CitationLink): string {
   return preferred[0] || "unknown";
 }
 
+function manualRecordLookupKeys(canonicalRef: string, rawToken: string): string[] {
+  const variants = [canonicalRef, rawToken]
+    .map((value) => cleanToken(String(value || "")))
+    .filter(Boolean)
+    .flatMap((value) => [
+      value,
+      value.toLowerCase(),
+      value.replace(/:\s+/g, ":"),
+      value.replace(/:\s+/g, ":").toLowerCase(),
+    ]);
+  return uniqueInOrder(variants);
+}
+
 function mergeManualSourceRecord(canonicalRef: string, rawToken: string): ManualSourceRecord | null {
-  return manualSourceRecords[canonicalRef] || manualSourceRecords[rawToken] || null;
+  for (const key of manualRecordLookupKeys(canonicalRef, rawToken)) {
+    if (manualSourceRecords[key]) return manualSourceRecords[key];
+  }
+  return null;
 }
 
 function buildSourceRecord(candidate: CitationLink, rawToken: string, hint?: Partial<SourceRecord>): SourceRecord {
@@ -467,11 +544,14 @@ function buildSourceRecord(candidate: CitationLink, rawToken: string, hint?: Par
   const recordUrl = hint?.recordUrl || buildSourceRecordPath(sourceId);
   const externalUrl = manual?.external_url || hint?.externalUrl || (isExternalUrl(candidate.openUrl || candidate.url) ? cleanUrl(candidate.openUrl || candidate.url || "") : undefined);
   const hostedAssetUrl = manual?.hosted_asset_url || hint?.hostedAssetUrl || ((candidate.url || "").startsWith("/") ? candidate.url : undefined);
+  const archiveUrl = manual?.archive_url || hint?.archiveUrl;
 
   let kind: SourceKind = hint?.kind || manual?.kind || "record_only";
   if (!manual?.kind && !hint?.kind) {
     if (hostedAssetUrl) {
       kind = "hosted_copy";
+    } else if (archiveUrl) {
+      kind = "archived_copy";
     } else if (externalUrl) {
       kind = "external";
     } else if (isPrivateInternalReference(rawToken)) {
@@ -490,6 +570,8 @@ function buildSourceRecord(candidate: CitationLink, rawToken: string, hint?: Par
     canonicalRef,
     externalUrl,
     hostedAssetUrl,
+    archiveUrl,
+    archiveLookupUrl: buildWaybackLookupUrl(externalUrl),
     recordUrl,
     sourceType: manual?.source_type || hint?.sourceType || guessSourceType(rawToken || canonicalRef),
     publisherOrOrigin: manual?.publisher_or_origin || hint?.publisherOrOrigin,
@@ -502,6 +584,8 @@ function buildSourceRecord(candidate: CitationLink, rawToken: string, hint?: Par
         ? "Held locally by Ithildin. No public artifact URL is currently available."
         : kind === "private_internal"
           ? "Internal reference. This item does not meet the public source-disclosure bar."
+          : kind === "archived_copy"
+            ? "Archived source artifact available."
           : "Public source artifact available."),
     integrity: manual?.integrity || hint?.integrity,
     publishValid,
@@ -511,7 +595,15 @@ function buildSourceRecord(candidate: CitationLink, rawToken: string, hint?: Par
 export function getSourcePrimaryUrl(record: SourceRecord): string {
   if (record.kind === "external" && record.externalUrl) return record.externalUrl;
   if (record.kind === "hosted_copy" && record.hostedAssetUrl) return record.hostedAssetUrl;
+  if (record.kind === "archived_copy" && record.archiveUrl) return record.archiveUrl;
+  if (record.hostedAssetUrl) return record.hostedAssetUrl;
+  if (record.archiveUrl) return record.archiveUrl;
+  if (record.externalUrl) return record.externalUrl;
   return record.recordUrl;
+}
+
+export function getSourceArtifactUrl(record: SourceRecord): string {
+  return record.hostedAssetUrl || record.archiveUrl || record.externalUrl || "";
 }
 
 export function resolveSourceRecord(rawToken: string): SourceRecord | null {
@@ -542,11 +634,13 @@ function getCitationKey(candidate: CitationLink, rawToken: string, record: Sourc
 
 function sourceRecordToCitationLink(record: SourceRecord, labelOverride?: string, keyOverride?: string): CitationLink {
   const primaryUrl = getSourcePrimaryUrl(record);
+  const artifactUrl = getSourceArtifactUrl(record);
   return {
     key: keyOverride || record.canonicalRef,
     label: labelOverride || record.label,
     url: primaryUrl,
-    openUrl: record.externalUrl || record.hostedAssetUrl,
+    openUrl: artifactUrl || undefined,
+    archiveUrl: record.archiveUrl,
     sourceRecordUrl: record.recordUrl,
     sourceId: record.id,
     sourceKind: record.kind,
@@ -722,19 +816,21 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
   },
   {
     id: "sec",
-    tokenPattern: "SEC:\\d{10}-\\d{2}-\\d{6}",
+    tokenPattern: "(?:SEC:\\d{10}-\\d{2}-\\d{6}|SEC\\s+(?:EDGAR\\s+)?ADSH\\s+\\d{10}-\\d{2}-\\d{6}|ADSH\\s+\\d{10}-\\d{2}-\\d{6})",
     healthTier: "tier1",
     resolve(token) {
-      const match = token.match(/SEC:(\d{10}-\d{2}-\d{6})/i);
-      if (!match) return null;
-      const accession = match[1];
+      const accession = extractSecAccession(token);
+      if (!accession) return null;
       return { key: `sec:${accession}`, label: `SEC ${accession}`, url: buildSecEdgarUrl(accession) };
     },
     extract(raw) {
-      return (raw.match(/SEC:\d{10}-\d{2}-\d{6}/gi) || []).map(ref => {
-        const acc = ref.replace(/SEC:/i, "");
+      return (
+        raw.match(/SEC:\d{10}-\d{2}-\d{6}|SEC\s+(?:EDGAR\s+)?ADSH\s+\d{10}-\d{2}-\d{6}|ADSH\s+\d{10}-\d{2}-\d{6}/gi) || []
+      ).flatMap(ref => {
+        const acc = extractSecAccession(ref);
+        if (!acc) return [];
         const url = buildSecEdgarUrl(acc);
-        return { key: url, label: `SEC:${acc}`, url };
+        return [{ key: url, label: `SEC:${acc}`, url }];
       });
     },
   },
@@ -753,6 +849,28 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         const acc = ref.replace(/EDGAR:/i, "");
         const url = buildSecEdgarUrl(acc);
         return { key: url, label: `EDGAR:${acc}`, url };
+      });
+    },
+  },
+  {
+    id: "sec_cik",
+    tokenPattern: "(?:SEC\\s+)?CIK[:\\s-]*0*\\d{1,10}",
+    healthTier: "tier1",
+    resolve(token) {
+      const cik = extractSecCik(token);
+      if (!cik) return null;
+      return {
+        key: `sec-cik:${cik}`,
+        label: `CIK ${cik}`,
+        url: buildSecCompanyUrl(cik),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/(?:SEC\s+)?CIK[:\s-]*0*\d{1,10}/gi) || []).flatMap(ref => {
+        const cik = extractSecCik(ref);
+        if (!cik) return [];
+        const url = buildSecCompanyUrl(cik);
+        return [{ key: url, label: `CIK:${cik}`, url }];
       });
     },
   },
@@ -793,6 +911,40 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
     },
   },
   {
+    // DoD Boards for Correction of Military / Naval Records — token format
+    //   BCMR:<service>:<docket>   e.g.  BCMR:BCNR:NR20240000123
+    //                                    BCMR:AFBCMR:BC-2024-00035
+    //                                    BCMR:ABCMR:AR20240000053
+    //                                    BCMR:CGBCMR:2018-190
+    // The service folder index page is the deep-link target; the per-PDF URL is
+    // recorded in the local SQLite cache (.cache/military_corrections.db) and
+    // surfaced via `tools/query_military_corrections.py decision <SVC> <DOCKET>`.
+    id: "bcmr",
+    tokenPattern: "BCMR:(?:AFBCMR|ABCMR|BCNR|CGBCMR):[A-Za-z0-9_\\-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/BCMR:(AFBCMR|ABCMR|BCNR|CGBCMR):([A-Za-z0-9_\-]+)/i);
+      if (!match) return null;
+      const service = match[1].toUpperCase();
+      const docket = match[2].toUpperCase();
+      return {
+        key: `bcmr:${service}:${docket}`,
+        label: `${service} ${docket}`,
+        url: buildMilitaryCorrectionsUrl(service),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/BCMR:(?:AFBCMR|ABCMR|BCNR|CGBCMR):[A-Za-z0-9_\-]+/gi) || []).flatMap(ref => {
+        const m = ref.match(/BCMR:(AFBCMR|ABCMR|BCNR|CGBCMR):([A-Za-z0-9_\-]+)/i);
+        if (!m) return [];
+        const service = m[1].toUpperCase();
+        const docket = m[2].toUpperCase();
+        const url = buildMilitaryCorrectionsUrl(service);
+        return [{ key: `bcmr:${service}:${docket}`, label: `BCMR:${service}:${docket}`, url }];
+      });
+    },
+  },
+  {
     id: "cl",
     tokenPattern: "CL:\\d+",
     healthTier: "tier1",
@@ -807,6 +959,50 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         const docketId = ref.replace(/CL:/i, "");
         const url = buildCourtListenerUrl(docketId);
         return { key: url, label: `CL:${docketId}`, url };
+      });
+    },
+  },
+  {
+    id: "mj_caaf",
+    tokenPattern: "MJ:\\d{2}-\\d{4}(?:\\/[A-Z]{2})?",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/MJ:(\d{2}-\d{4}(?:\/[A-Z]{2})?)/i);
+      if (!match) return null;
+      const docket = match[1].toUpperCase();
+      return {
+        key: `mj:${docket}`,
+        label: `CAAF ${docket}`,
+        url: buildMilitaryJusticeUrl(docket),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/MJ:\d{2}-\d{4}(?:\/[A-Z]{2})?/gi) || []).map(ref => {
+        const docket = ref.replace(/MJ:/i, "").toUpperCase();
+        const url = buildMilitaryJusticeUrl(docket);
+        return { key: url, label: `MJ:${docket}`, url };
+      });
+    },
+  },
+  {
+    id: "nyscef_case",
+    tokenPattern: "NYSCEF_CASE:[A-Za-z0-9%+/_=.-]+",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/NYSCEF_CASE:([A-Za-z0-9%+/_=.-]+)/i);
+      if (!match) return null;
+      const docketId = match[1];
+      return {
+        key: `nyscef:${docketId}`,
+        label: `NYSCEF ${docketId}`,
+        url: buildNyscefCaseUrl(docketId),
+      };
+    },
+    extract(raw) {
+      return (raw.match(/NYSCEF_CASE:[A-Za-z0-9%+/_=.-]+/gi) || []).map(ref => {
+        const docketId = ref.replace(/NYSCEF_CASE:/i, "");
+        const url = buildNyscefCaseUrl(docketId);
+        return { key: url, label: `NYSCEF_CASE:${docketId}`, url };
       });
     },
   },
@@ -840,6 +1036,32 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
         const regNum = ref.replace(/FARA:/i, "");
         const url = buildFaraUrl(regNum);
         return { key: url, label: `FARA:${regNum}`, url };
+      });
+    },
+  },
+  {
+    id: "federal_register",
+    // Federal Register document numbers look like "2025-06461", "X95-11006",
+    // or "95-24218". Pattern: optional X-prefix, 2-4 digit year/serial,
+    // hyphen, 4-6 digit suffix. The /d/ short URL form redirects to the
+    // canonical dated slug URL.
+    tokenPattern: "FR:[A-Z]?\\d{2,4}-\\d{4,6}",
+    healthTier: "tier1",
+    resolve(token) {
+      const match = token.match(/FR:([A-Z]?\d{2,4}-\d{4,6})/i);
+      if (!match) return null;
+      const docNum = match[1].toUpperCase();
+      return {
+        key: `fr:${docNum}`,
+        label: `Federal Register ${docNum}`,
+        url: `https://www.federalregister.gov/d/${docNum}`,
+      };
+    },
+    extract(raw) {
+      return (raw.match(/FR:[A-Z]?\d{2,4}-\d{4,6}/gi) || []).map(ref => {
+        const docNum = ref.replace(/^FR:/i, "").toUpperCase();
+        const url = `https://www.federalregister.gov/d/${docNum}`;
+        return { key: url, label: `FR:${docNum}`, url };
       });
     },
   },
@@ -1002,10 +1224,10 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
   },
   {
     id: "opensanctions",
-    tokenPattern: "OpenSanctions:[A-Za-z0-9]+",
+    tokenPattern: "OpenSanctions[:\\s]+[A-Za-z0-9]+",
     healthTier: "tier1",
     resolve(token) {
-      const match = token.match(/OpenSanctions:([A-Za-z0-9]+)/i);
+      const match = token.match(/OpenSanctions[:\s]+([A-Za-z0-9]+)/i);
       if (!match) return null;
       const entityId = match[1];
       return {
@@ -1015,8 +1237,8 @@ const CITATION_REGISTRY: CitationTypeDef[] = [
       };
     },
     extract(raw) {
-      return (raw.match(/OpenSanctions:[A-Za-z0-9]+/gi) || []).flatMap(ref => {
-        const m = ref.match(/OpenSanctions:([A-Za-z0-9]+)/i);
+      return (raw.match(/OpenSanctions[:\s]+[A-Za-z0-9]+/gi) || []).flatMap(ref => {
+        const m = ref.match(/OpenSanctions[:\s]+([A-Za-z0-9]+)/i);
         if (!m) return [];
         const url = buildOpenSanctionsUrl(m[1]);
         return [{ key: url, label: `OpenSanctions:${m[1]}`, url }];
@@ -1424,8 +1646,10 @@ function resolveCitationToken(token: string, options: CitationOptions): RawCitat
 }
 
 function citationEntryToSuperscript(entry: CitationEntry): string {
-  const href = entry.targetKind === "finding_popover" ? `#fn-${entry.number}` : (entry.url || `#fn-${entry.number}`);
-  const external = entry.targetKind !== "finding_popover" && isExternalUrl(entry.url);
+  const href = entry.targetKind === "finding_popover"
+    ? `#fn-${entry.number}`
+    : (entry.sourceRecordUrl || entry.url || `#fn-${entry.number}`);
+  const external = entry.targetKind !== "finding_popover" && isExternalUrl(href);
   const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : "";
   return `<sup class="citation"><a href="${escapeHtml(href)}"${attrs} data-citation-number="${entry.number}" data-citation-key="${escapeHtml(entry.key)}" aria-label="Source ${entry.number}: ${escapeHtml(entry.label)}">${entry.number}</a></sup>`;
 }
@@ -1772,7 +1996,9 @@ export function renderFootnotes(entries: CitationEntry[]): string {
   const renderPrimaryLink = (entry: CitationEntry): string => {
     const label = escapeHtml(entry.label);
     const number = entry.number;
-    const href = entry.targetKind === "finding_popover" ? `#fn-${number}` : entry.url;
+    const href = entry.targetKind === "finding_popover"
+      ? `#fn-${number}`
+      : (entry.sourceRecordUrl || entry.url);
     if (!href) {
       return `<span data-citation-number="${number}" data-citation-key="${escapeHtml(entry.key)}">${label}</span>`;
     }
@@ -1782,7 +2008,7 @@ export function renderFootnotes(entries: CitationEntry[]): string {
 
   const renderSourceLink = (source: CitationLink, parentKey: string): string => {
     const label = escapeHtml(source.label);
-    const primaryHref = source.url;
+    const primaryHref = source.sourceRecordUrl || source.url;
     const sourceAttrs = primaryHref && isExternalUrl(primaryHref) ? ' target="_blank" rel="noopener noreferrer"' : "";
     const primary = primaryHref
       ? `<a href="${escapeHtml(primaryHref)}"${sourceAttrs} data-source-key="${escapeHtml(source.key)}" data-parent-citation-key="${escapeHtml(parentKey)}">${label}</a>`
@@ -1790,10 +2016,13 @@ export function renderFootnotes(entries: CitationEntry[]): string {
 
     const actions: string[] = [];
     if (source.openUrl) {
-      actions.push(renderActionLink(source.openUrl, "Open source", `data-source-open="${escapeHtml(source.key)}"`));
+      actions.push(renderActionLink(source.openUrl, "Open artifact", `data-source-open="${escapeHtml(source.key)}"`));
+    }
+    if (source.archiveUrl && source.archiveUrl !== source.openUrl) {
+      actions.push(renderActionLink(source.archiveUrl, "Archived copy", `data-source-archive="${escapeHtml(source.key)}"`));
     }
     if (source.sourceRecordUrl) {
-      actions.push(renderActionLink(source.sourceRecordUrl, "View source record", `data-source-record="${escapeHtml(source.key)}"`));
+      actions.push(renderActionLink(source.sourceRecordUrl, "Source record", `data-source-record="${escapeHtml(source.key)}"`));
     }
 
     if (!actions.length) return primary;
@@ -1806,10 +2035,13 @@ export function renderFootnotes(entries: CitationEntry[]): string {
 
     const actions: string[] = [];
     if (entry.kind === "source" && entry.openUrl) {
-      actions.push(renderActionLink(entry.openUrl, "Open source", `data-citation-open="${escapeHtml(entry.key)}"`));
+      actions.push(renderActionLink(entry.openUrl, "Open artifact", `data-citation-open="${escapeHtml(entry.key)}"`));
+    }
+    if (entry.kind === "source" && entry.archiveUrl && entry.archiveUrl !== entry.openUrl) {
+      actions.push(renderActionLink(entry.archiveUrl, "Archived copy", `data-citation-archive="${escapeHtml(entry.key)}"`));
     }
     if (entry.kind === "source" && entry.sourceRecordUrl) {
-      actions.push(renderActionLink(entry.sourceRecordUrl, "View source record", `data-citation-record="${escapeHtml(entry.key)}"`));
+      actions.push(renderActionLink(entry.sourceRecordUrl, "Source record", `data-citation-record="${escapeHtml(entry.key)}"`));
     }
     const actionHtml = actions.length ? `<div class="citation-actions">${actions.join("")}</div>` : "";
 

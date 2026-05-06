@@ -11,10 +11,11 @@ type SourceRecord = {
   id: string;
   label: string;
   title: string;
-  kind: "external" | "hosted_copy" | "record_only" | "private_internal";
+  kind: "external" | "hosted_copy" | "archived_copy" | "record_only" | "private_internal";
   recordUrl: string;
   externalUrl?: string;
   hostedAssetUrl?: string;
+  archiveUrl?: string;
   pageOrLocator?: string;
   accessNote: string;
 };
@@ -82,21 +83,23 @@ function renderActionLink(href: string, text: string, className: string): string
 }
 
 function renderSourceRecord(source: SourceRecord): string {
-  const primaryHref = source.kind === "external"
-    ? source.externalUrl
-    : source.kind === "hosted_copy"
-      ? source.hostedAssetUrl
-      : source.recordUrl;
+  const primaryHref = source.recordUrl;
+  const artifactHref = source.hostedAssetUrl || source.archiveUrl || source.externalUrl || "";
 
   const primary = primaryHref
     ? renderActionLink(primaryHref, source.label, "finding-popover__evidence-link")
     : `<span class="finding-popover__evidence-ref">${escapeHtml(source.label)}</span>`;
 
   const actions: string[] = [];
-  if (source.externalUrl || source.hostedAssetUrl) {
-    actions.push(renderActionLink(source.externalUrl || source.hostedAssetUrl || "", "Open source", "finding-popover__action"));
+  if (artifactHref) {
+    actions.push(renderActionLink(artifactHref, "Open artifact", "finding-popover__action"));
   }
-  actions.push(renderActionLink(source.recordUrl, "View source record", "finding-popover__action"));
+  if (source.archiveUrl && source.archiveUrl !== artifactHref) {
+    actions.push(renderActionLink(source.archiveUrl, "Archived copy", "finding-popover__action"));
+  }
+  if (source.recordUrl !== primaryHref) {
+    actions.push(renderActionLink(source.recordUrl, "Source record", "finding-popover__action"));
+  }
 
   const metaBits = [source.pageOrLocator, source.accessNote].filter(Boolean).map((value) => escapeHtml(value || ""));
   const meta = metaBits.length ? `<div class="finding-popover__evidence-meta">${metaBits.join(" · ")}</div>` : "";

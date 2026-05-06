@@ -8,6 +8,12 @@ import {
   type CitationLink,
   type SourceRecord,
 } from "./citations";
+import {
+  loadArticleFindingCatalog,
+  loadDossierFindingCatalog,
+  loadGlobalFindingCatalog,
+  mergeFindingCatalogs,
+} from "./findingCatalog";
 
 export type SourceOccurrence = {
   routeType: "article" | "dossier";
@@ -28,22 +34,6 @@ export type CatalogSourceRecord = SourceRecord & {
 type CatalogMap = Record<string, CatalogSourceRecord>;
 
 let cachedCatalog: CatalogMap | null = null;
-
-function buildFindingEvidenceMap(items: Array<{ id?: string | number; evidence?: Array<{ evidence_ref?: string | null }> }> = []): Record<string, string[]> {
-  const map: Record<string, string[]> = {};
-  for (const item of items) {
-    const id = String(item?.id || "").trim();
-    if (!id) continue;
-    map[id] = [];
-    for (const evidence of item?.evidence || []) {
-      const ref = typeof evidence?.evidence_ref === "string" ? evidence.evidence_ref.trim() : "";
-      if (ref) {
-        map[id].push(ref);
-      }
-    }
-  }
-  return map;
-}
 
 function parseFrontmatterTitle(raw: string, fallback: string): string {
   const match = raw.match(/^---\n([\s\S]*?)\n---/);
@@ -68,6 +58,7 @@ function createSourceRecordFromLink(link: CitationLink): SourceRecord | null {
     canonicalRef: link.key,
     externalUrl: kind === "external" ? (link.openUrl || link.url) : undefined,
     hostedAssetUrl: kind === "hosted_copy" ? (link.openUrl || link.url) : undefined,
+    archiveUrl: kind === "archived_copy" ? (link.openUrl || link.url) : link.archiveUrl,
     recordUrl: link.sourceRecordUrl || link.url || `/sources/${encodeURIComponent(link.sourceId)}`,
     sourceType: "source_record",
     accessNote: kind === "record_only"
@@ -89,6 +80,8 @@ function mergeRecord(target: CatalogSourceRecord | undefined, source: SourceReco
     canonicalRef: source.canonicalRef || target.canonicalRef,
     externalUrl: source.externalUrl || target.externalUrl,
     hostedAssetUrl: source.hostedAssetUrl || target.hostedAssetUrl,
+    archiveUrl: source.archiveUrl || target.archiveUrl,
+    archiveLookupUrl: source.archiveLookupUrl || target.archiveLookupUrl,
     recordUrl: source.recordUrl || target.recordUrl,
     sourceType: source.sourceType || target.sourceType,
     publisherOrOrigin: source.publisherOrOrigin || target.publisherOrOrigin,
@@ -112,9 +105,9 @@ function addOccurrence(
   catalog[record.id] = existing;
 }
 
-function collectSourceEntries(markdown: string): CitationEntry[] {
+function collectSourceEntries(markdown: string, findingEvidenceMap: Record<string, string[]> = {}): CitationEntry[] {
   const state = createCitationState();
-  applyCitations(markdown, {}, state);
+  applyCitations(markdown, { findingEvidenceMap }, state);
   return state.entries.filter((entry) => entry.kind === "source");
 }
 
@@ -128,7 +121,11 @@ function scanArticles(catalog: CatalogMap): void {
     const raw = readFileSync(resolve(articlesDir, fileName), "utf-8");
     const title = parseFrontmatterTitle(raw, slug);
     const body = raw.replace(/^---\n[\s\S]*?\n---\n*/, "");
-    const entries = collectSourceEntries(body);
+    const findingEvidenceMap = mergeFindingCatalogs(
+      loadGlobalFindingCatalog({ includeDbFallback: true }),
+      loadArticleFindingCatalog(slug),
+    ).evidenceMap;
+    const entries = collectSourceEntries(body, findingEvidenceMap);
     for (const entry of entries) {
       const record = createSourceRecordFromLink(entry);
       if (!record || !record.publishValid) continue;
@@ -145,9 +142,10 @@ function scanArticles(catalog: CatalogMap): void {
   for (const fileName of findingsFiles) {
     const articleSlug = fileName.replace(/-findings\.json$/, "");
     const raw = JSON.parse(readFileSync(resolve(articlesDir, fileName), "utf-8")) as Record<string, any>;
-    const findingEvidenceMap = buildFindingEvidenceMap(
-      Object.entries(raw).map(([id, detail]) => ({ id, evidence: detail?.evidence || [] })),
-    );
+    const findingEvidenceMap = mergeFindingCatalogs(
+      loadGlobalFindingCatalog({ includeDbFallback: true }),
+      loadArticleFindingCatalog(articleSlug),
+    ).evidenceMap;
     for (const [findingId, detail] of Object.entries(raw)) {
       for (const ev of detail?.evidence || []) {
         const records = extractEvidenceSourceRecords(ev.evidence_ref || "", { findingEvidenceMap });
@@ -182,7 +180,10 @@ function scanDossiers(catalog: CatalogMap): void {
     const slug = basename(fileName, ".json");
     const dossier = JSON.parse(readFileSync(resolve(dossiersDir, fileName), "utf-8"));
     const title = dossier?.name || slug;
-    const findingEvidenceMap = buildFindingEvidenceMap(dossier?.findings || []);
+    const findingEvidenceMap = mergeFindingCatalogs(
+      loadGlobalFindingCatalog({ includeDbFallback: true }),
+      loadDossierFindingCatalog(dossier),
+    ).evidenceMap;
 
     const proseSections = [
       typeof dossier?.curation?.lead === "string" ? dossier.curation.lead : "",
@@ -192,7 +193,7 @@ function scanDossiers(catalog: CatalogMap): void {
     ].filter(Boolean);
 
     for (const prose of proseSections) {
-      const entries = collectSourceEntries(String(prose));
+      const entries = collectSourceEntries(String(prose), findingEvidenceMap);
       for (const entry of entries) {
         const record = createSourceRecordFromLink(entry);
         if (!record || !record.publishValid) continue;

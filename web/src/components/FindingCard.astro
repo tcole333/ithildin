@@ -1,5 +1,5 @@
 ---
-import { extractEvidenceSourceRecords, getSourcePrimaryUrl } from '../lib/citations';
+import { extractEvidenceSourceRecords, getSourceArtifactUrl } from '../lib/citations';
 
 interface Props {
   finding: {
@@ -80,8 +80,8 @@ const confColor = confidenceColors[finding.confidence] || 'var(--color-mithril)'
             <span class="text-mithril shrink-0">[{ev.evidence_type}]</span>
             <span class="flex flex-wrap gap-2">
               {sources.map(source => (
-                getSourcePrimaryUrl(source) ? (
-                  <a href={getSourcePrimaryUrl(source)} target="_blank" rel="noopener noreferrer" class="text-icy hover:text-ember">
+                source.recordUrl ? (
+                  <a href={source.recordUrl} class="text-icy hover:text-ember" title={getSourceArtifactUrl(source) ? 'Source record with artifact' : source.accessNote}>
                     {source.label}
                   </a>
                 ) : (
