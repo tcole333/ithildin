@@ -136,6 +136,33 @@ VALID_SOURCES = [
     "dsca", "lda", "fara_local",
     # Internal investigation cross-references
     "investigations",
+    # ── Round 6 additions ──────────────────────────────────────
+    # General news / wires
+    "cnn", "bloomberg", "aljazeera", "gulfbusiness", "agbi",
+    "ledgerinsights", "laraontheblock", "gulfnews", "thenationalnews",
+    "reuters", "ft", "wsj", "nyt",
+    # US government / regulator (additional)
+    "sec_edgar", "occ", "treasury", "oge", "ogeforms", "sec_oig", "ftc",
+    # Gulf-state primary
+    "mubadala", "dpworld", "adgm", "dfzc", "dfsa", "dfm", "adx",
+    "adq", "masdar", "adnoc", "l_imad", "mediaoffice",
+    # US corporate primary
+    "apollo", "nasdaq", "oracle", "openai", "softbank", "oklo",
+    "palantir", "kkr", "blackstone", "blackrock", "ares", "carlyle",
+    "gs", "citi", "jpmorgan", "ms", "chubb", "omv", "borouge",
+    "anthropic", "xai", "crusoe", "lancium",
+    # Crypto / blockchain
+    "theblock", "dune", "etherscan", "solscan", "bitfury",
+    "anchorage", "circle", "coinbase", "binance", "blockchain_com",
+    # Italian / EU media + Vatican
+    "ilfattoquotidiano", "ansa", "repubblica", "corriere",
+    "ilmessaggero", "domani", "irpimedia", "inkiesta",
+    "vaticannews", "press_vatican",
+    # Lux / Swiss registries
+    "lux_rcs", "swiss_zefix", "lbr_lu",
+    # UK registries / regulators / courts
+    "companies_house", "fca", "london_gazette", "charity_commission",
+    "bailii", "ewhc",
 ]
 VALID_CLAIM_TYPES = ["direct_quote", "paraphrase", "inference", "synthesis", "user_provided"]
 VALID_VERIFICATION = ["unverified", "verified", "disputed", "retracted"]
