@@ -22,6 +22,7 @@ VALID_IDS = [
     "manufactured-dependency", "bridge-tax", "private-order", "narrative-shield",
     "jurisdictional-arbitrage", "parallel-financial-system", "enabler-gradient",
     "complexity-as-credential",
+    "durable-deregulation-scaffolding", "announcement-bundling", "controlled-detachment",
 ]
 
 

@@ -1,0 +1,70 @@
+{
+  "id": "durable-deregulation-scaffolding",
+  "version": 1,
+  "title": "Durable Deregulation Scaffolding",
+  "subtitle": "Legal artifacts that outlast the personnel who authored them",
+  "archetype": "Shifting the Burden",
+  "definition": "Durable Deregulation Scaffolding is the pattern by which a regulated industry — typically through alumni-of-the-regulator at a small number of vault firms — authors deregulatory legal artifacts (interpretive letters, no-action letters, advisory bulletins, FAQs, guidance documents) during a friendly administration, and those artifacts persist as operative law across administration changes. Subsequent transactions, often filed by partners from the same authoring firm, cite the prior artifacts as authority to obtain charters, approvals, exemptions, or preemption rulings.\n\nThe mechanism's value is durability. Personnel rotate. Statutes are slow to amend. But interpretive letters and similar agency artifacts have a peculiar status: they are not formal rules subject to APA notice-and-comment, yet they are treated as binding agency interpretations. Once issued, they sit on the agency's website as a structural feature of the regulated industry's permitted activity, rescindable only by an equally slow successor action. The artifact outlasts the personnel who authored it; it becomes the durable infrastructure that subsequent personnel rotations exploit.",
+  "case_intro": "In July 2020, Acting Comptroller Brian Brooks — formerly Chief Legal Officer of Coinbase — issued OCC Interpretive Letter #1170, declaring that national banks could custody digital assets. Two months later, IL #1174 followed, blessing stablecoin reserve activities. Brooks left government in April 2021 to become CEO of Bitfury. The Biden-era OCC could have rescinded IL #1170 and #1174 at any point during its four-year tenure. It did not. The letters sat dormant on the agency's website, technically operative but politically unsurfaced. On June 11, 2025, Skadden partner Jonathan Gould filed Erebor Bank's conditional charter application, citing IL #1170, #1174, and #1184 as binding authority. On August 11, 2025, Gould joined the OCC as Senior Deputy Comptroller and Chief Counsel. Sixty-five days later, the Erebor approval issued. What looked like a single 2025 transaction was actually scaffolded by 2020 letters that had quietly waited five years for the political wind to shift back. The personnel changed; the artifact remained. That artifact — not the personnel — is the load-bearing element of the deregulation.",
+  "theoretical_basis": "Extends Stigler's 'Theory of Economic Regulation' (1971) on regulator capture by regulated industry, and Levitin & Wachter's 'The Great American Housing Bubble' (2020) on rule-making artifacts as durable infrastructure. The framework operationalizes how interpretive guidance — formally non-binding but practically dispositive — becomes the persistent unit of regulatory leverage.",
+  "mechanism": [
+    "Authorship in regulator post",
+    "Return to private practice",
+    "Survival across administrations",
+    "Citation in subsequent applications",
+    "Approval as legal-artifact validation"
+  ],
+  "mechanism_details": {
+    "Authorship in regulator post": "A vault-firm alumnus enters the regulator (typically Acting Comptroller, Acting Director, Chief Counsel, Senior Advisor) and authors interpretive letters or guidance that expand the regulated industry's permitted activity. Brooks's IL #1170 (Jul 2020, custody of digital assets by national banks) and IL #1174 (Sep 2020, stablecoin reserve activities) are paradigm cases.",
+    "Return to private practice": "The authoring official cycles back to private practice or an industry CLO/General Counsel role (Brooks → Bitfury CEO Apr 2021). The artifact remains live on the agency's website even though its author is gone.",
+    "Survival across administrations": "The successor administration could rescind but typically does not, because (a) rescission requires its own administrative process, (b) the regulated industry mobilizes against rescission, and (c) rescission may itself be challenged as arbitrary-and-capricious if reliance interests have built up. The artifact ages into entrenchment.",
+    "Citation in subsequent applications": "When the political wind shifts again, partners from the same firm (or tightly connected vault firms) file applications that cite the dormant artifacts as binding authority. Skadden partner Jonathan Gould files the Erebor Bank charter Jun 11 2025 citing IL #1170/1174/1184; Gould enters OCC as Sr Deputy + Chief Counsel Aug 11 2025; Erebor approval issues 65 days later.",
+    "Approval as legal-artifact validation": "The approval letter itself becomes a new artifact — a precedent that subsequent applicants will cite. The scaffolding extends. What began as one Brooks letter in 2020 cascades into 2025-2026 charter approvals that cite the chain."
+  },
+  "canonical_instances": [
+    {
+      "label": "Brooks IL #1170/1174 → Gould → Erebor (2020-2025)",
+      "summary": "Acting Comptroller Brian Brooks (ex-Coinbase CLO) authors IL #1170 (Jul 2020, digital asset custody) and IL #1174 (Sep 2020, stablecoin reserves), then exits to Bitfury CEO Apr 2021. The letters survive the entire Biden-era OCC. Skadden partner Jonathan Gould files Erebor Bank's conditional charter application Jun 11 2025 citing IL #1170/1174/1184 as binding authority. Gould joins OCC as Senior Deputy Comptroller and Chief Counsel Aug 11 2025. Erebor approval issues 65 days later.",
+      "evidence": ["finding:11236", "OCC IL #1170", "OCC IL #1174", "OCC IL #1184", "Erebor charter conditional approval 2025"]
+    },
+    {
+      "label": "Cohen Skadden → OCC (2025)",
+      "summary": "Second instance of vault-firm-to-OCC cycling within the Round 6 window: Skadden partner enters OCC during Trump-II window with portfolio overlapping the Brooks-era crypto custody letters. Demonstrates firm-level (not merely individual) coordination of the scaffolding pattern across multiple cycles.",
+      "evidence": ["finding:11236"]
+    },
+    {
+      "label": "Paoletta dual-cycle (2018, 2025)",
+      "summary": "Mark Paoletta cycles between regulator-side and private practice across multiple administrations, with each cycle producing or activating durable interpretive artifacts. The 2018 and 2025 placements bracket a hostile administration during which the prior cycle's artifacts persisted unrescinded — the diagnostic durability marker.",
+      "evidence": ["finding:11236"]
+    },
+    {
+      "label": "Brooks → Bitfury (2021)",
+      "summary": "Brian Brooks's exit from Acting Comptroller to Bitfury CEO in April 2021 — within months of authoring IL #1170/1174 — is the canonical 'return to private practice' step. Bitfury's subsequent role in the Cipher/Stargate cluster (see Announcement Bundling) shows how the scaffolding artifact and the personnel pipeline compound: the same individual builds the artifact, then deploys industry-side activity that benefits from it.",
+      "evidence": ["finding:11195", "finding:11236", "Bitfury Dec 23 2024 dividend"]
+    }
+  ],
+  "detection_markers": [
+    "Authoring official's prior firm matches the firm filing subsequent applications citing the artifact (vault-firm coordination)",
+    "Letter cited 3+ times across multiple administrations (durable scaffolding, not one-off precedent)",
+    "Charters/approvals/preemption rulings filed within 60-90 days of the authoring official's return to a regulator post in a successor administration",
+    "Successor administration considered and dropped rescission (industry mobilization signal)",
+    "Letter lay dormant during a hostile administration and was activated immediately when conditions allowed"
+  ],
+  "limitations": [
+    "Open-source evidence may not reach internal communications between vault-firm partners and successor regulators that would prove deliberate scaffolding strategy. Citations in approval letters are public; authorship intent is not.",
+    "The framework can over-attribute design to what may be emergent good-faith administrative law. The diagnostic distinguishing feature is firm-level coordination and temporal clustering of authorship and citation across the same vault-firm network — not individual-level intent.",
+    "Routine guidance documents that clarify existing law without expanding regulated-party authority are not scaffolding. Most agency FAQs and bulletins are housekeeping.",
+    "Status: adopted based on Round 6 four-instance pattern (Brooks 2020 → Gould 2025; Brooks → Bitfury 2021; Cohen Skadden → OCC 2025; Paoletta 2018+2025). More instances needed across other agencies (SEC, CFTC, FinCEN) to confirm cross-domain transferability."
+  ],
+  "related_models": [
+    "jurisdictional-arbitrage",
+    "private-order",
+    "bridge-tax"
+  ],
+  "visualization": {
+    "primary_type": "timeline",
+    "description": "Horizontal timeline spanning 2020-2026 with two parallel tracks: (top) personnel rotations between vault firm and regulator (Brooks at OCC → Bitfury → ...; Gould at Skadden → OCC), (bottom) the durable artifact itself (IL #1170, IL #1174) shown as a continuous bar persisting unbroken across the Biden administration shaded region. Citation arcs connect the artifact to the 2025 Erebor approval, demonstrating that the artifact, not the personnel, is the load-bearing element.",
+    "static_fallback": "Two-track timeline with persistent artifact bar"
+  },
+  "last_updated": "2026-05-07"
+}

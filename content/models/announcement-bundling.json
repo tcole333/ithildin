@@ -1,0 +1,71 @@
+{
+  "id": "announcement-bundling",
+  "version": 1,
+  "title": "Announcement Bundling",
+  "subtitle": "Manufacturing the price-moving event that the substantive activity already preceded",
+  "archetype": "Escalation",
+  "definition": "Announcement Bundling is the pattern of orchestrating a high-profile public announcement that bundles multiple pre-existing investments, contracts, and capital commitments into a single dramatic narrative. The announcement itself creates the price-moving event, even though the components were committed months or quarters earlier. Insiders close to the underlying components reposition financially in advance of the announcement, benefiting from the announcement-driven price move.\n\nThe diagnostic separation from routine corporate communications is the temporal precedence of components. A normal earnings call announces results that occurred during the quarter; a normal partnership announcement consummates a deal that closed that day. Announcement Bundling announces commitments that closed months earlier but were withheld from public disclosure or sub-aggregated until the bundle could be assembled. The announcement is not the substantive event — it is the manufactured promotional moment that turns already-committed activity into a tradable narrative.",
+  "case_intro": "On January 21, 2025, Stargate was announced from the White House: a $500 billion AI infrastructure bundle uniting OpenAI, Oracle, SoftBank, and Abu Dhabi's MGX. The number was staggering, the political theater elaborate, and the press response treated it as a new commitment of unprecedented scale. Now reconstruct the underlying components by date. Crusoe broke ground at the Abilene datacenter in June 2024 — seven months before the announcement. The AltC SPAC closed in May 2024 with anomalously low redemption (about $7,457.80 against roughly 30 million shares), suggesting non-redemption agreements arranged in advance. Bitfury paid a $53.9M dividend on December 23, 2024, thirty-eight days before the Cipher PIPE. SoftBank fully exited 100% of its 10.4 million-share Cipher PIPE in Q3 2025, after the announcement-driven price move had played out. The $500B headline wasn't a commitment moment. It was the bundled re-narration of infrastructure already in motion, timed to a White House appearance, with sponsors positioned to harvest the move. The substantive activity preceded the announcement; the announcement was the trade.",
+  "theoretical_basis": "Extends Akerlof's 'Market for Lemons' (1970) on information asymmetry — here, the asymmetry is not about quality but about timing, with insiders knowing the bundle is forthcoming while public markets see only the dispersed components — and Shiller's 'Irrational Exuberance' (2000) on narrative-driven asset pricing, where the bundled story moves prices independently of the unchanged underlying cash flows.",
+  "mechanism": [
+    "Component pre-positioning",
+    "Insider repositioning",
+    "Bundle assembly",
+    "Announcement event",
+    "Price move and exit"
+  ],
+  "mechanism_details": {
+    "Component pre-positioning": "Underlying capex, equity stakes, and supplier contracts are committed, often with sub-disclosure (8-K filings without press releases, ground-breaking without ribbon-cuttings, board approvals without shareholder communications). Each component is individually below the threshold of mainstream attention. Crusoe broke ground at Abilene in Jun 2024; AltC SPAC closed May 2024; multiple supplier contracts were signed quarters before the bundle.",
+    "Insider repositioning": "Parties with knowledge of the pending bundle reposition. Forms include sponsor-side dividends extracting cash from a portfolio company that will appreciate post-announcement (Bitfury → Cipher: $53.9M dividend Dec 23 2024, 38 days before Cipher PIPE); SPAC redemption patterns suggesting pre-arranged backstops (AltC's $7,457.80 redemption); equity exits sized to the announcement-driven price (SoftBank's full Q3 2025 Cipher PIPE exit); 10b5-1 plans timed to the announcement window.",
+    "Bundle assembly": "Communications and government-relations teams assemble the components into a single narrative. The story typically invokes a national-priority frame ('AI dominance,' 'energy independence,' 'supply-chain security') that justifies the scale and the public-private coordination, and that deflects scrutiny from any individual component.",
+    "Announcement event": "The bundle is unveiled in a high-visibility moment (White House appearance, joint press conference, foreign-leader visit). The announcement is sized in dollars far larger than the underlying committed capital, often by including conditional or aspirational components. Stargate's $500B headline far exceeded the actual contracted capex visible in the components.",
+    "Price move and exit": "Public-market prices for connected tickers move sharply on the announcement. Pre-positioned insiders harvest the move. Within 30-90 days, retail and institutional follow-on capital flows in at higher prices, allowing further exit. The 'investment' announced often shrinks under later scrutiny — committed dollars reduce, timelines extend, scope narrows."
+  },
+  "canonical_instances": [
+    {
+      "label": "Stargate (Jan 21 2025)",
+      "summary": "$500B AI infrastructure bundle of OpenAI/Oracle/SoftBank/MGX announced from the White House. Underlying components were largely pre-positioned: Crusoe broke ground at Abilene Jun 2024 (7 months prior); AltC SPAC closed May 2024 with $7,457.80 redemption (out of ~30M shares); Bitfury paid $53.9M dividend Dec 23 2024 (38 days before Cipher PIPE). The announcement repackaged infrastructure already in motion.",
+      "evidence": ["finding:11195", "finding:11236", "Crusoe Abilene groundbreaking Jun 2024", "AltC S-4 redemption disclosure", "Bitfury Dec 23 2024 dividend"]
+    },
+    {
+      "label": "Bitfury → Cipher dividend extraction",
+      "summary": "Bitfury paid a $53.9M dividend on Dec 23 2024, 38 days before the Cipher PIPE that priced into the Stargate-bundle narrative. The dividend extracted sponsor-side cash on the eve of an announcement-driven price appreciation — the canonical insider-repositioning pattern in the Stargate cluster.",
+      "evidence": ["finding:11195", "Bitfury Dec 23 2024 dividend disclosure"]
+    },
+    {
+      "label": "AltC SPAC anomalous redemption",
+      "summary": "AltC SPAC closed May 2024 with anomalously low redemption: roughly $7,457.80 against approximately 30 million shares. The PIPE backstop was not triggered, suggesting non-redemption agreements arranged in advance. The pattern is a marker of pre-positioned bundle participation: redemption-suppressing arrangements only make sense if sponsors knew the underlying entity would appreciate post-bundle.",
+      "evidence": ["finding:11195", "AltC S-4 redemption disclosure May 2024"]
+    },
+    {
+      "label": "SoftBank Cipher Q3 2025 exit",
+      "summary": "SoftBank fully exited 100% of its 10.4M-share Cipher PIPE in Q3 2025, after the Stargate announcement-driven price appreciation had played out. The complete-exit pattern (rather than gradual rebalancing) is characteristic of position-closing after a known catalyst rather than ordinary portfolio management.",
+      "evidence": ["finding:11195", "SoftBank Q3 2025 Cipher 13F filing"]
+    }
+  ],
+  "detection_markers": [
+    "Sub-disclosure precedence: 3+ underlying components publicly knowable (8-K, ground-breaking permits, registry filings, building permits) 30+ days before the bundled announcement",
+    "Sponsor-side cash extraction: dividends, special distributions, or secondary sales by bundle-component sponsors in the 90 days BEFORE announcement",
+    "Anomalous SPAC behavior: anomalously low redemption suggesting non-redemption agreements, or redemption-and-immediate-PIPE patterns",
+    "Pre-announcement insider equity activity: Form 4 filings, 13F changes, prediction-market activity in the 30-60 days before announcement, anomalous vs. historical baseline",
+    "Post-announcement scope shrinkage: announced figure vs. actual capex commitments visible in subsequent 10-Q/10-K disclosures over 12-18 months",
+    "Government-relations timing: lobbying disclosures and meeting logs in the 60-90 days prior to bundled announcements with senior administration figures present"
+  ],
+  "limitations": [
+    "Distinguishing announcement bundling from legitimate disclosure timing requires forensic reconstruction of the components' true commitment dates. SPACs and private LLCs often have deliberately opaque timing. Component-by-component dating is labor-intensive.",
+    "The framework can produce false positives in industries with long capex lead times (datacenters, energy infrastructure, semiconductor fabs) where construction necessarily predates commercialization announcement by months. Context-specific baseline rates matter.",
+    "Insider repositioning evidence (dividends, exits, redemptions) is suggestive but not dispositive. Some sponsors take dividends on schedule; some SPAC redemption patterns reflect deal-specific terms not foreknowledge. The framework requires the COMBINATION of pre-positioning, repositioning, and announcement-driven price move — not any one component alone.",
+    "Status: adopted based on Round 6 Stargate cluster (Bitfury, Cipher, Crusoe, AltC). More instances needed across non-AI sectors to confirm transferability beyond the Jan 2025 window."
+  ],
+  "related_models": [
+    "narrative-shield",
+    "complexity-as-credential",
+    "controlled-detachment"
+  ],
+  "visualization": {
+    "primary_type": "timeline",
+    "description": "Horizontal timeline anchored at the Jan 21 2025 announcement event (vertical red bar). Component commitment dates (Crusoe groundbreaking Jun 2024, AltC close May 2024, etc.) plotted to the LEFT of the announcement, demonstrating temporal precedence. Insider repositioning events (Bitfury dividend Dec 23 2024, SoftBank Q3 2025 exit) plotted in red as the trades that bracket the bundle. The visual separates substantive activity (left) from manufactured event (center) from harvested move (right).",
+    "static_fallback": "Pre-announcement / announcement / post-announcement three-phase timeline"
+  },
+  "last_updated": "2026-05-07"
+}
