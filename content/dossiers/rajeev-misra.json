@@ -5,30 +5,30 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.854861",
-  "last_updated": "2026-02-26T18:29:28",
+  "generated_at": "2026-05-07T23:07:36.140456",
+  "last_updated": "2026-05-07T23:07:36",
   "stats": {
-    "total_findings": 19,
-    "total_connections": 14,
+    "total_findings": 28,
+    "total_connections": 18,
     "total_entities": 0,
     "finding_types": {
       "relationship": 2,
-      "intelligence": 10,
-      "legal": 1,
+      "intelligence": 16,
+      "legal": 2,
       "financial": 2,
-      "identity": 1,
+      "identity": 3,
       "communication": 2,
       "document": 1
     },
     "connection_types": {
       "legal": 3,
-      "financial": 4,
-      "employment": 2,
-      "intelligence": 3,
+      "financial": 5,
+      "employment": 3,
+      "intelligence": 5,
       "social": 1,
       "corporate": 1
     },
-    "last_updated": "2026-02-26T18:29:28"
+    "last_updated": "2026-05-07T06:59:25"
   },
   "findings": [
     {
@@ -174,6 +174,47 @@
           "evidence_type": "efta",
           "evidence_ref": "EFTA02617269",
           "source_quote": "Steve jabor - jabor - steve",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11147,
+      "finding_type": "intelligence",
+      "summary": "India SEBI/ED 2017 SoftBank kickback complaint = COMPREHENSIVE NULL REGULATORY OUTCOME (no SEBI adjudication, no ED FIR, no CBI charge ever) but operationally significant: filed via TWO TRACKS \u2014 Geneva (Giannakopoulos via CH Communication SA, Charles Ergen/Dish JV repurposed) + India (two unnamed Indian businessmen courting Vision Fund LP slots, WSJ withheld their identities). WSJ Feb 27 2020 byline is Hope/STRASBURG (not Hope/Copeland as previously cited). Operational chain: Misra \u2192 ~$500K to Benedetti SAE Capital \u2192 Boies Schiller Flexner + Mintz & Gold LLP NY \u2192 Giannakopoulos as nominal 'shareholder' \u2192 multi-jurisdiction filings",
+      "detail": "Two-track filing architecture confirmed: TRACK A Geneva: Nicolas Giannakopoulos as named filer via vehicle CH Communication SA (originally Charles Ergen / DISH JV repurposed for activism); Swiss AG complaint Mar 2016, Aug 25 2016 letter to SoftBank Board, March 2017 ED complaint. TRACK B India-side: Per WSJ Feb 26-27 2020 (Hope/Strasburg), Misra asked two unnamed Indian businessmen who were courting Vision Fund LP slots to file parallel complaint in India in 2017. Their identities NEVER publicly disclosed but WSJ knew them. ALLEGATIONS AGAINST SAMA (Janta Ka Reporter exclusive May 2017): Pre-employment consulting Sept 2014-Mar 2015 paid through Kensington Capital International (BVI); $175K/month escalating to $250K/month + $3M success fee = $4.6M total; conflict of interest with Raine Group / Raine Partners (SoftBank M&A advisor); $150M SoftBank Vatika investment via Beacon Vatika Holdings Limited (Mauritius) with Goldman Sachs, Wachovia, Baer Capital (Sama's own Dubai vehicle); Snapdeal Oct 2014 fee concurrent with Arora's personal 5% Snapdeal stake. INDIAN COMPANIES NAMED: Snapdeal (Bahl/Bansal), Ola (Aggarwal), Housing.com (Yadav fired May 2015), Grofers (now BlinkIt), InMobi (Tewari), plus US deals WME-IMG and Zynga. REGULATORY OUTCOME \u2014 COMPLETE NULL: SEBI portal 'no record(s) available'; ED no ECIR no PMLA prosecution no raid no press release 2017-2026; CBI no FIR no PE; Indian courts no SC/HC/NCLT/SAT/PMLA-Special-Court filings. Three convergent reasons India did nothing: (1) foreign principal made it readable as foreign-instigated not domestic whistleblower; (2) FEMA/PMLA jurisdiction over non-resident-Indian executives of Japanese company was thin; (3) SoftBank's Shearman & Sterling / Morrison & Foerster reviews gave clean chits + Modi-Son personal cultivation removed political tailwind. Vision Fund Indian portfolio losses are real but not kickback-driven: combined India loss FY2017 $1.4B on Snapdeal/Ola; $475M written off Feb 2017; Housing.com $100M+. Cause: strategic over-aggressiveness on valuations. SIGNIFICANCE: India complaint significant NOT as regulatory matter (closed) but as operational signature of Misra dirty-tricks apparatus. Giannakopoulos = SCL Switzerland linkage ties Misra's operation directly into Cambridge Analytica / SCL Group network \u2014 same infrastructure that operated against 1MDB Malaysia, reportedly worked Indian elections for BJP, and Trump 2016 US. NEW ENTITIES TO RESEARCH: Kensington Capital International (BVI), Beacon Vatika Holdings Limited (Mauritius), CH Communication SA (Geneva, Charles Ergen/Dish JV repurposed), Mintz & Gold LLP NY (engaged alongside Boies Schiller), Raine Group/Raine Partners (Sama conflict).",
+      "source_datasets": [
+        "wsj.com",
+        "axios.com",
+        "jantakareporter.com"
+      ],
+      "confidence": "high",
+      "date_of_event": "2017-03-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 06:59:25",
+      "target_name": "Rajeev Misra",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "axios-2018-03-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "janta-ka-reporter-2017-05",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "wsj-2020-02-27-hope-strasburg",
+          "source_quote": null,
           "source_page": null,
           "assessment": null
         }
@@ -399,6 +440,87 @@
       ]
     },
     {
+      "id": 11141,
+      "finding_type": "legal",
+      "summary": "Weingarten Jan 26 2019 'Softbank caper' engagement was anticipatory criminal-defense + reputational-risk management triggered by 5-front convergence: (1) Shearman & Sterling internal probe of Misra in terminal phase, (2) Geneva criminal docket still live (Sama+SoftBank+Giannakopoulos cross-complaints), (3) anticipated WSJ Hope/Copeland blockbuster (Feb 2020), (4) imminent Sama departure April 2019, (5) Karp/Paul Weiss conflict locked Misra out of SoftBank's house counsel. Probably NOT retained \u2014 Misra ultimately surfaced with Paul Weiss representation in WSJ Feb 2020 cycle, suggesting conflict-wall was breached",
+      "detail": "By Jan 2019: smear operation 2015-2017 was over; WSJ Cycle 1 (Jan 2016 anonymous shareholder letter) public; WSJ Cycle 2 (Mar 28 2018 unmasked Giannakopoulos/Cambridge Analytica ties) public; Hope/Scheck blockbuster still 13 months away (Feb 27 2020); Sama still at SoftBank (didn't leave until Apr 2019); Misra still co-CEO Vision Fund. THE CRITICAL INSIGHT: by Jan 2019, Misra needed his OWN defense separate from SoftBank's because the internal Shearman & Sterling investigation (commissioned by SoftBank to probe HIM) was actively running. Karp/Paul Weiss represented SoftBank Group Corp + SoftBank Vision Fund \u2014 could not also represent Misra personally on same matter without conflict waivers. Karp confirmed informal contact with Misra Jan 25 2019 ('Sort of. Spoke to him yesterday') but no formal personal representation \u2014 exactly what conflict avoidance requires. Weingarten's 'obviously dont mention my role with brad till we both think it useful' (Jan 26) reveals coordination tension. Counsel-to-actor map Jan 2019: SoftBank Group = Paul Weiss (Karp); Internal investigation = Shearman & Sterling (probing Misra; concluded 2019 inconclusively); Misra personally = approaching Reid Weingarten/Steptoe; Sama personally = eventually Mark MacDougall/Akin Gump. Weingarten's specialism: federal white-collar criminal defense at the level of Wynn (DOJ/Broidy), Flynn-equivalent, presidential outside counsel. 'Caper' word choice signals scandal-management not active litigation \u2014 matches Wynn engagement shape. SOFFER'S PROPOSED ROLE: Geneva front (Bouvier Affair muscle memory \u2014 but recall Bouvier Affair Geneva prosecutor was Yves Bertossa, not Olivier Jornot); French press response (Benedetti Paris-based); Israeli intelligence-adjacent angle (IDF JAG background, Sama London ex-Mossad meeting context). Why Soffer probably NOT retained: Misra's WSJ Feb 2020 counsel was Paul Weiss (per #11108 / #4241) \u2014 meaning Karp obtained limited-engagement waiver for media-response phase OR Paul Weiss split matter between teams. The Jan 2019 Weingarten approach was likely a backup play for the structural-conflict scenario that didn't ultimately materialize. CONFIRMS user's timing question: Misra was buying federal criminal-defense optionality at highest tier of US bar specifically because he correctly forecast convergence of (a) Hope's continuing WSJ reporting, (b) Shearman terminal phase, (c) Sama imminent departure with anticipated US litigation, (d) structural impossibility of using Karp/Paul Weiss.",
+      "source_datasets": [
+        "wsj.com",
+        "house-oversight"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-01-26",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 05:44:08",
+      "target_name": "Rajeev Misra",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "HOUSE_OVERSIGHT_028576",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WSJ-2018-03-28",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "WSJ-2020-02-27",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11133,
+      "finding_type": "intelligence",
+      "summary": "REFRAME: Klein-Misra was transactional 2017-2018 banker-client pair, NOT patronage triangle. Misra's protector was Tahnoon (not MBS); OneIM Mubadala-anchored not PIF-anchored; Misra rebuilt deal-finder bench on Centricus-DB alumni (des Pallieres ex-Centricus partner ex-DB direct report); structural cooling Klein\u2194Misra by 2019",
+      "detail": "Klein VF2/PIF non-advocacy probe disconfirms strong patronage thesis. (1) Klein not on VF2 placement team \u2014 Bloomberg Jun 12 2019: SoftBank retained Goldman + Centricus + Cantor Fitzgerald for VF2 (Klein conspicuously absent). (2) Klein's structural lockout 2018-2020: PIF-SABIC sale advisor (Sept 10 2018, Aramco buys 70% SABIC for $69.1B closed Mar 2019), Aramco IPO troika 2019 (with Moelis + Lazard, principal-side), Credit Suisse board since Apr 2018 (fiduciary duty to SoftBank lender), Churchill Capital SPAC family (CCI through CCIV/Lucid Feb 2021). (3) Misra exit pattern: Centricus 'fraying' 2018-19 (Misra wanted them gone, Son building direct ties); 2020-22 sidelined at SoftBank; 2022 OneIM founded with Mubadala anchor (not PIF); des Pallieres = ex-Centricus partner + ex-Misra DB direct report 2005-2007 \u2192 joined OneIM at founding as Partner Private Credit. (4) MBS told Masa: 'until Vision 1 is in good shape, there's no commitment for Vision Fund 2'; PIF was capital recipient not deployer in 2019 (Aramco proceeds Dec 2019). (5) Klein's HSGAC Feb 6 2024 testimony scope: PIF, LIV, PGA, Asian Tour \u2014 does NOT publicly name SoftBank/Vision Fund. (6) Klein NBC News Khashoggi-week framing: 'highly influential power broker for the Saudi kingdom who played a key role in bringing the annual summit together'; spokesperson refused confirm-or-deny FII 2018 attendance. (7) Khashoggi did NOT weaken Klein's Saudi business \u2014 DEEPENED it by clearing competing US bankers (JPM Dimon, Ford, Uber, Bloomberg, FT, NYT, CNBC all pulled out of Oct 2018 FII; Klein continued SABIC + joined Aramco IPO). (8) Lucid PIPE Feb 2021 corrects 'Klein steered PIF away from VF2' hypothesis: PIF's underlying Lucid equity dates to Sept 2018, predating CCIV merger discussions \u2014 Klein's SPAC monetized PIF's pre-existing position, did NOT divert fresh capital. CONCLUSION: probability assessment 55% Klein declined to advocate VF2 (structural fiduciary lockout, not adversarial); 25% advocated quietly but PIF declined; 15% PIF declined for performance/Khashoggi reasons; 5% Klein actively undermined. The patronage pattern that EXISTS is Misra-Centricus-Mubadala (Tahnoon) \u2014 not Misra-Klein-PIF. CORRECTS PRIOR FINDING #11105: Klein's $6M is honest advisory for episodic SoftBank M&A (Uber tender Dec 2017-Jan 2018), NOT laundering vehicle for Benedetti operational debt. The 'where did the rest of the money go' question is answered differently: Misra paid the INTRODUCER (des Pallieres) in equity at OneIM in 2022+, not the OPERATIVE (Benedetti) in cash. That's why Benedetti leaked to WSJ in 2018-2020.",
+      "source_datasets": [
+        "bloomberg.com",
+        "hsgac.senate.gov",
+        "wsj.com"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2019-06-12",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 04:35:23",
+      "target_name": "Rajeev Misra",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "bloomberg-2019-06-12",
+          "source_quote": "SoftBank Taps Goldman for Talks on Second 100 Billion Fund \u2014 Centricus Cantor Fitzgerald named placement team Klein not retained",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "hsgac-klein-2024-02-06",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "wsj-2020-02-27",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 739,
       "finding_type": "intelligence",
       "summary": "WSJ (Bradley Hope, Rob Copeland, Feb 2020) reported Misra paid $500K from Standard Chartered Bank to Barkmere Group Ltd (BVI company controlled by Benedetti) in April 2015 to fund smear campaigns against SoftBank rivals Nikesh Arora and Alok Sama. Operations included: (1) honey trap \u2014 women to lure Arora to Tokyo hotel room rigged with cameras, (2) K2 Intelligence hired to investigate targets, (3) Swiss operative Nicolas Giannakopoulos recruited to distribute leaked banking records and emails, (4) Mark Hollingsworth (freelance reporter) paid to plant story in The Independent (Oct 2015), (5) Boies Schiller Flexner sent anonymous shareholder letter (Jan 2016). Misra denies all; SoftBank hired Shearman & Sterling to investigate but dropped the probe.",
@@ -415,6 +537,85 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://inc42.com/buzz/sex-power-money-the-story-of-rajeev-misras-rise-in-softbank-vision-fund/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11107,
+      "finding_type": "identity",
+      "summary": "Misra removed from SoftBank board Nov 9 2020 (8 months after WSJ expos\u00e9) alongside Marcelo Claure; formally exited SoftBank Nov 12 2024; founded OneIM ($8B AUM by Nov 2024) backed by Mubadala/Royal Group",
+      "detail": "Post-WSJ Misra trajectory consolidates the operational impact: (1) Feb 27 2020: WSJ Hope/Scheck blockbuster names Misra and Benedetti. (2) Nov 9 2020: SoftBank removes both Misra and Marcelo Claure from its board to 'improve perception of independence' \u2014 exactly 8 months later. (3) Aug 2022: Misra steps back from corporate officer / EVP roles to launch OneIM. (4) Nov 12 2024: Misra formally exits as co-CEO of SoftBank Investment Advisers and Global Advisers; Alex Clavel becomes sole CEO. (5) Nov 19 2024: OneIM upsizes to $8B AUM (from $6.8B Aug 2023, $6B 2022). (6) Dec 2025: OneIM-backed blank-check (SPAC) firm files for IPO. (7) Feb 10 2026: Bloomberg headline 'SoftBank Scars Fade.' OneIM is HQ Abu Dhabi with offices London/NY/Tokyo/India. Backed by Mubadala Investment Co. and Royal Group (Sheikh Tahnoon Bin Zayed Al Nahyan). Robert Merksamer hired by Mubadala from OneIM/SoftBank June 2024 \u2014 illustrates the OneIM\u2194Mubadala personnel pipeline. Background: Misra IIT Delhi \u2192 UPenn \u2192 MIT Sloan \u2192 Merrill Lynch \u2192 Deutsche Bank (global head credit & commodities, departed June 2008 reportedly earning EUR 10-15M/yr) \u2192 TCI Fund (briefly) \u2192 UBS (2009-2013) \u2192 Fortress (2014) \u2192 SoftBank Nov 2014. NEGATIVE: no documented Sumitomo/Lineage tie to Misra \u2014 should disconfirm any prior briefing that suggested this.",
+      "source_datasets": [
+        "bloomberg.com",
+        "techcrunch.com"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-11-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:26:44",
+      "target_name": "Rajeev Misra",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "bloomberg-2024-11-19",
+          "source_quote": "Rajeev Misra OneIM upsizes to 8 billion to boost investments",
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "techcrunch-2024-11-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "wsj-2020-02-27",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11122,
+      "finding_type": "intelligence",
+      "summary": "Misra exit\u2192Stargate timeline (Nov 2024-Jan 2025) plausibly designed to clear his Vision-Fund fiduciary conflicts so he could intermediate Tahnoon-Son AI deals through OneIM without GP/LP conflict-of-interest disclosure; SoftBank dirty-tricks network re-platformed inside Sheikh Tahnoon's Mubadala/Royal Group ecosystem",
+      "detail": "Sequencing: 12 Nov 2024 Misra formal exit from SoftBank as co-CEO Vision Fund/SBIA/Global Advisers (Alex Clavel becomes sole CEO); Dec 2024 Son's B Mar-a-Lago pledge to Trump; 16 Jan 2025 Aryam-WLFI signed (Tahnoon's UAE 49% stake in Trump-family DeFi via G42 executives); 21 Jan 2025 Stargate JV announced (SoftBank 40% / OpenAI 40% / Oracle / MGX 10% = B). Misra was removed from operational SoftBank role at exactly the right time to act as the unconflicted intermediary between Son (SoftBank Vision Fund) and Tahnoon (Mubadala/Royal Group/MGX) on the Stargate AI deals. OneIM key facts: ADGM Financial Services Permission granted 25 May 2023; HQ Al Reem Tower L12 Al Maryah Island (same Abu Dhabi financial cluster as G42's Al Khatem Tower); US registered as One Investment Management US LLC; master fund Oneim Fund I LP. AUM trajectory: B (2022) \u2192 .8B (Aug 2023) \u2192 B (Nov 2024). OneIM-OHA partnership Jul 2024: up to B European private credit. OneIM-RXR partnership Apr 2024: US rental housing. OneIM Acquisition Corp (NASDAQ: OIMAU) IPO completed 13 Jan 2026 at .5M (CEO Yanni Pipilis, CFO Greg Kapenis); sector-agnostic mandate is the institutional descendant of Vision Fund 'any sector' via SPAC mechanics. CRITICAL: Bertrand des Pallieres (DB-alumnus French banker who introduced Misra to Benedetti for the SoftBank dirty-tricks operation) is OneIM Partner Private Credit Abu Dhabi \u2014 confirmed via OneIM team page. The man who arranged the dirty-tricks introduction is now sitting in the same Abu Dhabi office signing off on private-credit deployments backed by Tahnoon's Royal Group. CORRECTION: It is Sam Merksamer (NOT Robert) \u2014 career Icahn Capital \u2192 Caligan \u2192 SoftBank/SB Management 2019-22 \u2192 OneIM 2022-24 \u2192 Mubadala Capital June 2024; led Mubadala's B CI Financial take-private Aug 2025. Sofia Lasky precision: IHC Board Member since Apr 2020, 18-year Royal Group veteran \u2014 sits on LP/sponsor side (capital flowing INTO OneIM), not GP/staff side. Misra-Lasky relationship is LP-GP coordination, not internal OneIM staffing.",
+      "source_datasets": [
+        "adgm.com"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-11-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 03:23:12",
+      "target_name": "Rajeev Misra",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "adgm.com",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "oneimgroup.com/team",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "techcrunch-2024-11-12",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -572,6 +773,123 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 11114,
+      "finding_type": "intelligence",
+      "summary": "CONFIRMED: Bertrand des Pallieres is Partner Private Credit at OneIM (Misra's Abu Dhabi firm). The DB Principal Finance \u2192 SPQR/Methorios \u2192 Centricus \u2192 OneIM pipeline retains des Pallieres into the new vehicle despite WSJ Feb 2020 naming him publicly as the Misra-Benedetti introducer. Centricus (Nizar Al-Bassam, Dalinc Ariburnu) raised the original Vision Fund and earned 100M+ USD in fees; des Pallieres used Centricus as the bridge to OneIM. Active UK directorship: BITFURY GROUP LIMITED (UK 11441275, appointed May 20 2021), co-directors Val Vavilov, George Kikvadze, Brian P. Brooks (former US Acting Comptroller of the Currency under Trump). des Pallieres' OneIM bio names 'Centricus and JPMorgan' but conspicuously omits Deutsche Bank.",
+      "detail": "Confirmed via OneIM team page (oneimgroup.com/team) and Bitfury board page. Pipeline: DB Principal Finance under Misra (2005-07) \u2192 SPQR/Methorios constellation (2007-23) \u2192 Centricus consultant during Vision Fund 1 era (~2018-23) \u2192 OneIM Partner Private Credit Abu Dhabi (~2024-present). Three-man DB Principal Finance breakaway 2007: des Pallieres + Malik Chaabouni + Moez Ben-Zid co-founded SPQR. SPQR Capital Holdings SA in liquidation since 16 March 2023 (liquidator Christian Steinmetz Luxembourg). Cadogan Petroleum / Western Ukraine: SPQR owned 27-28.5 percent controlling stake; des Pallieres CEO 2011-17 covering Yanukovych era + Maidan + Crimea + Donbas; Eni S.p.A. was 2013 Cadogan shale-gas JV partner.",
+      "source_datasets": [
+        "oneimgroup.com",
+        "uk-companies-house",
+        "wsj.com"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-01-01",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-05-07 06:30:00",
+      "target_name": "Bertrand des Pallieres",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "oneimgroup.com/team",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "uk-companies-house-11441275",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 3803,
+      "finding_type": "identity",
+      "summary": "MGX Fund Management registered US fund management entity in Delaware (August 2024) and New York (September 2024) \u2014 the SCFEA sovereign vehicle (Mubadala / G42 / Tahnoon-chair, Khaldoon Al Mubarak vice-chair) established its US operating layer 2-3 months before Misra's formal SoftBank exit on Nov 12 2024 and 4-5 months before the Stargate JV announcement on Jan 21 2025.",
+      "detail": null,
+      "source_datasets": [
+        "delaware-soss",
+        "ny-soss"
+      ],
+      "confidence": "high",
+      "date_of_event": "2024-08-01",
+      "claim_type": "direct_quote",
+      "verification_status": "verified",
+      "created_at": "2026-05-07 06:30:00",
+      "target_name": "MGX Fund Management Limited",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "REG:DE:MGX-FUND-MANAGEMENT-US-LLC",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11176,
+      "finding_type": "intelligence",
+      "summary": "ROUND 5 META-SYNTHESIS: Four Tier-2 synthesis runs converge on a unified structural model \u2014 Mubadala-Tahnoon capital backbone (NOT MBS/PIF) operating through a 2-tier institutional pipeline. Tier 1 is Bitfury Group UK board as crypto/regulatory keystone with two consecutive ex-Bitfury OCC Comptrollers (Brian P. Brooks 2020, Jonathan V. Gould 2025). Tier 2 is the Mayfair-Geneva-Lux corporate-administration backbone via Tancredi Salvatore Maria Marchiolo and the Five Arrows / Rothschild orbit. Reid Weingarten / Steptoe is the legal pivot \u2014 the single non-Epstein person in both the SoftBank-caper clique (Benedetti + Misra + Epstein + Weingarten) and the old-guard clique (Bannon + Barr + Epstein + Weingarten). Aug-Dec 2024 Delaware/ADGM pre-positioning window (MGX DE/NY + Scimitar ADGM + Brooks MSTR + Black DFC) preceded Aryam-WLFI Jan 16 2025 + Stargate Jan 21 2025 by 60-90 days.",
+      "detail": null,
+      "source_datasets": [
+        "synthesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-05-07",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 06:30:00",
+      "target_name": "SoftBank Caper Meta-Synthesis",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding-11122",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding-11114",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11236,
+      "finding_type": "intelligence",
+      "summary": "ROUND 6 META-SYNTHESIS: Vault-firm regulatory revolving door is a 4-instance pattern: a 3-instance Skadden-or-equivalent \u2192 OCC \u2192 implementation pipeline (Brooks 2020 Coinbase \u2192 OCC \u2192 Bitfury; Gould 2025 Bitfury/BlackRock/Promontory \u2192 OCC; Cohen 2025 Skadden \u2192 OCC \u2192 Erebor approval), plus a parallel vault-firm \u2192 OMB \u2192 Schaerr Jaffe \u2192 OMB pattern via Paoletta. Brooks-era OCC interpretive letters #1170 / #1174 / #1184 are live operative law cited in the Erebor approval letter. Aryam Investment 1 (Tahnoon vehicle) bought 49 percent of World Liberty Financial for 500M USD (187M to Trump-family entities); MGX deployed 2B USD WLFI USD1 to Binance May 2025. Pre-positioning trades cluster around the Jan 2025 Stargate window: Bitfury 53.9M USD dividend Dec 23 2024 (38 days before Cipher PIPE), AltC closed May 2024 with anomalous redemption pattern, Crusoe started Abilene construction June 2024 (7 months before Stargate announcement).",
+      "detail": null,
+      "source_datasets": [
+        "synthesis"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-05-07",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 06:30:00",
+      "target_name": "Round 6 meta-synthesis",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding-11176",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -697,7 +1015,7 @@
       "created_at": "2026-02-26 18:29:02",
       "profile_id": "epstein",
       "other_person": "Sheikh Tahnoon bin Zayed",
-      "other_person_slug": "sheikh-tahnoon-bin-zayed",
+      "other_person_slug": "sheikh-tahnoon-bin-zayed-al-nahyan",
       "evidence": [
         {
           "evidence_type": "ref",
@@ -728,6 +1046,51 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 5908,
+      "person_a": "Bertrand des Pallieres",
+      "person_b": "Rajeev Misra",
+      "relationship_type": "employment",
+      "description": "Co-workers at Deutsche Bank Global Credit/EM team during Misra's tenure (1997-2008). des Pallieres was JPMorgan Head EMEA Sales then DB. This DB alumni overlap is the structural origin of the Misra-Benedetti introduction in 2014-15.",
+      "strength": "strong",
+      "date_range": "1997-2008",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:28:30",
+      "profile_id": "epstein",
+      "other_person": "Bertrand G. des Pallieres",
+      "other_person_slug": "bertrand-g-des-pallieres",
+      "evidence": []
+    },
+    {
+      "id": 5910,
+      "person_a": "Bertrand des Pallieres",
+      "person_b": "Rajeev Misra",
+      "relationship_type": "intelligence",
+      "description": "des Pallieres introduced Misra to Alessandro Benedetti circa 2014-2015 \u2014 the structural bridge that produced the SoftBank dirty-tricks operation. WSJ Feb 27 2020.",
+      "strength": "strong",
+      "date_range": "2014-2015",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:28:30",
+      "profile_id": "epstein",
+      "other_person": "Bertrand G. des Pallieres",
+      "other_person_slug": "bertrand-g-des-pallieres",
+      "evidence": []
+    },
+    {
+      "id": 5912,
+      "person_a": "Michael Klein",
+      "person_b": "Rajeev Misra",
+      "relationship_type": "financial",
+      "description": "Klein received approximately 6M USD in advisory fees from SoftBank during Misra's Vision Fund era. Both speakers FII 2018 Riyadh Oct 23-25 (EFTA02603142). Klein is the most plausible follow-on payment vehicle for Benedetti operational debts to investigate.",
+      "strength": "strong",
+      "date_range": "2017-2020",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 02:28:39",
+      "profile_id": "epstein",
+      "other_person": "Michael Klein",
+      "other_person_slug": "michael-klein",
+      "evidence": []
     },
     {
       "id": 384,
@@ -878,6 +1241,21 @@
       "evidence": []
     },
     {
+      "id": 5924,
+      "person_a": "Larry Summers",
+      "person_b": "Rajeev Misra",
+      "relationship_type": "intelligence",
+      "description": "Summers met Misra at Saudi PIF/FII Riyadh-style event ~Oct 2017. Wrote to Epstein Oct 27 2017: 'Spent time w Softbank deputy Najeev or some such PIF guy too.' Earliest Epstein-orbit briefing on Misra at Saudi sovereign-fund event, 15 months pre-Weingarten 'Softbank caper' email.",
+      "strength": "medium",
+      "date_range": "2017-10",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 03:24:27",
+      "profile_id": "epstein",
+      "other_person": "Lawrence Summers",
+      "other_person_slug": "lawrence-summers",
+      "evidence": []
+    },
+    {
       "id": 414,
       "person_a": "Rajeev Misra",
       "person_b": "Ron Soffer",
@@ -903,12 +1281,28 @@
   "entities": [],
   "timeline": [
     {
+      "date": "1997-2008",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Co-workers at Deutsche Bank Global Credit/EM team during Misra's tenure (1997-2008). des Pallieres was JPMorgan Head EMEA Sales then DB. This DB alumni overlap is the structural origin of the Misra-Benedetti introduction in 2014-15.",
+      "other_person": "Bertrand G. des Pallieres",
+      "id": 5908
+    },
+    {
       "date": "2014-05",
       "type": "finding",
       "finding_type": "relationship",
       "summary": "Misra's career path creates multiple Epstein network intersections: (1) Deutsche Bank 1996-2008 as Global Head of Credit Trading \u2014 DB was Epstein's primary bank with 40+ accounts and .65M in co-conspirator payments. (2) Fortress Investment Group May 2014 \u2014 Epstein was an investor in Fortress VRF (Value Recovery Fund), which was the successor to DB Zwirn, and Fortress distributed funds to Epstein's Jeepers LLC entity. (3) SoftBank Vision Fund \u2014 Saudi Arabia's PIF is anchor investor; Epstein had deep Gulf connections via Jabor Al Thani, Alahmadi, Alrasheed, and Sulayem.",
       "confidence": "medium",
       "id": 737
+    },
+    {
+      "date": "2014-2015",
+      "type": "connection",
+      "relationship_type": "intelligence",
+      "description": "des Pallieres introduced Misra to Alessandro Benedetti circa 2014-2015 \u2014 the structural bridge that produced the SoftBank dirty-tricks operation. WSJ Feb 27 2020.",
+      "other_person": "Bertrand G. des Pallieres",
+      "id": 5910
     },
     {
       "date": "2015-08",
@@ -935,12 +1329,36 @@
       "id": 741
     },
     {
+      "date": "2017-03-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "India SEBI/ED 2017 SoftBank kickback complaint = COMPREHENSIVE NULL REGULATORY OUTCOME (no SEBI adjudication, no ED FIR, no CBI charge ever) but operationally significant: filed via TWO TRACKS \u2014 Geneva (Giannakopoulos via CH Communication SA, Charles Ergen/Dish JV repurposed) + India (two unnamed Indian businessmen courting Vision Fund LP slots, WSJ withheld their identities). WSJ Feb 27 2020 byline is Hope/STRASBURG (not Hope/Copeland as previously cited). Operational chain: Misra \u2192 ~$500K to Benedetti SAE Capital \u2192 Boies Schiller Flexner + Mintz & Gold LLP NY \u2192 Giannakopoulos as nominal 'shareholder' \u2192 multi-jurisdiction filings",
+      "confidence": "high",
+      "id": 11147
+    },
+    {
+      "date": "2017-10",
+      "type": "connection",
+      "relationship_type": "intelligence",
+      "description": "Summers met Misra at Saudi PIF/FII Riyadh-style event ~Oct 2017. Wrote to Epstein Oct 27 2017: 'Spent time w Softbank deputy Najeev or some such PIF guy too.' Earliest Epstein-orbit briefing on Misra at Saudi sovereign-fund event, 15 months pre-Weingarten 'Softbank caper' email.",
+      "other_person": "Lawrence Summers",
+      "id": 5924
+    },
+    {
       "date": "2017-11-13",
       "type": "finding",
       "finding_type": "financial",
       "summary": "Paul Barrett (Alpha Group Capital LLC, 142 W 57th St NYC) pitched Epstein on a Grab Taxi investment on Nov 13, 2017, explicitly noting 'Softbank is leading the round' at a $3.7B pre-money valuation. Barrett CC'd Richard Kahn (Epstein's financial manager). Barrett and Epstein had in-person meetings (Oct 23, 2018 confirmed). This shows Epstein's financial advisors were tracking SoftBank deal flow and positioning him for SoftBank-adjacent investments, further explaining his intelligence interest in Misra.",
       "confidence": "high",
       "id": 746
+    },
+    {
+      "date": "2017-2020",
+      "type": "connection",
+      "relationship_type": "financial",
+      "description": "Klein received approximately 6M USD in advisory fees from SoftBank during Misra's Vision Fund era. Both speakers FII 2018 Riyadh Oct 23-25 (EFTA02603142). Klein is the most plausible follow-on payment vehicle for Benedetti operational debts to investigate.",
+      "other_person": "Michael Klein",
+      "id": 5912
     },
     {
       "date": "2018-08-12",
@@ -1007,46 +1425,100 @@
       "id": 1000
     },
     {
+      "date": "2019-01-26",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Weingarten Jan 26 2019 'Softbank caper' engagement was anticipatory criminal-defense + reputational-risk management triggered by 5-front convergence: (1) Shearman & Sterling internal probe of Misra in terminal phase, (2) Geneva criminal docket still live (Sama+SoftBank+Giannakopoulos cross-complaints), (3) anticipated WSJ Hope/Copeland blockbuster (Feb 2020), (4) imminent Sama departure April 2019, (5) Karp/Paul Weiss conflict locked Misra out of SoftBank's house counsel. Probably NOT retained \u2014 Misra ultimately surfaced with Paul Weiss representation in WSJ Feb 2020 cycle, suggesting conflict-wall was breached",
+      "confidence": "medium",
+      "id": 11141
+    },
+    {
+      "date": "2019-06-12",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "REFRAME: Klein-Misra was transactional 2017-2018 banker-client pair, NOT patronage triangle. Misra's protector was Tahnoon (not MBS); OneIM Mubadala-anchored not PIF-anchored; Misra rebuilt deal-finder bench on Centricus-DB alumni (des Pallieres ex-Centricus partner ex-DB direct report); structural cooling Klein\u2194Misra by 2019",
+      "confidence": "medium",
+      "id": 11133
+    },
+    {
       "date": "2020-02",
       "type": "finding",
       "finding_type": "intelligence",
       "summary": "WSJ (Bradley Hope, Rob Copeland, Feb 2020) reported Misra paid $500K from Standard Chartered Bank to Barkmere Group Ltd (BVI company controlled by Benedetti) in April 2015 to fund smear campaigns against SoftBank rivals Nikesh Arora and Alok Sama. Operations included: (1) honey trap \u2014 women to lure Arora to Tokyo hotel room rigged with cameras, (2) K2 Intelligence hired to investigate targets, (3) Swiss operative Nicolas Giannakopoulos recruited to distribute leaked banking records and emails, (4) Mark Hollingsworth (freelance reporter) paid to plant story in The Independent (Oct 2015), (5) Boies Schiller Flexner sent anonymous shareholder letter (Jan 2016). Misra denies all; SoftBank hired Shearman & Sterling to investigate but dropped the probe.",
       "confidence": "high",
       "id": 739
+    },
+    {
+      "date": "2024-11-12",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Misra removed from SoftBank board Nov 9 2020 (8 months after WSJ expos\u00e9) alongside Marcelo Claure; formally exited SoftBank Nov 12 2024; founded OneIM ($8B AUM by Nov 2024) backed by Mubadala/Royal Group",
+      "confidence": "high",
+      "id": 11107
+    },
+    {
+      "date": "2024-11-12",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Misra exit\u2192Stargate timeline (Nov 2024-Jan 2025) plausibly designed to clear his Vision-Fund fiduciary conflicts so he could intermediate Tahnoon-Son AI deals through OneIM without GP/LP conflict-of-interest disclosure; SoftBank dirty-tricks network re-platformed inside Sheikh Tahnoon's Mubadala/Royal Group ecosystem",
+      "confidence": "high",
+      "id": 11122
+    },
+    {
+      "date": "2024-08-01",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "MGX Fund Management registered US fund management entity in Delaware (August 2024) and New York (September 2024) \u2014 the SCFEA sovereign vehicle (Mubadala / G42 / Tahnoon-chair, Khaldoon Al Mubarak vice-chair) established its US operating layer 2-3 months before Misra's formal SoftBank exit on Nov 12 2024 and 4-5 months before the Stargate JV announcement on Jan 21 2025.",
+      "confidence": "high",
+      "id": 3803
+    },
+    {
+      "date": "2024-01-01",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "CONFIRMED: Bertrand des Pallieres is Partner Private Credit at OneIM (Misra's Abu Dhabi firm). The DB Principal Finance \u2192 SPQR/Methorios \u2192 Centricus \u2192 OneIM pipeline retains des Pallieres into the new vehicle despite WSJ Feb 2020 naming him publicly as the Misra-Benedetti introducer. Active UK directorship: BITFURY GROUP LIMITED with co-directors Val Vavilov, George Kikvadze, Brian P. Brooks (former US Acting Comptroller of the Currency).",
+      "confidence": "confirmed",
+      "id": 11114
     }
   ],
   "curation": {
-    "lead": "<p>Rajeev Misra is a former <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> credit trading executive who became CEO of SB Investment Advisers, the management arm of SoftBank's $100 billion Vision Fund. His career moved through three institutions where Epstein maintained financial or intelligence interests: <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> (1996\u20132008), Fortress Investment Group (2014), and SoftBank Vision Fund (2017\u2013present). No evidence indicates a direct personal relationship between Misra and <a href=\"/dossiers/jeffrey-epstein\">Epstein</a>.</p>\n\n<p>Misra's significance to this investigation lies in the intelligence-gathering operation that Epstein mobilized around him. In January 2019, two of Epstein's most trusted legal advisors \u2014 <a href=\"/dossiers/brad-karp\">Brad Karp</a> (Chairman, <a href=\"/dossiers/paul-weiss\">Paul Weiss</a>) and <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a> (partner, Steptoe & Johnson) \u2014 were simultaneously pursuing Misra's legal representation in connection with the \"SoftBank caper,\" a reference to allegations that Misra had funded covert operations against SoftBank rivals. Epstein served as the shared but undisclosed coordination point between them, advising on engagement strategy and seeking background intelligence on Misra.</p>\n\n<p>The Misra thread also connects to Epstein's broader monitoring of SoftBank deal flow, Gulf sovereign wealth activity, and the <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> arrest in Tokyo \u2014 tracked through a network spanning Qatari businessmen, New York Times journalists, and law firm chairmen. Separately, the Wall Street Journal reported in February 2020 that Misra had paid $500,000 through a BVI company to fund covert operations \u2014 including alleged honey traps, planted media stories, and anonymous shareholder campaigns \u2014 against SoftBank executives Nikesh Arora and Alok Sama.</p>",
+    "lead": "<p>Rajeev Misra is a former <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> credit trading executive who became CEO of SB Investment Advisers, the management arm of <a href=\"/dossiers/softbank\">SoftBank</a>'s 100 billion USD Vision Fund. His career moved through three institutions where Epstein maintained financial or intelligence interests: <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> (1996\u20132008), Fortress Investment Group (2014), and SoftBank Vision Fund (2017\u20132024). No evidence indicates a direct personal relationship between Misra and <a href=\"/dossiers/jeffrey-epstein\">Epstein</a>.</p>\n\n<p>Misra's significance to this investigation lies in the intelligence-gathering operation that Epstein mobilized around him. In January 2019, two of Epstein's most trusted legal advisors \u2014 <a href=\"/dossiers/brad-karp\">Brad Karp</a> (Chairman, <a href=\"/dossiers/paul-weiss\">Paul Weiss</a>) and <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a> (partner, Steptoe & Johnson) \u2014 were simultaneously pursuing Misra's legal representation in connection with the \"SoftBank caper,\" a reference to allegations that Misra had funded covert operations against SoftBank rivals. Epstein served as the shared but undisclosed coordination point between them, advising on engagement strategy and seeking background intelligence on Misra.</p>\n\n<p>The Misra thread also connects to Epstein's broader monitoring of SoftBank deal flow, Gulf sovereign wealth activity, and the <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> arrest in Tokyo \u2014 tracked through a network spanning Qatari businessmen, New York Times journalists, and law firm chairmen. Separately, the Wall Street Journal reported in February 2020 that Misra had paid 500,000 USD through a BVI company to fund covert operations \u2014 including alleged honey traps, planted media stories, and anonymous shareholder campaigns \u2014 against SoftBank executives Nikesh Arora and Alok Sama [Finding #739].</p>\n\n<p>Misra exited SoftBank as co-CEO of SB Investment Advisers and Global Advisers on November 12 2024 and now runs OneIM, an 8 billion USD Abu Dhabi private-credit and alternatives manager backed by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon Bin Zayed Al Nahyan</a>'s Royal Group and Mubadala [Finding #11107]. <a href=\"/dossiers/bertrand-g-des-pallieres\">Bertrand G. des Pallieres</a> \u2014 the Deutsche Bank alumnus who introduced Misra to <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a> in 2014-15 \u2014 is now Partner Private Credit at OneIM, indicating that the SoftBank dirty-tricks bench was retained rather than dismantled [Finding #11114]. Misra's exit window aligns with the <a href=\"/dossiers/mgx-fund-management-limited\">MGX Fund Management</a> US registrations (Delaware August 2024, New York September 2024) and precedes the <a href=\"/dossiers/stargate-llc\">Stargate</a> AI joint-venture announcement on January 21 2025 by 70 days [Finding #3803, Finding #11122].</p>",
     "system_role": "Misra is the target of a documented Epstein intelligence-gathering operation in which parallel law firms (Paul Weiss and Steptoe) pursued the same potential client while Epstein served as an undisclosed coordination node between them.",
     "sections": [
       {
         "id": "career-and-institutional-overlap",
         "title": "Career Path and Institutional Overlap",
-        "content": "<p>Misra's career created structural proximity to the Epstein network at three distinct institutions, though none of these overlaps implies personal acquaintance. From 1996 to 2008, he served as Global Head of Credit Trading at <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> \u2014 the same institution that maintained Epstein's primary banking relationship, with over 40 accounts processing hundreds of millions in transactions. Misra's tenure overlapped substantially with the bank's service to Epstein, though the credit trading desk and private banking division operated independently.</p>\n\n<p>In May 2014, Misra joined Fortress Investment Group, where Epstein was an investor in the Fortress Value Recovery Fund (VRF), the successor to DB Zwirn. DOJ documents [EFTA02385363] confirm that Fortress distributed $183,753.77 to Epstein's <a href=\"/dossiers/jeepers-inc\">Jeepers LLC</a> entity from the VRF. <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, Epstein's financial manager, handled the Fortress correspondence. Epstein himself noted that \"its too much money. returns are generated on small amounts\" in reference to large-scale fund management.</p>\n\n<p>By 2017, Misra had ascended to lead the SoftBank Vision Fund, capitalized by a $45 billion commitment from Saudi Arabia's Public Investment Fund (PIF). This placed him at the center of the largest technology investment vehicle in history and at the intersection of Gulf sovereign wealth and Japanese corporate power \u2014 both areas where Epstein maintained active intelligence networks. Epstein's contacts tracked SoftBank deal flow: Paul Barrett of Alpha Group Capital pitched Epstein on a Grab Taxi investment in November 2017, noting \"Softbank is leading the round\" at a $3.7 billion valuation [EFTA02567987].</p>",
+        "content": "<p>Misra's career created structural proximity to the Epstein network at three distinct institutions, though none of these overlaps implies personal acquaintance. From 1996 to 2008, he served as Global Head of Credit Trading at <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> \u2014 the same institution that maintained Epstein's primary banking relationship, with over 40 accounts processing hundreds of millions in transactions. Misra's tenure overlapped substantially with the bank's service to Epstein, though the credit trading desk and private banking division operated independently.</p>\n\n<p>In May 2014, Misra joined Fortress Investment Group, where Epstein was an investor in the Fortress Value Recovery Fund (VRF), the successor to DB Zwirn. DOJ documents [EFTA02385363] confirm that Fortress distributed $183,753.77 to Epstein's <a href=\"/dossiers/jeepers-inc\">Jeepers LLC</a> entity from the VRF. <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, Epstein's financial manager, handled the Fortress correspondence. Epstein himself noted that \"its too much money. returns are generated on small amounts\" in reference to large-scale fund management.</p>\n\n<p>By 2017, Misra had ascended to lead the <a href=\"/dossiers/softbank\">SoftBank</a> Vision Fund, capitalized by a $45 billion commitment from Saudi Arabia's Public Investment Fund (PIF). This placed him at the center of the largest technology investment vehicle in history and at the intersection of Gulf sovereign wealth and Japanese corporate power \u2014 both areas where Epstein maintained active intelligence networks. Epstein's contacts tracked SoftBank deal flow: Paul Barrett of Alpha Group Capital pitched Epstein on a Grab Taxi investment in November 2017, noting \"Softbank is leading the round\" at a $3.7 billion valuation [EFTA02567987].</p>",
         "viz": null
       },
       {
         "id": "the-softbank-dark-arts-campaign",
         "title": "The SoftBank 'Dark Arts' Campaign",
-        "content": "<p>In February 2020, the Wall Street Journal reported that Misra had paid $500,000 from Standard Chartered Bank to Barkmere Group Ltd, a BVI company controlled by <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a>, in April 2015. The payment allegedly funded a multi-pronged covert campaign against SoftBank executives Nikesh Arora (then president of SoftBank) and Alok Sama (head of SoftBank's international operations) \u2014 both rivals for Masayoshi Son's favor.</p>\n\n<p>The operations attributed to this campaign spanned multiple countries and methods. Women were allegedly dispatched to lure Arora to a Tokyo hotel room rigged with hidden cameras. K2 Intelligence, a corporate investigations firm, was hired to investigate both targets. Swiss operative <a href=\"/dossiers/nicolas-giannakopoulos\">Nicolas Giannakopoulos</a> was recruited to distribute leaked banking records and emails. Freelance reporter Mark Hollingsworth was paid to plant a story in The Independent newspaper in October 2015. In January 2016, Boies Schiller Flexner LLP \u2014 the same firm where David Boies represented Virginia Giuffre in her lawsuit against <a href=\"/dossiers/ghislaine-maxwell\">Ghislaine Maxwell</a> \u2014 sent an anonymous shareholder letter raising allegations against Arora. Giannakopoulos served as the nominal shareholder behind the claims.</p>\n\n<p>Misra denied the allegations. SoftBank hired Shearman & Sterling to investigate but dropped the probe before reaching conclusions. Michael Klein, the investment banker who received $6 million in fees from Misra, had introduced Benedetti to various deals \u2014 creating a financial circuit between the alleged campaign funder, its alleged operator, and the M&A advisor who connected them. When Benedetti's expected executive position and profit share at SoftBank failed to materialize, his falling out with Misra appears to have contributed to the information reaching the WSJ.</p>",
+        "content": "<p>In February 2020, the Wall Street Journal reported that Misra had paid $500,000 from Standard Chartered Bank to Barkmere Group Ltd, a BVI company controlled by <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a>, in April 2015. The payment allegedly funded a multi-pronged covert campaign against <a href=\"/dossiers/softbank\">SoftBank</a> executives Nikesh Arora (then president of SoftBank) and Alok Sama (head of SoftBank's international operations) \u2014 both rivals for Masayoshi Son's favor.</p>\n\n<p>The operations attributed to this campaign spanned multiple countries and methods. Women were allegedly dispatched to lure Arora to a Tokyo hotel room rigged with hidden cameras. K2 Intelligence, a corporate investigations firm, was hired to investigate both targets. Swiss operative <a href=\"/dossiers/nicolas-giannakopoulos\">Nicolas Giannakopoulos</a> was recruited to distribute leaked banking records and emails. Freelance reporter Mark Hollingsworth was paid to plant a story in The Independent newspaper in October 2015. In January 2016, Boies Schiller Flexner LLP \u2014 the same firm where David Boies represented Virginia Giuffre in her lawsuit against <a href=\"/dossiers/ghislaine-maxwell\">Ghislaine Maxwell</a> \u2014 sent an anonymous shareholder letter raising allegations against Arora. Giannakopoulos served as the nominal shareholder behind the claims.</p>\n\n<p>Misra denied the allegations. SoftBank hired Shearman & Sterling to investigate but dropped the probe before reaching conclusions. <a href=\"/dossiers/michael-klein\">Michael Klein</a>, the investment banker who received $6 million in fees from Misra, had introduced Benedetti to various deals \u2014 creating a financial circuit between the alleged campaign funder, its alleged operator, and the M&A advisor who connected them. When Benedetti's expected executive position and profit share at SoftBank failed to materialize, his falling out with Misra appears to have contributed to the information reaching the WSJ.</p>",
         "viz": null
       },
       {
         "id": "epstein-intelligence-architecture",
         "title": "Epstein's Intelligence Architecture Around Misra",
-        "content": "<p>The documented intelligence apparatus that <a href=\"/dossiers/jeffrey-epstein\">Epstein</a> mobilized around Misra provides a detailed view of how his network operated in practice. Between January 25 and January 28, 2019, Epstein conducted a concentrated intelligence-gathering operation on Misra and the SoftBank situation through at least three separate channels, none of which appeared aware of the others' involvement.</p>\n\n<p>On January 25, 2019, <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a> \u2014 Epstein's criminal defense attorney and close personal advisor (245+ emails, regular breakfast meetings at 71st Street) \u2014 wrote to Epstein: \"Rajeev misra....softbank vision fund...any special jeffrey insights here?\" Epstein replied: \"If he wants you to rep him. YES.\" The next day, Weingarten reported back: \"He wants me to hire him....thinking about using him on the Softbank caper.\" Epstein advised: \"go slow.\" Weingarten concurred: \"As is often (but not always) the case you are correct....see if you can get the book on him.\" This exchange, from House Oversight documents [HOUSE_OVERSIGHT_028576], confirms that Epstein was advising on legal engagement strategy for Misra and positioning himself to obtain intelligence (\"the book on him\").</p>\n\n<p>On the same day \u2014 January 26 \u2014 Epstein separately emailed <a href=\"/dossiers/brad-karp\">Brad Karp</a>, Chairman of <a href=\"/dossiers/paul-weiss\">Paul Weiss</a>: \"Rajeev misra do you represent?\" Karp responded: \"Sort of. Spoke to him yesterday\" [EFTA02627034]. This confirmed that Paul Weiss had some form of relationship with Misra and that Karp had spoken to him just the previous day. The Karp exchange occurred in the same email thread where Epstein described <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> as \"a very very not good guy\" \u2014 linking the Misra inquiry to the broader Tokyo corporate intelligence picture.</p>\n\n<p>Weingarten's communications also show that he knew about Karp's involvement but wanted it kept hidden: \"Very small fucking world....obviously dont mention my role with brad till we both think it useful.\" Epstein was thus the undisclosed coordination point between two elite law firms \u2014 Paul Weiss and Steptoe & Johnson \u2014 circling the same potential client. Two days later, on January 28, Epstein contacted <a href=\"/dossiers/eduardo-teodorani-fabbri\">Eduardo Teodorani Fabbri</a> asking about <a href=\"/dossiers/alessandro-benedetti\">Benedetti</a>, the alleged operator of the smear campaign. The January 25\u201328 sequence represents a coordinated intelligence sweep across legal, personal, and European channels.</p>",
+        "content": "<p>The documented intelligence apparatus that <a href=\"/dossiers/jeffrey-epstein\">Epstein</a> mobilized around Misra provides a detailed view of how his network operated in practice. Between January 25 and January 28, 2019, Epstein conducted a concentrated intelligence-gathering operation on Misra and the <a href=\"/dossiers/softbank\">SoftBank</a> situation through at least three separate channels, none of which appeared aware of the others' involvement.</p>\n\n<p>On January 25, 2019, <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a> \u2014 Epstein's criminal defense attorney and close personal advisor (245+ emails, regular breakfast meetings at 71st Street) \u2014 wrote to Epstein: \"Rajeev misra....softbank vision fund...any special jeffrey insights here?\" Epstein replied: \"If he wants you to rep him. YES.\" The next day, Weingarten reported back: \"He wants me to hire him....thinking about using him on the Softbank caper.\" Epstein advised: \"go slow.\" Weingarten concurred: \"As is often (but not always) the case you are correct....see if you can get the book on him.\" This exchange, from House Oversight documents [HOUSE_OVERSIGHT_028576], confirms that Epstein was advising on legal engagement strategy for Misra and positioning himself to obtain intelligence (\"the book on him\").</p>\n\n<p>On the same day \u2014 January 26 \u2014 Epstein separately emailed <a href=\"/dossiers/brad-karp\">Brad Karp</a>, Chairman of <a href=\"/dossiers/paul-weiss\">Paul Weiss</a>: \"Rajeev misra do you represent?\" Karp responded: \"Sort of. Spoke to him yesterday\" [EFTA02627034]. This confirmed that Paul Weiss had some form of relationship with Misra and that Karp had spoken to him just the previous day. The Karp exchange occurred in the same email thread where Epstein described <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> as \"a very very not good guy\" \u2014 linking the Misra inquiry to the broader Tokyo corporate intelligence picture.</p>\n\n<p>Weingarten's communications also show that he knew about Karp's involvement but wanted it kept hidden: \"Very small fucking world....obviously dont mention my role with brad till we both think it useful.\" Epstein was thus the undisclosed coordination point between two elite law firms \u2014 Paul Weiss and Steptoe & Johnson \u2014 circling the same potential client. Two days later, on January 28, Epstein contacted <a href=\"/dossiers/eduardo-teodorani-fabbri\">Eduardo Teodorani Fabbri</a> asking about <a href=\"/dossiers/alessandro-benedetti\">Benedetti</a>, the alleged operator of the smear campaign. The January 25\u201328 sequence represents a coordinated intelligence sweep across legal, personal, and European channels.</p>",
         "viz": "timeline"
       },
       {
         "id": "softbank-intelligence-network",
         "title": "Epstein's SoftBank Intelligence Network",
-        "content": "<p>Epstein's interest in SoftBank and Misra predated the January 2019 operation. It drew on an intelligence network he had cultivated across Gulf, media, legal, and political channels. As early as October 14, 2016, Jabor Yousuf Jassim Al Thani, a Qatari businessman (United Group for Projects, Doha), forwarded Epstein a news link about MBS and the Saudi sovereign wealth fund's $100 billion SoftBank investment [EFTA02446715]. Epstein's reply \u2014 \"im aware, but its too much money. returns are generated on small amounts. otherwise its merely portfolio mgmt\" \u2014 demonstrated both prior knowledge and an opinionated assessment of the Vision Fund's scale problem.</p>\n\n<p><a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a> of the New York Times independently sent the same SoftBank/MBS story to Epstein on January 3, 2017 \u2014 confirming that Epstein was receiving overlapping SoftBank intelligence from both Gulf and media sources. Epstein later introduced Jabor to <a href=\"/dossiers/steve-bannon\">Steve Bannon</a> on November 11, 2018 (\"Steve jabor - jabor - steve,\" EFTA02617269), adding a political channel to the network. This triangulation \u2014 Gulf source, media source, political broker, paired with the Karp and Weingarten legal channels \u2014 indicates a multi-source intelligence collection pattern directed at a corporate target.</p>\n\n<p>The FII (Future Investment Initiative) 2018 speakers list, forwarded to Epstein by Aziza Alahmadi on August 12, 2018 [EFTA02603142], provides the clearest snapshot of Epstein's reach into the SoftBank-Gulf nexus. The Riyadh conference list included Rajeev Misra (CEO, SB Investment Advisers), Marcelo Claure (SoftBank COO), Michael Klein (whose fees from Misra connected to Benedetti), Christian Sewing (<a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> CEO), Jamie Dimon (JPMorgan), Larry Fink (BlackRock), Stephen Schwarzman (Blackstone), and Lynn Forester de Rothschild. Epstein possessed this complete list two months before <a href=\"/dossiers/carlos-ghosn\">Ghosn</a>'s arrest in Tokyo, establishing that he was tracking the full landscape of actors in the SoftBank-Saudi-Japanese corporate environment.</p>",
+        "content": "<p>Epstein's interest in <a href=\"/dossiers/softbank\">SoftBank</a> and Misra predated the January 2019 operation. It drew on an intelligence network he had cultivated across Gulf, media, legal, and political channels. As early as October 14, 2016, Jabor Yousuf Jassim Al Thani, a Qatari businessman (United Group for Projects, Doha), forwarded Epstein a news link about MBS and the Saudi sovereign wealth fund's $100 billion SoftBank investment [EFTA02446715]. Epstein's reply \u2014 \"im aware, but its too much money. returns are generated on small amounts. otherwise its merely portfolio mgmt\" \u2014 demonstrated both prior knowledge and an opinionated assessment of the Vision Fund's scale problem.</p>\n\n<p><a href=\"/dossiers/landon-thomas-jr\">Landon Thomas Jr.</a> of the New York Times independently sent the same SoftBank/MBS story to Epstein on January 3, 2017 \u2014 confirming that Epstein was receiving overlapping SoftBank intelligence from both Gulf and media sources. Epstein later introduced Jabor to <a href=\"/dossiers/steve-bannon\">Steve Bannon</a> on November 11, 2018 (\"Steve jabor - jabor - steve,\" EFTA02617269), adding a political channel to the network. This triangulation \u2014 Gulf source, media source, political broker, paired with the Karp and Weingarten legal channels \u2014 indicates a multi-source intelligence collection pattern directed at a corporate target.</p>\n\n<p>The FII (Future Investment Initiative) 2018 speakers list, forwarded to Epstein by Aziza Alahmadi on August 12, 2018 [EFTA02603142], provides the clearest snapshot of Epstein's reach into the SoftBank-Gulf nexus. The Riyadh conference list included Rajeev Misra (CEO, SB Investment Advisers), Marcelo Claure (SoftBank COO), <a href=\"/dossiers/michael-klein\">Michael Klein</a> (whose fees from Misra connected to Benedetti), Christian Sewing (<a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> CEO), Jamie Dimon (JPMorgan), Larry Fink (BlackRock), Stephen Schwarzman (Blackstone), and Lynn Forester de Rothschild. Epstein possessed this complete list two months before <a href=\"/dossiers/carlos-ghosn\">Ghosn</a>'s arrest in Tokyo, establishing that he was tracking the full landscape of actors in the SoftBank-Saudi-Japanese corporate environment.</p>",
         "viz": "ego_network"
       },
       {
         "id": "law-firm-convergence",
         "title": "The Paul Weiss Dual-Client Problem",
-        "content": "<p><a href=\"/dossiers/paul-weiss\">Paul Weiss, Rifkind, Wharton & Garrison LLP</a> served as a shared law firm between Misra and Epstein. <a href=\"/dossiers/brad-karp\">Brad Karp</a>, the firm's chairman, confirmed to Epstein that he \"sort of\" represented Misra while simultaneously serving as Epstein's primary legal advisor, personal confidant, and \u2014 as documented elsewhere in the investigation \u2014 the coordinator of Nardello & Co. surveillance operations on Epstein's behalf.</p>\n\n<p>In August 2015, Epstein directed Karp regarding Nardello operatives: \"probably a good idea for your nardello guy to be at the restaurant\" [EFTA02491414]. In September 2015, Epstein told Karp: \"I would like to review the people on the ground in london and new york with you and nardello\" [EFTA02485450]. In October 2015, Nardello sent a \"Draft Transcript\" of a Four Seasons meeting to Karp [EFTA02716245]. These communications establish that the same chairman managing Misra's relationship with the firm was simultaneously directing intelligence and surveillance operations for Epstein through the firm's corporate investigation resources.</p>\n\n<p>A parallel dual-client pattern appears at Boies Schiller Flexner, which served as a vehicle in the SoftBank dark arts campaign (sending the anonymous shareholder letter against Arora in January 2016) while David Boies personally represented Virginia Giuffre in her lawsuit against <a href=\"/dossiers/ghislaine-maxwell\">Ghislaine Maxwell</a>. Boies Schiller also represented both Harvey Weinstein's accusers and Weinstein himself. Weingarten's request to Epstein \u2014 \"obviously dont mention my role with brad till we both think it useful\" \u2014 confirms that the compartmentalization between these overlapping legal engagements was deliberate, with Epstein as the only actor who held the complete picture.</p>"
+        "content": "<p><a href=\"/dossiers/paul-weiss\">Paul Weiss, Rifkind, Wharton & Garrison LLP</a> served as a shared law firm between Misra and Epstein. <a href=\"/dossiers/brad-karp\">Brad Karp</a>, the firm's chairman, confirmed to Epstein that he \"sort of\" represented Misra while simultaneously serving as Epstein's primary legal advisor, personal confidant, and \u2014 as documented elsewhere in the investigation \u2014 the coordinator of Nardello & Co. surveillance operations on Epstein's behalf.</p>\n\n<p>In August 2015, Epstein directed Karp regarding Nardello operatives: \"probably a good idea for your nardello guy to be at the restaurant\" [EFTA02491414]. In September 2015, Epstein told Karp: \"I would like to review the people on the ground in london and new york with you and nardello\" [EFTA02485450]. In October 2015, Nardello sent a \"Draft Transcript\" of a Four Seasons meeting to Karp [EFTA02716245]. These communications establish that the same chairman managing Misra's relationship with the firm was simultaneously directing intelligence and surveillance operations for Epstein through the firm's corporate investigation resources.</p>\n\n<p>A parallel dual-client pattern appears at Boies Schiller Flexner, which served as a vehicle in the <a href=\"/dossiers/softbank\">SoftBank</a> dark arts campaign (sending the anonymous shareholder letter against Arora in January 2016) while David Boies personally represented Virginia Giuffre in her lawsuit against <a href=\"/dossiers/ghislaine-maxwell\">Ghislaine Maxwell</a>. Boies Schiller also represented both Harvey Weinstein's accusers and Weinstein himself. Weingarten's request to Epstein \u2014 \"obviously dont mention my role with brad till we both think it useful\" \u2014 confirms that the compartmentalization between these overlapping legal engagements was deliberate, with Epstein as the only actor who held the complete picture.</p>"
+      },
+      {
+        "id": "oneim-abu-dhabi-replatforming",
+        "title": "OneIM and the Abu Dhabi Re-Platforming (2024-Present)",
+        "content": "<p>The arc that begins with the WSJ February 2020 expose ends not with the dismantling of Misra's network but with its relocation. Misra was removed from the <a href=\"/dossiers/softbank\">SoftBank</a> board on November 9 2020, eight months after the WSJ blockbuster, alongside Marcelo Claure [Finding #11107]. He stepped back from corporate officer roles in August 2022 to launch OneIM, then formally exited as co-CEO of SB Investment Advisers and Global Advisers on November 12 2024, with Alex Clavel becoming sole CEO [Finding #11122]. OneIM received its ADGM Financial Services Permission on May 25 2023; its master fund is Oneim Fund I LP, headquartered at Al Reem Tower L12 on Al Maryah Island in Abu Dhabi, the same financial cluster as <a href=\"/dossiers/g42\">G42</a>'s Al Khatem Tower [Finding #11122]. AUM grew from 6 billion USD in 2022 to 6.8 billion in August 2023 to 8 billion by November 2024 [Finding #11107].</p>\n\n<p>OneIM is backed by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon Bin Zayed Al Nahyan</a>'s Royal Group and Mubadala Investment Company \u2014 not by Saudi Arabia's PIF, the original Vision Fund anchor [Finding #11107]. Sofia Lasky, an 18-year Royal Group veteran, has sat on the IHC board since April 2020 and represents the LP-side coordination point with OneIM [Finding #11122]. Sam Merksamer's career path \u2014 Icahn Capital, Caligan, SB Management 2019-22, OneIM 2022-24, Mubadala Capital from June 2024 \u2014 illustrates the OneIM-Mubadala personnel pipeline and confirms that the bench rotates inside a single ecosystem [Finding #11122]. According to the synthesis of Round 5 and Round 6 outputs, the structural pattern is framed as a Mubadala-Tahnoon capital backbone (rather than the MBS / PIF axis that prevailed during Vision Fund 1) operating through a two-tier institutional pipeline anchored on Bitfury Group UK and a Mayfair-Geneva-Lux corporate-administration backbone [Finding #11176].</p>\n\n<p>The keystone confirmation is that <a href=\"/dossiers/bertrand-g-des-pallieres\">Bertrand G. des Pallieres</a> \u2014 the <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> alumnus who introduced Misra to <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a> in 2014-15 \u2014 is now Partner Private Credit at OneIM [Finding #11114]. The pipeline runs DB Principal Finance under Misra (2005-07) to SPQR/Methorios (2007-23) to Centricus consultant during the Vision Fund 1 era to OneIM Partner Private Credit Abu Dhabi (~2024-present); des Pallieres' OneIM bio names \"Centricus and JPMorgan\" but conspicuously omits Deutsche Bank [Finding #11114]. Centricus, founded by Nizar Al-Bassam and Dalinc Ariburnu, raised the original Vision Fund and earned over 100 million USD in fees, then served as the bridge to OneIM. Synthesis of these data points indicates that the SoftBank dirty-tricks network was not dismantled \u2014 it was re-platformed inside the Tahnoon ecosystem, with the same operator who arranged the introduction now sitting in the same Abu Dhabi office signing off on private-credit deployments [Finding #11122]. des Pallieres also holds an active UK directorship at <a href=\"/dossiers/bitfury-group-limited\">Bitfury Group Limited</a> (UK 11441275, appointed May 20 2021), with co-directors Val Vavilov, George Kikvadze, and <a href=\"/dossiers/brian-p-brooks\">Brian P. Brooks</a>, the former US Acting Comptroller of the Currency [Finding #11114].</p>\n\n<p>The exit timing aligns with adjacent capital-deployment events. <a href=\"/dossiers/mgx-fund-management-limited\">MGX Fund Management</a>, the Mubadala / G42 vehicle chaired by Tahnoon with <a href=\"/dossiers/khaldoon-al-mubarak\">Khaldoon Al Mubarak</a> as vice-chair, registered US fund-management entities in Delaware in August 2024 and New York in September 2024 [Finding #3803] \u2014 two to three months before Misra's formal SoftBank departure. According to Round 6 records, <a href=\"/dossiers/aryam-investment-1\">Aryam Investment 1</a>, a Tahnoon vehicle, signed its 49 percent acquisition of <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> for 500 million USD on January 16 2025 (with 187 million USD reportedly flowing to Trump-family entities) [Finding #11236]. The <a href=\"/dossiers/stargate-llc\">Stargate</a> joint venture (SoftBank 40 percent, <a href=\"/dossiers/openai\">OpenAI</a> 40 percent, MGX 10 percent) was announced January 21 2025 [Finding #11122]. Synthesis of these sequences supports the inference that Misra was repositioned to act as the unconflicted intermediary between Son and Tahnoon on AI-infrastructure deals, a role that his prior Vision Fund GP fiduciary obligations would have made structurally impossible [Finding #11122]. According to the Round 6 meta-synthesis, the same network is scaffolded by a 3-instance Skadden-or-equivalent-firm-to-OCC vault-firm regulatory revolving door (Brooks 2020, Gould 2025, Cohen 2025) plus a parallel vault-firm-to-OMB pattern via Paoletta, including Brooks-era OCC interpretive letters #1170, #1174, and #1184 cited as live law in the <a href=\"/dossiers/erebor-bank\">Erebor Bank</a> approval letter [Finding #11236].</p>",
+        "viz": "ego_network"
       }
     ],
     "open_questions": [
@@ -1055,7 +1527,9 @@
       "What was the Ron Soffer connection? Weingarten was considering hiring this French-Israeli lawyer 'on the Softbank caper' and Epstein confirmed Soffer was 'very good friends with the sec gen council of europe, human rights court.' Was Soffer engaged, and in what capacity?",
       "Why did SoftBank drop the Shearman & Sterling investigation into Misra's alleged dark arts campaign before it reached conclusions? Who made that decision, and was Masayoshi Son aware of the full scope of the allegations?",
       "What role, if any, did Misra's Deutsche Bank network play in his subsequent career moves? Did relationships from the DB credit trading desk (1996\u20132008) connect to any Epstein-adjacent individuals at Fortress or SoftBank?",
-      "Epstein's January 28, 2019 inquiry to Teodorani about Benedetti came two days after the Karp and Weingarten exchanges about Misra. What was the intended use of the intelligence gathered across these channels, and was it transmitted to any third party?"
+      "Epstein's January 28, 2019 inquiry to Teodorani about Benedetti came two days after the Karp and Weingarten exchanges about Misra. What was the intended use of the intelligence gathered across these channels, and was it transmitted to any third party?",
+      "Why did Misra retain Bertrand G. des Pallieres \u2014 publicly named in the WSJ February 2020 article as the introducer of Benedetti \u2014 into the OneIM Partner Private Credit role circa 2024? What private-credit deployments has des Pallieres signed off on at OneIM, and how do those overlap with Mubadala or Royal Group LP commitments?",
+      "Which specific Stargate or MGX-related deals has Misra acted as intermediary on between SoftBank and the Tahnoon ecosystem since his November 12 2024 exit, and what disclosure obligations (if any) survived the loss of his Vision Fund co-CEO seat?"
     ],
     "applicable_models": [
       "complexity-as-credential",

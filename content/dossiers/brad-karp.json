@@ -5,17 +5,17 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.807165",
-  "last_updated": "2026-02-18T18:36:11",
+  "generated_at": "2026-05-07T23:07:36.108832",
+  "last_updated": "2026-05-07T03:23:30",
   "stats": {
-    "total_findings": 26,
+    "total_findings": 27,
     "total_connections": 25,
     "total_entities": 2,
     "finding_types": {
       "relationship": 3,
       "legal": 7,
       "communication": 3,
-      "intelligence": 11,
+      "intelligence": 12,
       "financial": 2
     },
     "connection_types": {
@@ -28,7 +28,7 @@
       "corporate": 1,
       "financial": 1
     },
-    "last_updated": "2026-02-18T18:36:11"
+    "last_updated": "2026-05-07T03:23:30"
   },
   "findings": [
     {
@@ -815,6 +815,39 @@
       ]
     },
     {
+      "id": 11123,
+      "finding_type": "intelligence",
+      "summary": "Brad Karp resigned as Paul Weiss chairman Feb 4 2026 after Epstein emails released \u2014 Scott Barshay successor; Kathy Ruemmler announced resignation Feb 12 2026 effective end of June 2026; Jes Staley permanently FCA-banned from senior UK regulated roles (Upper Tribunal Jun 2025) \u2014 post-Epstein actor pipeline collapsing in 2025-26",
+      "detail": "Cascade of consequences for senior Epstein-network actors in early 2026: (1) Brad Karp resigned Paul Weiss chairman Feb 4 2026 following DOJ release of Epstein emails. Scott Barshay named successor. Karp had been Paul Weiss's chair handling SoftBank, Misra, Leon Black, Ghosn, and Epstein simultaneously. (2) Kathy Ruemmler announced resignation Feb 12 2026 effective end of June 2026. (3) Jes Staley permanently FCA-banned from senior UK regulated roles by Upper Tribunal June 2025 (Epstein-related deception of FCA + Barclays). (4) Marcelo Claure \u2192 Bicycle Capital (Mubadala M anchor June 2023) \u2014 confirmed re-platforming in UAE. (5) Akshay Naheta \u2192 DTR/DRAM stablecoin in ADGM Oct 2023 \u2014 same ADGM cluster as OneIM. WATCH where Karp and Ruemmler land in next 12 months \u2014 UAE/Mubadala family-office advisory would close the Epstein-Karp-Misra loop. The structural pattern: as US/UK accountability mechanisms catch up to Epstein-network actors, those actors are migrating to UAE/Abu Dhabi (Mubadala, Royal Group, ADGM cluster) where regulatory and reputational risk is lower. Misra's OneIM is the model. des Pallieres is already there. Naheta's DTR/DRAM is there. Claure's Bicycle Capital has Mubadala anchor. The Epstein-network's institutional second life appears to be in Tahnoon bin Zayed's UAE financial cluster. Crypto/OneIM intersection currently weak in public records \u2014 Aryam-WLFI deal was held directly by Tahnoon via G42 executives, not via OneIM. But Finstreet MoU (Jan 2024) signals OneIM is positioning for tokenized credit, and Naheta's DTR/DRAM in same ADGM cluster is adjacent infrastructure.",
+      "source_datasets": [
+        "doj.gov",
+        "fca.org.uk"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-02-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 03:23:30",
+      "target_name": "Brad Karp",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "doj-epstein-release-feb-2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fca-staley-tribunal-jun-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 3475,
       "finding_type": "intelligence",
       "summary": "TEMPORAL PATTERN: Karp-Ghosn-Epstein intelligence pipeline Nov-Dec 2018, coinciding with Miami Herald publication. 8 Karp findings in Nov-Dec 2018 window, including Ghosn crisis coordination (Nov 20), Misra/SoftBank intelligence sharing (Jan 26), and ongoing legal consulting. The Ghosn arrest (Nov 19) and Miami Herald publication (Nov 28) created a dual crisis period where Karp was simultaneously managing corporate defense and Epstein relationship.",
@@ -898,6 +931,81 @@
         {
           "evidence_type": "file",
           "evidence_ref": "https://news.bloomberglaw.com/business-and-practice/karp-advised-epstein-on-fight-over-plea-deal-months-before-death",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11176,
+      "finding_type": "intelligence",
+      "summary": "Round 5 meta-synthesis frames the SoftBank caper as one component of a larger Mayfair-Geneva-Lux corporate-administration backbone connected by a Weingarten-Steptoe legal pivot. The synthesis identifies des Pallieres (introduced Misra to Benedetti per WSJ reporting) and Marchiolo as nodes in the Mayfair-Geneva cluster, with the SoftBank-caper clique (Benedetti + Misra + Epstein + Weingarten) sharing Weingarten as a single non-Epstein person bridging it to the old-guard clique (Bannon + Barr + Epstein + Weingarten). Karp's January 2019 SoftBank representation and his Deutsche Bank contact with Misra place Paul Weiss inside the US legal-services perimeter of that cluster at the moment Epstein was actively probing the Misra-Benedetti relationship.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-05-07",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 14:32:17",
+      "target_name": "SoftBank Caper Meta-Synthesis",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-round-5-meta-synthesis",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11201,
+      "finding_type": "intelligence",
+      "summary": "Round 6 synthesis identifies Mark Paoletta as the legal-architect node welding Vought (CRA + OMB), the Thomas household (Ginni Thomas representation + Clarence Thomas confirmation prep), Leo (FedSoc judicial pipeline), and Schaerr Jaffe (DC FedSoc boutique) into one operational cluster. The Paoletta pattern is presented as structurally parallel to other senior counsel acting as institutional convergence points between regulators, clients, and private channels - a category in which the broader investigation locates Karp's chairmanship of Paul Weiss during the Epstein-relationship period.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-05-07",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:23",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-round-6",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11236,
+      "finding_type": "intelligence",
+      "summary": "Round 6 meta-synthesis describes a vault-firm regulatory revolving-door pattern with four documented instances - three in an OCC-implementation pipeline (Brooks 2020, Gould 2025, Adam J. Cohen 2025 with a 65-day Skadden-OCC-Erebor-approval window cited as the tightest) and a parallel OMB-Schaerr Jaffe-OMB pattern via Paoletta (2018 + 2025). The synthesis also documents a 2025-2026 cascade of visible consequences for Epstein-network actors - Karp's Feb 4 2026 Paul Weiss resignation, Ruemmler's Feb 12 2026 Goldman Sachs resignation announcement effective end of June 2026, Staley's June 2025 Upper Tribunal FCA ban, and bin Sulayem's Feb 13 2026 DP World resignation - and observes a UAE/Abu Dhabi re-platforming pattern (Mubadala, Royal Group, ADGM) for actors whose US/UK reputational exposure has compounded.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-05-07",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:28:32",
+      "target_name": "Round 6 meta-synthesis: SoftBank-caper / Epstein-replatforming structural model",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-round-6-meta-synthesis",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -1796,16 +1904,24 @@
       "summary": "Brad Karp resigned as Paul Weiss chairman on Feb 4, 2026 after DOJ release of Epstein emails. The Karp-Epstein-Ghosn nexus: (1) Karp was 'dealing with Ghosn crisis' on Nov 20, 2018 (EFTA02616157). (2) Karp registered as lobbyist for Ghosn Nov 2018, lobbied through Q1 2020. (3) Simultaneously, Epstein fed Karp intelligence on Ghosn: 'ghosen info when you like' (Nov 30), 'my guy had it right from day one' (Dec 26), 'bring you up to date on google ghosen SIC' (Jan 24), 'ghosen a very very not good guy' (Jan 26). (4) Karp was also advising Epstein on his own plea deal: 'The draft motion is in great shape. Truly' (Mar 2019). (5) Karp asked Epstein for help getting his son a job on a Woody Allen movie. This dual relationship \u2014 where Karp was simultaneously Epstein's social correspondent AND Ghosn's registered lobbyist \u2014 raises questions about information flows between Epstein and the Ghosn case.",
       "confidence": "medium",
       "id": 980
+    },
+    {
+      "date": "2026-02-04",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Brad Karp resigned as Paul Weiss chairman Feb 4 2026 after Epstein emails released \u2014 Scott Barshay successor; Kathy Ruemmler announced resignation Feb 12 2026 effective end of June 2026; Jes Staley permanently FCA-banned from senior UK regulated roles (Upper Tribunal Jun 2025) \u2014 post-Epstein actor pipeline collapsing in 2025-26",
+      "confidence": "high",
+      "id": 11123
     }
   ],
   "curation": {
-    "lead": "<p>Brad S. Karp (born circa 1960) served as chairman of <a href=\"/dossiers/paul-weiss\">Paul, Weiss, Rifkind, Wharton &amp; Garrison LLP</a> from 2008 until his resignation on February 4, 2026, following the Department of Justice release of <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a>'s email corpus. DOJ Volume 11 documents show that Karp maintained both a personal and professional relationship with Epstein from at least 2014 through early 2019, visiting Epstein's townhouse at <a href=\"/dossiers/nine-east-71st-street-corporation\">9 East 71st Street</a> repeatedly and dining with him alongside <a href=\"/dossiers/kathryn-ruemmler\">Kathryn Ruemmler</a>, the former White House Counsel. Karp's firm simultaneously represented <a href=\"/dossiers/leon-black\">Leon Black</a> and <a href=\"/dossiers/apollo-global-management\">Apollo Global Management</a>, SoftBank, and Nissan interests in the <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> prosecution. Emails show Karp discussed all of these representations directly with Epstein: forwarding a response about a Leon Black escrow arrangement (March 2016), responding when Epstein asked about the Caesars litigation while Paul Weiss was a named defendant in Case 15-01145, and confirming SoftBank representation when Epstein asked \"Rajeev misra do you represent?\" in January 2019 [EFTA02627034]. Epstein characterized the bond in a November 2018 email: \"You and i are friends with a disagreement\" [EFTA02617307].</p>\n\n<p>The correspondence around the Ghosn affair provides the most detailed documentary thread. Karp told Epstein he was \"dealing with Ghosn crisis\" the day after the arrest [EFTA02616157], and within ten days the two were exchanging intelligence on the matter in both directions. Paul Weiss registered as a lobbyist for Ghosn under the Lobbying Disclosure Act, with Karp personally named on the filing. Quarterly LDA filings show $240,000 in declared income from Q4 2018 through Q1 2020.</p>\n\n<p>The relationship extended into Karp's family life. Both children appear in the email corpus: his son David attended Epstein-hosted Woody Allen screenings beginning at age eighteen in May 2014 and later dined privately with Epstein and Allen [EFTA02347847]. Karp shared his daughter Meredith's medical emergency with Epstein [EFTA02477831] and brought his son's girlfriend to Epstein events. His wife <a href=\"/dossiers/robbie-karp\">Robbie Karp</a> is referenced obliquely but never named in the documents. The breadth of personal disclosures in these emails &mdash; children's careers, family medical information, a wife's private opinions &mdash; goes well beyond the scope of a conventional attorney-client relationship.</p>",
+    "lead": "<p>Brad S. Karp (born circa 1960) served as chairman of <a href=\"/dossiers/paul-weiss\">Paul, Weiss, Rifkind, Wharton &amp; Garrison LLP</a> from 2008 until his resignation on February 4, 2026, following the Department of Justice release of <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a>'s email corpus. DOJ Volume 11 documents show that Karp maintained both a personal and professional relationship with Epstein from at least 2014 through early 2019, visiting Epstein's townhouse at <a href=\"/dossiers/nine-east-71st-street-corporation\">9 East 71st Street</a> repeatedly and dining with him alongside <a href=\"/dossiers/kathryn-ruemmler\">Kathryn Ruemmler</a>, the former White House Counsel. Karp's firm simultaneously represented <a href=\"/dossiers/leon-black\">Leon Black</a> and <a href=\"/dossiers/apollo-global-management\">Apollo Global Management</a>, <a href=\"/dossiers/softbank\">SoftBank</a>, and Nissan interests in the <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> prosecution. Emails show Karp discussed all of these representations directly with Epstein: forwarding a response about a Leon Black escrow arrangement (March 2016), responding when Epstein asked about the Caesars litigation while Paul Weiss was a named defendant in Case 15-01145, and confirming SoftBank representation when Epstein asked \"Rajeev misra do you represent?\" in January 2019 [EFTA02627034]. Epstein characterized the bond in a November 2018 email: \"You and i are friends with a disagreement\" [EFTA02617307].</p>\n\n<p>The correspondence around the Ghosn affair provides the most detailed documentary thread. Karp told Epstein he was \"dealing with Ghosn crisis\" the day after the arrest [EFTA02616157], and within ten days the two were exchanging intelligence on the matter in both directions. Paul Weiss registered as a lobbyist for Ghosn under the Lobbying Disclosure Act, with Karp personally named on the filing. Quarterly LDA filings show $240,000 in declared income from Q4 2018 through Q1 2020.</p>\n\n<p>The relationship extended into Karp's family life. Both children appear in the email corpus: his son David attended Epstein-hosted Woody Allen screenings beginning at age eighteen in May 2014 and later dined privately with Epstein and Allen [EFTA02347847]. Karp shared his daughter Meredith's medical emergency with Epstein [EFTA02477831] and brought his son's girlfriend to Epstein events. His wife <a href=\"/dossiers/robbie-karp\">Robbie Karp</a> is referenced obliquely but never named in the documents. The breadth of personal disclosures in these emails &mdash; children's careers, family medical information, a wife's private opinions &mdash; goes well beyond the scope of a conventional attorney-client relationship.</p>",
     "system_role": "As chairman of Paul Weiss, Karp maintained a close personal and professional relationship with Epstein from at least 2014 through 2019, during which he discussed privileged client matters involving Leon Black, Apollo, SoftBank, Carlos Ghosn, and Caesars directly with Epstein. Email records indicate the two exchanged information across multiple active representations, combining personal friendship, legal advisory work, and informal information sharing in ways that blurred conventional professional boundaries.",
     "sections": [
       {
         "id": "the-ghosn-intelligence-channel",
         "title": "The Ghosn Intelligence Channel",
-        "content": "<p>The Karp-Epstein correspondence on the <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> arrest provides the most granular documentary evidence of two-way information sharing in the DOJ email corpus. Karp told Epstein he was \"dealing with Ghosn crisis\" on November 20, 2018, the day after the arrest [EFTA02616157]. Within ten days, Epstein offered information from his own source: \"ghosen info when you like.\" Karp replied: \"That was quick. On call with DOJ now\" &mdash; indicating both that Karp was in contact with the Department of Justice on Ghosn-related matters and that he noted the speed with which Epstein had obtained information [EFTA02612503]. Epstein's response, comparing his source to \"the experienced mechanic\" who knows \"exactly where to knock,\" suggests a specific source rather than general media monitoring.</p>\n\n<p>The December 26, 2018 exchange is particularly detailed. Epstein wrote: \"following ghosen. it appears my guy had it right from day one. any updates?\" Karp, returning from Tokyo, replied: \"Just returning from tokyo. Your guy totally had it right\" [EFTA02609103]. Karp's Christmas-period trip to Tokyo in his capacity as <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> chairman reflects the seniority of the firm's involvement in the Ghosn matter. Four days later, Epstein followed up: \"how you doing? traveling to tokyo must have been stressful\" [EFTA02608327]. The casual tone of these exchanges &mdash; checking in on the stress of international travel, sharing assessments in informal fragments &mdash; indicates a relationship in which the chairman of a major law firm regularly discussed an ongoing DOJ matter with Epstein and validated the accuracy of Epstein's independent source.</p>\n\n<p>The thread continued into late January 2019. On January 24, Epstein told Karp: \"when free I can bring you up to date on google. ghosen SIC and...\" [EFTA02626821] &mdash; offering updates on multiple matters at once, including one involving Google and the ongoing Ghosn situation. Two days later, on January 26, Epstein wrote \"ghosen a very very not good guy\" and asked: \"Rajeev misra do you represent?\" [EFTA02627034]. Karp replied: \"Sort of. Spoke to him yesterday.\" Epstein then told a third party: \"brad represent softbank, not rajeev, but did speak to him yesterday, re DB\" &mdash; indicating that Karp had also discussed <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> matters with <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>. The same day, <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a> independently asked Epstein about Misra, placing Epstein as an intermediary between Karp (representing SoftBank) and Weingarten (seeking information on Misra) &mdash; with neither necessarily aware of the other's full involvement.</p>",
+        "content": "<p>The Karp-Epstein correspondence on the <a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> arrest provides the most granular documentary evidence of two-way information sharing in the DOJ email corpus. Karp told Epstein he was \"dealing with Ghosn crisis\" on November 20, 2018, the day after the arrest [EFTA02616157]. Within ten days, Epstein offered information from his own source: \"ghosen info when you like.\" Karp replied: \"That was quick. On call with DOJ now\" &mdash; indicating both that Karp was in contact with the Department of Justice on Ghosn-related matters and that he noted the speed with which Epstein had obtained information [EFTA02612503]. Epstein's response, comparing his source to \"the experienced mechanic\" who knows \"exactly where to knock,\" suggests a specific source rather than general media monitoring.</p>\n\n<p>The December 26, 2018 exchange is particularly detailed. Epstein wrote: \"following ghosen. it appears my guy had it right from day one. any updates?\" Karp, returning from Tokyo, replied: \"Just returning from tokyo. Your guy totally had it right\" [EFTA02609103]. Karp's Christmas-period trip to Tokyo in his capacity as <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> chairman reflects the seniority of the firm's involvement in the Ghosn matter. Four days later, Epstein followed up: \"how you doing? traveling to tokyo must have been stressful\" [EFTA02608327]. The casual tone of these exchanges &mdash; checking in on the stress of international travel, sharing assessments in informal fragments &mdash; indicates a relationship in which the chairman of a major law firm regularly discussed an ongoing DOJ matter with Epstein and validated the accuracy of Epstein's independent source.</p>\n\n<p>The thread continued into late January 2019. On January 24, Epstein told Karp: \"when free I can bring you up to date on google. ghosen SIC and...\" [EFTA02626821] &mdash; offering updates on multiple matters at once, including one involving Google and the ongoing Ghosn situation. Two days later, on January 26, Epstein wrote \"ghosen a very very not good guy\" and asked: \"Rajeev misra do you represent?\" [EFTA02627034]. Karp replied: \"Sort of. Spoke to him yesterday.\" Epstein then told a third party: \"brad represent softbank, not rajeev, but did speak to him yesterday, re DB\" &mdash; indicating that Karp had also discussed <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> matters with <a href=\"/dossiers/rajeev-misra\">Rajeev Misra</a>. The same day, <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a> independently asked Epstein about Misra, placing Epstein as an intermediary between Karp (representing <a href=\"/dossiers/softbank\">SoftBank</a>) and Weingarten (seeking information on Misra) &mdash; with neither necessarily aware of the other's full involvement.</p>",
         "viz": "timeline"
       },
       {
@@ -1817,13 +1933,13 @@
       {
         "id": "the-personal-entanglement",
         "title": "The Personal Entanglement",
-        "content": "<p>The email record indicates that the Karp-Epstein relationship was personal as well as professional. Karp's visits to 71st Street were regular and informal: arriving two minutes late from a board meeting on July 11, 2017 [EFTA02218810], having appointments rescheduled by <a href=\"/dossiers/lesley-groff\">Lesley Groff</a> when Epstein had \"an appt outside the house\" [EFTA02261421], receiving hand-delivered packages [EFTA02247503]. On May 19, 2017, <a href=\"/dossiers/jeffrey-epstein\">Epstein</a> arranged a dinner at the townhouse with Karp and <a href=\"/dossiers/kathryn-ruemmler\">Kathryn Ruemmler</a>, the former White House Counsel who later became Goldman Sachs General Counsel. Karp replied: \"I can join for about an hour\" [EFTA02213590].</p>\n\n<p>The relationship extended to Karp's family. In May 2014, both Karp children &mdash; David, then approximately eighteen, and Meredith &mdash; attended an Epstein-hosted Woody Allen screening alongside <a href=\"/dossiers/eva-dubin\">Eva</a> and <a href=\"/dossiers/glenn-dubin\">Glenn Dubin</a> and Jes Staley's family [EFTA02383641]. By January 2016, David Karp had dined privately with Epstein and met Allen in person [EFTA02347847]. Epstein later arranged for Allen to write out answers to David's personal questions as a gift, and facilitated introductions between David and Allen's assistant Helen Robin in August 2016. Karp brought his son's girlfriend, Courtney Loo, to Epstein screenings in January 2018. When Meredith Karp suffered a severe allergic reaction, Karp shared the details with Epstein [EFTA02477831]. In November 2017, when the Charlie Rose sexual harassment allegations broke, Epstein sent Karp the Washington Post article that evening, writing: \"I guess your wife can feel vindicated\" and referencing his own connection to the Rose situation through someone who had warned Rose his behavior would \"get both he and me in trouble\" [EFTA02563643, EFTA02563707].</p>\n\n<p>When the relationship encountered friction, Epstein's language reflected its personal nature. On November 2, 2018, he wrote to Karp: \"This is silly. You and i are friends with a disagreement. We should not allow this to get blown out of proportion\" [EFTA02617307]. Karp replied: \"I would send\" &mdash; an apparent reference to advising on how to handle the dispute. Separately, in January 2019, Epstein instructed Karp regarding a financial negotiation with an unnamed third party: \"if he brings up the money issue please stand tough and tell him you had told\" [EFTA02608729]. During this period Karp was simultaneously involved in the Ghosn lobbying campaign and representing SoftBank, accumulating multiple concurrent roles involving Epstein.</p>",
+        "content": "<p>The email record indicates that the Karp-Epstein relationship was personal as well as professional. Karp's visits to 71st Street were regular and informal: arriving two minutes late from a board meeting on July 11, 2017 [EFTA02218810], having appointments rescheduled by <a href=\"/dossiers/lesley-groff\">Lesley Groff</a> when Epstein had \"an appt outside the house\" [EFTA02261421], receiving hand-delivered packages [EFTA02247503]. On May 19, 2017, <a href=\"/dossiers/jeffrey-epstein\">Epstein</a> arranged a dinner at the townhouse with Karp and <a href=\"/dossiers/kathryn-ruemmler\">Kathryn Ruemmler</a>, the former White House Counsel who later became Goldman Sachs General Counsel. Karp replied: \"I can join for about an hour\" [EFTA02213590].</p>\n\n<p>The relationship extended to Karp's family. In May 2014, both Karp children &mdash; David, then approximately eighteen, and Meredith &mdash; attended an Epstein-hosted Woody Allen screening alongside <a href=\"/dossiers/eva-dubin\">Eva</a> and <a href=\"/dossiers/glenn-dubin\">Glenn Dubin</a> and Jes Staley's family [EFTA02383641]. By January 2016, David Karp had dined privately with Epstein and met Allen in person [EFTA02347847]. Epstein later arranged for Allen to write out answers to David's personal questions as a gift, and facilitated introductions between David and Allen's assistant Helen Robin in August 2016. Karp brought his son's girlfriend, Courtney Loo, to Epstein screenings in January 2018. When Meredith Karp suffered a severe allergic reaction, Karp shared the details with Epstein [EFTA02477831]. In November 2017, when the Charlie Rose sexual harassment allegations broke, Epstein sent Karp the Washington Post article that evening, writing: \"I guess your wife can feel vindicated\" and referencing his own connection to the Rose situation through someone who had warned Rose his behavior would \"get both he and me in trouble\" [EFTA02563643, EFTA02563707].</p>\n\n<p>When the relationship encountered friction, Epstein's language reflected its personal nature. On November 2, 2018, he wrote to Karp: \"This is silly. You and i are friends with a disagreement. We should not allow this to get blown out of proportion\" [EFTA02617307]. Karp replied: \"I would send\" &mdash; an apparent reference to advising on how to handle the dispute. Separately, in January 2019, Epstein instructed Karp regarding a financial negotiation with an unnamed third party: \"if he brings up the money issue please stand tough and tell him you had told\" [EFTA02608729]. During this period Karp was simultaneously involved in the Ghosn lobbying campaign and representing <a href=\"/dossiers/softbank\">SoftBank</a>, accumulating multiple concurrent roles involving Epstein.</p>",
         "viz": null
       },
       {
         "id": "the-weingarten-connection",
         "title": "The Weingarten Shadow Advisory",
-        "content": "<p><a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a>, the Steptoe &amp; Johnson white-collar defense attorney who would later represent Epstein in his 2019 federal case, maintained a concealed advisory relationship with Karp that Epstein deliberately managed. Weingarten told Epstein in 2015: \"do not mention my role with brad\" [EFTA02341191]. The nature of this undisclosed role is not fully explained in the available documents, but its existence transforms the map of the Karp-Epstein relationship. Epstein was not merely sharing intelligence with Karp; he was simultaneously running a back-channel advisory arrangement through Weingarten that Karp may not have known about, or that both men were keeping off the record.</p>\n\n<p>The two channels converged in late January 2019. On January 26, the same day Karp confirmed his SoftBank representation to Epstein, Weingarten independently emailed Epstein asking about Misra: \"Rajeev misra...softbank vision fund...any special jeffrey insights here?\" [HOUSE_OVERSIGHT_028601]. Epstein then told a third party: \"obviously dont mention my role with brad till we both think it useful\" &mdash; revealing that Epstein was actively managing the disclosure of his Karp relationship to <a href=\"/dossiers/ron-soffer\">Ron Soffer</a>, who was being considered for Misra's side of the SoftBank dispute. Epstein functioned as a hub connecting Karp (SoftBank's lawyer), Weingarten (seeking intelligence for a potential Misra engagement), and Soffer (a potential Israeli lawyer for Misra) &mdash; while none of the three necessarily knew the full scope of the others' involvement. By Q3 2019, Weingarten was added to the <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> Ghosn lobbying registration, formalizing what had been a covert arrangement into an official engagement.</p>",
+        "content": "<p><a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a>, the Steptoe &amp; Johnson white-collar defense attorney who would later represent Epstein in his 2019 federal case, maintained a concealed advisory relationship with Karp that Epstein deliberately managed. Weingarten told Epstein in 2015: \"do not mention my role with brad\" [EFTA02341191]. The nature of this undisclosed role is not fully explained in the available documents, but its existence transforms the map of the Karp-Epstein relationship. Epstein was not merely sharing intelligence with Karp; he was simultaneously running a back-channel advisory arrangement through Weingarten that Karp may not have known about, or that both men were keeping off the record.</p>\n\n<p>The two channels converged in late January 2019. On January 26, the same day Karp confirmed his SoftBank representation to Epstein, Weingarten independently emailed Epstein asking about Misra: \"Rajeev misra...softbank vision fund...any special jeffrey insights here?\" [HOUSE_OVERSIGHT_028601]. Epstein then told a third party: \"obviously dont mention my role with brad till we both think it useful\" &mdash; revealing that Epstein was actively managing the disclosure of his Karp relationship to <a href=\"/dossiers/ron-soffer\">Ron Soffer</a>, who was being considered for Misra's side of the SoftBank dispute. Epstein functioned as a hub connecting Karp (<a href=\"/dossiers/softbank\">SoftBank</a>'s lawyer), Weingarten (seeking intelligence for a potential Misra engagement), and Soffer (a potential Israeli lawyer for Misra) &mdash; while none of the three necessarily knew the full scope of the others' involvement. By Q3 2019, Weingarten was added to the <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> Ghosn lobbying registration, formalizing what had been a covert arrangement into an official engagement.</p>\n\n<p>Cross-reference of the broader investigation's synthesis records indicates that the Karp&ndash;Misra advisory channel sits inside a larger structural cluster labeled the SoftBank-caper Mayfair&ndash;Geneva cluster, in which <a href=\"/dossiers/bertrand-g-des-pallieres\">Bertrand des Pallieres</a> is documented as the figure who introduced Misra to Italian operative <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a> per Wall Street Journal reporting on the Misra honey-trap operation, and <a href=\"/dossiers/tancredi-salvatore-maria-marchiolo\">Tancredi Salvatore Maria Marchiolo</a> appears as a Mayfair&ndash;Geneva node in adjacent Italian corporate-administration filings [Finding #11176]. Karp's January 2019 confirmation to Epstein that Paul Weiss represented <a href=\"/dossiers/softbank\">SoftBank</a>, his concurrent contact with Misra on <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> matters, and Weingarten's same-day independent inquiry on Misra place the chairman of Paul Weiss inside the legal-services perimeter of that cluster at the moment Epstein was probing the Misra&ndash;Benedetti relationship.</p>",
         "viz": "ego_network"
       },
       {
@@ -1835,7 +1951,13 @@
       {
         "id": "the-lobbying-architecture",
         "title": "The Ghosn Lobbying Architecture",
-        "content": "<p><a href=\"/dossiers/paul-weiss\">Paul Weiss</a> registered as a lobbyist for \"Carlos Ghosn Bichara\" within weeks of the November 19, 2018 arrest, with Karp personally named on the registration. LDA quarterly filings document the engagement: Q4 2018 (,000), Q1 2019 (,000), Q2 2019 (,000), Q3 2019 (,000, with <a href=\"/dossiers/reid-weingarten\">Weingarten</a> added), Q4 2019 (,000), and Q1 2020 (,000, termination) &mdash; total declared income of ,000. The issues listed were \"Civil Rights/Civil Liberties\" and \"Law Enforcement.\" The lobbyist roster evolved from Karp, Gertzman, and Milione to include Thompson, then Weingarten, Antweiler, and Caselli in the final quarters. The framing of a foreign national's detention as a domestic civil rights issue was a deliberate regulatory strategy: it allowed Paul Weiss to register under the Lobbying Disclosure Act rather than the Foreign Agents Registration Act, despite Ghosn being a French-Brazilian-Lebanese citizen detained in Japan on behalf of a Japanese corporation.</p>\n\n<p>This LDA-over-FARA framing is significant because Paul Weiss's own institutional history demonstrates familiarity with foreign representation. The firm held five FARA registrations between 1963 and 2002, representing the governments of Israel, Morocco, Poland, and Botswana, as well as Japanese and Korean corporations including NEC (1982&ndash;1996), Samsung, Hyundai, and Korea Telecom. The NEC representation gave Paul Weiss more than a decade of institutional knowledge of Japanese corporate and legal systems &mdash; directly relevant to Karp's December 2018 Tokyo trip. Yet none of these FARA registrations were active during the Karp-Epstein period, and the Ghosn engagement was never registered as foreign agent activity. This regulatory arbitrage &mdash; using domestic lobbying registration for what was functionally a foreign advocacy campaign &mdash; is consistent with the broader pattern of FARA non-compliance documented across the Epstein network.</p>",
+        "content": "<p><a href=\"/dossiers/paul-weiss\">Paul Weiss</a> registered as a lobbyist for \"<a href=\"/dossiers/carlos-ghosn\">Carlos Ghosn</a> Bichara\" within weeks of the November 19, 2018 arrest, with Karp personally named on the registration. LDA quarterly filings document the engagement: Q4 2018 (,000), Q1 2019 (,000), Q2 2019 (,000), Q3 2019 (,000, with <a href=\"/dossiers/reid-weingarten\">Weingarten</a> added), Q4 2019 (,000), and Q1 2020 (,000, termination) &mdash; total declared income of ,000. The issues listed were \"Civil Rights/Civil Liberties\" and \"Law Enforcement.\" The lobbyist roster evolved from Karp, Gertzman, and Milione to include Thompson, then Weingarten, Antweiler, and Caselli in the final quarters. The framing of a foreign national's detention as a domestic civil rights issue was a deliberate regulatory strategy: it allowed Paul Weiss to register under the Lobbying Disclosure Act rather than the Foreign Agents Registration Act, despite Ghosn being a French-Brazilian-Lebanese citizen detained in Japan on behalf of a Japanese corporation.</p>\n\n<p>This LDA-over-FARA framing is significant because Paul Weiss's own institutional history demonstrates familiarity with foreign representation. The firm held five FARA registrations between 1963 and 2002, representing the governments of Israel, Morocco, Poland, and Botswana, as well as Japanese and Korean corporations including NEC (1982&ndash;1996), Samsung, Hyundai, and Korea Telecom. The NEC representation gave Paul Weiss more than a decade of institutional knowledge of Japanese corporate and legal systems &mdash; directly relevant to Karp's December 2018 Tokyo trip. Yet none of these FARA registrations were active during the Karp-Epstein period, and the Ghosn engagement was never registered as foreign agent activity. This regulatory arbitrage &mdash; using domestic lobbying registration for what was functionally a foreign advocacy campaign &mdash; is consistent with the broader pattern of FARA non-compliance documented across the Epstein network.</p>",
+        "viz": null
+      },
+      {
+        "id": "the-2026-cascade",
+        "title": "The February 2026 Cascade",
+        "content": "<p>Karp resigned as <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> chairman on February 4, 2026, in the days after the Department of Justice released the email volume containing his correspondence with Epstein [Finding #11123]. Scott Barshay was named successor. Eight days later, on February 12, 2026, <a href=\"/dossiers/kathryn-ruemmler\">Kathryn Ruemmler</a> announced her own resignation as Goldman Sachs general counsel effective end of June 2026 [Finding #11123]. Both departures followed the public release of the email threads documented in the sections above &mdash; the May 2017 dinner Karp arranged with Ruemmler at 71st Street, the November 2018 Ghosn-crisis exchanges, and the January 2019 Misra inquiry.</p>\n\n<p>Analysis of the broader investigation records indicates that the Karp-Ruemmler cascade is one of several visible 2025&ndash;2026 consequences for senior Epstein-network actors, alongside the Upper Tribunal's June 2025 permanent ban of <a href=\"/dossiers/jes-staley\">Jes Staley</a> from senior UK regulated roles and the February 13, 2026 resignation of Sultan Ahmed bin Sulayem from DP World [Finding #11176]. Examination of the same synthesis records documents a parallel Mayfair&ndash;Geneva structural cluster around the SoftBank caper, in which <a href=\"/dossiers/bertrand-g-des-pallieres\">Bertrand des Pallieres</a> introduced Misra to Benedetti per WSJ reporting and <a href=\"/dossiers/tancredi-salvatore-maria-marchiolo\">Tancredi Salvatore Maria Marchiolo</a> appears in adjacent Italian corporate-administration filings [Finding #11176]. Karp's January 2019 confirmation of <a href=\"/dossiers/softbank\">SoftBank</a> representation and his contemporaneous contact with Misra on <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> matters places him at the US legal-services perimeter of that same cluster.</p>\n\n<p>Cross-reference of analysis records indicates a related structural pattern outside the Karp file [Finding #11236, #11201], in which lawyers at vault firms transition into US regulatory roles and back to private-sector beneficiaries on compressed timelines &mdash; documented for <a href=\"/dossiers/adam-j-cohen\">Adam J. Cohen</a> in the OCC&ndash;Erebor approval pipeline and for <a href=\"/dossiers/mark-paoletta\">Mark Paoletta</a> in the OMB&ndash;Schaerr Jaffe&ndash;OMB pipeline. Karp's case is structurally distinct, in that he held the Paul Weiss chair throughout the Epstein-relationship period and the Ghosn lobbying engagement rather than rotating through a public office, but the broader investigation has come to treat all three as variants of the same legal-architect role: the senior counsel who sits at the institutional convergence point between regulator, client, and private intelligence channel.</p>",
         "viz": null
       }
     ],

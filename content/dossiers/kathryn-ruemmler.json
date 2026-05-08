@@ -7,17 +7,17 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.782964",
-  "last_updated": "2026-02-25T22:58:02",
+  "generated_at": "2026-05-07T23:07:36.084328",
+  "last_updated": "2026-05-07T23:07:00",
   "stats": {
-    "total_findings": 32,
+    "total_findings": 36,
     "total_connections": 29,
     "total_entities": 4,
     "finding_types": {
       "legal": 9,
-      "intelligence": 10,
+      "intelligence": 12,
       "communication": 3,
-      "relationship": 7,
+      "relationship": 9,
       "financial": 3
     },
     "connection_types": {
@@ -28,7 +28,7 @@
       "advisory": 2,
       "intelligence": 2
     },
-    "last_updated": "2026-02-25T22:58:02"
+    "last_updated": "2026-05-07T23:07:00"
   },
   "findings": [
     {
@@ -1272,6 +1272,107 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 11165,
+      "finding_type": "relationship",
+      "summary": "STRUCTURAL The Goldman Sachs to Latham and Watkins institutional bridge is a SINGLE-PERSON edge: Kathryn Ruemmler is the sole alumnus the graph records spanning these two pillars. Her arc roles (President Goldman + employee/partner/global head regulatory affairs Latham) make her the network's only AmLaw-100 to top-tier-bank cross-pillar, more so than even Karp",
+      "detail": "Graph metric: institutional-graph edge {Goldman Sachs, Latham and Watkins, shared_alumni=1} = Ruemmler. Her role list at Latham includes 'partner' AND 'global_head_regulatory_affairs' \u2014 the compliance/regulatory chair seat \u2014 and her Goldman role is 'President' (Goldman Sachs Bank). She is the only person the system identifies bridging these two specific pillars. Significance: Ruemmler's known centrality in the Epstein-Karp-Boies-Black-Boies Schiller old-guard cluster (theme #1, #5) is amplified by this institutional-singularity. The size-4 clique {Epstein, Ruemmler, Summers, Thiel} and her cross-pillar count of 2 (banking + legal) are not the full picture \u2014 she is the LITERAL UNIQUE NODE-OF-RECORD between regulatory-defense law and Goldman's deal-flow infrastructure. This is structurally distinctive enough to flag as a NEW network observation: every Latham-Goldman conflict-of-interest in this dataset must route through her, and her movement Latham \u2192 Goldman in 2020 (regulatory-affairs to bank-presidency) is a single-person revolving-door of the highest leverage.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 14:16:01",
+      "target_name": "Kathryn Ruemmler",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-50",
+          "source_quote": " institutional-graph edge {Goldman Sachs, Latham & Watkins, shared_alumni=1} sole-alumnus query returns Kathryn Ruemmler with roles President + employee + partner + global_head_regulatory_affairs",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11123,
+      "finding_type": "intelligence",
+      "summary": "Brad Karp resigned as Paul Weiss chairman Feb 4 2026 after DOJ release of Karp-Epstein emails — Scott Barshay successor; Kathy Ruemmler announced resignation from Goldman Sachs Feb 12 2026 effective end of June 2026; Jes Staley permanently FCA-banned from senior UK regulated roles (Upper Tribunal Jun 2025) — documenting a post-Epstein actor pipeline of 2025-26 departures.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "high",
+      "date_of_event": "2026-02-04",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 23:07:00",
+      "target_name": "Brad Karp",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "doj-epstein-release-feb-2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "fca-staley-tribunal-jun-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11156,
+      "finding_type": "intelligence",
+      "summary": "TEMPORAL PATTERN Feb 5-13 2026 — Brende WEF probe, Jagland aggravated-corruption charge, and Mette-Marit Norwegian-network developments are synchronous with the Karp/Ruemmler/Sulayem cluster of departures and announcements during the same window.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 23:07:00",
+      "target_name": "Jan-Feb 2026 Norwegian-Council-of-Europe Cleanup Window",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-49",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11157,
+      "finding_type": "relationship",
+      "summary": "STRUCTURAL Reid Weingarten is the singular counsel-pivot bridging SoftBank-caper actors (Misra/Benedetti) to an Epstein old-guard cluster that includes Barr, Karp, Ruemmler, Bannon, Holder, Wynn, Pence, Wolff, and the Gulen extradition matter; identified as the only non-Epstein person appearing in both size-4 cliques in the brokerage analysis.",
+      "detail": null,
+      "source_datasets": null,
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 23:07:00",
+      "target_name": "Reid Weingarten",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-50",
+          "source_quote": "graph_tools holes brokerage_score=0.80 deg=15; cliques size-4 Benedetti+Misra+Epstein+Weingarten AND size-4 Bannon+Barr+Karp+Weingarten",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -2310,7 +2411,7 @@
     }
   ],
   "curation": {
-    "lead": "<p>Kathryn H. Ruemmler served as White House Counsel to President Barack Obama from 2011 to 2014. Within months of leaving government she joined Latham &amp; Watkins as a partner, and by late 2014 had begun a sustained correspondence with <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a>; analysis of the DOJ Volume 11 corpus by the investigation team identifies roughly 201 emails between them [Finding #1432]. Her formal Latham engagement was with <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company</a>, Epstein's USVI financial vehicle, rather than with Epstein personally &mdash; a distinction Epstein clarified in writing when Ruemmler asked: \"no, the letter engaging southern trust co to work, (me)\" [EFTA02492343][Finding #1447]. Southern Trust's <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> balances peaked above $100 million during the engagement period [Finding #14]. In August 2019, days before Epstein's death, Ruemmler was named a co-trustee of the Epstein 2019 Trust alongside <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> and <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, and successor executor of the will [EFTA01266278][EFTA01266457][Finding #11]. She has not been criminally charged in connection with any Epstein matter.</p>\n\n<p>The DOJ corpus shows Ruemmler sharing major professional decisions with Epstein in real time from 2014 to 2019. She forwarded the October 2014 Bloomberg article reporting Obama was favoring her to succeed Eric Holder as Attorney General, then shared her October 23 withdrawal statement with him before public disclosure [EFTA02591681][EFTA02593429][Finding #17]. She relayed Latham compensation negotiations [EFTA02391492], routed a draft follow-up email to Sheryl Sandberg through Epstein during the 2018 Facebook recruitment [EFTA02503788][Finding #22], and forwarded Goldman Sachs President John Waldron's April 2019 recruiting emails to Epstein [EFTA02633918][Finding #26]. Epstein arranged gifts and services documented in the corpus, including an iMac for her New York apartment, a 64-inch television for Washington, a Herm&egrave;s Apple Watch, birthday flowers, and a Valentine's Day \"Glam Squad\" booking routed through <a href=\"/dossiers/lesley-groff\">Lesley Groff</a> [EFTA00335003][EFTA02262535][EFTA02238367][Finding #50]. Analysis of the corpus by the investigation team characterises this gift pattern as part of Epstein's broader method of creating dependency, though no finding in the record asserts a quid pro quo.</p>\n\n<p>During the same period Ruemmler took on engagements that intersected with multiple sides of the 2017-2018 Gulf diplomatic rupture. She represented George Nader, a convicted sex offender and Mueller-investigation cooperating witness with ties to the UAE, as confirmed by Richard Kahn to Epstein in March 2018 [EFTA02502020][Finding #174]. Records show her telling Epstein on March 2, 2018, that she was \"involved in the WSJ matter\" concerning <a href=\"/dossiers/elliott-broidy\">Elliott Broidy</a> [EFTA02514715][Finding #1385]. Epstein had separately offered her Hamad bin Jassim, a former Prime Minister of Qatar, as a prospective client in June 2017 [EFTA02647898][Finding #1431]; the documentary record does not show whether she accepted. On Saudi-aligned contacts, corpus records show Epstein introduced her to <a href=\"/dossiers/raafat-alsabbagh\">Raafat Alsabbagh</a> in October 2016 and Aziza Alahmadi subsequently emailed Ruemmler directly to arrange a Washington meeting [EFTA02449625][EFTA02448016][Finding #1450]. According to a July 2016 email from <a href=\"/dossiers/ariane-de-rothschild\">Ariane de Rothschild</a> that the investigation team has reviewed, Ruemmler was among the counsel working on the <a href=\"/dossiers/edmond-de-rothschild-bank\">Edmond de Rothschild Bank</a> 1MDB exposure: \"I have 3 of the top Lux law firms working for us + Yves + Kathy on all angles\" [EFTA02455931][Finding #887]. Ruemmler joined Goldman Sachs as Global Head of Regulatory Affairs in April 2020 and resigned in February 2026, per a LittleSis entity update [Finding #1438].</p>",
+    "lead": "<p>Kathryn H. Ruemmler served as White House Counsel to President Barack Obama from 2011 to 2014. Within months of leaving government she joined Latham &amp; Watkins as a partner, and by late 2014 had begun a sustained correspondence with <a href=\"/dossiers/jeffrey-epstein\">Jeffrey Epstein</a>; analysis of the DOJ Volume 11 corpus by the investigation team identifies roughly 201 emails between them [Finding #1432]. Her formal Latham engagement was with <a href=\"/dossiers/southern-trust-company-inc\">Southern Trust Company</a>, Epstein's USVI financial vehicle, rather than with Epstein personally &mdash; a distinction Epstein clarified in writing when Ruemmler asked: \"no, the letter engaging southern trust co to work, (me)\" [EFTA02492343][Finding #1447]. Southern Trust's <a href=\"/dossiers/deutsche-bank\">Deutsche Bank</a> balances peaked above $100 million during the engagement period [Finding #14]. In August 2019, days before Epstein's death, Ruemmler was named a co-trustee of the Epstein 2019 Trust alongside <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> and <a href=\"/dossiers/richard-kahn\">Richard Kahn</a>, and successor executor of the will [EFTA01266278][EFTA01266457][Finding #11]. She has not been criminally charged in connection with any Epstein matter.</p>\n\n<p>The DOJ corpus shows Ruemmler sharing major professional decisions with Epstein in real time from 2014 to 2019. She forwarded the October 2014 Bloomberg article reporting Obama was favoring her to succeed Eric Holder as Attorney General, then shared her October 23 withdrawal statement with him before public disclosure [EFTA02591681][EFTA02593429][Finding #17]. She relayed Latham compensation negotiations [EFTA02391492], routed a draft follow-up email to Sheryl Sandberg through Epstein during the 2018 Facebook recruitment [EFTA02503788][Finding #22], and forwarded Goldman Sachs President John Waldron's April 2019 recruiting emails to Epstein [EFTA02633918][Finding #26]. Epstein arranged gifts and services documented in the corpus, including an iMac for her New York apartment, a 64-inch television for Washington, a Herm&egrave;s Apple Watch, birthday flowers, and a Valentine's Day \"Glam Squad\" booking routed through <a href=\"/dossiers/lesley-groff\">Lesley Groff</a> [EFTA00335003][EFTA02262535][EFTA02238367][Finding #50]. Analysis of the corpus by the investigation team characterises this gift pattern as part of Epstein's broader method of creating dependency, though no finding in the record asserts a quid pro quo.</p>\n\n<p>During the same period Ruemmler took on engagements that intersected with multiple sides of the 2017-2018 Gulf diplomatic rupture. She represented George Nader, a convicted sex offender and Mueller-investigation cooperating witness with ties to the UAE, as confirmed by Richard Kahn to Epstein in March 2018 [EFTA02502020][Finding #174]. Records show her telling Epstein on March 2, 2018, that she was \"involved in the WSJ matter\" concerning <a href=\"/dossiers/elliott-broidy\">Elliott Broidy</a> [EFTA02514715][Finding #1385]. Epstein had separately offered her Hamad bin Jassim, a former Prime Minister of Qatar, as a prospective client in June 2017 [EFTA02647898][Finding #1431]; the documentary record does not show whether she accepted. On Saudi-aligned contacts, corpus records show Epstein introduced her to <a href=\"/dossiers/raafat-alsabbagh\">Raafat Alsabbagh</a> in October 2016 and Aziza Alahmadi subsequently emailed Ruemmler directly to arrange a Washington meeting [EFTA02449625][EFTA02448016][Finding #1450]. According to a July 2016 email from <a href=\"/dossiers/ariane-de-rothschild\">Ariane de Rothschild</a> that the investigation team has reviewed, Ruemmler was among the counsel working on the <a href=\"/dossiers/edmond-de-rothschild-bank\">Edmond de Rothschild Bank</a> 1MDB exposure: \"I have 3 of the top Lux law firms working for us + Yves + Kathy on all angles\" [EFTA02455931][Finding #887]. Ruemmler joined Goldman Sachs as Global Head of Regulatory Affairs in April 2020 and announced her resignation in February 2026 effective end of June 2026; the announcement followed <a href=\"/dossiers/brad-karp\">Brad Karp</a>'s February 4, 2026 resignation as <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> chairman after the DOJ release of Karp-Epstein emails [Finding #1438][Finding #11123].</p>",
     "system_role": "Former Obama White House Counsel who, from 2014 to 2019, served as a partner at Latham &amp; Watkins representing Southern Trust Company and other Epstein-adjacent clients, and was named a co-trustee of Epstein's 2019 estate; her career arc illustrates the movement of senior executive-branch lawyers into private practice engagements spanning domestic legal defense, Gulf-state and private-bank representations, and institutional compliance roles.",
     "sections": [
       {
@@ -2352,7 +2453,7 @@
       {
         "id": "estate-and-aftermath",
         "title": "Trust, Estate, and Subsequent Roles",
-        "content": "<p>The August 2019 Epstein estate documents name Ruemmler as a fiduciary alongside <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> and <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> [Finding #11]. The 2019 Trust instrument lists \"DARREN K. INDYKE, RICHARD D. KAHN, and KATHERYN H. RUEMMLER, as Trustees\" [EFTA01266457]. Epstein's will appoints \"KATHRYN H. RUEMMLER, as successor Executor\" [EFTA01266278]. A separate trust instrument names her as successor trustee [EFTA01266434][Finding #11]. Indyke and Kahn had acted for Epstein over many years; the record does not show prior fiduciary roles for Ruemmler in Epstein entities before 2019 [Finding #11].</p>\n\n<p>Ruemmler joined Goldman Sachs as Global Head of Regulatory Affairs in April 2020, approximately eight months after Epstein's death [Finding #1438]. FEC records list her employer as Latham &amp; Watkins through 2019 and Goldman Sachs from 2020 onward [Finding #479][Finding #1434]. Political contributions from this period include $10,000 to the DNC in September 2020, $10,000 to the Biden Victory Fund in September 2020, $6,600 to Harris for President in July 2024, and $5,000 annually to the Goldman Sachs PAC from 2020 through 2025 [Finding #479][Finding #1434]. The May 2025 $5,000 GS PAC contribution lists her occupation as \"investment banker\" rather than attorney [Finding #1434]. SEC EDGAR records her name in Goldman Sachs DEF 14A proxy statements from 2022 through 2024 [Finding #1438]. She has no appearances in Senate LDA lobbying disclosures [Finding #479].</p>\n\n<p>In February 2026 Ruemmler resigned from Goldman Sachs, per a LittleSis entity update (entity 117867, updated 2026-02-13) describing her as \"Resigned as Global head of regulatory affairs, Goldman Sachs in February 2026\" [Finding #1438]. The investigation team notes that the resignation followed recent DOJ releases of Epstein documents and compares it to departures by other Epstein-connected figures after document releases; no causal link is established in the record [Finding #1438].</p>",
+        "content": "<p>The August 2019 Epstein estate documents name Ruemmler as a fiduciary alongside <a href=\"/dossiers/darren-indyke\">Darren Indyke</a> and <a href=\"/dossiers/richard-kahn\">Richard Kahn</a> [Finding #11]. The 2019 Trust instrument lists \"DARREN K. INDYKE, RICHARD D. KAHN, and KATHERYN H. RUEMMLER, as Trustees\" [EFTA01266457]. Epstein's will appoints \"KATHRYN H. RUEMMLER, as successor Executor\" [EFTA01266278]. A separate trust instrument names her as successor trustee [EFTA01266434][Finding #11]. Indyke and Kahn had acted for Epstein over many years; the record does not show prior fiduciary roles for Ruemmler in Epstein entities before 2019 [Finding #11].</p>\n\n<p>Ruemmler joined Goldman Sachs as Global Head of Regulatory Affairs in April 2020, approximately eight months after Epstein's death [Finding #1438]. FEC records list her employer as Latham &amp; Watkins through 2019 and Goldman Sachs from 2020 onward [Finding #479][Finding #1434]. Political contributions from this period include $10,000 to the DNC in September 2020, $10,000 to the Biden Victory Fund in September 2020, $6,600 to Harris for President in July 2024, and $5,000 annually to the Goldman Sachs PAC from 2020 through 2025 [Finding #479][Finding #1434]. The May 2025 $5,000 GS PAC contribution lists her occupation as \"investment banker\" rather than attorney [Finding #1434]. SEC EDGAR records her name in Goldman Sachs DEF 14A proxy statements from 2022 through 2024 [Finding #1438]. She has no appearances in Senate LDA lobbying disclosures [Finding #479].</p>\n\n<p>In February 2026 Ruemmler resigned from Goldman Sachs, per a LittleSis entity update (entity 117867, updated 2026-02-13) describing her as \"Resigned as Global head of regulatory affairs, Goldman Sachs in February 2026\" [Finding #1438]. According to the investigation team's Round 6 cross-reference, the announcement was part of a documented February 2026 cascade: <a href=\"/dossiers/brad-karp\">Brad Karp</a> resigned as <a href=\"/dossiers/paul-weiss\">Paul Weiss</a> chairman on February 4, 2026 following the DOJ release of Karp-Epstein emails, and Ruemmler announced her own resignation on February 12, 2026 effective end of June 2026 [Finding #11123]. Cross-reference of the corpus by the investigation team places the Karp and Ruemmler announcements within a February 5-13, 2026 window that also includes the WEF probe of Borge Brende, the aggravated-corruption charge against <a href=\"/dossiers/thorbjorn-jagland\">Thorbjorn Jagland</a>, and changes affecting other actors in the Norwegian and Council-of-Europe networks; the documentary record does not establish a causal link between any of these events [Finding #11156]. Cross-reference of the corpus by the investigation team identifies <a href=\"/dossiers/reid-weingarten\">Reid Weingarten</a> as a counsel-pivot whose client list spans an Epstein-old-guard cluster including Ruemmler, Karp, <a href=\"/dossiers/william-barr\">William Barr</a>, <a href=\"/dossiers/steve-bannon\">Steve Bannon</a>, Eric Holder, Steve Wynn, and Mike Pence; the underlying record consists of named representations rather than confirmed coordination [Finding #11157].</p>",
         "viz": null
       }
     ],
