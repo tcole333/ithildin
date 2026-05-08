@@ -3,27 +3,314 @@
   "slug": "erebor-bank",
   "aliases": [],
   "profile_ids": [
-    "tech-right"
+    "tech-right",
+    "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.968299",
-  "last_updated": "2026-03-04T20:30:20",
+  "generated_at": "2026-05-07T23:35:00",
+  "last_updated": "2026-05-07T15:30:00",
   "stats": {
-    "total_findings": 8,
-    "total_connections": 4,
+    "total_findings": 31,
+    "total_connections": 13,
     "total_entities": 0,
     "finding_types": {
-      "financial": 4,
-      "legal": 2,
+      "legal": 8,
+      "relationship": 1,
+      "identity": 4,
+      "intelligence": 5,
+      "financial": 9,
+      "negative_result": 2,
       "location": 1,
-      "intelligence": 1
+      "document": 1
     },
     "connection_types": {
-      "corporate": 2,
-      "legal": 2
+      "corporate": 3,
+      "legal": 2,
+      "employment": 1,
+      "owns": 2,
+      "funds": 4,
+      "contracts_with": 1
     },
-    "last_updated": "2026-03-04T20:30:20"
+    "last_updated": "2026-03-24T14:11:57"
   },
   "findings": [
+    {
+      "id": 7019,
+      "finding_type": "legal",
+      "summary": "Erebor Group Inc. (NY) lobbied Congress on Banking and Financial Institutions issues through Rich Feuer Anderson (DC firm, 1133 Connecticut Ave NW Ste 620). 4 LDA filings: Registration (Q2 2025), Q2 report ($60K), Q3 report ($80K), plus Q4. Lobbying effective date 2025-06-01 \u2014 same month as OCC charter application (June 11, 2025). Lobbyists: Andrew Carr Palmer (fmr LA for Rep. Fleischmann/Fincher), Jared Cody Sawyer (fmr Deputy Asst Secretary Treasury; fmr Senior Counsel Senate Banking Committee), Matthew Kellogg (fmr Deputy Asst Sec Legislative Affairs Treasury 2017-18; fmr Sr Policy Adviser House Majority Leader McCarthy), Jennifer Rust (fmr Deputy Chief Counsel House Financial Services Committee), John A. Anderson (fmr Sr Policy Adviser Sen. Crapo). All lobbyists have revolving-door Congressional/Treasury backgrounds.",
+      "detail": null,
+      "source_datasets": [
+        "lda"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-06-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:02",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:e1b7b759-e1d1-424c-8cc5-7323a6eed981",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7035,
+      "finding_type": "relationship",
+      "summary": "Rich Feuer Anderson lobbying firm retained by Erebor Group Inc. also lobbies for Coinbase, JPMorgan Chase, American Express, Amazon, London Stock Exchange, SoFi, and FINRA \u2014 total $7.6M in 2025 lobbying across 56 clients. The SoFi connection is notable: Adam Cohen (Erebor's OCC application lawyer who became OCC Chief Counsel) previously served as general counsel at SoFi per Banking Dive. The lobbying team targeting Congress on banking issues included 5 lobbyists, all with revolving-door backgrounds from Treasury Department, Senate Banking Committee, House Financial Services Committee, and House Majority Leader's office.",
+      "detail": null,
+      "source_datasets": [
+        "lda",
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-06-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:00:38",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:e1b7b759",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7021,
+      "finding_type": "identity",
+      "summary": "Erebor Bank complete executive team from Business Insider July 2025: Co-CEOs Owen Rapaport (fmr CEO Aer Compliance, fmr Bain & Co consultant, fmr Electrum bitcoin wallet) and Jacob Hirshman (Circle adviser, fmr Sullivan & Cromwell associate, UPenn Law). Co-founders also include Trevor Capozza (head of operations Palmer Luckey family office, fmr Optimozo) and Aaron Pelz (CTO, fmr Pinwheel engineering lead, fmr Quorum software engineer). President: Michael Hagedorn (fmr SVP Valley National Bank, fmr 17yr Wells Fargo veteran leading Midwest banking group 5yr, fmr UMB Financial). CRO: Joshua Rosenberg (22yr Federal Reserve Bank of NY career, fmr United Texas Bank crypto-focused institution, PhD Economics UC San Diego, fmr NYU Stern professor). CFO: Ricky Grant (fmr Customers Bank head of IR and strategic finance, fmr Goldman Sachs MD 2019, fmr JP Morgan investment banking). CCO: Vlad Dubinsky (fmr Bancorp Bank MD credit markets, fmr Blue Foundry Bank).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-07-03",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:16",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "BusinessInsider:erebor-executives-2025-07",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7030,
+      "finding_type": "intelligence",
+      "summary": "Erebor Bank Columbus-Anduril Arsenal-1 geographic nexus: Erebor Bank HQ at 500 Neil Ave Suite 140, Columbus OH 43215. Anduril Industries building Arsenal-1, a $1B autonomous weapons manufacturing facility in Pickaway County, just south of Columbus, projected 4,000+ jobs (largest single job-creation project in Ohio history). Anduril received $310M grant from Ohio for Arsenal-1. Both entities co-founded by Palmer Luckey. This creates a vertically integrated defense-tech hub: manufacturing (Arsenal-1) + financial services (Erebor) in the same metro area, with the same founder.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-07-03",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:58:26",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OhioTechNews:erebor-columbus-2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7023,
+      "finding_type": "legal",
+      "summary": "Adam Cohen revolving door: Skadden Arps partner who co-headed Financial Institutions Regulatory Group and submitted Erebor Bank's OCC charter application on June 11, 2025. Named OCC Chief Counsel and Senior Deputy Comptroller in August 2025 \u2014 less than 2 months after filing Erebor's application. In his OCC role, he oversees the Law Department including licensing actions (bank charter approvals). OCC bio omits Skadden by name, describing him as co-head of Financial Institutions Regulatory Group at 'a major international law firm.' Prior government: Board of Governors Federal Reserve System, CFTC. Education: Duke BA political science, Columbia Law. Also served as general counsel for unnamed financial institution (reported as SoFi by Banking Dive).",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-08-01",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:57:28",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC:nr-occ-2025-76",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7029,
+      "finding_type": "legal",
+      "summary": "FDIC approval conditions for Erebor Bank (Dec 16, 2025): Must maintain minimum 12% tier 1 leverage ratio during first 3 years of operation (above standard requirement). Must implement protocols for processing deposit accounts in event of bank failure. Must exercise Capital Call Agreement rights to obtain capital if it ceases to meet 'well capitalized' status. Approval expires if bank not established within 12 months. Business model explicitly stated as serving 'technology, payment systems, investment, and defense industries, including virtual currency market participants.'",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-12-16",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:58:16",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC:erebor-deposit-insurance-2025-12-16",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7033,
+      "finding_type": "financial",
+      "summary": "Erebor Bank complete investor map and defense-tech network integration: $635M total capital. $350M round led by Lux Capital at $4.35B valuation. Full investor list: Andreessen Horowitz (a16z, also American Dynamism defense fund), Founders Fund (Peter Thiel), Lux Capital, 8VC (Joe Lonsdale), Haun Ventures, Elad Gil. Every major investor has significant defense-tech portfolio: Founders Fund (Anduril, Palantir, SpaceX), 8VC (Palantir, Anduril, Saronic, Epirus), a16z (Anduril, Shield AI, ACS). Planned services directly serve defense ecosystem: compute loans for AI chips/GPU clusters, underwriting for defense contractors/robotics firms/advanced manufacturers, crypto-collateralized loans, stablecoin integration, credit lines backed by private securities. Bank explicitly designed to fill SVB gap for startups and VC-backed companies.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-12-22",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:00:15",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Axios:erebor-valuation-2025-12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7034,
+      "finding_type": "legal",
+      "summary": "Erebor Bank regulatory timeline confirms record speed for de novo national bank: Application filed June 11, 2025 (public notice Columbus Dispatch June 12). OCC conditional approval October 15, 2025 (~4 months). FDIC deposit insurance approved December 16, 2025 (~6 months from application). Full OCC charter granted February 6, 2026 (~8 months from application). This is the first de novo national bank chartered under the second Trump administration, and the first new national bank charter in years (fewer than 6 charters annually 2010-2023 vs ~130 annually pre-2008). Typical de novo bank process takes 12-18 months. Comptroller Gould publicly promoted the approval on X. The bank's investor memo had predicted approval by end of 2025.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-02-06",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 17:00:27",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC:nr-occ-2025-101",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7014,
+      "finding_type": "financial",
+      "summary": "Erebor Bank GLEIF record: LEI 254900S59ZHI2UFM9J76, legal name 'Erebor Bank, National Association', registered at 500 Neil Ave Suite 140, Columbus OH 43215, US-OH jurisdiction, GLEIF entity creation date 2025-11-05, LEI registration date 2026-02-13, status ACTIVE, registered as FDIC CERT 59378, S&P Global ID 1949686530, NON_CONFORMING conformity flag, no parent entity reported (reporting exception)",
+      "detail": null,
+      "source_datasets": [
+        "GLEIF"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-02-13",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:56:48",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "GLEIF:254900S59ZHI2UFM9J76",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7028,
+      "finding_type": "legal",
+      "summary": "Senator Elizabeth Warren probe of Erebor Bank charter (Feb 25-26, 2026): Sent letters to OCC Comptroller Jonathan Gould, FDIC Chairman Travis Hill, and Palmer Luckey. Cited investor memo predicting approval by end of 2025 with language 'Palmer's political network will get this done' and touting co-founder's 'unique connectivity to banking regulators.' Warren alleged charter approval was potentially a 'corrupt political favor.' Requested unredacted charter applications and all correspondence related to Erebor's approval process. Response deadline: March 12, 2026.",
+      "detail": null,
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-02-26",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:58:04",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate-Banking:Warren-Erebor-2026-02-25",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7031,
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULTS: Sources checked with zero results for Erebor Bank: (1) SEC EDGAR full-text search \u2014 0 hits, bank has no SEC filings. (2) CourtListener \u2014 0 results, no federal litigation involving Erebor. (3) Corporate registries (unified, OH, DE) \u2014 0 results, national bank charter not in state corporate registries. (4) USASpending \u2014 0 federal contracts or grants to Erebor. (5) IRS 990 \u2014 0 results, not a nonprofit. (6) FARA \u2014 0 results, no foreign agent registration. (7) SAM.gov \u2014 could not query (API key not configured). (8) LDA lobbying under 'Erebor Bank' name \u2014 0 results (lobbying filed under 'Erebor Group Inc.' parent).",
+      "detail": null,
+      "source_datasets": [
+        "edgar",
+        "courtlistener",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-03-23",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 16:58:37",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "multiple-sources",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 4684,
       "finding_type": "financial",
@@ -260,6 +547,276 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7251,
+      "finding_type": "financial",
+      "summary": "Erebor Bank N.A. received OCC conditional charter approval 2025-10-15, FDIC deposit insurance Dec 2025, final charter Feb 2026. CERT 59378, Columbus OH.",
+      "detail": "Erebor Bank, N.A. (FDIC CERT 59378) is a national charter bank established 2026-02-06 in Columbus, OH. Charter application filed 2025-06-11 by Erebor Group, Inc. (NY corporation). OCC conditional approval granted 2025-10-15 (OCC NR-2025-101) - just 4 months after application, compared to median 9.5 months. FDIC deposit insurance approved Dec 2025. Final charter granted Feb 2026. Bank is active per FDIC records (no assets/deposits reported yet). Founded by Palmer Luckey (Anduril founder), Joe Lonsdale (8VC), with backing from Peter Thiel/Founders Fund, 8VC, Haun Ventures. Initial capital $275M. Dec 2025 fundraise: $350M at $4.35B valuation led by Lux Capital. Target market: tech companies in crypto, AI, defense, manufacturing. Services planned: stablecoin integration, crypto-collateralized loans, traditional banking via API. Conditions: 12% Tier 1 leverage ratio for 3 years, independent external auditor, pre-opening examination.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:58:44",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC BankFind CERT 59378; OCC NR-2025-101 and NR-2025-101a; Senate Banking Committee 2026-02-25 letter",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7261,
+      "finding_type": "financial",
+      "summary": "Erebor Group Inc hired Rich Feuer Anderson for banking/financial lobbying. Registration effective 2025-06-01, $60K in Q2 2025 income.",
+      "detail": "Erebor Group, Inc. (NY) retained Rich Feuer Anderson (DC government relations firm) for lobbying. LDA registration effective 2025-06-01 (same month as OCC application filed). Issues: Banking (BAN) and Financial Institutions/Investments/Securities (FIN). Lobbyists registered: Andrew Carr Palmer (former LA to Rep Fleischmann, Rep Fincher), Jared Cody Sawyer (former Deputy Assistant Secretary Treasury, Senior Counsel Senate Banking Committee, PSM House Financial Services Committee), Matthew Kellogg (former Deputy Asst Sec for Leg Affairs Treasury 2017-2018, Sr Policy Adviser to House Majority Leader McCarthy 2015-2017), Jennifer Rust (former Deputy Chief Counsel House Financial Services Committee). Q2 2025 reported income: $60,000. All four lobbyists have 'covered positions' (government revolving door). Sawyer's prior Senate Banking Committee role is particularly notable given Erebor's need for charter approval.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:13",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA Senate filing e1b7b759-e1d1-424c-8cc5-7323a6eed981 (registration); LDA filing 839d4bfe-e1fb-43de-b692-81233ef32600 (Q2 report)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7267,
+      "finding_type": "intelligence",
+      "summary": "Warren probe found investor memo claimed Luckey political network will get this done and co-founder unique connectivity to banking regulators including Gould.",
+      "detail": "Senator Elizabeth Warren sent letters on 2026-02-25 to OCC Comptroller Jonathan Gould, FDIC Chairman Travis Hill, and Palmer Luckey regarding Erebor Bank's charter approval. Warren cited a fundraising memo circulated to prospective investors that stated: (1) Palmer Luckeys political network will get this done and (2) an Erebor co-founder had unique connectivity to banking regulators including Comptroller Gould. The memo predicted federal approval in less than six months after June 2025 application - and the actual conditional approval came in 4 months. Warren demanded the complete unredacted charter application and all correspondence, with March 12, 2026 deadline. She stated: If my inquiry reveals that Erebors national bank charter was not granted in accordance with law and regulation and instead represented a corrupt political favor to the Presidents billionaire supporters in Silicon Valley it would have to be terminated. At the Feb 26 hearing, Gould responded: the only political pressure I have felt from any part of the United States government senator is from you.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:26",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate Banking Committee press release 2026-02-25; Warren letter to OCC 2026-02-25; CoinDesk 2026-02-26 hearing coverage",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7273,
+      "finding_type": "identity",
+      "summary": "Erebor founding team: Palmer Luckey, Trevor Capozza, Jacob Hirshman, Aaron Pelz, Owen Rapaport. Key execs: Rapaport (CEO/director), Hirshman (co-CEO), Mike Hagedorn (president).",
+      "detail": "Erebor Bank officers: Owen Rapaport (CEO, director, formerly Aer Compliance CEO), Jacob Hirshman (co-CEO, former Circle adviser), Mike Hagedorn (president, formerly SVP Valley National Bank NJ). Founders: Palmer Luckey (Anduril/Oculus founder), Trevor Capozzi, Jacob Hirshman, Aaron Pelz, Owen Rapaport. Backers: Peter Thiel (Founders Fund), Joe Lonsdale (8VC), Katie Haun (Haun Ventures), Lux Capital (led $350M round Dec 2025). Erebor Group Inc incorporated in New York. Bank headquarters: Columbus, Ohio. LittleSis entity 459524 describes it as 'Crypto bank by right-wing billionaires'.",
+      "source_datasets": [
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:59:50",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "PitchBook Erebor profile; LittleSis entity 459524; OCC charter application; Axios/Bloomberg Dec 2025 reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7278,
+      "finding_type": "negative_result",
+      "summary": "No Erebor Bank entry in EDGAR as a bank (only investment fund SPVs). No RSSD/NIC found. No SAM.gov registration. No CourtListener cases.",
+      "detail": "EDGAR search for 'Erebor' returned 43 filings but all relate to investment fund SPVs (Erebor LP, series of VUVP Fund, CGF2021 LLC, etc.) and unrelated companies - no filings from Erebor Bank or Erebor Group Inc as a bank entity. FDIC confirms the bank exists (CERT 59378) but it is newly chartered with no financial statements yet. SAM.gov search failed (no API key configured). CourtListener search returned only unrelated cases (Erebor Resources LLC Ch 7 bankruptcy in E.D. Texas 2019). No Federal Reserve NIC/RSSD entry was findable via web search. This suggests the bank is too new for most regulatory databases.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:02",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR EFTS search for Erebor; FDIC BankFind CERT 59378; CourtListener search",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7442,
+      "finding_type": "financial",
+      "summary": "Erebor Bank: defense-tech banking infrastructure with $4.35B valuation, Warren probe into approval",
+      "detail": "Erebor Bank, founded by Palmer Luckey (Anduril) and Joe Lonsdale (8VC), raised $350M at $4.35B valuation. Backed by Founders Fund, 8VC, Lux Capital, Haun Ventures. OCC conditional charter Oct 2025; FDIC deposit insurance Dec 2025; final charter Feb 2026. Serves defense, AI, crypto companies. Holds stablecoins on balance sheet. Senator Warren probed approval: fundraising memo allegedly stated Luckey's political network will get this done with references to unique connectivity to banking regulators including the Comptroller of the Currency. Erebor lobbied via Rich Feuer Anderson ($220K in Q2-Q4 2025).",
+      "source_datasets": [
+        "web_search",
+        "lobbying"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:27:32",
+      "target_name": "Erebor Bank",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "FDIC press release Dec 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA lobbying filings Q2-Q4 2025",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Senate Banking Committee minority press release",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11184,
+      "finding_type": "identity",
+      "summary": "Adam Cohen \u2014 Skadden partner who filed Erebor charter application appointed OCC Chief Counsel 61 days later",
+      "detail": "Sen. Warren's Feb 25 2026 letter establishes the timeline: Erebor's charter application was submitted by Adam J. Cohen, a Skadden partner, on June 11, 2025. OCC press release nr-occ-2025-76 (July 30, 2025) announced Cohen's appointment as Senior Deputy Comptroller and Chief Counsel effective August 11, 2025 \u2014 61 days after Erebor application. Cohen co-headed Skadden's Financial Institutions Regulatory Group (joined Skadden May 2024). Prior: SoFi General Counsel; Federal Reserve Board; CFTC. Warren letter Q8-Q10 demands Cohen's recusal documentation and asks whether Gould 'discussed Erebor's application with Mr. Cohen either before or after he joined the OCC' and whether Gould 'was aware he served as counsel to Erebor and submitted the company's charter application' when hired. The Erebor charter was approved Oct 15, 2025 \u2014 Cohen had been OCC Chief Counsel for 65 days at approval. The OCC approval letter was signed to 'Wendy M. Goldberg, Counsel, Skadden, Arps' \u2014 Cohen's former colleague at the same firm.",
+      "source_datasets": [
+        "banking.senate.gov",
+        "occ.gov"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:17:19",
+      "target_name": "Adam J. Cohen",
+      "profile_id": "epstein",
+      "evidence": []
+    },
+    {
+      "id": 11204,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Erebor charter is the structural payoff of the Bitfury->OCC pipeline \u2014 three-link revolving door (Cohen/Skadden, M\u00f3nica/Anchorage, Gould/Bitfury) operating same Brooks-era IL framework; Warren letter Feb 2026 frames it as 'corrupt political favor'",
+      "detail": "Round-6 synthesis. Three documented revolving-door links converge on Erebor approval (Oct 15 2025): (1) GOULD: Comptroller is ex-Bitfury Group CLO (2022-2025) and prior OCC Chief Counsel (Brooks tenure 2020-21) \u2014 confirmed in Warren confirmation letter and Bitfury 2022 press release. (2) COHEN: OCC Chief Counsel since Aug 11 2025 was the Skadden partner who filed Erebor's June 11 2025 charter app; named recusal subject in Warren Feb 2026 letter Q8-Q10. (3) M\u00d3NICA: Erebor independent director is Anchorage Digital co-founder; Anchorage holds the prototypical Brooks-era OCC crypto charter (Jan 2021), later subject to OCC consent order (Apr 2022, AML deficiencies \u2014 exact same risk profile Erebor's 12% Tier-1 condition tries to ring-fence). Erebor's approval letter explicitly cites Brooks-era ILs #1170 and #1174 as legal scaffold \u2014 meaning the framework Brooks wrote at OCC, then served at Bitfury, is now used by Bitfury's ex-CLO (now Comptroller) to charter a bank advised by his Chief Counsel's old law firm. Warren Feb 2026 letter frames as: 'whether the OCC's process was contaminated by backroom political manipulation... a corrupt political favor to the President's billionaire supporters in Silicon Valley.' Cited Business Insider Aug 8 2025 fundraising memo: Luckey's 'political network will get this done' and a co-founder had 'unique connectivity to banking regulators,' including Comptroller Gould. Bank approval expected by end of 2025 in fundraising memo \u2014 granted within 4 months of application (vs typical multi-year vetting for de novo banks). 'Erebor would serve as the financial hub for an interrelated set of Silicon Valley firms' \u2014 Anduril (Luckey weapons), Palantir (Thiel/Lonsdale surveillance), and a 'concentrated set' of crypto/AI/defense companies. Bank opened Feb 8 2026 without a Chief Risk Officer (Rosenberg listed in approval letter; Warren Q12 confirms departure before opening). The Bitfury->OCC pipeline is now Bitfury->OCC->Bitfury-friendly-charter pipeline, with Skadden as the legal hinge.",
+      "source_datasets": [
+        "banking.senate.gov",
+        "occ.gov"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:35",
+      "target_name": "Erebor Bank, N.A.",
+      "profile_id": "epstein",
+      "evidence": []
+    },
+    {
+      "id": 11236,
+      "finding_type": "intelligence",
+      "summary": "META-SYNTHESIS: Seven cross-lens patterns from Round 6 (Agents A-G). (1) Vault-firm regulatory revolving door is a 4-instance pattern: a 3-instance Skadden-or-equivalent->OCC->implementation pipeline (Brooks 2020 Coinbase->OCC->Bitfury; Gould 2025 Bitfury/BlackRock/Promontory->OCC; Cohen 2025 Skadden->OCC->Erebor approval \u2014 Cohen's 65-day window the tightest), plus a parallel vault-firm->OMB->Schaerr Jaffe->OMB pattern via Paoletta (2018+2025) at OMB+CFPB+OIRA \u2014 STRUCTURALLY DISTINCT from the OCC pipeline. (2) Brooks-era IL #1170/#1174 + IL #1184 are LIVE OPERATIVE LAW cited in Erebor approval letter \u2014 the deregulation framework now scaffolds WLFI/Tahnoon flows. (3) Aryam Investment 1 = Tahnoon vehicle bought 49% WLFI for $500M ($187M to Trump-family entities); G42 Edelman + Xiao seated undisclosed; MGX deployed $2B WLFI USD1 -> Binance May 2025. (4) Round 5 'Mubadala unifies' model UPGRADED to three SCFEA sovereign pillars (ADIA + Mubadala + L'IMAD ~$300B post Jan-2026 consolidation under Khaled bin Mohamed bin Zayed) + regulatory layer (Al Shorafa = ADX + SCA + ADGM Vice Chair) + US-listing layer (Kazim = Nasdaq Inc. director via Borse Dubai). Bridges outlast principals. (5) Pre-positioning trades cluster around Jan 2025 Stargate window: Bitfury $53.9M dividend Dec 23 2024 (38d before Cipher PIPE), AltC closed May 2024 with anomalous $7,457.80 redemption out of ~30M shares (PIPE backstop not triggered), Crusoe started Abilene construction Jun 2024 (7mo before Stargate announcement), SoftBank fully exited Cipher Q3 2025 \u2014 Stargate is largely re-bundling of preexisting infrastructure already in motion. (6) Klein-Altman-Oklo and Stargate-MGX are STRUCTURALLY SEPARATE per SEC primary-source level \u2014 press treatment merged them. Altman resigned Oklo board Apr 22 2025, 3 months after Stargate announce. (7) bin Sulayem resigned DP World Feb 13 2026 after DOJ Epstein release \u2014 first observed VISIBLE LOSS for Tahnoon network on Epstein-related exposure; replacement Kazim maintains/extends US-market access via Nasdaq Inc. board seat. ROUND 5 NAME CORRECTIONS: St\u00e9phane->Bertrand G. des Palli\u00e8res; Antoine Bremner unverified->likely Christopher Bremner; Compagnie Du Saleve B223232 incorporated 2018 so cannot be 28 Oct 2015 entity (likely closed French SARL #803012046 instead); SKAS = Saker Aviation Services ticker not partners' acronym; Hoffenberg 'Gold shielded Epstein' claim has NO docket support in 1:94-cr-00213.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:28:32",
+      "target_name": "Round 6 meta-synthesis: SoftBank-caper / Epstein-replatforming structural model",
+      "profile_id": "epstein",
+      "evidence": []
+    },
+    {
+      "id": 11180,
+      "finding_type": "document",
+      "summary": "OCC Conditional Approval \u2014 Erebor Bank N.A. \u2014 full charter Oct 15 2025 (Skadden filed, Gould era)",
+      "detail": "OCC granted preliminary conditional approval Oct 15 2025 (OCC Control 2025-Charter-342076; Charter 25357; Residency Waivers 2025-Waiver-342510). Counsel of record: Wendy M. Goldberg, Skadden Arps Slate Meagher Flom LLP, One Manhattan West, NY. Organizing entity: Erebor Group Inc (Delaware) merges into the bank under 12 USC 215a-3. Existing subsidiary Atticus Digital Inc becomes wholly-owned post-merger. Tier-1 Leverage Ratio condition: 12% for first three years (vs 9% standard CBLR). Bank explicitly cites Brooks-era Interpretive Letters #1170 (Jul 20 2020 \u2014 written under Brooks), #1174 (Jan 4 2021 \u2014 Brooks's last day), and Hood/Gould-era IL #1184 (May 7 2025) as legal scaffold for holding non-asset-backed virtual currencies on balance sheet to pay 'gas fees' under 12 USC 24(Seventh). Confirms the Brooks-Gould interpretive-letter framework is the live operative legal scaffold for new crypto-bank charters.",
+      "source_datasets": [
+        "occ.gov"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:16:58",
+      "target_name": "Erebor Bank, N.A.",
+      "profile_id": "epstein",
+      "evidence": []
+    },
+    {
+      "id": 11181,
+      "finding_type": "identity",
+      "summary": "Erebor organizers, directors, officers \u2014 full roster from OCC approval letter Oct 15 2025",
+      "detail": "OCC approval letter names: Owen Rapaport (Organizer/CEO/Director/Principal Shareholder; ex-Aer Compliance CEO acquired by StarCompliance); Jacob E. Hirshman (Organizer/CSO/Director/Principal Shareholder; ex-Circle); Michael Hagedorn (Organizer/President/Director); Richard E. Grant (Organizer/CFO); Trevor Capozza (Organizer/Independent Director); Palmer Luckey (Director/Principal Shareholder; Anduril founder); Diogo M\u00f3nica (Independent Director; Anchorage Digital co-founder, Haun Ventures GP); Michael Mosier (Independent Director; ex-FinCEN Acting Director); Vlad Dubinsky (Chief Credit Officer); Joshua Rosenberg (Chief Risk Officer \u2014 per Warren letter departed before bank opened); Aaron Pelz (CTO). Residency waivers under 12 USC 72 for Capozza, Hagedorn, Hirshman, Luckey, Mosier, Rapaport. Backers per Warren: Luckey, Lonsdale, Thiel \u2014 all major Trump/Vance donors. CRITICAL OVERLAP: Diogo M\u00f3nica co-founded Anchorage Digital, the OCC's first crypto bank charter (Brooks era 2021); Mosier is ex-FinCEN; structurally, Erebor's 'independence' rests on directors who built/regulated the framework now being applied to them.",
+      "source_datasets": [
+        "occ.gov"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:17:10",
+      "target_name": "Erebor Bank, N.A.",
+      "profile_id": "epstein",
+      "evidence": []
+    },
+    {
+      "id": 11198,
+      "finding_type": "legal",
+      "summary": "Warren March 25 2025 confirmation-letter listed Bitfury alongside Blackrock and Promontory as Gould's prior 'senior roles'; demanded 4-year cooling-off + immediate divestiture commitment",
+      "detail": "Sen. Warren's pre-confirmation letter to Comptroller-designate Gould (Mar 25 2025, 16pp) explicitly states: 'Previously, you served as Senior Deputy Comptroller and Chief Counsel at the OCC. You have also served in senior roles at Bitfury, the Senate Banking, Housing, and Urban Affairs Committee, Blackrock, and Promontory Financial Group.' Letter posed 100+ questions across Regulation/Supervision, Bank Merger Review, States' Rights, Crypto Assets, CRA, Enforcement, DOGE/Independence, and Ethics. Specific Ethics Q1: 'Do you agree with your former boss [Otting] that banks are the OCC's customers?' Q2: 'do you commit to recusing yourself in all matters related to your former clients for a period of four years?' Q3: 'In the past 12 months, have you advised any clients on any matters related to national bank chartering, licensing, mergers, permissible activities, regulation, supervision, or enforcement? If so, please list the client and the relevant matters.' Q4: 'will you commit to immediately divesting from owning securities, such as stock, stock options, and bonds, of banks or savings associations or their affiliates?' Q6: 'Do you commit to a 4-year cooling off period from representing any national banks, or their affiliates or holding companies, following the conclusion of your service as Comptroller?' Q5: 'Would you approve a merger transaction if so directed to by the White House, including after the applicant made a payment to the President, a member of his family, or to his related business interests?' Crypto Assets Q7-8 raised Anchorage Digital and Paxos/Protego conditional charters. Gould's prior law-firm clients per public reporting: JPMorgan Chase, Goldman Sachs, Circle (the stablecoin issuer). Erebor approval Oct 15 2025 was first major chartering action under Gould \u2014 application reviewer was Cohen (ex-Skadden, former Erebor counsel).",
+      "source_datasets": [
+        "banking.senate.gov"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:10",
+      "target_name": "Jonathan V. Gould",
+      "profile_id": "epstein",
+      "evidence": []
     }
   ],
   "connections": [
@@ -322,111 +879,579 @@
       "other_person": "Jonathan Gould",
       "other_person_slug": "jonathan-gould",
       "evidence": []
+    },
+    {
+      "id": 3659,
+      "person_a": "Adam Cohen",
+      "person_b": "Erebor Bank",
+      "relationship_type": "employment",
+      "description": "Cohen filed Erebor OCC charter application as Skadden partner (Jun 2025), then became OCC Chief Counsel (Aug 2025) that approved Erebor (Oct 2025)",
+      "strength": "strong",
+      "date_range": "2025-06 to 2025-10",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:31",
+      "profile_id": "tech-right",
+      "other_person": "Adam Cohen",
+      "other_person_slug": "adam-cohen",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC NR-2025-76, OCC NR-2025-101",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3661,
+      "person_a": "Erebor Bank",
+      "person_b": "Palmer Luckey",
+      "relationship_type": "owns",
+      "description": "Palmer Luckey co-founded Erebor Bank. Investor memo cited his political network for charter approval",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:35",
+      "profile_id": "tech-right",
+      "other_person": "Palmer Luckey",
+      "other_person_slug": "palmer-luckey",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC charter application; Warren letter 2026-02-25",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3662,
+      "person_a": "Erebor Bank",
+      "person_b": "Peter Thiel",
+      "relationship_type": "funds",
+      "description": "Thiel/Founders Fund is a backer of Erebor Bank",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:37",
+      "profile_id": "tech-right",
+      "other_person": "Peter Thiel",
+      "other_person_slug": "peter-thiel",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Multiple press reports; OCC charter application",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3664,
+      "person_a": "Erebor Bank",
+      "person_b": "Joe Lonsdale",
+      "relationship_type": "owns",
+      "description": "Lonsdale co-founded Erebor Bank with Palmer Luckey. Also 8VC founder",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:40",
+      "profile_id": "tech-right",
+      "other_person": "Joe Lonsdale",
+      "other_person_slug": "joe-lonsdale",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC charter application; press reports",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3666,
+      "person_a": "Erebor Bank",
+      "person_b": "Rich Feuer Anderson",
+      "relationship_type": "contracts_with",
+      "description": "Erebor Group Inc retained Rich Feuer Anderson for banking/financial lobbying effective 2025-06-01, $60K Q2 2025",
+      "strength": "strong",
+      "date_range": "2025-06 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:00:45",
+      "profile_id": "tech-right",
+      "other_person": "Rich Feuer Anderson",
+      "other_person_slug": "rich-feuer-anderson",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA filing e1b7b759-e1d1-424c-8cc5-7323a6eed981",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3690,
+      "person_a": "Erebor Bank",
+      "person_b": "Founders Fund",
+      "relationship_type": "funds",
+      "description": "Founders Fund is a backer/investor in Erebor Bank. Peter Thiel (FF co-founder) is named as investor. FF portfolio company Anduril's founder Palmer Luckey co-founded Erebor.",
+      "strength": "strong",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:44",
+      "profile_id": "tech-right",
+      "other_person": "Founders Fund",
+      "other_person_slug": "founders-fund",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OCC charter application; multiple press reports",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3798,
+      "person_a": "Erebor Bank",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Lux Capital led Erebor Bank's $350M raise at $4.35B valuation",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:34:18",
+      "profile_id": null,
+      "other_person": "Lux Capital",
+      "other_person_slug": "lux-capital",
+      "evidence": []
+    },
+    {
+      "id": 3852,
+      "person_a": "Erebor Bank",
+      "person_b": "Lux Capital",
+      "relationship_type": "funds",
+      "description": "Led Erebor Bank $350M round at $4.35B valuation. Co-investors: Founders Fund, 8VC, a16z, Haun Ventures. Erebor is defense-tech banking infrastructure.",
+      "strength": "strong",
+      "date_range": "2025-present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-24 14:11:57",
+      "profile_id": "tech-right",
+      "other_person": "Lux Capital",
+      "other_person_slug": "lux-capital",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Finding #7033: Erebor Bank investor map",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3691,
+      "person_a": "Erebor Bank",
+      "person_b": "Kenneth Howery",
+      "relationship_type": "corporate",
+      "description": "Howery is Founders Fund co-founder. FF invests in Erebor. Howery's potential carry interest in FF creates indirect financial exposure to Erebor's success.",
+      "strength": "circumstantial",
+      "date_range": "2025 to present",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 19:01:47",
+      "profile_id": "tech-right",
+      "other_person": "Kenneth Howery",
+      "other_person_slug": "kenneth-howery",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "Synthesis from findings 7247, 7251",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "owns",
+      "description": "Palmer Luckey co-founded Erebor Bank. Investor memo cited his political network for charter approval",
+      "other_person": "Palmer Luckey",
+      "id": 3661
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Thiel/Founders Fund is a backer of Erebor Bank",
+      "other_person": "Peter Thiel",
+      "id": 3662
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "owns",
+      "description": "Lonsdale co-founded Erebor Bank with Palmer Luckey. Also 8VC founder",
+      "other_person": "Joe Lonsdale",
+      "id": 3664
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Founders Fund is a backer/investor in Erebor Bank. Peter Thiel (FF co-founder) is named as investor. FF portfolio company Anduril's founder Palmer Luckey co-founded Erebor.",
+      "other_person": "Founders Fund",
+      "id": 3690
+    },
+    {
+      "date": "2025 to present",
+      "type": "connection",
+      "relationship_type": "corporate",
+      "description": "Howery is Founders Fund co-founder. FF invests in Erebor. Howery's potential carry interest in FF creates indirect financial exposure to Erebor's success.",
+      "other_person": "Kenneth Howery",
+      "id": 3691
+    },
+    {
+      "date": "2025-06 to 2025-10",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Cohen filed Erebor OCC charter application as Skadden partner (Jun 2025), then became OCC Chief Counsel (Aug 2025) that approved Erebor (Oct 2025)",
+      "other_person": "Adam Cohen",
+      "id": 3659
+    },
+    {
+      "date": "2025-06 to present",
+      "type": "connection",
+      "relationship_type": "contracts_with",
+      "description": "Erebor Group Inc retained Rich Feuer Anderson for banking/financial lobbying effective 2025-06-01, $60K Q2 2025",
+      "other_person": "Rich Feuer Anderson",
+      "id": 3666
+    },
+    {
+      "date": "2025-06-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Erebor Group Inc. (NY) lobbied Congress on Banking and Financial Institutions issues through Rich Feuer Anderson (DC firm, 1133 Connecticut Ave NW Ste 620). 4 LDA filings: Registration (Q2 2025), Q2 report ($60K), Q3 report ($80K), plus Q4. Lobbying effective date 2025-06-01 \u2014 same month as OCC charter application (June 11, 2025). Lobbyists: Andrew Carr Palmer (fmr LA for Rep. Fleischmann/Fincher), Jared Cody Sawyer (fmr Deputy Asst Secretary Treasury; fmr Senior Counsel Senate Banking Committee), Matthew Kellogg (fmr Deputy Asst Sec Legislative Affairs Treasury 2017-18; fmr Sr Policy Adviser House Majority Leader McCarthy), Jennifer Rust (fmr Deputy Chief Counsel House Financial Services Committee), John A. Anderson (fmr Sr Policy Adviser Sen. Crapo). All lobbyists have revolving-door Congressional/Treasury backgrounds.",
+      "confidence": "confirmed",
+      "id": 7019
+    },
+    {
+      "date": "2025-06-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Rich Feuer Anderson lobbying firm retained by Erebor Group Inc. also lobbies for Coinbase, JPMorgan Chase, American Express, Amazon, London Stock Exchange, SoFi, and FINRA \u2014 total $7.6M in 2025 lobbying across 56 clients. The SoFi connection is notable: Adam Cohen (Erebor's OCC application lawyer who became OCC Chief Counsel) previously served as general counsel at SoFi per Banking Dive. The lobbying team targeting Congress on banking issues included 5 lobbyists, all with revolving-door backgrounds from Treasury Department, Senate Banking Committee, House Financial Services Committee, and House Majority Leader's office.",
+      "confidence": "medium",
+      "id": 7035
+    },
+    {
+      "date": "2025-07-03",
+      "type": "finding",
+      "finding_type": "identity",
+      "summary": "Erebor Bank complete executive team from Business Insider July 2025: Co-CEOs Owen Rapaport (fmr CEO Aer Compliance, fmr Bain & Co consultant, fmr Electrum bitcoin wallet) and Jacob Hirshman (Circle adviser, fmr Sullivan & Cromwell associate, UPenn Law). Co-founders also include Trevor Capozza (head of operations Palmer Luckey family office, fmr Optimozo) and Aaron Pelz (CTO, fmr Pinwheel engineering lead, fmr Quorum software engineer). President: Michael Hagedorn (fmr SVP Valley National Bank, fmr 17yr Wells Fargo veteran leading Midwest banking group 5yr, fmr UMB Financial). CRO: Joshua Rosenberg (22yr Federal Reserve Bank of NY career, fmr United Texas Bank crypto-focused institution, PhD Economics UC San Diego, fmr NYU Stern professor). CFO: Ricky Grant (fmr Customers Bank head of IR and strategic finance, fmr Goldman Sachs MD 2019, fmr JP Morgan investment banking). CCO: Vlad Dubinsky (fmr Bancorp Bank MD credit markets, fmr Blue Foundry Bank).",
+      "confidence": "high",
+      "id": 7021
+    },
+    {
+      "date": "2025-07-03",
+      "type": "finding",
+      "finding_type": "intelligence",
+      "summary": "Erebor Bank Columbus-Anduril Arsenal-1 geographic nexus: Erebor Bank HQ at 500 Neil Ave Suite 140, Columbus OH 43215. Anduril Industries building Arsenal-1, a $1B autonomous weapons manufacturing facility in Pickaway County, just south of Columbus, projected 4,000+ jobs (largest single job-creation project in Ohio history). Anduril received $310M grant from Ohio for Arsenal-1. Both entities co-founded by Palmer Luckey. This creates a vertically integrated defense-tech hub: manufacturing (Arsenal-1) + financial services (Erebor) in the same metro area, with the same founder.",
+      "confidence": "medium",
+      "id": 7030
+    },
+    {
+      "date": "2025-08-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Adam Cohen revolving door: Skadden Arps partner who co-headed Financial Institutions Regulatory Group and submitted Erebor Bank's OCC charter application on June 11, 2025. Named OCC Chief Counsel and Senior Deputy Comptroller in August 2025 \u2014 less than 2 months after filing Erebor's application. In his OCC role, he oversees the Law Department including licensing actions (bank charter approvals). OCC bio omits Skadden by name, describing him as co-head of Financial Institutions Regulatory Group at 'a major international law firm.' Prior government: Board of Governors Federal Reserve System, CFTC. Education: Duke BA political science, Columbia Law. Also served as general counsel for unnamed financial institution (reported as SoFi by Banking Dive).",
+      "confidence": "medium",
+      "id": 7023
+    },
+    {
+      "date": "2025-12-16",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "FDIC approval conditions for Erebor Bank (Dec 16, 2025): Must maintain minimum 12% tier 1 leverage ratio during first 3 years of operation (above standard requirement). Must implement protocols for processing deposit accounts in event of bank failure. Must exercise Capital Call Agreement rights to obtain capital if it ceases to meet 'well capitalized' status. Approval expires if bank not established within 12 months. Business model explicitly stated as serving 'technology, payment systems, investment, and defense industries, including virtual currency market participants.'",
+      "confidence": "confirmed",
+      "id": 7029
+    },
+    {
+      "date": "2025-12-22",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Erebor Bank complete investor map and defense-tech network integration: $635M total capital. $350M round led by Lux Capital at $4.35B valuation. Full investor list: Andreessen Horowitz (a16z, also American Dynamism defense fund), Founders Fund (Peter Thiel), Lux Capital, 8VC (Joe Lonsdale), Haun Ventures, Elad Gil. Every major investor has significant defense-tech portfolio: Founders Fund (Anduril, Palantir, SpaceX), 8VC (Palantir, Anduril, Saronic, Epirus), a16z (Anduril, Shield AI, ACS). Planned services directly serve defense ecosystem: compute loans for AI chips/GPU clusters, underwriting for defense contractors/robotics firms/advanced manufacturers, crypto-collateralized loans, stablecoin integration, credit lines backed by private securities. Bank explicitly designed to fill SVB gap for startups and VC-backed companies.",
+      "confidence": "medium",
+      "id": 7033
+    },
+    {
+      "date": "2025-present",
+      "type": "connection",
+      "relationship_type": "funds",
+      "description": "Led Erebor Bank $350M round at $4.35B valuation. Co-investors: Founders Fund, 8VC, a16z, Haun Ventures. Erebor is defense-tech banking infrastructure.",
+      "other_person": "Lux Capital",
+      "id": 3852
+    },
+    {
+      "date": "2026-02-06",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Erebor Bank regulatory timeline confirms record speed for de novo national bank: Application filed June 11, 2025 (public notice Columbus Dispatch June 12). OCC conditional approval October 15, 2025 (~4 months). FDIC deposit insurance approved December 16, 2025 (~6 months from application). Full OCC charter granted February 6, 2026 (~8 months from application). This is the first de novo national bank chartered under the second Trump administration, and the first new national bank charter in years (fewer than 6 charters annually 2010-2023 vs ~130 annually pre-2008). Typical de novo bank process takes 12-18 months. Comptroller Gould publicly promoted the approval on X. The bank's investor memo had predicted approval by end of 2025.",
+      "confidence": "medium",
+      "id": 7034
+    },
+    {
+      "date": "2026-02-13",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Erebor Bank GLEIF record: LEI 254900S59ZHI2UFM9J76, legal name 'Erebor Bank, National Association', registered at 500 Neil Ave Suite 140, Columbus OH 43215, US-OH jurisdiction, GLEIF entity creation date 2025-11-05, LEI registration date 2026-02-13, status ACTIVE, registered as FDIC CERT 59378, S&P Global ID 1949686530, NON_CONFORMING conformity flag, no parent entity reported (reporting exception)",
+      "confidence": "confirmed",
+      "id": 7014
+    },
+    {
+      "date": "2026-02-26",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Senator Elizabeth Warren probe of Erebor Bank charter (Feb 25-26, 2026): Sent letters to OCC Comptroller Jonathan Gould, FDIC Chairman Travis Hill, and Palmer Luckey. Cited investor memo predicting approval by end of 2025 with language 'Palmer's political network will get this done' and touting co-founder's 'unique connectivity to banking regulators.' Warren alleged charter approval was potentially a 'corrupt political favor.' Requested unredacted charter applications and all correspondence related to Erebor's approval process. Response deadline: March 12, 2026.",
+      "confidence": "high",
+      "id": 7028
+    },
+    {
+      "date": "2026-03-23",
+      "type": "finding",
+      "finding_type": "negative_result",
+      "summary": "NEGATIVE RESULTS: Sources checked with zero results for Erebor Bank: (1) SEC EDGAR full-text search \u2014 0 hits, bank has no SEC filings. (2) CourtListener \u2014 0 results, no federal litigation involving Erebor. (3) Corporate registries (unified, OH, DE) \u2014 0 results, national bank charter not in state corporate registries. (4) USASpending \u2014 0 federal contracts or grants to Erebor. (5) IRS 990 \u2014 0 results, not a nonprofit. (6) FARA \u2014 0 results, no foreign agent registration. (7) SAM.gov \u2014 could not query (API key not configured). (8) LDA lobbying under 'Erebor Bank' name \u2014 0 results (lobbying filed under 'Erebor Group Inc.' parent).",
+      "confidence": "confirmed",
+      "id": 7031
+    }
+  ],
   "curation": {
     "key_finding_ids": [
+      11180,
+      11181,
+      11184,
+      11198,
+      11204,
+      11236,
       4945,
       4944,
-      4947,
-      4754,
       4946,
       4948,
       4753,
-      4684
+      4684,
+      7019,
+      7028,
+      7029,
+      7033,
+      7273
     ],
     "key_identifiers": {
-      "jurisdictions": [],
-      "officers": [],
-      "entities": []
+      "jurisdictions": [
+        "US-OH",
+        "US-DE"
+      ],
+      "officers": [
+        "Owen Rapaport (CEO/Director/Principal Shareholder)",
+        "Jacob E. Hirshman (CSO/Director/Principal Shareholder)",
+        "Michael Hagedorn (President/Director)",
+        "Richard E. Grant (CFO)",
+        "Trevor Capozza (Independent Director)",
+        "Palmer Luckey (Director/Principal Shareholder)",
+        "Diogo M\u00f3nica (Independent Director)",
+        "Michael Mosier (Independent Director)",
+        "Vlad Dubinsky (Chief Credit Officer)",
+        "Joshua Rosenberg (Chief Risk Officer \u2014 departed before bank opened)",
+        "Aaron Pelz (CTO)",
+        "Wendy M. Goldberg (Skadden, counsel of record on OCC approval letter)",
+        "Adam J. Cohen (Skadden, application counsel; OCC Chief Counsel from Aug 11, 2025)"
+      ],
+      "entities": [
+        "Erebor Bank, N.A. \u2014 FDIC CERT 59378 / OCC Charter 25357 / RSSD 6053129 / LEI 254900S59ZHI2UFM9J76",
+        "Erebor Group Inc. (Delaware; merged into bank under 12 USC 215a-3)",
+        "Atticus Digital Inc. (wholly-owned subsidiary post-merger)",
+        "OCC Control Number 2025-Charter-342076",
+        "Residency Waivers 2025-Waiver-342510 (12 USC 72)",
+        "OCC Interpretive Letter #1170 (Jul 20, 2020)",
+        "OCC Interpretive Letter #1174 (Jan 4, 2021)",
+        "OCC Interpretive Letter #1184 (May 7, 2025)"
+      ]
     },
     "section_suggestions": [
       {
         "id": "key-relationships",
         "title": "Key Relationships",
         "viz": "ego_network",
-        "finding_ids": [],
+        "finding_ids": [
+          11181,
+          11184,
+          11198,
+          11204
+        ],
         "connection_ids": [
           2792,
           2793,
           2790,
-          2808
+          2808,
+          3659,
+          3661,
+          3662,
+          3664,
+          3666,
+          3690,
+          3798,
+          3852
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
       {
-        "id": "financial-activity",
-        "title": "Financial Activity",
+        "id": "charter-approval",
+        "title": "Charter Approval",
+        "viz": "timeline",
+        "finding_ids": [
+          11180,
+          11181,
+          4945,
+          7029,
+          4948
+        ],
+        "connection_ids": [],
+        "guidance": "Charter approval timeline, conditions, and OCC document references."
+      },
+      {
+        "id": "interpretive-letter-scaffold",
+        "title": "Interpretive Letter Scaffold",
+        "viz": "timeline",
+        "finding_ids": [
+          11180,
+          11198,
+          11204,
+          11236
+        ],
+        "connection_ids": [],
+        "guidance": "How OCC ILs #1170/1174/1184 act as durable scaffolding."
+      },
+      {
+        "id": "cohen-skadden-occ",
+        "title": "Adam J. Cohen Pipeline",
+        "viz": "ego_network",
+        "finding_ids": [
+          11184,
+          11204,
+          7023,
+          7019,
+          7261
+        ],
+        "connection_ids": [
+          2790,
+          3659
+        ],
+        "guidance": "The Skadden\u2192OCC revolving-door pipeline."
+      },
+      {
+        "id": "warren-probe",
+        "title": "Warren Probe",
+        "viz": "timeline",
+        "finding_ids": [
+          11184,
+          11198,
+          11204,
+          7028,
+          7267
+        ],
+        "connection_ids": [],
+        "guidance": "The recusal-voidability question raised by the Warren letter."
+      },
+      {
+        "id": "structural-significance",
+        "title": "Structural Significance",
+        "viz": null,
+        "finding_ids": [
+          11180,
+          11184,
+          11204,
+          11236,
+          11198
+        ],
+        "connection_ids": [],
+        "guidance": "Why Erebor is the canonical durable-deregulation-scaffolding instance."
+      },
+      {
+        "id": "founding-and-capital",
+        "title": "Founding and Capital",
         "viz": null,
         "finding_ids": [
           4684,
           4753,
           4944,
-          4947
+          4946,
+          7014,
+          7030,
+          7033
         ],
         "connection_ids": [],
-        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
-      },
-      {
-        "id": "legal-proceedings",
-        "title": "Legal Proceedings",
-        "viz": "timeline",
-        "finding_ids": [
-          4754,
-          4945
-        ],
-        "connection_ids": [
-          2790,
-          2808
-        ],
-        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+        "guidance": "Founding background, capital, geography."
       }
     ],
-    "curated_at": "2026-03-11T22:50:05.008846+00:00",
-    "lead": "<p>Erebor Bank, N.A. (FDIC CERT 59378, OCC Charter 25357) is a federally chartered national bank incorporated in Columbus, Ohio, co-founded by <a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a> and Joe Lonsdale with backing from <a href=\"/dossiers/peter-thiel\">Peter Thiel</a>'s <a href=\"/dossiers/founders-fund\">Founders Fund</a>, <a href=\"/dossiers/8vc\">8VC</a>, Lux Capital, and <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a>. The bank raised $350 million at a $4.35 billion valuation and launched with approximately $635 million in total committed capital [Finding #4684, Finding #4753]. Its stated purpose is to provide banking services\u2014including stablecoin integration and crypto-collateralized lending\u2014to AI, defense, and manufacturing companies [Finding #4684]. It received an OCC conditional charter on October 15, 2025, FDIC deposit insurance on December 16, 2025, and became fully operational on February 6, 2026 [Finding #4945].</p><p>The OCC conditional charter was granted 114 days before the bank opened for business, and a comparison of FDIC charter records indicates it is only the second fintech to receive a de novo OCC national bank charter after Varo Bank, whose process took over three years [Finding #4948]. OCC Comptroller Jonathan Gould publicly described Erebor's charter as \"the first full-service national bank charter granted during my tenure \u2014 the first in four years\" [Finding #4753]. A fundraising memo obtained by Business Insider stated that a co-founder's \"unique connectivity to banking regulators\" was a selling point for investors, and separately predicted regulatory approval by end of 2025 \u2014 a prediction that proved accurate [Finding #4754]. Adam Cohen, the Skadden, Arps partner who worked on Erebor's OCC charter application, joined the OCC as Chief Counsel on August 11, 2025 \u2014 two months before Erebor's conditional approval \u2014 transitioning directly from representing the applicant to a supervisory role at the approving agency [Finding #4754, Connection #2790].</p><p>The bank's Columbus, Ohio address (500 Neil Ave Ste 140) places it in the same metropolitan area as <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>' Arsenal-1 manufacturing facility, which Luckey founded and which is valued at $30.5 billion [Finding #4946]. Investors in Erebor overlap substantially with investors in Anduril: Founders Fund, <a href=\"/dossiers/8vc\">8VC</a>, and Lux Capital hold positions in both [Finding #4684]. Senator Elizabeth Warren (Ranking Member, Senate Banking Committee) sent letters to Comptroller Gould, FDIC Chair Hill, and Luckey on February 25, 2026, calling the approval process \"deeply troubling\" and citing the fundraising memo as evidence that political connectivity drove regulatory timing [Finding #4754].</p>",
-    "system_role": "Erebor Bank is a de novo federally chartered national bank providing deposit, lending, and digital asset services to technology, defense, and AI-adjacent companies. Its co-founders also founded <a href=\"/dossiers/anduril-industries\">Anduril Industries</a> and co-founded <a href=\"/dossiers/palantir-technologies\">Palantir Technologies</a>, and its investor base overlaps with both companies.",
+    "curated_at": "2026-05-07T23:35:00",
+    "lead": "<p>Erebor Bank, N.A. (FDIC CERT 59378, OCC Charter 25357) is a federally chartered national bank incorporated in Columbus, Ohio, co-founded by <a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a> and <a href=\"/dossiers/joe-lonsdale\">Joe Lonsdale</a> with backing from <a href=\"/dossiers/peter-thiel\">Peter Thiel</a>'s <a href=\"/dossiers/founders-fund\">Founders Fund</a>, <a href=\"/dossiers/8vc\">8VC</a>, <a href=\"/dossiers/lux-capital\">Lux Capital</a>, and <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a>. The bank raised $350 million at a $4.35 billion valuation and launched with approximately $635 million in total committed capital [Finding #4684, Finding #4753]. The OCC granted preliminary conditional approval on October 15, 2025 under control number 2025-Charter-342076 (Charter 25357), the FDIC approved deposit insurance on December 16, 2025, and the bank opened for business on February 6, 2026 [Finding #11180, Finding #4945].</p><p>The OCC approval letter was signed to Skadden, Arps, Slate, Meagher &amp; Flom LLP partner Wendy M. Goldberg as counsel of record, and explicitly cites Brooks-era OCC Interpretive Letters #1170 (July 20, 2020) and #1174 (January 4, 2021) together with the Hood/Gould-era IL #1184 (May 7, 2025) as the legal scaffold authorizing the bank to hold non-asset-backed virtual currencies on balance sheet under 12 USC 24(Seventh) [Finding #11180]. Application counsel of record was <a href=\"/dossiers/adam-j-cohen\">Adam J. Cohen</a>, who filed the charter application on June 11, 2025, then was named OCC Senior Deputy Comptroller and Chief Counsel effective August 11, 2025 \u2014 placing him in supervisory authority over bank licensing 65 days before Erebor's conditional approval [Finding #11184].</p><p>The board of directors named in the OCC approval letter includes <a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a> (Director and Principal Shareholder; founder of <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>), Diogo M\u00f3nica (Independent Director and co-founder of Anchorage Digital, the holder of the prototypical 2021 OCC crypto-bank charter), Michael Mosier (Independent Director and former Acting Director of FinCEN), and Owen Rapaport, Jacob Hirshman, Michael Hagedorn, Trevor Capozza, Richard Grant, Vlad Dubinsky, and Aaron Pelz [Finding #11181]. Senator Elizabeth Warren's February 25, 2026 letter to Comptroller Jonathan Gould stated that the OCC's process 'may have been contaminated by backroom political manipulation' [Finding #11184]. Warren's March 25, 2025 pre-confirmation letter to Gould had previously demanded a four-year cooling-off period from representing national banks following his service as Comptroller and asked whether he would approve a merger directed by the White House after a payment to the President or his family [Finding #11198].</p>",
+    "system_role": "Erebor Bank is a de novo federally chartered national bank providing deposit, lending, and digital-asset services to technology, defense, and AI-adjacent companies. According to Round 6 analysis, its OCC approval letter cites Brooks-era Interpretive Letters #1170 and #1174 together with IL #1184 as the legal scaffold for holding non-asset-backed virtual currencies on balance sheet \u2014 making Erebor the canonical instance of durable deregulation scaffolding, where deregulatory artifacts authored at the OCC under one administration are reanimated by counsel from the issuing law firm in a later administration to charter a new entity.",
     "sections": [
       {
-        "id": "founding-and-capital",
-        "title": "Founding and Capital Structure",
-        "viz": null,
-        "content": "<p><a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a> conceived Erebor Bank following the March 2023 collapse of Silicon Valley Bank, identifying a gap in banking services for venture-backed technology and defense companies [Finding #4753]. He co-founded the bank with Joe Lonsdale, who also co-founded <a href=\"/dossiers/palantir-technologies\">Palantir Technologies</a> and runs <a href=\"/dossiers/8vc\">8VC</a> [Connection #2793]. The bank appointed Owen Rapaport as CEO and Jacob Hirshman \u2014 a former adviser to Circle, the issuer of the USDC stablecoin \u2014 in a senior role [Finding #4684].</p><p>Lux Capital led the $350 million fundraising round at a $4.35 billion pre-money valuation. Co-investors include <a href=\"/dossiers/founders-fund\">Founders Fund</a>, <a href=\"/dossiers/8vc\">8VC</a>, and Haun Ventures. Total committed capital including prior rounds reached approximately $635 million [Finding #4753]. The investor base overlaps substantially with the capitalization of <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>: Founders Fund, 8VC, and <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a> are investors in both entities [Finding #4684]. This alignment positions Erebor as a potential financial services provider to companies within the same investor portfolio \u2014 a vertical integration across defense-contracting and banking that the bank's founders have described as intentional [Finding #4684].</p>"
-      },
-      {
-        "id": "regulatory-approval",
-        "title": "Regulatory Approval Timeline",
+        "id": "charter-approval",
+        "title": "Charter Approval and Conditions",
         "viz": "timeline",
-        "content": "<p>Erebor filed its OCC national bank charter application in mid-2025. OCC Comptroller <a href=\"/dossiers/jonathan-gould\">Jonathan Gould</a> granted conditional approval on October 15, 2025 (OCC NR-2025-101), describing it publicly as \"the first full-service national bank charter granted during my tenure \u2014 the first in four years\" [Finding #4753]. The FDIC Board approved deposit insurance on December 16, 2025. The full charter became effective February 6, 2026 \u2014 114 days after conditional approval [Finding #4945].</p><p>For comparison, Varo Bank \u2014 the only prior fintech to receive an OCC de novo national bank charter \u2014 spent more than three years in the application and approval process. Varo had approximately $376 million in assets after five years of operation and reported a net income of negative $91.7 million as of December 2025. Analysis of FDIC records and fundraising disclosures indicates Erebor launched with $635 million in committed capital on day one [Finding #4948]. The OCC imposed a 12 percent Tier 1 leverage ratio requirement on Erebor for its first three years of operation \u2014 more than double the standard well-capitalized threshold of 5 percent \u2014 indicating that regulators assessed the bank as carrying elevated risk [Finding #4945].</p><p>Gould's prior professional background included a position at Bitfury, a Bitcoin infrastructure company, creating an alignment of professional history with Erebor's stated stablecoin and crypto-lending product plans [Connection #2808]. No formal recusal or ethics disclosure documents regarding Gould's role in the Erebor charter approval have been made public as of the investigation date.</p>"
+        "content": "<p>Erebor filed its OCC national bank charter application on June 11, 2025 [Finding #11184]. OCC Comptroller Jonathan Gould granted preliminary conditional approval on October 15, 2025 under OCC Control Number 2025-Charter-342076, Charter 25357, with companion residency waivers under 12 USC 72 (control number 2025-Waiver-342510) for six of the eleven organizers and directors [Finding #11180, Finding #11181]. The FDIC Board approved deposit insurance on December 16, 2025, and the full charter became effective February 6, 2026 [Finding #4945, Finding #7029].</p><p>The OCC approval letter was signed to Wendy M. Goldberg of Skadden, Arps, Slate, Meagher &amp; Flom LLP as counsel of record. The organizing entity Erebor Group Inc., a Delaware corporation, merges into the bank under 12 USC 215a-3, and existing subsidiary Atticus Digital Inc. becomes a wholly-owned subsidiary post-merger [Finding #11180]. The OCC imposed a 12 percent Tier 1 leverage ratio condition for the first three years \u2014 well above the standard 9 percent Community Bank Leverage Ratio \u2014 together with deposit-failure-processing protocols, Capital Call Agreement enforcement rights, and mandatory pre-opening examination [Finding #11180, Finding #4945].</p><p>Analysis of the OCC approval letter indicates that the legal authority cited for holding non-asset-backed virtual currencies on balance sheet under 12 USC 24(Seventh) is built directly on three OCC interpretive letters: IL #1170 (July 20, 2020), IL #1174 (January 4, 2021 \u2014 the last business day of the Brooks tenure), and IL #1184 (May 7, 2025) [Finding #11180]. The first two letters were authored under Acting Comptroller Brian Brooks; IL #1184 was issued in the current administration. According to the Round 6 cross-lens review, the framework Brooks wrote at OCC and then served alongside at Bitfury is now operative scaffolding for the Erebor charter [Finding #11236].</p>"
       },
       {
-        "id": "revolving-door",
-        "title": "Adam Cohen: OCC Application and Appointment",
+        "id": "board-and-management",
+        "title": "Board, Management, and Principal Shareholders",
         "viz": "ego_network",
-        "content": "<p>Adam Cohen was a partner at Skadden, Arps, Slate, Meagher &amp; Flom LLP and co-head of its Financial Institutions Regulatory Group. In that capacity he worked on Erebor's OCC charter application [Finding #4754]. Cohen joined the OCC as Chief Counsel on August 11, 2025 (OCC NR-2025-76), placing him in a supervisory role over bank licensing and supervision \u2014 at the same agency reviewing the application he had recently helped prepare [Connection #2790]. Conditional approval followed 65 days later.</p><p>Senator Elizabeth Warren's February 25, 2026 letter to Comptroller Gould described this sequence as a \"textbook revolving door\" and requested documentation of any recusals, ethics screenings, or waivers related to Cohen's involvement in the Erebor application process [Finding #4754]. Cohen's career history prior to Skadden included roles at the Federal Reserve Board of Governors and the CFTC, providing him with working relationships across multiple federal financial regulatory agencies [Finding #4754]. The OCC had not responded publicly to Warren's letter as of the investigation date.</p>"
+        "content": "<p>The OCC approval letter names eleven organizers, directors, and senior officers [Finding #11181]. Owen Rapaport (CEO, Director, and Principal Shareholder) is the former CEO of Aer Compliance, the regulatory technology firm acquired by StarCompliance, with prior tenures at Bain &amp; Company and the Electrum bitcoin wallet [Finding #7021, Finding #11181]. Jacob E. Hirshman (Chief Strategy Officer, Director, and Principal Shareholder) was previously a regulatory adviser to Circle Internet Financial, the issuer of the USDC stablecoin, and an associate at Sullivan &amp; Cromwell [Finding #7021]. Michael Hagedorn (President and Director) is a former Senior Vice President at Valley National Bank and a 17-year veteran of Wells Fargo [Finding #7021]. Richard E. Grant (Chief Financial Officer) previously held senior roles at Customers Bank, Goldman Sachs, and JPMorgan investment banking [Finding #7021]. Trevor Capozza (Independent Director) heads operations at <a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a>'s family office [Finding #7021, Finding #11181].</p><p>Three directors warrant particular attention. <a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a> sits on the board as a Principal Shareholder; he separately founded <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>; according to reporting from Ohio Tech News, Anduril's Arsenal-1 manufacturing facility is being built south of Columbus [Finding #11181, Finding #7030]. Diogo M\u00f3nica is an Independent Director and a co-founder of Anchorage Digital, which holds the OCC's prototypical 2021 crypto-bank charter \u2014 itself a product of the same Brooks-era interpretive-letter framework now cited in Erebor's approval [Finding #11181]. Michael Mosier is an Independent Director and the former Acting Director of FinCEN [Finding #11181]. The OCC granted residency waivers under 12 USC 72 for Capozza, Hagedorn, Hirshman, Luckey, Mosier, and Rapaport [Finding #11180, Finding #11181].</p><p>Joshua Rosenberg, named in the OCC approval letter as Chief Risk Officer with a 22-year career at the Federal Reserve Bank of New York, departed before the bank opened for business per Senator Warren's February 25, 2026 letter [Finding #11181, Finding #7021]. Vlad Dubinsky (Chief Credit Officer) and Aaron Pelz (CTO) round out the management team [Finding #11181]. The principal shareholders identified in the approval letter \u2014 Luckey, Rapaport, and Hirshman \u2014 are joined by external backers including <a href=\"/dossiers/peter-thiel\">Peter Thiel</a>'s <a href=\"/dossiers/founders-fund\">Founders Fund</a>, <a href=\"/dossiers/joe-lonsdale\">Joe Lonsdale</a>'s <a href=\"/dossiers/8vc\">8VC</a>, <a href=\"/dossiers/lux-capital\">Lux Capital</a>, <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a>, and Haun Ventures, according to the investor map compiled in Round 6 [Finding #7033, Finding #7273].</p>"
       },
       {
-        "id": "network-and-geography",
-        "title": "Network Context and Geographic Alignment",
+        "id": "interpretive-letter-scaffold",
+        "title": "Brooks-Era Interpretive Letters as Live Legal Scaffold",
+        "viz": "timeline",
+        "content": "<p>The OCC approval letter's legal foundation is unusual to the point of being diagnostic. To authorize the bank to hold non-asset-backed virtual currencies on balance sheet to pay 'gas fees' under 12 USC 24(Seventh), the letter cites three OCC interpretive letters as authority [Finding #11180]. Two were issued during the 2020-2021 tenure of Acting Comptroller Brian Brooks: IL #1170 on July 20, 2020 (national-bank custody of cryptocurrency assets) and IL #1174 on January 4, 2021 (national-bank participation in independent node verification networks and stablecoin settlement). The third, IL #1184, was issued under the current administration on May 7, 2025 [Finding #11180].</p><p>Analysis of the Round 6 evidence indicates that the Brooks-era framework now functions as durable deregulation scaffolding: legal artifacts authored during a friendly administration that persisted across administration changes and are now reanimated by counsel from the same chartering channel [Finding #11236]. According to the cross-lens review, the structural pattern is a three-link revolving door \u2014 Cohen (Skadden\u2192OCC), M\u00f3nica (Anchorage Digital, the prototype crypto-bank charter), and Gould (Bitfury Group\u2192OCC) \u2014 operating around the same Brooks-era interpretive-letter framework that scaffolded both Anchorage in 2021 and Erebor in 2025 [Finding #11204].</p><p>Records of Jonathan Gould's prior employment, as listed in Senator Warren's March 25, 2025 pre-confirmation letter, identify Bitfury alongside BlackRock and Promontory Financial Group as senior roles preceding his OCC appointment [Finding #11198]. According to corporate registry records compiled in Round 6, Brian Brooks himself sat on the Bitfury Group Ltd UK 11441275 board following his OCC tenure, placing two consecutive ex-Bitfury executives in the Comptroller's office across two administrations [Finding #11236].</p>"
+      },
+      {
+        "id": "cohen-skadden-occ",
+        "title": "Adam J. Cohen: Skadden Application to OCC Approval",
         "viz": "ego_network",
-        "content": "<p>Both of Erebor's co-founders operate within the network associated with <a href=\"/dossiers/peter-thiel\">Peter Thiel</a>. Luckey founded <a href=\"/dossiers/anduril-industries\">Anduril Industries</a> in 2017 with <a href=\"/dossiers/trae-stephens\">Trae Stephens</a>, a partner at <a href=\"/dossiers/founders-fund\">Founders Fund</a>; Founders Fund is Anduril's lead investor and also backed Erebor [Connection #2792]. Lonsdale co-founded <a href=\"/dossiers/palantir-technologies\">Palantir Technologies</a> with Thiel in 2003 and later founded <a href=\"/dossiers/8vc\">8VC</a>, which invests in defense companies including Epirus, Saronic, and Overland AI [Connection #2793].</p><p>Erebor is registered at 500 Neil Ave Ste 140, Columbus, OH 43215 (Franklin County; FDIC CERT 59378; Fed RSSD 6053129) [Finding #4944, Finding #4946]. Columbus is also the location of Anduril's Arsenal-1 manufacturing facility \u2014 Luckey's flagship production site for defense hardware \u2014 despite both Luckey and Lonsdale being based in California and Texas respectively [Finding #4946]. The shared geography positions Erebor to serve Arsenal-1 employees, suppliers, and the broader defense-industrial ecosystem growing around that facility [Finding #4684]. The bank currently operates a single office with no branches [Finding #4946].</p><p>Both company names \u2014 Erebor and Anduril \u2014 are drawn from J.R.R. Tolkien's fiction, continuing a naming convention established by <a href=\"/dossiers/palantir-technologies\">Palantir Technologies</a>, which took its name from the seeing stones in the same mythology [Finding #4753].</p>"
+        "content": "<p><a href=\"/dossiers/adam-j-cohen\">Adam J. Cohen</a> joined Skadden, Arps, Slate, Meagher &amp; Flom LLP in May 2024 as co-head of the Financial Institutions Regulatory Group [Finding #11184]. On June 11, 2025 he filed Erebor's OCC national bank charter application on behalf of the organizers [Finding #11184]. OCC press release NR-OCC-2025-76, dated July 30, 2025, announced Cohen's appointment as Senior Deputy Comptroller and Chief Counsel effective August 11, 2025 \u2014 sixty-one days after he filed Erebor's application [Finding #11184].</p><p>The OCC granted preliminary conditional approval on October 15, 2025; Cohen had then served as OCC Chief Counsel for sixty-five days [Finding #11184]. The approval letter was addressed to Wendy M. Goldberg of Cohen's former Skadden practice [Finding #11180, Finding #11184]. In her February 25, 2026 letter to Comptroller Gould, Senator Elizabeth Warren wrote that the OCC's process 'may have been contaminated by backroom political manipulation' and posed Questions 8 through 10 demanding documentation of Cohen's recusals and asking whether Gould had 'discussed Erebor's application with Mr. Cohen either before or after he joined the OCC' and whether Gould 'was aware he served as counsel to Erebor and submitted the company's charter application' when Cohen was hired [Finding #11184]. Cohen's prior government experience, according to the OCC biography and reporting reviewed in this investigation, includes the Federal Reserve Board of Governors and the CFTC, and he previously served as general counsel at SoFi [Finding #11184, Finding #7023].</p><p>Analysis of the documented timeline indicates a 65-day window between Cohen's assumption of OCC supervisory authority over bank licensing and the conditional approval of his most recent client's charter application \u2014 according to the Round 6 cross-lens review, among the tightest such windows in the federal banking-regulator dataset [Finding #11236]. In parallel, LDA records show that Erebor Group Inc. retained Rich Feuer Anderson for banking and financial-institutions lobbying with effective date June 1, 2025 \u2014 the same month as the charter application \u2014 through lobbyists with prior service at the Treasury Department, Senate Banking Committee, House Financial Services Committee, and the House Majority Leader's office [Finding #7019, Finding #7261].</p>"
       },
       {
-        "id": "product-strategy",
-        "title": "Product Strategy and Stated Market Position",
+        "id": "warren-probe",
+        "title": "The Warren Probe and the Recusal Question",
+        "viz": "timeline",
+        "content": "<p>On February 25, 2026, Senator Elizabeth Warren, Ranking Member of the Senate Banking Committee, sent letters to OCC Comptroller Jonathan Gould, FDIC Chair Travis Hill, and <a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a> regarding the Erebor charter approval [Finding #7028, Finding #11184]. In her February 25, 2026 letter to Comptroller Gould, Senator Elizabeth Warren wrote that the OCC's process 'may have been contaminated by backroom political manipulation' [Finding #11184]. The letter cited a fundraising memo, according to Business Insider reporting referenced in the Warren correspondence, describing a co-founder's 'unique connectivity to banking regulators' \u2014 including Comptroller Gould \u2014 and predicting approval by end of 2025; conditional approval came within four months of application [Finding #7028, Finding #11204].</p><p>Warren's March 25, 2025 pre-confirmation letter to Comptroller-designate Gould posed more than one hundred questions across regulation, supervision, bank-merger review, crypto assets, ethics, and agency independence [Finding #11198]. Question 2 demanded a four-year recusal commitment for matters related to former clients; Question 6 requested a four-year cooling-off period from representing national banks after the Comptroller's service; Question 5 asked whether Gould would approve a merger directed by the White House after a payment to the President or his family [Finding #11198]. The same letter listed Bitfury alongside BlackRock, Promontory Financial Group, and the Senate Banking Committee as Gould's prior senior roles [Finding #11198].</p><p>Analysis of the documented sequence frames Erebor as the first material chartering action under Gould \u2014 an application reviewed by Cohen as Chief Counsel after the application was submitted by Cohen as Skadden partner [Finding #11198, Finding #11204]. The recusal-voidability question follows directly: according to standard reading of federal ethics regulations and OCC internal procedures, if Cohen's involvement post-appointment was not properly walled off, aspects of the approval may be voidable [Finding #11204]. The OCC had not publicly released recusal documentation as of the investigation date.</p>"
+      },
+      {
+        "id": "structural-significance",
+        "title": "Structural Significance: Durable Deregulation Scaffolding",
         "viz": null,
-        "content": "<p>Erebor has described itself as a digital-first bank targeting AI, cryptocurrency, defense, and manufacturing companies \u2014 explicitly framing its target market as the post-SVB gap in startup and VC-backed company banking [Finding #4684]. Its announced product suite includes standard commercial deposit and lending services, stablecoin integration, crypto-collateralized loans, and banking-as-a-service via API [Finding #4684]. Jacob Hirshman's background as a Circle adviser is relevant to the stablecoin product line, and Comptroller Gould's Bitfury background aligns with the crypto-lending component [Finding #4684, Connection #2808].</p><p>The bank has not yet filed Call Reports with the FDIC \u2014 it is too newly chartered to have generated required financial disclosures \u2014 so no independent assessment of its asset base, lending activity, or profitability is yet available [Finding #4947]. Its OCC-imposed 12 percent Tier 1 leverage requirement will constrain leverage ratios during the first three years of operation [Finding #4945].</p>"
+        "content": "<p>According to the Round 6 cross-lens synthesis, Erebor is the canonical instance of durable deregulation scaffolding [Finding #11236]. Records show that the mechanism has four moving parts. First, OCC Interpretive Letters #1170 and #1174 were authored under Acting Comptroller Brian Brooks in July 2020 and January 2021 respectively. Second, the letters survived the entire Biden administration as live legal authority without being rescinded. Third, the framework was supplemented in May 2025 by IL #1184 issued under the Hood and Gould tenures. Fourth, the entire stack was cited as authority in the Erebor approval letter signed October 15, 2025 to a partner at the same firm that filed the application [Finding #11180, Finding #11236].</p><p>Analysis of the broader pattern reveals two institutional channels converging on the Erebor approval, according to the Round 6 review [Finding #11236, Finding #11204]. According to Round 6 corporate-registry and Senate-Banking-Committee records, the first is Bitfury\u2192OCC: Brian Brooks served on the Bitfury Group Ltd UK 11441275 board following his 2020-2021 OCC tenure, and Jonathan Gould served as Bitfury Chief Legal Officer from 2022 to 2025 before his confirmation as the 32nd Comptroller [Finding #11198, Finding #11236]. The second is Skadden\u2192OCC: <a href=\"/dossiers/adam-j-cohen\">Adam J. Cohen</a> joined Skadden in May 2024, filed the Erebor application in June 2025, and was named OCC Chief Counsel in August 2025 [Finding #11184]. According to the cross-lens review, the two channels meet at the Erebor approval letter, which Comptroller Gould's office signed and which OCC Chief Counsel Cohen's law department oversaw \u2014 addressed to a partner at Cohen's former firm [Finding #11180, Finding #11204].</p><p>Analysis of the Round 6 evidence frames the structural significance plainly: the Brooks-era deregulation framework, written when Brooks ran the OCC, then carried into the private sector when Brooks served at Bitfury, is now the legal scaffold under which a Bitfury-affiliated Comptroller charters a bank advised by his Chief Counsel's old law firm \u2014 for backers who include <a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a>, <a href=\"/dossiers/peter-thiel\">Peter Thiel</a>, and <a href=\"/dossiers/joe-lonsdale\">Joe Lonsdale</a> [Finding #11204, Finding #11236]. According to the same review, the same Brooks-era framework is also the legal scaffold cited in connection with the <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> token and the <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Tahnoon</a>-anchored stablecoin flows reviewed in Round 6 [Finding #11236].</p>"
+      },
+      {
+        "id": "founding-and-capital",
+        "title": "Founding, Capital, and Geography",
+        "viz": null,
+        "content": "<p><a href=\"/dossiers/palmer-luckey\">Palmer Luckey</a> conceived Erebor Bank following the March 2023 collapse of Silicon Valley Bank, identifying a gap in banking services for venture-backed technology and defense companies [Finding #4753]. He co-founded the bank with <a href=\"/dossiers/joe-lonsdale\">Joe Lonsdale</a>, who also co-founded a data-analytics firm with <a href=\"/dossiers/peter-thiel\">Peter Thiel</a> in 2003 and later founded <a href=\"/dossiers/8vc\">8VC</a> [Finding #4684, Finding #11181]. According to investor-disclosure reporting reviewed in this investigation, <a href=\"/dossiers/lux-capital\">Lux Capital</a> led the $350 million fundraising round at a $4.35 billion pre-money valuation; co-investors include <a href=\"/dossiers/founders-fund\">Founders Fund</a>, <a href=\"/dossiers/8vc\">8VC</a>, <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a>, and Haun Ventures, with total committed capital of approximately $635 million [Finding #4753, Finding #7033].</p><p>Erebor is registered at 500 Neil Avenue, Suite 140, Columbus, OH 43215 (Franklin County; FDIC CERT 59378; OCC Charter 25357; Federal Reserve RSSD 6053129; LEI 254900S59ZHI2UFM9J76) and operates a single office with no branches [Finding #4944, Finding #4946, Finding #7014]. According to Ohio Tech News and the press record reviewed in this investigation, Columbus is also the location of <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>' Arsenal-1 autonomous-weapons manufacturing facility \u2014 Luckey's flagship production site, supported by a $310 million Ohio grant \u2014 despite both Luckey and Lonsdale being based in California and Texas respectively [Finding #7030]. Analysis of the geographic record positions Erebor as a financial counterpart to Arsenal-1 employees, suppliers, and the broader defense-industrial ecosystem aggregating around the facility [Finding #7030].</p><p>According to the investor map reviewed in this investigation, the investor base overlaps substantially with that of <a href=\"/dossiers/anduril-industries\">Anduril Industries</a>: <a href=\"/dossiers/founders-fund\">Founders Fund</a>, <a href=\"/dossiers/8vc\">8VC</a>, and <a href=\"/dossiers/andreessen-horowitz\">Andreessen Horowitz</a> hold positions in both entities [Finding #7033]. According to the Round 6 cross-lens review, Erebor's announced product suite \u2014 stablecoin integration, crypto-collateralized loans, banking-as-a-service via API, and lending into AI compute and defense manufacturing \u2014 was designed to serve the post-SVB gap that these same investors identified [Finding #4684, Finding #7033].</p>"
       }
     ],
     "open_questions": [
-      "Did Adam Cohen recuse himself from any aspect of the OCC's review of Erebor's charter application after joining as Chief Counsel on August 11, 2025? What ethics screening or waiver documentation exists at the OCC?",
-      "What specific role did Comptroller Gould play in the Erebor approval relative to career OCC staff? Were standard de novo review timelines modified, and if so, by whom and on what basis?",
-      "Which defense contractors, AI companies, and crypto entities have opened accounts at Erebor Bank since its February 6, 2026 launch, and does that customer base overlap materially with the investor network (Founders Fund, 8VC, a16z portfolios)?",
-      "What are the terms of the stablecoin integration and crypto-collateralized lending products \u2014 specifically, which stablecoins, what collateral haircuts, and how are those products structured relative to the 12 percent Tier 1 leverage requirement?",
-      "Has Erebor Bank filed for or received any government contracts, GSA schedules, or Treasury/DoD financial services authorizations that would allow it to bank federal contractors or process government disbursements?"
+      "Did Adam J. Cohen recuse himself from any aspect of the OCC's review of Erebor's charter application after joining as Chief Counsel on August 11, 2025? What ethics screening or waiver documentation exists at the OCC, and was it transmitted in response to Senator Warren's February 25, 2026 letter?",
+      "If Cohen's involvement post-appointment was not properly walled off, what aspects of the October 15, 2025 conditional approval are voidable under federal ethics regulations and OCC internal procedures?",
+      "What specific role did Comptroller Jonathan Gould play in the Erebor approval relative to career OCC staff, and was his prior employment at Bitfury Group Ltd. UK 11441275 disclosed in the chartering record?",
+      "Is OCC Interpretive Letter #1184 (May 7, 2025) a discrete agency action or an extension of the Brooks-era #1170/#1174 framework, and what notice-and-comment process if any preceded it?",
+      "Joshua Rosenberg was named in the OCC approval letter as Chief Risk Officer but departed before the bank opened on February 6, 2026. Who replaced him, was the OCC notified prior to opening, and was the change consistent with the bank's pre-opening examination conditions?",
+      "Which defense contractors, AI companies, and crypto entities have opened accounts at Erebor Bank since launch, and does that customer base overlap materially with the Founders Fund, 8VC, and Andreessen Horowitz portfolios?",
+      "Has Erebor filed for or received any government contracts, GSA schedules, or Treasury or DoD financial-services authorizations that would allow it to bank federal contractors or process government disbursements?"
     ],
     "applicable_models": [
+      "durable-deregulation-scaffolding",
       "private-order",
       "bridge-tax",
       "manufactured-dependency"
@@ -463,6 +1488,69 @@
           "strength": 1.0,
           "evidence_ref": null,
           "description": "Gould as OCC Comptroller granted Erebor's national bank charter \u2014 conditional Oct 2025, full Feb 2026. Erebor's fundraising memo claimed co-founder had 'unique connectivity' to Gould. Gould publicly celebrated as 'first full-service charter in four years.' Gould has crypto background (Bitfury) aligning with Erebor's stablecoin plans."
+        },
+        {
+          "target": "Adam Cohen",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "OCC NR-2025-76, OCC NR-2025-101",
+          "description": "Cohen filed Erebor OCC charter application as Skadden partner (Jun 2025), then became OCC Chief Counsel (Aug 2025) that approved Erebor (Oct 2025)"
+        },
+        {
+          "target": "Palmer Luckey",
+          "type": "owns",
+          "strength": 1.0,
+          "evidence_ref": "OCC charter application; Warren letter 2026-02-25",
+          "description": "Palmer Luckey co-founded Erebor Bank. Investor memo cited his political network for charter approval"
+        },
+        {
+          "target": "Peter Thiel",
+          "type": "funds",
+          "strength": 1.0,
+          "evidence_ref": "Multiple press reports; OCC charter application",
+          "description": "Thiel/Founders Fund is a backer of Erebor Bank"
+        },
+        {
+          "target": "Joe Lonsdale",
+          "type": "owns",
+          "strength": 1.0,
+          "evidence_ref": "OCC charter application; press reports",
+          "description": "Lonsdale co-founded Erebor Bank with Palmer Luckey. Also 8VC founder"
+        },
+        {
+          "target": "Rich Feuer Anderson",
+          "type": "contracts_with",
+          "strength": 1.0,
+          "evidence_ref": "LDA filing e1b7b759-e1d1-424c-8cc5-7323a6eed981",
+          "description": "Erebor Group Inc retained Rich Feuer Anderson for banking/financial lobbying effective 2025-06-01, $60K Q2 2025"
+        },
+        {
+          "target": "Founders Fund",
+          "type": "funds",
+          "strength": 1.0,
+          "evidence_ref": "OCC charter application; multiple press reports",
+          "description": "Founders Fund is a backer/investor in Erebor Bank. Peter Thiel (FF co-founder) is named as investor. FF portfolio company Anduril's founder Palmer Luckey co-founded Erebor."
+        },
+        {
+          "target": "Lux Capital",
+          "type": "funds",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": "Lux Capital led Erebor Bank's $350M raise at $4.35B valuation"
+        },
+        {
+          "target": "Lux Capital",
+          "type": "funds",
+          "strength": 1.0,
+          "evidence_ref": "Finding #7033: Erebor Bank investor map",
+          "description": "Led Erebor Bank $350M round at $4.35B valuation. Co-investors: Founders Fund, 8VC, a16z, Haun Ventures. Erebor is defense-tech banking infrastructure."
+        },
+        {
+          "target": "Kenneth Howery",
+          "type": "corporate",
+          "strength": 0.2,
+          "evidence_ref": "Synthesis from findings 7247, 7251",
+          "description": "Howery is Founders Fund co-founder. FF invests in Erebor. Howery's potential carry interest in FF creates indirect financial exposure to Erebor's success."
         }
       ],
       "secondHop": {
@@ -472,6 +1560,50 @@
             "type": "employment",
             "strength": 1.0,
             "description": "Cohen serves as Chief Counsel to Comptroller Gould at OCC. Gould was named in Erebor's fundraising memo as a regulator the co-founder had 'unique connectivity' to. Cohen previously worked on Erebor's OCC application at Skadden."
+          },
+          {
+            "target": "Palmer Luckey",
+            "type": "legal",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Skadden Arps",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Cohen was co-head of Financial Institutions Regulatory Group at Skadden Arps (May 2024-Aug 2025). Filed Erebor charter application from Skadden"
+          }
+        ],
+        "Founders Fund": [
+          {
+            "target": "Peter Thiel",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Thiel founded Founders Fund; controls B AUM; FF invested in Palantir (.1B return), Anduril (B), SpaceX (.5B gain)"
+          },
+          {
+            "target": "Trae Stephens",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Stephens is FF partner since 2014; co-founded Anduril at FF retreat; FF led Anduril .5B round"
+          },
+          {
+            "target": "Ken Howery",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Co-founder and partner of Founders Fund. Fund led Anduril's $2.5B raise. Howery now US Ambassador to Denmark (controls Greenland/Pituffik Space Base critical for Golden Dome)."
+          },
+          {
+            "target": "Kenneth Howery",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Howery co-founded Founders Fund in 2005 with Thiel and Nosek. Not listed on Growth IV Form D (2026) but alleged to retain 3% carried interest"
+          },
+          {
+            "target": "Kenneth Howery",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Howery is co-founder and former partner of Founders Fund. First institutional investor in SpaceX and Palantir."
           }
         ],
         "Joe Lonsdale": [
@@ -500,10 +1632,88 @@
             "description": "Lonsdale co-founded Palantir with Thiel in 2003. Later founded 8VC which invests in Thiel-network defense companies (Palantir, Anduril). Both back Erebor Bank. Lonsdale's 8VC employs sons of sanctioned Russian oligarchs."
           },
           {
-            "target": "8VC",
+            "target": "Palantir Technologies",
             "type": "corporate",
             "strength": 1.0,
-            "description": "Lonsdale founded 8VC; Palantir co-founder; defense portfolio includes Epirus, Saronic, Overland AI"
+            "description": "Co-founded Palantir in 2004 with Peter Thiel, Alex Karp, Stephen Cohen, Nathan Gettings"
+          }
+        ],
+        "Jonathan Gould": [
+          {
+            "target": "Palmer Luckey",
+            "type": "legal",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Brian P. Brooks",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Both Brian P. Brooks (2020 OCC Acting Comptroller) and Jonathan Gould (2025+ confirmed 32nd Comptroller of Currency) are ex-Bitfury executives. Two consecutive crypto-firm-alumni installed at the OCC within five years. Bitfury Group Ltd UK 11441275 is the shared institutional anchor; des Pallieres also sits on its board."
+          }
+        ],
+        "Kenneth Howery": [
+          {
+            "target": "Peter Thiel",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Founders Fund co-founders; Howery is Amb. to Denmark holding Founders Fund, Palantir, Neuralink, Tesla"
+          },
+          {
+            "target": "Peter Thiel",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-founders of Founders Fund. Howery holds carried interest in FF Management LLCs I-IV, Alpha Management. Thiel network placed Howery as Ambassador to Denmark."
+          },
+          {
+            "target": "Luke Nosek",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "PayPal co-founders, Founders Fund co-founders. Nosek left FF 2017 to start Gigafund (SpaceX-focused). Howery holds promissory notes from Gigafund Management Company LLC and Gigafund 0.2 LP $250M-500M."
+          },
+          {
+            "target": "Trae Stephens",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Both Partners at Founders Fund. Stephens co-founded Anduril Industries (defense AI, valued at $30.5B). FF led Anduril's $2.5B Series G with $1B check. Direct pipeline between FF venture capital and defense contracting."
+          },
+          {
+            "target": "Stephen Oskoui",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Howery is LP investor in Gigafund 0.2 LP (1 of 4 investors, 250M-500M position) managed by Oskoui and Nosek"
+          }
+        ],
+        "Lux Capital": [
+          {
+            "target": "Peter Hebert",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Co-founder, based in Menlo Park CA"
+          },
+          {
+            "target": "R. James Woolsey",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Venture Partner since 2011. Former CIA Director (1993-1995). Revolving door: intelligence to defense-tech VC."
+          },
+          {
+            "target": "Raymond A. Thomas",
+            "type": "advisory",
+            "strength": 1.0,
+            "description": "Venture Partner since Jan 2020. Retired 4-star general, former Commander of USSOCOM (11th Commander). Works with Lux portfolio companies on strategy, team building, and advancing technologies for defense."
+          },
+          {
+            "target": "Saildrone Inc",
+            "type": "funds",
+            "strength": 1.0,
+            "description": "Series A investor (2016). Saildrone builds autonomous surface vehicles for maritime ISR. $17.6M in government contracts."
+          },
+          {
+            "target": "Primer Technologies Inc",
+            "type": "funds",
+            "strength": 1.0,
+            "description": "Portfolio company. Primer builds NLP/AI for intelligence analysis. $4.5M+ in DoD contracts including $3M SOCOM social media monitoring contract."
           }
         ],
         "Palmer Luckey": [
@@ -526,21 +1736,195 @@
             "description": "Co-founded Anduril Industries 2017. Stephens (FF partner) recruited Luckey (Oculus founder) after idea at FF retreat 2014. Stephens as exec chairman, Luckey as CEO. Both hold significant equity in $30.5B company."
           },
           {
+            "target": "Rockbridge Network",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Speaker at Rockbridge Network events. Anduril Industries founder. Defense-tech billionaire. Key bridge between defense-tech sector and Rockbridge donor infrastructure."
+          },
+          {
             "target": "Anduril Industries LLC",
             "type": "corporate",
             "strength": 1.0,
             "description": "Founder and CEO of Anduril Industries since 2017. Address: 1375 Sunflower Ave, Costa Mesa CA. Controls company valued at .5B."
+          }
+        ],
+        "Peter Thiel": [
+          {
+            "target": "Sargon Capital Pty Ltd",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Thiel invested AUD 47.5M in Sargon Capital via Trimantium Capital Kingston vehicle. Thiel later distanced himself from the Kingstons after Sargon collapse in Feb 2020."
           },
           {
-            "target": "Emil Michael",
-            "type": "political",
+            "target": "Trae Stephens",
+            "type": "financial",
             "strength": 1.0,
-            "description": "Michael as USD(R&E) oversees Anduril's contract ecosystem: IVAS ($22B), TITAN, Golden Dome, Altius production. Michael publicly champions 'new primes' like Anduril. Both are Trump administration aligned. Michael's 6 tech priorities map directly to Anduril's product portfolio."
+            "description": "Stephens is partner at Thiel's Founders Fund since 2014. Previously at Thiel's Palantir from 2008. Founders Fund invested B in Anduril Series G (2025)."
+          },
+          {
+            "target": "Polymarket",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Thiel Founders Fund led $200M+ investment in Polymarket. Thiel simultaneously chairs Palantir (defense/intel contracts). Polymarket saw $1.2M suspicious Iran war profits. Structural conflict: defense intelligence access + unregulated betting platform."
+          },
+          {
+            "target": "Praxis",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Thiel funded Praxis via Pronomos Capital in early 2021. Praxis $525M raised for 'freedom city' with Greenland as candidate location. Dryden Brown visited Greenland Nov 2024."
+          },
+          {
+            "target": "Rockbridge Network",
+            "type": "funds",
+            "strength": 1.0,
+            "description": "Early financier of Rockbridge Network. Described as puppet master. Mentor and funder of Vance since before 2022 Senate race. Maintains presence at high-dollar retreats. Silicon Valley billionaire and Palantir founder."
+          }
+        ],
+        "Rich Feuer Anderson": [
+          {
+            "target": "Erebor Group, Inc.",
+            "type": "contracts_with",
+            "strength": 1.0,
+            "description": "Erebor Group Inc retained Rich Feuer Anderson as lobbying firm. $220K in Q2-Q4 2025 for banking/financial services issues."
           }
         ]
       },
       "depth": 2
     },
-    "timeline_events": []
+    "timeline_events": [
+      {
+        "date": "2025 to present",
+        "label": "owns with Palmer Luckey",
+        "type": "owns",
+        "entity": "Palmer Luckey",
+        "id": 3661
+      },
+      {
+        "date": "2025 to present",
+        "label": "funds with Peter Thiel",
+        "type": "funds",
+        "entity": "Peter Thiel",
+        "id": 3662
+      },
+      {
+        "date": "2025 to present",
+        "label": "owns with Joe Lonsdale",
+        "type": "owns",
+        "entity": "Joe Lonsdale",
+        "id": 3664
+      },
+      {
+        "date": "2025 to present",
+        "label": "funds with Founders Fund",
+        "type": "funds",
+        "entity": "Founders Fund",
+        "id": 3690
+      },
+      {
+        "date": "2025 to present",
+        "label": "corporate with Kenneth Howery",
+        "type": "corporate",
+        "entity": "Kenneth Howery",
+        "id": 3691
+      },
+      {
+        "date": "2025-06 to 2025-10",
+        "label": "employment with Adam Cohen",
+        "type": "employment",
+        "entity": "Adam Cohen",
+        "id": 3659
+      },
+      {
+        "date": "2025-06 to present",
+        "label": "contracts_with with Rich Feuer Anderson",
+        "type": "contracts_with",
+        "entity": "Rich Feuer Anderson",
+        "id": 3666
+      },
+      {
+        "date": "2025-06-01",
+        "label": "Erebor Group Inc. (NY) lobbied Congress on Banking and Financial Institutions issues through Rich Feuer Anderson (DC firm, 1133 Connecticut Ave NW Ste 620). 4 LDA filings: Registration (Q2 2025), Q2 report ($60K), Q3 report ($80K), plus Q4. Lobbying effective date 2025-06-01 \u2014 same month as OCC charter application (June 11, 2025). Lobbyists: Andrew Carr Palmer (fmr LA for Rep. Fleischmann/Fincher), Jared Cody Sawyer (fmr Deputy Asst Secretary Treasury; fmr Senior Counsel Senate Banking Committee), Matthew Kellogg (fmr Deputy Asst Sec Legislative Affairs Treasury 2017-18; fmr Sr Policy Adviser House Majority Leader McCarthy), Jennifer Rust (fmr Deputy Chief Counsel House Financial Services Committee), John A. Anderson (fmr Sr Policy Adviser Sen. Crapo). All lobbyists have revolving-door Congressional/Treasury backgrounds.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7019
+      },
+      {
+        "date": "2025-06-01",
+        "label": "Rich Feuer Anderson lobbying firm retained by Erebor Group Inc. also lobbies for Coinbase, JPMorgan Chase, American Express, Amazon, London Stock Exchange, SoFi, and FINRA \u2014 total $7.6M in 2025 lobbying across 56 clients. The SoFi connection is notable: Adam Cohen (Erebor's OCC application lawyer who became OCC Chief Counsel) previously served as general counsel at SoFi per Banking Dive. The lobbying team targeting Congress on banking issues included 5 lobbyists, all with revolving-door backgrounds from Treasury Department, Senate Banking Committee, House Financial Services Committee, and House Majority Leader's office.",
+        "type": "relationship",
+        "evidence_ref": null,
+        "id": 7035
+      },
+      {
+        "date": "2025-07-03",
+        "label": "Erebor Bank complete executive team from Business Insider July 2025: Co-CEOs Owen Rapaport (fmr CEO Aer Compliance, fmr Bain & Co consultant, fmr Electrum bitcoin wallet) and Jacob Hirshman (Circle adviser, fmr Sullivan & Cromwell associate, UPenn Law). Co-founders also include Trevor Capozza (head of operations Palmer Luckey family office, fmr Optimozo) and Aaron Pelz (CTO, fmr Pinwheel engineering lead, fmr Quorum software engineer). President: Michael Hagedorn (fmr SVP Valley National Bank, fmr 17yr Wells Fargo veteran leading Midwest banking group 5yr, fmr UMB Financial). CRO: Joshua Rosenberg (22yr Federal Reserve Bank of NY career, fmr United Texas Bank crypto-focused institution, PhD Economics UC San Diego, fmr NYU Stern professor). CFO: Ricky Grant (fmr Customers Bank head of IR and strategic finance, fmr Goldman Sachs MD 2019, fmr JP Morgan investment banking). CCO: Vlad Dubinsky (fmr Bancorp Bank MD credit markets, fmr Blue Foundry Bank).",
+        "type": "identity",
+        "evidence_ref": null,
+        "id": 7021
+      },
+      {
+        "date": "2025-07-03",
+        "label": "Erebor Bank Columbus-Anduril Arsenal-1 geographic nexus: Erebor Bank HQ at 500 Neil Ave Suite 140, Columbus OH 43215. Anduril Industries building Arsenal-1, a $1B autonomous weapons manufacturing facility in Pickaway County, just south of Columbus, projected 4,000+ jobs (largest single job-creation project in Ohio history). Anduril received $310M grant from Ohio for Arsenal-1. Both entities co-founded by Palmer Luckey. This creates a vertically integrated defense-tech hub: manufacturing (Arsenal-1) + financial services (Erebor) in the same metro area, with the same founder.",
+        "type": "intelligence",
+        "evidence_ref": null,
+        "id": 7030
+      },
+      {
+        "date": "2025-08-01",
+        "label": "Adam Cohen revolving door: Skadden Arps partner who co-headed Financial Institutions Regulatory Group and submitted Erebor Bank's OCC charter application on June 11, 2025. Named OCC Chief Counsel and Senior Deputy Comptroller in August 2025 \u2014 less than 2 months after filing Erebor's application. In his OCC role, he oversees the Law Department including licensing actions (bank charter approvals). OCC bio omits Skadden by name, describing him as co-head of Financial Institutions Regulatory Group at 'a major international law firm.' Prior government: Board of Governors Federal Reserve System, CFTC. Education: Duke BA political science, Columbia Law. Also served as general counsel for unnamed financial institution (reported as SoFi by Banking Dive).",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7023
+      },
+      {
+        "date": "2025-12-16",
+        "label": "FDIC approval conditions for Erebor Bank (Dec 16, 2025): Must maintain minimum 12% tier 1 leverage ratio during first 3 years of operation (above standard requirement). Must implement protocols for processing deposit accounts in event of bank failure. Must exercise Capital Call Agreement rights to obtain capital if it ceases to meet 'well capitalized' status. Approval expires if bank not established within 12 months. Business model explicitly stated as serving 'technology, payment systems, investment, and defense industries, including virtual currency market participants.'",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7029
+      },
+      {
+        "date": "2025-12-22",
+        "label": "Erebor Bank complete investor map and defense-tech network integration: $635M total capital. $350M round led by Lux Capital at $4.35B valuation. Full investor list: Andreessen Horowitz (a16z, also American Dynamism defense fund), Founders Fund (Peter Thiel), Lux Capital, 8VC (Joe Lonsdale), Haun Ventures, Elad Gil. Every major investor has significant defense-tech portfolio: Founders Fund (Anduril, Palantir, SpaceX), 8VC (Palantir, Anduril, Saronic, Epirus), a16z (Anduril, Shield AI, ACS). Planned services directly serve defense ecosystem: compute loans for AI chips/GPU clusters, underwriting for defense contractors/robotics firms/advanced manufacturers, crypto-collateralized loans, stablecoin integration, credit lines backed by private securities. Bank explicitly designed to fill SVB gap for startups and VC-backed companies.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 7033
+      },
+      {
+        "date": "2025-present",
+        "label": "funds with Lux Capital",
+        "type": "funds",
+        "entity": "Lux Capital",
+        "id": 3852
+      },
+      {
+        "date": "2026-02-06",
+        "label": "Erebor Bank regulatory timeline confirms record speed for de novo national bank: Application filed June 11, 2025 (public notice Columbus Dispatch June 12). OCC conditional approval October 15, 2025 (~4 months). FDIC deposit insurance approved December 16, 2025 (~6 months from application). Full OCC charter granted February 6, 2026 (~8 months from application). This is the first de novo national bank chartered under the second Trump administration, and the first new national bank charter in years (fewer than 6 charters annually 2010-2023 vs ~130 annually pre-2008). Typical de novo bank process takes 12-18 months. Comptroller Gould publicly promoted the approval on X. The bank's investor memo had predicted approval by end of 2025.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7034
+      },
+      {
+        "date": "2026-02-13",
+        "label": "Erebor Bank GLEIF record: LEI 254900S59ZHI2UFM9J76, legal name 'Erebor Bank, National Association', registered at 500 Neil Ave Suite 140, Columbus OH 43215, US-OH jurisdiction, GLEIF entity creation date 2025-11-05, LEI registration date 2026-02-13, status ACTIVE, registered as FDIC CERT 59378, S&P Global ID 1949686530, NON_CONFORMING conformity flag, no parent entity reported (reporting exception)",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 7014
+      },
+      {
+        "date": "2026-02-26",
+        "label": "Senator Elizabeth Warren probe of Erebor Bank charter (Feb 25-26, 2026): Sent letters to OCC Comptroller Jonathan Gould, FDIC Chairman Travis Hill, and Palmer Luckey. Cited investor memo predicting approval by end of 2025 with language 'Palmer's political network will get this done' and touting co-founder's 'unique connectivity to banking regulators.' Warren alleged charter approval was potentially a 'corrupt political favor.' Requested unredacted charter applications and all correspondence related to Erebor's approval process. Response deadline: March 12, 2026.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7028
+      },
+      {
+        "date": "2026-03-23",
+        "label": "NEGATIVE RESULTS: Sources checked with zero results for Erebor Bank: (1) SEC EDGAR full-text search \u2014 0 hits, bank has no SEC filings. (2) CourtListener \u2014 0 results, no federal litigation involving Erebor. (3) Corporate registries (unified, OH, DE) \u2014 0 results, national bank charter not in state corporate registries. (4) USASpending \u2014 0 federal contracts or grants to Erebor. (5) IRS 990 \u2014 0 results, not a nonprofit. (6) FARA \u2014 0 results, no foreign agent registration. (7) SAM.gov \u2014 could not query (API key not configured). (8) LDA lobbying under 'Erebor Bank' name \u2014 0 results (lobbying filed under 'Erebor Group Inc.' parent).",
+        "type": "negative_result",
+        "evidence_ref": null,
+        "id": 7031
+      }
+    ]
   }
 }

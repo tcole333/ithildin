@@ -5,11 +5,11 @@
   "profile_ids": [
     "epstein"
   ],
-  "generated_at": "2026-03-11T18:36:07.848134",
-  "last_updated": "2026-02-26T18:50:12",
+  "generated_at": "2026-05-07T23:07:36.175358",
+  "last_updated": "2026-05-08T00:34:53",
   "stats": {
-    "total_findings": 19,
-    "total_connections": 12,
+    "total_findings": 23,
+    "total_connections": 13,
     "total_entities": 0,
     "finding_types": {
       "financial": 8,
@@ -21,9 +21,10 @@
     },
     "connection_types": {
       "financial": 8,
-      "corporate": 4
+      "corporate": 4,
+      "owns": 1
     },
-    "last_updated": "2026-02-26T18:50:12"
+    "last_updated": "2026-05-08T00:34:53"
   },
   "findings": [
     {
@@ -514,7 +515,7 @@
         },
         {
           "evidence_type": "ref",
-          "evidence_ref": "OpenSanctions search",
+          "evidence_ref": "OpenSanctions:search",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -695,6 +696,98 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "theblock.co:Warren_Kim_CFIUS_Feb2026",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11220,
+      "finding_type": "background",
+      "summary": "MGX formed March 12 2024 by Mubadala + G42; chair Sheikh Tahnoun bin Zayed (UAE NSA); vice chair Khaldoon Al Mubarak (Mubadala CEO); $100B AUM target.",
+      "source_datasets": "[\"web_search\"]",
+      "confidence": "high",
+      "date_of_event": "2024-03-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:20:12",
+      "target_name": "MGX Fund Management Limited",
+      "profile_id": "epstein",
+      "detail": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:11220 (Round 6 cross-target injection from MGX Fund Management Limited)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11236,
+      "finding_type": "intelligence",
+      "summary": "META-SYNTHESIS: Seven cross-lens patterns from Round 6 (Agents A-G). (1) Vault-firm regulatory revolving door is a 4-instance pattern: a 3-instance Skadden-or-equivalent->OCC->implementation pipeline (Brooks 2020 Coinbase->OCC->Bitfury; Gould 2025 Bitfury/BlackRock/Promontory->OCC; Cohen 2025 Skadden->OCC->Erebor approval — Cohen's 65-day window the tightest), plus a parallel vault-firm->OMB->Schaerr Jaffe->OMB pattern via Paoletta (2018+2025) at OMB+CFPB+OIRA — STRUCTURALLY DISTINCT from the OCC pipeline. (2) Brooks-era IL #1170/#1174 + IL #1184 are LIVE OPERATIVE LAW cited in Erebor approval letter — the deregulation framework now scaffolds WLFI/Tahnoon flows. (3) Aryam Investment 1 = Tahnoon vehicle bought 49% WLFI for $500M ($187M to Trump-family entities); G42 Edelman + Xiao seated undisclosed; MGX deployed $2B WLFI USD1 -> Binance May 2025. (4) Round 5 'Mubadala unifies' model UPGRADED to three SCFEA sovereign pillars (ADIA + Mubadala + L'IMAD ~$300B post Jan-2026 consolidation under Khaled bin Mohamed bin Zayed) + regulatory layer (Al Shorafa = ADX + SCA + ADGM Vice Chair) + US-listing layer (Kazim = Nasdaq Inc. director via Borse Dubai). Bridges outlast principals. (5) Pre-positioning trades cluster around Jan 2025 Stargate window: Bitfury $53.9M dividend Dec 23 2024 (38d before Cipher PIPE), AltC closed May 2024 with anomalous $7,457.80 redemption out of ~30M shares (PIPE backstop not triggered), Crusoe started Abilene construction Jun 2024 (7mo before Stargate announcement), SoftBank fully exited Cipher Q3 2025 — Stargate is largely re-bundling of preexisting infrastructure already in motion. (6) Klein-Altman-Oklo and Stargate-MGX are STRUCTURALLY SEPARATE per SEC primary-source level — press treatment merged them. Altman resigned Oklo board Apr 22 2025, 3 months after Stargate announce. (7) bin Sulayem resigned DP World Feb 13 2026 after DOJ Epstein release — first observed VISIBLE LOSS for Tahnoon network on Epstein-related exposure; replacement Kazim maintains/extends US-market access via Nasdaq Inc. board seat. ROUND 5 NAME CORRECTIONS: Stéphane->Bertrand G. des Pallières; Antoine Bremner unverified->likely Christopher Bremner; Compagnie Du Saleve B223232 incorporated 2018 so cannot be 28 Oct 2015 entity (likely closed French SARL #803012046 instead); SKAS = Saker Aviation Services ticker not partners' acronym; Hoffenberg 'Gold shielded Epstein' claim has NO docket support in 1:94-cr-00213.",
+      "source_datasets": "[\"analysis_run\"]",
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:28:32",
+      "target_name": "Round 6 meta-synthesis: SoftBank-caper / Epstein-replatforming structural model",
+      "profile_id": "epstein",
+      "detail": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:11236 (Round 6 cross-target injection from Round 6 meta-synthesis: SoftBank-caper / Epstein-replatforming structural model)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11183,
+      "finding_type": "relationship",
+      "summary": "bin Sulayem resigned DP World Chair/CEO Feb 13 2026 after Epstein DOJ files released; replaced by Essa Kazim (Nasdaq Inc. board)",
+      "source_datasets": "[\"cnn.com\", \"bloomberg.com\", \"aljazeera.com\"]",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:17:19",
+      "target_name": "Sultan Ahmed bin Sulayem",
+      "profile_id": "epstein",
+      "detail": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:11183 (Round 6 cross-target injection from Sultan Ahmed bin Sulayem)",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11209,
+      "finding_type": "identity",
+      "summary": "Al Shorafa is fifth Tahnoon-cluster connector: Hub71 Chair, ADX Chair, ADIO Head, Etihad Aviation Chair, ADGM Vice Chair, SCA Chair, Abu Dhabi Housing Chair, DMT Chair, Exec Council member",
+      "source_datasets": "[\"adgm.com\", \"wikipedia\", \"hub71.com\"]",
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:19:09",
+      "target_name": "Mohamed Ali Al Shorafa Al Hammadi",
+      "profile_id": "epstein",
+      "detail": null,
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:11209 (Round 6 cross-target injection from Mohamed Ali Al Shorafa Al Hammadi)",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -943,6 +1036,28 @@
           "source_page": null
         }
       ]
+    },
+    {
+      "id": 6028,
+      "person_a": "Aryam Investment 1",
+      "person_b": "World Liberty Financial",
+      "relationship_type": "owns",
+      "description": "owns 49% of WLFI (acquired $500M, Jan 2026; per Round 6 finding #11190)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 22:47:06",
+      "profile_id": "epstein",
+      "other_person": "World Liberty Financial",
+      "other_person_slug": "world-liberty-financial",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "finding:11190",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
     }
   ],
   "entities": [],
@@ -969,7 +1084,11 @@
       4121,
       3979,
       3983,
-      4130
+      4130,
+      11220,
+      11236,
+      11183,
+      11209
     ],
     "key_identifiers": {
       "jurisdictions": [],
@@ -996,7 +1115,8 @@
           2457,
           2459,
           2512,
-          2513
+          2513,
+          6028
         ],
         "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
@@ -1049,17 +1169,30 @@
         ],
         "connection_ids": [],
         "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      },
+      {
+        "id": "round-6-network-strain",
+        "title": "Round 6 Network Strain and ADGM Gatekeeping",
+        "viz": null,
+        "finding_ids": [
+          11220,
+          11236,
+          11183,
+          11209,
+          4121
+        ],
+        "connection_ids": [],
+        "guidance": "Round 6 cross-target injection: bin Sulayem ouster context, Al Shorafa as ADGM gatekeeper, controlled-detachment pattern."
       }
     ],
-    "curated_at": "2026-03-11T22:20:45.140973+00:00",
-    "lead": "<p>Aryam Investment 1 is a special purpose vehicle controlled by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, the UAE national security adviser and brother of the UAE president. Incorporated simultaneously in Delaware and Abu Dhabi in December 2024, the entity acquired a 49% stake in <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> for $500 million [Finding #3980]. The agreement was signed on January 16, 2025 &mdash; four days before the presidential inauguration &mdash; by Eric Trump on behalf of WLFI and by <a href=\"/dossiers/martin-edelman\">Martin Edelman</a> and Peng Xiao of <a href=\"/dossiers/g42\">G42</a> on behalf of Aryam [Finding #4265]. The deal was never publicly disclosed until a Wall Street Journal investigation in February 2026 [Finding #4168].</p><p>Of the initial $250 million tranche, $187 million flowed to Trump family entities, approximately $31 million to entities affiliated with <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>, and further sums to co-founders <a href=\"/dossiers/zach-folkman\">Zach Folkman</a> and <a href=\"/dossiers/chase-herro\">Chase Herro</a> [Finding #4123]. A review of records across SEC EDGAR, GLEIF, OCCRP Aleph, ICIJ offshore leaks, FARA, and multiple corporate registries returned no filings for the entity, indicating it was structured for minimal public visibility [Finding #3992]. Analysis of the broader Tahnoon financial ecosystem indicates that another Tahnoon vehicle, <a href=\"/dossiers/mgx\">MGX</a>, subsequently used WLFI&rsquo;s USD1 stablecoin to settle a $2 billion investment in Binance, positioning Tahnoon entities as both WLFI&rsquo;s largest shareholder and its largest stablecoin customer [Finding #4132]. Multiple congressional investigations were launched after the deal became public [Finding #3988].</p>",
-    "system_role": "Aryam Investment 1 is an Abu Dhabi and Delaware-incorporated investment vehicle through which Sheikh Tahnoon bin Zayed Al Nahyan acquired a 49% stake in World Liberty Financial, the Trump family cryptocurrency venture, for $500 million. The deal was signed four days before the January 2025 inauguration. Its structural significance is threefold: it represents the largest documented single payment from a foreign sovereign-linked entity to Trump family interests ($187 million in the first tranche); it is temporally correlated with US policy reversals on AI chip exports to the UAE; and it was structured as a dual-jurisdiction SPV with no regulatory filings, no public disclosure, and no web presence, revealed only through investigative journalism thirteen months after execution.",
+    "curated_at": "2026-05-08T00:34:53.411816",
+    "lead": "<p>Aryam Investment 1 is a special purpose vehicle controlled by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, the UAE national security adviser and brother of the UAE president [Finding #4168]. Incorporated simultaneously in Delaware and Abu Dhabi in December 2024, the entity acquired a 49% stake in <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> for $500 million [Finding #3980]. The agreement was signed on January 16, 2025 — four days before the presidential inauguration — by Eric Trump on behalf of WLFI and by <a href=\"/dossiers/martin-edelman\">Martin Edelman</a> and Peng Xiao of <a href=\"/dossiers/g42\">G42</a> on behalf of Aryam [Finding #4265]. The deal was never publicly disclosed until a Wall Street Journal investigation in February 2026 [Finding #4168].</p><p>Of the initial $250 million tranche, $187 million flowed to Trump family entities, approximately $31 million to entities affiliated with <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>, and further sums to co-founders <a href=\"/dossiers/zach-folkman\">Zach Folkman</a> and <a href=\"/dossiers/chase-herro\">Chase Herro</a> [Finding #4123]. A review of records across SEC EDGAR, GLEIF, OCCRP Aleph, ICIJ offshore leaks, FARA, and multiple corporate registries returned no filings for the entity, indicating it was structured for minimal public visibility [Finding #3992]. Cross-reference of Round 6 findings indicates that another Tahnoon vehicle, <a href=\"/dossiers/mgx\">MGX</a> — formed March 12, 2024 by Mubadala and G42 with <a href=\"/dossiers/tahnoon-bin-zayed-al-nahyan\">Tahnoon</a> as chair and Khaldoon Al Mubarak as vice chair [Finding #11220] — subsequently used WLFI's USD1 stablecoin to settle a $2 billion investment in Binance in May 2025, positioning Tahnoon entities as both WLFI's largest shareholder and its largest stablecoin customer [Finding #4132] [Finding #11236]. Multiple congressional investigations were launched after the deal became public [Finding #3988].</p>",
     "sections": [
       {
         "id": "corporate-structure",
         "title": "Corporate Structure and Beneficial Ownership",
         "viz": null,
-        "content": "<p>Aryam Investment 1 exists as a dual-entity structure: two identically named companies incorporated separately in Delaware and Abu Dhabi on consecutive days in December 2024, approximately one week after <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>&rsquo;s trip to the UAE [Finding #4121]. The Delaware entity is managed by <a href=\"/dossiers/martin-edelman\">Martin Edelman</a>, <a href=\"/dossiers/g42\">G42</a>&rsquo;s general counsel and senior counsel at Paul Hastings, and by Peng Xiao, G42&rsquo;s chief executive officer [Finding #3979]. The Abu Dhabi entity shares office space in the Abu Dhabi Global Market area with other companies in <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>&rsquo;s business network. According to a person close to Tahnoon, the deal was funded by the sheikh and unnamed co-investors rather than G42 corporate funds [Finding #4130].</p><p>The entity&rsquo;s name, Arabic for &ldquo;white gazelle,&rdquo; carries the suffix &ldquo;1,&rdquo; and examination of available records found no Aryam Investment 2 or subsequent entities [Finding #4138]. Review of records across SEC EDGAR, GLEIF, OCCRP Aleph, ICIJ offshore leaks, FARA, OpenSanctions, UK Companies House, and US state corporate registries returned zero results, confirming the entity has no regulatory filings, no Legal Entity Identifier, no foreign agent registration, and no web presence [Finding #3992]. Both Delaware and Abu Dhabi impose minimal beneficial ownership disclosure requirements, and Aryam has no public footprint beyond the WLFI transaction itself.</p>"
+        "content": "<p>Aryam Investment 1 exists as a dual-entity structure: two identically named companies incorporated separately in Delaware and Abu Dhabi on consecutive days in December 2024, approximately one week after <a href=\"/dossiers/steve-witkoff\">Steve Witkoff</a>&rsquo;s trip to the UAE [Finding #4121]. The Delaware entity is managed by <a href=\"/dossiers/martin-edelman\">Martin Edelman</a>, <a href=\"/dossiers/g42\">G42</a>&rsquo;s general counsel and senior counsel at Paul Hastings, and by Peng Xiao, G42&rsquo;s chief executive officer [Finding #3979]. The Abu Dhabi entity shares office space in the Abu Dhabi Global Market area with other companies in <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>&rsquo;s business network [Finding #4121]. According to a person close to Tahnoon, the deal was funded by <a href=\"/dossiers/tahnoon-bin-zayed-al-nahyan\">Tahnoon</a> and unnamed co-investors rather than <a href=\"/dossiers/g42\">G42</a> corporate funds [Finding #4130].</p><p>The entity&rsquo;s name, Arabic for &ldquo;white gazelle,&rdquo; carries the suffix &ldquo;1,&rdquo; and examination of available records found no Aryam Investment 2 or subsequent entities [Finding #4138]. Review of records across SEC EDGAR, GLEIF, OCCRP Aleph, ICIJ offshore leaks, FARA, OpenSanctions, UK Companies House, and US state corporate registries returned zero results, confirming the entity has no regulatory filings, no Legal Entity Identifier, no foreign agent registration, and no web presence [Finding #3992]. Both Delaware and Abu Dhabi impose minimal beneficial ownership disclosure requirements, and analysis of available records indicates Aryam has no public footprint beyond the WLFI transaction itself [Finding #3992].</p>"
       },
       {
         "id": "wlfi-acquisition",
@@ -1071,33 +1204,42 @@
         "id": "tahnoon-ecosystem",
         "title": "The Tahnoon Financial Ecosystem",
         "viz": "ego_network",
-        "content": "<p>Aryam Investment 1 is one node in a constellation of entities controlled by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, the UAE national security adviser. Tahnoon chairs <a href=\"/dossiers/g42\">G42</a>, the Abu Dhabi artificial intelligence company that received a $1.5 billion investment from Microsoft in April 2024. Analysis of corporate records indicates that G42&rsquo;s divested Chinese operations were transferred to another Tahnoon-controlled fund rather than sold to unaffiliated parties [Finding #3983]. Tahnoon also leads <a href=\"/dossiers/mgx\">MGX</a>, a sovereign technology investment vehicle co-founded by G42 and Mubadala.</p><p>The interconnection between these vehicles and WLFI created what analysis suggests is a circular financial structure. According to financial reporting, in May 2025 MGX used WLFI&rsquo;s <a href=\"/dossiers/usd1-stablecoin\">USD1 stablecoin</a> to settle a $2 billion investment in Binance &mdash; the largest single cryptocurrency investment reported to have been paid in stablecoin [Finding #4132]. <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> announced USD1 as the official settlement instrument. Because Aryam held 49% of WLFI and MGX shared board members with Aryam, analysis indicates that Tahnoon entities were simultaneously WLFI&rsquo;s largest shareholder and its largest stablecoin customer [Finding #3985].</p>"
+        "content": "<p>Aryam Investment 1 is one node in a constellation of entities controlled by <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon bin Zayed Al Nahyan</a>, the UAE national security adviser [Finding #4168]. According to public reporting, Tahnoon chairs <a href=\"/dossiers/g42\">G42</a>, the Abu Dhabi artificial intelligence company that received a $1.5 billion investment from Microsoft in April 2024 [Finding #3983]. Analysis of corporate records indicates that G42's divested Chinese operations were transferred to another Tahnoon-controlled fund rather than sold to unaffiliated parties [Finding #3983]. <a href=\"/dossiers/mgx-fund-management-limited\">MGX Fund Management Limited</a> was formed on March 12, 2024 by Mubadala and G42, with <a href=\"/dossiers/tahnoon-bin-zayed-al-nahyan\">Tahnoon</a> installed as chair and Mubadala chief executive Khaldoon Al Mubarak as vice chair, targeting $100 billion in assets under management [Finding #11220].</p><p>The interconnection between these vehicles and WLFI created a circular financial structure. According to financial reporting, in May 2025 <a href=\"/dossiers/mgx\">MGX</a> used WLFI’s <a href=\"/dossiers/usd1-stablecoin\">USD1 stablecoin</a> to settle a $2 billion investment in Binance — the largest single cryptocurrency investment reported to have been paid in stablecoin [Finding #4132]. According to financial reporting, <a href=\"/dossiers/zachary-witkoff\">Zachary Witkoff</a> announced USD1 as the official settlement instrument [Finding #4132]. Because Aryam held 49% of WLFI and MGX shared board members with Aryam, analysis of the financial relationships indicates that Tahnoon entities were simultaneously WLFI’s largest shareholder and its largest stablecoin customer [Finding #3985] [Finding #11236]. Cross-reference of Round 6 findings indicates the broader Abu Dhabi sovereign architecture has been upgraded from a single \"Mubadala unifies\" model to three SCFEA sovereign pillars — ADIA, Mubadala, and L'IMAD — totaling roughly $300 billion in consolidated assets following a January 2026 reorganization under Khaled bin Mohamed bin Zayed [Finding #11236].</p>"
       },
       {
         "id": "policy-timeline",
         "title": "Policy Implications and Quid Pro Quo Timeline",
         "viz": "timeline",
-        "content": "<p>The chronology surrounding the Aryam deal shows a sequence in which sovereign Abu Dhabi capital preceded favorable US policy shifts. On January 16, 2025, Aryam signed the $500 million agreement. Four days later, Trump was inaugurated. In March 2025, <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon</a> visited the White House and met with both Trump and <a href=\"/dossiers/steve-witkoff\">Witkoff</a>. In May 2025, the Trump administration announced that the UAE would receive access to over 500,000 advanced Nvidia AI chips annually, with approximately one-fifth allocated to <a href=\"/dossiers/g42\">G42</a>. Analysis of this timeline indicates that G42 stood to benefit directly from both the WLFI stake and the chip export reversal [Finding #3983] [Finding #4130]. The Biden administration had previously blocked this access over concerns that technology would reach China through G42&rsquo;s Huawei ties.</p><p>Members of Congress investigated whether these events were connected. The <a href=\"/dossiers/mgx\">MGX</a>-Binance settlement in USD1 stablecoin also prompted questions about whether the use of a Trump family financial product influenced the October 21, 2025 presidential pardon of Binance founder Changpeng Zhao. Analysis of the financial relationships indicates that Tahnoon entities were positioned on both sides of these transactions [Finding #3985]. The Aryam deal was signed during the same pre-inauguration period in which, according to public records, the incoming administration revoked ethics executive orders and established <a href=\"/dossiers/doge\">DOGE</a>. The temporal compression of these actions has drawn scrutiny from congressional investigators.</p>"
+        "content": "<p>Analysis of the chronology surrounding the Aryam deal indicates a sequence in which sovereign Abu Dhabi capital preceded favorable US policy shifts [Finding #4130]. On January 16, 2025, Aryam signed the $500 million agreement [Finding #3980]. Four days later, Trump was inaugurated. In March 2025, according to public reporting, <a href=\"/dossiers/sheikh-tahnoon-bin-zayed-al-nahyan\">Sheikh Tahnoon</a> visited the White House and met with both Trump and <a href=\"/dossiers/steve-witkoff\">Witkoff</a> [Finding #3983]. According to public reporting, in May 2025 the Trump administration announced that the UAE would receive access to over 500,000 advanced Nvidia AI chips annually, with approximately one-fifth allocated to <a href=\"/dossiers/g42\">G42</a> [Finding #4130]. Analysis of this timeline indicates that G42 stood to benefit directly from both the WLFI stake and the chip export reversal [Finding #3983] [Finding #4130]. The Biden administration had previously blocked this access over concerns that technology would reach China through G42&rsquo;s Huawei ties.</p><p>Members of Congress investigated whether these events were connected. The <a href=\"/dossiers/mgx\">MGX</a>-Binance settlement in USD1 stablecoin also prompted questions about whether the use of a Trump family financial product influenced the October 21, 2025 presidential pardon of Binance founder Changpeng Zhao, according to congressional inquiries reviewing the financial relationships [Finding #3985]. Analysis of the financial relationships indicates that Tahnoon entities were positioned on both sides of these transactions [Finding #3985]. The Aryam deal was signed during the same pre-inauguration period in which, according to public records, the incoming administration revoked ethics executive orders and established <a href=\"/dossiers/doge\">DOGE</a>. The temporal compression of these actions has drawn scrutiny from congressional investigators.</p>"
+      },
+      {
+        "id": "round-6-network-strain",
+        "title": "Round 6 Network Strain and ADGM Gatekeeping",
+        "viz": null,
+        "content": "<p>Cross-reference of Round 6 findings indicates that the Tahnoon network around Aryam came under observable strain in early 2026 [Finding #11236]. According to news reporting, <a href=\"/dossiers/sultan-bin-sulayem\">Sultan Ahmed bin Sulayem</a> resigned as DP World chair and chief executive on February 13, 2026, days after the release of Department of Justice Epstein files; he was replaced by <a href=\"/dossiers/essa-kazim\">Essa Kazim</a>, who holds a seat on the Nasdaq board through Borse Dubai [Finding #11183]. Cross-reference of Round 6 findings indicates that the bin-Sulayem-to-Kazim succession reflects a \"controlled detachment\" pattern within the broader Tahnoon network in which a visible principal exits under exposure pressure while the network's US capital-market access is preserved through a successor holding structural ties to the Nasdaq board [Finding #11236]. Cross-reference of Round 6 findings further suggests that Aryam's 49% WLFI stake remained in place across this transition while exposure landed on adjacent principals [Finding #11236].</p><p>Analysis of the Abu Dhabi regulatory layer indicates that <a href=\"/dossiers/mohamed-ali-al-shorafa-al-hammadi\">Mohamed Ali Al Shorafa Al Hammadi</a> functions as a fifth Tahnoon-cluster connector, holding overlapping roles as Hub71 chair, Abu Dhabi Securities Exchange chair, head of the Abu Dhabi Investment Office, Etihad Aviation chair, Securities and Commodities Authority chair, and — most directly relevant to Aryam — vice chair of the Abu Dhabi Global Market [Finding #11209]. Because the Abu Dhabi entity in the Aryam dual-jurisdiction structure shares office space with other Tahnoon companies inside the ADGM area [Finding #4121], analysis of the regulatory architecture indicates that the ADGM perimeter — overseen at the vice-chair level by Al Shorafa — gatekeeps the Aryam vehicle's primary jurisdiction [Finding #11209]. Cross-reference of Round 6 findings further indicates that the Brooks-era Office of the Comptroller of the Currency interpretive letters #1170, #1174, and #1184 are now operative law cited in the <a href=\"/dossiers/erebor-bank\">Erebor Bank</a> approval letter, and analysis of the parallel deregulation scaffolding indicates that <a href=\"/dossiers/adam-j-cohen\">Adam J Cohen</a> exhibits the same Skadden-to-OCC-to-implementation revolving-door pattern serving Tahnoon-adjacent flows [Finding #11236].</p>"
       },
       {
         "id": "congressional-probes",
         "title": "Congressional Investigations and Regulatory Status",
         "viz": null,
-        "content": "<p>The revelation of the Aryam deal triggered multiple congressional inquiries. Representative Ro Khanna, ranking member of the House Select Committee on the CCP, sent a formal letter to <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> on February 4, 2026, demanding ownership records, payment details, capitalization tables, profit distributions, board appointment records, and all communications related to the Binance deal by March 1, 2026 [Finding #3988]. Senators Elizabeth Warren and Andy Kim demanded that Treasury Secretary Bessent initiate a CFIUS review of the Aryam acquisition by March 5, 2026, citing national security concerns over UAE access to WLFI user data. Representative Sydney Kamlager-Dove pursued a separate investigation into the connection between the investment and the AI chip export reversal [Finding #3988].</p><p>Review of the filings indicates that Aryam&rsquo;s governance rights at WLFI remain partially undisclosed: the entity holds two of five board seats and a 49% equity stake, but no public document has addressed whether Aryam possesses veto rights, consent rights, or other protective provisions beyond board representation [Finding #4266]. As of the March 5, 2026 deadline imposed by Warren and Kim, no formal CFIUS review had been initiated. Because the Trump administration controls the Treasury Department &mdash; which chairs CFIUS &mdash; analysis suggests that a self-initiated national security review of a transaction benefiting the president&rsquo;s family was unlikely to proceed under the current administration [Finding #4283]. WLFI denied wrongdoing and characterized the probes as politically motivated.</p>"
+        "content": "<p>The revelation of the Aryam deal triggered multiple congressional inquiries [Finding #3988]. Representative Ro Khanna, ranking member of the House Select Committee on the CCP, sent a formal letter to <a href=\"/dossiers/world-liberty-financial\">World Liberty Financial</a> on February 4, 2026, demanding ownership records, payment details, capitalization tables, profit distributions, board appointment records, and all communications related to the Binance deal by March 1, 2026 [Finding #3988]. Senators Elizabeth Warren and Andy Kim demanded that Treasury Secretary Bessent initiate a CFIUS review of the Aryam acquisition by March 5, 2026, citing national security concerns over UAE access to WLFI user data [Finding #3988]. Representative Sydney Kamlager-Dove pursued a separate investigation into the connection between the investment and the AI chip export reversal [Finding #3988].</p><p>Review of the filings indicates that Aryam’s governance rights at WLFI remain partially undisclosed: the entity holds two of five board seats and a 49% equity stake, but no public document has addressed whether Aryam possesses veto rights, consent rights, or other protective provisions beyond board representation [Finding #4266]. Analysis of the regulatory record indicates that, as of the March 5, 2026 deadline imposed by Warren and Kim, no formal CFIUS review had been initiated [Finding #4283]. Because the Trump administration controls the Treasury Department — which chairs CFIUS — analysis suggests that a self-initiated national security review of a transaction benefiting the president's family was unlikely to proceed under the current administration [Finding #4283]. WLFI denied wrongdoing and characterized the probes as politically motivated [Finding #3988].</p>"
       }
     ],
+    "system_role": "Aryam Investment 1 is an Abu Dhabi and Delaware-incorporated investment vehicle through which Sheikh Tahnoon bin Zayed Al Nahyan acquired a 49% stake in World Liberty Financial, the Trump family cryptocurrency venture, for $500 million. The deal was signed four days before the January 2025 inauguration. Its structural significance is fourfold: it is the largest documented single payment from a foreign sovereign-linked entity to Trump family interests ($187 million in the first tranche); it is temporally correlated with US policy reversals on AI chip exports to the UAE; it was structured as a dual-jurisdiction SPV with no regulatory filings, no public disclosure, and no web presence, revealed only through investigative journalism thirteen months after execution; and Round 6 analysis indicates the surrounding Tahnoon network entered a phase of selective principal turnover (bin Sulayem out, Kazim in) consistent with a controlled-detachment pattern that preserves Aryam's WLFI position across Epstein-related exposure events.",
     "open_questions": [
       "Was the second $250 million tranche paid by the July 15, 2025 deadline? Neither WLFI nor Aryam has disclosed the status of this payment, and the WSJ reported it could not determine the allocation of remaining funds. Confirmation would establish whether Trump family entities ultimately received up to $375 million from this single transaction.",
       "Who are the unnamed co-investors alongside Sheikh Tahnoon in the Aryam vehicle? A source close to Tahnoon stated the funds did not come from G42 corporate accounts, implying personal or sovereign wealth participation. Identifying these co-investors would reveal whether additional Gulf sovereign entities or private individuals hold indirect stakes in WLFI.",
       "What protective provisions does Aryam hold beyond its two board seats? A 49% stake would typically carry consent rights over major transactions, dilution protections, and information rights. No public disclosure has addressed these terms, leaving the full extent of Aryam's governance influence over WLFI undetermined.",
       "Did any communication occur between Aryam-affiliated individuals and US government officials regarding AI chip export policy between January and May 2025? The temporal proximity between the $500 million investment, Tahnoon's March White House visit, and the May reversal of chip export restrictions to the UAE has not been explained by any party involved.",
-      "Does Aryam Investment 1 have any FARA-triggering obligations? The entity is controlled by the UAE national security adviser and placed directors on the board of a company generating revenue for the president's family. No foreign agent registration has been filed, and no determination of FARA applicability is publicly documented."
+      "Does Aryam Investment 1 have any FARA-triggering obligations? The entity is controlled by the UAE national security adviser and placed directors on the board of a company generating revenue for the president's family. No foreign agent registration has been filed, and no determination of FARA applicability is publicly documented.",
+      "Does the bin Sulayem-to-Kazim succession at DP World on February 13, 2026 — following the DOJ Epstein file release — indicate a deliberate detachment of high-exposure principals from the Tahnoon network while preserving Aryam's 49% WLFI position and US capital-market access through Kazim's Nasdaq Inc. board seat?"
     ],
     "applicable_models": [
       "jurisdictional-arbitrage",
       "parallel-financial-system",
       "bridge-tax",
-      "private-order"
+      "private-order",
+      "controlled-detachment"
     ]
   },
   "viz_data": {
@@ -1187,6 +1329,13 @@
           "strength": 1.0,
           "evidence_ref": "WSJ Feb 2026; TheBlock Feb 2026",
           "description": "Aryam Investment 1 is investment vehicle backed by Sheikh Tahnoon bin Zayed Al Nahyan. Tahnoon also runs MGX (which used WLFI USD1 stablecoin for B Binance deal) and G42 (AI company). Aryam board appointees hold senior G42 positions."
+        },
+        {
+          "target": "World Liberty Financial",
+          "type": "owns",
+          "strength": 1.0,
+          "evidence_ref": "finding:11190",
+          "description": "owns 49% of WLFI (acquired $500M, Jan 2026; per Round 6 finding #11190)"
         }
       ],
       "secondHop": {
@@ -1393,7 +1542,7 @@
             "target": "World Liberty Financial",
             "type": "political",
             "strength": 1.0,
-            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East \u2014 dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
+            "description": "Steve Witkoff named Promoter on WLFI Form D; son Zach Witkoff is CEO. Steve simultaneously serves as Trump Special Envoy to Middle East — dual-hat conflict connecting WLFI to MGX (Abu Dhabi) and Gulf State diplomacy."
           },
           {
             "target": "Zachary Witkoff",
@@ -1414,6 +1563,12 @@
             "type": "financial",
             "strength": 1.0,
             "description": "Tahnoon backed Aryam Investment 1 which purchased 49% of WLFI for $500M, Jan 2025"
+          },
+          {
+            "target": "World Liberty Financial",
+            "type": "controls",
+            "strength": 1.0,
+            "description": "controls-via-Aryam-Investment-1: Aryam Investment 1 = Tahnoon vehicle bought 49% WLFI for $500M (Round 6 finding #11190)"
           },
           {
             "target": "Mohammed bin Zayed Al Nahyan",

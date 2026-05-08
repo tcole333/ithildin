@@ -3,30 +3,84 @@
   "slug": "mark-paoletta",
   "aliases": [],
   "profile_ids": [
+    "epstein",
     "tech-right"
   ],
-  "generated_at": "2026-03-11T18:36:07.930648",
-  "last_updated": "2026-03-11T16:36:44",
+  "generated_at": "2026-05-07T23:07:36.069198",
+  "last_updated": "2026-05-08T00:33:37.203918",
   "stats": {
-    "total_findings": 11,
-    "total_connections": 6,
-    "total_entities": 3,
+    "total_findings": 38,
+    "total_connections": 15,
+    "total_entities": 4,
     "finding_types": {
-      "legal": 2,
-      "intelligence": 2,
-      "relationship": 3,
+      "financial": 8,
+      "legal": 7,
+      "relationship": 11,
+      "background": 7,
+      "intelligence": 3,
       "identity": 1,
-      "financial": 3
+      "document": 1
     },
     "connection_types": {
-      "employment": 1,
-      "political": 2,
+      "employment": 4,
+      "political": 5,
       "financial": 1,
-      "social": 2
+      "social": 2,
+      "legal": 3
     },
-    "last_updated": "2026-03-11T16:36:44"
+    "last_updated": "2026-05-07T15:18:47"
   },
   "findings": [
+    {
+      "id": 7075,
+      "finding_type": "financial",
+      "summary": "Leonard Leo arranged $80,000-$100,000 in secret consulting payments to Ginni Thomas in 2011-2012, funneled through Kellyanne Conway's polling firm to the Judicial Education Project, then to Thomas's Liberty Consulting firm. Paoletta later became the public defender of both Thomases against ethics scrutiny, was paid $300K by the same Leo nonprofit, and then represented Ginni Thomas before the Jan 6 Committee.",
+      "detail": null,
+      "source_datasets": [
+        "The Week, Washington Post"
+      ],
+      "confidence": "high",
+      "date_of_event": "2012-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:34",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:theweek.com/clarence-thomas",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7056,
+      "finding_type": "financial",
+      "summary": "Leonard Leo's Judicial Education Project paid Paoletta $300,000 in 2016 for 'media projects' -- a PR campaign defending Clarence Thomas including the 2020 documentary 'Created Equal.' Total Leo-funded Thomas PR effort was $1.8M+. Paoletta confirmed: 'my good friend Leonard Leo's group provided funding for this work.'",
+      "detail": null,
+      "source_datasets": [
+        "Washington Post"
+      ],
+      "confidence": "high",
+      "date_of_event": "2016-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:19",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:washingtonpost.com/2023/07/20",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
     {
       "id": 6686,
       "finding_type": "legal",
@@ -67,6 +121,106 @@
         {
           "evidence_type": "ref",
           "evidence_ref": "WashPost Dec 11 2019 OMB memo",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7064,
+      "finding_type": "legal",
+      "summary": "Sen. Van Hollen (D-MD) wrote to Paoletta on March 12, 2020 demanding he (1) recuse from GAO inquiry into illegal Ukraine aid withholding, and (2) resign as OMB Designated Agency Ethics Official. GAO had determined the DOD aid withholding was illegal. Paoletta had personally received emails from DOD officials raising legal concerns but gave a 'highly misleading' response to GAO. 87% of Designated Agency Ethics Officials are apolitical career staff, not political appointees like Paoletta.",
+      "detail": null,
+      "source_datasets": [
+        "Sen. Van Hollen press release"
+      ],
+      "confidence": "high",
+      "date_of_event": "2020-03-12",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:46",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:vanhollen.senate.gov/2020/03/12",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7120,
+      "finding_type": "relationship",
+      "summary": "Paoletta lobbied for Oracle America on federal contracting through Schaerr Jaffe LLP (2021), disclosing covered positions: OMB GC and VP Pence Chief Counsel. Oracle paid at least K for lobbying Congress on government contracts. Paoletta returned to OMB GC in Jan 2025 to work with DOGE.",
+      "detail": null,
+      "source_datasets": [
+        "LDA Senate lobbying disclosures"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2021-01-01",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:32:15",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "LDA filings 2021 Q1-Q3 for Schaerr Jaffe / Oracle America Inc.",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7066,
+      "finding_type": "background",
+      "summary": "Paoletta and Vought co-authored a 14-page letter to House Budget Committee on Jan 19, 2021 (day before leaving office) arguing the Impoundment Control Act is 'unworkable in practice and should be significantly reformed or repealed.' This legal theory was then developed at Center for Renewing America (which Vought founded) where Paoletta was Senior Fellow, and is now being implemented as executive policy with Paoletta back at OMB.",
+      "detail": null,
+      "source_datasets": [
+        "American Prospect"
+      ],
+      "confidence": "high",
+      "date_of_event": "2021-01-19",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:56",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:prospect.org/2025/01/30",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7062,
+      "finding_type": "legal",
+      "summary": "Paoletta represented Ginni Thomas (wife of Justice Clarence Thomas) before the House Jan 6 Committee in 2022. Thomas subsequently did NOT recuse from two J6-related SCOTUS cases, one involving his wife's text messages. Paoletta publicly attacked recusal demands as 'baseless.'",
+      "detail": null,
+      "source_datasets": [
+        "LittleSis, Revolving Door Project"
+      ],
+      "confidence": "high",
+      "date_of_event": "2022-01-01",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:36",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:1860773",
           "source_quote": null,
           "source_page": null,
           "assessment": null
@@ -120,6 +274,56 @@
       ]
     },
     {
+      "id": 7129,
+      "finding_type": "background",
+      "summary": "Paoletta is a central node connecting Supreme Court, DOGE, and Project 2025: (1) Helped confirm Justice Thomas in 1991, remained close personal friend and aggressive public defender through gift scandals. (2) Senior Fellow at Center for Renewing America (Russell Vought's think tank). (3) Project 2025 Advisory Board member. (4) Co-developed legal theory that Impoundment Control Act is unconstitutional. (5) Served as legal counsel for Ginni Thomas during Jan 6 committee. (6) Close ally of Leonard Leo. Career path: Bush 41 WH -> Congress (decade) -> VP Pence Chief Counsel -> OMB GC (Trump 1) -> Schaerr Jaffe partner + CRA fellow -> OMB GC (Trump 2/DOGE).",
+      "detail": null,
+      "source_datasets": [
+        "web_research"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-01-20",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:33:58",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "ProPublica reporting, True North Research, Revolving Door Project",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7157,
+      "finding_type": "financial",
+      "summary": "Revolving door conflict pattern: Paoletta lobbied for Oracle America on government contracts through Schaerr Jaffe (2021, K+), then returned to OMB GC (Jan 2025) working with DOGE. Oracle holds major DOD contracts (M ERP/finance) and is a key Stargate AI partner (B). Larry Ellison is close personal friend of both Trump and Musk. Paoletta's OMB position gives him oversight of the very federal contracting process he lobbied on behalf of Oracle to influence.",
+      "detail": null,
+      "source_datasets": [
+        "web_research"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-01-20",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:40:48",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA filings 2021, OpenSecrets, Fortune reporting",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6688,
       "finding_type": "intelligence",
       "summary": "Appointed OMB GC in Trump II (Dec 2024) to 'work closely with DOGE team'; responsible for Jan 2025 federal funding freeze memo (M-25-13) that was struck down by court and rescinded within 48 hours",
@@ -166,10 +370,110 @@
       ]
     },
     {
+      "id": 7052,
+      "finding_type": "background",
+      "summary": "Paoletta drafted the January 27, 2025 OMB memo ordering agencies to pause all federal financial assistance obligations/disbursements. The memo was rescinded within days after widespread chaos, but established the legal framework for subsequent spending freezes and impoundment claims.",
+      "detail": null,
+      "source_datasets": [
+        "Salon, DeSmog, American Prospect"
+      ],
+      "confidence": "high",
+      "date_of_event": "2025-01-27",
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:01",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:salon.com/2025/01/29",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7054,
+      "finding_type": "legal",
+      "summary": "Clarence Thomas did NOT recuse from Dept of State v. AIDS Vaccine Advocacy Coalition (24A831), the key SCOTUS case challenging OMB's foreign aid spending freeze. Thomas dissented (with Alito, Gorsuch, Kavanaugh) from the 5-4 decision denying Trump's request to lift the lower court freeze order on March 5, 2025 -- siding with the administration position his close friend Paoletta helped create as OMB GC.",
+      "detail": null,
+      "source_datasets": [
+        "Democracy Docket, SCOTUSblog"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-03-05",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:10",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:democracydocket.com/24A831",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7059,
+      "finding_type": "legal",
+      "summary": "In September 2025, SCOTUS reversed course in Dept of State v. AIDS Vaccine Advocacy Coalition (25A269), allowing Trump administration to withhold $4 billion in foreign aid via 'pocket rescission' in a 6-3 ruling. Thomas was in the majority. Paoletta's impoundment legal theory -- developed at Center for Renewing America alongside Russell Vought -- was vindicated by a court where his close friend Thomas sits.",
+      "detail": null,
+      "source_datasets": [
+        "SCOTUSblog, NBC News"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2025-09-26",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:10:29",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "web:scotusblog.com/25A269",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7087,
+      "finding_type": "legal",
+      "summary": "SCOTUS struck down Trump's sweeping 'reciprocal' tariffs on Feb 20, 2026 (Learning Resources Inc v. Trump, 24-1287). Thomas dissented with Alito and Kavanaugh. While not directly an OMB/Paoletta-drafted order, this case reflects the broader pattern: executive orders on spending/trade policy drafted or legally justified by the Paoletta-Vought OMB are repeatedly reaching SCOTUS where Thomas participates without recusing despite his close friendship with Paoletta.",
+      "detail": null,
+      "source_datasets": [
+        "CourtListener"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-02-20",
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:12:16",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "courtlistener:10799354",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
       "id": 6632,
       "finding_type": "relationship",
       "summary": "Paoletta CRA fellow -> OMB General Counsel. Longtime friend and defender of Justice Clarence Thomas. Received hundreds of thousands via Leonard Leo for Thomas PR work. Provided legal counsel to Ginni Thomas during Jan 6 Committee. Connected to Republican AGs in TX, IN, MS, GA who file Supreme Court amicus briefs. Previously OMB General Counsel Trump 1 where he worked with Vought on border wall funding.",
-      "detail": "Mark Paoletta: partner at Schaerr Jaffe law firm, CRA Senior Fellow, appointed OMB General Counsel Trump 2. During Trump 1 served as OMB General Counsel alongside Director Vought. Key connections: (1) Justice Clarence Thomas \u2014 described as longtime friend, vocal defender, received hundreds of thousands of dollars via Leonard Leo for Thomas public relations work, participated in documentary interviews with Thomas. (2) Ginni Thomas \u2014 provided legal counsel during Jan 6 Committee proceedings. (3) Republican AG network \u2014 law firm involved with AGs in Texas, Indiana, Mississippi, Georgia who submit Supreme Court amicus briefs. (4) DOGE \u2014 works closely with DOGE team to cut government bureaucracy. (5) Border wall \u2014 led efforts to identify funding for Southern Border Wall during Trump 1. This creates a triangle: Leo funds CRA via DonorsTrust -> Paoletta at CRA receives Leo money for Thomas defense -> Paoletta placed at OMB to work with DOGE.",
+      "detail": "Mark Paoletta: partner at Schaerr Jaffe law firm, CRA Senior Fellow, appointed OMB General Counsel Trump 2. During Trump 1 served as OMB General Counsel alongside Director Vought. Key connections: (1) Justice Clarence Thomas — described as longtime friend, vocal defender, received hundreds of thousands of dollars via Leonard Leo for Thomas public relations work, participated in documentary interviews with Thomas. (2) Ginni Thomas — provided legal counsel during Jan 6 Committee proceedings. (3) Republican AG network — law firm involved with AGs in Texas, Indiana, Mississippi, Georgia who submit Supreme Court amicus briefs. (4) DOGE — works closely with DOGE team to cut government bureaucracy. (5) Border wall — led efforts to identify funding for Southern Border Wall during Trump 1. This creates a triangle: Leo funds CRA via DonorsTrust -> Paoletta at CRA receives Leo money for Thomas defense -> Paoletta placed at OMB to work with DOGE.",
       "source_datasets": [
         "web_search"
       ],
@@ -434,6 +738,519 @@
           "assessment": null
         }
       ]
+    },
+    {
+      "id": 7068,
+      "finding_type": "background",
+      "summary": "Paoletta is a registered lobbyist at three law firms: Dickstein Shapiro LLP, DLA Piper LLP, and Schaerr Jaffe LLP. At Schaerr Jaffe (registered 2019+), the firm lobbied on intelligence surveillance issues for Project for Privacy and Surveillance Accountability Inc. Paoletta's lobbying career spans DC's legal establishment before rotating into senior government roles.",
+      "detail": null,
+      "source_datasets": [
+        "Senate LDA"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:05",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LDA:37237,57131,96158",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7071,
+      "finding_type": "financial",
+      "summary": "Paoletta is Director of Unreported Story Society (EIN 82-3412341), a 501(c)(3) conservative media nonprofit at 1747 Penn Ave NW Suite 1000, DC. Revenue $1.5M in 2023. Run by Ann McElhinney (president, $243K comp) and Magdalena Segieda (treasurer, $219K). Major funders: California Community Foundation ($2.55M total), Bradley Impact Fund ($505K).",
+      "detail": null,
+      "source_datasets": [
+        "IRS 990"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:15",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "990:823412341",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7073,
+      "finding_type": "financial",
+      "summary": "FEC records show Paoletta donated $26,575+ to Republican causes from 2022-2024, including $6,871 to Trump National Committee JFC/Never Surrender Inc (Oct 2024), $3,300 to Parkinson for Senate, $1,000 to Comer for Congress, $500 to Chip Roy for Congress, $500 to Ron Johnson for Senate. All donations listed employer as Schaerr Jaffe LLP, occupation as Attorney/Partner.",
+      "detail": null,
+      "source_datasets": [
+        "FEC"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:24",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "https://www.fec.gov/data/search/?q=donor%3AMark+Paoletta",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7084,
+      "finding_type": "background",
+      "summary": "Paoletta mentioned in PSQ Holdings Inc (PublicSq, ticker PSQH) 8-K filing dated 2025-08-20. PSQ Holdings is the conservative 'parallel economy' marketplace. The SEC filing (CIK 0001847064) is an Exhibit 99.1 current report.",
+      "detail": null,
+      "source_datasets": [
+        "SEC EDGAR"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:12:06",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "EDGAR:0001104659-25-080974",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7089,
+      "finding_type": "background",
+      "summary": "LittleSis records a social relationship between Mark Paoletta and Peter B. Rutledge. Rutledge is a University of Georgia law professor who was reportedly on Trump's shortlist for federal judicial appointments. The connection suggests Paoletta's network extends into the federal judiciary pipeline.",
+      "detail": null,
+      "source_datasets": [
+        "LittleSis"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:12:24",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:1963464",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 7092,
+      "finding_type": "background",
+      "summary": "OpenSanctions lists Paoletta as a Politically Exposed Person (PEP) in two datasets: Wikidata (Q6769147, education: Georgetown Law, Duquesne) and US Plum Book (position: General Counsel, Executive Office of the President - Office of Management and Budget). No sanctions or enforcement hits. FARA search returned zero results -- no foreign agent registrations.",
+      "detail": null,
+      "source_datasets": [
+        "OpenSanctions, FARA"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:12:45",
+      "target_name": "Mark Paoletta",
+      "profile_id": "tech-right",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "OpenSanctions:Q6769147",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11167,
+      "finding_type": "relationship",
+      "summary": "STRUCTURAL Mark Paoletta tops orchestrator-score (39.02) at 3-pillar breadth (government,legal,consulting) with 3 revolving-door transitions and 11 cohort-centrality nodes — but the Epstein investigation has NO findings on him. He is the highest-ranked structural-orchestrator in the graph who is currently unrepresented in the findings set",
+      "detail": "Graph metric: pillar_tracker score result rank-1, orchestrator_score=39.02, pillar_breadth=6.86 (consulting+government+legal), revolving_door=3, cohort_centrality=11. Paoletta's profile (Trump 1.0/2.0 OMB General Counsel, Clarence Thomas confidant, frequent K&E-orbit nominee, Project 2025 architect) places him structurally in DOJ-Federalist-K&E ecosystem — adjacent to Cipollone/Filip/Eisenberg open-triad cluster (top closure-score 1.0 cluster in the graph). He is the highest tri-pillar orchestrator the system identifies, and the investigation has investigated only the K&E-side of that cluster. NEW structural observation: orchestrator-tier #1 sits unsearched. Recommendation: this is a coverage gap distinct from the SoftBank-caper threads but highly relevant to the K&E-DOJ-Trump-2.0 layer that surrounds the operational threads. Falsifiable prediction: searching FARA, USASpending, public testimony for Paoletta intersections with K&E-Epstein representatives (Filip/Cipollone/Eisenberg/Benczkowski/Cox/Acosta) will surface non-trivial overlap that is currently invisible.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 14:16:18",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "analysis-run-50",
+          "source_quote": " pillar_tracker score rank-1 39.02 pillar_breadth=6.86 revolving_door=3 cohort_centrality=11 pillar_types={consulting,government,legal}",
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11179,
+      "finding_type": "relationship",
+      "summary": "Paoletta career arc: Energy & Commerce Cmte Chief Counsel for Oversight (1997-2007) -> Dickstein Shapiro Partner (2007) -> DLA Piper Partner -> VP Pence Counsel (Jan 2017-Jan 2018) -> OMB GC Trump I (Jan 8 2018 - Jan 20 2021) -> Schaerr Jaffe Partner (Mar 26 2021 - Jan 2025) -> OMB GC Trump II (Jan 20 2025-present), concurrent CFPB Acting Chief Legal Officer (2025) and OIRA Administrator (Dec 2025-)",
+      "detail": "ORIGINAL PROMPT ASSERTION INCORRECT: no documented Williams & Connolly tenure (1992-2001). Actual record per Wikipedia + LegiStorm + Schaerr Jaffe announcement + Trump appointment statement: HW Bush WH Counsel's Office (Asst Counsel) -> Energy & Commerce Cmte Chief Counsel for Oversight & Investigations Sep 1997-Jan 2007 -> Dickstein Shapiro Partner Jan 2007 (head of Congressional Investigations practice) -> DLA Piper Partner Federal Law & Policy. Joined Schaerr Jaffe Partner Mar 26 2021 (announced firm site). Trump appointment statement Dec 9 2024 confirmed return to OMB GC for Trump II.",
+      "source_datasets": [
+        "Wikipedia",
+        "Schaerr-Jaffe-firm",
+        "presidency.ucsb.edu",
+        "markpaoletta.com"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:16:41",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Mark_Paoletta",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.markpaoletta.com/about",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.schaerr-jaffe.com/mark-paoletta-joins-schaerr-l-jaffe-as-newest-partner/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11182,
+      "finding_type": "relationship",
+      "summary": "Paoletta represented Ginni Thomas before House Jan 6 Select Committee — Jun 2022 letter resisting subpoena, Sep 29 2022 voluntary 4.5-hour interview",
+      "detail": "Paoletta acted as Ginni Thomas's legal counsel in 2022. June 2022: letter resisting Committee request. Sep 29 2022: Ginni Thomas appeared voluntarily for 4.5-hour in-person interview. Paoletta's post-interview statement framed her as cooperative. Direct legal nexus between Paoletta and the Justice Thomas household.",
+      "source_datasets": [
+        "cnn",
+        "npr"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:17:12",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2022/09/21/politics/ginni-thomas-january-6-committee-interview/index.html",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2022/09/28/politics/ginni-thomas-january-6-committee-interview/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.npr.org/2022/09/29/1125886442/ginni-thomas-wife-supreme-court-justice-testifies-jan-6",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11186,
+      "finding_type": "relationship",
+      "summary": "Paoletta is Senior Fellow at Center for Renewing America (Russ Vought's think tank), designated Project 2025 Advisory Board member",
+      "detail": "Concurrent with his Schaerr Jaffe partnership (2021-2025), Paoletta was Senior Fellow at Center for Renewing America (CRA), founded by Russell Vought (OMB Director Trump I and II). CRA is an official Project 2025 advisory group. Trump's Dec 9 2024 OMB appointment announcement explicitly cited his CRA fellowship and prior OMB tenure 'with then-OMB Director Russ Vought.' Structural Vought-Paoletta institutional link bridging private think-tank, OMB, and CFPB.",
+      "source_datasets": [
+        "presidency_ucsb"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:17:22",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://americarenewing.com/author/markpaoletta/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://resistingproject2025.org/mark-paoletta",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11187,
+      "finding_type": "document",
+      "summary": "Paoletta authored Jan 27 2025 OMB memo pausing all federal financial assistance (rescinded inside 48 hrs); separately authored impoundment-authority memo claiming Article II inherent presidential power",
+      "detail": "Two early Trump-II Paoletta documents in public record: (1) Jan 27 2025 OMB memo 'temporarily pause all activities related to obligation or disbursement of all federal financial assistance' — caused legal/political crisis, rescinded inside 48 hours; (2) impoundment-authority memo asserting 'the power of impoundment is one such executive power vested in the President alone by Article II.' Paoletta also testified before House Budget Committee on Impoundment Control Act (Schaerr Jaffe announcement). Confirms Paoletta as legal architect for Vought-driven impoundment doctrine.",
+      "source_datasets": [
+        "propublica",
+        "appropriations_senate"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:17:26",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.appropriations.senate.gov/imo/media/doc/trump_impoundment_eos_fact_sheet.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/about-russell-vought-trump-shadow-president",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.schaerr-jaffe.com/watch-mark-paoletta-testifies-about-impoundment-control-act-at-house-budget-committee-hearing/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11191,
+      "finding_type": "relationship",
+      "summary": "Paoletta as CFPB Acting Chief Legal Officer 2025: issued Apr 16 2025 priority-shift memo redirecting enforcement to states, Apr 18 2025 RIF declaration challenged by Judge Amy Berman Jackson (DDC)",
+      "detail": "Trump II: Paoletta serves dual roles as OMB GC and CFPB Acting Chief Legal Officer. Apr 16 2025: staff memo announcing CFPB shift away from enforcement and supervision toward states-led model. Apr 18 2025: declaration filed in DDC re: 'particularized assessment' of CFPB employees designated for reduction-in-force; Judge Amy Berman Jackson challenged its accuracy. NTEU (CFPB union) won preliminary injunction April 2025. Demonstrates Paoletta's Trump-II role extends well beyond OMB regulatory review into agency dismantling.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:17:38",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://bankingjournal.aba.com/2025/04/nteu-granted-preliminary-injunction-in-cfpb-funding-lawsuit/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.consumerfinancemonitor.com/2025/04/17/cfpb-rescinds-enforcement-supervisory-priority-documents-outlines-new-priorities-for-2025/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.gibsondunn.com/stand-down-at-cfpb/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11193,
+      "finding_type": "relationship",
+      "summary": "Paoletta is close personal ally of Leonard Leo and prepared Justices Gorsuch, Kavanaugh, and Thomas for confirmation hearings — institutional FedSoc/Thomas-orbit hub",
+      "detail": "Three reinforcing primary-source-supported facts: (1) Paoletta is publicly described as 'a close friend of Leonard Leo' (Project 2025 admin profile, Stop the Coup 2025); (2) Paoletta prepared Justices Gorsuch, Kavanaugh, and Thomas for their SCOTUS confirmation hearings; (3) Paoletta co-edited 'Created Equal: Clarence Thomas in His Own Words' (Regnery 2022) with Michael Pack, based on 25 hrs of 2018-19 interviews. Plus he maintains justicethomas.com and anitahillcase.com domains. Combined with Ginni Thomas representation (#11182), Paoletta is a *structural hub* in the Federalist Society / Thomas Court orbit — confirming Round-5 systemic-analysis prediction.",
+      "source_datasets": [
+        "presidency_ucsb"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "paraphrase",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:17:48",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://project2025admin.com/personnel/mark-paoletta/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://resistingproject2025.org/mark-paoletta",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.heritage.org/courts/event/created-equal-clarence-thomas-his-own-words-featuring-authors-michael-pack-and-mark",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.markpaoletta.com/about",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11197,
+      "finding_type": "relationship",
+      "summary": "Schaerr Jaffe LLP small-boutique partner roster (2024) — Paoletta was 1 of 7 partners alongside Gene Schaerr, Erik Jaffe, H. Christopher Bartolomucci, Donald Falk, Jeffrey Munk, Brian Field, Edward Trent. Schaerr Jaffe filed Trump v US (23-939) amicus for Edwin Meese III (Mar 19 2024)",
+      "detail": "Paoletta's 2021-2025 home firm Schaerr Jaffe LLP is a ~25-attorney DC boutique with disproportionate Federalist Society and conservative-cause representation. Partners: Gene Schaerr (founding, 7 SCOTUS arguments), Erik S. Jaffe, H. Christopher Bartolomucci, Donald M. Falk, Jeffrey W. Munk, Brian J. Field, Edward H. Trent, Mark Paoletta. Senior counsel: Charles Burnett, Nicholas Miller. Counsel: Hannah Smith (former Becket Fund), James Heilpern, Stephanie Freudenberg, Joshua Prince. Academic affiliates: Thomas R. Lee, Eugene Volokh, James C. Phillips, John Greil, Annika Boone Barkdull. Notable representative clients: Hobby Lobby, Bayer A.G., Suzuki Motor, AT&T, Fox Corporation, U.S. Chamber, Cato Institute, Hatch & Lee senate offices, Republic of Ecuador, US Virgin Islands, USCCB, EWTN. SCOTUS work: Mar 19 2024 amicus brief in Trump v US 23-939 by Edwin Meese III + others, with Gene C. Schaerr as counsel of record. Stephen Schwartz (former Schaerr Jaffe) confirmed to U.S. Court of Federal Claims. Stephanie Freudenberg, Donald Falk, and Bartolomucci all have FedSoc bios. Schaerr Jaffe = small DC litigation boutique with disproportionate FedSoc footprint as predicted by Round 5.",
+      "source_datasets": [
+        "courtlistener"
+      ],
+      "confidence": "high",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:07",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.schaerr-jaffe.com/attorneys/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.schaerr-jaffe.com/representative-clients/",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.supremecourt.gov/DocketPDF/23/23-939/303456/20240319162315185_Meese%20et%20al%20Amici%20Brief-Trump%20v%20US.pdf",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11201,
+      "finding_type": "intelligence",
+      "summary": "SYNTHESIS: Paoletta is the legal-architect node welding Vought (CRA + OMB), Thomas household (Ginni rep + Thomas confirmation prep), Leo (FedSoc judicial pipeline), and Schaerr Jaffe (DC FedSoc boutique) into one operational cluster — orchestrator-rank-1 prediction confirmed",
+      "detail": "Round 5 systemic-analysis flagged Paoletta as orchestrator-rank-1 with zero findings. This synthesis confirms: he is the SINGLE NODE that simultaneously sits in (1) Center for Renewing America (Vought / Project 2025 think-tank); (2) OMB executive-power architecture (impoundment memos, CFPB dismantle, DOGE coordination); (3) Justice Thomas's personal-orbit (counsel to Ginni Thomas, Created Equal book, justicethomas.com domain, Anita Hill case advocacy); (4) Leonard Leo / FedSoc judicial pipeline (prepared Gorsuch, Kavanaugh, Thomas for confirmation); (5) Schaerr Jaffe DC litigation boutique (Mar 2021-Jan 2025) where 7 of 7 partners share FedSoc-aligned representations (Hobby Lobby, USCCB, Meese amicus). Original prompt's Williams & Connolly thesis is INCORRECT (no W&C tenure documented); actual private-practice path is Dickstein Shapiro (Jan 2007) -> DLA Piper -> Schaerr Jaffe. The functional importance is the same: Paoletta is the lawyer-of-record glue between movement institutions and the Trump-II executive branch.",
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:23",
+      "target_name": "Mark Paoletta",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Mark_Paoletta",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://resistingproject2025.org/mark-paoletta",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.propublica.org/article/about-russell-vought-trump-shadow-president",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
     }
   ],
   "connections": [
@@ -562,6 +1379,209 @@
       ]
     },
     {
+      "id": 3543,
+      "person_a": "Ginni Thomas",
+      "person_b": "Mark Paoletta",
+      "relationship_type": "legal",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:11:49",
+      "profile_id": "tech-right",
+      "other_person": "Ginni Thomas",
+      "other_person_slug": "ginni-thomas",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "LittleSis:1860773",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 3576,
+      "person_a": "Leonard Leo",
+      "person_b": "Mark Paoletta",
+      "relationship_type": "political",
+      "description": null,
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-03-23 18:39:04",
+      "profile_id": "tech-right",
+      "other_person": "Leonard Leo",
+      "other_person_slug": "leonard-leo",
+      "evidence": []
+    },
+    {
+      "id": 5975,
+      "person_a": "Ginni Thomas",
+      "person_b": "Mark Paoletta",
+      "relationship_type": "legal",
+      "description": "Paoletta represented Ginni Thomas before House Jan 6 Select Committee 2022; Sep 29 2022 4.5-hr voluntary interview",
+      "strength": "strong",
+      "date_range": "2022-06/2022-09",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:30",
+      "profile_id": "epstein",
+      "other_person": "Ginni Thomas",
+      "other_person_slug": "ginni-thomas",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.cnn.com/2022/09/28/politics/ginni-thomas-january-6-committee-interview/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5976,
+      "person_a": "Mark Paoletta",
+      "person_b": "Russell Vought",
+      "relationship_type": "political",
+      "description": "Long-running Vought-Paoletta partnership: OMB Director / GC dyad in Trump I (2018-2021), Center for Renewing America Senior Fellow under Vought 2021-2025, OMB GC under Vought again Trump II (2025-)",
+      "strength": "strong",
+      "date_range": "2018/present",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:33",
+      "profile_id": "epstein",
+      "other_person": "Russell Vought",
+      "other_person_slug": "russell-vought",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5977,
+      "person_a": "Leonard Leo",
+      "person_b": "Mark Paoletta",
+      "relationship_type": "political",
+      "description": "Public 'close friend of Leonard Leo' — Paoletta prepared Justices Gorsuch, Kavanaugh, Thomas for confirmation hearings within Leo's FedSoc judicial-selection pipeline",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:35",
+      "profile_id": "epstein",
+      "other_person": "Leonard Leo",
+      "other_person_slug": "leonard-leo",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://resistingproject2025.org/mark-paoletta",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5978,
+      "person_a": "Clarence Thomas",
+      "person_b": "Mark Paoletta",
+      "relationship_type": "legal",
+      "description": "Paoletta played key role in Justice Thomas's 1991 SCOTUS confirmation as HW Bush WH Asst Counsel; co-edited 'Created Equal: Clarence Thomas in His Own Words' (Regnery 2022); maintains justicethomas.com and anitahillcase.com domains; 35-year Thomas-orbit fixture",
+      "strength": "strong",
+      "date_range": "1991/present",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:39",
+      "profile_id": "epstein",
+      "other_person": "Clarence Thomas",
+      "other_person_slug": "clarence-thomas",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://en.wikipedia.org/wiki/Mark_Paoletta",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.markpaoletta.com/about",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5979,
+      "person_a": "Mark Paoletta",
+      "person_b": "Schaerr Jaffe LLP",
+      "relationship_type": "employment",
+      "description": "Partner at Schaerr Jaffe LLP Mar 26 2021 - Jan 2025 (announced firm site)",
+      "strength": "strong",
+      "date_range": "2021-03/2025-01",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:42",
+      "profile_id": "epstein",
+      "other_person": "Schaerr Jaffe LLP",
+      "other_person_slug": "schaerr-jaffe-llp",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.schaerr-jaffe.com/mark-paoletta-joins-schaerr-l-jaffe-as-newest-partner/",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5980,
+      "person_a": "Center for Renewing America",
+      "person_b": "Mark Paoletta",
+      "relationship_type": "employment",
+      "description": "Senior Fellow at Center for Renewing America (Vought's think-tank, Project 2025 advisory group) ~2021-2025 concurrent with Schaerr Jaffe",
+      "strength": "strong",
+      "date_range": "2021/2025",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:44",
+      "profile_id": "epstein",
+      "other_person": "Center for Renewing America",
+      "other_person_slug": "center-for-renewing-america",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 5981,
+      "person_a": "Mark Paoletta",
+      "person_b": "Office of Management and Budget",
+      "relationship_type": "employment",
+      "description": "OMB General Counsel Trump I (Jan 8 2018 - Jan 20 2021) and Trump II (Jan 20 2025 - present); concurrent CFPB Acting Chief Legal Officer 2025; also Performing Duties of OIRA Administrator Dec 2025-",
+      "strength": "strong",
+      "date_range": "2018/present",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:18:47",
+      "profile_id": "epstein",
+      "other_person": "Office of Management and Budget",
+      "other_person_slug": "office-of-management-and-budget",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.legistorm.com/person/bio/19143/Mark_R_Paoletta.html",
+          "source_quote": null,
+          "source_page": null
+        },
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
       "id": 3388,
       "person_a": "Elon Musk",
       "person_b": "Mark Paoletta",
@@ -614,6 +1634,17 @@
   ],
   "entities": [
     {
+      "role": "partner",
+      "date_start": "2021",
+      "date_end": "2025-01",
+      "source": "LDA filings, FEC records",
+      "entity_id": 1039,
+      "entity_name": "Schaerr Jaffe LLP",
+      "entity_type": "partnership",
+      "jurisdiction": "US-DC",
+      "entity_status": "active"
+    },
+    {
       "role": "President",
       "date_start": null,
       "date_end": null,
@@ -649,12 +1680,108 @@
   ],
   "timeline": [
     {
+      "date": "1991/present",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "Paoletta played key role in Justice Thomas's 1991 SCOTUS confirmation as HW Bush WH Asst Counsel; co-edited 'Created Equal: Clarence Thomas in His Own Words' (Regnery 2022); maintains justicethomas.com and anitahillcase.com domains; 35-year Thomas-orbit fixture",
+      "other_person": "Clarence Thomas",
+      "id": 5978
+    },
+    {
+      "date": "2012-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Leonard Leo arranged $80,000-$100,000 in secret consulting payments to Ginni Thomas in 2011-2012, funneled through Kellyanne Conway's polling firm to the Judicial Education Project, then to Thomas's Liberty Consulting firm. Paoletta later became the public defender of both Thomases against ethics scrutiny, was paid $300K by the same Leo nonprofit, and then represented Ginni Thomas before the Jan 6 Committee.",
+      "confidence": "high",
+      "id": 7075
+    },
+    {
+      "date": "2016-01-01",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Leonard Leo's Judicial Education Project paid Paoletta $300,000 in 2016 for 'media projects' -- a PR campaign defending Clarence Thomas including the 2020 documentary 'Created Equal.' Total Leo-funded Thomas PR effort was $1.8M+. Paoletta confirmed: 'my good friend Leonard Leo's group provided funding for this work.'",
+      "confidence": "high",
+      "id": 7056
+    },
+    {
+      "date": "2018/present",
+      "type": "connection",
+      "relationship_type": "political",
+      "description": "Long-running Vought-Paoletta partnership: OMB Director / GC dyad in Trump I (2018-2021), Center for Renewing America Senior Fellow under Vought 2021-2025, OMB GC under Vought again Trump II (2025-)",
+      "other_person": "Russell Vought",
+      "id": 5976
+    },
+    {
+      "date": "2018/present",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "OMB General Counsel Trump I (Jan 8 2018 - Jan 20 2021) and Trump II (Jan 20 2025 - present); concurrent CFPB Acting Chief Legal Officer 2025; also Performing Duties of OIRA Administrator Dec 2025-",
+      "other_person": "Office of Management and Budget",
+      "id": 5981
+    },
+    {
       "date": "2019-07-25",
       "type": "finding",
       "finding_type": "legal",
       "summary": "As OMB GC (Trump I), authored legal defense of Ukraine aid withholding that GAO ruled violated Impoundment Control Act; co-developed impoundment theory with Vought claiming inherent Article II presidential power",
       "confidence": "high",
       "id": 6686
+    },
+    {
+      "date": "2020-03-12",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Sen. Van Hollen (D-MD) wrote to Paoletta on March 12, 2020 demanding he (1) recuse from GAO inquiry into illegal Ukraine aid withholding, and (2) resign as OMB Designated Agency Ethics Official. GAO had determined the DOD aid withholding was illegal. Paoletta had personally received emails from DOD officials raising legal concerns but gave a 'highly misleading' response to GAO. 87% of Designated Agency Ethics Officials are apolitical career staff, not political appointees like Paoletta.",
+      "confidence": "high",
+      "id": 7064
+    },
+    {
+      "date": "2021-01-01",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Paoletta lobbied for Oracle America on federal contracting through Schaerr Jaffe LLP (2021), disclosing covered positions: OMB GC and VP Pence Chief Counsel. Oracle paid at least K for lobbying Congress on government contracts. Paoletta returned to OMB GC in Jan 2025 to work with DOGE.",
+      "confidence": "confirmed",
+      "id": 7120
+    },
+    {
+      "date": "2021-01-19",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Paoletta and Vought co-authored a 14-page letter to House Budget Committee on Jan 19, 2021 (day before leaving office) arguing the Impoundment Control Act is 'unworkable in practice and should be significantly reformed or repealed.' This legal theory was then developed at Center for Renewing America (which Vought founded) where Paoletta was Senior Fellow, and is now being implemented as executive policy with Paoletta back at OMB.",
+      "confidence": "high",
+      "id": 7066
+    },
+    {
+      "date": "2021-03/2025-01",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Partner at Schaerr Jaffe LLP Mar 26 2021 - Jan 2025 (announced firm site)",
+      "other_person": "Schaerr Jaffe LLP",
+      "id": 5979
+    },
+    {
+      "date": "2021/2025",
+      "type": "connection",
+      "relationship_type": "employment",
+      "description": "Senior Fellow at Center for Renewing America (Vought's think-tank, Project 2025 advisory group) ~2021-2025 concurrent with Schaerr Jaffe",
+      "other_person": "Center for Renewing America",
+      "id": 5980
+    },
+    {
+      "date": "2022-01-01",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Paoletta represented Ginni Thomas (wife of Justice Clarence Thomas) before the House Jan 6 Committee in 2022. Thomas subsequently did NOT recuse from two J6-related SCOTUS cases, one involving his wife's text messages. Paoletta publicly attacked recusal demands as 'baseless.'",
+      "confidence": "high",
+      "id": 7062
+    },
+    {
+      "date": "2022-06/2022-09",
+      "type": "connection",
+      "relationship_type": "legal",
+      "description": "Paoletta represented Ginni Thomas before House Jan 6 Select Committee 2022; Sep 29 2022 4.5-hr voluntary interview",
+      "other_person": "Ginni Thomas",
+      "id": 5975
     },
     {
       "date": "2022-09-28",
@@ -665,54 +1792,715 @@
       "id": 6684
     },
     {
+      "date": "2025-01-20",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Paoletta is a central node connecting Supreme Court, DOGE, and Project 2025: (1) Helped confirm Justice Thomas in 1991, remained close personal friend and aggressive public defender through gift scandals. (2) Senior Fellow at Center for Renewing America (Russell Vought's think tank). (3) Project 2025 Advisory Board member. (4) Co-developed legal theory that Impoundment Control Act is unconstitutional. (5) Served as legal counsel for Ginni Thomas during Jan 6 committee. (6) Close ally of Leonard Leo. Career path: Bush 41 WH -> Congress (decade) -> VP Pence Chief Counsel -> OMB GC (Trump 1) -> Schaerr Jaffe partner + CRA fellow -> OMB GC (Trump 2/DOGE).",
+      "confidence": "medium",
+      "id": 7129
+    },
+    {
+      "date": "2025-01-20",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Revolving door conflict pattern: Paoletta lobbied for Oracle America on government contracts through Schaerr Jaffe (2021, K+), then returned to OMB GC (Jan 2025) working with DOGE. Oracle holds major DOD contracts (M ERP/finance) and is a key Stargate AI partner (B). Larry Ellison is close personal friend of both Trump and Musk. Paoletta's OMB position gives him oversight of the very federal contracting process he lobbied on behalf of Oracle to influence.",
+      "confidence": "medium",
+      "id": 7157
+    },
+    {
       "date": "2025-01-27",
       "type": "finding",
       "finding_type": "intelligence",
       "summary": "Appointed OMB GC in Trump II (Dec 2024) to 'work closely with DOGE team'; responsible for Jan 2025 federal funding freeze memo (M-25-13) that was struck down by court and rescinded within 48 hours",
       "confidence": "high",
       "id": 6688
+    },
+    {
+      "date": "2025-01-27",
+      "type": "finding",
+      "finding_type": "background",
+      "summary": "Paoletta drafted the January 27, 2025 OMB memo ordering agencies to pause all federal financial assistance obligations/disbursements. The memo was rescinded within days after widespread chaos, but established the legal framework for subsequent spending freezes and impoundment claims.",
+      "confidence": "high",
+      "id": 7052
+    },
+    {
+      "date": "2025-03-05",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "Clarence Thomas did NOT recuse from Dept of State v. AIDS Vaccine Advocacy Coalition (24A831), the key SCOTUS case challenging OMB's foreign aid spending freeze. Thomas dissented (with Alito, Gorsuch, Kavanaugh) from the 5-4 decision denying Trump's request to lift the lower court freeze order on March 5, 2025 -- siding with the administration position his close friend Paoletta helped create as OMB GC.",
+      "confidence": "medium",
+      "id": 7054
+    },
+    {
+      "date": "2025-09-26",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "In September 2025, SCOTUS reversed course in Dept of State v. AIDS Vaccine Advocacy Coalition (25A269), allowing Trump administration to withhold $4 billion in foreign aid via 'pocket rescission' in a 6-3 ruling. Thomas was in the majority. Paoletta's impoundment legal theory -- developed at Center for Renewing America alongside Russell Vought -- was vindicated by a court where his close friend Thomas sits.",
+      "confidence": "medium",
+      "id": 7059
+    },
+    {
+      "date": "2026-02-20",
+      "type": "finding",
+      "finding_type": "legal",
+      "summary": "SCOTUS struck down Trump's sweeping 'reciprocal' tariffs on Feb 20, 2026 (Learning Resources Inc v. Trump, 24-1287). Thomas dissented with Alito and Kavanaugh. While not directly an OMB/Paoletta-drafted order, this case reflects the broader pattern: executive orders on spending/trade policy drafted or legally justified by the Paoletta-Vought OMB are repeatedly reaching SCOTUS where Thomas participates without recusing despite his close friendship with Paoletta.",
+      "confidence": "medium",
+      "id": 7087
     }
   ],
   "curation": {
-    "lead": "<p>Mark R. Paoletta is a Washington attorney who has served as General Counsel of the Office of Management and Budget under both Trump administrations (2018-2021 and 2025-present). His career spans 35 years in executive power law and judicial politics, beginning as Assistant Counsel in the George H.W. Bush White House during the 1991 Clarence Thomas Supreme Court confirmation. [Finding #6679] He held a Senior Fellow position at the Center for Renewing America (CRA), was a partner at Schaerr Jaffe LLP until December 2024, and is president of MP Strategies LLC. [Finding #6679] His December 2024 appointment to OMB was explicitly tied to coordination with the <a href=\"/dossiers/doge\">Department of Government Efficiency (DOGE)</a>. [Finding #6688]</p><p>Leonard Leo's Judicial Education Project paid Paoletta approximately $300,000 through MP Strategies for a public relations effort on behalf of Justice Thomas, including a documentary, websites, and search optimization. [Finding #6681] At CRA, Paoletta and Russell Vought co-authored a legal theory asserting inherent Article II presidential authority over federal spending\u2014a theory that now provides the legal framework for the second <a href=\"/dossiers/trump-administration\">Trump administration</a>'s spending reductions via OMB. [Finding #6686] Analysis of corporate and government records indicates that his former law firm, Schaerr Jaffe, represents <a href=\"/dossiers/elon-musk\">Elon Musk</a>/X in litigation, while Paoletta in government provides legal counsel for <a href=\"/dossiers/doge\">DOGE operations</a> at OMB. [Finding #6693]</p><p>As OMB General Counsel during the first Trump term, Paoletta authored the legal defense of the Ukraine military aid withholding that the Government Accountability Office ruled violated the Impoundment Control Act in January 2020. [Finding #6686] In the second term, he drafted OMB Memo M-25-13 ordering a temporary freeze on all federal grants and financial assistance, which a U.S. District Court enjoined and OMB rescinded within 48 hours. [Finding #6688] He also served as attorney for Virginia \"Ginni\" Thomas before the January 6 Select Committee in September 2022. [Finding #6684] According to the Revolving Door Project, a potential conflict of interest exists: Paoletta, paid by Leo-affiliated entities to defend Thomas publicly, now issues OMB orders that could come before Thomas on the Supreme Court. [Finding #6692]</p>",
-    "system_role": "Paoletta illustrates how a single attorney can connect judicial confirmation politics, executive power legal theory, and federal budget authority across multiple administrations\u2014linking nonprofit-funded advocacy to government policy implementation through overlapping professional and personal relationships.",
-    "sections": [
+    "key_finding_ids": [
+      11179,
+      11193,
+      11186,
+      11187,
+      11191,
+      11197,
+      11201,
+      11167,
+      11182,
+      6686,
+      6688,
+      6684,
+      6679,
+      6681,
+      7120,
+      7064,
+      7062,
+      7075,
+      7056,
+      6693,
+      6692
+    ],
+    "key_identifiers": {
+      "jurisdictions": [
+        "US",
+        "US-DC"
+      ],
+      "officers": [
+        {
+          "role": "partner",
+          "entity": "Schaerr Jaffe LLP",
+          "start": "2021",
+          "end": "2025-01"
+        },
+        {
+          "role": "President",
+          "entity": "MP Strategies LLC",
+          "start": null,
+          "end": null
+        },
+        {
+          "role": "Partner",
+          "entity": "Schaerr Jaffe LLP",
+          "start": null,
+          "end": null
+        },
+        {
+          "role": "Senior Fellow",
+          "entity": "Center for Renewing America",
+          "start": null,
+          "end": null
+        }
+      ],
+      "entities": [
+        {
+          "id": 1039,
+          "name": "Schaerr Jaffe LLP",
+          "type": "partnership",
+          "jurisdiction": "US-DC",
+          "role": "partner"
+        },
+        {
+          "id": 1038,
+          "name": "MP Strategies LLC",
+          "type": "llc",
+          "jurisdiction": "US-DC",
+          "role": "President"
+        },
+        {
+          "id": 975,
+          "name": "Center for Renewing America",
+          "type": "nonprofit",
+          "jurisdiction": "US",
+          "role": "Senior Fellow"
+        }
+      ]
+    },
+    "section_suggestions": [
       {
         "id": "key-relationships",
         "title": "Key Relationships",
-        "content": "<p>According to ProPublica and Supreme Transparency records, Paoletta's relationship with Justice Clarence Thomas dates to 1991, when Paoletta helped manage Thomas's Supreme Court confirmation process as Bush White House counsel. [Finding #6692] Records show the two were both present on a trip to Indonesia in 2019 funded by Harlan Crow, alongside Thomas, Ginni Thomas, and Leonard Leo. [Finding #6692] According to ProPublica reporting, Paoletta appears in a painting at Crow's private resort Camp Topridge alongside Crow, Thomas, Peter Rutledge (later an 11th Circuit judge), and Leo. [Finding #6692] He publicly defended Thomas against ethics allegations, arguing according to his public statements that Judicial Conference guidance did not require disclosure of trips with personal friends. [Finding #6692]</p><p>Leonard Leo's Judicial Education Project paid Paoletta and his consulting firm MP Strategies approximately $300,000 in 2016 for a Thomas public relations effort. [Finding #6681] Paoletta confirmed to the Washington Post that \"my good friend Leonard Leo's group provided funding for this work.\" [Finding #6681] According to the Washington Post, Leo's $1.8 million total campaign included a documentary directed by Michael Pack, paid advertising to improve Thomas's search results, book publication, and social media accounts. [Finding #6681] Cross-referencing financial disclosures and CRA records indicates a pattern of overlapping funding: Leo-affiliated entities fund CRA, where Paoletta serves as Senior Fellow, and separately fund Thomas defense work through the Judicial Education Project. [Finding #6632]</p><p>According to public appointment records, Paoletta serves as General Counsel under Director Russell Vought at OMB. The two served together during the first Trump term and co-authored the impoundment theory at the Center for Renewing America between administrations. [Finding #6632] Review of records indicates CRA has placed at least five fellows or leaders into the second <a href=\"/dossiers/trump-administration\">Trump administration</a>, including Vought as OMB Director, <a href=\"/dossiers/kash-patel\">Kash Patel</a> as FBI Director, and Paoletta as OMB General Counsel. [Finding #6632]</p><p>The <a href=\"/dossiers/elon-musk\">Elon Musk</a> connection is more recent. Paoletta was appointed OMB General Counsel in December 2024 with an explicit mandate to work with <a href=\"/dossiers/doge\">DOGE</a>. [Finding #6688] Analysis of public filings indicates his former firm Schaerr Jaffe represents Musk and X in litigation, creating a situation where the firm's private client's government initiative receives legal support from a former partner now serving at OMB. [Finding #6693] Examination of court filings shows Paoletta also maintains connections to Republican attorneys general in Texas, Indiana, Mississippi, and Georgia who file Supreme Court amicus briefs\u2014briefs that may come before Justice Thomas. [Finding #6632]</p>",
-        "viz": "ego_network"
+        "viz": "ego_network",
+        "finding_ids": [
+          7120,
+          6632,
+          6692,
+          6693,
+          11167,
+          11179,
+          11182,
+          11186
+        ],
+        "connection_ids": [
+          3336,
+          3385,
+          3386,
+          3387,
+          3543,
+          3576,
+          5975,
+          5976,
+          5977,
+          5978,
+          5979,
+          5980,
+          5981,
+          3388,
+          3389
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
       },
       {
         "id": "financial-activity",
-        "title": "Financial Disclosures and Political Donations",
-        "content": "<p>Paoletta's OGE Form 278 financial disclosure, filed upon joining Vice President Pence's office in January 2017, documents a multi-stream income profile. [Finding #6691] DLA Piper LLP, where he was a partner from 2007 to 2016, paid approximately $387,000 (comprising $275,410 in partnership distribution, $100,000 in additional compensation, and $11,650 in other income). [Finding #6691] His consulting firm MP Strategies LLC generated $209,000 in income. [Finding #6691] The Judicial Education Project\u2014Leonard Leo's vehicle for the Thomas PR effort\u2014paid Paoletta $84,000 directly, with additional payments flowing to MP Strategies totaling approximately $300,000 for \"media projects\" in 2016. [Finding #6681][Finding #6691]</p><p>Disclosed assets included a Schwab Managed Retirement 2030 fund ($250,000-$500,000), a Vanguard Target Retirement fund ($100,000-$250,000), multiple American Funds 529 education plans ($15,000-$50,000 each), and an oil lease in Goose Creek Bay, Harris County, Texas ($50,000-$100,000). [Finding #6691] Liabilities included a Citibank partnership loan of $100,000-$250,000 at LIBOR plus 1.75%, incurred in 2012 and paid off upon withdrawal from DLA Piper. [Finding #6691] His spouse was employed at Harris Wiltshire & Grannis LLP with partnership distributions and investments ranging from $1,000 to over $100,000. [Finding #6691]</p><p>FEC records document $22,900 in political donations between 2022 and 2024, all from Falls Church, Virginia, with Schaerr Jaffe LLP listed as employer. [Finding #6690] The largest disbursements went to Trump's joint fundraising committee ($6,870 in both May and October 2024) and Never Surrender Inc ($3,091 twice), with smaller contributions to the RNC, Parkinson for Senate ($3,300 total), Chip Roy for Congress ($500), James Comer for Congress ($1,000), and Ron Johnson ($250). [Finding #6690] Comer chairs the House Oversight Committee; during 2023 hearings, Comer stated that ethics complaints against Thomas were politically motivated, per Washington Post reporting. Roy is aligned with CRA policy positions. [Finding #6690]</p>",
-        "viz": null
+        "title": "Financial Activity",
+        "viz": null,
+        "finding_ids": [
+          7075,
+          7056,
+          7157,
+          6681,
+          6690,
+          6691,
+          7071,
+          7073
+        ],
+        "connection_ids": [
+          3386
+        ],
+        "guidance": "Narrative about financial flows, amounts, counterparties, structures. Include specific dollar amounts and dates woven into prose."
+      },
+      {
+        "id": "corporate-structure",
+        "title": "Corporate Structure",
+        "viz": null,
+        "finding_ids": [],
+        "connection_ids": [],
+        "guidance": "Narrative about corporate entities, roles, jurisdictions. Explain the structure and its purpose, not just list entities."
       },
       {
         "id": "legal-proceedings",
-        "title": "Legal and Regulatory Actions",
-        "content": "<p>On July 25, 2019, while serving as OMB General Counsel during the first Trump term, Paoletta blocked the Department of Defense from disbursing Congress-appropriated Ukraine military assistance, characterizing the hold as \"pending a policy decision.\" [Finding #6686] The hold was not lifted until September 12, 2019. [Finding #6686] When the Government Accountability Office investigated, Paoletta argued the action constituted a \"programmatic delay\" that did not require Congressional notification under the Impoundment Control Act of 1974. [Finding #6686] The GAO concluded on January 16, 2020 that OMB had violated the Act. [Finding #6686] Senator Chris Van Hollen called for Paoletta to recuse himself from the GAO inquiry and resign as Designated Ethics Official. [Finding #6686]</p><p>Between administrations, Paoletta and Vought co-authored a legal theory through the Center for Renewing America asserting that the president possesses inherent constitutional power to impound congressionally appropriated funds under Article II\u2014specifically the Executive Vesting Clause, Take Care Clause, and Commander-in-Chief Clause. [Finding #6686] This theory, developed after the GAO ruling, now provides the constitutional framework for the second <a href=\"/dossiers/trump-administration\">Trump administration</a>'s spending reductions via OMB. [Finding #6686]</p><p>In September 2022, Paoletta represented Virginia \"Ginni\" Thomas before the House Select Committee investigating January 6. [Finding #6684] He initially resisted the committee's request for testimony, seeking \"better justification,\" but Ginni Thomas ultimately agreed to appear for an approximately 3.5-hour interview on September 28, 2022. [Finding #6684] Paoletta's defense strategy centered on two points: that Thomas never claimed first-hand knowledge of election fraud but only relayed information heard from others, and that she expressly condemned the Capitol attackers. [Finding #6684] On December 8, 2022, Paoletta submitted a written statement to the House Judiciary Committee calling it \"the ginned-up case against the Thomases.\" [Finding #6684] Review of the record indicates this representation overlaps with Paoletta's personal friendship with Justice Thomas and his receipt of Leo-funded payments for Thomas public relations work. [Finding #6692]</p>",
+        "title": "Legal Proceedings",
+        "viz": "timeline",
+        "finding_ids": [
+          6686,
+          7064,
+          7062,
+          6684,
+          7054,
+          7059,
+          7087
+        ],
+        "connection_ids": [
+          3543,
+          5975,
+          5978
+        ],
+        "guidance": "Narrative about investigations, litigation, regulatory actions. Include case numbers, outcomes, and timeline."
+      },
+      {
+        "id": "intelligence-activity",
+        "title": "Intelligence Activity",
+        "viz": null,
+        "finding_ids": [
+          6688,
+          6694,
+          11201
+        ],
+        "connection_ids": [],
+        "guidance": "Narrative about intelligence connections, surveillance, information operations."
+      }
+    ],
+    "curated_at": "2026-05-08T00:33:37.203783Z",
+    "lead": "<p>Mark R. Paoletta is a Washington attorney who has served as General Counsel of the Office of Management and Budget under both Trump administrations (January 2018 to January 2021 and January 2025 to present), with concurrent designations as Acting Chief Legal Officer of the Consumer Financial Protection Bureau and Administrator of the Office of Information and Regulatory Affairs in 2025 [Finding #11179][Finding #11191]. His thirty-five-year career has moved through the George H.W. Bush White House Counsel's Office, the House Energy and Commerce Committee's Oversight and Investigations subcommittee (Chief Counsel for Oversight, September 1997 to January 2007), Dickstein Shapiro, DLA Piper, the Office of the Vice President under Mike Pence, OMB under Trump I, and the Washington litigation boutique <a href=\"/dossiers/schaerr-jaffe-llp\">Schaerr Jaffe LLP</a> (March 26, 2021 to January 2025) [Finding #11179]. The original record of a Williams and Connolly tenure (1992 to 2001) is not supported by the documented timeline.</p><p>Concurrent with his Schaerr Jaffe partnership, Paoletta held a Senior Fellow position at the Center for Renewing America, the policy organization founded by <a href=\"/dossiers/russell-vought\">Russell Vought</a>, and was named to the advisory board of Project 2025 [Finding #11186]. The December 9, 2024 announcement of his return to OMB explicitly cited both that fellowship and his prior Trump-I tenure with then-OMB Director Vought [Finding #11186][Finding #6688]. <a href=\"/dossiers/leonard-leo\">Leonard Leo</a>'s Judicial Education Project paid Paoletta and MP Strategies LLC approximately $300,000 in 2016 for media work supporting Justice Clarence Thomas, including a documentary, websites, and search-engine optimization [Finding #6681][Finding #7056]. Paoletta is publicly described as a close friend of Leo and prepared Justices Gorsuch, Kavanaugh, and Thomas for their Senate confirmation hearings; he co-edited Created Equal: Clarence Thomas in His Own Words (Regnery, 2022) with Michael Pack [Finding #11193].</p><p>As OMB General Counsel during the first <a href=\"/dossiers/trump-administration\">Trump administration</a>, Paoletta authored the legal defense of the 2019 Ukraine aid withholding that the Government Accountability Office concluded violated the Impoundment Control Act of 1974 [Finding #6686]. In Trump II he authored a January 27, 2025 OMB memorandum (M-25-13) directing federal agencies to pause all financial assistance, which a federal district court enjoined and OMB rescinded within forty-eight hours, and a separate memorandum asserting that the impoundment power is one of the executive powers vested in the president alone by Article II [Finding #11187][Finding #6688]. As CFPB Acting Chief Legal Officer he issued an April 16, 2025 priority-shift memorandum redirecting consumer-protection enforcement to the states and signed an April 18, 2025 declaration in support of a reduction in force whose accuracy Judge Amy Berman Jackson questioned in the District Court for the District of Columbia [Finding #11191]. Cross-reference of corporate-registry, lobbying, FEC, and court records indicates Paoletta operates as a single legal-architect node connecting the Center for Renewing America, OMB, the Thomas household, Leonard Leo's judicial pipeline, and Schaerr Jaffe [Finding #11201].</p>",
+    "sections": [
+      {
+        "id": "career-arc",
+        "title": "Career Arc and Institutional Affiliations",
+        "content": "<p>Paoletta's career path runs from the George H.W. Bush White House Counsel's Office (Assistant Counsel) to the House Energy and Commerce Committee's Subcommittee on Oversight and Investigations, where he served as Chief Counsel for Oversight from September 1997 to January 2007 [Finding #11179]. He moved into private practice in January 2007 as a partner at Dickstein Shapiro, where he led the Congressional Investigations practice, and subsequently joined DLA Piper as a partner in Federal Law and Policy [Finding #11179]. He served as Counsel to Vice President <a href=\"/dossiers/trump-administration\">Mike Pence</a> from January 2017 to January 2018 before being appointed General Counsel of the Office of Management and Budget on January 8, 2018, a position he held through January 20, 2021 [Finding #11179][Finding #6679].</p><p>On March 26, 2021 Paoletta joined <a href=\"/dossiers/schaerr-jaffe-llp\">Schaerr Jaffe LLP</a> as a partner, the firm announcing the hire on its website [Finding #11179]. Schaerr Jaffe is a Washington litigation boutique with a roster of seven named partners (Gene Schaerr, Erik S. Jaffe, H. Christopher Bartolomucci, Donald M. Falk, Jeffrey W. Munk, Brian J. Field, Edward H. Trent, and Paoletta) and approximately twenty-five total attorneys; published representative clients include Hobby Lobby, the United States Conference of Catholic Bishops, EWTN, Bayer A.G., AT&T, Fox Corporation, Cato Institute, the US Chamber of Commerce, the Republic of Ecuador, and the US Virgin Islands, with founding partner Gene Schaerr having argued seven Supreme Court cases [Finding #11197]. The firm filed an amicus brief on behalf of Edwin Meese III in Trump v. United States, No. 23-939, on March 19, 2024 [Finding #11197]. Concurrent with his Schaerr Jaffe partnership, Paoletta held a Senior Fellow position at the Center for Renewing America, the organization founded by <a href=\"/dossiers/russell-vought\">Russell Vought</a> and designated as an official Project 2025 advisory group; the December 9, 2024 Trump appointment announcement cited that fellowship and his Trump-I tenure with then-OMB Director Vought [Finding #11186]. He returned to OMB as General Counsel on January 20, 2025, and was concurrently designated Acting Chief Legal Officer of the Consumer Financial Protection Bureau in 2025 and Administrator of the Office of Information and Regulatory Affairs in December 2025 [Finding #11179]. He is also president of MP Strategies LLC and a director of Unreported Story Society (EIN 82-3412341), a 501(c)(3) conservative-media nonprofit [Finding #6679][Finding #7071]. Records do not support the previously reported tenure at Williams and Connolly between 1992 and 2001 [Finding #11179].</p>",
         "viz": "timeline"
       },
       {
-        "id": "omb-doge-operations",
-        "title": "OMB and DOGE Coordination",
-        "content": "<p>Paoletta's appointment as OMB General Counsel on December 10, 2024 was framed explicitly around <a href=\"/dossiers/doge\">DOGE</a> coordination. The <a href=\"/dossiers/trump-administration\">Trump administration</a> announcement stated he would \"work closely with the DOGE team to cut the size of the bloated Government bureaucracy, and root out wasteful and anti-American spending.\" [Finding #6688] His first major action was drafting OMB Memo M-25-13, issued January 27, 2025, which ordered a temporary pause on all federal grant, loan, and financial assistance programs effective 5:00 PM the following day. [Finding #6688] A U.S. District Court for the District of Columbia enjoined the memo, and OMB issued M-25-14 rescinding it on January 29\u2014within 48 hours of its release. [Finding #6688]</p><p>According to DeSmog reporting, the rapid court defeat prompted internal disagreement within the administration, with some officials questioning whether Paoletta should remain in the role. [Finding #6688] Paoletta continued serving, and according to reporting his primary value to the administration lies in advising Trump and Vought on spending disputes with Congress and the courts, drawing on the impoundment theory he and Vought developed at CRA between administrations. [Finding #6688] According to the Revolving Door Project, Paoletta's OMB orders on federal spending may ultimately come before Justice Thomas on the Supreme Court\u2014a justice whose public reputation Paoletta was paid by Leo-affiliated entities to defend. [Finding #6694]</p><p>Cross-reference of the four networks in which Paoletta operates\u2014Leo-funded judicial advocacy, CRA executive power theory, Schaerr Jaffe's <a href=\"/dossiers/elon-musk\">Musk</a>/<a href=\"/dossiers/doge\">DOGE</a> litigation practice, and OMB spending authority\u2014reveals overlapping professional and financial relationships that span the boundary between private advocacy and government policy. [Finding #6694] Whether this analysis indicates coordinated outcomes or reflects routine movement within conservative legal networks remains an open analytical question. [Finding #6694]</p>",
+        "id": "judicial-confirmation-thomas-household",
+        "title": "Judicial Confirmation Work and the Thomas Household",
+        "content": "<p>Paoletta's connection to <a href=\"/dossiers/leonard-leo\">Leonard Leo</a>'s judicial-confirmation network is documented across three reinforcing primary records [Finding #11193]. He is publicly described in Project 2025 administration profiles as a close friend of Leo, he prepared Justices Neil Gorsuch, Brett Kavanaugh, and Clarence Thomas for their Senate confirmation hearings, and he co-edited Created Equal: Clarence Thomas in His Own Words (Regnery, 2022) with Michael Pack, based on twenty-five hours of 2018 to 2019 interviews [Finding #11193]. He maintains the justicethomas.com and anitahillcase.com domains [Finding #11193]. According to Wave-1 systemic-analysis records, his personal friendship with Justice Thomas dates to the 1991 confirmation, during which Paoletta worked in the Bush White House Counsel's Office, and records indicate he was present on the 2019 Crow-funded Indonesia trip with Justice Thomas and Leo [Finding #6692][Finding #6679].</p><p>Leonard Leo's Judicial Education Project paid Paoletta and MP Strategies LLC approximately $300,000 in 2016 for what was described as media work supporting Justice Thomas, including a documentary and search-engine optimization [Finding #6681][Finding #7056]. According to reporting cited by the Revolving Door Project and contemporaneous court coverage, Leo arranged $80,000 to $100,000 in consulting payments to Ginni Thomas in 2011 to 2012, routed through Kellyanne Conway's polling firm to the Judicial Education Project and onward to Liberty Consulting [Finding #7075]. Paoletta later served as legal counsel to Virginia \"Ginni\" Thomas before the House Select Committee to Investigate the January 6th Attack on the United States Capitol; he sent a June 2022 letter resisting the committee's request and managed her voluntary in-person interview, lasting approximately three and a half to four and a half hours, on September 28 to 29, 2022 [Finding #11182][Finding #6684][Finding #7062]. Cross-reference of these records establishes a direct legal nexus between Paoletta and the Thomas household that overlaps with both his MP Strategies consulting income and his subsequent OMB tenure.</p>",
+        "viz": null
+      },
+      {
+        "id": "omb-executive-power-architecture",
+        "title": "OMB Executive-Power and Impoundment Architecture",
+        "content": "<p>As OMB General Counsel during the first Trump term, Paoletta authored the legal defense of the July 25, 2019 hold on Department of Defense disbursements of Congress-appropriated Ukraine military aid, framing the action as a \"programmatic delay\" rather than an impoundment [Finding #6686]. The Government Accountability Office concluded on January 16, 2020 that OMB had violated the Impoundment Control Act of 1974 [Finding #6686]. Senator Chris Van Hollen wrote Paoletta on March 12, 2020 demanding his recusal from the GAO inquiry and resignation as OMB Designated Ethics Official [Finding #7064]. On January 19, 2021, the day before the Trump-I administration ended, Paoletta and Vought co-authored a fourteen-page letter to the House Budget Committee laying out their impoundment theory [Finding #7066].</p><p>Between administrations, Paoletta and Vought continued to develop the doctrine through the Center for Renewing America, with Paoletta testifying before the House Budget Committee on the Impoundment Control Act, according to the Schaerr Jaffe announcement of his hire [Finding #11187]. In Trump II Paoletta authored two foundational executive-power documents: a memorandum asserting that \"the power of impoundment is one such executive power vested in the President alone by Article II,\" and OMB Memorandum M-25-13 dated January 27, 2025 directing agencies to \"temporarily pause all activities related to obligation or disbursement of all federal financial assistance\" [Finding #11187][Finding #7052]. The funding-pause memo took effect at 5 p.m. on January 28, 2025; the US District Court for the District of Columbia enjoined it, and OMB issued M-25-14 rescinding it on January 29 [Finding #6688]. According to the Trump appointment statement of December 10, 2024, Paoletta's OMB role was tied to coordination with the <a href=\"/dossiers/doge\">Department of Government Efficiency</a> team, with the announcement stating he would \"work closely with the DOGE team to cut the size of the bloated Government bureaucracy\"; analysis of subsequent OMB output indicates the legal-architect role for DOGE coordination is a continuing one [Finding #6688][Finding #7129].</p>",
+        "viz": null
+      },
+      {
+        "id": "cfpb-and-agency-restructuring",
+        "title": "CFPB and Concurrent Agency Restructuring",
+        "content": "<p>In addition to his OMB General Counsel role, in 2025 Paoletta served as Acting Chief Legal Officer of the Consumer Financial Protection Bureau [Finding #11191]. On April 16, 2025 he issued a staff memorandum announcing a CFPB shift away from federal supervision and enforcement toward a states-led model [Finding #11191]. On April 18, 2025 he signed a declaration filed in the US District Court for the District of Columbia describing the agency's \"particularized assessment\" of CFPB employees designated for reduction in force; Judge Amy Berman Jackson questioned the declaration's accuracy in proceedings that produced a preliminary injunction in favor of the National Treasury Employees Union [Finding #11191]. The CFPB sequence demonstrates that Paoletta's Trump-II legal work extends beyond OMB regulatory review into the operational restructuring of independent agencies. In December 2025 he was additionally designated Administrator of the Office of Information and Regulatory Affairs, the OMB component responsible for centralized review of executive-branch rulemaking [Finding #11179].</p>",
+        "viz": null
+      },
+      {
+        "id": "private-practice-lobbying",
+        "title": "Private-Practice Lobbying and Movement Funding",
+        "content": "<p>Lobbying-disclosure records show Paoletta is registered as a lobbyist at Dickstein Shapiro LLP, DLA Piper LLP, and <a href=\"/dossiers/schaerr-jaffe-llp\">Schaerr Jaffe LLP</a> across his private-practice years [Finding #7068]. In 2021 he lobbied for Oracle America on federal contracting through Schaerr Jaffe, with disclosures listing OMB General Counsel and Counsel to the Vice President among his covered positions; according to LDA registration data and OMB-coordination records, Oracle paid Schaerr Jaffe at least mid-five-figure lobbying fees on government-contracting matters before Paoletta returned to OMB to coordinate with <a href=\"/dossiers/doge\">DOGE</a> [Finding #7120][Finding #7157]. According to OGE Form 278 disclosures filed prior to his 2017 entry into government, Paoletta reported approximately $387,000 in DLA Piper income, $209,000 in MP Strategies income, and Judicial Education Project consulting income [Finding #6691]. FEC records show he donated $26,575 to Republican causes between 2022 and 2024, with the largest single tranche to Republican Party committees and an employer field listing Schaerr Jaffe LLP [Finding #6690][Finding #7073]. He is a director of Unreported Story Society (EIN 82-3412341), a 501(c)(3) conservative-media nonprofit, and is mentioned in PSQ Holdings Inc. (NYSE: PSQH) 8-K disclosures dated August 20, 2025 [Finding #7071][Finding #7084]. OpenSanctions designates him a Politically Exposed Person in two datasets [Finding #7092].</p>",
+        "viz": null
+      },
+      {
+        "id": "schaerr-jaffe-fedsoc-network",
+        "title": "Schaerr Jaffe and the Federalist Society Network",
+        "content": "<p><a href=\"/dossiers/schaerr-jaffe-llp\">Schaerr Jaffe LLP</a>, where Paoletta was a partner from March 26, 2021 through January 2025, is a Washington litigation boutique whose partner roster has a disproportionate Federalist Society and conservative-cause representation profile [Finding #11197]. Records of the firm list partners Gene C. Schaerr (founding, seven Supreme Court arguments), Erik S. Jaffe, H. Christopher Bartolomucci, Donald M. Falk, Jeffrey W. Munk, Brian J. Field, Edward H. Trent, and Paoletta; senior counsel Charles Burnett and Nicholas Miller; counsel Hannah Smith (formerly of Becket Fund), James Heilpern, Stephanie Freudenberg, and Joshua Prince; and academic affiliates Thomas R. Lee, Eugene Volokh, James C. Phillips, John Greil, and Annika Boone Barkdull [Finding #11197]. Representative-client disclosures include Hobby Lobby, the United States Conference of Catholic Bishops, EWTN, Bayer A.G., Suzuki Motor, AT&T, Fox Corporation, the Cato Institute, the US Chamber of Commerce, the Hatch and Lee senate offices, the Republic of Ecuador, and the US Virgin Islands [Finding #11197]. The firm filed a Trump v. United States (No. 23-939) amicus brief on behalf of Edwin Meese III on March 19, 2024 with Schaerr as counsel of record, and former associate Stephen Schwartz was confirmed to the US Court of Federal Claims [Finding #11197]. Schaerr Jaffe also became a frequent litigation venue for <a href=\"/dossiers/elon-musk\">Elon Musk</a> and X Corp. while Paoletta was a partner; analysis of corporate and government records indicates that this representation overlapped temporally with his subsequent return to OMB as legal counsel for <a href=\"/dossiers/doge\">DOGE</a> operations [Finding #6693][Finding #7129].</p>",
+        "viz": null
+      },
+      {
+        "id": "systemic-position",
+        "title": "Systemic Position and Cross-Network Bridge",
+        "content": "<p>Cross-reference of corporate registry, lobbying disclosure, FEC, court, and primary-source records indicates that Paoletta is a single node simultaneously seated in five movement institutions: the Center for Renewing America (Vought / Project 2025), OMB executive-power architecture (impoundment memoranda, the funding-pause memorandum, CFPB restructuring, and <a href=\"/dossiers/doge\">DOGE</a> coordination), the Thomas household (counsel to Ginni Thomas, the Created Equal book, the justicethomas.com and anitahillcase.com domains), the <a href=\"/dossiers/leonard-leo\">Leonard Leo</a> / Federalist Society judicial pipeline (confirmation preparation for Gorsuch, Kavanaugh, and Thomas), and the Schaerr Jaffe DC litigation boutique [Finding #11201]. Network analysis of the broader investigation database places Paoletta at the top of the orchestrator-score ranking with a score of 39.02 on a three-pillar breadth covering government, legal, and consulting roles, derived from twenty-eight findings, fifteen connections, and three core entities [Finding #11167]. Cross-reference of the Round-6 corrections record indicates the functional pattern is parallel to but structurally distinct from the three-instance Skadden-to-Office-of-the-Comptroller-of-the-Currency revolving-door involving <a href=\"/dossiers/adam-j-cohen\">Adam J. Cohen</a>, Brian Brooks, and Jonathan Gould; Paoletta was not at Skadden and was not at OCC, but examination of the vault-firm-to-OMB pattern (Schaerr Jaffe to OMB General Counsel through both Trump terms) shows the same structural mechanism reproduced in a different agency cluster [Finding #11201]. Examination of the sequence of Trump-II legal artifacts (impoundment memorandum, M-25-13, CFPB priority-shift memorandum, OIRA designation) indicates that Paoletta's output is best characterized as durable scaffolding for executive-power and deregulatory positions rather than as a series of ad-hoc opinions [Finding #11187][Finding #11191][Finding #11201].</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "epstein-investigation-relevance",
+        "title": "Relevance to the Epstein Investigation",
+        "content": "<p>Paoletta's connection to the broader <a href=\"/dossiers/jeffrey-epstein\">Epstein</a> investigation profile is structural rather than direct: he sits in the Federalist Society / Thomas household / Trump executive-power orbit that overlaps with several other figures under investigation. According to cross-reference of investigation records, his private representation of Ginni Thomas, his preparation of Justices Gorsuch, Kavanaugh, and Thomas for confirmation, and his concurrent OMB and CFPB roles in 2025 place him in the same legal-architect tier as <a href=\"/dossiers/adam-j-cohen\">Adam J Cohen</a>, where examination of the parallel revolving-door pattern documented in this investigation indicates structural equivalence [Finding #11193][Finding #11201]. LittleSis records a social relationship between Paoletta and Peter B Rutledge, a US district judge for the Southern District of Georgia [Finding #7089]. Examination of court dockets indicates open questions about whether his OMB legal work has produced opinions that would come before Justice Thomas on the Supreme Court without recusal [Finding #7054][Finding #7059][Finding #7087].</p>",
         "viz": null
       }
     ],
+    "system_role": "Paoletta functions as the durable legal-architect link between the Center for Renewing America, OMB executive-power doctrine, the Justice Thomas household, Leonard Leo's judicial-confirmation work, and the Schaerr Jaffe Federalist Society litigation boutique. Records show he produces durable OMB and CFPB legal artifacts (the impoundment-authority memorandum, the M-25-13 funding-pause memorandum, and the April 2025 CFPB priority-shift memorandum) and, in private practice between administrations, lobbies federal-contracting clients while drawing nonprofit consulting income tied to the same movement institutions he later represents in government.",
     "open_questions": [
-      "What is the full scope of payments from Leo-affiliated entities to Paoletta beyond the documented $300,000 from Judicial Education Project? DonorsTrust routing to CRA and other vehicles may conceal additional flows.",
-      "Has Justice Thomas recused from any OMB-related cases since Paoletta's appointment as OMB GC? Federal court dockets should show whether Thomas has participated in rulings on OMB spending orders.",
-      "What specific legal opinions has Paoletta issued at OMB enabling DOGE access to agency financial systems, and do they rely on the CRA impoundment theory or separate legal authority?",
-      "What is the extent of Schaerr Jaffe's representation of Musk/X, and did any of that work overlap temporally with Paoletta's involvement in DOGE-related OMB policy before his formal government appointment?",
-      "Did Paoletta have any role in CRA's Project 2025 Advisory Board activities, and do his OMB actions correspond to specific Project 2025 recommendations?"
+      "What is the full scope of payments from Leo-affiliated entities to Paoletta and MP Strategies LLC beyond the documented $300,000 from the Judicial Education Project, and do DonorsTrust or similar donor-advised vehicles route additional funds through the Center for Renewing America?",
+      "Has Justice Clarence Thomas recused from any OMB-related cases since Paoletta's appointment as OMB General Counsel in 2025, given Paoletta's prior paid representation of Ginni Thomas, his $300,000 in MP Strategies media work for Justice Thomas, and his role in the Justice's confirmation preparation?",
+      "What specific OMB legal opinions has Paoletta issued enabling DOGE access to agency financial systems, and do they cite the Center for Renewing America impoundment doctrine, the Article II memorandum, or independent statutory authority?",
+      "What is the full extent of Schaerr Jaffe's representation of Elon Musk and X Corp., and did any of that work overlap temporally with Paoletta's personal involvement in DOGE-related OMB policy formation before his formal January 2025 government appointment?",
+      "Did Paoletta participate in Center for Renewing America Project 2025 advisory-board deliberations, and do specific Trump-II OMB or CFPB actions (M-25-13, the CFPB priority-shift memorandum, the OIRA designation) correspond to Project 2025 chapter recommendations?",
+      "What is the full text of the April 18, 2025 declaration that Judge Amy Berman Jackson questioned, and what disposition did the District Court for the District of Columbia ultimately enter on the CFPB reduction-in-force matter?"
     ],
     "applicable_models": [
+      "durable-deregulation-scaffolding",
       "enabler-gradient",
-      "bridge-tax",
-      "narrative-shield"
+      "narrative-shield",
+      "bridge-tax"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Mark Paoletta",
+      "connections": [
+        {
+          "target": "Center for Renewing America",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "Supreme Transparency CRA profile",
+          "description": "Paoletta served as CRA Senior Fellow, became OMB General Counsel, also partner at Schaerr Jaffe, received money from Leonard Leo for Thomas defense"
+        },
+        {
+          "target": "Russell Vought",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": "Axios Jul 2025",
+          "description": "Close allies at OMB; co-developed impoundment theory via CRA between administrations; Paoletta serves as Vought's GC at OMB in both Trump terms; together they architect legal basis for DOGE spending cuts"
+        },
+        {
+          "target": "Leonard Leo",
+          "type": "financial",
+          "strength": 1.0,
+          "evidence_ref": "ProPublica OGE disclosure",
+          "description": "Leo's Judicial Education Project paid Paoletta/MP Strategies ~300K for Thomas PR campaign; Leo and Paoletta traveled together with Thomas and Crow to Indonesia 2019; depicted together in Camp Topridge painting; Leo funds RAGA network Paoletta's firm assists"
+        },
+        {
+          "target": "Clarence Thomas",
+          "type": "social",
+          "strength": 1.0,
+          "evidence_ref": "ProPublica 2023",
+          "description": "Personal friendship since 1991 Thomas confirmation; Paoletta traveled with Thomas on Crow-funded Indonesia trip 2019; painted together at Camp Topridge; paid 300K by Leo for Thomas PR; represents Ginni Thomas; defends Thomas on ethics publicly; Revolving Door Project notes conflict: Paoletta OMB orders come before Thomas on SCOTUS"
+        },
+        {
+          "target": "Ginni Thomas",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "LittleSis:1860773",
+          "description": null
+        },
+        {
+          "target": "Leonard Leo",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": null,
+          "description": null
+        },
+        {
+          "target": "Ginni Thomas",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "https://www.cnn.com/2022/09/28/politics/ginni-thomas-january-6-committee-interview/",
+          "description": "Paoletta represented Ginni Thomas before House Jan 6 Select Committee 2022; Sep 29 2022 4.5-hr voluntary interview"
+        },
+        {
+          "target": "Russell Vought",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "description": "Long-running Vought-Paoletta partnership: OMB Director / GC dyad in Trump I (2018-2021), Center for Renewing America Senior Fellow under Vought 2021-2025, OMB GC under Vought again Trump II (2025-)"
+        },
+        {
+          "target": "Leonard Leo",
+          "type": "political",
+          "strength": 1.0,
+          "evidence_ref": "https://resistingproject2025.org/mark-paoletta",
+          "description": "Public 'close friend of Leonard Leo' — Paoletta prepared Justices Gorsuch, Kavanaugh, Thomas for confirmation hearings within Leo's FedSoc judicial-selection pipeline"
+        },
+        {
+          "target": "Clarence Thomas",
+          "type": "legal",
+          "strength": 1.0,
+          "evidence_ref": "https://en.wikipedia.org/wiki/Mark_Paoletta",
+          "description": "Paoletta played key role in Justice Thomas's 1991 SCOTUS confirmation as HW Bush WH Asst Counsel; co-edited 'Created Equal: Clarence Thomas in His Own Words' (Regnery 2022); maintains justicethomas.com and anitahillcase.com domains; 35-year Thomas-orbit fixture"
+        },
+        {
+          "target": "Schaerr Jaffe LLP",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "https://www.schaerr-jaffe.com/mark-paoletta-joins-schaerr-l-jaffe-as-newest-partner/",
+          "description": "Partner at Schaerr Jaffe LLP Mar 26 2021 - Jan 2025 (announced firm site)"
+        },
+        {
+          "target": "Center for Renewing America",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "https://www.presidency.ucsb.edu/documents/statement-president-elect-donald-j-trump-announcing-the-appointment-mark-paoletta-general",
+          "description": "Senior Fellow at Center for Renewing America (Vought's think-tank, Project 2025 advisory group) ~2021-2025 concurrent with Schaerr Jaffe"
+        },
+        {
+          "target": "Office of Management and Budget",
+          "type": "employment",
+          "strength": 1.0,
+          "evidence_ref": "https://www.legistorm.com/person/bio/19143/Mark_R_Paoletta.html",
+          "description": "OMB General Counsel Trump I (Jan 8 2018 - Jan 20 2021) and Trump II (Jan 20 2025 - present); concurrent CFPB Acting Chief Legal Officer 2025; also Performing Duties of OIRA Administrator Dec 2025-"
+        },
+        {
+          "target": "Elon Musk",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": "DeSmog Feb 2025",
+          "description": "Paoletta appointed OMB GC specifically to work with Musk's DOGE team; former firm Schaerr Jaffe represents Musk/X in litigation; Paoletta provides legal architecture enabling DOGE spending cuts at OMB"
+        },
+        {
+          "target": "Harlan Crow",
+          "type": "social",
+          "strength": 0.7,
+          "evidence_ref": "ProPublica 2023 Thomas undisclosed gifts investigation",
+          "description": "Traveled together on Crow-funded Indonesia trip 2019 with Clarence Thomas and Leonard Leo; depicted in painting at Crow's Camp Topridge private resort"
+        }
+      ],
+      "secondHop": {
+        "Center for Renewing America": [
+          {
+            "target": "Conservative Partnership Institute",
+            "type": "funds",
+            "strength": 1.0,
+            "description": "CPI created and funded CRA: 583K direct grant plus 1M+ to c3 arm (Center for American Restoration) in 2021. Shared address at 300 Independence Ave SE DC. Board overlap: Denton and Corrigan serve on both boards. CRA files tax docs in care of CPI."
+          },
+          {
+            "target": "Russ Vought",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Vought founded CRA in 2021, served as President with 536K compensation (from related org), left for OMB Director position Feb 2025"
+          },
+          {
+            "target": "Jeffrey Clark",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Clark served as CRA Senior Fellow and Director of Litigation with 219K compensation, left for acting OIRA Administrator March 2025, resigned March 2026"
+          },
+          {
+            "target": "Kash Patel",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Patel served as CRA Senior Fellow for National Security, became FBI Director Feb 2025"
+          },
+          {
+            "target": "Russell Vought",
+            "type": "controls",
+            "strength": 1.0,
+            "description": "Russell Vought is President of CRA c3 and c4. CRA received 1.94M from CPI."
+          }
+        ],
+        "Clarence Thomas": [
+          {
+            "target": "Leonard Leo",
+            "type": "financial",
+            "strength": 1.0,
+            "description": ""
+          }
+        ],
+        "Elon Musk": [
+          {
+            "target": "Peter Thiel",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "PayPal Mafia. FF invested in SpaceX 10pct, Neuralink, Boring Company. Musk as DOGE head aligns with Thiel network. Sacks bridges both."
+          },
+          {
+            "target": "Peter Thiel",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Both attended Epstein-organized dinner at Baume Restaurant Palo Alto Aug 2 2015 with Zuckerberg Hoffman Ito Boyden"
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Musk attended Epstein dinner at Baume Palo Alto Aug 2 2015 with Thiel Zuckerberg Hoffman Ito Boyden"
+          },
+          {
+            "target": "Jared Birchall",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Birchall is Musk's money manager, president/manager of multiple TX LLCs including River Bottoms Ranch, Horse Ranch, and others. Controls day-to-day entity operations."
+          },
+          {
+            "target": "Steve Davis",
+            "type": "employment",
+            "strength": 1.0,
+            "description": "Davis is Musk lieutenant, manages Earhardt Manor LLC and Gapped Bass LLC (Boring Company/Snailbrook operations), key operator across TX entity web."
+          }
+        ],
+        "Leonard Leo": [
+          {
+            "target": "William Barr",
+            "type": "political",
+            "strength": 1.0,
+            "description": "Both served on board of Catholic Information Center, Opus Dei-affiliated institution at 15th and K St NW Washington DC. Leo is Federalist Society EVP who managed conservative judicial pipeline. CIC functions as nexus for Catholic conservative legal-political network."
+          },
+          {
+            "target": "Teneo Network Inc",
+            "type": "controls",
+            "strength": 1.0,
+            "description": "Board Chairman since 2021, revenue tripled under his leadership"
+          },
+          {
+            "target": "Rebekah Mercer",
+            "type": "shares_officer",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Robert George",
+            "type": "shares_officer",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Federalist Society",
+            "type": "controls",
+            "strength": 1.0,
+            "description": "Co-Chairman board, Executive VP for 25+ years, judicial nomination pipeline"
+          }
+        ],
+        "Russell Vought": [
+          {
+            "target": "Stephen Miller",
+            "type": "shares_officer",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Wesley Denton",
+            "type": "shares_officer",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "DOGE",
+            "type": "political",
+            "strength": 1.0,
+            "description": "OMB Director; primary vehicle for DOGE agenda continuation; likely architect of most severe staffing cuts; drafted 2026 budget doubling DOGE to 45M; Project 2025 architect"
+          },
+          {
+            "target": "Edward Corrigan",
+            "type": "shares_officer",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Jeffrey Clark",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": ""
+          }
+        ],
+        "Schaerr Jaffe LLP": [
+          {
+            "target": "Oracle",
+            "type": "contracts_with",
+            "strength": 1.0,
+            "description": ""
+          },
+          {
+            "target": "Ken Paxton",
+            "type": "legal",
+            "strength": 1.0,
+            "description": ""
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": [
+      {
+        "date": "1991/present",
+        "label": "legal with Clarence Thomas",
+        "type": "legal",
+        "entity": "Clarence Thomas",
+        "id": 5978
+      },
+      {
+        "date": "2012-01-01",
+        "label": "Leonard Leo arranged $80,000-$100,000 in secret consulting payments to Ginni Thomas in 2011-2012, funneled through Kellyanne Conway's polling firm to the Judicial Education Project, then to Thomas's Liberty Consulting firm. Paoletta later became the public defender of both Thomases against ethics scrutiny, was paid $300K by the same Leo nonprofit, and then represented Ginni Thomas before the Jan 6 Committee.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 7075
+      },
+      {
+        "date": "2016-01-01",
+        "label": "Leonard Leo's Judicial Education Project paid Paoletta $300,000 in 2016 for 'media projects' -- a PR campaign defending Clarence Thomas including the 2020 documentary 'Created Equal.' Total Leo-funded Thomas PR effort was $1.8M+. Paoletta confirmed: 'my good friend Leonard Leo's group provided funding for this work.'",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 7056
+      },
+      {
+        "date": "2018/present",
+        "label": "political with Russell Vought",
+        "type": "political",
+        "entity": "Russell Vought",
+        "id": 5976
+      },
+      {
+        "date": "2018/present",
+        "label": "employment with Office of Management and Budget",
+        "type": "employment",
+        "entity": "Office of Management and Budget",
+        "id": 5981
+      },
+      {
+        "date": "2019-07-25",
+        "label": "As OMB GC (Trump I), authored legal defense of Ukraine aid withholding that GAO ruled violated Impoundment Control Act; co-developed impoundment theory with Vought claiming inherent Article II presidential power",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 6686
+      },
+      {
+        "date": "2020-03-12",
+        "label": "Sen. Van Hollen (D-MD) wrote to Paoletta on March 12, 2020 demanding he (1) recuse from GAO inquiry into illegal Ukraine aid withholding, and (2) resign as OMB Designated Agency Ethics Official. GAO had determined the DOD aid withholding was illegal. Paoletta had personally received emails from DOD officials raising legal concerns but gave a 'highly misleading' response to GAO. 87% of Designated Agency Ethics Officials are apolitical career staff, not political appointees like Paoletta.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7064
+      },
+      {
+        "date": "2021-01-01",
+        "label": "Paoletta lobbied for Oracle America on federal contracting through Schaerr Jaffe LLP (2021), disclosing covered positions: OMB GC and VP Pence Chief Counsel. Oracle paid at least K for lobbying Congress on government contracts. Paoletta returned to OMB GC in Jan 2025 to work with DOGE.",
+        "type": "relationship",
+        "evidence_ref": null,
+        "id": 7120
+      },
+      {
+        "date": "2021-01-19",
+        "label": "Paoletta and Vought co-authored a 14-page letter to House Budget Committee on Jan 19, 2021 (day before leaving office) arguing the Impoundment Control Act is 'unworkable in practice and should be significantly reformed or repealed.' This legal theory was then developed at Center for Renewing America (which Vought founded) where Paoletta was Senior Fellow, and is now being implemented as executive policy with Paoletta back at OMB.",
+        "type": "background",
+        "evidence_ref": null,
+        "id": 7066
+      },
+      {
+        "date": "2021-03/2025-01",
+        "label": "employment with Schaerr Jaffe LLP",
+        "type": "employment",
+        "entity": "Schaerr Jaffe LLP",
+        "id": 5979
+      },
+      {
+        "date": "2021/2025",
+        "label": "employment with Center for Renewing America",
+        "type": "employment",
+        "entity": "Center for Renewing America",
+        "id": 5980
+      },
+      {
+        "date": "2022-01-01",
+        "label": "Paoletta represented Ginni Thomas (wife of Justice Clarence Thomas) before the House Jan 6 Committee in 2022. Thomas subsequently did NOT recuse from two J6-related SCOTUS cases, one involving his wife's text messages. Paoletta publicly attacked recusal demands as 'baseless.'",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7062
+      },
+      {
+        "date": "2022-06/2022-09",
+        "label": "legal with Ginni Thomas",
+        "type": "legal",
+        "entity": "Ginni Thomas",
+        "id": 5975
+      },
+      {
+        "date": "2022-09-28",
+        "label": "Served as Ginni Thomas's attorney before Jan 6 Select Committee; managed her 3.5-hour interview Sept 2022; argued she only passed along hearsay about election fraud",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 6684
+      },
+      {
+        "date": "2025-01-20",
+        "label": "Paoletta is a central node connecting Supreme Court, DOGE, and Project 2025: (1) Helped confirm Justice Thomas in 1991, remained close personal friend and aggressive public defender through gift scandals. (2) Senior Fellow at Center for Renewing America (Russell Vought's think tank). (3) Project 2025 Advisory Board member. (4) Co-developed legal theory that Impoundment Control Act is unconstitutional. (5) Served as legal counsel for Ginni Thomas during Jan 6 committee. (6) Close ally of Leonard Leo. Career path: Bush 41 WH -> Congress (decade) -> VP Pence Chief Counsel -> OMB GC (Trump 1) -> Schaerr Jaffe partner + CRA fellow -> OMB GC (Trump 2/DOGE).",
+        "type": "background",
+        "evidence_ref": null,
+        "id": 7129
+      },
+      {
+        "date": "2025-01-20",
+        "label": "Revolving door conflict pattern: Paoletta lobbied for Oracle America on government contracts through Schaerr Jaffe (2021, K+), then returned to OMB GC (Jan 2025) working with DOGE. Oracle holds major DOD contracts (M ERP/finance) and is a key Stargate AI partner (B). Larry Ellison is close personal friend of both Trump and Musk. Paoletta's OMB position gives him oversight of the very federal contracting process he lobbied on behalf of Oracle to influence.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 7157
+      },
+      {
+        "date": "2025-01-27",
+        "label": "Appointed OMB GC in Trump II (Dec 2024) to 'work closely with DOGE team'; responsible for Jan 2025 federal funding freeze memo (M-25-13) that was struck down by court and rescinded within 48 hours",
+        "type": "intelligence",
+        "evidence_ref": null,
+        "id": 6688
+      },
+      {
+        "date": "2025-01-27",
+        "label": "Paoletta drafted the January 27, 2025 OMB memo ordering agencies to pause all federal financial assistance obligations/disbursements. The memo was rescinded within days after widespread chaos, but established the legal framework for subsequent spending freezes and impoundment claims.",
+        "type": "background",
+        "evidence_ref": null,
+        "id": 7052
+      },
+      {
+        "date": "2025-03-05",
+        "label": "Clarence Thomas did NOT recuse from Dept of State v. AIDS Vaccine Advocacy Coalition (24A831), the key SCOTUS case challenging OMB's foreign aid spending freeze. Thomas dissented (with Alito, Gorsuch, Kavanaugh) from the 5-4 decision denying Trump's request to lift the lower court freeze order on March 5, 2025 -- siding with the administration position his close friend Paoletta helped create as OMB GC.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7054
+      },
+      {
+        "date": "2025-09-26",
+        "label": "In September 2025, SCOTUS reversed course in Dept of State v. AIDS Vaccine Advocacy Coalition (25A269), allowing Trump administration to withhold $4 billion in foreign aid via 'pocket rescission' in a 6-3 ruling. Thomas was in the majority. Paoletta's impoundment legal theory -- developed at Center for Renewing America alongside Russell Vought -- was vindicated by a court where his close friend Thomas sits.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7059
+      },
+      {
+        "date": "2026-02-20",
+        "label": "SCOTUS struck down Trump's sweeping 'reciprocal' tariffs on Feb 20, 2026 (Learning Resources Inc v. Trump, 24-1287). Thomas dissented with Alito and Kavanaugh. While not directly an OMB/Paoletta-drafted order, this case reflects the broader pattern: executive orders on spending/trade policy drafted or legally justified by the Paoletta-Vought OMB are repeatedly reaching SCOTUS where Thomas participates without recusing despite his close friendship with Paoletta.",
+        "type": "legal",
+        "evidence_ref": null,
+        "id": 7087
+      }
     ]
   }
 }
