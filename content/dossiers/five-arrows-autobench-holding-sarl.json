@@ -1,0 +1,264 @@
+{
+  "name": "Five Arrows AutoBench Holding Sarl",
+  "slug": "five-arrows-autobench-holding-sarl",
+  "aliases": [],
+  "profile_ids": [
+    "epstein"
+  ],
+  "generated_at": "2026-05-08T02:56:28.792851",
+  "last_updated": "2026-05-07T15:21:11",
+  "stats": {
+    "total_findings": 1,
+    "total_connections": 3,
+    "total_entities": 0,
+    "finding_types": {
+      "document": 1
+    },
+    "connection_types": {
+      "owns": 1,
+      "subsidiary_of": 1,
+      "controls": 1
+    },
+    "last_updated": "2026-05-07T15:21:11"
+  },
+  "findings": [
+    {
+      "id": 11213,
+      "finding_type": "document",
+      "summary": "Five Arrows AutoBench Holding Sarl (Lux RCS B209234) - Rothschild Five Arrows PE vehicle, terminated 21 Nov 2024; originally Five Arrows White C Holding Sarl (renamed 2 Dec 2020); shareholders FIN PO SA SICAR + Delphen Sarl; capital EUR 41.1M; managers Xavier Monnereau + Elisa Costanzo; liquidator Five Arrows Managers SA + Costanzo",
+      "detail": "Originally registered 12 Sept 2016 as 'Five Arrows White C Holding Sarl'; renamed 2 Dec 2020 to AutoBench. Sole shareholder of Compagnie Du Saleve since 8 Mar 2023. Five Arrows Managers SA (B143757) appointed as liquidator confirms Rothschild & Co control - Five Arrows Managers SA is the Rothschild & Co alternative-assets management entity in Luxembourg.",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:19:26",
+      "target_name": "Five Arrows AutoBench Holding Sarl",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.northdata.com/Five+Arrows+AutoBench+Holding",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11211,
+      "finding_type": "document",
+      "summary": "Compagnie Du Saleve SA (Lux RCS B223232) wholly owned by Five Arrows AutoBench Holding Sarl (B209234) since 8 Mar 2023; current directors Pierre Mouliere + Mathieu Villaume; office 12 rue Guillaume Schneider L-2522 (NeoTrust Fiduciary domicile)",
+      "detail": "Reg 23 Mar 2018, capital EUR 6,854,000, LEI 254900TWD935XLM3HD91. Past directors: Othman Baraka (apt 25 Jan 2023), Lucie Delamontagne (term 25 Jan 2023), Pierre-Yves Mouliere (apt Sept 2019). Previous shareholder Luxfactory Group (2020-2021); 27 Jul 2018 record showed Five Arrows White C Holding Sarl (renamed AutoBench 2 Dec 2020 - same entity B209234).",
+      "source_datasets": [
+        "registry"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": null,
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:19:17",
+      "target_name": "Compagnie Du Saleve SA",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.northdata.com/Compagnie+DU+Saleve+SA",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": 6001,
+      "person_a": "Compagnie Du Saleve SA",
+      "person_b": "Five Arrows AutoBench Holding Sarl",
+      "relationship_type": "owns",
+      "description": "Five Arrows is current shareholder of Lux RCS B223232 (8 Mar 2023)",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:20:14",
+      "profile_id": "epstein",
+      "other_person": "Compagnie Du Saleve SA",
+      "other_person_slug": "compagnie-du-saleve-sa",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.northdata.com/Compagnie%20Du%20Saleve%20SA",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 6013,
+      "person_a": "Compagnie Du Saleve SA",
+      "person_b": "Five Arrows AutoBench Holding Sarl",
+      "relationship_type": "subsidiary_of",
+      "description": "Compagnie Du Saleve (Lux B223232) wholly owned by Five Arrows AutoBench Holding (Lux B209234) since 8 Mar 2023",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:21:11",
+      "profile_id": "epstein",
+      "other_person": "Compagnie Du Saleve SA",
+      "other_person_slug": "compagnie-du-saleve-sa",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.northdata.com/Compagnie+DU+Saleve+SA",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    },
+    {
+      "id": 6014,
+      "person_a": "Five Arrows AutoBench Holding Sarl",
+      "person_b": "Five Arrows Managers SA",
+      "relationship_type": "controls",
+      "description": "Five Arrows Managers SA (B143757) appointed liquidator of AutoBench Holding 21 Nov 2024 - confirms Rothschild & Co control",
+      "strength": "strong",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:21:11",
+      "profile_id": "epstein",
+      "other_person": "Five Arrows Managers SA",
+      "other_person_slug": "five-arrows-managers-sa",
+      "evidence": [
+        {
+          "evidence_type": "file",
+          "evidence_ref": "https://www.northdata.com/Five+Arrows+AutoBench+Holding",
+          "source_quote": null,
+          "source_page": null
+        }
+      ]
+    }
+  ],
+  "entities": [],
+  "timeline": [],
+  "curation": {
+    "key_finding_ids": [
+      11211,
+      11213
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [],
+        "connection_ids": [
+          6001,
+          6013,
+          6014
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      }
+    ],
+    "curated_at": "2026-05-08T02:58:09.318711",
+    "lead": "<p>Five Arrows AutoBench Holding Sarl was a Luxembourg private limited company (<em>societe a responsabilite limitee</em>) registered at the Luxembourg <em>Registre de Commerce et des Societes</em> under number B209234, originally incorporated 12 September 2016 as Five Arrows White C Holding Sarl and renamed to AutoBench on 2 December 2020 [Finding #11213]. The vehicle carried EUR 41.1 million in share capital and was held by FIN PO SA SICAR alongside Delphen Sarl, with Xavier Monnereau and Elisa Costanzo serving as managers [Finding #11213].</p><p>The Five Arrows brand denotes the alternative-assets management franchise of Rothschild &amp; Co; the appointment of Five Arrows Managers SA (Lux RCS B143757) as liquidator on termination identifies AutoBench Holding as a Rothschild Five Arrows private equity vehicle [Finding #11213]. Between 8 March 2023 and termination, AutoBench Holding was the sole shareholder of <a href=\"/dossiers/compagnie-du-saleve-sa\">Compagnie Du Saleve SA</a> (Lux RCS B223232), a Luxembourg <em>societe anonyme</em> with EUR 6,854,000 in share capital domiciled at 12 rue Guillaume Schneider L-2522 (NeoTrust Fiduciary) [Finding #11211].</p><p>Five Arrows AutoBench Holding Sarl was terminated 21 November 2024 [Finding #11213]. The post-termination shareholder of record for Compagnie Du Saleve has not been recovered from the registry extracts on file; the chain of beneficial ownership for Compagnie Du Saleve after November 2024 is an open question [Finding #11211][Finding #11213].</p>",
+    "system_role": "Five Arrows AutoBench Holding Sarl operationalises the Rothschild Five Arrows private equity franchise as a single-purpose Luxembourg holding tier inserted between portfolio assets and the Five Arrows Managers fund-administration entity, with its 2024 termination extinguishing the documented ownership chain to Compagnie Du Saleve.",
+    "sections": [
+      {
+        "id": "corporate-structure-and-registration",
+        "title": "Corporate Structure and Registration",
+        "content": "<p>Five Arrows AutoBench Holding Sarl was a Luxembourg <em>societe a responsabilite limitee</em> registered at the Luxembourg <em>Registre de Commerce et des Societes</em> under number B209234 [Finding #11213]. The company was originally incorporated on 12 September 2016 under the name Five Arrows White C Holding Sarl and was renamed to Five Arrows AutoBench Holding Sarl on 2 December 2020 [Finding #11213]. The same B209234 number persisted across the rename, which registry filings confirm by listing Five Arrows White C Holding Sarl as the 27 July 2018 shareholder of <a href=\"/dossiers/compagnie-du-saleve-sa\">Compagnie Du Saleve SA</a> and AutoBench Holding as the 8 March 2023 shareholder of the same B223232 [Finding #11211].</p><p>Share capital stood at EUR 41.1 million [Finding #11213]. Day-to-day management was carried out by Xavier Monnereau and Elisa Costanzo as managers [Finding #11213]. The two named shareholders of record were FIN PO SA SICAR and Delphen Sarl [Finding #11213].</p>",
+        "viz": null
+      },
+      {
+        "id": "shareholders-and-the-five-arrows-brand",
+        "title": "Shareholders and the Five Arrows Brand",
+        "content": "<p>The Five Arrows label is the alternative-assets management franchise of the Rothschild &amp; Co group. The clearest documentary identification of AutoBench Holding as a Rothschild-controlled vehicle comes from the liquidation step itself: Five Arrows Managers SA (Lux RCS B143757), the Rothschild &amp; Co alternative-assets management entity in Luxembourg, was appointed as liquidator on termination [Finding #11213]. Records show Elisa Costanzo, who served as a manager of AutoBench Holding, also took a role on the liquidator side [Finding #11213].</p><p>The two named shareholders of AutoBench Holding were FIN PO SA SICAR and Delphen Sarl [Finding #11213]. The SICAR designation marks FIN PO SA as a Luxembourg <em>societe d'investissement en capital a risque</em>, the regulated risk-capital investment company wrapper used by Luxembourg private equity funds. Cross-reference of these holdings to underlying limited partner identities was not recovered in the registry extracts on file and remains an open question.</p>",
+        "viz": null
+      },
+      {
+        "id": "compagnie-du-saleve-holding",
+        "title": "Compagnie Du Saleve Holding",
+        "content": "<p>Between 8 March 2023 and the 21 November 2024 termination, Five Arrows AutoBench Holding Sarl was the sole shareholder of <a href=\"/dossiers/compagnie-du-saleve-sa\">Compagnie Du Saleve SA</a> (Lux RCS B223232), a Luxembourg <em>societe anonyme</em> with EUR 6,854,000 in share capital and LEI 254900TWD935XLM3HD91, domiciled at 12 rue Guillaume Schneider L-2522 Luxembourg (NeoTrust Fiduciary) [Finding #11211]. The 27 July 2018 registry snapshot for Compagnie Du Saleve had already listed Five Arrows White C Holding Sarl - the predecessor name of the same B209234 entity - as a shareholder, which establishes that the Rothschild Five Arrows holding tier sat over Compagnie Du Saleve in two distinct capacities across the 2018-2024 window [Finding #11211].</p><p>Compagnie Du Saleve's directors during the AutoBench-controlled window included <a href=\"/dossiers/mathieu-villaume\">Mathieu Villaume</a>, who is documented elsewhere as a cross-jurisdiction corporate-administration custodian whose mandate portfolio also covers <a href=\"/dossiers/spqr-capital-holding-sa\">SPQR Capital Holding SA</a> and the Asherco LLP vehicle in the <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a> and <a href=\"/dossiers/bertrand-g-des-pallieres\">Bertrand G des Pallieres</a> orbit [Finding #11211]. Records indicate the Compagnie Du Saleve directorship marks the first documented intersection between Villaume's portfolio and a Rothschild Five Arrows-owned entity [Finding #11211].</p>",
+        "viz": "ego_network"
+      },
+      {
+        "id": "termination-and-liquidation",
+        "title": "Termination and Liquidation",
+        "content": "<p>Five Arrows AutoBench Holding Sarl was terminated on 21 November 2024 [Finding #11213]. The liquidator on record is Five Arrows Managers SA (Lux RCS B143757), with Elisa Costanzo serving alongside on the liquidator side [Finding #11213]. The appointment of Five Arrows Managers SA as liquidator is the registry-evidence linkage that ties AutoBench Holding to the Rothschild &amp; Co alternative-assets franchise: Five Arrows Managers SA is the Rothschild &amp; Co alternative-assets management entity in Luxembourg [Finding #11213].</p><p>The post-termination shareholder of record for <a href=\"/dossiers/compagnie-du-saleve-sa\">Compagnie Du Saleve SA</a> was not recovered from the registry extracts on file [Finding #11211]. Compagnie Du Saleve was active in registry status as of the 2026-05-07 records examination and continued to operate under the same Luxembourg domicile and director set after the AutoBench Holding liquidation, but the destination of its share capital has not been documented and is flagged as an open question [Finding #11211].</p>",
+        "viz": "timeline"
+      },
+      {
+        "id": "significance-to-the-investigation",
+        "title": "Significance to the Investigation",
+        "content": "<p>Examination of the AutoBench Holding registry trail places Rothschild &amp; Co's Five Arrows alternative-assets franchise on the chain of title for <a href=\"/dossiers/compagnie-du-saleve-sa\">Compagnie Du Saleve SA</a> across at least the 2018 and 2023-2024 windows [Finding #11211][Finding #11213]. The director set Compagnie Du Saleve carried during that period overlaps the corporate-administration portfolio of <a href=\"/dossiers/mathieu-villaume\">Mathieu Villaume</a>, whose other mandates connect to the <a href=\"/dossiers/alessandro-benedetti\">Alessandro Benedetti</a>, <a href=\"/dossiers/bertrand-g-des-pallieres\">Bertrand G des Pallieres</a>, and <a href=\"/dossiers/raffaele-mincione\">Raffaele Mincione</a> cluster through <a href=\"/dossiers/spqr-capital-holding-sa\">SPQR Capital Holding SA</a> and Asherco LLP [Finding #11211].</p><p>The 21 November 2024 termination of AutoBench Holding extinguishes the documented Rothschild Five Arrows ownership tier over Compagnie Du Saleve [Finding #11213]. Whether Compagnie Du Saleve's share capital was redistributed to a successor Five Arrows vehicle, transferred outside the Five Arrows franchise, or moved to a different beneficial owner is the next investigative step [Finding #11211][Finding #11213].</p>",
+        "viz": null
+      }
+    ],
+    "open_questions": [
+      "Who acquired the Compagnie Du Saleve SA (Lux RCS B223232) shareholding after the 21 November 2024 termination of Five Arrows AutoBench Holding Sarl?",
+      "What were the underlying limited partner identities behind FIN PO SA SICAR and Delphen Sarl, the two named shareholders of AutoBench Holding?",
+      "What portfolio assets, if any, did Compagnie Du Saleve SA hold during the 8 March 2023 to 21 November 2024 window of AutoBench Holding ownership?",
+      "Why was the 12 September 2016 registration name 'Five Arrows White C Holding Sarl' carried for over four years before the 2 December 2020 rename to AutoBench, and what underlying-asset event drove the rename?",
+      "Does the Xavier Monnereau and Elisa Costanzo manager pairing recur on other Five Arrows-branded Luxembourg holding tiers, and if so what does the cohort of co-managed vehicles reveal about Five Arrows fund structuring?"
+    ],
+    "applicable_models": [
+      "complexity-as-credential",
+      "jurisdictional-arbitrage",
+      "controlled-detachment"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Five Arrows AutoBench Holding Sarl",
+      "connections": [
+        {
+          "target": "Compagnie Du Saleve SA",
+          "type": "owns",
+          "strength": 1.0,
+          "evidence_ref": "https://www.northdata.com/Compagnie%20Du%20Saleve%20SA",
+          "description": "Five Arrows is current shareholder of Lux RCS B223232 (8 Mar 2023)"
+        },
+        {
+          "target": "Compagnie Du Saleve SA",
+          "type": "subsidiary_of",
+          "strength": 1.0,
+          "evidence_ref": "https://www.northdata.com/Compagnie+DU+Saleve+SA",
+          "description": "Compagnie Du Saleve (Lux B223232) wholly owned by Five Arrows AutoBench Holding (Lux B209234) since 8 Mar 2023"
+        },
+        {
+          "target": "Five Arrows Managers SA",
+          "type": "controls",
+          "strength": 1.0,
+          "evidence_ref": "https://www.northdata.com/Five+Arrows+AutoBench+Holding",
+          "description": "Five Arrows Managers SA (B143757) appointed liquidator of AutoBench Holding 21 Nov 2024 - confirms Rothschild & Co control"
+        }
+      ],
+      "secondHop": {
+        "Compagnie Du Saleve SA": [
+          {
+            "target": "Mathieu Villaume",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Director from 23 Mar 2018 to current"
+          },
+          {
+            "target": "SPQR Capital Holding SA",
+            "type": "shares_officer",
+            "strength": 0.7,
+            "description": "Both entities registered at 12 rue Guillaume Schneider L-2522 Luxembourg (NeoTrust Fiduciary domicile); both also share Mathieu Villaume as director"
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": []
+  }
+}
