@@ -1,0 +1,478 @@
+{
+  "name": "Oklo Inc.",
+  "slug": "oklo-inc",
+  "aliases": [],
+  "profile_ids": [
+    "epstein"
+  ],
+  "generated_at": "2026-05-08T03:16:52.434512",
+  "last_updated": "2026-05-07T15:20:58",
+  "stats": {
+    "total_findings": 2,
+    "total_connections": 4,
+    "total_entities": 0,
+    "finding_types": {
+      "financial": 1,
+      "relationship": 1
+    },
+    "connection_types": {
+      "advisory": 2,
+      "controls": 1,
+      "political": 1
+    },
+    "last_updated": "2026-05-07T15:20:58"
+  },
+  "findings": [
+    {
+      "id": 11208,
+      "finding_type": "financial",
+      "summary": "AltC/Oklo merger closed May 9 2024: only 710 public shares redeemed ($7,457.80); ~$306M trust capital retained.",
+      "detail": "AltC 8-K filed 2024-05-08 (Item 5.07/8.01) reports holders of 710 Class A shares exercised redemption at ~$10.50/share, total redemption $7,457.80; 43,099,811 shares of common stock remained outstanding; ~$306M remained in Trust Account. AltC IPO 2021-07-12 raised $500M gross. Sponsor Commitment up to $50M PIPE backstop at $10/share; backstop NOT triggered (cash above $250M floor). Klein chaired AltC; Altman was AltC CEO. Renamed Oklo Inc. 2024-05-08. Near-zero redemption rate is a SPAC anomaly suggesting non-redemption agreements with anchor holders.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-05-08",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:19:05",
+      "target_name": "AltC Acquisition Corp",
+      "profile_id": "epstein",
+      "evidence": []
+    },
+    {
+      "id": 11210,
+      "finding_type": "relationship",
+      "summary": "Klein-affiliated Archimedes Advisor Group LLC ran AltC's target sourcing for the Oklo combination.",
+      "detail": "Final S-4/A (filed 2024-04-15, accession 0001104659-24-047344) discloses Archimedes Advisor Group LLC as 'AltC's strategic advisor and affiliate of Michael Klein, Chairman of the Board of AltC' commenced focused search 2021-2022 for combination targets. AltC IPO 2021-07-12 raised $500M. AltC Sponsor LLC and 'Insiders' (Sam Altman, Michael Klein, Jay Taragin, Frances Frei, Allison Green, Peter Lattman, John L. Thornton) were identified as having interests differing from public stockholders. M. Klein and Company is the related strategic advisory firm Klein founded in 2012.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2024-04-15",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:19:12",
+      "target_name": "Michael Klein",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001104659-24-047344",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11212,
+      "finding_type": "relationship",
+      "summary": "Sam Altman resigned from Oklo Board effective April 22 2025, three months after the Stargate Project announcement (Jan 21 2025).",
+      "detail": "Oklo 2025 DEF 14A (filed 2025-04-22, accession 0001628280-25-018885) discloses 'Effective April 22, 2025, Sam Altman resigned from the Board. Mr. Altmans decision to resign was not due to any disagreement with the Company.' Stargate (announced Jan 21 2025) is the OpenAI/SoftBank/Oracle/MGX AI infrastructure JV; Oklo would be a logical SMR power supplier for the Texas data centers, creating a related-party / conflict optic if Altman remained Oklo Chair while OpenAI procures power. Altman had chaired Oklo Board since October 2015. He waived all director compensation while serving (2024 fees $0, stock awards $0). His Oklo equity is below the named-officer disclosure threshold in 2026 \u2014 he is no longer in the beneficial ownership table at all.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2025-04-22",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:19:24",
+      "target_name": "Sam Altman",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001628280-25-018885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11214,
+      "finding_type": "financial",
+      "summary": "Post-Altman Oklo beneficial ownership: DeWittes 12.16% each (controlling), BlackRock 8.29%, Klein only 150,000 shares; no Mubadala/MGX/SoftBank holding disclosed.",
+      "detail": "Oklo 2026 DEF 14A (filed 2026-04-21, accession 0001849056-26-000023) reports as of April 6 2026: BlackRock Inc 14,419,350 shares (8.29%) only 5%+ holder; Jacob DeWitte and Caroline DeWitte (married, co-founders) each beneficially own 21,159,091 (12.16%) \u2014 concentrated in family trusts and GRATs; Klein holds 150,000 shares via M. Klein Associates Inc; Daniel Poneman (former Centrus CEO + Deputy Energy Secretary 2009-2014) holds 37,000. NO Mubadala, MGX, SoftBank, or PIF disclosed as 5%+ holder. Oklo is NOT a Stargate vehicle in cap table terms \u2014 the Klein/Altman/Oklo SPAC is structurally separate from the Stargate JV. Klein chairs Churchill Capital Corp IX, X, XI (active blank checks affiliated with M. Klein Associates Inc, NY corp).",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "confirmed",
+      "date_of_event": "2026-04-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:19:35",
+      "target_name": "Oklo Inc.",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001849056-26-000023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11222,
+      "finding_type": "background",
+      "summary": "Klein's SPAC pipeline as of 2026: Churchill Capital IX, X, XI (sponsors all affiliates of M. Klein Associates Inc, NY corp); historical: Lucid (PIF-backed, Churchill IV), Clarivate (Churchill I), MultiPlan (Churchill III, subject of Delaware Chancery breach-of-fiduciary-duty SPAC opinion).",
+      "detail": "Per Oklo 2026 DEF 14A Klein bio: 'Mr. Klein is currently the Chief Executive Officer, President and Chairman of Churchill Capital Corp IX, Churchill Capital Corp. X and Churchill Capital Corp. XI, all three (3) of which are blank check companies whose respective sponsors are affiliates of M. Klein Associates, Inc., a New York corporation (MKA).' Klein is co-founder/Chairman of original Churchill Capital Corp (2018). Churchill I -> Clarivate (May 2019). Churchill III -> MultiPlan (subject of Skadden-tracked first-impression Delaware Chancery SPAC sponsor disclosure ruling). Churchill IV -> Lucid (Saudi PIF anchor; PIF >$1B 2018 pre-SPAC commit; Saudi assembly plant promise). M. Klein and Company LLC = strategic advisory firm Klein founded 2012; advised PIF on multiple SoftBank-PIF transactions per public reporting. Klein on Trilateral Commission. Active SPAC pipeline through 2026 means Klein remains a dominant SPAC sponsor and likely vehicle for future Gulf-state-anchored US public listings.",
+      "source_datasets": [
+        "edgar",
+        "web_search"
+      ],
+      "confidence": "high",
+      "date_of_event": "2026-04-21",
+      "claim_type": "direct_quote",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:20:26",
+      "target_name": "Michael Klein",
+      "profile_id": "epstein",
+      "evidence": []
+    },
+    {
+      "id": 11224,
+      "finding_type": "relationship",
+      "summary": "Government nuclear-policy intermediation pillar at Oklo: Daniel B. Poneman (former DOE Deputy Secretary, former Centrus CEO) joined Oklo Board March 4 2025; Chris Wright resigned to become Energy Secretary 2025.",
+      "detail": "Sequence: (1) Chris Wright (Liberty Energy CEO; original Oklo Class III nominee per 2024 S-4/A) resigned Oklo Board to become US Energy Secretary in early 2025; (2) March 4 2025 Board appointed Michael Thompson and Daniel B. Poneman (per 2025 DEF 14A); (3) April 22 2025 Altman resigned. Poneman: Centrus Energy CEO 2015-2023 (uranium enrichment); DOE Deputy Secretary 2009-2014 \u2014 directly responsible for nuclear infrastructure approvals. The composition shift converts Oklo's board from 'tech-financier-anchored' (Altman/Klein/Wright) to 'former-DOE-anchored' (Poneman + Jansen + Park) just as Wright takes over DOE. Inference: Oklo is positioning for accelerated NRC licensing under a friendly DOE while distancing from Altman to avoid OpenAI-Stargate procurement conflict-of-interest optics.",
+      "source_datasets": [
+        "edgar"
+      ],
+      "confidence": "medium",
+      "date_of_event": "2026-04-21",
+      "claim_type": "inference",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:20:38",
+      "target_name": "Oklo Inc.",
+      "profile_id": "epstein",
+      "evidence": [
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001628280-25-018885",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        },
+        {
+          "evidence_type": "ref",
+          "evidence_ref": "SEC:0001849056-26-000023",
+          "source_quote": null,
+          "source_page": null,
+          "assessment": null
+        }
+      ]
+    },
+    {
+      "id": 11236,
+      "finding_type": "intelligence",
+      "summary": "META-SYNTHESIS: Seven cross-lens patterns from Round 6 (Agents A-G). (1) Vault-firm regulatory revolving door is a 4-instance pattern: a 3-instance Skadden-or-equivalent->OCC->implementation pipeline (Brooks 2020 Coinbase->OCC->Bitfury; Gould 2025 Bitfury/BlackRock/Promontory->OCC; Cohen 2025 Skadden->OCC->Erebor approval \u2014 Cohen's 65-day window the tightest), plus a parallel vault-firm->OMB->Schaerr Jaffe->OMB pattern via Paoletta (2018+2025) at OMB+CFPB+OIRA \u2014 STRUCTURALLY DISTINCT from the OCC pipeline. (2) Brooks-era IL #1170/#1174 + IL #1184 are LIVE OPERATIVE LAW cited in Erebor approval letter \u2014 the deregulation framework now scaffolds WLFI/Tahnoon flows. (3) Aryam Investment 1 = Tahnoon vehicle bought 49% WLFI for $500M ($187M to Trump-family entities); G42 Edelman + Xiao seated undisclosed; MGX deployed $2B WLFI USD1 -> Binance May 2025. (4) Round 5 'Mubadala unifies' model UPGRADED to three SCFEA sovereign pillars (ADIA + Mubadala + L'IMAD ~$300B post Jan-2026 consolidation under Khaled bin Mohamed bin Zayed) + regulatory layer (Al Shorafa = ADX + SCA + ADGM Vice Chair) + US-listing layer (Kazim = Nasdaq Inc. director via Borse Dubai). Bridges outlast principals. (5) Pre-positioning trades cluster around Jan 2025 Stargate window: Bitfury $53.9M dividend Dec 23 2024 (38d before Cipher PIPE), AltC closed May 2024 with anomalous $7,457.80 redemption out of ~30M shares (PIPE backstop not triggered), Crusoe started Abilene construction Jun 2024 (7mo before Stargate announcement), SoftBank fully exited Cipher Q3 2025 \u2014 Stargate is largely re-bundling of preexisting infrastructure already in motion. (6) Klein-Altman-Oklo and Stargate-MGX are STRUCTURALLY SEPARATE per SEC primary-source level \u2014 press treatment merged them. Altman resigned Oklo board Apr 22 2025, 3 months after Stargate announce. (7) bin Sulayem resigned DP World Feb 13 2026 after DOJ Epstein release \u2014 first observed VISIBLE LOSS for Tahnoon network on Epstein-related exposure; replacement Kazim maintains/extends US-market access via Nasdaq Inc. board seat. ROUND 5 NAME CORRECTIONS: St\u00e9phane->Bertrand G. des Palli\u00e8res; Antoine Bremner unverified->likely Christopher Bremner; Compagnie Du Saleve B223232 incorporated 2018 so cannot be 28 Oct 2015 entity (likely closed French SARL #803012046 instead); SKAS = Saker Aviation Services ticker not partners' acronym; Hoffenberg 'Gold shielded Epstein' claim has NO docket support in 1:94-cr-00213.",
+      "detail": null,
+      "source_datasets": [
+        "analysis_run"
+      ],
+      "confidence": "medium",
+      "date_of_event": null,
+      "claim_type": "synthesis",
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:28:32",
+      "target_name": "Round 6 meta-synthesis: SoftBank-caper / Epstein-replatforming structural model",
+      "profile_id": "epstein",
+      "evidence": []
+    }
+  ],
+  "connections": [
+    {
+      "id": 6004,
+      "person_a": "Michael Klein",
+      "person_b": "Oklo Inc.",
+      "relationship_type": "advisory",
+      "description": "Klein remains Class I director of Oklo (2024-present); 150,000 shares via M. Klein Associates Inc.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:20:58",
+      "profile_id": "epstein",
+      "other_person": "Michael Klein",
+      "other_person_slug": "michael-klein",
+      "evidence": []
+    },
+    {
+      "id": 6005,
+      "person_a": "Oklo Inc.",
+      "person_b": "Sam Altman",
+      "relationship_type": "controls",
+      "description": "Altman chaired Oklo Board Oct 2015 - May 2024; AltC CEO; resigned Oklo Board April 22 2025 post-Stargate.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:20:58",
+      "profile_id": "epstein",
+      "other_person": "Sam Altman",
+      "other_person_slug": "sam-altman",
+      "evidence": []
+    },
+    {
+      "id": 6009,
+      "person_a": "Daniel B. Poneman",
+      "person_b": "Oklo Inc.",
+      "relationship_type": "advisory",
+      "description": "Former DOE Deputy Secretary 2009-2014 + Centrus Energy CEO 2015-2023; appointed Oklo director March 4 2025.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:20:58",
+      "profile_id": "epstein",
+      "other_person": "Daniel B. Poneman",
+      "other_person_slug": "daniel-b-poneman",
+      "evidence": []
+    },
+    {
+      "id": 6010,
+      "person_a": "Chris Wright",
+      "person_b": "Oklo Inc.",
+      "relationship_type": "political",
+      "description": "Liberty Energy CEO; original Oklo Class III nominee 2024; resigned to become US Energy Secretary 2025.",
+      "strength": "medium",
+      "date_range": null,
+      "verification_status": "unverified",
+      "created_at": "2026-05-07 15:20:58",
+      "profile_id": "epstein",
+      "other_person": "Chris Wright",
+      "other_person_slug": "chris-wright",
+      "evidence": []
+    }
+  ],
+  "entities": [],
+  "timeline": [
+    {
+      "date": "2026-04-21",
+      "type": "finding",
+      "finding_type": "financial",
+      "summary": "Post-Altman Oklo beneficial ownership: DeWittes 12.16% each (controlling), BlackRock 8.29%, Klein only 150,000 shares; no Mubadala/MGX/SoftBank holding disclosed.",
+      "confidence": "confirmed",
+      "id": 11214
+    },
+    {
+      "date": "2026-04-21",
+      "type": "finding",
+      "finding_type": "relationship",
+      "summary": "Government nuclear-policy intermediation pillar at Oklo: Daniel B. Poneman (former DOE Deputy Secretary, former Centrus CEO) joined Oklo Board March 4 2025; Chris Wright resigned to become Energy Secretary 2025.",
+      "confidence": "medium",
+      "id": 11224
+    }
+  ],
+  "curation": {
+    "key_finding_ids": [
+      11208,
+      11210,
+      11212,
+      11214,
+      11222,
+      11224,
+      11236
+    ],
+    "key_identifiers": {
+      "jurisdictions": [],
+      "officers": [],
+      "entities": []
+    },
+    "section_suggestions": [
+      {
+        "id": "key-relationships",
+        "title": "Key Relationships",
+        "viz": "ego_network",
+        "finding_ids": [
+          11224
+        ],
+        "connection_ids": [
+          6004,
+          6005,
+          6009,
+          6010
+        ],
+        "guidance": "Narrative about the most significant relationships. Name each person with a link to their dossier. Explain the nature and significance of each relationship, not just that it exists."
+      }
+    ],
+    "curated_at": "2026-05-08T03:16:52.505417",
+    "lead": "<p><strong>Oklo Inc.</strong> (NYSE: OKLO) is a Santa Clara-based small modular reactor (SMR) developer that became publicly traded on May 9 2024 through reverse merger with AltC Acquisition Corp, a special purpose acquisition company chaired by financier <a href=\"/dossiers/michael-klein\">Michael Klein</a> and co-led by <a href=\"/dossiers/sam-altman\">Sam Altman</a> as Chief Executive Officer [Finding #11208][SEC:0001104659-24-047344]. Klein-affiliated Archimedes Advisor Group LLC ran target sourcing for the combination, and the AltC closing was an acknowledged anomaly: holders of only 710 public shares exercised redemption for 7,457.80 dollars out of approximately 30 million Class A shares outstanding, leaving roughly 306 million dollars in trust and rendering the sponsor's 50 million-dollar PIPE backstop unused [Finding #11208][SEC:0001104659-24-047344].</p><p>Altman chaired the Oklo Board from October 2015 through May 2024 and remained Chair after the SPAC closing until resigning effective April 22 2025, three months after the January 21 2025 announcement of the Stargate Project, the <a href=\"/dossiers/openai\">OpenAI</a>-<a href=\"/dossiers/softbank\">SoftBank</a>-Oracle-MGX artificial-intelligence infrastructure joint venture [Finding #11212][SEC:0001628280-25-018885]. Examination of the 2026 proxy statement shows that as of April 6 2026 co-founders Jacob DeWitte and Caroline DeWitte each beneficially own 21,159,091 shares (12.16 percent), BlackRock holds 14,419,350 shares (8.29 percent) as the only other 5-percent holder, Klein retains 150,000 shares via M. Klein Associates Inc, and former US Energy Deputy Secretary Daniel B. Poneman holds 37,000 shares [Finding #11214][SEC:0001849056-26-000023]. Records show that no <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>, Mubadala, SoftBank, or Saudi Public Investment Fund position is disclosed in the post-Altman capitalization table [Finding #11214][SEC:0001849056-26-000023].</p><p>According to Round 6 meta-synthesis, the Klein-Altman-Oklo SPAC and the Stargate-MGX joint venture are structurally separate at the SEC primary-source level and press treatment conflated them [Finding #11236]. Examination of Board composition during 2025 indicates a transition from a tech-financier-anchored directorate (Altman, Klein, original Class III nominee Christopher Wright) to a former-DOE-anchored directorate, with Wright resigning to become US Secretary of Energy and Poneman appointed March 4 2025 [Finding #11224][SEC:0001628280-25-018885][SEC:0001849056-26-000023].</p>",
+    "system_role": "Oklo Inc. demonstrates how a SPAC vehicle assembled by a single financier-and-founder dyad can convert a pre-IPO nuclear startup into a publicly traded entity at near-zero redemption while shedding its most conflicted board members in the eighteen months following the merger, replacing them with former federal regulators positioned to navigate the same agencies that approve the company's reactors.",
+    "sections": [
+      {
+        "id": "corporate-structure-and-spac-origin",
+        "title": "Corporate Structure and SPAC Origin",
+        "viz": null,
+        "content": "<p>Oklo Inc. (NYSE: OKLO) is a Delaware corporation that became publicly traded on May 9 2024 through reverse merger with AltC Acquisition Corp [Finding #11208][SEC:0001104659-24-047344]. AltC's final S-4/A, filed April 15 2024, identifies Archimedes Advisor Group LLC as a strategic advisor to AltC and an affiliate of <a href=\"/dossiers/michael-klein\">Michael Klein</a>, AltC's Chairman, and discloses that Archimedes commenced focused target sourcing during 2021 and 2022 [Finding #11210][SEC:0001104659-24-047344]. The same filing names AltC Sponsor LLC and the Insider group \u2014 <a href=\"/dossiers/sam-altman\">Sam Altman</a>, Klein, Jay Taragin, Frances Frei, Allison Green, Peter Lattman, and John L. Thornton \u2014 as parties whose interests differ from those of public stockholders [Finding #11210][SEC:0001104659-24-047344]. M. Klein and Company is the related strategic-advisory firm Klein founded in 2012 [Finding #11210].</p><p>The post-merger entity retained the Oklo brand and the Santa Clara operating footprint of the legacy Oklo Inc., absorbing the legacy company's pre-licensing relationship with the US Nuclear Regulatory Commission for its compact fast-reactor design [Finding #11208][SEC:0001104659-24-047344]. The SPAC pathway delivered approximately 306 million dollars of trust capital to the operating company on closing, an unusually high retention for a 2024-vintage SPAC [Finding #11208][SEC:0001104659-24-047344].</p>"
+      },
+      {
+        "id": "anomalous-altc-closing",
+        "title": "Anomalous AltC Closing",
+        "viz": "timeline",
+        "content": "<p>AltC's closing 8-K, filed May 8 2024, reports that holders of 710 Class A shares exercised redemption rights at approximately 10.50 dollars per share, totaling 7,457.80 dollars in redemption payments out of 43,099,811 shares of common stock that remained outstanding immediately after closing [Finding #11208][SEC:0001104659-24-047344]. AltC's July 12 2021 initial public offering raised 500 million dollars gross [Finding #11208]. The Sponsor Commitment provided up to 50 million dollars of PIPE backstop at 10 dollars per share to be triggered if cash held in trust fell below a 250-million-dollar floor; cash never breached that floor and the backstop was not triggered [Finding #11208][SEC:0001104659-24-047344].</p><p>Analysis of the redemption profile against contemporaneous SPAC redemption rates indicates this is a structural outlier \u2014 a near-zero redemption rate at a 2024-vintage closing is consistent with non-redemption agreements between sponsor and anchor holders, although none are disclosed in the 8-K [Finding #11208][SEC:0001104659-24-047344]. According to the Round 6 meta-synthesis, the AltC closing groups with the Bitfury 53.9-million-dollar dividend of December 23 2024 and the Crusoe Abilene construction start of June 2024 as pre-positioning trades that cluster around the January 2025 Stargate window, indicating that the Stargate announcement re-bundled infrastructure activity already in motion rather than initiating it [Finding #11236].</p>"
+      },
+      {
+        "id": "altman-board-tenure-and-resignation",
+        "title": "Sam Altman's Board Tenure and Resignation",
+        "viz": "timeline",
+        "content": "<p><a href=\"/dossiers/sam-altman\">Sam Altman</a> chaired the Board of legacy Oklo Inc. from October 2015 through the May 9 2024 SPAC closing, and continued as Chair of the publicly traded successor company until resigning effective April 22 2025 [Finding #11212][SEC:0001628280-25-018885]. The 2025 DEF 14A, filed April 22 2025, states that effective April 22 2025 Altman resigned from the Board and that his decision to resign was not due to any disagreement with the Company [Finding #11212][SEC:0001628280-25-018885]. The resignation occurred three months after the January 21 2025 public announcement of the Stargate Project, the <a href=\"/dossiers/openai\">OpenAI</a>-<a href=\"/dossiers/softbank\">SoftBank</a>-Oracle-MGX artificial-intelligence-infrastructure joint venture for which Oklo would be a logical small-modular-reactor power supplier [Finding #11212].</p><p>Altman waived all director compensation while serving \u2014 disclosed director fees of zero dollars and stock awards of zero dollars across the SPAC successor period \u2014 and his Oklo equity falls below the named-officer disclosure threshold in the 2026 proxy, removing him from the beneficial ownership table entirely [Finding #11212][SEC:0001628280-25-018885][SEC:0001849056-26-000023]. Analysis of the timing indicates the resignation eliminated the procurement-conflict optic that would otherwise arise from OpenAI or Stargate negotiating power-purchase terms with a company chaired by OpenAI's Chief Executive Officer [Finding #11212]. According to the Round 6 meta-synthesis, the resignation also eliminated residual personnel overlap between the Klein-Altman-Oklo structure and the Stargate-MGX structure at the same time press coverage was conflating the two [Finding #11236].</p>"
+      },
+      {
+        "id": "post-altman-beneficial-ownership",
+        "title": "Post-Altman Beneficial Ownership",
+        "viz": null,
+        "content": "<p>Oklo's 2026 DEF 14A, filed April 21 2026, reports the post-Altman capitalization as of April 6 2026 [Finding #11214][SEC:0001849056-26-000023]. BlackRock Inc is the only disclosed 5-percent holder outside the founder group, with 14,419,350 shares (8.29 percent) [Finding #11214][SEC:0001849056-26-000023]. Co-founders Jacob DeWitte and Caroline DeWitte \u2014 a married couple \u2014 each beneficially own 21,159,091 shares (12.16 percent), held through family trusts and grantor-retained annuity trusts; their combined position is approximately 24.3 percent and constitutes a controlling block [Finding #11214][SEC:0001849056-26-000023].</p><p><a href=\"/dossiers/michael-klein\">Michael Klein</a> holds 150,000 shares via M. Klein Associates Inc, a New York corporation; Daniel B. Poneman holds 37,000 shares [Finding #11214][SEC:0001849056-26-000023]. The proxy discloses no position for <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>, Mubadala, <a href=\"/dossiers/softbank\">SoftBank</a>, the Saudi Public Investment Fund, or any other Gulf or Asian sovereign vehicle [Finding #11214]. Cross-reference of the 2026 proxy beneficial-ownership table with Stargate's MGX-anchored capital stack indicates Oklo's equity is not a Stargate vehicle in cap-table terms [Finding #11214][Finding #11236].</p>"
+      },
+      {
+        "id": "government-nuclear-policy-intermediation",
+        "title": "Government Nuclear-Policy Intermediation",
+        "viz": "ego_network",
+        "content": "<p>Examination of Oklo's Board composition shifts during the first half of 2025 indicates a transition from a tech-financier configuration to a former-federal-regulator configuration [Finding #11224][SEC:0001628280-25-018885]. Records show that Christopher Wright, the Liberty Energy Chief Executive Officer and original Class III nominee per the 2024 S-4/A, resigned from the Oklo Board upon US Senate confirmation as Secretary of Energy in early 2025 [Finding #11224]. Records show the Board appointed Michael Thompson and Daniel B. Poneman effective March 4 2025, and Altman resigned April 22 2025 [Finding #11224][SEC:0001628280-25-018885].</p><p>According to the 2026 DEF 14A and Poneman's biographical disclosure, Poneman served as US Energy Deputy Secretary from 2009 through 2014 \u2014 the role with direct responsibility for nuclear-infrastructure approvals \u2014 and was Centrus Energy Chief Executive Officer from 2015 through 2023, leading the principal US uranium-enrichment company [Finding #11224]. Examination of the composition shift indicates a deliberate substitution of Altman, Klein, and Wright (a financier-and-tech configuration) with Poneman, Jansen, and Park (a former-DOE configuration) at the same time Wright assumed the Energy Secretary post [Finding #11224][SEC:0001628280-25-018885][SEC:0001849056-26-000023]. Analysis of the sequence suggests Oklo is positioning for accelerated NRC licensing under a friendly DOE while distancing the issuer from Altman to avoid <a href=\"/dossiers/openai\">OpenAI</a>-Stargate procurement conflict-of-interest optics [Finding #11224].</p>"
+      },
+      {
+        "id": "klein-altman-oklo-stargate-mgx-structural-separation",
+        "title": "Klein-Altman-Oklo and Stargate-MGX Structural Separation",
+        "viz": null,
+        "content": "<p>According to Round 6 meta-synthesis, the Klein-Altman-Oklo SPAC vehicle and the <a href=\"/dossiers/stargate-llc\">Stargate</a>-MGX joint venture are structurally separate at the SEC primary-source level, and press treatment merged them in coverage during 2025 [Finding #11236]. The two structures share Altman as a common principal \u2014 Chief Executive Officer of <a href=\"/dossiers/openai\">OpenAI</a> (Stargate's anchor customer) and former AltC Chief Executive Officer and Oklo Chair \u2014 but the corporate vehicles, capital sources, governance, and disclosure trails are distinct [Finding #11236][Finding #11214].</p><p>Cross-reference of the 2026 Oklo proxy beneficial-ownership table with the disclosed Stargate capital stack \u2014 which includes <a href=\"/dossiers/mgx-fund-management-limited\">MGX</a>, <a href=\"/dossiers/softbank\">SoftBank</a>, Oracle, and OpenAI as partners \u2014 produces no overlapping Gulf-sovereign or SoftBank position in Oklo equity [Finding #11214][Finding #11236]. Records show that Altman's resignation from Oklo on April 22 2025, three months after the January 21 2025 Stargate announcement, eliminated the residual personnel overlap between the two structures [Finding #11212][Finding #11236]. Klein retains 150,000 Oklo shares and chairs separate active blank-check vehicles Churchill Capital Corp IX, X, and XI, all sponsored by affiliates of M. Klein Associates Inc [Finding #11214][Finding #11222][SEC:0001849056-26-000023].</p>"
+      },
+      {
+        "id": "significance-to-the-investigation",
+        "title": "Significance to the Investigation",
+        "viz": null,
+        "content": "<p>According to Round 6 meta-synthesis, Oklo is the most documented test case for the structural-separation finding: it is the SPAC vehicle most likely \u2014 on press treatment alone \u2014 to be confused with a Stargate or MGX-anchored asset, and the SEC primary-source record demonstrates the absence of any such overlap in equity terms [Finding #11236][Finding #11214]. The investigation tracks Klein as a recurring SPAC sponsor and advisory-fee bridge across the post-2018 financial-intermediation network, and Oklo is his most visible 2024\u20132026 sponsor outcome [Finding #11210][Finding #11222].</p><p>Examination of the Altman-Klein-DeWitte network indicates Klein holds the structural bridge position \u2014 connecting the AI-infrastructure SPAC ecosystem (Altman, Hydrazine Capital, Apollo Projects) to the federal-policy revolving-door layer (Wright, Poneman) \u2014 without holding a controlling equity stake in any of the resulting public companies [Finding #11214][Finding #11222][Finding #11224]. Records reveal that Oklo's evolution from a 2015-vintage venture-backed startup to a 2024 SPAC merger to a 2025\u20132026 former-DOE-anchored issuer compresses three distinct phases of credentialing \u2014 venture capital, capital-markets sponsorship, and federal-regulatory positioning \u2014 into an eleven-year arc anchored by a single Klein-Altman dyad [Finding #11208][Finding #11212][Finding #11224].</p>"
+      }
+    ],
+    "open_questions": [
+      "Were there undisclosed non-redemption agreements with anchor holders ahead of the May 9 2024 AltC closing that produced the 710-share, 7,457.80-dollar redemption outcome [Finding #11208]?",
+      "What advisory fees did Archimedes Advisor Group LLC and M. Klein and Company collect from the AltC-Oklo combination, and to what extent did Klein-affiliated entities retain economic interest beyond the 150,000-share post-merger position [Finding #11210][Finding #11214]?",
+      "Has Oklo entered any power-purchase or supply discussion with OpenAI, Stargate, or MGX-affiliated infrastructure since Altman's April 22 2025 resignation, and would such discussions appear under related-party disclosure rules given Altman's residual sub-5-percent Oklo equity [Finding #11212][Finding #11214]?",
+      "Did Daniel B. Poneman's March 4 2025 appointment coincide with any specific NRC licensing decision, DOE Reactor Pilot Program selection, or Centrus Energy fuel-supply discussion involving Oklo [Finding #11224]?",
+      "What is the full secondary-market trading record of Klein's reduction from 13.95 million AltC Sponsor LLC beneficial shares (April 2024) to 150,000 M. Klein Associates Inc shares (April 2026), and is any portion of the disposition documented in Form 4 or 13D/A filings [Finding #11214][Finding #11222]?"
+    ],
+    "applicable_models": [
+      "announcement-bundling",
+      "complexity-as-credential",
+      "bridge-tax",
+      "controlled-detachment"
+    ]
+  },
+  "viz_data": {
+    "ego_network": {
+      "center": "Oklo Inc.",
+      "connections": [
+        {
+          "target": "Michael Klein",
+          "type": "advisory",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Klein remains Class I director of Oklo (2024-present); 150,000 shares via M. Klein Associates Inc."
+        },
+        {
+          "target": "Sam Altman",
+          "type": "controls",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Altman chaired Oklo Board Oct 2015 - May 2024; AltC CEO; resigned Oklo Board April 22 2025 post-Stargate."
+        },
+        {
+          "target": "Daniel B. Poneman",
+          "type": "advisory",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Former DOE Deputy Secretary 2009-2014 + Centrus Energy CEO 2015-2023; appointed Oklo director March 4 2025."
+        },
+        {
+          "target": "Chris Wright",
+          "type": "political",
+          "strength": 0.7,
+          "evidence_ref": null,
+          "description": "Liberty Energy CEO; original Oklo Class III nominee 2024; resigned to become US Energy Secretary 2025."
+        }
+      ],
+      "secondHop": {
+        "Michael Klein": [
+          {
+            "target": "AltC Sponsor LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Michael Klein is the sole stockholder of M. Klein Associates, Inc., which is the managing member of AltC Sponsor LLC. Klein therefore held beneficial ownership of all 13,950,000 AltC Sponsor shares. Klein was also co-founder of AltC SPAC and post-merger Oklo director."
+          },
+          {
+            "target": "Rajeev Misra",
+            "type": "financial",
+            "strength": 1.0,
+            "description": "Klein received approximately 6M USD in advisory fees from SoftBank during Misra's Vision Fund era. Both speakers FII 2018 Riyadh Oct 23-25 (EFTA02603142). Klein is the most plausible follow-on payment vehicle for Benedetti operational debts to investigate."
+          },
+          {
+            "target": "Jeffrey Epstein",
+            "type": "social",
+            "strength": 1.0,
+            "description": "Prior friendship confirmed by Epstein complaint to Summers May 2017. Klein on FII 2018 speakers list sent to Epstein."
+          },
+          {
+            "target": "Jacob DeWitte",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Co-participants in AltC Acquisition Corp. SPAC merger with Oklo Inc. DeWitte=Oklo CEO (target company), Klein=SPAC sponsor/banker. Open triad score=0.800 via Sam Altman. Direct working relationship highly likely given 2+ year transaction collaboration."
+          },
+          {
+            "target": "Sam Altman",
+            "type": "corporate",
+            "strength": 0.7,
+            "description": "Co-founders of AltC Acquisition Corp; Klein Chairman, Altman CEO; SPAC closed 2024-05 as Oklo Inc."
+          }
+        ],
+        "Sam Altman": [
+          {
+            "target": "Jennifer Serralta",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Jennifer Serralta is Sam Altman's cousin, hired 2021 as COO of his family office. She appears as manager on every confirmed property LLC and most investment fund entities."
+          },
+          {
+            "target": "SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Sam Altman co-manages the QOF directly \u2014 both listed as managers on SAM ALTMAN QUALIFIED OPPORTUNITY FUND LLC. Only entity where Altman appears alongside Serralta as co-manager."
+          },
+          {
+            "target": "APOLLO PROJECTS, L.P.",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Apollo Projects LP was founded by Sam, Jack, and Max Altman as a brothers' seed fund for moonshot companies. Serralta serves as CEO of the GP entity."
+          },
+          {
+            "target": "HYDRAZINE CAPITAL MANAGEMENT, LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Hydrazine Capital was co-founded by Sam Altman and his brother Jack Altman in 2012. The entire fund family (4 fund vintages) was re-registered in 2022 under Serralta's administration."
+          },
+          {
+            "target": "Hydrazine Capital Management, LLC",
+            "type": "corporate",
+            "strength": 1.0,
+            "description": "Sam Altman is Managing Director (since 09/2020) and 75%+ indirect owner via Hydrazine Corporation. Confirmed via Form ADV Schedule A (CRD 332160) and EDGAR Schedule 13D."
+          }
+        ]
+      },
+      "depth": 2
+    },
+    "timeline_events": [
+      {
+        "date": "2026-04-21",
+        "label": "Post-Altman Oklo beneficial ownership: DeWittes 12.16% each (controlling), BlackRock 8.29%, Klein only 150,000 shares; no Mubadala/MGX/SoftBank holding disclosed.",
+        "type": "financial",
+        "evidence_ref": null,
+        "id": 11214
+      },
+      {
+        "date": "2026-04-21",
+        "label": "Government nuclear-policy intermediation pillar at Oklo: Daniel B. Poneman (former DOE Deputy Secretary, former Centrus CEO) joined Oklo Board March 4 2025; Chris Wright resigned to become Energy Secretary 2025.",
+        "type": "relationship",
+        "evidence_ref": null,
+        "id": 11224
+      }
+    ]
+  }
+}
